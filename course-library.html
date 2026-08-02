@@ -110,6 +110,22 @@
   .wwm-fab{position:fixed;right:22px;bottom:22px;z-index:95;font-family:'Karla',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;background:#A93F63;color:#FBF6EE;padding:15px 24px;border-radius:60px;text-decoration:none;box-shadow:0 16px 32px -12px rgba(124,43,72,.65);transition:transform .25s}
   .wwm-fab:hover{transform:translateY(-3px) scale(1.04)}
   @media (prefers-reduced-motion:reduce){#pageLoader{display:none}.l-svg .tline,.l-svg .l-arm,.l-dots i{animation:none}}
+
+  /* hand-drawn collateral */
+  .sq{display:block;margin:0 auto 10px}
+  .doodle-arrow{vertical-align:middle;margin-left:8px;transform:rotate(14deg)}
+  .u-doodle{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 12' preserveAspectRatio='none'%3E%3Cpath d='M3 9 Q 30 3 60 8 T 117 7' fill='none' stroke='%23A93F63' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:0 100%;background-size:100% .3em;padding-bottom:.16em}
+  .sec-ink .u-doodle,.sec-pink .u-doodle{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 12' preserveAspectRatio='none'%3E%3Cpath d='M3 9 Q 30 3 60 8 T 117 7' fill='none' stroke='%23BC8A47' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E")}
+  /* photo trio bands */
+  .trio-sec{padding:24px 0 70px}
+  .trio-cap{text-align:center;font-family:'Ephesis',cursive;font-size:1.9rem;color:#A93F63;margin-bottom:22px}
+  .trio{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:1020px;margin:0 auto}
+  .tph{position:relative;border:3px solid #2E1F27;border-radius:140px 140px 16px 16px;overflow:hidden;aspect-ratio:3/3.7;box-shadow:8px 8px 0 #F0DCE2}
+  .tph:nth-child(2){border-radius:16px;box-shadow:8px 8px 0 #A93F63;transform:translateY(16px)}
+  .tph:nth-child(3){box-shadow:8px 8px 0 #BC8A47}
+  .tph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+  .tph:hover img{transform:scale(1.05)}
+  @media (max-width:880px){.trio{grid-template-columns:1fr 1fr;max-width:520px}.tph:nth-child(3){display:none}.tph:nth-child(2){transform:none}}
 </style>
 </head>
 <body>
@@ -166,7 +182,7 @@
     <div class="lock">&#128274;</div>
     <span class="eyebrow">Members-only shelf</span>
     <h1>Enter your access code, babe.</h1>
-    <div class="hand-note">it was in your welcome email &#10022;</div>
+    <div class="hand-note">it was in your welcome email <svg class="doodle-arrow" viewBox="0 0 60 60" width="42" height="42" aria-hidden="true"><path d="M8 6 C 30 14 40 30 42 50 M42 50 L 32 42 M42 50 L 50 38" fill="none" stroke="#BC8A47" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     <p>Pop in the access code from your Free Resource Library email and the whole course shelf unlocks.</p>
     <input type="password" id="gatePass" placeholder="ACCESS CODE" autocomplete="off">
     <button class="btn btn-pink" id="gateBtn">Unlock the library</button>

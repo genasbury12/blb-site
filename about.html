@@ -200,6 +200,22 @@
   .wwm-btn{display:inline-flex;align-items:center;gap:10px;font-family:'Karla',system-ui,sans-serif;font-weight:700;font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;padding:19px 40px;border-radius:60px;text-decoration:none;background:#2E1F27;color:#FBF6EE;border:1px solid #2E1F27;transition:background .25s,transform .25s,box-shadow .25s}
   .wwm-btn:hover{background:#A93F63;border-color:#A93F63;transform:translateY(-3px);box-shadow:0 14px 26px -14px rgba(124,43,72,.6)}
   @media (max-width:600px){.wwm-fab{right:14px;bottom:14px;padding:13px 19px}}
+
+  /* hand-drawn collateral */
+  .sq{display:block;margin:0 auto 10px}
+  .doodle-arrow{vertical-align:middle;margin-left:8px;transform:rotate(14deg)}
+  .u-doodle{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 12' preserveAspectRatio='none'%3E%3Cpath d='M3 9 Q 30 3 60 8 T 117 7' fill='none' stroke='%23A93F63' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:0 100%;background-size:100% .3em;padding-bottom:.16em}
+  .sec-ink .u-doodle,.sec-pink .u-doodle{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 12' preserveAspectRatio='none'%3E%3Cpath d='M3 9 Q 30 3 60 8 T 117 7' fill='none' stroke='%23BC8A47' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E")}
+  /* photo trio bands */
+  .trio-sec{padding:24px 0 70px}
+  .trio-cap{text-align:center;font-family:'Ephesis',cursive;font-size:1.9rem;color:#A93F63;margin-bottom:22px}
+  .trio{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:1020px;margin:0 auto}
+  .tph{position:relative;border:3px solid #2E1F27;border-radius:140px 140px 16px 16px;overflow:hidden;aspect-ratio:3/3.7;box-shadow:8px 8px 0 #F0DCE2}
+  .tph:nth-child(2){border-radius:16px;box-shadow:8px 8px 0 #A93F63;transform:translateY(16px)}
+  .tph:nth-child(3){box-shadow:8px 8px 0 #BC8A47}
+  .tph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+  .tph:hover img{transform:scale(1.05)}
+  @media (max-width:880px){.trio{grid-template-columns:1fr 1fr;max-width:520px}.tph:nth-child(3){display:none}.tph:nth-child(2){transform:none}}
 </style>
 </head>
 <body>
@@ -260,7 +276,7 @@
     <div class="rise">
       <span class="eyebrow">About me</span>
       <h1>Hi, I'm Genasys. Just an ordinary mom, going <span class="mark pink">all in</span> on the dream again.</h1>
-      <div class="hand-note">the real story, no highlight reel &#10022;</div>
+      <div class="hand-note">the real story, no highlight reel <svg class="doodle-arrow" viewBox="0 0 60 60" width="42" height="42" aria-hidden="true"><path d="M8 6 C 30 14 40 30 42 50 M42 50 L 32 42 M42 50 L 50 38" fill="none" stroke="#BC8A47" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       <p class="sub">I run Boss Lady Bloggers, I've been doing this since 2017, and I'm not about to pretend I have it all figured out. I've got a kid, a day job, a big dream, and a stubborn belief that you can build something of your own without faking your way there. <b>Let me tell you how I got here.</b></p>
       <div class="hero-cta">
         <a href="/blog-launch-lab" class="btn btn-pink">Work with me</a>
@@ -421,6 +437,7 @@
 
 <section class="wwm-band">
   <div class="wrap">
+    <svg class="sq" viewBox="0 0 220 14" width="180" height="12" aria-hidden="true"><path d="M2 8 Q 15 2 28 8 T 54 8 T 80 8 T 106 8 T 132 8 T 158 8 T 184 8 T 210 8" fill="none" stroke="#A93F63" stroke-width="3" stroke-linecap="round"/></svg>
     <div class="hand-note2">ready when you are, babe &#10022;</div>
     <a href="/blog-launch-lab" class="wwm-btn">Work with me &rarr;</a>
   </div>
