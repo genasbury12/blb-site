@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Course Library | Boss Lady Bloggers</title>
+<meta name="description" content="The Boss Lady Bloggers Free Resource Library. Enter your access code to unlock every free blogging course.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400;1,9..144,500;1,9..144,600&family=Karla:wght@400;500;600;700&family=Ephesis&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FBF6EE;--tint:#F4EBDE;--ink:#2E1F27;--pink:#A93F63;--purple:#7C2B48;
+    --blue:#BC8A47;--lilac:#F0DCE2;--muted:#6E5C63;
+    --display:'Fraunces', system-ui, serif;--body:'Karla', system-ui, sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--paper);color:var(--ink);font-family:var(--body);line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 30px}
+  h1,h2,h3{font-family:var(--display);font-weight:500;line-height:1.08;letter-spacing:-.01em}
+  a{color:inherit}
+  section{padding:80px 0}
+  .sec-tint{background:var(--tint)}
+  .sec-ink{background:var(--ink);color:var(--paper)}
+  .eyebrow{display:inline-block;font-family:var(--body);font-weight:700;font-size:.74rem;letter-spacing:.24em;text-transform:uppercase;color:var(--purple)}
+  .sec-ink .eyebrow{color:var(--lilac)}
+  .hand-note{font-family:'Ephesis',cursive;font-size:1.8rem;color:var(--pink);margin:6px 0 14px;line-height:1.2}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-family:var(--body);font-weight:700;font-size:.76rem;letter-spacing:.18em;text-transform:uppercase;padding:17px 36px;border-radius:60px;text-decoration:none;background:var(--ink);color:var(--paper);border:2px solid var(--ink);cursor:pointer;transition:transform .2s ease,background .2s ease,box-shadow .2s ease}
+  .btn:hover{transform:translateY(-3px);background:var(--pink);border-color:var(--pink);box-shadow:0 12px 26px -12px rgba(124,43,72,.55)}
+  .btn-pink{background:var(--pink);border-color:var(--pink);color:#fff}
+  .btn-pink:hover{background:var(--ink);border-color:var(--ink)}
+  .btn-outline{background:transparent;color:var(--ink)}
+  .btn-outline:hover{background:var(--ink);color:var(--paper)}
+
+  nav{position:sticky;top:0;z-index:60;background:var(--paper);border-bottom:3px solid var(--ink)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:74px}
+  a.logo{font-family:var(--display);font-weight:500;font-size:1.25rem;text-decoration:none}
+  .logo b{color:var(--pink);font-style:italic;font-weight:500}
+  .nav-links{display:flex;gap:24px;list-style:none}
+  .nav-links a{font-weight:600;font-size:.84rem;text-decoration:none;transition:color .2s}
+  .nav-links a:hover{color:var(--pink)}
+  .nav-cta{font-family:var(--body);font-weight:700;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;background:var(--pink);color:#fff;padding:12px 22px;border-radius:60px;border:2px solid var(--ink)}
+  .burger{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:6px;padding:8px}
+  .burger i{display:block;width:26px;height:3px;border-radius:3px;background:var(--ink)}
+  .mobile-menu{display:none;position:fixed;inset:0;background:var(--paper);z-index:100;padding:100px 34px 40px;flex-direction:column;gap:20px;overflow-y:auto}
+  .mobile-menu.open{display:flex}
+  .mobile-menu a{font-family:var(--display);font-weight:600;font-size:1.45rem;text-decoration:none;color:var(--ink)}
+  .mobile-menu a:hover{color:var(--pink)}
+  .mobile-close{position:absolute;top:22px;right:26px;background:none;border:none;font-size:2.2rem;line-height:1;cursor:pointer;color:var(--ink)}
+  @media (max-width:920px){.burger{display:flex}.nav-links{display:none}}
+
+  /* gate */
+  .gate{min-height:62vh;display:flex;align-items:center;justify-content:center;padding:70px 24px}
+  .gate-card{max-width:520px;width:100%;background:#fff;border:3px solid var(--ink);border-radius:26px;padding:52px 42px;text-align:center;box-shadow:14px 14px 0 var(--pink)}
+  .gate-card .lock{width:70px;height:70px;border-radius:50%;background:var(--lilac);border:3px solid var(--ink);display:flex;align-items:center;justify-content:center;font-size:1.8rem;margin:0 auto 20px}
+  .gate-card h1{font-size:clamp(1.9rem,5vw,2.6rem);margin-bottom:10px}
+  .gate-card p{color:var(--muted);margin-bottom:26px}
+  .gate-card input{width:100%;border:2px solid var(--ink);border-radius:60px;padding:16px 24px;font-family:var(--body);font-size:1.05rem;text-align:center;letter-spacing:.2em;text-transform:uppercase;background:var(--paper);color:var(--ink);margin-bottom:16px}
+  .gate-card input:focus{outline:none;box-shadow:0 0 0 3px var(--lilac)}
+  .gate-card .btn{width:100%}
+  .gate-err{display:none;color:var(--pink);font-weight:700;margin-top:14px}
+  .gate-err.show{display:block}
+  .gate-hint{font-size:.85rem;color:var(--muted);margin-top:18px}
+  .gate-hint a{color:var(--purple);font-weight:700}
+
+  /* library */
+  #library{display:none}
+  #library.open{display:block}
+  .shead{max-width:720px;margin:0 auto 50px;text-align:center}
+  .shead h2{font-size:clamp(2.1rem,5vw,3.4rem);margin-bottom:12px}
+  .shead p{font-size:1.08rem;color:var(--muted)}
+  .flib{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .fcard{background:#fff;border:3px solid var(--ink);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;transition:transform .2s}
+  .fcard:hover{transform:translateY(-6px)}
+  .fcard:nth-child(3n+1){box-shadow:10px 10px 0 var(--pink)}
+  .fcard:nth-child(3n+2){box-shadow:10px 10px 0 var(--blue)}
+  .fcard:nth-child(3n+3){box-shadow:10px 10px 0 var(--purple)}
+  .fcover{aspect-ratio:5/3;border-bottom:3px solid var(--ink);position:relative;overflow:hidden}
+  .fcover img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .ftag{position:absolute;top:14px;left:14px;background:var(--ink);color:#fff;font-family:var(--body);font-weight:700;font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;padding:6px 13px;border-radius:60px;z-index:2}
+  .fbody{padding:26px;display:flex;flex-direction:column;flex:1}
+  .fbody h3{font-size:1.26rem;margin-bottom:10px}
+  .fbody p{color:var(--muted);font-size:.95rem;margin-bottom:22px;flex:1}
+  .fbody .btn{width:100%;padding:14px 24px}
+  .lib-note{text-align:center;margin-top:34px;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  @media (max-width:880px){.flib{grid-template-columns:1fr;gap:22px}section{padding:60px 0}}
+
+  footer{background:var(--ink);color:#B9A9A0;padding:46px 0;text-align:center}
+  .foot-logo{font-family:var(--display);font-weight:500;font-size:1.25rem;color:var(--paper);margin-bottom:10px}
+  .foot-logo b{color:var(--pink);font-style:italic}
+  .foot-tag{font-family:'Ephesis',cursive;font-size:1.5rem;color:var(--blue)}
+
+  /* 2027 layer */
+  #pageLoader{position:fixed;inset:0;background:#FBF6EE;z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;transition:opacity .55s ease,visibility .55s}
+  #pageLoader.done{opacity:0;visibility:hidden;pointer-events:none}
+  .l-note{font-family:'Ephesis',cursive;font-size:1.9rem;color:#A93F63}
+  .l-dots{display:flex;gap:7px}
+  .l-dots i{width:8px;height:8px;border-radius:50%;background:#BC8A47;animation:ldot 1s ease-in-out infinite}
+  .l-dots i:nth-child(2){animation-delay:.15s}.l-dots i:nth-child(3){animation-delay:.3s}
+  @keyframes ldot{0%,100%{transform:translateY(0);opacity:.5}50%{transform:translateY(-7px);opacity:1}}
+  .l-svg .tline{transform-origin:left center;animation:ltype 1.3s ease-in-out infinite}
+  .l-svg .t2{animation-delay:.22s}.l-svg .t3{animation-delay:.44s}
+  @keyframes ltype{0%,8%{transform:scaleX(0)}48%,72%{transform:scaleX(1)}100%{transform:scaleX(0)}}
+  .l-svg .l-arm{animation:ltap .3s ease-in-out infinite alternate;transform-origin:58px 74px}
+  @keyframes ltap{from{transform:rotate(-1deg)}to{transform:rotate(5deg)}}
+  .scrollprog{position:fixed;top:0;left:0;width:100%;height:3px;z-index:998;pointer-events:none}
+  .scrollprog i{display:block;height:100%;width:0;background:linear-gradient(90deg,#A93F63,#BC8A47)}
+  .wwm-fab{position:fixed;right:22px;bottom:22px;z-index:95;font-family:'Karla',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;background:#A93F63;color:#FBF6EE;padding:15px 24px;border-radius:60px;text-decoration:none;box-shadow:0 16px 32px -12px rgba(124,43,72,.65);transition:transform .25s}
+  .wwm-fab:hover{transform:translateY(-3px) scale(1.04)}
+  @media (prefers-reduced-motion:reduce){#pageLoader{display:none}.l-svg .tline,.l-svg .l-arm,.l-dots i{animation:none}}
+</style>
+</head>
+<body>
+<div id="pageLoader" aria-hidden="true">
+  <svg class="l-svg" viewBox="0 0 170 120" width="170" height="120" fill="none">
+    <rect x="12" y="98" width="146" height="6" rx="3" fill="#2E1F27"/>
+    <rect x="90" y="48" width="44" height="32" rx="3" fill="#2E1F27"/>
+    <rect x="92.5" y="50.5" width="39" height="27" rx="2" fill="#FBF6EE"/>
+    <rect class="tline t1" x="97" y="56" width="22" height="3" rx="1.5" fill="#A93F63"/>
+    <rect class="tline t2" x="97" y="62" width="28" height="3" rx="1.5" fill="#BC8A47"/>
+    <rect class="tline t3" x="97" y="68" width="17" height="3" rx="1.5" fill="#A93F63"/>
+    <rect x="82" y="82" width="60" height="5" rx="2.5" fill="#2E1F27"/>
+    <circle cx="44" cy="42" r="13" fill="#2E1F27"/>
+    <circle cx="53" cy="30" r="7" fill="#A93F63"/>
+    <path d="M26 98 Q28 60 44 58 Q60 60 62 98 Z" fill="#2E1F27"/>
+    <rect class="l-arm" x="56" y="70" width="28" height="6" rx="3" fill="#2E1F27"/>
+    <circle cx="86" cy="74" r="4" fill="#2E1F27"/>
+  </svg>
+  <div class="l-note">brewing something gorgeous&hellip;</div>
+  <div class="l-dots"><i></i><i></i><i></i></div>
+</div>
+<div class="scrollprog" aria-hidden="true"><i></i></div>
+<a href="/blog-launch-lab" class="wwm-fab">Work With Me &hearts;</a>
+
+<nav>
+  <div class="wrap nav-inner">
+    <a class="logo" href="/">Boss Lady <b>Bloggers</b></a>
+    <ul class="nav-links">
+      <li><a href="/about">About</a></li>
+      <li><a href="/blog-coaching">Blog Coaching</a></li>
+      <li><a href="/membership">Membership</a></li>
+      <li><a href="/blog">Blog</a></li>
+      <li><a href="/podcast">Podcast</a></li>
+      <li><a href="/freebies">Freebies</a></li>
+    </ul>
+    <a href="/blog-launch-lab" class="nav-cta">Work With Me</a>
+    <button class="burger" id="burger" aria-label="Menu"><i></i><i></i><i></i></button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="mobileClose" aria-label="Close menu">&times;</button>
+  <a href="/about">About</a>
+  <a href="/blog-coaching">Blog Coaching</a>
+  <a href="/membership">Membership</a>
+  <a href="/blog">Blog</a>
+  <a href="/podcast">Podcast</a>
+  <a href="/freebies">Freebies</a>
+  <a href="/blog-launch-lab" style="color:var(--pink)">Work With Me &rarr;</a>
+</div>
+
+<!-- PASSWORD GATE -->
+<div class="gate" id="gate">
+  <div class="gate-card">
+    <div class="lock">&#128274;</div>
+    <span class="eyebrow">Members-only shelf</span>
+    <h1>Enter your access code, babe.</h1>
+    <div class="hand-note">it was in your welcome email &#10022;</div>
+    <p>Pop in the access code from your Free Resource Library email and the whole course shelf unlocks.</p>
+    <input type="password" id="gatePass" placeholder="ACCESS CODE" autocomplete="off">
+    <button class="btn btn-pink" id="gateBtn">Unlock the library</button>
+    <div class="gate-err" id="gateErr">Hmm, that's not it. Double-check your welcome email, babe.</div>
+    <p class="gate-hint">Don't have a code yet? <a href="/freebies">Sign up free right here &rarr;</a></p>
+  </div>
+</div>
+
+<!-- LIBRARY -->
+<div id="library">
+  <section class="sec-tint">
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow">You're in</span>
+        <h2>Welcome to the Course Library.</h2>
+        <div class="hand-note" style="font-size:2rem">take whatever you need, it's all yours</div>
+        <p>Every free blogging course in one place. Start at the top or jump straight to what you're stuck on.</p>
+      </div>
+      <div class="flib">
+        <div class="fcard"><div class="fcover"><span class="ftag">Course 01</span><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_022.jpeg" alt="Start a Blog the Right Way" loading="lazy"></div><div class="fbody"><h3>Start a Blog the Right Way</h3><p>Every step to start a blog that's built to make money, in the right order, minus the overwhelm.</p><a href="#" class="btn btn-outline">Start the course</a></div></div>
+        <div class="fcard"><div class="fcover"><span class="ftag">Course 02</span><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_048.jpeg" alt="Blog Business Foundations" loading="lazy"></div><div class="fbody"><h3>Blog Business Foundations</h3><p>Turn your fuzzy blog idea into a real little business plan you can actually follow.</p><a href="#" class="btn btn-outline">Start the course</a></div></div>
+        <div class="fcard"><div class="fcover"><span class="ftag">Course 03</span><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_049.jpeg" alt="Find What to Sell" loading="lazy"></div><div class="fbody"><h3>Find What to Sell</h3><p>Map out real offer ideas so you can make money blogging without relying on affiliate pennies.</p><a href="#" class="btn btn-outline">Start the course</a></div></div>
+        <div class="fcard"><div class="fcover"><span class="ftag">Course 04</span><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_045.jpeg" alt="The Rule of Ones" loading="lazy"></div><div class="fbody"><h3>The Rule of Ones</h3><p>My whole framework, taught step by step. One purpose, one person, one offer at a time.</p><a href="#" class="btn btn-outline">Start the course</a></div></div>
+        <div class="fcard"><div class="fcover"><span class="ftag">Course 05</span><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_001.jpeg" alt="Blog Traffic Jumpstart" loading="lazy"></div><div class="fbody"><h3>Blog Traffic Jumpstart</h3><p>Simple, doable ways to get your first real blog traffic, even with zero audience.</p><a href="#" class="btn btn-outline">Start the course</a></div></div>
+        <div class="fcard"><div class="fcover"><span class="ftag">Course 06</span><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_027.jpeg" alt="A Website That Sells" loading="lazy"></div><div class="fbody"><h3>A Website That Sells</h3><p>What every page of your blog website needs to turn visitors into buyers.</p><a href="#" class="btn btn-outline">Start the course</a></div></div>
+      </div>
+      <p class="lib-note">Connect each "Start the course" button to your course platform links</p>
+    </div>
+  </section>
+
+  <section class="sec-ink" style="text-align:center">
+    <div class="wrap">
+      <span class="eyebrow">Loving the free stuff?</span>
+      <h2 style="font-size:clamp(2rem,5vw,3.2rem);margin:14px 0 18px">Imagine what we'd build together.</h2>
+      <p style="color:#D8CBC3;max-width:520px;margin:0 auto 32px">The library gets you started. Blog Launch Lab gets you launched, with me building it right beside you.</p>
+      <a href="/blog-launch-lab" class="btn btn-pink">Work with me &rarr;</a>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-logo">Boss Lady <b>Bloggers</b></div>
+    <div class="foot-tag">the course library &#10022; free forever</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var l=document.getElementById('pageLoader');
+  if(l){
+    var hide=function(){l.classList.add('done')};
+    if(matchMedia('(prefers-reduced-motion: reduce)').matches){hide();}
+    else{window.addEventListener('load',function(){setTimeout(hide,600)});setTimeout(hide,2600);}
+  }
+  var bar=document.querySelector('.scrollprog i');
+  if(bar){addEventListener('scroll',function(){var h=document.documentElement.scrollHeight-innerHeight;bar.style.width=(h>0?(scrollY/h*100):0)+'%'},{passive:true});}
+  var b=document.getElementById('burger'),m=document.getElementById('mobileMenu'),c=document.getElementById('mobileClose');
+  if(b&&m){b.addEventListener('click',function(){m.classList.add('open')});
+    if(c)c.addEventListener('click',function(){m.classList.remove('open')});
+    m.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){m.classList.remove('open')})});}
+
+  /* ---- password gate ----
+     Change the access code below to whatever you want.
+     Note: this is a friendly front-door lock, not bank-level security. */
+  var ACCESS_CODE = "BLOGBABE";
+  var gate=document.getElementById('gate'), lib=document.getElementById('library'),
+      pass=document.getElementById('gatePass'), btn=document.getElementById('gateBtn'),
+      err=document.getElementById('gateErr');
+  function unlock(){gate.style.display='none';lib.classList.add('open');try{sessionStorage.setItem('bll_lib','1')}catch(e){}}
+  function attempt(){
+    if(pass.value.trim().toUpperCase()===ACCESS_CODE){unlock();}
+    else{err.classList.add('show');pass.value='';pass.focus();}
+  }
+  btn.addEventListener('click',attempt);
+  pass.addEventListener('keydown',function(e){if(e.key==='Enter')attempt();});
+  try{if(sessionStorage.getItem('bll_lib')==='1')unlock();}catch(e){}
+})();
+</script>
+</body>
+</html>
