@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Find What to Sell | Course 03 | Boss Lady Bloggers</title>
+<meta name="description" content="Course 03 from the Boss Lady Bloggers Course Library: Find What to Sell — build your Easy Yes offer.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400;1,9..144,500;1,9..144,600&family=Karla:wght@400;500;600;700&family=Ephesis&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FBF6EE;--tint:#F4EBDE;--ink:#2E1F27;--pink:#A93F63;--purple:#7C2B48;
+    --blue:#BC8A47;--lilac:#F0DCE2;--muted:#6E5C63;
+    --display:'Fraunces', system-ui, serif;--body:'Karla', system-ui, sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--paper);color:var(--ink);font-family:var(--body);line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  h1,h2,h3{font-family:var(--display);font-weight:500;line-height:1.12;letter-spacing:-.01em}
+  a{color:inherit}
+  .eyebrow{display:inline-block;font-family:var(--body);font-weight:700;font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;color:var(--purple)}
+  .hand-note{font-family:'Ephesis',cursive;font-size:1.8rem;color:var(--pink);line-height:1.2}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-family:var(--body);font-weight:700;font-size:.76rem;letter-spacing:.18em;text-transform:uppercase;padding:16px 32px;border-radius:60px;text-decoration:none;background:var(--ink);color:var(--paper);border:1px solid var(--ink);cursor:pointer;transition:transform .2s ease,background .2s ease,box-shadow .2s ease}
+  .btn:hover{transform:translateY(-3px);background:var(--pink);border-color:var(--pink);box-shadow:0 12px 26px -12px rgba(124,43,72,.55)}
+  .btn-pink{background:var(--pink);border-color:var(--pink);color:#fff}
+  .btn-pink:hover{background:var(--ink);border-color:var(--ink)}
+  .btn-outline{background:transparent;color:var(--ink)}
+  .btn-outline:hover{background:var(--ink);color:var(--paper)}
+  .btn[disabled]{opacity:.35;pointer-events:none}
+
+  /* ---- course top bar (Kajabi-style chrome) ---- */
+  .topbar{position:sticky;top:0;z-index:60;background:var(--paper);border-bottom:1px solid rgba(46,31,39,.14);box-shadow:0 8px 24px -18px rgba(46,31,39,.2)}
+  .topbar-inner{display:flex;align-items:center;gap:18px;height:66px;padding:0 22px}
+  .back-link{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;color:var(--purple);white-space:nowrap}
+  .back-link:hover{color:var(--pink)}
+  .tb-title{flex:1;min-width:0;text-align:center;font-family:var(--display);font-size:1.02rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .tb-title b{color:var(--pink);font-style:italic;font-weight:500}
+  .tb-prog{display:flex;align-items:center;gap:10px;white-space:nowrap}
+  .tb-prog .pct{font-weight:700;font-size:.78rem;letter-spacing:.08em;color:var(--purple)}
+  .tb-bar{width:110px;height:6px;border-radius:6px;background:var(--lilac);overflow:hidden}
+  .tb-bar i{display:block;height:100%;width:0;border-radius:6px;background:linear-gradient(90deg,var(--pink),var(--blue));transition:width .4s ease}
+  @media (max-width:640px){.tb-title{display:none}.tb-bar{width:70px}}
+
+  /* ---- layout ---- */
+  .player{display:none}
+  .player.open{display:block}
+  .layout{display:grid;grid-template-columns:360px minmax(0,1fr);align-items:start}
+  .side{grid-column:1;grid-row:1;background:#fff;border-right:1px solid rgba(46,31,39,.14);position:sticky;top:66px;height:calc(100vh - 66px);overflow-y:auto;padding:26px 20px 40px}
+  .stage{grid-column:2;grid-row:1}
+  .side-head{padding:0 6px 18px}
+  .side-head .eyebrow{font-size:.66rem}
+  .side-head h2{font-size:1.3rem;margin-top:4px}
+  .mod{border:1px solid rgba(46,31,39,.16);border-radius:16px;margin-bottom:14px;background:#fff;overflow:hidden}
+  .mod summary{list-style:none;cursor:pointer;padding:15px 18px;display:grid;grid-template-columns:1fr auto;grid-template-rows:auto auto;column-gap:12px;row-gap:2px;align-items:center;background:var(--tint)}
+  .mod summary::-webkit-details-marker{display:none}
+  .mod-num{grid-column:1;grid-row:1;font-family:var(--display);font-style:italic;font-size:.98rem;color:var(--pink);white-space:nowrap}
+  .mod-num small{font-family:var(--body);font-style:normal;font-weight:700;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-left:10px}
+  .mod-name{grid-column:1;grid-row:2;font-weight:700;font-size:.9rem;line-height:1.3}
+  .mod-arrow{grid-column:2;grid-row:1 / span 2;transition:transform .25s;color:var(--purple);flex-shrink:0}
+  .mod[open] .mod-arrow{transform:rotate(180deg)}
+  .lrow{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:none;border:none;border-top:1px solid rgba(46,31,39,.1);padding:13px 16px;cursor:pointer;font-family:var(--body);color:var(--ink);transition:background .15s}
+  .lrow:hover{background:var(--paper)}
+  .lrow.active{background:var(--lilac)}
+  .lrow .lnum{font-weight:700;font-size:.72rem;color:var(--muted);width:28px;flex-shrink:0}
+  .lrow.active .lnum{color:var(--purple)}
+  .lrow .lname{flex:1;font-size:.88rem;font-weight:600;line-height:1.35}
+  .lrow .ldone{width:20px;height:20px;border-radius:50%;border:1px solid rgba(46,31,39,.35);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.68rem;color:transparent;background:transparent;transition:all .2s}
+  .lrow.done .ldone{background:var(--pink);border-color:var(--pink);color:#fff}
+  .side-upsell{margin-top:22px;background:var(--ink);color:var(--paper);border-radius:16px;padding:22px;text-align:center}
+  .side-upsell .hand-note{color:var(--blue);font-size:1.5rem;margin-bottom:6px}
+  .side-upsell p{font-size:.85rem;color:#D8CBC3;margin-bottom:14px}
+  .side-upsell .btn{padding:12px 22px;font-size:.68rem;background:var(--pink);border-color:var(--pink)}
+
+  /* ---- stage ---- */
+  .stage{padding:36px 44px 80px;min-width:0}
+  .crumb{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--muted);margin-bottom:10px}
+  .crumb b{color:var(--purple)}
+  .stage h1{font-size:clamp(1.5rem,3vw,2.3rem);margin-bottom:20px}
+  .vidwrap{position:relative;aspect-ratio:16/9;border-radius:20px;overflow:hidden;border:1px solid rgba(46,31,39,.16);box-shadow:0 34px 64px -30px rgba(46,31,39,.45);background:var(--ink)}
+  .vidwrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .stage-note{margin-top:16px;font-family:'Ephesis',cursive;font-size:1.6rem;color:var(--pink)}
+  .controls{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:26px;flex-wrap:wrap}
+  .controls .grow{flex:1}
+  /* congrats */
+  .congrats{display:none;text-align:center;padding:60px 20px}
+  .congrats.show{display:block}
+  .congrats .big{font-size:3rem;margin-bottom:8px}
+  .congrats h1{font-size:clamp(2rem,4vw,3rem);margin-bottom:12px}
+  .congrats p{color:var(--muted);max-width:480px;margin:0 auto 28px}
+  .congrats .row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+  @media (max-width:980px){
+    .layout{grid-template-columns:1fr}
+    .side{grid-column:1;grid-row:2;position:static;height:auto;border-right:none;border-top:1px solid rgba(46,31,39,.14)}
+    .stage{grid-column:1;grid-row:1;padding:24px 20px 30px}
+    .controls .btn{flex:1 1 100%;width:100%}
+  }
+
+  /* ---- gate ---- */
+  .gate{min-height:70vh;display:flex;align-items:center;justify-content:center;padding:70px 24px}
+  .gate-card{max-width:520px;width:100%;background:#fff;border:1px solid var(--ink);border-radius:26px;padding:52px 42px;text-align:center;box-shadow:0 26px 50px -26px rgba(46,31,39,.38)}
+  .gate-card .lock{width:70px;height:70px;border-radius:50%;background:var(--lilac);border:1px solid var(--ink);display:flex;align-items:center;justify-content:center;font-size:1.8rem;margin:0 auto 20px}
+  .gate-card h1{font-size:clamp(1.9rem,5vw,2.4rem);margin-bottom:10px}
+  .gate-card p{color:var(--muted);margin-bottom:26px}
+  .gate-card input{width:100%;border:1px solid var(--ink);border-radius:60px;padding:16px 24px;font-family:var(--body);font-size:1.05rem;text-align:center;letter-spacing:.2em;text-transform:uppercase;background:var(--paper);color:var(--ink);margin-bottom:16px}
+  .gate-card input:focus{outline:none;box-shadow:0 0 0 3px var(--lilac)}
+  .gate-card .btn{width:100%}
+  .gate-err{display:none;color:var(--pink);font-weight:700;margin-top:14px}
+  .gate-err.show{display:block}
+  .gate-hint{font-size:.85rem;color:var(--muted);margin-top:18px}
+  .gate-hint a{color:var(--purple);font-weight:700}
+
+  footer{background:var(--ink);color:#B9A9A0;padding:40px 0;text-align:center}
+  .foot-logo{font-family:var(--display);font-weight:500;font-size:1.25rem;color:var(--paper);margin-bottom:8px}
+  .foot-logo b{color:var(--pink);font-style:italic}
+  .foot-tag{font-family:'Ephesis',cursive;font-size:1.5rem;color:var(--blue)}
+
+  /* ---- 2027 layer ---- */
+  #pageLoader{position:fixed;inset:0;background:#FBF6EE;z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;transition:opacity .55s ease,visibility .55s}
+  #pageLoader.done{opacity:0;visibility:hidden;pointer-events:none}
+  .l-note{font-family:'Ephesis',cursive;font-size:1.9rem;color:#A93F63}
+  .l-dots{display:flex;gap:7px}
+  .l-dots i{width:8px;height:8px;border-radius:50%;background:#BC8A47;animation:ldot 1s ease-in-out infinite}
+  .l-dots i:nth-child(2){animation-delay:.15s}.l-dots i:nth-child(3){animation-delay:.3s}
+  @keyframes ldot{0%,100%{transform:translateY(0);opacity:.5}50%{transform:translateY(-7px);opacity:1}}
+  .l-svg .tline{transform-origin:left center;animation:ltype 1.3s ease-in-out infinite}
+  .l-svg .t2{animation-delay:.22s}.l-svg .t3{animation-delay:.44s}
+  @keyframes ltype{0%,8%{transform:scaleX(0)}48%,72%{transform:scaleX(1)}100%{transform:scaleX(0)}}
+  .l-svg .l-arm{animation:ltap .3s ease-in-out infinite alternate;transform-origin:58px 74px}
+  @keyframes ltap{from{transform:rotate(-1deg)}to{transform:rotate(5deg)}}
+  @media (prefers-reduced-motion:reduce){#pageLoader{display:none}.l-svg .tline,.l-svg .l-arm,.l-dots i{animation:none}}
+</style>
+</head>
+<body>
+<div id="pageLoader" aria-hidden="true">
+  <svg class="l-svg" viewBox="0 0 170 120" width="170" height="120" fill="none">
+    <rect x="12" y="98" width="146" height="6" rx="3" fill="#2E1F27"/>
+    <rect x="90" y="48" width="44" height="32" rx="3" fill="#2E1F27"/>
+    <rect x="92.5" y="50.5" width="39" height="27" rx="2" fill="#FBF6EE"/>
+    <rect class="tline t1" x="97" y="56" width="22" height="3" rx="1.5" fill="#A93F63"/>
+    <rect class="tline t2" x="97" y="62" width="28" height="3" rx="1.5" fill="#BC8A47"/>
+    <rect class="tline t3" x="97" y="68" width="17" height="3" rx="1.5" fill="#A93F63"/>
+    <rect x="82" y="82" width="60" height="5" rx="2.5" fill="#2E1F27"/>
+    <circle cx="44" cy="42" r="13" fill="#2E1F27"/>
+    <circle cx="53" cy="30" r="7" fill="#A93F63"/>
+    <path d="M26 98 Q28 60 44 58 Q60 60 62 98 Z" fill="#2E1F27"/>
+    <rect class="l-arm" x="56" y="70" width="28" height="6" rx="3" fill="#2E1F27"/>
+    <circle cx="86" cy="74" r="4" fill="#2E1F27"/>
+  </svg>
+  <div class="l-note">brewing something gorgeous&hellip;</div>
+  <div class="l-dots"><i></i><i></i><i></i></div>
+</div>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <a class="back-link" href="/course-library"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg> Course Library</a>
+    <div class="tb-title">Course 03 &middot; Find What <b>to Sell</b></div>
+    <div class="tb-prog"><span class="pct" id="progPct">0%</span><div class="tb-bar"><i id="progBar"></i></div></div>
+  </div>
+</div>
+
+<!-- PASSWORD GATE -->
+<div class="gate" id="gate">
+  <div class="gate-card">
+    <div class="lock">&#128274;</div>
+    <span class="eyebrow">Students only</span>
+    <h1>Enter your access code, babe.</h1>
+    <p>This course is part of the free Course Library. Pop in the access code from your welcome email and dive right in.</p>
+    <input type="password" id="gatePass" placeholder="ACCESS CODE" autocomplete="off">
+    <button class="btn btn-pink" id="gateBtn">Unlock the course</button>
+    <div class="gate-err" id="gateErr">Hmm, that's not it. Double-check your welcome email, babe.</div>
+    <p class="gate-hint">Don't have a code yet? <a href="/freebies">Sign up free right here &rarr;</a></p>
+  </div>
+</div>
+
+<!-- COURSE PLAYER -->
+<div class="player" id="player">
+  <div class="layout">
+
+    <main class="stage">
+      <div id="lessonView">
+        <div class="crumb" id="crumb"></div>
+        <h1 id="lessonTitle"></h1>
+        <div class="vidwrap"><iframe id="lessonFrame" src="" allow="autoplay; fullscreen" allowfullscreen title="Lesson video"></iframe></div>
+        <div class="stage-note">press play &amp; take notes, babe</div>
+        <div class="controls">
+          <button class="btn btn-outline" id="prevBtn">&larr; Previous</button>
+          <span class="grow"></span>
+          <button class="btn btn-pink" id="completeBtn">Mark complete &amp; continue &rarr;</button>
+        </div>
+      </div>
+
+      <div class="congrats" id="congrats">
+        <div class="big">&#127881;</div>
+        <span class="eyebrow">Course complete</span>
+        <h1>You finished the whole thing, babe.</h1>
+        <div class="hand-note">so proud of you</div>
+        <p>Your Easy Yes offer is officially mapped out. Head back to the library for your next course, or let's build and launch the whole thing together inside Blog Launch Lab.</p>
+        <div class="row">
+          <a href="/course-library" class="btn btn-outline">Back to the library</a>
+          <a href="/blog-launch-lab" class="btn btn-pink">Work with me &rarr;</a>
+        </div>
+      </div>
+    </main>
+
+    <aside class="side">
+      <div class="side-head">
+        <span class="eyebrow">Curriculum</span>
+        <h2>The Easy Yes Offer</h2>
+      </div>
+      <div id="curriculum"></div>
+      <div class="side-upsell">
+        <div class="hand-note">want it built with you?</div>
+        <p>Blog Launch Lab is where we build your whole blog together, step by step.</p>
+        <a href="/blog-launch-lab" class="btn">Work With Me &rarr;</a>
+      </div>
+    </aside>
+
+  </div>
+</div>
+
+<footer>
+  <div class="foot-logo">Boss Lady <b>Bloggers</b></div>
+  <div class="foot-tag">one lesson at a time &#10022;</div>
+</footer>
+
+<script>
+(function(){
+  var l=document.getElementById('pageLoader');
+  if(l){
+    var hide=function(){l.classList.add('done')};
+    if(matchMedia('(prefers-reduced-motion: reduce)').matches){hide();}
+    else{window.addEventListener('load',function(){setTimeout(hide,600)});setTimeout(hide,2600);}
+  }
+
+  /* ---- password gate (same code as the Course Library page) ---- */
+  var ACCESS_CODE = "BLOGBABE";
+  var gate=document.getElementById('gate'), player=document.getElementById('player'),
+      pass=document.getElementById('gatePass'), gbtn=document.getElementById('gateBtn'),
+      err=document.getElementById('gateErr');
+  function unlock(){gate.style.display='none';player.classList.add('open');try{sessionStorage.setItem('bll_lib','1')}catch(e){}}
+  function attempt(){
+    if(pass.value.trim().toUpperCase()===ACCESS_CODE){unlock();}
+    else{err.classList.add('show');pass.value='';pass.focus();}
+  }
+  gbtn.addEventListener('click',attempt);
+  pass.addEventListener('keydown',function(e){if(e.key==='Enter')attempt();});
+  try{if(sessionStorage.getItem('bll_lib')==='1')unlock();}catch(e){}
+
+  /* ---- course data ----
+     To add or edit lessons: each lesson is {n:"1.1", t:"Title", id:"GoogleDriveFileID"}.
+     The Drive file ID is the long string in the share link between /d/ and /view.
+     Videos must be shared as "Anyone with the link can view" or students will see a
+     Google permission error instead of the video. */
+  var COURSE=[
+    {num:"Module 1", name:"Easy Yes Foundations", lessons:[
+      {n:"1.1", t:"What Makes an \u201cEasy Yes\u201d Offer", id:"1K8e8mFkjwLAE5WeXMCGDXv30gZAlLuc0"},
+      {n:"1.2", t:"Who You Help & What They Actually Want", id:"14zC9BR02q7Hbh00TSh6P0yUWRz_E1ta_"},
+      {n:"1.3", t:"Your Unique Value Lever", id:"1uCrJ0lQHNL4UFZrST2PFU-Nc3S4eYYER"},
+      {n:"1.4", t:"Beliefs That Block (and Build) Buyer Trust", id:"1yU1CJTgduBHtMN5a2BL8z8cXv_hN9U28"}
+    ]},
+    {num:"Module 2", name:"Design Your Offer", lessons:[
+      {n:"2.1", t:"The 4 Offer Archetypes for Bloggers", id:"1VM9YzcbYU6tdfvIKnkGW0qcOyTgcn3bL"},
+      {n:"2.2", t:"Crafting a Transformational Promise", id:"13zKmPcpKipdarNCsn0MXN9-EM2qYVX48"},
+      {n:"2.3", t:"Building the Delivery Plan", id:"1OLPYrSOLVwwrRZFJNBrHhmPZAfikqm4b"},
+      {n:"2.4", t:"Pricing for Value, Not Just Time", id:"1c5T1-iTiYp8qDFVNIneO31Wiw2VfeW05"}
+    ]},
+    {num:"Module 3", name:"Make It Irresistible", lessons:[
+      {n:"3.1", t:"What Makes People Buy (Especially Women)", id:"1TWZpUdaOeddZRCdqjrd-QpPnhfIO3VDB"},
+      {n:"3.2", t:"The Irresistibility Equation", id:"1xmWb8Si49TdYLSiJxzugBjv2Byh4hmUG"},
+      {n:"3.3", t:"Removing Risk (Real & Perceived)", id:"1g0fTgyKnq3l4KHnNF2bSl9oEGlQo_H-n"},
+      {n:"3.4", t:"Creating Aligned Urgency", id:"1S0hHJsz_ZaMhpyxt6E-Q8nza6qXLPplc"}
+    ]},
+    {num:"Module 4", name:"Package & Position It", lessons:[
+      {n:"4.1", t:"Naming That Sells (Without Sounding Salesy)", id:"1xFj3P8gPOctnoUgqSGXjoa2I9piWrdjE"},
+      {n:"4.2", t:"Offer Stack Anatomy", id:"19zCmkRR-KsZsmIs6L3mDr5Jj3Yv3IWlf"},
+      {n:"4.3", t:"Writing the \u201cWhy Buy Now\u201d Message", id:"1pFKBv8dykoZg132HZLWyL6Yv8vqGblRF"},
+      {n:"4.4", t:"Bonus Strategy That Boosts Conversions", id:"130EFEMETn_jFnyVeN7CNBgBYYobXVz85"}
+    ]}
+  ];
+
+  /* flat lesson list */
+  var FLAT=[];
+  COURSE.forEach(function(m,mi){m.lessons.forEach(function(les){FLAT.push({m:m,mi:mi,les:les});});});
+
+  /* progress persistence */
+  var STORE_KEY='bll_course3_done';
+  function loadDone(){try{return JSON.parse(localStorage.getItem(STORE_KEY)||'[]');}catch(e){return [];}}
+  function saveDone(arr){try{localStorage.setItem(STORE_KEY,JSON.stringify(arr));}catch(e){}}
+  var done=loadDone();
+  function isDone(n){return done.indexOf(n)>-1;}
+
+  var cur=0;
+  var curEl=document.getElementById('curriculum'),
+      crumb=document.getElementById('crumb'),
+      title=document.getElementById('lessonTitle'),
+      frame=document.getElementById('lessonFrame'),
+      prevBtn=document.getElementById('prevBtn'),
+      compBtn=document.getElementById('completeBtn'),
+      pct=document.getElementById('progPct'),
+      bar=document.getElementById('progBar'),
+      lessonView=document.getElementById('lessonView'),
+      congrats=document.getElementById('congrats');
+
+  function renderSidebar(){
+    var html='';
+    COURSE.forEach(function(m,mi){
+      html+='<details class="mod" open><summary>'+
+        '<span class="mod-num">'+m.num+'<small>'+m.lessons.length+' lessons</small></span>'+
+        '<span class="mod-name">'+m.name+'</span>'+
+        '<svg class="mod-arrow" viewBox="0 0 24 24" width="16" height="16" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>'+
+        '</summary>';
+      m.lessons.forEach(function(les){
+        var fi=FLAT.findIndex(function(f){return f.les.n===les.n;});
+        html+='<button class="lrow'+(fi===cur?' active':'')+(isDone(les.n)?' done':'')+'" data-i="'+fi+'">'+
+          '<span class="lnum">'+les.n+'</span>'+
+          '<span class="lname">'+les.t+'</span>'+
+          '<span class="ldone">&#10003;</span>'+
+          '</button>';
+      });
+      html+='</details>';
+    });
+    curEl.innerHTML=html;
+    curEl.querySelectorAll('.lrow').forEach(function(b){
+      b.addEventListener('click',function(){select(parseInt(b.getAttribute('data-i'),10),true);});
+    });
+  }
+
+  function updateProgress(){
+    var p=FLAT.length?Math.round(done.length/FLAT.length*100):0;
+    pct.textContent=p+'%';
+    bar.style.width=p+'%';
+  }
+
+  function select(i,scrollTop){
+    cur=Math.max(0,Math.min(FLAT.length-1,i));
+    var f=FLAT[cur];
+    crumb.innerHTML='<b>'+f.m.num+'</b> &middot; '+f.m.name;
+    title.textContent='Lesson '+f.les.n+' — '+f.les.t;
+    frame.src='https://drive.google.com/file/d/'+f.les.id+'/preview';
+    prevBtn.disabled=(cur===0);
+    if(cur===0){prevBtn.setAttribute('disabled','');}else{prevBtn.removeAttribute('disabled');}
+    compBtn.innerHTML=isDone(f.les.n)?(cur<FLAT.length-1?'Next lesson &rarr;':'Finish course &#127881;'):'Mark complete &amp; continue &rarr;';
+    congrats.classList.remove('show');
+    lessonView.style.display='';
+    renderSidebar();
+    updateProgress();
+    if(scrollTop){window.scrollTo({top:0,behavior:'smooth'});}
+  }
+
+  prevBtn.addEventListener('click',function(){if(cur>0)select(cur-1,true);});
+  compBtn.addEventListener('click',function(){
+    var f=FLAT[cur];
+    if(!isDone(f.les.n)){done.push(f.les.n);saveDone(done);}
+    if(cur<FLAT.length-1){select(cur+1,true);}
+    else{
+      renderSidebar();updateProgress();
+      lessonView.style.display='none';
+      congrats.classList.add('show');
+      window.scrollTo({top:0,behavior:'smooth'});
+    }
+  });
+
+  /* start at the first lesson not yet completed */
+  var start=FLAT.findIndex(function(f){return !isDone(f.les.n);});
+  select(start===-1?0:start,false);
+})();
+</script>
+</body>
+</html>
