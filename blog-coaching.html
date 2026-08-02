@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog Coaching | 1:1 Coaching Packages with Boss Lady Bloggers</title>
+<meta name="description" content="1:1 blog coaching with Genasys, by the call. Pick a coaching package based on how many calls you need and get expert help to start a blog, grow a blog, and make money blogging.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FFF4FA;--tint:#FBEDFB;--ink:#34204F;--pink:#FF5DA2;--purple:#8B5CF6;
+    --blue:#5C7CFA;--lilac:#E7D4FF;--muted:#5b4a72;--sun:#FFC83D;
+    --display:'Bricolage Grotesque', system-ui, sans-serif;--body:'Inter', system-ui, sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--paper);color:var(--ink);font-family:var(--body);line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 30px}
+  h1,h2,h3{font-family:var(--display);font-weight:800;line-height:1.04;letter-spacing:-.02em}
+  a{color:inherit}
+  section{padding:92px 0}
+
+  .sec-tint{background:var(--tint)}
+  .sec-ink{background:var(--ink);color:var(--paper)}
+  .sec-purple{background:var(--purple);color:#fff}
+  .sec-blue{background:var(--blue);color:#fff}
+
+  .eyebrow{display:inline-block;font-family:var(--body);font-weight:600;font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;color:var(--purple)}
+  .sec-ink .eyebrow,.sec-purple .eyebrow,.sec-blue .eyebrow{color:var(--lilac)}
+
+  .mark{position:relative;white-space:nowrap;z-index:0;color:var(--ink)}
+  .mark::before{content:'';position:absolute;z-index:-1;left:-.08em;right:-.08em;bottom:.06em;height:.42em;background:var(--lilac);transform:skewX(-6deg)}
+  .mark.pink::before{background:var(--pink);bottom:.04em;height:.5em;opacity:.95}
+  .mark.pink{color:#fff}
+
+  .btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--display);font-weight:700;font-size:1rem;padding:16px 34px;border-radius:50px;text-decoration:none;background:var(--ink);color:var(--paper);border:2px solid var(--ink);cursor:pointer;transition:transform .2s ease, box-shadow .2s ease, background .2s ease, color .2s ease}
+  .btn:hover{transform:translateY(-3px);box-shadow:0 12px 0 -4px var(--pink)}
+  .btn-pink{background:var(--pink);border-color:var(--pink);color:#fff}
+  .btn-pink:hover{box-shadow:0 12px 0 -4px var(--purple)}
+  .btn-outline{background:transparent;color:var(--ink)}
+  .btn-outline:hover{background:var(--ink);color:var(--paper);box-shadow:none;transform:translateY(-3px)}
+
+  nav{position:sticky;top:0;z-index:60;background:var(--paper);border-bottom:3px solid var(--ink)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:74px}
+  .logo{font-family:var(--display);font-weight:800;font-size:1.3rem}
+  .logo b{color:var(--pink)}
+  .nav-links{display:flex;gap:24px;list-style:none}
+  .nav-links a{font-weight:600;font-size:.84rem;text-decoration:none;transition:color .2s}
+  .nav-links a:hover{color:var(--pink)}
+  .nav-cta{font-family:var(--display);font-weight:700;font-size:.9rem;text-decoration:none;background:var(--pink);color:#fff;padding:10px 22px;border-radius:50px;border:2px solid var(--ink)}
+
+  .imgph{position:relative;border:3px solid var(--ink);border-radius:18px;background:linear-gradient(135deg,var(--lilac),var(--pink));display:flex;align-items:center;justify-content:center;overflow:hidden;min-height:110px}
+  .imgph span{background:var(--paper);border:2px solid var(--ink);border-radius:50px;padding:7px 16px;font-weight:600;font-size:.72rem;color:var(--ink);text-align:center}
+  .imgph.p{background:linear-gradient(135deg,var(--pink),var(--purple))}
+  .imgph.b{background:linear-gradient(135deg,var(--blue),var(--purple))}
+
+  .hero{padding:80px 0}
+  .hero-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:56px;align-items:center}
+  .hero .eyebrow{margin-bottom:20px}
+  .hero h1{font-size:clamp(2.6rem,6vw,4.8rem);margin-bottom:22px}
+  .hero p.sub{font-size:1.18rem;color:var(--muted);margin-bottom:30px;max-width:560px}
+  .hero p.sub b{color:var(--ink);font-weight:600}
+  .hero-cta{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+  .hero-media .imgph{aspect-ratio:4/5;box-shadow:16px 16px 0 var(--purple)}
+
+  .shead{max-width:740px;margin:0 auto 54px;text-align:center}
+  .shead .eyebrow{margin-bottom:14px}
+  .shead h2{font-size:clamp(2.2rem,5.4vw,3.8rem);margin-bottom:16px}
+  .shead p{font-size:1.12rem;color:var(--muted)}
+  .sec-purple .shead p,.sec-blue .shead p,.sec-ink .shead p{color:rgba(255,255,255,.9)}
+
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:58px;align-items:center}
+  .split .eyebrow{margin-bottom:16px}
+  .split h2{font-size:clamp(2rem,4.4vw,3.2rem);margin-bottom:20px}
+  .split p{font-size:1.08rem;color:var(--muted);margin-bottom:18px;max-width:540px}
+  .split p b{color:var(--ink);font-weight:600}
+  .split .imgph{aspect-ratio:4/3;box-shadow:14px 14px 0 var(--blue)}
+
+  .inc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;max-width:980px;margin:0 auto}
+  .inc{display:flex;gap:18px;align-items:flex-start;background:#fff;border:2px solid var(--ink);border-radius:18px;padding:24px}
+  .inc .ic{flex:0 0 44px;height:44px;border-radius:12px;background:var(--lilac);border:2px solid var(--ink);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:800;font-size:1.05rem;color:var(--ink)}
+  .inc h3{font-size:1.18rem;margin-bottom:5px;color:var(--ink)}
+  .inc p{font-size:.95rem;color:var(--muted)}
+
+  .cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .step{text-align:center}
+  .step .n{width:58px;height:58px;border-radius:50%;background:#fff;color:var(--ink);border:3px solid var(--ink);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:800;font-size:1.3rem;margin:0 auto 18px}
+  .step h3{font-size:1.35rem;margin-bottom:8px}
+  .step p{color:rgba(255,255,255,.9);font-size:1rem;max-width:300px;margin:0 auto}
+
+  /* pricing tiers */
+  .tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;align-items:stretch;max-width:1060px;margin:0 auto}
+  .tier{background:#fff;border:3px solid var(--ink);border-radius:22px;padding:38px 30px;display:flex;flex-direction:column;box-shadow:10px 10px 0 var(--blue);position:relative}
+  .tier.featured{box-shadow:12px 12px 0 var(--pink)}
+  .tier .badge{position:absolute;top:-15px;left:50%;transform:translateX(-50%);background:var(--pink);color:#fff;font-family:var(--display);font-weight:800;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;padding:7px 16px;border-radius:50px;border:2px solid var(--ink);white-space:nowrap}
+  .tier .calls{font-family:var(--body);font-weight:600;font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--purple)}
+  .tier h3{font-size:1.55rem;margin:8px 0 4px}
+  .tier .blurb{color:var(--muted);font-size:.95rem;min-height:48px;margin-bottom:18px}
+  .tier .price{font-family:var(--display);font-weight:800;font-size:2.8rem;line-height:1}
+  .tier .per{color:var(--muted);font-size:.9rem;margin-bottom:22px}
+  .tier ul{list-style:none;margin-bottom:26px;flex:1}
+  .tier li{display:flex;gap:12px;align-items:flex-start;padding:9px 0;font-size:.98rem;border-bottom:1px solid rgba(52,32,79,.1)}
+
+  .bonus-box{background:var(--tint);border:2px dashed var(--purple);border-radius:16px;padding:18px 18px 16px;margin-bottom:22px}
+  .bonus-box .bhead{display:flex;align-items:center;gap:8px;font-family:var(--display);font-weight:800;font-size:.82rem;letter-spacing:.04em;text-transform:uppercase;color:var(--purple);margin-bottom:10px}
+  .bonus-box .bhead .star{color:var(--sun);font-size:1rem}
+  .bonus-item{display:flex;gap:10px;align-items:flex-start;padding:6px 0;font-size:.92rem}
+  .bonus-item:not(:last-child){border-bottom:1px dashed rgba(139,92,246,.25)}
+  .bonus-item .bm{flex:0 0 16px;color:var(--purple);font-weight:800}
+  .bonus-item b{display:block;color:var(--ink)}
+  .bonus-item span.val{display:inline-block;margin-top:2px;font-size:.78rem;font-weight:700;color:var(--pink)}
+  .tier li:last-child{border-bottom:none}
+  .tier li .m{flex:0 0 18px;color:var(--pink);font-weight:800}
+  .tier .btn{width:100%;justify-content:center}
+  .tiers-note{text-align:center;margin-top:30px;color:var(--muted);font-size:1rem}
+  .tiers-note a{font-weight:600;border-bottom:2px solid var(--pink);text-decoration:none}
+
+  .cred-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:56px;align-items:center}
+  .cred-photo{aspect-ratio:4/5;box-shadow:14px 14px 0 var(--ink)}
+  .cred h2{font-size:clamp(2.2rem,4.8vw,3.4rem);margin-bottom:20px}
+  .cred .copy p{font-size:1.08rem;color:rgba(255,255,255,.92);margin-bottom:18px;max-width:560px}
+  .cred .copy p b{color:#fff;font-weight:700}
+
+  .tcards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .tcard{background:#fff;border:2px solid var(--ink);border-radius:20px;padding:30px}
+  .tcard .stars{color:var(--pink);letter-spacing:2px;margin-bottom:14px;font-size:1.1rem}
+  .tcard p{font-size:1.01rem;margin-bottom:18px;color:var(--ink)}
+  .tcard .av{display:flex;align-items:center;gap:12px}
+  .tcard .avph{flex:0 0 46px;height:46px;border-radius:50%;border:2px solid var(--ink);background:linear-gradient(135deg,var(--pink),var(--purple))}
+  .tcard .who{font-family:var(--display);font-weight:700;font-size:.95rem}
+  .tcard .who small{display:block;font-family:var(--body);font-weight:400;color:var(--muted);font-size:.82rem}
+  .ph-note{text-align:center;margin-top:26px;font-size:.72rem;letter-spacing:.1em;color:#a99ec0;text-transform:uppercase}
+
+  .faq-list{max-width:820px;margin:0 auto}
+  .faq-list details{border:2px solid var(--ink);border-radius:16px;padding:0 26px;margin-bottom:16px;background:#fff;transition:box-shadow .2s}
+  .faq-list details[open]{box-shadow:8px 8px 0 var(--lilac)}
+  .faq-list summary{list-style:none;cursor:pointer;font-family:var(--display);font-weight:700;font-size:1.12rem;padding:22px 0;display:flex;justify-content:space-between;align-items:center;gap:20px;color:var(--ink)}
+  .faq-list summary::-webkit-details-marker{display:none}
+  .faq-list summary .pm{flex:0 0 28px;height:28px;border-radius:50%;background:var(--pink);color:#fff;text-align:center;line-height:26px;font-size:1.3rem;transition:transform .2s}
+  .faq-list details[open] summary .pm{transform:rotate(45deg)}
+  .faq-list .ans{padding:0 0 24px;color:var(--muted);font-size:1.03rem}
+
+  .final{text-align:center}
+  .final h2{font-size:clamp(2.4rem,6vw,4.4rem);margin-bottom:20px;max-width:18ch;margin-left:auto;margin-right:auto}
+  .final p{color:#d9cfe8;max-width:540px;margin:0 auto 36px;font-size:1.14rem}
+
+  footer{background:var(--ink);color:#b6abc9;border-top:1px solid rgba(255,255,255,.12);padding:50px 0}
+  .foot-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px}
+  .foot-logo{font-family:var(--display);font-weight:800;font-size:1.3rem;color:var(--paper)}
+  .foot-logo b{color:var(--pink)}
+  .foot-links{display:flex;gap:24px;list-style:none}
+  .foot-links a{font-size:.8rem;font-weight:500;text-decoration:none;color:#b6abc9}
+  .foot-links a:hover{color:var(--paper)}
+  .foot-tag{width:100%;text-align:center;font-family:var(--display);font-weight:600;color:var(--lilac);padding-top:24px;margin-top:24px;border-top:1px solid rgba(255,255,255,.1)}
+
+  .rise{opacity:0;transform:translateY(24px);transition:opacity .8s ease, transform .8s ease}
+  .rise.seen{opacity:1;transform:none}
+
+  @media (max-width:880px){
+    .nav-links{display:none}
+    section{padding:68px 0}
+    .hero-grid,.split,.cred-grid{grid-template-columns:1fr;gap:38px}
+    .hero-media .imgph,.split .imgph,.cred-photo{max-width:400px}
+    .inc-grid,.cards3,.tiers,.tcards{grid-template-columns:1fr;gap:22px}
+  }
+  @media (prefers-reduced-motion:reduce){.rise{opacity:1;transform:none;transition:none}}
+
+  /* real images inside placeholder frames */
+  .imgph img,.feat-cover img,.fcover img,.note .pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+  .imgph,.feat-cover,.fcover,.note .pic{position:relative}
+  /* mobile nav */
+  .burger{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:6px;padding:8px}
+  .burger i{display:block;width:26px;height:3px;border-radius:3px;background:var(--ink)}
+  .mobile-menu{display:none;position:fixed;inset:0;background:var(--paper);z-index:100;padding:100px 34px 40px;flex-direction:column;gap:20px;overflow-y:auto}
+  .mobile-menu.open{display:flex}
+  .mobile-menu a{font-family:var(--display);font-weight:800;font-size:1.45rem;text-decoration:none;color:var(--ink);border:none}
+  .mobile-menu a:hover{color:var(--pink)}
+  .mobile-close{position:absolute;top:22px;right:26px;background:none;border:none;font-size:2.2rem;line-height:1;cursor:pointer;color:var(--ink)}
+  @media (max-width:920px){.burger{display:flex}}
+  /* mobile polish */
+  @media (max-width:600px){
+    .wrap{padding:0 22px}
+    .btn{width:100%;justify-content:center}
+    nav .nav-cta{display:none}
+    .hero-cta .btn{width:100%}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-inner">
+    <div class="logo">Boss Lady <b>Bloggers</b></div>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="#work">What we cover</a></li>
+      <li><a href="#packages">Packages</a></li>
+      <li><a href="#coach">Your coach</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <a href="#packages" class="nav-cta">See packages</a>
+    <button class="burger" id="burger" aria-label="Menu"><i></i><i></i><i></i></button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="mobileClose" aria-label="Close menu">&times;</button>
+  <a href="/">Home</a>
+  <a href="#work">What we cover</a>
+  <a href="#packages">Packages</a>
+  <a href="#coach">Your coach</a>
+  <a href="#faq">FAQ</a>
+  <a href="#packages" style="color:var(--pink)">See packages &rarr;</a>
+</div>
+
+
+<!-- 1 HERO -->
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div class="rise">
+      <span class="eyebrow">1:1 blog coaching · book by the call</span>
+      <h1>Blog coaching that cuts through the overwhelm and hands you the exact next step to <span class="mark pink">grow your blog and get paid.</span></h1>
+      <p class="sub">Not ready for the whole program? Same. Sometimes you don't need a twelve-week commitment, you just need a blog coach in your corner for a call or two to get unstuck fast. Book the number of coaching calls you need, bring your messiest questions, and walk away with a clear, doable plan to start a blog, grow your blog, or finally make money from it. <b>Pick a package and let's go.</b></p>
+      <div class="hero-cta">
+        <a href="#packages" class="btn btn-pink">See the packages</a>
+        <a href="#work" class="btn btn-outline">What we can cover</a>
+      </div>
+    </div>
+    <div class="hero-media rise"><div class="imgph p"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_018.jpeg" alt="Genasys holding a Boss Lady Bloggers letterboard" loading="lazy"></div></div>
+  </div>
+</header>
+
+<!-- 2 WHAT COACHING IS -->
+<section class="sec-tint">
+  <div class="wrap split">
+    <div class="rise"><div class="imgph"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_008.jpeg" alt="A one-on-one blog coaching call" loading="lazy"></div></div>
+    <div class="rise">
+      <span class="eyebrow" style="color:var(--pink)">Why a call</span>
+      <h2>One honest hour of blog coaching can save you six lonely months of guessing.</h2>
+      <p>You can spend half a year guessing, or you can get an hour with someone who's done this for nine years and skip straight to the answer. That's the whole magic of 1:1 blog coaching.</p>
+      <p>No fluffy theory, no generic advice. Just real eyes on <b>your</b> blog, <b>your</b> offer, and <b>your</b> next move, tailored to exactly where you are right now.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 3 WHAT WE CAN WORK ON -->
+<section id="work">
+  <div class="wrap">
+    <div class="shead rise">
+      <span class="eyebrow">Bring it all</span>
+      <h2>Bring the mess, the doubts, and the half-finished ideas. Here's what we untangle in your blog coaching calls.</h2>
+      <p>Show up with whatever is keeping you stuck. Here's the kind of stuff we tackle on a call.</p>
+    </div>
+    <div class="inc-grid">
+      <div class="inc rise"><div class="ic">&hearts;</div><div><h3>Your niche &amp; idea</h3><p>Figure out what to start a blog about and who it's really for, so you stop second-guessing.</p></div></div>
+      <div class="inc rise"><div class="ic">&starf;</div><div><h3>Your offer &amp; monetization</h3><p>Map out what to sell so you can actually make money blogging, not just hope for ad pennies.</p></div></div>
+      <div class="inc rise"><div class="ic">&#9733;</div><div><h3>Your blog website</h3><p>Get clear on what your site needs to look like and say to turn visitors into buyers.</p></div></div>
+      <div class="inc rise"><div class="ic">&#9788;</div><div><h3>Blog traffic &amp; SEO</h3><p>A real plan to grow a blog and get the right people finding you on purpose.</p></div></div>
+      <div class="inc rise"><div class="ic">&#10024;</div><div><h3>Messaging &amp; copy</h3><p>Words that sound like you and actually persuade, so your blog does the selling.</p></div></div>
+      <div class="inc rise"><div class="ic">&hearts;</div><div><h3>Strategy &amp; accountability</h3><p>A clear next step, a gentle push, and someone keeping you honest about doing it.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4 HOW A CALL WORKS -->
+<section class="sec-purple">
+  <div class="wrap">
+    <div class="shead rise">
+      <span class="eyebrow">Easy as it sounds</span>
+      <h2>How your blog coaching actually works. Spoiler: it's refreshingly simple.</h2>
+    </div>
+    <div class="cards3">
+      <div class="step rise"><div class="n">1</div><h3>Pick &amp; book</h3><p>Choose your package, then tell me what you want to focus on so I come prepped for you.</p></div>
+      <div class="step rise"><div class="n">2</div><h3>We hop on live</h3><p>Just the two of us, working through your blog and your questions in real time, no fluff.</p></div>
+      <div class="step rise"><div class="n">3</div><h3>You leave with a plan</h3><p>Clear next steps and a recap so you know exactly what to do the second we hang up.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 PACKAGES -->
+<section id="packages">
+  <div class="wrap">
+    <div class="shead rise">
+      <span class="eyebrow">Coaching packages</span>
+      <h2>Pick the blog coaching package that matches exactly where you are right now.</h2>
+      <p>Priced by the number of calls, so you only pay for what you need. The more you book, the more you save per call.</p>
+    </div>
+    <div class="tiers">
+      <div class="tier rise">
+        <span class="calls">1 call</span>
+        <h3>The Power Hour</h3>
+        <p class="blurb">One focused session for a quick audit, gut-check, or your single biggest question.</p>
+        <div class="price">$150</div>
+        <div class="per">one 60-minute call</div>
+        <div class="bonus-box">
+          <div class="bhead"><span class="star">&#9733;</span> Free bonus (a total steal)</div>
+          <div class="bonus-item"><span class="bm">&#9733;</span><div><b>Done-For-You Freebie Template</b>A fully designed, ready-to-use opt-in freebie. Just add your name and hit publish, no design skills, no hours lost. <span class="val">$97 value, yours free</span></div></div>
+        </div>
+        <ul>
+          <li><span class="m">&check;</span> One 60-minute 1:1 coaching call</li>
+          <li><span class="m">&check;</span> A focused game plan for your top question</li>
+          <li><span class="m">&check;</span> A recap with your clear next steps</li>
+          <li><span class="m">&check;</span> Perfect for a one-time unstuck</li>
+        </ul>
+        <a href="#" class="btn btn-outline">Book the Power Hour</a>
+      </div>
+
+      <div class="tier featured rise">
+        <span class="badge">Most popular</span>
+        <span class="calls">3 calls</span>
+        <h3>The Momentum Pack</h3>
+        <p class="blurb">Enough runway to work through a real project, from idea to launch-ready.</p>
+        <div class="price">$400</div>
+        <div class="per">three calls · about $133 each</div>
+        <div class="bonus-box">
+          <div class="bhead"><span class="star">&#9733;</span> 2 free bonuses (a total steal)</div>
+          <div class="bonus-item"><span class="bm">&#9733;</span><div><b>Done-For-You Freebie Template</b>A fully designed opt-in freebie, ready to publish today. <span class="val">$97 value, yours free</span></div></div>
+          <div class="bonus-item"><span class="bm">&#9733;</span><div><b>Your 90-Day Content Calendar</b>90 blog post topics, planned and written out for your exact niche. No more staring at a blank page wondering what to post. <span class="val">$150 value, yours free</span></div></div>
+        </div>
+        <ul>
+          <li><span class="m">&check;</span> Three 60-minute 1:1 calls</li>
+          <li><span class="m">&check;</span> Use them over a few months</li>
+          <li><span class="m">&check;</span> Recap &amp; next steps after each call</li>
+          <li><span class="m">&check;</span> Light support between calls</li>
+          <li><span class="m">&check;</span> Best for real, steady progress</li>
+        </ul>
+        <a href="#" class="btn btn-pink">Book the Momentum Pack</a>
+      </div>
+
+      <div class="tier rise">
+        <span class="calls">6 calls</span>
+        <h3>The Deep Dive</h3>
+        <p class="blurb">Go all in over a couple months and build genuine traction with me beside you.</p>
+        <div class="price">$750</div>
+        <div class="per">six calls · just $125 each</div>
+        <div class="bonus-box">
+          <div class="bhead"><span class="star">&#9733;</span> 3 free bonuses (a total steal)</div>
+          <div class="bonus-item"><span class="bm">&#9733;</span><div><b>Done-For-You Freebie Template</b>A fully designed opt-in freebie, ready to publish today. <span class="val">$97 value, yours free</span></div></div>
+          <div class="bonus-item"><span class="bm">&#9733;</span><div><b>Your 90-Day Content Calendar</b>90 blog post topics, planned and written out for your exact niche. <span class="val">$150 value, yours free</span></div></div>
+          <div class="bonus-item"><span class="bm">&#9733;</span><div><b>A Private Recorded Blog Audit</b>I personally screen-record myself going through your actual blog line by line, what to fix, what to keep, what to build next. Yours to rewatch anytime. <span class="val">$250 value, yours free</span></div></div>
+        </div>
+        <ul>
+          <li><span class="m">&check;</span> Six 60-minute 1:1 calls</li>
+          <li><span class="m">&check;</span> Ongoing support between calls</li>
+          <li><span class="m">&check;</span> Recaps &amp; accountability throughout</li>
+          <li><span class="m">&check;</span> The closest thing to me on speed dial</li>
+          <li><span class="m">&check;</span> Best value per call</li>
+        </ul>
+        <a href="#" class="btn btn-outline">Book the Deep Dive</a>
+      </div>
+    </div>
+    <p class="tiers-note rise">Not sure which fits? <a href="/book-a-call">Book a free call</a> and we'll figure it out together.</p>
+  </div>
+</section>
+
+<!-- 6 MEET COACH -->
+<section class="sec-blue" id="coach">
+  <div class="wrap cred-grid">
+    <div class="rise"><div class="imgph cred-photo"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_016.jpeg" alt="Genasys, your blog coach since 2017" loading="lazy"></div></div>
+    <div class="copy rise">
+      <span class="eyebrow">Your coach</span>
+      <h2>Your blog coach has been in the trenches since 2017, not just reading about it in someone else's course.</h2>
+      <p>Hey, I'm Genasys. I've been building blogs since 2017 and coaching other women through it for <b>seven years</b>. I started in my aunt's basement on a clunky DIY site, figured it all out the hard way, and now I help women skip the parts that wasted my time.</p>
+      <p>And I'm not coaching from a yacht. I'm a real mom going all in on this again, so I genuinely get the juggle. On our calls you get honest answers, real strategy, and someone who's truly in your corner.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 7 TESTIMONIALS -->
+<section class="sec-tint">
+  <div class="wrap">
+    <div class="shead rise">
+      <span class="eyebrow" style="color:var(--pink)">Happy bloggers</span>
+      <h2>What just one blog coaching call has done for women exactly like you.</h2>
+    </div>
+    <div class="tcards">
+      <div class="tcard rise"><div class="stars">&starf;&starf;&starf;&starf;&starf;</div><p>"One Power Hour and I finally knew my niche, my offer, and my next three steps. I'd been stuck on that for months."</p><div class="av"><div class="avph"></div><div class="who">Your client name<small>What she does</small></div></div></div>
+      <div class="tcard rise"><div class="stars">&starf;&starf;&starf;&starf;&starf;</div><p>"The Momentum Pack got me from idea to launched. Having her every few weeks kept me accountable and moving."</p><div class="av"><div class="avph"></div><div class="who">Your client name<small>What she does</small></div></div></div>
+      <div class="tcard rise"><div class="stars">&starf;&starf;&starf;&starf;&starf;</div><p>"Worth every penny. She gives real, specific advice, not the vague stuff you find for free online. My traffic finally grew."</p><div class="av"><div class="avph"></div><div class="who">Your client name<small>What she does</small></div></div></div>
+    </div>
+    <p class="ph-note">Placeholder testimonials, swap in your real client words</p>
+  </div>
+</section>
+
+<!-- 8 FAQ -->
+<section id="faq">
+  <div class="wrap">
+    <div class="shead rise">
+      <span class="eyebrow">Quick questions</span>
+      <h2>The stuff you're wondering before you book your blog coaching.</h2>
+    </div>
+    <div class="faq-list">
+      <details class="rise"><summary>How long is each call? <span class="pm">+</span></summary><div class="ans">Each call is 60 minutes of focused, one-on-one time. Enough to actually dig in and leave with a real plan.</div></details>
+      <details class="rise"><summary>How do I use a multi-call package? <span class="pm">+</span></summary><div class="ans">However works for you. Most women space their calls out over a few weeks or months so they have time to act between sessions. We'll find a rhythm that fits your life.</div></details>
+      <details class="rise"><summary>What if I need more calls later? <span class="pm">+</span></summary><div class="ans">Easy, you can book another package anytime. Lots of women start with a Power Hour and come back for more once they feel the difference.</div></details>
+      <details class="rise"><summary>Are the calls really just me and you? <span class="pm">+</span></summary><div class="ans">100%. This is private 1:1 coaching, no group, no assistant. Just you, me, and your blog.</div></details>
+      <details class="rise"><summary>I'm brand new. Is coaching right for me? <span class="pm">+</span></summary><div class="ans">Totally. The earlier we talk, the more time and mistakes I save you. We'll start exactly where you are, even if that's a blank page.</div></details>
+      <details class="rise"><summary>What's the difference between this and Blog Launch Lab? <span class="pm">+</span></summary><div class="ans">Blog Launch Lab is my full done-with-you program where I also build your website. These packages are pure coaching by the call, perfect when you want guidance and want to do the building yourself.</div></details>
+    </div>
+  </div>
+</section>
+
+<!-- 9 FINAL -->
+<section class="sec-ink final">
+  <div class="wrap rise">
+    <span class="eyebrow">Okay, your move</span>
+    <h2 style="margin-top:18px">Stop googling it at midnight. Let's get your blog unstuck on a real coaching call.</h2>
+    <p>You don't have to figure your blog out alone. Pick the number of calls you want, bring your questions, and let's make a real plan together.</p>
+    <a href="#packages" class="btn btn-pink">Pick your package</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-inner">
+    <div class="foot-logo">Boss Lady <b>Bloggers</b></div>
+    <ul class="foot-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="#work">What we cover</a></li>
+      <li><a href="#packages">Packages</a></li>
+      <li><a href="#coach">Your coach</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <div class="foot-tag">Boss Lady Bloggers · blog coaching and blog website design for women who mean business.</div>
+  </div>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('seen'); obs.unobserve(e.target);} });
+  },{threshold:.1});
+  document.querySelectorAll('.rise').forEach(el=>obs.observe(el));
+</script>
+
+
+<script>
+(function(){
+  var b=document.getElementById('burger'),m=document.getElementById('mobileMenu'),c=document.getElementById('mobileClose');
+  if(b&&m){
+    b.addEventListener('click',function(){m.classList.add('open')});
+    if(c)c.addEventListener('click',function(){m.classList.remove('open')});
+    m.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){m.classList.remove('open')})});
+  }
+})();
+</script>
+</body>
+</html>

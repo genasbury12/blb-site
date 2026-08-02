@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Resource Library | Boss Lady Bloggers</title>
+<meta name="description" content="Unlock the Free Resource Library from Boss Lady Bloggers: a whole library of free blogging courses to help you start a blog, grow a blog, and make money blogging.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FFF4FA;--tint:#FBEDFB;--ink:#34204F;--pink:#FF5DA2;--purple:#8B5CF6;
+    --blue:#5C7CFA;--lilac:#E7D4FF;--muted:#5b4a72;
+    --display:'Bricolage Grotesque', system-ui, sans-serif;--body:'Inter', system-ui, sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--paper);color:var(--ink);font-family:var(--body);line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 30px}
+  h1,h2,h3{font-family:var(--display);font-weight:800;line-height:1.04;letter-spacing:-.02em}
+  a{color:inherit}
+  section{padding:90px 0}
+
+  .sec-tint{background:var(--tint)}
+  .sec-ink{background:var(--ink);color:var(--paper)}
+  .sec-purple{background:var(--purple);color:#fff}
+
+  .eyebrow{display:inline-block;font-family:var(--body);font-weight:600;font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;color:var(--purple)}
+  .sec-ink .eyebrow,.sec-purple .eyebrow{color:var(--lilac)}
+
+  .mark{position:relative;white-space:nowrap;z-index:0;color:var(--ink)}
+  .mark::before{content:'';position:absolute;z-index:-1;left:-.08em;right:-.08em;bottom:.06em;height:.42em;background:var(--lilac);transform:skewX(-6deg)}
+  .mark.pink::before{background:var(--pink);bottom:.04em;height:.5em;opacity:.95}
+  .mark.pink{color:#fff}
+
+  .btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--display);font-weight:700;font-size:1rem;padding:16px 34px;border-radius:50px;text-decoration:none;background:var(--ink);color:var(--paper);border:2px solid var(--ink);cursor:pointer;transition:transform .2s ease, box-shadow .2s ease, background .2s ease, color .2s ease}
+  .btn:hover{transform:translateY(-3px);box-shadow:0 12px 0 -4px var(--pink)}
+  .btn-pink{background:var(--pink);border-color:var(--pink);color:#fff}
+  .btn-pink:hover{box-shadow:0 12px 0 -4px var(--purple)}
+  .btn-outline{background:transparent;color:var(--ink)}
+  .btn-outline:hover{background:var(--ink);color:var(--paper);box-shadow:none;transform:translateY(-3px)}
+
+  nav{position:sticky;top:0;z-index:60;background:var(--paper);border-bottom:3px solid var(--ink)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:74px}
+  .logo{font-family:var(--display);font-weight:800;font-size:1.35rem}
+  .logo b{color:var(--pink)}
+  .nav-links{display:flex;gap:26px;list-style:none}
+  .nav-links a{font-weight:600;font-size:.84rem;text-decoration:none;transition:color .2s}
+  .nav-links a:hover{color:var(--pink)}
+  .nav-cta{font-family:var(--display);font-weight:700;font-size:.9rem;text-decoration:none;background:var(--pink);color:#fff;padding:10px 22px;border-radius:50px;border:2px solid var(--ink)}
+
+  /* hero */
+  .hero{padding:84px 0;text-align:center}
+  .hero .eyebrow{margin-bottom:22px}
+  .hero h1{font-size:clamp(2.7rem,7vw,5.4rem);max-width:16ch;margin:0 auto 22px}
+  .hero p.sub{font-size:1.2rem;color:var(--muted);max-width:600px;margin:0 auto}
+  .hero p.sub b{color:var(--ink);font-weight:600}
+
+  /* featured / unlock */
+  .feat-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:56px;align-items:center}
+  .feat-cover{aspect-ratio:4/3;border:3px solid var(--ink);border-radius:20px;background:linear-gradient(135deg,var(--pink),var(--purple));display:flex;align-items:center;justify-content:center;box-shadow:16px 16px 0 var(--blue);position:relative}
+  .feat-cover span{background:var(--paper);border:2px solid var(--ink);border-radius:50px;padding:8px 18px;font-weight:600;font-size:.74rem;color:var(--ink)}
+  .feat .eyebrow{margin-bottom:14px}
+  .feat h2{font-size:clamp(2rem,4.4vw,3.1rem);margin-bottom:16px}
+  .feat .desc{color:var(--muted);font-size:1.06rem;margin-bottom:18px;max-width:480px}
+  .feat-list{list-style:none;margin-bottom:26px}
+  .feat-list li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;font-size:1.02rem}
+  .feat-list .h{color:var(--pink);font-weight:800}
+
+  /* opt-in form */
+  .optin{display:flex;gap:12px;flex-wrap:wrap}
+  .optin input{flex:1;min-width:180px;border:2px solid var(--ink);border-radius:50px;padding:15px 20px;font-family:var(--body);font-size:1rem;background:#fff;color:var(--ink)}
+  .optin input:focus{outline:none;box-shadow:0 0 0 3px var(--lilac)}
+  .optin .btn{flex:none}
+  .form-note{font-size:.82rem;color:var(--muted);margin-top:12px}
+  .thanks{display:none;background:#fff;border:2px solid var(--ink);border-radius:18px;padding:22px;margin-top:6px}
+  .thanks.show{display:block}
+  .thanks b{color:var(--ink)}
+
+  /* library */
+  .shead{max-width:720px;margin:0 auto 54px;text-align:center}
+  .shead .eyebrow{margin-bottom:14px}
+  .shead h2{font-size:clamp(2.2rem,5.4vw,3.8rem);margin-bottom:14px}
+  .shead p{font-size:1.1rem;color:var(--muted)}
+  .sec-purple .shead p,.sec-ink .shead p{color:rgba(255,255,255,.9)}
+
+  .flib{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .fcard{background:#fff;border:3px solid var(--ink);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;transition:transform .2s}
+  .fcard:hover{transform:translateY(-6px)}
+  .fcard:nth-child(3n+1){box-shadow:10px 10px 0 var(--pink)}
+  .fcard:nth-child(3n+2){box-shadow:10px 10px 0 var(--blue)}
+  .fcard:nth-child(3n+3){box-shadow:10px 10px 0 var(--purple)}
+  .fcover{aspect-ratio:5/3;border-bottom:3px solid var(--ink);display:flex;align-items:center;justify-content:center;position:relative}
+  .fcover.g1{background:linear-gradient(135deg,var(--lilac),var(--pink))}
+  .fcover.g2{background:linear-gradient(135deg,var(--blue),var(--purple))}
+  .fcover.g3{background:linear-gradient(135deg,var(--pink),var(--purple))}
+  .fcover.g4{background:linear-gradient(135deg,var(--lilac),var(--blue))}
+  .fcover .lbl{background:var(--paper);border:2px solid var(--ink);border-radius:50px;padding:6px 14px;font-weight:600;font-size:.7rem;color:var(--ink)}
+  .ftag{position:absolute;top:14px;left:14px;background:var(--ink);color:#fff;font-family:var(--display);font-weight:800;font-size:.66rem;letter-spacing:.12em;padding:5px 12px;border-radius:50px}
+  .fbody{padding:26px;display:flex;flex-direction:column;flex:1}
+  .fbody h3{font-size:1.28rem;margin-bottom:10px}
+  .fbody p{color:var(--muted);font-size:.95rem;margin-bottom:22px;flex:1}
+  .fbody .btn{width:100%;justify-content:center;font-size:.92rem;padding:14px 24px}
+
+  /* how it works */
+  .cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .step{text-align:center}
+  .step .n{width:58px;height:58px;border-radius:50%;background:#fff;color:var(--ink);border:3px solid var(--ink);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:800;font-size:1.3rem;margin:0 auto 18px}
+  .step h3{font-size:1.35rem;margin-bottom:8px}
+  .step p{color:rgba(255,255,255,.9);font-size:1rem;max-width:300px;margin:0 auto}
+
+  /* newsletter */
+  .news{text-align:center}
+  .news h2{font-size:clamp(2.2rem,5.4vw,3.8rem);margin-bottom:16px;max-width:18ch;margin-left:auto;margin-right:auto}
+  .news p{color:#d9cfe8;max-width:540px;margin:0 auto 32px;font-size:1.12rem}
+  .news .optin{max-width:520px;margin:0 auto;justify-content:center}
+  .news .optin input{background:#fff}
+  .news .form-note{color:#a99ec0}
+
+  footer{background:var(--ink);color:#b6abc9;border-top:1px solid rgba(255,255,255,.12);padding:50px 0}
+  .foot-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px}
+  .foot-logo{font-family:var(--display);font-weight:800;font-size:1.3rem;color:var(--paper)}
+  .foot-logo b{color:var(--pink)}
+  .foot-links{display:flex;gap:24px;list-style:none}
+  .foot-links a{font-size:.8rem;font-weight:500;text-decoration:none;color:#b6abc9}
+  .foot-links a:hover{color:var(--paper)}
+  .foot-tag{width:100%;text-align:center;font-family:var(--display);font-weight:600;color:var(--lilac);padding-top:24px;margin-top:24px;border-top:1px solid rgba(255,255,255,.1)}
+
+  .rise{opacity:0;transform:translateY(24px);transition:opacity .8s ease, transform .8s ease}
+  .rise.seen{opacity:1;transform:none}
+
+  @media (max-width:880px){
+    .nav-links{display:none}
+    section{padding:66px 0}
+    .feat-grid{grid-template-columns:1fr;gap:36px}
+    .feat-cover{max-width:420px}
+    .flib,.cards3{grid-template-columns:1fr;gap:22px}
+  }
+  @media (prefers-reduced-motion:reduce){.rise{opacity:1;transform:none;transition:none}}
+
+  /* real images inside placeholder frames */
+  .imgph img,.feat-cover img,.fcover img,.note .pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+  .imgph,.feat-cover,.fcover,.note .pic{position:relative}
+  /* mobile nav */
+  .burger{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:6px;padding:8px}
+  .burger i{display:block;width:26px;height:3px;border-radius:3px;background:var(--ink)}
+  .mobile-menu{display:none;position:fixed;inset:0;background:var(--paper);z-index:100;padding:100px 34px 40px;flex-direction:column;gap:20px;overflow-y:auto}
+  .mobile-menu.open{display:flex}
+  .mobile-menu a{font-family:var(--display);font-weight:800;font-size:1.45rem;text-decoration:none;color:var(--ink);border:none}
+  .mobile-menu a:hover{color:var(--pink)}
+  .mobile-close{position:absolute;top:22px;right:26px;background:none;border:none;font-size:2.2rem;line-height:1;cursor:pointer;color:var(--ink)}
+  @media (max-width:920px){.burger{display:flex}}
+  /* mobile polish */
+  @media (max-width:600px){
+    .wrap{padding:0 22px}
+    .btn{width:100%;justify-content:center}
+    nav .nav-cta{display:none}
+    .hero-cta .btn{width:100%}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-inner">
+    <div class="logo">Boss Lady <b>Bloggers</b></div>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/about">About</a></li>
+      <li><a href="/blog-coaching">Coaching</a></li>
+      <li><a href="#library">The Library</a></li>
+      <li><a href="/podcast">Podcast</a></li>
+    </ul>
+    <a href="#unlock" class="nav-cta">Unlock the library</a>
+    <button class="burger" id="burger" aria-label="Menu"><i></i><i></i><i></i></button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="mobileClose" aria-label="Close menu">&times;</button>
+  <a href="/">Home</a>
+  <a href="/about">About</a>
+  <a href="/blog-coaching">Coaching</a>
+  <a href="#library">The Library</a>
+  <a href="/podcast">Podcast</a>
+  <a href="#unlock" style="color:var(--pink)">Unlock the library &rarr;</a>
+</div>
+
+
+<!-- 1 HERO -->
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow rise">The Free Resource Library</span>
+    <h1 class="rise">A whole library of free blogging courses. <span class="mark pink">On the house.</span></h1>
+    <p class="sub rise">Free courses to help you start a blog, grow a blog, and figure out how to make money blogging, all built from the exact stuff I teach my clients. <b>Sign up once and unlock everything inside.</b></p>
+  </div>
+</header>
+
+<!-- 2 UNLOCK -->
+<section class="sec-tint feat" id="unlock">
+  <div class="wrap feat-grid">
+    <div class="rise"><div class="feat-cover"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_040.jpeg" alt="The Free Resource Library" loading="lazy"></div></div>
+    <div class="rise">
+      <span class="eyebrow" style="color:var(--pink)">Unlock it all</span>
+      <h2>One signup. Every course. Zero dollars.</h2>
+      <p class="desc">Pop in your name and email and I'll send you your personal link to the Free Resource Library, home to every free blogging course I've made. No paywalls hiding inside, no "upgrade to see the good part."</p>
+      <ul class="feat-list">
+        <li><span class="h">&check;</span> <span>Instant access to every free course in the library</span></li>
+        <li><span class="h">&check;</span> <span>New courses added over time, free forever</span></li>
+        <li><span class="h">&check;</span> <span>Plus honest, no-fluff blog coaching in your inbox</span></li>
+      </ul>
+      <form class="optin" id="featForm">
+        <input type="text" placeholder="Your first name" required>
+        <input type="email" placeholder="Your email" required>
+        <button type="submit" class="btn btn-pink">Unlock the library</button>
+      </form>
+      <p class="form-note">Free, instant, and no spam ever. Unsubscribe anytime.</p>
+      <div class="thanks" id="featThanks"><b>Yay, check your inbox!</b> Your Free Resource Library access is on its way. If it's hiding, peek in promotions or spam.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 3 LIBRARY -->
+<section id="library">
+  <div class="wrap">
+    <div class="shead rise">
+      <span class="eyebrow">Inside the library</span>
+      <h2>A peek at the free courses you're unlocking.</h2>
+      <p>Every one of these lives inside the Free Resource Library. Sign up once up top and they're all yours.</p>
+    </div>
+    <div class="flib">
+      <div class="fcard rise"><div class="fcover g1"><span class="ftag">Free course</span><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_022.jpeg" alt="Start a Blog the Right Way course" loading="lazy"></div><div class="fbody"><h3>Start a Blog the Right Way</h3><p>Every step to start a blog that's built to make money, in the right order, minus the overwhelm.</p><a href="#unlock" class="btn btn-outline">Unlock this course</a></div></div>
+      <div class="fcard rise"><div class="fcover g2"><span class="ftag">Free course</span><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_048.jpeg" alt="Blog Business Foundations course" loading="lazy"></div><div class="fbody"><h3>Blog Business Foundations</h3><p>Turn your fuzzy blog idea into a real little business plan you can actually follow.</p><a href="#unlock" class="btn btn-outline">Unlock this course</a></div></div>
+      <div class="fcard rise"><div class="fcover g3"><span class="ftag">Free course</span><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_049.jpeg" alt="Find What to Sell course" loading="lazy"></div><div class="fbody"><h3>Find What to Sell</h3><p>Map out real offer ideas so you can make money blogging without relying on affiliate pennies.</p><a href="#unlock" class="btn btn-outline">Unlock this course</a></div></div>
+      <div class="fcard rise"><div class="fcover g4"><span class="ftag">Free course</span><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_045.jpeg" alt="The Rule of Ones course" loading="lazy"></div><div class="fbody"><h3>The Rule of Ones</h3><p>My whole framework, taught step by step. One purpose, one person, one offer at a time.</p><a href="#unlock" class="btn btn-outline">Unlock this course</a></div></div>
+      <div class="fcard rise"><div class="fcover g1"><span class="ftag">Free course</span><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_001.jpeg" alt="Blog Traffic Jumpstart course" loading="lazy"></div><div class="fbody"><h3>Blog Traffic Jumpstart</h3><p>Simple, doable ways to get your first real blog traffic, even with zero audience.</p><a href="#unlock" class="btn btn-outline">Unlock this course</a></div></div>
+      <div class="fcard rise"><div class="fcover g2"><span class="ftag">Free course</span><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_027.jpeg" alt="A Website That Sells course" loading="lazy"></div><div class="fbody"><h3>A Website That Sells</h3><p>What every page of your blog website needs to turn visitors into buyers.</p><a href="#unlock" class="btn btn-outline">Unlock this course</a></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4 HOW IT WORKS -->
+<section class="sec-purple">
+  <div class="wrap">
+    <div class="shead rise">
+      <span class="eyebrow">Easy as it sounds</span>
+      <h2>How the library works.</h2>
+    </div>
+    <div class="cards3">
+      <div class="step rise"><div class="n">1</div><h3>Pop in your email</h3><p>Sign up once with your name and email. Takes five seconds, unlocks the whole library.</p></div>
+      <div class="step rise"><div class="n">2</div><h3>Check your inbox</h3><p>Your access link lands right away. If you don't see it, peek in promotions or spam and drag it over.</p></div>
+      <div class="step rise"><div class="n">3</div><h3>Take the courses</h3><p>Actually take them, babe. That's the whole point. Small action beats another saved bookmark.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 NEWSLETTER -->
+<section class="sec-ink news">
+  <div class="wrap rise">
+    <span class="eyebrow">Stay in the loop</span>
+    <h2 style="margin-top:18px">Want more where that came from?</h2>
+    <p>Join the email list for honest, no-fluff blog coaching, new free courses the moment they drop, and the occasional behind-the-scenes of building a business as a real, busy mom.</p>
+    <form class="optin" id="newsForm">
+      <input type="text" placeholder="Your first name" required>
+      <input type="email" placeholder="Your email" required>
+      <button type="submit" class="btn btn-pink">Keep me posted</button>
+    </form>
+    <p class="form-note">No spam, no daily inbox clutter. Just the good stuff. Unsubscribe anytime.</p>
+    <div class="thanks" id="newsThanks" style="max-width:520px;margin:14px auto 0"><b>You're in!</b> Thanks for joining, babe. Talk soon.</div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-inner">
+    <div class="foot-logo">Boss Lady <b>Bloggers</b></div>
+    <ul class="foot-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/about">About</a></li>
+      <li><a href="/blog-coaching">Coaching</a></li>
+      <li><a href="#library">The Library</a></li>
+      <li><a href="/podcast">Podcast</a></li>
+    </ul>
+    <div class="foot-tag">Boss Lady Bloggers · blog coaching and blog website design for women who mean business.</div>
+  </div>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('seen'); obs.unobserve(e.target);} });
+  },{threshold:.1});
+  document.querySelectorAll('.rise').forEach(el=>obs.observe(el));
+
+  function wire(formId, thanksId){
+    const f = document.getElementById(formId);
+    if(f){ f.addEventListener('submit', function(e){ e.preventDefault(); f.style.display='none'; document.getElementById(thanksId).classList.add('show'); }); }
+  }
+  wire('featForm','featThanks');
+  wire('newsForm','newsThanks');
+</script>
+
+
+<script>
+(function(){
+  var b=document.getElementById('burger'),m=document.getElementById('mobileMenu'),c=document.getElementById('mobileClose');
+  if(b&&m){
+    b.addEventListener('click',function(){m.classList.add('open')});
+    if(c)c.addEventListener('click',function(){m.classList.remove('open')});
+    m.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){m.classList.remove('open')})});
+  }
+})();
+</script>
+</body>
+</html>

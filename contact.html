@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact | Boss Lady Bloggers</title>
+<meta name="description" content="Get in touch with Genasys at Boss Lady Bloggers. Reach out about blog coaching, custom blog website design, the podcast, or just to say hi.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FFF4FA;--tint:#FBEDFB;--ink:#34204F;--pink:#FF5DA2;--purple:#8B5CF6;
+    --blue:#5C7CFA;--lilac:#E7D4FF;--muted:#5b4a72;
+    --display:'Bricolage Grotesque', system-ui, sans-serif;--body:'Inter', system-ui, sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--paper);color:var(--ink);font-family:var(--body);line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 30px}
+  h1,h2,h3{font-family:var(--display);font-weight:800;line-height:1.04;letter-spacing:-.02em}
+  a{color:inherit}
+  section{padding:90px 0}
+
+  .sec-tint{background:var(--tint)}
+  .sec-ink{background:var(--ink);color:var(--paper)}
+  .sec-purple{background:var(--purple);color:#fff}
+
+  .eyebrow{display:inline-block;font-family:var(--body);font-weight:600;font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;color:var(--purple)}
+  .sec-ink .eyebrow,.sec-purple .eyebrow{color:var(--lilac)}
+
+  .mark{position:relative;white-space:nowrap;z-index:0;color:var(--ink)}
+  .mark::before{content:'';position:absolute;z-index:-1;left:-.08em;right:-.08em;bottom:.06em;height:.42em;background:var(--lilac);transform:skewX(-6deg)}
+  .mark.pink::before{background:var(--pink);bottom:.04em;height:.5em;opacity:.95}
+  .mark.pink{color:#fff}
+
+  .btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--display);font-weight:700;font-size:1rem;padding:17px 38px;border-radius:50px;text-decoration:none;background:var(--ink);color:var(--paper);border:2px solid var(--ink);cursor:pointer;transition:transform .2s ease, box-shadow .2s ease, background .2s ease, color .2s ease}
+  .btn:hover{transform:translateY(-3px);box-shadow:0 12px 0 -4px var(--pink)}
+  .btn-pink{background:var(--pink);border-color:var(--pink);color:#fff}
+  .btn-pink:hover{box-shadow:0 12px 0 -4px var(--purple)}
+  .btn-outline{background:transparent;color:var(--ink)}
+  .btn-outline:hover{background:var(--ink);color:var(--paper);box-shadow:none;transform:translateY(-3px)}
+
+  nav{position:sticky;top:0;z-index:60;background:var(--paper);border-bottom:3px solid var(--ink)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:74px}
+  .logo{font-family:var(--display);font-weight:800;font-size:1.35rem}
+  .logo b{color:var(--pink)}
+  .nav-links{display:flex;gap:26px;list-style:none}
+  .nav-links a{font-weight:600;font-size:.84rem;text-decoration:none;transition:color .2s}
+  .nav-links a:hover{color:var(--pink)}
+  .nav-cta{font-family:var(--display);font-weight:700;font-size:.9rem;text-decoration:none;background:var(--pink);color:#fff;padding:10px 22px;border-radius:50px;border:2px solid var(--ink)}
+
+  .imgph{position:relative;border:3px solid var(--ink);border-radius:18px;background:linear-gradient(135deg,var(--pink),var(--purple));display:flex;align-items:center;justify-content:center;overflow:hidden;min-height:110px}
+  .imgph span{background:var(--paper);border:2px solid var(--ink);border-radius:50px;padding:7px 16px;font-weight:600;font-size:.72rem;color:var(--ink);text-align:center}
+
+  /* hero */
+  .hero{padding:80px 0}
+  .hero-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:56px;align-items:center}
+  .hero .eyebrow{margin-bottom:22px}
+  .hero h1{font-size:clamp(2.7rem,6.4vw,5rem);margin-bottom:22px}
+  .hero p.sub{font-size:1.18rem;color:var(--muted);max-width:540px}
+  .hero p.sub b{color:var(--ink);font-weight:600}
+  .hero-media .imgph{aspect-ratio:4/5;box-shadow:16px 16px 0 var(--blue)}
+
+  /* contact block */
+  .contact-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:56px;align-items:start}
+  .reach .eyebrow{margin-bottom:14px}
+  .reach h2{font-size:clamp(2rem,4.2vw,3rem);margin-bottom:18px}
+  .reach p{color:var(--muted);font-size:1.06rem;margin-bottom:26px;max-width:440px}
+  .reach-list{list-style:none}
+  .reach-list li{display:flex;gap:14px;align-items:center;padding:14px 0;border-bottom:1px solid rgba(52,32,79,.14);font-size:1.04rem}
+  .reach-list li:last-child{border-bottom:none}
+  .reach-list .ic{flex:0 0 42px;height:42px;border-radius:12px;background:var(--lilac);border:2px solid var(--ink);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:800;font-size:1rem}
+  .reach-list a{font-weight:600;text-decoration:none;border-bottom:2px solid var(--pink)}
+
+  .form-card{background:#fff;border:3px solid var(--ink);border-radius:24px;padding:42px;box-shadow:16px 16px 0 var(--pink)}
+  .field{margin-bottom:20px}
+  .field label{display:block;font-family:var(--display);font-weight:700;font-size:.92rem;margin-bottom:8px}
+  .field input,.field textarea,.field select{width:100%;border:2px solid var(--ink);border-radius:14px;padding:14px 16px;font-family:var(--body);font-size:1rem;background:var(--paper);color:var(--ink)}
+  .field textarea{min-height:130px;resize:vertical}
+  .field input:focus,.field textarea:focus,.field select:focus{outline:none;box-shadow:0 0 0 3px var(--lilac)}
+  .form-card .btn{width:100%;justify-content:center;margin-top:4px}
+  .thanks{display:none;text-align:center;padding:30px 10px}
+  .thanks.show{display:block}
+  .thanks h3{font-size:1.6rem;margin-bottom:10px}
+  .thanks p{color:var(--muted)}
+
+  /* reach about cards */
+  .cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .card{border:3px solid var(--ink);border-radius:20px;padding:32px 28px;background:#fff;transition:transform .2s ease}
+  .card:hover{transform:translateY(-6px)}
+  .card:nth-child(1){box-shadow:10px 10px 0 var(--pink)}
+  .card:nth-child(2){box-shadow:10px 10px 0 var(--blue)}
+  .card:nth-child(3){box-shadow:10px 10px 0 var(--purple)}
+  .card h3{font-size:1.4rem;margin-bottom:10px}
+  .card p{color:var(--muted);font-size:.97rem}
+
+  .shead{max-width:720px;margin:0 auto 54px;text-align:center}
+  .shead .eyebrow{margin-bottom:14px}
+  .shead h2{font-size:clamp(2.2rem,5vw,3.6rem);margin-bottom:14px}
+  .shead p{font-size:1.1rem;color:var(--muted)}
+  .sec-purple .shead p{color:rgba(255,255,255,.9)}
+
+  .final{text-align:center}
+  .final h2{font-size:clamp(2.2rem,5.4vw,4rem);margin-bottom:20px;max-width:18ch;margin-left:auto;margin-right:auto}
+  .final p{color:#d9cfe8;max-width:540px;margin:0 auto 36px;font-size:1.12rem}
+
+  footer{background:var(--ink);color:#b6abc9;border-top:1px solid rgba(255,255,255,.12);padding:50px 0}
+  .foot-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px}
+  .foot-logo{font-family:var(--display);font-weight:800;font-size:1.3rem;color:var(--paper)}
+  .foot-logo b{color:var(--pink)}
+  .foot-links{display:flex;gap:24px;list-style:none}
+  .foot-links a{font-size:.8rem;font-weight:500;text-decoration:none;color:#b6abc9}
+  .foot-links a:hover{color:var(--paper)}
+  .foot-tag{width:100%;text-align:center;font-family:var(--display);font-weight:600;color:var(--lilac);padding-top:24px;margin-top:24px;border-top:1px solid rgba(255,255,255,.1)}
+
+  .rise{opacity:0;transform:translateY(24px);transition:opacity .8s ease, transform .8s ease}
+  .rise.seen{opacity:1;transform:none}
+
+  @media (max-width:880px){
+    .nav-links{display:none}
+    section{padding:66px 0}
+    .hero-grid,.contact-grid{grid-template-columns:1fr;gap:38px}
+    .hero-media .imgph{max-width:380px}
+    .cards3{grid-template-columns:1fr;gap:22px}
+    .form-card{padding:30px 24px;box-shadow:10px 10px 0 var(--pink)}
+  }
+  @media (prefers-reduced-motion:reduce){.rise{opacity:1;transform:none;transition:none}}
+
+  /* real images inside placeholder frames */
+  .imgph img,.feat-cover img,.fcover img,.note .pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+  .imgph,.feat-cover,.fcover,.note .pic{position:relative}
+  /* mobile nav */
+  .burger{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:6px;padding:8px}
+  .burger i{display:block;width:26px;height:3px;border-radius:3px;background:var(--ink)}
+  .mobile-menu{display:none;position:fixed;inset:0;background:var(--paper);z-index:100;padding:100px 34px 40px;flex-direction:column;gap:20px;overflow-y:auto}
+  .mobile-menu.open{display:flex}
+  .mobile-menu a{font-family:var(--display);font-weight:800;font-size:1.45rem;text-decoration:none;color:var(--ink);border:none}
+  .mobile-menu a:hover{color:var(--pink)}
+  .mobile-close{position:absolute;top:22px;right:26px;background:none;border:none;font-size:2.2rem;line-height:1;cursor:pointer;color:var(--ink)}
+  @media (max-width:920px){.burger{display:flex}}
+  /* mobile polish */
+  @media (max-width:600px){
+    .wrap{padding:0 22px}
+    .btn{width:100%;justify-content:center}
+    nav .nav-cta{display:none}
+    .hero-cta .btn{width:100%}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-inner">
+    <div class="logo">Boss Lady <b>Bloggers</b></div>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/about">About</a></li>
+      <li><a href="/blog-coaching">Coaching</a></li>
+      <li><a href="/podcast">Podcast</a></li>
+      <li><a href="#form">Contact</a></li>
+    </ul>
+    <a href="#form" class="nav-cta">Say hi</a>
+    <button class="burger" id="burger" aria-label="Menu"><i></i><i></i><i></i></button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="mobileClose" aria-label="Close menu">&times;</button>
+  <a href="/">Home</a>
+  <a href="/about">About</a>
+  <a href="/blog-coaching">Coaching</a>
+  <a href="/podcast">Podcast</a>
+  <a href="#form">Contact</a>
+  <a href="#form" style="color:var(--pink)">Say hi &rarr;</a>
+</div>
+
+
+<!-- 1 HERO -->
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div class="rise">
+      <span class="eyebrow">Contact</span>
+      <h1>Come say <span class="mark pink">hi.</span> I don't bite, I promise.</h1>
+      <p class="sub">Whether you're ready to build your blog, curious about working together, want me on your podcast, or you just have a question rattling around, I'd love to hear from you. <b>Drop me a note and let's chat.</b></p>
+    </div>
+    <div class="hero-media rise"><div class="imgph"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_033.jpeg" alt="Genasys from Boss Lady Bloggers saying hi" loading="lazy"></div></div>
+  </div>
+</header>
+
+<!-- 2 FORM -->
+<section class="sec-tint" id="form">
+  <div class="wrap contact-grid">
+    <div class="reach rise">
+      <span class="eyebrow" style="color:var(--pink)">Let's talk</span>
+      <h2>Tell me what's on your mind.</h2>
+      <p>Fill out the form and it lands straight in my inbox. I read every single message myself, no team, no bots, just me.</p>
+      <ul class="reach-list">
+        <li><span class="ic">@</span> <span>Prefer email? <a href="mailto:hello@bossladybloggers.com">hello@bossladybloggers.com</a></span></li>
+        <li><span class="ic">IG</span> <span>Slide into the DMs <a href="https://www.instagram.com/bossladybloggers" target="_blank" rel="noopener">@bossladybloggers</a></span></li>
+        <li><span class="ic">&hearts;</span> <span>I usually reply within a couple of days.</span></li>
+      </ul>
+    </div>
+
+    <div class="form-card rise">
+      <form id="contactForm">
+        <div class="field">
+          <label for="name">Your name</label>
+          <input type="text" id="name" name="name" placeholder="What should I call you?" required>
+        </div>
+        <div class="field">
+          <label for="email">Your email</label>
+          <input type="email" id="email" name="email" placeholder="you@email.com" required>
+        </div>
+        <div class="field">
+          <label for="topic">What's this about?</label>
+          <select id="topic" name="topic">
+            <option>Working together (Blog Launch Lab)</option>
+            <option>A custom blog website</option>
+            <option>Podcast or collaboration</option>
+            <option>Just saying hi</option>
+            <option>Something else</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="message">Your message</label>
+          <textarea id="message" name="message" placeholder="Tell me a little about you and what you're dreaming up..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-pink">Send it my way</button>
+      </form>
+      <div class="thanks" id="thanks">
+        <h3>Yay, got it!</h3>
+        <p>Thanks for reaching out, babe. I'll get back to you soon, usually within a couple of days. Talk soon.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3 WHAT TO REACH OUT ABOUT -->
+<section>
+  <div class="wrap">
+    <div class="shead rise">
+      <span class="eyebrow">A few good reasons</span>
+      <h2>What people usually reach out about.</h2>
+    </div>
+    <div class="cards3">
+      <div class="card rise"><h3>You want to work together</h3><p>Ready to start your blog and build it into a real business? Tell me where you are and what you're dreaming about.</p></div>
+      <div class="card rise"><h3>You've got a question</h3><p>Curious about blog coaching, custom blog website design, or whether this is even right for you? Ask away.</p></div>
+      <div class="card rise"><h3>You just want to connect</h3><p>Podcast guest, collab, or a friendly hello from a fellow blogger? Those are my favorite emails, honestly.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4 PERSONALITY BAND -->
+<section class="sec-purple">
+  <div class="wrap">
+    <div class="shead rise" style="margin-bottom:0">
+      <span class="eyebrow">Fair warning</span>
+      <h2>I'm friendlier over email than I am at parties.</h2>
+      <p>I'll be honest, I'm a little socially awkward in person. But put me behind a keyboard talking about blogs, business, and your big dream? I light all the way up. So don't be shy. There are no silly questions here, and I genuinely love hearing what you're building.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 5 FINAL -->
+<section class="sec-ink final">
+  <div class="wrap rise">
+    <span class="eyebrow">Not sure yet?</span>
+    <h2 style="margin-top:18px">Take a peek before you reach out.</h2>
+    <p>Want a feel for how I work first? Get to know me a little, or see exactly what it looks like when we build your blog together.</p>
+    <div style="display:flex;gap:16px;flex-wrap:wrap;justify-content:center">
+      <a href="/blog-launch-lab" class="btn btn-pink">Explore Blog Launch Lab</a>
+      <a href="/about" class="btn" style="background:transparent;color:var(--paper);border-color:var(--paper)">Read my story</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-inner">
+    <div class="foot-logo">Boss Lady <b>Bloggers</b></div>
+    <ul class="foot-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/about">About</a></li>
+      <li><a href="/blog-coaching">Coaching</a></li>
+      <li><a href="/podcast">Podcast</a></li>
+      <li><a href="#form">Contact</a></li>
+    </ul>
+    <div class="foot-tag">Boss Lady Bloggers · blog coaching and blog website design for women who mean business.</div>
+  </div>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('seen'); obs.unobserve(e.target);} });
+  },{threshold:.1});
+  document.querySelectorAll('.rise').forEach(el=>obs.observe(el));
+
+  const form = document.getElementById('contactForm');
+  if(form){
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      form.style.display = 'none';
+      document.getElementById('thanks').classList.add('show');
+    });
+  }
+</script>
+
+
+<script>
+(function(){
+  var b=document.getElementById('burger'),m=document.getElementById('mobileMenu'),c=document.getElementById('mobileClose');
+  if(b&&m){
+    b.addEventListener('click',function(){m.classList.add('open')});
+    if(c)c.addEventListener('click',function(){m.classList.remove('open')});
+    m.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){m.classList.remove('open')})});
+  }
+})();
+</script>
+</body>
+</html>

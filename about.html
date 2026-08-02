@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Genasys | Boss Lady Bloggers</title>
+<meta name="description" content="Meet Genasys, the blog coach behind Boss Lady Bloggers. A real mom going all in on her business, helping women start a blog, build it right, and make money blogging.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FFF4FA;--tint:#FBEDFB;--ink:#34204F;--pink:#FF5DA2;--purple:#8B5CF6;
+    --blue:#5C7CFA;--lilac:#E7D4FF;--muted:#5b4a72;
+    --display:'Bricolage Grotesque', system-ui, sans-serif;--body:'Inter', system-ui, sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--paper);color:var(--ink);font-family:var(--body);line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 30px}
+  h1,h2,h3{font-family:var(--display);font-weight:800;line-height:1.04;letter-spacing:-.02em}
+  a{color:inherit}
+  section{padding:96px 0}
+
+  .sec-tint{background:var(--tint)}
+  .sec-ink{background:var(--ink);color:var(--paper)}
+  .sec-pink{background:var(--pink);color:#fff}
+  .sec-purple{background:var(--purple);color:#fff}
+  .sec-blue{background:var(--blue);color:#fff}
+
+  .eyebrow{display:inline-block;font-family:var(--body);font-weight:600;font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;color:var(--purple)}
+  .sec-ink .eyebrow,.sec-pink .eyebrow,.sec-purple .eyebrow,.sec-blue .eyebrow{color:var(--lilac)}
+
+  .mark{position:relative;white-space:nowrap;z-index:0;color:var(--ink)}
+  .mark::before{content:'';position:absolute;z-index:-1;left:-.08em;right:-.08em;bottom:.06em;height:.42em;background:var(--lilac);transform:skewX(-6deg)}
+  .mark.pink::before{background:var(--pink);bottom:.04em;height:.5em;opacity:.95}
+  .mark.pink{color:#fff}
+
+  .btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--display);font-weight:700;font-size:1rem;padding:17px 38px;border-radius:50px;text-decoration:none;background:var(--ink);color:var(--paper);border:2px solid var(--ink);transition:transform .2s ease, box-shadow .2s ease, background .2s ease, color .2s ease}
+  .btn:hover{transform:translateY(-3px);box-shadow:0 12px 0 -4px var(--pink)}
+  .btn-pink{background:var(--pink);border-color:var(--pink);color:#fff}
+  .btn-pink:hover{box-shadow:0 12px 0 -4px var(--purple)}
+  .btn-outline{background:transparent;color:var(--ink)}
+  .btn-outline:hover{background:var(--ink);color:var(--paper);box-shadow:none;transform:translateY(-3px)}
+
+  nav{position:sticky;top:0;z-index:60;background:var(--paper);border-bottom:3px solid var(--ink)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:74px}
+  .logo{font-family:var(--display);font-weight:800;font-size:1.35rem}
+  .logo b{color:var(--pink)}
+  .nav-links{display:flex;gap:26px;list-style:none}
+  .nav-links a{font-weight:600;font-size:.84rem;text-decoration:none;transition:color .2s}
+  .nav-links a:hover{color:var(--pink)}
+  .nav-cta{font-family:var(--display);font-weight:700;font-size:.9rem;text-decoration:none;background:var(--pink);color:#fff;padding:10px 22px;border-radius:50px;border:2px solid var(--ink)}
+
+  .imgph{position:relative;border:3px solid var(--ink);border-radius:18px;background:linear-gradient(135deg,var(--lilac),var(--pink));display:flex;align-items:center;justify-content:center;overflow:hidden;min-height:110px}
+  .imgph span{background:var(--paper);border:2px solid var(--ink);border-radius:50px;padding:7px 16px;font-weight:600;font-size:.72rem;color:var(--ink);text-align:center}
+  .imgph.p{background:linear-gradient(135deg,var(--pink),var(--purple))}
+  .imgph.b{background:linear-gradient(135deg,var(--blue),var(--purple))}
+  .imgph.l{background:linear-gradient(135deg,var(--lilac),var(--blue))}
+
+  .shead{max-width:760px;margin:0 auto 56px;text-align:center}
+  .shead .eyebrow{margin-bottom:14px}
+  .shead h2{font-size:clamp(2.2rem,5.4vw,3.8rem);margin-bottom:16px}
+  .shead p{font-size:1.12rem;color:var(--muted)}
+  .sec-ink .shead p,.sec-pink .shead p,.sec-purple .shead p,.sec-blue .shead p{color:rgba(255,255,255,.9)}
+
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:58px;align-items:center}
+  .split .eyebrow{margin-bottom:16px}
+  .split h2{font-size:clamp(2rem,4.4vw,3.3rem);margin-bottom:20px}
+  .split p{font-size:1.08rem;color:var(--muted);margin-bottom:18px;max-width:540px}
+  .split p b{color:var(--ink);font-weight:600}
+  .split .imgph{aspect-ratio:4/5;box-shadow:14px 14px 0 var(--blue)}
+  .split.flip .imgph{box-shadow:14px 14px 0 var(--pink)}
+
+  .hero{padding:84px 0}
+  .hero-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:56px;align-items:center}
+  .hero .eyebrow{margin-bottom:22px}
+  .hero h1{font-size:clamp(2.6rem,6.2vw,4.8rem);margin-bottom:24px}
+  .hero p.sub{font-size:1.18rem;color:var(--muted);margin-bottom:32px;max-width:560px}
+  .hero p.sub b{color:var(--ink);font-weight:600}
+  .hero-cta{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+  .hero-media .imgph{aspect-ratio:4/5;box-shadow:16px 16px 0 var(--purple)}
+
+  .timeline{max-width:720px;margin:0 auto}
+  .tstep{display:grid;grid-template-columns:64px 1fr;gap:26px;padding-bottom:34px;position:relative}
+  .tstep:last-child{padding-bottom:0}
+  .tnum{width:64px;height:64px;border-radius:50%;background:var(--ink);color:var(--paper);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:800;font-size:1.1rem;z-index:1;text-align:center;line-height:1.05}
+  .tstep:not(:last-child)::before{content:'';position:absolute;left:31px;top:64px;bottom:0;width:3px;background:var(--lilac)}
+  .tstep h3{font-size:1.35rem;margin-bottom:6px}
+  .tstep p{color:var(--muted)}
+
+  .inc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;max-width:980px;margin:0 auto}
+  .inc{display:flex;gap:18px;align-items:flex-start;background:#fff;border:2px solid var(--ink);border-radius:18px;padding:24px}
+  .inc .ic{flex:0 0 44px;height:44px;border-radius:12px;background:var(--lilac);border:2px solid var(--ink);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:800;font-size:1.05rem;color:var(--ink)}
+  .inc h3{font-size:1.18rem;margin-bottom:5px;color:var(--ink)}
+  .inc p{font-size:.95rem;color:var(--muted)}
+
+  .cred-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:56px;align-items:center}
+  .cred-photo{aspect-ratio:4/5;box-shadow:14px 14px 0 var(--ink)}
+  .cred h2{font-size:clamp(2.2rem,4.8vw,3.4rem);margin-bottom:20px}
+  .cred .copy p{font-size:1.08rem;color:rgba(255,255,255,.92);margin-bottom:18px;max-width:560px}
+  .cred .copy p b{color:#fff;font-weight:700}
+
+  .big{font-family:var(--display);font-weight:700;font-size:clamp(1.5rem,3.6vw,2.2rem);line-height:1.28;max-width:840px;margin:0 auto;text-align:center}
+  .sec-purple .big,.sec-pink .big,.sec-ink .big{color:#fff}
+
+  .fun-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:40px}
+  .fun-grid .imgph{aspect-ratio:1/1}
+  .funlist{list-style:none;max-width:760px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:6px 34px}
+  .funlist li{display:flex;gap:14px;align-items:flex-start;padding:13px 0;font-size:1.05rem;border-bottom:1px solid rgba(52,32,79,.12)}
+  .funlist .h{flex:0 0 22px;color:var(--pink);font-size:1.1rem;line-height:1.5}
+
+  .final{text-align:center}
+  .final h2{font-size:clamp(2.4rem,6vw,4.4rem);margin-bottom:22px;max-width:18ch;margin-left:auto;margin-right:auto}
+  .final p{color:#d9cfe8;max-width:580px;margin:0 auto 40px;font-size:1.14rem}
+
+  footer{background:var(--ink);color:#b6abc9;border-top:1px solid rgba(255,255,255,.12);padding:50px 0}
+  .foot-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px}
+  .foot-logo{font-family:var(--display);font-weight:800;font-size:1.3rem;color:var(--paper)}
+  .foot-logo b{color:var(--pink)}
+  .foot-links{display:flex;gap:24px;list-style:none}
+  .foot-links a{font-size:.8rem;font-weight:500;text-decoration:none;color:#b6abc9}
+  .foot-links a:hover{color:var(--paper)}
+  .foot-tag{width:100%;text-align:center;font-family:var(--display);font-weight:600;color:var(--lilac);padding-top:24px;margin-top:24px;border-top:1px solid rgba(255,255,255,.1)}
+
+  .rise{opacity:0;transform:translateY(24px);transition:opacity .8s ease, transform .8s ease}
+  .rise.seen{opacity:1;transform:none}
+
+  @media (max-width:880px){
+    .nav-links{display:none}
+    section{padding:70px 0}
+    .hero-grid,.split,.cred-grid{grid-template-columns:1fr;gap:38px}
+    .hero-media .imgph,.split .imgph,.cred-photo{max-width:400px}
+    .fun-grid{grid-template-columns:1fr 1fr}
+    .funlist{grid-template-columns:1fr}
+  }
+  @media (prefers-reduced-motion:reduce){.rise{opacity:1;transform:none;transition:none}}
+
+  /* real images inside placeholder frames */
+  .imgph img,.feat-cover img,.fcover img,.note .pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+  .imgph,.feat-cover,.fcover,.note .pic{position:relative}
+  /* mobile nav */
+  .burger{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:6px;padding:8px}
+  .burger i{display:block;width:26px;height:3px;border-radius:3px;background:var(--ink)}
+  .mobile-menu{display:none;position:fixed;inset:0;background:var(--paper);z-index:100;padding:100px 34px 40px;flex-direction:column;gap:20px;overflow-y:auto}
+  .mobile-menu.open{display:flex}
+  .mobile-menu a{font-family:var(--display);font-weight:800;font-size:1.45rem;text-decoration:none;color:var(--ink);border:none}
+  .mobile-menu a:hover{color:var(--pink)}
+  .mobile-close{position:absolute;top:22px;right:26px;background:none;border:none;font-size:2.2rem;line-height:1;cursor:pointer;color:var(--ink)}
+  @media (max-width:920px){.burger{display:flex}}
+  /* mobile polish */
+  @media (max-width:600px){
+    .wrap{padding:0 22px}
+    .btn{width:100%;justify-content:center}
+    nav .nav-cta{display:none}
+    .hero-cta .btn{width:100%}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-inner">
+    <div class="logo">Boss Lady <b>Bloggers</b></div>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="#story">My story</a></li>
+      <li><a href="#believe">What I believe</a></li>
+      <li><a href="#real">The real me</a></li>
+      <li><a href="/podcast">Podcast</a></li>
+    </ul>
+    <a href="#work" class="nav-cta">Work with me</a>
+    <button class="burger" id="burger" aria-label="Menu"><i></i><i></i><i></i></button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="mobileClose" aria-label="Close menu">&times;</button>
+  <a href="/">Home</a>
+  <a href="#story">My story</a>
+  <a href="#believe">What I believe</a>
+  <a href="#real">The real me</a>
+  <a href="/podcast">Podcast</a>
+  <a href="#work" style="color:var(--pink)">Work with me &rarr;</a>
+</div>
+
+
+<!-- 1 HERO -->
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div class="rise">
+      <span class="eyebrow">About me</span>
+      <h1>Hi, I'm Genasys. Just an ordinary mom, going <span class="mark pink">all in</span> on the dream again.</h1>
+      <p class="sub">I run Boss Lady Bloggers, I've been doing this since 2017, and I'm not about to pretend I have it all figured out. I've got a kid, a day job, a big dream, and a stubborn belief that you can build something of your own without faking your way there. <b>Let me tell you how I got here.</b></p>
+      <div class="hero-cta">
+        <a href="#work" class="btn btn-pink">Work with me</a>
+        <a href="#story" class="btn btn-outline">Read my story</a>
+      </div>
+    </div>
+    <div class="hero-media rise"><div class="imgph p"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_030.jpeg" alt="Genasys, founder of Boss Lady Bloggers" loading="lazy"></div></div>
+  </div>
+</header>
+
+<!-- 2 HONEST HOOK -->
+<section class="sec-tint">
+  <div class="wrap">
+    <div class="shead rise" style="margin-bottom:0">
+      <span class="eyebrow" style="color:var(--pink)">Real talk</span>
+      <h2>Let me be honest with you from the jump.</h2>
+      <p style="font-size:1.18rem">I'm not writing this from a beach house with a green juice and a perfect life. I'm a mom with a day job, a little one underfoot, and a business I refuse to give up on. Right now we're saving for a house and I'm building this thing again in the margins of a very full life, out loud, no highlight reel. If you've ever felt like everyone else has it figured out except you, pull up a chair. Same, babe.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 3 STORY -->
+<section id="story">
+  <div class="wrap split">
+    <div class="rise"><div class="imgph l"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_047.jpeg" alt="The early days of Boss Lady Bloggers" loading="lazy"></div></div>
+    <div class="rise">
+      <span class="eyebrow">How it started</span>
+      <h2>It started with a Pinterest search and a basement.</h2>
+      <p>I didn't want to go to school. Deep down I knew a 9-5 wasn't built for me. So one night I was scrolling Pinterest looking up how to make money from home, and I found blogging. I was living in my aunt's basement at the time. Big dreams, not much else.</p>
+      <p>I started a lifestyle blog called Genasys Lifestyle on a DIY WordPress setup with a little theme I could barely wrangle. It took me days to figure WordPress out, I hated how my site looked, and I quickly realized making money this way was so much harder than the internet made it sound. <b>But I kept going anyway.</b></p>
+    </div>
+  </div>
+</section>
+
+<!-- 4 TIMELINE -->
+<section class="sec-tint">
+  <div class="wrap">
+    <div class="shead rise">
+      <span class="eyebrow" style="color:var(--pink)">The journey</span>
+      <h2>From basement to business.</h2>
+    </div>
+    <div class="timeline">
+      <div class="tstep rise"><div class="tnum">2017</div><div><h3>The spark</h3><p>Pinterest, my aunt's basement, and a decision to start a blog with zero clue what I was doing.</p></div></div>
+      <div class="tstep rise"><div class="tnum">Then</div><div><h3>The struggle</h3><p>Genasys Lifestyle on a clunky DIY WordPress site I couldn't stand. Lots of effort, barely any money.</p></div></div>
+      <div class="tstep rise"><div class="tnum">Next</div><div><h3>I hired a coach</h3><p>A blog coach helped me find the idea that became Boss Lady Bloggers. Everything shifted.</p></div></div>
+      <div class="tstep rise"><div class="tnum">Soon</div><div><h3>I learned to build</h3><p>I taught myself website design, started taking clients, and signed them fast: $4,000 in my first four months.</p></div></div>
+      <div class="tstep rise"><div class="tnum">Now</div><div><h3>The big lesson</h3><p>I realized I'd been waiting on affiliate and ad money when what I needed all along was a real business.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 PHILOSOPHY -->
+<section class="sec-purple">
+  <div class="wrap">
+    <div class="shead rise" style="margin-bottom:0">
+      <span class="eyebrow">What changed everything</span>
+      <h2 style="margin-bottom:22px">Business first. Blog second. Always.</h2>
+      <p class="big">A blog by itself doesn't pay you. A business does. Your blog is the marketing tool that brings the right people to your door so they buy your offers, book your services, or reach out for coaching. The day I flipped that order, digital products mixed with coaching and services, everything started to work. Now that's exactly what I teach.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 6 WHAT I BELIEVE -->
+<section id="believe">
+  <div class="wrap">
+    <div class="shead rise">
+      <span class="eyebrow">What I believe</span>
+      <h2>The beliefs I build everything on.</h2>
+      <p>This is the stuff that shapes how I coach, how I design, and how I run my own business.</p>
+    </div>
+    <div class="inc-grid">
+      <div class="inc rise"><div class="ic">1</div><div><h3>Business first, blogging second</h3><p>Your blog is the marketing tool that drives traffic to your offers. Not the whole plan, the engine.</p></div></div>
+      <div class="inc rise"><div class="ic">2</div><div><h3>Marketing is everything</h3><p>The best offer in the world stays invisible without it. Marketing always matters, full stop.</p></div></div>
+      <div class="inc rise"><div class="ic">3</div><div><h3>Gorgeous sites that sell</h3><p>Pretty is lovely. Pretty plus powerful, persuasive words is what actually makes you money.</p></div></div>
+      <div class="inc rise"><div class="ic">4</div><div><h3>Offers before everything else</h3><p>Nail what you're selling first. Then brand messaging, branding, copywriting, all of it.</p></div></div>
+      <div class="inc rise"><div class="ic">5</div><div><h3>Build it right the first time</h3><p>Even when it takes a little longer to launch. No flimsy foundations, no shortcuts you'll regret.</p></div></div>
+      <div class="inc rise"><div class="ic">6</div><div><h3>Stay true to you</h3><p>You can write what you believe in and sell something too. Those have never been opposites.</p></div></div>
+    </div>
+    <p class="big" style="margin-top:46px;color:var(--ink)">And the fuel behind all of it? Strategy, organization, a real business mindset, grit, and a whole lot of passion.</p>
+  </div>
+</section>
+
+<!-- 7 WHAT I REFUSE -->
+<section class="sec-tint">
+  <div class="wrap">
+    <div class="shead rise" style="margin-bottom:0">
+      <span class="eyebrow" style="color:var(--pink)">Where I draw the line</span>
+      <h2>What I flat-out refuse to do.</h2>
+      <p style="font-size:1.18rem">I won't let you start a DIY WordPress blog, stuff it full of affiliate links, and cross your fingers that someday it'll magically make enough to quit your job and live some luxurious laptop life. Because for most people, that day just never comes. I've watched it not come. That old "post and hope" way of blogging is exactly why so many talented women give up. <b>Not on my watch.</b></p>
+    </div>
+  </div>
+</section>
+
+<!-- 8 WHO I'M FOR -->
+<section>
+  <div class="wrap split flip">
+    <div class="rise">
+      <span class="eyebrow">Why me, why us</span>
+      <h2>Who I'm here for, and why we'll click.</h2>
+      <p>I help women who are just starting and already know one thing for sure: they do not want to waste years trying to figure this out alone. You're the one who'd rather invest, hire a real blog coach, and do it right the first time than spin your wheels for free and hope it works out.</p>
+      <p>And I get you because I've <b>been</b> you. The basement. The ugly first site. The day job that pays the bills but isn't the dream. I'm not coaching you from some mountaintop. I'm right here doing it alongside you.</p>
+    </div>
+    <div class="rise"><div class="imgph p"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_008.jpeg" alt="Genasys working with a client" loading="lazy"></div></div>
+  </div>
+</section>
+
+<!-- 9 THE HARD PART -->
+<section class="sec-blue">
+  <div class="wrap cred-grid">
+    <div class="rise"><div class="imgph cred-photo"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_051.jpeg" alt="A real, candid photo of Genasys" loading="lazy"></div></div>
+    <div class="copy rise">
+      <span class="eyebrow">The honest part</span>
+      <h2>2025 knocked me flat. Here's the truth.</h2>
+      <p>Last year was rough. We left our rental in Michigan and moved in with family to save for a house, and it didn't go the way we hoped. So we packed up again and landed at my brother and sister in law's place here in Ohio. I lost the daily support that made running my business possible, so I took a day job to keep us steady.</p>
+      <p>It was good for a season. But it's not me. <b>This</b>, the business, the blog, helping women like you, this is the thing I light up for. So while we save for our house, I'm going all in again, figuring it out with my kid on my hip the way I always have.</p>
+      <p>I'm telling you all of this so you know exactly who you're trusting. Not a polished guru. A real woman, mid-climb, who's done this since 2017 and isn't quitting.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 10 THE REAL ME -->
+<section id="real">
+  <div class="wrap">
+    <div class="shead rise">
+      <span class="eyebrow">The non-business stuff</span>
+      <h2>Okay, the real, slightly weird me.</h2>
+      <p>Because you should know who you'd actually be hanging out with.</p>
+    </div>
+    <div class="fun-grid">
+      <div class="imgph l rise"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_006.jpeg" alt="Celebrating with confetti" loading="lazy"></div>
+      <div class="imgph p rise"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_021.jpeg" alt="Behind the scenes" loading="lazy"></div>
+      <div class="imgph b rise"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_013.jpeg" alt="Big blog energy" loading="lazy"></div>
+      <div class="imgph rise"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_004.jpeg" alt="Everyday life" loading="lazy"></div>
+    </div>
+    <ul class="funlist rise">
+      <li><span class="h">&hearts;</span> <span>Wine is basically a love language. (Cooper's Hawk member, no notes.)</span></li>
+      <li><span class="h">&hearts;</span> <span>Blue is my color and my whole closet knows it.</span></li>
+      <li><span class="h">&hearts;</span> <span>My wardrobe is decorative summer pants and basic tees on repeat.</span></li>
+      <li><span class="h">&hearts;</span> <span>I have a cabinet. An actual cabinet. Full of earrings.</span></li>
+      <li><span class="h">&hearts;</span> <span>Please, for the love of everything, keep me out of the clothing store.</span></li>
+      <li><span class="h">&hearts;</span> <span>Overnight oats every single morning, like clockwork.</span></li>
+      <li><span class="h">&hearts;</span> <span>I'm a little socially awkward and a certified weirdo, and I've made peace with it.</span></li>
+      <li><span class="h">&hearts;</span> <span>And I'm a mom, first and always, building this in between everything else.</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- 11 FINAL CTA -->
+<section class="sec-ink final" id="work">
+  <div class="wrap rise">
+    <span class="eyebrow">Your turn</span>
+    <h2 style="margin-top:18px">If you read this far, I think we'd get along.</h2>
+    <p>Maybe you're in your own version of the basement right now. Big dream, ugly first website, no idea where to start. I promise you it can look completely different a few months from now. If you're ready to build a blog that actually becomes a business, I'd love to be the one in your corner.</p>
+    <a href="/start-here" class="btn btn-pink">See how we can work together</a>
+    <p style="margin-top:30px;font-family:var(--display);font-weight:600;color:var(--lilac);font-size:1.1rem">Just an ordinary mom, cheering you on. Let's go.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-inner">
+    <div class="foot-logo">Boss Lady <b>Bloggers</b></div>
+    <ul class="foot-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="#story">My story</a></li>
+      <li><a href="#believe">What I believe</a></li>
+      <li><a href="#work">Work with me</a></li>
+      <li><a href="/podcast">Podcast</a></li>
+    </ul>
+    <div class="foot-tag">Boss Lady Bloggers · blog coaching and blog website design for women who mean business.</div>
+  </div>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('seen'); obs.unobserve(e.target);} });
+  },{threshold:.1});
+  document.querySelectorAll('.rise').forEach(el=>obs.observe(el));
+</script>
+
+
+<script>
+(function(){
+  var b=document.getElementById('burger'),m=document.getElementById('mobileMenu'),c=document.getElementById('mobileClose');
+  if(b&&m){
+    b.addEventListener('click',function(){m.classList.add('open')});
+    if(c)c.addEventListener('click',function(){m.classList.remove('open')});
+    m.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){m.classList.remove('open')})});
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Join Blog Launch Lab | Payment Options</title>
+<meta name="description" content="Choose your payment plan and enroll in Blog Launch Lab. Pay in full or split it into easy monthly payments.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FFF4FA;--tint:#FBEDFB;--ink:#34204F;--pink:#FF5DA2;--purple:#8B5CF6;
+    --blue:#5C7CFA;--lilac:#E7D4FF;--muted:#5b4a72;
+    --display:'Bricolage Grotesque', system-ui, sans-serif;--body:'Inter', system-ui, sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--paper);color:var(--ink);font-family:var(--body);line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 30px}
+  h1,h2,h3{font-family:var(--display);font-weight:800;line-height:1.05;letter-spacing:-.02em}
+  a{color:inherit}
+  section{padding:84px 0}
+
+  .sec-tint{background:var(--tint)}
+  .sec-ink{background:var(--ink);color:var(--paper)}
+  .sec-purple{background:var(--purple);color:#fff}
+
+  .eyebrow{display:inline-block;font-family:var(--body);font-weight:600;font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;color:var(--purple)}
+  .sec-ink .eyebrow,.sec-purple .eyebrow{color:var(--lilac)}
+
+  .mark{position:relative;white-space:nowrap;z-index:0;color:var(--ink)}
+  .mark::before{content:'';position:absolute;z-index:-1;left:-.08em;right:-.08em;bottom:.06em;height:.42em;background:var(--lilac);transform:skewX(-6deg)}
+  .mark.pink{color:#fff;white-space:normal;background:var(--pink);padding:.05em .18em;border-radius:.16em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+  .mark.pink::before{content:none}
+
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:var(--display);font-weight:700;font-size:1rem;padding:16px 34px;border-radius:50px;text-decoration:none;background:var(--ink) !important;color:var(--paper) !important;border:2px solid var(--ink);cursor:pointer;transition:transform .2s ease, box-shadow .2s ease, background .2s ease, color .2s ease}
+  .btn:hover{transform:translateY(-3px);box-shadow:0 12px 0 -4px var(--pink);color:var(--paper) !important}
+  .btn-pink{background:var(--pink) !important;border-color:var(--pink);color:#fff !important}
+  .btn-pink:hover{box-shadow:0 12px 0 -4px var(--purple)}
+  .btn-outline{background:transparent !important;color:var(--ink) !important}
+  .btn-outline:hover{background:var(--ink);color:var(--paper);box-shadow:none;transform:translateY(-3px)}
+
+  nav{position:sticky;top:0;z-index:60;background:var(--paper);border-bottom:3px solid var(--ink)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:72px}
+  .logo{font-family:var(--display);font-weight:800;font-size:1.3rem}
+  .logo b{color:var(--pink)}
+  .secure{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:.82rem;color:var(--muted)}
+  .secure .lock{width:24px;height:24px;border-radius:50%;background:var(--lilac);border:2px solid var(--ink);display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:800}
+
+  /* hero */
+  .hero{padding:72px 0 40px;text-align:center}
+  .hero .eyebrow{margin-bottom:18px}
+  .hero h1{font-size:clamp(2.5rem,6vw,4.4rem);max-width:16ch;margin:0 auto 18px}
+  .hero p.sub{font-size:1.16rem;color:var(--muted);max-width:600px;margin:0 auto}
+  .hero p.sub b{color:var(--ink);font-weight:600}
+
+  .shead{max-width:720px;margin:0 auto 48px;text-align:center}
+  .shead .eyebrow{margin-bottom:14px}
+  .shead h2{font-size:clamp(2rem,5vw,3.3rem);margin-bottom:14px}
+  .shead p{font-size:1.08rem;color:var(--muted)}
+  .sec-purple .shead p,.sec-ink .shead p{color:rgba(255,255,255,.9)}
+
+  /* plans */
+  .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;align-items:stretch;max-width:1040px;margin:0 auto}
+  .plan{background:#fff;border:3px solid var(--ink);border-radius:22px;padding:36px 28px;display:flex;flex-direction:column;text-align:center;box-shadow:10px 10px 0 var(--blue);position:relative}
+  .plan.featured{box-shadow:12px 12px 0 var(--pink)}
+  .plan .badge{position:absolute;top:-15px;left:50%;transform:translateX(-50%);background:var(--pink);color:#fff;font-family:var(--display);font-weight:800;font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;padding:7px 16px;border-radius:50px;border:2px solid var(--ink);white-space:nowrap}
+  .plan .badge.blue{background:var(--blue)}
+  .plan .pl-label{font-family:var(--body);font-weight:600;font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--purple);margin-bottom:10px}
+  .plan .amt{font-family:var(--display);font-weight:800;font-size:3rem;line-height:1}
+  .plan .amt small{font-size:.34em;font-weight:700;color:var(--muted)}
+  .plan .terms{color:var(--muted);font-size:.95rem;margin:8px 0 6px}
+  .plan .save{display:inline-block;font-weight:700;font-size:.85rem;color:var(--pink);margin-bottom:22px;min-height:20px}
+  .plan .btn{width:100%;margin-top:auto}
+
+  /* order summary */
+  .summary{max-width:680px;margin:0 auto;background:#fff;border:3px solid var(--ink);border-radius:24px;padding:42px;box-shadow:16px 16px 0 var(--ink)}
+  .summary h3{font-size:1.5rem;text-align:center;margin-bottom:6px}
+  .summary .stag{text-align:center;font-family:var(--display);font-weight:600;color:var(--pink);margin-bottom:24px}
+  .summary ul{list-style:none}
+  .summary li{display:flex;gap:12px;align-items:flex-start;padding:11px 0;font-size:1.02rem;border-bottom:1px solid rgba(52,32,79,.1)}
+  .summary li:last-child{border-bottom:none}
+  .summary .m{color:var(--pink);font-weight:800;flex:0 0 18px}
+  .summary .tot{display:flex;justify-content:space-between;margin-top:20px;padding-top:18px;border-top:2px solid var(--ink);font-family:var(--display);font-weight:800;font-size:1.2rem}
+
+  /* steps */
+  .cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .step{text-align:center}
+  .step .n{width:56px;height:56px;border-radius:50%;background:#fff;color:var(--ink);border:3px solid var(--ink);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:800;font-size:1.3rem;margin:0 auto 18px}
+  .step h3{font-size:1.3rem;margin-bottom:8px}
+  .step p{color:var(--muted);font-size:.98rem;max-width:300px;margin:0 auto}
+
+  /* guarantee band */
+  .guar{display:grid;grid-template-columns:auto 1fr;gap:36px;align-items:center;max-width:860px;margin:0 auto}
+  .gbadge{flex:none;width:140px;height:140px;border-radius:50%;background:rgba(255,255,255,.16);border:3px solid rgba(255,255,255,.6);display:flex;align-items:center;justify-content:center;text-align:center;font-family:var(--display);font-weight:800;font-size:.92rem;line-height:1.15;transform:rotate(-8deg)}
+  .guar h2{font-size:clamp(1.8rem,4vw,2.6rem);margin-bottom:14px}
+  .guar p{color:rgba(255,255,255,.92);font-size:1.06rem;max-width:560px}
+
+  /* faq */
+  .faq-list{max-width:820px;margin:0 auto}
+  .faq-list details{border:2px solid var(--ink);border-radius:16px;padding:0 26px;margin-bottom:16px;background:#fff;transition:box-shadow .2s}
+  .faq-list details[open]{box-shadow:8px 8px 0 var(--lilac)}
+  .faq-list summary{list-style:none;cursor:pointer;font-family:var(--display);font-weight:700;font-size:1.1rem;padding:22px 0;display:flex;justify-content:space-between;align-items:center;gap:20px;color:var(--ink)}
+  .faq-list summary::-webkit-details-marker{display:none}
+  .faq-list summary .pm{flex:0 0 28px;height:28px;border-radius:50%;background:var(--pink);color:#fff;text-align:center;line-height:26px;font-size:1.3rem;transition:transform .2s}
+  .faq-list details[open] summary .pm{transform:rotate(45deg)}
+  .faq-list .ans{padding:0 0 24px;color:var(--muted);font-size:1.02rem}
+  .faq-list .ans a{color:var(--purple);font-weight:700;text-decoration:underline}
+
+  .trust{text-align:center;color:var(--muted);font-size:.92rem;margin-top:34px}
+  .trust b{color:var(--ink)}
+
+  .final{text-align:center}
+  .final h2{font-size:clamp(2.2rem,5.4vw,3.8rem);margin-bottom:18px;max-width:18ch;margin-left:auto;margin-right:auto}
+  .final p{color:#d9cfe8;max-width:540px;margin:0 auto 34px;font-size:1.12rem}
+
+  footer{background:var(--ink);color:#b6abc9;border-top:1px solid rgba(255,255,255,.12);padding:46px 0;text-align:center}
+  .foot-logo{font-family:var(--display);font-weight:800;font-size:1.3rem;color:var(--paper);margin-bottom:10px}
+  .foot-logo b{color:var(--pink)}
+  .foot-tag{font-family:var(--display);font-weight:600;color:var(--lilac);font-size:.95rem}
+
+  .rise{opacity:0;transform:translateY(24px);transition:opacity .8s ease, transform .8s ease}
+  .rise.seen{opacity:1;transform:none}
+
+  @media (max-width:880px){
+    section{padding:60px 0}
+    .plans,.cards3{grid-template-columns:1fr;gap:24px}
+    .summary{padding:30px 22px;box-shadow:10px 10px 0 var(--ink)}
+    .guar{grid-template-columns:1fr;gap:26px;text-align:center;justify-items:center}
+  }
+  @media (prefers-reduced-motion:reduce){.rise{opacity:1;transform:none;transition:none}}
+
+  /* real images inside placeholder frames */
+  .imgph img,.feat-cover img,.fcover img,.note .pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+  .imgph,.feat-cover,.fcover,.note .pic{position:relative}
+  /* mobile nav */
+  .burger{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:6px;padding:8px}
+  .burger i{display:block;width:26px;height:3px;border-radius:3px;background:var(--ink)}
+  .mobile-menu{display:none;position:fixed;inset:0;background:var(--paper);z-index:100;padding:100px 34px 40px;flex-direction:column;gap:20px;overflow-y:auto}
+  .mobile-menu.open{display:flex}
+  .mobile-menu a{font-family:var(--display);font-weight:800;font-size:1.45rem;text-decoration:none;color:var(--ink);border:none}
+  .mobile-menu a:hover{color:var(--pink)}
+  .mobile-close{position:absolute;top:22px;right:26px;background:none;border:none;font-size:2.2rem;line-height:1;cursor:pointer;color:var(--ink)}
+  @media (max-width:920px){.burger{display:flex}}
+  /* mobile polish */
+  @media (max-width:600px){
+    .wrap{padding:0 22px}
+    .btn{width:100%;justify-content:center}
+    nav .nav-cta{display:none}
+    .hero-cta .btn{width:100%}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-inner">
+    <div class="logo">Blog Launch <b>Lab</b></div>
+    <span class="secure"><span class="lock">&#128274;</span> Secure checkout</span>
+  </div>
+</nav>
+
+<!-- 1 HERO -->
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow rise">You're almost in</span>
+    <h1 class="rise">Let's make it <span class="mark pink">official.</span></h1>
+    <p class="sub rise">You're one quick decision away from building the blog you've been dreaming about, with me right beside you. Choose the payment option that feels good for your budget below, and let's get to work. <b>I cannot wait to do this with you.</b></p>
+  </div>
+</header>
+
+<!-- 2 PLANS -->
+<section class="sec-tint" id="plans" style="padding-top:30px">
+  <div class="wrap">
+    <div class="shead rise">
+      <span class="eyebrow" style="color:var(--pink)">Choose your plan</span>
+      <h2>Pick the option that works for you.</h2>
+      <p>Same Blog Launch Lab, same everything. Just choose how you'd like to pay.</p>
+    </div>
+    <div class="plans">
+      <div class="plan featured rise">
+        <span class="badge">Best value</span>
+        <div class="pl-label"><b>One time investment of</b></div>
+        <div class="amt">$2,997</div>
+        <div class="terms">paid once, done and done</div>
+        <div class="save">You save $453</div>
+        <a href="https://cash.app/pay/link/sr71gjsq" target="_blank" rel="noopener" class="btn btn-pink">Pay in full</a>
+      </div>
+      <div class="plan rise">
+        <span class="badge blue">Most popular</span>
+        <div class="pl-label"><b>3 monthly payments of</b></div>
+        <div class="amt">$1,099<small>/mo</small></div>
+        <div class="terms">for 3 months · $3,297 total</div>
+        <div class="save">&nbsp;</div>
+        <a href="https://cash.app/pay/link/3v8235sy" target="_blank" rel="noopener" class="btn">Choose 3 payments</a>
+      </div>
+      <div class="plan rise">
+        <span class="badge" style="background:var(--purple)">Most flexible</span>
+        <div class="pl-label"><b>6 monthly payments of</b></div>
+        <div class="amt">$575<small>/mo</small></div>
+        <div class="terms">for 6 months · $3,450 total</div>
+        <div class="save">&nbsp;</div>
+        <a href="https://cash.app/pay/link/43q7vgb9" target="_blank" rel="noopener" class="btn">Choose 6 payments</a>
+      </div>
+    </div>
+    <p class="trust rise"><b>100% secure checkout.</b> Your details are encrypted and protected. Payment plans simply split your total into easy monthly payments.</p>
+  </div>
+</section>
+
+<!-- 3 ORDER SUMMARY -->
+<section>
+  <div class="wrap">
+    <div class="shead rise">
+      <span class="eyebrow">Quick reminder</span>
+      <h2>Here's everything you're getting.</h2>
+    </div>
+    <div class="summary rise">
+      <h3>Blog Launch Lab</h3>
+      <div class="stag">1:1 blog coaching + a custom blog website</div>
+      <ul>
+        <li><span class="m">&check;</span> 1:1 blog coaching, start to finish</li>
+        <li><span class="m">&check;</span> A custom blog website designed around you</li>
+        <li><span class="m">&check;</span> Your full brand and visual identity</li>
+        <li><span class="m">&check;</span> Your money-making offer, mapped and built</li>
+        <li><span class="m">&check;</span> A freebie, email funnel, and blog traffic plan</li>
+        <li><span class="m">&check;</span> Your voice and messaging guide</li>
+        <li><span class="m">&check;</span> Me in your corner the whole way through</li>
+      </ul>
+      <div class="tot"><span>Total value</span><span>$6,550</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4 GUARANTEE -->
+<section class="sec-purple">
+  <div class="wrap">
+    <div class="guar rise">
+      <div class="gbadge">I'm with<br>you till<br>it's done</div>
+      <div>
+        <h2>You're not doing this alone, and you're not doing it twice.</h2>
+        <p>I don't disappear the second you pay. We build this together until it's done right and you feel confident running it. Show up and do the work, and I'll make sure you walk away with a blog you're proud of. That's my promise.</p>
+        <p style="font-size:.85rem;color:rgba(255,255,255,.7);margin-top:12px">This is a commitment-to-completion promise, not a money-back guarantee. All sales are final.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 WHAT HAPPENS NEXT -->
+<section>
+  <div class="wrap">
+    <div class="shead rise">
+      <span class="eyebrow">After you pay</span>
+      <h2>Here's exactly what happens next.</h2>
+    </div>
+    <div class="cards3">
+      <div class="step rise"><div class="n">1</div><h3>You get a confirmation</h3><p>Cash App confirms your payment right away, and I'll personally send your welcome email soon after with everything you need.</p></div>
+      <div class="step rise"><div class="n">2</div><h3>We book your kickoff</h3><p>You'll grab a time for our first call so we can start mapping your blog right away.</p></div>
+      <div class="step rise"><div class="n">3</div><h3>We get to building</h3><p>The fun part. We start turning your idea into a real, gorgeous, money-ready blog.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 6 PAYMENT FAQ -->
+<section class="sec-tint">
+  <div class="wrap">
+    <div class="shead rise">
+      <span class="eyebrow" style="color:var(--pink)">Quick questions</span>
+      <h2>Questions about paying.</h2>
+    </div>
+    <div class="faq-list">
+      <details class="rise"><summary>Why do you only accept Cash App? <span class="pm">+</span></summary><div class="ans">Because it keeps more of your investment going toward the actual work, your coaching and your website, instead of getting eaten up by high processing fees. I also see the payment right when it lands, so I can get your kickoff booked quickly. If Cash App genuinely doesn't work for you, see the next question.</div></details>
+      <details class="rise"><summary>What if I'm outside the US and can't use Cash App? <span class="pm">+</span></summary><div class="ans">No problem at all. Email me at <a href="mailto:hello@bossladybloggers.com">hello@bossladybloggers.com</a> and I'll send you a Stripe link or another secure checkout option that works for you.</div></details>
+      <details class="rise"><summary>When am I charged, and how do the payment plans work? <span class="pm">+</span></summary><div class="ans">If you pay in full, you're charged once today through the link on this page. On a payment plan, today's link covers your first payment, and I'll send you a fresh secure link for each remaining payment on the same date each month. You'll get a reminder before every one, so nothing catches you off guard.</div></details>
+      <details class="rise"><summary>Is the payment plan more expensive? <span class="pm">+</span></summary><div class="ans">Just a little, to cover the flexibility. Paying in full saves you the most, but every option gets you the exact same Blog Launch Lab experience.</div></details>
+      <details class="rise"><summary>Is my payment secure? <span class="pm">+</span></summary><div class="ans">Yes. Cash App uses bank-level encryption to process your payment, and your full card or bank details never touch this page directly.</div></details>
+      <details class="rise"><summary>What if my payment doesn't go through? <span class="pm">+</span></summary><div class="ans">No stress, it happens. Just email <a href="mailto:hello@bossladybloggers.com">hello@bossladybloggers.com</a> and I'll help you sort it out or send you an alternate way to pay.</div></details>
+      <details class="rise"><summary>What happens right after I pay? <span class="pm">+</span></summary><div class="ans">You'll get a confirmation from Cash App right away, and I'll personally send your welcome email with next steps and a link to book your first call. It's not automatic, so give it a little time, but you'll hear from me soon.</div></details>
+      <details class="rise"><summary>Do you offer refunds? <span class="pm">+</span></summary><div class="ans">All sales are final, so there are no refunds. This is a high-touch, 1:1 program where I block off real time and start working with you right away, which means your spot is truly yours the moment you join. If anything's on your mind before you commit, ask me first. That's exactly what a call is for, and I'll always shoot straight with you.</div></details>
+    </div>
+  </div>
+</section>
+
+<!-- 7 FINAL -->
+<section class="sec-ink final">
+  <div class="wrap rise">
+    <span class="eyebrow">Ready?</span>
+    <h2 style="margin-top:16px">Your blog has waited long enough.</h2>
+    <p>Pick your plan, hit the button, and let's finally build the d*mn thing together. I'll see you on the inside, babe.</p>
+    <a href="#plans" class="btn btn-pink">Choose my plan</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-logo">Boss Lady <b>Bloggers</b></div>
+    <div class="foot-tag">Blog Launch Lab · secure enrollment</div>
+  </div>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('seen'); obs.unobserve(e.target);} });
+  },{threshold:.1});
+  document.querySelectorAll('.rise').forEach(el=>obs.observe(el));
+</script>
+
+</body>
+</html>

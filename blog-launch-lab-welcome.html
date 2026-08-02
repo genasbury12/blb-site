@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>You're In! | Welcome to Blog Launch Lab</title>
+<meta name="description" content="Welcome to Blog Launch Lab. You're in. Here's what happens next.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FFF4FA;--tint:#FBEDFB;--ink:#34204F;--pink:#FF5DA2;--purple:#8B5CF6;
+    --blue:#5C7CFA;--lilac:#E7D4FF;--sun:#FFC83D;--muted:#5b4a72;
+    --display:'Bricolage Grotesque', system-ui, sans-serif;--body:'Inter', system-ui, sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--paper);color:var(--ink);font-family:var(--body);line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 30px}
+  h1,h2,h3{font-family:var(--display);font-weight:800;line-height:1.04;letter-spacing:-.02em}
+  a{color:inherit}
+  section{padding:84px 0}
+
+  .sec-tint{background:var(--tint)}
+  .sec-ink{background:var(--ink);color:var(--paper)}
+
+  #confetti{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:200}
+
+  .eyebrow{display:inline-block;font-family:var(--body);font-weight:600;font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;color:var(--purple)}
+  .sec-ink .eyebrow{color:var(--lilac)}
+
+  .mark{position:relative;white-space:nowrap;z-index:0;color:#fff}
+  .mark::before{content:'';position:absolute;z-index:-1;left:-.06em;right:-.06em;bottom:.04em;height:.5em;background:var(--pink);transform:skewX(-6deg)}
+
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:var(--display);font-weight:700;font-size:1rem;padding:17px 38px;border-radius:50px;text-decoration:none;background:var(--ink);color:var(--paper);border:2px solid var(--ink);cursor:pointer;transition:transform .2s ease, box-shadow .2s ease, background .2s ease, color .2s ease}
+  .btn:hover{transform:translateY(-3px);box-shadow:0 12px 0 -4px var(--pink)}
+  .btn-pink{background:var(--pink);border-color:var(--pink);color:#fff}
+  .btn-pink:hover{box-shadow:0 12px 0 -4px var(--purple)}
+  .btn-outline{background:transparent;color:var(--ink)}
+  .btn-outline:hover{background:var(--ink);color:var(--paper);box-shadow:none;transform:translateY(-3px)}
+
+  /* hero */
+  .hero{padding:90px 0 70px;text-align:center;position:relative}
+  .party{display:inline-block;width:120px;height:120px;border-radius:50%;background:var(--sun);border:3px solid var(--ink);color:var(--ink);font-family:var(--display);font-weight:800;font-size:1.6rem;line-height:120px;transform:rotate(-8deg);box-shadow:0 10px 0 -2px rgba(52,32,79,.22);margin-bottom:28px;animation:pop .6s cubic-bezier(.18,1.4,.4,1) both}
+  @keyframes pop{0%{transform:rotate(-8deg) scale(0)}100%{transform:rotate(-8deg) scale(1)}}
+  .hero .eyebrow{display:block;margin-bottom:18px}
+  .hero h1{font-size:clamp(3rem,9vw,6.4rem);margin-bottom:20px}
+  .hero p.sub{font-size:1.22rem;color:var(--muted);max-width:600px;margin:0 auto 36px}
+  .hero p.sub b{color:var(--ink);font-weight:600}
+  .hero-cta{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;align-items:center}
+
+  /* note card */
+  .note{max-width:760px;margin:0 auto;background:#fff;border:3px solid var(--ink);border-radius:24px;padding:42px;box-shadow:16px 16px 0 var(--purple);display:grid;grid-template-columns:auto 1fr;gap:30px;align-items:center}
+  .note .pic{flex:none;width:120px;height:120px;border-radius:18px;border:3px solid var(--ink);background:linear-gradient(135deg,var(--pink),var(--purple));display:flex;align-items:center;justify-content:center}
+  .note .pic span{background:var(--paper);border:2px solid var(--ink);border-radius:50px;padding:5px 10px;font-size:.62rem;font-weight:600;text-align:center}
+  .note h2{font-size:1.6rem;margin-bottom:10px}
+  .note p{color:var(--muted);font-size:1.04rem;margin-bottom:10px}
+  .note .sig{font-family:var(--display);font-weight:700;color:var(--pink)}
+
+  .shead{max-width:720px;margin:0 auto 48px;text-align:center}
+  .shead .eyebrow{margin-bottom:14px}
+  .shead h2{font-size:clamp(2rem,5vw,3.4rem)}
+
+  .cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .step{background:#fff;border:3px solid var(--ink);border-radius:20px;padding:32px 28px;text-align:center}
+  .step:nth-child(1){box-shadow:9px 9px 0 var(--pink)}
+  .step:nth-child(2){box-shadow:9px 9px 0 var(--blue)}
+  .step:nth-child(3){box-shadow:9px 9px 0 var(--purple)}
+  .step .n{width:54px;height:54px;border-radius:50%;background:var(--ink);color:var(--paper);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:800;font-size:1.2rem;margin:0 auto 18px}
+  .step h3{font-size:1.3rem;margin-bottom:8px}
+  .step p{color:var(--muted);font-size:.97rem}
+
+  .final{text-align:center}
+  .final h2{font-size:clamp(2.2rem,5.4vw,3.8rem);margin-bottom:18px;max-width:18ch;margin-left:auto;margin-right:auto}
+  .final p{color:#d9cfe8;max-width:540px;margin:0 auto 34px;font-size:1.12rem}
+
+  footer{background:var(--ink);color:#b6abc9;border-top:1px solid rgba(255,255,255,.12);padding:42px 0;text-align:center}
+  .foot-logo{font-family:var(--display);font-weight:800;font-size:1.3rem;color:var(--paper);margin-bottom:8px}
+  .foot-logo b{color:var(--pink)}
+  .foot-tag{font-family:var(--display);font-weight:600;color:var(--lilac);font-size:.95rem}
+
+  .rise{opacity:0;transform:translateY(24px);transition:opacity .8s ease, transform .8s ease}
+  .rise.seen{opacity:1;transform:none}
+
+  @media (max-width:860px){
+    section{padding:60px 0}
+    .note{grid-template-columns:1fr;text-align:center;justify-items:center;padding:32px 24px;box-shadow:10px 10px 0 var(--purple)}
+    .cards3{grid-template-columns:1fr;gap:22px}
+  }
+  @media (prefers-reduced-motion:reduce){.party{animation:none}.rise{opacity:1;transform:none;transition:none}}
+
+  /* real images inside placeholder frames */
+  .imgph img,.feat-cover img,.fcover img,.note .pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+  .imgph,.feat-cover,.fcover,.note .pic{position:relative}
+  /* mobile nav */
+  .burger{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:6px;padding:8px}
+  .burger i{display:block;width:26px;height:3px;border-radius:3px;background:var(--ink)}
+  .mobile-menu{display:none;position:fixed;inset:0;background:var(--paper);z-index:100;padding:100px 34px 40px;flex-direction:column;gap:20px;overflow-y:auto}
+  .mobile-menu.open{display:flex}
+  .mobile-menu a{font-family:var(--display);font-weight:800;font-size:1.45rem;text-decoration:none;color:var(--ink);border:none}
+  .mobile-menu a:hover{color:var(--pink)}
+  .mobile-close{position:absolute;top:22px;right:26px;background:none;border:none;font-size:2.2rem;line-height:1;cursor:pointer;color:var(--ink)}
+  @media (max-width:920px){.burger{display:flex}}
+  /* mobile polish */
+  @media (max-width:600px){
+    .wrap{padding:0 22px}
+    .btn{width:100%;justify-content:center}
+    nav .nav-cta{display:none}
+    .hero-cta .btn{width:100%}
+  }
+</style>
+</head>
+<body>
+
+<canvas id="confetti"></canvas>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap">
+    <div class="party">YAY</div>
+    <span class="eyebrow">Payment confirmed · welcome to the Lab</span>
+    <h1>You're <span class="mark">IN</span>, babe!</h1>
+    <p class="sub">Eeee, I am genuinely doing a happy dance right now. You just made the move so many women keep putting off, and I could not be more excited to build this blog with you. <b>Welcome to Blog Launch Lab.</b></p>
+    <div class="hero-cta">
+      <a href="/book-a-call" class="btn btn-pink">Book your kickoff call</a>
+      <button class="btn btn-outline" id="moreConfetti">Pop more confetti</button>
+    </div>
+  </div>
+</header>
+
+<!-- NOTE FROM ME -->
+<section class="sec-tint">
+  <div class="wrap">
+    <div class="note rise">
+      <div class="pic"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_006.jpeg" alt="Genasys celebrating you joining the Lab" loading="lazy"></div>
+      <div>
+        <h2>A quick note from me.</h2>
+        <p>I don't take it lightly that you trusted me with this. Building something of your own is brave, and you just said yes to it. I've got you from here, every step.</p>
+        <p>Now go check your inbox, then come back and book your first call. Let's get to the good stuff.</p>
+        <p class="sig">So glad you're here, Genasys</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT NEXT -->
+<section>
+  <div class="wrap">
+    <div class="shead rise">
+      <span class="eyebrow">Here's what happens now</span>
+      <h2>Three little things, then we build.</h2>
+    </div>
+    <div class="cards3">
+      <div class="step rise"><div class="n">1</div><h3>Check your inbox</h3><p>Your confirmation and welcome email are already on their way. Peek in promotions or spam if you don't see them.</p></div>
+      <div class="step rise"><div class="n">2</div><h3>Book your kickoff call</h3><p>Grab a time for our first 1:1 so we can start mapping your blog right away. The button up top takes you there.</p></div>
+      <div class="step rise"><div class="n">3</div><h3>Come ready to dream</h3><p>Start jotting down everything you want your blog to be. No idea is too big. We'll shape it together.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL -->
+<section class="sec-ink final">
+  <div class="wrap rise">
+    <span class="eyebrow">Let's go</span>
+    <h2 style="margin-top:16px">The blog you've been dreaming about starts now.</h2>
+    <p>I'll see you on our first call, babe. Get excited, because this is the fun part. We're really doing the d*mn thing.</p>
+    <a href="/book-a-call" class="btn btn-pink">Book your kickoff call</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-logo">Boss Lady <b>Bloggers</b></div>
+    <div class="foot-tag">Blog Launch Lab · welcome aboard</div>
+  </div>
+</footer>
+
+<script>
+  // reveal on scroll
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('seen'); obs.unobserve(e.target);} });
+  },{threshold:.1});
+  document.querySelectorAll('.rise').forEach(el=>obs.observe(el));
+
+  // confetti
+  const canvas = document.getElementById('confetti');
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [], raf = null;
+  const colors = ['#FF5DA2','#8B5CF6','#5C7CFA','#E7D4FF','#FFC83D','#ffffff'];
+  function resize(){ W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+  resize(); window.addEventListener('resize', resize);
+
+  function burst(count, originX){
+    const ox = originX === undefined ? W * 0.5 : originX;
+    for(let i=0;i<count;i++){
+      particles.push({
+        x: ox + (Math.random()-0.5) * W * 0.5,
+        y: H * 0.18 + (Math.random()-0.5) * 60,
+        vx: (Math.random()-0.5) * 9,
+        vy: Math.random() * -7 - 2,
+        g: 0.16 + Math.random()*0.12,
+        size: 6 + Math.random()*9,
+        color: colors[Math.floor(Math.random()*colors.length)],
+        rot: Math.random()*Math.PI*2,
+        vr: (Math.random()-0.5)*0.35,
+        life: 0,
+        max: 110 + Math.random()*70,
+        shape: Math.random() < 0.5 ? 'rect' : 'circ'
+      });
+    }
+    if(!raf) loop();
+  }
+  function loop(){
+    ctx.clearRect(0,0,W,H);
+    for(const p of particles){
+      p.vy += p.g; p.x += p.vx; p.y += p.vy; p.rot += p.vr; p.life++;
+      const alpha = Math.max(0, 1 - p.life / p.max);
+      ctx.globalAlpha = alpha;
+      ctx.fillStyle = p.color;
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rot);
+      if(p.shape === 'rect'){ ctx.fillRect(-p.size/2, -p.size/2, p.size, p.size*0.6); }
+      else { ctx.beginPath(); ctx.arc(0,0,p.size/2,0,Math.PI*2); ctx.fill(); }
+      ctx.restore();
+    }
+    ctx.globalAlpha = 1;
+    particles = particles.filter(p => p.life < p.max && p.y < H + 50);
+    if(particles.length){ raf = requestAnimationFrame(loop); }
+    else { raf = null; ctx.clearRect(0,0,W,H); }
+  }
+
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!reduce){
+    setTimeout(()=>{ burst(140, W*0.5); }, 250);
+    setTimeout(()=>{ burst(90, W*0.25); burst(90, W*0.75); }, 650);
+  }
+  document.getElementById('moreConfetti').addEventListener('click', ()=>{
+    burst(160, W*0.5);
+  });
+</script>
+
+</body>
+</html>
