@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Blog | Boss Lady Bloggers</title>
+<meta name="description" content="Blogging tips, strategy and real talk for women building money-making blogs. The Boss Lady Bloggers blog.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400;1,9..144,500;1,9..144,600&family=Karla:wght@400;500;600;700&family=Ephesis&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FBF6EE;--tint:#F4EBDE;--ink:#2E1F27;--pink:#A93F63;--purple:#7C2B48;
+    --blue:#BC8A47;--lilac:#F0DCE2;--muted:#6E5C63;
+    --display:'Fraunces', system-ui, serif;--body:'Karla', system-ui, sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--paper);color:var(--ink);font-family:var(--body);line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 30px}
+  h1,h2,h3{font-family:var(--display);font-weight:500;line-height:1.08;letter-spacing:-.01em}
+  a{color:inherit}
+  section{padding:80px 0}
+  .sec-tint{background:var(--tint)}
+  .sec-ink{background:var(--ink);color:var(--paper)}
+  .eyebrow{display:inline-block;font-family:var(--body);font-weight:700;font-size:.74rem;letter-spacing:.24em;text-transform:uppercase;color:var(--purple)}
+  .sec-ink .eyebrow{color:var(--lilac)}
+  .hand-note{font-family:'Ephesis',cursive;font-size:1.8rem;color:var(--pink);margin:6px 0 14px;line-height:1.2}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-family:var(--body);font-weight:700;font-size:.76rem;letter-spacing:.18em;text-transform:uppercase;padding:17px 36px;border-radius:60px;text-decoration:none;background:var(--ink);color:var(--paper);border:1px solid var(--ink);cursor:pointer;transition:transform .2s ease,background .2s ease,box-shadow .2s ease}
+  .btn:hover{transform:translateY(-3px);background:var(--pink);border-color:var(--pink);box-shadow:0 12px 26px -12px rgba(124,43,72,.55)}
+  .btn-pink{background:var(--pink);border-color:var(--pink);color:#fff}
+  .btn-pink:hover{background:var(--ink);border-color:var(--ink)}
+  .btn-outline{background:transparent;color:var(--ink)}
+  .btn-outline:hover{background:var(--ink);color:var(--paper)}
+  .mark{position:relative;display:inline-block;white-space:normal}
+  .mark.pink{background:none;color:var(--ink);padding:0}
+  .mark.pink::before{content:'';position:absolute;z-index:-1;left:-.05em;right:-.05em;top:auto;bottom:.05em;height:.42em;background:var(--lilac);opacity:1;transform:skewX(-6deg)}
+
+  nav{position:sticky;top:0;z-index:60;background:var(--paper);border-bottom:1px solid rgba(46,31,39,.14);box-shadow:0 8px 24px -18px rgba(46,31,39,.2)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:74px}
+  a.logo{font-family:var(--display);font-weight:500;font-size:1.25rem;text-decoration:none}
+  .logo b{color:var(--pink);font-style:italic;font-weight:500}
+  .nav-links{display:flex;gap:24px;list-style:none}
+  .nav-links a{font-weight:600;font-size:.84rem;text-decoration:none;transition:color .2s}
+  .nav-links a:hover{color:var(--pink)}
+  .nav-cta{font-family:var(--body);font-weight:700;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;background:var(--pink);color:#fff;padding:12px 22px;border-radius:60px;border:1px solid var(--ink)}
+  .burger{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:6px;padding:8px}
+  .burger i{display:block;width:26px;height:3px;border-radius:3px;background:var(--ink)}
+  .mobile-menu{display:none;position:fixed;inset:0;background:var(--paper);z-index:100;padding:100px 34px 40px;flex-direction:column;gap:20px;overflow-y:auto}
+  .mobile-menu.open{display:flex}
+  .mobile-menu a{font-family:var(--display);font-weight:600;font-size:1.45rem;text-decoration:none;color:var(--ink)}
+  .mobile-menu a:hover{color:var(--pink)}
+  .mobile-close{position:absolute;top:22px;right:26px;background:none;border:none;font-size:2.2rem;line-height:1;cursor:pointer;color:var(--ink)}
+  @media (max-width:920px){.burger{display:flex}.nav-links{display:none}}
+
+  /* blog hero */
+  .bhero{padding:76px 0 40px;text-align:center}
+  .bhero h1{font-size:clamp(2.6rem,6vw,4.4rem);max-width:760px;margin:8px auto 0}
+  .bhero h1 i{color:var(--pink)}
+  .bhero .hand-note{font-size:2rem}
+  .bhero p{max-width:560px;margin:14px auto 0;font-size:1.08rem;color:var(--muted)}
+  .sq{display:block;margin:26px auto 0}
+
+  /* category pills */
+  .cats{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;padding:26px 0 0}
+  .cat{font-family:var(--body);font-weight:700;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;padding:11px 22px;border-radius:60px;border:1px solid rgba(46,31,39,.35);background:transparent;color:var(--ink);cursor:pointer;transition:all .2s}
+  .cat:hover{border-color:var(--pink);color:var(--pink)}
+  .cat.on{background:var(--pink);border-color:var(--pink);color:#fff}
+
+  /* featured post */
+  .feat-sec{padding:56px 0 70px}
+  .feat{display:grid;grid-template-columns:1fr 1.1fr;gap:0;background:#fff;border:1px solid rgba(46,31,39,.16);border-radius:26px;overflow:hidden;box-shadow:0 26px 50px -26px rgba(46,31,39,.38)}
+  .feat-media{position:relative;min-height:420px}
+  .feat-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .feat-body{padding:52px 54px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start}
+  .tagpill{display:inline-block;background:var(--lilac);color:var(--ink);font-weight:700;font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;padding:7px 14px;border-radius:60px}
+  .feat-body .flag{font-family:'Ephesis',cursive;font-size:1.6rem;color:var(--blue);margin:12px 0 4px}
+  .feat-body h2{font-size:clamp(1.7rem,3vw,2.5rem);margin:4px 0 14px}
+  .feat-body h2 a{text-decoration:none}
+  .feat-body h2 a:hover{color:var(--pink)}
+  .feat-body p{color:var(--muted);margin-bottom:20px}
+  .meta{font-size:.82rem;color:var(--muted);letter-spacing:.04em;margin-bottom:18px}
+  .readmore{font-family:var(--body);font-weight:700;font-size:.76rem;letter-spacing:.18em;text-transform:uppercase;color:var(--pink);text-decoration:none}
+  .readmore:hover{color:var(--purple)}
+
+  /* post grid */
+  .grid-sec{padding:0 0 60px}
+  .pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .pcard{background:#fff;border:1px solid rgba(46,31,39,.16);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 26px 50px -26px rgba(46,31,39,.38);transition:transform .25s}
+  .pcard:hover{transform:translateY(-6px)}
+  .pcover{aspect-ratio:5/3;position:relative;overflow:hidden;border-bottom:1px solid rgba(46,31,39,.14)}
+  .pcover img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+  .pcard:hover .pcover img{transform:scale(1.05)}
+  .pcover .tagpill{position:absolute;top:14px;left:14px;z-index:2;background:var(--paper)}
+  .pbody{padding:24px 26px 26px;display:flex;flex-direction:column;flex:1}
+  .pbody h3{font-size:1.22rem;margin-bottom:10px;line-height:1.25}
+  .pbody h3 a{text-decoration:none}
+  .pbody h3 a:hover{color:var(--pink)}
+  .pbody p{color:var(--muted);font-size:.93rem;flex:1;margin-bottom:16px}
+  .pbody .meta{margin-bottom:12px}
+  .loadwrap{text-align:center;margin-top:44px}
+
+  /* opt-in band */
+  .optin{background:var(--tint)}
+  .optin-inner{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+  .optin-media{position:relative;width:100%;max-width:380px;margin:0 auto}
+  .optin-media .ph{border-radius:46vw 46vw 20px 20px;overflow:hidden;border:1px solid rgba(46,31,39,.3);box-shadow:0 34px 64px -30px rgba(46,31,39,.45);aspect-ratio:3/3.6;position:relative}
+  .optin-media .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  @media (min-width:981px){.optin-media::after{content:'';position:absolute;inset:-14px 14px 14px -14px;border:1px solid var(--pink);border-radius:46vw 46vw 20px 20px;pointer-events:none}}
+  .optin h2{font-size:clamp(1.9rem,4vw,2.9rem);margin:8px 0 10px}
+  .optin p{color:var(--muted);margin-bottom:24px;max-width:440px}
+
+  /* wwm band */
+  .wwm-band{background:var(--ink);color:var(--paper);text-align:center;padding:76px 0}
+  .wwm-band h2{font-size:clamp(2rem,5vw,3.2rem);margin:14px 0 12px}
+  .wwm-band h2 i{color:var(--lilac)}
+  .wwm-band .hand-note{color:var(--blue)}
+  .wwm-band p{color:#D8CBC3;max-width:520px;margin:0 auto 30px}
+  .wwm-btn{display:inline-flex;font-family:var(--body);font-weight:700;font-size:.76rem;letter-spacing:.18em;text-transform:uppercase;padding:18px 42px;border-radius:60px;text-decoration:none;background:var(--pink);color:#fff;border:1px solid var(--pink);transition:transform .2s,box-shadow .2s}
+  .wwm-btn:hover{transform:translateY(-3px);box-shadow:0 14px 30px -12px rgba(169,63,99,.7)}
+
+  footer{background:var(--ink);color:#B9A9A0;padding:64px 0 40px;border-top:1px solid rgba(251,246,238,.12)}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;margin-bottom:44px}
+  .foot-logo{font-family:var(--display);font-weight:500;font-size:1.4rem;color:var(--paper);margin-bottom:12px}
+  .foot-logo b{color:var(--pink);font-style:italic}
+  .foot-about{font-size:.9rem;max-width:280px}
+  .foot-h{font-family:var(--body);font-weight:700;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--paper);margin-bottom:14px}
+  .foot-links{list-style:none}
+  .foot-links li{margin-bottom:9px}
+  .foot-links a{text-decoration:none;font-size:.9rem;transition:color .2s}
+  .foot-links a:hover{color:var(--paper)}
+  .foot-base{border-top:1px solid rgba(251,246,238,.12);padding-top:24px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:.8rem}
+  .foot-tag{font-family:'Ephesis',cursive;font-size:1.4rem;color:var(--blue)}
+
+  /* 2027 layer */
+  #pageLoader{position:fixed;inset:0;background:#FBF6EE;z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;transition:opacity .55s ease,visibility .55s}
+  #pageLoader.done{opacity:0;visibility:hidden;pointer-events:none}
+  .l-note{font-family:'Ephesis',cursive;font-size:1.9rem;color:#A93F63}
+  .l-dots{display:flex;gap:7px}
+  .l-dots i{width:8px;height:8px;border-radius:50%;background:#BC8A47;animation:ldot 1s ease-in-out infinite}
+  .l-dots i:nth-child(2){animation-delay:.15s}.l-dots i:nth-child(3){animation-delay:.3s}
+  @keyframes ldot{0%,100%{transform:translateY(0);opacity:.5}50%{transform:translateY(-7px);opacity:1}}
+  .l-svg .tline{transform-origin:left center;animation:ltype 1.3s ease-in-out infinite}
+  .l-svg .t2{animation-delay:.22s}.l-svg .t3{animation-delay:.44s}
+  @keyframes ltype{0%,8%{transform:scaleX(0)}48%,72%{transform:scaleX(1)}100%{transform:scaleX(0)}}
+  .l-svg .l-arm{animation:ltap .3s ease-in-out infinite alternate;transform-origin:58px 74px}
+  @keyframes ltap{from{transform:rotate(-1deg)}to{transform:rotate(5deg)}}
+  .scrollprog{position:fixed;top:0;left:0;width:100%;height:3px;z-index:998;pointer-events:none}
+  .scrollprog i{display:block;height:100%;width:0;background:linear-gradient(90deg,#A93F63,#BC8A47)}
+  .wwm-fab{position:fixed;right:22px;bottom:22px;z-index:95;font-family:'Karla',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;background:#A93F63;color:#FBF6EE;padding:15px 24px;border-radius:60px;text-decoration:none;box-shadow:0 16px 32px -12px rgba(124,43,72,.65);transition:transform .25s}
+  .wwm-fab:hover{transform:translateY(-3px) scale(1.04)}
+  @media (prefers-reduced-motion:reduce){#pageLoader{display:none}.l-svg .tline,.l-svg .l-arm,.l-dots i{animation:none}}
+
+  .u-doodle{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 12' preserveAspectRatio='none'%3E%3Cpath d='M3 9 Q 30 3 60 8 T 117 7' fill='none' stroke='%23A93F63' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:0 100%;background-size:100% .3em;padding-bottom:.16em}
+
+  @media (max-width:980px){
+    .feat{grid-template-columns:1fr}
+    .feat-media{min-height:300px}
+    .feat-body{padding:36px 30px}
+    .pgrid{grid-template-columns:1fr 1fr}
+    .optin-inner{grid-template-columns:1fr;gap:44px}
+  }
+  @media (max-width:640px){
+    section{padding:60px 0}
+    .pgrid{grid-template-columns:1fr}
+    .foot-grid{grid-template-columns:1fr 1fr}
+    .btn{width:100%}
+  }
+</style>
+</head>
+<body>
+<div id="pageLoader" aria-hidden="true">
+  <svg class="l-svg" viewBox="0 0 170 120" width="170" height="120" fill="none">
+    <rect x="12" y="98" width="146" height="6" rx="3" fill="#2E1F27"/>
+    <rect x="90" y="48" width="44" height="32" rx="3" fill="#2E1F27"/>
+    <rect x="92.5" y="50.5" width="39" height="27" rx="2" fill="#FBF6EE"/>
+    <rect class="tline t1" x="97" y="56" width="22" height="3" rx="1.5" fill="#A93F63"/>
+    <rect class="tline t2" x="97" y="62" width="28" height="3" rx="1.5" fill="#BC8A47"/>
+    <rect class="tline t3" x="97" y="68" width="17" height="3" rx="1.5" fill="#A93F63"/>
+    <rect x="82" y="82" width="60" height="5" rx="2.5" fill="#2E1F27"/>
+    <circle cx="44" cy="42" r="13" fill="#2E1F27"/>
+    <circle cx="53" cy="30" r="7" fill="#A93F63"/>
+    <path d="M26 98 Q28 60 44 58 Q60 60 62 98 Z" fill="#2E1F27"/>
+    <rect class="l-arm" x="56" y="70" width="28" height="6" rx="3" fill="#2E1F27"/>
+    <circle cx="86" cy="74" r="4" fill="#2E1F27"/>
+  </svg>
+  <div class="l-note">brewing something gorgeous&hellip;</div>
+  <div class="l-dots"><i></i><i></i><i></i></div>
+</div>
+<div class="scrollprog" aria-hidden="true"><i></i></div>
+<a href="/blog-launch-lab" class="wwm-fab">Work With Me &hearts;</a>
+
+<nav>
+  <div class="wrap nav-inner">
+    <a class="logo" href="/">Boss Lady <b>Bloggers</b></a>
+    <ul class="nav-links">
+      <li><a href="/about">About</a></li>
+      <li><a href="/blog-coaching">Blog Coaching</a></li>
+      <li><a href="/membership">Membership</a></li>
+      <li><a href="/blog">Blog</a></li>
+      <li><a href="/podcast">Podcast</a></li>
+      <li><a href="/freebies">Freebies</a></li>
+    </ul>
+    <a href="/blog-launch-lab" class="nav-cta">Work With Me</a>
+    <button class="burger" id="burger" aria-label="Menu"><i></i><i></i><i></i></button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="mobileClose" aria-label="Close menu">&times;</button>
+  <a href="/about">About</a>
+  <a href="/blog-coaching">Blog Coaching</a>
+  <a href="/membership">Membership</a>
+  <a href="/blog">Blog</a>
+  <a href="/podcast">Podcast</a>
+  <a href="/freebies">Freebies</a>
+  <a href="/blog-launch-lab" style="color:var(--pink)">Work With Me &rarr;</a>
+</div>
+
+<!-- HERO -->
+<header class="bhero">
+  <div class="wrap">
+    <span class="eyebrow">The Blog</span>
+    <h1>Blogging advice that <i>actually</i> <span class="mark pink">makes you money.</span></h1>
+    <div class="hand-note">grab a coffee &amp; stay a while</div>
+    <p>Strategy, honest lessons and step-by-step help for women building blogs that pay, not just look pretty.</p>
+    <svg class="sq" viewBox="0 0 160 20" width="150" height="20" aria-hidden="true"><path d="M4 12 Q 24 4 44 11 T 84 10 T 124 11 T 156 9" fill="none" stroke="#BC8A47" stroke-width="3.5" stroke-linecap="round"/></svg>
+    <div class="cats" id="cats">
+      <button class="cat on" data-cat="all">All posts</button>
+      <button class="cat" data-cat="start">Start a Blog</button>
+      <button class="cat" data-cat="traffic">Grow Traffic</button>
+      <button class="cat" data-cat="money">Make Money</button>
+      <button class="cat" data-cat="mindset">Mindset</button>
+    </div>
+  </div>
+</header>
+
+<!-- FEATURED POST -->
+<section class="feat-sec">
+  <div class="wrap">
+    <article class="feat">
+      <div class="feat-media"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_033.jpeg" alt="Featured post" loading="lazy"></div>
+      <div class="feat-body">
+        <span class="tagpill">Start a Blog</span>
+        <div class="flag">newest on the blog</div>
+        <h2><a href="/blog-post">How to Start a Money-Making Blog in 2026 (the Right Order)</a></h2>
+        <div class="meta">January 14, 2026 &middot; 12 min read</div>
+        <p>Most new bloggers do everything backwards, then wonder why nothing sells. Here's the exact order I walk every student through, from niche to first offer.</p>
+        <a class="readmore" href="/blog-post">Read the post &rarr;</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- POST GRID -->
+<section class="grid-sec">
+  <div class="wrap">
+    <div class="pgrid" id="pgrid">
+      <article class="pcard" data-cat="start">
+        <div class="pcover"><span class="tagpill">Start a Blog</span><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_035.jpeg" alt="" loading="lazy"></div>
+        <div class="pbody"><h3><a href="/blog-post">Pick a Blog Niche You Won't Regret in 6 Months</a></h3><p>The 3-question test I give every student before they commit to a niche.</p><div class="meta">Jan 7, 2026 &middot; 8 min read</div><a class="readmore" href="/blog-post">Read more &rarr;</a></div>
+      </article>
+      <article class="pcard" data-cat="money">
+        <div class="pcover"><span class="tagpill">Make Money</span><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_036.jpeg" alt="" loading="lazy"></div>
+        <div class="pbody"><h3><a href="/blog-post">Why Affiliate Pennies Aren't a Business Model</a></h3><p>What to sell instead, even if your audience is tiny right now.</p><div class="meta">Dec 30, 2025 &middot; 10 min read</div><a class="readmore" href="/blog-post">Read more &rarr;</a></div>
+      </article>
+      <article class="pcard" data-cat="traffic">
+        <div class="pcover"><span class="tagpill">Grow Traffic</span><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_037.jpeg" alt="" loading="lazy"></div>
+        <div class="pbody"><h3><a href="/blog-post">Your First 1,000 Readers Without Dancing on Reels</a></h3><p>Traffic strategies that compound while you sleep, no trends required.</p><div class="meta">Dec 22, 2025 &middot; 9 min read</div><a class="readmore" href="/blog-post">Read more &rarr;</a></div>
+      </article>
+      <article class="pcard" data-cat="mindset">
+        <div class="pcover"><span class="tagpill">Mindset</span><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_038.jpeg" alt="" loading="lazy"></div>
+        <div class="pbody"><h3><a href="/blog-post">"Who Am I to Teach This?" — Read This First</a></h3><p>The imposter feeling every blogger gets, and the reframe that fixes it.</p><div class="meta">Dec 15, 2025 &middot; 6 min read</div><a class="readmore" href="/blog-post">Read more &rarr;</a></div>
+      </article>
+      <article class="pcard" data-cat="start">
+        <div class="pcover"><span class="tagpill">Start a Blog</span><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_039.jpeg" alt="" loading="lazy"></div>
+        <div class="pbody"><h3><a href="/blog-post">Personal Brand vs. Standalone Blog: How to Choose</a></h3><p>The decision that shapes everything else, made simple with real examples.</p><div class="meta">Dec 8, 2025 &middot; 7 min read</div><a class="readmore" href="/blog-post">Read more &rarr;</a></div>
+      </article>
+      <article class="pcard" data-cat="money">
+        <div class="pcover"><span class="tagpill">Make Money</span><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_040.jpeg" alt="" loading="lazy"></div>
+        <div class="pbody"><h3><a href="/blog-post">Price Your First Offer Without Panicking</a></h3><p>A simple framework for pricing that feels fair to you and your readers.</p><div class="meta">Dec 1, 2025 &middot; 8 min read</div><a class="readmore" href="/blog-post">Read more &rarr;</a></div>
+      </article>
+    </div>
+    <div class="loadwrap"><a href="#" class="btn btn-outline">Load more posts</a></div>
+  </div>
+</section>
+
+<!-- OPT-IN -->
+<section class="optin">
+  <div class="wrap optin-inner">
+    <div class="optin-media">
+      <div class="ph"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_041.jpeg" alt="Free resource library" loading="lazy"></div>
+    </div>
+    <div>
+      <span class="eyebrow">Free Resource Library</span>
+      <h2>Like the blog? The <span class="u-doodle">free courses</span> go deeper.</h2>
+      <div class="hand-note">six full courses, zero dollars</div>
+      <p>One signup unlocks every free blogging course in the library — starting your blog, finding what to sell, getting traffic and more.</p>
+      <a href="/freebies" class="btn btn-pink">Unlock the free library &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- WWM BAND -->
+<section class="wwm-band">
+  <div class="wrap">
+    <span class="eyebrow">Ready for more than tips?</span>
+    <h2>Let's build your blog <i>together.</i></h2>
+    <div class="hand-note">this is the fun part</div>
+    <p>Blog Launch Lab is where reading turns into launching — with me building it right beside you.</p>
+    <a href="/blog-launch-lab" class="wwm-btn">Work with me &rarr;</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-logo">Boss Lady <b>Bloggers</b></div>
+        <p class="foot-about">Helping women start, grow and monetize blogs that feel like them and pay like a business.</p>
+      </div>
+      <div>
+        <div class="foot-h">Explore</div>
+        <ul class="foot-links">
+          <li><a href="/about">About</a></li>
+          <li><a href="/blog">Blog</a></li>
+          <li><a href="/podcast">Podcast</a></li>
+          <li><a href="/freebies">Freebies</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="foot-h">Work With Me</div>
+        <ul class="foot-links">
+          <li><a href="/blog-launch-lab">Blog Launch Lab</a></li>
+          <li><a href="/blog-coaching">Blog Coaching</a></li>
+          <li><a href="/membership">Membership</a></li>
+          <li><a href="/book-a-call">Book a Call</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="foot-h">Support</div>
+        <ul class="foot-links">
+          <li><a href="/contact">Contact</a></li>
+          <li><a href="/privacy-policy">Privacy Policy</a></li>
+          <li><a href="/terms-conditions">Terms &amp; Conditions</a></li>
+          <li><a href="/disclaimer">Disclaimer</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-base">
+      <div>&copy; 2026 Boss Lady Bloggers. All rights reserved.</div>
+      <div class="foot-tag">blog like she means business &#10022;</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var l=document.getElementById('pageLoader');
+  if(l){
+    var hide=function(){l.classList.add('done')};
+    if(matchMedia('(prefers-reduced-motion: reduce)').matches){hide();}
+    else{window.addEventListener('load',function(){setTimeout(hide,600)});setTimeout(hide,2600);}
+  }
+  var bar=document.querySelector('.scrollprog i');
+  if(bar){addEventListener('scroll',function(){var h=document.documentElement.scrollHeight-innerHeight;bar.style.width=(h>0?(scrollY/h*100):0)+'%'},{passive:true});}
+  var b=document.getElementById('burger'),m=document.getElementById('mobileMenu'),c=document.getElementById('mobileClose');
+  if(b&&m){b.addEventListener('click',function(){m.classList.add('open')});
+    if(c)c.addEventListener('click',function(){m.classList.remove('open')});
+    m.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){m.classList.remove('open')})});}
+
+  /* category filter */
+  var cats=document.querySelectorAll('.cat'),cards=document.querySelectorAll('.pcard');
+  cats.forEach(function(btn){
+    btn.addEventListener('click',function(){
+      cats.forEach(function(x){x.classList.remove('on')});
+      btn.classList.add('on');
+      var c=btn.getAttribute('data-cat');
+      cards.forEach(function(card){
+        card.style.display=(c==='all'||card.getAttribute('data-cat')===c)?'':'none';
+      });
+    });
+  });
+})();
+</script>
+</body>
+</html>
