@@ -4,170 +4,104 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Start Here | Boss Lady Bloggers</title>
-<meta name="description" content="New here? Find the right way to work with Boss Lady Bloggers, from free resources to 1:1 blog coaching, the membership, and the full Blog Launch Lab.">
+<meta name="description" content="New to Boss Lady Bloggers? Here's the two-minute version of business-first blogging, and exactly where to go depending on where you are.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400;1,9..144,500;1,9..144,600&family=Karla:wght@400;500;600;700&family=Ephesis&display=swap" rel="stylesheet">
+
 <style>
   :root{
     --paper:#FBF6EE;--tint:#F4EBDE;--ink:#2E1F27;--pink:#A93F63;--purple:#7C2B48;
-    --blue:#BC8A47;--lilac:#F0DCE2;--muted:#6E5C63;
-    --display:'Fraunces', system-ui, sans-serif;--body:'Karla', system-ui, sans-serif;
+    --gold:#BC8A47;--blush:#F0DCE2;--muted:#6E5C63;
+    --display:'Fraunces', Georgia, serif;--body:'Karla', system-ui, sans-serif;
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
-  body{background:var(--paper);color:var(--ink);font-family:var(--body);line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:1.03rem;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  ::selection{background:var(--pink);color:var(--paper)}
   .wrap{max-width:1160px;margin:0 auto;padding:0 30px}
-  h1,h2,h3{font-family:var(--display);font-weight:600;line-height:1.05;letter-spacing:-.02em}
+  .wrap-n{max-width:880px;margin:0 auto;padding:0 30px}
+  h1,h2,h3{font-family:var(--display);font-weight:500;line-height:1.1;letter-spacing:-.01em}
   a{color:inherit}
-  section{padding:88px 0}
-
+  section{padding:84px 0}
   .sec-tint{background:var(--tint)}
   .sec-ink{background:var(--ink);color:var(--paper)}
-
-  .eyebrow{display:inline-block;font-family:var(--body);font-weight:600;font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;color:var(--purple)}
-  .sec-ink .eyebrow{color:var(--lilac)}
-
-  .mark{position:relative;white-space:nowrap;z-index:0;color:var(--ink)}
-  .mark::before{content:'';position:absolute;z-index:-1;left:-.08em;right:-.08em;bottom:.06em;height:.42em;background:var(--lilac);transform:skewX(-6deg)}
-  .mark.pink::before{background:var(--pink);bottom:.04em;height:.5em;opacity:.95}
-  .mark.pink{color:#fff}
-
-  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:var(--display);font-weight:700;font-size:1rem;padding:15px 32px;border-radius:50px;text-decoration:none;background:var(--ink);color:var(--paper);border:1px solid var(--ink);cursor:pointer;transition:transform .2s ease, box-shadow .2s ease, background .2s ease, color .2s ease}
-  .btn:hover{transform:translateY(-3px);box-shadow:0 16px 30px -14px rgba(169,63,99,.55)}
+  .eyebrow{display:inline-block;font-family:var(--body);font-weight:700;font-size:.74rem;letter-spacing:.24em;text-transform:uppercase;color:var(--purple)}
+  .sec-ink .eyebrow{color:var(--blush)}
+  .hand-note{font-family:'Ephesis',cursive;font-size:1.8rem;color:var(--pink);margin:6px 0 14px;line-height:1.2}
+  .sec-ink .hand-note{color:var(--gold)}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-family:var(--body);font-weight:700;font-size:.76rem;letter-spacing:.18em;text-transform:uppercase;padding:17px 36px;border-radius:60px;text-decoration:none;background:var(--ink);color:var(--paper);border:1px solid var(--ink);cursor:pointer;transition:transform .2s ease,background .2s ease,box-shadow .2s ease}
+  .btn:hover{transform:translateY(-3px);background:var(--pink);border-color:var(--pink);box-shadow:0 12px 26px -12px rgba(124,43,72,.55)}
   .btn-pink{background:var(--pink);border-color:var(--pink);color:#fff}
-  .btn-pink:hover{box-shadow:0 16px 30px -14px rgba(124,43,72,.55)}
+  .btn-pink:hover{background:var(--ink);border-color:var(--ink)}
   .btn-outline{background:transparent;color:var(--ink)}
-  .btn-outline:hover{background:var(--ink);color:var(--paper);box-shadow:none;transform:translateY(-3px)}
-  .btn-sm{padding:12px 24px;font-size:.9rem}
+  .btn-outline:hover{background:var(--ink);color:var(--paper)}
+  .sec-ink .btn-outline{color:var(--paper);border-color:var(--paper)}
+  .sec-ink .btn-outline:hover{background:var(--paper);color:var(--ink)}
+  .micro{font-size:.85rem;color:var(--muted);margin-top:12px}
+  .sec-ink .micro{color:#D8CBC3}
+  .mark{position:relative;display:inline-block;white-space:normal}
+  .mark.pink{color:inherit}
+  .mark.pink::before{content:'';position:absolute;z-index:-1;left:-.05em;right:-.05em;bottom:.05em;height:.42em;background:var(--blush);transform:skewX(-6deg)}
+  .u-doodle{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 12' preserveAspectRatio='none'%3E%3Cpath d='M3 9 Q 30 3 60 8 T 117 7' fill='none' stroke='%23A93F63' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:0 100%;background-size:100% .3em;padding-bottom:.16em}
+  .shead{max-width:760px;margin:0 auto 46px;text-align:center}
+  .shead h2{font-size:clamp(2rem,4.6vw,3.1rem);margin-bottom:10px}
+  .shead p{color:var(--muted);font-size:1.06rem}
+  .sec-ink .shead p{color:#D8CBC3}
+  .prose{max-width:720px;margin:0 auto}
+  .prose p{margin-bottom:24px;font-size:1.08rem;line-height:1.75}
+  .prose p.big{font-size:1.22rem}
+  .prose em{color:var(--pink)}
+  .center{text-align:center}
+  .tagpill{display:inline-block;background:var(--blush);color:var(--ink);font-weight:700;font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;padding:7px 14px;border-radius:60px}
 
-  nav{position:sticky;top:0;z-index:60;background:var(--paper);border-bottom:1px solid rgba(46,31,39,.14)}
-  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:74px}
-  .logo{font-family:var(--display);font-weight:600;font-size:1.3rem}
-  .logo b{color:var(--pink)}
-  .nav-links{display:flex;gap:24px;list-style:none}
-  .nav-links a{font-weight:600;font-size:.84rem;text-decoration:none;transition:color .2s}
+  /* nav (canonical) */
+  nav{position:sticky;top:0;z-index:90;background:rgba(251,246,238,.9);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(46,31,39,.12);transition:box-shadow .3s}
+  nav.scrolled{box-shadow:0 10px 30px -18px rgba(46,31,39,.25)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:82px}
+  a.logo{font-family:var(--display);font-weight:500;font-size:1.32rem;letter-spacing:-.01em;text-decoration:none;color:var(--ink)}
+  .logo em{font-style:italic;color:var(--pink)}
+  .nav-links{display:flex;gap:30px;list-style:none;align-items:center}
+  .nav-links a{font-weight:700;font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;transition:color .2s}
   .nav-links a:hover{color:var(--pink)}
-  .nav-cta{font-family:var(--display);font-weight:700;font-size:.9rem;text-decoration:none;background:var(--pink);color:#fff;padding:10px 22px;border-radius:50px;border:1px solid var(--ink)}
-
-  .hero{padding:80px 0;text-align:center}
-  .hero .eyebrow{margin-bottom:18px}
-  .hero h1{font-size:clamp(2.7rem,7vw,5.2rem);max-width:16ch;margin:0 auto 18px}
-  .hero p.sub{font-size:1.18rem;color:var(--muted);max-width:600px;margin:0 auto}
-
-  .shead{max-width:740px;margin:0 auto 50px;text-align:center}
-  .shead .eyebrow{margin-bottom:14px}
-  .shead h2{font-size:clamp(2.1rem,5vw,3.5rem);margin-bottom:14px}
-  .shead p{font-size:1.1rem;color:var(--muted)}
-  .sec-ink .shead p{color:rgba(255,255,255,.9)}
-
-  /* paths */
-  .paths{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
-  .path{background:#fff;border:1px solid var(--ink);border-radius:20px;padding:30px 24px;display:flex;flex-direction:column;transition:transform .2s}
-  .path:hover{transform:translateY(-6px)}
-  .path:nth-child(1){box-shadow:0 26px 50px -26px rgba(46,31,39,.38)}
-  .path:nth-child(2){box-shadow:0 26px 50px -26px rgba(46,31,39,.38)}
-  .path:nth-child(3){box-shadow:0 26px 50px -26px rgba(46,31,39,.38)}
-  .path:nth-child(4){box-shadow:0 26px 50px -26px rgba(46,31,39,.38)}
-  .path .tag{font-family:var(--body);font-weight:600;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--purple);margin-bottom:10px}
-  .path h3{font-size:1.25rem;margin-bottom:10px}
-  .path p{color:var(--muted);font-size:.95rem;margin-bottom:18px;flex:1}
-  .path a{font-family:var(--display);font-weight:700;text-decoration:none;border-bottom:2px solid var(--pink);padding-bottom:2px;align-self:flex-start}
-
-  /* offers */
-  .offers{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;align-items:stretch}
-  .offer{background:#fff;border:1px solid var(--ink);border-radius:22px;padding:36px 30px;display:flex;flex-direction:column;box-shadow:0 26px 50px -26px rgba(46,31,39,.38);position:relative}
-  .offer.featured{box-shadow:0 26px 50px -26px rgba(46,31,39,.38)}
-  .offer .badge{position:absolute;top:-15px;left:50%;transform:translateX(-50%);background:var(--pink);color:#fff;font-family:var(--display);font-weight:600;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;padding:7px 16px;border-radius:50px;border:1px solid var(--ink);white-space:nowrap}
-  .offer .badge.blue{background:var(--blue)}
-  .offer .kind{font-family:var(--body);font-weight:600;font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--purple)}
-  .offer h3{font-size:1.5rem;margin:8px 0 4px}
-  .offer .price{font-family:var(--display);font-weight:600;font-size:1.7rem;margin-bottom:6px}
-  .offer .price small{font-size:.5em;color:var(--muted);font-weight:700}
-  .offer .blurb{color:var(--muted);font-size:.97rem;margin-bottom:18px}
-  .offer ul{list-style:none;margin-bottom:24px;flex:1}
-  .offer li{display:flex;gap:10px;align-items:flex-start;padding:7px 0;font-size:.95rem}
-  .offer li .m{color:var(--pink);font-weight:600;flex:0 0 16px}
-  .offer .btn{width:100%}
-
-  /* comparison */
-  .ctable-wrap{overflow-x:auto;border:1px solid var(--ink);border-radius:20px;max-width:980px;margin:0 auto}
-  .ctable{width:100%;min-width:660px;border-collapse:collapse;background:#fff}
-  .ctable th,.ctable td{padding:15px 18px;text-align:left;border-bottom:1px solid rgba(46,31,39,.12);font-size:.95rem;vertical-align:top}
-  .ctable thead th{background:var(--ink);color:var(--paper);font-family:var(--display);font-weight:600;font-size:1rem;border-bottom:none}
-  .ctable tbody th{font-weight:700;color:var(--ink);width:170px}
-  .ctable .yes{color:var(--pink);font-weight:600}
-  .ctable .no{color:#CFC4BD}
-  .ctable tr:last-child td,.ctable tr:last-child th{border-bottom:none}
-  .ctable .prow th,.ctable .prow td{font-family:var(--display);font-weight:600;font-size:1.02rem}
-
-  /* free ways */
-  .free{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
-  .fcard{background:#fff;border:1px solid var(--ink);border-radius:20px;padding:28px 24px;text-align:center;transition:transform .2s}
-  .fcard:hover{transform:translateY(-6px)}
-  .fcard:nth-child(1){box-shadow:0 26px 50px -26px rgba(46,31,39,.38)}
-  .fcard:nth-child(2){box-shadow:0 26px 50px -26px rgba(46,31,39,.38)}
-  .fcard:nth-child(3){box-shadow:0 26px 50px -26px rgba(46,31,39,.38)}
-  .fcard:nth-child(4){box-shadow:0 26px 50px -26px rgba(46,31,39,.38)}
-  .fcard h3{font-size:1.22rem;margin-bottom:8px}
-  .fcard p{color:var(--muted);font-size:.93rem;margin-bottom:16px}
-  .fcard a{font-family:var(--display);font-weight:700;text-decoration:none;border-bottom:2px solid var(--pink);padding-bottom:2px}
-
-  .final{text-align:center}
-  .final h2{font-size:clamp(2.2rem,5.4vw,3.8rem);margin-bottom:18px;max-width:18ch;margin-left:auto;margin-right:auto}
-  .final p{color:#D8CBC3;max-width:540px;margin:0 auto 34px;font-size:1.12rem}
-
-  footer{background:var(--ink);color:#B9A9A0;border-top:1px solid rgba(255,255,255,.12);padding:50px 0}
-  .foot-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px}
-  .foot-logo{font-family:var(--display);font-weight:600;font-size:1.3rem;color:var(--paper)}
-  .foot-logo b{color:var(--pink)}
-  .foot-links{display:flex;gap:24px;list-style:none}
-  .foot-links a{font-size:.8rem;font-weight:500;text-decoration:none;color:#B9A9A0}
-  .foot-links a:hover{color:var(--paper)}
-  .foot-tag{width:100%;text-align:center;font-family:var(--display);font-weight:600;color:var(--lilac);padding-top:24px;margin-top:24px;border-top:1px solid rgba(255,255,255,.1)}
-
-  .rise{opacity:0;transform:translateY(24px);transition:opacity .8s ease, transform .8s ease}
-  .rise.seen{opacity:1;transform:none}
-
-  @media (max-width:920px){
-    .nav-links{display:none}
-    section{padding:64px 0}
-    .paths,.free{grid-template-columns:1fr 1fr;gap:18px}
-    .offers{grid-template-columns:1fr;gap:24px}
-  }
-  @media (max-width:560px){.paths,.free{grid-template-columns:1fr}}
-  @media (prefers-reduced-motion:reduce){.rise{opacity:1;transform:none;transition:none}}
-
-  /* real images inside placeholder frames */
-  .imgph img,.feat-cover img,.fcover img,.note .pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
-  .imgph,.feat-cover,.fcover,.note .pic{position:relative}
-  /* mobile nav */
-  .burger{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:6px;padding:8px}
-  .burger i{display:block;width:26px;height:3px;border-radius:3px;background:var(--ink)}
-  .mobile-menu{display:none;position:fixed;inset:0;background:var(--paper);z-index:100;padding:100px 34px 40px;flex-direction:column;gap:20px;overflow-y:auto}
+  .nav-cta{font-family:var(--body);font-weight:700;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;border:1px solid var(--ink);padding:12px 24px;border-radius:60px;transition:background .25s,color .25s}
+  .nav-cta:hover{background:var(--ink);color:var(--paper)}
+  .burger{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:6px;padding:6px}
+  .burger i{display:block;width:26px;height:2px;border-radius:2px;background:var(--ink)}
+  .mobile-menu{display:none;position:fixed;inset:0;background:var(--paper);z-index:100;padding:110px 34px 40px;flex-direction:column;gap:24px;overflow-y:auto}
   .mobile-menu.open{display:flex}
-  .mobile-menu a{font-family:var(--display);font-weight:600;font-size:1.45rem;text-decoration:none;color:var(--ink);border:none}
-  .mobile-menu a:hover{color:var(--pink)}
-  .mobile-close{position:absolute;top:22px;right:26px;background:none;border:none;font-size:2.2rem;line-height:1;cursor:pointer;color:var(--ink)}
-  @media (max-width:920px){.burger{display:flex}}
-  /* mobile polish */
-  @media (max-width:600px){
-    .wrap{padding:0 22px}
-    .btn{width:100%;justify-content:center}
-    nav .nav-cta{display:none}
-    .hero-cta .btn{width:100%}
-  }
+  .mobile-menu a{font-family:var(--display);font-weight:500;font-size:1.6rem;text-decoration:none;color:var(--ink)}
+  .mobile-menu a:hover{color:var(--pink);font-style:italic}
+  .mobile-close{position:absolute;top:24px;right:26px;background:none;border:none;font-size:2.2rem;line-height:1;cursor:pointer;color:var(--ink)}
+  @media (max-width:920px){.nav-links,.nav-cta{display:none}.burger{display:flex}}
 
-  /* editorial brand overlay: match the new homepage */
-  h1,h2,h3{font-weight:500;letter-spacing:-.01em}
-  .logo,.foot-logo{font-weight:500;font-size:1.25rem}
-  .logo b,.foot-logo b{font-style:italic;font-weight:500}
-  .btn,.nav-cta{font-family:var(--body);font-weight:700;font-size:.76rem;letter-spacing:.18em;text-transform:uppercase}
-  .eyebrow{font-weight:700;letter-spacing:.24em}
-  .mobile-menu a{font-weight:600}
+  /* footer (canonical) */
+  footer{background:var(--ink);color:#B9A9A0;border-top:1px solid rgba(251,246,238,.14);padding:70px 0 40px;overflow:hidden;text-align:left}
+  .foot-word{font-family:var(--display);font-style:italic;font-size:clamp(3rem,9.5vw,8.4rem);color:transparent;-webkit-text-stroke:1px rgba(251,246,238,.35);text-align:center;line-height:1;white-space:nowrap;margin-bottom:64px;user-select:none}
+  .foot-grid{display:grid;grid-template-columns:1.35fr 1fr 1fr 1fr;gap:44px;align-items:start}
+  .foot-logo{font-family:var(--display);font-size:1.7rem;color:var(--paper);margin-bottom:16px}
+  .foot-logo em{font-style:italic;color:var(--pink)}
+  .foot-brand p{font-size:.98rem;color:#B9A9A0;max-width:300px;margin-bottom:24px}
+  .foot-pods{display:flex;gap:12px;flex-wrap:wrap}
+  .fpod{display:inline-flex;align-items:center;gap:10px;font-family:var(--body);font-weight:700;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;padding:12px 22px;border-radius:60px;text-decoration:none;transition:transform .2s,background .2s,color .2s}
+  .fpod .d{width:9px;height:9px;border-radius:50%}
+  .fpod.apple{background:var(--paper);color:var(--ink)}
+  .fpod.apple .d{background:var(--pink)}
+  .fpod.apple:hover{background:var(--pink);color:var(--paper);transform:translateY(-2px)}
+  .fpod.spotify{background:transparent;color:var(--paper);border:1px solid var(--paper)}
+  .fpod.spotify .d{background:#1DB954}
+  .fpod.spotify:hover{background:var(--paper);color:var(--ink);transform:translateY(-2px)}
+  .foot-col h4{font-family:var(--body);font-weight:700;font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;color:var(--paper);margin-bottom:20px}
+  .foot-col ul{list-style:none}
+  .foot-col li{margin-bottom:13px}
+  .foot-col a{font-size:.92rem;color:#B9A9A0;text-decoration:none;transition:color .2s}
+  .foot-col a:hover{color:var(--pink)}
+  .foot-bottom{text-align:center;font-family:'Ephesis',cursive;font-size:1.8rem;color:var(--gold);padding-top:34px;margin-top:50px;border-top:1px solid rgba(251,246,238,.12)}
+  .foot-copy{text-align:center;font-size:.78rem;color:#8d7f77;margin-top:18px}
+  @media (max-width:980px){.foot-grid{grid-template-columns:1fr 1fr}}
+  @media (max-width:640px){.foot-grid{grid-template-columns:1fr;gap:36px}}
 
-  /* 2027 layer: loader, progress, decor */
-  a.logo{text-decoration:none;color:inherit}
+  /* loader + 2027 layer */
   #pageLoader{position:fixed;inset:0;background:#FBF6EE;z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;transition:opacity .55s ease,visibility .55s}
   #pageLoader.done{opacity:0;visibility:hidden;pointer-events:none}
   .l-note{font-family:'Ephesis',cursive;font-size:1.9rem;color:#A93F63}
@@ -180,139 +114,122 @@
   @keyframes ltype{0%,8%{transform:scaleX(0)}48%,72%{transform:scaleX(1)}100%{transform:scaleX(0)}}
   .l-svg .l-arm{animation:ltap .3s ease-in-out infinite alternate;transform-origin:58px 74px}
   @keyframes ltap{from{transform:rotate(-1deg)}to{transform:rotate(5deg)}}
-  .l-svg .l-glow{animation:lglow 1.3s ease-in-out infinite}
-  @keyframes lglow{0%,100%{opacity:.25}50%{opacity:.6}}
   .scrollprog{position:fixed;top:0;left:0;width:100%;height:3px;z-index:998;pointer-events:none}
   .scrollprog i{display:block;height:100%;width:0;background:linear-gradient(90deg,#A93F63,#BC8A47)}
-  .deco-star{position:fixed;z-index:5;font-size:1.5rem;color:#A93F63;opacity:.3;pointer-events:none;animation:dspin 16s linear infinite}
-  .deco-star.s1{top:16%;left:2.5%}
-  .deco-star.s2{bottom:12%;right:3%;color:#BC8A47;animation-duration:22s}
-  @keyframes dspin{to{transform:rotate(360deg)}}
-  .hand-note{font-family:'Ephesis',cursive;font-size:1.8rem;color:#A93F63;margin:6px 0 14px;line-height:1.2}
-  .btn:hover{box-shadow:0 12px 26px -12px rgba(169,63,99,.55)}
-  @media (max-width:700px){.deco-star{display:none}}
-  @media (prefers-reduced-motion:reduce){#pageLoader{display:none}.l-svg .tline,.l-svg .l-arm,.l-svg .l-glow,.l-dots i,.deco-star{animation:none}}
-
-  .cmpcards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1040px;margin:0 auto}
-  .cmp{background:#fff;border:1px solid var(--ink);border-radius:22px;padding:32px 28px;display:flex;flex-direction:column}
-  .cmp:nth-child(1){box-shadow:0 26px 50px -26px rgba(46,31,39,.38)}
-  .cmp.feat{box-shadow:0 26px 50px -26px rgba(46,31,39,.38)}
-  .cmp:nth-child(3){box-shadow:0 26px 50px -26px rgba(46,31,39,.38)}
-  .cmp h3{font-size:1.4rem;margin-bottom:2px}
-  .cmp .cprice{font-family:var(--display);font-weight:600;font-size:1.15rem;color:var(--pink);margin-bottom:14px}
-  .cmp ul{list-style:none;margin:0 0 22px;flex:1}
-  .cmp li{display:flex;justify-content:space-between;gap:14px;padding:9px 0;border-bottom:1px solid rgba(46,31,39,.1);font-size:.93rem}
-  .cmp li:last-child{border-bottom:none}
-  .cmp li b{font-weight:700;white-space:nowrap}
-  .cmp li span{text-align:right;color:var(--muted)}
-  .cmp .btn{width:100%}
-  @media (max-width:880px){.cmpcards{grid-template-columns:1fr;gap:26px}}
-
-  /* work-with-me layer */
-  .wwm-fab{position:fixed;right:22px;bottom:22px;z-index:95;font-family:'Karla',system-ui,sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;background:#A93F63;color:#FBF6EE;padding:15px 24px;border-radius:60px;text-decoration:none;box-shadow:0 16px 32px -12px rgba(124,43,72,.65);display:inline-flex;gap:8px;align-items:center;transition:transform .25s ease,box-shadow .25s ease}
-  .wwm-fab:hover{transform:translateY(-3px) scale(1.04);box-shadow:0 20px 38px -12px rgba(124,43,72,.75)}
-  .wwm-fab .hh{color:#F0DCE2}
-  .wwm-band{text-align:center;padding:74px 0;background:#F4EBDE}
-  .wwm-band .hand-note2{font-family:'Ephesis',cursive;font-size:2.3rem;color:#A93F63;margin-bottom:16px;line-height:1.2}
-  .wwm-btn{display:inline-flex;align-items:center;gap:10px;font-family:'Karla',system-ui,sans-serif;font-weight:700;font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;padding:19px 40px;border-radius:60px;text-decoration:none;background:#2E1F27;color:#FBF6EE;border:1px solid #2E1F27;transition:background .25s,transform .25s,box-shadow .25s}
-  .wwm-btn:hover{background:#A93F63;border-color:#A93F63;transform:translateY(-3px);box-shadow:0 14px 26px -14px rgba(124,43,72,.6)}
-  @media (max-width:600px){.wwm-fab{right:14px;bottom:14px;padding:13px 19px}}
-
-  /* hand-drawn collateral */
-  .sq{display:block;margin:0 auto 10px}
-  .doodle-arrow{vertical-align:middle;margin-left:8px;transform:rotate(14deg)}
-  .u-doodle{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 12' preserveAspectRatio='none'%3E%3Cpath d='M3 9 Q 30 3 60 8 T 117 7' fill='none' stroke='%23A93F63' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:0 100%;background-size:100% .3em;padding-bottom:.16em}
-  .sec-ink .u-doodle,.sec-pink .u-doodle{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 12' preserveAspectRatio='none'%3E%3Cpath d='M3 9 Q 30 3 60 8 T 117 7' fill='none' stroke='%23BC8A47' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E")}
-  /* photo trio bands */
-  .trio-sec{padding:24px 0 70px}
-  .trio-cap{text-align:center;font-family:'Ephesis',cursive;font-size:1.9rem;color:#A93F63;margin-bottom:22px}
-  .trio{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:1020px;margin:0 auto}
-  .tph{position:relative;border:1px solid #2E1F27;border-radius:140px 140px 16px 16px;overflow:hidden;aspect-ratio:3/3.7;box-shadow:0 26px 50px -26px rgba(46,31,39,.38)}
-  .tph:nth-child(2){border-radius:16px;box-shadow:0 26px 50px -26px rgba(46,31,39,.38);transform:translateY(16px)}
-  .tph:nth-child(3){box-shadow:0 26px 50px -26px rgba(46,31,39,.38)}
-  .tph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
-  .tph:hover img{transform:scale(1.05)}
-  @media (max-width:880px){.trio{grid-template-columns:1fr 1fr;max-width:520px}.tph:nth-child(3){display:none}.tph:nth-child(2){transform:none}}
-
-  /* powerhouse polish: refined borders, soft shadows, elegant highlight */
-  .mark{white-space:normal}
-  .mark.pink{background:none !important;color:var(--ink) !important;padding:0 !important}
-  .mark.pink::before{content:'' !important;position:absolute;z-index:-1;left:-.05em !important;right:-.05em !important;top:auto !important;bottom:.05em !important;height:.42em !important;background:var(--lilac) !important;opacity:1;transform:skewX(-6deg)}
-  .hero-media{position:relative}
-  .hero-media .imgph{border-radius:46vw 46vw 20px 20px;box-shadow:0 34px 64px -30px rgba(46,31,39,.45)}
-  .cred-photo{border-radius:46vw 46vw 20px 20px}
-  @media (min-width:981px){
-    .hero-media::after{content:'';position:absolute;inset:-14px 14px 14px -14px;border:1px solid var(--pink);border-radius:46vw 46vw 20px 20px;pointer-events:none}
-  }
-  .tcard,.inc,.get,.crit,.bubble{border-color:rgba(46,31,39,.16)}
-  .faq-list details{border-color:rgba(46,31,39,.18)}
-  nav{box-shadow:0 8px 24px -18px rgba(46,31,39,.2)}
-  .tph{border-width:1px}
-
-  /* ==== sitewide standard nav (matches homepage) ==== */
-  nav{position:sticky;top:0;z-index:90;background:rgba(251,246,238,.9);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(46,31,39,.12);box-shadow:none;transition:box-shadow .3s}
-  nav.scrolled{box-shadow:0 10px 30px -18px rgba(46,31,39,.25)}
-  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:82px}
-  a.logo,.logo{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:1.32rem;letter-spacing:-.01em;text-decoration:none;color:#2E1F27}
-  .logo em{font-style:italic;color:#A93F63}
-  .nav-links{display:flex;gap:30px;list-style:none;align-items:center}
-  .nav-links a{font-family:'Karla',sans-serif;font-weight:700;font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;color:#2E1F27;transition:color .2s}
-  .nav-links a:hover{color:#A93F63}
-  .nav-cta{font-family:'Karla',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;color:#2E1F27;background:transparent;border:1px solid #2E1F27;padding:12px 24px;border-radius:60px;transition:background .25s,color .25s}
-  .nav-cta:hover{background:#2E1F27;color:#FBF6EE}
-  .burger{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:6px;padding:6px}
-  .burger i{display:block;width:26px;height:2px;border-radius:2px;background:#2E1F27}
-  .mobile-menu{display:none;position:fixed;inset:0;background:#FBF6EE;z-index:100;padding:110px 34px 40px;flex-direction:column;gap:24px;overflow-y:auto}
-  .mobile-menu.open{display:flex}
-  .mobile-menu a{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:1.6rem;text-decoration:none;color:#2E1F27}
-  .mobile-menu a:hover{color:#A93F63;font-style:italic}
-  .mobile-close{position:absolute;top:24px;right:26px;background:none;border:none;font-size:2.2rem;line-height:1;cursor:pointer;color:#2E1F27}
-  @media (max-width:920px){.nav-links,.nav-cta{display:none}.burger{display:flex}}
-
-  /* ==== sitewide standard footer (matches homepage) ==== */
-  footer{background:#2E1F27;color:#B9A9A0;border-top:1px solid rgba(251,246,238,.14);padding:70px 0 40px;overflow:hidden;text-align:left}
-  footer .wrap{max-width:1160px;margin:0 auto;padding:0 30px}
-  .foot-word{font-family:'Fraunces',Georgia,serif;font-style:italic;font-size:clamp(3rem,9.5vw,8.4rem);color:transparent;-webkit-text-stroke:1px rgba(251,246,238,.35);text-align:center;line-height:1;white-space:nowrap;margin-bottom:64px;user-select:none}
-  .foot-grid{display:grid;grid-template-columns:1.35fr 1fr 1fr 1fr;gap:44px;align-items:start;margin-bottom:0}
-  .foot-logo{font-family:'Fraunces',Georgia,serif;font-size:1.7rem;color:#FBF6EE;margin-bottom:16px}
-  .foot-logo em{font-style:italic;color:#A93F63}
-  .foot-brand p{font-size:.98rem;color:#B9A9A0;max-width:300px;margin-bottom:24px}
-  .foot-pods{display:flex;gap:12px;flex-wrap:wrap}
-  .fpod{display:inline-flex;align-items:center;gap:10px;font-family:'Karla',sans-serif;font-weight:700;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;padding:12px 22px;border-radius:60px;text-decoration:none;transition:transform .2s,background .2s,color .2s,border-color .2s}
-  .fpod .d{width:9px;height:9px;border-radius:50%}
-  .fpod.apple{background:#FBF6EE;color:#2E1F27}
-  .fpod.apple .d{background:#A93F63}
-  .fpod.apple:hover{background:#A93F63;color:#FBF6EE;transform:translateY(-2px)}
-  .fpod.spotify{background:transparent;color:#FBF6EE;border:1px solid #FBF6EE}
-  .fpod.spotify .d{background:#1DB954}
-  .fpod.spotify:hover{background:#FBF6EE;color:#2E1F27;transform:translateY(-2px)}
-  .foot-col h4{font-family:'Karla',sans-serif;font-weight:700;font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;color:#FBF6EE;margin-bottom:20px}
-  .foot-col ul{list-style:none;margin:0;padding:0}
-  .foot-col li{margin-bottom:13px}
-  .foot-col a{font-size:.92rem;color:#B9A9A0;text-decoration:none;transition:color .2s}
-  .foot-col a:hover{color:#A93F63}
-  .foot-bottom{text-align:center;font-family:'Ephesis',cursive;font-size:1.8rem;color:#BC8A47;padding-top:34px;margin-top:50px;border-top:1px solid rgba(251,246,238,.12)}
-  .foot-copy{text-align:center;font-size:.78rem;color:#8d7f77;margin-top:18px}
-  @media (max-width:980px){.foot-grid{grid-template-columns:1fr 1fr}}
-  @media (max-width:640px){.foot-grid{grid-template-columns:1fr;gap:36px}}
-
-  /* ==== interactive layer: scroll reveals + back to top ==== */
-  .rv{opacity:0;transform:translateY(26px);transition:opacity .8s cubic-bezier(.2,.6,.2,1),transform .8s cubic-bezier(.2,.6,.2,1)}
-  .rv.in{opacity:1;transform:none}
-  @media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
-  @media print{.rv{opacity:1 !important;transform:none !important}}
+  .wwm-fab{position:fixed;right:22px;bottom:22px;z-index:95;font-family:'Karla',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;background:#A93F63;color:#FBF6EE;padding:15px 24px;border-radius:60px;text-decoration:none;box-shadow:0 16px 32px -12px rgba(124,43,72,.65);transition:transform .25s}
+  .wwm-fab:hover{transform:translateY(-3px) scale(1.04)}
   .backtop{position:fixed;left:22px;bottom:22px;z-index:94;width:52px;height:52px;border-radius:50%;background:#FBF6EE;color:#2E1F27;border:1px solid #2E1F27;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.15rem;box-shadow:0 14px 28px -14px rgba(46,31,39,.5);opacity:0;visibility:hidden;transform:translateY(12px);transition:opacity .3s,transform .3s,visibility .3s,background .2s,color .2s}
   .backtop.show{opacity:1;visibility:visible;transform:none}
   .backtop:hover{background:#A93F63;color:#FBF6EE;border-color:#A93F63}
+  .rv{opacity:0;transform:translateY(26px);transition:opacity .8s cubic-bezier(.2,.6,.2,1),transform .8s cubic-bezier(.2,.6,.2,1)}
+  .rv.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){#pageLoader{display:none}.l-svg .tline,.l-svg .l-arm,.l-dots i{animation:none}.rv{opacity:1;transform:none;transition:none}}
+
+  /* hero */
+  .hero{padding:88px 0 90px;overflow:hidden}
+  .hero-grid{display:grid;grid-template-columns:1.12fr .88fr;gap:64px;align-items:center}
+  .hero h1{font-size:clamp(2.5rem,5.4vw,4.1rem);margin:14px 0 22px}
+  .hero h1 em{color:var(--pink)}
+  .hero .sub{max-width:560px;font-size:1.12rem;margin-bottom:30px}
+  .hero-cta{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+  .proofbar{display:flex;gap:10px;flex-wrap:wrap;margin-top:30px}
+  .proofbar span{font-weight:700;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;background:#fff;border:1px solid rgba(46,31,39,.2);border-radius:60px;padding:9px 16px}
+  .hero-media{position:relative;max-width:430px;margin:0 auto}
+  .hero-media .ph{position:relative;border-radius:46vw 46vw 20px 20px;overflow:hidden;border:1px solid rgba(46,31,39,.3);box-shadow:0 34px 64px -30px rgba(46,31,39,.45);aspect-ratio:3/3.6}
+  .hero-media .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  @media (min-width:981px){.hero-media::after{content:'';position:absolute;inset:-14px 14px 14px -14px;border:1px solid var(--pink);border-radius:46vw 46vw 20px 20px;pointer-events:none}}
+
+  /* cards & misc */
+  .cardgrid{display:grid;gap:22px}
+  .g2{grid-template-columns:1fr 1fr}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .card{background:#fff;border:1px solid rgba(46,31,39,.16);border-radius:22px;padding:32px;box-shadow:0 26px 50px -26px rgba(46,31,39,.38)}
+  .card h3{font-size:1.25rem;margin-bottom:10px}
+  .card p{color:var(--muted);font-size:.97rem}
+  .card .btn{margin-top:18px}
+  .icircle{width:52px;height:52px;border-radius:50%;background:var(--blush);border:1px solid var(--ink);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-style:italic;font-size:1.2rem;color:var(--purple);margin-bottom:16px}
+
+  /* comparison table */
+  .cmp{max-width:900px;margin:0 auto;border:1px solid rgba(46,31,39,.2);border-radius:22px;overflow:hidden;background:#fff;box-shadow:0 26px 50px -26px rgba(46,31,39,.38)}
+  .cmp .row{display:grid;grid-template-columns:1fr 1fr}
+  .cmp .row>div{padding:18px 26px;font-size:.98rem;border-top:1px solid rgba(46,31,39,.12)}
+  .cmp .row>div:first-child{border-right:1px solid rgba(46,31,39,.12);color:var(--muted)}
+  .cmp .row.head>div{border-top:none;background:var(--tint);font-weight:700;font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink)}
+  .cmp .row.head>div:last-child{background:var(--pink);color:#fff}
+  .cmp .row>div:last-child{font-weight:600}
+  @media (max-width:640px){.cmp .row>div{padding:14px 16px;font-size:.88rem}}
+
+  /* lists */
+  .yn{display:grid;grid-template-columns:1fr 1fr;gap:22px;max-width:960px;margin:0 auto}
+  .yn .card ul{list-style:none;margin-top:6px}
+  .yn .card li{padding-left:30px;position:relative;margin-bottom:12px;font-size:.98rem}
+  .yn .card.yes li::before{content:'\2713';position:absolute;left:0;top:0;width:20px;height:20px;border-radius:50%;background:var(--pink);color:#fff;font-size:.66rem;display:flex;align-items:center;justify-content:center}
+  .yn .card.no li::before{content:'\00d7';position:absolute;left:0;top:0;width:20px;height:20px;border-radius:50%;background:var(--tint);border:1px solid rgba(46,31,39,.3);color:var(--muted);font-size:.8rem;display:flex;align-items:center;justify-content:center}
+
+  /* FAQ accordion */
+  .faq{max-width:760px;margin:0 auto}
+  .faq details{background:#fff;border:1px solid rgba(46,31,39,.18);border-radius:16px;margin-bottom:14px;overflow:hidden}
+  .faq summary{list-style:none;cursor:pointer;padding:22px 26px;font-weight:700;font-size:1.02rem;display:flex;justify-content:space-between;align-items:center;gap:16px}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{content:'+';font-family:var(--display);font-size:1.5rem;color:var(--pink);transition:transform .25s;flex-shrink:0}
+  .faq details[open] summary::after{transform:rotate(45deg)}
+  .faq .a{padding:0 26px 24px;color:var(--muted);font-size:.99rem}
+
+  /* video testimonials */
+  .vidband .vgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:1020px;margin:0 auto}
+  .vidband .vgrid.v2{grid-template-columns:repeat(2,1fr);max-width:720px}
+  .vidband .vgrid.v1{grid-template-columns:1fr;max-width:560px}
+  .vcard{background:#fff;border:1px solid rgba(46,31,39,.16);border-radius:20px;overflow:hidden;box-shadow:0 26px 50px -26px rgba(46,31,39,.38)}
+  .sec-ink .vcard{background:rgba(251,246,238,.06);border-color:rgba(251,246,238,.25);box-shadow:none}
+  .vcard .vframe{position:relative;aspect-ratio:16/9;background:#000}
+  .vcard .vframe iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .vcard .vname{padding:14px 20px;display:flex;align-items:center;gap:10px;font-weight:700;font-size:.86rem}
+  .vcard .vname .st{color:var(--gold);letter-spacing:2px}
+  .sec-ink .vcard .vname{color:var(--paper)}
+
+  /* CTA band */
+  .ctaband{background:var(--ink);color:var(--paper);text-align:center;padding:84px 0}
+  .ctaband h2{font-size:clamp(2rem,5vw,3.2rem);margin:12px 0 14px}
+  .ctaband h2 em{color:var(--blush)}
+  .ctaband p{color:#D8CBC3;max-width:560px;margin:0 auto 30px}
+  .ctaband .hand-note{color:var(--gold)}
+
+  /* forms */
+  .f-form{display:flex;gap:12px;max-width:520px;flex-wrap:wrap}
+  .f-form input[type=email],.f-form input[type=text]{flex:1;min-width:220px;border:1px solid var(--ink);border-radius:60px;padding:16px 24px;font-family:var(--body);font-size:1rem;background:#fff;color:var(--ink)}
+  .f-form input:focus{outline:none;box-shadow:0 0 0 3px var(--blush)}
+  .bigform{max-width:640px;margin:0 auto}
+  .bigform label{display:block;font-weight:700;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--purple);margin:0 0 8px}
+  .bigform input,.bigform textarea{width:100%;border:1px solid rgba(46,31,39,.4);border-radius:16px;background:#fff;padding:15px 18px;font-family:var(--body);font-size:1rem;color:var(--ink);margin-bottom:20px}
+  .bigform textarea{min-height:150px;resize:vertical}
+  .bigform input:focus,.bigform textarea:focus{outline:none;box-shadow:0 0 0 3px var(--blush);border-color:var(--pink)}
+
+  .squig{display:block;margin:0 auto}
+  .steps{max-width:820px;margin:0 auto;display:grid;gap:20px}
+  .step{display:grid;grid-template-columns:74px 1fr;gap:22px;align-items:start;background:#fff;border:1px solid rgba(46,31,39,.16);border-radius:20px;padding:28px;box-shadow:0 26px 50px -26px rgba(46,31,39,.38)}
+  .step .n{font-family:var(--display);font-style:italic;font-size:2.2rem;color:var(--pink);line-height:1}
+  .step h3{font-size:1.2rem;margin-bottom:6px}
+  .step p{color:var(--muted);font-size:.98rem}
+
+  @media (max-width:980px){
+    .hero-grid{grid-template-columns:1fr;gap:50px}
+    .hero-media{max-width:380px}
+    .g3{grid-template-columns:1fr}
+    .g2{grid-template-columns:1fr}
+    .yn{grid-template-columns:1fr}
+    .vidband .vgrid,.vidband .vgrid.v2{grid-template-columns:1fr;max-width:560px}
+  }
+  @media (max-width:640px){
+    section{padding:62px 0}
+    .btn{width:100%}
+    .hero{padding:56px 0 64px}
+  }
 </style>
 </head>
 <body>
-
-<a href="/blog-launch-lab" class="wwm-fab">Work With Me <span class="hh">&hearts;</span></a>
 <div id="pageLoader" aria-hidden="true">
   <svg class="l-svg" viewBox="0 0 170 120" width="170" height="120" fill="none">
     <rect x="12" y="98" width="146" height="6" rx="3" fill="#2E1F27"/>
-    <rect class="l-glow" x="86" y="44" width="52" height="40" rx="6" fill="#F0DCE2"/>
     <rect x="90" y="48" width="44" height="32" rx="3" fill="#2E1F27"/>
     <rect x="92.5" y="50.5" width="39" height="27" rx="2" fill="#FBF6EE"/>
     <rect class="tline t1" x="97" y="56" width="22" height="3" rx="1.5" fill="#A93F63"/>
@@ -329,15 +246,14 @@
   <div class="l-dots"><i></i><i></i><i></i></div>
 </div>
 <div class="scrollprog" aria-hidden="true"><i></i></div>
-<span class="deco-star s1" aria-hidden="true">&#10022;</span>
-<span class="deco-star s2" aria-hidden="true">&#10038;</span>
+<a href="/blog-accelerator" class="wwm-fab">Work With Me &hearts;</a>
 <nav id="nav">
   <div class="wrap nav-inner">
     <a class="logo" href="/">Boss Lady <em>Bloggers</em></a>
     <ul class="nav-links">
       <li><a href="/about">About</a></li>
+      <li><a href="/blog-accelerator">The Program</a></li>
       <li><a href="/blog-coaching">Blog Coaching</a></li>
-      <li><a href="/membership">Membership</a></li>
       <li><a href="/blog">Blog</a></li>
       <li><a href="/podcast">Podcast</a></li>
       <li><a href="/freebies">Freebies</a></li>
@@ -349,211 +265,103 @@
 <div class="mobile-menu" id="mobileMenu">
   <button class="mobile-close" id="mobileClose" aria-label="Close menu">&times;</button>
   <a href="/about">About</a>
+  <a href="/blog-accelerator">The Program</a>
   <a href="/blog-coaching">Blog Coaching</a>
   <a href="/membership">Membership</a>
   <a href="/blog">Blog</a>
   <a href="/podcast">Podcast</a>
   <a href="/freebies">Freebies</a>
-  <a href="/blog-launch-lab" style="color:#A93F63">Work With Me &rarr;</a>
-  <a href="/book-a-call" style="color:#7C2B48">Book a Free Call &rarr;</a>
+  <a href="/book-a-call" style="color:#A93F63">Book a Free Call &rarr;</a>
 </div>
 
-
-
-<!-- HERO -->
-<header class="hero">
-  <div class="wrap">
-    <span class="eyebrow">Start here</span>
-    <h1>Not sure where to start? <span class="mark pink">Start here.</span></h1>
-      <div class="hand-note">pick your path, babe <svg class="doodle-arrow" viewBox="0 0 60 60" width="42" height="42" aria-hidden="true"><path d="M8 6 C 30 14 40 30 42 50 M42 50 L 32 42 M42 50 L 50 38" fill="none" stroke="#BC8A47" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-    <p class="sub">Three ways to work with me, one simple page. See what each one costs, what you walk away with, and which fits exactly where you are right now. <b>No guessing, babe.</b></p>
+<header class="hero" style="padding-bottom:60px">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">New here? Start here.</span>
+      <h1>Welcome. Let me point you <em>in the right direction.</em></h1>
+      <p class="sub">I build gorgeous, business-first blogs for women who want an actual business, not a hobby that might pay off in three years. Here's where to go depending on where you are.</p>
+      <div class="hero-cta"><a href="#routes" class="btn btn-pink">Show me where to go &rarr;</a></div>
+    </div>
+    <div class="hero-media">
+      <div class="ph"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_008.jpeg" alt="Genasys welcoming you to Boss Lady Bloggers"></div>
+    </div>
   </div>
 </header>
-<section class="trio-sec"><div class="wrap"><div class="trio-cap">whichever door you pick, I've got you</div><div class="trio"><div class="tph"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_003.jpeg" alt="Behind the scenes at Boss Lady Bloggers" loading="lazy"></div><div class="tph"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_010.jpeg" alt="Behind the scenes at Boss Lady Bloggers" loading="lazy"></div><div class="tph"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_017.jpeg" alt="Behind the scenes at Boss Lady Bloggers" loading="lazy"></div></div></div></section>
 
+<section class="sec-tint">
+  <div class="wrap-n">
+    <span class="eyebrow">The two-minute version</span>
+    <h2 style="font-size:clamp(1.9rem,4.2vw,2.8rem);margin:10px 0 8px">The two-minute version of what I believe</h2>
+    <div class="hand-note">if you only read one thing on this site, read this</div>
+    <div class="prose" style="margin-top:14px">
+      <p><b>Your blog isn't your business. It's your marketing.</b> The blog is how people find you and decide they like you. Your offer is how you get paid. Build the blog without the offer and you've built a beautiful machine pointing at nothing.</p>
+      <p><b>Ads and affiliates pay pennies, and pennies need crowds.</b> Both need huge traffic before they turn into money you'd notice. Traffic is harder to build now than it's ever been. Keep affiliate links on the side if you like them. Skip ads entirely.</p>
+      <p><b>The order matters more than the effort.</b> Decide what you're selling. Write the copy that sells it. Then build the site around that copy. Almost everyone does it backwards, and that's why so many gorgeous blogs make nothing.</p>
+      <p class="big">I spent two years blogging the normal way and made zero dollars. Then I switched the order and made $4,000 in four months. <span class="mark pink">That's the whole thesis.</span></p>
+    </div>
+    <a href="/about" class="btn btn-outline" style="width:auto;margin-top:10px">Read my full story &rarr;</a>
+  </div>
+</section>
 
-<!-- PATHS -->
+<section id="routes">
+  <div class="wrap">
+    <div class="shead">
+      <span class="eyebrow">Pick your path</span>
+      <h2>So where should you go?</h2>
+    </div>
+    <div class="cardgrid g3" style="max-width:1060px;margin:0 auto">
+      <div class="card"><div class="icircle">01</div><h3>Brand new? Understand this properly first.</h3><p>Start with my free blogging courses. They'll walk you through why traffic-first blogging keeps falling flat and what to build instead. No cost, and honestly they'll save you a year.</p><a href="/freebies" class="btn btn-pink">Get the free courses &rarr;</a></div>
+      <div class="card"><div class="icircle">02</div><h3>Stuck on one specific decision?</h3><p>Book a coaching call. Bring the thing you've been going in circles on and leave with an answer. One hour, your blog, my actual opinion.</p><a href="/blog-coaching" class="btn btn-outline">See coaching packages &rarr;</a></div>
+      <div class="card"><div class="icircle">03</div><h3>Want the whole thing built with you?</h3><p>The Blog Accelerator. Your offer, messaging, brand, copy, website, and freebie built together in 21 days, plus weekly coaching.</p><a href="/blog-accelerator" class="btn btn-outline">See the program &rarr;</a></div>
+    </div>
+  </div>
+</section>
+
 <section class="sec-tint">
   <div class="wrap">
-    <div class="shead rise">
-      <span class="eyebrow" style="color:var(--pink)">Pick your vibe</span>
-      <h2>Answer this one question: where are you right now?</h2>
-      <p>Pick the line that sounds most like you. That's your next click.</p>
+    <div class="shead">
+      <span class="eyebrow">Just want to read for a while?</span>
+      <h2>Totally fine. Here's where I'd start.</h2>
+      <div class="hand-note">the posts that shift how you think, not just how-tos</div>
     </div>
-    <div class="paths">
-      <div class="path rise">
-        <span class="tag">Not ready to pay yet</span>
-        <h3>"I just want to learn first."</h3>
-        <p>Totally fine. Unlock the Free Resource Library, read the blog, or listen to the podcast. Zero cost, real value.</p>
-        <a href="#free">Start free &rarr;</a>
-      </div>
-      <div class="path rise">
-        <span class="tag">Want ongoing help, low cost</span>
-        <h3>"I want support without a big bill."</h3>
-        <p>Join the membership. $100/month gets you group coaching, courses, and a community, on repeat.</p>
-        <a href="#offers">See the membership &rarr;</a>
-      </div>
-      <div class="path rise">
-        <span class="tag">Stuck on one specific thing</span>
-        <h3>"I just need someone to talk it through."</h3>
-        <p>Book coaching by the call. Pay once, get 1:1 help, no ongoing commitment.</p>
-        <a href="#offers">See coaching calls &rarr;</a>
-      </div>
-      <div class="path rise">
-        <span class="tag">Ready to go all in</span>
-        <h3>"I want it all built for me, now."</h3>
-        <p>Blog Launch Lab. 1:1 coaching plus a custom website, done together, start to finish.</p>
-        <a href="#offers">Explore the Lab &rarr;</a>
-      </div>
+    <!-- These four posts are queued up on the blog. Genasys is writing them;
+         link each card to the post URL once it's published. -->
+    <div class="cardgrid g2" style="max-width:960px;margin:0 auto">
+      <div class="card"><span class="tagpill">Mindset shift</span><h3 style="margin-top:12px">Your Blog Isn't a Business Yet. Here's the One Thing That Makes It One.</h3><p>The difference between a blog and a blogging business, and why it changes every decision you make after it.</p><span class="micro">Coming soon on the blog</span></div>
+      <div class="card"><span class="tagpill">Design truth</span><h3 style="margin-top:12px">Why Your Gorgeous Template Isn't Converting</h3><p>What a site built to sell does differently, section by section, and why it was never about your fonts.</p><span class="micro">Coming soon on the blog</span></div>
+      <div class="card"><span class="tagpill">The math</span><h3 style="margin-top:12px">The Math Nobody Shows You: Why Ads and Affiliate Links Keep Bloggers Broke</h3><p>Real numbers on what display ads and affiliate commissions actually pay, and what to build instead.</p><span class="micro">Coming soon on the blog</span></div>
+      <div class="card"><span class="tagpill">My story</span><h3 style="margin-top:12px">I Made $0 in Two Years, Then $4,000 in Four Months. Here's What Changed.</h3><p>The full story of the order switch, with everything I'd do differently if I were starting today.</p><span class="micro">Coming soon on the blog</span></div>
     </div>
   </div>
 </section>
 
-<!-- OFFERS -->
-<section id="offers">
+<section class="vidband">
   <div class="wrap">
-    <div class="shead rise">
-      <span class="eyebrow">Three ways to work together</span>
-      <h2>Three ways to work with me. Here's exactly what each one includes.</h2>
-      <p>Same strategy behind all three. The difference is how much I do with you, and how often.</p>
+    <div class="shead">
+      <span class="eyebrow">Women who started right here</span>
+      <h2>They were new once too.</h2>
+      <div class="hand-note">press play, they said it better than I could</div>
     </div>
-    <div class="offers">
-      <div class="offer rise">
-        <span class="kind">By the call</span>
-        <h3>Blog Coaching</h3>
-        <div class="price">from $150</div>
-        <p class="blurb">Pay once, get 1:1 coaching by the call. No subscription, no long commitment. Just answers.</p>
-        <ul>
-          <li><span class="m">&check;</span> Private 1:1 calls with me</li>
-          <li><span class="m">&check;</span> Buy 1, 3, or 6 at a time</li>
-          <li><span class="m">&check;</span> A plan and recap after each</li>
-          <li><span class="m">&check;</span> Best for targeted help</li>
-        </ul>
-        <a href="/blog-coaching" class="btn btn-outline">See packages</a>
-      </div>
-
-      <div class="offer featured rise">
-        <span class="badge">Best place to start</span>
-        <span class="kind">Membership</span>
-        <h3>The Blogging Ladies</h3>
-        <div class="price">$100<small>/month</small></div>
-        <p class="blurb">One monthly price. Group coaching calls, a full course library, and a community, every month, on repeat.</p>
-        <ul>
-          <li><span class="m">&check;</span> Monthly live group coaching</li>
-          <li><span class="m">&check;</span> The full course library</li>
-          <li><span class="m">&check;</span> Community + accountability</li>
-          <li><span class="m">&check;</span> A free 1:1 kickstarter call</li>
-        </ul>
-        <a href="/membership" class="btn btn-pink">Join the membership</a>
-      </div>
-
-      <div class="offer rise">
-        <span class="badge blue">The full transformation</span>
-        <span class="kind">Done with you</span>
-        <h3>Blog Launch Lab</h3>
-        <div class="price">from $1,997</div>
-        <p class="blurb">One price, everything handled. I coach you 1:1 and build your custom website, together, start to finish.</p>
-        <ul>
-          <li><span class="m">&check;</span> 1:1 coaching, start to finish</li>
-          <li><span class="m">&check;</span> A custom blog website, built for you</li>
-          <li><span class="m">&check;</span> Brand, offer, funnel &amp; traffic plan</li>
-          <li><span class="m">&check;</span> Best for going all in</li>
-        </ul>
-        <a href="/blog-launch-lab" class="btn btn-outline">Explore the Lab</a>
-      </div>
-    </div>
+    <div class="vgrid v2"><div class="vcard"><div class="vframe"><iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/cpOFMndycg0?rel=0" title="Karen's experience" allow="autoplay; fullscreen" allowfullscreen></iframe></div><div class="vname"><span class="st">&#9733;&#9733;&#9733;&#9733;&#9733;</span> Karen</div></div><div class="vcard"><div class="vframe"><iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/uVIBdvOUaQg?rel=0" title="Kaylin's experience" allow="autoplay; fullscreen" allowfullscreen></iframe></div><div class="vname"><span class="st">&#9733;&#9733;&#9733;&#9733;&#9733;</span> Kaylin</div></div></div>
   </div>
 </section>
 
-<!-- COMPARISON -->
-<section class="sec-tint">
+<section class="ctaband">
   <div class="wrap">
-    <div class="shead rise">
-      <span class="eyebrow" style="color:var(--pink)">Side by side</span>
-      <h2>Same question, side by side: what do you get, and what does it cost?</h2>
-    </div>
-    <div class="cmpcards rise">
-      <div class="cmp">
-        <h3>Blog Coaching</h3><div class="cprice">From $150</div>
-        <ul>
-          <li><b>Format</b><span>1:1, by the call</span></li>
-          <li><b>Live coaching</b><span>Your booked calls</span></li>
-          <li><b>Course library</b><span>&ndash;</span></li>
-          <li><b>Community</b><span>&ndash;</span></li>
-          <li><b>Custom website build</b><span>&ndash;</span></li>
-          <li><b>Best for</b><span>Targeted help when stuck</span></li>
-        </ul>
-        <a href="/blog-coaching" class="btn btn-outline btn-sm">See packages</a>
-      </div>
-      <div class="cmp feat">
-        <h3>The Blogging Ladies</h3><div class="cprice">$100/month</div>
-        <ul>
-          <li><b>Format</b><span>Group + courses</span></li>
-          <li><b>Live coaching</b><span>Monthly group calls</span></li>
-          <li><b>Course library</b><span>&check; Included</span></li>
-          <li><b>Community</b><span>&check; Included</span></li>
-          <li><b>Free 1:1 kickstarter</b><span>&check; Included</span></li>
-          <li><b>Best for</b><span>Ongoing support + learning</span></li>
-        </ul>
-        <a href="/membership" class="btn btn-pink btn-sm">Join the membership</a>
-      </div>
-      <div class="cmp">
-        <h3>Blog Launch Lab</h3><div class="cprice">From $1,997</div>
-        <ul>
-          <li><b>Format</b><span>1:1, done with you</span></li>
-          <li><b>Live coaching</b><span>Throughout</span></li>
-          <li><b>Course library</b><span>Built for you</span></li>
-          <li><b>Custom website build</b><span>&check; Included</span></li>
-          <li><b>Funnel + traffic plan</b><span>&check; Included</span></li>
-          <li><b>Best for</b><span>Going all in</span></li>
-        </ul>
-        <a href="/blog-launch-lab" class="btn btn-outline btn-sm">Explore the Lab</a>
-      </div>
-    </div>
+    <span class="eyebrow">Or skip all of that</span>
+    <h2>Just <em>talk to me.</em></h2>
+    <p>Thirty minutes, free, and I'll tell you honestly what I'd do in your position, even if the answer isn't to hire me.</p>
+    <a href="/book-a-call" class="btn btn-pink" style="width:auto">Book your call &rarr;</a>
   </div>
 </section>
 
-<!-- FREE WAYS -->
-<section id="free">
-  <div class="wrap">
-    <div class="shead rise">
-      <span class="eyebrow">Start free</span>
-      <h2>Want to try before you buy anything? Start here, free.</h2>
-      <p>Four ways to get real value from me before you spend a single dollar.</p>
-    </div>
-    <div class="free">
-      <div class="fcard rise"><h3>Free Resource Library</h3><p>A whole library of free blogging courses that walk you through starting, growing, and monetizing your blog.</p><a href="/freebies">Unlock it &rarr;</a></div>
-      <div class="fcard rise"><h3>The Blog</h3><p>Free posts on traffic, monetizing, and building a blog like a real business.</p><a href="/blog">Read the blog &rarr;</a></div>
-      <div class="fcard rise"><h3>The Podcast</h3><p>Free episodes on blogging and business, easy to listen to on a walk or a drive.</p><a href="/podcast">Listen in &rarr;</a></div>
-      <div class="fcard rise"><h3>A Free Call</h3><p>Not sure what you need? Book 15 minutes with me and we'll figure it out together, no pressure.</p><a href="/book-a-call">Book a call &rarr;</a></div>
-    </div>
-  </div>
-</section>
-
-<!-- FINAL -->
-<section class="sec-ink final">
-  <div class="wrap rise">
-    <span class="eyebrow">Still can't decide?</span>
-    <h2 style="margin-top:16px">Skip the guessing. Just ask me directly.</h2>
-    <p>Book a free 15-minute call. Tell me where you're stuck, I'll tell you exactly which option fits, no pressure to buy anything.</p>
-    <a href="/book-a-call" class="btn btn-pink">Book my free call</a>
-  </div>
-</section>
-
-<section class="wwm-band">
-  <div class="wrap">
-    <svg class="sq" viewBox="0 0 220 14" width="180" height="12" aria-hidden="true"><path d="M2 8 Q 15 2 28 8 T 54 8 T 80 8 T 106 8 T 132 8 T 158 8 T 184 8 T 210 8" fill="none" stroke="#A93F63" stroke-width="3" stroke-linecap="round"/></svg>
-    <div class="hand-note2">ready when you are, babe &#10022;</div>
-    <a href="/blog-launch-lab" class="wwm-btn">Work with me &rarr;</a>
-  </div>
-</section>
 <footer>
   <div class="wrap">
     <div class="foot-word" aria-hidden="true">Boss Lady Bloggers</div>
     <div class="foot-grid">
       <div class="foot-brand">
         <div class="foot-logo">Boss <em>Lady</em> Bloggers</div>
-        <p>Blog coaching and custom website design for women who mean business.</p>
+        <p>Gorgeous, business-first blogs for women who want an actual business, not a hobby that might pay off in three years.</p>
         <div class="foot-pods">
           <a href="https://podcasts.apple.com/us/podcast/boss-lady-bloggers-start-a-blog-and-business/id1514838049" target="_blank" rel="noopener" class="fpod apple"><span class="d"></span> Apple Podcasts</a>
           <a href="https://open.spotify.com/show/104sYmQooO65IELDPNbrfv?si=9e60292cd17a4bc0&amp;nd=1&amp;dlsi=7a5d709d42984612" target="_blank" rel="noopener" class="fpod spotify"><span class="d"></span> Spotify</a>
@@ -563,17 +371,18 @@
         <h4>Explore</h4>
         <ul>
           <li><a href="/about">About</a></li>
+          <li><a href="/start-here">Start Here</a></li>
           <li><a href="/blog">Blog</a></li>
           <li><a href="/podcast">Podcast</a></li>
-          <li><a href="/freebies">Freebies</a></li>
+          <li><a href="/freebies">Free Courses</a></li>
         </ul>
       </div>
       <div class="foot-col">
         <h4>Work With Me</h4>
         <ul>
+          <li><a href="/blog-accelerator">The Blog Accelerator</a></li>
           <li><a href="/blog-coaching">Blog Coaching</a></li>
           <li><a href="/membership">Membership</a></li>
-          <li><a href="/blog-launch-lab">Blog Launch Lab</a></li>
           <li><a href="/book-a-call">Book a Free Call</a></li>
         </ul>
       </div>
@@ -587,29 +396,10 @@
         </ul>
       </div>
     </div>
-    <div class="foot-bottom">blog coaching &amp; website design for women who are done playing small</div>
+    <div class="foot-bottom">gorgeous blogs that actually make money</div>
     <div class="foot-copy">&copy; <span id="yr"></span> Boss Lady Bloggers. All rights reserved.</div>
   </div>
 </footer>
-
-<script>
-  const obs = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('seen'); obs.unobserve(e.target);} });
-  },{threshold:.1});
-  document.querySelectorAll('.rise').forEach(el=>obs.observe(el));
-</script>
-
-
-<script>
-(function(){
-  var b=document.getElementById('burger'),m=document.getElementById('mobileMenu'),c=document.getElementById('mobileClose');
-  if(b&&m){
-    b.addEventListener('click',function(){m.classList.add('open')});
-    if(c)c.addEventListener('click',function(){m.classList.remove('open')});
-    m.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){m.classList.remove('open')})});
-  }
-})();
-</script>
 <script>
 (function(){
   var l=document.getElementById('pageLoader');
@@ -620,71 +410,30 @@
   }
   var bar=document.querySelector('.scrollprog i');
   if(bar){addEventListener('scroll',function(){var h=document.documentElement.scrollHeight-innerHeight;bar.style.width=(h>0?(scrollY/h*100):0)+'%'},{passive:true});}
-  var b=document.getElementById('burger'),m=document.getElementById('mobileMenu'),c=document.getElementById('mobileClose');
-  if(b&&m&&!b.dataset.wired){b.dataset.wired='1';
-    b.addEventListener('click',function(){m.classList.add('open')});
-    if(c)c.addEventListener('click',function(){m.classList.remove('open')});
-    m.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){m.classList.remove('open')})});
-  }
-})();
-</script>
-<script>
-(function(){
-  if(window.__blbStd)return; window.__blbStd=1;
-  var nav=document.getElementById('nav')||document.querySelector('nav');
+  var nav=document.getElementById('nav');
   if(nav){addEventListener('scroll',function(){nav.classList.toggle('scrolled',scrollY>10)},{passive:true});}
   var b=document.getElementById('burger'),m=document.getElementById('mobileMenu'),c=document.getElementById('mobileClose');
-  if(b&&m&&!b.dataset.wired){b.dataset.wired='1';
-    b.addEventListener('click',function(){m.classList.add('open')});
+  if(b&&m){b.addEventListener('click',function(){m.classList.add('open')});
     if(c)c.addEventListener('click',function(){m.classList.remove('open')});
     m.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){m.classList.remove('open')})});}
   var yr=document.getElementById('yr'); if(yr)yr.textContent=new Date().getFullYear();
-
-  /* scroll reveals */
   var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
   if(!reduce&&'IntersectionObserver' in window){
-    var sel='.pcard,.fcard,.rcard,.tph,.asset,.optcard,.authcard,.feat,.tipbox,.gate-card,.tcard,.memcard,.cmpcards>*,.pillar,section h2,.shead,.pull';
-    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(el){return !el.classList.contains('rise')&&!el.closest('.rise')&&!el.closest('.tool')});
-    var io=new IntersectionObserver(function(entries){
-      entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
-    },{threshold:.12,rootMargin:'0px 0px -30px 0px'});
+    var els=[].slice.call(document.querySelectorAll('.card,.vcard,.step,.hero-media,.cmp,.faq details,section h2,.shead'));
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.12,rootMargin:'0px 0px -30px 0px'});
     els.forEach(function(el,i){
       var r=el.getBoundingClientRect();
-      if(r.top<innerHeight&&r.bottom>0){return;}
-      el.classList.add('rv');
-      el.style.transitionDelay=((i%3)*.08)+'s';
-      io.observe(el);
+      if(r.top<innerHeight&&r.bottom>0)return;
+      el.classList.add('rv');el.style.transitionDelay=((i%3)*.08)+'s';io.observe(el);
     });
   }
-
-  /* animated number count-up (homepage stats etc.) */
-  if(!reduce&&'IntersectionObserver' in window){
-    var nums=[].slice.call(document.querySelectorAll('.stat .n'));
-    var io2=new IntersectionObserver(function(entries){
-      entries.forEach(function(e){
-        if(!e.isIntersecting)return; io2.unobserve(e.target);
-        var el=e.target,orig=el.innerHTML,mtc=(el.textContent||'').match(/\d[\d,]*/);
-        if(!mtc)return;
-        var target=parseInt(mtc[0].replace(/,/g,''),10); if(!target||target>100000)return;
-        var t0=null;
-        function step(ts){
-          if(!t0)t0=ts; var p=Math.min((ts-t0)/1200,1); var ease=1-Math.pow(1-p,3);
-          el.innerHTML=orig.replace(mtc[0],Math.round(target*ease).toLocaleString());
-          if(p<1)requestAnimationFrame(step);
-        }
-        requestAnimationFrame(step);
-      });
-    },{threshold:.5});
-    nums.forEach(function(n){io2.observe(n)});
-  }
-
-  /* back to top */
   var bt=document.createElement('button');
-  bt.className='backtop'; bt.setAttribute('aria-label','Back to top'); bt.innerHTML='&uarr;';
+  bt.className='backtop';bt.setAttribute('aria-label','Back to top');bt.innerHTML='&uarr;';
   document.body.appendChild(bt);
   bt.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})});
   addEventListener('scroll',function(){bt.classList.toggle('show',scrollY>600)},{passive:true});
 })();
 </script>
+
 </body>
 </html>

@@ -1,0 +1,82 @@
+==========================================================
+BOSS LADY BLOGGERS - AUTOMATED EMAILS
+Set these up in your email tool. Fill anything in [brackets].
+==========================================================
+
+----------------------------------------------------------
+EMAIL 1: CONTACT FORM AUTO-RESPONSE
+----------------------------------------------------------
+Subject: Got your message
+
+Hi [name],
+
+Your message landed with me. I read every one of these myself,
+which means it isn't instant, but it does mean you'll get a real
+answer from an actual person rather than a support ticket.
+
+Give me a couple of business days.
+
+If your question is about working together, you'll get further
+faster by booking a call. Thirty minutes, free, and you'll have
+answers today rather than Thursday.
+
+[Book a call -> https://calendly.com/bossladybloggers/15min]
+
+And if you haven't got them yet, the free blogging courses are
+here. They cover most of what women ask me about.
+
+[Get the free courses -> yoursite.com/freebies]
+
+Talk soon,
+Genasys
+
+----------------------------------------------------------
+EMAIL 2: DISCOVERY CALL PREP (fires on booking)
+----------------------------------------------------------
+Subject: You're booked. Here's how to get the most out of it.
+
+Hi [name],
+
+We're on for [date and time]. Here's your link: [Zoom link]
+
+Nothing formal to prepare, but the calls that go best are the
+ones where you turn up with three things in your head:
+
+1. Your blog URL. Send it back to me in reply to this email if
+   you have one and I'll take a look before we talk. Twenty
+   minutes of prep on my end means twenty more useful minutes
+   on yours.
+
+2. What you'd like to sell. Even if it's vague. Even if it's
+   three competing ideas and you hate all of them. Vague is
+   fine. Vague is workable.
+
+3. The one question you most want answered. If you got nothing
+   else out of the call, what would you want to walk away
+   knowing?
+
+Here's what the call is: thirty minutes (sometimes closer to an
+hour if we're rolling) where you talk, I ask questions, and then
+I tell you what I'd actually do. Sometimes that's working
+together. Sometimes it's something you can go and do yourself
+for free. Either way you'll leave with a direction.
+
+Here's what it isn't: a pitch. There's no slide deck and no
+deadline pricing. If it's not a fit I'll say so first so you
+don't have to.
+
+If something comes up, reschedule here: [reschedule link].
+Life happens.
+
+See you [day],
+Genasys
+
+P.S. If you haven't started the free courses yet, no need before
+the call. But if you have, come with whatever they made you
+think about.
+
+----------------------------------------------------------
+ALSO ADD: the library password (blogbabe) at the TOP of your
+freebie delivery email. A lot of people close the thank-you tab
+immediately.
+----------------------------------------------------------
