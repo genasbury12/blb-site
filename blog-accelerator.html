@@ -323,6 +323,40 @@
   #confetti{position:fixed;inset:0;pointer-events:none;z-index:98}
 
   @media (prefers-reduced-motion:reduce){.ann-track,.shimmer{animation:none}}
+
+  /* dream / gap / order redesign */
+  .dreamgrid{display:grid;grid-template-columns:1.05fr .95fr;gap:60px;align-items:center}
+  .dreamvis{position:relative;max-width:430px;margin:0 auto;width:100%}
+  .ph-arch{position:relative;border-radius:46vw 46vw 20px 20px;overflow:hidden;border:1px solid rgba(46,31,39,.3);box-shadow:0 34px 64px -30px rgba(46,31,39,.45);aspect-ratio:3/3.6}
+  .ph-arch img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .pinkframe{border-radius:46vw 46vw 20px 20px}
+  .gapvis{position:relative;width:100%;max-width:400px;margin:0 auto}
+  @media (min-width:981px){.gapvis::after{content:'';position:absolute;inset:-14px 14px 14px -14px;border:1px solid var(--pink);border-radius:46vw 46vw 20px 20px;pointer-events:none}}
+  .bubble-say{position:absolute;top:-18px;left:-26px;z-index:6;background:#fff;border:1px solid var(--ink);border-radius:18px 18px 18px 4px;padding:12px 18px;font-family:var(--display);font-style:italic;font-size:1.05rem;box-shadow:0 14px 28px -14px rgba(46,31,39,.4);transform:rotate(-4deg)}
+  .bubble-say em{color:var(--pink)}
+  .notifcard{position:absolute;bottom:26px;left:-40px;right:auto;z-index:6;display:flex;gap:12px;align-items:center;background:rgba(255,255,255,.96);border:1px solid rgba(46,31,39,.2);border-radius:18px;padding:14px 18px;box-shadow:0 22px 44px -18px rgba(46,31,39,.5);max-width:320px}
+  .notifcard .nicon{width:40px;height:40px;border-radius:12px;background:var(--blush);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
+  .notifcard .ntitle{font-weight:700;font-size:.88rem}
+  .notifcard .nsub{font-size:.78rem;color:var(--muted)}
+  .notifcard .ntime{font-size:.68rem;color:var(--muted);align-self:flex-start;white-space:nowrap}
+  .gapgrid{display:grid;grid-template-columns:.85fr 1.15fr;gap:64px;align-items:center}
+  .gapquote{position:relative;background:var(--blush);border-radius:20px;padding:26px 30px 24px 58px;margin-bottom:26px}
+  .gapquote p{font-family:var(--display);font-style:italic;font-size:clamp(1.2rem,2.4vw,1.6rem);line-height:1.4;color:var(--purple);margin:0}
+  .gq-mark{position:absolute;top:2px;left:16px;font-family:var(--display);font-size:3.4rem;line-height:1;color:var(--pink)}
+  .chainrow{max-width:760px;margin:0 auto 22px}
+  .chainlabel{font-weight:700;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:12px}
+  .chainlabel.bad{color:#B9A9A0}
+  .chainlabel.good{color:var(--gold)}
+  .chain{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}
+  .chain i{font-style:normal;color:rgba(251,246,238,.5)}
+  .chip-x{background:rgba(251,246,238,.07);border:1px solid rgba(251,246,238,.25);color:#B9A9A0;border-radius:60px;padding:10px 20px;font-size:.88rem;text-decoration:line-through;text-decoration-color:rgba(185,169,160,.7)}
+  .chip-ok{background:var(--pink);border:1px solid var(--pink);color:#fff;border-radius:60px;padding:12px 22px;font-weight:700;font-size:.9rem;box-shadow:0 14px 28px -14px rgba(169,63,99,.7)}
+  @media (max-width:980px){
+    .dreamgrid,.gapgrid{grid-template-columns:1fr;gap:48px}
+    .gapvis{order:-1}
+    .notifcard{left:0}
+    .bubble-say{left:0}
+  }
 </style>
 </head>
 <body>
@@ -416,48 +450,80 @@
 
 <div class="wave" aria-hidden="true"><svg viewBox="0 0 1440 60" preserveAspectRatio="none"><path d="M0 34 C 240 62 480 6 720 24 C 960 42 1200 12 1440 32 L1440 60 L0 60 Z" fill="#F4EBDE"/></svg></div>
 <section class="sec-tint">
-  <div class="wrap-n">
-    <span class="eyebrow">The dream</span>
-    <h2 style="font-size:clamp(1.9rem,4.4vw,2.9rem);margin:10px 0 8px">Picture the day your site goes live.</h2>
-    <div class="prose" style="margin-top:16px">
-      <p>You type in your own URL. The page loads.</p>
-      <p>And it's <em>stunning.</em> The colors are exactly right. The fonts feel like you. Every section flows into the next like somebody thought about it, because somebody did. You scroll to the bottom and then you scroll back up again just to look at it one more time.</p>
-      <p>You send the link to your sister. To your group chat. To the friend who's been politely nodding at your blog for a year. And you send it without adding "ignore the header, I'm still fixing it."</p>
-      <p>Someone replies: <em>wait, YOU made this?</em></p>
-      <p>Then a woman you've never met lands on your homepage. She reads your headline and something in her chest goes <em>oh.</em> She keeps scrolling. She reads your story and feels like you've been reading her diary. She gets to the bottom, and she doesn't leave.</p>
-      <p class="big"><b>She buys.</b></p>
-      <p>At 9pm on a Tuesday, while you're on the couch, your phone lights up with a notification for something you made.</p>
-      <p>That's the day. That's what we're building toward, and it's <span class="mark pink">21 days out.</span></p>
+  <div class="wrap dreamgrid">
+    <div>
+      <span class="eyebrow">The dream</span>
+      <h2 style="font-size:clamp(1.9rem,4.4vw,2.9rem);margin:10px 0 8px">Picture the day your site goes live.</h2>
+      <div class="hand-note">close your eyes. okay, now scroll.</div>
+      <div class="prose" style="max-width:none;margin-top:14px">
+        <p>You type in your own URL. The page loads.</p>
+        <p>And it's <em>stunning.</em> The colors are exactly right. The fonts feel like you. Every section flows into the next like somebody thought about it, because somebody did. You scroll to the bottom and then you scroll back up again just to look at it one more time.</p>
+        <p>You send the link to your sister. To your group chat. To the friend who's been politely nodding at your blog for a year. And you send it without adding "ignore the header, I'm still fixing it."</p>
+        <p>Then a woman you've never met lands on your homepage. She reads your headline and something in her chest goes <em>oh.</em> She keeps scrolling. She reads your story and feels like you've been reading her diary. She gets to the bottom, and she doesn't leave.</p>
+        <p class="big"><b>She buys.</b></p>
+        <p>That's the day. That's what we're building toward, and it's <span class="mark pink">21 days out.</span></p>
+      </div>
+    </div>
+    <div class="dreamvis">
+      <div class="bubble-say">wait, <em>YOU</em> made this?</div>
+      <div class="ph-arch"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_034.jpeg" alt="The day your site goes live" loading="lazy"></div>
+      <div class="notifcard">
+        <div class="nicon">&#128176;</div>
+        <div>
+          <div class="ntitle">Cha-ching! You made a sale.</div>
+          <div class="nsub">Someone just bought the thing you made.</div>
+        </div>
+        <div class="ntime">9:02 PM &middot; Tue</div>
+      </div>
     </div>
   </div>
 </section>
 
 <section>
-  <div class="wrap-n">
-    <span class="eyebrow">The gap</span>
-    <h2 style="font-size:clamp(1.9rem,4.2vw,2.8rem);margin:10px 0 18px">You already have the idea. You just can't get it out of your head.</h2>
-    <div class="prose">
-      <p>Here's what I hear from women constantly, in almost the same words every time.</p>
-      <p><em>I know what I want it to feel like. I just can't explain it.</em></p>
-      <p>You can picture the blog. You can almost see the colors. You know the kind of woman you want reading it, and you know you have something worth saying to her. But every time you sit down to write it, the words come out generic. Every time you try to design it, it ends up looking like the template everybody else is using.</p>
-      <p>And so the thing on your screen looks nothing like the thing in your head.</p>
-      <p>That's not a talent problem. It's a translation problem. Turning a feeling into messaging, and messaging into copy, and copy into design is a specific skill set, and it's the one I've spent since 2017 getting good at.</p>
-      <p class="big">You don't need to learn all three of those skills to have a beautiful blog that sells. <b>You need someone to pull it out of you and build it.</b></p>
+  <div class="wrap gapgrid">
+    <div class="gapvis">
+      <div class="ph-arch pinkframe"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_043.jpeg" alt="The idea you can't get out of your head" loading="lazy"></div>
+    </div>
+    <div>
+      <span class="eyebrow">The gap</span>
+      <h2 style="font-size:clamp(1.9rem,4.2vw,2.8rem);margin:10px 0 16px">You already have the idea. You just can't get it out of your head.</h2>
+      <p style="color:var(--muted);margin-bottom:18px">Here's what I hear from women constantly, in almost the same words every time.</p>
+      <div class="gapquote">
+        <span class="gq-mark">&ldquo;</span>
+        <p>I know what I want it to feel like. I just can't explain it.</p>
+      </div>
+      <div class="prose" style="max-width:none">
+        <p>You can picture the blog. You can almost see the colors. You know the kind of woman you want reading it, and you know you have something worth saying to her. But every time you sit down to write it, the words come out generic. Every time you try to design it, it ends up looking like the template everybody else is using.</p>
+        <p>And so the thing on your screen looks nothing like the thing in your head.</p>
+        <p>That's not a talent problem. It's a translation problem. Turning a feeling into messaging, and messaging into copy, and copy into design is a specific skill set, and it's the one I've spent since 2017 getting good at.</p>
+        <p class="big">You don't need to learn all three of those skills to have a beautiful blog that sells. <span class="mark pink">You need someone to pull it out of you and build it.</span></p>
+      </div>
     </div>
   </div>
 </section>
 
 <section class="sec-ink">
-  <div class="wrap-n">
+  <div class="wrap center">
     <span class="eyebrow">The part that matters more than the design</span>
-    <h2 style="font-size:clamp(1.9rem,4.2vw,2.8rem);margin:10px 0 8px;color:var(--paper)">Pretty isn't the goal. Pretty that sells is the goal.</h2>
+    <h2 style="font-size:clamp(2rem,4.8vw,3.2rem);margin:14px auto 8px;max-width:700px;color:var(--paper)">Pretty isn't the goal. <em style="color:var(--blush)">Pretty that sells</em> is the goal.</h2>
     <div class="hand-note">not a button color, babe. a sequence.</div>
-    <div class="prose">
-      <p style="color:#D8CBC3">There are thousands of beautiful blogs online making zero dollars. I had one. It looked fine and it earned nothing for two years, because I built it in the order everybody teaches. Template first. Content second. Traffic third. Money someday.</p>
-      <p style="color:#D8CBC3">That order is why it failed. A template is designed to look nice on a demo page, by someone who has no idea what you sell or who you're talking to. It cannot move a reader from curious to buying, because it was never built to.</p>
-      <p style="color:var(--paper)"><b>The order that actually works: decide what you're selling. Write the copy that sells it. Then design the site around that copy.</b></p>
-      <p style="color:#D8CBC3">When you build in that order, every section of your homepage has a job. Your headline is doing something. Your about page is doing something. Your freebie leads somewhere. The whole site becomes one machine pointed at one outcome instead of a pile of pretty pages sitting next to each other.</p>
+    <p style="color:#D8CBC3;max-width:620px;margin:14px auto 40px">There are thousands of beautiful blogs online making zero dollars. I had one. It looked fine and it earned nothing for two years, because I built it in the order everybody teaches.</p>
+
+    <div class="chainrow">
+      <div class="chainlabel bad">&#10007; the order everybody teaches</div>
+      <div class="chain">
+        <span class="chip-x">Template</span><i>&rarr;</i><span class="chip-x">Content</span><i>&rarr;</i><span class="chip-x">Traffic</span><i>&rarr;</i><span class="chip-x">Money, someday</span>
+      </div>
     </div>
+    <div class="chainrow">
+      <div class="chainlabel good">&#10003; the order that actually works</div>
+      <div class="chain">
+        <span class="chip-ok">Your offer</span><i>&rarr;</i><span class="chip-ok">Copy that sells it</span><i>&rarr;</i><span class="chip-ok">Design built around it</span>
+      </div>
+    </div>
+
+    <p style="color:#D8CBC3;max-width:640px;margin:40px auto 0">A template is designed to look nice on a demo page, by someone who has no idea what you sell or who you're talking to. It cannot move a reader from curious to buying, because it was never built to. When you build in the right order, every section of your homepage has a job. Your headline is doing something. Your about page is doing something. Your freebie leads somewhere. The whole site becomes one machine pointed at one outcome instead of a pile of pretty pages sitting next to each other.</p>
+    <p style="font-family:'Ephesis',cursive;font-size:1.7rem;color:var(--gold);margin-top:20px">that's what "built to convert" actually means</p>
   </div>
 </section>
 
