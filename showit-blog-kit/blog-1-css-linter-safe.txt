@@ -1,0 +1,192 @@
+/* BOSS LADY BLOGGERS - BLOG CUSTOM CSS (linter-safe version)
+   1. Paste this whole file in the Custom CSS box on BOTH blog
+      templates. No @import, no HTML - pure rules only.
+   2. ALSO add the tiny fonts embed (separate file) to each
+      template once, or the fonts fall back to plain serif.
+   3. IMPORTANT: this styling does NOT show inside the Showit
+      design editor. Check it with PREVIEW or on your live
+      preview link. The editor canvas will always look plain.
+   4. Nothing changes until you assign the classes: click a
+      blog placeholder, Advanced tab, CSS Classes, then type:
+      blb-title / blb-meta / blb-featured / blb-post /
+      blb-grid / blb-excerpt / blb-cats  (no dots) */
+
+/* ---------- single post: title + meta + featured image ---------- */
+.blb-title, .blb-title *{
+  font-family:'Fraunces',Georgia,serif !important;
+  font-weight:500 !important;
+  color:#2E1F27 !important;
+  line-height:1.1 !important;
+  letter-spacing:-0.01em !important;
+}
+.blb-meta, .blb-meta *{
+  font-family:'Karla',sans-serif !important;
+  font-weight:700 !important;
+  font-size:13px !important;
+  letter-spacing:0.18em !important;
+  text-transform:uppercase !important;
+  color:#6E5C63 !important;
+}
+.blb-meta a{color:#7C2B48 !important;text-decoration:none !important}
+.blb-meta a:hover{color:#A93F63 !important}
+.blb-featured img, img.blb-featured{
+  border-radius:26px !important;
+  border:1px solid rgba(46,31,39,.16) !important;
+  box-shadow:0 34px 64px -30px rgba(46,31,39,.45) !important;
+}
+
+/* ---------- single post: everything inside the post content ---------- */
+.blb-post p{
+  font-family:'Karla',sans-serif !important;
+  font-size:17px !important;
+  line-height:1.75 !important;
+  color:#2E1F27 !important;
+  margin-bottom:26px !important;
+}
+.blb-post h2, .blb-post h3, .blb-post h4{
+  font-family:'Fraunces',Georgia,serif !important;
+  font-weight:500 !important;
+  color:#2E1F27 !important;
+  line-height:1.15 !important;
+  margin:44px 0 18px !important;
+}
+.blb-post h2{font-size:30px !important}
+.blb-post h3{font-size:24px !important}
+.blb-post h4{font-size:20px !important}
+.blb-post a{
+  color:#A93F63 !important;
+  font-weight:600 !important;
+  text-decoration:underline !important;
+  text-decoration-color:rgba(169,63,99,.4) !important;
+  text-underline-offset:3px !important;
+}
+.blb-post a:hover{text-decoration-color:#A93F63 !important}
+.blb-post ul, .blb-post ol{margin:0 0 26px 22px !important}
+.blb-post li{font-size:16.5px !important;line-height:1.7 !important;margin-bottom:10px !important;font-family:'Karla',sans-serif !important;color:#2E1F27 !important}
+.blb-post li::marker{color:#A93F63 !important}
+.blb-post blockquote{
+  border-left:2px solid #A93F63 !important;
+  margin:36px 0 !important;
+  padding:6px 0 6px 26px !important;
+  background:none !important;
+}
+.blb-post blockquote p{
+  font-family:'Fraunces',Georgia,serif !important;
+  font-style:italic !important;
+  font-size:23px !important;
+  line-height:1.45 !important;
+  color:#A93F63 !important;
+  margin:0 !important;
+}
+.blb-post img{
+  border-radius:20px !important;
+  border:1px solid rgba(46,31,39,.16) !important;
+  box-shadow:0 26px 50px -26px rgba(46,31,39,.38) !important;
+  height:auto !important;
+  max-width:100% !important;
+}
+.blb-post figcaption, .blb-post .wp-caption-text{
+  font-family:'Ephesis',cursive !important;
+  font-size:22px !important;
+  color:#BC8A47 !important;
+  text-align:center !important;
+  margin-top:10px !important;
+}
+.blb-post strong, .blb-post b{color:#2E1F27 !important;font-weight:700 !important}
+.blb-post em{color:#A93F63 !important}
+.blb-post hr{border:none !important;border-top:1px dashed rgba(46,31,39,.25) !important;margin:40px 0 !important}
+
+/* ---------- blog index: the post list / grid ---------- */
+.blb-grid h2 a, .blb-grid h3 a, .blb-grid .blog-post-title, .blb-grid .blog-post-title a{
+  font-family:'Fraunces',Georgia,serif !important;
+  font-weight:500 !important;
+  color:#2E1F27 !important;
+  text-decoration:none !important;
+  line-height:1.25 !important;
+}
+.blb-grid h2 a:hover, .blb-grid h3 a:hover{color:#A93F63 !important}
+.blb-grid img{
+  border-radius:20px 20px 0 0 !important;
+  border:1px solid rgba(46,31,39,.14) !important;
+}
+.blb-grid p, .blb-excerpt, .blb-excerpt *{
+  font-family:'Karla',sans-serif !important;
+  font-size:15px !important;
+  line-height:1.65 !important;
+  color:#6E5C63 !important;
+}
+.blb-grid a.more-link, .blb-grid .read-more, .blb-readmore, .blb-readmore *{
+  font-family:'Karla',sans-serif !important;
+  font-weight:700 !important;
+  font-size:12px !important;
+  letter-spacing:0.18em !important;
+  text-transform:uppercase !important;
+  color:#A93F63 !important;
+  text-decoration:none !important;
+}
+
+/* the repeating post items inside the list you tagged blb-grid */
+.blb-grid article, .blb-grid .post, .blb-grid li, .blb-grid .blog-post{
+  background:#fff !important;
+  border:1px solid rgba(46,31,39,.16) !important;
+  border-radius:20px !important;
+  box-shadow:0 26px 50px -26px rgba(46,31,39,.38) !important;
+  overflow:hidden !important;
+  transition:transform .25s ease !important;
+}
+.blb-grid article:hover, .blb-grid .post:hover, .blb-grid li:hover, .blb-grid .blog-post:hover{
+  transform:translateY(-6px) !important;
+}
+.blb-grid .post-thumbnail img, .blb-grid .featured-image img{
+  border-radius:20px 20px 0 0 !important;
+  border:none !important;
+  width:100% !important;
+  height:auto !important;
+}
+.blb-cardimg img, img.blb-cardimg{
+  border-radius:20px 20px 0 0 !important;
+}
+.blb-cardtitle, .blb-cardtitle *, .blb-grid .entry-title, .blb-grid .entry-title a{
+  font-family:'Fraunces',Georgia,serif !important;
+  font-weight:500 !important;
+  font-size:20px !important;
+  line-height:1.25 !important;
+  color:#2E1F27 !important;
+  text-decoration:none !important;
+}
+.blb-cardtitle a:hover, .blb-grid .entry-title a:hover{color:#A93F63 !important}
+.blb-grid .entry-summary, .blb-grid .entry-content p{
+  font-family:'Karla',sans-serif !important;
+  font-size:15px !important;
+  line-height:1.65 !important;
+  color:#6E5C63 !important;
+}
+.blb-grid .post-date, .blb-grid .entry-date, .blb-grid time{
+  font-family:'Karla',sans-serif !important;
+  font-size:12px !important;
+  letter-spacing:.04em !important;
+  color:#6E5C63 !important;
+}
+
+/* category filter pills - tag the row of category links: blb-cats */
+.blb-cats a{
+  display:inline-block !important;
+  font-family:'Karla',sans-serif !important;
+  font-weight:700 !important;
+  font-size:11.5px !important;
+  letter-spacing:.14em !important;
+  text-transform:uppercase !important;
+  padding:11px 22px !important;
+  border-radius:60px !important;
+  border:1px solid rgba(46,31,39,.35) !important;
+  color:#2E1F27 !important;
+  text-decoration:none !important;
+  margin:0 5px 10px 0 !important;
+  transition:all .2s !important;
+}
+.blb-cats a:hover{border-color:#A93F63 !important;color:#A93F63 !important}
+.blb-cats a.current, .blb-cats .current-cat a{
+  background:#A93F63 !important;
+  border-color:#A93F63 !important;
+  color:#fff !important;
+}
