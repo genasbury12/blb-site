@@ -1,0 +1,46 @@
+/* ============================================================
+   BOSS LADY BLOGGERS - BLOG TEMPLATE CUSTOM CSS
+   For Showit's "Update Custom CSS" box (pure CSS version).
+   Paste this WHOLE file into the Custom CSS box on BOTH blog
+   templates (blog index + single post). No <style> tags needed.
+
+   Then, in Showit: click a blog placeholder element, open the
+   ADVANCED tab, find "CSS Classes" and type the class name
+   (no dot):
+
+     blb-title     ->  the Post Title placeholder
+     blb-meta      ->  the date / author / category text line
+     blb-featured  ->  the Featured Image placeholder
+     blb-post      ->  the Post Content text placeholder (the big one)
+     blb-grid      ->  the Blog Post List element on the index page
+     blb-excerpt   ->  excerpt text on index cards (if separate)
+
+   Also set your template fonts to Fraunces + Karla in Showit's
+   font settings so the editor preview matches.
+   ============================================================ */
+
+tags) into ONE Embed Code block on your Blog Template page in
+Showit. Put the same block on BOTH templates: the blog index
+template AND the single post template. Size the embed block
+tiny (10x10px) and tuck it in a corner - it's invisible, it
+just loads the styling.
+
+HOW TO CONNECT IT: in Showit, click any blog placeholder
+element, open the ADVANCED tab, find "CSS Classes" and type
+the class name (no dot). Use these:
+
+  blb-title     -> the Post Title placeholder
+  blb-meta      -> the date / author / category text line
+  blb-featured  -> the Featured Image placeholder
+  blb-post      -> the Post Content text placeholder  (the big one!)
+  blb-grid      -> the Blog Post List element on the index page
+  blb-excerpt   -> excerpt text on index cards (if separate)
+
+Then design those elements as plainly as you want in Showit.
+The CSS below overrides their look and brands everything,
+including all the headings, links, lists, quotes and images
+INSIDE your post content, which you never hand-design.
+Also set your Showit template fonts to Fraunces + Karla
+(both are in Showit's Google Fonts list) so the editor
+preview matches.
+============================================================
