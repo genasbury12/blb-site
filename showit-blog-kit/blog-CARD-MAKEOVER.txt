@@ -1,0 +1,102 @@
+BLOG INDEX CARD MAKEOVER - exact steps for your template
+=========================================================
+
+WHY THE CSS ALONE DID NOT REDESIGN THE CARDS
+Showit draws those cards from the blog template's own design. Every
+card on the page is a repeat of ONE card you design in the template.
+Custom CSS can paint over that card (fonts, colors, corners, shadow,
+hover) but it cannot move elements around. So the makeover is:
+
+  PART 1: restyle the one template card in Showit (5 minutes)
+  PART 2: assign the classes so my CSS adds the polish Showit
+          cannot do natively (shadow, hover lift, pill, corners)
+
+Do both, publish, hard refresh. The cards will look like the rest
+of the site.
+
+
+PART 1 - RESTYLE THE TEMPLATE CARD IN SHOWIT
+---------------------------------------------
+Open the BLOG INDEX template in the Showit designer. Scroll to the
+post list area. You will see ONE example card (the one repeating on
+your live page: CATEGORY, title, photo, brown READ MORE bar).
+Click into it and restyle each piece:
+
+1. THE TITLE TEXT ("Seven Candle Scents...")
+   Font: Fraunces (if it is in Showit's font list; if not, skip,
+         the CSS will force it once the class is on)
+   Weight: Medium / 500
+   Size: 22
+   Line height: 1.25
+   Color: #2E1F27
+
+2. THE CATEGORY TEXT ("CATEGORY")
+   Font: Karla, Bold
+   Size: 10
+   Letter spacing: around 1.5 (Showit units)
+   All caps on
+   Color: #7C2B48
+
+3. THE BROWN "READ MORE" BAR
+   Click the brown rectangle behind the text.
+   Fill color: #A93F63  (the site pink)
+   Then click the READ MORE text: Karla Bold, size 12,
+   letter spacing on, color #FFFFFF.
+   (Prefer a cleaner look? Delete the rectangle and keep just the
+   text in #A93F63 on white. Either works with the CSS.)
+
+4. THE CARD BACKGROUND
+   If the white area is a rectangle: fill #FFFFFF.
+   If Showit lets you set corner radius on it, set 20.
+   If not, skip it, the CSS rounds it via the class.
+
+5. SPACING (optional but makes it feel designed)
+   Nudge the title so there is breathing room: roughly 24px of
+   space on the left and right edges of the card, category about
+   18px above the title.
+
+
+PART 2 - ASSIGN THE CLASSES (this switches on the CSS polish)
+--------------------------------------------------------------
+Still in the template, click each piece, open ADVANCED in the
+right panel, find CSS CLASSES, and type (no dot, no quotes):
+
+   the whole card group/canvas   ->  blb-card
+   the category text             ->  blb-cats
+   the title text                ->  blb-cardtitle
+   the featured image            ->  blb-cardimg
+   the READ MORE text            ->  blb-readmore
+
+What each one adds on the live site:
+   blb-card      white card, 20px rounded corners, thin ink
+                 border, soft dramatic shadow, lifts 6px on hover
+   blb-cats      turns the category into a little blush pill
+   blb-cardtitle forces Fraunces even if Showit lacks the font
+   blb-cardimg   makes the photo fill its box edge to edge
+   blb-readmore  pink caps lettering, darkens on hover
+
+IMPORTANT: assign them on the ONE template card. Showit repeats it,
+so every post gets the styling automatically.
+
+
+PART 3 - SAVE, PUBLISH, HARD REFRESH
+-------------------------------------
+Publish the site, open the live blog page, hold Shift and click
+reload (or Cmd+Shift+R). You should see white rounded cards with
+shadows that lift when you hover, blush category pills, Fraunces
+titles, and pink READ MORE.
+
+Also paste the SAME Custom CSS file into the single post template's
+CSS box (if you have not yet) and tag that template's placeholders:
+post title -> blb-title, date/author line -> blb-meta, featured
+image -> blb-featured, post content area -> blb-post.
+
+When the cards look right, delete the pink proof badge block at the
+top of the CSS file (the body::after rule) and publish once more.
+
+
+IF SOMETHING STILL LOOKS OFF
+-----------------------------
+Right click the odd element on the live page, choose INSPECT, and
+screenshot the highlighted HTML line. That shows me the exact
+markup Showit outputs and I will tune the CSS to it precisely.
