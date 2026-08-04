@@ -316,6 +316,38 @@
   #confetti{position:fixed;inset:0;pointer-events:none;z-index:98}
 
   @media (prefers-reduced-motion:reduce){.ann-track,.shimmer{animation:none}}
+
+  /* ==== cute mobile menu ==== */
+  .mobile-menu{display:none;position:fixed;inset:0;z-index:100;background:#FBF6EE;background-image:radial-gradient(circle at 85% 12%,#F0DCE2 0%,rgba(240,220,226,0) 42%),radial-gradient(circle at 8% 90%,#F4EBDE 0%,rgba(244,235,222,0) 50%);padding:26px 30px 40px;flex-direction:column;overflow-y:auto}
+  .mobile-menu.open{display:flex}
+  .mobile-close{position:absolute;top:20px;right:22px;z-index:5;background:#fff;border:1px solid #2E1F27;width:42px;height:42px;border-radius:50%;font-size:1.5rem;line-height:1;cursor:pointer;color:#2E1F27;transition:transform .2s,background .2s,color .2s}
+  .mobile-close:hover{transform:rotate(90deg);background:#A93F63;color:#fff;border-color:#A93F63}
+  .mm-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;padding-right:56px}
+  .mm-home{display:inline-flex;align-items:center;gap:9px;background:#fff;border:1px solid #2E1F27;border-radius:60px;padding:11px 20px;text-decoration:none;font-family:'Karla',sans-serif !important;font-weight:700;font-size:.74rem !important;letter-spacing:.16em;text-transform:uppercase;color:#2E1F27;box-shadow:0 12px 24px -14px rgba(46,31,39,.45)}
+  .mm-home:hover{background:#A93F63;color:#fff;border-color:#A93F63}
+  .mm-badge{position:relative;width:76px;height:76px;background:#fff;border:1px solid #2E1F27;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 24px -14px rgba(46,31,39,.45);flex-shrink:0}
+  .mm-badge svg{width:100%;height:100%;animation:mmspin 14s linear infinite}
+  .mm-mid{position:absolute;color:#BC8A47;font-size:1.15rem}
+  @keyframes mmspin{to{transform:rotate(360deg)}}
+  .mm-links{display:flex;flex-direction:column;gap:4px;margin-top:14px}
+  .mm-links a{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:clamp(1.7rem,7.4vw,2.2rem);line-height:1.35;text-decoration:none;color:#2E1F27;display:flex;align-items:baseline;gap:12px;padding:6px 0;border-bottom:1px dashed rgba(46,31,39,.14)}
+  .mm-links a::before{counter-reset:none;content:counter(mmc,decimal-leading-zero);counter-increment:mmc;font-family:'Karla',sans-serif;font-weight:700;font-size:.66rem;letter-spacing:.16em;color:#A93F63}
+  .mm-links{counter-reset:mmc}
+  .mm-links a:hover{color:#A93F63;font-style:italic;padding-left:6px}
+  .mobile-menu.open .mm-links a{opacity:0;transform:translateY(16px);animation:mmIn .5s cubic-bezier(.2,.6,.2,1) forwards;animation-delay:calc(var(--i)*70ms)}
+  @keyframes mmIn{to{opacity:1;transform:none}}
+  .mm-cta{margin-top:22px;display:flex;align-items:center;justify-content:center;background:#A93F63;color:#fff !important;font-family:'Karla',sans-serif !important;font-weight:700;font-size:.8rem !important;letter-spacing:.18em;text-transform:uppercase;padding:19px 30px;border-radius:60px;text-decoration:none;box-shadow:0 0 0 0 rgba(169,63,99,.5);animation:mmpulse 2.2s ease-out infinite}
+  @keyframes mmpulse{0%{box-shadow:0 0 0 0 rgba(169,63,99,.45)}70%{box-shadow:0 0 0 16px rgba(169,63,99,0)}100%{box-shadow:0 0 0 0 rgba(169,63,99,0)}}
+  .mm-script{font-family:'Ephesis',cursive;font-size:1.6rem;color:#BC8A47;text-align:center;margin-top:18px}
+  .mm-photo{position:absolute;right:-24px;bottom:-30px;width:150px;transform:rotate(8deg);opacity:.9;pointer-events:none}
+  .mm-photo img{width:100%;border-radius:75px 75px 16px 16px;border:1px solid rgba(46,31,39,.35);box-shadow:0 20px 40px -20px rgba(46,31,39,.5)}
+  .mm-star{position:absolute;color:#BC8A47;pointer-events:none;animation:mmspin 12s linear infinite}
+  .mm-star.st1{top:14%;left:6%;font-size:1.3rem}
+  .mm-star.st2{bottom:22%;left:10%;font-size:1rem;animation-duration:18s}
+  .nav-home{display:inline-flex;align-items:center}
+  .nav-home svg{display:block}
+  .nav-home:hover{color:#A93F63}
+  @media (prefers-reduced-motion:reduce){.mm-badge svg,.mm-star,.mm-cta{animation:none}.mobile-menu.open .mm-links a{opacity:1;transform:none;animation:none}}
 </style>
 </head>
 <body>
@@ -354,6 +386,7 @@
   <div class="wrap nav-inner">
     <a class="logo" href="/">Boss Lady <em>Bloggers</em></a>
     <ul class="nav-links">
+      <li><a href="/" class="nav-home" aria-label="Home"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11 12 3l9 8"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg></a></li>
       <li><a href="/about">About</a></li>
       <li><a href="/blog-accelerator">The Program</a></li>
       <li><a href="/blog-coaching">Blog Coaching</a></li>
@@ -367,14 +400,30 @@
 </nav>
 <div class="mobile-menu" id="mobileMenu">
   <button class="mobile-close" id="mobileClose" aria-label="Close menu">&times;</button>
-  <a href="/about">About</a>
-  <a href="/blog-accelerator">The Program</a>
-  <a href="/blog-coaching">Blog Coaching</a>
-  <a href="/membership">Membership</a>
-  <a href="/blog">Blog</a>
-  <a href="/podcast">Podcast</a>
-  <a href="/freebies">Freebies</a>
-  <a href="/book-a-call" style="color:#A93F63">Book a Free Call &rarr;</a>
+  <span class="mm-star st1" aria-hidden="true">&#10022;</span>
+  <span class="mm-star st2" aria-hidden="true">&#10038;</span>
+  <div class="mm-top">
+    <a href="/" class="mm-home" aria-label="Home"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11 12 3l9 8"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg><span>Home</span></a>
+    <div class="mm-badge" aria-hidden="true">
+      <svg viewBox="0 0 96 96">
+        <defs><path id="mmc" d="M48,48 m-34,0 a34,34 0 1,1 68,0 a34,34 0 1,1 -68,0"/></defs>
+        <text style="font-family:Karla,sans-serif;font-weight:700;font-size:10.5px;letter-spacing:2.4px;fill:#2E1F27"><textPath href="#mmc">BOSS LADY &#10022; BLOGGERS &#10022;</textPath></text>
+      </svg>
+      <span class="mm-mid">&#10022;</span>
+    </div>
+  </div>
+  <nav class="mm-links">
+    <a href="/" style="--i:0">Home</a>
+    <a href="/about" style="--i:1">About</a>
+    <a href="/blog-accelerator" style="--i:2">The Program</a>
+    <a href="/blog-coaching" style="--i:3">Blog Coaching</a>
+    <a href="/blog" style="--i:4">Blog</a>
+    <a href="/podcast" style="--i:5">Podcast</a>
+    <a href="/freebies" style="--i:6">Free Courses</a>
+  </nav>
+  <a href="/book-a-call" class="mm-cta">Book a Free Call &rarr;</a>
+  <div class="mm-script">blog like she means business</div>
+  <div class="mm-photo" aria-hidden="true"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_030.jpeg" alt=""></div>
 </div>
 
 <header class="hero" style="padding-bottom:60px">
