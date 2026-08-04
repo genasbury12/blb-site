@@ -1,38 +1,35 @@
-<!--
-============================================================
-PART 1 of 5 — THE CUSTOM CSS (the magic part)
-============================================================
-WHERE IT GOES: paste this ENTIRE block (including the 
--->
-
+<!-- Embed Code version. If you use Showit's Custom CSS box instead,
+     use the PURE file and skip this one. Instructions inside. -->
 <style>
-tags) into ONE Embed Code block on your Blog Template page in
-Showit. Put the same block on BOTH templates: the blog index
-template AND the single post template. Size the embed block
-tiny (10x10px) and tuck it in a corner - it's invisible, it
-just loads the styling.
+/* ============================================================
+   BOSS LADY BLOGGERS - BLOG TEMPLATE CUSTOM CSS
 
-HOW TO CONNECT IT: in Showit, click any blog placeholder
-element, open the ADVANCED tab, find "CSS Classes" and type
-the class name (no dot). Use these:
+   OPTION A (easiest): paste this whole file into Showit's
+   "Custom CSS" box on BOTH blog templates (blog index AND
+   single post). That box takes pure CSS, which this is.
 
-  blb-title     -> the Post Title placeholder
-  blb-meta      -> the date / author / category text line
-  blb-featured  -> the Featured Image placeholder
-  blb-post      -> the Post Content text placeholder  (the big one!)
-  blb-grid      -> the Blog Post List element on the index page
-  blb-excerpt   -> excerpt text on index cards (if separate)
+   OPTION B: or wrap it in <style> ... </style> tags and put
+   it in an Embed Code block instead. Either works, pick one.
 
-Then design those elements as plainly as you want in Showit.
-The CSS below overrides their look and brands everything,
-including all the headings, links, lists, quotes and images
-INSIDE your post content, which you never hand-design.
-Also set your Showit template fonts to Fraunces + Karla
-(both are in Showit's Google Fonts list) so the editor
-preview matches.
-============================================================
+   THEN CONNECT IT: in Showit, click a blog placeholder
+   element, open the ADVANCED tab, find "CSS Classes" and
+   type the class name (no dot):
 
-<style>
+     blb-title     ->  the Post Title placeholder
+     blb-meta      ->  the date / author / category text line
+     blb-featured  ->  the Featured Image placeholder
+     blb-post      ->  the Post Content text placeholder (the big one!)
+     blb-grid      ->  the Blog Post List element on the index page
+     blb-excerpt   ->  excerpt text on index cards (if separate)
+
+   Design those elements as plainly as you like. This CSS
+   overrides their look and brands everything inside your
+   post content automatically: headings, links, lists,
+   quotes, images, captions.
+
+   Also set the template fonts to Fraunces + Karla in Showit
+   so the design editor preview matches.
+   ============================================================ */
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Karla:wght@400;600;700&family=Ephesis&display=swap');
 
 /* ---------- single post: title + meta + featured image ---------- */
