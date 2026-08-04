@@ -195,6 +195,8 @@
   .ctaband .hand-note{color:var(--gold)}
 
   /* forms */
+  .fdwrap{max-width:520px}
+  .fdwrap .ff__root, .fdwrap form{font-family:var(--body) !important}
   .f-form{display:flex;gap:12px;max-width:520px;flex-wrap:wrap}
   .f-form input[type=email],.f-form input[type=text]{flex:1;min-width:220px;border:1px solid var(--ink);border-radius:60px;padding:16px 24px;font-family:var(--body);font-size:1rem;background:#fff;color:var(--ink)}
   .f-form input:focus{outline:none;box-shadow:0 0 0 3px var(--blush)}
@@ -255,13 +257,12 @@
       <span class="eyebrow">Free blogging courses</span>
       <h1>Everything I wish I'd known before I wasted two years on a blog <em>that made nothing.</em></h1>
       <p class="sub">Free courses on why the traffic-first approach keeps falling flat, and what to build instead. No fluff, no hosting affiliate links, no "just keep posting and it'll happen."</p>
-      <!-- Email capture: connect to your email platform. For now, submitting
-           sends readers to the thank-you page so the flow works end to end.
-           Swap this form's markup for your ESP embed when ready. -->
-      <form class="f-form" id="optinForm">
-        <input type="email" id="of-email" placeholder="Your email" required>
-        <button type="submit" class="btn btn-pink" style="width:auto">Send me the free courses</button>
-      </form>
+      <!-- Flodesk signup form: set this form's success action in Flodesk to
+           redirect to /freebies-thank-you, and put the password at the top
+           of the delivery email. -->
+      <div class="fdwrap" id="signup">
+        <div id="fd-form-6a712a913c526be4f8fd1754"></div>
+      </div>
       <p class="micro">Straight to your inbox. Unsubscribe whenever.</p>
     </div>
     <div class="hero-media">
@@ -313,10 +314,7 @@
 <section class="sec-tint" style="padding:70px 0">
   <div class="wrap center">
     <h2 style="font-size:clamp(2rem,4.6vw,3rem);margin-bottom:20px">Ready?</h2>
-    <form class="f-form" id="optinForm2" style="margin:0 auto;justify-content:center">
-      <input type="email" id="of-email2" placeholder="Your email" required>
-      <button type="submit" class="btn btn-pink" style="width:auto">Send me the free courses</button>
-    </form>
+    <a href="#signup" class="btn btn-pink" style="width:auto">Send me the free courses &uarr;</a>
     <p class="micro" style="margin-top:18px">Blogging since 2017 &middot; 300+ clients and students</p>
   </div>
 </section>
@@ -360,16 +358,31 @@
 })();
 </script>
 <script>
-(function(){
-  ['optinForm','optinForm2'].forEach(function(id){
-    var f=document.getElementById(id);
-    if(!f)return;
-    f.addEventListener('submit',function(e){
-      e.preventDefault();
-      location.href='/freebies-thank-you';
-    });
+  (function(w, d, t, h, s, n) {
+    w.FlodeskObject = n;
+    var fn = function() {
+      (w[n].q = w[n].q || []).push(arguments);
+    };
+    w[n] = w[n] || fn;
+    var f = d.getElementsByTagName(t)[0];
+    var v = '?v=' + Math.floor(new Date().getTime() / (120 * 1000)) * 60;
+    var sm = d.createElement(t);
+    sm.async = true;
+    sm.type = 'module';
+    sm.src = h + s + '.mjs' + v;
+    f.parentNode.insertBefore(sm, f);
+    var sn = d.createElement(t);
+    sn.async = true;
+    sn.noModule = true;
+    sn.src = h + s + '.js' + v;
+    f.parentNode.insertBefore(sn, f);
+  })(window, document, 'script', 'https://assets.flodesk.com', '/universal', 'fd');
+</script>
+<script>
+  window.fd('form', {
+    formId: '6a712a913c526be4f8fd1754',
+    containerEl: '#fd-form-6a712a913c526be4f8fd1754'
   });
-})();
 </script>
 </body>
 </html>
