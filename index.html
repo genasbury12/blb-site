@@ -134,7 +134,7 @@
   .hero-cta{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
   .proofbar{display:flex;gap:10px;flex-wrap:wrap;margin-top:30px}
   .proofbar span{font-weight:700;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;background:#fff;border:1px solid rgba(46,31,39,.2);border-radius:60px;padding:9px 16px}
-  .hero-media{position:relative;max-width:430px;margin:0 auto}
+  .hero-media{position:relative;width:100%;max-width:430px;margin:0 auto}
   .hero-media .ph{position:relative;border-radius:46vw 46vw 20px 20px;overflow:hidden;border:1px solid rgba(46,31,39,.3);box-shadow:0 34px 64px -30px rgba(46,31,39,.45);aspect-ratio:3/3.6}
   .hero-media .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
   @media (min-width:981px){.hero-media::after{content:'';position:absolute;inset:-14px 14px 14px -14px;border:1px solid var(--pink);border-radius:46vw 46vw 20px 20px;pointer-events:none}}
@@ -229,6 +229,57 @@
   .offlist li b{color:var(--ink)}
   @media (max-width:980px){#storygrid{grid-template-columns:1fr !important}}
   @media (max-width:640px){.offlist{grid-template-columns:1fr !important}}
+
+  /* ==== enrichment layer ==== */
+  .mqband{background:var(--ink);overflow:hidden;padding:16px 0;border-top:1px solid rgba(251,246,238,.14)}
+  .mq-track{display:flex;white-space:nowrap;width:max-content;animation:mqm 30s linear infinite}
+  .mq-track span{font-family:var(--display);font-style:italic;font-size:1.35rem;color:var(--paper);padding-right:16px}
+  .mq-track .g{color:var(--gold);font-style:normal}
+  .mqband:hover .mq-track{animation-play-state:paused}
+  @keyframes mqm{to{transform:translateX(-50%)}}
+
+  .statsband{background:var(--ink);padding:44px 0 52px}
+  .statgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:26px;text-align:center}
+  .stat .n{font-family:var(--display);font-size:2.7rem;line-height:1;color:var(--paper)}
+  .stat .n em{color:var(--gold);font-style:normal;font-size:.6em}
+  .stat .l{color:#B9A9A0;font-size:.85rem;margin-top:8px;letter-spacing:.04em}
+  @media (max-width:760px){.statgrid{grid-template-columns:1fr 1fr;gap:30px 16px}}
+
+  .pstrip{overflow:hidden;padding:30px 0}
+  .ps-track{display:flex;gap:18px;width:max-content;animation:psm 44s linear infinite}
+  .ps-track img{height:230px;width:auto;border-radius:16px;border:1px solid rgba(46,31,39,.25);box-shadow:0 20px 40px -24px rgba(46,31,39,.4)}
+  .pstrip:hover .ps-track{animation-play-state:paused}
+  @keyframes psm{to{transform:translateX(-50%)}}
+  @media (max-width:640px){.ps-track img{height:150px}}
+
+  .trio-sec{padding:30px 0 76px}
+  .trio-cap{text-align:center;font-family:'Ephesis',cursive;font-size:1.9rem;color:var(--pink);margin-bottom:24px}
+  .trio{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:1020px;margin:0 auto}
+  .tph{position:relative;border:1px solid rgba(46,31,39,.3);border-radius:140px 140px 16px 16px;overflow:hidden;aspect-ratio:3/3.7;box-shadow:0 26px 50px -26px rgba(46,31,39,.38)}
+  .tph:nth-child(2){border-radius:16px;transform:translateY(16px)}
+  .tph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+  .tph:hover img{transform:scale(1.05)}
+  @media (max-width:880px){.trio{grid-template-columns:1fr 1fr;max-width:520px}.tph:nth-child(3){display:none}.tph:nth-child(2){transform:none}}
+
+  .sqdiv{display:flex;justify-content:center;padding:38px 0 0}
+  .doodle-arrow{vertical-align:middle;transform:rotate(14deg)}
+  .herorot{display:flex;align-items:center;gap:8px;margin-top:16px;min-height:44px}
+  .herorot .hand-note{margin:0;transition:opacity .45s;font-size:1.7rem}
+
+  .rotbadge{position:absolute;top:-24px;right:-16px;z-index:5;width:118px;height:118px;background:var(--paper);border:1px solid var(--ink);border-radius:50%;box-shadow:0 16px 32px -16px rgba(46,31,39,.45);display:flex;align-items:center;justify-content:center}
+  .rotbadge svg{width:100%;height:100%;animation:spinb 16s linear infinite}
+  .rotbadge .midstar{position:absolute;font-size:1.6rem;color:var(--gold)}
+  @keyframes spinb{to{transform:rotate(360deg)}}
+  @media (max-width:640px){.rotbadge{width:92px;height:92px;top:-16px;right:-8px}}
+
+  .deco-star{position:fixed;z-index:5;color:var(--gold);opacity:.75;pointer-events:none;animation:spinstar 13s linear infinite;font-size:1.5rem}
+  .deco-star.s1{top:19%;left:2.4%}
+  .deco-star.s2{top:58%;right:3%;font-size:1.1rem;animation-duration:19s}
+  @keyframes spinstar{to{transform:rotate(360deg)}}
+  @media (max-width:900px){.deco-star{display:none}}
+
+  .tiltable{transform-style:preserve-3d;will-change:transform}
+  @media (prefers-reduced-motion:reduce){.mq-track,.ps-track,.rotbadge svg,.deco-star{animation:none}}
 </style>
 </head>
 <body>
@@ -252,6 +303,8 @@
 </div>
 <div class="scrollprog" aria-hidden="true"><i></i></div>
 <a href="/blog-accelerator" class="wwm-fab">Work With Me &hearts;</a>
+<span class="deco-star s1" aria-hidden="true">&#10022;</span>
+<span class="deco-star s2" aria-hidden="true">&#10038;</span>
 <nav id="nav">
   <div class="wrap nav-inner">
     <a class="logo" href="/">Boss Lady <em>Bloggers</em></a>
@@ -285,11 +338,12 @@
     <div>
       <span class="eyebrow">Blog coaching for women building a business, not just a blog</span>
       <h1>The blog you keep picturing in your head? Let's build it. <em>And let's make it sell.</em></h1>
-      <p class="sub">Branding, website design, copywriting, and 1:1 blog coaching, all in one program. In 21 days you'll have a blog you're proud to send people to, with something on it worth buying. You answer the questions. I build the thing.</p>
+      <p class="sub">Branding, website design, copywriting, and 1:1 blog coaching, all in one program. In <span class="u-doodle">21 days</span> you'll have a blog you're proud to send people to, with something on it worth buying. You answer the questions. I build the thing.</p>
       <div class="hero-cta">
         <a href="/book-a-call" class="btn btn-pink">Book your call &rarr;</a>
       </div>
       <p class="micro">Thirty minutes, free, and I'll tell you honestly if it's not a fit.</p>
+      <div class="herorot"><span class="hand-note" id="rotword" data-words='["gorgeous and profitable, both","built with you, not just for you","in 21 days, babe"]'>gorgeous and profitable, both</span> <svg class="doodle-arrow" viewBox="0 0 60 60" width="44" height="44" aria-hidden="true"><path d="M8 6 C 30 14 40 30 42 50 M42 50 L 32 42 M42 50 L 50 38" fill="none" stroke="#BC8A47" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       <div class="proofbar">
         <span>Blogging since 2017</span>
         <span>300+ clients &amp; students</span>
@@ -297,10 +351,21 @@
       </div>
     </div>
     <div class="hero-media">
+      <div class="rotbadge" aria-hidden="true">
+        <svg viewBox="0 0 120 120">
+          <defs><path id="bcirc" d="M60,60 m-42,0 a42,42 0 1,1 84,0 a42,42 0 1,1 -84,0"/></defs>
+          <text style="font-family:Karla,sans-serif;font-weight:700;font-size:11.5px;letter-spacing:2.6px;fill:#2E1F27"><textPath href="#bcirc">300+ STUDENTS &#10022; SINCE 2017 &#10022; SHOWIT &#10022;</textPath></text>
+        </svg>
+        <span class="midstar">&#10022;</span>
+      </div>
       <div class="ph"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_030.jpeg" alt="Genasys, blog coach at Boss Lady Bloggers"></div>
     </div>
   </div>
 </header>
+<div class="mqband" aria-hidden="true"><div class="mq-track"><span>start the blog</span><span class="g">&#10022;</span><span>build the brand</span><span class="g">&#10022;</span><span>make the money</span><span class="g">&#10022;</span><span>start the blog</span><span class="g">&#10022;</span><span>build the brand</span><span class="g">&#10022;</span><span>make the money</span><span class="g">&#10022;</span></div></div>
+
+<section class="statsband"><div class="wrap"><div class="statgrid"><div class="stat"><div class="n"><span data-count="300">300</span><em>+</em></div><div class="l">clients &amp; students</div></div><div class="stat"><div class="n">2017</div><div class="l">blogging &amp; building since</div></div><div class="stat"><div class="n"><span data-count="21">21</span></div><div class="l">days to a launched blog</div></div><div class="stat"><div class="n"><em>$</em><span data-count="4000">4,000</span></div><div class="l">my first four business-first months</div></div></div></div></section>
+
 
 <!-- SECTION 2: THE DESIRE -->
 <section class="sec-tint">
@@ -320,6 +385,8 @@
   </div>
 </section>
 
+
+<section class="trio-sec"><div class="wrap"><div class="trio-cap">the women, the builds, the little life behind it</div><div class="trio"><div class="tph"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_024.jpeg" alt="" loading="lazy"></div><div class="tph"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_028.jpeg" alt="" loading="lazy"></div><div class="tph"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_016.jpeg" alt="" loading="lazy"></div></div></div></section>
 <!-- SECTION 3: YOUR STORY -->
 <section>
   <div class="wrap" style="display:grid;grid-template-columns:1fr .8fr;gap:60px;align-items:center" id="storygrid">
@@ -415,6 +482,8 @@
   </div>
 </section>
 
+
+<div class="pstrip" aria-hidden="true"><div class="ps-track"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_033.jpeg" alt="" loading="lazy"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_042.jpeg" alt="" loading="lazy"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_010.jpeg" alt="" loading="lazy"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_003.jpeg" alt="" loading="lazy"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_017.jpeg" alt="" loading="lazy"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_005.jpeg" alt="" loading="lazy"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_026.jpeg" alt="" loading="lazy"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_041.jpeg" alt="" loading="lazy"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_033.jpeg" alt="" loading="lazy"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_042.jpeg" alt="" loading="lazy"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_010.jpeg" alt="" loading="lazy"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_003.jpeg" alt="" loading="lazy"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_017.jpeg" alt="" loading="lazy"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_005.jpeg" alt="" loading="lazy"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_026.jpeg" alt="" loading="lazy"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_041.jpeg" alt="" loading="lazy"></div></div>
 <section class="vidband">
   <div class="wrap">
     <div class="shead">
@@ -451,7 +520,7 @@
       </div>
       <p style="font-family:'Ephesis',cursive;font-size:1.5rem;color:var(--pink);margin-bottom:18px">i take three clients at a time, so there's a real line, babe</p>
       <a href="/book-a-call" class="btn btn-pink">Book your call &rarr;</a>
-      <a href="/blog-accelerator" class="btn btn-outline" style="margin-left:10px">See the full program &rarr;</a>
+      <a href="/blog-accelerator" class="btn btn-outline" style="margin-left:10px">See the full program &rarr;</a> <svg class="doodle-arrow" viewBox="0 0 60 60" width="44" height="44" aria-hidden="true"><path d="M8 6 C 30 14 40 30 42 50 M42 50 L 32 42 M42 50 L 50 38" fill="none" stroke="#BC8A47" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </div>
   </div>
 </section>
@@ -531,6 +600,7 @@
   </div>
 </section>
 
+<div class="sqdiv" aria-hidden="true"><svg viewBox="0 0 160 20" width="150" height="20"><path d="M4 12 Q 24 4 44 11 T 84 10 T 124 11 T 156 9" fill="none" stroke="#BC8A47" stroke-width="3.5" stroke-linecap="round"/></svg></div>
 <!-- SECTION 12: FINAL CTA -->
 <section class="ctaband">
   <div class="wrap">
@@ -538,7 +608,7 @@
     <h2>Let's build a blog that's gorgeous <em>and makes money.</em></h2>
     <div class="hand-note">you've been carrying this idea long enough</div>
     <p>You already have the idea. Every time you sit down to explain it the words come out wrong, and what ends up on the screen looks nothing like the thing in your head. That's not a you problem. That's a copy and design problem, and it's a very fixable one.</p>
-    <p>Twenty-one days from now, you could have a blog you're proud to send people to, with something on it worth buying.</p>
+    <p>Twenty-one days from now, you could have a blog you're proud to send people to, with something on it <span class="u-doodle" style="color:var(--blush)">worth buying.</span></p>
     <a href="/book-a-call" class="btn btn-pink" style="width:auto">Book your call &rarr;</a>
     <p class="micro">Thirty minutes, free, no pressure. If it's not a fit, I'll say so.</p>
   </div>
@@ -633,5 +703,49 @@
 })();
 </script>
 
+<script>
+(function(){
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /* animated count-ups */
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if(!e.isIntersecting)return; io.unobserve(e.target);
+        var el=e.target,t=parseInt(el.getAttribute('data-count'),10)||0;
+        if(reduce){el.textContent=t.toLocaleString();return;}
+        var t0=null;
+        function step(ts){
+          if(!t0)t0=ts;var p=Math.min((ts-t0)/1300,1),ease=1-Math.pow(1-p,3);
+          el.textContent=Math.round(t*ease).toLocaleString();
+          if(p<1)requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      });
+    },{threshold:.5});
+    document.querySelectorAll('[data-count]').forEach(function(n){io.observe(n)});
+  }
+  /* card tilt on hover */
+  if(!reduce&&matchMedia('(hover:hover)').matches){
+    document.querySelectorAll('.card').forEach(function(c){
+      c.classList.add('tiltable');
+      c.addEventListener('mousemove',function(ev){
+        var r=c.getBoundingClientRect();
+        var x=(ev.clientX-r.left)/r.width-.5, y=(ev.clientY-r.top)/r.height-.5;
+        c.style.transform='perspective(900px) rotateY('+(x*5)+'deg) rotateX('+(-y*5)+'deg) translateY(-4px)';
+      });
+      c.addEventListener('mouseleave',function(){c.style.transform='';});
+    });
+  }
+  /* rotating hero script line */
+  var rot=document.getElementById('rotword');
+  if(rot&&!reduce){
+    var words=JSON.parse(rot.getAttribute('data-words')||'[]'),i=0;
+    if(words.length>1){setInterval(function(){
+      rot.style.opacity=0;
+      setTimeout(function(){i=(i+1)%words.length;rot.textContent=words[i];rot.style.opacity=1;},450);
+    },3400);}
+  }
+})();
+</script>
 </body>
 </html>
