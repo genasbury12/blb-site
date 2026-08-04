@@ -1,0 +1,99 @@
+BLOG CSS TROUBLESHOOTING - do these in order
+=============================================
+
+The CSS box accepting the code and the code actually changing the
+page are two different things. This walks you to exactly which one
+is broken. Takes about 5 minutes.
+
+
+CHECK 1 - ARE YOU LOOKING AT THE RIGHT PAGE?
+---------------------------------------------
+The Custom CSS on the blog templates only affects the pages
+WordPress generates from those templates: your real blog post
+pages and the real blog index.
+
+It does NOT affect a normal Showit page. So if your /blog page is
+currently a regular Showit page (for example one holding the embed
+code design I gave you), the blog template CSS will never touch it.
+That is not a bug, it is just a different page.
+
+To test correctly: open an actual published blog post on your live
+site (a URL like bossladybloggers.com/your-post-name), or the blog
+index that WordPress serves. That is where the template CSS lives.
+
+
+CHECK 2 - PUBLISH, THEN LOOK FOR THE PINK BADGE
+------------------------------------------------
+I added a proof badge to the top of the new CSS file. Steps:
+
+  1. Paste the whole new blog-1-css-linter-safe file into the
+     Custom CSS box on the blog post template. Save.
+  2. PUBLISH the site. Custom CSS does not show in the design
+     editor, and it may not show on the preview link either.
+     It only reliably shows on the LIVE published site.
+  3. Open a real blog post on the live site. Hard refresh
+     (hold Shift and click reload, or Cmd+Shift+R).
+
+Now look at the bottom left corner of the page:
+
+  PINK "BLB CSS IS LOADED" PILL IS THERE
+    -> The CSS is working. Anything that still looks plain is
+       only missing its class. Go to Check 3.
+
+  NO PILL
+    -> The CSS never reached this page. Either:
+       a) It was pasted into a different template than the one
+          this page uses. Paste it on BOTH blog templates (index
+          and single post). If your Showit has a site-wide
+          Custom CSS box (Site Settings area), paste it there
+          too. It is safe to have it in all of them.
+       b) The site was not re-published after saving.
+       c) You are on a normal Showit page (see Check 1).
+
+
+CHECK 3 - ASSIGN THE CLASSES (the step that does the styling)
+--------------------------------------------------------------
+The CSS only targets elements you have tagged. In the Showit
+designer, on the blog template:
+
+  1. Click the placeholder element itself (the text box or image,
+     not the whole canvas or a group).
+  2. In the right panel open the ADVANCED section.
+  3. Find the field called CSS CLASSES.
+  4. Type the class name. No dot, no quotes, no spaces inside
+     the name. Exactly like: blb-title
+
+  Single post template:
+    post title text            -> blb-title
+    date and author line       -> blb-meta
+    featured image             -> blb-featured
+    the post content area      -> blb-post
+
+  Blog index template:
+    the post list or grid area -> blb-grid
+    excerpt text placeholder   -> blb-excerpt
+    category links row         -> blb-cats
+
+  5. Save and PUBLISH again. Hard refresh the live page.
+
+
+STILL NOTHING? SEND ME ONE OF THESE AND I WILL FIX IT
+------------------------------------------------------
+If the badge shows but assigned elements still look plain, the
+selectors need matching to Showit's real markup. I cannot see your
+live site from here, so grab me one of these (first one is best):
+
+  A) On the live blog post, right click the post title and choose
+     INSPECT. A panel opens with a line of HTML highlighted.
+     Screenshot that panel. That one screenshot tells me the exact
+     element and class names Showit really uses, and I will rewrite
+     the CSS to match it exactly.
+
+  B) Or: right click the page, VIEW PAGE SOURCE, press Ctrl+F
+     (Cmd+F on Mac), search for: blb-
+     Tell me how many matches it finds. Zero matches means the
+     class assignments are not being published. One or more means
+     they are there and I will adjust the selectors.
+
+  C) Or just a full screenshot of the live blog post page with the
+     badge visible, so I can see what state it is in.

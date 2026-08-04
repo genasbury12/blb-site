@@ -11,6 +11,37 @@
       blb-title / blb-meta / blb-featured / blb-post /
       blb-grid / blb-excerpt / blb-cats  (no dots) */
 
+/* ========== STEP 0 - PROOF BADGE (delete this block later) ==========
+   After you save this CSS and PUBLISH the site, open a real blog
+   post on your LIVE site. You should see a small pink pill that
+   says "BLB CSS IS LOADED" pinned to the bottom left corner.
+   - You SEE the badge: the CSS is loading. Anything still
+     unstyled means that element does not have its blb- class
+     assigned yet.
+   - You DO NOT see the badge: the CSS is not reaching that page
+     at all (pasted in the wrong place, site not published, or
+     you are looking at a normal Showit page instead of a blog
+     template page).
+   Once everything looks right, delete this one block (the
+   body::after rule below) and re-publish. */
+body::after{
+  content:"BLB CSS IS LOADED" !important;
+  position:fixed !important;
+  left:12px !important;
+  bottom:12px !important;
+  z-index:2147483647 !important;
+  background:#A93F63 !important;
+  color:#FBF6EE !important;
+  font-family:Arial,sans-serif !important;
+  font-size:11px !important;
+  font-weight:bold !important;
+  letter-spacing:0.08em !important;
+  padding:8px 14px !important;
+  border-radius:40px !important;
+  box-shadow:0 10px 24px rgba(46,31,39,.35) !important;
+  pointer-events:none !important;
+}
+
 /* ---------- single post: title + meta + featured image ---------- */
 .blb-title, .blb-title *{
   font-family:'Fraunces',Georgia,serif !important;
