@@ -1,0 +1,151 @@
+<!--
+============================================================
+PART 1 of 5 — THE CUSTOM CSS (the magic part)
+============================================================
+WHERE IT GOES: paste this ENTIRE block (including the 
+-->
+
+<style>
+tags) into ONE Embed Code block on your Blog Template page in
+Showit. Put the same block on BOTH templates: the blog index
+template AND the single post template. Size the embed block
+tiny (10x10px) and tuck it in a corner - it's invisible, it
+just loads the styling.
+
+HOW TO CONNECT IT: in Showit, click any blog placeholder
+element, open the ADVANCED tab, find "CSS Classes" and type
+the class name (no dot). Use these:
+
+  blb-title     -> the Post Title placeholder
+  blb-meta      -> the date / author / category text line
+  blb-featured  -> the Featured Image placeholder
+  blb-post      -> the Post Content text placeholder  (the big one!)
+  blb-grid      -> the Blog Post List element on the index page
+  blb-excerpt   -> excerpt text on index cards (if separate)
+
+Then design those elements as plainly as you want in Showit.
+The CSS below overrides their look and brands everything,
+including all the headings, links, lists, quotes and images
+INSIDE your post content, which you never hand-design.
+Also set your Showit template fonts to Fraunces + Karla
+(both are in Showit's Google Fonts list) so the editor
+preview matches.
+============================================================
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Karla:wght@400;600;700&family=Ephesis&display=swap');
+
+/* ---------- single post: title + meta + featured image ---------- */
+.blb-title, .blb-title *{
+  font-family:'Fraunces',Georgia,serif !important;
+  font-weight:500 !important;
+  color:#2E1F27 !important;
+  line-height:1.1 !important;
+  letter-spacing:-0.01em !important;
+}
+.blb-meta, .blb-meta *{
+  font-family:'Karla',sans-serif !important;
+  font-weight:700 !important;
+  font-size:13px !important;
+  letter-spacing:0.18em !important;
+  text-transform:uppercase !important;
+  color:#6E5C63 !important;
+}
+.blb-meta a{color:#7C2B48 !important;text-decoration:none !important}
+.blb-meta a:hover{color:#A93F63 !important}
+.blb-featured img, img.blb-featured{
+  border-radius:26px !important;
+  border:1px solid rgba(46,31,39,.16) !important;
+  box-shadow:0 34px 64px -30px rgba(46,31,39,.45) !important;
+}
+
+/* ---------- single post: everything inside the post content ---------- */
+.blb-post p{
+  font-family:'Karla',sans-serif !important;
+  font-size:17px !important;
+  line-height:1.75 !important;
+  color:#2E1F27 !important;
+  margin-bottom:26px !important;
+}
+.blb-post h2, .blb-post h3, .blb-post h4{
+  font-family:'Fraunces',Georgia,serif !important;
+  font-weight:500 !important;
+  color:#2E1F27 !important;
+  line-height:1.15 !important;
+  margin:44px 0 18px !important;
+}
+.blb-post h2{font-size:30px !important}
+.blb-post h3{font-size:24px !important}
+.blb-post h4{font-size:20px !important}
+.blb-post a{
+  color:#A93F63 !important;
+  font-weight:600 !important;
+  text-decoration:underline !important;
+  text-decoration-color:rgba(169,63,99,.4) !important;
+  text-underline-offset:3px !important;
+}
+.blb-post a:hover{text-decoration-color:#A93F63 !important}
+.blb-post ul, .blb-post ol{margin:0 0 26px 22px !important}
+.blb-post li{font-size:16.5px !important;line-height:1.7 !important;margin-bottom:10px !important;font-family:'Karla',sans-serif !important;color:#2E1F27 !important}
+.blb-post li::marker{color:#A93F63 !important}
+.blb-post blockquote{
+  border-left:2px solid #A93F63 !important;
+  margin:36px 0 !important;
+  padding:6px 0 6px 26px !important;
+  background:none !important;
+}
+.blb-post blockquote p{
+  font-family:'Fraunces',Georgia,serif !important;
+  font-style:italic !important;
+  font-size:23px !important;
+  line-height:1.45 !important;
+  color:#A93F63 !important;
+  margin:0 !important;
+}
+.blb-post img{
+  border-radius:20px !important;
+  border:1px solid rgba(46,31,39,.16) !important;
+  box-shadow:0 26px 50px -26px rgba(46,31,39,.38) !important;
+  height:auto !important;
+  max-width:100% !important;
+}
+.blb-post figcaption, .blb-post .wp-caption-text{
+  font-family:'Ephesis',cursive !important;
+  font-size:22px !important;
+  color:#BC8A47 !important;
+  text-align:center !important;
+  margin-top:10px !important;
+}
+.blb-post strong, .blb-post b{color:#2E1F27 !important;font-weight:700 !important}
+.blb-post em{color:#A93F63 !important}
+.blb-post hr{border:none !important;border-top:1px dashed rgba(46,31,39,.25) !important;margin:40px 0 !important}
+
+/* ---------- blog index: the post list / grid ---------- */
+.blb-grid h2 a, .blb-grid h3 a, .blb-grid .blog-post-title, .blb-grid .blog-post-title a{
+  font-family:'Fraunces',Georgia,serif !important;
+  font-weight:500 !important;
+  color:#2E1F27 !important;
+  text-decoration:none !important;
+  line-height:1.25 !important;
+}
+.blb-grid h2 a:hover, .blb-grid h3 a:hover{color:#A93F63 !important}
+.blb-grid img{
+  border-radius:20px 20px 0 0 !important;
+  border:1px solid rgba(46,31,39,.14) !important;
+}
+.blb-grid p, .blb-excerpt, .blb-excerpt *{
+  font-family:'Karla',sans-serif !important;
+  font-size:15px !important;
+  line-height:1.65 !important;
+  color:#6E5C63 !important;
+}
+.blb-grid a.more-link, .blb-grid .read-more, .blb-readmore, .blb-readmore *{
+  font-family:'Karla',sans-serif !important;
+  font-weight:700 !important;
+  font-size:12px !important;
+  letter-spacing:0.18em !important;
+  text-transform:uppercase !important;
+  color:#A93F63 !important;
+  text-decoration:none !important;
+}
+</style>

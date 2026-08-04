@@ -1,0 +1,88 @@
+<!--
+============================================================
+PART 5 of 5 — WORK WITH ME BAND + FOOTER (one embed block)
+============================================================
+WHERE IT GOES: an Embed Code block at the very BOTTOM of both
+blog templates, full width. Roughly 900px tall on desktop.
+============================================================
+-->
+
+<div id="blbFoot">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;1,9..144,500&family=Karla:wght@400;700&family=Ephesis&display=swap');
+#blbFoot{font-family:'Karla',sans-serif}
+#blbFoot *{margin:0;padding:0;box-sizing:border-box}
+#blbFoot .band{background:#2E1F27;color:#FBF6EE;text-align:center;padding:80px 30px}
+#blbFoot .eyebrow{display:inline-block;font-weight:700;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:#F0DCE2}
+#blbFoot .band h2{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:clamp(30px,5vw,48px);margin:12px 0 10px}
+#blbFoot .band h2 em{color:#F0DCE2}
+#blbFoot .script{font-family:'Ephesis',cursive;font-size:28px;color:#BC8A47;margin-bottom:12px}
+#blbFoot .band p{color:#D8CBC3;max-width:540px;margin:0 auto 28px;font-size:16px;line-height:1.65}
+#blbFoot .btn{display:inline-block;background:#A93F63;color:#fff;border:1px solid #A93F63;font-weight:700;font-size:12px;letter-spacing:.18em;text-transform:uppercase;padding:18px 42px;border-radius:60px;text-decoration:none;transition:all .2s}
+#blbFoot .btn:hover{transform:translateY(-3px)}
+#blbFoot footer{background:#2E1F27;color:#B9A9A0;border-top:1px solid rgba(251,246,238,.14);padding:70px 0 40px;overflow:hidden}
+#blbFoot .wrap{max-width:1160px;margin:0 auto;padding:0 30px}
+#blbFoot .foot-word{font-family:'Fraunces',Georgia,serif;font-style:italic;font-size:clamp(48px,9.5vw,130px);color:transparent;-webkit-text-stroke:1px rgba(251,246,238,.35);text-align:center;line-height:1;white-space:nowrap;margin-bottom:60px;user-select:none}
+#blbFoot .grid{display:grid;grid-template-columns:1.35fr 1fr 1fr 1fr;gap:44px}
+#blbFoot .foot-logo{font-family:'Fraunces',Georgia,serif;font-size:27px;color:#FBF6EE;margin-bottom:14px}
+#blbFoot .foot-logo em{font-style:italic;color:#A93F63}
+#blbFoot .brand p{font-size:15px;max-width:300px;margin-bottom:20px;line-height:1.6}
+#blbFoot h4{font-weight:700;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:#FBF6EE;margin-bottom:18px}
+#blbFoot ul{list-style:none}
+#blbFoot li{margin-bottom:12px}
+#blbFoot li a{font-size:14.5px;color:#B9A9A0;text-decoration:none}
+#blbFoot li a:hover{color:#A93F63}
+#blbFoot .tag{text-align:center;font-family:'Ephesis',cursive;font-size:28px;color:#BC8A47;padding-top:32px;margin-top:46px;border-top:1px solid rgba(251,246,238,.12)}
+#blbFoot .copy{text-align:center;font-size:12.5px;color:#8d7f77;margin-top:16px}
+@media (max-width:980px){#blbFoot .grid{grid-template-columns:1fr 1fr}}
+@media (max-width:640px){#blbFoot .grid{grid-template-columns:1fr;gap:32px}}
+</style>
+<div class="band">
+  <span class="eyebrow">Done reading, ready to build?</span>
+  <h2>Let's build your blog <em>together.</em></h2>
+  <div class="script">this is the fun part</div>
+  <p>The Blog Accelerator is where reading turns into launching: your offer, copy, brand and a gorgeous custom website, built with you in 21 days.</p>
+  <a class="btn" href="/blog-accelerator">Work with me &rarr;</a>
+</div>
+<footer>
+  <div class="wrap">
+    <div class="foot-word">Boss Lady Bloggers</div>
+    <div class="grid">
+      <div class="brand">
+        <div class="foot-logo">Boss <em>Lady</em> Bloggers</div>
+        <p>Gorgeous, business-first blogs for women who want an actual business, not a hobby that might pay off in three years.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="/about">About</a></li>
+          <li><a href="/start-here">Start Here</a></li>
+          <li><a href="/blog">Blog</a></li>
+          <li><a href="/podcast">Podcast</a></li>
+          <li><a href="/freebies">Free Courses</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Work With Me</h4>
+        <ul>
+          <li><a href="/blog-accelerator">The Blog Accelerator</a></li>
+          <li><a href="/blog-coaching">Blog Coaching</a></li>
+          <li><a href="/book-a-call">Book a Free Call</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Support</h4>
+        <ul>
+          <li><a href="/contact">Contact</a></li>
+          <li><a href="/privacy-policy">Privacy Policy</a></li>
+          <li><a href="/terms-conditions">Terms &amp; Conditions</a></li>
+          <li><a href="/disclaimer">Disclaimer</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="tag">gorgeous blogs that actually make money</div>
+    <div class="copy">&copy; <span id="blbYr"></span> Boss Lady Bloggers. All rights reserved.</div>
+  </div>
+</footer>
+<script>document.getElementById('blbYr').textContent=new Date().getFullYear();</script>
+</div>

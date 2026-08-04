@@ -1,0 +1,102 @@
+<!--
+============================================================
+PART 2 of 5 — BANNER + NAVIGATION (one embed block)
+============================================================
+WHERE IT GOES: an Embed Code block pinned to the very TOP of
+both blog templates, full width. In Showit make the block
+about 130px tall and full-bleed. The mobile menu opens as a
+full-screen overlay.
+NOTE: if the mobile menu looks cut off when you preview on
+your phone, Showit is boxing the embed in. Fix: make this
+embed block taller in the mobile view of the canvas, or tell
+me and I'll give you a version that pushes content instead
+of overlaying.
+============================================================
+-->
+
+<div id="blbNavRoot">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,500&family=Karla:wght@400;600;700&family=Ephesis&display=swap');
+#blbNavRoot{font-family:'Karla',sans-serif;color:#2E1F27}
+#blbNavRoot *{margin:0;padding:0;box-sizing:border-box}
+#blbNavRoot .annbar{position:relative;background:#A93F63;color:#fff;overflow:hidden}
+#blbNavRoot .ann-link{display:block;text-decoration:none;color:#fff;padding:11px 0}
+#blbNavRoot .ann-track{display:flex;align-items:center;white-space:nowrap;width:max-content;animation:blbannm 24s linear infinite}
+#blbNavRoot .ann-track span{font-size:12px;letter-spacing:.16em;text-transform:uppercase;padding:0 14px}
+#blbNavRoot .ann-track i{font-style:normal;color:#F0DCE2}
+#blbNavRoot .annbar:hover .ann-track{animation-play-state:paused}
+@keyframes blbannm{to{transform:translateX(-50%)}}
+#blbNavRoot .ann-x{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:rgba(46,31,39,.25);border:none;color:#fff;width:26px;height:26px;border-radius:50%;font-size:15px;line-height:1;cursor:pointer}
+#blbNavRoot .annbar.hide{display:none}
+#blbNavRoot nav{background:rgba(251,246,238,.95);border-bottom:1px solid rgba(46,31,39,.12)}
+#blbNavRoot .nav-inner{max-width:1160px;margin:0 auto;padding:0 30px;display:flex;align-items:center;justify-content:space-between;height:82px}
+#blbNavRoot .logo{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:21px;text-decoration:none;color:#2E1F27}
+#blbNavRoot .logo em{font-style:italic;color:#A93F63}
+#blbNavRoot .nav-links{display:flex;gap:30px;list-style:none;align-items:center}
+#blbNavRoot .nav-links a{font-weight:700;font-size:12px;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;color:#2E1F27;transition:color .2s}
+#blbNavRoot .nav-links a:hover{color:#A93F63}
+#blbNavRoot .nav-cta{font-weight:700;font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;color:#2E1F27;border:1px solid #2E1F27;padding:12px 24px;border-radius:60px;transition:all .25s}
+#blbNavRoot .nav-cta:hover{background:#2E1F27;color:#FBF6EE}
+#blbNavRoot .burger{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:6px;padding:6px}
+#blbNavRoot .burger i{display:block;width:26px;height:2px;border-radius:2px;background:#2E1F27}
+@media (max-width:920px){#blbNavRoot .nav-links,#blbNavRoot .nav-cta{display:none}#blbNavRoot .burger{display:flex}}
+#blbNavRoot .mobile-menu{display:none;position:fixed;inset:0;z-index:9999;background:#FBF6EE;background-image:radial-gradient(circle at 85% 12%,#F0DCE2 0%,rgba(240,220,226,0) 42%);padding:26px 30px 40px;flex-direction:column;overflow-y:auto}
+#blbNavRoot .mobile-menu.open{display:flex}
+#blbNavRoot .mobile-close{position:absolute;top:20px;right:22px;background:#fff;border:1px solid #2E1F27;width:42px;height:42px;border-radius:50%;font-size:22px;line-height:1;cursor:pointer;color:#2E1F27}
+#blbNavRoot .mm-links{display:flex;flex-direction:column;gap:4px;margin-top:60px;counter-reset:blbmm}
+#blbNavRoot .mm-links a{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:30px;line-height:1.35;text-decoration:none;color:#2E1F27;display:flex;align-items:baseline;gap:12px;padding:6px 0;border-bottom:1px dashed rgba(46,31,39,.14)}
+#blbNavRoot .mm-links a::before{content:counter(blbmm,decimal-leading-zero);counter-increment:blbmm;font-family:'Karla',sans-serif;font-weight:700;font-size:10.5px;letter-spacing:.16em;color:#A93F63}
+#blbNavRoot .mm-cta{margin-top:22px;display:flex;align-items:center;justify-content:center;background:#A93F63 !important;color:#fff !important;font-weight:700;font-size:13px;letter-spacing:.18em;text-transform:uppercase;padding:19px 30px;border-radius:60px;text-decoration:none;border:1px solid #7C2B48;box-shadow:0 16px 30px -12px rgba(124,43,72,.6)}
+#blbNavRoot .mm-script{font-family:'Ephesis',cursive;font-size:26px;color:#BC8A47;text-align:center;margin-top:18px}
+</style>
+<div class="annbar" id="blbAnn">
+  <a href="/freebies" class="ann-link">
+    <div class="ann-track">
+      <span><b>FREE BLOGGING COURSES</b></span><i>&#10022;</i><span>six full courses, zero dollars</span><i>&#10022;</i><span>everything I wish I'd known in year one</span><i>&#10022;</i><span><b>GET THEM FREE &rarr;</b></span><i>&#10022;</i>
+      <span><b>FREE BLOGGING COURSES</b></span><i>&#10022;</i><span>six full courses, zero dollars</span><i>&#10022;</i><span>everything I wish I'd known in year one</span><i>&#10022;</i><span><b>GET THEM FREE &rarr;</b></span><i>&#10022;</i>
+    </div>
+  </a>
+  <button class="ann-x" id="blbAnnX">&times;</button>
+</div>
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="/">Boss Lady <em>Bloggers</em></a>
+    <ul class="nav-links">
+      <li><a href="/" aria-label="Home" style="display:inline-flex"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11 12 3l9 8"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg></a></li>
+      <li><a href="/about">About</a></li>
+      <li><a href="/blog-accelerator">The Program</a></li>
+      <li><a href="/blog-coaching">Blog Coaching</a></li>
+      <li><a href="/blog">Blog</a></li>
+      <li><a href="/podcast">Podcast</a></li>
+      <li><a href="/freebies">Freebies</a></li>
+    </ul>
+    <a href="/book-a-call" class="nav-cta">Book a Free Call</a>
+    <button class="burger" id="blbBurger" aria-label="Menu"><i></i><i></i><i></i></button>
+  </div>
+</nav>
+<div class="mobile-menu" id="blbMenu">
+  <button class="mobile-close" id="blbClose">&times;</button>
+  <nav class="mm-links">
+    <a href="/">Home</a>
+    <a href="/about">About</a>
+    <a href="/blog-accelerator">The Program</a>
+    <a href="/blog-coaching">Blog Coaching</a>
+    <a href="/blog">Blog</a>
+    <a href="/podcast">Podcast</a>
+    <a href="/freebies">Free Courses</a>
+  </nav>
+  <a href="/book-a-call" class="mm-cta">Book a Free Call &rarr;</a>
+  <div class="mm-script">blog like she means business</div>
+</div>
+<script>
+(function(){
+  var b=document.getElementById('blbBurger'),m=document.getElementById('blbMenu'),c=document.getElementById('blbClose');
+  if(b&&m){b.addEventListener('click',function(){m.classList.add('open')});
+    c.addEventListener('click',function(){m.classList.remove('open')});
+    m.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){m.classList.remove('open')})});}
+  var ab=document.getElementById('blbAnn'),ax=document.getElementById('blbAnnX');
+  try{if(sessionStorage.getItem('blb_ann')==='1'&&ab)ab.classList.add('hide');}catch(e){}
+  if(ax)ax.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();ab.classList.add('hide');try{sessionStorage.setItem('blb_ann','1')}catch(e2){}});
+})();
+</script>
+</div>

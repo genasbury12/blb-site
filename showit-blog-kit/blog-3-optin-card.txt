@@ -1,0 +1,31 @@
+<!--
+============================================================
+PART 3 of 5 — FREE COURSES OPT-IN CARD (one embed block)
+============================================================
+WHERE IT GOES: an Embed Code block placed BELOW the post
+content placeholder on the single post template. Make the
+block roughly 420px tall, max width ~760px, centered.
+============================================================
+-->
+
+<div id="blbOpt">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;1,9..144,500&family=Karla:wght@400;700&family=Ephesis&display=swap');
+#blbOpt{font-family:'Karla',sans-serif;color:#2E1F27;padding:10px}
+#blbOpt *{margin:0;padding:0;box-sizing:border-box}
+#blbOpt .card{max-width:720px;margin:0 auto;background:#F4EBDE;border:1px solid rgba(46,31,39,.16);border-radius:26px;padding:44px 40px;text-align:center;box-shadow:0 26px 50px -26px rgba(46,31,39,.38)}
+#blbOpt .eyebrow{display:inline-block;font-weight:700;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:#7C2B48}
+#blbOpt h2{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:clamp(26px,4vw,34px);margin:8px 0}
+#blbOpt .script{font-family:'Ephesis',cursive;font-size:26px;color:#A93F63;margin-bottom:8px}
+#blbOpt p{color:#6E5C63;max-width:440px;margin:0 auto 22px;font-size:16px;line-height:1.65}
+#blbOpt .btn{display:inline-block;background:#A93F63;color:#fff;border:1px solid #A93F63;font-weight:700;font-size:12px;letter-spacing:.18em;text-transform:uppercase;padding:17px 36px;border-radius:60px;text-decoration:none;transition:all .2s}
+#blbOpt .btn:hover{background:#2E1F27;border-color:#2E1F27;transform:translateY(-3px)}
+</style>
+<div class="card">
+  <span class="eyebrow">Free Blogging Courses</span>
+  <h2>Liked this post? The free courses go deeper.</h2>
+  <div class="script">six full courses, zero dollars</div>
+  <p>One signup unlocks the whole free library: starting your blog, finding what to sell, getting traffic and more.</p>
+  <a class="btn" href="/freebies">Send me the free courses &rarr;</a>
+</div>
+</div>
