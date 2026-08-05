@@ -176,16 +176,15 @@ body::after{
   transform:translateY(-6px) !important;
   box-shadow:0 34px 60px -26px rgba(46,31,39,.5) !important;
 }
+/* categories: the tagged box itself stays invisible, and every
+   category link inside it becomes its own little blush pill,
+   lined up on the left */
 .blb-cats{
-  display:inline-block !important;
-  width:fit-content !important;
-  max-width:fit-content !important;
-  background:#F0DCE2 !important;
-  border-radius:40px !important;
-  padding:8px 16px !important;
-  text-align:center !important;
-  line-height:1.1 !important;
-  white-space:nowrap !important;
+  background:transparent !important;
+  background-color:transparent !important;
+  padding:0 !important;
+  border:none !important;
+  text-align:left !important;
 }
 .blb-cats, .blb-cats *{
   font-family:'Karla',sans-serif !important;
@@ -196,6 +195,18 @@ body::after{
   color:#7C2B48 !important;
   text-decoration:none !important;
 }
+.blb-cats a{
+  display:inline-block !important;
+  background:#F0DCE2 !important;
+  border:none !important;
+  border-radius:40px !important;
+  padding:6px 14px !important;
+  margin:0 6px 6px 0 !important;
+  white-space:nowrap !important;
+  line-height:1.1 !important;
+}
+.blb-cats a:hover{background:#A93F63 !important}
+.blb-cats a:hover, .blb-cats a:hover *{color:#FFFFFF !important}
 .blb-cardimg, .blb-cardimg img{
   border-radius:0 !important;
   width:100% !important;
@@ -269,25 +280,8 @@ body::after{
   color:#6E5C63 !important;
 }
 
-/* category filter pills - tag the row of category links: blb-cats */
-.blb-cats a{
-  display:inline-block !important;
-  font-family:'Karla',sans-serif !important;
-  font-weight:700 !important;
-  font-size:11.5px !important;
-  letter-spacing:.14em !important;
-  text-transform:uppercase !important;
-  padding:11px 22px !important;
-  border-radius:60px !important;
-  border:1px solid rgba(46,31,39,.35) !important;
-  color:#2E1F27 !important;
-  text-decoration:none !important;
-  margin:0 5px 10px 0 !important;
-  transition:all .2s !important;
-}
-.blb-cats a:hover{border-color:#A93F63 !important;color:#A93F63 !important}
+/* active category state (when viewing one category's page) */
 .blb-cats a.current, .blb-cats .current-cat a{
   background:#A93F63 !important;
-  border-color:#A93F63 !important;
   color:#fff !important;
 }
