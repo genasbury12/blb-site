@@ -208,6 +208,18 @@ body::after{
   text-decoration:none !important;
 }
 .blb-readmore:hover, .blb-readmore:hover *{color:#7C2B48 !important}
+/* the rectangle BEHIND the read more text: tag it blb-readbar
+   and it turns site pink. Tag the text on top blb-readbartext
+   so it goes white instead of pink. */
+.blb-readbar{background:#A93F63 !important;background-color:#A93F63 !important}
+.blb-readbartext, .blb-readbartext *{
+  font-family:'Karla',sans-serif !important;
+  font-weight:700 !important;
+  font-size:12px !important;
+  letter-spacing:.18em !important;
+  text-transform:uppercase !important;
+  color:#FFFFFF !important;
+}
 
 /* the repeating post items inside the list you tagged blb-grid */
 .blb-grid article, .blb-grid .post, .blb-grid li, .blb-grid .blog-post{
