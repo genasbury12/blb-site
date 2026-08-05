@@ -1,0 +1,56 @@
+<!--
+============================================================
+PART 10 — BROWSE BY TOPIC / CATEGORIES (one embed block)
+============================================================
+WHERE IT GOES: an Embed Code block on the blog INDEX
+template, between the hero (part 7) and the post list.
+Make the block roughly 230px tall on desktop, full width.
+
+EDIT YOUR CATEGORIES: the pills are in the list near the
+bottom of this code. Each pill is one line like:
+  <a class="pill" href="/blog/category/blogging-tips/">Blogging tips</a>
+Swap the text for your category name and the href for its
+real link. TO GET THE REAL LINK: on your live blog, click
+that category's little blush pill on any post card, then
+copy the URL from the address bar and paste it as the href.
+Add or delete pill lines freely, the row wraps and centers
+itself.
+============================================================
+-->
+
+<div id="blbCatsRow">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;1,9..144,500&family=Karla:wght@400;700&family=Ephesis&display=swap');
+#blbCatsRow{font-family:'Karla',sans-serif;color:#2E1F27;background:#FBF6EE;padding:36px 20px;text-align:center}
+#blbCatsRow *{margin:0;padding:0;box-sizing:border-box}
+#blbCatsRow .script{font-family:'Ephesis',cursive;font-size:clamp(24px,3.5vw,32px);color:#BC8A47}
+#blbCatsRow h2{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:clamp(22px,3.5vw,30px);margin:4px 0 22px}
+#blbCatsRow .row{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;max-width:860px;margin:0 auto}
+#blbCatsRow .pill{
+  display:inline-block;
+  font-weight:700;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;
+  padding:13px 26px;border-radius:60px;
+  border:1px solid rgba(46,31,39,.35);
+  color:#2E1F27;text-decoration:none;background:transparent;
+  transition:all .2s ease;
+}
+#blbCatsRow .pill:hover{
+  background:#A93F63;border-color:#A93F63;color:#fff;
+  transform:translateY(-3px);
+  box-shadow:0 14px 26px -14px rgba(169,63,99,.6);
+}
+#blbCatsRow .pill.all{background:#2E1F27;border-color:#2E1F27;color:#FBF6EE}
+#blbCatsRow .pill.all:hover{background:#A93F63;border-color:#A93F63}
+@media (prefers-reduced-motion:reduce){#blbCatsRow .pill:hover{transform:none}}
+</style>
+<div class="script">what do you want to learn?</div>
+<h2>Browse by topic</h2>
+<div class="row">
+  <a class="pill all" href="/blog">All posts</a>
+  <a class="pill" href="/blog/category/blogging-tips/">Blogging tips</a>
+  <a class="pill" href="/blog/category/make-money-blogging/">Make money blogging</a>
+  <a class="pill" href="/blog/category/blog-design/">Blog design</a>
+  <a class="pill" href="/blog/category/email-marketing/">Email marketing</a>
+  <a class="pill" href="/blog/category/traffic-seo/">Traffic + SEO</a>
+</div>
+</div>
