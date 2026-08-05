@@ -178,11 +178,14 @@ body::after{
 }
 .blb-cats{
   display:inline-block !important;
+  width:fit-content !important;
+  max-width:fit-content !important;
   background:#F0DCE2 !important;
   border-radius:40px !important;
-  padding:8px 6px !important;
+  padding:8px 16px !important;
   text-align:center !important;
   line-height:1.1 !important;
+  white-space:nowrap !important;
 }
 .blb-cats, .blb-cats *{
   font-family:'Karla',sans-serif !important;
