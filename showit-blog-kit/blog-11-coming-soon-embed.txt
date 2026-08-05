@@ -1,0 +1,152 @@
+<!--
+============================================================
+PART 11 — BLOG COMING SOON (one embed block, no JavaScript)
+============================================================
+WHERE IT GOES: an Embed Code block on the blog INDEX
+template, between the nav embed (part 2) and the footer
+embed (part 5). Hide or delete the post list placeholder
+while this is up.
+
+SIZE: full width. Height roughly 1750px on desktop and
+2500px on mobile. If the bottom gets cut off, make the
+block taller until it all fits.
+
+This block is built with zero JavaScript on purpose so the
+blog template cannot break it. All the movement (spinning
+badge, marquee, progress bar, sheen) is pure CSS.
+============================================================
+-->
+
+<div id="blbSoon">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;1,9..144,500&family=Karla:wght@400;700&family=Ephesis&display=swap');
+#blbSoon{max-width:100vw;overflow:hidden;font-family:'Karla',sans-serif;color:#2E1F27;background:#FBF6EE}
+#blbSoon *{margin:0;padding:0;box-sizing:border-box}
+#blbSoon .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+
+/* hero */
+#blbSoon .hero{position:relative;text-align:center;padding:84px 0 60px;overflow:hidden}
+#blbSoon .word{position:absolute;top:16px;left:50%;transform:translateX(-50%);font-family:'Fraunces',Georgia,serif;font-style:italic;font-size:clamp(64px,14vw,170px);line-height:1;color:transparent;-webkit-text-stroke:1px rgba(169,63,99,.18);white-space:nowrap;pointer-events:none;user-select:none}
+#blbSoon .badge{position:relative;width:130px;height:130px;margin:0 auto 26px;background:#fff;border:1px solid #2E1F27;border-radius:50%;box-shadow:0 18px 36px -18px rgba(46,31,39,.5);display:flex;align-items:center;justify-content:center}
+#blbSoon .badge svg{width:100%;height:100%;animation:blbSpin 15s linear infinite}
+#blbSoon .badge .mid{position:absolute;font-size:32px}
+@keyframes blbSpin{to{transform:rotate(360deg)}}
+#blbSoon .eyebrow{display:inline-block;background:#F0DCE2;border-radius:60px;padding:9px 20px;font-weight:700;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:#7C2B48}
+#blbSoon h1{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:clamp(38px,6vw,64px);line-height:1.08;margin:16px 0 8px}
+#blbSoon h1 em{font-style:italic;color:#A93F63}
+#blbSoon .script{font-family:'Ephesis',cursive;font-size:clamp(26px,4vw,34px);color:#BC8A47;margin-bottom:12px}
+#blbSoon .lead{max-width:560px;margin:0 auto;color:#6E5C63;font-size:17px;line-height:1.7}
+#blbSoon .bar{max-width:420px;margin:28px auto 8px;background:#fff;border:1px solid rgba(46,31,39,.25);border-radius:60px;height:16px;overflow:hidden}
+#blbSoon .bar i{display:block;height:100%;width:72%;border-radius:60px;background:linear-gradient(90deg,#A93F63,#BC8A47);background-size:200% 100%;animation:blbFill 2.4s ease infinite alternate}
+@keyframes blbFill{to{background-position:100% 0}}
+#blbSoon .pct{font-family:'Ephesis',cursive;font-size:24px;color:#A93F63}
+
+/* marquee (duplicated content, pure CSS loop) */
+#blbSoon .mq{border-top:1px solid rgba(46,31,39,.14);border-bottom:1px solid rgba(46,31,39,.14);padding:14px 0;white-space:nowrap;overflow:hidden;background:#FBF6EE}
+#blbSoon .mq-in{display:inline-block;animation:blbMq 26s linear infinite;font-family:'Fraunces',Georgia,serif;font-size:15px;letter-spacing:.22em;text-transform:uppercase}
+#blbSoon .mq-in i{font-style:normal;color:#A93F63;padding:0 14px}
+@keyframes blbMq{to{transform:translateX(-50%)}}
+
+/* cards */
+#blbSoon .cards-sec{background:#F4EBDE;padding:70px 0 80px}
+#blbSoon .sec-head{text-align:center;margin-bottom:38px}
+#blbSoon h2{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:clamp(28px,4.5vw,40px);margin:10px 0 4px}
+#blbSoon .hand{font-family:'Ephesis',cursive;font-size:clamp(24px,3.5vw,30px);color:#A93F63}
+#blbSoon .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+#blbSoon .card{position:relative;border-radius:26px;padding:38px 30px;display:flex;flex-direction:column;gap:12px;text-align:left;transition:transform .25s ease}
+#blbSoon .card:hover{transform:translateY(-8px)}
+#blbSoon .num{font-family:'Ephesis',cursive;font-size:26px;opacity:.75}
+#blbSoon h3{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:24px;line-height:1.2}
+#blbSoon .card p{font-size:15.5px;line-height:1.65;flex:1;color:#4a3a41}
+#blbSoon .btn{display:inline-block;align-self:flex-start;background:#A93F63;color:#fff;border:1px solid #A93F63;font-weight:700;font-size:12px;letter-spacing:.18em;text-transform:uppercase;padding:16px 30px;border-radius:60px;text-decoration:none;transition:all .2s}
+#blbSoon .btn:hover{background:#2E1F27;border-color:#2E1F27;transform:translateY(-3px)}
+#blbSoon .btn.ghost{background:transparent;border-color:rgba(251,246,238,.5);color:#FBF6EE}
+#blbSoon .btn.ghost:hover{background:#FBF6EE;color:#2E1F27}
+#blbSoon .c-free{background:#F0DCE2;border:1px solid rgba(124,43,72,.25);box-shadow:0 26px 50px -26px rgba(169,63,99,.4)}
+#blbSoon .tag{position:absolute;top:-13px;right:22px;background:#A93F63;color:#fff;font-weight:700;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;padding:7px 16px;border-radius:40px;animation:blbWig 2.6s ease infinite}
+@keyframes blbWig{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(2deg)}}
+#blbSoon .c-pod{background:#2E1F27;color:#FBF6EE;box-shadow:0 30px 56px -28px rgba(46,31,39,.6);overflow:hidden}
+#blbSoon .c-pod h3{color:#FBF6EE}
+#blbSoon .c-pod p{color:rgba(251,246,238,.78)}
+#blbSoon .c-pod .mic{position:absolute;right:-26px;bottom:-30px;font-size:120px;opacity:.14;transform:rotate(-14deg);pointer-events:none}
+#blbSoon .c-accel{background:#fff;border:1px solid #A93F63;box-shadow:0 26px 50px -26px rgba(46,31,39,.38);overflow:hidden}
+#blbSoon .c-accel::before{content:'';position:absolute;inset:0;background:linear-gradient(115deg,transparent 30%,rgba(240,220,226,.55) 48%,transparent 62%);background-size:240% 100%;animation:blbSheen 3.2s linear infinite;pointer-events:none}
+@keyframes blbSheen{to{background-position:-140% 0}}
+#blbSoon .price{font-family:'Fraunces',Georgia,serif;font-size:18px;color:#7C2B48}
+
+/* final CTA */
+#blbSoon .cta{text-align:center;padding:76px 0 84px;background:#FBF6EE}
+#blbSoon .cta p{max-width:460px;margin:0 auto 24px;color:#6E5C63;font-size:16px;line-height:1.7}
+#blbSoon .cta .btn{align-self:center}
+
+@media (max-width:900px){#blbSoon .cards{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){#blbSoon .badge svg,#blbSoon .bar i,#blbSoon .mq-in,#blbSoon .tag,#blbSoon .c-accel::before{animation:none}}
+</style>
+
+<div class="hero">
+  <div class="word" aria-hidden="true">coming back</div>
+  <div class="wrap" style="position:relative">
+    <div class="badge" aria-hidden="true">
+      <svg viewBox="0 0 130 130">
+        <defs><path id="blbSoonCirc" d="M65,65 m-47,0 a47,47 0 1,1 94,0 a47,47 0 1,1 -94,0"/></defs>
+        <text style="font-family:Karla,sans-serif;font-weight:700;font-size:12px;letter-spacing:3px;fill:#2E1F27"><textPath href="#blbSoonCirc">THE BLOG &#10022; GLOW UP &#10022; IN PROGRESS &#10022;</textPath></text>
+      </svg>
+      <span class="mid">&#128221;</span>
+    </div>
+    <span class="eyebrow">The Boss Lady Blog</span>
+    <h1>The blog is getting a <em>glow up.</em></h1>
+    <div class="script">new posts, new look, worth the wait</div>
+    <p class="lead">I'm rebuilding the blog from the ground up: better posts, better design, all focused on one thing. Helping you build a blog that actually sells.</p>
+    <div class="bar" aria-hidden="true"><i></i></div>
+    <div class="pct">so close, babe</div>
+  </div>
+</div>
+
+<div class="mq" aria-hidden="true">
+  <div class="mq-in">
+    Coming back soon<i>&#10038;</i>New posts brewing<i>&#10038;</i>Blogging tips<i>&#10038;</i>Make money blogging<i>&#10038;</i>Blog design<i>&#10038;</i>Coming back soon<i>&#10038;</i>New posts brewing<i>&#10038;</i>Blogging tips<i>&#10038;</i>Make money blogging<i>&#10038;</i>Blog design<i>&#10038;</i>
+  </div>
+</div>
+
+<div class="cards-sec">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">While you wait</span>
+      <h2>Three things to keep you busy</h2>
+      <div class="hand">all three are kind of a big deal</div>
+    </div>
+    <div class="cards">
+      <div class="card c-free">
+        <span class="tag">100% free</span>
+        <span class="num">01.</span>
+        <h3>Six free blogging courses</h3>
+        <p>The entire Course Library, free. Starting your blog, finding what to sell, getting traffic, making your first sale. One signup unlocks everything.</p>
+        <a class="btn" href="/freebies">Unlock the free courses &rarr;</a>
+      </div>
+      <div class="card c-pod">
+        <span class="mic" aria-hidden="true">&#127908;</span>
+        <span class="num" style="color:#BC8A47">02.</span>
+        <h3>The podcast is live</h3>
+        <p>Blogging strategy you can binge while the blog gets its makeover. Real talk on offers, traffic, and selling without feeling salesy.</p>
+        <a class="btn ghost" href="/podcast">Listen to the podcast &rarr;</a>
+      </div>
+      <div class="card c-accel">
+        <span class="num" style="color:#A93F63">03.</span>
+        <h3>Skip the reading. Get it built.</h3>
+        <p>The Blog Accelerator is my done-with-you program: your offer nailed down, sales copy written, and a custom website designed around it. In 21 days.</p>
+        <div class="price">$3,000 &middot; payment plans available</div>
+        <a class="btn" href="/blog-accelerator">See the program &rarr;</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="cta">
+  <div class="wrap">
+    <span class="eyebrow">Or just say hi</span>
+    <h2>Not sure where to start?</h2>
+    <p>Book a free call and I'll point you at the right thing for where your blog is right now. No pitch, just a plan.</p>
+    <a class="btn" href="/book-a-call">Book a free call &rarr;</a>
+  </div>
+</div>
+</div>
