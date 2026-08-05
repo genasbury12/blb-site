@@ -1,0 +1,35 @@
+<!--
+============================================================
+PART 9 — FREE COURSES SLIDING MARQUEE STRIP (one embed block)
+============================================================
+WHERE IT GOES: an Embed Code block anywhere you want a cute
+divider that promotes the free course library. Works on the
+blog index or the single post template. Make the block about
+110px tall, full width. The whole strip is clickable and
+goes to /freebies.
+============================================================
+-->
+
+<div id="blbFreeMq">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;1,9..144,500&family=Karla:wght@400;700&display=swap');
+#blbFreeMq{font-family:'Karla',sans-serif;padding:10px 0}
+#blbFreeMq *{margin:0;padding:0;box-sizing:border-box}
+#blbFreeMq a.strip{display:block;background:#F0DCE2;border-top:1px solid rgba(46,31,39,.14);border-bottom:1px solid rgba(46,31,39,.14);padding:20px 0;white-space:nowrap;overflow:hidden;text-decoration:none;transition:background .25s}
+#blbFreeMq a.strip:hover{background:#A93F63}
+#blbFreeMq .in{display:inline-block;animation:blbFreeSlide 22s linear infinite;font-family:'Fraunces',Georgia,serif;font-size:clamp(16px,2.4vw,21px);letter-spacing:.18em;text-transform:uppercase;color:#7C2B48;transition:color .25s}
+#blbFreeMq a.strip:hover .in{color:#FBF6EE}
+#blbFreeMq .in b{font-family:'Karla',sans-serif;font-weight:700;font-size:12px;letter-spacing:.22em;vertical-align:middle;padding:0 18px;color:#A93F63;transition:color .25s}
+#blbFreeMq a.strip:hover .in b{color:#F0DCE2}
+@keyframes blbFreeSlide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){#blbFreeMq .in{animation:none}}
+</style>
+<a class="strip" href="/freebies" aria-label="Get the free blogging courses">
+  <div class="in" id="blbFreeMqIn">
+    Free blogging courses<b>&rarr; tap to unlock</b>Six courses, zero dollars<b>&rarr; tap to unlock</b>Start your blog free<b>&rarr; tap to unlock</b>
+  </div>
+</a>
+<script>
+(function(){var m=document.getElementById('blbFreeMqIn');if(m){m.innerHTML+=m.innerHTML}})();
+</script>
+</div>

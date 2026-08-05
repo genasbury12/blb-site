@@ -1,0 +1,49 @@
+<!--
+============================================================
+PART 8 — BLOG ACCELERATOR PROMO BAND (one embed block)
+============================================================
+WHERE IT GOES: an Embed Code block on the blog INDEX
+template. Nice spots: between the post list and the footer,
+or halfway down the page if your list is long. Also works on
+the single post template above the footer. Make the block
+roughly 460px tall on desktop, full width.
+============================================================
+-->
+
+<div id="blbAccel">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;1,9..144,500&family=Karla:wght@400;700&family=Ephesis&display=swap');
+#blbAccel{font-family:'Karla',sans-serif;padding:26px 20px}
+#blbAccel *{margin:0;padding:0;box-sizing:border-box}
+#blbAccel .card{position:relative;max-width:980px;margin:0 auto;background:#2E1F27;color:#FBF6EE;border-radius:30px;padding:56px 48px;text-align:center;overflow:hidden;box-shadow:0 40px 70px -34px rgba(46,31,39,.55)}
+#blbAccel .glow{position:absolute;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(169,63,99,.35),transparent 70%);top:-120px;right:-90px;pointer-events:none}
+#blbAccel .glow.two{top:auto;bottom:-140px;left:-110px;right:auto;background:radial-gradient(circle,rgba(188,138,71,.28),transparent 70%)}
+#blbAccel .script{font-family:'Ephesis',cursive;font-size:clamp(28px,4vw,38px);color:#BC8A47}
+#blbAccel h2{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:clamp(30px,5vw,46px);line-height:1.1;margin:8px 0 14px}
+#blbAccel h2 em{font-style:italic;color:#F0DCE2}
+#blbAccel p{color:rgba(251,246,238,.82);max-width:560px;margin:0 auto 12px;font-size:16.5px;line-height:1.7}
+#blbAccel .chips{margin:18px 0 26px}
+#blbAccel .chip{display:inline-block;border:1px solid rgba(251,246,238,.35);border-radius:60px;padding:9px 18px;margin:4px 3px;font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#F0DCE2}
+#blbAccel .btn{display:inline-block;background:#A93F63;color:#fff;border:1px solid #A93F63;font-weight:700;font-size:12px;letter-spacing:.18em;text-transform:uppercase;padding:18px 38px;border-radius:60px;text-decoration:none;transition:all .2s;margin:4px 6px}
+#blbAccel .btn:hover{background:#FBF6EE;border-color:#FBF6EE;color:#2E1F27;transform:translateY(-3px)}
+#blbAccel .btn.ghost{background:transparent;border-color:rgba(251,246,238,.4);color:#FBF6EE}
+#blbAccel .btn.ghost:hover{background:#FBF6EE;color:#2E1F27}
+#blbAccel .fine{font-size:13px;color:rgba(251,246,238,.55);margin-top:14px}
+@media (max-width:640px){#blbAccel .card{padding:44px 24px}}
+</style>
+<div class="card">
+  <div class="glow"></div><div class="glow two"></div>
+  <div class="script">ready to skip the guesswork?</div>
+  <h2>Your blog, built to sell,<br>in <em>21 days</em></h2>
+  <p>The Blog Accelerator is my done-with-you program: your offer nailed down, sales copy written, and a custom website designed around it. You blog, it sells.</p>
+  <div class="chips">
+    <span class="chip">Custom design</span>
+    <span class="chip">Offer + copy</span>
+    <span class="chip">21 days</span>
+    <span class="chip">Only 3 spots at a time</span>
+  </div>
+  <a class="btn" href="/blog-accelerator">See the program &rarr;</a>
+  <a class="btn ghost" href="/book-a-call">Book a free call</a>
+  <div class="fine">$3,000 with payment plans available</div>
+</div>
+</div>

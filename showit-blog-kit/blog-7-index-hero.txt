@@ -1,0 +1,67 @@
+<!--
+============================================================
+PART 7 — BLOG INDEX HERO / ABOVE THE FOLD (one embed block)
+============================================================
+WHERE IT GOES: an Embed Code block at the TOP of the blog
+INDEX template, below the navigation, above the post list.
+Make the block roughly 480px tall on desktop, full width.
+On mobile Showit may need it around 420px tall.
+============================================================
+-->
+
+<div id="blbBlogHero">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;1,9..144,500&family=Karla:wght@400;700&family=Ephesis&display=swap');
+#blbBlogHero{font-family:'Karla',sans-serif;color:#2E1F27;background:#FBF6EE;padding:44px 20px 0;overflow:hidden}
+#blbBlogHero *{margin:0;padding:0;box-sizing:border-box}
+#blbBlogHero .wrap{max-width:860px;margin:0 auto;text-align:center;position:relative}
+#blbBlogHero .eyebrow{display:inline-block;background:#F0DCE2;border-radius:60px;padding:9px 20px;font-weight:700;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:#7C2B48}
+#blbBlogHero h1{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:clamp(34px,6vw,58px);line-height:1.08;letter-spacing:-0.01em;margin:18px 0 6px}
+#blbBlogHero h1 em{font-style:italic;color:#A93F63}
+#blbBlogHero .script{font-family:'Ephesis',cursive;font-size:clamp(26px,4vw,36px);color:#BC8A47;margin-bottom:14px}
+#blbBlogHero .typeline{font-size:15px;color:#6E5C63;min-height:24px;margin-bottom:26px}
+#blbBlogHero .typeline b{color:#A93F63;font-weight:700;border-right:2px solid #A93F63;padding-right:2px}
+#blbBlogHero .doodle{width:170px;margin:0 auto 8px;display:block}
+#blbBlogHero .mq{border-top:1px solid rgba(46,31,39,.14);border-bottom:1px solid rgba(46,31,39,.14);padding:13px 0;white-space:nowrap;overflow:hidden;margin-top:8px}
+#blbBlogHero .mq-in{display:inline-block;animation:blbSlide 26s linear infinite;font-family:'Fraunces',Georgia,serif;font-size:15px;letter-spacing:.22em;text-transform:uppercase;color:#2E1F27}
+#blbBlogHero .mq-in span{color:#A93F63;padding:0 14px}
+@keyframes blbSlide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){
+  #blbBlogHero .mq-in{animation:none}
+  #blbBlogHero .typeline b{border-right:none}
+}
+</style>
+<div class="wrap">
+  <span class="eyebrow">The Boss Lady Blog</span>
+  <h1>Read your way to a blog<br>that actually <em>sells</em></h1>
+  <div class="script">no fluff, just the stuff that works</div>
+  <div class="typeline">Posts about <b id="blbType">niching down</b></div>
+  <svg class="doodle" viewBox="0 0 170 14" fill="none" aria-hidden="true"><path d="M3 10 C 40 2, 130 2, 167 8" stroke="#A93F63" stroke-width="2.5" stroke-linecap="round"/><path d="M18 12 C 60 6, 120 6, 155 11" stroke="#A93F63" stroke-width="1.5" stroke-linecap="round" opacity=".45"/></svg>
+</div>
+<div class="mq" aria-hidden="true">
+  <div class="mq-in" id="blbHeroMq">
+    Blogging tips<span>&#10038;</span>Make money blogging<span>&#10038;</span>Blog design<span>&#10038;</span>Email lists<span>&#10038;</span>Traffic that converts<span>&#10038;</span>Offers that sell<span>&#10038;</span>
+  </div>
+</div>
+<script>
+(function(){
+  var mq=document.getElementById('blbHeroMq');
+  if(mq){mq.innerHTML+=mq.innerHTML;}
+  var el=document.getElementById('blbType');
+  if(!el)return;
+  if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  var words=['niching down','making your first sale','offers that feel easy','traffic that converts','email lists','design that sells'];
+  var wi=0,ci=0,del=false;
+  function tick(){
+    var w=words[wi];
+    ci=del?ci-1:ci+1;
+    el.textContent=w.slice(0,ci);
+    var wait=del?45:95;
+    if(!del&&ci===w.length){wait=1900;del=true}
+    else if(del&&ci===0){del=false;wi=(wi+1)%words.length;wait=350}
+    setTimeout(tick,wait);
+  }
+  setTimeout(tick,900);
+})();
+</script>
+</div>
