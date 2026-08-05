@@ -1,19 +1,21 @@
 <!--
 ============================================================
-PART 11 — BLOG COMING SOON (one embed block, no JavaScript)
+PART 11 — BLOG COMING SOON, FULL PAGE (one embed block)
 ============================================================
-WHERE IT GOES: an Embed Code block on the blog INDEX
-template, between the nav embed (part 2) and the footer
-embed (part 5). Hide or delete the post list placeholder
-while this is up.
+WHERE IT GOES: ONE Embed Code block on the blog INDEX
+template. This version includes the announcement banner,
+navigation, and footer, so it is the ENTIRE page in one
+paste. Do NOT also add the part 2 nav or part 5 footer on
+this template, or you'll get doubles. Hide or delete the
+post list placeholder while this is up.
 
-SIZE: full width. Height roughly 1750px on desktop and
-2500px on mobile. If the bottom gets cut off, make the
+SIZE: full width. Height roughly 2400px on desktop and
+3400px on mobile. If the bottom gets cut off, make the
 block taller until it all fits.
 
-This block is built with zero JavaScript on purpose so the
-blog template cannot break it. All the movement (spinning
-badge, marquee, progress bar, sheen) is pure CSS.
+Built with zero JavaScript on purpose so the blog template
+cannot break it. Everything (spinning badge, marquees,
+progress bar, sheen, even the mobile menu) is pure CSS.
 ============================================================
 -->
 
@@ -23,6 +25,35 @@ badge, marquee, progress bar, sheen) is pure CSS.
 #blbSoon{max-width:100vw;overflow:hidden;font-family:'Karla',sans-serif;color:#2E1F27;background:#FBF6EE}
 #blbSoon *{margin:0;padding:0;box-sizing:border-box}
 #blbSoon .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+
+/* announcement banner */
+#blbSoon .ann{display:block;background:#A93F63;text-decoration:none;padding:11px 0;white-space:nowrap;overflow:hidden}
+#blbSoon .ann-in{display:inline-block;animation:blbMq 24s linear infinite;font-weight:700;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#fff}
+#blbSoon .ann-in i{font-style:normal;color:#F0DCE2;padding:0 14px}
+
+/* navigation */
+#blbSoon .nv{position:relative;background:#FBF6EE;border-bottom:1px solid rgba(46,31,39,.1)}
+#blbSoon .nv input{position:absolute;opacity:0;pointer-events:none}
+#blbSoon .nv-bar{max-width:1200px;margin:0 auto;padding:18px 22px;display:flex;align-items:center;gap:26px}
+#blbSoon .nv-logo{font-family:'Fraunces',Georgia,serif;font-size:22px;color:#2E1F27;text-decoration:none;white-space:nowrap}
+#blbSoon .nv-logo em{font-style:italic;color:#A93F63}
+#blbSoon .nv-links{display:flex;align-items:center;gap:24px;margin-left:auto;list-style:none}
+#blbSoon .nv-links a{font-weight:700;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:#2E1F27;text-decoration:none;transition:color .2s}
+#blbSoon .nv-links a:hover{color:#A93F63}
+#blbSoon .nv-cta{border:1px solid #2E1F27;border-radius:60px;padding:14px 26px !important;transition:all .2s !important}
+#blbSoon .nv-cta:hover{background:#A93F63;border-color:#A93F63;color:#fff !important}
+#blbSoon .nv-burg{display:none;margin-left:auto;width:40px;height:40px;cursor:pointer;flex-direction:column;justify-content:center;gap:6px;align-items:center;border:1px solid rgba(46,31,39,.3);border-radius:50%}
+#blbSoon .nv-burg s{display:block;width:16px;height:2px;background:#2E1F27;border-radius:2px;transition:transform .25s}
+#blbSoon .nv-menu{display:none;background:#FBF6EE;border-bottom:1px solid rgba(46,31,39,.12);padding:10px 22px 26px;text-align:center}
+#blbSoon .nv-menu a{display:block;padding:13px 0;font-weight:700;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:#2E1F27;text-decoration:none;border-bottom:1px dashed rgba(46,31,39,.12)}
+#blbSoon .nv-menu a.mcta{margin-top:16px;background:#A93F63;color:#fff;border-radius:60px;padding:16px 0;border-bottom:none}
+#blbSoon .nv input:checked ~ .nv-menu{display:block}
+#blbSoon .nv input:checked ~ .nv-bar .nv-burg s:first-child{transform:translateY(4px) rotate(45deg)}
+#blbSoon .nv input:checked ~ .nv-bar .nv-burg s:last-child{transform:translateY(-4px) rotate(-45deg)}
+@media (max-width:900px){
+  #blbSoon .nv-links{display:none}
+  #blbSoon .nv-burg{display:flex}
+}
 
 /* hero */
 #blbSoon .hero{position:relative;text-align:center;padding:84px 0 60px;overflow:hidden}
@@ -79,9 +110,62 @@ badge, marquee, progress bar, sheen) is pure CSS.
 #blbSoon .cta p{max-width:460px;margin:0 auto 24px;color:#6E5C63;font-size:16px;line-height:1.7}
 #blbSoon .cta .btn{align-self:center}
 
-@media (max-width:900px){#blbSoon .cards{grid-template-columns:1fr}}
-@media (prefers-reduced-motion:reduce){#blbSoon .badge svg,#blbSoon .bar i,#blbSoon .mq-in,#blbSoon .tag,#blbSoon .c-accel::before{animation:none}}
+/* footer */
+#blbSoon .ft{background:#2E1F27;color:#FBF6EE;padding:60px 0 30px;overflow:hidden}
+#blbSoon .ft .fword{font-family:'Fraunces',Georgia,serif;font-style:italic;font-size:clamp(48px,9vw,110px);line-height:1;text-align:center;color:transparent;-webkit-text-stroke:1px rgba(251,246,238,.16);white-space:nowrap;margin-bottom:44px}
+#blbSoon .ft .fgrid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:36px;max-width:1080px;margin:0 auto;padding:0 22px}
+#blbSoon .ft .flogo{font-family:'Fraunces',Georgia,serif;font-size:22px;margin-bottom:10px}
+#blbSoon .ft .flogo em{font-style:italic;color:#A93F63}
+#blbSoon .ft p{color:#D8CBC3;font-size:14.5px;line-height:1.65;max-width:280px}
+#blbSoon .ft .fpods{display:flex;flex-wrap:wrap;gap:9px;margin-top:16px}
+#blbSoon .ft .fpod{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(251,246,238,.3);border-radius:60px;padding:9px 16px;font-weight:700;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#FBF6EE;text-decoration:none;transition:all .2s}
+#blbSoon .ft .fpod:hover{background:#FBF6EE;color:#2E1F27}
+#blbSoon .ft .fpod .d{width:8px;height:8px;border-radius:50%}
+#blbSoon .ft .apple .d{background:#fa57c1}
+#blbSoon .ft .spotify .d{background:#1ed760}
+#blbSoon .ft h4{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#BC8A47;margin-bottom:14px}
+#blbSoon .ft ul{list-style:none}
+#blbSoon .ft ul li{margin-bottom:10px}
+#blbSoon .ft ul a{color:#D8CBC3;text-decoration:none;font-size:14.5px;transition:color .2s}
+#blbSoon .ft ul a:hover{color:#FBF6EE}
+#blbSoon .ft .fbot{text-align:center;font-family:'Ephesis',cursive;font-size:24px;color:#BC8A47;margin-top:46px}
+#blbSoon .ft .fcopy{text-align:center;font-size:12px;color:rgba(251,246,238,.45);margin-top:10px}
+@media (max-width:900px){
+  #blbSoon .cards{grid-template-columns:1fr}
+  #blbSoon .ft .fgrid{grid-template-columns:1fr 1fr}
+}
+@media (prefers-reduced-motion:reduce){#blbSoon .badge svg,#blbSoon .bar i,#blbSoon .mq-in,#blbSoon .ann-in,#blbSoon .tag,#blbSoon .c-accel::before{animation:none}}
 </style>
+
+<a class="ann" href="/freebies" aria-label="Get the free blogging courses">
+  <div class="ann-in">
+    <b>FREE BLOGGING COURSES</b><i>&#10022;</i>six full courses, zero dollars<i>&#10022;</i>everything I wish I'd known in year one<i>&#10022;</i><b>GET THEM FREE &rarr;</b><i>&#10022;</i><b>FREE BLOGGING COURSES</b><i>&#10022;</i>six full courses, zero dollars<i>&#10022;</i>everything I wish I'd known in year one<i>&#10022;</i><b>GET THEM FREE &rarr;</b><i>&#10022;</i>
+  </div>
+</a>
+
+<div class="nv">
+  <input type="checkbox" id="blbSoonNavT" aria-hidden="true">
+  <div class="nv-bar">
+    <a class="nv-logo" href="/">Boss Lady <em>Bloggers</em></a>
+    <ul class="nv-links">
+      <li><a href="/about">About</a></li>
+      <li><a href="/blog-accelerator">The Program</a></li>
+      <li><a href="/blog-coaching">Blog Coaching</a></li>
+      <li><a href="/podcast">Podcast</a></li>
+      <li><a href="/freebies">Freebies</a></li>
+      <li><a class="nv-cta" href="/book-a-call">Book a Free Call</a></li>
+    </ul>
+    <label class="nv-burg" for="blbSoonNavT" aria-label="Open menu"><s></s><s></s></label>
+  </div>
+  <div class="nv-menu">
+    <a href="/about">About</a>
+    <a href="/blog-accelerator">The Program</a>
+    <a href="/blog-coaching">Blog Coaching</a>
+    <a href="/podcast">Podcast</a>
+    <a href="/freebies">Freebies</a>
+    <a class="mcta" href="/book-a-call">Book a Free Call &rarr;</a>
+  </div>
+</div>
 
 <div class="hero">
   <div class="word" aria-hidden="true">coming back</div>
@@ -148,5 +232,48 @@ badge, marquee, progress bar, sheen) is pure CSS.
     <p>Book a free call and I'll point you at the right thing for where your blog is right now. No pitch, just a plan.</p>
     <a class="btn" href="/book-a-call">Book a free call &rarr;</a>
   </div>
+</div>
+
+<div class="ft">
+  <div class="fword" aria-hidden="true">Boss Lady Bloggers</div>
+  <div class="fgrid">
+    <div>
+      <div class="flogo">Boss <em>Lady</em> Bloggers</div>
+      <p>Gorgeous, business-first blogs for women who want an actual business, not a hobby that might pay off in three years.</p>
+      <div class="fpods">
+        <a href="https://podcasts.apple.com/us/podcast/boss-lady-bloggers-start-a-blog-and-business/id1514838049" target="_blank" rel="noopener" class="fpod apple"><span class="d"></span> Apple Podcasts</a>
+        <a href="https://open.spotify.com/show/104sYmQooO65IELDPNbrfv?si=9e60292cd17a4bc0&amp;nd=1&amp;dlsi=7a5d709d42984612" target="_blank" rel="noopener" class="fpod spotify"><span class="d"></span> Spotify</a>
+      </div>
+    </div>
+    <div>
+      <h4>Explore</h4>
+      <ul>
+        <li><a href="/about">About</a></li>
+        <li><a href="/start-here">Start Here</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/podcast">Podcast</a></li>
+        <li><a href="/freebies">Free Courses</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Work With Me</h4>
+      <ul>
+        <li><a href="/blog-accelerator">The Blog Accelerator</a></li>
+        <li><a href="/blog-coaching">Blog Coaching</a></li>
+        <li><a href="/book-a-call">Book a Free Call</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Support</h4>
+      <ul>
+        <li><a href="/contact">Contact</a></li>
+        <li><a href="/privacy-policy">Privacy Policy</a></li>
+        <li><a href="/terms-conditions">Terms &amp; Conditions</a></li>
+        <li><a href="/disclaimer">Disclaimer</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="fbot">gorgeous blogs that actually make money</div>
+  <div class="fcopy">&copy; 2026 Boss Lady Bloggers. All rights reserved.</div>
 </div>
 </div>
