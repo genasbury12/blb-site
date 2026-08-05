@@ -12,7 +12,7 @@ On mobile Showit may need it around 420px tall.
 <div id="blbBlogHero">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;1,9..144,500&family=Karla:wght@400;700&family=Ephesis&display=swap');
-#blbBlogHero{font-family:'Karla',sans-serif;color:#2E1F27;background:#FBF6EE;padding:44px 20px 0;overflow:hidden}
+#blbBlogHero{max-width:100vw;font-family:'Karla',sans-serif;color:#2E1F27;background:#FBF6EE;padding:44px 20px 0;overflow:hidden}
 #blbBlogHero *{margin:0;padding:0;box-sizing:border-box}
 #blbBlogHero .wrap{max-width:860px;margin:0 auto;text-align:center;position:relative}
 #blbBlogHero .eyebrow{display:inline-block;background:#F0DCE2;border-radius:60px;padding:9px 20px;font-weight:700;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:#7C2B48}

@@ -21,7 +21,7 @@ itself.
 <div id="blbCatsRow">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;1,9..144,500&family=Karla:wght@400;700&family=Ephesis&display=swap');
-#blbCatsRow{font-family:'Karla',sans-serif;color:#2E1F27;background:#FBF6EE;padding:36px 20px;text-align:center}
+#blbCatsRow{max-width:100vw;font-family:'Karla',sans-serif;color:#2E1F27;background:#FBF6EE;padding:36px 20px;text-align:center}
 #blbCatsRow *{margin:0;padding:0;box-sizing:border-box}
 #blbCatsRow .script{font-family:'Ephesis',cursive;font-size:clamp(24px,3.5vw,32px);color:#BC8A47}
 #blbCatsRow h2{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:clamp(22px,3.5vw,30px);margin:4px 0 22px}

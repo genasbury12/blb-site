@@ -13,7 +13,7 @@ roughly 460px tall on desktop, full width.
 <div id="blbAccel">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;1,9..144,500&family=Karla:wght@400;700&family=Ephesis&display=swap');
-#blbAccel{font-family:'Karla',sans-serif;padding:26px 20px}
+#blbAccel{max-width:100vw;font-family:'Karla',sans-serif;padding:26px 20px}
 #blbAccel *{margin:0;padding:0;box-sizing:border-box}
 #blbAccel .card{position:relative;max-width:980px;margin:0 auto;background:#2E1F27;color:#FBF6EE;border-radius:30px;padding:56px 48px;text-align:center;overflow:hidden;box-shadow:0 40px 70px -34px rgba(46,31,39,.55)}
 #blbAccel .glow{position:absolute;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(169,63,99,.35),transparent 70%);top:-120px;right:-90px;pointer-events:none}
