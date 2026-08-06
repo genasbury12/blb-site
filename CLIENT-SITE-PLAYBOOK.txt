@@ -39,10 +39,14 @@ Before writing any code, gather:
 [ ] Complete website copy, page by page (a single doc is ideal).
     Decisions to extract from it: offers, prices, payment plans,
     guarantees, timelines, capacity limits ("3 clients at a time").
-[ ] Brand photos, uploaded somewhere with stable URLs. We used a
-    GitHub repo branch and served images via
-    raw.githubusercontent.com URLs. A folder of 15-40 photos is
-    plenty. Screenshots of past work too (portfolio).
+[ ] Brand photos. REQUIREMENTS to give the client up front:
+      - JPG files only (no HEIC, no PNG photo exports)
+      - each photo file UNDER 30 MB
+      - uploaded to a shared Google Drive folder
+    A folder of 15-40 photos is plenty. Screenshots of past work
+    too (portfolio). From there, move them somewhere with stable
+    direct URLs for the site to serve; we used a GitHub repo
+    branch and raw.githubusercontent.com URLs.
 [ ] Links: booking (Calendly), payment (Cash App/Stripe links),
     social, podcast platforms, YouTube testimonial videos (IDs),
     email platform embed code (Flodesk form snippet).
@@ -437,6 +441,9 @@ mobile-verified at 390px, delivered as .txt files."
 =====================================================================
 CHANGELOG (newest first)
 =====================================================================
+2026-08-06  v1.2  Phase 0: photo intake requirements locked in.
+                  JPG only, each file under 30 MB, delivered via
+                  a shared Google Drive folder.
 2026-08-06  v1.1  Phase 5: added the Flodesk form glow-up recipe
                   (card wrapper + scoped !important overrides via
                   [class*=] selectors; zero the container margins
