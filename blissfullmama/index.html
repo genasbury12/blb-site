@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blissful Mama | Motherhood, Made Lighter — Redesign Concept</title>
+<meta name="description" content="Blissful Mama is your go-to space for practical mom hacks, simple self-care, and encouragement to make everyday motherhood a little lighter and a lot more joyful.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Karla:wght@400;500;600;700&family=Sacramento&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FBF7F2;
+    --blush:#F6E7E1;
+    --blush-deep:#EFD9D2;
+    --rose:#C08578;
+    --rose-deep:#A96B5E;
+    --ink:#43382F;
+    --muted:#87776C;
+    --line:#E8DCD2;
+    --serif:'Cormorant Garamond', Georgia, serif;
+    --sans:'Karla', system-ui, sans-serif;
+    --script:'Sacramento', cursive;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--cream);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.75;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  ::selection{background:var(--rose);color:#fff}
+  img{max-width:100%;display:block}
+  a{color:inherit}
+  .wrap{max-width:1150px;margin:0 auto;padding:0 28px}
+
+  h1,h2,h3{font-family:var(--serif);font-weight:500;line-height:1.12}
+  .script{font-family:var(--script);font-weight:400;color:var(--rose);line-height:1}
+  .label{font-family:var(--sans);font-weight:700;font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--rose-deep)}
+
+  .btn{display:inline-block;font-family:var(--sans);font-weight:700;font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;text-decoration:none;padding:17px 36px;background:var(--rose);color:#fff;border:1px solid var(--rose);transition:background .25s,color .25s,transform .25s}
+  .btn:hover{background:var(--rose-deep);border-color:var(--rose-deep);transform:translateY(-2px)}
+  .btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--ink)}
+  .btn.ghost:hover{background:var(--ink);color:var(--cream)}
+  .btn.light{background:#fff;color:var(--rose-deep);border-color:#fff}
+  .btn.light:hover{background:var(--blush);border-color:var(--blush);color:var(--rose-deep)}
+
+  /* announce bar */
+  .announce{background:var(--rose);color:#fff;text-align:center;font-size:.72rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;padding:11px 16px}
+  .announce a{color:#fff;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.55);padding-bottom:2px}
+  .announce a:hover{border-bottom-color:#fff}
+
+  /* header */
+  header{background:var(--cream);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50;backdrop-filter:blur(8px);background:rgba(251,247,242,.92)}
+  .head-inner{display:flex;align-items:center;justify-content:space-between;height:84px;gap:20px}
+  .wordmark{text-decoration:none;line-height:1;display:flex;flex-direction:column;align-items:flex-start}
+  .wordmark .b{font-family:var(--script);font-size:2rem;color:var(--rose);margin-bottom:-6px}
+  .wordmark .m{font-family:var(--serif);font-size:1.28rem;letter-spacing:.42em;font-weight:600;text-transform:uppercase;padding-left:2px}
+  .wordmark .tag{font-size:.56rem;letter-spacing:.34em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+  nav.main ul{display:flex;gap:30px;list-style:none;align-items:center}
+  nav.main a{text-decoration:none;font-weight:600;font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;transition:color .2s}
+  nav.main a:hover{color:var(--rose)}
+  nav.main .cta{background:var(--blush-deep);padding:11px 22px;transition:background .25s}
+  nav.main .cta:hover{background:var(--rose);color:#fff}
+
+  /* hero */
+  .hero{padding:84px 0 96px;position:relative;overflow:hidden}
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:60px;align-items:center}
+  .hero .script{font-size:2.9rem;margin-bottom:14px;display:block}
+  .hero h1{font-size:clamp(2.6rem,5.2vw,4.3rem);margin-bottom:26px}
+  .hero h1 em{font-style:italic;color:var(--rose-deep)}
+  .hero p.sub{color:var(--muted);max-width:480px;font-size:1.04rem;margin-bottom:36px}
+  .hero-ctas{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+  .hero-note{margin-top:26px;font-size:.74rem;letter-spacing:.3em;text-transform:uppercase;color:var(--rose)}
+  .hero-photos{position:relative;min-height:560px}
+  .hero-photos .ph1{position:absolute;top:0;right:8%;width:72%;aspect-ratio:3/4;object-fit:cover;box-shadow:0 30px 60px -30px rgba(67,56,47,.35)}
+  .hero-photos .ph2{position:absolute;bottom:-4%;left:0;width:44%;aspect-ratio:3/4;object-fit:cover;border:10px solid #fff;box-shadow:0 24px 50px -24px rgba(67,56,47,.4)}
+  .hero-photos::before{content:'';position:absolute;top:6%;right:0;width:78%;height:92%;background:var(--blush);z-index:-1}
+
+  /* ticker strip */
+  .strip{background:var(--ink);color:var(--cream);padding:20px 0;font-family:var(--serif);font-size:1.06rem;letter-spacing:.12em;text-transform:uppercase}
+  .strip .wrap{display:flex;justify-content:center;gap:34px;flex-wrap:wrap;text-align:center}
+  .strip span.dot{color:var(--rose)}
+
+  section.pad{padding:104px 0}
+  .sec-head{text-align:center;max-width:640px;margin:0 auto 64px}
+  .sec-head .script{font-size:2.4rem;display:block;margin-bottom:6px}
+  .sec-head h2{font-size:clamp(2rem,3.6vw,2.9rem)}
+  .sec-head p{color:var(--muted);margin-top:16px}
+
+  /* categories */
+  .cats{display:grid;grid-template-columns:repeat(4,1fr);gap:26px}
+  .cat{position:relative;text-decoration:none;overflow:hidden;display:block}
+  .cat img{aspect-ratio:3/4;object-fit:cover;width:100%;transition:transform .6s ease}
+  .cat:hover img{transform:scale(1.05)}
+  .cat .name{position:absolute;left:14px;right:14px;bottom:14px;background:rgba(251,247,242,.94);text-align:center;padding:14px 10px;font-weight:700;font-size:.72rem;letter-spacing:.24em;text-transform:uppercase}
+  .cat .name small{display:block;font-family:var(--script);font-size:1.3rem;letter-spacing:0;text-transform:none;color:var(--rose);font-weight:400;margin-bottom:2px}
+
+  /* posts */
+  .posts-bg{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .posts{display:grid;grid-template-columns:repeat(3,1fr);gap:34px}
+  .post{background:var(--cream);border:1px solid var(--line);display:flex;flex-direction:column;transition:transform .3s,box-shadow .3s}
+  .post:hover{transform:translateY(-6px);box-shadow:0 30px 50px -30px rgba(67,56,47,.3)}
+  .post img{aspect-ratio:4/3;object-fit:cover}
+  .post .body{padding:28px 26px 30px;display:flex;flex-direction:column;flex:1}
+  .post .meta{font-size:.68rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--rose-deep);margin-bottom:12px}
+  .post h3{font-size:1.5rem;margin-bottom:12px}
+  .post h3 a{text-decoration:none}
+  .post h3 a:hover{color:var(--rose-deep)}
+  .post p{color:var(--muted);font-size:.94rem;flex:1}
+  .post .more{margin-top:20px;font-size:.72rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--rose);padding-bottom:3px;align-self:flex-start;transition:color .2s}
+  .post .more:hover{color:var(--rose-deep)}
+  .center-btn{text-align:center;margin-top:56px}
+
+  /* optin */
+  .optin{background:var(--blush)}
+  .optin-card{max-width:880px;margin:0 auto;background:#fff;border:1px solid var(--line);padding:70px 60px;text-align:center;position:relative}
+  .optin-card::before{content:'';position:absolute;inset:14px;border:1px solid var(--blush-deep);pointer-events:none}
+  .optin-card .script{font-size:2.5rem;display:block;margin-bottom:4px}
+  .optin-card h2{font-size:clamp(2rem,3.4vw,2.7rem);margin-bottom:18px}
+  .optin-card p{color:var(--muted);max-width:520px;margin:0 auto 34px}
+  .optin-form{display:flex;gap:12px;max-width:520px;margin:0 auto;position:relative;z-index:1}
+  .optin-form input{flex:1;border:1px solid var(--line);background:var(--cream);padding:16px 20px;font-family:var(--sans);font-size:.9rem;color:var(--ink);outline:none}
+  .optin-form input:focus{border-color:var(--rose)}
+  .optin-fine{margin-top:18px;font-size:.72rem;letter-spacing:.08em;color:var(--muted)}
+
+  /* about */
+  .about-grid{display:grid;grid-template-columns:.92fr 1.08fr;gap:70px;align-items:center}
+  .about-photo{position:relative}
+  .about-photo img{aspect-ratio:3/4;object-fit:cover;width:100%}
+  .about-photo::after{content:'';position:absolute;top:20px;left:20px;right:-20px;bottom:-20px;border:1px solid var(--rose);z-index:-1}
+  .about-copy .script{font-size:2.4rem;display:block;margin-bottom:6px}
+  .about-copy h2{font-size:clamp(2rem,3.6vw,2.9rem);margin-bottom:22px}
+  .about-copy p{color:var(--muted);margin-bottom:18px}
+  .about-copy p b{color:var(--ink)}
+  .about-list{list-style:none;margin:26px 0 34px}
+  .about-list li{padding:12px 0 12px 34px;border-bottom:1px solid var(--line);position:relative;font-size:.96rem}
+  .about-list li::before{content:'♡';position:absolute;left:4px;color:var(--rose);font-size:.95rem}
+
+  /* quote */
+  .quote{background:var(--ink);color:var(--cream);text-align:center;padding:110px 0}
+  .quote .script{font-size:2.2rem;color:var(--blush-deep);display:block;margin-bottom:10px}
+  .quote blockquote{font-family:var(--serif);font-style:italic;font-size:clamp(1.7rem,3.4vw,2.6rem);line-height:1.4;max-width:820px;margin:0 auto}
+
+  /* amazon */
+  .amazon{background:var(--blush);border-top:1px solid var(--line)}
+  .amazon .inner{display:flex;align-items:center;justify-content:space-between;gap:30px;padding:56px 0;flex-wrap:wrap}
+  .amazon h3{font-size:1.9rem}
+  .amazon p{color:var(--muted);max-width:460px}
+
+  footer{background:var(--cream);padding:70px 0 40px;border-top:1px solid var(--line)}
+  .foot-grid{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;margin-bottom:50px}
+  .foot-col h4{font-size:.72rem;font-weight:700;letter-spacing:.26em;text-transform:uppercase;margin-bottom:18px;color:var(--rose-deep)}
+  .foot-col ul{list-style:none}
+  .foot-col li{margin-bottom:10px}
+  .foot-col a{text-decoration:none;font-size:.92rem;color:var(--muted);transition:color .2s}
+  .foot-col a:hover{color:var(--rose-deep)}
+  .foot-bottom{border-top:1px solid var(--line);padding-top:28px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:.78rem;color:var(--muted);letter-spacing:.06em}
+
+  /* concept badge */
+  .concept{position:fixed;bottom:18px;right:18px;z-index:90;background:var(--ink);color:var(--cream);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;padding:10px 18px;box-shadow:0 10px 30px -10px rgba(0,0,0,.4)}
+  .concept b{color:var(--blush-deep)}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .8s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  @media(max-width:960px){
+    .head-inner{height:auto;padding:16px 0;flex-direction:column;gap:12px}
+    nav.main ul{gap:16px;flex-wrap:wrap;justify-content:center}
+    .hero{padding:60px 0 70px}
+    .hero-grid{grid-template-columns:1fr;gap:50px}
+    .hero-photos{min-height:0;margin:0 auto;width:min(430px,100%)}
+    .hero-photos .ph1{position:relative;right:auto;margin-left:auto;width:80%}
+    .hero-photos .ph2{width:46%;bottom:-8%}
+    .cats{grid-template-columns:repeat(2,1fr)}
+    .posts{grid-template-columns:1fr;max-width:480px;margin:0 auto}
+    .about-grid{grid-template-columns:1fr;gap:56px}
+    .optin-card{padding:50px 26px}
+    .optin-form{flex-direction:column}
+    section.pad{padding:76px 0}
+  }
+</style>
+</head>
+<body>
+
+<div class="announce">New here? Grab the free <a href="#freebie">Overwhelmed Mom's Starter Kit</a> — 3 checklists that take 20 minutes or less</div>
+
+<header>
+  <div class="wrap head-inner">
+    <a class="wordmark" href="#top">
+      <span class="b">Blissful</span>
+      <span class="m">Mama</span>
+      <span class="tag">home &middot; routines &middot; self-care</span>
+    </a>
+    <nav class="main">
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#blog">Blog</a></li>
+        <li><a href="#categories">Categories</a></li>
+        <li><a href="#amazon">Amazon Faves</a></li>
+        <li><a class="cta" href="#freebie">Free Starter Kit</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="script">i'm so glad you're here!</span>
+      <h1>Let's make motherhood feel <em>lighter</em> — and a lot more joyful.</h1>
+      <p class="sub">Blissful Mama is your go-to space for practical mom hacks, simple self-care, and encouragement to make everyday motherhood a little lighter and a lot more joyful.</p>
+      <div class="hero-ctas">
+        <a class="btn" href="#freebie">Get the Free Kit</a>
+        <a class="btn ghost" href="#blog">Read the Blog</a>
+      </div>
+      <p class="hero-note">joy &middot; balance &middot; blissings</p>
+    </div>
+    <div class="hero-photos">
+      <img class="ph1" src="https://d8j0ntlcm91z4.cloudfront.net/user_3HLF56fntoufkyqpyZylwksqwoM/hf_20260806_020808_3ce74732-b84f-41c2-9786-1106648b17e7.png" alt="Mom reading with her boys on the sofa">
+      <img class="ph2" src="https://d8j0ntlcm91z4.cloudfront.net/user_3HLF56fntoufkyqpyZylwksqwoM/hf_20260806_020700_78821334-0533-4619-9d3d-6d6e26806de7.png" alt="Blush flowers and morning coffee">
+    </div>
+  </div>
+</section>
+
+<div class="strip">
+  <div class="wrap">
+    <span>Practical Mom Hacks</span><span class="dot">&#10047;</span>
+    <span>Simple Self-Care</span><span class="dot">&#10047;</span>
+    <span>Real-Life Routines</span><span class="dot">&#10047;</span>
+    <span>Honest Encouragement</span>
+  </div>
+</div>
+
+<section class="pad" id="categories">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="script">where do you need help?</span>
+      <h2>Find What You Need Today</h2>
+    </div>
+    <div class="cats reveal">
+      <a class="cat" href="#">
+        <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3HLF56fntoufkyqpyZylwksqwoM/hf_20260806_021259_57d91c6c-402e-4dc6-a458-ad205326e569.png" alt="Bright tidy kitchen">
+        <span class="name"><small>reset the chaos</small>Home Routines</span>
+      </a>
+      <a class="cat" href="#">
+        <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3HLF56fntoufkyqpyZylwksqwoM/hf_20260806_021145_f21eed17-068f-40ae-b0f4-353eda002d5b.png" alt="Organized school supplies">
+        <span class="name"><small>mornings to bedtime</small>Boys Routines</span>
+      </a>
+      <a class="cat" href="#">
+        <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3HLF56fntoufkyqpyZylwksqwoM/hf_20260806_021208_7f206797-c4b1-4bae-92c4-82d544dc596f.png" alt="Boy at the pumpkin patch">
+        <span class="name"><small>burn that energy</small>Activities for Boys</span>
+      </a>
+      <a class="cat" href="#">
+        <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3HLF56fntoufkyqpyZylwksqwoM/hf_20260806_022042_98bea3ee-4a21-4bee-adb4-4e0d9c270585.png" alt="Self-care bath tray">
+        <span class="name"><small>you matter too</small>Self-Care &amp; Boy Mom Life</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="pad posts-bg" id="blog">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="script">fresh off the blog</span>
+      <h2>New Posts to Make Life Lighter</h2>
+    </div>
+    <div class="posts">
+      <article class="post reveal">
+        <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3HLF56fntoufkyqpyZylwksqwoM/hf_20260806_021109_3e74400a-08c0-4ecd-9d69-1035cff15d4a.png" alt="Cozy fall home with basket of blankets">
+        <div class="body">
+          <p class="meta">Home Cleaning &amp; Organization &middot; Aug 5</p>
+          <h3><a href="#">Ultimate Fall Deep Cleaning Checklist for a Fresh, Cozy Home</a></h3>
+          <p>Use this ultimate fall deep cleaning checklist to declutter, clean, and prepare every room for the colder months with a realistic seven-day plan.</p>
+          <a class="more" href="#">Read the Post</a>
+        </div>
+      </article>
+      <article class="post reveal">
+        <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3HLF56fntoufkyqpyZylwksqwoM/hf_20260806_021145_f21eed17-068f-40ae-b0f4-353eda002d5b.png" alt="School supply organization">
+        <div class="body">
+          <p class="meta">Home Cleaning &amp; Organization &middot; Aug 2</p>
+          <h3><a href="#">15 School Supply Organization Hacks That Keep the Clutter Under Control</a></h3>
+          <p>Try these practical school supply organization hacks to organize pencils, papers, homework supplies and extra school supplies in any size home.</p>
+          <a class="more" href="#">Read the Post</a>
+        </div>
+      </article>
+      <article class="post reveal">
+        <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3HLF56fntoufkyqpyZylwksqwoM/hf_20260806_021208_7f206797-c4b1-4bae-92c4-82d544dc596f.png" alt="Fall bucket list for boys">
+        <div class="body">
+          <p class="meta">Activities for Boys &middot; Jul 20</p>
+          <h3><a href="#">Fall Bucket List for Boys: 40 Easy Ideas for the Whole Family</a></h3>
+          <p>Create unforgettable family memories this season with 40 easy outdoor adventures, cozy indoor activities, fun fall treats, creative crafts, and simple family traditions — plus a free printable checklist.</p>
+          <a class="more" href="#">Read the Post</a>
+        </div>
+      </article>
+    </div>
+    <div class="center-btn reveal"><a class="btn ghost" href="#">Read More Posts</a></div>
+  </div>
+</section>
+
+<section class="pad optin" id="freebie">
+  <div class="wrap">
+    <div class="optin-card reveal">
+      <span class="script">free for you, mama</span>
+      <h2>Your Home Doesn't Have to Feel Chaotic</h2>
+      <p>Grab the free <b>Overwhelmed Mom's Starter Kit</b> — 3 simple checklists that take 20 minutes or less and actually work for busy moms with kids underfoot.</p>
+      <form class="optin-form" onsubmit="return false">
+        <input type="email" placeholder="Your email address" aria-label="Email address">
+        <button class="btn" type="submit">Send Me the Free Kit</button>
+      </form>
+      <p class="optin-fine">We won't send you spam. Unsubscribe at any time.</p>
+    </div>
+  </div>
+</section>
+
+<section class="pad" id="about">
+  <div class="wrap about-grid">
+    <div class="about-photo reveal">
+      <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3HLF56fntoufkyqpyZylwksqwoM/hf_20260806_022126_93b460e0-6931-46d9-b49d-b996876fe290.png" alt="Lola walking with her four boys">
+    </div>
+    <div class="about-copy reveal">
+      <span class="script">hi, i'm lola!</span>
+      <h2>The Mom Behind Blissful Mama</h2>
+      <p>I'm a busy mom of four boys, navigating real life one routine, one reset, and one deep breath at a time.</p>
+      <p>This blog started because I needed something honest. Not picture-perfect motherhood. Not impossible routines. <b>Just real-life systems that actually work</b> when you're raising kids, managing a home, and trying not to lose yourself in the process.</p>
+      <ul class="about-list">
+        <li>Simple cleaning routines for busy moms</li>
+        <li>Realistic home resets you can do in short bursts</li>
+        <li>Parenting routines that work with kids — not against them</li>
+        <li>Self-care ideas that fit into real mom life</li>
+      </ul>
+      <a class="btn" href="#">Read My Story</a>
+    </div>
+  </div>
+</section>
+
+<section class="quote">
+  <div class="wrap reveal">
+    <span class="script">a little reminder</span>
+    <blockquote>"You don't need to have it all figured out to be a good mom. You're already doing more than you think."</blockquote>
+  </div>
+</section>
+
+<section class="amazon" id="amazon">
+  <div class="wrap inner">
+    <div>
+      <h3>Shop My Amazon Favorites</h3>
+      <p>The exact products I use to keep our home (mostly) running — things that save time, reduce mental load, and make everyday routines easier.</p>
+    </div>
+    <a class="btn" href="#">Visit the Storefront</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-col" style="max-width:300px">
+        <a class="wordmark" href="#top" style="margin-bottom:16px">
+          <span class="b">Blissful</span>
+          <span class="m">Mama</span>
+        </a>
+        <p style="font-size:.88rem;color:var(--muted);margin-top:14px">Practical help and honest encouragement for moms who want a calmer home — without unrealistic expectations. You're always welcome here, messy days and all.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="#about">About the Blog</a></li>
+          <li><a href="#blog">Blog</a></li>
+          <li><a href="#freebie">Free Starter Kit</a></li>
+          <li><a href="#amazon">Amazon Storefront</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Categories</h4>
+        <ul>
+          <li><a href="#">Home Routines</a></li>
+          <li><a href="#">Boys Routines</a></li>
+          <li><a href="#">Activities for Boys</a></li>
+          <li><a href="#">Boy Mom Life &amp; Self Care</a></li>
+          <li><a href="#">Gift Guides</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Let's Stay Connected</h4>
+        <ul>
+          <li><a href="#">Pinterest</a></li>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">Facebook</a></li>
+          <li><a href="#freebie">Join the Email List</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>&copy; 2026 Blissful Mama. All rights reserved.</span>
+      <span>Redesign concept by Boss Lady Bloggers</span>
+    </div>
+  </div>
+</footer>
+
+<div class="concept"><b>&#10047;</b> Redesign Concept &middot; Boss Lady Bloggers</div>
+
+<script>
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  }), {threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
