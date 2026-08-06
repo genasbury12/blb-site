@@ -2,6 +2,10 @@
 THE CLIENT WEBSITE PLAYBOOK
 How the Boss Lady Bloggers site was built, written as a repeatable
 process for coding new client websites on Showit.
+
+THIS IS A LIVING DOCUMENT. It gets updated every time we fix
+something new on this project. Newest changes are logged at the
+bottom in the CHANGELOG.
 =====================================================================
 
 THE BIG IDEA
@@ -416,6 +420,15 @@ homepage, then confirm the design direction with screenshots
 before building out the rest. Every page: announcement banner,
 distinct sections, testimonial videos, FAQ schema on money pages,
 mobile-verified at 390px, delivered as .txt files."
+
+=====================================================================
+CHANGELOG (newest first)
+=====================================================================
+2026-08-06  v1.0  Initial playbook written covering the full BLB
+                  build: phases 0-11, all 15 lessons, kickoff
+                  prompt. Everything from the copy-driven redesign
+                  through the blog kit, course players, email
+                  asset pipeline, and launch email.
 
 =====================================================================
 END OF PLAYBOOK
