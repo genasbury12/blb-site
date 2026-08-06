@@ -1,0 +1,422 @@
+=====================================================================
+THE CLIENT WEBSITE PLAYBOOK
+How the Boss Lady Bloggers site was built, written as a repeatable
+process for coding new client websites on Showit.
+=====================================================================
+
+THE BIG IDEA
+Every page is one self-contained HTML file (styles, scripts, and
+content all in a single document) that gets pasted into a full-page
+Embed Code block on a Showit page. Showit handles hosting, domains,
+and the page list. The embed handles 100% of the design. This gives
+you hand-coded, award-style custom design on a platform the client
+already knows how to log into.
+
+THE PHASES
+  0. Collect everything from the client
+  1. Define the brand system
+  2. Set up the workspace (repo + build pipeline)
+  3. Build the core pages
+  4. The interactive layer (what makes it feel expensive)
+  5. Forms and integrations
+  6. Course/membership backends (if any)
+  7. Verify every page like a robot
+  8. Deliver and install in Showit
+  9. The Showit blog (special case, different rules)
+ 10. Bonus assets (email kit, GIFs, launch email)
+ 11. Lessons learned (read this twice)
+
+
+=====================================================================
+PHASE 0 - COLLECT EVERYTHING FROM THE CLIENT
+=====================================================================
+Before writing any code, gather:
+
+[ ] Complete website copy, page by page (a single doc is ideal).
+    Decisions to extract from it: offers, prices, payment plans,
+    guarantees, timelines, capacity limits ("3 clients at a time").
+[ ] Brand photos, uploaded somewhere with stable URLs. We used a
+    GitHub repo branch and served images via
+    raw.githubusercontent.com URLs. A folder of 15-40 photos is
+    plenty. Screenshots of past work too (portfolio).
+[ ] Links: booking (Calendly), payment (Cash App/Stripe links),
+    social, podcast platforms, YouTube testimonial videos (IDs),
+    email platform embed code (Flodesk form snippet).
+[ ] The page list. Ours: home, about, program/offer page, coaching,
+    start here, book a call, contact, freebies + thank you, course
+    library + course pages, blog, podcast, legal pages.
+[ ] Voice rules. Ours: warm, punchy, "babe" sparingly, and NO EM
+    DASHES anywhere in site copy.
+[ ] Every business fact you'll need: email address for forms,
+    course passwords, program price and payment plan, call length.
+
+If the client is missing something (real course titles, podcast
+episode links), build with clearly labeled placeholders and keep a
+running "waiting on client" list.
+
+
+=====================================================================
+PHASE 1 - DEFINE THE BRAND SYSTEM
+=====================================================================
+Lock these before page one, and never freelance new values later:
+
+COLORS (BLB's, swap per client):
+  --paper  #FBF6EE   page background, never pure white
+  --tint   #F4EBDE   alternate section background
+  --ink    #2E1F27   dark sections + body text, never pure black
+  --pink   #A93F63   the action color: buttons, links, accents
+  --purple #7C2B48   hover states, small caps labels
+  --gold   #BC8A47   script accents, dividers, flourishes
+  --blush  #F0DCE2   soft highlight backgrounds, pills
+  --muted  #6E5C63   secondary text
+
+FONTS (3 roles):
+  Display serif (Fraunces 500 + italic) for headlines
+  Workhorse sans (Karla 400/700) for body and caps labels
+  Script (Ephesis) for handwritten accent lines
+
+SIGNATURE ELEMENTS (reuse on every site, restyle per brand):
+  - Eyebrow labels: bold caps, letterspaced, small
+  - Script "hand notes" under headings
+  - Pill-shaped buttons (radius 60px), pink with white text
+  - Giant outlined display words behind sections
+    (color transparent + -webkit-text-stroke at low opacity)
+  - Rounded cards (radius 20-26px) with soft dramatic shadows
+  - Arched photo frames (border-radius 46vw 46vw 24px 24px)
+  - Spinning circular text badges (SVG textPath + CSS rotate)
+  - Announcement banner marquee at the very top of every page
+
+
+=====================================================================
+PHASE 2 - SET UP THE WORKSPACE
+=====================================================================
+1. One git repo per client. All page HTML files at the root.
+   Images on a branch or folder served via raw.githubusercontent.
+2. A Python "builder" script that holds the shared skeleton:
+   - BASE_CSS: tokens, nav, footer, buttons, cards, section styles
+   - NAV / FOOTER / LOADER constants (canonical, edited ONCE)
+   - STD_JS: loader dismiss, reveal-on-scroll observer, count-ups,
+     typewriter, mobile menu, back-to-top, year stamp
+   - page(fname, title, desc, content, extra_css, extra_js):
+     wraps content in the full HTML document and writes the file
+   - helpers: vidband(video keys), faq_schema(), faq_html()
+3. Every page is then a small script: content HTML + page-specific
+   CSS/JS, calling page(). Rebuilding a page is rerunning a script.
+4. Deliverables are .txt copies of each .html (clients can open txt
+   and copy-paste; some computers fight .html attachments).
+
+CRITICAL RULE LEARNED THE HARD WAY: if you later patch pages
+directly (adding banners, new marquee styles, new JS), PORT THE
+PATCH BACK INTO THE BUILDER. Freshly generated pages silently miss
+every patch that only lives in the old files. This bit us twice:
+regenerated pages lost the announcement banner, the marquee styles,
+the stats band styles, and the reveal script coverage. Before
+delivering any rebuilt page, diff its class names against a known
+good page and confirm every used class has CSS and every behavior
+has JS.
+
+
+=====================================================================
+PHASE 3 - BUILD THE CORE PAGES
+=====================================================================
+Order that worked: homepage first (it defines the design system in
+practice), then the offer page, then everything else.
+
+EVERY page gets, top to bottom:
+  1. Announcement banner marquee (clickable, dismissible)
+  2. Nav: logo, home icon, links, pill CTA button; fancy mobile
+     menu (spinning badge, numbered links, photo, big pink CTA)
+  3. Hero DIFFERENT from every other page's hero
+  4. Alternating sections, each visually distinct (see rule below)
+  5. Testimonial video band (YouTube embeds, youtube-nocookie.com)
+  6. FAQ accordion + JSON-LD schema on money pages
+  7. Final CTA band (dark, script accent, shimmer headline)
+  8. Reverse-direction outline marquee
+  9. Footer: giant outline wordmark, 4 columns, podcast pills,
+     script sign-off, copyright
+
+THE NO-TWINS RULE (client said "Never do this again" and she was
+right): no two adjacent sections may share the same layout. Rotate
+through: text+image split, card grid, ink (dark) band, stats band,
+photo strip marquee, comparison table, timeline, checklist,
+centered prose with doodles. If two sections in a row are both
+"heading + paragraphs," redesign one. The page must be skimmable
+by someone scrolling fast on a phone.
+
+CONTENT DENSITY: err heavily toward MORE collateral: doodle arrows,
+underline squiggles (SVG), floating stickers, polaroids, chips,
+marquees, big outlined words. Restraint reads as unfinished to
+this kind of client. "Add like 70 interactive elements" was real
+feedback and correct for the brand.
+
+
+=====================================================================
+PHASE 4 - THE INTERACTIVE LAYER
+=====================================================================
+The standard kit (all in STD_JS + BASE_CSS, all guarded by
+prefers-reduced-motion):
+  - Page loader (branded mini illustration) that self-dismisses,
+    PLUS a pure-CSS animation fallback that kills it after ~3s
+    even if every script dies
+  - Reveal-on-scroll: an IntersectionObserver ADDS .rv to
+    off-screen elements then adds .in when they enter. Two rules:
+    (a) the hide rule must be WEAKER than the .in reveal rule,
+    (b) if you hand-write rv classes in markup, the observer must
+    also select .rv, and in-viewport elements need .rv REMOVED.
+  - Sliding marquees (duplicate the content 2x, translateX(-50%))
+  - Typewriter headline words ([data-words] JSON attribute)
+  - Count-up numbers ([data-count])
+  - Sticky nav, back-to-top, magnetic buttons, click ripples,
+    sparkle cursor trail, card tilt
+
+PAGE-SPECIFIC SHOWPIECES (one or two per page, sitewide they add
+up): tappable checklist with live meter and a reaction note,
+scroll-drawn timeline (scaleY a gradient line by scroll progress),
+3D flip cards, old-way/new-way toggle switch, clickable polaroid
+cluster, giant subtle background line-art (podcast microphone),
+progress bars, "coming soon" pages with skip-the-line offer cards.
+
+
+=====================================================================
+PHASE 5 - FORMS AND INTEGRATIONS
+=====================================================================
+CONTACT FORMS: FormSubmit (formsubmit.co/EMAIL). POST with hidden
+fields _subject, _captcha=false, _template=table, and _next set to
+the page URL + "?sent=1" for the success note. WARNING: the first
+ever submission emails the owner an activation link they MUST
+click. mailto: links are NOT a contact form; they open the
+visitor's mail app and feel broken. Never ship mailto as a form.
+
+FLODESK INLINE FORMS: paste their div + loader snippet. The
+universal loader's function call REQUIRES the 6th argument 'fd'
+or you get "window.fd is not a function". Have the client set the
+form's success redirect to the thank-you page.
+
+PAYMENTS: link buttons straight to payment links (Cash App/Stripe).
+Put "how do payments work" in the FAQ + schema. Say "payment plans
+available" everywhere the price appears.
+
+BOOKING: Calendly links on every CTA. Confirm the event's real
+duration matches what the copy promises.
+
+SCHEMA: FAQPage JSON-LD on homepage, offer page, coaching page,
+booking page.
+
+
+=====================================================================
+PHASE 6 - COURSE / MEMBERSHIP BACKENDS
+=====================================================================
+Kajabi-style players as single-file pages:
+  - Password gate: a session key in localStorage after entering
+    the shared password (ours: BLOGBABE). Client-side only; it
+    keeps honest people honest, which is the right level for a
+    free library.
+  - Google Drive videos: iframe src /file/d/FILE_ID/preview
+  - YouTube videos: youtube-nocookie.com/embed/ID?rel=0
+  - Sidebar lesson list + main stage, progress checkboxes saved
+    to localStorage (bll_courseN_done), progress bar per module
+  - Workbooks: Google Doc links ending in /copy (forces the
+    visitor to duplicate the doc)
+  - eBook-style course: chapters in-page with interactive tools
+    (fill-in cards, generators, dashboards) that autosave every
+    [data-save] field to one localStorage key + print stylesheet
+  - Courses not ready yet: coming-soon page with animated progress
+    bar and a flashy "skip the line" offer card for the paid
+    program
+
+
+=====================================================================
+PHASE 7 - VERIFY EVERY PAGE LIKE A ROBOT
+=====================================================================
+Never ship a page you haven't rendered. The rig: Playwright +
+headless Chromium.
+
+PER PAGE CHECKLIST:
+[ ] Desktop full-page screenshot (emulate reduced motion for
+    stable captures) and actually LOOK at it top to bottom at
+    full size. Squinting at a thumbnail missed real breakage.
+[ ] Scroll pass first so lazy images and reveals fire.
+[ ] Mobile 390px: horizontal overflow must be 0px
+    (scrollWidth - clientWidth). Belt and braces: put
+    html,body{overflow-x:hidden} in the base CSS anyway.
+[ ] Zero console/page errors.
+[ ] CLICK the interactive things in the test browser: menu opens,
+    accordions toggle, tabs switch, checklists count, toggles
+    flip. "It renders" is not "it works."
+[ ] Test WITH JavaScript disabled: the full page must still be
+    readable and complete. Loader hidden, content visible.
+    (Playwright context: javaScriptEnabled false.)
+[ ] Classic CSS grid gotcha to watch for: a grid child with
+    margin:auto and no width collapses to 0 width. Give grid
+    media items width:100%. This one bit us three times.
+
+Fix, re-verify, THEN commit, push, and export the .txt copy.
+
+
+=====================================================================
+PHASE 8 - DELIVER AND INSTALL IN SHOWIT
+=====================================================================
+For each page: Showit page -> one full-page Embed Code block ->
+paste the whole HTML document -> publish.
+
+TEACH THE CLIENT THESE FOUR THINGS (saves endless panic):
+1. The embed block is a PICTURE FRAME. The code fills whatever
+   frame you draw. Full width frame on desktop AND separately on
+   the mobile canvas; Showit positions the two canvases
+   independently. A squished or off-canvas block on mobile = the
+   "missing" nav/menu/hero.
+2. The Showit EDITOR canvas never renders embeds or custom code.
+   Gray box in the editor is normal. Judge only the PUBLISHED
+   site (preview links can also lag).
+3. After every change: save, PUBLISH, then hard refresh
+   (Cmd+Shift+R). Old cached pages cause most "it's broken"
+   reports.
+4. Send screenshots WITH the URL bar visible when something looks
+   wrong. Screenshots let you diagnose remotely; browser zoom can
+   make pages look mysteriously tiny, so check for the zoom icon.
+
+Keep a running "waiting on client" list (activation email click,
+real course titles, category links, membership checkout URL) and
+a "when branches merge, repoint all raw.githubusercontent image
+URLs" note if images live on a branch.
+
+
+=====================================================================
+PHASE 9 - THE SHOWIT BLOG (SPECIAL CASE, DIFFERENT RULES)
+=====================================================================
+Showit blogs are WordPress under the hood with Showit-designed
+templates. Embeds and CSS behave DIFFERENTLY there. Rules:
+
+1. The blog index and single post pages are built from Showit
+   BLOG TEMPLATES with placeholder elements (title, content,
+   featured image, post list). You cannot paste one big page
+   embed and call it done.
+2. Brand the placeholders via the CUSTOM CSS box + CSS classes:
+   client assigns class names to placeholders (Advanced -> CSS
+   Classes: blb-title, blb-meta, blb-featured, blb-post,
+   blb-grid, blb-cats, blb-card, blb-cardtitle, blb-cardimg,
+   blb-readmore...) and your stylesheet targets those classes
+   with !important throughout (Showit inlines its own styles).
+3. The Custom CSS box accepts PURE CSS ONLY. No HTML, no <style>
+   tags, and its linter rejects @import. Load fonts with a tiny
+   separate embed block containing <link> tags instead.
+4. Custom CSS shows only on preview/published pages, never in the
+   editor. And nothing changes until classes are assigned. Put
+   both facts in comments at the top of the CSS file.
+5. Ship a PROOF BADGE in the CSS while installing: a body::after
+   fixed pill saying "CSS IS LOADED". It instantly separates
+   "stylesheet not reaching the page" from "classes not assigned."
+   Delete the block after everything works.
+6. The index post cards repeat ONE template card. Classes assigned
+   to the pieces of that one card style every post. CSS can paint
+   the cards (colors, fonts, corners, shadows, hover) but cannot
+   rearrange the template's layout; layout changes happen in the
+   Showit designer.
+7. Categories on the live site are real links, sometimes several
+   per post. Style .blb-cats a as individual pills; keep the
+   container transparent.
+8. SECTION EMBEDS ON BLOG TEMPLATES GET NO JAVASCRIPT. Scripts
+   that work on normal Showit pages silently fail here. Any embed
+   for a blog template must be ZERO-JS: CSS-only marquees
+   (statically duplicated content), CSS-only mobile menu
+   (checkbox hack), no loader, no reveal-on-scroll. We shipped a
+   full coming-soon page this way: banner + nav + hero + offer
+   cards + footer, all pure CSS.
+9. Interim move that buys time: a "blog coming back soon" page on
+   the index template with offers for the freebie, podcast, and
+   paid program, while the real templates get finished.
+
+
+=====================================================================
+PHASE 10 - BONUS ASSETS (THE LAUNCH KIT)
+=====================================================================
+These take an hour with the pipeline and clients love them:
+
+EMAIL GRAPHICS (Flodesk): build one HTML sheet with a block per
+asset, render each block to PNG with Playwright at
+deviceScaleFactor 2 (retina), omitBackground for transparent
+pieces. Download the actual Google Font .woff2 files and load
+them locally so the type is exactly on-brand. Kit: 3 headers
+(clean / dark / script "hey babe"), footer, signature, 2 dividers,
+circular badge, 2 button images, photo polaroid, quote card.
+
+SITE TOUR GIF: localize the homepage (swap image URLs and fonts
+to local files), script a scroll tour in Playwright (hold the
+hero, glide between stops), screenshot each step, assemble with
+PIL (600px wide, ~12fps, quantized to ~160 colors, loop forever).
+Target under 5MB. Make frame 1 the full hero because Outlook
+freezes GIFs on the first frame.
+
+BRAND COLORS FOR FLODESK: hand the client the 8 hex codes with
+one-line usage rules (background = paper, buttons = action color,
+text = ink, one pink button per email).
+
+LAUNCH EMAIL: subject options, preview text, block-by-block
+assembly using the kit, and copy in the client's voice. The
+strategy: the site IS the pitch; the GIF shows it off; the PS is
+the soft sell for the paid offer.
+
+
+=====================================================================
+PHASE 11 - LESSONS LEARNED (READ TWICE, THEY ALL COST US A ROUND)
+=====================================================================
+ 1. Grid children with margin:auto and no width collapse to zero.
+    Media in grids always gets width:100%.
+ 2. Patches applied to files but not the builder VANISH on the
+    next rebuild. Port every patch back, and diff every rebuilt
+    page's used classes against a working page before sending.
+ 3. If you make a hide-rule stronger (html.js .rv), the show-rule
+    (.rv.in) silently loses. After any specificity change, verify
+    the state you WANT wins.
+ 4. A reveal system that auto-tags elements ignores classes you
+    hand-write. Extend the selector AND handle the in-viewport
+    case before relying on it.
+ 5. Showit editor shows embeds as gray boxes; custom CSS never
+    renders in the editor. Only the published site is truth.
+ 6. Showit's Custom CSS box: pure CSS only, no @import. Fonts go
+    in a separate link-tag embed.
+ 7. Blog template embeds get no JS. Zero-JS versions for anything
+    living there, including the mobile menu (checkbox hack).
+ 8. The embed block is a picture frame sized per canvas; mobile is
+    positioned separately and is where "it disappeared" happens.
+ 9. FormSubmit needs its one-time activation click; mailto is not
+    a form; the Flodesk loader needs the 'fd' argument.
+10. Verify by USING the page in a real browser: click everything,
+    scroll everything, test with JS off, check 390px overflow,
+    view the full-size screenshot. Forcing states in tests can
+    mask real failures (we force-revealed sections once and
+    shipped a bug the test was hiding).
+11. Distinct adjacent sections, always. Clients notice twins
+    instantly and they are right.
+12. Keep every deliverable as .txt files clients can open, sent in
+    small labeled batches with a one-line "where it goes."
+13. Photos of the client, hand-drawn collateral, and motion are
+    what make a page feel expensive. When in doubt, add more.
+14. Announcement banner on every page pointing at the free offer.
+    The freebie is the top of the whole funnel; make it loud.
+15. iOS renders subtle effects differently (an expanding
+    box-shadow pulse looked like a washed-out halo). On mobile
+    prefer solid fills, explicit borders, and z-index layering,
+    and test on a real phone screenshot.
+
+
+=====================================================================
+KICKOFF PROMPT FOR THE NEXT CLIENT PROJECT
+=====================================================================
+Paste something like this to start a new build:
+
+"We're building a client website the Boss Lady Bloggers way:
+single-file HTML pages pasted into Showit embed blocks. Follow the
+CLIENT-SITE-PLAYBOOK.txt in this repo. Here is the client's
+complete copy doc [attach], brand colors [hexes], fonts [3 roles],
+photo folder [location], links [booking/payment/social/videos],
+and page list [list]. Voice rules: [rules]. Build the shared
+builder first (tokens, nav, footer, loader, standard JS), then the
+homepage, then confirm the design direction with screenshots
+before building out the rest. Every page: announcement banner,
+distinct sections, testimonial videos, FAQ schema on money pages,
+mobile-verified at 390px, delivered as .txt files."
+
+=====================================================================
+END OF PLAYBOOK
+=====================================================================
