@@ -195,6 +195,19 @@ FLODESK INLINE FORMS: paste their div + loader snippet. The
 universal loader's function call REQUIRES the 6th argument 'fd'
 or you get "window.fd is not a function". Have the client set the
 form's success redirect to the thank-you page.
+  STYLING: Flodesk's default render is tiny. Since the form is
+  injected into YOUR page, override it: wrap the fd-form div in a
+  designed card (brand border, corner ribbon tag, headline +
+  script sub, sheen animation) and restyle the internals with
+  scoped !important rules. Target attribute patterns, not exact
+  class names: [class*="__container"] (zero its padding/margins,
+  this kills the mystery gap), [class*="__fields"] (force
+  display:grid, 1 column, 12px gap for stacked full-width
+  fields), inputs (16px+ font so iOS doesn't zoom, generous
+  padding, brand focus ring), [class*="__button"] and button
+  (full width, big, brand pill). Test with mock Flodesk markup
+  injected into the container if the real script can't load in
+  your test environment.
 
 PAYMENTS: link buttons straight to payment links (Cash App/Stripe).
 Put "how do payments work" in the FAQ + schema. Say "payment plans
@@ -424,6 +437,10 @@ mobile-verified at 390px, delivered as .txt files."
 =====================================================================
 CHANGELOG (newest first)
 =====================================================================
+2026-08-06  v1.1  Phase 5: added the Flodesk form glow-up recipe
+                  (card wrapper + scoped !important overrides via
+                  [class*=] selectors; zero the container margins
+                  to kill the dead gap; 16px+ inputs for iOS).
 2026-08-06  v1.0  Initial playbook written covering the full BLB
                   build: phases 0-11, all 15 lessons, kickoff
                   prompt. Everything from the copy-driven redesign
