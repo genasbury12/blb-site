@@ -368,6 +368,19 @@ PIL (600px wide, ~12fps, quantized to ~160 colors, loop forever).
 Target under 5MB. Make frame 1 the full hero because Outlook
 freezes GIFs on the first frame.
 
+COURSE DECK TEMPLATE: build it as a .pptx with pptxgenjs so the
+client can edit in Google Slides (which already has the Google
+Fonts) or PowerPoint. Write ~20 reusable LAYOUT FUNCTIONS (cover,
+module divider, statement, teach, bullets, 2/3 cards, compare,
+steps, stat, quote, checklist, do-dont, prompt, example, recap,
+breather, resources, offer, closing) then call them with real
+content, so the client duplicates a slide instead of designing
+one. Put layout guidance in the SPEAKER NOTES of each layout's
+first use. Two gotchas that cost us a round: (1) in pptxgenjs the
+bullet option must be on EACH item's options, not the parent, or
+only the first line gets a bullet; (2) cards sized by eye leave a
+dead band at the slide bottom, so render and check every slide.
+
 FAVICON: a single letter monogram beats a shrunken logo every
 time. Set the brand initial in the display serif (italic if the
 wordmark uses italic), cream on a solid brand-color circle, with
@@ -452,6 +465,9 @@ mobile-verified at 390px, delivered as .txt files."
 =====================================================================
 CHANGELOG (newest first)
 =====================================================================
+2026-08-07  v1.4  Phase 10: course deck template recipe (layout
+                  functions + speaker notes; pptxgenjs bullets go
+                  on each item, not the parent).
 2026-08-07  v1.3  Phase 10: favicon recipe added (monogram in
                   display serif, transparent corners, render big
                   and downsample, test at real size; watch the
