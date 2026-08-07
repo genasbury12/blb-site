@@ -368,6 +368,17 @@ PIL (600px wide, ~12fps, quantized to ~160 colors, loop forever).
 Target under 5MB. Make frame 1 the full hero because Outlook
 freezes GIFs on the first frame.
 
+FAVICON: a single letter monogram beats a shrunken logo every
+time. Set the brand initial in the display serif (italic if the
+wordmark uses italic), cream on a solid brand-color circle, with
+TRANSPARENT corners so it adapts to light and dark browser
+themes. Render big (512px) then downsample with LANCZOS, and
+ALWAYS preview it at the real delivered size plus an 8x pixel
+zoom before shipping. Watch for a gotcha: an explicit body
+background in the render page defeats omitBackground and bakes
+gray corners into the PNG. Deliver the size the platform asks
+for (Showit wants 35x35) plus 180 and 512 for app icons.
+
 BRAND COLORS FOR FLODESK: hand the client the 8 hex codes with
 one-line usage rules (background = paper, buttons = action color,
 text = ink, one pink button per email).
@@ -441,6 +452,10 @@ mobile-verified at 390px, delivered as .txt files."
 =====================================================================
 CHANGELOG (newest first)
 =====================================================================
+2026-08-07  v1.3  Phase 10: favicon recipe added (monogram in
+                  display serif, transparent corners, render big
+                  and downsample, test at real size; watch the
+                  omitBackground gotcha).
 2026-08-06  v1.2  Phase 0: photo intake requirements locked in.
                   JPG only, each file under 30 MB, delivered via
                   a shared Google Drive folder.
