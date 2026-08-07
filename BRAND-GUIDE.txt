@@ -1,0 +1,184 @@
+=====================================================================
+BOSS LADY BLOGGERS - BRAND GUIDE
+The single source of truth for every color, font, and design detail
+on bossladybloggers.com, the emails, and everything branded.
+=====================================================================
+
+
+=====================================================================
+1. THE LOGO / WORDMARK
+=====================================================================
+The wordmark is typeset, not an image:
+
+    Boss Lady Bloggers
+    - "Boss" and "Bloggers" in Fraunces, weight 500, Ink #2E1F27
+    - "Lady" in Fraunces ITALIC, Boss Pink #A93F63
+
+Tagline options (script, Ephesis, Gold #BC8A47):
+    "blog like she means business"
+    "gorgeous blogs that actually make money"
+
+
+=====================================================================
+2. COLORS
+=====================================================================
+CORE PALETTE
+  Paper cream    #FBF6EE   Every page and email background.
+                           NEVER pure white.
+  Ink plum       #2E1F27   Body text, dark sections, footer.
+                           NEVER pure black.
+  Boss pink      #A93F63   THE action color. Buttons, links,
+                           accents, anything meant to be clicked.
+  Deep plum      #7C2B48   Hover states, small caps labels,
+                           text on blush backgrounds.
+  Gold           #BC8A47   Script accents, dividers, doodles,
+                           flourishes. Warmth, not bling.
+
+SUPPORTING SHADES
+  Blush          #F0DCE2   Soft highlight backgrounds, pills,
+                           category tags.
+  Tint sand      #F4EBDE   Alternate section background (used to
+                           break up long stretches of cream).
+  Muted mauve    #6E5C63   Secondary text, captions, fine print.
+
+EXTRAS THAT APPEAR IN THE SYSTEM
+  Cream text on ink: #D8CBC3 (footer paragraph text)
+  White #FFFFFF: card backgrounds only, never page backgrounds.
+
+PAIRING RULES
+  - Backgrounds rotate: paper -> tint -> ink -> paper. Never two
+    dark sections back to back.
+  - One pink button per zone. If everything is pink, nothing is.
+  - Text on cream/tint/blush = Ink. Text on ink = Paper cream.
+  - Gold is for accents and script only, never body text.
+  - Borders on light backgrounds: Ink at 14-35% opacity
+    (rgba(46,31,39,.16) for cards, .35 for inputs).
+
+
+=====================================================================
+3. TYPOGRAPHY
+=====================================================================
+THREE FONTS, THREE JOBS (all free on Google Fonts):
+
+FRAUNCES - the display serif. Headlines, big numbers, quotes.
+  Weight: 500 only. Italic for emphasis words and the wordmark
+  "Lady". Headline letter-spacing: -0.01em. Line height 1.05-1.15.
+  Sizes on the site: h1 40-64px, h2 30-45px, h3 20-24px
+  (fluid with clamp()).
+
+KARLA - the workhorse sans. Body text, buttons, labels, nav.
+  Weights: 400 (body), 700 (bold, buttons, labels).
+  Body: 16-17px, line height 1.65-1.75.
+  CAPS LABELS (eyebrows, buttons, nav): 700 weight, 10-14px,
+  letter-spacing .16em-.24em, all uppercase.
+
+EPHESIS - the handwritten script. Accent lines only.
+  One line at a time ("so close, babe", "pop your email in").
+  22-46px. In Gold or Boss pink. NEVER for body text, never
+  more than one script line per section.
+
+GOOGLE FONTS EMBED:
+https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;1,9..144,500&family=Karla:wght@400;700&family=Ephesis&display=swap
+
+
+=====================================================================
+4. SHAPES, SHADOWS, AND TEXTURE
+=====================================================================
+CORNERS
+  Buttons + pills: fully round (border-radius 60px)
+  Cards: 20-26px
+  Large feature cards / dark bands: 26-30px
+  Photos: 20-24px, or the signature ARCH:
+    border-radius: 46vw 46vw 24px 24px (rounded top, square-ish
+    bottom, like a window)
+
+SHADOWS (soft but dramatic, always warm-toned)
+  Cards:    0 26px 50px -26px rgba(46,31,39,.38)
+  Features: 0 34px 64px -30px rgba(46,31,39,.45)
+  Pink pop: 0 18px 34px -14px rgba(169,63,99,.65) (buttons)
+
+SIGNATURE DECORATIVE ELEMENTS
+  - Giant outlined words behind sections: Fraunces italic,
+    huge, transparent fill, 1px stroke of pink or cream at
+    10-18% opacity
+  - Hand-drawn SVG doodles: arrows, underline squiggles, in Gold
+    or Boss pink, stroke width 2.5-3.5, round caps
+  - Spinning circular text badges (SVG textPath, 14-15s rotation)
+  - Sliding text marquees: Fraunces caps with sparkle
+    separators (the four-pointed star ✦, entity &#10022;)
+  - Floating stickers: white or blush pills, slight rotation
+    (-7deg to 5deg), caps text
+  - Polaroids: white frame, 12-14px padding, 40-52px bottom,
+    script caption, slight rotation
+  - Sparkles: ✦ in pink or gold, never emoji stars
+
+MOTION RULES
+  - Subtle and constant beats loud and once: slow marquees,
+    gentle floats, soft sheens
+  - Hover: lift (-3 to -8px translateY) + deepen shadow
+  - Everything respects prefers-reduced-motion
+
+
+=====================================================================
+5. BUTTONS
+=====================================================================
+PRIMARY (the pink pill)
+  Background Boss pink, white text, Karla 700, 12-14px,
+  letter-spacing .18em, uppercase, padding ~17px 36px,
+  radius 60px, pink-tinted shadow.
+  Hover: background Ink, lift 3px.
+  Copy style: action + arrow. "Book your call →"
+  "Unlock the free courses →" "See the program →"
+
+SECONDARY (the outline pill)
+  Transparent background, 1px Ink border, Ink text.
+  On dark: cream border at 40-50% opacity, cream text.
+  Hover: fills (pink on light, cream on dark).
+
+RULE: one primary per section. Secondary supports, never competes.
+
+
+=====================================================================
+6. VOICE
+=====================================================================
+  - Warm, blunt, confident. A big sister who built the thing.
+  - Short punchy lines. One idea per paragraph.
+  - "babe" sparingly - once or twice per page or email, max.
+  - Sell with certainty, never pressure. The PS is the soft sell.
+  - Say "payment plans available" wherever a price appears.
+  - NO EM DASHES. Use periods, commas, or the word "and".
+  - Script lines are little winks: "so close, babe",
+    "all three are kind of a big deal", "no pitch, just a plan".
+
+
+=====================================================================
+7. EMAIL BRAND (FLODESK)
+=====================================================================
+  - Email background: Paper cream #FBF6EE, never white.
+  - Default text: Ink. Default links: Boss pink.
+  - One pink button per email.
+  - Branded PNG kit lives in the repo at email-assets/:
+    3 headers, footer, signature, 2 dividers, badge, 2 buttons,
+    polaroid, quote card, site-tour GIF.
+  - Headers by mood: clean cream (default), ink (launches),
+    blush script "hey babe" (personal notes).
+
+
+=====================================================================
+8. THE FULL HEX LIST (copy-paste block)
+=====================================================================
+  #FBF6EE  paper cream
+  #F4EBDE  tint sand
+  #2E1F27  ink plum
+  #A93F63  boss pink
+  #7C2B48  deep plum
+  #BC8A47  gold
+  #F0DCE2  blush
+  #6E5C63  muted mauve
+  #D8CBC3  cream text on dark
+  #FFFFFF  card white
+
+=====================================================================
+END - keep this file with the site repo; update it if the brand
+evolves so the site, emails, and socials never drift apart.
+=====================================================================
