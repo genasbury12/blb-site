@@ -368,6 +368,20 @@ PIL (600px wide, ~12fps, quantized to ~160 colors, loop forever).
 Target under 5MB. Make frame 1 the full hero because Outlook
 freezes GIFs on the first frame.
 
+DECK VARIETY IS ABOUT COMPOSITION, NOT CONTENT BLOCKS. Our first
+100-slide deck had 20 "layouts" and the client said every slide
+looked the same, and she was right: all 20 shared one composition
+(eyebrow top-left, headline same spot, content below, cream bg).
+The top third of 70 slides was identical. Real variety means
+changing the COMPOSITION: move the title (top, bottom, centred,
+vertically-centred left), split the canvas (colour panel left,
+right, or a top band), go full-bleed colour, use circles instead
+of cards, stagger card heights, bleed a giant numeral off the
+edge, set a huge tinted word behind the text, and rotate the
+background across 6 values. Assert it in code: log each slide's
+layout + background and fail if two adjacent slides share a
+layout or three in a row share a background.
+
 COURSE DECK TEMPLATE: build it as a .pptx with pptxgenjs so the
 client can edit in Google Slides (which already has the Google
 Fonts) or PowerPoint. Write ~20 reusable LAYOUT FUNCTIONS (cover,
@@ -465,6 +479,10 @@ mobile-verified at 390px, delivered as .txt files."
 =====================================================================
 CHANGELOG (newest first)
 =====================================================================
+2026-08-07  v1.5  Phase 10 + lesson: slide variety comes from
+                  composition, not from renaming content blocks.
+                  Also: pptxgenjs shape is ShapeType.rect, not
+                  .rectangle; never use a vertical edge stripe.
 2026-08-07  v1.4  Phase 10: course deck template recipe (layout
                   functions + speaker notes; pptxgenjs bullets go
                   on each item, not the parent).
