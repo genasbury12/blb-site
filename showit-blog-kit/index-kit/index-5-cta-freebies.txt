@@ -1,0 +1,66 @@
+<!--
+============================================================
+BLOG INDEX KIT · 5 of 7 — FREE COURSES CTA
+============================================================
+WHERE: one Embed Code block directly BELOW the post list and
+pagination.
+
+SIZE: full width on both canvases.
+  Desktop height: about 470px
+  Mobile height:  about 560px
+
+A sliding marquee strip (clickable, pure CSS) plus the big
+blush sign-up card. The button goes to /freebies where your
+real Flodesk form lives, because embedded forms cannot run
+on blog templates. Zero JavaScript.
+============================================================
+-->
+
+<div id="bxFree">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;1,9..144,500&family=Karla:wght@400;700&family=Ephesis&display=swap');
+#bxFree{max-width:100vw;overflow:hidden;font-family:'Karla',sans-serif;color:#2E1F27;background:#FBF6EE}
+#bxFree *{margin:0;padding:0;box-sizing:border-box}
+
+/* clickable marquee strip */
+#bxFree .strip{display:block;background:#F0DCE2;border-top:1px solid rgba(46,31,39,.14);border-bottom:1px solid rgba(46,31,39,.14);padding:18px 0;white-space:nowrap;overflow:hidden;text-decoration:none;transition:background .25s}
+#bxFree .strip:hover{background:#A93F63}
+#bxFree .strip .in{display:inline-block;animation:bxFreeMq 22s linear infinite;font-family:'Fraunces',Georgia,serif;font-size:clamp(16px,2.4vw,20px);letter-spacing:.18em;text-transform:uppercase;color:#7C2B48;transition:color .25s}
+#bxFree .strip:hover .in{color:#FBF6EE}
+#bxFree .strip .in b{font-family:'Karla',sans-serif;font-weight:700;font-size:12px;letter-spacing:.22em;vertical-align:middle;padding:0 18px;color:#A93F63;transition:color .25s}
+#bxFree .strip:hover .in b{color:#F0DCE2}
+@keyframes bxFreeMq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* the card */
+#bxFree .card{position:relative;max-width:760px;margin:44px auto 50px;background:#F0DCE2;border:1px solid rgba(124,43,72,.28);border-radius:26px;padding:46px 40px 42px;text-align:center;box-shadow:0 26px 50px -26px rgba(169,63,99,.45);overflow:hidden}
+#bxFree .card::after{content:'';position:absolute;inset:0;background:linear-gradient(115deg,transparent 30%,rgba(251,246,238,.55) 48%,transparent 62%);background-size:240% 100%;animation:bxFreeSheen 3.4s linear infinite;pointer-events:none}
+@keyframes bxFreeSheen{to{background-position:-140% 0}}
+#bxFree .tag{position:absolute;top:16px;right:-36px;background:#A93F63;color:#fff;font-weight:700;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;padding:8px 42px;transform:rotate(38deg);z-index:2}
+#bxFree .eyebrow{display:inline-block;font-weight:700;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:#7C2B48}
+#bxFree h2{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:clamp(26px,4.5vw,36px);line-height:1.15;margin:10px 0 4px}
+#bxFree h2 em{font-style:italic;color:#A93F63}
+#bxFree .script{font-family:'Ephesis',cursive;font-size:clamp(24px,3.5vw,30px);color:#BC8A47;margin-bottom:12px}
+#bxFree p{color:#5C4450;max-width:480px;margin:0 auto 24px;font-size:15.5px;line-height:1.65;position:relative;z-index:1}
+#bxFree .btn{display:inline-block;position:relative;z-index:1;background:#A93F63;color:#fff;border:1px solid #A93F63;font-weight:700;font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;padding:18px 40px;border-radius:60px;text-decoration:none;transition:all .2s;box-shadow:0 18px 34px -14px rgba(124,43,72,.6)}
+#bxFree .btn:hover{background:#2E1F27;border-color:#2E1F27;transform:translateY(-3px)}
+#bxFree .micro{font-size:12.5px;color:#7C2B48;margin:14px 0 0;position:relative;z-index:1}
+@media (max-width:640px){#bxFree .card{margin:34px 16px 40px;padding:38px 22px 36px}}
+@media (prefers-reduced-motion:reduce){#bxFree .strip .in,#bxFree .card::after{animation:none}}
+</style>
+
+<a class="strip" href="/freebies" aria-label="Get the free blogging courses">
+  <div class="in">
+    Free blogging courses<b>&rarr; tap to unlock</b>Six courses, zero dollars<b>&rarr; tap to unlock</b>Start your blog free<b>&rarr; tap to unlock</b>Free blogging courses<b>&rarr; tap to unlock</b>Six courses, zero dollars<b>&rarr; tap to unlock</b>Start your blog free<b>&rarr; tap to unlock</b>
+  </div>
+</a>
+
+<div class="card">
+  <span class="tag">100% free</span>
+  <span class="eyebrow">Liked these posts?</span>
+  <h2>The free courses go <em>deeper.</em></h2>
+  <div class="script">six full courses, zero dollars</div>
+  <p>One signup unlocks the whole library: starting your blog, finding what to sell, getting traffic, making your first sale.</p>
+  <a class="btn" href="/freebies">Unlock the free courses &rarr;</a>
+  <div class="micro">Straight to your inbox. Unsubscribe whenever.</div>
+</div>
+</div>

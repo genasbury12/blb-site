@@ -1,0 +1,49 @@
+<!--
+============================================================
+BLOG INDEX KIT · 2 of 7 — ABOVE THE FOLD
+============================================================
+WHERE: one Embed Code block directly under the nav embed.
+
+SIZE: full width on both canvases.
+  Desktop height: about 430px
+  Mobile height:  about 400px
+
+ZERO JavaScript. The topic marquee at the bottom is pure CSS
+with the content written twice, so it loops forever without
+a single script.
+============================================================
+-->
+
+<div id="bxHero">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;1,9..144,500&family=Karla:wght@400;700&family=Ephesis&display=swap');
+#bxHero{max-width:100vw;overflow:hidden;font-family:'Karla',sans-serif;color:#2E1F27;background:#FBF6EE;padding-top:46px}
+#bxHero *{margin:0;padding:0;box-sizing:border-box}
+#bxHero .wrap{max-width:860px;margin:0 auto;text-align:center;padding:0 22px}
+#bxHero .eyebrow{display:inline-block;background:#F0DCE2;border-radius:60px;padding:9px 20px;font-weight:700;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:#7C2B48}
+#bxHero h1{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:clamp(34px,6vw,56px);line-height:1.08;letter-spacing:-0.01em;margin:18px 0 6px}
+#bxHero h1 em{font-style:italic;color:#A93F63}
+#bxHero .script{font-family:'Ephesis',cursive;font-size:clamp(26px,4vw,36px);color:#BC8A47;margin-bottom:12px}
+#bxHero .sub{font-size:15.5px;color:#6E5C63;max-width:520px;margin:0 auto 22px;line-height:1.65}
+#bxHero .doodle{width:170px;margin:0 auto 6px;display:block}
+#bxHero .mq{border-top:1px solid rgba(46,31,39,.14);border-bottom:1px solid rgba(46,31,39,.14);padding:13px 0;white-space:nowrap;overflow:hidden;margin-top:26px}
+#bxHero .mq-in{display:inline-block;animation:bxHeroMq 26s linear infinite;font-family:'Fraunces',Georgia,serif;font-size:15px;letter-spacing:.22em;text-transform:uppercase;color:#2E1F27}
+#bxHero .mq-in i{font-style:normal;color:#A93F63;padding:0 14px}
+@keyframes bxHeroMq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){#bxHero .mq-in{animation:none}}
+</style>
+
+<div class="wrap">
+  <span class="eyebrow">The Boss Lady Blog</span>
+  <h1>Read your way to a blog<br>that actually <em>sells</em></h1>
+  <div class="script">no fluff, just the stuff that works</div>
+  <p class="sub">Blogging strategy, offers, copy, and design for women building a business, not a hobby.</p>
+  <svg class="doodle" viewBox="0 0 170 14" fill="none" aria-hidden="true"><path d="M3 10 C 40 2, 130 2, 167 8" stroke="#A93F63" stroke-width="2.5" stroke-linecap="round"/><path d="M18 12 C 60 6, 120 6, 155 11" stroke="#A93F63" stroke-width="1.5" stroke-linecap="round" opacity=".45"/></svg>
+</div>
+
+<div class="mq" aria-hidden="true">
+  <div class="mq-in">
+    Blogging tips<i>&#10038;</i>Make money blogging<i>&#10038;</i>Blog design<i>&#10038;</i>Email lists<i>&#10038;</i>Traffic that converts<i>&#10038;</i>Offers that sell<i>&#10038;</i>Blogging tips<i>&#10038;</i>Make money blogging<i>&#10038;</i>Blog design<i>&#10038;</i>Email lists<i>&#10038;</i>Traffic that converts<i>&#10038;</i>Offers that sell<i>&#10038;</i>
+  </div>
+</div>
+</div>
