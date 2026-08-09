@@ -501,6 +501,14 @@ mobile-verified at 390px, delivered as .txt files."
 =====================================================================
 CHANGELOG (newest first)
 =====================================================================
+2026-08-09  v1.7  Phase 6: blog Custom CSS now ends with a
+                  mobile block: under 700px force the post grid
+                  and every card to display:block width:100%
+                  !important (Showit/WP keeps cards two-across on
+                  phones otherwise and titles wrap one word per
+                  line). Also bump card titles to 19px and shrink
+                  pagination pills on mobile. Always test the
+                  card grid at 390px, not just the embeds.
 2026-08-07  v1.6  Phase 10: added the deck QA defect list (zero-
                   width lines still draw, default valign centres,
                   end-of-track captions overflow, zero-gutter
