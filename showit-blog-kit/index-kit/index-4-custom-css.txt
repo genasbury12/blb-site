@@ -312,6 +312,68 @@ nav.pagination span.current, .nav-links span.page-numbers.current{
   color:#6E5C63 !important;
 }
 
+/* ---------- live-site rescue: stop Showit cutting titles off ---------- */
+/* Showit publishes every text box at the exact size you drew it
+   and hides anything longer. Real post titles are longer than your
+   placeholder text, so they were being chopped mid-word. These
+   rules let the text wrap and the box grow downward instead. */
+.blb-cardtitle, .blb-cardtitle *{
+  white-space:normal !important;
+  overflow:visible !important;
+  height:auto !important;
+  max-height:none !important;
+  text-transform:none !important;
+  letter-spacing:-0.01em !important;
+}
+.blb-cardtitle{
+  background:transparent !important;
+  border:none !important;
+  box-shadow:none !important;
+}
+.blb-cardtitle *{
+  background:transparent !important;
+  padding:0 !important;
+  border:none !important;
+  border-radius:0 !important;
+}
+.blb-cardtitle a:not(.blbx), .blb-cardtitle a:not(.blbx) span{
+  font-family:'Fraunces',Georgia,serif !important;
+  font-weight:500 !important;
+  background:transparent !important;
+  padding:0 !important;
+  margin:0 !important;
+  border:none !important;
+  border-radius:0 !important;
+  display:inline !important;
+  white-space:normal !important;
+  text-transform:none !important;
+  letter-spacing:-0.01em !important;
+  font-size:20px !important;
+  line-height:1.25 !important;
+  color:#2E1F27 !important;
+}
+.blb-cats, .blb-cats a{
+  overflow:visible !important;
+  height:auto !important;
+  max-height:none !important;
+}
+
+/* safety net: if the card class accidentally lands on a text box
+   INSIDE the real card, strip the card look off the inner one so
+   text boxes never get their own white border box */
+.blb-card .blb-card{
+  background:transparent !important;
+  border:none !important;
+  box-shadow:none !important;
+  border-radius:0 !important;
+  overflow:visible !important;
+  transform:none !important;
+}
+
+/* utility: tag ANY leftover shape you cannot delete in Showit
+   with the class blb-hide and it disappears on publish */
+.blb-hide{display:none !important;visibility:hidden !important}
+
 /* ---------- mobile: post cards go ONE per row, full width ---------- */
 @media (max-width: 700px){
   .blb-grid{display:block !important;width:100% !important}

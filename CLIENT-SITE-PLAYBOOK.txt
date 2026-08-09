@@ -501,6 +501,18 @@ mobile-verified at 390px, delivered as .txt files."
 =====================================================================
 CHANGELOG (newest first)
 =====================================================================
+2026-08-09  v1.9  Phase 6 rescue rules, learned from the live
+                  site: (a) Showit publishes text boxes at drawn
+                  size and clips longer real titles, so card
+                  title rules force wrap + auto height; (b) a
+                  category class landing on the content area or
+                  title makes everything uppercase pill-styled,
+                  so body/title rules explicitly reset
+                  text-transform, letter-spacing, link padding
+                  and background; use :not(.blbx) to outrank the
+                  pill selector at equal order; (c) added a
+                  blb-hide utility class to remove stray shapes
+                  the client cannot find on the Showit canvas.
 2026-08-09  v1.8  Phase 6: the single post template gets its
                   OWN Custom CSS file (post kit), separate from
                   the index kit CSS. Covers header, featured

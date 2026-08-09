@@ -419,7 +419,40 @@
 }
 
 /* =============================================================
-   SECTION 12 - MOBILE (under 700px wide)
+   SECTION 12 - RESCUE: keep body text NORMAL no matter what
+   Showit text styles or misplaced classes try to do to it.
+   Kills the all-caps + wide letter-spacing + pill-links look.
+   ============================================================= */
+.blb-post p, .blb-post li, .blb-post h2, .blb-post h3, .blb-post h4,
+.blb-post blockquote p, .blb-post td{
+  text-transform:none !important;
+}
+.blb-post p, .blb-post li, .blb-post blockquote p, .blb-post td{
+  letter-spacing:0 !important;
+}
+.blb-post h2, .blb-post h3, .blb-post h4{
+  letter-spacing:-0.01em !important;
+}
+.blb-post p a, .blb-post li a, .blb-post h2 a, .blb-post h3 a,
+.blb-post blockquote a, .blb-post td a{
+  background:transparent !important;
+  padding:0 !important;
+  margin:0 !important;
+  border:none !important;
+  border-radius:0 !important;
+  display:inline !important;
+  white-space:normal !important;
+  font-size:inherit !important;
+  letter-spacing:inherit !important;
+  text-transform:inherit !important;
+}
+
+/* utility: tag ANY leftover shape you cannot delete in Showit
+   with the class blb-hide and it disappears on publish */
+.blb-hide{display:none !important;visibility:hidden !important}
+
+/* =============================================================
+   SECTION 13 - MOBILE (under 700px wide)
    ============================================================= */
 @media (max-width: 700px){
   .blb-title, .blb-title *{font-size:30px !important;line-height:1.15 !important}
