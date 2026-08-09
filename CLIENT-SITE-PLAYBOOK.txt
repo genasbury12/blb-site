@@ -501,6 +501,15 @@ mobile-verified at 390px, delivered as .txt files."
 =====================================================================
 CHANGELOG (newest first)
 =====================================================================
+2026-08-09  v1.8  Phase 6: the single post template gets its
+                  OWN Custom CSS file (post kit), separate from
+                  the index kit CSS. Covers header, featured
+                  image, body type, headings with pink underline,
+                  lists, quote cards, images, buttons, tables,
+                  prev/next links, comments, and a mobile block.
+                  Opt-in WordPress block classes: blb-lead,
+                  blb-dropcap, blb-note, blb-btn (added per post
+                  via block Advanced -> Additional CSS class).
 2026-08-09  v1.7  Phase 6: blog Custom CSS now ends with a
                   mobile block: under 700px force the post grid
                   and every card to display:block width:100%

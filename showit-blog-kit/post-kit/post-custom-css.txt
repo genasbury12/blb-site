@@ -1,0 +1,447 @@
+/* =============================================================
+   BOSS LADY BLOGGERS - SINGLE POST CUSTOM CSS (post kit v1)
+   This goes in the Custom CSS box on the SINGLE POST template
+   ONLY. It replaces everything currently in that box. Your blog
+   INDEX template keeps the index kit CSS you already have.
+
+   CLASSES TO ASSIGN in Showit (Advanced -> CSS Classes, no dot):
+     post title text        -> blb-title
+     date / author line     -> blb-meta
+     category text          -> blb-cats
+     featured image         -> blb-featured
+     the blog content area  -> blb-post
+
+   OPTIONAL CLASSES you add in WORDPRESS while writing a post
+   (select the block -> Advanced -> Additional CSS class):
+     blb-lead     on your opening paragraph  = bigger intro text
+     blb-dropcap  on your opening paragraph  = big fancy first letter
+     blb-btn      on any link or button      = pink pill button
+     blb-note     on a paragraph             = blush callout card
+
+   Styling shows on the PUBLISHED site, never in the editor.
+   ============================================================= */
+
+/* =============================================================
+   SECTION 1 - POST HEADER: title, meta line, category pills
+   ============================================================= */
+.blb-title, .blb-title *{
+  font-family:'Fraunces',Georgia,serif !important;
+  font-weight:500 !important;
+  color:#2E1F27 !important;
+  line-height:1.12 !important;
+  letter-spacing:-0.01em !important;
+}
+.blb-meta, .blb-meta *{
+  font-family:'Karla',sans-serif !important;
+  font-weight:700 !important;
+  font-size:12.5px !important;
+  letter-spacing:0.18em !important;
+  text-transform:uppercase !important;
+  color:#6E5C63 !important;
+}
+.blb-meta a{color:#7C2B48 !important;text-decoration:none !important}
+.blb-meta a:hover{color:#A93F63 !important}
+
+/* category links become little blush pills; the box holding
+   them stays invisible */
+.blb-cats{
+  background:transparent !important;
+  background-color:transparent !important;
+  padding:0 !important;
+  border:none !important;
+  text-align:left !important;
+}
+.blb-cats, .blb-cats *{
+  font-family:'Karla',sans-serif !important;
+  font-weight:700 !important;
+  font-size:10px !important;
+  letter-spacing:.14em !important;
+  text-transform:uppercase !important;
+  color:#7C2B48 !important;
+  text-decoration:none !important;
+}
+.blb-cats a{
+  display:inline-block !important;
+  background:#F0DCE2 !important;
+  border:none !important;
+  border-radius:40px !important;
+  padding:6px 14px !important;
+  margin:0 6px 6px 0 !important;
+  white-space:nowrap !important;
+  line-height:1.1 !important;
+}
+.blb-cats a:hover{background:#A93F63 !important}
+.blb-cats a:hover, .blb-cats a:hover *{color:#FFFFFF !important}
+
+/* =============================================================
+   SECTION 2 - FEATURED IMAGE
+   ============================================================= */
+.blb-featured img, img.blb-featured{
+  border-radius:26px !important;
+  border:1px solid rgba(46,31,39,.16) !important;
+  box-shadow:0 34px 64px -30px rgba(46,31,39,.45) !important;
+}
+
+/* =============================================================
+   SECTION 3 - BODY TEXT: paragraphs, links, bold, italic
+   ============================================================= */
+.blb-post p{
+  font-family:'Karla',sans-serif !important;
+  font-size:17px !important;
+  line-height:1.75 !important;
+  color:#2E1F27 !important;
+  margin-bottom:26px !important;
+}
+.blb-post a{
+  color:#A93F63 !important;
+  font-weight:600 !important;
+  text-decoration:underline !important;
+  text-decoration-color:rgba(169,63,99,.4) !important;
+  text-decoration-thickness:2px !important;
+  text-underline-offset:3px !important;
+}
+.blb-post a:hover{text-decoration-color:#A93F63 !important}
+.blb-post strong, .blb-post b{color:#2E1F27 !important;font-weight:700 !important}
+.blb-post em{color:#A93F63 !important}
+
+/* opening paragraph upgrades (add the class in WordPress) */
+.blb-post p.blb-lead{
+  font-size:20px !important;
+  line-height:1.65 !important;
+  color:#5C4450 !important;
+}
+.blb-post p.blb-dropcap::first-letter{
+  font-family:'Fraunces',Georgia,serif !important;
+  font-weight:500 !important;
+  font-size:64px !important;
+  line-height:.9 !important;
+  color:#A93F63 !important;
+  float:left !important;
+  padding:6px 12px 0 0 !important;
+}
+
+/* blush callout card for tips and reminders */
+.blb-post p.blb-note{
+  background:#F0DCE2 !important;
+  border:1px solid rgba(124,43,72,.25) !important;
+  border-radius:18px !important;
+  padding:22px 26px !important;
+  color:#5C4450 !important;
+}
+
+/* =============================================================
+   SECTION 4 - HEADINGS with a short pink underline on h2
+   ============================================================= */
+.blb-post h2, .blb-post h3, .blb-post h4{
+  font-family:'Fraunces',Georgia,serif !important;
+  font-weight:500 !important;
+  color:#2E1F27 !important;
+  line-height:1.15 !important;
+  margin:46px 0 18px !important;
+}
+.blb-post h2{font-size:31px !important}
+.blb-post h3{font-size:24px !important}
+.blb-post h4{font-size:20px !important}
+.blb-post h2::after{
+  content:'' !important;
+  display:block !important;
+  width:56px !important;
+  height:3px !important;
+  border-radius:3px !important;
+  background:#A93F63 !important;
+  margin-top:12px !important;
+}
+
+/* =============================================================
+   SECTION 5 - LISTS
+   ============================================================= */
+.blb-post ul, .blb-post ol{margin:0 0 26px 22px !important;padding-left:4px !important}
+.blb-post li{
+  font-family:'Karla',sans-serif !important;
+  font-size:16.5px !important;
+  line-height:1.7 !important;
+  margin-bottom:10px !important;
+  color:#2E1F27 !important;
+}
+.blb-post li::marker{color:#A93F63 !important;font-weight:700 !important}
+
+/* =============================================================
+   SECTION 6 - QUOTES: blush card with a big gold quote mark
+   ============================================================= */
+.blb-post blockquote{
+  position:relative !important;
+  background:#F0DCE2 !important;
+  border:none !important;
+  border-left:none !important;
+  border-radius:22px !important;
+  margin:38px 0 !important;
+  padding:34px 34px 30px 34px !important;
+  overflow:visible !important;
+}
+.blb-post blockquote::before{
+  content:'\201C' !important;
+  position:absolute !important;
+  top:-6px !important;
+  left:22px !important;
+  font-family:'Fraunces',Georgia,serif !important;
+  font-size:72px !important;
+  line-height:1 !important;
+  color:#BC8A47 !important;
+}
+.blb-post blockquote p{
+  font-family:'Fraunces',Georgia,serif !important;
+  font-style:italic !important;
+  font-size:22px !important;
+  line-height:1.5 !important;
+  color:#7C2B48 !important;
+  margin:0 !important;
+}
+.blb-post blockquote p + p{margin-top:14px !important}
+.blb-post blockquote cite{
+  display:block !important;
+  margin-top:14px !important;
+  font-family:'Karla',sans-serif !important;
+  font-style:normal !important;
+  font-weight:700 !important;
+  font-size:11px !important;
+  letter-spacing:.18em !important;
+  text-transform:uppercase !important;
+  color:#A93F63 !important;
+}
+
+/* =============================================================
+   SECTION 7 - IMAGES + CAPTIONS inside the post
+   ============================================================= */
+.blb-post img{
+  border-radius:20px !important;
+  border:1px solid rgba(46,31,39,.16) !important;
+  box-shadow:0 26px 50px -26px rgba(46,31,39,.38) !important;
+  height:auto !important;
+  max-width:100% !important;
+}
+.blb-post figure{margin:34px 0 !important}
+.blb-post figcaption, .blb-post .wp-caption-text{
+  font-family:'Ephesis',cursive !important;
+  font-size:22px !important;
+  color:#BC8A47 !important;
+  text-align:center !important;
+  margin-top:10px !important;
+}
+
+/* =============================================================
+   SECTION 8 - BUTTONS: WordPress button blocks AND any link
+   you give the class blb-btn
+   ============================================================= */
+.blb-post .wp-block-button__link, .blb-post a.blb-btn{
+  display:inline-block !important;
+  background:#A93F63 !important;
+  color:#FFFFFF !important;
+  border:1px solid #A93F63 !important;
+  border-radius:60px !important;
+  font-family:'Karla',sans-serif !important;
+  font-weight:700 !important;
+  font-size:12.5px !important;
+  letter-spacing:.18em !important;
+  text-transform:uppercase !important;
+  padding:17px 36px !important;
+  text-decoration:none !important;
+  box-shadow:0 18px 34px -14px rgba(124,43,72,.6) !important;
+  transition:all .2s ease !important;
+}
+.blb-post .wp-block-button__link:hover, .blb-post a.blb-btn:hover{
+  background:#2E1F27 !important;
+  border-color:#2E1F27 !important;
+  color:#FFFFFF !important;
+}
+
+/* =============================================================
+   SECTION 9 - DIVIDERS + TABLES
+   ============================================================= */
+.blb-post hr{
+  border:none !important;
+  border-top:1px dashed rgba(46,31,39,.25) !important;
+  margin:44px 0 !important;
+}
+.blb-post table{
+  width:100% !important;
+  border-collapse:collapse !important;
+  margin:0 0 30px !important;
+  font-family:'Karla',sans-serif !important;
+  font-size:15px !important;
+}
+.blb-post th{
+  background:#2E1F27 !important;
+  color:#FBF6EE !important;
+  font-weight:700 !important;
+  font-size:11.5px !important;
+  letter-spacing:.14em !important;
+  text-transform:uppercase !important;
+  padding:13px 16px !important;
+  text-align:left !important;
+}
+.blb-post td{
+  padding:13px 16px !important;
+  border-bottom:1px solid rgba(46,31,39,.14) !important;
+  color:#2E1F27 !important;
+}
+.blb-post tr:nth-child(even) td{background:#F4EBDE !important}
+
+/* =============================================================
+   SECTION 10 - PREVIOUS / NEXT POST LINKS
+   (WordPress prints these automatically under the post)
+   ============================================================= */
+.blb-post .post-navigation a, .post-navigation a,
+.blb-post .nav-links a, nav.post-navigation a{
+  display:inline-block !important;
+  border:1px solid rgba(46,31,39,.3) !important;
+  border-radius:60px !important;
+  background:transparent !important;
+  font-family:'Karla',sans-serif !important;
+  font-weight:700 !important;
+  font-size:11.5px !important;
+  letter-spacing:.14em !important;
+  text-transform:uppercase !important;
+  color:#2E1F27 !important;
+  text-decoration:none !important;
+  padding:14px 24px !important;
+  margin:6px 8px 6px 0 !important;
+  transition:all .2s ease !important;
+}
+.blb-post .post-navigation a:hover, .post-navigation a:hover,
+.blb-post .nav-links a:hover, nav.post-navigation a:hover{
+  background:#A93F63 !important;
+  border-color:#A93F63 !important;
+  color:#FFFFFF !important;
+}
+
+/* =============================================================
+   SECTION 11 - COMMENTS: the form and the comment list
+   ============================================================= */
+#respond, .comment-respond{
+  background:#F4EBDE !important;
+  border:1px solid rgba(46,31,39,.14) !important;
+  border-radius:22px !important;
+  padding:30px 28px !important;
+  margin-top:44px !important;
+}
+#respond .comment-reply-title, .comment-respond .comment-reply-title{
+  font-family:'Fraunces',Georgia,serif !important;
+  font-weight:500 !important;
+  font-size:24px !important;
+  color:#2E1F27 !important;
+  margin:0 0 14px !important;
+}
+#respond label, .comment-respond label{
+  font-family:'Karla',sans-serif !important;
+  font-weight:700 !important;
+  font-size:11px !important;
+  letter-spacing:.16em !important;
+  text-transform:uppercase !important;
+  color:#7C2B48 !important;
+}
+#respond input[type="text"], #respond input[type="email"],
+#respond input[type="url"], #respond textarea,
+.comment-form input[type="text"], .comment-form input[type="email"],
+.comment-form input[type="url"], .comment-form textarea{
+  width:100% !important;
+  background:#FFFFFF !important;
+  border:1px solid rgba(46,31,39,.25) !important;
+  border-radius:14px !important;
+  padding:14px 16px !important;
+  font-family:'Karla',sans-serif !important;
+  font-size:16px !important;
+  color:#2E1F27 !important;
+  margin:6px 0 16px !important;
+}
+#respond input:focus, #respond textarea:focus,
+.comment-form input:focus, .comment-form textarea:focus{
+  outline:none !important;
+  border-color:#A93F63 !important;
+  box-shadow:0 0 0 3px rgba(169,63,99,.18) !important;
+}
+#respond input[type="submit"], .comment-form input[type="submit"],
+.form-submit input{
+  width:auto !important;
+  background:#A93F63 !important;
+  color:#FFFFFF !important;
+  border:1px solid #A93F63 !important;
+  border-radius:60px !important;
+  font-family:'Karla',sans-serif !important;
+  font-weight:700 !important;
+  font-size:12.5px !important;
+  letter-spacing:.18em !important;
+  text-transform:uppercase !important;
+  padding:16px 34px !important;
+  cursor:pointer !important;
+  transition:all .2s ease !important;
+}
+#respond input[type="submit"]:hover, .form-submit input:hover{
+  background:#2E1F27 !important;
+  border-color:#2E1F27 !important;
+}
+.comment-list, ol.comment-list{list-style:none !important;margin:30px 0 0 !important;padding:0 !important}
+.comment-list .comment, .comment-list li.comment{
+  background:#FFFFFF !important;
+  border:1px solid rgba(46,31,39,.14) !important;
+  border-radius:18px !important;
+  padding:22px 24px !important;
+  margin:0 0 16px !important;
+}
+.comment-list .comment-author, .comment-list .fn{
+  font-family:'Fraunces',Georgia,serif !important;
+  font-style:normal !important;
+  font-size:17px !important;
+  color:#2E1F27 !important;
+}
+.comment-list .comment-metadata a, .comment-list .comment-meta a{
+  font-family:'Karla',sans-serif !important;
+  font-size:11px !important;
+  letter-spacing:.1em !important;
+  text-transform:uppercase !important;
+  color:#6E5C63 !important;
+  text-decoration:none !important;
+}
+.comment-list .comment-content p{
+  font-family:'Karla',sans-serif !important;
+  font-size:15.5px !important;
+  line-height:1.7 !important;
+  color:#2E1F27 !important;
+  margin:10px 0 0 !important;
+}
+.comment-list .reply a, .comment-reply-link{
+  font-family:'Karla',sans-serif !important;
+  font-weight:700 !important;
+  font-size:11px !important;
+  letter-spacing:.16em !important;
+  text-transform:uppercase !important;
+  color:#A93F63 !important;
+  text-decoration:none !important;
+}
+
+/* =============================================================
+   SECTION 12 - MOBILE (under 700px wide)
+   ============================================================= */
+@media (max-width: 700px){
+  .blb-title, .blb-title *{font-size:30px !important;line-height:1.15 !important}
+  .blb-post p{font-size:16.5px !important}
+  .blb-post p.blb-lead{font-size:18.5px !important}
+  .blb-post h2{font-size:25px !important}
+  .blb-post h3{font-size:21px !important}
+  .blb-post h4{font-size:18px !important}
+  .blb-post p.blb-dropcap::first-letter{font-size:52px !important}
+  .blb-post blockquote{padding:28px 22px 24px !important}
+  .blb-post blockquote p{font-size:19px !important}
+  .blb-post th, .blb-post td{padding:10px 10px !important;font-size:13.5px !important}
+  #respond, .comment-respond{padding:24px 18px !important}
+  .blb-post .wp-block-button__link, .blb-post a.blb-btn{
+    display:block !important;
+    text-align:center !important;
+    padding:16px 20px !important;
+  }
+  .blb-post .post-navigation a, .post-navigation a,
+  .blb-post .nav-links a, nav.post-navigation a{
+    display:block !important;
+    text-align:center !important;
+    margin:0 0 10px !important;
+  }
+}
