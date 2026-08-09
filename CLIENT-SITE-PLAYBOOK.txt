@@ -368,6 +368,28 @@ PIL (600px wide, ~12fps, quantized to ~160 colors, loop forever).
 Target under 5MB. Make frame 1 the full hero because Outlook
 freezes GIFs on the first frame.
 
+DECK QA: THE DEFECTS THAT ONLY SHOW UP WHEN YOU RENDER. Every one
+of these shipped past a "looks fine" review and had to be caught
+in the rendered images:
+  - Shapes with line width 0 still draw a hairline. Decorative
+    circles all had visible rings. Use an explicit no-line, not
+    width 0.
+  - Text boxes vertically centre by default, so captions in a row
+    with different line counts sit at different heights. Pin
+    valign to top in your text helper.
+  - Anything centred on the first/last item of an evenly spaced
+    track runs off the slide. Inset the track by half a caption
+    width before computing the step.
+  - Caption boxes exactly as wide as the column step touch each
+    other and read as one running paragraph. Subtract a gutter.
+  - A headline ending in a colon must sit ABOVE the list it
+    introduces. Bottom-anchored titles break reading order.
+  - A half-slide colour panel with one small line in it reads as
+    unfinished. Either fill it with a real element (oversized
+    script, framed image slot) or make the panel smaller.
+  - Icon/checkbox rows need the label vertically centred against
+    the box, not top-aligned, or every label sits low.
+
 DECK VARIETY IS ABOUT COMPOSITION, NOT CONTENT BLOCKS. Our first
 100-slide deck had 20 "layouts" and the client said every slide
 looked the same, and she was right: all 20 shared one composition
@@ -479,6 +501,10 @@ mobile-verified at 390px, delivered as .txt files."
 =====================================================================
 CHANGELOG (newest first)
 =====================================================================
+2026-08-07  v1.6  Phase 10: added the deck QA defect list (zero-
+                  width lines still draw, default valign centres,
+                  end-of-track captions overflow, zero-gutter
+                  columns merge, colon headlines must lead).
 2026-08-07  v1.5  Phase 10 + lesson: slide variety comes from
                   composition, not from renaming content blocks.
                   Also: pptxgenjs shape is ShapeType.rect, not
