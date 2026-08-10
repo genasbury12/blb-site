@@ -15,6 +15,13 @@ Running list per the playbook. Update as items arrive.
 
 ## Needed later (non-blocking)
 
+- [ ] IMAGES: interim Provence set was generated with Genasys's Higsfeild account
+      (9 images, ~1 credit total) and is hotlinked from the Higsfeild CDN.
+      Before launch: download them from the Higsfeild library (or replace with
+      licensed stock / client photos), commit JPGs to clients/lisette/images/,
+      and swap URLs in site/images.py to raw.githubusercontent.com, then rebuild.
+- [ ] Practice Trip pricing (page says "custom quoted per couple" until set)
+
 - [ ] Payment links/processor for the Practice Trip deposit (Stripe etc.)
 - [ ] Official legal copy (Privacy Policy, Terms, Disclaimer) as markdown
 - [ ] Testimonials (none exist yet; site uses clearly-labeled placeholders until real ones arrive)

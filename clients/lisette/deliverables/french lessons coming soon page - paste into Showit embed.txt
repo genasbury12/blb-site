@@ -1,36 +1,13 @@
-#!/usr/bin/env python3
-"""
-Marriage & Retirement Abroad (Lisette Ralston) - site builder.
-Per CLIENT-SITE-PLAYBOOK: this file is the single source of truth for the
-shared skeleton (tokens, nav, footer, loader, base CSS, standard JS).
-Every page script imports page() from here. PATCHES GO HERE, not in the
-generated HTML files.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>French Lessons for Couples | Marriage & Retirement Abroad</title>
+<meta name="description" content="French language and culture training for couples retiring to France. Taught by a fluent speaker who lived there. Coming soon.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@400;500;600&family=Parisienne&display=swap" rel="stylesheet">
 
-Brand system (Phase 1, locked 2026-08-10, pending client approval):
-  paper  #FBF9F4  creme page background, never pure white
-  tint   #F1EDF7  pale lavender alternate section background
-  ink    #2F2838  deep aubergine ink: dark sections + body text
-  lav    #6A579E  ACTION color: buttons, links, accents
-  deep   #4F3F7E  hover states, small caps labels
-  gold   #B9944E  script accents, dividers, sun details
-  blush  #E9E2F4  soft lavender highlight backgrounds, pills
-  muted  #6F677D  secondary text
-
-Fonts: Cormorant Garamond (display serif) / Jost (workhorse sans) /
-Parisienne (script accents). Voice: warm, elegant, plain English.
-HOUSE RULE: no em dashes anywhere in site copy.
-"""
-
-SITE = "Marriage & Retirement Abroad"
-DOMAIN = "https://marriageandretirementabroad.com"
-
-FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">'
-         '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
-         '<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond'
-         ':ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@400;500;600'
-         '&family=Parisienne&display=swap" rel="stylesheet">')
-
-BASE_CSS = r"""
+<style>
 :root{
   --paper:#FBF9F4; --tint:#F1EDF7; --ink:#2F2838; --lav:#6A579E;
   --deep:#4F3F7E; --gold:#B9944E; --blush:#E9E2F4; --muted:#6F677D;
@@ -253,9 +230,40 @@ footer .legal a{display:inline;font-size:13.5px;padding:0}
   .sect{padding:64px 0}
   footer .fgrid{grid-template-columns:1fr 1fr}
 }
-"""
 
-NAV = """
+
+.cshero{text-align:center;padding:110px 0 80px;background:var(--tint);position:relative;overflow:hidden}
+.cshero h1{font-size:clamp(42px,5.8vw,68px);margin:14px 0 14px}
+.csbar{max-width:420px;margin:30px auto 0;height:10px;border-radius:6px;background:#fff;overflow:hidden;
+  border:1px solid rgba(106,87,158,.25)}
+.csbar i{display:block;height:100%;width:62%;border-radius:6px;
+  background:linear-gradient(90deg,var(--lav),var(--gold))}
+.cscards{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;max-width:1000px;margin:48px auto 0}
+.cscard{padding:32px 28px;text-align:center}
+.cscard .hand{font-size:26px}
+.cscard h3{font-size:22px;margin:6px 0 8px}
+.cscard p{font-size:15.5px;color:var(--muted)}
+@media(max-width:920px){.cscards{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div id="loader" aria-hidden="true">
+  <div class="lscript">bonjour...</div>
+  <div class="lbar"><i></i></div>
+</div>
+
+
+<div class="banner" id="banner"><a href="freebie.html"><div class="bin">
+  <div class="btrack">
+    <span>Free: The Retire in France Starter Checklist</span><em>oui, it's free</em>
+    <span>Dreaming of Provence? Start here</span><em>allons-y</em>
+    <span>Free: The Retire in France Starter Checklist</span><em>oui, it's free</em>
+    <span>Dreaming of Provence? Start here</span><em>allons-y</em>
+  </div>
+</div></a><button class="bx" aria-label="Dismiss">&times;</button></div>
+
+
 <nav class="top"><div class="nin">
   <a class="logo" href="home.html">Marriage <em>&amp;</em> Retirement <span style="color:var(--lav)">Abroad</span></a>
   <div class="nlinks">
@@ -278,27 +286,31 @@ NAV = """
   <a class="btn" href="book.html">Plan Your Retirement in France</a>
   <div class="mnote">see you in Provence...</div>
 </div>
-"""
 
-BANNER = """
-<div class="banner" id="banner"><a href="freebie.html"><div class="bin">
-  <div class="btrack">
-    <span>Free: The Retire in France Starter Checklist</span><em>oui, it's free</em>
-    <span>Dreaming of Provence? Start here</span><em>allons-y</em>
-    <span>Free: The Retire in France Starter Checklist</span><em>oui, it's free</em>
-    <span>Dreaming of Provence? Start here</span><em>allons-y</em>
+<main>
+
+<section class="cshero">
+  <div class="ghostword" style="bottom:-16px;left:-20px">En Francais</div>
+  <div class="wrap">
+    <span class="eyebrow" style="justify-content:center">French for your new life</span>
+    <h1>Learn the French your retirement needs</h1>
+    <p class="lede" style="margin:0 auto">Not classroom French. Market French, neighbor French, paperwork French. Lessons built for couples moving to France, taught by Lisette, who lived it and speaks it fluently.</p>
+    <div class="csbar"><i></i></div>
+    <p style="margin-top:12px;font-size:13.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--deep)">In the works</p>
+    <div style="margin-top:8px"><span class="hand">taught with joy, et amour</span></div>
   </div>
-</div></a><button class="bx" aria-label="Dismiss">&times;</button></div>
-"""
+</section>
+<section class="sect">
+  <div class="wrap">
+    <div class="cscards"><div class="card cscard"><span class="hand">lesson one</span><h3>Real conversations</h3><p>The exact exchanges you will actually have: the market, the pharmacy, the mairie.</p></div><div class="card cscard"><span class="hand">lesson two</span><h3>Culture included</h3><p>The customs and courtesies that turn strangers into neighbors.</p></div><div class="card cscard"><span class="hand">lesson three</span><h3>Learn as a couple</h3><p>Practice together, laugh together, arrive in France as a team.</p></div></div>
+    <div style="text-align:center;margin-top:54px">
+      <a class="btn" href="contact.html">Join the Waitlist</a>
+    </div>
+  </div>
+</section>
 
-LOADER = """
-<div id="loader" aria-hidden="true">
-  <div class="lscript">bonjour...</div>
-  <div class="lbar"><i></i></div>
-</div>
-"""
+</main>
 
-FOOTER = """
 <div class="marq" style="background:var(--paper)"><div class="mtrack rev" aria-hidden="true">
   <span class="mword">Provence</span><span class="mword fill">la belle vie</span>
   <span class="mword">Ensemble</span><span class="mword fill">bonjour</span>
@@ -334,9 +346,8 @@ FOOTER = """
   </div>
 </div></footer>
 <button id="totop" aria-label="Back to top">&uarr;</button>
-"""
 
-STD_JS = r"""
+<script>
 (function(){
   // loader
   var L=document.getElementById('loader');
@@ -424,68 +435,7 @@ STD_JS = r"""
   var yr=document.getElementById('yr');
   if(yr) yr.textContent=new Date().getFullYear();
 })();
-"""
-
-
-# Site imagery. Filled by images.py manifest (generated Provence set for now;
-# swap values for client/stock photos later; every slot degrades to the
-# branded gradient placeholder if a URL ever breaks).
-try:
-    from images import IMAGES
-except ImportError:
-    IMAGES = {}
-
-
-def img(key, alt, label="Photo coming soon", tone=""):
-    """Photo slot: real image over a branded gradient fallback."""
-    src = IMAGES.get(key, "")
-    tag = (f'<img class="phimg" src="{src}" alt="{alt}" loading="lazy" '
-           f'onerror="this.remove()">') if src else ""
-    return f'<div class="ph {tone}">{tag}<span>{label}</span></div>'
-
-
-def faq_schema(pairs):
-    import json
-    return ('<script type="application/ld+json">' + json.dumps({
-        "@context": "https://schema.org", "@type": "FAQPage",
-        "mainEntity": [{"@type": "Question", "name": q,
-                        "acceptedAnswer": {"@type": "Answer", "text": a}}
-                       for q, a in pairs]}) + '</script>')
-
-
-def faq_html(pairs):
-    out = ['<div class="faq">']
-    for q, a in pairs:
-        out.append('<details><summary>%s</summary><div class="fa">%s</div></details>' % (q, a))
-    out.append('</div>')
-    return "".join(out)
-
-
-def page(fname, title, desc, content, extra_css="", extra_js="", extra_head=""):
-    html = f"""<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{title}</title>
-<meta name="description" content="{desc}">
-{FONTS}
-{extra_head}
-<style>{BASE_CSS}
-{extra_css}</style>
-</head>
-<body>
-{LOADER}
-{BANNER}
-{NAV}
-<main>
-{content}
-</main>
-{FOOTER}
-<script>{STD_JS}</script>
-<script>{extra_js}</script>
+</script>
+<script></script>
 </body>
-</html>"""
-    with open(fname, "w") as f:
-        f.write(html)
-    print(f"wrote {fname} ({len(html)} bytes)")
+</html>

@@ -15,8 +15,8 @@ Client project workspace for **Lisette**, managed under Boss Lady Bloggers.
 
 - [x] Kickoff / brief collected (questionnaire received 2/12/2026, brief in notes/)
 - [ ] Brand assets received
-- [ ] Design direction approved (homepage mockup ready for review, see site/shots/)
-- [x] Build in progress (builder pipeline + homepage done)
+- [x] Design direction approved by Genasys (2026-08-10)
+- [x] Full site built: 14 pages, verified, deliverables exported
 - [ ] Review with client
 - [ ] Launch
 

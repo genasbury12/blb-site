@@ -1,36 +1,13 @@
-#!/usr/bin/env python3
-"""
-Marriage & Retirement Abroad (Lisette Ralston) - site builder.
-Per CLIENT-SITE-PLAYBOOK: this file is the single source of truth for the
-shared skeleton (tokens, nav, footer, loader, base CSS, standard JS).
-Every page script imports page() from here. PATCHES GO HERE, not in the
-generated HTML files.
-
-Brand system (Phase 1, locked 2026-08-10, pending client approval):
-  paper  #FBF9F4  creme page background, never pure white
-  tint   #F1EDF7  pale lavender alternate section background
-  ink    #2F2838  deep aubergine ink: dark sections + body text
-  lav    #6A579E  ACTION color: buttons, links, accents
-  deep   #4F3F7E  hover states, small caps labels
-  gold   #B9944E  script accents, dividers, sun details
-  blush  #E9E2F4  soft lavender highlight backgrounds, pills
-  muted  #6F677D  secondary text
-
-Fonts: Cormorant Garamond (display serif) / Jost (workhorse sans) /
-Parisienne (script accents). Voice: warm, elegant, plain English.
-HOUSE RULE: no em dashes anywhere in site copy.
-"""
-
-SITE = "Marriage & Retirement Abroad"
-DOMAIN = "https://marriageandretirementabroad.com"
-
-FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">'
-         '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
-         '<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond'
-         ':ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@400;500;600'
-         '&family=Parisienne&display=swap" rel="stylesheet">')
-
-BASE_CSS = r"""
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book a Free Call | Marriage & Retirement Abroad</title>
+<meta name="description" content="Book a free thirty minute call about retiring in France as a couple. No pressure, just an honest conversation and a clear next step.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@400;500;600&family=Parisienne&display=swap" rel="stylesheet">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is the call really free?", "acceptedAnswer": {"@type": "Answer", "text": "Completely. It is a get-to-know-you conversation about your dream, not a sales pitch. If we can help, we will tell you how. If we cannot, we will point you somewhere useful."}}, {"@type": "Question", "name": "Should both of us be on the call?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, please. This is a couples plan, so both dreams belong in the conversation from minute one."}}, {"@type": "Question", "name": "What happens after the call?", "acceptedAnswer": {"@type": "Answer", "text": "You get a written recap of what we discussed and our suggested next step. No pressure, no countdown timers. The decision stays yours."}}]}</script>
+<style>
 :root{
   --paper:#FBF9F4; --tint:#F1EDF7; --ink:#2F2838; --lav:#6A579E;
   --deep:#4F3F7E; --gold:#B9944E; --blush:#E9E2F4; --muted:#6F677D;
@@ -253,9 +230,37 @@ footer .legal a{display:inline;font-size:13.5px;padding:0}
   .sect{padding:64px 0}
   footer .fgrid{grid-template-columns:1fr 1fr}
 }
-"""
 
-NAV = """
+
+.bsteps{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;max-width:960px;margin:44px auto 0}
+.bstep{text-align:center;padding:32px 26px}
+.bstep .bn{font-family:var(--script);font-size:36px;color:var(--gold)}
+.bstep h3{font-size:22px;margin:6px 0 8px}
+.bstep p{font-size:15.5px;color:var(--muted)}
+.calbox{max-width:760px;margin:48px auto 0;border:2px dashed var(--lav);border-radius:var(--rad);
+  padding:56px 34px;text-align:center;background:var(--blush)}
+.calbox h3{font-size:26px;margin-bottom:10px}
+@media(max-width:920px){.bsteps{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div id="loader" aria-hidden="true">
+  <div class="lscript">bonjour...</div>
+  <div class="lbar"><i></i></div>
+</div>
+
+
+<div class="banner" id="banner"><a href="freebie.html"><div class="bin">
+  <div class="btrack">
+    <span>Free: The Retire in France Starter Checklist</span><em>oui, it's free</em>
+    <span>Dreaming of Provence? Start here</span><em>allons-y</em>
+    <span>Free: The Retire in France Starter Checklist</span><em>oui, it's free</em>
+    <span>Dreaming of Provence? Start here</span><em>allons-y</em>
+  </div>
+</div></a><button class="bx" aria-label="Dismiss">&times;</button></div>
+
+
 <nav class="top"><div class="nin">
   <a class="logo" href="home.html">Marriage <em>&amp;</em> Retirement <span style="color:var(--lav)">Abroad</span></a>
   <div class="nlinks">
@@ -278,27 +283,47 @@ NAV = """
   <a class="btn" href="book.html">Plan Your Retirement in France</a>
   <div class="mnote">see you in Provence...</div>
 </div>
-"""
 
-BANNER = """
-<div class="banner" id="banner"><a href="freebie.html"><div class="bin">
-  <div class="btrack">
-    <span>Free: The Retire in France Starter Checklist</span><em>oui, it's free</em>
-    <span>Dreaming of Provence? Start here</span><em>allons-y</em>
-    <span>Free: The Retire in France Starter Checklist</span><em>oui, it's free</em>
-    <span>Dreaming of Provence? Start here</span><em>allons-y</em>
+<main>
+
+<section class="phero">
+  <div class="ghostword" style="top:6px;right:-30px">Rendez-vous</div>
+  <div class="wrap">
+    <span class="eyebrow" style="justify-content:center">Free dream call</span>
+    <h1>Thirty friendly minutes about your someday</h1>
+    <p class="lede">No pressure, no jargon, no obligation. Just the two of you, Lisette, and an honest conversation about retiring in France.</p>
   </div>
-</div></a><button class="bx" aria-label="Dismiss">&times;</button></div>
-"""
+</section>
+<section class="sect">
+  <div class="wrap">
+    <div style="text-align:center;max-width:600px;margin:0 auto">
+      <span class="eyebrow" style="justify-content:center">What to expect</span>
+      <h2 class="h2">The call, in three parts</h2>
+    </div>
+    <div class="bsteps">
+      <div class="card bstep"><div class="bn">un</div><h3>Your dream</h3><p>You talk, we listen. Where, when, and what your ideal French life looks like.</p></div>
+      <div class="card bstep"><div class="bn">deux</div><h3>Your reality</h3><p>Timeline, budget comfort, and questions. We map what is actually in the way.</p></div>
+      <div class="card bstep"><div class="bn">trois</div><h3>Your next step</h3><p>We tell you honestly what we would do next, whether or not it involves us.</p></div>
+    </div>
+    <div class="calbox">
+      <h3>Scheduling opens soon</h3>
+      <p style="color:var(--muted);margin-bottom:22px">Our booking calendar is being set up. Until it is live, send us a message and we will arrange your call by email.</p>
+      <a class="btn" href="contact.html">Request Your Call</a>
+    </div>
+    <!-- INSTALL NOTE: replace the calbox above with the Calendly embed once Lisette provides the booking link -->
 
-LOADER = """
-<div id="loader" aria-hidden="true">
-  <div class="lscript">bonjour...</div>
-  <div class="lbar"><i></i></div>
-</div>
-"""
+  </div>
+</section>
+<section class="sect tint">
+  <div class="wrap" style="text-align:center">
+    <span class="eyebrow" style="justify-content:center">Before you book</span>
+    <h2 class="h2">Fair questions</h2>
+    <div class="faq"><details><summary>Is the call really free?</summary><div class="fa">Completely. It is a get-to-know-you conversation about your dream, not a sales pitch. If we can help, we will tell you how. If we cannot, we will point you somewhere useful.</div></details><details><summary>Should both of us be on the call?</summary><div class="fa">Yes, please. This is a couples plan, so both dreams belong in the conversation from minute one.</div></details><details><summary>What happens after the call?</summary><div class="fa">You get a written recap of what we discussed and our suggested next step. No pressure, no countdown timers. The decision stays yours.</div></details></div>
+  </div>
+</section>
 
-FOOTER = """
+</main>
+
 <div class="marq" style="background:var(--paper)"><div class="mtrack rev" aria-hidden="true">
   <span class="mword">Provence</span><span class="mword fill">la belle vie</span>
   <span class="mword">Ensemble</span><span class="mword fill">bonjour</span>
@@ -334,9 +359,8 @@ FOOTER = """
   </div>
 </div></footer>
 <button id="totop" aria-label="Back to top">&uarr;</button>
-"""
 
-STD_JS = r"""
+<script>
 (function(){
   // loader
   var L=document.getElementById('loader');
@@ -424,68 +448,7 @@ STD_JS = r"""
   var yr=document.getElementById('yr');
   if(yr) yr.textContent=new Date().getFullYear();
 })();
-"""
-
-
-# Site imagery. Filled by images.py manifest (generated Provence set for now;
-# swap values for client/stock photos later; every slot degrades to the
-# branded gradient placeholder if a URL ever breaks).
-try:
-    from images import IMAGES
-except ImportError:
-    IMAGES = {}
-
-
-def img(key, alt, label="Photo coming soon", tone=""):
-    """Photo slot: real image over a branded gradient fallback."""
-    src = IMAGES.get(key, "")
-    tag = (f'<img class="phimg" src="{src}" alt="{alt}" loading="lazy" '
-           f'onerror="this.remove()">') if src else ""
-    return f'<div class="ph {tone}">{tag}<span>{label}</span></div>'
-
-
-def faq_schema(pairs):
-    import json
-    return ('<script type="application/ld+json">' + json.dumps({
-        "@context": "https://schema.org", "@type": "FAQPage",
-        "mainEntity": [{"@type": "Question", "name": q,
-                        "acceptedAnswer": {"@type": "Answer", "text": a}}
-                       for q, a in pairs]}) + '</script>')
-
-
-def faq_html(pairs):
-    out = ['<div class="faq">']
-    for q, a in pairs:
-        out.append('<details><summary>%s</summary><div class="fa">%s</div></details>' % (q, a))
-    out.append('</div>')
-    return "".join(out)
-
-
-def page(fname, title, desc, content, extra_css="", extra_js="", extra_head=""):
-    html = f"""<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{title}</title>
-<meta name="description" content="{desc}">
-{FONTS}
-{extra_head}
-<style>{BASE_CSS}
-{extra_css}</style>
-</head>
-<body>
-{LOADER}
-{BANNER}
-{NAV}
-<main>
-{content}
-</main>
-{FOOTER}
-<script>{STD_JS}</script>
-<script>{extra_js}</script>
+</script>
+<script></script>
 </body>
-</html>"""
-    with open(fname, "w") as f:
-        f.write(html)
-    print(f"wrote {fname} ({len(html)} bytes)")
+</html>

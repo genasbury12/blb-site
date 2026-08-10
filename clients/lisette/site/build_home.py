@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Homepage for Marriage & Retirement Abroad. Run: python3 build_home.py
 ALL COPY IS DRAFT until Lisette approves (she asked for input on copy)."""
-from builder import page, faq_schema, faq_html
+from builder import page, faq_schema, faq_html, img
 
 FAQS = [
  ("Is there a retirement visa for Americans who want to retire in France?",
@@ -206,7 +206,7 @@ content = f"""
     </div>
     <div class="hphoto">
       <div class="hnote">wake up and smell the lavender</div>
-      <div class="arch"><div class="ph field"><span>Photo coming soon<br>Lisette &amp; her husband in Provence</span></div></div>
+      <div class="arch">{img('hero', 'Rows of blooming lavender leading to a stone farmhouse in Provence at golden hour', tone='field')}</div>
       {BADGE_SVG}
     </div>
   </div>
@@ -318,21 +318,21 @@ content = f"""
     <div class="ogrid">
       <div class="card ocard">
         <span class="otag">Limited spots</span>
-        <div class="ph sunset"><span>Photo coming soon</span></div>
+        {img('cafe', 'French cafe terrace table with coffee, croissants and lavender', tone='sunset')}
         <h3>1:1 Lifestyle <em>Planning</em></h3>
         <p>A retirement plan custom made for the two of you. Region shortlist, timeline, budget frame, and the exact order to do everything in.</p>
         <a class="btn ghost" href="book.html">Book a Call</a>
       </div>
       <div class="card ocard feat">
         <span class="otag">Signature</span>
-        <div class="ph field"><span>Photo coming soon</span></div>
+        {img('table', 'Long lunch table set in an olive grove in Provence at golden hour', tone='field')}
         <h3>The Practice <em>Retirement Trip</em></h3>
         <p>The heart of it all. A short, fully organized stay in Provence to test drive your French retirement before you commit. Late spring and early summer departures.</p>
         <a class="btn" href="trip.html">Explore the Trip</a>
       </div>
       <div class="card ocard">
         <span class="otag">Coming soon</span>
-        <div class="ph"><span>Photo coming soon</span></div>
+        {img('flatlay', 'Notebook with French phrases, coffee and lavender sprigs on cream linen')}
         <h3>French for <em>Your New Life</em></h3>
         <p>Language and culture training built for couples moving to France. Real conversations for markets, neighbors, and paperwork, taught with joy.</p>
         <a class="btn ghost" href="contact.html">Join the List</a>

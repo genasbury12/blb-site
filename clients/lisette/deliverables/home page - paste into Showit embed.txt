@@ -71,6 +71,7 @@ section{position:relative;overflow:hidden}
   letter-spacing:.24em;text-transform:uppercase;opacity:.95;padding:0 18px;line-height:2}
 .ph.sunset{background:linear-gradient(165deg,#E8C99B 0%,#C79A76 30%,#8A76BC 72%,#4F3F7E 100%)}
 .ph.field{background:linear-gradient(180deg,#D8CFEA 0%,#A28ECB 55%,#6A579E 100%)}
+.ph img.phimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2}
 
 /* announcement banner marquee */
 .banner{position:relative;background:var(--deep);color:#fff;z-index:60}
@@ -143,6 +144,22 @@ body.menu-open{overflow:hidden}
 .h2{font-size:clamp(34px,4.6vw,54px);margin:14px 0 18px}
 .lede{font-size:19.5px;color:var(--muted);max-width:640px}
 .sect.ink .lede{color:#CFC8DA}
+
+/* interior page hero + shared layout utils */
+.phero{padding:84px 0 70px;background:var(--tint);text-align:center}
+.phero h1{font-size:clamp(40px,5.6vw,66px);margin:14px 0 12px}
+.phero .lede{margin:0 auto}
+.phero .hand{margin-top:10px}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.ticks{list-style:none;margin:18px 0}
+.ticks li{padding:10px 0 10px 40px;position:relative;font-size:17px}
+.ticks li::before{content:"";position:absolute;left:0;top:12px;width:24px;height:24px;
+  border-radius:8px;border:2px solid var(--lav);background:var(--blush)}
+.ticks li::after{content:"\2713";position:absolute;left:6px;top:9px;color:var(--deep);
+  font-weight:700;font-size:14px}
+.notice{background:var(--blush);border:1px dashed var(--lav);border-radius:16px;
+  padding:18px 24px;font-size:15.5px;color:var(--deep)}
+@media(max-width:920px){.split{grid-template-columns:1fr}}
 
 /* FAQ accordion */
 .faq{max-width:820px;margin:44px auto 0}
@@ -402,7 +419,7 @@ stroke="#B9944E" stroke-width="3" stroke-linecap="round"/></svg>
     </div>
     <div class="hphoto">
       <div class="hnote">wake up and smell the lavender</div>
-      <div class="arch"><div class="ph field"><span>Photo coming soon<br>Lisette &amp; her husband in Provence</span></div></div>
+      <div class="arch"><div class="ph field"><img class="phimg" src="https://d8j0ntlcm91z4.cloudfront.net/user_3HLF56fntoufkyqpyZylwksqwoM/hf_20260810_163550_c1f3536d-142f-462d-8679-c024ea9c0a19.png" alt="Rows of blooming lavender leading to a stone farmhouse in Provence at golden hour" loading="lazy" onerror="this.remove()"><span>Photo coming soon</span></div></div>
       <div class="spinbadge"><svg viewBox="0 0 120 120">
 <defs><path id="circ" d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0"/></defs>
 <text font-family="Jost,sans-serif" font-size="10.5" fill="#4F3F7E">
@@ -518,21 +535,21 @@ stroke="#B9944E" stroke-width="3" stroke-linecap="round"/></svg>
     <div class="ogrid">
       <div class="card ocard">
         <span class="otag">Limited spots</span>
-        <div class="ph sunset"><span>Photo coming soon</span></div>
+        <div class="ph sunset"><img class="phimg" src="https://d8j0ntlcm91z4.cloudfront.net/user_3HLF56fntoufkyqpyZylwksqwoM/hf_20260810_163550_10e54926-f661-42fb-9f84-28d43346d2ad.png" alt="French cafe terrace table with coffee, croissants and lavender" loading="lazy" onerror="this.remove()"><span>Photo coming soon</span></div>
         <h3>1:1 Lifestyle <em>Planning</em></h3>
         <p>A retirement plan custom made for the two of you. Region shortlist, timeline, budget frame, and the exact order to do everything in.</p>
         <a class="btn ghost" href="book.html">Book a Call</a>
       </div>
       <div class="card ocard feat">
         <span class="otag">Signature</span>
-        <div class="ph field"><span>Photo coming soon</span></div>
+        <div class="ph field"><img class="phimg" src="https://d8j0ntlcm91z4.cloudfront.net/user_3HLF56fntoufkyqpyZylwksqwoM/hf_20260810_163550_79bcc52d-c742-423e-99c0-9f9e8d26b9dd.png" alt="Long lunch table set in an olive grove in Provence at golden hour" loading="lazy" onerror="this.remove()"><span>Photo coming soon</span></div>
         <h3>The Practice <em>Retirement Trip</em></h3>
         <p>The heart of it all. A short, fully organized stay in Provence to test drive your French retirement before you commit. Late spring and early summer departures.</p>
         <a class="btn" href="trip.html">Explore the Trip</a>
       </div>
       <div class="card ocard">
         <span class="otag">Coming soon</span>
-        <div class="ph"><span>Photo coming soon</span></div>
+        <div class="ph "><img class="phimg" src="https://d8j0ntlcm91z4.cloudfront.net/user_3HLF56fntoufkyqpyZylwksqwoM/hf_20260810_163550_63d3b0d2-d9a0-42c1-920e-1d87a032caba.png" alt="Notebook with French phrases, coffee and lavender sprigs on cream linen" loading="lazy" onerror="this.remove()"><span>Photo coming soon</span></div>
         <h3>French for <em>Your New Life</em></h3>
         <p>Language and culture training built for couples moving to France. Real conversations for markets, neighbors, and paperwork, taught with joy.</p>
         <a class="btn ghost" href="contact.html">Join the List</a>
