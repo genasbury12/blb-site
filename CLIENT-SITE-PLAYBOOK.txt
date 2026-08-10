@@ -501,6 +501,14 @@ mobile-verified at 390px, delivered as .txt files."
 =====================================================================
 CHANGELOG (newest first)
 =====================================================================
+2026-08-10  v2.3  Exit popup: second popup with a DIFFERENT
+                  offer (the freebie) and a different look
+                  (dark card vs cream card). Desktop trigger is
+                  mouseout at the window top; phone trigger is
+                  700px scrolled then a 450px upward flick.
+                  Arms only after 6s, and it checks the other
+                  popup's element display so the two never
+                  stack - scroll popup always wins the moment.
 2026-08-10  v2.2  Redesign funnel: popup quick form (name,
                   email, website; FormSubmit POST) -> confetti
                   welcome page with the full onboarding form ->
