@@ -501,6 +501,19 @@ mobile-verified at 390px, delivered as .txt files."
 =====================================================================
 CHANGELOG (newest first)
 =====================================================================
+2026-08-10  v2.4  Portfolio: /portfolio page with one featured
+                  case study card (scrolling homepage shot in a
+                  panel, palette dots, scope tags, two CTAs) and
+                  dashed "your site here" slots. Case studies
+                  live at /case-study-<slug>, built in the
+                  client's session and linked from the portfolio.
+                  Portfolio link injected into every page's nav,
+                  staggered mobile menus renumbered, footer
+                  Explore lists, and the blog-kit nav/footer
+                  embeds; chrome-light funnel pages carry it in
+                  their slim footer only. Delivery upgrade: all
+                  codes now ship as one zip (build_zip.py),
+                  rebuilt and re-sent after every change.
 2026-08-10  v2.3  Exit popup: second popup with a DIFFERENT
                   offer (the freebie) and a different look
                   (dark card vs cream card). Desktop trigger is

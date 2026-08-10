@@ -151,6 +151,7 @@ progress bar, sheen, even the mobile menu) is pure CSS.
       <li><a href="/about">About</a></li>
       <li><a href="/blog-accelerator">The Program</a></li>
       <li><a href="/blog-coaching">Blog Coaching</a></li>
+      <li><a href="/portfolio">Portfolio</a></li>
       <li><a href="/podcast">Podcast</a></li>
       <li><a href="/freebies">Freebies</a></li>
       <li><a class="nv-cta" href="/book-a-call">Book a Free Call</a></li>
@@ -161,6 +162,7 @@ progress bar, sheen, even the mobile menu) is pure CSS.
     <a href="/about">About</a>
     <a href="/blog-accelerator">The Program</a>
     <a href="/blog-coaching">Blog Coaching</a>
+    <a href="/portfolio">Portfolio</a>
     <a href="/podcast">Podcast</a>
     <a href="/freebies">Freebies</a>
     <a class="mcta" href="/book-a-call">Book a Free Call &rarr;</a>
@@ -249,6 +251,7 @@ progress bar, sheen, even the mobile menu) is pure CSS.
       <h4>Explore</h4>
       <ul>
         <li><a href="/about">About</a></li>
+          <li><a href="/portfolio">Portfolio</a></li>
         <li><a href="/start-here">Start Here</a></li>
         <li><a href="/blog">Blog</a></li>
         <li><a href="/podcast">Podcast</a></li>

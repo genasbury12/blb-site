@@ -60,6 +60,7 @@ nothing here needs a script. Zero JavaScript.
       <h4>Explore</h4>
       <ul>
         <li><a href="/about">About</a></li>
+          <li><a href="/portfolio">Portfolio</a></li>
         <li><a href="/start-here">Start Here</a></li>
         <li><a href="/blog">Blog</a></li>
         <li><a href="/podcast">Podcast</a></li>
@@ -71,6 +72,7 @@ nothing here needs a script. Zero JavaScript.
       <ul>
         <li><a href="/blog-accelerator">The Blog Accelerator</a></li>
         <li><a href="/blog-coaching">Blog Coaching</a></li>
+      <li><a href="/portfolio">Portfolio</a></li>
         <li><a href="/book-a-call">Book a Free Call</a></li>
       </ul>
     </div>

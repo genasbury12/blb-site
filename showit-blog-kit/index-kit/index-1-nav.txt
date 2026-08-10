@@ -72,6 +72,7 @@ template does can break it.
       <li><a href="/about">About</a></li>
       <li><a href="/blog-accelerator">The Program</a></li>
       <li><a href="/blog-coaching">Blog Coaching</a></li>
+      <li><a href="/portfolio">Portfolio</a></li>
       <li><a class="on" href="/blog">Blog</a></li>
       <li><a href="/podcast">Podcast</a></li>
       <li><a href="/freebies">Freebies</a></li>
@@ -83,6 +84,7 @@ template does can break it.
     <a href="/about">About</a>
     <a href="/blog-accelerator">The Program</a>
     <a href="/blog-coaching">Blog Coaching</a>
+    <a href="/portfolio">Portfolio</a>
     <a href="/blog">Blog</a>
     <a href="/podcast">Podcast</a>
     <a href="/freebies">Freebies</a>
