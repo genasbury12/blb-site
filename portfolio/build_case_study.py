@@ -90,11 +90,12 @@ nav{{position:sticky;top:0;z-index:50;background:rgba(251,246,238,.93);backdrop-
 .bbar i:nth-child(2){{background:var(--gold)}}
 .bbar span{{margin-left:8px;background:#fff;border-radius:50px;padding:4px 14px;font-size:.75rem;color:var(--muted)}}
 .bwin{{height:520px;overflow:hidden;position:relative}}
+.bwin img#tourshot{{width:100%!important;height:auto!important;max-height:none!important;min-height:0!important;object-fit:unset!important}}
 .bwin img{{width:100%;animation:sitescroll 26s ease-in-out infinite alternate}}
 .bwin:hover img{{animation-play-state:paused}}
 @keyframes sitescroll{{0%,4%{{transform:translateY(0)}}96%,100%{{transform:translateY(calc(-100% + 520px))}}}}
-.swatches{{display:flex;gap:8px;flex-wrap:wrap;margin:22px 0 6px}}
-.sw{{width:54px;height:54px;border-radius:14px;border:1px solid rgba(52,32,79,.12)}}
+.swatches{{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:8px;margin:22px 0 6px;max-width:440px}}
+.sw{{aspect-ratio:1;width:auto;height:auto;border-radius:12px;border:1px solid rgba(46,31,39,.12)}}
 .spec{{display:flex;flex-direction:column;gap:6px;margin-top:18px}}
 .spec .s1{{font-family:var(--mra-serif);font-style:italic;font-size:1.7rem}}
 .spec .s2{{font-family:var(--mra-script);font-size:1.9rem;color:#B9944E}}
@@ -105,6 +106,7 @@ nav{{position:sticky;top:0;z-index:50;background:rgba(251,246,238,.93);backdrop-
   box-shadow:0 18px 40px rgba(46,31,39,.10);transition:transform .25s}}
 .shot:hover{{transform:translateY(-6px) rotate(-.5deg)}}
 .shot .simg{{height:230px;overflow:hidden;border-bottom:1px solid var(--lilac)}}
+.shot .simg img{{width:100%!important;height:auto!important;max-height:none!important;min-height:0!important}}
 .shot figcaption{{padding:14px 18px;font-family:var(--display);font-weight:700;font-size:.95rem}}
 .shot figcaption span{{display:block;font-family:var(--body);font-weight:400;font-size:.82rem;color:var(--muted)}}
 
@@ -222,7 +224,7 @@ footer b{{color:var(--pink)}}
     </div>
     <div class="browser rise">
       <div class="bbar"><i></i><i></i><i></i><span>marriageandretirementabroad.com</span></div>
-      <div class="bwin"><img src="{RAW}/mra-home-full.jpg" alt="Full homepage of Marriage and Retirement Abroad scrolling top to bottom"></div>
+      <div class="bwin"><img id="tourshot" src="{RAW}/mra-home-full.jpg" alt="Full homepage of Marriage and Retirement Abroad scrolling top to bottom"></div>
     </div>
   </div>
   <p style="text-align:center;margin-top:16px;font-size:.85rem;color:var(--muted)">The homepage, scrolling itself. Hover to pause, or
