@@ -29,6 +29,17 @@
   .ltabs{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
   .ltabs a{font-family:var(--display);font-weight:700;font-size:.82rem;text-decoration:none;color:var(--ink);background:#fff;border:1px solid var(--ink);border-radius:50px;padding:8px 18px}
   .ltabs a.active{background:var(--ink);color:var(--paper)}
+  .humannote{position:relative;background:var(--lilac);border:1px solid rgba(124,43,72,.3);border-radius:18px;padding:26px 28px 24px;margin-bottom:40px}
+  .humannote .hn-script{font-family:'Ephesis',cursive;font-size:1.6rem;color:var(--blue);margin-bottom:8px}
+  .humannote p{margin:0;color:#5C4450;font-size:.98rem}
+  .legal-body strong{color:var(--ink)}
+  .legal-body hr{border:none;border-top:1px dashed rgba(46,31,39,.25);margin:36px 0}
+  .legal-body h2{font-family:var(--display);font-weight:500}
+  .tscroll{overflow-x:auto;margin:0 0 18px}
+  .ltable{width:100%;border-collapse:collapse;font-size:.92rem;min-width:420px}
+  .ltable th{background:var(--ink);color:var(--paper);text-align:left;font-weight:700;font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;padding:11px 14px}
+  .ltable td{padding:11px 14px;border-bottom:1px solid rgba(46,31,39,.14)}
+  .ltable tr:nth-child(even) td{background:var(--tint)}
   .legal{padding:56px 0 80px}
   .legal .wrap{max-width:820px}
   .notice{background:#fff;border:1px solid var(--ink);border-radius:14px;padding:18px 22px;margin-bottom:40px;font-size:.9rem;color:var(--muted)}
@@ -356,7 +367,7 @@
 <header class="lhead">
   <div class="wrap" style="max-width:820px">
     <h1>Disclaimer</h1>
-    <div class="updated">Last updated: [Month Day, Year]</div>
+    <div class="updated">Last updated: August 6, 2026</div>
     <div class="ltabs">
       <a href="/privacy-policy">Privacy</a>
       <a href="/terms-conditions">Terms</a>
@@ -367,31 +378,52 @@
 
 <main class="legal">
   <div class="wrap">
-    <div class="notice"><b>Heads up:</b> This is a template starting point, not legal advice. Please fill in every bracketed detail and have it reviewed by a qualified professional before publishing.</div>
+    <div class="humannote"><div class="hn-script">the human version first</div><p>Quick human note before the formal language. I share everything I know about blogging openly and honestly, and I genuinely want it to work for you. But I am one person with one set of experiences, and I cannot promise that what worked for me or for any of my clients will work the same way for you. Your results will depend on your effort, your niche, your timing, and a hundred things neither of us controls. I also want you to know when I have a financial relationship with a company I mention, so that is spelled out below too. Read this page. It matters.</p></div>
     <div class="legal-body">
-      <p>The information provided by [Your Business Name] ("we," "us," or "our") on [yourwebsite.com] and through our products, programs, coaching, emails, and content is for general educational and informational purposes only.</p>
-
-      <h2>Earnings and results disclaimer</h2>
-      <div class="callout"><b>We make no guarantee of income or specific results.</b> Any examples, case studies, or numbers we share are not a promise or guarantee that you'll achieve the same. Building a blog and a business takes work, and your results depend on your effort, skills, consistency, market, timing, and many factors outside our control. It is entirely possible to earn little or nothing. You alone are responsible for your actions and the results of your business.</div>
-      <p>Nothing on this Site or in our programs should be interpreted as a promise or guarantee of earnings.</p>
-
-      <h2>Not professional advice</h2>
-      <p>We are not attorneys, accountants, or financial advisors, and nothing we share is legal, financial, tax, or other professional advice. Always consult your own qualified professionals before making business, financial, or legal decisions.</p>
-
-      <h2>Testimonials and examples</h2>
-      <p>Testimonials reflect the real experiences of individual clients and students. They are individual results and may not be typical. We don't claim they represent what you should expect to achieve.</p>
-
-      <h2>Affiliate disclosure</h2>
-      <p>Some links on the Site may be affiliate links, which means we may earn a small commission, at no extra cost to you, if you purchase through them. We only recommend tools and products we genuinely use or believe in. Your trust matters more to us than any commission.</p>
-
-      <h2>External links</h2>
-      <p>The Site may contain links to third-party websites or resources. We provide these for convenience and don't endorse or take responsibility for their content, products, or practices.</p>
-
-      <h2>Errors and omissions</h2>
-      <p>We work hard to keep our content accurate and up to date, but we make no warranties about the completeness, reliability, or accuracy of any information. Any action you take based on our content is strictly at your own risk.</p>
-
-      <h2>Contact us</h2>
-      <p>Questions about this disclaimer? Reach out at <a href="mailto:hello@bossladybloggers.com">hello@bossladybloggers.com</a> or through our <a href="/contact">contact page</a>.</p>
+      <h2>1. General Information Only</h2>
+      <p>The content published on bossladybloggers.com (the "Site"), including blog posts, podcast episodes, emails, downloadable resources, coaching calls, and course library materials, is provided for <strong>general informational and educational purposes only</strong>.</p>
+      <p>Boss Lady Bloggers LLC ("Boss Lady Bloggers," "we," "us," or "our") makes no representations or warranties of any kind, express or implied, regarding the accuracy, adequacy, completeness, reliability, suitability, or availability of any information on the Site. Information may become outdated, and we are under no obligation to update it.</p>
+      <h2>2. No Professional Advice</h2>
+      <p><strong>Nothing on the Site or provided through our Services constitutes business, financial, legal, tax, accounting, investment, medical, or any other form of professional advice.</strong></p>
+      <p>We are not attorneys, certified public accountants, financial advisors, tax professionals, or licensed consultants of any kind. Content is shared based on our own experience and research and should not be relied upon as a substitute for professional guidance tailored to your specific circumstances.</p>
+      <p><strong>You should consult a qualified professional in the relevant field before making any business, financial, legal, or tax decision.</strong> Your reliance on any information provided by us is solely at your own risk.</p>
+      <p>No attorney-client, fiduciary, accountant-client, or other professional relationship is created by your use of the Site or purchase of our Services.</p>
+      <h2>3. No Guarantee of Results</h2>
+      <p><strong>We do not guarantee any specific result, outcome, or level of success.</strong></p>
+      <p>This includes, without limitation, any guarantee regarding:</p>
+      <ul><li>Blog traffic, page views, or website visitors</li><li>Email subscriber growth</li><li>Social media following or engagement</li><li>Search engine rankings or visibility</li><li>Income, revenue, profit, or earnings of any kind</li><li>Client acquisition or sales</li><li>Brand recognition or business growth</li></ul>
+      <p>Success in blogging and online business depends on numerous factors that are entirely outside of our control, including but not limited to your individual effort, consistency, skill, experience, niche selection, market conditions, competition, platform algorithm changes, timing, and business decisions.</p>
+      <p><strong>Your results are your own responsibility.</strong></p>
+      <h2>4. Earnings and Income Disclaimer</h2>
+      <p>Any income figures, revenue examples, earnings statements, growth statistics, or financial results referenced anywhere on the Site, in our marketing materials, in our podcast, in our emails, or during our Services are <strong>illustrative examples only</strong> and should not be interpreted as a promise, guarantee, or representation of what you will earn.</p>
+      <p>Any such figures represent the experience of specific individuals under specific circumstances and are <strong>not typical</strong>. Most people who purchase educational programs and coaching do not achieve the results described in any example.</p>
+      <p>We make <strong>no representation whatsoever</strong> regarding your likelihood of earning any income. You accept full responsibility for your own financial outcomes and agree that we bear no liability for your success or failure.</p>
+      <h2>5. Testimonials and Client Results</h2>
+      <p>Testimonials, reviews, case studies, and client results published on the Site reflect the genuine experiences of specific individuals. They are individual experiences and <strong>do not represent typical results</strong>. We do not claim that they are representative of what any other person will experience.</p>
+      <p>Testimonials are not intended to represent or guarantee that anyone will achieve the same or similar outcomes.</p>
+      <h2>6. Affiliate and Referral Link Disclosure</h2>
+      <p><strong>Some links on this Site, in our blog posts, in our emails, in our podcast episodes, and in our communications with clients are affiliate or referral links.</strong></p>
+      <p>This means that if you click one of those links and make a purchase or sign up for a service, we may receive a commission, referral credit, account credit, discount, or other compensation, at no additional cost to you.</p>
+      <p>We only recommend products and services we have used or genuinely believe may be valuable. However, you should not assume that any recommendation is free from financial interest. <strong>Always conduct your own research before purchasing any product or service, and do not rely solely on our recommendation.</strong></p>
+      <p>This disclosure is provided in accordance with the Federal Trade Commission's Guides Concerning the Use of Endorsements and Testimonials in Advertising, 16 CFR Part 255.</p>
+      <h2>7. Sponsored Content</h2>
+      <p>From time to time, our podcast, blog, or other content may include sponsored segments, paid partnerships, or advertisements for which we receive compensation. Where content is sponsored, we will disclose that fact clearly.</p>
+      <p>Sponsorship does not influence our honest opinion, but you should be aware of the financial relationship when evaluating any statement made about a sponsor's product or service.</p>
+      <h2>8. External Links</h2>
+      <p>The Site contains links to third-party websites, tools, products, and services. These links are provided for convenience and reference only.</p>
+      <p>We do not control, endorse, guarantee, or assume responsibility for the content, accuracy, privacy practices, products, services, or opinions of any third-party site. We are not liable for any loss or damage arising from your use of any third-party website or resource. Your interactions with third parties are solely between you and that third party.</p>
+      <h2>9. Errors and Omissions</h2>
+      <p>While we make reasonable efforts to ensure the accuracy of our content, the Site may contain typographical errors, inaccuracies, or omissions. Content may be revised or removed at any time without notice. We assume no liability for any errors or omissions.</p>
+      <h2>10. Personal Responsibility and Assumption of Risk</h2>
+      <p>By using the Site or purchasing our Services, you acknowledge and agree that:</p>
+      <ul><li>You are voluntarily choosing to use the information and Services provided</li><li>You are solely responsible for your own decisions, actions, and results</li><li>You assume full responsibility for any risks, losses, or damages arising from your use of the information provided</li><li>You will not hold Boss Lady Bloggers LLC, its owner, members, contractors, or agents liable for any direct, indirect, incidental, consequential, or other loss or damage resulting from your use of the Site or Services</li></ul>
+      <h2>11. Limitation of Liability</h2>
+      <p>To the fullest extent permitted by law, Boss Lady Bloggers LLC and its owner, members, contractors, and agents shall not be liable for any loss or damage, including without limitation lost profits, lost revenue, business interruption, or loss of data, arising out of or in connection with your use of the Site, our content, or our Services. Additional limitations are set forth in our Terms and Conditions.</p>
+      <h2>12. Changes to This Disclaimer</h2>
+      <p>We may update this Disclaimer at any time by posting a revised version with an updated "Last updated" date. Your continued use of the Site constitutes acceptance of the revised Disclaimer.</p>
+      <h2>13. Contact</h2>
+      <p>Questions about this Disclaimer may be directed to:</p>
+      <p><strong>Boss Lady Bloggers LLC</strong><br>3155 Beal Rd<br>Franklin, OH 45005<br><a href="mailto:hello@bossladybloggers.com">hello@bossladybloggers.com</a></p>
     </div>
   </div>
 </main>

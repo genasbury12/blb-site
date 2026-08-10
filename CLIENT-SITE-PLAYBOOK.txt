@@ -501,6 +501,15 @@ mobile-verified at 390px, delivered as .txt files."
 =====================================================================
 CHANGELOG (newest first)
 =====================================================================
+2026-08-10  v2.0  Legal pages: client supplies official legal
+                  copy (Disclaimer, Privacy Policy, Terms) as
+                  markdown; a converter injects it into the
+                  legal page shells, replacing the bracketed
+                  template text and its warning notice. The
+                  plain-English intro paragraph becomes a blush
+                  "human version first" callout, tables get a
+                  dark header + horizontal scroll wrapper for
+                  phones, and every page is re-verified at 390px.
 2026-08-09  v1.9  Phase 6 rescue rules, learned from the live
                   site: (a) Showit publishes text boxes at drawn
                   size and clips longer real titles, so card
