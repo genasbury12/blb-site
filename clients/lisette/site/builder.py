@@ -1,0 +1,457 @@
+#!/usr/bin/env python3
+"""
+Marriage & Retirement Abroad (Lisette Ralston) - site builder.
+Per CLIENT-SITE-PLAYBOOK: this file is the single source of truth for the
+shared skeleton (tokens, nav, footer, loader, base CSS, standard JS).
+Every page script imports page() from here. PATCHES GO HERE, not in the
+generated HTML files.
+
+Brand system (Phase 1, locked 2026-08-10, pending client approval):
+  paper  #FBF9F4  creme page background, never pure white
+  tint   #F1EDF7  pale lavender alternate section background
+  ink    #2F2838  deep aubergine ink: dark sections + body text
+  lav    #6A579E  ACTION color: buttons, links, accents
+  deep   #4F3F7E  hover states, small caps labels
+  gold   #B9944E  script accents, dividers, sun details
+  blush  #E9E2F4  soft lavender highlight backgrounds, pills
+  muted  #6F677D  secondary text
+
+Fonts: Cormorant Garamond (display serif) / Jost (workhorse sans) /
+Parisienne (script accents). Voice: warm, elegant, plain English.
+HOUSE RULE: no em dashes anywhere in site copy.
+"""
+
+SITE = "Marriage & Retirement Abroad"
+DOMAIN = "https://marriageandretirementabroad.com"
+
+FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">'
+         '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
+         '<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond'
+         ':ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@400;500;600'
+         '&family=Parisienne&display=swap" rel="stylesheet">')
+
+BASE_CSS = r"""
+:root{
+  --paper:#FBF9F4; --tint:#F1EDF7; --ink:#2F2838; --lav:#6A579E;
+  --deep:#4F3F7E; --gold:#B9944E; --blush:#E9E2F4; --muted:#6F677D;
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'Jost','Trebuchet MS',sans-serif;
+  --script:'Parisienne',cursive;
+  --rad:22px; --shadow:0 18px 45px rgba(47,40,56,.12);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+html,body{overflow-x:hidden}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);
+  font-size:18px;line-height:1.65;-webkit-font-smoothing:antialiased}
+img,svg,video{max-width:100%;display:block}
+a{color:var(--lav)}
+h1,h2,h3{font-family:var(--serif);font-weight:500;line-height:1.12}
+.wrap{max-width:1140px;margin:0 auto;padding:0 24px}
+section{position:relative;overflow:hidden}
+
+/* eyebrow + script notes (signature elements) */
+.eyebrow{font-family:var(--sans);font-weight:600;font-size:13px;
+  letter-spacing:.28em;text-transform:uppercase;color:var(--deep);
+  display:inline-flex;align-items:center;gap:12px}
+.eyebrow::before{content:"";width:34px;height:1px;background:var(--gold)}
+.hand{font-family:var(--script);color:var(--gold);font-size:clamp(26px,3.4vw,38px);
+  line-height:1.2;transform:rotate(-2deg);display:inline-block}
+.hand.lav{color:var(--lav)}
+
+/* pill buttons */
+.btn{display:inline-flex;align-items:center;gap:10px;background:var(--lav);
+  color:#fff;text-decoration:none;font-family:var(--sans);font-weight:600;
+  font-size:16px;letter-spacing:.04em;padding:17px 34px;border-radius:60px;
+  border:2px solid var(--lav);transition:transform .25s,background .25s,color .25s;
+  box-shadow:0 12px 26px rgba(106,87,158,.32)}
+.btn:hover{background:var(--deep);border-color:var(--deep);transform:translateY(-2px)}
+.btn.ghost{background:transparent;color:var(--deep);box-shadow:none}
+.btn.ghost:hover{background:var(--deep);color:#fff}
+.btn.cream{background:var(--paper);border-color:var(--paper);color:var(--ink);box-shadow:0 12px 26px rgba(0,0,0,.25)}
+.btn.cream:hover{background:var(--gold);border-color:var(--gold);color:#fff}
+
+/* giant outlined display words behind sections */
+.ghostword{position:absolute;font-family:var(--serif);font-style:italic;
+  font-size:clamp(90px,17vw,240px);color:transparent;
+  -webkit-text-stroke:1.5px rgba(106,87,158,.14);white-space:nowrap;
+  pointer-events:none;user-select:none;z-index:0;line-height:1}
+
+/* cards */
+.card{background:#fff;border-radius:var(--rad);box-shadow:var(--shadow);
+  border:1px solid rgba(106,87,158,.10)}
+
+/* arched photo frames */
+.arch{border-radius:46vw 46vw 24px 24px;overflow:hidden;box-shadow:var(--shadow)}
+
+/* labeled photo placeholders (until client photos arrive) */
+.ph{position:relative;display:flex;align-items:center;justify-content:center;
+  text-align:center;color:#fff;min-height:280px;width:100%;
+  background:linear-gradient(160deg,#B9AEDC 0%,#8A76BC 45%,#5C4A92 100%)}
+.ph::after{content:"";position:absolute;inset:0;
+  background:repeating-linear-gradient(115deg,transparent 0 26px,rgba(255,255,255,.05) 26px 28px)}
+.ph span{position:relative;z-index:1;font-size:12px;font-weight:600;
+  letter-spacing:.24em;text-transform:uppercase;opacity:.95;padding:0 18px;line-height:2}
+.ph.sunset{background:linear-gradient(165deg,#E8C99B 0%,#C79A76 30%,#8A76BC 72%,#4F3F7E 100%)}
+.ph.field{background:linear-gradient(180deg,#D8CFEA 0%,#A28ECB 55%,#6A579E 100%)}
+
+/* announcement banner marquee */
+.banner{position:relative;background:var(--deep);color:#fff;z-index:60}
+.banner a{color:#fff;text-decoration:none;display:block}
+.banner .bin{display:flex;overflow:hidden;padding:11px 0}
+.banner .btrack{display:flex;gap:48px;white-space:nowrap;animation:slide 28s linear infinite;
+  font-size:13.5px;font-weight:500;letter-spacing:.14em;text-transform:uppercase}
+.banner .btrack em{font-family:var(--script);font-style:normal;text-transform:none;
+  letter-spacing:0;font-size:19px;color:#E5D9A9}
+.banner .bx{position:absolute;right:10px;top:50%;transform:translateY(-50%);
+  background:none;border:0;color:#fff;font-size:17px;cursor:pointer;padding:6px 10px;opacity:.8}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* nav */
+nav.top{position:sticky;top:0;z-index:50;background:rgba(251,249,244,.92);
+  backdrop-filter:blur(10px);border-bottom:1px solid rgba(106,87,158,.12)}
+nav.top .nin{max-width:1220px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;gap:26px}
+.logo{font-family:var(--serif);font-weight:600;font-size:21px;color:var(--ink);
+  text-decoration:none;line-height:1.1}
+.logo em{font-family:var(--script);font-style:normal;color:var(--lav);font-size:24px}
+.nlinks{display:flex;gap:26px;margin-left:auto;align-items:center}
+.nlinks a{color:var(--ink);text-decoration:none;font-size:15.5px;font-weight:500;
+  letter-spacing:.05em;position:relative}
+.nlinks a:not(.btn)::after{content:"";position:absolute;left:0;bottom:-5px;width:0;
+  height:2px;background:var(--gold);transition:width .25s}
+.nlinks a:not(.btn):hover::after{width:100%}
+.nlinks .btn{padding:12px 26px;font-size:14.5px}
+.burger{display:none;margin-left:auto;background:none;border:0;cursor:pointer;
+  width:44px;height:44px;position:relative;z-index:71}
+.burger i{display:block;width:26px;height:2px;background:var(--ink);margin:6px auto;
+  transition:transform .3s,opacity .3s}
+body.menu-open .burger i:nth-child(1){transform:translateY(8px) rotate(45deg)}
+body.menu-open .burger i:nth-child(2){opacity:0}
+body.menu-open .burger i:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+
+/* fancy mobile menu */
+.mmenu{position:fixed;inset:0;background:var(--ink);color:#fff;z-index:70;
+  display:none;flex-direction:column;justify-content:center;padding:80px 34px 40px}
+body.menu-open .mmenu{display:flex}
+.mmenu a{color:#fff;text-decoration:none;font-family:var(--serif);
+  font-size:clamp(30px,7.5vw,44px);padding:9px 0;display:flex;align-items:baseline;gap:16px}
+.mmenu a small{font-family:var(--sans);font-size:12px;color:var(--gold);letter-spacing:.2em}
+.mmenu .btn{margin-top:26px;justify-content:center;font-family:var(--sans);font-size:16px}
+.mmenu .mnote{margin-top:22px;font-family:var(--script);color:#CBBFE4;font-size:26px}
+body.menu-open{overflow:hidden}
+
+/* spinning circular badge */
+.spinbadge{width:118px;height:118px;position:relative;flex:none;background:var(--paper);
+  border-radius:50%;box-shadow:0 10px 24px rgba(47,40,56,.22)}
+.spinbadge svg{width:100%;height:100%;animation:spin 16s linear infinite}
+.spinbadge .mid{position:absolute;inset:0;display:flex;align-items:center;
+  justify-content:center;font-family:var(--script);color:var(--gold);font-size:30px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* sliding marquees */
+.marq{overflow:hidden;padding:18px 0}
+.mtrack{display:flex;gap:44px;white-space:nowrap;animation:slide 30s linear infinite}
+.mtrack.rev{animation:slide 34s linear infinite reverse}
+.mword{font-family:var(--serif);font-style:italic;font-size:clamp(38px,6vw,72px);
+  color:transparent;-webkit-text-stroke:1.3px rgba(106,87,158,.55);flex:none}
+.mword.fill{color:var(--gold);-webkit-text-stroke:0;font-family:var(--script);font-style:normal}
+
+/* section rhythm */
+.sect{padding:96px 0}
+.sect.tint{background:var(--tint)}
+.sect.ink{background:var(--ink);color:#F4EFE7}
+.sect.ink .eyebrow{color:#CBBFE4}
+.sect.ink .eyebrow::before{background:var(--gold)}
+.sect.blush{background:var(--blush)}
+.h2{font-size:clamp(34px,4.6vw,54px);margin:14px 0 18px}
+.lede{font-size:19.5px;color:var(--muted);max-width:640px}
+.sect.ink .lede{color:#CFC8DA}
+
+/* FAQ accordion */
+.faq{max-width:820px;margin:44px auto 0}
+.faq details{background:#fff;border-radius:16px;border:1px solid rgba(106,87,158,.14);
+  margin-bottom:14px;box-shadow:0 8px 22px rgba(47,40,56,.06)}
+.faq summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;
+  align-items:center;gap:18px;padding:20px 26px;font-family:var(--serif);
+  font-size:21px;font-weight:600}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-family:var(--sans);color:var(--lav);
+  font-size:26px;transition:transform .25s;flex:none}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq .fa{padding:0 26px 22px;color:var(--muted);font-size:17px}
+
+/* footer */
+footer{background:var(--ink);color:#D8D2E2;padding:70px 0 34px;position:relative;overflow:hidden}
+footer .fmark{font-family:var(--serif);font-style:italic;font-size:clamp(60px,10vw,150px);
+  color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.13);white-space:nowrap;line-height:1}
+footer .fgrid{display:grid;grid-template-columns:2fr 1fr 1fr 1.3fr;gap:38px;margin:44px 0 30px}
+footer h4{font-family:var(--sans);font-size:12.5px;letter-spacing:.24em;text-transform:uppercase;
+  color:#fff;margin-bottom:16px}
+footer a{color:#D8D2E2;text-decoration:none;display:block;padding:4px 0;font-size:15.5px}
+footer a:hover{color:var(--gold)}
+footer .fscript{font-family:var(--script);color:var(--gold);font-size:30px}
+footer .pods{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+footer .pods span{border:1px solid rgba(255,255,255,.25);border-radius:60px;
+  padding:7px 16px;font-size:13px;letter-spacing:.06em}
+footer .legal{border-top:1px solid rgba(255,255,255,.14);padding-top:22px;display:flex;
+  flex-wrap:wrap;gap:8px 26px;justify-content:space-between;font-size:13.5px;color:#A79FB6}
+footer .legal a{display:inline;font-size:13.5px;padding:0}
+
+/* loader (with pure-CSS fallback kill at 3s even if JS dies) */
+#loader{position:fixed;inset:0;background:var(--paper);z-index:99;display:flex;
+  flex-direction:column;gap:18px;align-items:center;justify-content:center;
+  animation:loaderdie .6s ease 2.6s forwards}
+#loader .lscript{font-family:var(--script);font-size:44px;color:var(--lav)}
+#loader .lbar{width:150px;height:3px;background:var(--blush);border-radius:3px;overflow:hidden}
+#loader .lbar i{display:block;height:100%;width:40%;background:var(--gold);
+  animation:lslide 1s ease-in-out infinite alternate}
+@keyframes lslide{to{transform:translateX(150%)}}
+@keyframes loaderdie{to{opacity:0;visibility:hidden}}
+#loader.done{opacity:0;visibility:hidden;transition:opacity .5s,visibility .5s}
+
+/* reveal on scroll. Hide rule stays WEAKER than the .in show rule. */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+.rv.in{opacity:1;transform:none}
+
+/* back to top */
+#totop{position:fixed;right:22px;bottom:22px;z-index:40;width:52px;height:52px;
+  border-radius:50%;border:0;background:var(--lav);color:#fff;font-size:20px;
+  cursor:pointer;opacity:0;pointer-events:none;transition:opacity .3s;
+  box-shadow:0 10px 24px rgba(106,87,158,.4)}
+#totop.show{opacity:1;pointer-events:auto}
+
+/* chips / pills */
+.chip{display:inline-block;background:#fff;border:1px solid rgba(106,87,158,.22);
+  color:var(--deep);border-radius:60px;padding:10px 22px;font-size:15.5px;font-weight:500}
+.chip.solid{background:var(--blush);border-color:var(--blush)}
+
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01s!important;transition-duration:.01s!important}
+  .rv{opacity:1;transform:none}
+  html{scroll-behavior:auto}
+}
+@media(max-width:920px){
+  .nlinks{display:none}
+  .burger{display:block}
+  .sect{padding:64px 0}
+  footer .fgrid{grid-template-columns:1fr 1fr}
+}
+"""
+
+NAV = """
+<nav class="top"><div class="nin">
+  <a class="logo" href="home.html">Marriage <em>&amp;</em> Retirement <span style="color:var(--lav)">Abroad</span></a>
+  <div class="nlinks">
+    <a href="about.html">About</a>
+    <a href="trip.html">The Practice Trip</a>
+    <a href="start-here.html">Start Here</a>
+    <a href="blog.html">Blog</a>
+    <a href="contact.html">Contact</a>
+    <a class="btn" href="book.html">Plan Your Retirement</a>
+  </div>
+  <button class="burger" aria-label="Menu" aria-expanded="false"><i></i><i></i><i></i></button>
+</div></nav>
+<div class="mmenu" id="mmenu">
+  <a href="home.html"><small>01</small> Home</a>
+  <a href="about.html"><small>02</small> About</a>
+  <a href="trip.html"><small>03</small> The Practice Trip</a>
+  <a href="start-here.html"><small>04</small> Start Here</a>
+  <a href="blog.html"><small>05</small> Blog</a>
+  <a href="contact.html"><small>06</small> Contact</a>
+  <a class="btn" href="book.html">Plan Your Retirement in France</a>
+  <div class="mnote">see you in Provence...</div>
+</div>
+"""
+
+BANNER = """
+<div class="banner" id="banner"><a href="freebie.html"><div class="bin">
+  <div class="btrack">
+    <span>Free: The Retire in France Starter Checklist</span><em>oui, it's free</em>
+    <span>Dreaming of Provence? Start here</span><em>allons-y</em>
+    <span>Free: The Retire in France Starter Checklist</span><em>oui, it's free</em>
+    <span>Dreaming of Provence? Start here</span><em>allons-y</em>
+  </div>
+</div></a><button class="bx" aria-label="Dismiss">&times;</button></div>
+"""
+
+LOADER = """
+<div id="loader" aria-hidden="true">
+  <div class="lscript">bonjour...</div>
+  <div class="lbar"><i></i></div>
+</div>
+"""
+
+FOOTER = """
+<div class="marq" style="background:var(--paper)"><div class="mtrack rev" aria-hidden="true">
+  <span class="mword">Provence</span><span class="mword fill">la belle vie</span>
+  <span class="mword">Ensemble</span><span class="mword fill">bonjour</span>
+  <span class="mword">Retire Abroad</span><span class="mword fill">oui oui</span>
+  <span class="mword">Provence</span><span class="mword fill">la belle vie</span>
+  <span class="mword">Ensemble</span><span class="mword fill">bonjour</span>
+  <span class="mword">Retire Abroad</span><span class="mword fill">oui oui</span>
+</div></div>
+<footer><div class="wrap">
+  <div class="fmark">Marriage &amp; Retirement Abroad</div>
+  <div class="fgrid">
+    <div>
+      <div class="fscript">your dream retirement, together</div>
+      <p style="font-size:15.5px;max-width:300px;margin-top:12px">Helping couples 45 and better
+      retire to France with ease, confidence, and a little joie de vivre.</p>
+    </div>
+    <div><h4>Explore</h4>
+      <a href="home.html">Home</a><a href="about.html">About</a>
+      <a href="trip.html">The Practice Trip</a><a href="blog.html">Blog</a>
+    </div>
+    <div><h4>Connect</h4>
+      <a href="start-here.html">Start Here</a><a href="contact.html">Contact</a>
+      <a href="book.html">Book a Call</a><a href="freebie.html">Free Checklist</a>
+    </div>
+    <div><h4>Coming Soon</h4>
+      <div class="pods"><span>The Podcast</span><span>French Lessons</span><span>The Book</span></div>
+    </div>
+  </div>
+  <div class="legal">
+    <span>&copy; <span id="yr">2026</span> Marriage &amp; Retirement Abroad. All rights reserved.</span>
+    <span><a href="privacy.html">Privacy</a> &nbsp;&middot;&nbsp; <a href="terms.html">Terms</a>
+    &nbsp;&middot;&nbsp; <a href="disclaimer.html">Disclaimer</a></span>
+  </div>
+</div></footer>
+<button id="totop" aria-label="Back to top">&uarr;</button>
+"""
+
+STD_JS = r"""
+(function(){
+  // loader
+  var L=document.getElementById('loader');
+  function killLoader(){ if(L) L.classList.add('done'); }
+  window.addEventListener('load',function(){ setTimeout(killLoader,500); });
+  setTimeout(killLoader,2400);
+
+  // banner dismiss (session only)
+  var B=document.getElementById('banner');
+  var bx=B&&B.querySelector('.bx');
+  try{ if(B&&sessionStorage.getItem('mra_banner')==='x') B.style.display='none'; }catch(e){}
+  if(bx) bx.addEventListener('click',function(e){ e.preventDefault();e.stopPropagation();
+    B.style.display='none'; try{sessionStorage.setItem('mra_banner','x');}catch(err){} });
+
+  // mobile menu
+  var burger=document.querySelector('.burger');
+  if(burger) burger.addEventListener('click',function(){
+    var open=document.body.classList.toggle('menu-open');
+    burger.setAttribute('aria-expanded',open?'true':'false');
+  });
+  document.querySelectorAll('.mmenu a').forEach(function(a){
+    a.addEventListener('click',function(){ document.body.classList.remove('menu-open'); });
+  });
+
+  // reveal on scroll: auto-tag section children AND respect hand-written .rv.
+  // In-viewport elements get shown immediately (playbook lesson #4).
+  var candidates=[].slice.call(document.querySelectorAll(
+    '[data-rv], .rv, .sect .wrap > *, footer .fgrid > div'));
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if('IntersectionObserver' in window && !reduce){
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target);} });
+    },{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+    candidates.forEach(function(el){
+      var r=el.getBoundingClientRect();
+      var inView=r.top < window.innerHeight && r.bottom > 0;
+      if(inView){ el.classList.add('in'); el.classList.remove('rv'); return; }
+      el.classList.add('rv'); io.observe(el);
+    });
+  } else {
+    candidates.forEach(function(el){ el.classList.remove('rv'); el.classList.add('in'); });
+  }
+
+  // count-up numbers
+  function countUp(el){
+    var end=parseFloat(el.getAttribute('data-count'))||0, dur=1400, t0=null;
+    function step(t){ if(!t0)t0=t; var p=Math.min((t-t0)/dur,1);
+      el.textContent=Math.round(end*(0.5-Math.cos(Math.PI*p)/2));
+      if(p<1) requestAnimationFrame(step); else el.textContent=end; }
+    requestAnimationFrame(step);
+  }
+  var counted=false;
+  var counts=document.querySelectorAll('[data-count]');
+  if(counts.length){
+    if('IntersectionObserver' in window && !reduce){
+      var co=new IntersectionObserver(function(es){
+        es.forEach(function(en){ if(en.isIntersecting && !counted){ counted=true;
+          counts.forEach(countUp); co.disconnect(); } });
+      },{threshold:.3});
+      co.observe(counts[0]);
+    } else { counts.forEach(function(el){ el.textContent=el.getAttribute('data-count'); }); }
+  }
+
+  // typewriter [data-words]
+  document.querySelectorAll('[data-words]').forEach(function(el){
+    var words=[]; try{ words=JSON.parse(el.getAttribute('data-words')); }catch(e){ return; }
+    if(reduce){ el.textContent=words[0]; return; }
+    var wi=0,ci=0,del=false;
+    (function tick(){
+      var w=words[wi];
+      el.textContent=w.slice(0,ci);
+      if(!del && ci<w.length){ ci++; setTimeout(tick,90); }
+      else if(!del){ del=true; setTimeout(tick,1700); }
+      else if(ci>0){ ci--; setTimeout(tick,45); }
+      else { del=false; wi=(wi+1)%words.length; setTimeout(tick,350); }
+    })();
+  });
+
+  // back to top + year
+  var tt=document.getElementById('totop');
+  if(tt){ window.addEventListener('scroll',function(){
+      tt.classList.toggle('show',window.scrollY>700); },{passive:true});
+    tt.addEventListener('click',function(){ window.scrollTo({top:0,behavior:reduce?'auto':'smooth'}); });
+  }
+  var yr=document.getElementById('yr');
+  if(yr) yr.textContent=new Date().getFullYear();
+})();
+"""
+
+
+def faq_schema(pairs):
+    import json
+    return ('<script type="application/ld+json">' + json.dumps({
+        "@context": "https://schema.org", "@type": "FAQPage",
+        "mainEntity": [{"@type": "Question", "name": q,
+                        "acceptedAnswer": {"@type": "Answer", "text": a}}
+                       for q, a in pairs]}) + '</script>')
+
+
+def faq_html(pairs):
+    out = ['<div class="faq">']
+    for q, a in pairs:
+        out.append('<details><summary>%s</summary><div class="fa">%s</div></details>' % (q, a))
+    out.append('</div>')
+    return "".join(out)
+
+
+def page(fname, title, desc, content, extra_css="", extra_js="", extra_head=""):
+    html = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{title}</title>
+<meta name="description" content="{desc}">
+{FONTS}
+{extra_head}
+<style>{BASE_CSS}
+{extra_css}</style>
+</head>
+<body>
+{LOADER}
+{BANNER}
+{NAV}
+<main>
+{content}
+</main>
+{FOOTER}
+<script>{STD_JS}</script>
+<script>{extra_js}</script>
+</body>
+</html>"""
+    with open(fname, "w") as f:
+        f.write(html)
+    print(f"wrote {fname} ({len(html)} bytes)")

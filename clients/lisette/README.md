@@ -13,10 +13,10 @@ Client project workspace for **Lisette**, managed under Boss Lady Bloggers.
 
 ## Project status
 
-- [ ] Kickoff / brief collected
+- [x] Kickoff / brief collected (questionnaire received 2/12/2026, brief in notes/)
 - [ ] Brand assets received
-- [ ] Design direction approved
-- [ ] Build in progress
+- [ ] Design direction approved (homepage mockup ready for review, see site/shots/)
+- [x] Build in progress (builder pipeline + homepage done)
 - [ ] Review with client
 - [ ] Launch
 
@@ -24,5 +24,5 @@ Client project workspace for **Lisette**, managed under Boss Lady Bloggers.
 
 - **Client:** Lisette
 - **Started:** August 2026
-- **Contact:** _add client email/phone here_
-- **Links:** _add site URL, Showit share link, ClickUp task, etc._
+- **Contact:** see ClickUp / Gmail thread
+- **Links:** planned domain marriageandretirementabroad.com (not purchased yet)
