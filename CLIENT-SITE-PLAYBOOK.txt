@@ -501,6 +501,15 @@ mobile-verified at 390px, delivered as .txt files."
 =====================================================================
 CHANGELOG (newest first)
 =====================================================================
+2026-08-10  v2.2  Redesign funnel: popup quick form (name,
+                  email, website; FormSubmit POST) -> confetti
+                  welcome page with the full onboarding form ->
+                  confetti confirmation page pushing the core
+                  program + a free call. Confetti is a ~40-line
+                  canvas script, brand colors, fades by 5s,
+                  skipped under reduced motion. FormSubmit needs
+                  its one-time activation email clicked before
+                  submissions flow. Funnel pages are noindex.
 2026-08-10  v2.1  Lead popup embed: self-contained offer popup
                   ("see your homepage redesigned") pasted into
                   one embed block per page. Shows after 9s or

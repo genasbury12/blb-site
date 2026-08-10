@@ -54,6 +54,11 @@ HOW IT BEHAVES:
 #blbPop h2 em{font-style:italic;color:#A93F63}
 #blbPop p{font-size:15px;line-height:1.65;color:#6E5C63;max-width:400px;margin:0 auto 22px}
 #blbPop p b{color:#2E1F27}
+#blbPop .qf{max-width:360px;margin:0 auto}
+#blbPop .qf input{width:100%;background:#fff;border:1px solid rgba(46,31,39,.3);border-radius:14px;padding:14px 16px;font-family:'Karla',sans-serif;font-size:16px;color:#2E1F27;margin-bottom:10px}
+#blbPop .qf input:focus{outline:none;border-color:#A93F63;box-shadow:0 0 0 3px rgba(169,63,99,.18)}
+#blbPop .qf input::placeholder{color:#6E5C63}
+#blbPop .qf .btn{width:100%;cursor:pointer;margin-top:4px}
 #blbPop .btn{display:inline-block;background:#A93F63;color:#fff;border:1px solid #A93F63;font-weight:700;font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;padding:18px 36px;border-radius:60px;text-decoration:none;transition:all .2s;box-shadow:0 18px 34px -14px rgba(124,43,72,.6)}
 #blbPop .btn:hover{background:#2E1F27;border-color:#2E1F27;transform:translateY(-3px)}
 #blbPop .nah{display:block;margin-top:14px;background:none;border:none;cursor:pointer;font-family:'Karla',sans-serif;font-size:12px;color:#6E5C63;text-decoration:underline;text-underline-offset:3px}
@@ -76,10 +81,19 @@ HOW IT BEHAVES:
   </div>
   <div class="script">okay babe, real talk</div>
   <h2>See your homepage <em>redesigned.</em> For you. Before you pay a thing.</h2>
-  <p>Book a free call and I'll walk you through exactly what <b>your</b> homepage could look like: your brand, your offer, designed to actually sell. No template, no obligation, just the glow-up plan.</p>
-  <a class="btn" href="/book-a-call">Show me my new homepage &rarr;</a>
+  <p>Drop your info below and I'll personally put together a redesign concept of what <b>your</b> homepage could look like: your brand, your offer, designed to actually sell. No template, no obligation.</p>
+  <form class="qf" action="https://formsubmit.co/hello@bossladybloggers.com" method="POST">
+    <input type="hidden" name="_subject" value="NEW homepage redesign request!">
+    <input type="hidden" name="_next" value="https://bossladybloggers.com/redesign-welcome">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_template" value="table">
+    <input type="text" name="name" placeholder="your first name" required>
+    <input type="email" name="email" placeholder="your email" required>
+    <input type="url" name="website" placeholder="your website link (https://...)" required>
+    <button class="btn" type="submit">Request my free redesign &rarr;</button>
+  </form>
   <button class="nah" data-close>not yet, my website and I need a minute</button>
-  <div class="micro">Free 30 minutes &#10022; zero pressure &#10022; all vision</div>
+  <div class="micro">Free &#10022; no card &#10022; no strings, just vision</div>
 </div>
 
 <script>
