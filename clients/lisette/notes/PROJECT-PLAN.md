@@ -4,7 +4,8 @@ Status date: 2026-08-10. Build phase is COMPLETE (14 pages verified and
 exported). This document tracks the completion phase: what remains, who owns
 it, and the re-engagement proposal terms.
 
-Client portal / proposal (share with Lisette from the artifact's share menu):
+LIVE SITE (installed on Showit 2026-08-10): https://marriageandretirementabroad.showit.site/
+Client portal / proposal:
 https://claude.ai/code/artifact/f799cca8-d845-47eb-a82b-62b890bfbee3
 
 ## Background
@@ -23,7 +24,7 @@ https://claude.ai/code/artifact/f799cca8-d845-47eb-a82b-62b890bfbee3
 
 Ordered roughly by dependency. Items marked (blocked) need a Lisette task first.
 
-1. [ ] Send Lisette the portal link; follow up by voice message
+1. [x] Proposal email drafted in Gmail (to lisettekm@yahoo.com) with live site + portal links; Genasys to review and send, then follow up by voice message
 2. [ ] (blocked: L1) Confirm payment option received; restart project officially
 3. [ ] (blocked: L5) Swap `REPLACE-WITH-LISETTES-EMAIL` in contact.html +
        freebie.html (build scripts), rebuild, re-verify, re-export
@@ -36,9 +37,8 @@ Ordered roughly by dependency. Items marked (blocked) need a Lisette task first.
        (markdown converter per playbook v2.0)
 9. [ ] Download the 9 Higsfeild images, commit to clients/lisette/images/,
        swap site/images.py to raw.githubusercontent URLs, rebuild all
-10. [ ] (blocked: L3) Showit install: 14 pages into full-page embed blocks,
-        desktop AND mobile canvases; publish; teach her the 4 Showit rules
-        (playbook Phase 8)
+10. [x] Showit install DONE by Genasys (showit.site subdomain live); still to do:
+        connect custom domain when purchased + teach her the 4 Showit rules
 11. [ ] Favicon (M monogram, Cormorant italic, transparent corners; 35x35 +
         180 + 512 per playbook)
 12. [ ] (blocked: L4) Place brand photos: about page bio slots, homepage

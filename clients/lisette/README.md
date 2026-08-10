@@ -17,7 +17,8 @@ Client project workspace for **Lisette**, managed under Boss Lady Bloggers.
 - [ ] Brand assets received
 - [x] Design direction approved by Genasys (2026-08-10)
 - [x] Full site built: 14 pages, verified, deliverables exported
-- [ ] Review with client
+- [x] Installed on Showit: https://marriageandretirementabroad.showit.site/
+- [ ] Review with client (proposal email drafted)
 - [ ] Launch
 
 ## Details
