@@ -1,0 +1,309 @@
+#!/usr/bin/env python3
+"""BLB portfolio case study: Marriage & Retirement Abroad.
+Single-file page for a full-page Showit embed on bossladybloggers.com.
+Matches the LIVE BLB brand (index.html): Bricolage Grotesque + Inter,
+pink/purple on blush paper. Run: python3 build_case_study.py"""
+
+RAW = "https://raw.githubusercontent.com/genasbury12/blb-site/claude/lisette-client-repo-9865ki/portfolio/img"
+LIVE = "https://marriageandretirementabroad.showit.site/"
+BLB = "https://bossladybloggers.com"
+
+html = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case Study: Marriage &amp; Retirement Abroad | Boss Lady Bloggers</title>
+<meta name="description" content="How Boss Lady Bloggers turned one onboarding questionnaire into a 14-page, hand-coded website for Marriage &amp; Retirement Abroad, a retire-in-France brand for couples 45 and better.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&family=Cormorant+Garamond:ital,wght@1,500&family=Parisienne&display=swap" rel="stylesheet">
+<style>
+:root{{--paper:#FFF4FA;--tint:#FBEDFB;--ink:#34204F;--pink:#FF5DA2;--purple:#8B5CF6;
+  --lilac:#E7D4FF;--blue:#5C7CFA;--muted:#5b4a72;
+  --display:'Bricolage Grotesque',sans-serif;--body:'Inter',sans-serif;
+  --mra-serif:'Cormorant Garamond',serif;--mra-script:'Parisienne',cursive}}
+*{{margin:0;padding:0;box-sizing:border-box}}
+html{{scroll-behavior:smooth}}
+html,body{{overflow-x:hidden}}
+body{{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.65}}
+img{{max-width:100%;display:block}}
+.wrap{{max-width:1100px;margin:0 auto;padding:0 24px}}
+section{{padding:88px 0;position:relative;overflow:hidden}}
+h1,h2,h3{{font-family:var(--display);font-weight:800;line-height:1.08;letter-spacing:-.01em}}
+.eyebrow{{display:inline-flex;align-items:center;gap:10px;font-family:var(--display);font-weight:700;
+  font-size:.82rem;letter-spacing:.22em;text-transform:uppercase;color:var(--purple)}}
+.eyebrow::before{{content:"";width:30px;height:2px;background:var(--pink)}}
+.h2{{font-size:clamp(2rem,4.4vw,3.1rem);margin:14px 0 16px}}
+.mark{{background:linear-gradient(180deg,transparent 62%,var(--lilac) 62%)}}
+.mark.pink{{background:linear-gradient(180deg,transparent 62%,#FFD3E7 62%)}}
+.lede{{font-size:1.1rem;color:var(--muted);max-width:600px}}
+.btn{{display:inline-flex;align-items:center;gap:8px;font-family:var(--display);font-weight:700;
+  font-size:.98rem;padding:16px 34px;border-radius:50px;text-decoration:none;background:var(--ink);
+  color:var(--paper);border:2px solid var(--ink);transition:transform .2s,box-shadow .2s,background .2s,color .2s}}
+.btn:hover{{transform:translateY(-3px);box-shadow:0 14px 30px rgba(52,32,79,.25)}}
+.btn-pink{{background:var(--pink);border-color:var(--pink)}}
+.btn-outline{{background:transparent;color:var(--ink)}}
+.btn-outline:hover{{background:var(--ink);color:var(--paper)}}
+
+nav{{position:sticky;top:0;z-index:50;background:rgba(255,244,250,.92);backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(139,92,246,.15)}}
+.nav-inner{{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;max-width:1100px;margin:0 auto}}
+.logo{{font-family:var(--display);font-weight:800;font-size:1.2rem}}
+.logo b{{color:var(--pink)}}
+.logo a{{color:var(--ink);text-decoration:none}}
+.nav-cta{{font-family:var(--display);font-weight:700;font-size:.9rem;background:var(--ink);color:var(--paper);
+  padding:11px 24px;border-radius:50px;text-decoration:none}}
+
+.hero{{padding:96px 0 80px;background:
+  radial-gradient(800px 400px at 90% -10%,rgba(139,92,246,.16),transparent 70%),
+  radial-gradient(700px 400px at -5% 100%,rgba(255,93,162,.12),transparent 70%),var(--paper)}}
+.hero h1{{font-size:clamp(2.6rem,6vw,4.4rem);margin:16px 0 20px;max-width:820px}}
+.hctas{{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px}}
+.chips{{display:flex;gap:10px;flex-wrap:wrap;margin-top:34px}}
+.chip{{background:#fff;border:1.5px solid var(--lilac);border-radius:50px;padding:9px 20px;
+  font-family:var(--display);font-weight:600;font-size:.86rem;color:var(--muted)}}
+.chip b{{color:var(--pink)}}
+
+.meta{{background:var(--ink);color:#EDE4FA;padding:34px 0}}
+.metarow{{display:grid;grid-template-columns:repeat(5,1fr);gap:20px}}
+.meta .m b{{display:block;font-family:var(--display);font-size:.72rem;letter-spacing:.2em;
+  text-transform:uppercase;color:#C9B6F2;margin-bottom:5px}}
+.meta .m span{{font-size:.98rem}}
+.meta a{{color:#FFD3E7}}
+
+.split{{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}}
+.brief p{{margin-bottom:16px;color:var(--muted)}}
+.brief p b{{color:var(--ink)}}
+.quotecard{{background:#fff;border:2px solid var(--lilac);border-radius:22px;padding:34px 36px;
+  box-shadow:0 22px 50px rgba(52,32,79,.10);transform:rotate(-1deg)}}
+.quotecard .q{{font-family:var(--mra-serif);font-style:italic;font-size:1.5rem;line-height:1.4;color:var(--ink)}}
+.quotecard .a{{margin-top:14px;font-family:var(--display);font-weight:600;font-size:.85rem;color:var(--muted)}}
+
+.tour{{background:var(--tint)}}
+.tourgrid{{display:grid;grid-template-columns:1fr 1.1fr;gap:52px;align-items:center;margin-top:10px}}
+.browser{{background:#fff;border-radius:18px;overflow:hidden;border:1px solid rgba(139,92,246,.2);
+  box-shadow:0 30px 70px rgba(52,32,79,.18)}}
+.bbar{{display:flex;gap:6px;align-items:center;padding:12px 16px;background:var(--lilac)}}
+.bbar i{{width:10px;height:10px;border-radius:50%;background:#fff}}
+.bbar i:nth-child(1){{background:var(--pink)}}
+.bbar i:nth-child(2){{background:var(--purple)}}
+.bbar span{{margin-left:8px;background:#fff;border-radius:50px;padding:4px 14px;font-size:.75rem;color:var(--muted)}}
+.bwin{{height:520px;overflow:hidden;position:relative}}
+.bwin img{{width:100%;animation:sitescroll 26s ease-in-out infinite alternate}}
+.bwin:hover img{{animation-play-state:paused}}
+@keyframes sitescroll{{0%,4%{{transform:translateY(0)}}96%,100%{{transform:translateY(calc(-100% + 520px))}}}}
+.swatches{{display:flex;gap:8px;flex-wrap:wrap;margin:22px 0 6px}}
+.sw{{width:54px;height:54px;border-radius:14px;border:1px solid rgba(52,32,79,.12)}}
+.spec{{display:flex;flex-direction:column;gap:6px;margin-top:18px}}
+.spec .s1{{font-family:var(--mra-serif);font-style:italic;font-size:1.7rem}}
+.spec .s2{{font-family:var(--mra-script);font-size:1.9rem;color:#B9944E}}
+.spec .lab{{font-family:var(--display);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}}
+
+.gal{{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:46px}}
+.shot{{background:#fff;border-radius:16px;overflow:hidden;border:1px solid rgba(139,92,246,.18);
+  box-shadow:0 18px 40px rgba(52,32,79,.12);transition:transform .25s}}
+.shot:hover{{transform:translateY(-6px) rotate(-.5deg)}}
+.shot .simg{{height:230px;overflow:hidden;border-bottom:1px solid var(--lilac)}}
+.shot figcaption{{padding:14px 18px;font-family:var(--display);font-weight:700;font-size:.95rem}}
+.shot figcaption span{{display:block;font-family:var(--body);font-weight:400;font-size:.82rem;color:var(--muted)}}
+
+.inc{{display:grid;grid-template-columns:1fr 1fr;gap:10px 34px;max-width:860px;margin:42px auto 0}}
+.inc div{{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px dashed rgba(139,92,246,.25);font-size:.98rem}}
+.inc div::before{{content:"✓";flex:none;width:24px;height:24px;border-radius:8px;background:var(--lilac);
+  color:var(--purple);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:.85rem}}
+
+.steps{{background:var(--tint)}}
+.steprow{{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;margin-top:46px}}
+.step{{background:#fff;border-radius:18px;padding:26px 22px;border:1px solid rgba(139,92,246,.16);
+  box-shadow:0 14px 34px rgba(52,32,79,.08)}}
+.step .n{{font-family:var(--display);font-weight:800;font-size:1.6rem;color:var(--pink)}}
+.step h3{{font-size:1.02rem;margin:8px 0 6px}}
+.step p{{font-size:.85rem;color:var(--muted)}}
+
+.final{{background:var(--ink);color:var(--paper);text-align:center;padding:110px 0}}
+.final .h2{{color:#fff;max-width:680px;margin:14px auto 16px}}
+.final .lede{{margin:0 auto 34px;color:#D5C8EC}}
+footer{{background:var(--ink);color:#B8A8D6;text-align:center;font-size:.85rem;padding:26px 16px;
+  border-top:1px solid rgba(255,255,255,.12)}}
+footer b{{color:var(--pink)}}
+
+.rise{{opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s}}
+.rise.in{{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){{
+  *{{animation:none!important;transition:none!important}}
+  .rise{{opacity:1;transform:none}}
+  html{{scroll-behavior:auto}}
+}}
+@media(max-width:920px){{
+  section{{padding:60px 0}}
+  .split,.tourgrid{{grid-template-columns:1fr}}
+  .metarow{{grid-template-columns:1fr 1fr}}
+  .gal{{grid-template-columns:1fr}}
+  .inc{{grid-template-columns:1fr}}
+  .steprow{{grid-template-columns:1fr 1fr}}
+  .bwin{{height:420px}}
+  @keyframes sitescroll{{0%,4%{{transform:translateY(0)}}96%,100%{{transform:translateY(calc(-100% + 420px))}}}}
+}}
+</style>
+</head>
+<body>
+
+<nav><div class="nav-inner">
+  <div class="logo"><a href="{BLB}">Boss Lady <b>Bloggers</b></a></div>
+  <a class="nav-cta" href="{BLB}/#final">Work with me</a>
+</div></nav>
+
+<header class="hero"><div class="wrap">
+  <span class="eyebrow">Client case study</span>
+  <h1>One questionnaire in. A whole <span class="mark pink">French dream</span> out.</h1>
+  <p class="lede">Marriage &amp; Retirement Abroad helps couples 45 and better retire to the South of
+  France. When the project landed, there was no logo, no photos, not even a domain. There was one
+  deeply honest onboarding questionnaire. Here is what it became.</p>
+  <div class="hctas">
+    <a class="btn btn-pink" href="{LIVE}" target="_blank" rel="noopener">View the Live Site</a>
+    <a class="btn btn-outline" href="{BLB}/#final">Start Your Project</a>
+  </div>
+  <div class="chips">
+    <span class="chip"><b>14</b> pages, hand-coded</span>
+    <span class="chip"><b>0</b> templates used</span>
+    <span class="chip"><b>9</b> custom brand images</span>
+    <span class="chip"><b>100%</b> phone-verified</span>
+  </div>
+</div></header>
+
+<div class="meta"><div class="wrap metarow">
+  <div class="m"><b>Client</b><span>Marriage &amp; Retirement Abroad</span></div>
+  <div class="m"><b>Niche</b><span>Retirement lifestyle, France</span></div>
+  <div class="m"><b>Scope</b><span>Brand, copy, full website</span></div>
+  <div class="m"><b>Platform</b><span>Showit, custom code</span></div>
+  <div class="m"><b>Live at</b><span><a href="{LIVE}" target="_blank" rel="noopener">the client site</a></span></div>
+</div></div>
+
+<section><div class="wrap split">
+  <div class="brief rise">
+    <span class="eyebrow">The brief</span>
+    <h2 class="h2">Pre-launch. Pre-everything.</h2>
+    <p>The client came to BEM+ with a beautiful, specific dream: help married couples retire to France
+    without the overwhelm, starting with a practice trip to Provence. And she came with
+    <b>nothing built</b>. No brand, no site, no content. Exactly the moment where most people stall
+    for years.</p>
+    <p>Her one design wish: <b>lavender</b>. Elegant, minimalist, warm. A website that makes visitors
+    feel the South of France before they can point to it on a map.</p>
+    <p>So we skipped the templates and built the whole thing by hand: brand system, copy in her voice,
+    fourteen pages, a freebie funnel, and coming-soon pages for the blog, podcast, and French lessons
+    she is launching next.</p>
+  </div>
+  <div class="quotecard rise">
+    <div class="q">"I want visitors to see the beauty of southern France and appreciate the endless
+    possibilities for dream building."</div>
+    <div class="a">FROM THE CLIENT'S ONBOARDING QUESTIONNAIRE</div>
+  </div>
+</div></section>
+
+<section class="tour"><div class="wrap">
+  <span class="eyebrow">The build</span>
+  <h2 class="h2">A brand system first. <span class="mark">Then every pixel.</span></h2>
+  <div class="tourgrid">
+    <div class="rise">
+      <p style="color:var(--muted);margin-bottom:6px">Eight colors, three typefaces, and a rule book:
+      arched photo frames like Provencal doorways, handwritten French accents, pill buttons, and no
+      two sections that look alike.</p>
+      <div class="swatches">
+        <div class="sw" style="background:#FBF9F4"></div><div class="sw" style="background:#F1EDF7"></div>
+        <div class="sw" style="background:#E9E2F4"></div><div class="sw" style="background:#6A579E"></div>
+        <div class="sw" style="background:#4F3F7E"></div><div class="sw" style="background:#B9944E"></div>
+        <div class="sw" style="background:#6F677D"></div><div class="sw" style="background:#2F2838"></div>
+      </div>
+      <div class="spec">
+        <span class="s1">Retire in France, together</span><span class="lab">Cormorant Garamond, headlines</span>
+        <span class="s2">la belle vie</span><span class="lab">Parisienne, handwritten accents</span>
+      </div>
+    </div>
+    <div class="browser rise">
+      <div class="bbar"><i></i><i></i><i></i><span>marriageandretirementabroad.com</span></div>
+      <div class="bwin"><img src="{RAW}/mra-home-full.jpg" alt="Full homepage of Marriage and Retirement Abroad scrolling top to bottom"></div>
+    </div>
+  </div>
+  <p style="text-align:center;margin-top:16px;font-size:.85rem;color:var(--muted)">The homepage, scrolling itself. Hover to pause, or
+  <a href="{LIVE}" target="_blank" rel="noopener" style="color:var(--purple)">click through the real thing</a>.</p>
+</div></section>
+
+<section><div class="wrap">
+  <span class="eyebrow">The pages</span>
+  <h2 class="h2">Fourteen pages, zero twins</h2>
+  <p class="lede">Every page opens differently, moves differently, and still reads as one brand.
+  A few favorites:</p>
+  <div class="gal">
+    <figure class="shot rise"><div class="simg"><img src="{RAW}/mra-trip-top.jpg" alt="Practice Retirement Trip sales page"></div>
+      <figcaption>The Practice Trip <span>signature offer page with itinerary and FAQ</span></figcaption></figure>
+    <figure class="shot rise"><div class="simg"><img src="{RAW}/mra-about-top.jpg" alt="About page"></div>
+      <figcaption>Our Story <span>editorial about page with journey timeline</span></figcaption></figure>
+    <figure class="shot rise"><div class="simg"><img src="{RAW}/mra-freebie-top.jpg" alt="Freebie opt-in page"></div>
+      <figcaption>The Freebie <span>list-building checklist funnel</span></figcaption></figure>
+    <figure class="shot rise"><div class="simg"><img src="{RAW}/mra-start-top.jpg" alt="Start Here page"></div>
+      <figcaption>Start Here <span>a welcome mat for brand new visitors</span></figcaption></figure>
+    <figure class="shot rise"><div class="simg"><img src="{RAW}/mra-book-top.jpg" alt="Book a call page"></div>
+      <figcaption>Book a Call <span>friendly booking page, zero pressure</span></figcaption></figure>
+    <figure class="shot rise"><div class="simg"><img src="{RAW}/mra-home-top.jpg" alt="Homepage hero"></div>
+      <figcaption>The Homepage <span>typewriter headline, arches, and lavender</span></figcaption></figure>
+  </div>
+</div></section>
+
+<section style="padding-top:0"><div class="wrap" >
+  <div style="text-align:center"><span class="eyebrow">Under the hood</span>
+  <h2 class="h2">What "done" actually included</h2></div>
+  <div class="inc">
+    <div>Complete brand system: colors, type, signature details</div>
+    <div>Website copy drafted in the client's voice</div>
+    <div>Custom on-brand Provence imagery, sitewide</div>
+    <div>Freebie funnel with styled forms and thank you page</div>
+    <div>SEO structure with FAQ schema on the money pages</div>
+    <div>Interactive details: timelines, toggles, marquees, menus</div>
+    <div>Coming-soon pages for blog, podcast, and French lessons</div>
+    <div>Every page robot-tested: phones, clicks, and slow connections</div>
+  </div>
+</div></section>
+
+<section class="steps"><div class="wrap">
+  <div style="text-align:center"><span class="eyebrow">The process</span>
+  <h2 class="h2">How a BLB website gets built</h2></div>
+  <div class="steprow">
+    <div class="step rise"><div class="n">01</div><h3>Deep-dive questionnaire</h3><p>263 questions. The messy, honest answers become the strategy.</p></div>
+    <div class="step rise"><div class="n">02</div><h3>Brand system</h3><p>Colors, fonts, and signature details locked before page one.</p></div>
+    <div class="step rise"><div class="n">03</div><h3>Hand-coded build</h3><p>Every page custom. No templates, no page builders, no twins.</p></div>
+    <div class="step rise"><div class="n">04</div><h3>Robot-grade QA</h3><p>Automated browser tests on every page before you ever see it.</p></div>
+    <div class="step rise"><div class="n">05</div><h3>Showit install</h3><p>Live on a platform the client can actually log into and own.</p></div>
+  </div>
+</div></section>
+
+<section class="final"><div class="wrap">
+  <span class="eyebrow" style="color:#C9B6F2">Your turn</span>
+  <h2 class="h2">Your website could be next, babe.</h2>
+  <p class="lede">Bring me the dream and the messy answers. I will bring the brand, the code, and the
+  website your business deserves.</p>
+  <a class="btn btn-pink" href="{BLB}/#final">Work With Me</a>
+</div></section>
+
+<footer>Boss Lady <b>Bloggers</b> &middot; Case study: Marriage &amp; Retirement Abroad &middot; bossladybloggers.com</footer>
+
+<script>
+(function(){{
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var els=[].slice.call(document.querySelectorAll('.rise'));
+  if('IntersectionObserver' in window && !reduce){{
+    var io=new IntersectionObserver(function(es){{es.forEach(function(en){{
+      if(en.isIntersecting){{en.target.classList.add('in');io.unobserve(en.target);}}}});}},
+      {{threshold:.12}});
+    els.forEach(function(el){{
+      var r=el.getBoundingClientRect();
+      if(r.top<window.innerHeight&&r.bottom>0){{el.classList.add('in');return;}}
+      io.observe(el);}});
+  }} else {{ els.forEach(function(el){{el.classList.add('in');}}); }}
+}})();
+</script>
+</body>
+</html>"""
+
+open("case-study-mra.html", "w").write(html)
+print(f"wrote case-study-mra.html ({len(html)} bytes)")
