@@ -501,6 +501,15 @@ mobile-verified at 390px, delivered as .txt files."
 =====================================================================
 CHANGELOG (newest first)
 =====================================================================
+2026-08-10  v2.1  Lead popup embed: self-contained offer popup
+                  ("see your homepage redesigned") pasted into
+                  one embed block per page. Shows after 9s or
+                  33% scroll, 7-day snooze on close, permanent
+                  hide after CTA click, ESC/overlay close, CSS
+                  before/after browser art. GOTCHA: an inline
+                  display:none beats any class toggle - show and
+                  hide with element.style, not classList. Never
+                  on blog templates (no JS there).
 2026-08-10  v2.0  Legal pages: client supplies official legal
                   copy (Disclaimer, Privacy Policy, Terms) as
                   markdown; a converter injects it into the

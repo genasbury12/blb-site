@@ -1,0 +1,122 @@
+<!--
+============================================================
+BLB POPUP - "GET YOUR HOMEPAGE REDESIGNED" LEAD OFFER
+============================================================
+WHERE: paste into ONE Embed Code block on any page where you
+want the popup to appear (homepage, about, blog, freebies...).
+The block can be tiny (100 x 100, tucked anywhere) - the popup
+floats over the whole page on its own.
+
+DO NOT put this on the blog templates (they block JavaScript).
+Regular Showit pages only.
+
+HOW IT BEHAVES:
+- appears after 9 seconds OR once they scroll a third of the
+  page, whichever happens first
+- close it and it stays gone for 7 days
+- click the pink button and it never shows again (they're
+  already booked, no need to nag)
+- ESC key, the X, or clicking the dark background all close it
+============================================================
+-->
+
+<div id="blbPop" role="dialog" aria-modal="true" aria-label="Free homepage redesign offer" style="display:none">
+<style>
+#blbPop{position:fixed;inset:0;z-index:99999;font-family:'Karla',sans-serif;color:#2E1F27;align-items:center;justify-content:center;padding:20px}
+#blbPop.on{display:flex}
+#blbPop *{margin:0;padding:0;box-sizing:border-box}
+#blbPop .ov{position:absolute;inset:0;background:rgba(46,31,39,.62);backdrop-filter:blur(3px);cursor:pointer}
+#blbPop .card{position:relative;background:#FBF6EE;border:1px solid rgba(124,43,72,.3);border-radius:26px;max-width:520px;width:100%;padding:40px 36px 34px;text-align:center;box-shadow:0 40px 90px -30px rgba(46,31,39,.7);animation:blbPopIn .45s cubic-bezier(.2,1.2,.3,1)}
+@keyframes blbPopIn{from{opacity:0;transform:translateY(26px) scale(.96)}to{opacity:1;transform:none}}
+#blbPop .x{position:absolute;top:14px;right:14px;width:38px;height:38px;border:1px solid rgba(46,31,39,.3);border-radius:50%;background:transparent;cursor:pointer;font-size:17px;line-height:1;color:#2E1F27;transition:all .2s}
+#blbPop .x:hover{background:#2E1F27;color:#FBF6EE}
+
+/* mini before -> after browser art */
+#blbPop .art{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:20px}
+#blbPop .win{width:120px;border-radius:10px;overflow:hidden;border:1px solid rgba(46,31,39,.25);background:#fff;box-shadow:0 14px 26px -14px rgba(46,31,39,.4)}
+#blbPop .win .bar{display:flex;gap:4px;padding:6px 8px;background:#F4EBDE;border-bottom:1px solid rgba(46,31,39,.12)}
+#blbPop .win .bar i{width:6px;height:6px;border-radius:50%;background:rgba(46,31,39,.25)}
+#blbPop .win .b{padding:10px 10px 12px}
+#blbPop .win .l{height:7px;border-radius:4px;background:#DDD3C6;margin-bottom:6px}
+#blbPop .win.sad .l:nth-child(1){width:85%}
+#blbPop .win.sad .l:nth-child(2){width:60%}
+#blbPop .win.sad .l:nth-child(3){width:72%;margin-bottom:0}
+#blbPop .win.glow{border-color:#A93F63;box-shadow:0 18px 34px -14px rgba(169,63,99,.55)}
+#blbPop .win.glow .hero{height:26px;border-radius:6px;background:linear-gradient(120deg,#F0DCE2,#A93F63);margin-bottom:7px}
+#blbPop .win.glow .l:nth-child(2){width:88%;background:#2E1F27}
+#blbPop .win.glow .l:nth-child(3){width:55%;background:#F0DCE2;margin-bottom:7px}
+#blbPop .win.glow .cta{width:58%;height:9px;border-radius:6px;background:#A93F63;margin:0 auto}
+#blbPop .arw{font-size:22px;color:#BC8A47;animation:blbNudge 1.6s ease-in-out infinite}
+@keyframes blbNudge{0%,100%{transform:translateX(0)}50%{transform:translateX(5px)}}
+
+#blbPop .script{font-family:'Ephesis',cursive;font-size:clamp(24px,3.4vw,30px);color:#BC8A47;margin-bottom:4px}
+#blbPop h2{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:clamp(24px,4.2vw,32px);line-height:1.14;margin-bottom:12px}
+#blbPop h2 em{font-style:italic;color:#A93F63}
+#blbPop p{font-size:15px;line-height:1.65;color:#6E5C63;max-width:400px;margin:0 auto 22px}
+#blbPop p b{color:#2E1F27}
+#blbPop .btn{display:inline-block;background:#A93F63;color:#fff;border:1px solid #A93F63;font-weight:700;font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;padding:18px 36px;border-radius:60px;text-decoration:none;transition:all .2s;box-shadow:0 18px 34px -14px rgba(124,43,72,.6)}
+#blbPop .btn:hover{background:#2E1F27;border-color:#2E1F27;transform:translateY(-3px)}
+#blbPop .nah{display:block;margin-top:14px;background:none;border:none;cursor:pointer;font-family:'Karla',sans-serif;font-size:12px;color:#6E5C63;text-decoration:underline;text-underline-offset:3px}
+#blbPop .nah:hover{color:#A93F63}
+#blbPop .micro{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:#7C2B48;margin-top:16px}
+@media (max-width:480px){
+  #blbPop .card{padding:34px 22px 28px}
+  #blbPop .win{width:100px}
+}
+@media (prefers-reduced-motion:reduce){#blbPop .card,#blbPop .arw{animation:none}}
+</style>
+
+<div class="ov" data-close aria-hidden="true"></div>
+<div class="card">
+  <button class="x" data-close aria-label="Close">&#10005;</button>
+  <div class="art" aria-hidden="true">
+    <div class="win sad"><div class="bar"><i></i><i></i><i></i></div><div class="b"><div class="l"></div><div class="l"></div><div class="l"></div></div></div>
+    <div class="arw">&rarr;</div>
+    <div class="win glow"><div class="bar"><i></i><i></i><i></i></div><div class="b"><div class="hero"></div><div class="l"></div><div class="l"></div><div class="cta"></div></div></div>
+  </div>
+  <div class="script">okay babe, real talk</div>
+  <h2>See your homepage <em>redesigned.</em> For you. Before you pay a thing.</h2>
+  <p>Book a free call and I'll walk you through exactly what <b>your</b> homepage could look like: your brand, your offer, designed to actually sell. No template, no obligation, just the glow-up plan.</p>
+  <a class="btn" href="/book-a-call">Show me my new homepage &rarr;</a>
+  <button class="nah" data-close>not yet, my website and I need a minute</button>
+  <div class="micro">Free 30 minutes &#10022; zero pressure &#10022; all vision</div>
+</div>
+
+<script>
+(function(){
+  var pop=document.getElementById('blbPop');
+  if(!pop)return;
+  var KEY='blbPopSeen';
+  try{
+    var seen=localStorage.getItem(KEY);
+    if(seen==='booked')return;
+    if(seen&&Date.now()-parseInt(seen,10)<7*24*60*60*1000)return;
+  }catch(e){}
+  var shown=false;
+  function show(){
+    if(shown)return;shown=true;
+    pop.style.display='flex';
+    document.removeEventListener('scroll',onScroll);
+  }
+  function close(val){
+    pop.style.display='none';
+    try{localStorage.setItem(KEY,val||String(Date.now()))}catch(e){}
+  }
+  function onScroll(){
+    var d=document.documentElement;
+    var max=d.scrollHeight-d.clientHeight;
+    if(max>0&&d.scrollTop/max>0.33)show();
+  }
+  setTimeout(show,9000);
+  document.addEventListener('scroll',onScroll,{passive:true});
+  pop.querySelectorAll('[data-close]').forEach(function(el){
+    el.addEventListener('click',function(){close()});
+  });
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'&&pop.style.display==='flex')close();
+  });
+  var btn=pop.querySelector('.btn');
+  if(btn)btn.addEventListener('click',function(){close('booked')});
+})();
+</script>
+</div>
