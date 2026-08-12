@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Conscious Lifestyle | Holistik Queen</title>
+<meta name="description" content="Conscious Lifestyle for women 40+: Wellness does not stop at your plate. The air in your home, the products under your sink, the stuff in your schedule:...">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Outfit:wght@300;400;600;700&family=Sacramento&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js')</script>
+<style>
+:root{
+  --paper:#FDF9F0;   /* warm cream, never pure white */
+  --tint:#ECF3E4;    /* sage alternate background */
+  --ink:#1C3A2A;     /* deep forest, never pure black */
+  --coral:#E4572E;   /* the action color */
+  --clay:#B8431F;    /* hover state */
+  --emerald:#1E6F50; /* depth accent */
+  --gold:#C9973E;    /* script accents, flourishes */
+  --honey:#F7E8CD;   /* soft highlight, pills */
+  --rose:#F3DDD0;    /* soft alt highlight */
+  --muted:#5C6B5D;   /* secondary text */
+  --display:'Cormorant Garamond',Georgia,serif;
+  --body:'Outfit',system-ui,sans-serif;
+  --script:'Sacramento',cursive;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+html,body{overflow-x:hidden}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);
+  font-weight:300;font-size:1.02rem;line-height:1.7;-webkit-font-smoothing:antialiased}
+::selection{background:var(--coral);color:#fff}
+img,svg,video,iframe{max-width:100%}
+h1,h2,h3{font-family:var(--display);font-weight:600;line-height:1.06;letter-spacing:.005em}
+a{color:inherit}
+strong{font-weight:600}
+.wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+.narrow{max-width:780px}
+section{padding:96px 0}
+.sec-tint{background:var(--tint)}
+.sec-ink{background:var(--ink);color:var(--paper)}
+.sec-ink .eyebrow{color:var(--gold)}
+.sec-ink .muted{color:#cfdcc9}
+.muted{color:var(--muted)}
+.center{text-align:center}
+
+/* type kit */
+.eyebrow{display:inline-block;font-weight:700;font-size:.72rem;letter-spacing:.24em;
+  text-transform:uppercase;color:var(--emerald)}
+.hand{font-family:var(--script);font-size:clamp(1.5rem,2.6vw,2.1rem);color:var(--gold);
+  line-height:1.2;display:inline-block;transform:rotate(-2deg)}
+.h-xl{font-size:clamp(2.6rem,6vw,4.6rem)}
+.h-lg{font-size:clamp(2.1rem,4.4vw,3.4rem)}
+.h-md{font-size:clamp(1.6rem,3vw,2.3rem)}
+.it{font-style:italic}
+.hl{position:relative;white-space:nowrap;z-index:0}
+.hl::after{content:'';position:absolute;z-index:-1;left:-.06em;right:-.06em;bottom:.05em;
+  height:.36em;background:var(--honey);transform:skewX(-8deg)}
+.hl-coral::after{background:var(--coral);opacity:.22}
+.lede{font-size:1.14rem;line-height:1.75;color:var(--muted);font-weight:300}
+.sec-ink .lede{color:#d9e4d3}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:.55em;font-family:var(--body);font-weight:600;
+  font-size:.95rem;letter-spacing:.04em;padding:17px 34px;border-radius:60px;border:1.5px solid transparent;
+  cursor:pointer;text-decoration:none;transition:background .25s,color .25s,border-color .25s,box-shadow .25s;
+  position:relative;overflow:hidden}
+.btn-coral{background:var(--coral);color:#fff;box-shadow:0 14px 30px -12px rgba(228,87,46,.55)}
+.btn-coral:hover{background:var(--clay)}
+.btn-ghost{border-color:var(--ink);color:var(--ink);background:transparent}
+.btn-ghost:hover{background:var(--ink);color:var(--paper)}
+.sec-ink .btn-ghost{border-color:var(--paper);color:var(--paper)}
+.sec-ink .btn-ghost:hover{background:var(--paper);color:var(--ink)}
+.btn .arr{transition:translate .25s}
+.btn:hover .arr{translate:4px 0}
+
+/* announcement banner marquee */
+.banner{background:var(--ink);color:var(--paper);position:relative;z-index:60;overflow:hidden}
+.banner a{display:block;text-decoration:none;padding:11px 44px 11px 0}
+.banner .btrack{display:flex;width:max-content;animation:bslide 26s linear infinite;gap:0}
+.banner .btrack span{white-space:nowrap;font-size:.78rem;font-weight:600;letter-spacing:.18em;
+  text-transform:uppercase;padding:0 2.2em}
+.banner .btrack b{color:var(--gold)}
+.banner .bx{position:absolute;right:8px;top:50%;translate:0 -50%;background:none;border:0;color:var(--paper);
+  font-size:1.05rem;cursor:pointer;padding:6px 10px;opacity:.7}
+.banner .bx:hover{opacity:1}
+@keyframes bslide{to{transform:translateX(-50%)}}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:50;background:rgba(253,249,240,.92);backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(28,58,42,.09);transition:box-shadow .3s}
+.nav.scrolled{box-shadow:0 10px 30px -18px rgba(28,58,42,.35)}
+.nav .bar{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:16px 28px;
+  max-width:1280px;margin:0 auto}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+.logo .mono{width:44px;height:44px;border-radius:50%;background:var(--ink);color:var(--paper);
+  display:grid;place-items:center;font-family:var(--display);font-style:italic;font-size:1.35rem;
+  font-weight:600;flex:none}
+.logo .wordmark{font-family:var(--display);font-weight:600;font-size:1.28rem;letter-spacing:.02em;line-height:1}
+.logo .wordmark em{font-style:italic;color:var(--coral)}
+.logo .tag{display:block;font-family:var(--body);font-weight:600;font-size:.56rem;letter-spacing:.3em;
+  text-transform:uppercase;color:var(--muted);margin-top:3px}
+.nav-links{display:flex;align-items:center;gap:30px;list-style:none}
+.nav-links a{text-decoration:none;font-weight:400;font-size:.95rem;position:relative}
+.nav-links a:not(.nav-cta)::after{content:'';position:absolute;left:0;bottom:-5px;height:2px;width:0;
+  background:var(--coral);transition:width .25s}
+.nav-links a:not(.nav-cta):hover::after{width:100%}
+.nav-cta{background:var(--coral);color:#fff;font-weight:600;padding:12px 26px;border-radius:60px;
+  box-shadow:0 10px 24px -10px rgba(228,87,46,.6);transition:background .25s}
+.nav-cta:hover{background:var(--clay)}
+.burger{display:none;background:none;border:0;cursor:pointer;width:44px;height:44px;flex:none;
+  flex-direction:column;align-items:center;justify-content:center;gap:6px}
+.burger i{display:block;width:26px;height:2px;background:var(--ink);transition:transform .3s,opacity .3s}
+
+/* mobile menu */
+.mmenu{position:fixed;inset:0;z-index:90;background:var(--ink);color:var(--paper);display:none;
+  flex-direction:column;justify-content:center;padding:40px 30px;overflow:auto}
+.mmenu.open{display:flex}
+.mmenu .mclose{position:absolute;top:20px;right:20px;background:none;border:1.5px solid rgba(253,249,240,.4);
+  color:var(--paper);width:46px;height:46px;border-radius:50%;font-size:1.15rem;cursor:pointer}
+.mmenu ol{list-style:none;counter-reset:mm}
+.mmenu ol a{display:flex;align-items:baseline;gap:16px;text-decoration:none;
+  font-family:var(--display);font-size:clamp(1.9rem,7vw,2.7rem);padding:10px 0;counter-increment:mm}
+.mmenu ol a::before{content:counter(mm,decimal-leading-zero);font-family:var(--body);font-size:.75rem;
+  color:var(--gold);letter-spacing:.2em}
+.mmenu ol a:hover{color:var(--gold)}
+.mmenu .mnote{font-family:var(--script);color:var(--gold);font-size:1.7rem;margin:22px 0 8px}
+.mmenu .btn{margin-top:6px;align-self:flex-start}
+
+/* giant outline display words */
+.ghost{position:absolute;inset:auto 0;font-family:var(--display);font-style:italic;font-weight:600;
+  font-size:clamp(5rem,16vw,13rem);line-height:1;color:transparent;
+  -webkit-text-stroke:1px rgba(28,58,42,.13);pointer-events:none;user-select:none;white-space:nowrap;
+  text-align:center;z-index:0}
+.sec-ink .ghost{-webkit-text-stroke:1px rgba(253,249,240,.14)}
+
+/* cards */
+.card{background:#fff;border:1px solid rgba(28,58,42,.08);border-radius:24px;padding:34px 30px;
+  box-shadow:0 24px 50px -30px rgba(28,58,42,.28);transition:transform .3s,box-shadow .3s}
+.card:hover{transform:translateY(-6px);box-shadow:0 34px 60px -28px rgba(28,58,42,.36)}
+
+/* arched frame (photo slot) */
+.arch{border-radius:46vw 46vw 24px 24px;overflow:hidden;position:relative;width:100%}
+.arch img{width:100%;height:100%;object-fit:cover;display:block}
+
+/* spinning circular badge */
+.spinbadge{width:120px;height:120px;flex:none;position:relative}
+.spinbadge svg{width:100%;height:100%;animation:spin 16s linear infinite}
+.spinbadge svg text{font-family:var(--body);font-weight:700;font-size:9.2px;letter-spacing:.32em;
+  text-transform:uppercase;fill:currentColor}
+.spinbadge .core{position:absolute;inset:0;display:grid;place-items:center;
+  font-family:var(--display);font-style:italic;font-size:2rem}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* sliding marquee (content duplicated 2x in markup) */
+.marq{overflow:hidden;white-space:nowrap}
+.marq .mtrack{display:inline-flex;width:max-content;animation:mslide 30s linear infinite}
+.marq.rev .mtrack{animation-direction:reverse}
+.marq .mtrack span{display:inline-flex;align-items:center;gap:.6em;font-family:var(--display);
+  font-style:italic;font-size:clamp(1.7rem,3.6vw,2.8rem);padding:0 .7em}
+.marq .mtrack i{font-style:normal;color:var(--gold)}
+.marq.outline .mtrack span{color:transparent;-webkit-text-stroke:1px rgba(28,58,42,.35)}
+.sec-ink .marq.outline .mtrack span{-webkit-text-stroke:1px rgba(253,249,240,.4)}
+@keyframes mslide{to{transform:translateX(-50%)}}
+
+/* stats band */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:26px;text-align:center}
+.stats .num{font-family:var(--display);font-size:clamp(2.6rem,5vw,3.8rem);line-height:1;color:var(--coral)}
+.sec-ink .stats .num{color:var(--gold)}
+.stats .lbl{font-size:.8rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;margin-top:8px}
+
+/* FAQ accordion (details/summary: works with JS off) */
+.faq{max-width:820px;margin:0 auto}
+.faq details{background:#fff;border:1px solid rgba(28,58,42,.09);border-radius:18px;margin-bottom:14px;
+  box-shadow:0 14px 30px -24px rgba(28,58,42,.3);overflow:hidden}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;
+  gap:18px;padding:22px 26px;font-family:var(--display);font-size:1.28rem;font-weight:600}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:'+';font-family:var(--body);font-weight:300;font-size:1.6rem;color:var(--coral);
+  transition:rotate .25s;flex:none;line-height:1}
+.faq details[open] summary::after{rotate:45deg}
+.faq .ans{padding:0 26px 24px;color:var(--muted)}
+
+/* pills / chips */
+.chip{display:inline-flex;align-items:center;gap:.5em;background:var(--honey);border-radius:60px;
+  padding:8px 18px;font-size:.82rem;font-weight:600;letter-spacing:.06em}
+
+/* final CTA shimmer */
+.shimmer{background:linear-gradient(100deg,var(--paper) 35%,var(--gold) 50%,var(--paper) 65%);
+  background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:sheen 5s linear infinite}
+@keyframes sheen{to{background-position:-220% 0}}
+
+/* footer */
+footer{background:var(--ink);color:var(--paper);padding:90px 0 34px;position:relative;overflow:hidden}
+footer .fmark{font-family:var(--display);font-style:italic;font-weight:600;text-align:center;
+  font-size:clamp(3rem,10.5vw,8.6rem);line-height:1;color:transparent;
+  -webkit-text-stroke:1px rgba(253,249,240,.22);user-select:none;margin-bottom:60px;white-space:nowrap}
+footer .fcols{display:grid;grid-template-columns:2fr 1fr 1fr 1.3fr;gap:44px}
+footer h4{font-family:var(--body);font-size:.72rem;font-weight:700;letter-spacing:.24em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:18px}
+footer ul{list-style:none}
+footer ul a{display:inline-block;text-decoration:none;padding:5px 0;color:#d9e4d3;transition:color .2s}
+footer ul a:hover{color:var(--paper)}
+footer .fabout{color:#cfdcc9;font-size:.95rem;max-width:330px}
+footer .fsign{font-family:var(--script);font-size:2.1rem;color:var(--gold);margin-top:22px}
+footer .fbase{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:center;
+  border-top:1px solid rgba(253,249,240,.14);margin-top:64px;padding-top:26px;font-size:.8rem;color:#a9bba4}
+footer .fbase a{color:inherit}
+.socpill{display:inline-flex;align-items:center;gap:.5em;border:1px solid rgba(253,249,240,.3);
+  border-radius:60px;padding:9px 18px;font-size:.82rem;font-weight:600;text-decoration:none;
+  color:var(--paper);margin:0 8px 10px 0;transition:background .2s,color .2s}
+.socpill:hover{background:var(--paper);color:var(--ink)}
+
+/* loader */
+.loader{position:fixed;inset:0;z-index:200;background:var(--paper);display:none;
+  place-items:center;flex-direction:column;text-align:center}
+html.js .loader{display:grid;animation:loaderbye .5s ease 2.8s forwards}
+.loader .lring{width:74px;height:74px;border-radius:50%;border:2px solid rgba(28,58,42,.15);
+  border-top-color:var(--coral);animation:spin 1s linear infinite;margin:0 auto 18px}
+.loader .lword{font-family:var(--script);font-size:1.9rem;color:var(--gold)}
+.loader.done{animation:loaderbye .5s ease forwards}
+@keyframes loaderbye{to{opacity:0;visibility:hidden}}
+
+/* reveal on scroll: hide only when JS present; .seen always wins */
+html.js .rise{opacity:0;translate:0 30px;transition:opacity .7s ease,translate .7s ease}
+html.js .rise.seen{opacity:1;translate:0 0}
+
+/* back to top */
+.totop{position:fixed;right:22px;bottom:22px;z-index:70;width:52px;height:52px;border-radius:50%;
+  background:var(--ink);color:var(--paper);border:0;cursor:pointer;font-size:1.1rem;display:grid;
+  place-items:center;opacity:0;pointer-events:none;transition:opacity .3s;box-shadow:0 14px 30px -12px rgba(28,58,42,.5)}
+.totop.show{opacity:1;pointer-events:auto}
+.totop:hover{background:var(--emerald)}
+
+/* sparkle pop on CTA click */
+.pop{position:fixed;z-index:210;pointer-events:none;font-size:15px;animation:popfly .9s ease-out forwards}
+@keyframes popfly{to{transform:translate(var(--dx),var(--dy)) rotate(120deg);opacity:0}}
+
+/* squiggle underline svg */
+.squig{display:block;margin:10px auto 0;width:150px}
+
+/* forms */
+.field{width:100%;font-family:var(--body);font-size:16px;padding:15px 18px;border-radius:14px;
+  border:1.5px solid rgba(28,58,42,.2);background:#fff;color:var(--ink);transition:border-color .2s,box-shadow .2s}
+.field:focus{outline:none;border-color:var(--coral);box-shadow:0 0 0 4px rgba(228,87,46,.14)}
+label.flabel{display:block;font-size:.74rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  margin:0 0 7px 4px;color:var(--emerald)}
+
+@media(max-width:900px){
+  .nav-links{display:none}
+  .burger{display:flex}
+  footer .fcols{grid-template-columns:1fr 1fr}
+  section{padding:72px 0}
+}
+@media(max-width:560px){
+  footer .fcols{grid-template-columns:1fr}
+  .wrap{padding:0 20px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001s!important;animation-iteration-count:1!important;
+    transition-duration:.001s!important;scroll-behavior:auto}
+  html.js .rise{opacity:1;translate:0 0}
+  html.js .loader{display:none}
+}
+
+.phero{position:relative;overflow:hidden;padding:100px 0 90px;background:
+  linear-gradient(180deg,color-mix(in srgb,#C9973E 10%,var(--paper)),var(--paper))}
+.phero .kicker{display:inline-flex;align-items:center;gap:12px}
+.phero .kicker .dotline{width:60px;height:2px;background:#C9973E}
+.phero .eyebrow{color:#C9973E}
+.phero .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
+.phero .emblem{width:100%;max-width:340px;aspect-ratio:1;margin:0 auto;border-radius:50% 50% 26px 26px;
+  background:linear-gradient(160deg,color-mix(in srgb,#C9973E 30%,#fff),color-mix(in srgb,#C9973E 70%,var(--ink)));
+  display:grid;place-items:center;font-size:6rem;box-shadow:0 36px 66px -36px color-mix(in srgb,#C9973E 70%,#000);
+  position:relative}
+.phero .emblem::after{content:'';position:absolute;inset:16px;border-radius:inherit;
+  border:1.5px dashed rgba(253,249,240,.55)}
+/* find grid */
+.finds{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px;margin-top:50px}
+.find{background:#fff;border-radius:22px;padding:32px 28px;border:1px solid rgba(28,58,42,.08);
+  border-bottom:5px solid #C9973E;box-shadow:0 22px 46px -30px rgba(28,58,42,.35);transition:transform .3s}
+.find:hover{transform:translateY(-6px)}
+.find .fi{width:52px;height:52px;border-radius:16px;background:color-mix(in srgb,#C9973E 14%,#fff);
+  display:grid;place-items:center;font-size:1.5rem;margin-bottom:16px}
+.find h3{font-size:1.4rem;margin-bottom:8px}
+.find p{font-size:.93rem;color:var(--muted)}
+/* starter reads */
+.reads{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;margin-top:50px}
+.read{background:#fff;border-radius:22px;overflow:hidden;border:1px solid rgba(28,58,42,.09);
+  box-shadow:0 22px 46px -30px rgba(28,58,42,.35);display:flex;flex-direction:column;transition:transform .3s}
+.read:hover{transform:translateY(-6px) rotate(-.4deg)}
+.read .rimg{width:100%;aspect-ratio:16/9;background:linear-gradient(140deg,color-mix(in srgb,#C9973E 22%,#fff),color-mix(in srgb,#C9973E 55%,var(--tint)));
+  display:grid;place-items:center;font-size:2.4rem}
+.read .rbody{padding:24px 26px 28px;display:flex;flex-direction:column;gap:10px;flex:1}
+.read .rtag{font-size:.66rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#C9973E}
+.read h3{font-size:1.32rem;line-height:1.25}
+.read p{font-size:.9rem;color:var(--muted);flex:1}
+.read .soon{align-self:flex-start;background:var(--honey);border-radius:60px;padding:6px 16px;
+  font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+/* tip band */
+.tipband{position:relative;overflow:hidden}
+.tipband .tipcard{max-width:820px;margin:0 auto;text-align:center;position:relative;z-index:1}
+.tipband .tiplabel{display:inline-block;background:#C9973E;color:#fff;border-radius:60px;padding:9px 24px;
+  font-size:.72rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;margin-bottom:22px}
+.tipband .tiptext{font-family:var(--display);font-style:italic;font-size:clamp(1.6rem,3.2vw,2.4rem);line-height:1.4}
+/* other topics chips */
+.others{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:34px}
+.others a{text-decoration:none;border:1.5px solid rgba(28,58,42,.25);border-radius:60px;padding:12px 24px;
+  font-weight:600;font-size:.88rem;transition:border-color .2s,background .2s,color .2s}
+.others a:hover{border-color:#C9973E;background:#C9973E;color:#fff}
+@media(max-width:900px){.phero .grid{grid-template-columns:1fr}}
+</style>
+
+</head>
+<body>
+
+<div class="loader" id="loader" aria-hidden="true">
+  <div><div class="lring"></div><div class="lword">polishing the crown&hellip;</div></div>
+</div>
+
+<div class="banner" id="banner">
+  <a href="start-here.html" aria-label="Get the free Queen's Reset guide">
+    <div class="btrack" aria-hidden="true">
+      <span>Free for new readers: <b>The Queen&rsquo;s Reset</b> &middot; 7 royally simple swaps for more energy after 40 &#10022;</span>
+      <span>Free for new readers: <b>The Queen&rsquo;s Reset</b> &middot; 7 royally simple swaps for more energy after 40 &#10022;</span>
+    </div>
+  </a>
+  <button class="bx" id="bannerX" aria-label="Dismiss announcement">&times;</button>
+</div>
+
+<header class="nav" id="nav">
+  <div class="bar">
+    <a class="logo" href="index.html" aria-label="Holistik Queen home">
+      <span class="mono">Q</span>
+      <span><span class="wordmark">Holistik <em>Queen</em></span>
+      <span class="tag">Wellness &middot; Women 40+</span></span>
+    </a>
+    <ul class="nav-links"><li><a href="about.html">About</a></li><li><a href="start-here.html">Start Here</a></li><li><a href="holistic-health.html">Topics</a></li><li><a href="contact.html">Contact</a></li>
+      <li><a class="nav-cta" href="start-here.html">Get the free reset</a></li>
+    </ul>
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false">
+      <i></i><i></i><i></i>
+    </button>
+  </div>
+</header>
+<div class="mmenu" id="mmenu" role="dialog" aria-label="Menu">
+  <button class="mclose" id="mclose" aria-label="Close menu">&times;</button>
+  <ol>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">Meet Victoria</a></li>
+    <li><a href="start-here.html">Start Here</a></li>
+    <li><a href="holistic-health.html">Holistic Health</a></li>
+    <li><a href="clean-eating.html">Clean Eating</a></li>
+    <li><a href="mindful-wellness.html">Mindful Wellness</a></li>
+    <li><a href="eco-beauty.html">Eco Beauty</a></li>
+    <li><a href="conscious-lifestyle.html">Conscious Lifestyle</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ol>
+  <p class="mnote">your health is your crown, babe</p>
+  <a class="btn btn-coral" href="start-here.html">Claim the free Queen&rsquo;s Reset <span class="arr">&rarr;</span></a>
+</div>
+
+<main>
+
+<section class="phero">
+  <div class="ghost" style="top:26px">Conscious Lifestyle</div>
+  <div class="wrap grid" style="position:relative;z-index:1">
+    <div>
+      <span class="kicker rise"><span class="eyebrow">Crown jewel no. 5</span><span class="dotline"></span></span>
+      <h1 class="h-xl rise" style="margin:16px 0 10px">A life designed<br><span class="it hl">on purpose</span></h1>
+      <span class="hand rise">a home that works for your health</span>
+      <p class="lede rise" style="margin-top:18px;max-width:560px">Wellness does not stop at your plate. The air in your home, the products under your sink, the stuff in your schedule: it all counts. Conscious lifestyle is about small intentional choices that pay you back in health, money, and time.</p>
+      <div class="rise" style="display:flex;flex-wrap:wrap;gap:16px;margin-top:30px">
+        <a class="btn btn-coral" href="start-here.html">Get the free Queen&rsquo;s Reset <span class="arr">&rarr;</span></a>
+        <a class="btn btn-ghost" href="index.html">All topics</a>
+      </div>
+    </div>
+    <div class="rise"><div class="emblem">&#127793;</div></div>
+  </div>
+</section>
+
+<section style="padding-top:80px">
+  <div class="wrap">
+    <div class="center">
+      <span class="eyebrow rise" style="color:#C9973E">Inside this pillar</span>
+      <h2 class="h-lg rise">What you&rsquo;ll find here</h2>
+      <svg class="squig" viewBox="0 0 150 12" fill="none" aria-hidden="true">
+<path d="M2 8 C 20 2, 35 12, 55 6 S 95 2, 115 8 S 140 4, 148 6" stroke="#C9973E" stroke-width="3" stroke-linecap="round"/></svg>
+    </div>
+    <div class="finds"><div class="find rise"><div class="fi">&#127968;</div><h3>Healthier home</h3><p>Indoor air, cookware, cleaning products. The home upgrades that matter most, in order.</p></div><div class="find rise"><div class="fi">&#128184;</div><h3>Wellness that saves money</h3><p>Most of what protects your health costs less than what it replaces. The receipts are here.</p></div><div class="find rise"><div class="fi">&#9200;</div><h3>Time-back systems</h3><p>Routines and defaults that quietly remove decisions, so healthy runs on autopilot.</p></div></div>
+  </div>
+</section>
+
+<section class="sec-tint">
+  <div class="wrap">
+    <div class="center">
+      <span class="eyebrow rise" style="color:#C9973E">Starter reads</span>
+      <h2 class="h-lg rise">Begin with <span class="it hl">these three</span></h2>
+      <p class="lede rise narrow" style="margin:16px auto 0">The library is being polished for the new site.
+      Join the Crown Letter and these land in your inbox the moment they go live.</p>
+    </div>
+    <div class="reads"><article class="read rise"><div class="rimg">&#127788;</div><div class="rbody"><span class="rtag">Home</span><h3>The air in your house: a respiratory therapist's home audit</h3><p>Ventilation, candles, cooking fumes. What actually affects your lungs indoors.</p><span class="soon">Article coming soon</span></div></article><article class="read rise"><div class="rimg">&#128176;</div><div class="rbody"><span class="rtag">Money</span><h3>The wellness swaps that pay for themselves in 30 days</h3><p>Health advice that saves money is rare. Here are the swaps with receipts.</p><span class="soon">Article coming soon</span></div></article><article class="read rise"><div class="rimg">&#128257;</div><div class="rbody"><span class="rtag">Habits</span><h3>Default settings: the lazy person's guide to a healthy life</h3><p>Design your environment once, and discipline becomes optional.</p><span class="soon">Article coming soon</span></div></article></div>
+  </div>
+</section>
+
+<section class="sec-ink tipband">
+  <div class="ghost" style="bottom:12px">wisdom</div>
+  <div class="wrap tipcard">
+    <span class="tiplabel rise">Victoria&rsquo;s rule of thumb</span>
+    <p class="tiptext rise">&ldquo;Motivation is a guest, environment is family. Set up your home so the healthy option is the default option, and you will never need willpower at 9pm again.&rdquo;</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap center">
+    <span class="eyebrow rise" style="color:#C9973E">Keep exploring</span>
+    <h2 class="h-md rise">The other crown jewels</h2>
+    <div class="others rise"><a href="holistic-health.html">&#127811; Holistic Health</a><a href="clean-eating.html">&#129361; Clean Eating</a><a href="mindful-wellness.html">&#129496; Mindful Wellness</a><a href="eco-beauty.html">&#127802; Eco Beauty</a></div>
+    <div class="rise" style="margin-top:44px">
+      <span class="hand" style="display:block;margin-bottom:14px">or start with the freebie, babe</span>
+      <a class="btn btn-coral" href="start-here.html">Claim the Queen&rsquo;s Reset <span class="arr">&rarr;</span></a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div class="marq outline rev sec-ink" style="padding:34px 0;background:var(--ink)">
+  <div class="mtrack" aria-hidden="true">
+    <span>prevent <i>&#10022;</i></span><span>nourish <i>&#10022;</i></span><span>restore <i>&#10022;</i></span><span>reign <i>&#10022;</i></span>
+    <span>prevent <i>&#10022;</i></span><span>nourish <i>&#10022;</i></span><span>restore <i>&#10022;</i></span><span>reign <i>&#10022;</i></span>
+  </div>
+</div>
+<footer>
+  <div class="wrap">
+    <div class="fmark">Holistik Queen</div>
+    <div class="fcols">
+      <div>
+        <h4>The short version</h4>
+        <p class="fabout">Holistik Queen is where women 40+ learn to prevent and reverse chronic disease with
+        simple, science-informed lifestyle changes. Run by Victoria, B.S., RCP, RRT, a respiratory therapist
+        who watched preventable disease up close for years and decided to get ahead of it.</p>
+        <p class="fsign">long may you reign, Victoria</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="about.html">About Victoria</a></li>
+          <li><a href="start-here.html">Start here</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Topics</h4>
+        <ul>
+          <li><a href="holistic-health.html">Holistic Health</a></li>
+          <li><a href="clean-eating.html">Clean Eating</a></li>
+          <li><a href="mindful-wellness.html">Mindful Wellness</a></li>
+          <li><a href="eco-beauty.html">Eco Beauty</a></li>
+          <li><a href="conscious-lifestyle.html">Conscious Lifestyle</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Keep in touch</h4>
+        <a class="socpill" href="https://www.instagram.com/holistikqueen/" target="_blank" rel="noopener">&#10047; Instagram</a>
+        <a class="socpill" href="https://www.threads.com/@holistikqueen" target="_blank" rel="noopener">&#10047; Threads</a>
+        <a class="socpill" href="start-here.html">&#10047; The Crown Letter</a>
+      </div>
+    </div>
+    <div class="fbase">
+      <span>&copy; <span id="yr">2026</span> Holistik Queen. All rights reserved.</span>
+      <span>Education, not medical advice. Always talk to your own care team.</span>
+    </div>
+  </div>
+</footer>
+<button class="totop" id="totop" aria-label="Back to top">&uarr;</button>
+
+<script>
+(function(){
+  var motionOK=!matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var fine=matchMedia('(pointer: fine)').matches;
+
+  /* loader */
+  var loader=document.getElementById('loader');
+  if(loader){addEventListener('load',function(){loader.classList.add('done');});
+    setTimeout(function(){loader.classList.add('done');},2400);}
+
+  /* banner dismiss (session) */
+  var banner=document.getElementById('banner'),bx=document.getElementById('bannerX');
+  try{if(banner&&sessionStorage.getItem('hq_banner')==='x')banner.style.display='none';}catch(e){}
+  if(bx)bx.addEventListener('click',function(){banner.style.display='none';
+    try{sessionStorage.setItem('hq_banner','x');}catch(e){}});
+
+  /* sticky nav shadow */
+  var nav=document.getElementById('nav');
+  addEventListener('scroll',function(){if(nav)nav.classList.toggle('scrolled',scrollY>8);},{passive:true});
+
+  /* mobile menu */
+  var burger=document.getElementById('burger'),mmenu=document.getElementById('mmenu'),
+      mclose=document.getElementById('mclose');
+  if(burger&&mmenu){burger.addEventListener('click',function(){mmenu.classList.add('open');
+    burger.setAttribute('aria-expanded','true');document.body.style.overflow='hidden';});
+    var shut=function(){mmenu.classList.remove('open');burger.setAttribute('aria-expanded','false');
+      document.body.style.overflow='';};
+    if(mclose)mclose.addEventListener('click',shut);
+    mmenu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',shut);});}
+
+  /* reveal on scroll with stagger */
+  var obs=new IntersectionObserver(function(es){es.forEach(function(e){
+    if(e.isIntersecting){e.target.classList.add('seen');obs.unobserve(e.target);}});},{threshold:.08});
+  document.querySelectorAll('.rise').forEach(function(el){
+    var sibs=[].filter.call(el.parentElement.children,function(c){return c.classList.contains('rise')});
+    el.style.transitionDelay=(sibs.indexOf(el)%6)*80+'ms';
+    var r=el.getBoundingClientRect();
+    if(r.top<innerHeight&&r.bottom>0){el.classList.add('seen');}else{obs.observe(el);}});
+
+  /* count-up numbers */
+  var nobs=new IntersectionObserver(function(es){es.forEach(function(en){
+    if(!en.isIntersecting)return;nobs.unobserve(en.target);
+    var el=en.target,end=+el.dataset.count,t0=performance.now();
+    (function tick(t){var q=Math.min(1,(t-t0)/1200);
+      el.textContent=Math.round(end*(1-Math.pow(1-q,3)));
+      if(q<1)requestAnimationFrame(tick);else el.textContent=end;})(t0);});},{threshold:.2});
+  document.querySelectorAll('[data-count]').forEach(function(n){nobs.observe(n);});
+
+  /* typewriter words */
+  document.querySelectorAll('[data-words]').forEach(function(el){
+    var words=JSON.parse(el.dataset.words),i=0;
+    if(!motionOK){el.textContent=words[0];return;}
+    (function cycle(){var w=words[i%words.length],j=0;
+      (function type(){if(j<=w.length){el.textContent=w.slice(0,j++)+(j<=w.length?'|':'');
+        setTimeout(type,70);}else{el.textContent=w;
+        setTimeout(function(){i++;cycle();},2200);}})();})();});
+
+  /* magnetic buttons */
+  if(fine&&motionOK){document.querySelectorAll('.btn,.nav-cta').forEach(function(b){
+    b.addEventListener('mousemove',function(e){var r=b.getBoundingClientRect();
+      b.style.transform='translate('+((e.clientX-r.left-r.width/2)*.16)+'px,'+((e.clientY-r.top-r.height/2)*.28)+'px)';});
+    b.addEventListener('mouseleave',function(){b.style.transform='';});});}
+
+  /* sparkle pop on coral CTAs */
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('.btn-coral,.nav-cta');if(!b||!motionOK)return;
+    for(var i=0;i<14;i++){var s=document.createElement('i');s.className='pop';
+      s.textContent=['✦','❀','♥'][i%3];
+      s.style.left=e.clientX+'px';s.style.top=e.clientY+'px';
+      var a=Math.random()*Math.PI*2,d=55+Math.random()*85;
+      s.style.setProperty('--dx',(Math.cos(a)*d)+'px');
+      s.style.setProperty('--dy',(Math.sin(a)*d-60)+'px');
+      s.style.color=['#E4572E','#C9973E','#1E6F50'][i%3];
+      document.body.appendChild(s);
+      setTimeout(function(el){return function(){el.remove();}}(s),900);}});
+
+  /* back to top */
+  var tt=document.getElementById('totop');
+  if(tt){addEventListener('scroll',function(){tt.classList.toggle('show',scrollY>700);},{passive:true});
+    tt.addEventListener('click',function(){scrollTo({top:0,behavior:motionOK?'smooth':'auto'});});}
+
+  /* year stamp */
+  var yr=document.getElementById('yr');if(yr)yr.textContent=new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
