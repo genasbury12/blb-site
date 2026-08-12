@@ -1,0 +1,774 @@
+<!--
+  ============================================================
+  PURPOSEFUL PENNIES  ·  THE SYSTEM VAULT   /members-vault
+  Showit + MemberSpace
+  ============================================================
+
+  WHAT THIS PAGE IS
+  The index of the seven systems. Its whole job is to stop a new member
+  opening all seven at once, because that is the fastest way to lose her
+  in week two. Every design choice here pushes toward one at a time.
+
+  TWO VIEWS OF THE SAME SEVEN CARDS
+  "In the order I would do them" is the default, because most members
+  want to be told. "By what is bugging you" is for the member who
+  already knows her problem and does not want to be walked through
+  budgeting first. Same cards, reordered, no page reload.
+
+  ------------------------------------------------------------
+  A NOTE ON COUNTS
+  ------------------------------------------------------------
+  The offer brief quotes "50+ templates and tools" and "10+ video
+  trainings". This page deliberately does NOT print those totals,
+  because right now the vault is empty and a number on a page is a
+  promise. Each card lists only what that system will actually contain.
+  Once the vault is genuinely built, count what is in it and put the
+  real total in the hero. Never the other way round.
+
+  ------------------------------------------------------------
+  MEMBERSPACE
+  ------------------------------------------------------------
+  Protection inherited from the /members-* prefix rule. See the member
+  home file for the full protection setup.
+  Attributes used: data-ms-member-info="firstName" only.
+  Account links point at /members-account, the one page that carries
+  the MemberSpace Link.
+
+  SYSTEM PAGES THIS LINKS TO, none of which exist yet:
+     /members-vault-budget
+     /members-vault-sinking-funds
+     /members-vault-meals
+     /members-vault-groceries
+     /members-vault-home-rhythms
+     /members-vault-mindset
+     /members-vault-implementation
+
+  Build them in that order. It is the order members are told to use
+  them, so it is the order they will be missed in.
+
+  FORMATTING RULE. Zero em dashes, zero en dashes. The separator is
+  the diamond glyph.
+  ============================================================
+-->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>The System Vault · The One-Income Circle</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&amp;family=DM+Serif+Display&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --deep-sage: #2E3E2F;
+      --sage: #5C6E47;
+      --sage-soft: #8B9E75;
+      --warm-tan: #C28954;
+      --warm-tan-dark: #A77246;
+      --cream: #FBF4D7;
+      --cream-warm: #F7ECC4;
+      --charcoal: #2A2A2A;
+      --soft-gray: #7E867D;
+      --light-sage: #DBE3CE;
+      --pale-tan: #EFE0C1;
+      --white: #FFFFFF;
+      --coral: #DD6B4E;
+      --coral-deep: #C25441;
+      --coral-soft: #F7D0BE;
+      --coral-blush: #FBE3D5;
+      --gold: #D4A83F;
+      --gold-soft: #EDD98D;
+      --gold-deep: #B8912E;
+      --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 17px; scroll-behavior: smooth; }
+    @media (min-width: 720px) { html { font-size: 18px; } }
+    body {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 1.05rem; line-height: 1.66;
+      color: var(--charcoal); background: var(--cream);
+      -webkit-font-smoothing: antialiased; overflow-x: hidden;
+    }
+    .container { max-width: 1180px; margin: 0 auto; padding: 0 1.5rem; }
+    .narrow { max-width: 780px; margin: 0 auto; padding: 0 1.5rem; }
+    section { padding: 3rem 0; position: relative; }
+    @media (max-width: 700px) { section { padding: 2.25rem 0; } }
+    .script { font-family: 'Caveat', cursive; font-weight: 700; }
+    h1, h2, h3, h4 { font-family: Georgia, serif; color: var(--deep-sage); }
+    h1 { font-size: clamp(2.05rem, 4.8vw, 3.05rem); font-weight: bold; line-height: 1.08; letter-spacing: -0.01em; }
+    h2 { font-size: clamp(1.45rem, 3vw, 1.95rem); font-weight: bold; line-height: 1.18; }
+    h3 { font-size: 1.22rem; font-weight: bold; line-height: 1.3; }
+    h4 { font-size: 0.98rem; font-weight: bold; }
+    p { margin-bottom: 0.9rem; }
+    p:last-child { margin-bottom: 0; }
+    a { color: var(--coral-deep); }
+    .eyebrow {
+      font-size: 0.74rem; font-weight: bold; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--warm-tan-dark);
+      display: inline-flex; align-items: center; gap: 0.7rem;
+    }
+    .eyebrow::before { content: ""; width: 24px; height: 1px; background: var(--warm-tan); }
+    .eyebrow-coral { color: var(--coral-deep); }
+    .eyebrow-coral::before { background: var(--coral); }
+    .eyebrow-cream { color: var(--coral-soft); }
+    .eyebrow-cream::before { background: var(--coral); }
+
+    /* ===== BUTTONS ===== */
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.55rem;
+      background: var(--warm-tan); color: white; font-family: Georgia, serif;
+      font-size: 1rem; font-weight: bold; padding: 0.85rem 1.8rem;
+      border: none; border-radius: 999px; cursor: pointer; text-decoration: none;
+      transition: all 0.25s var(--ease); box-shadow: 0 3px 0 var(--warm-tan-dark);
+    }
+    .btn:hover { background: var(--warm-tan-dark); transform: translateY(-2px); box-shadow: 0 5px 0 var(--warm-tan-dark); color: white; }
+    .btn::after { content: "\2192"; transition: transform 0.25s var(--ease); }
+    .btn:hover::after { transform: translateX(3px); }
+    .btn-coral { background: var(--coral); box-shadow: 0 3px 0 var(--coral-deep); }
+    .btn-coral:hover { background: var(--coral-deep); box-shadow: 0 5px 0 var(--coral-deep); }
+    .btn-outline {
+      background: transparent; color: var(--warm-tan-dark); border: 2px solid var(--warm-tan);
+      padding: calc(0.85rem - 2px) calc(1.8rem - 2px); box-shadow: none;
+    }
+    .btn-outline:hover { background: var(--pale-tan); color: var(--warm-tan-dark); box-shadow: none; }
+    .btn-cream { background: var(--cream); color: var(--deep-sage); box-shadow: 0 3px 0 rgba(0,0,0,0.18); }
+    .btn-cream:hover { background: var(--cream-warm); color: var(--deep-sage); box-shadow: 0 5px 0 rgba(0,0,0,0.18); }
+    .btn-ghost { background: transparent; color: var(--cream); border: 2px solid var(--coral-soft); box-shadow: none; padding: calc(0.85rem - 2px) calc(1.8rem - 2px); }
+    .btn-ghost:hover { background: rgba(255,255,255,0.1); color: var(--cream); box-shadow: none; }
+    .btn-sm { font-size: 0.9rem; padding: 0.6rem 1.3rem; }
+
+    /* ===== MEMBER NAV ===== */
+    .mnav { background: var(--deep-sage); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(46, 62, 47, 0.18); }
+    .mnav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 1.5rem; padding: 0.85rem 1.5rem; max-width: 1280px; margin: 0 auto;
+    }
+    .mnav-logo {
+      font-family: Georgia, serif; font-size: 1.12rem; font-weight: bold;
+      color: var(--cream); text-decoration: none; display: flex; align-items: center;
+      gap: 0.5rem; white-space: nowrap;
+    }
+    .mnav-logo .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--coral); }
+    .mnav-links { display: flex; align-items: center; gap: 1.6rem; }
+    .mnav-links a {
+      color: var(--cream); text-decoration: none; font-size: 0.94rem; opacity: 0.88;
+      position: relative; padding-bottom: 2px; white-space: nowrap;
+    }
+    .mnav-links a::after {
+      content: ""; position: absolute; left: 0; right: 0; bottom: -3px; height: 2px;
+      background: var(--coral); transform: scaleX(0); transform-origin: left;
+      transition: transform 0.25s var(--ease); border-radius: 2px;
+    }
+    .mnav-links a:hover { opacity: 1; }
+    .mnav-links a:hover::after, .mnav-links a.current::after { transform: scaleX(1); }
+    .mnav-links a.current { opacity: 1; font-weight: bold; }
+    .mnav-account {
+      background: var(--coral); color: white !important; padding: 0.5rem 1.1rem;
+      border-radius: 999px; font-size: 0.86rem !important; font-weight: bold;
+      opacity: 1 !important; box-shadow: 0 2px 0 var(--coral-deep);
+    }
+    .mnav-account::after { display: none; }
+    .mnav-account:hover { background: var(--coral-deep); }
+    .mnav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 0.4rem; }
+    .mnav-toggle span { display: block; width: 24px; height: 2px; background: var(--cream); margin: 5px 0; border-radius: 2px; }
+    @media (max-width: 1080px) {
+      .mnav-toggle { display: block; }
+      .mnav-links {
+        position: absolute; top: 100%; left: 0; right: 0; background: var(--deep-sage);
+        flex-direction: column; align-items: stretch; gap: 0; padding: 0 1.5rem;
+        max-height: 0; overflow: hidden;
+        transition: max-height 0.35s var(--ease), padding 0.35s var(--ease);
+      }
+      .mnav-links.open { max-height: 32rem; padding: 0.75rem 1.5rem 1.5rem; }
+      .mnav-links a { padding: 0.75rem 0; font-size: 1.02rem; }
+      .mnav-links a::after { display: none; }
+      .mnav-account { text-align: center; margin-top: 0.75rem; }
+    }
+
+    /* ===== SHOWIT OVERRIDE ARMOUR =====
+       Showit injects its own link colours over anything pasted into
+       Custom Head HTML, and it beat the logo rule on the live site: the
+       logo rendered dark on the dark nav and was effectively invisible.
+       The nav links happened to survive, but they are one template
+       change away from the same problem.
+
+       Every colour in the nav is therefore pinned here with high
+       specificity and !important. These are the same colours the
+       component already intended, nothing new. Do not remove this
+       block. If a nav element ever renders the wrong colour on Showit
+       again, add it here rather than editing the rules above. */
+    .mnav .mnav-logo,
+    .mnav .mnav-logo:link,
+    .mnav .mnav-logo:visited,
+    .mnav .mnav-logo:hover,
+    .mnav .mnav-logo:focus,
+    .mnav .mnav-logo:active,
+    .mnav .mnav-logo * { color: var(--cream) !important; }
+    .mnav .mnav-logo .dot { background: var(--coral) !important; }
+
+    .mnav .mnav-links a,
+    .mnav .mnav-links a:link,
+    .mnav .mnav-links a:visited,
+    .mnav .mnav-links a:hover,
+    .mnav .mnav-links a:active { color: var(--cream) !important; }
+
+    .mnav .mnav-links a.mnav-account,
+    .mnav .mnav-links a.mnav-account:link,
+    .mnav .mnav-links a.mnav-account:visited,
+    .mnav .mnav-links a.mnav-account:hover,
+    .mnav .mnav-links a.mnav-account:active { color: #FFFFFF !important; }
+    .mnav .mnav-toggle span { background: var(--cream) !important; }
+    .mnav .mnav-logo, .mnav .mnav-links a { text-decoration: none !important; }
+
+
+    /* ===== HERO ===== */
+    .v-hero { background: var(--cream); padding: 2.5rem 0 2.25rem; position: relative; overflow: hidden; }
+    .v-hero::before {
+      content: ""; position: absolute; top: -170px; right: -150px; width: 440px; height: 440px;
+      background: radial-gradient(circle, var(--coral-blush) 0%, transparent 65%);
+      opacity: 0.8; pointer-events: none;
+    }
+    .v-hero-inner { position: relative; z-index: 2; }
+    .crumb { font-size: 0.85rem; color: var(--soft-gray); margin-bottom: 1rem; }
+    .crumb a { color: var(--sage); text-decoration: none; border-bottom: 1px solid rgba(92,110,71,0.3); }
+    .crumb a:hover { color: var(--coral-deep); }
+    .v-hero h1 { margin-bottom: 0.9rem; }
+    .v-hero-sub { font-size: 1.14rem; font-style: italic; color: var(--sage); max-width: 40rem; }
+    .one-rule {
+      margin-top: 1.75rem; background: var(--deep-sage); color: var(--cream);
+      border-radius: 14px; padding: 1.5rem 1.75rem; max-width: 44rem;
+      display: grid; grid-template-columns: auto 1fr; gap: 1.25rem; align-items: start;
+    }
+    @media (max-width: 620px) { .one-rule { grid-template-columns: 1fr; } }
+    .one-rule .rule-mark {
+      font-family: 'DM Serif Display', Georgia, serif; font-size: 2.2rem;
+      color: var(--gold-soft); line-height: 1;
+    }
+    .one-rule h2 { color: var(--cream); font-size: 1.25rem; margin-bottom: 0.4rem; }
+    .one-rule p { color: var(--cream); opacity: 0.92; font-size: 0.98rem; }
+
+    /* new member band */
+    .newband { background: var(--coral-blush); padding: 1.75rem 0; }
+    .newband-inner {
+      display: grid; grid-template-columns: 1fr auto; gap: 1.5rem; align-items: center;
+      background: white; border-radius: 12px; padding: 1.35rem 1.6rem;
+      border-left: 5px solid var(--coral);
+    }
+    @media (max-width: 760px) { .newband-inner { grid-template-columns: 1fr; } }
+    .newband h3 { margin-bottom: 0.2rem; font-size: 1.1rem; }
+    .newband p { font-size: 0.94rem; color: var(--sage); margin: 0; }
+
+    /* ===== VIEW TOGGLE ===== */
+    .systems { background: var(--white); }
+    .view-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 1.25rem; flex-wrap: wrap; margin-bottom: 2rem;
+    }
+    .view-toggle {
+      display: inline-flex; background: var(--cream); border-radius: 999px;
+      padding: 0.3rem; border: 1px solid rgba(194, 137, 84, 0.35);
+    }
+    .view-btn {
+      background: none; border: none; cursor: pointer; font-family: Georgia, serif;
+      font-size: 0.9rem; font-weight: bold; color: var(--sage);
+      padding: 0.55rem 1.2rem; border-radius: 999px; transition: all 0.25s var(--ease);
+    }
+    .view-btn.active { background: var(--coral); color: white; box-shadow: 0 2px 0 var(--coral-deep); }
+    .view-note { font-size: 0.9rem; font-style: italic; color: var(--soft-gray); }
+
+    /* ===== SYSTEM CARDS ===== */
+    .sys-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+    @media (max-width: 900px) { .sys-grid { grid-template-columns: 1fr; } }
+    .sys {
+      background: var(--cream); border: 1px solid rgba(194, 137, 84, 0.28);
+      border-radius: 16px; padding: 1.75rem 1.75rem; display: flex; flex-direction: column;
+      min-width: 0;
+      transition: transform 0.28s var(--ease), box-shadow 0.28s var(--ease), border-color 0.28s var(--ease);
+    }
+    @media (max-width: 600px) { .sys { padding: 1.5rem 1.35rem; } }
+    .sys:hover { transform: translateY(-4px); box-shadow: 0 16px 36px rgba(46, 62, 47, 0.12); border-color: var(--coral); }
+    .sys.featured { background: var(--coral-blush); border-color: var(--coral); border-width: 2px; }
+    .sys-top {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      flex-wrap: wrap; gap: 0.6rem 1rem; margin-bottom: 0.75rem;
+    }
+    .sys-num {
+      font-family: 'DM Serif Display', Georgia, serif; font-size: 2rem;
+      color: var(--coral-soft); line-height: 1;
+    }
+    .sys.featured .sys-num { color: var(--coral); }
+    .sys-pill {
+      font-size: 0.62rem; font-weight: bold; letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 0.3rem 0.6rem; border-radius: 4px; max-width: 100%;
+      /* Deliberately NOT nowrap. The "For:" labels are long sentences and
+         nowrap gave every card a min-content width of 441px, which is wider
+         than a phone. That clipped the label on every card in problem view. */
+      white-space: normal; line-height: 1.35;
+    }
+    .sys-pill.start { white-space: nowrap; }
+    .sys-pill.start { background: var(--sage); color: white; }
+    .sys-pill.for { background: var(--pale-tan); color: var(--warm-tan-dark); display: none; }
+    body.view-problem .sys-pill.for { display: inline-block; }
+    body.view-problem .sys-pill.start { display: none; }
+    .sys h3 { margin-bottom: 0.4rem; }
+    .sys .fixes { font-size: 0.98rem; color: var(--charcoal); margin-bottom: 1.1rem; }
+    .sys-meta {
+      display: flex; flex-wrap: wrap; gap: 0.4rem 1.1rem; margin-bottom: 1.1rem;
+      padding-bottom: 1.1rem; border-bottom: 1px dashed rgba(194, 137, 84, 0.4);
+      font-size: 0.82rem; color: var(--sage);
+    }
+    .sys-meta span { display: inline-flex; align-items: center; gap: 0.35rem; }
+    .sys-meta b { color: var(--deep-sage); font-weight: bold; }
+    .inside-label {
+      font-size: 0.7rem; font-weight: bold; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--warm-tan-dark); margin-bottom: 0.6rem;
+    }
+    .sys ul { list-style: none; margin-bottom: 1.5rem; }
+    .sys li {
+      font-size: 0.92rem; color: var(--sage); line-height: 1.5;
+      padding: 0.28rem 0 0.28rem 1.1rem; position: relative;
+    }
+    .sys li::before { content: "\25C6"; position: absolute; left: 0; top: 0.4rem; color: var(--warm-tan); font-size: 0.55rem; }
+    .sys .btn { align-self: flex-start; margin-top: auto; }
+
+    /* ===== HOW TO USE ===== */
+    .howto { background: var(--light-sage); }
+    .howto-head { text-align: center; max-width: 38rem; margin: 0 auto 2.25rem; }
+    .howto-head h2 { margin: 0.85rem 0 0; }
+    .rules { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+    @media (max-width: 860px) { .rules { grid-template-columns: 1fr; } }
+    .rule { background: white; border-radius: 12px; padding: 1.6rem 1.5rem; }
+    .rule .r-num {
+      font-family: 'Caveat', cursive; font-size: 1.6rem; color: var(--coral-deep);
+      line-height: 1; margin-bottom: 0.35rem;
+    }
+    .rule h4 { margin-bottom: 0.4rem; font-size: 1.05rem; }
+    .rule p { font-size: 0.93rem; color: var(--sage); margin: 0; }
+
+    /* ===== NOT SURE ===== */
+    .notsure { background: var(--cream-warm); }
+    .notsure-card {
+      max-width: 44rem; margin: 0 auto; text-align: center;
+      background: white; border-radius: 14px; padding: 2.25rem 2rem;
+    }
+    .notsure-card .script { font-size: 1.55rem; color: var(--coral-deep); display: block; margin-bottom: 0.25rem; }
+    .notsure-card h2 { margin-bottom: 0.85rem; }
+    .notsure-card p { font-size: 1rem; margin-bottom: 1.5rem; }
+
+    /* ===== NEXT ===== */
+    .next { background: var(--deep-sage); color: var(--cream); text-align: center; padding: 3rem 0; }
+    .next h2 { color: var(--cream); margin: 0.85rem 0 0.9rem; }
+    .next p { color: var(--cream); opacity: 0.92; max-width: 34rem; margin: 0 auto 1.5rem; }
+    .next-row { display: flex; flex-wrap: wrap; gap: 0.9rem; justify-content: center; }
+
+    /* ===== FOOTER ===== */
+    footer { background: var(--deep-sage); color: var(--cream); padding: 2.25rem 0 2rem; text-align: center; border-top: 1px solid rgba(221, 107, 78, 0.22); }
+    footer .diamond { color: var(--coral); font-size: 0.8rem; letter-spacing: 1.1em; padding-left: 1.1em; opacity: 0.7; margin-bottom: 1.25rem; }
+    footer .fnav { display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem 1.75rem; margin-bottom: 1.25rem; }
+    footer .fnav a { color: var(--cream); opacity: 0.85; text-decoration: none; font-size: 0.9rem; }
+    footer .fnav a:hover { opacity: 1; color: var(--coral-soft); }
+    footer .legal { font-size: 0.8rem; opacity: 0.6; }
+    footer .legal a { color: var(--cream); opacity: 0.85; text-decoration: none; margin: 0 0.35rem; }
+
+    .fade-in { opacity: 0; transform: translateY(16px); transition: opacity 0.6s var(--ease), transform 0.6s var(--ease); }
+    .fade-in.visible { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+      html { scroll-behavior: auto; }
+      .fade-in { opacity: 1; transform: none; }
+    }
+    :focus-visible { outline: 3px solid var(--coral); outline-offset: 3px; }
+    .skip-link { position: absolute; left: -9999px; background: var(--coral); color: white; padding: 0.7rem 1.2rem; z-index: 200; }
+    .skip-link:focus { left: 0; }
+  
+    /* Real photos placed in the placeholder frames (photo shoot, Aug 2026) */
+    .img-ph.has-img { padding: 0; border: none; }
+    .img-ph.has-img::before { display: none; }
+    .img-ph.has-img > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+  </style>
+
+
+
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <!-- ==================== MEMBER NAV ==================== -->
+  <nav class="mnav">
+    <div class="mnav-inner">
+      <a href="/members" class="mnav-logo">
+        <span class="dot"></span>
+        The One-Income Circle
+      </a>
+      <button class="mnav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="mnavLinks">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="mnav-links" id="mnavLinks">
+        <a href="/members">Home</a>
+        <a href="/members-vault" class="current" aria-current="page">The Vault</a>
+        <a href="/members-library">Printables</a>
+        <a href="/members-sessions">Live Sessions</a>
+        <a href="/members-circle">The Circle</a>
+        <a href="/members-ask-brooke" class="">Ask Brooke</a>
+        <a href="/members-account" class="mnav-account">My account</a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main">
+
+  <!-- ==================== HERO ==================== -->
+  <section class="v-hero">
+    <div class="container v-hero-inner">
+      <p class="crumb"><a href="/members">Member home</a> ◆ The Vault</p>
+      <h1>The System Vault</h1>
+      <p class="v-hero-sub">Seven systems that work together. Budget, savings, meals, groceries, home, mindset, and the order to do them in.</p>
+      <div class="one-rule">
+        <span class="rule-mark" aria-hidden="true">◆</span>
+        <div>
+          <h2>One at a time. That is the only rule in here.</h2>
+          <p>Every one of these is designed to run on its own, so there is no penalty for taking a month over each. Opening all seven this week is the single most reliable way to abandon all seven by next month. I would rather you finished one.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== NEW MEMBER BAND ==================== -->
+  <section class="newband">
+    <div class="container">
+      <div class="newband-inner fade-in">
+        <div>
+          <h3>Landed here on day one?</h3>
+          <p>Do the Quick Start first. It picks your starting system for you, which is easier than choosing from seven.</p>
+        </div>
+        <a href="/members-quick-start" class="btn btn-coral">Open Quick Start</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== THE SEVEN SYSTEMS ==================== -->
+  <section class="systems">
+    <div class="container">
+      <div class="view-bar fade-in">
+        <div class="view-toggle" role="group" aria-label="How to sort the systems">
+          <button class="view-btn active" type="button" id="btnOrder" aria-pressed="true">In the order I would do them</button>
+          <button class="view-btn" type="button" id="btnProblem" aria-pressed="false">By what is bugging you</button>
+        </div>
+        <span class="view-note" id="viewNote">Start at one and work down. It builds on itself.</span>
+      </div>
+
+      <div class="sys-grid" id="sysGrid">
+
+        <!-- 01 BUDGET -->
+        <div class="sys featured fade-in" data-order="1" data-problem="3">
+          <div class="sys-top">
+            <span class="sys-num">01</span>
+            <span class="sys-pill start">Start here</span>
+            <span class="sys-pill for">For: no idea where it goes</span>
+          </div>
+          <h3>The One-Income Budget System</h3>
+          <p class="fixes">The fifteen minute payday routine that tells you where every dollar is going, without tracking every penny.</p>
+          <div class="sys-meta">
+            <span><b>15 min</b> to set up</span>
+            <span><b>4</b> printables</span>
+            <span><b>1</b> walkthrough video</span>
+          </div>
+          <p class="inside-label">Inside</p>
+          <ul>
+            <li>The Payday Reset Page, the page everything else hangs off</li>
+            <li>The One-Page Monthly Budget, planned against actual</li>
+            <li>Bill Due Date Calendar, which payday covers what</li>
+            <li>Debt Payoff Progress Tracker</li>
+            <li>The five minute walkthrough, real numbers, filled in out loud</li>
+          </ul>
+          <a href="/members-vault-budget" class="btn btn-coral">Open this system</a>
+        </div>
+
+        <!-- 02 SINKING FUNDS -->
+        <div class="sys fade-in" data-order="2" data-problem="4">
+          <div class="sys-top">
+            <span class="sys-num">02</span>
+            <span class="sys-pill for">For: fine until something breaks</span>
+          </div>
+          <h3>The Sinking Fund System</h3>
+          <p class="fixes">Small pots of money set aside on purpose, so a set of tires stops taking the whole month down with it.</p>
+          <div class="sys-meta">
+            <span><b>20 min</b> to set up</span>
+            <span><b>3</b> printables</span>
+            <span><b>1</b> short training</span>
+          </div>
+          <p class="inside-label">Inside</p>
+          <ul>
+            <li>Sinking Fund Starter Sheet, twelve funds and one number each</li>
+            <li>Monthly Contribution Calculator</li>
+            <li>Progress Tracker with a visual goal chart</li>
+            <li>Which fund to start first when you cannot start them all</li>
+          </ul>
+          <a href="/members-vault-sinking-funds" class="btn btn-outline">Open this system</a>
+        </div>
+
+        <!-- 03 MEALS -->
+        <div class="sys fade-in" data-order="3" data-problem="2">
+          <div class="sys-top">
+            <span class="sys-num">03</span>
+            <span class="sys-pill for">For: the five o’clock panic</span>
+          </div>
+          <h3>The Frugal Family Meal System</h3>
+          <p class="fixes">Dinner decided before Monday, built from the food already in your kitchen instead of a fresh shopping list.</p>
+          <div class="sys-meta">
+            <span><b>30 min</b> on a Sunday</span>
+            <span><b>4</b> printables</span>
+            <span><b>30</b> recipes</span>
+          </div>
+          <p class="inside-label">Inside</p>
+          <ul>
+            <li>The Pantry First method, explained on video</li>
+            <li>Thirty budget dinners built for one-income families</li>
+            <li>Weekly Meal Planner, the fridge copy</li>
+            <li>Freezer and Pantry Inventory pages</li>
+            <li>Price Book template, for learning what things should cost</li>
+          </ul>
+          <a href="/members-vault-meals" class="btn btn-outline">Open this system</a>
+        </div>
+
+        <!-- 04 GROCERIES -->
+        <div class="sys fade-in" data-order="4" data-problem="1">
+          <div class="sys-top">
+            <span class="sys-num">04</span>
+            <span class="sys-pill for">For: groceries eating us alive</span>
+          </div>
+          <h3>The Grocery Strategy System</h3>
+          <p class="fixes">Set the number before you walk in, not after you check out. The fastest visible win in the vault.</p>
+          <div class="sys-meta">
+            <span><b>15 min</b> to set up</span>
+            <span><b>4</b> printables</span>
+            <span><b>1</b> calculator</span>
+          </div>
+          <p class="inside-label">Inside</p>
+          <ul>
+            <li>How to set your weekly number, and what to do when you go over</li>
+            <li>Grocery Trip Cheat Sheet, with the number at the top</li>
+            <li>Store by store savings guide</li>
+            <li>Bulk Buying Calculator, because bulk is not always cheaper</li>
+            <li>Seasonal produce guide with what to expect to pay</li>
+          </ul>
+          <a href="/members-vault-groceries" class="btn btn-outline">Open this system</a>
+        </div>
+
+        <!-- 05 HOME RHYTHMS -->
+        <div class="sys fade-in" data-order="5" data-problem="5">
+          <div class="sys-top">
+            <span class="sys-num">05</span>
+            <span class="sys-pill for">For: never feeling caught up</span>
+          </div>
+          <h3>Simple Home Rhythms</h3>
+          <p class="fixes">Daily and weekly patterns that keep the house from piling up, without a cleaning schedule nobody could keep.</p>
+          <div class="sys-meta">
+            <span><b>10 min</b> to set up</span>
+            <span><b>4</b> printables</span>
+            <span><b>1</b> short training</span>
+          </div>
+          <p class="inside-label">Inside</p>
+          <ul>
+            <li>Daily rhythm cards for morning, afternoon, and evening</li>
+            <li>The Weekly Reset, in about forty minutes</li>
+            <li>A cleaning rhythm built for a house with children in it</li>
+            <li>The laundry system, so you stop falling behind on it</li>
+          </ul>
+          <a href="/members-vault-home-rhythms" class="btn btn-outline">Open this system</a>
+        </div>
+
+        <!-- 06 MINDSET -->
+        <div class="sys fade-in" data-order="6" data-problem="6">
+          <div class="sys-top">
+            <span class="sys-num">06</span>
+            <span class="sys-pill for">For: I know what to do and still feel awful</span>
+          </div>
+          <h3>Money Is a Tool</h3>
+          <p class="fixes">The shame part. Nobody picks this one first, and for plenty of women it is the one actually standing in the way.</p>
+          <div class="sys-meta">
+            <span><b>1 quiet hour</b></span>
+            <span><b>4</b> printables</span>
+            <span><b>1</b> training and workbook</span>
+          </div>
+          <p class="inside-label">Inside</p>
+          <ul>
+            <li>Money is a tool, not a scorecard. The training and the workbook</li>
+            <li>Money Values pages, for working out what you actually want it for</li>
+            <li>Reflection pages, for a quiet ten minutes</li>
+            <li>Wins and gratitude pages, where small wins count</li>
+          </ul>
+          <a href="/members-vault-mindset" class="btn btn-outline">Open this system</a>
+        </div>
+
+        <!-- 07 IMPLEMENTATION -->
+        <div class="sys fade-in" data-order="7" data-problem="7">
+          <div class="sys-top">
+            <span class="sys-num">07</span>
+            <span class="sys-pill for">For: too much at once</span>
+          </div>
+          <h3>What To Do First</h3>
+          <p class="fixes">The order to add things in, so you never add two at once. Come back to this whenever a month gets away from you.</p>
+          <div class="sys-meta">
+            <span><b>10 min</b> to read</span>
+            <span><b>2</b> printables</span>
+            <span><b>1</b> tour</span>
+          </div>
+          <p class="inside-label">Inside</p>
+          <ul>
+            <li>The four week roadmap, one system a week</li>
+            <li>The implementation checklist, printable</li>
+            <li>The fifteen minute path, for weeks that go sideways</li>
+            <li>A short tour of where everything lives</li>
+          </ul>
+          <a href="/members-vault-implementation" class="btn btn-outline">Open this system</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== HOW TO USE THE VAULT ==================== -->
+  <section class="howto">
+    <div class="container">
+      <div class="howto-head fade-in">
+        <span class="eyebrow">Three things that make this work</span>
+        <h2>How to use the vault.</h2>
+      </div>
+      <div class="rules">
+        <div class="rule fade-in">
+          <div class="r-num">one</div>
+          <h4>Print before you plan.</h4>
+          <p>Paper on the counter gets used. A file in a downloads folder does not. Print the pages first, then think about the numbers.</p>
+        </div>
+        <div class="rule fade-in">
+          <div class="r-num">two</div>
+          <h4>Finish one before you open the next.</h4>
+          <p>Finished means you have used it through one full payday or one full week. Not read it. Used it.</p>
+        </div>
+        <div class="rule fade-in">
+          <div class="r-num">three</div>
+          <h4>Come back when it slips.</h4>
+          <p>Nothing in here expires and nobody is keeping score. Reprint the page, start with the next payday, carry on.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== NOT SURE ==================== -->
+  <section class="notsure">
+    <div class="container">
+      <div class="notsure-card fade-in">
+        <span class="script">still hovering?</span>
+        <h2>Not sure which one is yours?</h2>
+        <p>Answer one question in the Quick Start and it picks for you, with a first week already written out. That is easier than weighing up seven cards, and you can change your mind whenever you like.</p>
+        <a href="/members-quick-start#step3" class="btn btn-coral">Let it pick for me</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== NEXT ==================== -->
+  <section class="next">
+    <div class="container">
+      <span class="eyebrow eyebrow-cream">While you are here</span>
+      <h2>Bring a question to the next session.</h2>
+      <p>Whichever system you start with, the monthly reset is where we work through the bit that did not go to plan. Bring your page and your real numbers.</p>
+      <div class="next-row">
+        <a href="/members-sessions" class="btn btn-cream">See the next session</a>
+        <a href="/members-ask-brooke" class="btn btn-ghost">Ask Brooke something</a>
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="diamond">◆ ◆ ◆</div>
+      <nav class="fnav" aria-label="Member footer">
+        <a href="/members">Member home</a>
+        <a href="/members-quick-start">Quick Start</a>
+        <a href="/members-library">Printables</a>
+        <a href="/members-sessions">Live Sessions</a>
+        <a href="/members-account">My account</a>
+        <a href="/contact">Help</a>
+      </nav>
+      <p class="legal">
+        © 2026 Purposeful Pennies. Member content, please keep it in the family.
+        &nbsp;·&nbsp;
+        <a href="/terms">Terms</a> ·
+        <a href="/privacy-policy">Privacy</a>
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    /* ============================================================
+       CONFIG
+       ============================================================ */
+
+
+    /* ===== VIEW TOGGLE =====
+       Two orders over the same seven cards, driven by the CSS order
+       property so nothing is destroyed and rebuilt.
+
+       data-order    the recommended sequence, budget first
+       data-problem  ordered by the complaint she would actually say out
+                     loud, most common first. Groceries leads because that
+                     is the sentence this audience says before any other,
+                     then the five o'clock panic, then visibility. The
+                     numbered path disagrees with that on purpose: what
+                     hurts loudest is not always what to fix first.
+
+       If Brooke wants a different problem order later, change the
+       data-problem numbers in the markup. No script edit needed. */
+    (function () {
+      const grid = document.getElementById('sysGrid');
+      const cards = Array.prototype.slice.call(grid.querySelectorAll('.sys'));
+      const btnOrder = document.getElementById('btnOrder');
+      const btnProblem = document.getElementById('btnProblem');
+      const note = document.getElementById('viewNote');
+
+      const NOTES = {
+        order: 'Start at one and work down. It builds on itself.',
+        problem: 'Pick the one that sounds like your house. Still only one.'
+      };
+
+      function apply(view) {
+        const key = view === 'problem' ? 'problem' : 'order';
+        cards.forEach(function (c) { c.style.order = c.dataset[key]; });
+        document.body.classList.toggle('view-problem', key === 'problem');
+        btnProblem.classList.toggle('active', key === 'problem');
+        btnOrder.classList.toggle('active', key !== 'problem');
+        btnProblem.setAttribute('aria-pressed', String(key === 'problem'));
+        btnOrder.setAttribute('aria-pressed', String(key !== 'problem'));
+        note.textContent = NOTES[key];
+
+        /* The featured treatment belongs to whichever card is first in the
+           current view, so the eye lands somewhere sensible either way. */
+        cards.forEach(function (c) { c.classList.toggle('featured', c.dataset[key] === '1'); });
+      }
+
+      btnOrder.addEventListener('click', function () { apply('order'); });
+      btnProblem.addEventListener('click', function () { apply('problem'); });
+      apply('order');
+    })();
+
+    /* ===== MOBILE NAV ===== */
+    (function () {
+      const t = document.getElementById('navToggle');
+      const l = document.getElementById('mnavLinks');
+      t.addEventListener('click', function () {
+        const open = l.classList.toggle('open');
+        t.setAttribute('aria-expanded', String(open));
+      });
+    })();
+
+    /* ===== FADE-IN ===== */
+    (function () {
+      const obs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) { en.target.classList.add('visible'); obs.unobserve(en.target); }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+      document.querySelectorAll('.fade-in').forEach(function (el) { obs.observe(el); });
+    })();
+<w:pgSz w:h="15840" w:w="12240" w:orient="portrait"/><w:pgMar w:bottom="1440" w:top="1440" w:left="1440" w:right="1440" w:header="720" w:footer="720"/><w:pgNumType w:start="1"/></w:sectPr></w:pPr><w:r w:rsidDel="00000000" w:rsidR="00000000" w:rsidRPr="00000000"><w:rPr><w:rtl w:val="0"/></w:rPr><w:t xml:space="preserve">  </script>

@@ -1,0 +1,427 @@
+<!--
+  =====================================================================
+  PURPOSEFUL PENNIES  ·  PHOTOGRAPHY GUIDE AND MOODBOARD
+  =====================================================================
+  Open in a browser, full screen. Built to be looked at rather than
+  read, because a moodboard that is mostly words is not a moodboard.
+
+  Covers all 18 image slots on the site. One is already filled, so
+  there are 17 to shoot, grouped into 6 setups.
+
+  Everything in px. No em dashes, no en dashes.
+  =====================================================================
+-->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Photography Guide · Purposeful Pennies</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&amp;family=DM+Serif+Display&amp;display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:Georgia,'Times New Roman',serif;background:#F4F1E8;color:#2A2A2A;
+       -webkit-font-smoothing:antialiased;}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 24px;}
+  .head{background:#2E3E2F;color:#FBF4D7;padding:52px 0 46px;}
+  .head .script{font-family:'Caveat',cursive;font-weight:700;font-size:32px;color:#F7D0BE;display:block;margin-bottom:4px;}
+  .head h1{font-family:'DM Serif Display',Georgia,serif;font-size:44px;line-height:1.08;margin-bottom:12px;}
+  .head p{font-size:18px;opacity:.88;font-style:italic;max-width:640px;}
+  .head .stats{display:flex;flex-wrap:wrap;gap:36px;margin-top:30px;padding-top:26px;
+    border-top:1px solid rgba(221,107,78,.3);}
+  .stat b{display:block;font-family:'DM Serif Display',Georgia,serif;font-size:34px;color:#EDD98D;line-height:1;}
+  .stat span{font-size:13px;letter-spacing:1.4px;text-transform:uppercase;opacity:.75;}
+
+  .sec{padding:54px 0 8px;}
+  .num{display:inline-block;background:#DD6B4E;color:#fff;font-size:12px;font-weight:bold;
+    letter-spacing:2.2px;padding:6px 15px;border-radius:100px;margin-bottom:14px;}
+  .sec h2{font-size:32px;color:#2E3E2F;margin-bottom:8px;}
+  .sec .lede{font-size:17px;color:#5C6E47;font-style:italic;margin-bottom:30px;max-width:680px;}
+  .card{background:#fff;border-radius:14px;padding:30px;margin-bottom:22px;
+        box-shadow:0 8px 26px rgba(46,62,47,.07);}
+  h3.sub{font-size:21px;color:#2E3E2F;margin:34px 0 14px;}
+
+  /* moodboard */
+  .mood{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:8px;}
+  @media(max-width:900px){.mood{grid-template-columns:repeat(2,1fr);}}
+  .tile{border-radius:12px;min-height:170px;padding:18px;display:flex;flex-direction:column;
+        justify-content:flex-end;position:relative;overflow:hidden;}
+  .tile span{font-size:13px;line-height:1.45;font-style:italic;position:relative;z-index:2;}
+  .tile b{display:block;font-size:11px;letter-spacing:1.8px;text-transform:uppercase;
+          margin-bottom:5px;position:relative;z-index:2;font-style:normal;}
+  .t-wide{grid-column:span 2;}
+  .t-tall{grid-row:span 2;min-height:360px;}
+
+  /* yes / no */
+  .yn{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+  @media(max-width:800px){.yn{grid-template-columns:1fr;}}
+  .yes,.no{border-radius:12px;padding:22px 24px;}
+  .yes{background:#DBE3CE;border-left:5px solid #5C6E47;}
+  .no{background:#FBE3D5;border-left:5px solid #DD6B4E;}
+  .yes h4,.no h4{font-size:13px;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;}
+  .yes h4{color:#2E3E2F;} .no h4{color:#C25441;}
+  .yn ul{list-style:none;}
+  .yn li{font-size:15px;line-height:1.55;padding:5px 0 5px 22px;position:relative;}
+  .yes li::before{content:"\2713";position:absolute;left:0;color:#5C6E47;font-weight:bold;}
+  .no li::before{content:"\2715";position:absolute;left:0;color:#DD6B4E;font-weight:bold;}
+
+  /* framing diagrams */
+  .frames{display:flex;flex-wrap:wrap;gap:26px;align-items:flex-end;}
+  .fr{text-align:center;}
+  .fr .box{background:linear-gradient(135deg,#FBE3D5,#DBE3CE);border:2px solid #C28954;
+    border-radius:8px;position:relative;display:flex;align-items:center;justify-content:center;
+    font-size:11px;color:#5C6E47;font-style:italic;}
+  .fr .safe{position:absolute;inset:12%;border:2px dashed #DD6B4E;border-radius:4px;}
+  .fr p{font-size:13px;margin-top:9px;color:#2E3E2F;font-weight:bold;}
+  .fr small{display:block;font-size:12px;color:#7E867D;font-style:italic;}
+  .f45 .box{width:150px;height:188px;}
+  .f11 .box{width:170px;height:170px;}
+  .f53 .box{width:210px;height:126px;}
+  .f1610 .box{width:210px;height:131px;}
+
+  /* palette */
+  .pal{display:flex;flex-wrap:wrap;gap:10px;}
+  .chip{width:96px;border-radius:10px;overflow:hidden;box-shadow:0 4px 14px rgba(46,62,47,.1);}
+  .chip .c{height:70px;} .chip .l{background:#fff;padding:7px 8px;font-size:10px;text-align:center;color:#2E3E2F;}
+
+  /* shot table */
+  table{width:100%;border-collapse:collapse;font-size:14px;}
+  th{text-align:left;font-size:11px;letter-spacing:1.6px;text-transform:uppercase;color:#C25441;
+     padding:11px 12px;border-bottom:2px solid #EFE0C1;white-space:nowrap;}
+  td{padding:12px;border-bottom:1px solid rgba(46,62,47,.09);vertical-align:top;line-height:1.5;}
+  td.slot{font-family:Consolas,Monaco,monospace;font-size:12px;color:#C25441;white-space:nowrap;}
+  td.shape{font-weight:bold;color:#2E3E2F;white-space:nowrap;}
+  tr:last-child td{border-bottom:none;}
+  .tbl-scroll{overflow-x:auto;}
+  .setup-head{background:#2E3E2F;color:#FBF4D7;border-radius:10px 10px 0 0;padding:16px 22px;
+    margin-top:26px;}
+  .setup-head b{font-size:12px;letter-spacing:2.2px;text-transform:uppercase;color:#EDD98D;display:block;}
+  .setup-head h4{font-size:20px;margin:4px 0 3px;color:#FBF4D7;}
+  .setup-head span{font-size:14px;font-style:italic;opacity:.85;}
+  .setup-body{background:#fff;border-radius:0 0 10px 10px;padding:8px 22px 14px;
+    box-shadow:0 8px 26px rgba(46,62,47,.07);margin-bottom:6px;}
+
+  .note{background:#FBE3D5;border-left:5px solid #DD6B4E;border-radius:10px;padding:17px 22px;
+        font-size:15px;line-height:1.6;margin:22px 0;}
+  .note b{color:#C25441;}
+  .big{background:#2E3E2F;color:#FBF4D7;border-radius:14px;padding:32px 36px;text-align:center;margin:30px 0;}
+  .big h3{color:#EDD98D;font-size:17px;letter-spacing:2.4px;text-transform:uppercase;margin-bottom:14px;}
+  .big p{font-size:17px;line-height:1.65;font-style:italic;max-width:720px;margin:0 auto;}
+  ol.steps{list-style:none;counter-reset:s;}
+  ol.steps li{counter-increment:s;padding:12px 0 12px 46px;position:relative;font-size:16px;line-height:1.6;
+    border-bottom:1px solid rgba(46,62,47,.08);}
+  ol.steps li:last-child{border-bottom:none;}
+  ol.steps li::before{content:counter(s);position:absolute;left:0;top:12px;width:30px;height:30px;
+    background:#DD6B4E;color:#fff;border-radius:50%;display:flex;align-items:center;
+    justify-content:center;font-size:14px;font-weight:bold;}
+  ol.steps b{color:#2E3E2F;}
+</style>
+
+
+
+<div class="head">
+  <div class="wrap">
+    <span class="script">a phone, a window, an afternoon</span>
+    <h1>Photography guide and moodboard</h1>
+    <p>Seventeen photographs, six setups, and everything you need to know to take them yourself without a photographer.</p>
+    <div class="stats">
+      <div class="stat"><b>18</b><span>image slots</span></div>
+      <div class="stat"><b>1</b><span>already done</span></div>
+      <div class="stat"><b>17</b><span>to shoot</span></div>
+      <div class="stat"><b>6</b><span>setups</span></div>
+      <div class="stat"><b>2h</b><span>total, split over two days</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 1 MOOD ============ -->
+<div class="sec"><div class="wrap">
+  <span class="num">01</span>
+  <h2>The feeling we are after</h2>
+  <p class="lede">Before any of the technical parts. If a photo has this feeling and is slightly imperfect, use it. If it is beautiful and does not, do not.</p>
+
+  <div class="mood">
+    <div class="tile t-tall" style="background:linear-gradient(160deg,#FBE3D5,#F7D0BE);color:#2E3E2F">
+      <b>The core feeling</b>
+      <span>Warm morning light through a real kitchen window. Somebody at a table who is tired but not defeated. A cup that has been half drunk. Nothing staged, nothing gleaming.</span></div>
+    <div class="tile" style="background:#DBE3CE;color:#2E3E2F">
+      <b>Lived in</b>
+      <span>A crumb on the counter is fine. Kids art on the fridge is better than a clean fridge.</span></div>
+    <div class="tile" style="background:#2E3E2F;color:#FBF4D7">
+      <b>Quiet, not empty</b>
+      <span>Calm. Not styled into sterility. Warmth beats minimalism every time here.</span></div>
+    <div class="tile t-wide" style="background:linear-gradient(120deg,#FBF4D7,#EFE0C1);color:#2E3E2F">
+      <b>Handwriting, not screens</b>
+      <span>Pen on paper. A worn notebook. Real numbers in her own handwriting. Almost never a laptop, and never a stock photo of a graph.</span></div>
+    <div class="tile" style="background:#DD6B4E;color:#fff">
+      <b>One touch of coral</b>
+      <span>A rust jumper, a terracotta mug, a red kettle. Something in frame that ties to the site.</span></div>
+    <div class="tile" style="background:#C28954;color:#fff">
+      <b>Hands do a lot</b>
+      <span>Half the shots have no face at all. Hands around a mug, hands writing, hands folding.</span></div>
+    <div class="tile" style="background:#EDD98D;color:#2E3E2F">
+      <b>Mid moment</b>
+      <span>Caught halfway through something. Mid laugh, mid pour, mid sentence. Not posed and waiting.</span></div>
+    <div class="tile t-wide" style="background:linear-gradient(120deg,#DBE3CE,#FBF4D7);color:#2E3E2F">
+      <b>The test</b>
+      <span>Would your reader look at this and think, that is my kitchen. Not, I wish that were my kitchen. That difference is the entire brand.</span></div>
+    <div class="tile" style="background:#5C6E47;color:#FBF4D7">
+      <b>Soft edges</b>
+      <span>Blurred background, sharp face. Depth is what stops a phone photo looking like a phone photo.</span></div>
+  </div>
+</div></div>
+
+<!-- ============ 2 YES NO ============ -->
+<div class="sec"><div class="wrap">
+  <span class="num">02</span>
+  <h2>Yes and no</h2>
+  <p class="lede">Read this once before you start. It will save you reshooting.</p>
+  <div class="card">
+    <div class="yn">
+      <div class="yes"><h4>Do</h4><ul>
+        <li>Shoot mid morning, roughly nine to eleven</li>
+        <li>Turn every light in the house off, window light only</li>
+        <li>Face the window, or have it just off to one side</li>
+        <li>Take ten of every shot, not one</li>
+        <li>Leave space around the edges of the frame</li>
+        <li>Wear something soft in cream, sage, tan, denim or rust</li>
+        <li>Let the kitchen look like people live there</li>
+        <li>Use portrait mode for anything with a face</li>
+        <li>Keep the phone at your own eye level, not above</li>
+        <li>Shoot on an overcast day if you can, it is the best light there is</li>
+      </ul></div>
+      <div class="no"><h4>Do not</h4><ul>
+        <li>Shoot at midday, the light goes hard and unkind</li>
+        <li>Mix ceiling lights with daylight, it turns skin orange</li>
+        <li>Stand with the window behind you, you become a silhouette</li>
+        <li>Wear black, stark white, neon, logos or tight stripes</li>
+        <li>Use a filter. None at all, we colour match afterwards</li>
+        <li>Tidy the room until it looks like a showroom</li>
+        <li>Fill the frame edge to edge, we crop these several ways</li>
+        <li>Send them by text message, it destroys the quality</li>
+        <li>Screenshot a photo instead of sending the original</li>
+        <li>Wait until all seventeen are done to send anything</li>
+      </ul></div>
+    </div>
+  </div>
+</div></div>
+
+<!-- ============ 3 SHAPES ============ -->
+<div class="sec"><div class="wrap">
+  <span class="num">03</span>
+  <h2>The four shapes</h2>
+  <p class="lede">Every slot on the site is one of these four. Shoot in the right shape and nothing important gets cropped off.</p>
+  <div class="card">
+    <div class="frames">
+      <div class="fr f45"><div class="box"><div class="safe"></div>4:5</div>
+        <p>Tall portrait</p><small>phone upright · 8 slots</small></div>
+      <div class="fr f11"><div class="box"><div class="safe"></div>1:1</div>
+        <p>Square</p><small>phone upright · 2 slots</small></div>
+      <div class="fr f53"><div class="box"><div class="safe"></div>5:3</div>
+        <p>Wide landscape</p><small>phone sideways · 3 slots</small></div>
+      <div class="fr f1610"><div class="box"><div class="safe"></div>16:10</div>
+        <p>Blog wide</p><small>phone sideways · 6 slots</small></div>
+    </div>
+    <div class="note" style="margin-bottom:0"><b>The dashed line is the safe zone.</b> Keep faces, hands and
+    anything that matters inside it. We crop these to several different shapes for desktop and mobile, and
+    the outer twelve percent is what gets trimmed. Leaving room is the single most useful thing you can do.</div>
+  </div>
+</div></div>
+
+<!-- ============ 4 PALETTE AND WARDROBE ============ -->
+<div class="sec"><div class="wrap">
+  <span class="num">04</span>
+  <h2>Colours to wear and have in frame</h2>
+  <p class="lede">You do not need to match these. Just stay in the family, and put one warm thing in every shot.</p>
+  <div class="card">
+    <div class="pal">
+      <div class="chip"><div class="c" style="background:#FBF4D7"></div><div class="l">Cream</div></div>
+      <div class="chip"><div class="c" style="background:#EFE0C1"></div><div class="l">Oatmeal</div></div>
+      <div class="chip"><div class="c" style="background:#C28954"></div><div class="l">Warm tan</div></div>
+      <div class="chip"><div class="c" style="background:#DD6B4E"></div><div class="l">Coral</div></div>
+      <div class="chip"><div class="c" style="background:#C25441"></div><div class="l">Rust</div></div>
+      <div class="chip"><div class="c" style="background:#DBE3CE"></div><div class="l">Light sage</div></div>
+      <div class="chip"><div class="c" style="background:#5C6E47"></div><div class="l">Sage</div></div>
+      <div class="chip"><div class="c" style="background:#2E3E2F"></div><div class="l">Deep sage</div></div>
+      <div class="chip"><div class="c" style="background:#7189A8"></div><div class="l">Denim</div></div>
+    </div>
+    <h3 class="sub">Two outfits is enough for the whole thing</h3>
+    <div class="yn">
+      <div class="yes"><h4>Wear</h4><ul>
+        <li>Soft knits, chambray, denim, an apron</li>
+        <li>Cream, oatmeal, soft white, warm tan</li>
+        <li>Sage green, rust, terracotta</li>
+        <li>The red fleece from the bridge photo is perfect</li>
+        <li>Hair and makeup as you normally wear it</li>
+      </ul></div>
+      <div class="no"><h4>Avoid</h4><ul>
+        <li>Black and stark white, both are harsh on camera</li>
+        <li>Neon anything</li>
+        <li>Large logos or slogans</li>
+        <li>Busy patterns and thin stripes, which flicker on screens</li>
+        <li>Anything you would not normally put on at home</li>
+      </ul></div>
+    </div>
+    <div class="note" style="margin-bottom:0"><b>Why this matters.</b> Your reader is a tired mom at her
+    own kitchen table. She needs to recognise you, not admire you. Looking slightly under styled is
+    working in your favour here.</div>
+  </div>
+</div></div>
+
+<!-- ============ 5 PROPS ============ -->
+<div class="sec"><div class="wrap">
+  <span class="num">05</span>
+  <h2>Gather these first</h2>
+  <p class="lede">Almost all of it is already in your kitchen. Ten minutes of collecting saves an hour of stopping and starting.</p>
+  <div class="card">
+    <div class="yn">
+      <div class="yes"><h4>Objects</h4><ul>
+        <li>Two mugs you actually like</li>
+        <li>A worn notebook or planner</li>
+        <li>A pen you would really use</li>
+        <li>Real coffee or tea, not an empty cup</li>
+        <li>A small plant or a few flowers</li>
+        <li>A folded tea towel</li>
+        <li>A calendar or wall planner</li>
+        <li>A reusable grocery bag</li>
+        <li>Real groceries, unstyled</li>
+      </ul></div>
+      <div class="yes"><h4>Printed, and filled in by hand</h4><ul>
+        <li>The 5-Minute Money Reality Check</li>
+        <li>The One-Page Monthly Budget</li>
+        <li>The Bill Due Date Calendar</li>
+        <li>The Grocery Trip Cheat Sheet</li>
+        <li>The Debt Payoff Tracker, some squares coloured in</li>
+        <li>Two or three others, any of them</li>
+      </ul></div>
+    </div>
+    <div class="note" style="margin-bottom:0"><b>Print them and use them before you photograph them.</b>
+    Write a few real numbers in. Let the paper curl a bit. A blank pristine printout looks like a product
+    shot from a stock library. A half finished one looks like somebody is actually doing this, which is
+    the entire point.</div>
+  </div>
+</div></div>
+
+<!-- ============ 6 THE SHOT LIST ============ -->
+<div class="sec"><div class="wrap">
+  <span class="num">06</span>
+  <h2>The shot list</h2>
+  <p class="lede">Seventeen photographs in six setups. Work through a setup completely before moving, and this takes an afternoon rather than a weekend.</p>
+
+  <div class="setup-head"><b>Setup one · about 45 minutes</b>
+    <h4>Kitchen, you in frame</h4>
+    <span>Window light, cream or sage top, no ceiling lights. Five shots from the same spot.</span></div>
+  <div class="setup-body"><div class="tbl-scroll"><table>
+    <tbody><tr><th>#</th><th>The shot</th><th>Shape</th><th>Goes where</th><th>Direction</th></tr>
+    <tr><td>1</td><td><b>Laughing, mug in hand</b></td><td class="shape">4:5 tall</td><td class="slot">home-hero</td>
+      <td>Mid laugh, not a held smile. Have someone say something daft just before. Kitchen visible behind, kids art on the fridge is a bonus. This is the first thing anyone sees on your site.</td></tr>
+    <tr><td>2</td><td><b>Three quarter portrait</b></td><td class="shape">4:5 tall</td><td class="slot">home-meet-brooke</td>
+      <td>Body turned slightly away, face to camera, warm settled smile. This is the one people look at longest. Portrait mode.</td></tr>
+    <tr><td>3</td><td><b>You in your kitchen, wider</b></td><td class="shape">4:5 tall</td><td class="slot">about-hero</td>
+      <td>Step back. More of the room, you smaller in the frame, leaning on the counter. Warm and unhurried.</td></tr>
+    <tr><td>4</td><td><b>Waving hello</b></td><td class="shape">1:1 square</td><td class="slot">start-welcome</td>
+      <td>Relaxed, mid wave, like you just opened the door to a friend. The least formal of the set.</td></tr>
+    <tr><td>5</td><td><b>At the table, notebook open</b></td><td class="shape">4:5 tall</td><td class="slot">spare, and useful</td>
+      <td>Sitting, pen in hand, looking up at the camera. Calm rather than busy. We will find a home for this one.</td></tr>
+  </tbody></table></div></div>
+
+  <div class="setup-head"><b>Setup two · about 25 minutes</b>
+    <h4>Kitchen table, no faces</h4>
+    <span>Same light, same table. Just hands and objects, so these go quickly.</span></div>
+  <div class="setup-body"><div class="tbl-scroll"><table>
+    <tbody><tr><th>#</th><th>The shot</th><th>Shape</th><th>Goes where</th><th>Direction</th></tr>
+    <tr><td>6</td><td><b>Hands writing in a budget notebook</b></td><td class="shape">4:5 tall</td><td class="slot">home-notebook</td>
+      <td>Your hands only, pen actually on paper, mug just inside the frame. Real handwriting, real numbers.</td></tr>
+    <tr><td>7</td><td><b>The handwritten budget, from above</b></td><td class="shape">5:3 wide</td><td class="slot">home-budget</td>
+      <td>Stand over the table and shoot straight down. Notebook, coffee, small plant, maybe a family photo in one corner. Phone sideways.</td></tr>
+    <tr><td>8</td><td><b>Morning ritual</b></td><td class="shape">5:3 wide</td><td class="slot">home-ritual</td>
+      <td>Journal open, coffee, sunlight falling across the table. Nobody in it at all. This one is about calm.</td></tr>
+  </tbody></table></div></div>
+
+  <div class="setup-head"><b>Setup three · about 10 minutes</b>
+    <h4>Two people, no faces</h4>
+    <span>You need one other person for ten minutes. A friend, your husband, anybody with hands.</span></div>
+  <div class="setup-body"><div class="tbl-scroll"><table>
+    <tbody><tr><th>#</th><th>The shot</th><th>Shape</th><th>Goes where</th><th>Direction</th></tr>
+    <tr><td>9</td><td><b>Two friends over coffee</b></td><td class="shape">5:3 wide</td><td class="slot">home-friends</td>
+      <td>Two sets of hands wrapped around mugs at the table. Shoot from just above, phone sideways. Warm and close, not arranged.</td></tr>
+  </tbody></table></div></div>
+
+  <div class="setup-head"><b>Setup four · whenever they are in a good mood</b>
+    <h4>With the kids</h4>
+    <span>Do not force this one. Wait for a moment and catch it.</span></div>
+  <div class="setup-body"><div class="tbl-scroll"><table>
+    <tbody><tr><th>#</th><th>The shot</th><th>Shape</th><th>Goes where</th><th>Direction</th></tr>
+    <tr><td>10</td><td><b>You and the kids, unposed</b></td><td class="shape">4:5 tall</td><td class="slot">about-kids</td>
+      <td>Laughing, cooking, sitting together on the floor. Nobody has to look at the camera. Real beats tidy here by a long way. Get someone else to take it so you are properly in it.</td></tr>
+  </tbody></table></div></div>
+
+  <div class="setup-head"><b>Setup five · about 15 minutes</b>
+    <h4>The printables</h4>
+    <span>Table by the window. Nobody in shot. This is the easiest setup of the six.</span></div>
+  <div class="setup-body"><div class="tbl-scroll"><table>
+    <tbody><tr><th>#</th><th>The shot</th><th>Shape</th><th>Goes where</th><th>Direction</th></tr>
+    <tr><td>11</td><td><b>The Reality Check, filled in</b></td><td class="shape">4:5 tall</td><td class="slot">free-mockup</td>
+      <td>One printed sheet with a few numbers written in, pen resting on it, mug just in frame. Shoot from slightly above and to the side, not flat on.</td></tr>
+    <tr><td>12</td><td><b>The library, fanned out</b></td><td class="shape">4:5 tall</td><td class="slot">optin-mockup</td>
+      <td>Four or five printed sheets loosely spread so you can see the edges of each, Reality Check on top. Used, not arranged into a neat stack.</td></tr>
+  </tbody></table></div></div>
+
+  <div class="setup-head"><b>Setup six · about 20 minutes</b>
+    <h4>Blog images</h4>
+    <span>Three photos, each used in two places. Phone sideways for all of them.</span></div>
+  <div class="setup-body"><div class="tbl-scroll"><table>
+    <tbody><tr><th>#</th><th>The shot</th><th>Shape</th><th>Goes where</th><th>Direction</th></tr>
+    <tr><td>13</td><td><b>Budgeting</b></td><td class="shape">16:10 wide</td><td class="slot">home-blog-1<br>start-blog-1</td>
+      <td>Notebook, calculator, coffee. Overhead or slightly angled. Leave empty space on one side, text sometimes sits over these.</td></tr>
+    <tr><td>14</td><td><b>Groceries</b></td><td class="shape">16:10 wide</td><td class="slot">home-blog-2<br>start-blog-2</td>
+      <td>A bag of real groceries on the counter, or your handwritten list held in one hand at the table.</td></tr>
+    <tr><td>15</td><td><b>Payday</b></td><td class="shape">16:10 wide</td><td class="slot">home-blog-3<br>start-blog-3</td>
+      <td>Bank app on a phone with a notebook beside it and a coffee. Calm rather than stressful. Blur the actual screen or use a blank one.</td></tr>
+    <tr><td>16</td><td><b>Spare wide, kitchen</b></td><td class="shape">16:10 wide</td><td class="slot">future blog posts</td>
+      <td>Anything that reads as your kitchen. You will need these constantly once you start blogging, so take a few.</td></tr>
+    <tr><td>17</td><td><b>Spare wide, hands and paper</b></td><td class="shape">16:10 wide</td><td class="slot">future blog posts</td>
+      <td>Same idea. Hands, a printable, a mug. Take three or four variations while everything is already out.</td></tr>
+  </tbody></table></div></div>
+
+  <div class="note"><b>Already done.</b> The photograph of you and your husband on the bridge is live on the
+  homepage in the <span style="font-family:Consolas,monospace;font-size:13px;color:#C25441">home-family</span>
+  slot. It is a good reference for the feeling: warm, real, and nobody pretending.</div>
+</div></div>
+
+<!-- ============ 7 IF YOU ONLY DO FOUR ============ -->
+<div class="sec"><div class="wrap">
+  <span class="num">07</span>
+  <h2>If you only manage four</h2>
+  <div class="big">
+    <h3>Shots 1, 2, 6 and 11</h3>
+    <p>The laugh, the three quarter portrait, the hands writing, and the filled in worksheet. Those four cover
+    the homepage hero, the About page, the main body image and the product shot, which is most of what a
+    visitor actually sees. Everything else can follow whenever you get to it.</p>
+  </div>
+</div></div>
+
+<!-- ============ 8 SENDING ============ -->
+<div class="sec"><div class="wrap">
+  <span class="num">08</span>
+  <h2>Sending them over</h2>
+  <p class="lede">The technical part, briefly, and then how to get them to us without wrecking them.</p>
+  <div class="card">
+    <ol class="steps">
+      <li><b>Shoot at the highest quality your phone offers.</b> Do not shrink anything, do not screenshot, and do not send through anything that compresses.</li>
+      <li><b>Send everything, not just your favourites.</b> We often pick a different frame than people expect, and the outtakes are frequently the best ones.</li>
+      <li><b>Make a folder in Google Drive called Brand Photos.</b> Inside it, one folder per setup. Setup One, Setup Two and so on.</li>
+      <li><b>Name nothing.</b> Genuinely, do not spend time renaming files. The folder tells us which setup it is and that is enough.</li>
+      <li><b>Share the folder link and tell us what you could not get.</b> We will work around anything missing rather than chase you for it.</li>
+      <li><b>Send setups one and two first, before doing the rest.</b> Those seven cover the homepage and About. We start placing them while you shoot the others.</li>
+    </ol>
+    <div class="note" style="margin-bottom:0"><b>Not by text message.</b> Messaging apps compress photographs
+    badly and there is no way to undo it. Drive, Dropbox or WeTransfer all keep the full quality.</div>
+  </div>
+
+  <div class="big" style="margin-bottom:60px">
+    <h3>Send one test photo first</h3>
+    <p>Before you do the whole afternoon, take one shot of anything and send it over. Two minutes of feedback
+    on the light and the framing beats reshooting an entire setup, and it has saved every client we have ever
+    said this to at least one afternoon.</p>
+  </div>
+</div></div>

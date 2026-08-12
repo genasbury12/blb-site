@@ -1,0 +1,789 @@
+<!--
+  ============================================================
+  PURPOSEFUL PENNIES  ·  THE PRINTABLE LIBRARY   /members-library
+  Showit + MemberSpace
+  ============================================================
+
+  WHAT THIS PAGE IS
+  The page she opens most. Not a place to browse and admire, a place
+  to find one page and print it in under ten seconds. Everything here
+  is built for speed of retrieval, not for showing off the catalogue.
+
+  HOW THE LIST IS BUILT
+  The 27 printables live in the ITEMS array at the bottom of the file
+  and the cards are rendered from it. To add a printable, add one
+  object to that array. Do not hand write card markup, or the counts
+  and filters will drift out of sync within a month.
+
+  Each item needs:
+     title, pages, blurb, cat, system, file
+     isNew: true   puts a New flag on it and floats it under
+                   the New this month filter
+     starter: true adds it to the print these three first strip
+
+  COUNTS MUST AGREE WITH THE VAULT
+  Every vault card states a printable count. Those numbers come from
+  this array. Current totals, checked by the console log at the
+  bottom of the script:
+     01 budget 4  ◆  02 sinking funds 3  ◆  03 meals 4
+     04 groceries 4 ◆ 05 home 4        ◆  06 mindset 4
+     07 implementation 2                ◆  monthly release 2
+  If you add a printable to a system, update that vault card too.
+
+  ------------------------------------------------------------
+  MEMBERSPACE
+  ------------------------------------------------------------
+  Protection inherited from the /members-* prefix rule. See the member
+  home file for the full protection setup.
+  Account links point at /members-account, which is the one page that
+  carries the MemberSpace Link. Nothing on this page needs it.
+
+  Worth knowing: if these PDFs are hosted in a MemberSpace Space as
+  file content rather than as plain links, MemberSpace reports which
+  members opened which file. On a membership this size that data is
+  the difference between guessing what people use and knowing it.
+
+  FORMATTING RULE. Zero em dashes, zero en dashes. Separator is the
+  diamond glyph.
+  ============================================================
+-->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>The Printable Library · The One-Income Circle</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&amp;family=DM+Serif+Display&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --deep-sage: #2E3E2F; --sage: #5C6E47; --sage-soft: #8B9E75;
+      --warm-tan: #C28954; --warm-tan-dark: #A77246;
+      --cream: #FBF4D7; --cream-warm: #F7ECC4; --charcoal: #2A2A2A;
+      --soft-gray: #7E867D; --light-sage: #DBE3CE; --pale-tan: #EFE0C1; --white: #FFFFFF;
+      --coral: #DD6B4E; --coral-deep: #C25441; --coral-soft: #F7D0BE; --coral-blush: #FBE3D5;
+      --gold: #D4A83F; --gold-soft: #EDD98D; --gold-deep: #B8912E;
+      --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 17px; scroll-behavior: smooth; }
+    @media (min-width: 720px) { html { font-size: 18px; } }
+    body {
+      font-family: Georgia, 'Times New Roman', serif; font-size: 1.05rem; line-height: 1.68;
+      color: var(--charcoal); background: var(--cream);
+      -webkit-font-smoothing: antialiased; overflow-x: hidden;
+    }
+    .container { max-width: 1180px; margin: 0 auto; padding: 0 1.5rem; }
+    section { padding: 2.75rem 0; position: relative; }
+    @media (max-width: 700px) { section { padding: 2rem 0; } }
+    .script { font-family: 'Caveat', cursive; font-weight: 700; }
+    h1, h2, h3, h4 { font-family: Georgia, serif; color: var(--deep-sage); }
+    h1 { font-size: clamp(2.05rem, 4.8vw, 3rem); font-weight: bold; line-height: 1.08; }
+    h2 { font-size: clamp(1.45rem, 3vw, 1.95rem); font-weight: bold; line-height: 1.18; }
+    h3 { font-size: 1.05rem; font-weight: bold; line-height: 1.32; }
+    h4 { font-size: 1rem; font-weight: bold; }
+    p { margin-bottom: 0.9rem; } p:last-child { margin-bottom: 0; }
+    a { color: var(--coral-deep); }
+    .eyebrow {
+      font-size: 0.74rem; font-weight: bold; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--warm-tan-dark); display: inline-flex; align-items: center; gap: 0.7rem;
+    }
+    .eyebrow::before { content: ""; width: 24px; height: 1px; background: var(--warm-tan); }
+    .eyebrow-coral { color: var(--coral-deep); }
+    .eyebrow-coral::before { background: var(--coral); }
+    .eyebrow-cream { color: var(--coral-soft); }
+    .eyebrow-cream::before { background: var(--coral); }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem; background: var(--warm-tan);
+      color: white; font-family: Georgia, serif; font-size: 1rem; font-weight: bold;
+      padding: 0.85rem 1.8rem; border: none; border-radius: 999px; cursor: pointer;
+      text-decoration: none; transition: all 0.25s var(--ease); box-shadow: 0 3px 0 var(--warm-tan-dark);
+    }
+    .btn:hover { background: var(--warm-tan-dark); transform: translateY(-2px); box-shadow: 0 5px 0 var(--warm-tan-dark); color: white; }
+    .btn::after { content: "\2192"; transition: transform 0.25s var(--ease); }
+    .btn:hover::after { transform: translateX(3px); }
+    .btn-coral { background: var(--coral); box-shadow: 0 3px 0 var(--coral-deep); }
+    .btn-coral:hover { background: var(--coral-deep); box-shadow: 0 5px 0 var(--coral-deep); }
+    .btn-outline {
+      background: transparent; color: var(--warm-tan-dark); border: 2px solid var(--warm-tan);
+      padding: calc(0.85rem - 2px) calc(1.8rem - 2px); box-shadow: none;
+    }
+    .btn-outline:hover { background: var(--pale-tan); color: var(--warm-tan-dark); box-shadow: none; }
+    .btn-cream { background: var(--cream); color: var(--deep-sage); box-shadow: 0 3px 0 rgba(0,0,0,0.18); }
+    .btn-cream:hover { background: var(--cream-warm); color: var(--deep-sage); box-shadow: 0 5px 0 rgba(0,0,0,0.18); }
+    .btn-ghost { background: transparent; color: var(--cream); border: 2px solid var(--coral-soft); box-shadow: none; padding: calc(0.85rem - 2px) calc(1.8rem - 2px); }
+    .btn-ghost:hover { background: rgba(255,255,255,0.1); color: var(--cream); box-shadow: none; }
+    .btn-sm { font-size: 0.88rem; padding: 0.6rem 1.25rem; }
+
+    /* ===== MEMBER NAV ===== */
+    .mnav { background: var(--deep-sage); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(46,62,47,0.18); }
+    .mnav-inner { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding: 0.85rem 1.5rem; max-width: 1280px; margin: 0 auto; }
+    .mnav-logo { font-family: Georgia, serif; font-size: 1.12rem; font-weight: bold; color: var(--cream); text-decoration: none; display: flex; align-items: center; gap: 0.5rem; white-space: nowrap; }
+    .mnav-logo .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--coral); }
+    .mnav-links { display: flex; align-items: center; gap: 1.6rem; }
+    .mnav-links a { color: var(--cream); text-decoration: none; font-size: 0.94rem; opacity: 0.88; position: relative; padding-bottom: 2px; white-space: nowrap; }
+    .mnav-links a::after { content: ""; position: absolute; left: 0; right: 0; bottom: -3px; height: 2px; background: var(--coral); transform: scaleX(0); transform-origin: left; transition: transform 0.25s var(--ease); border-radius: 2px; }
+    .mnav-links a:hover { opacity: 1; }
+    .mnav-links a:hover::after, .mnav-links a.current::after { transform: scaleX(1); }
+    .mnav-links a.current { opacity: 1; font-weight: bold; }
+    .mnav-account { background: var(--coral); color: white !important; padding: 0.5rem 1.1rem; border-radius: 999px; font-size: 0.86rem !important; font-weight: bold; opacity: 1 !important; box-shadow: 0 2px 0 var(--coral-deep); }
+    .mnav-account::after { display: none; }
+    .mnav-account:hover { background: var(--coral-deep); }
+    .mnav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 0.4rem; }
+    .mnav-toggle span { display: block; width: 24px; height: 2px; background: var(--cream); margin: 5px 0; border-radius: 2px; }
+    @media (max-width: 1080px) {
+      .mnav-toggle { display: block; }
+      .mnav-links { position: absolute; top: 100%; left: 0; right: 0; background: var(--deep-sage); flex-direction: column; align-items: stretch; gap: 0; padding: 0 1.5rem; max-height: 0; overflow: hidden; transition: max-height 0.35s var(--ease), padding 0.35s var(--ease); }
+      .mnav-links.open { max-height: 32rem; padding: 0.75rem 1.5rem 1.5rem; }
+      .mnav-links a { padding: 0.75rem 0; font-size: 1.02rem; }
+      .mnav-links a::after { display: none; }
+      .mnav-account { text-align: center; margin-top: 0.75rem; }
+    }
+
+    /* ===== SHOWIT OVERRIDE ARMOUR =====
+       Showit injects its own link colours over anything pasted into
+       Custom Head HTML, and it beat the logo rule on the live site: the
+       logo rendered dark on the dark nav and was effectively invisible.
+       The nav links happened to survive, but they are one template
+       change away from the same problem.
+
+       Every colour in the nav is therefore pinned here with high
+       specificity and !important. These are the same colours the
+       component already intended, nothing new. Do not remove this
+       block. If a nav element ever renders the wrong colour on Showit
+       again, add it here rather than editing the rules above. */
+    .mnav .mnav-logo,
+    .mnav .mnav-logo:link,
+    .mnav .mnav-logo:visited,
+    .mnav .mnav-logo:hover,
+    .mnav .mnav-logo:focus,
+    .mnav .mnav-logo:active,
+    .mnav .mnav-logo * { color: var(--cream) !important; }
+    .mnav .mnav-logo .dot { background: var(--coral) !important; }
+
+    .mnav .mnav-links a,
+    .mnav .mnav-links a:link,
+    .mnav .mnav-links a:visited,
+    .mnav .mnav-links a:hover,
+    .mnav .mnav-links a:active { color: var(--cream) !important; }
+
+    .mnav .mnav-links a.mnav-account,
+    .mnav .mnav-links a.mnav-account:link,
+    .mnav .mnav-links a.mnav-account:visited,
+    .mnav .mnav-links a.mnav-account:hover,
+    .mnav .mnav-links a.mnav-account:active { color: #FFFFFF !important; }
+    .mnav .mnav-toggle span { background: var(--cream) !important; }
+    .mnav .mnav-logo, .mnav .mnav-links a { text-decoration: none !important; }
+
+
+    /* ===== HERO ===== */
+    .lib-hero { background: var(--cream); padding: 2.5rem 0 1.75rem; position: relative; overflow: hidden; }
+    .lib-hero::before {
+      content: ""; position: absolute; top: -170px; right: -150px; width: 430px; height: 430px;
+      background: radial-gradient(circle, var(--coral-blush) 0%, transparent 65%); opacity: 0.8; pointer-events: none;
+    }
+    .lib-hero-inner { position: relative; z-index: 2; }
+    .crumb { font-size: 0.85rem; color: var(--soft-gray); margin-bottom: 1rem; }
+    .crumb a { color: var(--sage); text-decoration: none; border-bottom: 1px solid rgba(92,110,71,0.3); }
+    .crumb a:hover { color: var(--coral-deep); }
+    .lib-hero h1 { margin-bottom: 0.85rem; }
+    .lib-hero-sub { font-size: 1.12rem; font-style: italic; color: var(--sage); max-width: 40rem; }
+
+    /* ===== STARTER STRIP ===== */
+    .starter { background: var(--coral-blush); padding: 2rem 0; }
+    .starter-head { display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.1rem; }
+    .starter-head h2 { font-size: 1.35rem; margin: 0; }
+    .starter-head span { font-size: 0.92rem; font-style: italic; color: var(--sage); }
+    .starter-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    @media (max-width: 820px) { .starter-row { grid-template-columns: 1fr; } }
+    .starter-item {
+      background: white; border-radius: 12px; padding: 1rem 1.15rem; display: flex;
+      align-items: center; gap: 0.9rem; text-decoration: none; border: 1px solid rgba(221,107,78,0.25);
+      transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
+    }
+    .starter-item:hover { transform: translateY(-3px); box-shadow: 0 12px 26px rgba(46,62,47,0.1); }
+    .starter-item .s-num { font-family: 'DM Serif Display', Georgia, serif; font-size: 1.5rem; color: var(--coral-soft); line-height: 1; }
+    .starter-item h4 { font-size: 0.96rem; margin-bottom: 0.1rem; line-height: 1.3; }
+    .starter-item .s-meta { font-size: 0.78rem; color: var(--soft-gray); font-style: italic; }
+
+    /* ===== CONTROLS ===== */
+    .controls {
+      background: rgba(255,255,255,0.97); backdrop-filter: blur(8px);
+      border-top: 1px solid rgba(194,137,84,0.25); border-bottom: 1px solid rgba(194,137,84,0.25);
+      position: sticky; top: var(--nav-h, 68px); z-index: 90; padding: 0.9rem 0;
+    }
+    .controls-inner { max-width: 1180px; margin: 0 auto; padding: 0 1.5rem; display: flex; flex-direction: column; gap: 0.75rem; }
+    .controls-row { display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap; }
+    .search-wrap { position: relative; flex: 1; min-width: 220px; }
+    .search-wrap::before {
+      content: "\1F50D"; position: absolute; left: 0.9rem; top: 50%; transform: translateY(-50%);
+      font-size: 0.9rem; opacity: 0.5; pointer-events: none;
+    }
+    #search {
+      width: 100%; font-family: Georgia, serif; font-size: 0.98rem; color: var(--charcoal);
+      padding: 0.7rem 2.4rem 0.7rem 2.5rem; border: 1px solid rgba(194,137,84,0.45);
+      border-radius: 999px; background: var(--cream); outline: none;
+      transition: border-color 0.2s var(--ease), background 0.2s var(--ease);
+    }
+    #search:focus { border-color: var(--coral); background: white; }
+    #search::placeholder { color: var(--soft-gray); font-style: italic; }
+    .clear-search {
+      position: absolute; right: 0.6rem; top: 50%; transform: translateY(-50%);
+      background: none; border: none; cursor: pointer; font-size: 1.1rem; color: var(--soft-gray);
+      padding: 0.2rem 0.45rem; line-height: 1; display: none;
+    }
+    .clear-search.show { display: block; }
+    .clear-search:hover { color: var(--coral-deep); }
+    .sort-wrap { display: flex; align-items: center; gap: 0.5rem; }
+    .sort-wrap label { font-size: 0.86rem; color: var(--sage); white-space: nowrap; }
+    #sort {
+      font-family: Georgia, serif; font-size: 0.9rem; color: var(--deep-sage);
+      padding: 0.55rem 0.8rem; border: 1px solid rgba(194,137,84,0.45);
+      border-radius: 8px; background: var(--cream); cursor: pointer;
+    }
+    .chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .chip {
+      background: var(--cream); border: 1px solid rgba(194,137,84,0.4); color: var(--sage);
+      font-family: Georgia, serif; font-size: 0.86rem; padding: 0.45rem 0.95rem;
+      border-radius: 999px; cursor: pointer; transition: all 0.2s var(--ease); white-space: nowrap;
+    }
+    .chip:hover { border-color: var(--coral); color: var(--coral-deep); }
+    .chip.active { background: var(--coral); border-color: var(--coral); color: white; font-weight: bold; }
+    .chip .count { opacity: 0.7; font-size: 0.78rem; }
+
+    /* ===== GRID ===== */
+    .grid-sec { background: var(--white); padding-top: 2rem; }
+    .result-line { font-size: 0.9rem; color: var(--sage); font-style: italic; margin-bottom: 1.35rem; }
+    .result-line b { font-style: normal; color: var(--deep-sage); }
+    .lib-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.35rem; }
+    @media (max-width: 1080px) { .lib-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 820px) { .lib-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 520px) { .lib-grid { grid-template-columns: 1fr; } }
+    .card {
+      background: var(--cream); border: 1px solid rgba(194,137,84,0.28); border-radius: 14px;
+      overflow: hidden; display: flex; flex-direction: column; min-width: 0;
+      transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease), border-color 0.25s var(--ease);
+    }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 14px 30px rgba(46,62,47,0.12); border-color: var(--coral); }
+    .thumb {
+      aspect-ratio: 8.5 / 11; background: white; position: relative;
+      border-bottom: 1px solid rgba(194,137,84,0.28); overflow: hidden;
+      display: flex; align-items: center; justify-content: center; padding: 1rem;
+    }
+    /* faint ruled lines so the thumbnail reads as a printed page */
+    .thumb::before {
+      content: ""; position: absolute; inset: 14% 12% 12% 12%;
+      background: repeating-linear-gradient(to bottom, rgba(46,62,47,0.10) 0 1px, transparent 1px 11px);
+    }
+    .thumb::after {
+      content: ""; position: absolute; top: 7%; left: 12%; width: 42%; height: 5px;
+      background: var(--coral-soft); border-radius: 2px;
+    }
+    .thumb .t-label {
+      position: relative; z-index: 2; font-size: 0.64rem; font-weight: bold;
+      letter-spacing: 0.16em; text-transform: uppercase; color: var(--coral-deep);
+      background: rgba(255,255,255,0.9); padding: 0.3rem 0.5rem; border-radius: 3px;
+    }
+    .flag {
+      position: absolute; top: 0.6rem; right: 0.6rem; z-index: 3;
+      background: var(--gold); color: white; font-size: 0.58rem; font-weight: bold;
+      letter-spacing: 0.1em; text-transform: uppercase; padding: 0.22rem 0.45rem;
+      border-radius: 3px; box-shadow: 0 2px 0 var(--gold-deep);
+    }
+    .card-body { padding: 1.1rem 1.15rem; display: flex; flex-direction: column; flex: 1; }
+    .card-body h3 { margin-bottom: 0.3rem; }
+    .card-meta { font-size: 0.78rem; color: var(--soft-gray); font-style: italic; margin-bottom: 0.6rem; }
+    .card-body p { font-size: 0.9rem; color: var(--sage); margin-bottom: 0.9rem; line-height: 1.5; }
+    .sys-tag {
+      align-self: flex-start; background: none; border: 1px solid rgba(92,110,71,0.35);
+      color: var(--sage); font-family: Georgia, serif; font-size: 0.72rem;
+      padding: 0.25rem 0.6rem; border-radius: 999px; cursor: pointer; margin-bottom: 0.9rem;
+      transition: all 0.2s var(--ease); text-align: left; max-width: 100%;
+    }
+    .sys-tag:hover { border-color: var(--coral); color: var(--coral-deep); }
+    .card .get { margin-top: auto; }
+    .empty {
+      display: none; text-align: center; padding: 3rem 1.5rem; color: var(--sage);
+    }
+    .empty.show { display: block; }
+    .empty .script { font-size: 1.6rem; color: var(--coral-deep); display: block; margin-bottom: 0.4rem; }
+    .empty p { max-width: 30rem; margin: 0 auto 1.25rem; }
+
+    /* ===== NO PRINTER ===== */
+    .noprint { background: var(--cream-warm); }
+    .noprint-card {
+      max-width: 46rem; margin: 0 auto; background: white; border-radius: 14px;
+      padding: 1.9rem 2rem; border-left: 5px solid var(--gold);
+    }
+    .noprint-card h2 { font-size: 1.35rem; margin-bottom: 0.6rem; }
+    .noprint-card p { font-size: 0.98rem; }
+
+    /* ===== NEXT ===== */
+    .next { background: var(--deep-sage); color: var(--cream); text-align: center; padding: 3rem 0; }
+    .next h2 { color: var(--cream); margin: 0.85rem 0 0.9rem; }
+    .next p { color: var(--cream); opacity: 0.92; max-width: 34rem; margin: 0 auto 1.4rem; }
+    .next-row { display: flex; flex-wrap: wrap; gap: 0.9rem; justify-content: center; }
+
+    footer { background: var(--deep-sage); color: var(--cream); padding: 2.25rem 0 2rem; text-align: center; border-top: 1px solid rgba(221,107,78,0.22); }
+    footer .diamond { color: var(--coral); font-size: 0.8rem; letter-spacing: 1.1em; padding-left: 1.1em; opacity: 0.7; margin-bottom: 1.25rem; }
+    footer .fnav { display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem 1.75rem; margin-bottom: 1.25rem; }
+    footer .fnav a { color: var(--cream); opacity: 0.85; text-decoration: none; font-size: 0.9rem; }
+    footer .fnav a:hover { opacity: 1; color: var(--coral-soft); }
+    footer .legal { font-size: 0.8rem; opacity: 0.6; }
+    footer .legal a { color: var(--cream); opacity: 0.85; text-decoration: none; margin: 0 0.35rem; }
+
+    .fade-in { opacity: 0; transform: translateY(14px); transition: opacity 0.5s var(--ease), transform 0.5s var(--ease); }
+    .fade-in.visible { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+      html { scroll-behavior: auto; }
+      .fade-in { opacity: 1; transform: none; }
+    }
+    :focus-visible { outline: 3px solid var(--coral); outline-offset: 3px; }
+    .skip-link { position: absolute; left: -9999px; background: var(--coral); color: white; padding: 0.7rem 1.2rem; z-index: 200; }
+    .skip-link:focus { left: 0; }
+    .sr-only {
+      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+    }
+  </style>
+
+
+
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <nav class="mnav">
+    <div class="mnav-inner">
+      <a href="/members" class="mnav-logo"><span class="dot"></span> The One-Income Circle</a>
+      <button class="mnav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="mnavLinks">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="mnav-links" id="mnavLinks">
+        <a href="/members">Home</a>
+        <a href="/members-vault">The Vault</a>
+        <a href="/members-library" class="current" aria-current="page">Printables</a>
+        <a href="/members-sessions">Live Sessions</a>
+        <a href="/members-circle">The Circle</a>
+        <a href="/members-ask-brooke" class="">Ask Brooke</a>
+        <a href="/members-account" class="mnav-account">My account</a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main">
+
+  <!-- ==================== HERO ==================== -->
+  <section class="lib-hero">
+    <div class="container lib-hero-inner">
+      <p class="crumb"><a href="/members">Member home</a> ◆ Printables</p>
+      <h1>The Printable Library</h1>
+      <p class="lib-hero-sub">Every page in the membership, in one place. Find the one you need, print it, and get back to your evening.</p>
+    </div>
+  </section>
+
+  <!-- ==================== STARTER STRIP ==================== -->
+  <section class="starter">
+    <div class="container">
+      <div class="starter-head">
+        <h2>Print these three first</h2>
+        <span>If you only ever print three pages, make it these.</span>
+      </div>
+      <div class="starter-row" id="starterRow"></div>
+    </div>
+  </section>
+
+  <!-- ==================== CONTROLS ==================== -->
+  <div class="controls">
+    <div class="controls-inner">
+      <div class="controls-row">
+        <div class="search-wrap">
+          <label for="search" class="sr-only">Search the printable library</label>
+          <input type="search" id="search" placeholder="Search for a page, say groceries or payday" autocomplete="off">
+          <button class="clear-search" id="clearSearch" type="button" aria-label="Clear search">×</button>
+        </div>
+        <div class="sort-wrap">
+          <label for="sort">Sort</label>
+          <select id="sort">
+            <option value="system">By system</option>
+            <option value="new">Newest first</option>
+            <option value="az">A to Z</option>
+            <option value="short">Shortest first</option>
+          </select>
+        </div>
+      </div>
+      <div class="chips" id="chips" role="group" aria-label="Filter by category"></div>
+    </div>
+  </div>
+
+  <!-- ==================== GRID ==================== -->
+  <section class="grid-sec">
+    <div class="container">
+      <p class="result-line" id="resultLine" aria-live="polite">Showing everything</p>
+      <div class="lib-grid" id="grid"></div>
+      <div class="empty" id="empty">
+        <span class="script">hmm, nothing here</span>
+        <h2>No pages match that.</h2>
+        <p>Try a shorter word, or clear the filters and browse. If you are looking for something that does not exist yet, tell me and I will very likely make it.</p>
+        <button class="btn btn-outline" id="resetAll" type="button">Clear the filters</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== NO PRINTER ==================== -->
+  <section class="noprint">
+    <div class="container">
+      <div class="noprint-card fade-in">
+        <h2>No printer? Still fine.</h2>
+        <p>Every page here is fillable, so you can type into it on a phone or a laptop and save it. Or do what I did for two years and copy the columns into a cheap notebook. The page is a prompt, not a rule, and nobody has ever budgeted better because their page was laser printed.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== NEXT ==================== -->
+  <section class="next">
+    <div class="container">
+      <span class="eyebrow eyebrow-cream">Cannot find it</span>
+      <h2>Missing a page you need?</h2>
+      <p>Tell me what you are trying to keep track of. Half of what is in this library exists because a member asked for it, and founding members vote on what gets built next.</p>
+      <div class="next-row">
+        <a href="/members-ask-brooke" class="btn btn-cream">Request a printable</a>
+        <a href="/members-vault" class="btn btn-ghost">Back to the vault</a>
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="diamond">◆ ◆ ◆</div>
+      <nav class="fnav" aria-label="Member footer">
+        <a href="/members">Member home</a>
+        <a href="/members-vault">The Vault</a>
+        <a href="/members-quick-start">Quick Start</a>
+        <a href="/members-sessions">Live Sessions</a>
+        <a href="/members-account">My account</a>
+        <a href="/contact">Help</a>
+      </nav>
+      <p class="legal">
+        © 2026 Purposeful Pennies. Member content, please keep it in the family.
+        &nbsp;·&nbsp;
+        <a href="/terms">Terms</a> ·
+        <a href="/privacy-policy">Privacy</a>
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    /* ============================================================
+       CONFIG
+       ============================================================ */
+    const FILE_BASE = '/members-files/';
+
+    const SYSTEMS = {
+      budget:         { n: '01', label: 'The One-Income Budget', slug: 'budget' },
+      sinking:        { n: '02', label: 'Sinking Funds',         slug: 'sinking-funds' },
+      meals:          { n: '03', label: 'Family Meals',          slug: 'meals' },
+      groceries:      { n: '04', label: 'Grocery Strategy',      slug: 'groceries' },
+      home:           { n: '05', label: 'Simple Home Rhythms',   slug: 'home-rhythms' },
+      mindset:        { n: '06', label: 'Money Is a Tool',       slug: 'mindset' },
+      implementation: { n: '07', label: 'What To Do First',      slug: 'implementation' },
+      monthly:        { n: '',   label: 'Monthly release',       slug: '' }
+    };
+
+    const CATS = [
+      { key: 'all',    label: 'Everything' },
+      { key: 'new',    label: 'New this month' },
+      { key: 'budget', label: 'Budgeting' },
+      { key: 'food',   label: 'Groceries and meals' },
+      { key: 'home',   label: 'Home and family' },
+      { key: 'mind',   label: 'Mindset' }
+    ];
+
+    /* ADD A PRINTABLE HERE. One object, and the cards, counts, filters,
+       and search all pick it up. */
+    const ITEMS = [
+      /* 01 budget, 4 */
+      { title: 'The Payday Reset Page', pages: 1, cat: 'budget', system: 'budget', starter: true,
+        blurb: 'Every dollar of this paycheck given a job before it goes anywhere. The page the whole thing hangs off.', file: 'payday-reset-page.pdf' },
+      { title: 'The One-Page Monthly Budget', pages: 2, cat: 'budget', system: 'budget', starter: true,
+        blurb: 'The month on one sheet, with a column for planned and a column for what actually happened.', file: 'one-page-monthly-budget.pdf' },
+      { title: 'Bill Due Date Calendar', pages: 2, cat: 'budget', system: 'budget',
+        blurb: 'Which payday covers what, so nothing lands in the wrong week again.', file: 'bill-due-date-calendar.pdf' },
+      { title: 'Debt Payoff Progress Tracker', pages: 1, cat: 'budget', system: 'budget',
+        blurb: 'One hundred squares to colour in. Slow progress you can actually see is progress you keep making.', file: 'debt-payoff-tracker.pdf' },
+
+      /* 02 sinking funds, 3 */
+      { title: 'Sinking Fund Starter Sheet', pages: 1, cat: 'budget', system: 'sinking', starter: true,
+        blurb: 'Twelve funds, one number each. Start with one and add the rest when you are ready.', file: 'sinking-fund-starter.pdf' },
+      { title: 'Monthly Contribution Calculator', pages: 1, cat: 'budget', system: 'sinking',
+        blurb: 'Work out what each fund needs a month so Christmas stops arriving as a surprise in December.', file: 'contribution-calculator.pdf' },
+      { title: 'Sinking Fund Progress Tracker', pages: 1, cat: 'budget', system: 'sinking',
+        blurb: 'A visual goal chart per fund, for the kind of saving that takes months.', file: 'sinking-fund-tracker.pdf' },
+
+      /* 03 meals, 4 */
+      { title: 'The Two-Week Pantry Meal Plan', pages: 4, cat: 'food', system: 'meals',
+        blurb: 'Fourteen dinners built from pantry staples, with the shopping list already written.', file: 'two-week-pantry-plan.pdf' },
+      { title: 'Weekly Meal Planner', pages: 1, cat: 'food', system: 'meals',
+        blurb: 'The fridge copy. Seven dinners, decided on Sunday, so five o clock stops being a decision.', file: 'weekly-meal-planner.pdf' },
+      { title: 'Lunchbox Fortnight', pages: 3, cat: 'food', system: 'meals', isNew: true,
+        blurb: 'Two weeks of school lunches from pantry staples, with a nut free column.', file: 'lunchbox-fortnight.pdf' },
+      { title: 'Pantry Staples Checklist', pages: 1, cat: 'food', system: 'meals',
+        blurb: 'The short list of things worth always having in, so you can always make something.', file: 'pantry-staples.pdf' },
+
+      /* 04 groceries, 4 */
+      { title: 'Grocery Trip Cheat Sheet', pages: 1, cat: 'food', system: 'groceries',
+        blurb: 'Folds to pocket size, with your number at the top and a running total down the side.', file: 'grocery-cheat-sheet.pdf' },
+      { title: 'Weekly Grocery Number Worksheet', pages: 1, cat: 'food', system: 'groceries',
+        blurb: 'Set the number on purpose, using what you actually spent for the last month.', file: 'grocery-number.pdf' },
+      { title: 'Bulk Buying Calculator', pages: 1, cat: 'food', system: 'groceries',
+        blurb: 'Price per unit, worked out properly, because bulk is not always cheaper and the big box knows it.', file: 'bulk-buying-calculator.pdf' },
+      { title: 'Seasonal Produce Guide', pages: 2, cat: 'food', system: 'groceries',
+        blurb: 'What is cheap this month and roughly what you should expect to pay for it.', file: 'seasonal-produce.pdf' },
+
+      /* 05 home, 4 */
+      { title: 'Weekly Home Rhythm Planner', pages: 2, cat: 'home', system: 'home',
+        blurb: 'Morning, afternoon, evening. Rhythms rather than a cleaning schedule you will resent by Thursday.', file: 'home-rhythm-planner.pdf' },
+      { title: 'Daily Rhythm Cards', pages: 2, cat: 'home', system: 'home',
+        blurb: 'Cut them out and stick them where you need them. Good for kids who like to know what happens next.', file: 'daily-rhythm-cards.pdf' },
+      { title: 'Freezer and Pantry Inventory', pages: 2, cat: 'home', system: 'home',
+        blurb: 'Stops you buying a fourth jar of the thing you already have three of.', file: 'freezer-pantry-inventory.pdf' },
+      { title: 'The Laundry System Page', pages: 1, cat: 'home', system: 'home',
+        blurb: 'One load a day, sorted by who it belongs to. Unglamorous, and it works.', file: 'laundry-system.pdf' },
+
+      /* 06 mindset, 4 */
+      { title: 'Money Is a Tool Workbook', pages: 6, cat: 'mind', system: 'mindset',
+        blurb: 'The full workbook that goes with the training. Do it once, properly, with nobody reading over your shoulder.', file: 'money-is-a-tool-workbook.pdf' },
+      { title: 'Reflection Pages', pages: 4, cat: 'mind', system: 'mindset',
+        blurb: 'For a quiet ten minutes. One optional faith prompt, and it is genuinely optional.', file: 'reflection-pages.pdf' },
+      { title: 'Money Values Pages', pages: 2, cat: 'mind', system: 'mindset',
+        blurb: 'For working out what you actually want the money for, which makes saying no to the rest easier.', file: 'money-values.pdf' },
+      { title: 'Wins and Gratitude Pages', pages: 2, cat: 'mind', system: 'mindset',
+        blurb: 'Where small wins count. Especially the ones nobody else in the house noticed.', file: 'wins-and-gratitude.pdf' },
+
+      /* 07 implementation, 2 */
+      { title: 'The Four Week Roadmap', pages: 1, cat: 'budget', system: 'implementation',
+        blurb: 'One system a week, in order, so you never add two at once.', file: 'four-week-roadmap.pdf' },
+      { title: 'The Implementation Checklist', pages: 1, cat: 'budget', system: 'implementation',
+        blurb: 'What is running, what is next, and what you are deliberately not doing yet.', file: 'implementation-checklist.pdf' },
+
+      /* monthly release, 2 */
+      { title: 'School Supply Plan', pages: 2, cat: 'home', system: 'monthly', isNew: true,
+        blurb: 'Fill it in once and reuse it every August. The month that quietly wrecks a good budget.', file: 'school-supply-plan.pdf' },
+      { title: 'Talking to Kids About Money', pages: 3, cat: 'home', system: 'monthly',
+        blurb: 'Twenty conversation starters by age, and five things worth not saying.', file: 'talking-to-kids.pdf' }
+    ];
+
+    /* ===== WIRE LINKS ===== */
+
+    /* ===== STATE ===== */
+    let activeCat = 'all';
+    let query = '';
+    let sortBy = 'system';
+
+    const grid = document.getElementById('grid');
+    const empty = document.getElementById('empty');
+    const resultLine = document.getElementById('resultLine');
+    const chipsWrap = document.getElementById('chips');
+    const search = document.getElementById('search');
+    const clearBtn = document.getElementById('clearSearch');
+
+    function countFor(key) {
+      if (key === 'all') return ITEMS.length;
+      if (key === 'new') return ITEMS.filter(function (i) { return i.isNew; }).length;
+      return ITEMS.filter(function (i) { return i.cat === key; }).length;
+    }
+
+    /* ===== CHIPS ===== */
+    CATS.forEach(function (c) {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'chip' + (c.key === 'all' ? ' active' : '');
+      b.dataset.cat = c.key;
+      b.setAttribute('aria-pressed', String(c.key === 'all'));
+      b.innerHTML = c.label + ' <span class="count">' + countFor(c.key) + '</span>';
+      b.addEventListener('click', function () {
+        activeCat = c.key;
+        chipsWrap.querySelectorAll('.chip').forEach(function (x) {
+          const on = x.dataset.cat === c.key;
+          x.classList.toggle('active', on);
+          x.setAttribute('aria-pressed', String(on));
+        });
+        render();
+      });
+      chipsWrap.appendChild(b);
+    });
+
+    /* ===== SEARCH AND SORT ===== */
+    search.addEventListener('input', function () {
+      query = search.value.trim().toLowerCase();
+      clearBtn.classList.toggle('show', query.length > 0);
+      render();
+    });
+    clearBtn.addEventListener('click', function () {
+      search.value = ''; query = '';
+      clearBtn.classList.remove('show');
+      search.focus();
+      render();
+    });
+    document.getElementById('sort').addEventListener('change', function (e) {
+      sortBy = e.target.value;
+      render();
+    });
+    document.getElementById('resetAll').addEventListener('click', function () {
+      search.value = ''; query = ''; activeCat = 'all';
+      clearBtn.classList.remove('show');
+      chipsWrap.querySelectorAll('.chip').forEach(function (x) {
+        const on = x.dataset.cat === 'all';
+        x.classList.toggle('active', on);
+        x.setAttribute('aria-pressed', String(on));
+      });
+      render();
+    });
+
+    /* ===== FILTER, SORT, RENDER ===== */
+    function matches(item) {
+      if (activeCat === 'new' && !item.isNew) return false;
+      if (activeCat !== 'all' && activeCat !== 'new' && item.cat !== activeCat) return false;
+      if (!query) return true;
+      const sys = SYSTEMS[item.system];
+      const hay = (item.title + ' ' + item.blurb + ' ' + (sys ? sys.label : '')).toLowerCase();
+      return query.split(/\s+/).every(function (word) { return hay.indexOf(word) !== -1; });
+    }
+
+    function sorted(list) {
+      const copy = list.slice();
+      if (sortBy === 'az') return copy.sort(function (a, b) { return a.title.localeCompare(b.title); });
+      if (sortBy === 'short') return copy.sort(function (a, b) { return a.pages - b.pages || a.title.localeCompare(b.title); });
+      if (sortBy === 'new') return copy.sort(function (a, b) { return (b.isNew ? 1 : 0) - (a.isNew ? 1 : 0); });
+      return copy; /* by system, the order they are written in the array */
+    }
+
+    function cardFor(item) {
+      const sys = SYSTEMS[item.system] || SYSTEMS.monthly;
+      const el = document.createElement('article');
+      el.className = 'card';
+
+      const sysText = sys.n ? sys.n + ' ' + sys.label : sys.label;
+      const pagesText = item.pages + (item.pages === 1 ? ' page' : ' pages');
+
+      el.innerHTML =
+        '<div class="thumb">' +
+          (item.isNew ? '<span class="flag">New</span>' : '') +
+          '<span class="t-label">' + pagesText + '</span>' +
+        '</div>' +
+        '<div class="card-body">' +
+          '<h3></h3>' +
+          '<p class="card-meta">' + pagesText + ' &#9670; fillable PDF</p>' +
+          '<p class="blurb"></p>' +
+          '<button class="sys-tag" type="button">' + sysText + '</button>' +
+          '<a class="btn btn-coral btn-sm get" target="_blank" rel="noopener">Open and print</a>' +
+        '</div>';
+
+      /* text set as text nodes, never innerHTML, so an apostrophe in a
+         title can never break the markup */
+      el.querySelector('h3').textContent = item.title;
+      el.querySelector('.blurb').textContent = item.blurb;
+      el.querySelector('.get').href = FILE_BASE + item.file;
+
+      const tag = el.querySelector('.sys-tag');
+      if (sys.slug) {
+        tag.title = 'Show only pages from this system';
+        tag.addEventListener('click', function () {
+          search.value = sys.label; query = sys.label.toLowerCase();
+          clearBtn.classList.add('show');
+          activeCat = 'all';
+          chipsWrap.querySelectorAll('.chip').forEach(function (x) {
+            const on = x.dataset.cat === 'all';
+            x.classList.toggle('active', on);
+            x.setAttribute('aria-pressed', String(on));
+          });
+          render();
+          document.querySelector('.grid-sec').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      } else {
+        tag.disabled = true;
+        tag.style.cursor = 'default';
+      }
+      return el;
+    }
+
+    function render() {
+      const list = sorted(ITEMS.filter(matches));
+      grid.innerHTML = '';
+      list.forEach(function (item) { grid.appendChild(cardFor(item)); });
+
+      empty.classList.toggle('show', list.length === 0);
+      grid.style.display = list.length === 0 ? 'none' : '';
+
+      const total = ITEMS.length;
+      let line;
+      if (list.length === total) line = 'Showing all <b>' + total + '</b> pages';
+      else if (list.length === 0) line = 'No pages match';
+      else line = 'Showing <b>' + list.length + '</b> of ' + total + ' pages';
+      if (query) line += ' for &ldquo;' + query.replace(/[<>&]/g, '') + '&rdquo;';
+      resultLine.innerHTML = line;
+    }
+
+    /* ===== STARTER STRIP ===== */
+    (function () {
+      const row = document.getElementById('starterRow');
+      ITEMS.filter(function (i) { return i.starter; }).slice(0, 3).forEach(function (item, idx) {
+        const a = document.createElement('a');
+        a.className = 'starter-item';
+        a.href = FILE_BASE + item.file;
+        a.target = '_blank';
+        a.rel = 'noopener';
+        a.innerHTML = '<span class="s-num">0' + (idx + 1) + '</span><span><h4></h4>' +
+                      '<span class="s-meta">' + item.pages + (item.pages === 1 ? ' page' : ' pages') + ' &#9670; print two</span></span>';
+        a.querySelector('h4').textContent = item.title;
+        row.appendChild(a);
+      });
+    })();
+
+    render();
+
+    /* ===== STICKY OFFSET  ◆  keep the controls flush under the nav =====
+       Nav height changes with breakpoint and again once the webfonts land,
+       so measure it rather than hardcoding. */
+    (function () {
+      const nav = document.querySelector('.mnav');
+      function setNavHeight() {
+        document.documentElement.style.setProperty('--nav-h', Math.round(nav.getBoundingClientRect().height) + 'px');
+      }
+      setNavHeight();
+      window.addEventListener('resize', setNavHeight);
+      window.addEventListener('orientationchange', setNavHeight);
+      if (document.fonts && document.fonts.ready) { document.fonts.ready.then(setNavHeight); }
+      if (window.ResizeObserver) { new ResizeObserver(setNavHeight).observe(nav); }
+    })();
+
+    /* ===== MOBILE NAV ===== */
+    (function () {
+      const t = document.getElementById('navToggle');
+      const l = document.getElementById('mnavLinks');
+      t.addEventListener('click', function () {
+        const open = l.classList.toggle('open');
+        t.setAttribute('aria-expanded', String(open));
+      });
+    })();
+
+    /* ===== FADE-IN ===== */
+    (function () {
+      const obs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) { en.target.classList.add('visible'); obs.unobserve(en.target); }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+      document.querySelectorAll('.fade-in').forEach(function (el) { obs.observe(el); });
+    })();
+
+    /* ===== COUNT CHECK  ◆  keeps this page honest against the vault =====
+       Logs the per system totals. If a vault card claims a different
+       number, one of the two is lying to a paying member. */
+    (function () {
+      const tally = {};
+      ITEMS.forEach(function (i) { tally[i.system] = (tally[i.system] || 0) + 1; });
+      console.log('Printable counts by system, check these against the vault cards:', tally, 'Total:', ITEMS.length);
+    })();
+<w:pgSz w:h="15840" w:w="12240" w:orient="portrait"/><w:pgMar w:bottom="1440" w:top="1440" w:left="1440" w:right="1440" w:header="720" w:footer="720"/><w:pgNumType w:start="1"/></w:sectPr></w:pPr><w:r w:rsidDel="00000000" w:rsidR="00000000" w:rsidRPr="00000000"><w:rPr><w:rtl w:val="0"/></w:rPr><w:t xml:space="preserve">  </script>

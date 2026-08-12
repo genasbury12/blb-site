@@ -1,0 +1,455 @@
+<!--
+  ============================================================
+  PURPOSEFUL PENNIES  ·  THE FREE RESOURCE LIBRARY
+  Gated delivery page for subscribers
+  Suggested URL: /library   (keep it out of the nav, unlisted)
+  ============================================================
+
+  PASSWORD
+  The password is NOT written anywhere in this file. It is stored only
+  as a hash on the PASS_HASH line in the script below, so that reading
+  the source does not hand it over. Genasys sent you the password
+  separately. To change it, run this in any browser console:
+
+      function h(s){let x=5381;for(let i=0;i<s.length;i++){x=((x<<5)+x)+s.charCodeAt(i);x=x&0xFFFFFFFF;}return x>>>0;}
+      h('yournewpassword')
+
+  and paste the number into PASS_HASH.
+
+  BE CLEAR ABOUT WHAT THIS GATE IS
+  It is a soft gate, not security. The hash and all twelve links sit
+  in this page's source, so anyone who views source can get in. That
+  is completely normal for a freebie library and it does the real job,
+  which is making the resource feel earned and stopping casual
+  forwarding. It will not stop a determined person. If you need real
+  protection, that is a Showit member area or a Flodesk gated page.
+
+  ONE CLICK ENTRY FROM THE THANK-YOU PAGE
+  /library?u=2765610647 opens the library with no typing. The thank-you
+  page uses this so a brand new subscriber is not asked for a password
+  three seconds after being given one. The number is the same hash that
+  is already in this file, so it adds no new exposure. If you change the
+  password, update UNLOCK_HASH on the thank-you page to match.
+
+  THE TWO BUTTONS, AND WHY THERE ARE TWO
+  Download PDF      /export?format=pdf   instant download, no Google
+                                          account needed, cannot touch
+                                          your master
+  Make your own copy  /copy               opens Google's own "Copy
+                                          document" dialog, so the
+                                          copy step is done FOR them
+                                          rather than asked of them
+
+  Neither link can reach the original document. That is deliberate.
+
+  REQUIRED DRIVE SETTING
+  All twelve masters must be shared as: Anyone with the link, VIEWER.
+  As of the last check they were set to WRITER, which lets anybody
+  edit the master. Viewer still permits copying, so nothing is lost.
+  Leave "Viewers and commenters can see the option to download,
+  print, and copy" CHECKED or both buttons above will break.
+
+  No em dashes or en dashes anywhere.
+  ============================================================
+-->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Free Resource Library · Purposeful Pennies</title>
+  <meta name="description" content="Your free resource library. Twelve printables for one-income families.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&amp;family=DM+Serif+Display&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --deep-sage:#2E3E2F; --sage:#5C6E47; --warm-tan:#C28954; --warm-tan-dark:#A77246;
+      --cream:#FBF4D7; --cream-warm:#F7ECC4; --charcoal:#2A2A2A; --soft-gray:#7E867D;
+      --light-sage:#DBE3CE; --pale-tan:#EFE0C1; --white:#FFFFFF;
+      --coral:#DD6B4E; --coral-deep:#C25441; --coral-soft:#F7D0BE; --coral-blush:#FBE3D5;
+      --gold:#D4A83F; --gold-soft:#EDD98D; --gold-deep:#B8912E;
+      --ease:cubic-bezier(0.22,0.61,0.36,1);
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{font-size:17px;scroll-behavior:smooth;}
+    @media(min-width:720px){html{font-size:18px;}}
+    body{font-family:Georgia,'Times New Roman',serif;font-size:1.06rem;line-height:1.7;
+      color:var(--charcoal);background:var(--cream);-webkit-font-smoothing:antialiased;}
+    .container{max-width:1180px;margin:0 auto;padding:0 1.5rem;}
+    h1,h2,h3{font-family:Georgia,serif;color:var(--deep-sage);}
+    .script{font-family:'Caveat',cursive;font-weight:700;}
+    a{color:var(--coral-deep);}
+
+    /* ============ GATE ============ */
+    .gate{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:2rem 1.5rem;
+      background:var(--cream);position:relative;overflow:hidden;}
+    .gate::before{content:"";position:absolute;top:-200px;right:-160px;width:540px;height:540px;
+      background:radial-gradient(circle,var(--coral-blush)0%,transparent 65%);opacity:.8;}
+    .gate::after{content:"";position:absolute;bottom:-180px;left:-140px;width:460px;height:460px;
+      background:radial-gradient(circle,var(--gold-soft)0%,transparent 62%);opacity:.45;}
+    .gate-card{position:relative;z-index:2;background:var(--white);border:2px solid var(--coral);
+      border-radius:18px;padding:3rem 2.75rem;max-width:520px;width:100%;text-align:center;
+      box-shadow:0 30px 70px rgba(46,62,47,.14);}
+    @media(max-width:560px){.gate-card{padding:2.25rem 1.5rem;}}
+    .gate-logo{font-size:1.15rem;font-weight:bold;color:var(--deep-sage);letter-spacing:.06em;
+      display:inline-flex;align-items:center;gap:.5rem;margin-bottom:1.75rem;}
+    .gate-logo .dot{width:8px;height:8px;border-radius:50%;background:var(--coral);}
+    .gate-card .script{display:block;font-size:1.7rem;color:var(--coral-deep);margin-bottom:.2rem;}
+    .gate-card h1{font-size:clamp(1.6rem,4vw,2.1rem);line-height:1.2;margin-bottom:.9rem;}
+    .gate-card p{font-size:1rem;color:var(--sage);font-style:italic;margin-bottom:1.75rem;}
+    .gate-field{text-align:left;margin-bottom:1rem;}
+    .gate-field label{display:block;font-size:.74rem;font-weight:bold;letter-spacing:.16em;
+      text-transform:uppercase;color:var(--coral-deep);margin-bottom:.45rem;}
+    .gate-field input{width:100%;padding:1rem;border:1px solid rgba(126,134,125,.35);border-radius:8px;
+      font-family:Georgia,serif;font-size:1.05rem;background:var(--cream);color:var(--charcoal);
+      transition:border-color .2s var(--ease),box-shadow .2s var(--ease);}
+    .gate-field input:focus{outline:none;border-color:var(--coral);background:#fff;
+      box-shadow:0 0 0 3px rgba(221,107,78,.15);}
+    .gate.error .gate-field input{border-color:var(--coral-deep);background:#FFF7F4;}
+    .gate-msg{display:none;font-size:.92rem;font-weight:bold;color:var(--coral-deep);margin-bottom:1rem;}
+    .gate.error .gate-msg{display:block;}
+    .gate-hint{font-size:.86rem;color:var(--soft-gray);font-style:italic;margin-top:1rem;}
+    .gate-hint a{font-weight:bold;}
+
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:.55rem;background:var(--coral);
+      color:#fff;font-family:Georgia,serif;font-size:1rem;font-weight:bold;padding:1rem 2rem;border:none;
+      border-radius:999px;cursor:pointer;text-decoration:none;letter-spacing:.02em;
+      box-shadow:0 3px 0 var(--coral-deep);transition:all .22s var(--ease);}
+    .btn:hover{background:var(--coral-deep);transform:translateY(-2px);box-shadow:0 5px 0 var(--coral-deep);}
+    .btn-full{width:100%;}
+    .btn-sm{font-size:.9rem;padding:.7rem 1.15rem;}
+    .btn-tan{background:var(--warm-tan);box-shadow:0 3px 0 var(--warm-tan-dark);}
+    .btn-tan:hover{background:var(--warm-tan-dark);box-shadow:0 5px 0 var(--warm-tan-dark);}
+    .btn-outline{background:transparent;color:var(--sage);border:2px solid var(--sage);box-shadow:none;
+      padding:calc(.7rem - 2px) calc(1.15rem - 2px);}
+    .btn-outline:hover{background:var(--light-sage);color:var(--deep-sage);box-shadow:none;transform:translateY(-2px);}
+
+    /* ============ LIBRARY ============ */
+    .library{display:none;}
+    .library.open{display:block;}
+    .topbar{background:var(--deep-sage);color:var(--cream);}
+    .topbar-in{max-width:1180px;margin:0 auto;padding:1.1rem 1.5rem;display:flex;align-items:center;
+      justify-content:space-between;gap:1rem;flex-wrap:wrap;}
+    .topbar-logo{font-size:1.2rem;font-weight:bold;color:var(--cream);letter-spacing:.05em;
+      text-decoration:none;display:inline-flex;align-items:center;gap:.5rem;}
+    .topbar-logo .dot{width:8px;height:8px;border-radius:50%;background:var(--coral);}
+    .topbar-note{font-family:'Caveat',cursive;font-size:1.2rem;color:var(--gold-soft);}
+
+    .hero{padding:3.5rem 0 2.25rem;text-align:center;}
+    .hero .script{display:block;font-size:1.9rem;color:var(--coral-deep);margin-bottom:.3rem;}
+    .hero h1{font-size:clamp(2rem,5vw,3.1rem);line-height:1.08;letter-spacing:-.02em;margin-bottom:1rem;}
+    .hero p{font-size:1.1rem;font-style:italic;color:var(--sage);max-width:36rem;margin:0 auto;}
+
+    /* the loud instruction */
+    .howto{background:var(--coral);color:#fff;border-radius:16px;padding:2rem 2.25rem;
+      max-width:960px;margin:2.5rem auto 0;border:3px solid var(--coral-deep);}
+    @media(max-width:600px){.howto{padding:1.6rem 1.35rem;}}
+    .howto h2{color:#fff;font-size:clamp(1.2rem,3vw,1.6rem);letter-spacing:.06em;text-transform:uppercase;
+      text-align:center;margin-bottom:1.1rem;}
+    .howto-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+    @media(max-width:700px){.howto-grid{grid-template-columns:1fr;}}
+    .howto-item{background:rgba(255,255,255,.14);border-radius:10px;padding:1.15rem 1.25rem;}
+    .howto-item b{display:block;font-size:1rem;color:var(--gold-soft);margin-bottom:.3rem;
+      letter-spacing:.04em;text-transform:uppercase;font-size:.82rem;}
+    .howto-item span{font-size:.97rem;line-height:1.55;}
+    .howto-foot{text-align:center;margin-top:1.15rem;font-size:1rem;font-weight:bold;}
+    .howto-foot em{color:var(--gold-soft);font-style:normal;}
+
+    /* filters */
+    .filters{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center;margin:3rem 0 .75rem;}
+    .chip{font-family:Georgia,serif;font-size:.9rem;background:var(--white);border:2px solid transparent;
+      color:var(--deep-sage);padding:.55rem 1.15rem;border-radius:999px;cursor:pointer;
+      transition:all .2s var(--ease);}
+    .chip:hover{border-color:var(--coral);background:var(--coral-blush);}
+    .chip.on{background:var(--coral);border-color:var(--coral);color:#fff;box-shadow:0 3px 0 var(--coral-deep);}
+    .chip .n{opacity:.7;font-size:.82rem;margin-left:.25rem;}
+    .count{text-align:center;font-size:.9rem;font-style:italic;color:var(--soft-gray);margin-bottom:2.25rem;}
+
+    /* cards */
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;padding-bottom:3rem;}
+    @media(max-width:980px){.grid{grid-template-columns:repeat(2,1fr);}}
+    @media(max-width:640px){.grid{grid-template-columns:1fr;}}
+    .card{background:var(--white);border-radius:14px;padding:1.85rem 1.7rem 1.6rem;
+      border:1px solid rgba(221,107,78,.18);display:flex;flex-direction:column;position:relative;
+      overflow:hidden;transition:transform .28s var(--ease),box-shadow .28s var(--ease);}
+    .card::before{content:"";position:absolute;top:0;left:0;right:0;height:5px;background:var(--coral);}
+    .card[data-cat="groceries"]::before{background:var(--gold);}
+    .card[data-cat="home"]::before{background:var(--sage);}
+    .card[data-cat="mindset"]::before{background:var(--warm-tan);}
+    .card:hover{transform:translateY(-5px);box-shadow:0 22px 46px rgba(46,62,47,.12);}
+    .card.hide{display:none;}
+    .card-top{display:flex;align-items:baseline;justify-content:space-between;gap:.6rem;margin-bottom:.85rem;}
+    .card-num{font-family:'DM Serif Display',Georgia,serif;font-size:1.7rem;color:var(--coral-deep);line-height:1;}
+    .card[data-cat="groceries"] .card-num{color:var(--gold-deep);}
+    .card[data-cat="home"] .card-num{color:var(--sage);}
+    .card[data-cat="mindset"] .card-num{color:var(--warm-tan-dark);}
+    .card-pages{font-size:.72rem;font-weight:bold;letter-spacing:.1em;text-transform:uppercase;
+      color:var(--soft-gray);background:var(--cream);padding:.3rem .6rem;border-radius:5px;white-space:nowrap;}
+    .card-cat{font-size:.66rem;font-weight:bold;letter-spacing:.17em;text-transform:uppercase;
+      color:var(--coral-deep);margin-bottom:.4rem;}
+    .card[data-cat="groceries"] .card-cat{color:var(--gold-deep);}
+    .card[data-cat="home"] .card-cat{color:var(--sage);}
+    .card[data-cat="mindset"] .card-cat{color:var(--warm-tan-dark);}
+    .card h3{font-size:1.1rem;line-height:1.32;margin-bottom:.55rem;}
+    .card p{font-size:.93rem;line-height:1.6;color:var(--charcoal);margin-bottom:1.2rem;flex-grow:1;}
+    .card-actions{display:flex;flex-direction:column;gap:.5rem;}
+    .card-actions .btn{width:100%;}
+    .card-copy-note{font-size:.76rem;font-style:italic;color:var(--soft-gray);text-align:center;margin-top:.15rem;}
+
+    /* footer */
+    footer{background:var(--deep-sage);color:var(--cream);padding:3rem 0 2rem;text-align:center;}
+    footer .brand{font-family:'DM Serif Display',Georgia,serif;font-size:1.6rem;}
+    footer .tag{font-family:'Caveat',cursive;color:var(--coral-soft);font-size:1.25rem;margin:.3rem 0 1.5rem;}
+    footer .note{font-size:.92rem;opacity:.85;max-width:34rem;margin:0 auto 1.25rem;font-style:italic;}
+    footer .legal{font-size:.8rem;opacity:.6;padding-top:1.25rem;border-top:1px solid rgba(221,107,78,.22);}
+    footer a{color:var(--gold-soft);}
+
+    @media(prefers-reduced-motion:reduce){*{transition-duration:.01ms!important;}}
+    :focus-visible{outline:3px solid var(--coral);outline-offset:3px;}
+  </style>
+
+
+
+<!-- ==================== THE GATE ==================== -->
+<section class="gate" id="gate">
+  <div class="gate-card">
+    <span class="gate-logo"><span class="dot"></span>PURPOSEFUL PENNIES</span>
+    <span class="script">welcome, friend</span>
+    <h1>Your free resource library</h1>
+    <p>Pop in the password from your welcome email and everything is yours.</p>
+
+    <form id="gateForm" novalidate="">
+      <div class="gate-field">
+        <label for="pw">Password</label>
+        <input type="text" id="pw" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="It is in the email I sent you" required="">
+      </div>
+      <p class="gate-msg" id="gateMsg">That is not quite it. Check the email, it is all lowercase.</p>
+      <button type="submit" class="btn btn-full">Open my library</button>
+    </form>
+
+    <p class="gate-hint">Cannot find it? Check your spam or promotions folder, or
+      <a href="/contact">send me a note</a> and I will send it straight over.</p>
+  </div>
+</section>
+
+<!-- ==================== THE LIBRARY ==================== -->
+<div class="library" id="library">
+
+  <div class="topbar">
+    <div class="topbar-in">
+      <a href="/" class="topbar-logo"><span class="dot"></span>Purposeful Pennies</a>
+      <span class="topbar-note">all twelve, yours to keep</span>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="hero">
+      <span class="script">you are in!</span>
+      <h1>The Free Resource Library</h1>
+      <p>Twelve resources, twenty one pages, and not a single thing you have to pay for. Take what you need and ignore the rest.</p>
+    </div>
+
+    <!-- THE LOUD BIT -->
+    <div class="howto">
+      <h2>Two buttons on every resource</h2>
+      <div class="howto-grid">
+        <div class="howto-item">
+          <b>Download PDF</b>
+          <span>Downloads straight to your device, ready to print. No Google account needed. Best if you want to fill it in with a pen.</span>
+        </div>
+        <div class="howto-item">
+          <b>Make your own copy</b>
+          <span>Opens a Google window with one button that says <strong>Make a copy</strong>. Press it, and your own editable version lands in your Drive.</span>
+        </div>
+      </div>
+      <p class="howto-foot">
+        Always press <em>Make a copy</em> before you type anything.
+        That way you are working on <em>your</em> version, and the original stays put for the next person.
+      </p>
+    </div>
+
+    <!-- FILTERS -->
+    <div class="filters" role="group" aria-label="Filter by group">
+      <button class="chip on" data-filter="all">Everything <span class="n">12</span></button>
+      <button class="chip" data-filter="budget">Budgeting <span class="n">5</span></button>
+      <button class="chip" data-filter="groceries">Groceries and meals <span class="n">3</span></button>
+      <button class="chip" data-filter="home">Home and family <span class="n">2</span></button>
+      <button class="chip" data-filter="mindset">Money mindset <span class="n">2</span></button>
+    </div>
+    <p class="count" id="count" role="status" aria-live="polite">Showing all 12 resources</p>
+
+    <div class="grid" id="grid"></div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="brand">Purposeful Pennies</div>
+      <p class="tag">spend with intention. save with purpose.</p>
+      <p class="note">Everything here is free and stays free. If something is not working, or a link will not open,
+        just <a href="/contact">tell me</a> and I will fix it.</p>
+      <p class="legal">© 2026 Purposeful Pennies. For your own family's use. Please send friends to the site
+        rather than passing the files around, so I know who to help.</p>
+    </div>
+  </footer>
+</div>
+
+<script>
+/* =========================================================
+   PASSWORD
+   Stored as a hash only. The password itself is deliberately not
+   written anywhere in this file. To change it, run h('newpassword')
+   in a browser console and paste the number below.
+   ========================================================= */
+var PASS_HASH = 2765610647;
+
+function h(s) {
+  var x = 5381;
+  for (var i = 0; i < s.length; i++) { x = ((x << 5) + x) + s.charCodeAt(i); x = x & 0xFFFFFFFF; }
+  return x >>> 0;
+}
+
+/* =========================================================
+   THE TWELVE
+   id is the Google Doc id. The page builds two safe links from it:
+     /export?format=pdf   instant PDF download
+     /copy                Google's own Make a copy dialog
+   Neither can open the original for editing.
+   ========================================================= */
+var RESOURCES = [
+  { n:1,  cat:'budget',    group:'Budgeting', pages:'1 page',
+    name:'The 5-Minute Money Reality Check',
+    desc:'Start here. One page, five minutes, and a clear picture of where your money is actually going.',
+    id:'1436oj_SMrAeY3Nt9Tjdyp6VL3f4fkbYRNyuq9w4Fy5c' },
+  { n:2,  cat:'budget',    group:'Budgeting', pages:'1 page',
+    name:'The One-Page Monthly Budget',
+    desc:'The whole month on one sheet, with planned and actual side by side, and which payday covers what.',
+    id:'1coWlslWKiGslyoLl3vc8IvwvcmezIqbGEBxRdhxY27E' },
+  { n:3,  cat:'budget',    group:'Budgeting', pages:'2 pages',
+    name:'The Bill Due Date Calendar',
+    desc:'Every bill mapped to the payday it comes out of, plus a blank month grid to print each month.',
+    id:'13R_O0TE-Uxq_rue-68xqSt5OMSrLKT93Bt-GmbVbaEc' },
+  { n:4,  cat:'budget',    group:'Budgeting', pages:'1 page',
+    name:'The Sinking Fund Starter Sheet',
+    desc:'Christmas, tires, the dentist. Six funds and tiny monthly amounts so none of it is an emergency.',
+    id:'1rofF_VebBjBE9fzaqqRa7kYuuimwtAhlfCOeAKsuQUk' },
+  { n:5,  cat:'budget',    group:'Budgeting', pages:'1 page',
+    name:'The Debt Payoff Progress Tracker',
+    desc:'One hundred squares to color in. Tape it inside a cabinet door and watch it fill up.',
+    id:'1Hf9oww3SCud_d7eu-8731lXvaEncSAFMC_84vcxK1lQ' },
+  { n:6,  cat:'groceries', group:'Groceries and meals', pages:'4 pages',
+    name:'The Two-Week Pantry Meal Plan',
+    desc:'Fourteen cheap dinners from things you already have, with swaps and a checkbox shopping list.',
+    id:'1FIdUL8sGdv98fDkL_0l4mXsiGk37CFAFkenvc-UWHdY' },
+  { n:7,  cat:'groceries', group:'Groceries and meals', pages:'1 page, folds',
+    name:'The Grocery Trip Cheat Sheet',
+    desc:'Five habits on one side, your list on the other. Fold it down the middle and put it in your purse.',
+    id:'1okYGhw4rs2QIfDY1J3nVXOComTrGF5mBy3ii2ILevp4' },
+  { n:8,  cat:'groceries', group:'Groceries and meals', pages:'2 pages',
+    name:'The Freezer and Pantry Inventory',
+    desc:'Two sheets so nothing gets buried at the back, freezer burned, or bought for the third time.',
+    id:'1SS9ImZ9GbIDmqbCdp--JD6qpR_i_C0EXpEJvL5FYKKQ' },
+  { n:9,  cat:'home',      group:'Home and family', pages:'1 page',
+    name:'The Fifteen-Minute Payday Reset',
+    desc:'Seven steps, in order, with the minutes printed so you can hold me to the fifteen.',
+    id:'1isk_5Q6HF56yFwnQeVmctulexFk1AywErio9HOh97kU' },
+  { n:10, cat:'home',      group:'Home and family', pages:'2 pages',
+    name:'The Weekly Home Rhythm Planner',
+    desc:'One anchor task a day and three non-negotiables. Not a chore chart you will abandon by March.',
+    id:'13MlgITK1dpV5BqjWeMQTVtikEKNyo3RGs1b36mErM_E' },
+  { n:11, cat:'mindset',   group:'Money mindset', pages:'3 pages',
+    name:'Money Is a Tool Reflection Pages',
+    desc:'Three quiet pages on where your money beliefs came from, and what you want them to be instead.',
+    id:'1Pia--u483RpahaED_THpJ7oUzJjiqwq8dhxHPEC_XnI' },
+  { n:12, cat:'mindset',   group:'Money mindset', pages:'2 pages',
+    name:'Talking to Kids About Money',
+    desc:'Twenty conversation starters by age, plus five things it is better not to say.',
+    id:'1wrrC_77USC3ejvUypSv_D-EmDVahd8IRa4_upLKBTXQ' }
+];
+
+var DOC = 'https://docs.google.com/document/d/';
+function pdfUrl(id)  { return DOC + id + '/export?format=pdf'; }
+function copyUrl(id) { return DOC + id + '/copy'; }
+
+/* ---------- build the cards ---------- */
+function render() {
+  var grid = document.getElementById('grid');
+  grid.innerHTML = RESOURCES.map(function (r) {
+    return '' +
+    '<article class="card" data-cat="' + r.cat + '">' +
+      '<div class="card-top">' +
+        '<span class="card-num">' + (r.n < 10 ? '0' + r.n : r.n) + '</span>' +
+        '<span class="card-pages">' + r.pages + '</span>' +
+      '</div>' +
+      '<div class="card-cat">' + r.group + '</div>' +
+      '<h3>' + r.name + '</h3>' +
+      '<p>' + r.desc + '</p>' +
+      '<div class="card-actions">' +
+        '<a class="btn btn-sm" href="' + pdfUrl(r.id) + '">Download PDF</a>' +
+        '<a class="btn btn-sm btn-outline" href="' + copyUrl(r.id) + '" target="_blank" rel="noopener">' +
+          'Make your own copy</a>' +
+        '<span class="card-copy-note">then press Make a copy</span>' +
+      '</div>' +
+    '</article>';
+  }).join('');
+}
+
+/* ---------- filters ---------- */
+var LABELS = { all:'resources', budget:'budgeting resources',
+  groceries:'grocery and meal resources', home:'home and family resources',
+  mindset:'money mindset resources' };
+
+function applyFilter(f) {
+  var shown = 0;
+  document.querySelectorAll('.card').forEach(function (c) {
+    var match = (f === 'all' || c.dataset.cat === f);
+    c.classList.toggle('hide', !match);
+    if (match) shown++;
+  });
+  document.querySelectorAll('.chip').forEach(function (c) {
+    c.classList.toggle('on', c.dataset.filter === f);
+  });
+  document.getElementById('count').textContent = (f === 'all')
+    ? 'Showing all ' + shown + ' resources'
+    : 'Showing ' + shown + ' ' + LABELS[f];
+}
+
+/* ---------- open the library ---------- */
+function openLibrary() {
+  document.getElementById('gate').style.display = 'none';
+  var lib = document.getElementById('library');
+  lib.classList.add('open');
+  render();
+  document.querySelectorAll('.chip').forEach(function (c) {
+    c.addEventListener('click', function () { applyFilter(c.dataset.filter); });
+  });
+  window.scrollTo(0, 0);
+}
+
+/* ---------- one click entry from the thank-you page ----------
+   /library?u=<hash> unlocks without typing. The hash is already in
+   this file's source, so this adds no new exposure. -------------- */
+(function autoUnlock() {
+  var u = '';
+  try { u = new URLSearchParams(window.location.search).get('u') || ''; } catch (e) { return; }
+  if (u && String(PASS_HASH) === u) {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', openLibrary);
+    } else { openLibrary(); }
+  }
+})();
+
+/* ---------- the gate ---------- */
+document.getElementById('gateForm').addEventListener('submit', function (e) {
+  e.preventDefault();
+  var gate = document.getElementById('gate');
+  var val = document.getElementById('pw').value.trim().toLowerCase();
+  if (h(val) === PASS_HASH) {
+    openLibrary();
+  } else {
+    gate.classList.add('error');
+    document.getElementById('pw').select();
+  }
+});
+document.getElementById('pw').addEventListener('input', function () {
+  document.getElementById('gate').classList.remove('error');
+});
+<w:pgSz w:h="15840" w:w="12240" w:orient="portrait"/><w:pgMar w:bottom="1440" w:top="1440" w:left="1440" w:right="1440" w:header="720" w:footer="720"/><w:pgNumType w:start="1"/></w:sectPr></w:pPr><w:r w:rsidDel="00000000" w:rsidR="00000000" w:rsidRPr="00000000"><w:rPr><w:rtl w:val="0"/></w:rPr><w:t xml:space="preserve"></script>

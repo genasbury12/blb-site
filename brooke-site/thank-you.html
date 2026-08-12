@@ -1,0 +1,371 @@
+<!--
+  ============================================================
+  PURPOSEFUL PENNIES  ·  THANK YOU  ·  opt-in confirmation
+  URL: /thank-you
+  Draft: https://purposefulpenniesdraft.showit.site/thank-you
+  ============================================================
+
+  WHAT THIS PAGE HAS TO DO
+  It is the page somebody lands on the instant they subscribe, so it
+  carries the one thing they cannot get anywhere else yet: the library
+  password. Everything else on the page is secondary to that.
+
+  ABOUT "JUST REDIRECT THEM STRAIGHT THERE"
+  An instant redirect to /library would strand them at the password
+  gate with no password, so this page does something better:
+
+    UNLOCK BUTTON      goes to /library?u=<hash>, which unlocks the
+                       library automatically. No typing at all.
+    PASSWORD SHOWN     large, copyable, because they WILL come back
+                       later from the welcome email and need it then.
+
+  If you still want a hands-off redirect, set AUTO_REDIRECT to true in
+  the config below. A visible countdown appears and it sends them to
+  the same auto-unlocking URL. It is off by default because this page
+  is the highest intent moment in the whole funnel and worth two more
+  seconds of their attention.
+
+  INCOMING PARAMETERS from /opt-in
+    ?name=Katie                greets her by name
+    ?r=pantry-meal-plan        names the resource that brought her in
+  Both are optional. Missing or unrecognised values fall back cleanly.
+
+  READ THIS ABOUT THE GATE
+  The unlock hash below is the same one in the library page source, so
+  it adds no new exposure. It is still a soft gate. See the note in the
+  library file.
+
+  No em dashes or en dashes anywhere.
+  ============================================================
+-->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>You are in · Purposeful Pennies</title>
+  <meta name="description" content="Your free resource library is ready.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&amp;family=DM+Serif+Display&amp;display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --deep-sage:#2E3E2F;--sage:#5C6E47;--warm-tan:#C28954;--warm-tan-dark:#A77246;
+      --cream:#FBF4D7;--cream-warm:#F7ECC4;--charcoal:#2A2A2A;--soft-gray:#7E867D;
+      --light-sage:#DBE3CE;--pale-tan:#EFE0C1;--white:#FFFFFF;
+      --coral:#DD6B4E;--coral-deep:#C25441;--coral-soft:#F7D0BE;--coral-blush:#FBE3D5;
+      --gold:#D4A83F;--gold-soft:#EDD98D;--gold-deep:#B8912E;
+      --ease:cubic-bezier(.22,.61,.36,1);
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{font-size:17px;scroll-behavior:smooth;}
+    @media(min-width:720px){html{font-size:18px;}}
+    body{font-family:Georgia,'Times New Roman',serif;font-size:1.06rem;line-height:1.7;
+      color:var(--charcoal);background:var(--cream);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+    .container{max-width:1100px;margin:0 auto;padding:0 1.5rem;}
+    .narrow{max-width:800px;margin:0 auto;padding:0 1.5rem;}
+    h1,h2,h3{font-family:Georgia,serif;color:var(--deep-sage);}
+    .script{font-family:'Caveat',cursive;font-weight:700;}
+    section{padding:4rem 0;position:relative;}
+    @media(max-width:700px){section{padding:3rem 0;}}
+
+    /* top bar, no nav on purpose */
+    .lp-bar{background:var(--cream);border-bottom:1px solid rgba(194,137,84,.18);}
+    .lp-bar-in{max-width:1100px;margin:0 auto;padding:1.05rem 1.5rem;display:flex;
+      align-items:center;justify-content:space-between;gap:1rem;}
+    .lp-logo{font-size:1.2rem;font-weight:bold;color:var(--deep-sage);letter-spacing:.04em;
+      text-decoration:none;display:inline-flex;align-items:center;gap:.5rem;}
+    .lp-logo .dot{width:8px;height:8px;border-radius:50%;background:var(--coral);}
+    .lp-note{font-family:'Caveat',cursive;font-size:1.2rem;color:var(--coral-deep);white-space:nowrap;}
+    @media(max-width:600px){.lp-note{display:none;}}
+
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:.6rem;background:var(--coral);
+      color:#fff;font-family:Georgia,serif;font-size:1.05rem;font-weight:bold;padding:1.1rem 2.2rem;
+      border:none;border-radius:999px;cursor:pointer;text-decoration:none;letter-spacing:.02em;
+      box-shadow:0 3px 0 var(--coral-deep);transition:all .22s var(--ease);}
+    .btn:hover{background:var(--coral-deep);transform:translateY(-2px);box-shadow:0 5px 0 var(--coral-deep);}
+    .btn::after{content:"\2192";transition:transform .22s var(--ease);}
+    .btn:hover::after{transform:translateX(4px);}
+    .btn-lg{font-size:1.15rem;padding:1.25rem 2.6rem;}
+    .btn-ghost{background:transparent;color:var(--sage);border:2px solid var(--sage);box-shadow:none;
+      padding:calc(.8rem - 2px) calc(1.6rem - 2px);font-size:.95rem;}
+    .btn-ghost:hover{background:var(--light-sage);color:var(--deep-sage);box-shadow:none;}
+    .btn-ghost::after{content:none;}
+
+    /* hero */
+    .hero{background:var(--cream);text-align:center;overflow:hidden;padding-top:3.25rem;}
+    .hero::before{content:"";position:absolute;top:-200px;right:-150px;width:520px;height:520px;
+      background:radial-gradient(circle,var(--coral-blush)0%,transparent 65%);opacity:.8;pointer-events:none;}
+    .hero::after{content:"";position:absolute;bottom:-180px;left:-140px;width:450px;height:450px;
+      background:radial-gradient(circle,var(--gold-soft)0%,transparent 62%);opacity:.45;pointer-events:none;}
+    .hero .narrow{position:relative;z-index:2;}
+    .tick{width:82px;height:82px;margin:0 auto 1.5rem;border-radius:50%;background:var(--deep-sage);
+      display:flex;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(46,62,47,.2);}
+    .tick svg{width:38px;height:38px;}
+    .hero .script{display:block;font-size:2rem;color:var(--coral-deep);margin-bottom:.25rem;}
+    .hero h1{font-size:clamp(2rem,5vw,3.2rem);line-height:1.06;letter-spacing:-.02em;margin-bottom:1.1rem;}
+    .hero-sub{font-size:1.12rem;font-style:italic;color:var(--sage);max-width:34rem;margin:0 auto;}
+
+    /* the resource they came for */
+    .ref{display:none;background:var(--white);border:2px solid var(--gold);border-radius:12px;
+      padding:1rem 1.4rem;max-width:34rem;margin:1.75rem auto 0;box-shadow:0 6px 18px rgba(212,168,63,.18);}
+    .ref.show{display:block;}
+    .ref .script{display:block;font-size:1.25rem;color:var(--gold-deep);margin-bottom:.15rem;}
+    .ref p{font-size:.97rem;line-height:1.55;}
+    .ref strong{color:var(--deep-sage);}
+
+    /* THE PASSWORD BLOCK, the point of the page */
+    .pwblock{background:var(--coral);color:#fff;border:3px solid var(--coral-deep);border-radius:18px;
+      padding:2.5rem 2.25rem;max-width:640px;margin:2.75rem auto 0;text-align:center;
+      box-shadow:0 20px 50px rgba(221,107,78,.28);}
+    @media(max-width:600px){.pwblock{padding:1.85rem 1.35rem;}}
+    .pwblock h2{color:#fff;font-size:.86rem;font-weight:bold;letter-spacing:.2em;text-transform:uppercase;
+      margin-bottom:1.1rem;}
+    .pwrow{display:flex;align-items:stretch;gap:.6rem;justify-content:center;flex-wrap:wrap;}
+    .pw{background:#fff;border-radius:10px;padding:.9rem 2rem;font-family:'DM Serif Display',Georgia,serif;
+      font-size:clamp(1.8rem,6vw,2.6rem);color:var(--coral-deep);letter-spacing:.06em;line-height:1.1;}
+    .copybtn{background:var(--deep-sage);color:var(--gold-soft);border:none;border-radius:10px;
+      padding:0 1.15rem;font-family:Georgia,serif;font-size:.86rem;font-weight:bold;letter-spacing:.1em;
+      text-transform:uppercase;cursor:pointer;transition:all .2s var(--ease);white-space:nowrap;}
+    .copybtn:hover{background:#22301F;color:#fff;}
+    .copybtn.done{background:var(--gold);color:var(--deep-sage);}
+    .pwblock .why{font-size:.97rem;margin-top:1.15rem;line-height:1.6;opacity:.97;}
+    .pwblock .why b{color:var(--gold-soft);}
+
+    /* main CTA */
+    .go{text-align:center;margin-top:2.25rem;}
+    .go .trust{margin-top:.9rem;font-size:.9rem;font-style:italic;color:var(--soft-gray);}
+    .countdown{display:none;margin-top:.85rem;font-size:.92rem;color:var(--coral-deep);font-weight:bold;}
+    .countdown.show{display:block;}
+
+    /* what happens next */
+    .next{background:var(--white);}
+    .next-head{text-align:center;max-width:40rem;margin:0 auto 2.5rem;}
+    .next-head .eyebrow{font-size:.76rem;font-weight:bold;letter-spacing:.2em;text-transform:uppercase;
+      color:var(--coral-deep);display:inline-flex;align-items:center;gap:.7rem;margin-bottom:.9rem;}
+    .next-head .eyebrow::before{content:"";width:28px;height:1px;background:var(--coral);display:inline-block;}
+    .next-head h2{font-size:clamp(1.6rem,3.6vw,2.3rem);line-height:1.15;}
+    .rows{max-width:44rem;margin:0 auto;display:flex;flex-direction:column;gap:.9rem;}
+    .row{background:var(--cream);border-radius:12px;padding:1.4rem 1.7rem;display:grid;
+      grid-template-columns:140px 1fr;gap:1.5rem;align-items:center;transition:transform .25s var(--ease);}
+    .row:hover{transform:translateX(5px);}
+    @media(max-width:640px){.row{grid-template-columns:1fr;gap:.45rem;padding:1.25rem 1.35rem;}}
+    .row .when{font-family:'Caveat',cursive;font-size:1.35rem;color:var(--coral-deep);line-height:1.2;}
+    .row .what{font-size:.98rem;line-height:1.6;}
+    .row .what strong{color:var(--deep-sage);}
+    .spam{max-width:44rem;margin:1.75rem auto 0;background:var(--coral-blush);border-radius:12px;
+      padding:1.25rem 1.6rem;border-left:5px solid var(--coral);font-size:.97rem;line-height:1.6;}
+    .spam b{color:var(--coral-deep);}
+
+    /* soft membership mention */
+    .bridge{background:var(--light-sage);}
+    .bridge-card{max-width:44rem;margin:0 auto;background:var(--white);border-radius:14px;
+      padding:2.25rem 2.25rem;text-align:center;box-shadow:0 10px 30px rgba(46,62,47,.07);}
+    @media(max-width:600px){.bridge-card{padding:1.85rem 1.4rem;}}
+    .bridge-card .eyebrow{font-size:.74rem;font-weight:bold;letter-spacing:.2em;text-transform:uppercase;
+      color:var(--sage);margin-bottom:.8rem;}
+    .bridge-card h2{font-size:clamp(1.35rem,3vw,1.85rem);line-height:1.2;margin-bottom:.85rem;}
+    .bridge-card p{font-size:1rem;color:var(--charcoal);margin-bottom:1.5rem;}
+
+    footer{background:var(--deep-sage);color:var(--cream);padding:2.5rem 0 2rem;text-align:center;}
+    footer .brand{font-family:'DM Serif Display',Georgia,serif;font-size:1.5rem;color:var(--cream);
+      text-decoration:none;display:inline-block;}
+    footer .tag{font-family:'Caveat',cursive;color:var(--coral-soft);font-size:1.2rem;margin:.3rem 0 1.4rem;}
+    footer .legal{font-size:.82rem;opacity:.65;}
+    footer .legal a{color:var(--cream);opacity:.85;text-decoration:none;margin:0 .4rem;}
+
+    @media(prefers-reduced-motion:reduce){*{transition-duration:.01ms!important;}}
+    :focus-visible{outline:3px solid var(--coral);outline-offset:3px;}
+  </style>
+
+
+
+<div class="lp-bar">
+  <div class="lp-bar-in">
+    <a href="/" class="lp-logo"><span class="dot"></span>Purposeful Pennies</a>
+    <span class="lp-note">all twelve, yours to keep</span>
+  </div>
+</div>
+
+<!-- ==================== HERO ==================== -->
+<section class="hero">
+  <div class="narrow">
+    <div class="tick">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#EDD98D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+    </div>
+    <span class="script" id="greet">you are in!</span>
+    <h1 id="headline">Your library is ready.</h1>
+    <p class="hero-sub">All twelve resources, waiting for you. You will need the password just below, so grab it before you go anywhere.</p>
+
+    <!-- shown when ?r= names a specific resource -->
+    <div class="ref" id="ref">
+      <span class="script">the one you came for</span>
+      <p>The <strong id="refName">free library</strong> is in there, along with the other eleven. It is number <strong id="refNum">1</strong> on the shelf.</p>
+    </div>
+
+    <!-- THE PASSWORD -->
+    <div class="pwblock">
+      <h2>Your library password</h2>
+      <div class="pwrow">
+        <span class="pw" id="pwText">pennies</span>
+        <button class="copybtn" id="copyBtn" type="button">Copy</button>
+      </div>
+      <p class="why">Write it down or take a screenshot now. <b>You will need it again</b> whenever you come back to the library, and it is in your welcome email too.</p>
+    </div>
+
+    <div class="go">
+      <a href="/library" class="btn btn-lg" id="goBtn">Open my library</a>
+      <p class="trust">The button below takes you straight in. No typing needed this time.</p>
+      <p class="countdown" id="countdown"></p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== WHAT HAPPENS NEXT ==================== -->
+<section class="next">
+  <div class="container">
+    <div class="next-head">
+      <span class="eyebrow">No surprises</span>
+      <h2>What happens from here.</h2>
+    </div>
+    <div class="rows">
+      <div class="row">
+        <div class="when">in a minute or two</div>
+        <div class="what">A welcome email with the password again and a link back to the library. <strong>If it has not arrived in five minutes, check your spam folder.</strong></div>
+      </div>
+      <div class="row">
+        <div class="when">the next few days</div>
+        <div class="what">A short series walking you through the Reality Check and <strong>the one thing to fix first.</strong> Written like a friend, not a newsletter.</div>
+      </div>
+      <div class="row">
+        <div class="when">every week or so</div>
+        <div class="what">One honest email. What is working in our house, what is not, something you can use. <strong>Unsubscribe any time, no hard feelings.</strong></div>
+      </div>
+    </div>
+    <p class="spam"><b>One small favour.</b> Add my email address to your contacts, or drag this first email into your main inbox. It teaches your email provider that I am not spam, and it means the rest of them actually reach you.</p>
+  </div>
+</section>
+
+<!-- ==================== SOFT BRIDGE ==================== -->
+<section class="bridge">
+  <div class="container">
+    <div class="bridge-card">
+      <div class="eyebrow">Only if you want it</div>
+      <h2>Start with the free twelve. Truly.</h2>
+      <p>Plenty of families never go past the free library, and that is completely fine by me. If you work through it and find yourself wanting everything connected in one place with me alongside you, the membership is there whenever you are ready. No rush, and no pitch today.</p>
+      <a href="/membership" class="btn btn-ghost">Have a look at the membership</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <a href="/" class="brand">Purposeful Pennies</a>
+    <p class="tag">spend with intention. save with purpose.</p>
+    <p class="legal">
+      © 2026 Purposeful Pennies. All rights reserved.
+      &nbsp;·&nbsp;
+      <a href="/privacy-policy">Privacy</a> ·
+      <a href="/terms">Terms</a> ·
+      <a href="/contact">Contact</a>
+    </p>
+  </div>
+</footer>
+
+<script>
+/* =========================================================
+   CONFIG  ·  the only lines you should need to touch
+   ========================================================= */
+var LIBRARY_URL   = '/library';
+var UNLOCK_HASH   = 2765610647;   /* must match PASS_HASH in the library page */
+var PASSWORD_TEXT = 'pennies';    /* shown on screen only, for her to copy */
+var AUTO_REDIRECT = false;        /* true sends her onward automatically */
+var REDIRECT_SECS = 6;
+
+/* the twelve, so ?r= can be named back to her */
+var RESOURCES = {
+  'reality-check':       ['5-Minute Money Reality Check', 1],
+  'monthly-budget':      ['One-Page Monthly Budget', 2],
+  'bill-calendar':       ['Bill Due Date Calendar', 3],
+  'sinking-funds':       ['Sinking Fund Starter Sheet', 4],
+  'debt-tracker':        ['Debt Payoff Progress Tracker', 5],
+  'pantry-meal-plan':    ['Two-Week Pantry Meal Plan', 6],
+  'grocery-cheat-sheet': ['Grocery Trip Cheat Sheet', 7],
+  'freezer-inventory':   ['Freezer and Pantry Inventory', 8],
+  'payday-reset':        ['Fifteen-Minute Payday Reset', 9],
+  'home-rhythm':         ['Weekly Home Rhythm Planner', 10],
+  'money-reflection':    ['Money Is a Tool Reflection Pages', 11],
+  'kids-and-money':      ['Talking to Kids About Money', 12]
+};
+var GENERIC = ['library', 'library-close'];
+
+/* ---------- read the parameters ---------- */
+var params = {};
+try { params = new URLSearchParams(window.location.search); } catch (e) { params = null; }
+function get(k) { try { return params ? (params.get(k) || '') : ''; } catch (e) { return ''; } }
+
+/* keep the name to letters, spaces, hyphens and apostrophes, capped, so nothing can be injected */
+function cleanName(s) {
+  return s.replace(/[^A-Za-z\u00C0-\u024F' -]/g, '').trim().slice(0, 24);
+}
+
+(function greet() {
+  var name = cleanName(get('name'));
+  if (!name) return;
+  var pretty = name.charAt(0).toUpperCase() + name.slice(1);
+  document.getElementById('greet').textContent = 'you are in, ' + pretty + '!';
+  document.getElementById('headline').textContent = 'Your library is ready, ' + pretty + '.';
+})();
+
+(function namedResource() {
+  var slug = get('r');
+  if (!slug || GENERIC.indexOf(slug) !== -1) return;
+  var hit = RESOURCES[slug];
+  if (!hit) return;
+  document.getElementById('refName').textContent = hit[0];
+  document.getElementById('refNum').textContent = hit[1];
+  document.getElementById('ref').classList.add('show');
+})();
+
+/* ---------- the password ---------- */
+document.getElementById('pwText').textContent = PASSWORD_TEXT;
+
+document.getElementById('copyBtn').addEventListener('click', function () {
+  var btn = this;
+  function done() {
+    btn.textContent = 'Copied';
+    btn.classList.add('done');
+    setTimeout(function () { btn.textContent = 'Copy'; btn.classList.remove('done'); }, 2200);
+  }
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(PASSWORD_TEXT).then(done, fallback);
+  } else { fallback(); }
+  function fallback() {
+    var ta = document.createElement('textarea');
+    ta.value = PASSWORD_TEXT;
+    ta.setAttribute('readonly', '');
+    ta.style.position = 'absolute';
+    ta.style.left = '-9999px';
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); done(); }
+    catch (e) { btn.textContent = 'Select it'; }
+    document.body.removeChild(ta);
+  }
+});
+
+/* ---------- the one click straight in ---------- */
+var unlockUrl = LIBRARY_URL + '?u=' + UNLOCK_HASH;
+document.getElementById('goBtn').setAttribute('href', unlockUrl);
+
+/* ---------- optional hands off redirect ---------- */
+if (AUTO_REDIRECT) {
+  var left = REDIRECT_SECS;
+  var el = document.getElementById('countdown');
+  el.classList.add('show');
+  el.textContent = 'Taking you there in ' + left + ' seconds. Grab the password first.';
+  var t = setInterval(function () {
+    left--;
+    if (left <= 0) { clearInterval(t); window.location.href = unlockUrl; return; }
+    el.textContent = 'Taking you there in ' + left + ' second' + (left === 1 ? '' : 's') + '. Grab the password first.';
+  }, 1000);
+}
+<w:pgSz w:h="15840" w:w="12240" w:orient="portrait"/><w:pgMar w:bottom="1440" w:top="1440" w:left="1440" w:right="1440" w:header="720" w:footer="720"/><w:pgNumType w:start="1"/></w:sectPr></w:pPr><w:r w:rsidDel="00000000" w:rsidR="00000000" w:rsidRPr="00000000"><w:rPr><w:rtl w:val="0"/></w:rPr><w:t xml:space="preserve"></script>

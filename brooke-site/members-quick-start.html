@@ -1,0 +1,1015 @@
+<!--
+  ============================================================
+  PURPOSEFUL PENNIES  ·  QUICK START   /members-quick-start
+  Showit + MemberSpace
+  ============================================================
+
+  WHAT THIS PAGE IS
+  The single most linked page in the whole membership. A new member
+  arrives here from four places: twice on /membership-thank-you, from
+  the new member strip on /members, and from the Quick Start tile in
+  the vault grid.
+
+  It has one job. Get her from "I just paid" to "I have actually done
+  something" in fifteen minutes, without opening the whole vault.
+
+  THE PROMISE IT HAS TO KEEP
+  Three pages already promise the same specific thing, so this page
+  delivers exactly that and nothing extra:
+     two pages to print, one five minute video, one decision.
+  If any of those three change here, change them there too.
+
+  ------------------------------------------------------------
+  MEMBERSPACE
+  ------------------------------------------------------------
+  Protection is inherited from the /members-* prefix rule. Nothing to
+  set up per page.
+
+  Attributes used, confirmed against the MemberSpace developer docs:
+     data-ms-member-info="firstName"   prints her first name
+
+  No data-ms-show on this page, so there is no flicker to prevent and
+  no preview shim needed. Account links point at /members-account,
+  the one page that carries the MemberSpace Link.
+
+  ------------------------------------------------------------
+  WHAT TO FILL IN
+  ------------------------------------------------------------
+  The config block at the bottom holds everything:
+     PRINTABLES     the two files for step one
+     VIDEO_EMBED    the five minute walkthrough
+     NEXT_SESSION   date, time, join link
+  The two printables are the only hard dependency. This page cannot
+  go live before those two PDFs exist.
+
+  FORMATTING RULE. Zero em dashes, zero en dashes. The separator is
+  the diamond glyph.
+  ============================================================
+-->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Quick Start · The One-Income Circle</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&amp;family=DM+Serif+Display&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --deep-sage: #2E3E2F;
+      --sage: #5C6E47;
+      --sage-soft: #8B9E75;
+      --warm-tan: #C28954;
+      --warm-tan-dark: #A77246;
+      --cream: #FBF4D7;
+      --cream-warm: #F7ECC4;
+      --charcoal: #2A2A2A;
+      --soft-gray: #7E867D;
+      --light-sage: #DBE3CE;
+      --pale-tan: #EFE0C1;
+      --white: #FFFFFF;
+      --coral: #DD6B4E;
+      --coral-deep: #C25441;
+      --coral-soft: #F7D0BE;
+      --coral-blush: #FBE3D5;
+      --gold: #D4A83F;
+      --gold-soft: #EDD98D;
+      --gold-deep: #B8912E;
+      --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+      --bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 17px; scroll-behavior: smooth; }
+    @media (min-width: 720px) { html { font-size: 18px; } }
+    body {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 1.05rem; line-height: 1.68;
+      color: var(--charcoal); background: var(--cream);
+      -webkit-font-smoothing: antialiased; overflow-x: hidden;
+    }
+    .container { max-width: 1080px; margin: 0 auto; padding: 0 1.5rem; }
+    .narrow { max-width: 780px; margin: 0 auto; padding: 0 1.5rem; }
+    section { padding: 3rem 0; position: relative; }
+    @media (max-width: 700px) { section { padding: 2.25rem 0; } }
+    .script { font-family: 'Caveat', cursive; font-weight: 700; }
+    h1, h2, h3, h4 { font-family: Georgia, serif; color: var(--deep-sage); }
+    h1 { font-size: clamp(2.05rem, 4.8vw, 3.05rem); font-weight: bold; line-height: 1.08; letter-spacing: -0.01em; }
+    h2 { font-size: clamp(1.5rem, 3.1vw, 2.05rem); font-weight: bold; line-height: 1.18; }
+    h3 { font-size: 1.18rem; font-weight: bold; line-height: 1.32; }
+    h4 { font-size: 1rem; font-weight: bold; }
+    p { margin-bottom: 0.95rem; }
+    p:last-child { margin-bottom: 0; }
+    a { color: var(--coral-deep); }
+    .eyebrow {
+      font-size: 0.74rem; font-weight: bold; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--warm-tan-dark);
+      display: inline-flex; align-items: center; gap: 0.7rem;
+    }
+    .eyebrow::before { content: ""; width: 24px; height: 1px; background: var(--warm-tan); }
+    .eyebrow-coral { color: var(--coral-deep); }
+    .eyebrow-coral::before { background: var(--coral); }
+    .eyebrow-cream { color: var(--coral-soft); }
+    .eyebrow-cream::before { background: var(--coral); }
+
+    /* ===== BUTTONS ===== */
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.55rem;
+      background: var(--warm-tan); color: white; font-family: Georgia, serif;
+      font-size: 1rem; font-weight: bold; padding: 0.9rem 1.9rem;
+      border: none; border-radius: 999px; cursor: pointer; text-decoration: none;
+      transition: all 0.25s var(--ease); box-shadow: 0 3px 0 var(--warm-tan-dark);
+    }
+    .btn:hover { background: var(--warm-tan-dark); transform: translateY(-2px); box-shadow: 0 5px 0 var(--warm-tan-dark); color: white; }
+    .btn::after { content: "\2192"; transition: transform 0.25s var(--ease); }
+    .btn:hover::after { transform: translateX(3px); }
+    .btn-coral { background: var(--coral); box-shadow: 0 3px 0 var(--coral-deep); }
+    .btn-coral:hover { background: var(--coral-deep); box-shadow: 0 5px 0 var(--coral-deep); }
+    .btn-outline {
+      background: transparent; color: var(--warm-tan-dark); border: 2px solid var(--warm-tan);
+      padding: calc(0.9rem - 2px) calc(1.9rem - 2px); box-shadow: none;
+    }
+    .btn-outline:hover { background: var(--pale-tan); color: var(--warm-tan-dark); box-shadow: none; }
+    .btn-cream { background: var(--cream); color: var(--deep-sage); box-shadow: 0 3px 0 rgba(0,0,0,0.18); }
+    .btn-cream:hover { background: var(--cream-warm); color: var(--deep-sage); box-shadow: 0 5px 0 rgba(0,0,0,0.18); }
+    .btn-sm { font-size: 0.9rem; padding: 0.65rem 1.35rem; }
+    .btn-plain::after { content: ""; }
+    .btn-print::before {
+      content: "\2399"; font-size: 1.1rem; line-height: 1;
+    }
+
+    /* ===== MEMBER NAV ===== */
+    .mnav { background: var(--deep-sage); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(46, 62, 47, 0.18); }
+    .mnav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 1.5rem; padding: 0.85rem 1.5rem; max-width: 1280px; margin: 0 auto;
+    }
+    .mnav-logo {
+      font-family: Georgia, serif; font-size: 1.12rem; font-weight: bold;
+      color: var(--cream); text-decoration: none; display: flex; align-items: center;
+      gap: 0.5rem; white-space: nowrap;
+    }
+    .mnav-logo .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--coral); }
+    .mnav-links { display: flex; align-items: center; gap: 1.6rem; }
+    .mnav-links a {
+      color: var(--cream); text-decoration: none; font-size: 0.94rem; opacity: 0.88;
+      position: relative; padding-bottom: 2px; white-space: nowrap;
+    }
+    .mnav-links a::after {
+      content: ""; position: absolute; left: 0; right: 0; bottom: -3px; height: 2px;
+      background: var(--coral); transform: scaleX(0); transform-origin: left;
+      transition: transform 0.25s var(--ease); border-radius: 2px;
+    }
+    .mnav-links a:hover { opacity: 1; }
+    .mnav-links a:hover::after { transform: scaleX(1); }
+    .mnav-account {
+      background: var(--coral); color: white !important; padding: 0.5rem 1.1rem;
+      border-radius: 999px; font-size: 0.86rem !important; font-weight: bold;
+      opacity: 1 !important; box-shadow: 0 2px 0 var(--coral-deep);
+    }
+    .mnav-account::after { display: none; }
+    .mnav-account:hover { background: var(--coral-deep); }
+    .mnav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 0.4rem; }
+    .mnav-toggle span { display: block; width: 24px; height: 2px; background: var(--cream); margin: 5px 0; border-radius: 2px; }
+    @media (max-width: 1080px) {
+      .mnav-toggle { display: block; }
+      .mnav-links {
+        position: absolute; top: 100%; left: 0; right: 0; background: var(--deep-sage);
+        flex-direction: column; align-items: stretch; gap: 0; padding: 0 1.5rem;
+        max-height: 0; overflow: hidden;
+        transition: max-height 0.35s var(--ease), padding 0.35s var(--ease);
+      }
+      .mnav-links.open { max-height: 32rem; padding: 0.75rem 1.5rem 1.5rem; }
+      .mnav-links a { padding: 0.75rem 0; font-size: 1.02rem; }
+      .mnav-links a::after { display: none; }
+      .mnav-account { text-align: center; margin-top: 0.75rem; }
+    }
+
+    /* ===== SHOWIT OVERRIDE ARMOUR =====
+       Showit injects its own link colours over anything pasted into
+       Custom Head HTML, and it beat the logo rule on the live site: the
+       logo rendered dark on the dark nav and was effectively invisible.
+       The nav links happened to survive, but they are one template
+       change away from the same problem.
+
+       Every colour in the nav is therefore pinned here with high
+       specificity and !important. These are the same colours the
+       component already intended, nothing new. Do not remove this
+       block. If a nav element ever renders the wrong colour on Showit
+       again, add it here rather than editing the rules above. */
+    .mnav .mnav-logo,
+    .mnav .mnav-logo:link,
+    .mnav .mnav-logo:visited,
+    .mnav .mnav-logo:hover,
+    .mnav .mnav-logo:focus,
+    .mnav .mnav-logo:active,
+    .mnav .mnav-logo * { color: var(--cream) !important; }
+    .mnav .mnav-logo .dot { background: var(--coral) !important; }
+
+    .mnav .mnav-links a,
+    .mnav .mnav-links a:link,
+    .mnav .mnav-links a:visited,
+    .mnav .mnav-links a:hover,
+    .mnav .mnav-links a:active { color: var(--cream) !important; }
+
+    .mnav .mnav-links a.mnav-account,
+    .mnav .mnav-links a.mnav-account:link,
+    .mnav .mnav-links a.mnav-account:visited,
+    .mnav .mnav-links a.mnav-account:hover,
+    .mnav .mnav-links a.mnav-account:active { color: #FFFFFF !important; }
+    .mnav .mnav-toggle span { background: var(--cream) !important; }
+    .mnav .mnav-logo, .mnav .mnav-links a { text-decoration: none !important; }
+
+
+    /* ===== PROGRESS RAIL ===== */
+    .rail {
+      background: rgba(251, 244, 215, 0.96); backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(194, 137, 84, 0.25);
+      position: sticky; top: var(--nav-h, 68px); z-index: 90; padding: 0.7rem 0;
+    }
+    .rail-inner {
+      max-width: 1080px; margin: 0 auto; padding: 0 1.5rem;
+      display: flex; align-items: center; gap: 1.25rem;
+    }
+    .rail-steps { display: flex; align-items: center; gap: 0.5rem; flex: 1; }
+    .rail-step {
+      flex: 1; height: 7px; background: var(--light-sage);
+      border-radius: 999px; overflow: hidden; position: relative;
+    }
+    .rail-step.done { background: var(--coral); }
+    .rail-label { font-size: 0.82rem; color: var(--sage); font-style: italic; white-space: nowrap; }
+    @media (max-width: 620px) { .rail-label { display: none; } }
+
+    /* ===== HERO ===== */
+    .qs-hero { background: var(--cream); padding: 2.75rem 0 2.5rem; position: relative; overflow: hidden; }
+    .qs-hero::before {
+      content: ""; position: absolute; top: -170px; right: -150px; width: 440px; height: 440px;
+      background: radial-gradient(circle, var(--coral-blush) 0%, transparent 65%);
+      opacity: 0.8; pointer-events: none;
+    }
+    .qs-hero-inner { position: relative; z-index: 2; }
+    .crumb { font-size: 0.85rem; color: var(--soft-gray); margin-bottom: 1.1rem; }
+    .crumb a { color: var(--sage); text-decoration: none; border-bottom: 1px solid rgba(92,110,71,0.3); }
+    .crumb a:hover { color: var(--coral-deep); }
+    .greeting { font-family: 'Caveat', cursive; font-size: 1.75rem; color: var(--coral-deep); display: block; margin-bottom: 0.15rem; }
+    .qs-hero h1 { margin-bottom: 1rem; }
+    .qs-hero-sub { font-size: 1.14rem; font-style: italic; color: var(--sage); max-width: 38rem; margin-bottom: 1.5rem; }
+    .promise-row { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 1.75rem; }
+    .promise {
+      background: white; border: 1px solid rgba(194, 137, 84, 0.35); border-radius: 999px;
+      padding: 0.5rem 1.05rem; font-size: 0.9rem; color: var(--deep-sage);
+      display: inline-flex; align-items: center; gap: 0.5rem;
+    }
+    .promise b { color: var(--coral-deep); }
+    .reassure {
+      background: var(--light-sage); border-radius: 12px; padding: 1.35rem 1.5rem;
+      max-width: 42rem; font-size: 0.98rem; color: var(--deep-sage);
+    }
+    .reassure strong { color: var(--deep-sage); }
+
+    /* ===== STEP BLOCKS ===== */
+    .step { border-top: 1px solid rgba(194, 137, 84, 0.3); }
+    .step:nth-of-type(even) { background: var(--white); }
+    .step:nth-of-type(odd) { background: var(--cream); }
+    .step-head { display: flex; align-items: flex-start; gap: 1.1rem; margin-bottom: 1.5rem; }
+    .step-num {
+      width: 44px; height: 44px; flex-shrink: 0; border-radius: 50%;
+      background: var(--coral); color: white; font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 1.35rem; display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 3px 0 var(--coral-deep);
+    }
+    .step.complete .step-num { background: var(--sage); box-shadow: 0 3px 0 var(--deep-sage); }
+    .step.complete .step-num::after { content: ""; }
+    .step-title h2 { margin-bottom: 0.3rem; }
+    .step-meta { font-size: 0.85rem; font-weight: bold; letter-spacing: 0.1em; text-transform: uppercase; color: var(--warm-tan-dark); }
+    .step-body { padding-left: 3.6rem; }
+    @media (max-width: 620px) { .step-body { padding-left: 0; } }
+    .step-foot { margin-top: 1.75rem; display: flex; flex-wrap: wrap; gap: 0.85rem; align-items: center; }
+    .done-btn {
+      background: var(--sage); color: white; border: none; cursor: pointer;
+      font-family: Georgia, serif; font-size: 0.95rem; font-weight: bold;
+      padding: 0.8rem 1.7rem; border-radius: 999px; box-shadow: 0 3px 0 var(--deep-sage);
+      transition: all 0.25s var(--ease); display: inline-flex; align-items: center; gap: 0.5rem;
+    }
+    .done-btn:hover { background: var(--deep-sage); transform: translateY(-2px); box-shadow: 0 5px 0 var(--deep-sage); }
+    .done-btn.ticked { background: var(--light-sage); color: var(--sage); box-shadow: 0 3px 0 var(--sage-soft); }
+    .done-btn.ticked::before { content: "\2713 "; }
+    .step-skip { font-size: 0.88rem; color: var(--soft-gray); font-style: italic; }
+    .step-skip a { color: var(--sage); }
+
+    /* printables */
+    .print-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+    @media (max-width: 780px) { .print-grid { grid-template-columns: 1fr; } }
+    .print-card {
+      background: var(--white); border: 1px solid rgba(194, 137, 84, 0.3); border-radius: 14px;
+      overflow: hidden; display: flex; flex-direction: column;
+    }
+    .step:nth-of-type(even) .print-card { background: var(--cream); }
+    .print-preview { aspect-ratio: 8.5 / 6; border-bottom: 1px dashed rgba(194,137,84,0.5); }
+    .print-preview .img-ph { width: 100%; height: 100%; border: none; }
+    .img-ph {
+      background: linear-gradient(135deg, var(--coral-blush) 0%, var(--pale-tan) 50%, var(--light-sage) 100%);
+      display: flex; align-items: center; justify-content: center; flex-direction: column;
+      padding: 1.25rem; text-align: center;
+    }
+    .img-ph .ph-tag { font-size: 0.62rem; font-weight: bold; letter-spacing: 0.18em; text-transform: uppercase; color: var(--coral-deep); margin-bottom: 0.35rem; }
+    .img-ph .ph-title { font-size: 0.92rem; font-weight: bold; color: var(--deep-sage); margin-bottom: 0.25rem; }
+    .img-ph .ph-brief { font-size: 0.76rem; font-style: italic; color: var(--sage); line-height: 1.45; max-width: 18rem; }
+    .print-body { padding: 1.35rem 1.4rem; display: flex; flex-direction: column; flex: 1; }
+    .print-body h3 { margin-bottom: 0.35rem; }
+    .print-body .meta { font-size: 0.82rem; color: var(--soft-gray); font-style: italic; margin-bottom: 0.7rem; }
+    .print-body p { font-size: 0.94rem; margin-bottom: 1.1rem; }
+    .print-body .btn { align-self: flex-start; margin-top: auto; }
+    .no-printer {
+      margin-top: 1.35rem; background: var(--cream-warm); border-left: 4px solid var(--gold);
+      border-radius: 10px; padding: 1.1rem 1.25rem; font-size: 0.94rem;
+    }
+    .no-printer h4 { margin-bottom: 0.25rem; }
+
+    /* video */
+    .video-wrap {
+      position: relative; aspect-ratio: 16 / 9; border-radius: 14px; overflow: hidden;
+      border: 1px dashed rgba(194,137,84,0.55); background: var(--deep-sage);
+      display: flex; align-items: center; justify-content: center; flex-direction: column;
+      text-align: center; padding: 2rem;
+    }
+    .video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+    .play {
+      width: 68px; height: 68px; border-radius: 50%; background: var(--coral);
+      display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    }
+    .play::after {
+      content: ""; width: 0; height: 0;
+      border-style: solid; border-width: 11px 0 11px 18px;
+      border-color: transparent transparent transparent white; margin-left: 4px;
+    }
+    .video-wrap .v-tag { font-size: 0.66rem; font-weight: bold; letter-spacing: 0.18em; text-transform: uppercase; color: var(--coral-soft); margin-bottom: 0.5rem; }
+    .video-wrap .v-title { font-family: Georgia, serif; font-size: 1.1rem; font-weight: bold; color: var(--cream); margin-bottom: 0.4rem; }
+    .video-wrap .v-brief { font-size: 0.82rem; font-style: italic; color: var(--light-sage); max-width: 26rem; line-height: 1.5; }
+    .covered { list-style: none; margin-top: 1.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem 1.5rem; }
+    @media (max-width: 700px) { .covered { grid-template-columns: 1fr; } }
+    .covered li { padding: 0.3rem 0 0.3rem 1.5rem; position: relative; font-size: 0.95rem; }
+    .covered li::before {
+      content: ""; position: absolute; left: 0; top: 0.65rem; width: 15px; height: 15px;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23DD6B4E' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center/contain no-repeat;
+    }
+    .read-instead { margin-top: 1.25rem; font-size: 0.92rem; font-style: italic; color: var(--sage); }
+
+    /* picker */
+    .picker { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+    @media (max-width: 780px) { .picker { grid-template-columns: 1fr; } }
+    .pick {
+      background: var(--white); border: 2px solid rgba(194, 137, 84, 0.3); border-radius: 12px;
+      padding: 1.35rem 1.4rem; text-align: left; cursor: pointer; font-family: Georgia, serif;
+      transition: all 0.25s var(--ease); display: flex; flex-direction: column; gap: 0.35rem;
+    }
+    .step:nth-of-type(even) .pick { background: var(--cream); }
+    .pick:hover { border-color: var(--coral); transform: translateY(-3px); box-shadow: 0 12px 26px rgba(46,62,47,0.1); }
+    .pick.selected { border-color: var(--coral); background: var(--coral-blush); }
+    .pick .pick-quote { font-size: 1.02rem; font-weight: bold; color: var(--deep-sage); line-height: 1.4; font-style: italic; }
+    .pick .pick-note { font-size: 0.88rem; color: var(--sage); }
+    .pick-hint { margin-top: 1.1rem; font-size: 0.9rem; font-style: italic; color: var(--soft-gray); }
+    .result {
+      margin-top: 1.75rem; background: var(--deep-sage); color: var(--cream);
+      border-radius: 14px; padding: 2rem 2rem; display: none;
+    }
+    .result.show { display: block; animation: rise 0.5s var(--ease) both; }
+    @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+    .result h3 { color: var(--cream); font-size: 1.35rem; margin-bottom: 0.6rem; }
+    .result p { color: var(--cream); opacity: 0.92; font-size: 0.98rem; }
+    .result .r-script { font-family: 'Caveat', cursive; font-size: 1.5rem; color: var(--coral-soft); display: block; margin-bottom: 0.2rem; }
+    .result-week { list-style: none; margin: 1.25rem 0 1.5rem; }
+    .result-week li {
+      padding: 0.4rem 0 0.4rem 1.6rem; position: relative;
+      color: var(--cream); font-size: 0.96rem; opacity: 0.94;
+    }
+    .result-week li::before { content: "\25C6"; position: absolute; left: 0; top: 0.5rem; color: var(--coral); font-size: 0.6rem; }
+    .result-actions { display: flex; flex-wrap: wrap; gap: 0.8rem; }
+
+    /* two small things */
+    .small-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+    @media (max-width: 780px) { .small-grid { grid-template-columns: 1fr; } }
+    .small-card {
+      background: var(--white); border-radius: 14px; padding: 1.6rem 1.6rem;
+      border: 1px solid rgba(194, 137, 84, 0.3); display: flex; flex-direction: column;
+    }
+    .step:nth-of-type(even) .small-card { background: var(--cream); }
+    .small-card h3 { margin-bottom: 0.45rem; }
+    .small-card p { font-size: 0.94rem; margin-bottom: 1.1rem; }
+    .date-inline {
+      display: inline-flex; align-items: baseline; gap: 0.5rem; margin-bottom: 0.9rem;
+      background: var(--coral-blush); border-radius: 8px; padding: 0.5rem 0.85rem;
+      font-size: 0.9rem; color: var(--deep-sage);
+    }
+    .date-inline b { font-family: 'DM Serif Display', Georgia, serif; font-size: 1.15rem; color: var(--coral-deep); }
+    .cal-links { display: flex; gap: 1rem; font-size: 0.86rem; margin-top: auto; }
+    .cal-links a { color: var(--coral-deep); text-decoration: underline; text-underline-offset: 3px; }
+    .small-card .btn { align-self: flex-start; margin-top: auto; }
+
+    /* ===== AFTER THIS WEEK ===== */
+    .after { background: var(--coral-blush); }
+    .after-head { text-align: center; max-width: 40rem; margin: 0 auto 2.5rem; }
+    .after-head h2 { margin: 0.9rem 0 0.75rem; }
+    .weeks { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.1rem; }
+    @media (max-width: 900px) { .weeks { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 520px) { .weeks { grid-template-columns: 1fr; } }
+    .week {
+      background: white; border-radius: 12px; padding: 1.4rem 1.35rem;
+    }
+    .week .w-num { font-size: 0.68rem; font-weight: bold; letter-spacing: 0.16em; text-transform: uppercase; color: var(--coral-deep); margin-bottom: 0.5rem; }
+    .week h4 { margin-bottom: 0.35rem; }
+    .week p { font-size: 0.9rem; color: var(--sage); margin: 0; }
+    .after-note { text-align: center; margin-top: 2.25rem; font-style: italic; color: var(--deep-sage); max-width: 38rem; margin-left: auto; margin-right: auto; }
+
+    /* ===== IF IT FALLS APART ===== */
+    .apart { background: var(--light-sage); }
+    .apart-card {
+      max-width: 44rem; margin: 0 auto; background: white; border-radius: 14px;
+      padding: 2.25rem 2.25rem; text-align: center;
+    }
+    @media (max-width: 600px) { .apart-card { padding: 1.75rem 1.5rem; } }
+    .apart-card .script { font-size: 1.6rem; color: var(--coral-deep); display: block; margin-bottom: 0.3rem; }
+    .apart-card h2 { margin-bottom: 1rem; }
+    .apart-card p { font-size: 1rem; }
+    .apart-sign { font-family: 'Caveat', cursive; font-size: 1.7rem; color: var(--coral-deep); margin-top: 1.1rem; }
+
+    /* ===== NEXT ===== */
+    .next { background: var(--deep-sage); color: var(--cream); text-align: center; padding: 3.5rem 0; }
+    .next h2 { color: var(--cream); margin: 0.9rem 0 1rem; }
+    .next p { color: var(--cream); opacity: 0.92; max-width: 34rem; margin: 0 auto 1.5rem; }
+    .next-row { display: flex; flex-wrap: wrap; gap: 0.9rem; justify-content: center; }
+    .next .btn-ghost { background: transparent; color: var(--cream); border: 2px solid var(--coral-soft); box-shadow: none; padding: calc(0.9rem - 2px) calc(1.9rem - 2px); }
+    .next .btn-ghost:hover { background: rgba(255,255,255,0.1); color: var(--cream); box-shadow: none; }
+    .next-fine { margin-top: 1.5rem; font-size: 0.88rem; font-style: italic; opacity: 0.78; }
+
+    /* ===== FOOTER ===== */
+    footer { background: var(--deep-sage); color: var(--cream); padding: 2.25rem 0 2rem; text-align: center; border-top: 1px solid rgba(221, 107, 78, 0.22); }
+    footer .diamond { color: var(--coral); font-size: 0.8rem; letter-spacing: 1.1em; padding-left: 1.1em; opacity: 0.7; margin-bottom: 1.25rem; }
+    footer .fnav { display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem 1.75rem; margin-bottom: 1.25rem; }
+    footer .fnav a { color: var(--cream); opacity: 0.85; text-decoration: none; font-size: 0.9rem; }
+    footer .fnav a:hover { opacity: 1; color: var(--coral-soft); }
+    footer .legal { font-size: 0.8rem; opacity: 0.6; }
+    footer .legal a { color: var(--cream); opacity: 0.85; text-decoration: none; margin: 0 0.35rem; }
+
+    .fade-in { opacity: 0; transform: translateY(16px); transition: opacity 0.6s var(--ease), transform 0.6s var(--ease); }
+    .fade-in.visible { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+      html { scroll-behavior: auto; }
+      .fade-in { opacity: 1; transform: none; }
+    }
+    :focus-visible { outline: 3px solid var(--coral); outline-offset: 3px; }
+    .skip-link { position: absolute; left: -9999px; background: var(--coral); color: white; padding: 0.7rem 1.2rem; z-index: 200; }
+    .skip-link:focus { left: 0; }
+  
+    /* Real photos placed in the placeholder frames (photo shoot, Aug 2026) */
+    .img-ph.has-img { padding: 0; border: none; }
+    .img-ph.has-img::before { display: none; }
+    .img-ph.has-img > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+  </style>
+
+
+
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <!-- ==================== MEMBER NAV ==================== -->
+  <nav class="mnav">
+    <div class="mnav-inner">
+      <a href="/members" class="mnav-logo">
+        <span class="dot"></span>
+        The One-Income Circle
+      </a>
+      <button class="mnav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="mnavLinks">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="mnav-links" id="mnavLinks">
+        <a href="/members">Home</a>
+        <a href="/members-vault">The Vault</a>
+        <a href="/members-library">Printables</a>
+        <a href="/members-sessions">Live Sessions</a>
+        <a href="/members-circle">The Circle</a>
+        <a href="/members-ask-brooke" class="">Ask Brooke</a>
+        <a href="/members-account" class="mnav-account">My account</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ==================== PROGRESS RAIL ==================== -->
+  <div class="rail">
+    <div class="rail-inner">
+      <div class="rail-steps" id="railSteps" role="progressbar" aria-valuemin="0" aria-valuemax="4" aria-valuenow="0" aria-label="Quick Start progress">
+        <span class="rail-step" data-rail="1"></span>
+        <span class="rail-step" data-rail="2"></span>
+        <span class="rail-step" data-rail="3"></span>
+        <span class="rail-step" data-rail="4"></span>
+      </div>
+      <span class="rail-label" id="railLabel">Four steps, about fifteen minutes</span>
+    </div>
+  </div>
+
+  <main id="main">
+
+  <!-- ==================== HERO ==================== -->
+  <section class="qs-hero">
+    <div class="container qs-hero-inner">
+      <p class="crumb"><a href="/members">Member home</a> ◆ Quick Start</p>
+      <span class="greeting">Right then, <span data-ms-member-info="firstName" id="memberName">friend</span></span>
+      <h1>Start here. Then close the tab.</h1>
+      <p class="qs-hero-sub">This is the whole beginning. Four steps, about fifteen minutes, and you will have done the thing that most people never get around to doing.</p>
+      <div class="promise-row">
+        <span class="promise"><b>Two</b> pages to print</span>
+        <span class="promise"><b>One</b> five minute video</span>
+        <span class="promise"><b>One</b> decision</span>
+        <span class="promise"><b>Two</b> small things to lock it in</span>
+      </div>
+      <div class="reassure">
+        <p><strong>What you do not need:</strong> a spreadsheet, a perfect month to start in, a spare hour, or anyone else in the house to be on board yet. You need a pen and the next fifteen minutes.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== STEP 1 ==================== -->
+  <section class="step" id="step1" data-step="1">
+    <div class="container">
+      <div class="step-head fade-in">
+        <div class="step-num">1</div>
+        <div class="step-title">
+          <h2>Print these two pages.</h2>
+          <span class="step-meta">About three minutes</span>
+        </div>
+      </div>
+      <div class="step-body">
+        <p class="fade-in">Print two copies of each while you are at it. One for this payday, one for the next, and you will not have to think about it again for a month.</p>
+        <div class="print-grid fade-in">
+          <div class="print-card">
+            <div class="print-preview">
+              <div class="img-ph has-img"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/brookes-images-folder-sf3xp4/brooke-site-images/vault-payday-reset.jpg" alt="A printable worksheet being filled in by hand at the kitchen table, tea and glasses nearby" loading="lazy"></div>
+            </div>
+            <div class="print-body">
+              <h3>The Payday Reset Page</h3>
+              <p class="meta">1 page ◆ PDF ◆ print two</p>
+              <p>Every dollar of this paycheck gets a job before it goes anywhere. This is the page the whole membership is built around.</p>
+              <a href="#" class="btn btn-coral btn-print js-print-1">Open and print</a>
+            </div>
+          </div>
+          <div class="print-card">
+            <div class="print-preview">
+              <div class="img-ph has-img"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/brookes-images-folder-sf3xp4/brooke-site-images/vault-monthly-budget.jpg" alt="The One-Page Monthly Budget printable on the kitchen table with a mug of tea" loading="lazy"></div>
+            </div>
+            <div class="print-body">
+              <h3>The One-Page Monthly Budget</h3>
+              <p class="meta">2 pages ◆ PDF ◆ planned against actual</p>
+              <p>The month on one sheet, with a column for what you planned and a column for what actually happened. No judgment in either column.</p>
+              <a href="#" class="btn btn-outline btn-print js-print-2">Open and print</a>
+            </div>
+          </div>
+        </div>
+        <div class="no-printer fade-in">
+          <h4>No printer? That is not a problem.</h4>
+          <p>Both files are fillable, so you can type into them on a phone or laptop. Or do what I did for two years and draw the four columns in a cheap notebook. The page is a prompt, not a rule.</p>
+        </div>
+        <div class="step-foot fade-in">
+          <button class="done-btn" type="button" data-done="1">Printed, next step</button>
+          <span class="step-skip">Or <a href="#step2">skip ahead</a> and come back to printing later.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== STEP 2 ==================== -->
+  <section class="step" id="step2" data-step="2">
+    <div class="container">
+      <div class="step-head fade-in">
+        <div class="step-num">2</div>
+        <div class="step-title">
+          <h2>Watch me do it once.</h2>
+          <span class="step-meta">Five minutes</span>
+        </div>
+      </div>
+      <div class="step-body">
+        <p class="fade-in">I fill in the payday page with a real paycheck and real numbers, out loud, including the part where the maths does not work and what I do about it.</p>
+        <div class="video-wrap fade-in" id="videoWrap">
+          <div class="play" aria-hidden="true"></div>
+          <div class="v-tag">Video placeholder</div>
+          <div class="v-title">The five minute walkthrough</div>
+          <div class="v-brief">Screen recording of the payday page being filled in, with Brooke talking over it. Phone camera on the paper works better than anything polished. Replace this block with the embed code.</div>
+        </div>
+        <ul class="covered fade-in">
+          <li>Where the money goes first, and why order matters</li>
+          <li>How to set the grocery number without guessing</li>
+          <li>What to do when the paycheck does not cover it</li>
+          <li>The one line most people leave blank and should not</li>
+        </ul>
+        <p class="read-instead fade-in">Prefer to read? The same walkthrough is written out on the <a href="/members-vault-budget">budget system page</a>, step by step, with the same screenshots.</p>
+        <div class="step-foot fade-in">
+          <button class="done-btn" type="button" data-done="2">Watched it, next step</button>
+          <span class="step-skip">Kids awake? Come back to this one tonight.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== STEP 3 ==================== -->
+  <section class="step" id="step3" data-step="3">
+    <div class="container">
+      <div class="step-head fade-in">
+        <div class="step-num">3</div>
+        <div class="step-title">
+          <h2>Pick the one thing you are working on first.</h2>
+          <span class="step-meta">One minute, and it is the important one</span>
+        </div>
+      </div>
+      <div class="step-body">
+        <p class="fade-in">One. Not all seven. Everything in the vault will still be there next month, and trying to fix all of it in one week is exactly how this falls apart. Which of these sounds most like your house right now?</p>
+        <div class="picker fade-in" id="picker">
+          <button class="pick" type="button" data-pick="a">
+            <span class="pick-quote">“Honestly, I have no idea where it all goes.”</span>
+            <span class="pick-note">The money leaves and you could not account for most of it.</span>
+          </button>
+          <button class="pick" type="button" data-pick="b">
+            <span class="pick-quote">“Groceries are eating us alive.”</span>
+            <span class="pick-note">You know roughly where it goes. It goes to food and it is too much.</span>
+          </button>
+          <button class="pick" type="button" data-pick="c">
+            <span class="pick-quote">“We are fine until something breaks.”</span>
+            <span class="pick-note">Normal months work. One car repair and the whole thing is off.</span>
+          </button>
+          <button class="pick" type="button" data-pick="d">
+            <span class="pick-quote">“I know what to do. I just feel awful about money.”</span>
+            <span class="pick-note">The numbers are not really the problem and you know it.</span>
+          </button>
+        </div>
+        <p class="pick-hint">Cannot decide? Pick the first one. It is the right answer more often than not, and you can change it any time.</p>
+
+        <div class="result" id="result" aria-live="polite">
+          <span class="r-script" id="rScript">good pick</span>
+          <h3 id="rTitle">Your first week</h3>
+          <p id="rBody">Body</p>
+          <ul class="result-week" id="rWeek"></ul>
+          <div class="result-actions">
+            <a href="/members-vault" class="btn btn-cream" id="rCta">Open it</a>
+            <button class="done-btn" type="button" data-done="3">That is my pick, next step</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== STEP 4 ==================== -->
+  <section class="step" id="step4" data-step="4">
+    <div class="container">
+      <div class="step-head fade-in">
+        <div class="step-num">4</div>
+        <div class="step-title">
+          <h2>Two small things to lock it in.</h2>
+          <span class="step-meta">Two minutes, then you are done</span>
+        </div>
+      </div>
+      <div class="step-body">
+        <div class="small-grid fade-in">
+          <div class="small-card">
+            <h3>Put the live session on your calendar.</h3>
+            <span class="date-inline"><b id="dateInline">Month 00</b> <span id="timeInline">time to be set</span></span>
+            <p>Forty five minutes where we plan the month together, out loud. It is the thing that keeps the rest of this going, and it is recorded if bedtime wins.</p>
+            <div class="cal-links">
+              <a href="#" id="gcalBtn" target="_blank" rel="noopener">Add to Google Calendar</a>
+              <a href="#" id="icsBtn" download="monthly-money-reset.ics">Download invite</a>
+            </div>
+          </div>
+          <div class="small-card">
+            <h3>Say hello in the Circle.</h3>
+            <p>First name, how many people you feed, and the one thing you want different by next payday. That is the whole introduction. Nobody there is judging, and most of them were exactly this nervous about posting.</p>
+            <a href="/members-circle" class="btn">Introduce yourself</a>
+          </div>
+        </div>
+        <div class="step-foot fade-in">
+          <button class="done-btn" type="button" data-done="4">Both done</button>
+          <span class="step-skip">The calendar one matters more than the hello. Do that one at least.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== AFTER THIS WEEK ==================== -->
+  <section class="after">
+    <div class="container">
+      <div class="after-head fade-in">
+        <span class="eyebrow eyebrow-coral">No rush at all</span>
+        <h2>What the next month looks like.</h2>
+        <p>So you know there is a path, and so you know nobody expects you to do all of it now.</p>
+      </div>
+      <div class="weeks">
+        <div class="week fade-in">
+          <div class="w-num">This week</div>
+          <h4>One payday reset</h4>
+          <p>That is the entire goal. One page, filled in, on one payday. Nothing else counts as behind.</p>
+        </div>
+        <div class="week fade-in">
+          <div class="w-num">Week two</div>
+          <h4>Add the meal plan</h4>
+          <p>One Sunday, one page, dinner decided from what is already in the pantry.</p>
+        </div>
+        <div class="week fade-in">
+          <div class="w-num">Week three</div>
+          <h4>Start one sinking fund</h4>
+          <p>One fund, any amount, even five dollars. Starting matters more than the number.</p>
+        </div>
+        <div class="week fade-in">
+          <div class="w-num">Week four</div>
+          <h4>Come to the live session</h4>
+          <p>Bring what worked and what did not. We plan next month together from there.</p>
+        </div>
+      </div>
+      <p class="after-note fade-in">Four weeks in, payday is a routine you barely think about. That is the whole promise, and it is a smaller one than most people make.</p>
+    </div>
+  </section>
+
+  <!-- ==================== IF IT FALLS APART ==================== -->
+  <section class="apart">
+    <div class="container">
+      <div class="apart-card fade-in">
+        <span class="script">and one more thing</span>
+        <h2>When a week goes sideways.</h2>
+        <p>It will. A kid gets sick, the car makes a noise, and the page sits on the counter untouched for eleven days. I need you to hear the next part properly, because it is the reason most people quit and it does not have to be.</p>
+        <p><strong>You have not failed and you are not behind.</strong> There is no group to catch up to, no lessons expiring, and nothing here keeping score. Come back, print a fresh page, and start with the next payday. That is not a consolation prize. That is genuinely how this works, and it is how I did it too.</p>
+        <p class="apart-sign">progress over perfection, always ◆ Brooke</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== NEXT ==================== -->
+  <section class="next">
+    <div class="container">
+      <span class="eyebrow eyebrow-cream">Done here</span>
+      <h2>That is the Quick Start finished.</h2>
+      <p>Everything else can wait for a quieter evening. When you are ready, the vault is right here and nothing in it is going anywhere.</p>
+      <div class="next-row">
+        <a href="/members-vault" class="btn btn-cream">Have a look in the vault</a>
+        <a href="/members" class="btn btn-ghost">Back to member home</a>
+      </div>
+      <p class="next-fine">The ticks on this page are just for this visit. Nothing is tracked, nothing is graded, and nobody sees them but you.</p>
+    </div>
+  </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="diamond">◆ ◆ ◆</div>
+      <nav class="fnav" aria-label="Member footer">
+        <a href="/members">Member home</a>
+        <a href="/members-vault">The Vault</a>
+        <a href="/members-library">Printables</a>
+        <a href="/members-sessions">Live Sessions</a>
+        <a href="/members-account">My account</a>
+        <a href="/contact">Help</a>
+      </nav>
+      <p class="legal">
+        © 2026 Purposeful Pennies. Member content, please keep it in the family.
+        &nbsp;·&nbsp;
+        <a href="/terms">Terms</a> ·
+        <a href="/privacy-policy">Privacy</a>
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    /* ============================================================
+       CONFIG
+       ============================================================ */
+    const PRINTABLES = {
+      paydayPage: '/members-files/payday-reset-page.pdf',
+      monthlyBudget: '/members-files/one-page-monthly-budget.pdf'
+    };
+
+    /* Paste the embed URL for the walkthrough. Unlisted Vimeo or YouTube,
+       or a MemberSpace hosted video. Leave empty to keep the placeholder. */
+    const VIDEO_EMBED = '';
+
+
+    const NEXT_SESSION = {
+      title: 'The Monthly Money Reset  ◆  One-Income Circle',
+      /* Offsets required. Eastern daylight is -04:00, standard is -05:00. */
+      start: '2026-08-11T20:00:00-04:00',
+      end:   '2026-08-11T20:45:00-04:00',
+      timeLabel: '8:00 pm eastern',
+      joinUrl: 'https://zoom.us/j/your-recurring-meeting-id',
+      details: 'Forty five minutes together. Bring your notebook. Replay lands the next morning.'
+    };
+
+    /* Step 3 outcomes. Each one points at a single system, never two. */
+    const PICKS = {
+      a: {
+        script: 'that is the right place to start',
+        title: 'Start with the payday routine.',
+        body: 'You do not have a spending problem, you have a visibility problem, and those are fixed differently. One page on payday and the fog lifts faster than you would expect. Most people are shocked by one particular line, and it is almost never the one they braced for.',
+        week: [
+          'Fill in the payday page on your next payday, even if the numbers are ugly',
+          'Write down every expense for seven days, no changes, just watching',
+          'Circle the one number that surprised you',
+          'Bring that number to the live session'
+        ],
+        ctaText: 'Open the budget system',
+        ctaHref: '/members-vault-budget'
+      },
+      b: {
+        script: 'this one moves money fastest',
+        title: 'Start with the grocery number.',
+        body: 'Groceries are the one big expense you actually control week to week, which makes this the fastest visible win in the whole vault. The trick is deciding the number before you walk in rather than discovering it at the register.',
+        week: [
+          'Set one weekly grocery number and write it at the top of the list',
+          'Plan four dinners from food already in your kitchen',
+          'Take the cheat sheet into the store and keep a running total',
+          'Note the gap between your number and the receipt, no guilt attached'
+        ],
+        ctaText: 'Open the grocery system',
+        ctaHref: '/members-vault-groceries'
+      },
+      c: {
+        script: 'you are closer than you think',
+        title: 'Start with one sinking fund.',
+        body: 'If normal months work and surprises break you, you do not need a better budget. You need a small pot of money standing between your family and the next unexpected thing. One fund, started this week, changes how the whole month feels.',
+        week: [
+          'Pick the surprise that hurt most in the last year',
+          'Open one fund for it, any amount, even five dollars',
+          'Set the amount to repeat automatically on payday',
+          'List the next three surprises you can see coming'
+        ],
+        ctaText: 'Open the sinking fund system',
+        ctaHref: '/members-vault-sinking-funds'
+      },
+      d: {
+        script: 'thank you for saying it',
+        title: 'Start with the part nobody starts with.',
+        body: 'This is the honest answer and almost nobody picks it, which is a shame, because shame is the thing that makes women abandon perfectly good budgets. If you already know what to do and cannot make yourself do it, no new spreadsheet is going to help. Start here instead.',
+        week: [
+          'Do the reflection pages once, on your own, with nobody reading over your shoulder',
+          'Write the one money sentence you say about yourself that is not actually true',
+          'Fill in one payday page anyway, badly, on purpose',
+          'Post one small win in the Circle, even if it feels too small to count'
+        ],
+        ctaText: 'Open the mindset kit',
+        ctaHref: '/members-vault-mindset'
+      }
+    };
+
+    /* ===== WIRE LINKS ===== */
+    document.querySelectorAll('.js-print-1').forEach(function (a) { a.href = PRINTABLES.paydayPage; a.target = '_blank'; a.rel = 'noopener'; });
+    document.querySelectorAll('.js-print-2').forEach(function (a) { a.href = PRINTABLES.monthlyBudget; a.target = '_blank'; a.rel = 'noopener'; });
+
+    /* ===== NAME FALLBACK ===== */
+    (function () {
+      const el = document.getElementById('memberName');
+      setTimeout(function () { if (!el.textContent.trim()) el.textContent = 'friend'; }, 1200);
+    })();
+
+    /* ===== VIDEO EMBED ===== */
+    (function () {
+      if (!VIDEO_EMBED) return;
+      const wrap = document.getElementById('videoWrap');
+      wrap.innerHTML = '<iframe src="' + VIDEO_EMBED + '" title="The five minute walkthrough" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>';
+      wrap.style.border = 'none';
+    })();
+
+    /* ===== SESSION DATE AND CALENDAR ===== */
+    (function () {
+      const m = NEXT_SESSION.start.match(/^(\d{4})-(\d{2})-(\d{2})/);
+      if (m) {
+        const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+        document.getElementById('dateInline').textContent = months[parseInt(m[2], 10) - 1] + ' ' + parseInt(m[3], 10);
+        document.getElementById('timeInline').textContent = NEXT_SESSION.timeLabel;
+      }
+      function stamp(t) { return new Date(t).toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, ''); }
+      const s = stamp(NEXT_SESSION.start), e = stamp(NEXT_SESSION.end);
+
+      const g = new URL('https://calendar.google.com/calendar/render');
+      g.searchParams.set('action', 'TEMPLATE');
+      g.searchParams.set('text', NEXT_SESSION.title);
+      g.searchParams.set('dates', s + '/' + e);
+      g.searchParams.set('details', NEXT_SESSION.details + ' Join here: ' + NEXT_SESSION.joinUrl);
+      g.searchParams.set('location', NEXT_SESSION.joinUrl);
+      document.getElementById('gcalBtn').href = g.toString();
+
+      const ics = [
+        'BEGIN:VCALENDAR','VERSION:2.0',
+        'PRODID:-//Purposeful Pennies//One-Income Circle//EN',
+        'BEGIN:VEVENT','UID:' + s + '-reset@purposefulpennies.com',
+        'DTSTAMP:' + s,'DTSTART:' + s,'DTEND:' + e,
+        'SUMMARY:' + NEXT_SESSION.title,
+        'DESCRIPTION:' + NEXT_SESSION.details,
+        'LOCATION:' + NEXT_SESSION.joinUrl,
+        'BEGIN:VALARM','TRIGGER:-PT60M','ACTION:DISPLAY',
+        'DESCRIPTION:Monthly Money Reset starts in one hour','END:VALARM',
+        'END:VEVENT','END:VCALENDAR'
+      ].join('\r\n');
+      document.getElementById('icsBtn').href = URL.createObjectURL(new Blob([ics], { type: 'text/calendar;charset=utf-8' }));
+    })();
+
+    /* ===== STEP 3 PICKER ===== */
+    (function () {
+      const picks = Array.prototype.slice.call(document.querySelectorAll('.pick'));
+      const result = document.getElementById('result');
+      picks.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          picks.forEach(function (p) { p.classList.remove('selected'); p.setAttribute('aria-pressed', 'false'); });
+          btn.classList.add('selected');
+          btn.setAttribute('aria-pressed', 'true');
+          const d = PICKS[btn.dataset.pick];
+          document.getElementById('rScript').textContent = d.script;
+          document.getElementById('rTitle').textContent = d.title;
+          document.getElementById('rBody').textContent = d.body;
+          const ul = document.getElementById('rWeek');
+          ul.innerHTML = '';
+          d.week.forEach(function (line) {
+            const li = document.createElement('li');
+            li.textContent = line;
+            ul.appendChild(li);
+          });
+          const cta = document.getElementById('rCta');
+          cta.textContent = d.ctaText;
+          cta.href = d.ctaHref;
+          result.classList.add('show');
+        });
+      });
+    })();
+
+    /* ===== STEP PROGRESS  ◆  this visit only, deliberately not stored =====
+       If it should persist, MemberSpace member metadata is the clean way:
+       updateMemberMetadata to store the completed steps, getMemberMetadata
+       to read them on load. Browser storage is not used here on purpose. */
+    (function () {
+      const done = new Set();
+      const rails = document.querySelectorAll('.rail-step');
+      const railSteps = document.getElementById('railSteps');
+      const label = document.getElementById('railLabel');
+      const labels = {
+        0: 'Four steps, about fifteen minutes',
+        1: 'One done. Three to go.',
+        2: 'Halfway. That was the longest one.',
+        3: 'One left, and it is the two minute one.',
+        4: 'All four done. Go and put the kettle on.'
+      };
+
+      document.querySelectorAll('.done-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          const n = parseInt(btn.dataset.done, 10);
+          const section = document.getElementById('step' + n);
+
+          if (done.has(n)) {
+            done.delete(n);
+            btn.classList.remove('ticked');
+            section.classList.remove('complete');
+          } else {
+            done.add(n);
+            btn.classList.add('ticked');
+            section.classList.add('complete');
+            const nextSection = document.getElementById('step' + (n + 1));
+            if (nextSection) {
+              setTimeout(function () { nextSection.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 220);
+            }
+          }
+
+          rails.forEach(function (r) {
+            r.classList.toggle('done', done.has(parseInt(r.dataset.rail, 10)));
+          });
+          railSteps.setAttribute('aria-valuenow', String(done.size));
+          label.textContent = labels[done.size];
+        });
+      });
+    })();
+
+    /* ===== STICKY OFFSET  ◆  keep the progress rail flush under the nav =====
+       The nav height changes with breakpoint and again once the webfonts
+       land, so measuring beats hardcoding. Without this the rail hides its
+       own top edge underneath the nav. */
+    (function () {
+      const nav = document.querySelector('.mnav');
+      function setNavHeight() {
+        document.documentElement.style.setProperty('--nav-h', Math.round(nav.getBoundingClientRect().height) + 'px');
+      }
+      setNavHeight();
+      window.addEventListener('resize', setNavHeight);
+      window.addEventListener('orientationchange', setNavHeight);
+      if (document.fonts && document.fonts.ready) { document.fonts.ready.then(setNavHeight); }
+      if (window.ResizeObserver) { new ResizeObserver(setNavHeight).observe(nav); }
+    })();
+
+    /* ===== MOBILE NAV ===== */
+    (function () {
+      const t = document.getElementById('navToggle');
+      const l = document.getElementById('mnavLinks');
+      t.addEventListener('click', function () {
+        const open = l.classList.toggle('open');
+        t.setAttribute('aria-expanded', String(open));
+      });
+    })();
+
+    /* ===== FADE-IN ===== */
+    (function () {
+      const obs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) { en.target.classList.add('visible'); obs.unobserve(en.target); }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+      document.querySelectorAll('.fade-in').forEach(function (el) { obs.observe(el); });
+    })();
+<w:pgSz w:h="15840" w:w="12240" w:orient="portrait"/><w:pgMar w:bottom="1440" w:top="1440" w:left="1440" w:right="1440" w:header="720" w:footer="720"/><w:pgNumType w:start="1"/></w:sectPr></w:pPr><w:r w:rsidDel="00000000" w:rsidR="00000000" w:rsidRPr="00000000"><w:rPr><w:rtl w:val="0"/></w:rPr><w:t xml:space="preserve">  </script>

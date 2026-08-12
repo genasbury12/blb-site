@@ -1,0 +1,411 @@
+<!--
+  ============================================================
+  PURPOSEFUL PENNIES  ·  DISCLAIMER
+  URL: /disclaimer
+  ============================================================
+
+  THIS IS THE MOST IMPORTANT OF THE FOUR FOR THIS BRAND.
+  The site publishes household money guidance from someone who is not
+  a licensed professional, and it quotes dollar figures. Sections 02,
+  03, 05 and 09 are what keep that honest. Do not trim them.
+
+  BEFORE THIS GOES LIVE
+  Fill the BUSINESS object in the script at the bottom. Every blank
+  on the page reads from it. Anything left empty stays visible as a
+  [PLACEHOLDER] so nothing ships half finished by accident.
+
+  This is a drafted document, not legal advice, and it has not been
+  reviewed by an attorney. Have it checked before you rely on it.
+
+  No em dashes or en dashes anywhere.
+  ============================================================
+-->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Disclaimer · Purposeful Pennies</title>
+  <meta name="description" content="What this site is, and just as importantly, what it is not.">
+  <link rel="canonical" href="https://purposefulpenniesdraft.showit.site/disclaimer">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&amp;family=DM+Serif+Display&amp;display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --deep-sage:#2E3E2F;--sage:#5C6E47;--warm-tan:#C28954;--warm-tan-dark:#A77246;
+      --cream:#FBF4D7;--cream-warm:#F7ECC4;--charcoal:#2A2A2A;--soft-gray:#7E867D;
+      --light-sage:#DBE3CE;--pale-tan:#EFE0C1;--white:#FFFFFF;
+      --coral:#DD6B4E;--coral-deep:#C25441;--coral-soft:#F7D0BE;--coral-blush:#FBE3D5;
+      --gold:#D4A83F;--gold-soft:#EDD98D;--gold-deep:#B8912E;
+      --ease:cubic-bezier(.22,.61,.36,1);
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{font-size:17px;scroll-behavior:smooth;}
+    @media(min-width:720px){html{font-size:18px;}}
+    body{font-family:Georgia,'Times New Roman',serif;font-size:1.04rem;line-height:1.75;
+      color:var(--charcoal);background:var(--cream);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+    .container{max-width:1240px;margin:0 auto;padding:0 1.5rem;}
+    .doc{max-width:52rem;margin:0 auto;padding:0 1.5rem;}
+    h1,h2,h3{font-family:Georgia,serif;color:var(--deep-sage);}
+    .script{font-family:'Caveat',cursive;font-weight:700;}
+    a{color:var(--coral-deep);}
+
+    /* nav, same as the public pages */
+    .nav{background:rgba(251,244,215,.95);border-bottom:1px solid rgba(194,137,84,.18);
+      position:sticky;top:0;z-index:100;backdrop-filter:blur(10px);}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 1.5rem;
+      max-width:1280px;margin:0 auto;position:relative;}
+    .nav-logo{font-size:1.3rem;font-weight:bold;color:var(--deep-sage);letter-spacing:.03em;
+      text-decoration:none;line-height:1;display:flex;align-items:baseline;gap:.5rem;}
+    .nav-logo .dot{width:8px;height:8px;border-radius:50%;background:var(--coral);display:inline-block;}
+    .nav-logo em{display:block;font-family:'Caveat',cursive;font-weight:500;font-style:normal;
+      color:var(--coral-deep);font-size:.95rem;margin-top:-2px;}
+    .nav-links{display:flex;gap:1.6rem;align-items:center;}
+    .nav-links a{font-size:.95rem;color:var(--deep-sage);text-decoration:none;position:relative;
+      white-space:nowrap;transition:color .2s var(--ease);}
+    .nav-links a:not(.nav-cta):hover{color:var(--coral-deep);}
+    .nav-cta{background:var(--coral);color:#fff!important;padding:.6rem 1.25rem;border-radius:999px;
+      font-size:.85rem!important;font-weight:bold;letter-spacing:.04em;box-shadow:0 3px 0 var(--coral-deep);
+      transition:all .25s var(--ease);}
+    .nav-cta:hover{background:var(--coral-deep);transform:translateY(-1px);}
+    .nav-toggle{display:none;background:none;border:none;width:44px;height:44px;cursor:pointer;
+      flex-direction:column;align-items:center;justify-content:center;gap:5px;}
+    .nav-toggle span{display:block;width:24px;height:2px;background:var(--deep-sage);border-radius:2px;
+      transition:transform .28s var(--ease),opacity .2s var(--ease);}
+    .nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+    .nav-toggle.open span:nth-child(2){opacity:0;}
+    .nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+    @media(max-width:1000px){
+      .nav-toggle{display:flex;}
+      .nav-links{position:absolute;top:100%;left:0;right:0;background:var(--cream);flex-direction:column;
+        align-items:stretch;gap:0;padding:0 1.5rem;max-height:0;overflow:hidden;
+        transition:max-height .35s var(--ease),padding .35s var(--ease);
+        border-bottom:1px solid rgba(194,137,84,.18);box-shadow:0 18px 40px rgba(46,62,47,.08);}
+      .nav-links.open{max-height:560px;padding-bottom:1.5rem;}
+      .nav-links a{padding:.95rem 0;border-bottom:1px solid rgba(194,137,84,.15);font-size:1.05rem;}
+      .nav-cta{text-align:center;margin-top:1.1rem;border-bottom:none;padding:.9rem 1.25rem;}
+    }
+
+    /* header */
+    .legal-hero{background:var(--cream);padding:3.5rem 0 2.5rem;position:relative;overflow:hidden;}
+    .legal-hero::before{content:"";position:absolute;top:-190px;right:-150px;width:500px;height:500px;
+      background:radial-gradient(circle,var(--coral-blush)0%,transparent 65%);opacity:.7;pointer-events:none;}
+    .legal-hero .doc{position:relative;z-index:2;}
+    .legal-kicker{font-size:.76rem;font-weight:bold;letter-spacing:.2em;text-transform:uppercase;
+      color:var(--coral-deep);display:inline-flex;align-items:center;gap:.7rem;margin-bottom:.9rem;}
+    .legal-kicker::before{content:"";width:28px;height:1px;background:var(--coral);display:inline-block;}
+    .legal-hero h1{font-size:clamp(2rem,5vw,3.1rem);line-height:1.06;letter-spacing:-.02em;margin-bottom:1rem;}
+    .legal-lead{font-size:1.1rem;font-style:italic;color:var(--sage);}
+    .dates{margin-top:1.5rem;padding-top:1.25rem;border-top:1px solid rgba(194,137,84,.3);
+      font-size:.9rem;color:var(--soft-gray);}
+    .dates b{color:var(--deep-sage);}
+
+    /* body */
+    .legal-body{background:var(--white);padding:3rem 0 4rem;}
+    .toc{background:var(--cream);border-radius:12px;padding:1.6rem 1.85rem;margin-bottom:2.75rem;
+      border-left:5px solid var(--coral);}
+    .toc h2{font-size:.78rem;font-weight:bold;letter-spacing:.18em;text-transform:uppercase;
+      color:var(--coral-deep);margin-bottom:.9rem;}
+    .toc ol{list-style:none;counter-reset:toc;columns:2;column-gap:2rem;}
+    @media(max-width:640px){.toc ol{columns:1;}}
+    .toc li{counter-increment:toc;padding:.28rem 0 .28rem 1.9rem;position:relative;font-size:.95rem;
+      break-inside:avoid;}
+    .toc li::before{content:counter(toc,decimal-leading-zero);position:absolute;left:0;
+      font-family:'DM Serif Display',Georgia,serif;font-size:.85rem;color:var(--warm-tan);}
+    .toc a{text-decoration:none;color:var(--deep-sage);}
+    .toc a:hover{color:var(--coral-deep);text-decoration:underline;}
+
+    section.s{margin-bottom:2.5rem;scroll-margin-top:6rem;}
+    section.s > h2{font-size:1.32rem;line-height:1.3;margin-bottom:.85rem;
+      padding-bottom:.5rem;border-bottom:2px solid var(--pale-tan);}
+    section.s > h2 .num{font-family:'DM Serif Display',Georgia,serif;color:var(--coral-deep);
+      margin-right:.6rem;}
+    section.s h3{font-size:1.05rem;margin:1.4rem 0 .5rem;color:var(--sage);}
+    section.s p{margin-bottom:1rem;}
+    section.s ul{margin:0 0 1rem;list-style:none;}
+    section.s ul li{padding:.32rem 0 .32rem 1.6rem;position:relative;}
+    section.s ul li::before{content:"\25C6";position:absolute;left:0;top:.5rem;color:var(--coral);
+      font-size:.6rem;}
+    section.s strong{color:var(--deep-sage);}
+
+    .callout{background:var(--coral-blush);border-radius:12px;padding:1.4rem 1.7rem;margin:1.5rem 0;
+      border-left:5px solid var(--coral);}
+    .callout p{margin-bottom:.6rem;}
+    .callout p:last-child{margin-bottom:0;}
+    .callout b{color:var(--coral-deep);}
+    .hard{background:var(--deep-sage);color:var(--cream);border-radius:12px;padding:1.6rem 1.85rem;
+      margin:1.75rem 0;}
+    .hard h3{color:var(--gold-soft);margin:0 0 .6rem;font-size:1rem;letter-spacing:.06em;
+      text-transform:uppercase;}
+    .hard p{margin-bottom:.7rem;}
+    .hard p:last-child{margin-bottom:0;}
+
+    table.t{width:100%;border-collapse:collapse;margin:1.1rem 0 1.4rem;font-size:.95rem;}
+    table.t th{text-align:left;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
+      color:var(--coral-deep);padding:.55rem .7rem;border-bottom:2px solid var(--pale-tan);}
+    table.t td{padding:.6rem .7rem;border-bottom:1px solid rgba(46,62,47,.09);vertical-align:top;}
+    table.t tr:last-child td{border-bottom:none;}
+
+    /* cross links */
+    .legal-nav{background:var(--light-sage);padding:2.75rem 0;}
+    .legal-nav h2{text-align:center;font-size:1.15rem;margin-bottom:1.5rem;}
+    .legal-nav-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;max-width:60rem;margin:0 auto;}
+    @media(max-width:820px){.legal-nav-grid{grid-template-columns:repeat(2,1fr);}}
+    @media(max-width:460px){.legal-nav-grid{grid-template-columns:1fr;}}
+    .legal-nav-grid a{background:var(--white);border-radius:10px;padding:1.1rem 1.15rem;text-decoration:none;
+      display:block;border:1px solid rgba(221,107,78,.18);transition:all .25s var(--ease);}
+    .legal-nav-grid a:hover{transform:translateY(-4px);box-shadow:0 16px 32px rgba(46,62,47,.1);}
+    .legal-nav-grid a.here{background:var(--cream-warm);border-color:var(--coral);}
+    .legal-nav-grid b{display:block;color:var(--deep-sage);font-size:.99rem;margin-bottom:.2rem;}
+    .legal-nav-grid span{font-size:.84rem;color:var(--sage);font-style:italic;}
+
+    footer{background:var(--deep-sage);color:var(--cream);padding:3.5rem 0 2rem;text-align:center;}
+    footer .brand-line{font-family:'DM Serif Display',Georgia,serif;font-size:1.8rem;color:var(--cream);
+      text-decoration:none;display:inline-block;}
+    footer .tagline{font-family:'Caveat',cursive;color:var(--coral-soft);font-size:1.35rem;margin:.4rem 0 2rem;}
+    footer .footer-nav{display:flex;justify-content:center;flex-wrap:wrap;gap:1.25rem 2rem;margin:2rem 0;
+      padding-top:2rem;border-top:1px solid rgba(221,107,78,.2);}
+    footer .footer-nav a{color:var(--cream);opacity:.85;text-decoration:none;font-size:.95rem;}
+    footer .footer-nav a:hover{opacity:1;color:var(--coral-soft);}
+    footer .legal{padding-top:1rem;margin-top:1.25rem;border-top:1px solid rgba(221,107,78,.12);
+      font-size:.82rem;opacity:.65;}
+    footer .legal a{color:var(--cream);opacity:.8;text-decoration:none;margin:0 .4rem;}
+
+    @media(prefers-reduced-motion:reduce){*{transition-duration:.01ms!important;}}
+    :focus-visible{outline:3px solid var(--coral);outline-offset:3px;}
+</style>
+
+
+
+  <nav class="nav" aria-label="Main">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo"><span class="dot"></span>Purposeful Pennies<em>&nbsp;spend with intention</em></a>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-links" id="navLinks">
+        <a href="/start-here">Start Here</a>
+        <a href="/about">About</a>
+        <a href="/free-resources">Free Resources</a>
+        <a href="/membership">Membership</a>
+        <a href="/blog">Blog</a>
+        <a href="/contact">Contact</a>
+        <a href="/opt-in" class="nav-cta">Free Reality Check</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="legal-hero">
+    <div class="doc">
+      <span class="legal-kicker">Please read this one</span>
+      <h1>Disclaimer</h1>
+      <p class="legal-lead">What this site is, and just as importantly, what it is not.</p>
+      <p class="dates">
+        <b>Effective</b> <span data-legal="effective">[DATE]</span>
+        &nbsp;◆&nbsp;
+        <b>Last updated</b> <span data-legal="updated">[DATE]</span>
+      </p>
+    </div>
+  </section>
+
+  <div class="legal-body">
+    <div class="doc">
+      <nav class="toc" aria-label="On this page">
+        <h2>On this page</h2>
+        <ol>
+        <li><a href="#s1">The short version</a></li>
+        <li><a href="#s2">Not professional advice</a></li>
+        <li><a href="#s3">Who is writing this</a></li>
+        <li><a href="#s4">Talk to a professional</a></li>
+        <li><a href="#s5">No guarantee of results</a></li>
+        <li><a href="#s6">Individual circumstances vary</a></li>
+        <li><a href="#s7">Accuracy and currency</a></li>
+        <li><a href="#s8">Third-party content and links</a></li>
+        <li><a href="#s9">Testimonials and stories</a></li>
+        <li><a href="#s10">Faith-based content</a></li>
+        <li><a href="#s11">Your responsibility</a></li>
+        <li><a href="#s12">Contact</a></li>
+        </ol>
+      </nav>
+
+      <section class="s" id="s1">
+        <h2><span class="num">01</span>The short version</h2>
+
+        <div class="hard">
+          <h3>In one paragraph</h3>
+          <p>Purposeful Pennies is one mother sharing what worked in her own household. It is educational information, not financial advice. Brooke is not a licensed financial professional. Nothing here is tailored to your situation, no result is promised, and for anything that genuinely matters you should talk to a qualified professional who knows your circumstances.</p>
+        </div>
+        <p>The rest of this page says the same thing in more detail, because some of it needs saying properly.</p>
+      </section>
+
+      <section class="s" id="s2">
+        <h2><span class="num">02</span>Not professional advice</h2>
+
+        <p>All content on this site, in our emails, in our free resources and inside the membership is <strong>general information for educational purposes</strong>. It is not:</p>
+        <ul>
+          <li>Financial or investment advice</li>
+          <li>Tax advice</li>
+          <li>Legal advice</li>
+          <li>Accounting or bookkeeping advice</li>
+          <li>Credit repair, debt settlement or debt counseling services</li>
+          <li>Insurance advice</li>
+        </ul>
+        <p>Using this site does not create a professional relationship of any kind between you and us.</p>
+      </section>
+
+      <section class="s" id="s3">
+        <h2><span class="num">03</span>Who is writing this</h2>
+
+        <p>Brooke is a mother who paid off household debt on a single income and now writes about how she did it. <strong>She is not a certified financial planner, licensed financial advisor, accountant, attorney, tax preparer or credit counselor</strong>, and she does not hold a professional license in any of those fields.</p>
+        <p>What she offers is lived experience and simple systems built at her own kitchen table. That has real value, and it is a different thing from professional advice. We would rather be clear about which one you are getting.</p>
+      </section>
+
+      <section class="s" id="s4">
+        <h2><span class="num">04</span>Talk to a professional</h2>
+
+        <p>Please consult a suitably qualified professional before acting on anything you read here, particularly for:</p>
+        <ul>
+          <li>Investment decisions of any kind</li>
+          <li>Retirement accounts and pensions</li>
+          <li>Taxes and tax filings</li>
+          <li>Debt settlement, consolidation loans or bankruptcy</li>
+          <li>Mortgages and refinancing</li>
+          <li>Insurance coverage</li>
+          <li>Estate planning</li>
+        </ul>
+        <p>A professional can look at your actual numbers and your actual circumstances. We cannot, and we will not pretend otherwise.</p>
+      </section>
+
+      <section class="s" id="s5">
+        <h2><span class="num">05</span>No guarantee of results</h2>
+
+        <p>We sometimes describe amounts saved or debts paid off, including our own. <strong>Those are examples of what has happened, not predictions of what will happen for you.</strong></p>
+        <p>Where the site mentions a figure such as an amount a family might free up in a month, treat it as an illustration drawn from experience, not a promise. Your result depends on your income, your expenses, your household, your local costs and your own decisions. None of those are within our control, and it would be dishonest to guarantee an outcome that depends on them.</p>
+        <p><strong>Some people will read everything here and see no financial change at all.</strong> That is a real possibility and you should know it before you spend money with us.</p>
+      </section>
+
+      <section class="s" id="s6">
+        <h2><span class="num">06</span>Individual circumstances vary</h2>
+
+        <p>Our materials assume a fairly ordinary household budget. They may not suit you if your situation involves irregular or commission-based income, self-employment, benefits with reporting requirements, shared custody arrangements, active debt collection or legal proceedings, or anything else materially different from a straightforward single-income household.</p>
+        <p>If you are in financial distress, facing eviction or foreclosure, or dealing with collectors, please seek help from a nonprofit credit counseling agency or a licensed professional. A budgeting worksheet is not the right tool for a crisis.</p>
+      </section>
+
+      <section class="s" id="s7">
+        <h2><span class="num">07</span>Accuracy and currency</h2>
+
+        <p>We write carefully and in good faith, but we make no warranty that the content is complete, accurate or current. Rules, prices, products and best practices change, and older articles may not reflect the present position. We may update or remove content at any time without notice.</p>
+        <p>If you spot something wrong, please <a href="/contact">tell us</a>. We would genuinely rather know.</p>
+      </section>
+
+      <section class="s" id="s8">
+        <h2><span class="num">08</span>Third-party content and links</h2>
+
+        <p>We link to other websites, tools and services. We do not control them and we are not responsible for their content, accuracy, products or practices. A link is not an endorsement of everything that site says or does. Please read their own terms and policies.</p>
+      </section>
+
+      <section class="s" id="s9">
+        <h2><span class="num">09</span>Testimonials and stories</h2>
+
+        <p>Where we share a reader's story or a testimonial, it reflects that person's individual experience at that time. <strong>It is not typical, not verified as representative, and not a guarantee that you would experience the same.</strong> Testimonials are used with permission. Some may be edited for length or to protect privacy.</p>
+      </section>
+
+      <section class="s" id="s10">
+        <h2><span class="num">10</span>Faith-based content</h2>
+
+        <p>Some of our writing touches on faith, because it is part of how Brooke thinks about money and contentment. It is offered as personal perspective, never as instruction, and it is always optional. Nothing on this site is theological guidance or pastoral counseling, and the practical material works perfectly well whether or not you share that perspective.</p>
+      </section>
+
+      <section class="s" id="s11">
+        <h2><span class="num">11</span>Your responsibility</h2>
+
+        <p>You are responsible for your own financial decisions. By using this site you accept that you do so at your own risk, and that we are not liable for any loss or outcome resulting from decisions you make. Our <a href="/terms">Terms of Use</a> set out the full limitation of liability.</p>
+      </section>
+
+      <section class="s" id="s12">
+        <h2><span class="num">12</span>Contact</h2>
+
+        <p>Questions about anything on this page:</p>
+        <ul>
+          <li><strong>Email</strong> <span data-legal="email">[LEGAL CONTACT EMAIL]</span></li>
+          <li><strong>Or use</strong> <a href="/contact">the contact form</a></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+
+  <section class="legal-nav">
+    <div class="container">
+      <h2>The other three, while you are here</h2>
+      <div class="legal-nav-grid">
+        <a href="/privacy-policy"><b>Privacy Policy</b><span>What we collect, why, and what you can ask us to do about it.</span></a>
+        <a href="/terms"><b>Terms of Use</b><span>The agreement between you and us when you use this site.</span></a>
+        <a href="/disclaimer" class="here"><b>Disclaimer</b><span>What this site is, and just as importantly, what it is not.</span></a>
+        <a href="/affiliate-disclosure"><b>Affiliate Disclosure</b><span>When a link earns us something, and how we choose what to recommend.</span></a>
+      </div>
+    </div>
+  </section>
+
+
+  <footer>
+    <div class="container">
+      <a href="/" class="brand-line">Purposeful Pennies</a>
+      <p class="tagline">spend with intention. save with purpose.</p>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="/start-here">Start Here</a>
+        <a href="/about">About</a>
+        <a href="/free-resources">Free Resources</a>
+        <a href="/membership">Membership</a>
+        <a href="/blog">Blog</a>
+        <a href="/contact">Contact</a>
+        <a href="/opt-in">Free Reality Check</a>
+      </nav>
+      <p class="legal">
+        © 2026 <span data-legal="name">[BUSINESS LEGAL NAME]</span>. All rights reserved.
+        &nbsp;·&nbsp;
+        <a href="/privacy-policy">Privacy</a> ·
+        <a href="/terms">Terms</a> ·
+        <a href="/disclaimer">Disclaimer</a> ·
+        <a href="/affiliate-disclosure">Affiliate Disclosure</a>
+      </p>
+    </div>
+  </footer>
+
+
+  <script>
+  /* =========================================================
+     FILL THESE IN ONCE. Every blank on the page reads from here.
+     Anything left unset keeps its visible [PLACEHOLDER] text so
+     you can see at a glance what is still missing.
+     ========================================================= */
+  var BUSINESS = {
+    name:      '',   /* legal entity name, e.g. Purposeful Pennies LLC */
+    trading:   'Purposeful Pennies',
+    entity:    '',   /* e.g. an Ohio limited liability company */
+    address:   '',   /* mailing address for legal notices */
+    email:     '',   /* address for privacy and legal contact */
+    state:     '',   /* governing law, e.g. Ohio */
+    effective: 'July 25, 2026',
+    updated:   'July 25, 2026'
+  };
+
+  Object.keys(BUSINESS).forEach(function (k) {
+    if (!BUSINESS[k]) return;
+    document.querySelectorAll('[data-legal="' + k + '"]').forEach(function (el) {
+      el.textContent = BUSINESS[k];
+      el.removeAttribute('style');
+    });
+  });
+
+  /* mobile nav */
+  (function () {
+    var t = document.getElementById('navToggle'), l = document.getElementById('navLinks');
+    if (!t || !l) return;
+    t.addEventListener('click', function () {
+      var open = l.classList.toggle('open');
+      t.classList.toggle('open', open);
+      t.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    l.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { l.classList.remove('open'); t.classList.remove('open'); });
+    });
+  })();
+<w:pgSz w:h="15840" w:w="12240" w:orient="portrait"/><w:pgMar w:bottom="1440" w:top="1440" w:left="1440" w:right="1440" w:header="720" w:footer="720"/><w:pgNumType w:start="1"/></w:sectPr></w:pPr><w:r w:rsidDel="00000000" w:rsidR="00000000" w:rsidRPr="00000000"><w:rPr><w:rtl w:val="0"/></w:rPr><w:t xml:space="preserve">  </script>

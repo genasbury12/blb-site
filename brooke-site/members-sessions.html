@@ -1,0 +1,782 @@
+<!--
+  ============================================================
+  PURPOSEFUL PENNIES  ·  LIVE SESSIONS   /members-sessions
+  Showit + MemberSpace
+  ============================================================
+
+  WHAT THIS PAGE IS
+  The home of the Monthly Money Reset. Three jobs, in order of how
+  often they matter:
+     1. When is the next one and how do I get in
+     2. What actually happens, so she is not nervous about joining
+     3. Every replay, because most members will watch more replays
+        than they attend live
+
+  Linked from the sales page, the thank you page, the member home,
+  the Circle rhythm section, and the nav. It was the most referenced
+  page in the membership that did not exist.
+
+  ------------------------------------------------------------
+  BEFORE THIS GOES LIVE, DELETE THE SAMPLE REPLAYS
+  ------------------------------------------------------------
+  The REPLAYS array contains three entries marked sample: true so the
+  replay card design can be reviewed. They render with a visible
+  SAMPLE ribbon and they must not ship. Delete them and the page
+  shows its empty state, which is written for a brand new membership
+  and reads perfectly well with zero replays.
+
+  ------------------------------------------------------------
+  THE RECURRENCE IS REAL, KEEP IT THAT WAY
+  ------------------------------------------------------------
+  11 August 2026 is the second Tuesday of the month, so the human
+  sentence "second Tuesday of every month" and the calendar rule
+  RRULE:FREQ=MONTHLY;BYDAY=2TU agree exactly. If the date moves, both
+  have to move together or the year of calendar entries she just
+  added will be wrong.
+
+  Timestamps carry a UTC offset for the same reason as every other
+  page. Eastern daylight is -04:00, eastern standard is -05:00.
+
+  ------------------------------------------------------------
+  MEMBERSPACE
+  ------------------------------------------------------------
+  Protection inherited from the /members-* prefix rule. See the member
+  home file for the full protection setup.
+  Account links point at /members-account, which is the one page that
+  carries the MemberSpace Link. Nothing on this page needs it.
+
+  FORMATTING RULE. Zero em dashes, zero en dashes. Separator is the
+  diamond glyph.
+  ============================================================
+-->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Live Sessions · The One-Income Circle</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&amp;family=DM+Serif+Display&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --deep-sage: #2E3E2F; --sage: #5C6E47; --sage-soft: #8B9E75;
+      --warm-tan: #C28954; --warm-tan-dark: #A77246;
+      --cream: #FBF4D7; --cream-warm: #F7ECC4; --charcoal: #2A2A2A;
+      --soft-gray: #7E867D; --light-sage: #DBE3CE; --pale-tan: #EFE0C1; --white: #FFFFFF;
+      --coral: #DD6B4E; --coral-deep: #C25441; --coral-soft: #F7D0BE; --coral-blush: #FBE3D5;
+      --gold: #D4A83F; --gold-soft: #EDD98D; --gold-deep: #B8912E;
+      --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 17px; scroll-behavior: smooth; }
+    @media (min-width: 720px) { html { font-size: 18px; } }
+    body {
+      font-family: Georgia, 'Times New Roman', serif; font-size: 1.05rem; line-height: 1.68;
+      color: var(--charcoal); background: var(--cream);
+      -webkit-font-smoothing: antialiased; overflow-x: hidden;
+    }
+    .container { max-width: 1120px; margin: 0 auto; padding: 0 1.5rem; }
+    section { padding: 3rem 0; position: relative; }
+    @media (max-width: 700px) { section { padding: 2.25rem 0; } }
+    .script { font-family: 'Caveat', cursive; font-weight: 700; }
+    h1, h2, h3, h4 { font-family: Georgia, serif; color: var(--deep-sage); }
+    h1 { font-size: clamp(2rem, 4.6vw, 2.9rem); font-weight: bold; line-height: 1.08; }
+    h2 { font-size: clamp(1.45rem, 3vw, 1.95rem); font-weight: bold; line-height: 1.18; }
+    h3 { font-size: 1.12rem; font-weight: bold; line-height: 1.32; }
+    h4 { font-size: 1rem; font-weight: bold; }
+    p { margin-bottom: 0.95rem; } p:last-child { margin-bottom: 0; }
+    a { color: var(--coral-deep); }
+    .eyebrow {
+      font-size: 0.74rem; font-weight: bold; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--warm-tan-dark); display: inline-flex; align-items: center; gap: 0.7rem;
+    }
+    .eyebrow::before { content: ""; width: 24px; height: 1px; background: var(--warm-tan); }
+    .eyebrow-coral { color: var(--coral-deep); }
+    .eyebrow-coral::before { background: var(--coral); }
+    .eyebrow-cream { color: var(--coral-soft); }
+    .eyebrow-cream::before { background: var(--coral); }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.55rem; background: var(--warm-tan);
+      color: white; font-family: Georgia, serif; font-size: 1rem; font-weight: bold;
+      padding: 0.9rem 1.9rem; border: none; border-radius: 999px; cursor: pointer;
+      text-decoration: none; transition: all 0.25s var(--ease); box-shadow: 0 3px 0 var(--warm-tan-dark);
+    }
+    .btn:hover { background: var(--warm-tan-dark); transform: translateY(-2px); box-shadow: 0 5px 0 var(--warm-tan-dark); color: white; }
+    .btn::after { content: "\2192"; transition: transform 0.25s var(--ease); }
+    .btn:hover::after { transform: translateX(3px); }
+    .btn-coral { background: var(--coral); box-shadow: 0 3px 0 var(--coral-deep); }
+    .btn-coral:hover { background: var(--coral-deep); box-shadow: 0 5px 0 var(--coral-deep); }
+    .btn-outline { background: transparent; color: var(--warm-tan-dark); border: 2px solid var(--warm-tan); padding: calc(0.9rem - 2px) calc(1.9rem - 2px); box-shadow: none; }
+    .btn-outline:hover { background: var(--pale-tan); color: var(--warm-tan-dark); box-shadow: none; }
+    .btn-cream { background: var(--cream); color: var(--deep-sage); box-shadow: 0 3px 0 rgba(0,0,0,0.18); }
+    .btn-cream:hover { background: var(--cream-warm); color: var(--deep-sage); box-shadow: 0 5px 0 rgba(0,0,0,0.18); }
+    .btn-ghost { background: transparent; color: var(--cream); border: 2px solid var(--coral-soft); box-shadow: none; padding: calc(0.9rem - 2px) calc(1.9rem - 2px); }
+    .btn-ghost:hover { background: rgba(255,255,255,0.1); color: var(--cream); box-shadow: none; }
+    .btn-lg { font-size: 1.1rem; padding: 1.05rem 2.2rem; }
+    .btn-sm { font-size: 0.88rem; padding: 0.6rem 1.25rem; }
+    .btn-plain::after { content: ""; }
+
+    /* ===== MEMBER NAV ===== */
+    .mnav { background: var(--deep-sage); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(46,62,47,0.18); }
+    .mnav-inner { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding: 0.85rem 1.5rem; max-width: 1280px; margin: 0 auto; }
+    .mnav-logo { font-family: Georgia, serif; font-size: 1.12rem; font-weight: bold; color: var(--cream); text-decoration: none; display: flex; align-items: center; gap: 0.5rem; white-space: nowrap; }
+    .mnav-logo .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--coral); }
+    .mnav-links { display: flex; align-items: center; gap: 1.6rem; }
+    .mnav-links a { color: var(--cream); text-decoration: none; font-size: 0.94rem; opacity: 0.88; position: relative; padding-bottom: 2px; white-space: nowrap; }
+    .mnav-links a::after { content: ""; position: absolute; left: 0; right: 0; bottom: -3px; height: 2px; background: var(--coral); transform: scaleX(0); transform-origin: left; transition: transform 0.25s var(--ease); border-radius: 2px; }
+    .mnav-links a:hover { opacity: 1; }
+    .mnav-links a:hover::after, .mnav-links a.current::after { transform: scaleX(1); }
+    .mnav-links a.current { opacity: 1; font-weight: bold; }
+    .mnav-account { background: var(--coral); color: white !important; padding: 0.5rem 1.1rem; border-radius: 999px; font-size: 0.86rem !important; font-weight: bold; opacity: 1 !important; box-shadow: 0 2px 0 var(--coral-deep); }
+    .mnav-account::after { display: none; }
+    .mnav-account:hover { background: var(--coral-deep); }
+    .mnav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 0.4rem; }
+    .mnav-toggle span { display: block; width: 24px; height: 2px; background: var(--cream); margin: 5px 0; border-radius: 2px; }
+    @media (max-width: 1080px) {
+      .mnav-toggle { display: block; }
+      .mnav-links { position: absolute; top: 100%; left: 0; right: 0; background: var(--deep-sage); flex-direction: column; align-items: stretch; gap: 0; padding: 0 1.5rem; max-height: 0; overflow: hidden; transition: max-height 0.35s var(--ease), padding 0.35s var(--ease); }
+      .mnav-links.open { max-height: 32rem; padding: 0.75rem 1.5rem 1.5rem; }
+      .mnav-links a { padding: 0.75rem 0; font-size: 1.02rem; }
+      .mnav-links a::after { display: none; }
+      .mnav-account { text-align: center; margin-top: 0.75rem; }
+    }
+
+    /* ===== SHOWIT OVERRIDE ARMOUR =====
+       Showit injects its own link colours over anything pasted into
+       Custom Head HTML, and it beat the logo rule on the live site: the
+       logo rendered dark on the dark nav and was effectively invisible.
+       The nav links happened to survive, but they are one template
+       change away from the same problem.
+
+       Every colour in the nav is therefore pinned here with high
+       specificity and !important. These are the same colours the
+       component already intended, nothing new. Do not remove this
+       block. If a nav element ever renders the wrong colour on Showit
+       again, add it here rather than editing the rules above. */
+    .mnav .mnav-logo,
+    .mnav .mnav-logo:link,
+    .mnav .mnav-logo:visited,
+    .mnav .mnav-logo:hover,
+    .mnav .mnav-logo:focus,
+    .mnav .mnav-logo:active,
+    .mnav .mnav-logo * { color: var(--cream) !important; }
+    .mnav .mnav-logo .dot { background: var(--coral) !important; }
+
+    .mnav .mnav-links a,
+    .mnav .mnav-links a:link,
+    .mnav .mnav-links a:visited,
+    .mnav .mnav-links a:hover,
+    .mnav .mnav-links a:active { color: var(--cream) !important; }
+
+    .mnav .mnav-links a.mnav-account,
+    .mnav .mnav-links a.mnav-account:link,
+    .mnav .mnav-links a.mnav-account:visited,
+    .mnav .mnav-links a.mnav-account:hover,
+    .mnav .mnav-links a.mnav-account:active { color: #FFFFFF !important; }
+    .mnav .mnav-toggle span { background: var(--cream) !important; }
+    .mnav .mnav-logo, .mnav .mnav-links a { text-decoration: none !important; }
+
+
+    /* ===== NEXT SESSION ===== */
+    .up { background: var(--deep-sage); color: var(--cream); padding: 2.5rem 0 3rem; position: relative; overflow: hidden; }
+    .up::before {
+      content: ""; position: absolute; top: -220px; right: -160px; width: 480px; height: 480px;
+      background: radial-gradient(circle, rgba(221,107,78,0.22) 0%, transparent 65%); pointer-events: none;
+    }
+    .up-inner { position: relative; z-index: 2; }
+    .crumb { font-size: 0.85rem; color: var(--coral-soft); margin-bottom: 1.1rem; opacity: 0.9; }
+    .crumb a { color: var(--coral-soft); text-decoration: none; border-bottom: 1px solid rgba(247,208,190,0.35); }
+    .up-grid { display: grid; grid-template-columns: auto 1fr; gap: 2.5rem; align-items: center; }
+    @media (max-width: 780px) { .up-grid { grid-template-columns: 1fr; gap: 1.75rem; } }
+    .date-block {
+      background: var(--cream); color: var(--deep-sage); border-radius: 16px;
+      padding: 1.35rem 1.9rem; text-align: center; min-width: 168px;
+      box-shadow: 0 16px 36px rgba(0,0,0,0.26);
+    }
+    @media (max-width: 780px) { .date-block { max-width: 210px; } }
+    .date-block .dow { font-size: 0.72rem; font-weight: bold; letter-spacing: 0.18em; text-transform: uppercase; color: var(--sage); }
+    .date-block .m { font-size: 0.78rem; font-weight: bold; letter-spacing: 0.2em; text-transform: uppercase; color: var(--coral-deep); margin-top: 0.2rem; }
+    .date-block .d { font-family: 'DM Serif Display', Georgia, serif; font-size: 3.4rem; line-height: 1.02; }
+    .date-block .t { font-size: 0.86rem; color: var(--sage); font-style: italic; }
+    .up h1 { color: var(--cream); margin-bottom: 0.6rem; }
+    .countdown { font-family: 'Caveat', cursive; font-size: 1.6rem; color: var(--gold-soft); display: block; margin-bottom: 0.5rem; }
+    .yourtime {
+      display: inline-block; background: rgba(255,255,255,0.09);
+      border: 1px solid rgba(221,107,78,0.35); border-radius: 999px;
+      padding: 0.45rem 1rem; font-size: 0.92rem; color: var(--cream); margin-bottom: 1.2rem;
+    }
+    .yourtime b { color: var(--gold-soft); }
+    .up p.blurb { color: var(--cream); opacity: 0.92; max-width: 36rem; }
+    .up-actions { display: flex; flex-wrap: wrap; gap: 0.85rem; margin-top: 1.5rem; align-items: center; }
+    .cal-row { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1rem; font-size: 0.88rem; }
+    .cal-row a { color: var(--coral-soft); text-decoration: underline; text-underline-offset: 3px; }
+    .room-note { margin-top: 1.1rem; font-size: 0.88rem; font-style: italic; opacity: 0.8; }
+
+    /* ===== WHAT HAPPENS ===== */
+    .agenda { background: var(--cream); }
+    .agenda-head { max-width: 42rem; margin-bottom: 2rem; }
+    .agenda-head h2 { margin: 0.85rem 0 0.7rem; }
+    .timeline { max-width: 46rem; }
+    .slot {
+      display: grid; grid-template-columns: 92px 1fr; gap: 1.5rem;
+      padding: 1.1rem 0; border-bottom: 1px dashed rgba(194,137,84,0.4); align-items: start;
+    }
+    .slot:last-child { border-bottom: none; }
+    @media (max-width: 560px) { .slot { grid-template-columns: 74px 1fr; gap: 1rem; } }
+    .slot .mins {
+      font-family: 'DM Serif Display', Georgia, serif; font-size: 1.15rem;
+      color: var(--coral-deep); line-height: 1.3; white-space: nowrap;
+    }
+    .slot h4 { margin-bottom: 0.2rem; }
+    .slot p { font-size: 0.95rem; color: var(--sage); margin: 0; }
+
+    /* ===== COME PREPARED ===== */
+    .prep { background: var(--coral-blush); }
+    .prep-head { max-width: 42rem; margin-bottom: 1.75rem; }
+    .prep-head h2 { margin: 0.85rem 0 0.7rem; }
+    .prep-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.15rem; }
+    @media (max-width: 860px) { .prep-grid { grid-template-columns: 1fr; } }
+    .prep-card { background: white; border-radius: 12px; padding: 1.5rem 1.5rem; }
+    .prep-card .p-n { font-family: 'Caveat', cursive; font-size: 1.7rem; color: var(--coral-deep); line-height: 1; margin-bottom: 0.3rem; }
+    .prep-card h4 { margin-bottom: 0.3rem; }
+    .prep-card p { font-size: 0.93rem; color: var(--sage); margin: 0; }
+    .prep-note {
+      margin-top: 1.6rem; background: white; border-left: 4px solid var(--gold);
+      border-radius: 10px; padding: 1.15rem 1.3rem; font-size: 0.97rem;
+    }
+    .prep-note b { color: var(--deep-sage); }
+
+    /* ===== ETIQUETTE ===== */
+    .etiquette { background: var(--white); }
+    .et-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem 2rem; max-width: 62rem; }
+    @media (max-width: 780px) { .et-grid { grid-template-columns: 1fr; } }
+    .et-item { padding: 0.6rem 0 0.6rem 1.8rem; position: relative; font-size: 0.99rem; }
+    .et-item::before {
+      content: ""; position: absolute; left: 0; top: 1rem; width: 16px; height: 16px;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23DD6B4E' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center/contain no-repeat;
+    }
+    .et-item b { color: var(--deep-sage); }
+
+    /* ===== REPLAYS ===== */
+    .replays { background: var(--cream-warm); }
+    .rep-head {
+      display: flex; align-items: baseline; justify-content: space-between;
+      gap: 1.5rem; flex-wrap: wrap; margin-bottom: 1.5rem;
+    }
+    .rep-head h2 { margin: 0; }
+    .rep-search { position: relative; min-width: 240px; flex: 0 1 300px; }
+    #repSearch {
+      width: 100%; font-family: Georgia, serif; font-size: 0.94rem; color: var(--charcoal);
+      padding: 0.6rem 1rem 0.6rem 2.3rem; border: 1px solid rgba(194,137,84,0.45);
+      border-radius: 999px; background: white; outline: none;
+    }
+    #repSearch:focus { border-color: var(--coral); }
+    #repSearch::placeholder { color: var(--soft-gray); font-style: italic; }
+    .rep-search::before {
+      content: "\1F50D"; position: absolute; left: 0.85rem; top: 50%; transform: translateY(-50%);
+      font-size: 0.85rem; opacity: 0.5; pointer-events: none;
+    }
+    .rep-list { display: flex; flex-direction: column; gap: 1rem; }
+    .replay {
+      background: white; border: 1px solid rgba(194,137,84,0.28); border-radius: 14px;
+      padding: 1.4rem 1.55rem; display: grid; grid-template-columns: 84px 1fr auto;
+      gap: 1.4rem; align-items: center; min-width: 0; position: relative;
+      transition: border-color 0.25s var(--ease), box-shadow 0.25s var(--ease);
+    }
+    .replay:hover { border-color: var(--coral); box-shadow: 0 12px 28px rgba(46,62,47,0.1); }
+    @media (max-width: 780px) {
+      .replay { grid-template-columns: 64px 1fr; }
+      .replay .rep-go { grid-column: 2; }
+    }
+    .rep-date {
+      background: var(--cream); border-radius: 10px; padding: 0.6rem 0.4rem; text-align: center;
+    }
+    .rep-date .m { font-size: 0.62rem; font-weight: bold; letter-spacing: 0.14em; text-transform: uppercase; color: var(--coral-deep); }
+    .rep-date .d { font-family: 'DM Serif Display', Georgia, serif; font-size: 1.7rem; line-height: 1.05; color: var(--deep-sage); }
+    .rep-date .y { font-size: 0.66rem; color: var(--soft-gray); }
+    .replay h3 { margin-bottom: 0.25rem; }
+    .rep-meta { font-size: 0.8rem; color: var(--soft-gray); font-style: italic; margin-bottom: 0.5rem; }
+    .replay p.covered { font-size: 0.92rem; color: var(--sage); margin: 0; }
+    .rep-go { display: flex; flex-direction: column; gap: 0.55rem; align-items: flex-end; }
+    @media (max-width: 780px) { .rep-go { align-items: flex-start; flex-direction: row; flex-wrap: wrap; margin-top: 0.9rem; } }
+    .rep-notes { font-size: 0.84rem; color: var(--coral-deep); text-decoration: underline; text-underline-offset: 3px; white-space: nowrap; }
+    .sample-ribbon {
+      position: absolute; top: 0.55rem; right: 0.55rem; background: var(--charcoal); color: white;
+      font-size: 0.56rem; font-weight: bold; letter-spacing: 0.14em; text-transform: uppercase;
+      padding: 0.22rem 0.5rem; border-radius: 3px; z-index: 2;
+    }
+    .rep-empty {
+      display: none; background: white; border-radius: 14px; padding: 2.5rem 2rem; text-align: center;
+      border: 1px dashed rgba(194,137,84,0.5);
+    }
+    .rep-empty.show { display: block; }
+    .rep-empty .script { font-size: 1.6rem; color: var(--coral-deep); display: block; margin-bottom: 0.35rem; }
+    .rep-empty h3 { font-size: 1.3rem; margin-bottom: 0.6rem; }
+    .rep-empty p { max-width: 32rem; margin: 0 auto 1.2rem; color: var(--sage); }
+    .rep-count { font-size: 0.88rem; color: var(--sage); font-style: italic; margin-bottom: 1.1rem; }
+
+    /* ===== CANNOT MAKE IT ===== */
+    .missit { background: var(--light-sage); }
+    .missit-card { max-width: 46rem; margin: 0 auto; background: white; border-radius: 14px; padding: 2rem 2.1rem; }
+    .missit-card h2 { font-size: 1.4rem; margin-bottom: 0.7rem; }
+    .missit-card p { font-size: 0.99rem; }
+    .missit-actions { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 1.3rem; }
+
+    /* ===== NEXT ===== */
+    .next { background: var(--coral-blush); text-align: center; padding: 3rem 0; }
+    .next h2 { margin: 0.85rem 0 0.9rem; }
+    .next p { max-width: 36rem; margin: 0 auto 1.4rem; color: var(--sage); }
+    .next-row { display: flex; flex-wrap: wrap; gap: 0.9rem; justify-content: center; }
+
+    footer { background: var(--deep-sage); color: var(--cream); padding: 2.25rem 0 2rem; text-align: center; border-top: 1px solid rgba(221,107,78,0.22); }
+    footer .diamond { color: var(--coral); font-size: 0.8rem; letter-spacing: 1.1em; padding-left: 1.1em; opacity: 0.7; margin-bottom: 1.25rem; }
+    footer .fnav { display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem 1.75rem; margin-bottom: 1.25rem; }
+    footer .fnav a { color: var(--cream); opacity: 0.85; text-decoration: none; font-size: 0.9rem; }
+    footer .fnav a:hover { opacity: 1; color: var(--coral-soft); }
+    footer .legal { font-size: 0.8rem; opacity: 0.6; }
+    footer .legal a { color: var(--cream); opacity: 0.85; text-decoration: none; margin: 0 0.35rem; }
+
+    .fade-in { opacity: 0; transform: translateY(16px); transition: opacity 0.6s var(--ease), transform 0.6s var(--ease); }
+    .fade-in.visible { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+      html { scroll-behavior: auto; }
+      .fade-in { opacity: 1; transform: none; }
+    }
+    :focus-visible { outline: 3px solid var(--coral); outline-offset: 3px; }
+    .skip-link { position: absolute; left: -9999px; background: var(--coral); color: white; padding: 0.7rem 1.2rem; z-index: 200; }
+    .skip-link:focus { left: 0; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+  </style>
+
+
+
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <nav class="mnav">
+    <div class="mnav-inner">
+      <a href="/members" class="mnav-logo"><span class="dot"></span> The One-Income Circle</a>
+      <button class="mnav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="mnavLinks">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="mnav-links" id="mnavLinks">
+        <a href="/members">Home</a>
+        <a href="/members-vault">The Vault</a>
+        <a href="/members-library">Printables</a>
+        <a href="/members-sessions" class="current" aria-current="page">Live Sessions</a>
+        <a href="/members-circle">The Circle</a>
+        <a href="/members-ask-brooke" class="">Ask Brooke</a>
+        <a href="/members-account" class="mnav-account">My account</a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main">
+
+  <!-- ==================== NEXT SESSION ==================== -->
+  <section class="up">
+    <div class="container up-inner">
+      <p class="crumb"><a href="/members">Member home</a> ◆ Live Sessions</p>
+      <div class="up-grid">
+        <div class="date-block">
+          <div class="dow" id="sDow">DAY</div>
+          <div class="m" id="sMonth">MONTH</div>
+          <div class="d" id="sDay">00</div>
+          <div class="t" id="sTime">time to be set</div>
+        </div>
+        <div>
+          <span class="countdown" id="countdown">the next one is coming up</span>
+          <h1>The Monthly Money Reset</h1>
+          <span class="yourtime" id="yourTime">Working out your local time…</span>
+          <p class="blurb">Forty five minutes where we plan the month together, out loud, in real numbers. We set the grocery number, check the sinking funds, and work through whatever you bring. This is the thing that keeps the rest of it going.</p>
+          <div class="up-actions">
+            <a href="#" class="btn btn-cream btn-lg js-join">Join the room</a>
+            <a href="#agenda" class="btn btn-ghost">What happens in one</a>
+          </div>
+          <div class="cal-row">
+            <a href="#" id="gcalBtn" target="_blank" rel="noopener">Add this one to Google Calendar</a>
+            <a href="#" id="icsOne" download="monthly-money-reset.ics">Download this one</a>
+            <a href="#" id="icsAll" download="monthly-money-reset-recurring.ics">Add every month at once</a>
+          </div>
+          <p class="room-note">The room opens ten minutes early if you like arriving before things start. <span id="recurText">It runs on the second Tuesday of every month.</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== WHAT HAPPENS ==================== -->
+  <section class="agenda" id="agenda">
+    <div class="container">
+      <div class="agenda-head fade-in">
+        <span class="eyebrow">No surprises</span>
+        <h2>What actually happens in the forty five minutes.</h2>
+        <p>Written out because knowing the shape of a thing makes it much easier to walk into.</p>
+      </div>
+      <div class="timeline">
+        <div class="slot fade-in">
+          <div class="mins">First 5</div>
+          <div>
+            <h4>Arriving</h4>
+            <p>Hellos, and I say who is new so nobody feels like they wandered into something already in progress. No introductions required from you.</p>
+          </div>
+        </div>
+        <div class="slot fade-in">
+          <div class="mins">Next 15</div>
+          <div>
+            <h4>We plan the month</h4>
+            <p>I share my screen and fill in the page for the month ahead with my own real numbers. You fill in yours alongside me. This is the core of it.</p>
+          </div>
+        </div>
+        <div class="slot fade-in">
+          <div class="mins">Next 15</div>
+          <div>
+            <h4>Questions from the room</h4>
+            <p>You type them in the chat or unmute, whichever you prefer. I take them in the order they land. If it is a question one person has, it is usually a question six people have.</p>
+          </div>
+        </div>
+        <div class="slot fade-in">
+          <div class="mins">Last 10</div>
+          <div>
+            <h4>What is coming, and one thing each</h4>
+            <p>What is landing in the vault next month, then everybody names one thing they are doing before the next session. Saying it out loud is most of why it gets done.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== COME PREPARED ==================== -->
+  <section class="prep">
+    <div class="container">
+      <div class="prep-head fade-in">
+        <span class="eyebrow eyebrow-coral">Two minutes of prep</span>
+        <h2>Bring three things, if you can.</h2>
+      </div>
+      <div class="prep-grid">
+        <div class="prep-card fade-in">
+          <div class="p-n">one</div>
+          <h4>Your numbers</h4>
+          <p>What is coming in this month and roughly what is going out. Rough is fine. Nobody is auditing you.</p>
+        </div>
+        <div class="prep-card fade-in">
+          <div class="p-n">two</div>
+          <h4>A printed page</h4>
+          <p>The payday page or the monthly budget, whichever you are working from. Pen beats typing while you are watching a screen.</p>
+        </div>
+        <div class="prep-card fade-in">
+          <div class="p-n">three</div>
+          <h4>One question</h4>
+          <p>The thing you have been going round in circles on. Written down, so you actually ask it instead of talking yourself out of it.</p>
+        </div>
+      </div>
+      <div class="prep-note fade-in">
+        <p><b>And if you turn up with none of that,</b> still come. Plenty of women join with a cup of tea and no page at all, listen to somebody else’s question, and leave with the thing they needed. Turning up beats preparing.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== ETIQUETTE ==================== -->
+  <section class="etiquette">
+    <div class="container">
+      <div class="agenda-head fade-in">
+        <span class="eyebrow">Before you worry about it</span>
+        <h2>Things people ask before their first one.</h2>
+      </div>
+      <div class="et-grid">
+        <div class="et-item fade-in"><b>Cameras are optional, always.</b> Plenty of people keep theirs off the whole time and it is genuinely not a thing.</div>
+        <div class="et-item fade-in"><b>Background noise is fine.</b> Children, dogs, a dishwasher. We are all at home and it is eight in the evening.</div>
+        <div class="et-item fade-in"><b>Nobody gets called on.</b> You will never be put on the spot. If you want to speak, you say so.</div>
+        <div class="et-item fade-in"><b>You can arrive late or leave early.</b> No apology needed and nobody will remark on it.</div>
+        <div class="et-item fade-in"><b>Chat questions are equally welcome.</b> Most questions come through the chat, not out loud.</div>
+        <div class="et-item fade-in"><b>Your numbers stay in the room.</b> Same rule as the Circle. What is shared here stays here.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== REPLAYS ==================== -->
+  <section class="replays">
+    <div class="container">
+      <div class="rep-head fade-in">
+        <h2>Every replay</h2>
+        <div class="rep-search">
+          <label for="repSearch" class="sr-only">Search the replays</label>
+          <input type="search" id="repSearch" placeholder="Search past sessions" autocomplete="off">
+        </div>
+      </div>
+      <p class="rep-count" id="repCount"></p>
+      <div class="rep-list" id="repList"></div>
+      <div class="rep-empty" id="repEmpty">
+        <span class="script">nothing here yet, and that is fine</span>
+        <h3>The first replay lands after the first session.</h3>
+        <p>Every session is recorded and shows up here the morning after, with the notes and any pages we used. Come to the live one if you can, and if bedtime wins, it will be waiting for you.</p>
+        <a href="#" class="btn btn-coral js-join">Join the next live one</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CANNOT MAKE IT ==================== -->
+  <section class="missit">
+    <div class="container">
+      <div class="missit-card fade-in">
+        <h2>Cannot make it live?</h2>
+        <p>Most members cannot, most months. Eight in the evening is bedtime in a lot of houses and I am not going to pretend otherwise, so nothing about this membership assumes you were there.</p>
+        <p>Send your question ahead and I will answer it in the session whether you are there or not. Then watch the replay when you have twenty quiet minutes, which is usually a better use of it anyway because you can skip to your bit.</p>
+        <div class="missit-actions">
+          <a href="/members-ask-brooke" class="btn btn-coral">Send a question ahead</a>
+          <a href="#" class="btn btn-outline" id="icsAll2" download="monthly-money-reset-recurring.ics">Put the year in my calendar</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== NEXT ==================== -->
+  <section class="next">
+    <div class="container">
+      <span class="eyebrow eyebrow-coral">See you there</span>
+      <h2>Second Tuesday. Eight in the evening.</h2>
+      <p>Bring a pen and whatever you have. That is genuinely the whole entry requirement.</p>
+      <div class="next-row">
+        <a href="#" class="btn btn-coral btn-lg js-join">Join the room</a>
+        <a href="/members" class="btn btn-outline">Back to member home</a>
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="diamond">◆ ◆ ◆</div>
+      <nav class="fnav" aria-label="Member footer">
+        <a href="/members">Member home</a>
+        <a href="/members-vault">The Vault</a>
+        <a href="/members-library">Printables</a>
+        <a href="/members-circle">The Circle</a>
+        <a href="/members-account">My account</a>
+        <a href="/contact">Help</a>
+      </nav>
+      <p class="legal">
+        © 2026 Purposeful Pennies. Member content, please keep it in the family.
+        &nbsp;·&nbsp;
+        <a href="/terms">Terms</a> ·
+        <a href="/privacy-policy">Privacy</a>
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    /* ============================================================
+       CONFIG
+       ============================================================ */
+
+    const SESSION = {
+      title: 'The Monthly Money Reset  ◆  One-Income Circle',
+      /* Offsets required. Eastern daylight -04:00, eastern standard -05:00. */
+      start: '2026-08-11T20:00:00-04:00',
+      end:   '2026-08-11T20:45:00-04:00',
+      timeLabel: '8:00 pm eastern',
+      joinUrl: 'https://zoom.us/j/your-recurring-meeting-id',
+      details: 'Forty five minutes together. Bring your notebook. Replay lands the next morning.',
+      /* Human sentence and calendar rule must always agree. 11 Aug 2026
+         is the second Tuesday, so these two match today. */
+      recurText: 'It runs on the second Tuesday of every month.',
+      rrule: 'FREQ=MONTHLY;BYDAY=2TU'
+    };
+
+    /* ============================================================
+       REPLAYS
+       ------------------------------------------------------------
+       DELETE THE THREE sample: true ENTRIES BEFORE LAUNCH.
+       They exist so the card design can be reviewed, they render with
+       a SAMPLE ribbon, and with the array empty the page shows a
+       properly written empty state instead.
+       ============================================================ */
+    const REPLAYS = [
+      { date: '2026-07-14', title: 'Planning July on one income', mins: 47, sample: true,
+        covered: 'Setting the grocery number for a five week month, and the sinking fund order when everything feels urgent.',
+        watch: '/members-sessions-2026-07', notes: '/members-files/session-notes-2026-07.pdf' },
+      { date: '2026-06-09', title: 'The summer months problem', mins: 44, sample: true,
+        covered: 'Why food costs jump when school stops, and three ways members handled childcare gaps without new debt.',
+        watch: '/members-sessions-2026-06', notes: '/members-files/session-notes-2026-06.pdf' },
+      { date: '2026-05-12', title: 'Starting again after a bad month', mins: 51, sample: true,
+        covered: 'What to do when the plan fell apart, and why starting from where you are beats starting over.',
+        watch: '/members-sessions-2026-05', notes: '/members-files/session-notes-2026-05.pdf' }
+    ];
+
+    /* ===== WIRE LINKS ===== */
+    document.querySelectorAll('.js-join').forEach(function (a) {
+      a.href = SESSION.joinUrl; a.target = '_blank'; a.rel = 'noopener';
+    });
+    document.getElementById('recurText').textContent = SESSION.recurText;
+
+    /* ===== DATE BLOCK, LOCAL TIME, AND COUNTDOWN ===== */
+    (function () {
+      const start = new Date(SESSION.start);
+      if (isNaN(start.getTime())) return;
+
+      /* Date shown literally from the config string so the day never
+         shifts for a member in another timezone. */
+      const m = SESSION.start.match(/^(\d{4})-(\d{2})-(\d{2})/);
+      const months = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+      const dows = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
+      document.getElementById('sMonth').textContent = months[parseInt(m[2], 10) - 1];
+      document.getElementById('sDay').textContent = String(parseInt(m[3], 10));
+      document.getElementById('sTime').textContent = SESSION.timeLabel;
+      /* Weekday derived from a noon UTC stamp of that calendar date, so
+         it cannot slip a day either side of midnight. */
+      document.getElementById('sDow').textContent =
+        dows[new Date(m[1] + '-' + m[2] + '-' + m[3] + 'T12:00:00Z').getUTCDay()];
+
+      /* Her local time. The whole point of carrying offsets. */
+      const yt = document.getElementById('yourTime');
+      try {
+        const fmt = new Intl.DateTimeFormat(undefined, {
+          weekday: 'long', hour: 'numeric', minute: '2-digit', timeZoneName: 'short'
+        });
+        const zone = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+        const isEastern = /New_York|Toronto|Detroit/.test(zone);
+        yt.innerHTML = isEastern
+          ? 'That is <b>' + SESSION.timeLabel + '</b>, which is your time'
+          : 'In your timezone that is <b>' + fmt.format(start) + '</b>';
+      } catch (e) {
+        yt.textContent = SESSION.timeLabel;
+      }
+
+      /* Calm countdown. Days, not a ticking clock. */
+      const cd = document.getElementById('countdown');
+      const now = new Date();
+      const dayMs = 86400000;
+      const days = Math.ceil((start - now) / dayMs);
+      const minsAway = (start - now) / 60000;
+      if (minsAway <= -60) cd.textContent = 'the next one is being scheduled';
+      else if (minsAway <= 45) cd.textContent = 'happening right now, come in';
+      else if (minsAway <= 90) cd.textContent = 'starting very shortly';
+      else if (days <= 1) cd.textContent = 'today';
+      else if (days === 2) cd.textContent = 'tomorrow';
+      else if (days <= 7) cd.textContent = 'in ' + (days - 1) + ' days';
+      else cd.textContent = 'in ' + Math.round((days - 1) / 7) + ' weeks';
+    })();
+
+    /* ===== CALENDAR LINKS ===== */
+    (function () {
+      function stamp(t) { return new Date(t).toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, ''); }
+      const s = stamp(SESSION.start), e = stamp(SESSION.end);
+
+      const g = new URL('https://calendar.google.com/calendar/render');
+      g.searchParams.set('action', 'TEMPLATE');
+      g.searchParams.set('text', SESSION.title);
+      g.searchParams.set('dates', s + '/' + e);
+      g.searchParams.set('details', SESSION.details + ' Join here: ' + SESSION.joinUrl);
+      g.searchParams.set('location', SESSION.joinUrl);
+      g.searchParams.set('recur', 'RRULE:' + SESSION.rrule);
+      document.getElementById('gcalBtn').href = g.toString();
+
+      function ics(recurring) {
+        const lines = [
+          'BEGIN:VCALENDAR','VERSION:2.0',
+          'PRODID:-//Purposeful Pennies//One-Income Circle//EN',
+          'BEGIN:VEVENT',
+          'UID:' + s + (recurring ? '-series' : '') + '-reset@purposefulpennies.com',
+          'DTSTAMP:' + s, 'DTSTART:' + s, 'DTEND:' + e
+        ];
+        if (recurring) lines.push('RRULE:' + SESSION.rrule);
+        lines.push(
+          'SUMMARY:' + SESSION.title,
+          'DESCRIPTION:' + SESSION.details,
+          'LOCATION:' + SESSION.joinUrl,
+          'BEGIN:VALARM','TRIGGER:-PT60M','ACTION:DISPLAY',
+          'DESCRIPTION:Monthly Money Reset starts in one hour','END:VALARM',
+          'END:VEVENT','END:VCALENDAR'
+        );
+        return URL.createObjectURL(new Blob([lines.join('\r\n')], { type: 'text/calendar;charset=utf-8' }));
+      }
+      document.getElementById('icsOne').href = ics(false);
+      const all = ics(true);
+      document.getElementById('icsAll').href = all;
+      document.getElementById('icsAll2').href = all;
+    })();
+
+    /* ===== REPLAY LIST ===== */
+    (function () {
+      const list = document.getElementById('repList');
+      const empty = document.getElementById('repEmpty');
+      const countLine = document.getElementById('repCount');
+      const search = document.getElementById('repSearch');
+      const months = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+
+      function card(r) {
+        const parts = r.date.split('-');
+        const el = document.createElement('article');
+        el.className = 'replay';
+        el.innerHTML =
+          (r.sample ? '<span class="sample-ribbon">Sample, delete before launch</span>' : '') +
+          '<div class="rep-date">' +
+            '<div class="m">' + months[parseInt(parts[1], 10) - 1] + '</div>' +
+            '<div class="d">' + parseInt(parts[2], 10) + '</div>' +
+            '<div class="y">' + parts[0] + '</div>' +
+          '</div>' +
+          '<div class="rep-info"><h3></h3>' +
+            '<p class="rep-meta">' + r.mins + ' minutes &#9670; recorded live</p>' +
+            '<p class="covered"></p></div>' +
+          '<div class="rep-go">' +
+            '<a class="btn btn-coral btn-sm watch">Watch</a>' +
+            '<a class="rep-notes">Session notes</a>' +
+          '</div>';
+        el.querySelector('h3').textContent = r.title;
+        el.querySelector('.covered').textContent = r.covered;
+        el.querySelector('.watch').href = r.watch;
+        el.querySelector('.rep-notes').href = r.notes;
+        return el;
+      }
+
+      function render() {
+        const q = search.value.trim().toLowerCase();
+        const shown = REPLAYS.filter(function (r) {
+          if (!q) return true;
+          return (r.title + ' ' + r.covered + ' ' + r.date).toLowerCase().indexOf(q) !== -1;
+        }).sort(function (a, b) { return a.date < b.date ? 1 : -1; });
+
+        list.innerHTML = '';
+        shown.forEach(function (r) { list.appendChild(card(r)); });
+
+        const none = shown.length === 0;
+        empty.classList.toggle('show', none && !q);
+        list.style.display = none ? 'none' : '';
+
+        if (none && q) countLine.textContent = 'No replays match that. Try a shorter word.';
+        else if (none) countLine.textContent = '';
+        else if (q) countLine.textContent = 'Showing ' + shown.length + ' of ' + REPLAYS.length + ' replays';
+        else countLine.textContent = REPLAYS.length + (REPLAYS.length === 1 ? ' replay' : ' replays') + ', newest first';
+
+        /* Search box is pointless with nothing to search */
+        document.querySelector('.rep-search').style.display = REPLAYS.length ? '' : 'none';
+      }
+
+      search.addEventListener('input', render);
+      render();
+
+      if (REPLAYS.some(function (r) { return r.sample; })) {
+        console.warn('Sessions page: sample replays are still in the REPLAYS array. Delete them before launch.');
+      }
+    })();
+
+    /* ===== MOBILE NAV ===== */
+    (function () {
+      const t = document.getElementById('navToggle');
+      const l = document.getElementById('mnavLinks');
+      t.addEventListener('click', function () {
+        const open = l.classList.toggle('open');
+        t.setAttribute('aria-expanded', String(open));
+      });
+    })();
+
+    /* ===== FADE-IN ===== */
+    (function () {
+      const obs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) { en.target.classList.add('visible'); obs.unobserve(en.target); }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+      document.querySelectorAll('.fade-in').forEach(function (el) { obs.observe(el); });
+    })();
+<w:pgSz w:h="15840" w:w="12240" w:orient="portrait"/><w:pgMar w:bottom="1440" w:top="1440" w:left="1440" w:right="1440" w:header="720" w:footer="720"/><w:pgNumType w:start="1"/></w:sectPr></w:pPr><w:r w:rsidDel="00000000" w:rsidR="00000000" w:rsidRPr="00000000"><w:rPr><w:rtl w:val="0"/></w:rPr><w:t xml:space="preserve">  </script>

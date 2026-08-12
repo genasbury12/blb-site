@@ -1,0 +1,1681 @@
+<!--
+  ============================================================
+  PURPOSEFUL PENNIES  ·  HOMEPAGE (fully linked)
+  Draft domain: https://purposefulpenniesdraft.showit.site
+  ============================================================
+
+  SITE MAP  (root-relative paths used throughout so links work on
+  BOTH the draft domain and the live domain with zero edits)
+
+    /                          Home  (this page)
+    /start-here                Start Here
+    /about                     About
+    /contact                   Contact
+    /free-resources            Free Resources
+    /opt-in                    Opt-In landing page (5-Minute Money Reality Check)
+    /thank-you                 Thank You  ·  opt-in confirmation
+    /membership                Membership Sales Page
+    /membership-thank-you      Thank You  ·  membership purchase
+    /blog                      Blog index
+    /blog/{post-slug}          Single blog post
+    /privacy-policy            Privacy Policy
+    /terms                     Terms
+    /disclaimer                Disclaimer          (add to map if needed)
+    /affiliate-disclosure      Affiliate Disclosure (add to map if needed)
+
+  ------------------------------------------------------------
+  OFFER ROUTING NOTE
+  ------------------------------------------------------------
+  Every paid CTA on this page currently routes to /membership,
+  because that is the only sales page in the page list.
+  If the $27 One Income Budget Toolkit and $197 Frugal Living
+  Bundle keep their own sales pages, search this file for
+  ALT-LINK and swap the commented href in. Two products, four
+  swaps, thirty seconds.
+  ============================================================
+-->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Purposeful Pennies · A peaceful plan for one-income families</title>
+  <meta name="description" content="The simple, real-life budgeting system for one-income families. Built by a mom who paid off $34,000 in debt and learned peace comes from clarity.">
+  <link rel="canonical" href="https://purposefulpenniesdraft.showit.site/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&amp;family=DM+Serif+Display&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --deep-sage: #2E3E2F;
+      --sage: #5C6E47;
+      --sage-soft: #8B9E75;
+      --warm-tan: #C28954;
+      --warm-tan-dark: #A77246;
+      --cream: #FBF4D7;
+      --cream-warm: #F7ECC4;
+      --charcoal: #2A2A2A;
+      --soft-gray: #7E867D;
+      --light-sage: #DBE3CE;
+      --pale-tan: #EFE0C1;
+      --white: #FFFFFF;
+      --coral: #DD6B4E;
+      --coral-deep: #C25441;
+      --coral-soft: #F7D0BE;
+      --coral-blush: #FBE3D5;
+      --gold: #D4A83F;
+      --gold-soft: #EDD98D;
+      --gold-deep: #B8912E;
+      --dusty-rose: #E8B4A0;
+      --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+      --bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 17px; scroll-behavior: smooth; }
+    @media (min-width: 720px) { html { font-size: 18px; } }
+
+    body {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 1.08rem;
+      line-height: 1.7;
+      color: var(--charcoal);
+      background: var(--cream);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    .container { max-width: 1240px; margin: 0 auto; padding: 0 1.5rem; }
+    .narrow { max-width: 760px; margin: 0 auto; padding: 0 1.5rem; }
+    section { padding: 5rem 0; position: relative; }
+    @media (max-width: 700px) { section { padding: 3.5rem 0; } }
+
+    .skip-link { position: absolute; left: -9999px; top: 0; background: var(--deep-sage); color: var(--cream); padding: 0.75rem 1.25rem; z-index: 200; text-decoration: none; }
+    .skip-link:focus { left: 0.5rem; top: 0.5rem; }
+
+    .script { font-family: 'Caveat', cursive; font-weight: 700; }
+    .eyebrow {
+      font-size: 0.78rem;
+      font-weight: bold;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--warm-tan-dark);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .eyebrow::before {
+      content: "";
+      display: inline-block;
+      width: 28px;
+      height: 1px;
+      background: var(--warm-tan);
+    }
+    .eyebrow-coral { color: var(--coral-deep); }
+    .eyebrow-coral::before { background: var(--coral); }
+    h1, h2, h3 { font-family: Georgia, serif; color: var(--deep-sage); }
+    h1 {
+      font-size: clamp(2.5rem, 6.5vw, 4.5rem);
+      font-weight: bold;
+      line-height: 1.02;
+      letter-spacing: -0.02em;
+    }
+    h2 {
+      font-size: clamp(1.9rem, 4.2vw, 3rem);
+      font-weight: bold;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+    }
+    h3 { font-size: 1.35rem; font-weight: bold; line-height: 1.3; }
+    p { margin-bottom: 1.1rem; }
+    p:last-child { margin-bottom: 0; }
+
+    .squiggle-wrap {
+      display: inline-block;
+      position: relative;
+      white-space: nowrap;
+    }
+    .squiggle-wrap svg {
+      position: absolute;
+      bottom: -0.2em;
+      left: 0;
+      width: 100%;
+      height: 0.35em;
+      pointer-events: none;
+    }
+    .squiggle-wrap svg path {
+      fill: none;
+      stroke: var(--coral);
+      stroke-width: 4;
+      stroke-linecap: round;
+    }
+
+    /* ANNOUNCE */
+    .announce {
+      background: var(--coral);
+      color: white;
+      text-align: center;
+      padding: 0.7rem 1rem;
+      font-size: 0.9rem;
+      letter-spacing: 0.01em;
+    }
+    .announce .script { color: var(--gold-soft); font-size: 1.15rem; margin-right: 0.5rem; }
+    .announce a { color: white; text-decoration: underline; text-decoration-color: rgba(255,255,255,0.5); text-underline-offset: 3px; font-weight: bold; }
+
+    /* NAV */
+    .nav {
+      background: rgba(251, 244, 215, 0.95);
+      border-bottom: 1px solid rgba(194, 137, 84, 0.18);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.1rem 1.5rem;
+      max-width: 1280px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .nav-logo {
+      font-family: Georgia, serif;
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: var(--deep-sage);
+      letter-spacing: 0.03em;
+      text-decoration: none;
+      line-height: 1;
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+    }
+    .nav-logo .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--coral); display: inline-block; }
+    .nav-logo em { display: block; font-family: 'Caveat', cursive; font-weight: 500; font-style: normal; color: var(--coral-deep); font-size: 0.95rem; letter-spacing: 0.02em; margin-top: -2px; }
+    .nav-links { display: flex; gap: 1.6rem; align-items: center; }
+    .nav-links a { font-family: Georgia, serif; font-size: 0.95rem; color: var(--deep-sage); text-decoration: none; position: relative; transition: color 0.2s var(--ease); white-space: nowrap; }
+    .nav-links a:not(.nav-cta)::after { content: ""; position: absolute; left: 0; right: 0; bottom: -4px; height: 2px; background: var(--coral); transform: scaleX(0); transform-origin: left; transition: transform 0.25s var(--ease); border-radius: 2px; }
+    .nav-links a:not(.nav-cta):hover::after { transform: scaleX(1); }
+    .nav-links a:hover:not(.nav-cta) { color: var(--coral-deep); }
+    .nav-cta { background: var(--coral); color: white !important; padding: 0.6rem 1.25rem; border-radius: 999px; font-size: 0.85rem !important; font-weight: bold; letter-spacing: 0.04em; transition: all 0.25s var(--ease); box-shadow: 0 3px 0 var(--coral-deep); }
+    .nav-cta:hover { background: var(--coral-deep); color: white !important; transform: translateY(-1px); }
+
+    .nav-toggle { display: none; background: none; border: none; width: 44px; height: 44px; cursor: pointer; flex-direction: column; align-items: center; justify-content: center; gap: 5px; }
+    .nav-toggle span { display: block; width: 24px; height: 2px; background: var(--deep-sage); border-radius: 2px; transition: transform 0.28s var(--ease), opacity 0.2s var(--ease); }
+    .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; }
+    .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    @media (max-width: 1000px) {
+      .nav-toggle { display: flex; }
+      .nav-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--cream);
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 0 1.5rem;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.35s var(--ease), padding 0.35s var(--ease);
+        border-bottom: 1px solid rgba(194, 137, 84, 0.18);
+        box-shadow: 0 18px 40px rgba(46, 62, 47, 0.08);
+      }
+      .nav-links.open { max-height: 560px; padding-bottom: 1.5rem; }
+      .nav-links a { padding: 0.95rem 0; border-bottom: 1px solid rgba(194, 137, 84, 0.15); font-size: 1.05rem; }
+      .nav-links a:not(.nav-cta)::after { display: none; }
+      .nav-cta { text-align: center; margin-top: 1.1rem; border-bottom: none; padding: 0.9rem 1.25rem; }
+    }
+
+    /* BUTTONS */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--warm-tan);
+      color: white;
+      font-family: Georgia, serif;
+      font-size: 1.05rem;
+      font-weight: bold;
+      padding: 1.1rem 2.3rem;
+      border: none;
+      border-radius: 999px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.25s var(--ease);
+      letter-spacing: 0.02em;
+      box-shadow: 0 3px 0 var(--warm-tan-dark);
+    }
+    .btn:hover { background: var(--warm-tan-dark); transform: translateY(-2px); box-shadow: 0 5px 0 var(--warm-tan-dark); }
+    .btn::after { content: "\2192"; transition: transform 0.25s var(--ease); }
+    .btn:hover::after { transform: translateX(4px); }
+    .btn-coral { background: var(--coral); box-shadow: 0 3px 0 var(--coral-deep); }
+    .btn-coral:hover { background: var(--coral-deep); box-shadow: 0 5px 0 var(--coral-deep); }
+    .btn-outline { background: transparent; color: var(--warm-tan-dark); border: 2px solid var(--warm-tan); padding: calc(1.1rem - 2px) calc(2.3rem - 2px); box-shadow: none; }
+    .btn-outline:hover { background: var(--pale-tan); color: var(--warm-tan-dark); box-shadow: none; }
+    .trust-line { font-family: Georgia, serif; font-style: italic; font-size: 0.92rem; color: var(--soft-gray); margin-top: 0.85rem; }
+
+    .sticker {
+      display: inline-block;
+      background: var(--gold);
+      color: white;
+      font-family: Georgia, serif;
+      font-weight: bold;
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.5rem 0.9rem;
+      border-radius: 4px;
+      transform: rotate(-3deg);
+      box-shadow: 0 3px 0 var(--gold-deep);
+    }
+    .sticker.coral { background: var(--coral); box-shadow: 0 3px 0 var(--coral-deep); transform: rotate(2deg); }
+    .sticker.sage { background: var(--sage); box-shadow: 0 3px 0 var(--deep-sage); }
+
+    .img-ph {
+      background: linear-gradient(135deg, var(--coral-blush) 0%, var(--pale-tan) 50%, var(--light-sage) 100%);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      padding: 2rem;
+      text-align: center;
+      border: 1px dashed rgba(194, 137, 84, 0.5);
+    }
+    .img-ph::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle at 20% 30%, rgba(221, 107, 78, 0.1) 0%, transparent 50%), radial-gradient(circle at 80% 70%, rgba(212, 168, 63, 0.1) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .img-ph .ph-icon { width: 52px; height: 52px; border: 1.5px solid var(--coral); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; color: var(--coral); font-size: 1.6rem; background: rgba(255,255,255,0.6); position: relative; z-index: 1; }
+    .img-ph .ph-tag { font-family: Georgia, serif; font-size: 0.7rem; font-weight: bold; letter-spacing: 0.2em; text-transform: uppercase; color: var(--coral-deep); margin-bottom: 0.75rem; position: relative; z-index: 1; }
+    .img-ph .ph-title { font-family: Georgia, serif; font-size: 1.05rem; font-weight: bold; color: var(--deep-sage); margin-bottom: 0.5rem; position: relative; z-index: 1; }
+    .img-ph .ph-brief { font-family: Georgia, serif; font-size: 0.85rem; font-style: italic; color: var(--sage); line-height: 1.5; max-width: 26rem; position: relative; z-index: 1; }
+
+    /* HERO */
+    .hero {
+      background: var(--cream);
+      padding: 3.5rem 0 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before { content: ""; position: absolute; top: -180px; right: -180px; width: 500px; height: 500px; background: radial-gradient(circle, var(--coral-blush) 0%, transparent 65%); opacity: 0.7; pointer-events: none; }
+    .hero::after { content: ""; position: absolute; bottom: -100px; left: -100px; width: 400px; height: 400px; background: radial-gradient(circle, var(--gold-soft) 0%, transparent 60%); opacity: 0.4; pointer-events: none; }
+    .hero-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 4rem; align-items: center; position: relative; }
+    @media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+    .hero-trust-row { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+    .hero-text h1 { margin: 0 0 1.75rem; }
+    .hero-subhead { font-style: italic; font-size: clamp(1.1rem, 2.2vw, 1.3rem); line-height: 1.55; color: var(--sage); margin-bottom: 1.5rem; max-width: 36rem; }
+    .hero-cta-row { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; }
+    .hero-proof { display: flex; align-items: center; gap: 0.85rem; margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid rgba(221, 107, 78, 0.3); }
+    .hero-proof-avatars { display: flex; }
+    .hero-proof-avatar { width: 42px; height: 42px; border-radius: 50%; border: 2px solid var(--cream); margin-left: -12px; font-family: Georgia, serif; color: white; font-weight: bold; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; }
+    .hero-proof-avatar:first-child { margin-left: 0; background: linear-gradient(135deg, var(--coral), var(--warm-tan)); }
+    .hero-proof-avatar:nth-child(2) { background: linear-gradient(135deg, var(--sage), var(--deep-sage)); }
+    .hero-proof-avatar:nth-child(3) { background: linear-gradient(135deg, var(--gold), var(--warm-tan-dark)); }
+    .hero-proof-stars { display: flex; gap: 2px; color: var(--gold); font-size: 0.95rem; margin-bottom: 0.15rem; }
+    .hero-proof-text { font-size: 0.92rem; color: var(--charcoal); line-height: 1.4; }
+    .hero-proof-text strong { color: var(--deep-sage); font-weight: bold; }
+    .hero-image { aspect-ratio: 4 / 5; max-width: 480px; width: 100%; justify-self: end; position: relative; }
+    @media (max-width: 900px) { .hero-image { justify-self: center; max-width: 380px; } }
+    .hero-image .img-ph { width: 100%; height: 100%; border-radius: 8px; }
+    .hero-image-badge { position: absolute; bottom: 1.5rem; left: -1.5rem; background: var(--coral); color: white; padding: 1rem 1.25rem; border-radius: 8px; box-shadow: 0 8px 24px rgba(221, 107, 78, 0.35); max-width: 220px; transform: rotate(-2deg); }
+    .hero-image-badge .num { font-family: 'DM Serif Display', Georgia, serif; font-size: 1.75rem; font-weight: bold; line-height: 1; display: block; margin-bottom: 0.25rem; }
+    .hero-image-badge .label { font-size: 0.8rem; font-style: italic; line-height: 1.4; opacity: 0.95; }
+    .hero-image-star { position: absolute; top: -1rem; right: -1rem; width: 100px; height: 100px; background: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-direction: column; text-align: center; color: white; font-family: Georgia, serif; font-weight: bold; font-size: 0.68rem; letter-spacing: 0.1em; line-height: 1.2; transform: rotate(12deg); box-shadow: 0 6px 20px rgba(212, 168, 63, 0.4); z-index: 2; text-decoration: none; }
+    .hero-image-star .script { font-size: 1.4rem; font-family: 'Caveat', cursive; font-weight: 700; letter-spacing: 0; margin-bottom: 0.1rem; }
+
+    /* FEATURED IN */
+    .featured-in { background: var(--coral-blush); padding: 2rem 0; border-top: 1px solid rgba(221, 107, 78, 0.2); border-bottom: 1px solid rgba(221, 107, 78, 0.2); }
+    .featured-in-grid { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 2rem 3rem; }
+    .featured-in-label { font-family: 'Caveat', cursive; font-size: 1.5rem; color: var(--coral-deep); font-weight: 700; }
+    .featured-in-logo { font-family: Georgia, serif; font-weight: bold; color: var(--sage); font-size: 1rem; letter-spacing: 0.06em; opacity: 0.72; transition: opacity 0.2s var(--ease); }
+    .featured-in-logo:hover { opacity: 1; }
+    .featured-in-logo em { font-style: italic; color: var(--warm-tan-dark); }
+
+    /* STAT BAND */
+    .stat-band { background: var(--deep-sage); color: var(--cream); padding: 3.5rem 0; position: relative; overflow: hidden; }
+    .stat-band::before { content: ""; position: absolute; top: 20%; left: 5%; width: 32px; height: 32px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23D4A83F'%3E%3Cpath d='M12 0l2.4 8.6L23 11l-8.6 2.4L12 22l-2.4-8.6L1 11l8.6-2.4z'/%3E%3C/svg%3E") center/contain no-repeat; opacity: 0.5; }
+    .stat-band::after { content: ""; position: absolute; bottom: 20%; right: 8%; width: 24px; height: 24px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23DD6B4E'%3E%3Cpath d='M12 0l2.4 8.6L23 11l-8.6 2.4L12 22l-2.4-8.6L1 11l8.6-2.4z'/%3E%3C/svg%3E") center/contain no-repeat; opacity: 0.6; }
+    .stat-band-eyebrow { text-align: center; font-family: 'Caveat', cursive; font-size: 1.6rem; color: var(--gold-soft); margin-bottom: 1.5rem; }
+    .stat-band-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; text-align: center; }
+    @media (max-width: 850px) { .stat-band-grid { grid-template-columns: repeat(2, 1fr); gap: 2rem; } }
+    .stat-tile { padding: 0 1rem; border-right: 1px solid rgba(212, 168, 63, 0.25); }
+    .stat-tile:last-child { border-right: none; }
+    @media (max-width: 850px) { .stat-tile:nth-child(2) { border-right: none; } .stat-tile:nth-child(1), .stat-tile:nth-child(2) { padding-bottom: 2rem; border-bottom: 1px solid rgba(212, 168, 63, 0.25); } }
+    .stat-num { font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(2.2rem, 5vw, 3.2rem); color: var(--gold-soft); line-height: 1; margin-bottom: 0.65rem; letter-spacing: -0.01em; }
+    .stat-num.coral { color: var(--coral-soft); }
+    .stat-label { font-size: 0.88rem; color: var(--cream); opacity: 0.85; font-style: italic; line-height: 1.45; }
+
+    /* MIDNIGHT MOMENT */
+    .midnight {
+      background: var(--deep-sage);
+      color: var(--cream);
+      padding: 6rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .midnight::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 10% 50%, rgba(221, 107, 78, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 90% 30%, rgba(212, 168, 63, 0.08) 0%, transparent 40%);
+      pointer-events: none;
+    }
+    .midnight-inner {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+    .midnight-script {
+      font-family: 'Caveat', cursive;
+      font-size: 1.8rem;
+      color: var(--coral-soft);
+      margin-bottom: 0.5rem;
+    }
+    .midnight h2 { color: var(--cream); margin-bottom: 1.5rem; }
+    .midnight-intro {
+      font-size: 1.15rem;
+      font-style: italic;
+      color: rgba(251, 244, 215, 0.85);
+      line-height: 1.7;
+      margin-bottom: 3rem;
+    }
+    .midnight-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      margin-bottom: 3rem;
+    }
+    @media (max-width: 780px) { .midnight-cards { grid-template-columns: 1fr; } }
+    .midnight-card {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(221, 107, 78, 0.25);
+      border-radius: 10px;
+      padding: 1.75rem 1.5rem;
+      text-align: left;
+      position: relative;
+    }
+    .midnight-card .quote-mark {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 3.5rem;
+      color: var(--coral);
+      line-height: 0.7;
+      display: block;
+      margin-bottom: 1rem;
+      opacity: 0.6;
+    }
+    .midnight-card p {
+      font-style: italic;
+      color: var(--cream);
+      font-size: 1.02rem;
+      line-height: 1.65;
+      opacity: 0.92;
+      margin: 0;
+    }
+    .midnight-pivot {
+      font-size: clamp(1.25rem, 2.6vw, 1.55rem);
+      font-weight: bold;
+      color: var(--gold-soft);
+      line-height: 1.45;
+      margin-bottom: 1rem;
+    }
+    .midnight-close { font-style: italic; color: rgba(251, 244, 215, 0.78); font-size: 1rem; }
+
+    /* TRUTH */
+    .truth { background: var(--coral-blush); padding: 6rem 0; position: relative; }
+    .truth-grid { display: grid; grid-template-columns: 0.85fr 1.1fr; gap: 4rem; align-items: center; }
+    @media (max-width: 900px) { .truth-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+    .truth-image { aspect-ratio: 4 / 5; width: 100%; position: relative; }
+    .truth-image .img-ph { width: 100%; height: 100%; border-radius: 8px; }
+    .truth-image .sticker { position: absolute; top: 1.5rem; right: -1rem; z-index: 2; }
+    .truth-text h2 { margin: 1.25rem 0 1.5rem; }
+    .truth-text p { font-size: 1.1rem; max-width: 38rem; }
+    .pull-quote {
+      background: white;
+      border-left: 5px solid var(--coral);
+      padding: 2rem 2.5rem;
+      margin: 2.5rem 0 0;
+      font-family: Georgia, serif;
+      font-size: clamp(1.25rem, 2.6vw, 1.5rem);
+      font-style: italic;
+      font-weight: bold;
+      color: var(--deep-sage);
+      line-height: 1.4;
+      border-radius: 0 8px 8px 0;
+      box-shadow: 0 8px 24px rgba(46, 62, 47, 0.05);
+    }
+
+    /* QUIZ */
+    .quiz { background: var(--light-sage); padding: 5rem 0; position: relative; overflow: hidden; }
+    .quiz-inner { max-width: 720px; margin: 0 auto; padding: 0 1.5rem; text-align: center; position: relative; z-index: 2; }
+    .quiz-script-eyebrow { font-family: 'Caveat', cursive; font-size: 1.7rem; color: var(--coral-deep); margin-bottom: 0.5rem; }
+    .quiz h2 { margin: 0 0 1rem; }
+    .quiz .quiz-intro { font-style: italic; color: var(--sage); font-size: 1.1rem; margin-bottom: 2.5rem; max-width: 32rem; margin-left: auto; margin-right: auto; }
+    .quiz-card { background: white; border-radius: 12px; padding: 2.5rem 2rem; box-shadow: 0 20px 60px rgba(46, 62, 47, 0.1); text-align: left; border: 1px solid rgba(221, 107, 78, 0.12); position: relative; }
+    @media (max-width: 600px) { .quiz-card { padding: 2rem 1.5rem; } }
+    .quiz-step { font-family: Georgia, serif; font-size: 0.75rem; font-weight: bold; letter-spacing: 0.2em; text-transform: uppercase; color: var(--coral-deep); margin-bottom: 0.85rem; }
+    .quiz-q { font-family: Georgia, serif; font-size: 1.45rem; font-weight: bold; color: var(--deep-sage); margin-bottom: 1.5rem; line-height: 1.3; }
+    .quiz-options { display: grid; gap: 0.75rem; }
+    .quiz-option { background: var(--cream); border: 2px solid transparent; padding: 1rem 1.25rem; border-radius: 8px; font-family: Georgia, serif; font-size: 1rem; color: var(--charcoal); text-align: left; cursor: pointer; transition: all 0.2s var(--ease); width: 100%; }
+    .quiz-option:hover { border-color: var(--coral); background: var(--coral-blush); transform: translateX(4px); }
+    .quiz-progress { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; }
+    .quiz-dot { flex: 1; height: 5px; background: var(--coral-blush); border-radius: 3px; transition: background 0.3s var(--ease); }
+    .quiz-dot.active { background: var(--coral); }
+    .quiz-result { display: none; text-align: center; }
+    .quiz-result.show { display: block; }
+    .quiz-result-tag { display: inline-block; background: var(--coral); color: white; font-size: 0.78rem; font-weight: bold; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.5rem 1.1rem; border-radius: 999px; margin-bottom: 1.25rem; box-shadow: 0 3px 0 var(--coral-deep); }
+    .quiz-result h3 { font-size: 1.7rem; margin-bottom: 1rem; }
+    .quiz-result .script { display: block; font-family: 'Caveat', cursive; font-size: 1.9rem; color: var(--coral-deep); margin-bottom: 0.5rem; }
+    .quiz-result p { color: var(--charcoal); margin-bottom: 1.75rem; font-size: 1.05rem; }
+    .quiz-restart { background: none; border: none; color: var(--coral-deep); font-family: Georgia, serif; font-style: italic; font-size: 0.92rem; cursor: pointer; margin-top: 1rem; text-decoration: underline; text-decoration-color: rgba(221, 107, 78, 0.4); text-underline-offset: 4px; }
+    .confetti { position: absolute; top: 50%; left: 50%; width: 10px; height: 10px; pointer-events: none; opacity: 0; z-index: 3; }
+    .confetti.animate { animation: confetti-burst 1.6s ease-out forwards; }
+    @keyframes confetti-burst { 0% { opacity: 1; transform: translate(-50%, -50%) rotate(0deg); } 100% { opacity: 0; transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) rotate(var(--rot)); } }
+
+    /* PROMISES */
+    .promises { background: var(--cream); padding: 6rem 0; position: relative; }
+    .promises-head { text-align: center; max-width: 720px; margin: 0 auto 3.5rem; }
+    .promises-head .eyebrow { justify-content: center; margin-bottom: 1rem; }
+    .promises-head .script { display: block; font-family: 'Caveat', cursive; font-size: 1.9rem; color: var(--coral-deep); margin-bottom: 0.5rem; }
+    .promises-head h2 { margin-bottom: 1rem; }
+    .promises-head p { font-style: italic; color: var(--sage); font-size: 1.1rem; }
+    .promise-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    @media (max-width: 900px) { .promise-grid { grid-template-columns: 1fr; } }
+    .promise-card { background: white; padding: 2.5rem 2rem; border-radius: 12px; border: 1px solid rgba(221, 107, 78, 0.18); transition: all 0.3s var(--ease); position: relative; overflow: hidden; }
+    .promise-card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 5px; background: linear-gradient(90deg, var(--coral), var(--gold)); transform: scaleX(0.3); transform-origin: left; transition: transform 0.4s var(--ease); }
+    .promise-card:hover { transform: translateY(-6px); box-shadow: 0 24px 48px rgba(46, 62, 47, 0.1); }
+    .promise-card:hover::before { transform: scaleX(1); }
+    .promise-icon-wrap { width: 56px; height: 56px; background: var(--coral-blush); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; color: var(--coral-deep); font-family: 'DM Serif Display', Georgia, serif; font-size: 1.5rem; }
+    .promise-card:nth-child(2) .promise-icon-wrap { background: var(--gold-soft); color: var(--gold-deep); }
+    .promise-card:nth-child(3) .promise-icon-wrap { background: var(--light-sage); color: var(--sage); }
+    .promise-card h3 { font-size: 1.3rem; margin-bottom: 0.85rem; line-height: 1.3; }
+    .promise-card p { color: var(--charcoal); font-size: 1rem; line-height: 1.65; max-width: none; }
+    .promise-foot { text-align: center; max-width: 580px; margin: 3rem auto 0; font-style: italic; color: var(--sage); font-size: 1rem; }
+
+    /* WHY */
+    .why { background: var(--gold-soft); padding: 6rem 0; }
+    .why-head { text-align: center; max-width: 720px; margin: 0 auto 3.5rem; }
+    .why-head .eyebrow { justify-content: center; margin-bottom: 1rem; color: var(--gold-deep); }
+    .why-head .eyebrow::before { background: var(--gold-deep); }
+    .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    @media (max-width: 900px) { .why-grid { grid-template-columns: 1fr; } }
+    .why-card { background: white; border-radius: 12px; overflow: hidden; transition: all 0.3s var(--ease); box-shadow: 0 4px 16px rgba(46, 62, 47, 0.05); }
+    .why-card:hover { transform: translateY(-6px); box-shadow: 0 24px 48px rgba(46, 62, 47, 0.12); }
+    .why-card .img-ph { aspect-ratio: 5 / 3; border-radius: 0; border: none; }
+    .why-card-body { padding: 1.75rem 1.75rem 2rem; }
+    .why-card h3 { margin-bottom: 0.75rem; font-size: 1.2rem; }
+    .why-card p { color: var(--charcoal); font-size: 0.98rem; line-height: 1.6; max-width: none; }
+    .why-foot { text-align: center; margin-top: 3rem; }
+    .why-foot a { color: var(--deep-sage); font-weight: bold; text-decoration: none; border-bottom: 2px solid var(--coral); padding-bottom: 2px; }
+    .why-foot a:hover { color: var(--coral-deep); }
+
+    /* PERMISSION SLIP */
+    .permission { background: var(--cream); padding: 5rem 0; }
+    .permission-inner { max-width: 760px; margin: 0 auto; padding: 0 1.5rem; }
+    .permission-card {
+      background: var(--deep-sage);
+      border-radius: 16px;
+      padding: 3.5rem 3rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    @media (max-width: 600px) { .permission-card { padding: 2.5rem 1.75rem; } }
+    .permission-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle at 20% 80%, rgba(221, 107, 78, 0.15) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(212, 168, 63, 0.1) 0%, transparent 45%);
+      pointer-events: none;
+    }
+    .permission-card > * { position: relative; z-index: 1; }
+    .permission-script { font-family: 'Caveat', cursive; font-size: 2rem; color: var(--coral-soft); display: block; margin-bottom: 1rem; }
+    .permission-card h2 { color: var(--cream); font-size: clamp(1.7rem, 3.5vw, 2.4rem); margin-bottom: 1.75rem; line-height: 1.2; }
+    .permission-list {
+      list-style: none;
+      text-align: left;
+      max-width: 480px;
+      margin: 0 auto 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .permission-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.85rem;
+      color: rgba(251, 244, 215, 0.9);
+      font-size: 1.05rem;
+      line-height: 1.55;
+    }
+    .permission-list li::before { content: "\25C6"; color: var(--coral); font-size: 0.7rem; margin-top: 0.45rem; flex-shrink: 0; }
+    .permission-close { font-style: italic; color: var(--gold-soft); font-size: 1.1rem; line-height: 1.55; }
+
+    /* TESTIMONIALS */
+    .testimonials { background: var(--cream); padding: 5rem 0; }
+    .testimonials-head { text-align: center; max-width: 720px; margin: 0 auto 3rem; }
+    .testimonials-head .eyebrow { justify-content: center; margin-bottom: 1rem; }
+    .testimonials-head .script { display: block; font-family: 'Caveat', cursive; font-size: 1.9rem; color: var(--coral-deep); margin-bottom: 0.4rem; }
+    .testimonial-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    @media (max-width: 900px) { .testimonial-grid { grid-template-columns: 1fr; } }
+    .testimonial-card { border-radius: 12px; padding: 2rem 1.75rem; position: relative; transition: transform 0.3s var(--ease); }
+    .testimonial-card:hover { transform: translateY(-4px); }
+    .testimonial-card:nth-child(1) { background: var(--coral-blush); }
+    .testimonial-card:nth-child(2) { background: var(--gold-soft); }
+    .testimonial-card:nth-child(3) { background: var(--light-sage); }
+    .testimonial-stars { color: var(--gold); font-size: 1.1rem; letter-spacing: 2px; margin-bottom: 1rem; }
+    .testimonial-quote { font-style: italic; color: var(--charcoal); font-size: 0.98rem; line-height: 1.65; margin-bottom: 1.25rem; }
+    .testimonial-author { display: flex; align-items: center; gap: 0.75rem; padding-top: 1rem; border-top: 1px solid rgba(46, 62, 47, 0.12); }
+    .testimonial-avatar { width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-family: Georgia, serif; font-weight: bold; font-size: 1rem; }
+    .testimonial-card:nth-child(1) .testimonial-avatar { background: linear-gradient(135deg, var(--coral), var(--coral-deep)); }
+    .testimonial-card:nth-child(2) .testimonial-avatar { background: linear-gradient(135deg, var(--gold), var(--gold-deep)); }
+    .testimonial-card:nth-child(3) .testimonial-avatar { background: linear-gradient(135deg, var(--sage), var(--deep-sage)); }
+    .testimonial-name { font-family: Georgia, serif; font-weight: bold; color: var(--deep-sage); font-size: 0.95rem; line-height: 1.2; }
+    .testimonial-context { font-size: 0.82rem; color: var(--soft-gray); font-style: italic; }
+    .testimonials-holding { text-align: center; margin-top: 2.5rem; font-style: italic; color: var(--sage); }
+
+    /* STEPS */
+    .steps { background: var(--white); padding: 6rem 0; }
+    .steps-head { text-align: center; max-width: 720px; margin: 0 auto 3.5rem; }
+    .steps-head .eyebrow { justify-content: center; margin-bottom: 1rem; }
+    .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; position: relative; }
+    @media (max-width: 900px) { .steps-grid { grid-template-columns: 1fr; } }
+    .step-card { background: var(--cream); border-radius: 12px; padding: 2.25rem 1.75rem 2rem; border: 2px solid transparent; position: relative; transition: all 0.3s var(--ease); display: flex; flex-direction: column; }
+    .step-card.featured { background: var(--deep-sage); color: var(--cream); border-color: var(--gold); transform: scale(1.04); }
+    @media (max-width: 900px) { .step-card.featured { transform: none; } }
+    .step-card:hover { transform: translateY(-6px); box-shadow: 0 24px 48px rgba(46, 62, 47, 0.12); }
+    .step-card.featured:hover { transform: translateY(-6px) scale(1.04); }
+    @media (max-width: 900px) { .step-card.featured:hover { transform: translateY(-6px); } }
+    .most-popular { position: absolute; top: -14px; left: 50%; transform: translateX(-50%) rotate(-2deg); background: var(--gold); color: white; font-family: Georgia, serif; font-weight: bold; font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; padding: 0.4rem 1.1rem; border-radius: 999px; box-shadow: 0 3px 0 var(--gold-deep); white-space: nowrap; }
+    .step-num-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; padding-bottom: 1.25rem; border-bottom: 1px solid rgba(194, 137, 84, 0.25); }
+    .step-card.featured .step-num-row { border-bottom-color: rgba(212, 168, 63, 0.35); }
+    .step-num { font-family: 'DM Serif Display', Georgia, serif; font-size: 1.85rem; color: var(--coral-deep); line-height: 1; }
+    .step-card.featured .step-num { color: var(--gold-soft); }
+    .step-price { font-family: Georgia, serif; font-size: 0.9rem; font-weight: bold; color: var(--deep-sage); letter-spacing: 0.05em; background: var(--coral-blush); padding: 0.4rem 0.85rem; border-radius: 999px; }
+    .step-card.featured .step-price { background: var(--gold); color: white; }
+    .step-card h3 { font-size: 1.2rem; margin-bottom: 0.85rem; line-height: 1.3; }
+    .step-card.featured h3 { color: var(--cream); }
+    .step-card p { color: var(--charcoal); font-size: 0.98rem; line-height: 1.6; margin-bottom: 1.5rem; flex-grow: 1; }
+    .step-card.featured p { color: var(--cream); opacity: 0.92; }
+    .step-cta { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--coral-deep); font-family: Georgia, serif; font-weight: bold; font-size: 0.95rem; text-decoration: none; transition: gap 0.2s var(--ease); align-self: flex-start; }
+    .step-card.featured .step-cta { color: var(--gold-soft); }
+    .step-cta:hover { gap: 0.75rem; }
+
+    /* STORY STRIP */
+    .story-strip { background: var(--coral-blush); padding: 5.5rem 0; }
+    .story-strip-inner { max-width: 860px; margin: 0 auto; padding: 0 1.5rem; }
+    .story-strip-top { text-align: center; margin-bottom: 3rem; }
+    .story-script { font-family: 'Caveat', cursive; font-size: 1.7rem; color: var(--coral-deep); display: block; margin-bottom: 0.5rem; }
+    .story-strip-top h2 { margin-bottom: 1rem; }
+    .story-strip-top p { font-style: italic; color: var(--sage); font-size: 1.1rem; max-width: 36rem; margin: 0 auto; }
+    .story-moments { display: flex; flex-direction: column; gap: 0; position: relative; }
+    .story-moments::before {
+      content: "";
+      position: absolute;
+      left: 28px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--coral) 0%, var(--gold) 100%);
+      opacity: 0.4;
+    }
+    @media (max-width: 600px) { .story-moments::before { left: 20px; } }
+    .story-moment { display: grid; grid-template-columns: 60px 1fr; gap: 1.5rem; align-items: flex-start; padding: 1.75rem 0; }
+    @media (max-width: 600px) { .story-moment { grid-template-columns: 44px 1fr; gap: 1rem; } }
+    .story-dot {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: white;
+      border: 3px solid var(--coral);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 1.3rem;
+      color: var(--coral-deep);
+      flex-shrink: 0;
+      box-shadow: 0 4px 12px rgba(221, 107, 78, 0.2);
+    }
+    .story-moment:last-child .story-dot { background: var(--deep-sage); border-color: var(--deep-sage); color: var(--gold-soft); }
+    @media (max-width: 600px) { .story-dot { width: 42px; height: 42px; font-size: 1rem; } }
+    .story-body h3 { font-size: 1.15rem; color: var(--deep-sage); margin-bottom: 0.4rem; }
+    .story-body p { font-size: 1rem; color: var(--charcoal); line-height: 1.65; margin: 0; }
+    .story-body p em { color: var(--coral-deep); font-style: italic; }
+
+    /* MEET BROOKE */
+    .meet { background: var(--coral-blush); padding: 6rem 0; position: relative; }
+    .meet-grid { display: grid; grid-template-columns: 1fr 1.05fr; gap: 4rem; align-items: center; }
+    @media (max-width: 900px) { .meet-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+    .meet-image { aspect-ratio: 4 / 5; width: 100%; max-width: 480px; position: relative; }
+    .meet-image .img-ph { width: 100%; height: 100%; border-radius: 8px; }
+    .meet-image-script { position: absolute; top: -1rem; left: -1rem; background: var(--gold); color: white; padding: 0.75rem 1.25rem; border-radius: 999px; font-family: 'Caveat', cursive; font-size: 1.4rem; transform: rotate(-4deg); box-shadow: 0 4px 12px rgba(212, 168, 63, 0.4); z-index: 2; }
+    .meet-image-stat { position: absolute; bottom: -1.5rem; right: -1.5rem; background: white; border: 2px solid var(--coral); padding: 1.25rem 1.5rem; border-radius: 8px; max-width: 220px; box-shadow: 0 12px 32px rgba(46, 62, 47, 0.12); transform: rotate(2deg); }
+    @media (max-width: 600px) { .meet-image-stat { right: 0; bottom: -1rem; max-width: 200px; } }
+    .meet-image-stat .label { font-size: 0.7rem; font-weight: bold; letter-spacing: 0.15em; color: var(--coral-deep); text-transform: uppercase; margin-bottom: 0.4rem; }
+    .meet-image-stat .text { font-family: Georgia, serif; font-style: italic; color: var(--deep-sage); font-size: 0.95rem; line-height: 1.4; }
+    .meet-text h2 { margin: 1.25rem 0 1.5rem; }
+    .meet-text h2 .script-accent { font-family: 'Caveat', cursive; color: var(--coral-deep); font-weight: 700; }
+    .meet-subhead { font-style: italic; font-size: 1.2rem; color: var(--sage); margin-bottom: 1.75rem; line-height: 1.5; }
+    .meet-text p { font-size: 1.05rem; }
+    .meet-stat-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; background: white; padding: 1.5rem; border-radius: 8px; margin: 2rem 0 1.75rem; border: 2px solid var(--coral); }
+    .meet-stat-strip .stat-tile { border-right: 1px solid rgba(194, 137, 84, 0.35); padding: 0 1rem; }
+    .meet-stat-strip .stat-tile:last-child { border-right: none; }
+    .meet-stat-strip .stat-num { color: var(--deep-sage); font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(1.3rem, 2.5vw, 1.6rem); margin-bottom: 0.3rem; }
+    .meet-stat-strip .stat-label { font-size: 0.75rem; color: var(--coral-deep); opacity: 1; font-style: italic; }
+    .meet-link { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--coral-deep); font-weight: bold; text-decoration: none; margin-top: 0.5rem; transition: gap 0.2s var(--ease); }
+    .meet-link:hover { gap: 0.85rem; color: var(--coral); }
+
+    /* FORK */
+    .fork { background: var(--gold-soft); padding: 6rem 0; }
+    .fork-head { text-align: center; max-width: 600px; margin: 0 auto 3rem; }
+    .fork-head .eyebrow { justify-content: center; margin-bottom: 1.25rem; color: var(--gold-deep); }
+    .fork-head .eyebrow::before { background: var(--gold-deep); }
+    .fork-head p { font-style: italic; color: var(--sage); font-size: 1.1rem; }
+    .fork-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; max-width: 920px; margin: 0 auto; }
+    @media (max-width: 700px) { .fork-grid { grid-template-columns: 1fr; } }
+    .fork-card { background: white; padding: 2.5rem 2rem; border-radius: 12px; text-align: center; transition: all 0.3s var(--ease); border: 2px solid transparent; position: relative; }
+    .fork-card.primary { background: var(--coral); color: white; }
+    .fork-card:hover { transform: translateY(-4px); box-shadow: 0 18px 36px rgba(46, 62, 47, 0.12); }
+    .fork-card .sticker { position: absolute; top: -12px; right: 1.5rem; }
+    .fork-card .label { font-size: 0.75rem; font-weight: bold; letter-spacing: 0.18em; text-transform: uppercase; color: var(--coral-deep); margin-bottom: 0.85rem; }
+    .fork-card.primary .label { color: var(--gold-soft); }
+    .fork-card h3 { font-size: 1.35rem; margin-bottom: 0.85rem; }
+    .fork-card.primary h3 { color: white; }
+    .fork-card p { font-size: 1rem; color: var(--charcoal); margin-bottom: 1.75rem; }
+    .fork-card.primary p { color: white; opacity: 0.94; }
+    .fork-soft { text-align: center; margin-top: 2.5rem; font-style: italic; color: var(--sage); }
+    .fork-soft a { color: var(--coral-deep); font-weight: bold; text-decoration: none; border-bottom: 1.5px solid var(--coral); }
+
+    /* FEATURED */
+    .featured { background: var(--deep-sage); color: var(--cream); padding: 6rem 0; position: relative; overflow: hidden; }
+    .featured::before, .featured::after { content: ""; position: absolute; width: 40px; height: 40px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23DD6B4E'%3E%3Cpath d='M12 0l2.4 8.6L23 11l-8.6 2.4L12 22l-2.4-8.6L1 11l8.6-2.4z'/%3E%3C/svg%3E") center/contain no-repeat; opacity: 0.5; }
+    .featured::before { top: 10%; left: 5%; }
+    .featured::after { bottom: 15%; right: 8%; }
+    .featured-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 4rem; align-items: center; position: relative; z-index: 2; }
+    @media (max-width: 900px) { .featured-grid { grid-template-columns: 1fr; gap: 2.5rem; text-align: center; } }
+    .featured-image { aspect-ratio: 1 / 1; width: 100%; max-width: 460px; }
+    .featured-image .img-ph { background: linear-gradient(135deg, rgba(221, 107, 78, 0.2) 0%, rgba(212, 168, 63, 0.2) 100%); width: 100%; height: 100%; border-radius: 12px; border-color: rgba(221, 107, 78, 0.5); }
+    .featured-image .ph-icon { background: rgba(46, 62, 47, 0.4); border-color: var(--coral); color: var(--coral-soft); }
+    .featured-image .ph-tag { color: var(--coral-soft); }
+    .featured-image .ph-title { color: var(--cream); }
+    .featured-image .ph-brief { color: var(--gold-soft); }
+    .featured-text h2 { color: var(--cream); margin: 1.25rem 0 1.5rem; }
+    .featured-text .eyebrow { color: var(--coral-soft); }
+    .featured-text .eyebrow::before { background: var(--coral); }
+    .featured-quote { font-family: Georgia, serif; font-size: clamp(1.2rem, 2.6vw, 1.45rem); font-style: italic; line-height: 1.55; color: var(--cream); margin: 1.5rem 0 1.5rem; padding-left: 1.5rem; border-left: 3px solid var(--coral); max-width: 32rem; }
+    @media (max-width: 900px) { .featured-quote { margin-left: auto; margin-right: auto; text-align: left; } }
+    .featured-attrib { font-style: italic; color: var(--coral-soft); font-size: 0.95rem; letter-spacing: 0.04em; }
+    .featured-mini-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid rgba(221, 107, 78, 0.3); }
+    @media (max-width: 600px) { .featured-mini-stats { grid-template-columns: 1fr; gap: 1.5rem; } }
+    .featured-mini-stat .num { font-family: 'DM Serif Display', Georgia, serif; font-size: 1.5rem; color: var(--gold-soft); line-height: 1; margin-bottom: 0.4rem; }
+    .featured-mini-stat .label { font-size: 0.82rem; color: var(--cream); opacity: 0.82; font-style: italic; line-height: 1.45; }
+
+    /* LATEST FROM THE BLOG */
+    .latest { background: var(--white); padding: 5.5rem 0; }
+    .latest-head { text-align: center; max-width: 700px; margin: 0 auto 3rem; }
+    .latest-head .eyebrow { justify-content: center; margin-bottom: 1rem; }
+    .latest-head .script { display: block; font-family: 'Caveat', cursive; font-size: 1.8rem; color: var(--coral-deep); margin-bottom: 0.35rem; }
+    .latest-head p { font-style: italic; color: var(--sage); margin-top: 0.75rem; }
+    .latest-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    @media (max-width: 900px) { .latest-grid { grid-template-columns: 1fr; } }
+    .post-card { background: var(--cream); border-radius: 12px; overflow: hidden; text-decoration: none; display: flex; flex-direction: column; border: 1px solid rgba(221, 107, 78, 0.16); transition: all 0.3s var(--ease); }
+    .post-card:hover { transform: translateY(-6px); box-shadow: 0 22px 44px rgba(46, 62, 47, 0.12); }
+    .post-card .img-ph { aspect-ratio: 16 / 10; border: none; border-radius: 0; }
+    .post-card-body { padding: 1.5rem 1.5rem 1.75rem; display: flex; flex-direction: column; flex-grow: 1; }
+    .post-cat { font-size: 0.7rem; font-weight: bold; letter-spacing: 0.18em; text-transform: uppercase; color: var(--coral-deep); margin-bottom: 0.6rem; }
+    .post-card h3 { font-size: 1.12rem; margin-bottom: 0.6rem; line-height: 1.35; }
+    .post-card p { font-size: 0.95rem; color: var(--charcoal); line-height: 1.6; margin-bottom: 1.1rem; flex-grow: 1; }
+    .post-meta { font-size: 0.82rem; font-style: italic; color: var(--soft-gray); }
+    .post-read { color: var(--coral-deep); font-weight: bold; font-size: 0.92rem; }
+    .latest-foot { text-align: center; margin-top: 3rem; }
+
+    /* OPT-IN */
+    .optin { background: var(--coral-blush); padding: 6rem 0; position: relative; }
+    .optin-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 4rem; align-items: center; }
+    @media (max-width: 900px) { .optin-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+    .optin-text h2 { margin: 1.25rem 0 1.25rem; }
+    .optin-body { font-size: 1.1rem; margin-bottom: 1.75rem; max-width: 36rem; }
+    .optin-list { list-style: none; margin: 1.5rem 0 0; }
+    .optin-list li { padding: 0.5rem 0 0.5rem 2.2rem; position: relative; font-size: 1rem; line-height: 1.55; }
+    .optin-list li::before { content: ""; position: absolute; left: 0; top: 0.6rem; width: 18px; height: 18px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23DD6B4E' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center/contain no-repeat; }
+    .optin-form { background: white; padding: 2.5rem 2rem; border-radius: 12px; box-shadow: 0 24px 60px rgba(46, 62, 47, 0.1); border: 2px solid var(--coral); position: relative; }
+    .optin-free-sticker { position: absolute; top: -1.5rem; right: -1rem; width: 100px; height: 100px; background: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-direction: column; text-align: center; color: white; font-family: 'Caveat', cursive; font-size: 1.65rem; font-weight: 700; line-height: 1; transform: rotate(15deg); box-shadow: 0 8px 24px rgba(212, 168, 63, 0.4); z-index: 2; }
+    .optin-free-sticker small { font-family: Georgia, serif; font-weight: bold; font-size: 0.55rem; letter-spacing: 0.15em; margin-top: 0.1rem; text-transform: uppercase; }
+    .optin-form-head { text-align: center; margin-bottom: 1.75rem; padding-bottom: 1.5rem; border-bottom: 1px solid rgba(221, 107, 78, 0.2); }
+    .optin-form-head h3 { font-size: 1.5rem; }
+    .optin-form-head .script { display: block; font-family: 'Caveat', cursive; font-size: 1.5rem; color: var(--coral-deep); margin-bottom: 0.25rem; }
+    .optin-form label { display: block; font-size: 0.78rem; font-weight: bold; letter-spacing: 0.15em; text-transform: uppercase; color: var(--coral-deep); margin-bottom: 0.4rem; margin-top: 1.25rem; }
+    .optin-form label:first-of-type { margin-top: 0; }
+    .optin-form input { width: 100%; padding: 0.95rem 1rem; border: 1px solid rgba(126, 134, 125, 0.3); border-radius: 6px; font-family: Georgia, serif; font-size: 1rem; color: var(--charcoal); background: var(--cream); transition: border-color 0.2s var(--ease); }
+    .optin-form input:focus { border-color: var(--coral); outline: none; }
+    .optin-form .btn { width: 100%; margin-top: 1.5rem; justify-content: center; background: var(--coral); box-shadow: 0 3px 0 var(--coral-deep); }
+    .optin-form .btn:hover { background: var(--coral-deep); box-shadow: 0 5px 0 var(--coral-deep); }
+    .optin-form .trust-line { text-align: center; margin-top: 1rem; }
+    .optin-form .form-legal { text-align: center; font-size: 0.78rem; color: var(--soft-gray); margin-top: 0.85rem; line-height: 1.5; }
+    .optin-form .form-legal a { color: var(--coral-deep); }
+
+    /* FOOTER */
+    footer { background: var(--deep-sage); color: var(--cream); padding: 5rem 0 2rem; text-align: center; }
+    footer .brand-line { font-family: 'DM Serif Display', Georgia, serif; font-size: 2rem; letter-spacing: 0.04em; color: var(--cream); text-decoration: none; display: inline-block; }
+    footer .tagline { font-family: 'Caveat', cursive; color: var(--coral-soft); margin: 0.5rem 0 2.5rem; font-size: 1.5rem; }
+    footer .diamond { text-align: center; padding: 0 0 2.5rem; color: var(--coral); font-size: 0.9rem; letter-spacing: 1.2em; padding-left: 1.2em; opacity: 0.8; }
+    footer .closing-quote { font-style: italic; font-size: clamp(1.05rem, 2.2vw, 1.2rem); color: var(--cream); max-width: 32em; margin: 0 auto 2.5rem; line-height: 1.7; opacity: 0.92; }
+    footer .footer-nav { display: flex; justify-content: center; flex-wrap: wrap; gap: 1.5rem 2rem; margin: 2.5rem 0 2rem; padding-top: 2.5rem; border-top: 1px solid rgba(221, 107, 78, 0.25); }
+    footer .footer-nav a { color: var(--cream); opacity: 0.85; text-decoration: none; font-size: 0.95rem; transition: opacity 0.2s var(--ease); }
+    footer .footer-nav a:hover { opacity: 1; color: var(--coral-soft); }
+    footer .legal { padding-top: 1.25rem; margin-top: 1.5rem; border-top: 1px solid rgba(221, 107, 78, 0.15); font-size: 0.82rem; color: var(--cream); opacity: 0.65; }
+    footer .legal a { color: var(--cream); opacity: 0.8; text-decoration: none; margin: 0 0.4rem; }
+    footer .built { margin-top: 1rem; font-family: 'Caveat', cursive; font-size: 1.1rem; color: var(--coral-soft); opacity: 0.85; }
+
+    /* SCROLL FADE */
+    .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); }
+    .fade-in.visible { opacity: 1; transform: none; }
+
+    /* FLOATING CTA */
+    .floating-cta { position: fixed; bottom: -100px; right: 2rem; z-index: 90; transition: bottom 0.4s var(--ease); opacity: 0; }
+    .floating-cta.visible { bottom: 2rem; opacity: 1; }
+    @media (max-width: 600px) { .floating-cta { right: 1rem; left: 1rem; } .floating-cta .btn { width: 100%; justify-content: center; } }
+    .floating-cta .btn { background: var(--coral); box-shadow: 0 8px 24px rgba(221, 107, 78, 0.35); }
+    .floating-cta .btn:hover { background: var(--coral-deep); }
+
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } html { scroll-behavior: auto; } .fade-in { opacity: 1; transform: none; } }
+    :focus-visible { outline: 3px solid var(--coral); outline-offset: 3px; }
+  
+    /* Real photos placed in the placeholder frames (photo shoot, Aug 2026) */
+    .img-ph.has-img { padding: 0; border: none; }
+    .img-ph.has-img::before { display: none; }
+    .img-ph.has-img > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+  </style>
+
+
+
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <!-- ANNOUNCEMENT BAR -->
+  <div class="announce">
+    <span class="script">Psst…</span>New here? <a href="/opt-in">Grab the free 5-Minute Money Reality Check</a>. No pressure, just clarity →
+  </div>
+
+  <!-- NAV -->
+  <nav class="nav" id="mainNav" aria-label="Main">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">
+        <span class="dot"></span>
+        Purposeful Pennies
+        <em>&nbsp;spend with intention</em>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-links" id="navLinks">
+        <a href="/start-here">Start Here</a>
+        <a href="/about">About</a>
+        <a href="/free-resources">Free Resources</a>
+        <a href="/membership">Membership</a>
+        <a href="/blog">Blog</a>
+        <a href="/contact">Contact</a>
+        <a href="/opt-in" class="nav-cta">Free Reality Check</a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main">
+
+  <!-- ==================== HERO ==================== -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-text fade-in">
+          <div class="hero-trust-row">
+            <span class="sticker coral">Mom approved</span>
+            <span class="script" style="font-size: 1.4rem; color: var(--coral-deep);">for one-income families</span>
+          </div>
+          <h1>Living on one income doesn’t have to feel <span class="squiggle-wrap">this hard.<svg viewBox="0 0 200 12" preserveAspectRatio="none"><path d="M2,7 Q25,1 50,7 T100,7 T150,7 T198,7"></path></svg></span></h1>
+          <p class="hero-subhead">You’re not failing. You’re not bad with money. You’ve just never had a simple system built for your real, one-income life. I’ll show you the one I used to pay off $34,000 in debt while staying home with my kids. It starts with a free five-minute worksheet.</p>
+          <div class="hero-cta-row">
+            <a href="/opt-in" class="btn btn-coral">Yes, I want the free worksheet</a>
+            <a href="/start-here" class="btn btn-outline">New here? Start here</a>
+          </div>
+          <p class="trust-line">No spam. No shame. No “just stop buying coffee” advice. Just clarity.</p>
+          <div class="hero-proof">
+            <div class="hero-proof-avatars">
+              <div class="hero-proof-avatar">K</div>
+              <div class="hero-proof-avatar">M</div>
+              <div class="hero-proof-avatar">J</div>
+            </div>
+            <div>
+              <div class="hero-proof-stars">★ ★ ★ ★ ★</div>
+              <div class="hero-proof-text"><strong>Joining hundreds of one-income families</strong> who are finally breathing again.</div>
+            </div>
+          </div>
+        </div>
+        <div class="hero-image fade-in">
+          <a href="/opt-in" class="hero-image-star" aria-label="Get the free five minute worksheet">
+            <span class="script">Free!</span>
+            5-min worksheet
+          </a>
+          <div class="img-ph has-img"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/brookes-images-folder-sf3xp4/brooke-site-images/home-hero.jpg" alt="Brooke laughing at her kitchen table, coffee mug in hand" loading="lazy"></div>
+          <div class="hero-image-badge">
+            <span class="num">$34,000</span>
+            <span class="label">paid off on one income. For real.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AS FEATURED IN -->
+  <section class="featured-in" style="padding: 2rem 0;">
+    <div class="container">
+      <div class="featured-in-grid">
+        <span class="featured-in-label">as featured in&nbsp;→</span>
+        <span class="featured-in-logo">REAL SIMPLE</span>
+        <span class="featured-in-logo"><em>Redbook</em></span>
+        <span class="featured-in-logo">THE BUMP</span>
+        <span class="featured-in-logo">FAMILY CIRCLE</span>
+        <span class="featured-in-logo"><em>MSN Money</em></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== MIDNIGHT MOMENT ==================== -->
+  <section class="midnight">
+    <div class="midnight-inner">
+      <p class="midnight-script fade-in">can I be honest with you for a second?</p>
+      <h2 class="fade-in">She’s lying to herself. And I used to too.</h2>
+      <p class="midnight-intro fade-in">There’s a mom out there right now, and maybe it’s you, who is smart, capable, and working so hard for her family. And yet money still feels like the one thing she can’t get ahead of. These are the thoughts she doesn’t say out loud.</p>
+      <div class="midnight-cards">
+        <div class="midnight-card fade-in">
+          <span class="quote-mark">“</span>
+          <p>I don’t even want to open the bank app anymore. Whatever’s in there, it’s not going to be good.</p>
+        </div>
+        <div class="midnight-card fade-in">
+          <span class="quote-mark">“</span>
+          <p>Everyone else seems to have it figured out. Why do I keep starting over every single month?</p>
+        </div>
+        <div class="midnight-card fade-in">
+          <span class="quote-mark">“</span>
+          <p>I know I should be doing better. We make enough. I just can’t figure out where it all goes.</p>
+        </div>
+      </div>
+      <p class="midnight-pivot fade-in">Friend, that is not a character flaw. That is a system problem. And system problems have solutions.</p>
+      <p class="midnight-close fade-in">I am not here to give you a pep talk and send you away. I am here to show you the actual plan. One step at a time.</p>
+    </div>
+  </section>
+
+  <!-- ==================== STAT BAND ==================== -->
+  <section class="stat-band">
+    <div class="container">
+      <div class="stat-band-eyebrow">Real receipts, from a real kitchen →</div>
+      <div class="stat-band-grid">
+        <div class="stat-tile fade-in">
+          <div class="stat-num" data-target="34000" data-prefix="$">$0</div>
+          <div class="stat-label">paid off. Every last dollar.</div>
+        </div>
+        <div class="stat-tile fade-in">
+          <div class="stat-num coral" data-target="10" data-suffix=" yrs">0 yrs</div>
+          <div class="stat-label">on one income before I ever taught a single class</div>
+        </div>
+        <div class="stat-tile fade-in">
+          <div class="stat-num">$0</div>
+          <div class="stat-label">credit card debt. Today. On purpose.</div>
+        </div>
+        <div class="stat-tile fade-in">
+          <div class="stat-num coral">100%</div>
+          <div class="stat-label">built in a real kitchen, not a conference room</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== TRUTH ==================== -->
+  <section class="truth">
+    <div class="container">
+      <div class="truth-grid">
+        <div class="truth-image fade-in">
+          <span class="sticker">You are not alone.</span>
+          <div class="img-ph has-img"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/brookes-images-folder-sf3xp4/brooke-site-images/home-notebook.jpg" alt="Hands writing real numbers in a budget notebook beside a mug of tea" loading="lazy"></div>
+        </div>
+        <div class="truth-text fade-in">
+          <span class="eyebrow eyebrow-coral">A hard truth, said gently</span>
+          <h2>You are not bad with money. You were just never taught.</h2>
+          <p>Neither was I. Neither was my husband. Most of us weren’t. We watched our parents stress about it, swipe when things got tight, and never talk about it directly. So we did the same.</p>
+          <p>We wing it. We swipe the card. We tell ourselves “just this once.” And then later comes, and we can’t pay it off. That is not a moral failure. That is a gap in what you were handed.</p>
+          <p>What I know with everything in me is this: peace doesn’t come from earning more. Peace comes from clarity. From a simple plan that fits the actual life you live, not the one the budget spreadsheet assumes you have.</p>
+          <div class="pull-quote">
+            Money is a tool, not a scorecard. You are already doing something brave just by being here.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PERMISSION SLIP ==================== -->
+  <section class="permission">
+    <div class="container">
+      <div class="permission-inner fade-in">
+        <div class="permission-card">
+          <span class="permission-script">before we go any further…</span>
+          <h2>I need you to give yourself permission to start where you actually are.</h2>
+          <ul class="permission-list">
+            <li>You do not have to have a plan yet. That is what we are building together.</li>
+            <li>You do not have to feel “ready.” Ready is a feeling that shows up after the first step, not before it.</li>
+            <li>You are allowed to have made a mess of it. A mess is just a starting point with context.</li>
+            <li>You are not behind. You are exactly where you need to be to begin something different.</li>
+            <li>Your past money mistakes are not your future. They are just what you did before you had a better way.</li>
+          </ul>
+          <p class="permission-close">This is a no-shame space. I mean that. Come in. Let’s figure it out together.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== QUIZ ==================== -->
+  <section class="quiz" id="quiz">
+    <div class="quiz-inner">
+      <div class="quiz-script-eyebrow">let’s find your starting point</div>
+      <h2>Where are you in your money journey right now?</h2>
+      <p class="quiz-intro">Three quick questions. No wrong answers. I’ll point you to exactly the right next step, whether that is the free worksheet, the membership, or just hanging out on the blog until you’re ready.</p>
+
+      <div class="quiz-card" id="quizCard">
+        <div class="quiz-progress">
+          <div class="quiz-dot active"></div>
+          <div class="quiz-dot"></div>
+          <div class="quiz-dot"></div>
+        </div>
+        <div class="quiz-step">Question 1 of 3</div>
+        <div class="quiz-q" id="quizQ">When you think about your money right now, the first feeling is…</div>
+        <div class="quiz-options" id="quizOptions">
+          <button class="quiz-option" data-score="0">Honestly? I avoid looking. It stresses me out too much.</button>
+          <button class="quiz-option" data-score="1">I have a vague idea, but I know things slip through the cracks.</button>
+          <button class="quiz-option" data-score="2">I track most of it already. I just want a better system.</button>
+        </div>
+
+        <div class="quiz-result" id="quizResult">
+          <div class="quiz-result-tag" id="resultTag">Start free</div>
+          <span class="script" id="resultScript">Perfect starting point!</span>
+          <h3 id="resultTitle">The free worksheet is your best first step.</h3>
+          <p id="resultBody">Five minutes, zero judgment. You’ll see exactly where your money is going and pick one small next step that is yours.</p>
+          <a href="/opt-in" class="btn btn-coral" id="resultCta">Send me the free worksheet</a>
+          <br>
+          <button class="quiz-restart" onclick="restartQuiz()">Start the quiz over</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PROMISES ==================== -->
+  <section class="promises">
+    <div class="container">
+      <div class="promises-head fade-in">
+        <span class="eyebrow">Three promises I make to you</span>
+        <span class="script">what you get to walk away with</span>
+        <h2>One clear plan. Built for one income. Designed for your real life.</h2>
+        <p>Not a theory. Not a plan built for a family with a second paycheck to fall back on. This.</p>
+      </div>
+      <div class="promise-grid">
+        <div class="promise-card fade-in">
+          <div class="promise-icon-wrap">01</div>
+          <h3>See exactly where your money is going.</h3>
+          <p>No more Sunday-night dread. No more “where did it all go?” on a Monday morning. You will know, and knowing is the whole game.</p>
+        </div>
+        <div class="promise-card fade-in">
+          <div class="promise-icon-wrap">02</div>
+          <h3>Build a simple payday routine you can keep.</h3>
+          <p>Not a forty-step process you will abandon by week two. Fifteen quiet minutes on payday, and money stops feeling like a fire you are constantly putting out.</p>
+        </div>
+        <div class="promise-card fade-in">
+          <div class="promise-icon-wrap">03</div>
+          <h3>Save $200 to $500 a month without feeling deprived.</h3>
+          <p>Real margin. Real breathing room. Not by cutting every joy out of your life. Just by plugging the quiet leaks you didn’t even know were there.</p>
+        </div>
+      </div>
+      <p class="promise-foot fade-in">No extreme rules. No spending freezes. No shame spirals. Just a kinder, smarter system that actually works on what you actually make.</p>
+    </div>
+  </section>
+
+  <!-- ==================== WHY ==================== -->
+  <section class="why">
+    <div class="container">
+      <div class="why-head fade-in">
+        <span class="eyebrow">Why this is different</span>
+        <h2>Three reasons this works when everything else didn’t.</h2>
+      </div>
+      <div class="why-grid">
+        <div class="why-card fade-in">
+          <div class="img-ph has-img"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/brookes-images-folder-sf3xp4/brooke-site-images/home-budget.jpg" alt="Brooke's handwritten monthly budget in a spiral notebook with a pen, mug and a small succulent" loading="lazy"></div>
+          <div class="why-card-body">
+            <h3>Built on one income. Mine.</h3>
+            <p>I am not a finance professor. I am a mom whose husband made $10 an hour when our first baby was born. We lived in an 800 square foot home and got $34,000 into debt before we finally climbed out. Every system I teach was built in my kitchen, at my table, with our real numbers.</p>
+          </div>
+        </div>
+        <div class="why-card fade-in">
+          <div class="img-ph has-img"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/brookes-images-folder-sf3xp4/brooke-site-images/home-ritual.jpg" alt="Brooke smiling over her mug at the kitchen table, budget journal open in front of her" loading="lazy"></div>
+          <div class="why-card-body">
+            <h3>Simple beats perfect. Every single time.</h3>
+            <p>The most elaborate budget in the world is useless if you quit by February. I do not care about tracking every penny. I care about a rhythm you can keep when dinner needs to be made, your toddler is clinging to your leg, and your brain is full. Fifteen minutes a week. That is it.</p>
+          </div>
+        </div>
+        <div class="why-card fade-in">
+          <div class="img-ph has-img"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/brookes-images-folder-sf3xp4/brooke-site-images/home-friends.jpg" alt="Two friends' hands wrapped around mugs of tea at a kitchen table, beside a note that reads Empathy first, always" loading="lazy"></div>
+          <div class="why-card-body">
+            <h3>Empathy first. Always. No exceptions.</h3>
+            <p>You can come in here stressed, embarrassed, or completely convinced you are the worst money person alive, and you will be met with understanding. Not a lecture. Not a judgment. Just someone who has been there, who gets it, and who will take the next step with you.</p>
+          </div>
+        </div>
+      </div>
+      <p class="why-foot fade-in"><a href="/about">Read the whole story behind Purposeful Pennies →</a></p>
+    </div>
+  </section>
+
+  <!-- ==================== STORY STRIP ==================== -->
+  <section class="story-strip">
+    <div class="story-strip-inner">
+      <div class="story-strip-top fade-in">
+        <span class="story-script">the turning point</span>
+        <h2>What the shift actually looks like.</h2>
+        <p>This is not about becoming a different person. It is about one small step at a time, until one day you realize the dread is gone.</p>
+      </div>
+      <div class="story-moments">
+        <div class="story-moment fade-in">
+          <div class="story-dot">1</div>
+          <div class="story-body">
+            <h3>You arrive here, tired of the cycle.</h3>
+            <p>You have tried apps, spreadsheets, “no-spend” months. Something always derails you. You are not looking for perfection. You are looking for something that <em>actually holds</em>.</p>
+          </div>
+        </div>
+        <div class="story-moment fade-in">
+          <div class="story-dot">2</div>
+          <div class="story-body">
+            <h3>You try the <a href="/opt-in" style="color: var(--deep-sage); text-decoration: none; border-bottom: 2px solid var(--coral);">free 5-Minute Reality Check</a>.</h3>
+            <p>One page. Five minutes. You see your numbers clearly for the first time without panic. <em>That feeling, of knowing instead of avoiding, changes things.</em></p>
+          </div>
+        </div>
+        <div class="story-moment fade-in">
+          <div class="story-dot">3</div>
+          <div class="story-body">
+            <h3>You build a rhythm you can actually keep.</h3>
+            <p>Payday comes, and for once you have a plan. Fifteen minutes. You know where every dollar is going. The dread does not show up this week. <em>Small win. Real win.</em></p>
+          </div>
+        </div>
+        <div class="story-moment fade-in">
+          <div class="story-dot">✓</div>
+          <div class="story-body">
+            <h3>You start to breathe again.</h3>
+            <p>Your first month with $200 left over. Your first payday that does not end in a fight. Your first time thinking, <em>“we actually did it.”</em> That is the whole point. That is what this is for.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== TESTIMONIALS ==================== -->
+  <section class="testimonials">
+    <div class="container">
+      <div class="testimonials-head fade-in">
+        <span class="script">what moms are saying</span>
+        <span class="eyebrow eyebrow-coral">Real women. Real progress. Real life.</span>
+        <h2>You are not going to do this alone.</h2>
+      </div>
+      <div class="testimonial-grid">
+        <div class="testimonial-card fade-in">
+          <div class="testimonial-stars">★ ★ ★ ★ ★</div>
+          <p class="testimonial-quote">[Placeholder. Pull a quote about finally seeing where the money goes. Specific dollar amount from a real member. She mentions the relief of “just knowing.”]</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">K</div>
+            <div>
+              <div class="testimonial-name">[First name]</div>
+              <div class="testimonial-context">[Mom of X, state]</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card fade-in">
+          <div class="testimonial-stars">★ ★ ★ ★ ★</div>
+          <p class="testimonial-quote">[Placeholder. The one habit that changed her first 30 days. She cried reading the worksheet. She sent it to her sister. Pulled from welcome sequence replies.]</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">M</div>
+            <div>
+              <div class="testimonial-name">[First name]</div>
+              <div class="testimonial-context">[Family context, state]</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card fade-in">
+          <div class="testimonial-stars">★ ★ ★ ★ ★</div>
+          <p class="testimonial-quote">[Placeholder. Feeling less alone in the one-income life. The “I thought it was just us” moment. The community angle.]</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">J</div>
+            <div>
+              <div class="testimonial-name">[First name]</div>
+              <div class="testimonial-context">[Family context, state]</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="testimonials-holding fade-in">New here? You might be one of the first stories we share in this spot. That is not nothing.</p>
+    </div>
+  </section>
+
+  <!-- ==================== STEPS ==================== -->
+  <section class="steps" id="steps">
+    <div class="container">
+      <div class="steps-head fade-in">
+        <span class="eyebrow">How we do this together</span>
+        <h2>Three steps. Start wherever you are.</h2>
+      </div>
+      <div class="steps-grid">
+        <div class="step-card fade-in">
+          <div class="step-num-row">
+            <span class="step-num">01</span>
+            <span class="step-price">Free</span>
+          </div>
+          <h3>Take the free 5-Minute Money Reality Check.</h3>
+          <p>One page. Five minutes. No wrong answers. You will see exactly where your money is going, and you will pick one area to work on first. That is the whole first step. Nothing else required.</p>
+          <a href="/opt-in" class="step-cta">Start here →</a>
+        </div>
+        <div class="step-card featured fade-in">
+          <div class="most-popular">Most popular</div>
+          <div class="step-num-row">
+            <span class="step-num">02</span>
+            <span class="step-price">Membership</span>
+          </div>
+          <h3>Build your payday routine inside the membership.</h3>
+          <p>A 15-minute weekly reset that replaces the dread with a plan. You will know where every dollar is going, without tracking every penny. Most families feel the difference by the first payday.</p>
+          <!-- ALT-LINK: if the $27 Budget Toolkit keeps its own page, use href="/budget-toolkit" -->
+          <a href="/membership" class="step-cta">See the membership →</a>
+        </div>
+        <div class="step-card fade-in">
+          <div class="step-num-row">
+            <span class="step-num">03</span>
+            <span class="step-price">Free library</span>
+          </div>
+          <h3>Keep going with the free resource library.</h3>
+          <p>Printables, trackers, and guides for budget, groceries, meals, and home. Everything you need to keep the rhythm going between paydays, all in one place.</p>
+          <!-- ALT-LINK: if the $197 Frugal Living Bundle keeps its own page, use href="/frugal-living-bundle" -->
+          <a href="/free-resources" class="step-cta">See the free resources →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== MEET BROOKE ==================== -->
+  <section class="meet" id="about">
+    <div class="container">
+      <div class="meet-grid">
+        <div class="meet-image fade-in">
+          <div class="meet-image-script">Hi, friend!</div>
+          <div class="img-ph has-img"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/brookes-images-folder-sf3xp4/brooke-site-images/home-meet-brooke.jpg" alt="Brooke sitting at her kitchen table with a warm settled smile, pen in hand" loading="lazy"></div>
+          <div class="meet-image-stat">
+            <div class="label">Said from my own kitchen</div>
+            <div class="text">“Friend, you are not failing. You are just tired and under-equipped.”</div>
+          </div>
+        </div>
+        <div class="meet-text fade-in">
+          <span class="eyebrow eyebrow-coral">Meet Brooke</span>
+          <h2>Hi. I’m <span class="script-accent">Brooke.</span></h2>
+          <p class="meet-subhead">And if we were sitting at my kitchen table right now, the first thing I would tell you is this: you are not failing. You are just tired, and you have never had a system built for your actual life.</p>
+          <p>When I got pregnant with our first, my husband was making $10 an hour. We lived in an 800 square foot home. There was no plan. There was no cushion. We got into $34,000 of debt trying to figure it out on our own. And for years, I was the one who avoided looking at the bank account because I already knew it would ruin my day.</p>
+          <div class="meet-stat-strip">
+            <div class="stat-tile">
+              <div class="stat-num">$10/hr</div>
+              <div class="stat-label">where we started</div>
+            </div>
+            <div class="stat-tile">
+              <div class="stat-num">$34,000</div>
+              <div class="stat-label">paid off, all of it</div>
+            </div>
+            <div class="stat-tile">
+              <div class="stat-num">800 sq ft</div>
+              <div class="stat-label">first home, full life</div>
+            </div>
+          </div>
+          <p>Today we have no car payments, no credit card debt, and we still live on one income, by choice. My paycheck goes straight into savings, because we proved years ago that we never actually needed it to live well. We just needed a plan that fit our real life.</p>
+          <p>I built Purposeful Pennies so you do not have to spend a decade figuring it out the way I did.</p>
+          <a href="/about" class="meet-link">Read the full story →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FORK ==================== -->
+  <section class="fork" id="shop">
+    <div class="container">
+      <div class="fork-head fade-in">
+        <span class="eyebrow">Two paths</span>
+        <h2>Where are you right now?</h2>
+        <p>Pick the one that feels true. Not the one you think you should pick.</p>
+      </div>
+      <div class="fork-grid">
+        <div class="fork-card primary fade-in">
+          <span class="sticker">Start here</span>
+          <div class="label">Start free</div>
+          <h3>I want the free worksheet first.</h3>
+          <p>One page. Five minutes. Zero pressure. I just want to see my numbers clearly and take one small step. That’s all I need right now, and that is enough.</p>
+          <a href="/opt-in" class="btn" style="background: white; color: var(--coral-deep); box-shadow: 0 3px 0 rgba(0,0,0,0.15);">Send it to me</a>
+        </div>
+        <div class="fork-card fade-in">
+          <span class="sticker sage">Ready for a system</span>
+          <div class="label">The membership</div>
+          <h3>I am ready for a real plan.</h3>
+          <p>I am done winging it. I want a real, repeatable weekly routine I can actually keep. The 15-minute payday reset sounds exactly like what I have been looking for.</p>
+          <!-- ALT-LINK: if the $27 Budget Toolkit keeps its own page, use href="/budget-toolkit" -->
+          <a href="/membership" class="btn btn-outline">Show me the membership</a>
+        </div>
+      </div>
+      <p class="fork-soft fade-in">Just browsing and not ready yet? <a href="/blog">Come hang out on the blog</a> or <a href="/free-resources">browse the free resources</a>. The door is always open.</p>
+    </div>
+  </section>
+
+  <!-- ==================== FEATURED ==================== -->
+  <section class="featured">
+    <div class="container">
+      <div class="featured-grid">
+        <div class="featured-image fade-in">
+          <div class="img-ph">
+            <div class="ph-icon">☻</div>
+            <div class="ph-tag">Featured family</div>
+            <div class="ph-title">Real one-income family, real joy</div>
+            <div class="ph-brief">Mom laughing with her kids in a bright kitchen. Warm, real, unposed. Life feels good even on a real budget.</div>
+          </div>
+        </div>
+        <div class="featured-text fade-in">
+          <span class="eyebrow">You are in good company</span>
+          <h2>Hundreds of families are building this alongside you.</h2>
+          <p style="color: var(--cream); opacity: 0.9; max-width: 32rem;">One-income life can feel lonely. Like you are the only ones watching the grocery total, saying no to the vacation, stretching the last $40 until Friday. You are not. We are all in this kitchen together.</p>
+          <div class="featured-quote">
+            [A longer, anchor testimonial about the shift from “bad with money” to calm and capable. Pulled from a real member 30 to 60 days in. She mentions the first time she felt proud of herself instead of ashamed.]
+          </div>
+          <p class="featured-attrib">◆ First name, mom of X, state</p>
+          <div class="featured-mini-stats">
+            <div class="featured-mini-stat">
+              <div class="num">[#]</div>
+              <div class="label">families on the list and counting</div>
+            </div>
+            <div class="featured-mini-stat">
+              <div class="num">[$ saved]</div>
+              <div class="label">freed up in the first month</div>
+            </div>
+            <div class="featured-mini-stat">
+              <div class="num">100%</div>
+              <div class="label">zero shame. Always.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== LATEST FROM THE BLOG ==================== -->
+  <section class="latest" id="blog">
+    <div class="container">
+      <div class="latest-head fade-in">
+        <span class="script">pull up a chair</span>
+        <span class="eyebrow eyebrow-coral">Latest from the blog</span>
+        <h2>Real talk from a real kitchen table.</h2>
+        <p>No jargon. No lectures. Just the things I wish someone had told me ten years ago.</p>
+      </div>
+      <div class="latest-grid">
+        <!-- SINGLE POST TEMPLATE: /blog/{post-slug} -->
+        <a href="/blog/one-income-budget-first-steps" class="post-card fade-in">
+          <div class="img-ph has-img"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/brookes-images-folder-sf3xp4/brooke-site-images/blog-budgeting.jpg" alt="Handwritten budget notebook beside a calculator, glasses and a cup of tea" loading="lazy"></div>
+          <div class="post-card-body">
+            <div class="post-cat">Budgeting</div>
+            <h3>Where to actually start when you live on one income</h3>
+            <p>Not the twelve-step plan. The first step. The one you can do tonight after the kids are down.</p>
+            <div class="post-meta"><span class="post-read">Read the post →</span> &nbsp;◆&nbsp; 6 min read</div>
+          </div>
+        </a>
+        <a href="/blog/grocery-budget-without-coupons" class="post-card fade-in">
+          <div class="img-ph has-img"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/brookes-images-folder-sf3xp4/brooke-site-images/blog-groceries.jpg" alt="A reusable grocery bag with bananas and fresh groceries on the kitchen counter next to a handwritten list" loading="lazy"></div>
+          <div class="post-card-body">
+            <div class="post-cat">Groceries</div>
+            <h3>How I cut our grocery bill without clipping a single coupon</h3>
+            <p>Five habits that saved us real money every week, and none of them involve extreme couponing.</p>
+            <div class="post-meta"><span class="post-read">Read the post →</span> &nbsp;◆&nbsp; 8 min read</div>
+          </div>
+        </a>
+        <a href="/blog/payday-routine-fifteen-minutes" class="post-card fade-in">
+          <div class="img-ph has-img"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/brookes-images-folder-sf3xp4/brooke-site-images/blog-payday.jpg" alt="A phone showing a banking app resting on a handwritten budget, with tea and glasses nearby" loading="lazy"></div>
+          <div class="post-card-body">
+            <div class="post-cat">Money mindset</div>
+            <h3>The fifteen-minute payday routine that ended the dread</h3>
+            <p>What I do every payday, in order, in less time than it takes to fold a load of laundry.</p>
+            <div class="post-meta"><span class="post-read">Read the post →</span> &nbsp;◆&nbsp; 5 min read</div>
+          </div>
+        </a>
+      </div>
+      <p class="latest-foot fade-in"><a href="/blog" class="btn btn-outline">Read more on the blog</a></p>
+    </div>
+  </section>
+
+  <!-- ==================== OPT-IN ==================== -->
+  <section class="optin" id="optin">
+    <div class="container">
+      <div class="optin-grid">
+        <div class="optin-text fade-in">
+          <span class="eyebrow eyebrow-coral">One small step</span>
+          <h2>Let’s start with five minutes and a clear picture.</h2>
+          <p class="optin-body">The 5-Minute Money Reality Check is one page. It gives you a snapshot of where your money is actually going. No spreadsheet, no jargon, no judgment. Just clarity. And one next step, picked by you.</p>
+          <p style="font-style: italic; color: var(--sage); font-size: 1rem; margin-bottom: 0.5rem;">You will walk away knowing:</p>
+          <ul class="optin-list">
+            <li>Exactly what is coming in and where it is going right now.</li>
+            <li>The Big Four expense check: housing, transport, food, utilities.</li>
+            <li>The quiet leaks you didn’t even know were bleeding money.</li>
+            <li>Your Reality Number, in plain math you can actually use.</li>
+            <li>One clear next step. Not ten. Just one. The right one for you.</li>
+          </ul>
+          <p style="font-style: italic; color: var(--coral-deep); margin-top: 1.5rem; font-size: 0.98rem;">This is free. It takes five minutes. And it will change how you feel about Sunday night.</p>
+        </div>
+
+        <!--
+          FLODESK NOTE: replace this form block with the Flodesk inline embed.
+          Set the Flodesk success redirect to  /thank-you
+          The JS fallback below sends the visitor to /thank-you so the funnel
+          can be click-tested on the draft site today.
+        -->
+        <form class="optin-form fade-in" id="optinForm" action="/thank-you" method="get" novalidate="">
+          <div class="optin-free-sticker">
+            Free!
+            <small>worksheet</small>
+          </div>
+          <div class="optin-form-head">
+            <span class="script">Send it to me, friend</span>
+            <h3>Your worksheet is one tap away.</h3>
+          </div>
+          <label for="fn">First name</label>
+          <input type="text" id="fn" name="first_name" placeholder="What should I call you?" required="">
+          <label for="em">Email address</label>
+          <input type="email" id="em" name="email" placeholder="Best email to reach you at" required="">
+          <button type="submit" class="btn">Yes, send me the free worksheet</button>
+          <p class="trust-line">No spam. No shame. Just honest emails from someone who actually gets it.</p>
+          <p class="form-legal">By subscribing you agree to our <a href="/privacy-policy">Privacy Policy</a> and <a href="/terms">Terms</a>.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer id="contact">
+    <div class="container">
+      <a href="/" class="brand-line">Purposeful Pennies</a>
+      <p class="tagline">spend with intention. save with purpose.</p>
+      <div class="diamond">◆ ◆ ◆</div>
+      <p class="closing-quote">“I want families to close the laptop and think, ‘for the first time in a long time, I actually think we can do this.’”</p>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="/start-here">Start Here</a>
+        <a href="/about">About</a>
+        <a href="/free-resources">Free Resources</a>
+        <a href="/membership">Membership</a>
+        <a href="/blog">Blog</a>
+        <a href="/contact">Contact</a>
+        <a href="/opt-in">Free Reality Check</a>
+      </nav>
+      <p class="legal">
+        © 2026 Purposeful Pennies. All rights reserved.
+        &nbsp;·&nbsp;
+        <a href="/privacy-policy">Privacy</a> ·
+        <a href="/terms">Terms</a> ·
+        <a href="/disclaimer">Disclaimer</a> ·
+        <a href="/affiliate-disclosure">Affiliate Disclosure</a>
+      </p>
+      <p class="built">built with love for one-income families everywhere</p>
+    </div>
+  </footer>
+
+  <!-- Floating CTA -->
+  <div class="floating-cta" id="floatingCta">
+    <a href="/opt-in" class="btn">Free worksheet</a>
+  </div>
+
+  <script>
+    /* MOBILE NAV */
+    (function () {
+      var toggle = document.getElementById('navToggle');
+      var links = document.getElementById('navLinks');
+      if (!toggle || !links) return;
+      toggle.addEventListener('click', function () {
+        var open = links.classList.toggle('open');
+        toggle.classList.toggle('open', open);
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      });
+      links.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () {
+          links.classList.remove('open');
+          toggle.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+        });
+      });
+    })();
+
+    /* FADE-IN */
+    var fadeEls = document.querySelectorAll('.fade-in');
+    var fadeObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          fadeObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    fadeEls.forEach(function (el) { fadeObserver.observe(el); });
+
+    /* COUNTERS */
+    function animateCounter(el) {
+      var target = parseInt(el.dataset.target, 10);
+      var prefix = el.dataset.prefix || '';
+      var suffix = el.dataset.suffix || '';
+      var duration = 1800;
+      var start = performance.now();
+      function step(now) {
+        var elapsed = now - start;
+        var progress = Math.min(elapsed / duration, 1);
+        var eased = 1 - Math.pow(1 - progress, 3);
+        var value = Math.floor(target * eased);
+        el.textContent = prefix + value.toLocaleString() + suffix;
+        if (progress < 1) requestAnimationFrame(step);
+        else el.textContent = prefix + target.toLocaleString() + suffix;
+      }
+      requestAnimationFrame(step);
+    }
+    var counters = document.querySelectorAll('[data-target]');
+    var counterObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          animateCounter(entry.target);
+          counterObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    counters.forEach(function (c) { counterObserver.observe(c); });
+
+    /* FLOATING CTA */
+    var floatingCta = document.getElementById('floatingCta');
+    var heroSection = document.querySelector('.hero');
+    window.addEventListener('scroll', function () {
+      var heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
+      var optinEl = document.getElementById('optin');
+      var optinTop = optinEl ? optinEl.offsetTop : 99999;
+      var scrollY = window.scrollY;
+      if (scrollY > heroBottom + 200 && scrollY < optinTop - 400) {
+        floatingCta.classList.add('visible');
+      } else {
+        floatingCta.classList.remove('visible');
+      }
+    });
+
+    /* CONFETTI */
+    function launchConfetti(container) {
+      var colors = ['#DD6B4E', '#D4A83F', '#5C6E47', '#C28954', '#F7D0BE'];
+      var count = 40;
+      for (var i = 0; i < count; i++) {
+        var el = document.createElement('div');
+        el.className = 'confetti';
+        var angle = (Math.PI * 2 * i) / count + (Math.random() * 0.5);
+        var distance = 100 + Math.random() * 180;
+        var dx = Math.cos(angle) * distance;
+        var dy = Math.sin(angle) * distance - 60;
+        var rot = (Math.random() - 0.5) * 720;
+        var color = colors[i % colors.length];
+        var size = 6 + Math.random() * 8;
+        el.style.background = color;
+        el.style.width = size + 'px';
+        el.style.height = size + 'px';
+        el.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+        el.style.setProperty('--dx', dx + 'px');
+        el.style.setProperty('--dy', dy + 'px');
+        el.style.setProperty('--rot', rot + 'deg');
+        container.appendChild(el);
+        (function (node) { requestAnimationFrame(function () { node.classList.add('animate'); }); })(el);
+        (function (node) { setTimeout(function () { node.remove(); }, 1800); })(el);
+      }
+    }
+
+    /* QUIZ  ·  result CTAs route to the real pages */
+    var quizData = {
+      questions: [
+        {
+          q: "When you think about your money right now, the first feeling is\u2026",
+          options: [
+            { text: "Honestly? I avoid looking. It stresses me out too much.", score: 0 },
+            { text: "I have a vague idea, but I know things slip through the cracks.", score: 1 },
+            { text: "I track most of it already. I just want a better system.", score: 2 }
+          ]
+        },
+        {
+          q: "Have you tried budgeting before?",
+          options: [
+            { text: "Never really. Or I gave up by week two.", score: 0 },
+            { text: "Yes, but nothing has stuck for more than a month.", score: 1 },
+            { text: "I\u2019ve used apps or templates and want to go deeper.", score: 2 }
+          ]
+        },
+        {
+          q: "What would change your daily life the most right now?",
+          options: [
+            { text: "Just knowing where to start. I feel completely paralyzed.", score: 0 },
+            { text: "A real, repeatable weekly routine I can actually keep.", score: 1 },
+            { text: "A whole connected system for budget, meals, groceries, home.", score: 2 }
+          ]
+        }
+      ],
+      results: [
+        {
+          tag: "Start free",
+          script: "Perfect starting point!",
+          title: "The free worksheet is your best first step.",
+          body: "Five minutes, zero judgment. You\u2019ll see exactly where your money is going and pick one small next step that\u2019s yours. Nothing else required right now.",
+          ctaText: "Send me the free worksheet",
+          ctaHref: "/opt-in"
+        },
+        {
+          tag: "Ready for a system",
+          script: "You are so ready for this.",
+          title: "The membership is built for exactly where you are.",
+          body: "You\u2019re past the basics. You want a real, repeatable rhythm. The 15-minute payday reset that finally makes payday feel like relief instead of dread.",
+          ctaText: "Show me the membership",
+          ctaHref: "/membership"
+        },
+        {
+          tag: "Ready for the full system",
+          script: "This is exciting!",
+          title: "The membership is your match.",
+          body: "Every connected system in one place. Budget, groceries, meals, home. Where one-income life finally feels calm and connected instead of constant survival mode.",
+          ctaText: "Show me the membership",
+          ctaHref: "/membership"
+        }
+      ]
+    };
+
+    var quizState = { step: 0, scores: [] };
+
+    function renderQuiz() {
+      var card = document.getElementById('quizCard');
+      var stepEl = card.querySelector('.quiz-step');
+      var qEl = document.getElementById('quizQ');
+      var optionsEl = document.getElementById('quizOptions');
+      var dots = card.querySelectorAll('.quiz-dot');
+      var resultEl = document.getElementById('quizResult');
+
+      resultEl.classList.remove('show');
+      card.querySelector('.quiz-progress').style.display = 'flex';
+      stepEl.style.display = 'block';
+      qEl.style.display = 'block';
+      optionsEl.style.display = 'grid';
+
+      var data = quizData.questions[quizState.step];
+      stepEl.textContent = 'Question ' + (quizState.step + 1) + ' of 3';
+      qEl.textContent = data.q;
+      dots.forEach(function (d, i) {
+        if (i <= quizState.step) d.classList.add('active');
+        else d.classList.remove('active');
+      });
+      optionsEl.innerHTML = data.options.map(function (opt) {
+        return '<button class="quiz-option" data-score="' + opt.score + '">' + opt.text + '</button>';
+      }).join('');
+      bindOptions(optionsEl);
+    }
+
+    function bindOptions(scope) {
+      scope.querySelectorAll('.quiz-option').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          quizState.scores.push(parseInt(btn.dataset.score, 10));
+          if (quizState.step < quizData.questions.length - 1) {
+            quizState.step++;
+            renderQuiz();
+          } else {
+            showResult();
+          }
+        });
+      });
+    }
+
+    function showResult() {
+      var card = document.getElementById('quizCard');
+      var total = quizState.scores.reduce(function (a, b) { return a + b; }, 0);
+      var resultIndex = 0;
+      if (total >= 5) resultIndex = 2;
+      else if (total >= 2) resultIndex = 1;
+      var r = quizData.results[resultIndex];
+
+      card.querySelector('.quiz-progress').style.display = 'none';
+      card.querySelector('.quiz-step').style.display = 'none';
+      document.getElementById('quizQ').style.display = 'none';
+      document.getElementById('quizOptions').style.display = 'none';
+
+      var resultEl = document.getElementById('quizResult');
+      document.getElementById('resultTag').textContent = r.tag;
+      document.getElementById('resultScript').textContent = r.script;
+      document.getElementById('resultTitle').textContent = r.title;
+      document.getElementById('resultBody').textContent = r.body;
+      var ctaBtn = document.getElementById('resultCta');
+      ctaBtn.textContent = r.ctaText;
+      ctaBtn.href = r.ctaHref;
+      resultEl.classList.add('show');
+      launchConfetti(card);
+    }
+
+    function restartQuiz() {
+      quizState = { step: 0, scores: [] };
+      renderQuiz();
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      bindOptions(document.getElementById('quizOptions'));
+    });
+<w:pgSz w:h="15840" w:w="12240" w:orient="portrait"/><w:pgMar w:bottom="1440" w:top="1440" w:left="1440" w:right="1440" w:header="720" w:footer="720"/><w:pgNumType w:start="1"/></w:sectPr></w:pPr><w:r w:rsidDel="00000000" w:rsidR="00000000" w:rsidRPr="00000000"><w:rPr><w:rtl w:val="0"/></w:rPr><w:t xml:space="preserve">  </script>

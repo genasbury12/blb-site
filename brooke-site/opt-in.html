@@ -1,0 +1,873 @@
+<!--
+  ============================================================
+  PURPOSEFUL PENNIES  ·  OPT-IN LANDING PAGE
+  URL: /opt-in
+  Draft: https://purposefulpenniesdraft.showit.site/opt-in
+  ============================================================
+
+  WHAT THIS PAGE IS
+  ------------------------------------------------------------
+  The single opt-in for the ENTIRE free resource library. One
+  email address, all twelve resources. This is not a landing
+  page for the Reality Check alone. The Reality Check appears
+  inside the library as the recommended first step, because it
+  is the flagship, but the offer being made here is the whole
+  shelf.
+
+  Every free CTA anywhere on the site lands here, whichever
+  resource the visitor happened to click.
+
+  WHY THERE IS NO NAVIGATION
+  ------------------------------------------------------------
+  This is a landing page, not a site page. 38 buttons across
+  the site point here, so this is where the list gets built or
+  lost, and every nav link is an invitation to leave before
+  converting. What remains: the logo, and the legal links the
+  form needs anyway.
+
+  To restore the full nav, paste the nav block and its styles
+  in from any other page.
+
+  FLODESK WIRING
+  ------------------------------------------------------------
+  Replace the .optin-form block with the Flodesk inline embed
+  and set the Flodesk success redirect to /thank-you
+  Map the hidden "resource" field to a Flodesk custom field so
+  the freebie tracking survives.
+
+  Until then the demo form validates and redirects to
+  /thank-you on its own, so the funnel is click-testable today.
+
+  THE ?r= SLUG
+  ------------------------------------------------------------
+  The Free Resources page sends visitors here with a slug, e.g.
+  /opt-in?r=sinking-funds. This page names that resource back
+  to them, confirms it is in the library, and writes the slug
+  into a hidden field for segmenting. The generic library slugs
+  are tracked without a banner. Missing or malformed slugs fall
+  back silently with no visible change.
+
+  No empty-anchor placeholders. No em dashes or en dashes.
+  ============================================================
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Get the Free Resource Library · Purposeful Pennies</title>
+<meta name="description" content="Twelve free budget printables, meal planners and trackers for one-income families. One signup opens the whole library. No credit card, no spam, no catch.">
+<link rel="canonical" href="https://purposefulpenniesdraft.showit.site/opt-in">
+<meta name="robots" content="noindex, follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&amp;family=DM+Serif+Display&amp;display=swap" rel="stylesheet">
+<style>
+  :root {
+    --deep-sage: #2E3E2F;
+    --sage: #5C6E47;
+    --sage-soft: #8B9E75;
+    --warm-tan: #C28954;
+    --warm-tan-dark: #A77246;
+    --cream: #FBF4D7;
+    --cream-warm: #F7ECC4;
+    --charcoal: #2A2A2A;
+    --soft-gray: #7E867D;
+    --light-sage: #DBE3CE;
+    --pale-tan: #EFE0C1;
+    --white: #FFFFFF;
+    --coral: #DD6B4E;
+    --coral-deep: #C25441;
+    --coral-soft: #F7D0BE;
+    --coral-blush: #FBE3D5;
+    --gold: #D4A83F;
+    --gold-soft: #EDD98D;
+    --gold-deep: #B8912E;
+    --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 17px; scroll-behavior: smooth; }
+  @media (min-width: 720px) { html { font-size: 18px; } }
+  body {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.08rem; line-height: 1.7; color: var(--charcoal);
+    background: var(--cream); -webkit-font-smoothing: antialiased; overflow-x: hidden;
+  }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+  .narrow { max-width: 780px; margin: 0 auto; padding: 0 1.5rem; }
+  section { padding: 5rem 0; position: relative; }
+  @media (max-width: 700px) { section { padding: 3.5rem 0; } }
+
+  .skip-link { position: absolute; left: -9999px; top: 0; background: var(--deep-sage); color: var(--cream); padding: 0.75rem 1.25rem; z-index: 200; text-decoration: none; }
+  .skip-link:focus { left: 0.5rem; top: 0.5rem; }
+
+  .script { font-family: 'Caveat', cursive; font-weight: 700; }
+  .eyebrow { font-size: 0.78rem; font-weight: bold; letter-spacing: 0.22em; text-transform: uppercase; color: var(--warm-tan-dark); display: inline-flex; align-items: center; gap: 0.75rem; }
+  .eyebrow::before { content: ""; display: inline-block; width: 28px; height: 1px; background: var(--warm-tan); }
+  .eyebrow-coral { color: var(--coral-deep); }
+  .eyebrow-coral::before { background: var(--coral); }
+  h1, h2, h3 { font-family: Georgia, serif; color: var(--deep-sage); }
+  h1 { font-size: clamp(2.15rem, 4.8vw, 3.6rem); font-weight: bold; line-height: 1.06; letter-spacing: -0.02em; }
+  h2 { font-size: clamp(1.75rem, 3.8vw, 2.7rem); font-weight: bold; line-height: 1.12; letter-spacing: -0.01em; }
+  h3 { font-size: 1.2rem; font-weight: bold; line-height: 1.3; }
+  p { margin-bottom: 1.1rem; }
+  p:last-child { margin-bottom: 0; }
+
+  .inline-link { color: var(--coral-deep); font-weight: bold; text-decoration: none; border-bottom: 2px solid var(--coral); padding-bottom: 1px; }
+  .inline-link:hover { color: var(--coral); }
+
+  .squiggle-wrap { display: inline-block; position: relative; white-space: nowrap; }
+  .squiggle-wrap svg { position: absolute; bottom: -0.2em; left: 0; width: 100%; height: 0.35em; pointer-events: none; }
+  .squiggle-wrap svg path { fill: none; stroke: var(--coral); stroke-width: 4; stroke-linecap: round; }
+
+  /* MINIMAL TOP BAR (no nav, on purpose) */
+  .lp-bar { background: var(--cream); border-bottom: 1px solid rgba(194, 137, 84, 0.18); }
+  .lp-bar-inner { max-width: 1200px; margin: 0 auto; padding: 1.1rem 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  .lp-logo { font-family: Georgia, serif; font-size: 1.25rem; font-weight: bold; color: var(--deep-sage); letter-spacing: 0.03em; text-decoration: none; line-height: 1; display: flex; align-items: baseline; gap: 0.5rem; }
+  .lp-logo .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--coral); display: inline-block; }
+  .lp-logo em { display: block; font-family: 'Caveat', cursive; font-weight: 500; font-style: normal; color: var(--coral-deep); font-size: 0.92rem; margin-top: -2px; }
+  .lp-bar-note { font-family: 'Caveat', cursive; font-size: 1.2rem; color: var(--coral-deep); white-space: nowrap; }
+  @media (max-width: 660px) { .lp-bar-note { display: none; } }
+
+  /* BUTTONS */
+  .btn { display: inline-flex; align-items: center; gap: 0.6rem; background: var(--warm-tan); color: white; font-family: Georgia, serif; font-size: 1.05rem; font-weight: bold; padding: 1.1rem 2.3rem; border: none; border-radius: 999px; cursor: pointer; text-decoration: none; transition: all 0.25s var(--ease); letter-spacing: 0.02em; box-shadow: 0 3px 0 var(--warm-tan-dark); }
+  .btn:hover { background: var(--warm-tan-dark); transform: translateY(-2px); box-shadow: 0 5px 0 var(--warm-tan-dark); }
+  .btn::after { content: "\2192"; transition: transform 0.25s var(--ease); }
+  .btn:hover::after { transform: translateX(4px); }
+  .btn-coral { background: var(--coral); box-shadow: 0 3px 0 var(--coral-deep); }
+  .btn-coral:hover { background: var(--coral-deep); box-shadow: 0 5px 0 var(--coral-deep); }
+  .btn[disabled] { opacity: 0.6; cursor: wait; transform: none !important; }
+  .trust-line { font-family: Georgia, serif; font-style: italic; font-size: 0.9rem; color: var(--soft-gray); margin-top: 0.85rem; }
+
+  /* IMG PLACEHOLDER */
+  .img-ph { background: linear-gradient(135deg, var(--coral-blush) 0%, var(--pale-tan) 50%, var(--light-sage) 100%); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; flex-direction: column; padding: 2rem; text-align: center; border: 1px dashed rgba(194, 137, 84, 0.5); }
+  .img-ph::before { content: ""; position: absolute; inset: 0; background-image: radial-gradient(circle at 20% 30%, rgba(221, 107, 78, 0.1) 0%, transparent 50%), radial-gradient(circle at 80% 70%, rgba(212, 168, 63, 0.1) 0%, transparent 50%); pointer-events: none; }
+  .img-ph .ph-icon { width: 52px; height: 52px; border: 1.5px solid var(--coral); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; color: var(--coral); font-size: 1.6rem; background: rgba(255,255,255,0.6); position: relative; z-index: 1; }
+  .img-ph .ph-tag { font-family: Georgia, serif; font-size: 0.7rem; font-weight: bold; letter-spacing: 0.2em; text-transform: uppercase; color: var(--coral-deep); margin-bottom: 0.75rem; position: relative; z-index: 1; }
+  .img-ph .ph-title { font-family: Georgia, serif; font-size: 1.05rem; font-weight: bold; color: var(--deep-sage); margin-bottom: 0.5rem; position: relative; z-index: 1; }
+  .img-ph .ph-brief { font-family: Georgia, serif; font-size: 0.85rem; font-style: italic; color: var(--sage); line-height: 1.5; max-width: 26rem; position: relative; z-index: 1; }
+
+  /* ===== 1. HERO + FORM ===== */
+  .lp-hero { background: var(--cream); padding: 3.5rem 0 5rem; position: relative; overflow: hidden; }
+  .lp-hero::before { content: ""; position: absolute; top: -190px; right: -150px; width: 520px; height: 520px; background: radial-gradient(circle, var(--coral-blush) 0%, transparent 65%); opacity: 0.75; pointer-events: none; }
+  .lp-hero::after { content: ""; position: absolute; bottom: -150px; left: -130px; width: 430px; height: 430px; background: radial-gradient(circle, var(--gold-soft) 0%, transparent 60%); opacity: 0.4; pointer-events: none; }
+  .lp-hero-grid { display: grid; grid-template-columns: 1.08fr 0.92fr; gap: 3.5rem; align-items: start; position: relative; }
+  @media (max-width: 940px) { .lp-hero-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+
+  /* the ?r= greeting banner */
+  .ref-banner { display: none; background: white; border: 2px solid var(--gold); border-radius: 12px; padding: 1rem 1.35rem; margin-bottom: 1.75rem; box-shadow: 0 6px 18px rgba(212, 168, 63, 0.18); }
+  .ref-banner.show { display: block; }
+  .ref-banner .script { font-family: 'Caveat', cursive; color: var(--gold-deep); font-size: 1.25rem; display: block; line-height: 1.2; margin-bottom: 0.2rem; }
+  .ref-banner p { font-size: 0.96rem; margin: 0; line-height: 1.55; }
+  .ref-banner strong { color: var(--deep-sage); }
+
+  .lp-hero-text .script { display: block; font-family: 'Caveat', cursive; font-size: 1.95rem; color: var(--coral-deep); margin-bottom: 0.3rem; }
+  .lp-hero-text h1 { margin: 0 0 1.35rem; }
+  .lp-hero-sub { font-style: italic; font-size: clamp(1.08rem, 2.1vw, 1.26rem); line-height: 1.55; color: var(--sage); margin-bottom: 1.75rem; max-width: 33rem; }
+  .lp-cats { list-style: none; margin: 0 0 1.75rem; }
+  .lp-cats li { padding: 0.6rem 0 0.6rem 2.2rem; position: relative; font-size: 1.01rem; line-height: 1.5; }
+  .lp-cats li::before { content: ""; position: absolute; left: 0; top: 0.65rem; width: 19px; height: 19px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23DD6B4E' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center/contain no-repeat; }
+  .lp-cats b { color: var(--deep-sage); }
+  .lp-cats .cnt { font-family: 'DM Serif Display', Georgia, serif; color: var(--coral-deep); margin-right: 0.3rem; font-size: 1.1rem; }
+  .lp-proof { display: flex; align-items: center; gap: 0.85rem; padding-top: 1.75rem; border-top: 1px solid rgba(221, 107, 78, 0.3); }
+  .lp-proof-avatars { display: flex; }
+  .lp-proof-avatar { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--cream); margin-left: -11px; font-family: Georgia, serif; color: white; font-weight: bold; display: flex; align-items: center; justify-content: center; font-size: 0.86rem; }
+  .lp-proof-avatar:first-child { margin-left: 0; background: linear-gradient(135deg, var(--coral), var(--warm-tan)); }
+  .lp-proof-avatar:nth-child(2) { background: linear-gradient(135deg, var(--sage), var(--deep-sage)); }
+  .lp-proof-avatar:nth-child(3) { background: linear-gradient(135deg, var(--gold), var(--warm-tan-dark)); }
+  .lp-proof-stars { color: var(--gold); font-size: 0.92rem; letter-spacing: 1px; margin-bottom: 0.1rem; }
+  .lp-proof-text { font-size: 0.9rem; line-height: 1.4; }
+  .lp-proof-text strong { color: var(--deep-sage); }
+
+  /* FORM CARD */
+  .form-wrap { position: relative; }
+  .optin-form { background: white; border: 2px solid var(--coral); border-radius: 16px; padding: 2.5rem 2.25rem; box-shadow: 0 26px 66px rgba(46, 62, 47, 0.13); position: relative; }
+  @media (max-width: 600px) { .optin-form { padding: 2rem 1.5rem; } }
+  .form-seal { position: absolute; top: -1.6rem; right: -1rem; width: 100px; height: 100px; background: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-direction: column; text-align: center; color: white; font-family: 'DM Serif Display', Georgia, serif; font-size: 1.85rem; line-height: 1; transform: rotate(14deg); box-shadow: 0 8px 24px rgba(212, 168, 63, 0.42); z-index: 3; }
+  .form-seal small { font-family: Georgia, serif; font-weight: bold; font-size: 0.5rem; letter-spacing: 0.14em; margin-top: 0.22rem; text-transform: uppercase; }
+  .form-head { text-align: center; margin-bottom: 1.75rem; padding-bottom: 1.4rem; border-bottom: 1px solid rgba(221, 107, 78, 0.22); }
+  .form-head .script { display: block; font-family: 'Caveat', cursive; font-size: 1.5rem; color: var(--coral-deep); margin-bottom: 0.15rem; }
+  .form-head h2 { font-size: 1.42rem; line-height: 1.25; }
+  .field { margin-bottom: 1.3rem; }
+  .field label { display: block; font-size: 0.75rem; font-weight: bold; letter-spacing: 0.15em; text-transform: uppercase; color: var(--coral-deep); margin-bottom: 0.45rem; }
+  .field input {
+    width: 100%; padding: 1rem; border: 1px solid rgba(126, 134, 125, 0.35); border-radius: 8px;
+    font-family: Georgia, serif; font-size: 1rem; color: var(--charcoal); background: var(--cream);
+    transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
+  }
+  .field input:focus { border-color: var(--coral); outline: none; box-shadow: 0 0 0 3px rgba(221, 107, 78, 0.14); background: white; }
+  .field.invalid input { border-color: var(--coral-deep); background: #FFF7F4; }
+  .field-error { display: none; font-size: 0.85rem; font-style: italic; color: var(--coral-deep); margin-top: 0.4rem; }
+  .field.invalid .field-error { display: block; }
+  .honeypot { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  .optin-form .btn { width: 100%; justify-content: center; margin-top: 0.5rem; background: var(--coral); box-shadow: 0 3px 0 var(--coral-deep); font-size: 1.04rem; }
+  .optin-form .btn:hover { background: var(--coral-deep); box-shadow: 0 5px 0 var(--coral-deep); }
+  .form-status { margin-top: 0.9rem; font-size: 0.92rem; font-style: italic; text-align: center; }
+  .form-status.error { color: var(--coral-deep); font-style: normal; font-weight: bold; }
+  .form-legal { text-align: center; font-size: 0.78rem; color: var(--soft-gray); margin-top: 0.9rem; line-height: 1.55; }
+  .form-legal a { color: var(--coral-deep); }
+  .form-micro { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem 1rem; margin-top: 1.25rem; padding-top: 1.25rem; border-top: 1px solid rgba(221, 107, 78, 0.18); }
+  .form-micro span { font-size: 0.8rem; color: var(--sage); display: inline-flex; align-items: center; gap: 0.35rem; }
+  .form-micro b { color: var(--coral); }
+
+  /* ===== 2. WHAT IS IN THE LIBRARY ===== */
+  .lib { background: var(--white); }
+  .lib-head { text-align: center; max-width: 700px; margin: 0 auto 3rem; }
+  .lib-head .eyebrow { justify-content: center; margin-bottom: 1rem; }
+  .lib-head .script { display: block; font-family: 'Caveat', cursive; font-size: 1.85rem; color: var(--coral-deep); margin-bottom: 0.25rem; }
+  .lib-head p { font-style: italic; color: var(--sage); font-size: 1.04rem; margin-top: 1rem; }
+  .lib-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.35rem; align-items: start; }
+  @media (max-width: 1020px) { .lib-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 620px) { .lib-grid { grid-template-columns: 1fr; } }
+  .lib-card { background: var(--cream); border-radius: 14px; padding: 1.85rem 1.5rem 1.6rem; border: 1px solid rgba(221, 107, 78, 0.16); position: relative; overflow: hidden; }
+  .lib-card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 5px; background: var(--coral); }
+  .lib-card:nth-child(2)::before { background: var(--gold); }
+  .lib-card:nth-child(3)::before { background: var(--sage); }
+  .lib-card:nth-child(4)::before { background: var(--warm-tan); }
+  .lib-card-top { display: flex; align-items: baseline; justify-content: space-between; gap: 0.75rem; margin-bottom: 1.1rem; padding-bottom: 0.85rem; border-bottom: 1px solid rgba(46, 62, 47, 0.1); }
+  .lib-card h3 { font-size: 1.02rem; line-height: 1.3; }
+  .lib-card-n { font-family: 'DM Serif Display', Georgia, serif; font-size: 1.6rem; color: var(--coral-deep); line-height: 1; flex-shrink: 0; }
+  .lib-card:nth-child(2) .lib-card-n { color: var(--gold-deep); }
+  .lib-card:nth-child(3) .lib-card-n { color: var(--sage); }
+  .lib-card:nth-child(4) .lib-card-n { color: var(--warm-tan-dark); }
+  .lib-items { list-style: none; }
+  .lib-items li { padding: 0.5rem 0 0.5rem 1.5rem; position: relative; font-size: 0.93rem; line-height: 1.5; }
+  .lib-items li::before { content: "\25C6"; position: absolute; left: 0; top: 0.62rem; font-size: 0.55rem; color: var(--coral); }
+  .lib-card:nth-child(2) .lib-items li::before { color: var(--gold); }
+  .lib-card:nth-child(3) .lib-items li::before { color: var(--sage); }
+  .lib-card:nth-child(4) .lib-items li::before { color: var(--warm-tan); }
+  .lib-items li.starter-item { font-weight: bold; color: var(--deep-sage); }
+  .starter-pill { display: inline-block; background: var(--gold); color: white; font-family: Georgia, serif; font-weight: bold; font-size: 0.58rem; letter-spacing: 0.14em; text-transform: uppercase; padding: 0.2rem 0.5rem; border-radius: 4px; margin-left: 0.4rem; vertical-align: 2px; white-space: nowrap; }
+  .lib-foot { text-align: center; margin-top: 2.75rem; font-family: Georgia, serif; font-style: italic; font-weight: bold; font-size: clamp(1.08rem, 2.3vw, 1.32rem); color: var(--deep-sage); }
+
+  /* ===== 3. START WITH THIS ONE ===== */
+  .starter { background: var(--coral-blush); }
+  .starter-grid { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 3.5rem; align-items: center; max-width: 1060px; margin: 0 auto; }
+  @media (max-width: 900px) { .starter-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+  .starter-img { aspect-ratio: 4/5; width: 100%; max-width: 400px; position: relative; }
+  .starter-img .img-ph { width: 100%; height: 100%; border-radius: 10px; }
+  .starter-img-tag { position: absolute; bottom: -1.25rem; right: -1.25rem; background: var(--coral); color: white; padding: 0.9rem 1.2rem; border-radius: 8px; max-width: 200px; box-shadow: 0 10px 28px rgba(221, 107, 78, 0.35); transform: rotate(2deg); }
+  @media (max-width: 600px) { .starter-img-tag { right: 0; bottom: -1rem; max-width: 180px; } }
+  .starter-img-tag .num { font-family: 'DM Serif Display', Georgia, serif; font-size: 1.5rem; line-height: 1; display: block; margin-bottom: 0.2rem; }
+  .starter-img-tag .label { font-size: 0.78rem; font-style: italic; line-height: 1.4; opacity: 0.95; }
+  .starter-text .eyebrow { margin-bottom: 1rem; }
+  .starter-text h2 { margin-bottom: 1.15rem; font-size: clamp(1.55rem, 3.1vw, 2.25rem); }
+  .starter-steps { list-style: none; counter-reset: ins; margin-top: 1.5rem; }
+  .starter-steps li { counter-increment: ins; padding: 1rem 0 1rem 3.3rem; position: relative; border-bottom: 1px solid rgba(46, 62, 47, 0.1); }
+  .starter-steps li:last-child { border-bottom: none; }
+  .starter-steps li::before {
+    content: counter(ins, decimal-leading-zero);
+    position: absolute; left: 0; top: 0.95rem;
+    font-family: 'DM Serif Display', Georgia, serif; font-size: 1.08rem; color: var(--coral-deep);
+    background: white; width: 38px; height: 38px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .starter-steps b { display: block; font-family: Georgia, serif; color: var(--deep-sage); font-size: 1.01rem; margin-bottom: 0.15rem; }
+  .starter-steps span { font-size: 0.94rem; line-height: 1.6; color: var(--charcoal); }
+
+  /* ===== 4. FOR YOU / NOT FOR YOU ===== */
+  .foryou { background: var(--cream); }
+  .foryou-head { text-align: center; max-width: 640px; margin: 0 auto 3rem; }
+  .foryou-head .eyebrow { justify-content: center; margin-bottom: 1rem; }
+  .foryou-head .script { display: block; font-family: 'Caveat', cursive; font-size: 1.85rem; color: var(--coral-deep); margin-bottom: 0.25rem; }
+  .foryou-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; max-width: 940px; margin: 0 auto; }
+  @media (max-width: 780px) { .foryou-grid { grid-template-columns: 1fr; } }
+  .fy-card { background: white; border-radius: 14px; padding: 2.25rem 2rem; box-shadow: 0 8px 26px rgba(46, 62, 47, 0.07); }
+  .fy-card.no { background: var(--deep-sage); color: var(--cream); }
+  .fy-label { font-family: 'Caveat', cursive; font-size: 1.55rem; display: block; margin-bottom: 1.15rem; }
+  .fy-card.yes .fy-label { color: var(--coral-deep); }
+  .fy-card.no .fy-label { color: var(--gold-soft); }
+  .fy-list { list-style: none; }
+  .fy-list li { padding: 0.65rem 0 0.65rem 2rem; position: relative; font-size: 0.98rem; line-height: 1.55; border-bottom: 1px solid rgba(46, 62, 47, 0.08); }
+  .fy-card.no .fy-list li { border-bottom-color: rgba(212, 168, 63, 0.18); }
+  .fy-list li:last-child { border-bottom: none; }
+  .fy-card.yes .fy-list li::before { content: ""; position: absolute; left: 0; top: 0.8rem; width: 17px; height: 17px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23DD6B4E' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center/contain no-repeat; }
+  .fy-card.no .fy-list li::before { content: ""; position: absolute; left: 0; top: 0.85rem; width: 16px; height: 16px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23EDD98D' stroke-width='3' stroke-linecap='round'%3E%3Cline x1='18' y1='6' x2='6' y2='18'/%3E%3Cline x1='6' y1='6' x2='18' y2='18'/%3E%3C/svg%3E") center/contain no-repeat; }
+  .foryou-close { text-align: center; max-width: 640px; margin: 2.75rem auto 0; font-family: Georgia, serif; font-style: italic; font-weight: bold; font-size: clamp(1.1rem, 2.4vw, 1.38rem); color: var(--deep-sage); line-height: 1.45; }
+
+  /* ===== 5. WHO IS BEHIND IT ===== */
+  .whois { background: var(--deep-sage); color: var(--cream); overflow: hidden; }
+  .whois::before { content: ""; position: absolute; top: 15%; left: 5%; width: 28px; height: 28px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23D4A83F'%3E%3Cpath d='M12 0l2.4 8.6L23 11l-8.6 2.4L12 22l-2.4-8.6L1 11l8.6-2.4z'/%3E%3C/svg%3E") center/contain no-repeat; opacity: 0.5; }
+  .whois::after { content: ""; position: absolute; bottom: 15%; right: 6%; width: 22px; height: 22px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23DD6B4E'%3E%3Cpath d='M12 0l2.4 8.6L23 11l-8.6 2.4L12 22l-2.4-8.6L1 11l8.6-2.4z'/%3E%3C/svg%3E") center/contain no-repeat; opacity: 0.6; }
+  .whois-inner { max-width: 880px; margin: 0 auto; padding: 0 1.5rem; text-align: center; position: relative; z-index: 2; }
+  .whois .script { font-family: 'Caveat', cursive; font-size: 1.8rem; color: var(--coral-soft); display: block; margin-bottom: 0.3rem; }
+  .whois h2 { color: var(--cream); margin-bottom: 1.35rem; }
+  .whois p { font-size: 1.05rem; line-height: 1.7; opacity: 0.9; max-width: 38rem; margin: 0 auto 1.1rem; }
+  .whois-nums { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin: 2.75rem 0 2.25rem; }
+  @media (max-width: 780px) { .whois-nums { grid-template-columns: 1fr; gap: 2rem; } }
+  .whois-num-item { padding: 0 1rem; border-right: 1px solid rgba(212, 168, 63, 0.25); }
+  .whois-num-item:last-child { border-right: none; }
+  @media (max-width: 780px) { .whois-num-item { border-right: none; } }
+  .whois-num { font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(1.9rem, 4.2vw, 2.7rem); line-height: 1; margin-bottom: 0.55rem; }
+  .whois-num-item:nth-child(1) .whois-num { color: var(--coral-soft); }
+  .whois-num-item:nth-child(2) .whois-num { color: var(--gold-soft); }
+  .whois-num-item:nth-child(3) .whois-num { color: var(--cream); }
+  .whois-num-label { font-size: 0.87rem; font-style: italic; opacity: 0.85; line-height: 1.45; }
+  .whois-quote { font-family: Georgia, serif; font-style: italic; font-weight: bold; font-size: clamp(1.12rem, 2.5vw, 1.42rem); color: var(--gold-soft); line-height: 1.45; max-width: 34rem; margin: 0 auto; }
+
+  /* ===== 6. WHAT HAPPENS NEXT ===== */
+  .next { background: var(--gold-soft); }
+  .next-head { text-align: center; max-width: 640px; margin: 0 auto 3rem; }
+  .next-head .eyebrow { justify-content: center; margin-bottom: 1rem; color: var(--gold-deep); }
+  .next-head .eyebrow::before { background: var(--gold-deep); }
+  .next-head p { font-style: italic; color: var(--sage); font-size: 1.04rem; margin-top: 1rem; }
+  .next-rows { max-width: 780px; margin: 0 auto; display: flex; flex-direction: column; gap: 1rem; }
+  .next-row { background: white; border-radius: 12px; padding: 1.55rem 1.9rem; display: grid; grid-template-columns: 145px 1fr; gap: 1.6rem; align-items: center; box-shadow: 0 4px 16px rgba(46, 62, 47, 0.06); transition: transform 0.3s var(--ease); }
+  .next-row:hover { transform: translateX(5px); }
+  @media (max-width: 700px) { .next-row { grid-template-columns: 1fr; gap: 0.5rem; padding: 1.4rem 1.5rem; } }
+  .next-when { font-family: 'Caveat', cursive; font-size: 1.4rem; color: var(--coral-deep); line-height: 1.2; }
+  .next-what { font-size: 0.98rem; line-height: 1.6; }
+  .next-what strong { color: var(--deep-sage); }
+
+  /* ===== 7. OBJECTIONS ===== */
+  .obj { background: var(--light-sage); }
+  .obj-head { text-align: center; max-width: 620px; margin: 0 auto 2.75rem; }
+  .obj-head .eyebrow { justify-content: center; margin-bottom: 1rem; }
+  .obj-head .script { display: block; font-family: 'Caveat', cursive; font-size: 1.8rem; color: var(--coral-deep); margin-bottom: 0.25rem; }
+  .obj-list { max-width: 780px; margin: 0 auto; display: flex; flex-direction: column; gap: 0.85rem; }
+  .obj-item { background: white; border-radius: 12px; border: 1px solid rgba(221, 107, 78, 0.16); overflow: hidden; }
+  .obj-item[open] { box-shadow: 0 12px 30px rgba(46, 62, 47, 0.09); }
+  .obj-item summary { cursor: pointer; list-style: none; padding: 1.3rem 3.4rem 1.3rem 1.75rem; font-family: Georgia, serif; font-weight: bold; font-size: 1.01rem; color: var(--deep-sage); position: relative; line-height: 1.45; }
+  .obj-item summary::-webkit-details-marker { display: none; }
+  .obj-item summary:hover { color: var(--coral-deep); }
+  .obj-item summary::after { content: ""; position: absolute; right: 1.5rem; top: 1.45rem; width: 15px; height: 15px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23DD6B4E' stroke-width='3' stroke-linecap='round'%3E%3Cline x1='12' y1='5' x2='12' y2='19'/%3E%3Cline x1='5' y1='12' x2='19' y2='12'/%3E%3C/svg%3E") center/contain no-repeat; transition: transform 0.3s var(--ease); }
+  .obj-item[open] summary::after { transform: rotate(45deg); }
+  .obj-body { padding: 0 1.75rem 1.5rem; }
+  .obj-body p { font-size: 0.98rem; line-height: 1.68; }
+
+  /* ===== 8. FINAL CTA ===== */
+  .final { background: var(--deep-sage); color: var(--cream); text-align: center; overflow: hidden; }
+  .final::before { content: ""; position: absolute; top: -100px; left: -100px; width: 400px; height: 400px; background: radial-gradient(circle, rgba(221,107,78,0.15) 0%, transparent 65%); }
+  .final::after { content: ""; position: absolute; bottom: -120px; right: -120px; width: 440px; height: 440px; background: radial-gradient(circle, rgba(212,168,63,0.1) 0%, transparent 65%); }
+  .final .narrow { position: relative; z-index: 2; }
+  .final .script { font-family: 'Caveat', cursive; font-size: 1.9rem; color: var(--coral-soft); display: block; margin-bottom: 0.5rem; }
+  .final h2 { color: var(--cream); margin-bottom: 1.25rem; }
+  .final p { font-size: 1.1rem; opacity: 0.9; margin-bottom: 2.25rem; max-width: 33rem; margin-left: auto; margin-right: auto; }
+  .final .trust { margin-top: 1.5rem; font-style: italic; font-size: 0.92rem; opacity: 0.7; }
+
+  /* MINIMAL FOOTER */
+  footer { background: var(--deep-sage); color: var(--cream); padding: 2.5rem 0 2rem; text-align: center; border-top: 1px solid rgba(221, 107, 78, 0.2); }
+  footer .brand-line { font-family: 'DM Serif Display', Georgia, serif; font-size: 1.5rem; color: var(--cream); text-decoration: none; display: inline-block; }
+  footer .tagline { font-family: 'Caveat', cursive; color: var(--coral-soft); margin: 0.3rem 0 1.5rem; font-size: 1.2rem; }
+  footer .legal { font-size: 0.82rem; opacity: 0.65; }
+  footer .legal a { color: var(--cream); opacity: 0.8; text-decoration: none; margin: 0 0.4rem; }
+  footer .legal a:hover { opacity: 1; }
+
+  /* FADE IN */
+  .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); }
+  .fade-in.visible { opacity: 1; transform: none; }
+
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } html { scroll-behavior: auto; } .fade-in { opacity: 1; transform: none; } }
+  :focus-visible { outline: 3px solid var(--coral); outline-offset: 3px; }
+
+    /* Real photos placed in the placeholder frames (photo shoot, Aug 2026) */
+    .img-ph.has-img { padding: 0; border: none; }
+    .img-ph.has-img::before { display: none; }
+    .img-ph.has-img > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+  </style>
+
+
+
+  <a href="#getit" class="skip-link">Skip to the form</a>
+
+  <!-- MINIMAL TOP BAR: no nav links, on purpose -->
+  <div class="lp-bar">
+    <div class="lp-bar-inner">
+      <a href="/" class="lp-logo"><span class="dot"></span>Purposeful Pennies<em>&nbsp;spend with intention</em></a>
+      <span class="lp-bar-note">twelve resources, one signup, no cost</span>
+    </div>
+  </div>
+
+  <main id="main">
+
+  <!-- ==================== 1. HERO + FORM ==================== -->
+  <section class="lp-hero">
+    <div class="container">
+      <div class="lp-hero-grid">
+
+        <div class="lp-hero-text fade-in">
+          <!-- shown by JS when a specific ?r= slug is present -->
+          <div class="ref-banner" id="refBanner">
+            <span class="script">good pick!</span>
+            <p>You came for the <strong id="refName">Sinking Fund Starter Sheet</strong>. That one is in here, and this signup opens all twelve at the same time.</p>
+          </div>
+
+          <span class="script">the whole free library</span>
+          <h1>Twelve free resources for one-income families. <span class="squiggle-wrap">One signup.<svg viewBox="0 0 200 12" preserveAspectRatio="none"><path d="M2,7 Q25,1 50,7 T100,7 T150,7 T198,7"></path></svg></span></h1>
+          <p class="lp-hero-sub">Budget templates, meal planners, trackers, and printables I built for my own family first. Not samples. Not teasers for something paid. The whole shelf, free, for as long as you want it.</p>
+          <ul class="lp-cats">
+            <li><span class="cnt">5</span> <b>Budgeting and getting clear</b>, including the 5-Minute Money Reality Check</li>
+            <li><span class="cnt">3</span> <b>Groceries and meals</b>, for the bill that eats every budget</li>
+            <li><span class="cnt">2</span> <b>Home and family rhythms</b>, so the week actually holds together</li>
+            <li><span class="cnt">2</span> <b>Money mindset</b>, for the part nobody hands you a worksheet for</li>
+          </ul>
+          <div class="lp-proof">
+            <div class="lp-proof-avatars">
+              <div class="lp-proof-avatar">K</div>
+              <div class="lp-proof-avatar">M</div>
+              <div class="lp-proof-avatar">J</div>
+            </div>
+            <div>
+              <div class="lp-proof-stars">★ ★ ★ ★ ★</div>
+              <div class="lp-proof-text"><strong>Joining hundreds of one-income families</strong> who are finally breathing again.</div>
+            </div>
+          </div>
+        </div>
+
+        <!--
+          FLODESK: replace this whole form with the Flodesk inline embed.
+          Set the Flodesk success redirect to /thank-you
+        -->
+        <div class="form-wrap fade-in" id="getit">
+          <form class="optin-form" id="optinForm" novalidate="">
+            <div class="form-seal">
+              12
+              <small>free</small>
+            </div>
+            <div class="form-head">
+              <span class="script">open the library</span>
+              <h2>Where should I send all twelve?</h2>
+            </div>
+
+            <div class="field" id="f-name">
+              <label for="firstName">First name</label>
+              <input type="text" id="firstName" name="first_name" autocomplete="given-name" placeholder="What should I call you?" required="">
+              <span class="field-error">I would love to know what to call you.</span>
+            </div>
+
+            <div class="field" id="f-email">
+              <label for="email">Email address</label>
+              <input type="email" id="email" name="email" autocomplete="email" placeholder="Where should I send the library?" required="">
+              <span class="field-error">Please check that address so the library actually reaches you.</span>
+            </div>
+
+            <!-- which freebie brought them here, read from ?r= for Flodesk segmenting -->
+            <input type="hidden" id="resourceField" name="resource" value="library">
+
+            <!-- honeypot -->
+            <div class="honeypot" aria-hidden="true">
+              <label for="_gotcha">Leave this empty</label>
+              <input type="text" id="_gotcha" name="_gotcha" tabindex="-1" autocomplete="off">
+            </div>
+
+            <button type="submit" class="btn" id="submitBtn">Yes, unlock the free library</button>
+            <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+            <p class="form-legal">I will only email you things I think actually help. Unsubscribe any time. <a href="/privacy-policy">Privacy Policy</a>.</p>
+
+            <div class="form-micro">
+              <span><b>◆</b> No credit card</span>
+              <span><b>◆</b> No spam</span>
+              <span><b>◆</b> No shame</span>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 2. WHAT IS IN THE LIBRARY ==================== -->
+  <section class="lib">
+    <div class="container">
+      <div class="lib-head fade-in">
+        <span class="script">so you know exactly what you are getting</span>
+        <span class="eyebrow eyebrow-coral">Everything in the library</span>
+        <h2>All twelve, listed out.</h2>
+        <p>No mystery bundle. Here is the whole thing, before you give me anything.</p>
+      </div>
+
+      <div class="lib-grid">
+        <div class="lib-card fade-in">
+          <div class="lib-card-top">
+            <h3>Budgeting and getting clear</h3>
+            <span class="lib-card-n">5</span>
+          </div>
+          <ul class="lib-items">
+            <li class="starter-item">The 5-Minute Money Reality Check <span class="starter-pill">start here</span></li>
+            <li>The One-Page Monthly Budget</li>
+            <li>Bill Due Date Calendar</li>
+            <li>Sinking Fund Starter Sheet</li>
+            <li>Debt Payoff Progress Tracker</li>
+          </ul>
+        </div>
+
+        <div class="lib-card fade-in">
+          <div class="lib-card-top">
+            <h3>Groceries and meals</h3>
+            <span class="lib-card-n">3</span>
+          </div>
+          <ul class="lib-items">
+            <li>Two-Week Pantry Meal Plan</li>
+            <li>Grocery Trip Cheat Sheet</li>
+            <li>Freezer and Pantry Inventory</li>
+          </ul>
+        </div>
+
+        <div class="lib-card fade-in">
+          <div class="lib-card-top">
+            <h3>Home and family</h3>
+            <span class="lib-card-n">2</span>
+          </div>
+          <ul class="lib-items">
+            <li>The Fifteen-Minute Payday Reset</li>
+            <li>Weekly Home Rhythm Planner</li>
+          </ul>
+        </div>
+
+        <div class="lib-card fade-in">
+          <div class="lib-card-top">
+            <h3>Money mindset</h3>
+            <span class="lib-card-n">2</span>
+          </div>
+          <ul class="lib-items">
+            <li>Money Is a Tool Reflection Pages</li>
+            <li>Talking to Kids About Money</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="lib-foot fade-in">One email address. All twelve. Print what you need, ignore what you do not.</p>
+    </div>
+  </section>
+
+  <!-- ==================== 3. START WITH THIS ONE ==================== -->
+  <section class="starter">
+    <div class="container">
+      <div class="starter-grid">
+        <div class="starter-img fade-in">
+          <div class="img-ph has-img"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/brookes-images-folder-sf3xp4/brooke-site-images/optin-mockup.jpg" alt="The free resource library printables fanned out on a wooden kitchen table" loading="lazy"></div>
+          <div class="starter-img-tag">
+            <span class="num">1 page</span>
+            <span class="label">Start with this one. It takes five minutes.</span>
+          </div>
+        </div>
+        <div class="starter-text fade-in">
+          <span class="eyebrow eyebrow-coral">If you only do one thing</span>
+          <h2>Start with the 5-Minute Money Reality Check.</h2>
+          <p>Twelve resources landing in your inbox at once is a lot, so let me tell you where to begin. This one is a single page, it takes five minutes, and it is the thing I wish someone had handed me when we were $34,000 in the hole and I was too scared to open the bank app.</p>
+          <ol class="starter-steps">
+            <li>
+              <b>Write down what comes in.</b>
+              <span>Every dollar, from every source, for one normal month. No rounding up to make it look better.</span>
+            </li>
+            <li>
+              <b>Check the Big Four.</b>
+              <span>Housing, transport, food, utilities. This is usually where the whole month quietly disappears.</span>
+            </li>
+            <li>
+              <b>Find the quiet leaks.</b>
+              <span>Subscriptions, convenience runs, small yeses. Not to shame you. Just so you can see them.</span>
+            </li>
+            <li>
+              <b>Get your Reality Number.</b>
+              <span>Simple subtraction, then the one next step that makes the biggest difference for your family.</span>
+            </li>
+          </ol>
+          <p class="trust-line">Then work through the rest of the library at whatever pace suits your life.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 4. FOR YOU / NOT FOR YOU ==================== -->
+  <section class="foryou">
+    <div class="container">
+      <div class="foryou-head fade-in">
+        <span class="script">let me be straight with you</span>
+        <span class="eyebrow eyebrow-coral">So you do not waste your time</span>
+        <h2>Who this library is actually for.</h2>
+      </div>
+      <div class="foryou-grid">
+        <div class="fy-card yes fade-in">
+          <span class="fy-label">this is for you if</span>
+          <ul class="fy-list">
+            <li>Your family lives on one income, by choice or otherwise.</li>
+            <li>You have started a budget before and it never stuck.</li>
+            <li>You avoid the bank app because you already know.</li>
+            <li>You want a plan, not a lecture about your coffee.</li>
+            <li>You would rather print one page than learn new software.</li>
+          </ul>
+        </div>
+        <div class="fy-card no fade-in">
+          <span class="fy-label">this is not for you if</span>
+          <ul class="fy-list">
+            <li>You want to get rich quickly. I have nothing for that.</li>
+            <li>You are looking for investment or tax advice. I am not licensed to give it.</li>
+            <li>You want someone else to manage your money for you.</li>
+            <li>You want a forty-tab spreadsheet. These are one-pagers on purpose.</li>
+          </ul>
+        </div>
+      </div>
+      <p class="foryou-close fade-in">If you are in the first column, every one of these twelve was built for you specifically. Right down to the wording.</p>
+    </div>
+  </section>
+
+  <!-- ==================== 5. WHO IS BEHIND IT ==================== -->
+  <section class="whois">
+    <div class="whois-inner">
+      <span class="script fade-in">before you hand over your email</span>
+      <h2 class="fade-in">You should know who is on the other end.</h2>
+      <p class="fade-in">I am Brooke. Not a finance professor, not an advisor. A mom. When I got pregnant with our first, my husband was making $10 an hour and working sixty hour weeks. We lived in an 800 square foot home, I wanted to stay home with my babies, and on paper it did not work. So we winged it, we swiped the card, and we ended up $34,000 in debt.</p>
+      <p class="fade-in">Every resource in this library came out of digging our way back out. I made them for my own kitchen table first.</p>
+      <div class="whois-nums">
+        <div class="whois-num-item fade-in">
+          <div class="whois-num" data-target="10" data-prefix="$" data-suffix="/hr">$0/hr</div>
+          <div class="whois-num-label">where we started, one paycheck, one baby coming</div>
+        </div>
+        <div class="whois-num-item fade-in">
+          <div class="whois-num" data-target="34000" data-prefix="$">$0</div>
+          <div class="whois-num-label">the debt we climbed all the way out of</div>
+        </div>
+        <div class="whois-num-item fade-in">
+          <div class="whois-num">$0</div>
+          <div class="whois-num-label">credit card debt today, still on one income</div>
+        </div>
+      </div>
+      <p class="whois-quote fade-in">We never earned our way out of it. We planned our way out of it. Same income, different plan.</p>
+    </div>
+  </section>
+
+  <!-- ==================== 6. WHAT HAPPENS NEXT ==================== -->
+  <section class="next">
+    <div class="container">
+      <div class="next-head fade-in">
+        <span class="eyebrow">No surprises</span>
+        <h2>Exactly what happens after you hit send.</h2>
+        <p>I hate signing up for something and having no idea what I just agreed to. So here it is, plainly.</p>
+      </div>
+      <div class="next-rows">
+        <div class="next-row fade-in">
+          <div class="next-when">right away</div>
+          <div class="next-what">One email with <strong>all twelve resources</strong>, plus a note telling you which to open first. Nothing to install, no account to create.</div>
+        </div>
+        <div class="next-row fade-in">
+          <div class="next-when">the next few days</div>
+          <div class="next-what">A short series walking you through the Reality Check and <strong>the one thing to fix first.</strong> Written like a friend, not a newsletter.</div>
+        </div>
+        <div class="next-row fade-in">
+          <div class="next-when">every week or so</div>
+          <div class="next-what">One honest email. What is working in our house, what is not, something you can use. <strong>Unsubscribe any time, no hard feelings.</strong></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 7. OBJECTIONS ==================== -->
+  <section class="obj">
+    <div class="container">
+      <div class="obj-head fade-in">
+        <span class="script">the things you are wondering</span>
+        <span class="eyebrow eyebrow-coral">Quick answers</span>
+        <h2>Before you sign up.</h2>
+      </div>
+      <div class="obj-list">
+        <details class="obj-item fade-in">
+          <summary>Are all twelve really free, or is this a sample of something paid?</summary>
+          <div class="obj-body">
+            <p>All twelve, really free, in full. Not watered-down versions of paid products. No credit card, no trial that quietly starts billing you. I do sell a membership elsewhere on the site and I will mention it sometimes, but this library is yours whether you ever buy anything or not. Plenty of families never do, and that is completely fine by me.</p>
+          </div>
+        </details>
+        <details class="obj-item fade-in">
+          <summary>Do I have to use all twelve? That feels like a lot.</summary>
+          <div class="obj-body">
+            <p>Not even slightly. Most people use two or three and ignore the rest, and that is exactly how it should work. Start with the Reality Check, then pick whatever is bothering you most this week. The others will still be there in six months if you need them.</p>
+          </div>
+        </details>
+        <details class="obj-item fade-in">
+          <summary>What are you going to do with my email address?</summary>
+          <div class="obj-body">
+            <p>Send you the library, then write to you about once a week. That is it. I do not sell it, rent it, or share it with anyone, ever. One click unsubscribes you and I will not chase you about it.</p>
+          </div>
+        </details>
+        <details class="obj-item fade-in">
+          <summary>I am honestly scared to look at my numbers.</summary>
+          <div class="obj-body">
+            <p>I know. I avoided ours for years, because I already knew opening the bank app would ruin my day. Here is what I did not expect: seeing it written down was so much less frightening than the version I had built up in my head. The not-knowing is the heavy part.</p>
+            <p>You are not bad with money. You were never taught. Those are two completely different things, and this is a no-shame space. Take the five minutes.</p>
+          </div>
+        </details>
+        <details class="obj-item fade-in">
+          <summary>Will these work if our income changes every month?</summary>
+          <div class="obj-body">
+            <p>Yes, and it might matter more for you than for anyone. Use a normal month, or if there is no such thing, use your lowest recent month. Building the plan on the lean months instead of the good ones is exactly how you stop getting caught out.</p>
+          </div>
+        </details>
+        <details class="obj-item fade-in">
+          <summary>Do I need a printer or any special software?</summary>
+          <div class="obj-body">
+            <p>Neither. They are PDFs. Print them if you like writing by hand, or open them on your phone and fill them in there. I built them to work at a kitchen table with a pen, because that is where I built them.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 8. FINAL CTA ==================== -->
+  <section class="final">
+    <div class="narrow">
+      <span class="script fade-in">okay, friend</span>
+      <h2 class="fade-in">Twelve resources, one email address, no catch.</h2>
+      <p class="fade-in">You do not have to have a plan yet. That is what these are for. Start with the five-minute one tonight and go from there.</p>
+      <a href="#getit" class="btn btn-coral fade-in">Unlock the free library</a>
+      <p class="trust fade-in">No credit card. No spam. No shame. Just clarity.</p>
+    </div>
+  </section>
+
+  </main>
+
+  <!-- MINIMAL FOOTER -->
+  <footer>
+    <div class="container">
+      <a href="/" class="brand-line">Purposeful Pennies</a>
+      <p class="tagline">spend with intention. save with purpose.</p>
+      <p class="legal">
+        © 2026 Purposeful Pennies. All rights reserved.
+        &nbsp;·&nbsp;
+        <a href="/privacy-policy">Privacy</a> ·
+        <a href="/terms">Terms</a> ·
+        <a href="/disclaimer">Disclaimer</a>
+      </p>
+    </div>
+  </footer>
+
+  <script>
+  /* =========================================================
+     CONFIG
+     ========================================================= */
+  var THANK_YOU = '/thank-you';
+
+  /* ---------- ?r= slug: name the resource back to them ---------- */
+  var RESOURCES = {
+    'reality-check':       '5-Minute Money Reality Check',
+    'monthly-budget':      'One-Page Monthly Budget',
+    'bill-calendar':       'Bill Due Date Calendar',
+    'sinking-funds':       'Sinking Fund Starter Sheet',
+    'debt-tracker':        'Debt Payoff Progress Tracker',
+    'pantry-meal-plan':    'Two-Week Pantry Meal Plan',
+    'grocery-cheat-sheet': 'Grocery Trip Cheat Sheet',
+    'freezer-inventory':   'Freezer and Pantry Inventory',
+    'payday-reset':        'Fifteen-Minute Payday Reset',
+    'home-rhythm':         'Weekly Home Rhythm Planner',
+    'money-reflection':    'Money Is a Tool Reflection Pages',
+    'kids-and-money':      'Talking to Kids About Money'
+  };
+  /* these mean "the whole library", so there is nothing specific to name */
+  var GENERIC = ['library', 'library-close'];
+
+  var REF_SLUG = '';
+  (function () {
+    var slug = '';
+    try { slug = new URLSearchParams(window.location.search).get('r') || ''; } catch (e) { slug = ''; }
+    if (!slug) return;
+
+    if (GENERIC.indexOf(slug) !== -1) {          /* generic: track it, no banner */
+      REF_SLUG = slug;
+      document.getElementById('resourceField').value = slug;
+      return;
+    }
+    if (!RESOURCES[slug]) return;                /* unknown or malformed: silent fallback */
+
+    REF_SLUG = slug;
+    document.getElementById('resourceField').value = slug;
+    document.getElementById('refName').textContent = RESOURCES[slug];
+    document.getElementById('refBanner').classList.add('show');
+  })();
+
+  /* ---------- fade in ---------- */
+  (function () {
+    var els = document.querySelectorAll('.fade-in');
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    els.forEach(function (el) { obs.observe(el); });
+  })();
+
+  /* ---------- counters ---------- */
+  (function () {
+    function animate(el) {
+      var target = parseInt(el.dataset.target, 10);
+      var prefix = el.dataset.prefix || '';
+      var suffix = el.dataset.suffix || '';
+      var start = performance.now();
+      function step(now) {
+        var p = Math.min((now - start) / 1800, 1);
+        var eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = prefix + Math.floor(target * eased).toLocaleString() + suffix;
+        if (p < 1) requestAnimationFrame(step);
+        else el.textContent = prefix + target.toLocaleString() + suffix;
+      }
+      requestAnimationFrame(step);
+    }
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { animate(e.target); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('[data-target]').forEach(function (c) { obs.observe(c); });
+  })();
+
+  /* ---------- objections: one open at a time ---------- */
+  (function () {
+    var items = document.querySelectorAll('.obj-item');
+    items.forEach(function (item) {
+      item.addEventListener('toggle', function () {
+        if (!item.open) return;
+        items.forEach(function (o) { if (o !== item) o.open = false; });
+      });
+    });
+  })();
+
+  /* ---------- form ---------- */
+  (function () {
+    var form   = document.getElementById('optinForm');
+    var status = document.getElementById('formStatus');
+    var btn    = document.getElementById('submitBtn');
+    if (!form) return;
+
+    var checks = [
+      { wrap: 'f-name',  input: 'firstName', test: function (v) { return v.trim().length > 0; } },
+      { wrap: 'f-email', input: 'email',     test: function (v) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()); } }
+    ];
+
+    checks.forEach(function (c) {
+      var el = document.getElementById(c.input);
+      var wrap = document.getElementById(c.wrap);
+      el.addEventListener('input', function () {
+        if (c.test(el.value)) wrap.classList.remove('invalid');
+      });
+    });
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      status.textContent = '';
+      status.className = 'form-status';
+
+      /* honeypot: bot filled the hidden field, go nowhere quietly */
+      if (document.getElementById('_gotcha').value !== '') return;
+
+      var firstBad = null;
+      checks.forEach(function (c) {
+        var el = document.getElementById(c.input);
+        var wrap = document.getElementById(c.wrap);
+        if (c.test(el.value)) { wrap.classList.remove('invalid'); }
+        else { wrap.classList.add('invalid'); if (!firstBad) firstBad = el; }
+      });
+
+      if (firstBad) {
+        status.className = 'form-status error';
+        status.textContent = 'Just one or two things to fix.';
+        firstBad.focus();
+        return;
+      }
+
+      /* Flodesk owns this step once its embed replaces the form.
+         Until then, carry the name and slug through to the thank-you page. */
+      btn.disabled = true;
+      btn.textContent = 'Sending' + '\u2026';
+      status.textContent = 'Opening your library.';
+
+      var q = 'name=' + encodeURIComponent(document.getElementById('firstName').value.trim());
+      if (REF_SLUG) q += '&r=' + encodeURIComponent(REF_SLUG);
+      window.location.href = THANK_YOU + '?' + q;
+    });
+  })();
+<w:pgSz w:h="15840" w:w="12240" w:orient="portrait"/><w:pgMar w:bottom="1440" w:top="1440" w:left="1440" w:right="1440" w:header="720" w:footer="720"/><w:pgNumType w:start="1"/></w:sectPr></w:pPr><w:r w:rsidDel="00000000" w:rsidR="00000000" w:rsidRPr="00000000"><w:rPr><w:rtl w:val="0"/></w:rPr><w:t xml:space="preserve">  </script>

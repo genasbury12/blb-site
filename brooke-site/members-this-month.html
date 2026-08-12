@@ -1,0 +1,625 @@
+<!--
+  ============================================================
+  PURPOSEFUL PENNIES  ·  THIS MONTH   /members-this-month
+  Showit + MemberSpace
+  ============================================================
+
+  WHAT THIS PAGE IS
+  The current monthly release, and the archive of every past one. It
+  is the page that answers "what am I paying for THIS month", which is
+  the question behind most cancellations at day sixty.
+
+  Linked from the member home card and the vault. A member should be
+  able to land here and see, in about five seconds, what is new and
+  what to do with it.
+
+  ------------------------------------------------------------
+  WHAT A RELEASE IS ALLOWED TO CONTAIN
+  ------------------------------------------------------------
+  Two printables and one short training is the shape. Resist making
+  it bigger. A release that takes a member two hours to work through
+  is a release she postpones, and postponed twice is cancelled.
+
+  THE RELEASE MUST MATCH THE LIBRARY. Anything marked isNew in the
+  library ITEMS array should appear here, and nothing else should.
+  August is Lunchbox Fortnight and the School Supply Plan. If you add
+  a third, add it in both places.
+
+  ------------------------------------------------------------
+  MONTHLY UPDATE ROUTINE, SO THIS STAYS TRUE
+  ------------------------------------------------------------
+  1. Add the new printables to the library ITEMS array with isNew.
+  2. Remove isNew from last month's items.
+  3. Update RELEASE below, and move last month into PAST.
+  4. Update the member home This Month card to match.
+  Four edits. Skipping step four is how the member home ends up
+  advertising a release that is two months old.
+
+  ------------------------------------------------------------
+  BEFORE LAUNCH, DELETE THE SAMPLE PAST RELEASES
+  ------------------------------------------------------------
+  PAST contains three entries marked sample: true. Visible ribbon,
+  console warning. Delete them and the archive shows an empty state.
+
+  ------------------------------------------------------------
+  MEMBERSPACE
+  ------------------------------------------------------------
+  Protection inherited from the /members-* prefix rule.
+  The Showit override armour block is included. Do not remove it.
+
+  FORMATTING RULE. Zero em dashes, zero en dashes. Separator is the
+  diamond glyph.
+  ============================================================
+-->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>This Month · The One-Income Circle</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&amp;family=DM+Serif+Display&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --deep-sage: #2E3E2F; --sage: #5C6E47; --sage-soft: #8B9E75;
+      --warm-tan: #C28954; --warm-tan-dark: #A77246;
+      --cream: #FBF4D7; --cream-warm: #F7ECC4; --charcoal: #2A2A2A;
+      --soft-gray: #7E867D; --light-sage: #DBE3CE; --pale-tan: #EFE0C1; --white: #FFFFFF;
+      --coral: #DD6B4E; --coral-deep: #C25441; --coral-soft: #F7D0BE; --coral-blush: #FBE3D5;
+      --gold: #D4A83F; --gold-soft: #EDD98D; --gold-deep: #B8912E;
+      --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 17px; scroll-behavior: smooth; }
+    @media (min-width: 720px) { html { font-size: 18px; } }
+    body {
+      font-family: Georgia, 'Times New Roman', serif; font-size: 1.05rem; line-height: 1.68;
+      color: var(--charcoal); background: var(--cream);
+      -webkit-font-smoothing: antialiased; overflow-x: hidden;
+    }
+    .container { max-width: 1120px; margin: 0 auto; padding: 0 1.5rem; }
+    section { padding: 3rem 0; position: relative; }
+    @media (max-width: 700px) { section { padding: 2.25rem 0; } }
+    .script { font-family: 'Caveat', cursive; font-weight: 700; }
+    h1, h2, h3, h4 { font-family: Georgia, serif; color: var(--deep-sage); }
+    h1 { font-size: clamp(2rem, 4.6vw, 2.95rem); font-weight: bold; line-height: 1.08; }
+    h2 { font-size: clamp(1.45rem, 3vw, 1.95rem); font-weight: bold; line-height: 1.18; }
+    h3 { font-size: 1.14rem; font-weight: bold; line-height: 1.32; }
+    h4 { font-size: 1rem; font-weight: bold; }
+    p { margin-bottom: 0.95rem; } p:last-child { margin-bottom: 0; }
+    a { color: var(--coral-deep); }
+    .eyebrow {
+      font-size: 0.74rem; font-weight: bold; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--warm-tan-dark); display: inline-flex; align-items: center; gap: 0.7rem;
+    }
+    .eyebrow::before { content: ""; width: 24px; height: 1px; background: var(--warm-tan); }
+    .eyebrow-coral { color: var(--coral-deep); }
+    .eyebrow-coral::before { background: var(--coral); }
+    .eyebrow-cream { color: var(--coral-soft); }
+    .eyebrow-cream::before { background: var(--coral); }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.55rem; background: var(--warm-tan);
+      color: white; font-family: Georgia, serif; font-size: 1rem; font-weight: bold;
+      padding: 0.9rem 1.9rem; border: none; border-radius: 999px; cursor: pointer;
+      text-decoration: none; transition: all 0.25s var(--ease); box-shadow: 0 3px 0 var(--warm-tan-dark);
+    }
+    .btn:hover { background: var(--warm-tan-dark); transform: translateY(-2px); box-shadow: 0 5px 0 var(--warm-tan-dark); color: white; }
+    .btn::after { content: "\2192"; transition: transform 0.25s var(--ease); }
+    .btn:hover::after { transform: translateX(3px); }
+    .btn-coral { background: var(--coral); box-shadow: 0 3px 0 var(--coral-deep); }
+    .btn-coral:hover { background: var(--coral-deep); box-shadow: 0 5px 0 var(--coral-deep); }
+    .btn-outline { background: transparent; color: var(--warm-tan-dark); border: 2px solid var(--warm-tan); padding: calc(0.9rem - 2px) calc(1.9rem - 2px); box-shadow: none; }
+    .btn-outline:hover { background: var(--pale-tan); color: var(--warm-tan-dark); box-shadow: none; }
+    .btn-cream { background: var(--cream); color: var(--deep-sage); box-shadow: 0 3px 0 rgba(0,0,0,0.18); }
+    .btn-cream:hover { background: var(--cream-warm); color: var(--deep-sage); box-shadow: 0 5px 0 rgba(0,0,0,0.18); }
+    .btn-ghost { background: transparent; color: var(--cream); border: 2px solid var(--coral-soft); box-shadow: none; padding: calc(0.9rem - 2px) calc(1.9rem - 2px); }
+    .btn-ghost:hover { background: rgba(255,255,255,0.1); color: var(--cream); box-shadow: none; }
+    .btn-lg { font-size: 1.1rem; padding: 1.05rem 2.2rem; }
+    .btn-sm { font-size: 0.88rem; padding: 0.6rem 1.25rem; }
+
+    /* ===== MEMBER NAV ===== */
+    .mnav { background: var(--deep-sage); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(46,62,47,0.18); }
+    .mnav-inner { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding: 0.85rem 1.5rem; max-width: 1280px; margin: 0 auto; }
+    .mnav-logo { font-family: Georgia, serif; font-size: 1.12rem; font-weight: bold; color: var(--cream); text-decoration: none; display: flex; align-items: center; gap: 0.5rem; white-space: nowrap; }
+    .mnav-logo .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--coral); }
+    .mnav-links { display: flex; align-items: center; gap: 1.6rem; }
+    .mnav-links a { color: var(--cream); text-decoration: none; font-size: 0.94rem; opacity: 0.88; position: relative; padding-bottom: 2px; white-space: nowrap; }
+    .mnav-links a::after { content: ""; position: absolute; left: 0; right: 0; bottom: -3px; height: 2px; background: var(--coral); transform: scaleX(0); transform-origin: left; transition: transform 0.25s var(--ease); border-radius: 2px; }
+    .mnav-links a:hover { opacity: 1; }
+    .mnav-links a:hover::after { transform: scaleX(1); }
+    .mnav-account { background: var(--coral); color: white !important; padding: 0.5rem 1.1rem; border-radius: 999px; font-size: 0.86rem !important; font-weight: bold; opacity: 1 !important; box-shadow: 0 2px 0 var(--coral-deep); }
+    .mnav-account::after { display: none; }
+    .mnav-account:hover { background: var(--coral-deep); }
+    .mnav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 0.4rem; }
+    .mnav-toggle span { display: block; width: 24px; height: 2px; background: var(--cream); margin: 5px 0; border-radius: 2px; }
+    @media (max-width: 1080px) {
+      .mnav-toggle { display: block; }
+      .mnav-links { position: absolute; top: 100%; left: 0; right: 0; background: var(--deep-sage); flex-direction: column; align-items: stretch; gap: 0; padding: 0 1.5rem; max-height: 0; overflow: hidden; transition: max-height 0.35s var(--ease), padding 0.35s var(--ease); }
+      .mnav-links.open { max-height: 32rem; padding: 0.75rem 1.5rem 1.5rem; }
+      .mnav-links a { padding: 0.75rem 0; font-size: 1.02rem; }
+      .mnav-links a::after { display: none; }
+      .mnav-account { text-align: center; margin-top: 0.75rem; }
+    }
+
+    /* ===== SHOWIT OVERRIDE ARMOUR =====
+       Showit injects its own link colours over anything pasted into
+       Custom Head HTML, and it beat the logo rule on the live site: the
+       logo rendered dark on the dark nav and was effectively invisible.
+       The nav links happened to survive, but they are one template
+       change away from the same problem.
+
+       Every colour in the nav is therefore pinned here with high
+       specificity and !important. These are the same colours the
+       component already intended, nothing new. Do not remove this
+       block. If a nav element ever renders the wrong colour on Showit
+       again, add it here rather than editing the rules above. */
+    .mnav .mnav-logo,
+    .mnav .mnav-logo:link,
+    .mnav .mnav-logo:visited,
+    .mnav .mnav-logo:hover,
+    .mnav .mnav-logo:focus,
+    .mnav .mnav-logo:active,
+    .mnav .mnav-logo * { color: var(--cream) !important; }
+    .mnav .mnav-logo .dot { background: var(--coral) !important; }
+
+    .mnav .mnav-links a,
+    .mnav .mnav-links a:link,
+    .mnav .mnav-links a:visited,
+    .mnav .mnav-links a:hover,
+    .mnav .mnav-links a:active { color: var(--cream) !important; }
+
+    .mnav .mnav-links a.mnav-account,
+    .mnav .mnav-links a.mnav-account:link,
+    .mnav .mnav-links a.mnav-account:visited,
+    .mnav .mnav-links a.mnav-account:hover,
+    .mnav .mnav-links a.mnav-account:active { color: #FFFFFF !important; }
+    .mnav .mnav-toggle span { background: var(--cream) !important; }
+    .mnav .mnav-logo, .mnav .mnav-links a { text-decoration: none !important; }
+
+    /* ===== HERO ===== */
+    .m-hero { background: var(--cream); padding: 2.5rem 0 2.5rem; position: relative; overflow: hidden; }
+    .m-hero::before {
+      content: ""; position: absolute; top: -170px; right: -150px; width: 440px; height: 440px;
+      background: radial-gradient(circle, var(--coral-blush) 0%, transparent 65%); opacity: 0.8; pointer-events: none;
+    }
+    .m-hero-inner { position: relative; z-index: 2; }
+    .crumb { font-size: 0.85rem; color: var(--soft-gray); margin-bottom: 1rem; }
+    .crumb a { color: var(--sage); text-decoration: none; border-bottom: 1px solid rgba(92,110,71,0.3); }
+    .month-badge {
+      display: inline-block; background: var(--coral); color: white; font-size: 0.68rem;
+      font-weight: bold; letter-spacing: 0.16em; text-transform: uppercase;
+      padding: 0.4rem 0.8rem; border-radius: 4px; margin-bottom: 0.9rem;
+      box-shadow: 0 3px 0 var(--coral-deep);
+    }
+    .m-hero h1 { margin-bottom: 0.85rem; }
+    .m-hero .why { font-size: 1.12rem; font-style: italic; color: var(--sage); max-width: 42rem; margin-bottom: 1.35rem; }
+    .m-meta { display: flex; flex-wrap: wrap; gap: 0.65rem; }
+    .m-meta span {
+      background: white; border: 1px solid rgba(194,137,84,0.35); border-radius: 999px;
+      padding: 0.42rem 0.95rem; font-size: 0.86rem; color: var(--deep-sage);
+    }
+    .m-meta b { color: var(--coral-deep); }
+
+    /* ===== DO THIS FIRST ===== */
+    .first { background: var(--deep-sage); color: var(--cream); }
+    .first-card { max-width: 46rem; }
+    .first .script { color: var(--gold-soft); font-size: 1.55rem; display: block; margin-bottom: 0.25rem; }
+    .first h2 { color: var(--cream); margin-bottom: 0.8rem; }
+    .first p { color: var(--cream); opacity: 0.93; }
+    .first-actions { display: flex; flex-wrap: wrap; gap: 0.85rem; margin-top: 1.4rem; }
+
+    /* ===== WHAT IS IN IT ===== */
+    .pieces { background: var(--white); }
+    .pieces-head { max-width: 42rem; margin-bottom: 1.85rem; }
+    .pieces-head h2 { margin: 0.85rem 0 0.7rem; }
+    .piece-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.3rem; }
+    @media (max-width: 940px) { .piece-list { grid-template-columns: 1fr; } }
+    .piece {
+      background: var(--cream); border: 1px solid rgba(194,137,84,0.28); border-radius: 14px;
+      overflow: hidden; display: flex; flex-direction: column; min-width: 0;
+      transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease), border-color 0.25s var(--ease);
+    }
+    .piece:hover { transform: translateY(-4px); box-shadow: 0 14px 30px rgba(46,62,47,0.12); border-color: var(--coral); }
+    .piece-top {
+      aspect-ratio: 16 / 9; background: linear-gradient(135deg, var(--coral-blush) 0%, var(--pale-tan) 55%, var(--light-sage) 100%);
+      border-bottom: 1px dashed rgba(194,137,84,0.5); display: flex; align-items: center;
+      justify-content: center; flex-direction: column; padding: 1rem; text-align: center; position: relative;
+    }
+    .piece-top .kind {
+      position: absolute; top: 0.6rem; left: 0.6rem; background: var(--deep-sage); color: var(--cream);
+      font-size: 0.58rem; font-weight: bold; letter-spacing: 0.13em; text-transform: uppercase;
+      padding: 0.22rem 0.5rem; border-radius: 3px;
+    }
+    .piece-top .ph-title { font-size: 0.9rem; font-weight: bold; color: var(--deep-sage); }
+    .piece-top .ph-brief { font-size: 0.76rem; font-style: italic; color: var(--sage); line-height: 1.45; margin-top: 0.25rem; max-width: 17rem; }
+    .piece-body { padding: 1.3rem 1.35rem; display: flex; flex-direction: column; flex: 1; }
+    .piece-body h3 { margin-bottom: 0.3rem; }
+    .piece-body .pmeta { font-size: 0.8rem; color: var(--soft-gray); font-style: italic; margin-bottom: 0.65rem; }
+    .piece-body p { font-size: 0.93rem; color: var(--sage); margin-bottom: 1.1rem; }
+    .piece-body .btn { align-self: flex-start; margin-top: auto; }
+
+    /* ===== CONNECTS TO ===== */
+    .connects { background: var(--coral-blush); }
+    .connects-head { max-width: 42rem; margin-bottom: 1.6rem; }
+    .connects-head h2 { margin: 0.85rem 0 0.7rem; }
+    .conn-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.1rem; }
+    @media (max-width: 780px) { .conn-list { grid-template-columns: 1fr; } }
+    .conn {
+      background: white; border-radius: 12px; padding: 1.35rem 1.4rem; text-decoration: none;
+      display: block; transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
+    }
+    .conn:hover { transform: translateY(-3px); box-shadow: 0 12px 26px rgba(46,62,47,0.1); }
+    .conn .cnum { font-family: 'DM Serif Display', Georgia, serif; font-size: 1.3rem; color: var(--coral-soft); line-height: 1; }
+    .conn h4 { margin: 0.2rem 0 0.3rem; }
+    .conn p { font-size: 0.9rem; color: var(--sage); margin: 0; }
+
+    /* ===== ARCHIVE ===== */
+    .past { background: var(--cream-warm); }
+    .past-head { display: flex; align-items: baseline; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 1.35rem; }
+    .past-head h2 { margin: 0; }
+    .past-count { font-size: 0.88rem; color: var(--sage); font-style: italic; }
+    .past-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+    @media (max-width: 940px) { .past-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 620px) { .past-grid { grid-template-columns: 1fr; } }
+    .rel {
+      background: white; border: 1px solid rgba(194,137,84,0.28); border-radius: 12px;
+      padding: 1.35rem 1.4rem; position: relative; min-width: 0;
+      transition: border-color 0.25s var(--ease), box-shadow 0.25s var(--ease);
+    }
+    .rel:hover { border-color: var(--coral); box-shadow: 0 12px 26px rgba(46,62,47,0.1); }
+    .rel .rmonth { font-size: 0.68rem; font-weight: bold; letter-spacing: 0.15em; text-transform: uppercase; color: var(--coral-deep); margin-bottom: 0.35rem; }
+    .rel h3 { margin-bottom: 0.35rem; font-size: 1.05rem; }
+    .rel p { font-size: 0.89rem; color: var(--sage); margin-bottom: 0.85rem; }
+    .rel .rlink { font-size: 0.86rem; color: var(--coral-deep); text-decoration: underline; text-underline-offset: 3px; }
+    .sample-ribbon {
+      position: absolute; top: 0.5rem; right: 0.5rem; background: var(--charcoal); color: white;
+      font-size: 0.55rem; font-weight: bold; letter-spacing: 0.13em; text-transform: uppercase;
+      padding: 0.2rem 0.45rem; border-radius: 3px;
+    }
+    .past-empty { display: none; background: white; border: 1px dashed rgba(194,137,84,0.5); border-radius: 14px; padding: 2.5rem 2rem; text-align: center; }
+    .past-empty.show { display: block; }
+    .past-empty .script { font-size: 1.55rem; color: var(--coral-deep); display: block; margin-bottom: 0.35rem; }
+    .past-empty h3 { font-size: 1.25rem; margin-bottom: 0.6rem; }
+    .past-empty p { max-width: 32rem; margin: 0 auto; color: var(--sage); }
+
+    /* ===== NEXT MONTH ===== */
+    .coming { background: var(--light-sage); }
+    .coming-card { max-width: 46rem; margin: 0 auto; background: white; border-radius: 14px; padding: 2rem 2.1rem; }
+    .coming-card h2 { font-size: 1.4rem; margin-bottom: 0.7rem; }
+    .coming-card ul { list-style: none; margin: 1rem 0 1.1rem; }
+    .coming-card li { padding: 0.42rem 0 0.42rem 1.6rem; position: relative; font-size: 0.96rem; }
+    .coming-card li::before { content: "\25C6"; position: absolute; left: 0; top: 0.6rem; color: var(--warm-tan); font-size: 0.6rem; }
+    .coming-card .caveat { font-size: 0.93rem; font-style: italic; color: var(--sage); }
+
+    /* ===== NEXT ===== */
+    .next { background: var(--deep-sage); color: var(--cream); text-align: center; padding: 3rem 0; }
+    .next h2 { color: var(--cream); margin: 0.85rem 0 0.9rem; }
+    .next p { color: var(--cream); opacity: 0.92; max-width: 36rem; margin: 0 auto 1.4rem; }
+    .next-row { display: flex; flex-wrap: wrap; gap: 0.9rem; justify-content: center; }
+
+    footer { background: var(--deep-sage); color: var(--cream); padding: 2.25rem 0 2rem; text-align: center; border-top: 1px solid rgba(221,107,78,0.22); }
+    footer .diamond { color: var(--coral); font-size: 0.8rem; letter-spacing: 1.1em; padding-left: 1.1em; opacity: 0.7; margin-bottom: 1.25rem; }
+    footer .fnav { display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem 1.75rem; margin-bottom: 1.25rem; }
+    footer .fnav a { color: var(--cream); opacity: 0.85; text-decoration: none; font-size: 0.9rem; }
+    footer .fnav a:hover { opacity: 1; color: var(--coral-soft); }
+    footer .legal { font-size: 0.8rem; opacity: 0.6; }
+    footer .legal a { color: var(--cream); opacity: 0.85; text-decoration: none; margin: 0 0.35rem; }
+
+    .fade-in { opacity: 0; transform: translateY(16px); transition: opacity 0.6s var(--ease), transform 0.6s var(--ease); }
+    .fade-in.visible { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+      html { scroll-behavior: auto; }
+      .fade-in { opacity: 1; transform: none; }
+    }
+    :focus-visible { outline: 3px solid var(--coral); outline-offset: 3px; }
+    .skip-link { position: absolute; left: -9999px; background: var(--coral); color: white; padding: 0.7rem 1.2rem; z-index: 200; }
+    .skip-link:focus { left: 0; }
+  </style>
+
+
+
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <nav class="mnav">
+    <div class="mnav-inner">
+      <a href="/members" class="mnav-logo"><span class="dot"></span> The One-Income Circle</a>
+      <button class="mnav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="mnavLinks">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="mnav-links" id="mnavLinks">
+        <a href="/members">Home</a>
+        <a href="/members-vault">The Vault</a>
+        <a href="/members-library">Printables</a>
+        <a href="/members-sessions">Live Sessions</a>
+        <a href="/members-circle">The Circle</a>
+        <a href="/members-ask-brooke">Ask Brooke</a>
+        <a href="/members-account" class="mnav-account">My account</a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main">
+
+  <!-- ==================== HERO ==================== -->
+  <section class="m-hero">
+    <div class="container m-hero-inner">
+      <p class="crumb"><a href="/members">Member home</a> ◆ This Month</p>
+      <span class="month-badge" id="badge">August release</span>
+      <h1 id="title">The back to school reset</h1>
+      <p class="why" id="why">School supply season is the month that quietly wrecks a good budget, so this one lands before it does instead of after. Two pages and a short training, and you will have the whole of August planned before the lists come home.</p>
+      <div class="m-meta">
+        <span>Added <b id="added">1 August</b></span>
+        <span><b id="pieceCount">3</b> pieces</span>
+        <span>About <b id="mins">25 minutes</b> to work through</span>
+        <span>Yours to keep, <b>forever</b></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== DO THIS FIRST ==================== -->
+  <section class="first">
+    <div class="container">
+      <div class="first-card">
+        <span class="script">if you only do one thing</span>
+        <h2>Print the School Supply Plan and fill in last year’s numbers.</h2>
+        <p>Not this year’s. Last year’s, from memory or the bank app, because that is the number that tells you what August actually costs your family. Everything else in this release gets easier once that figure is on paper, and it takes about ten minutes.</p>
+        <div class="first-actions">
+          <a href="/members-files/school-supply-plan.pdf" class="btn btn-cream" target="_blank" rel="noopener">Open the School Supply Plan</a>
+          <a href="#pieces" class="btn btn-ghost">See everything in this release</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== WHAT IS IN IT ==================== -->
+  <section class="pieces" id="pieces">
+    <div class="container">
+      <div class="pieces-head fade-in">
+        <span class="eyebrow">Three pieces</span>
+        <h2>What landed this month.</h2>
+        <p>Two printables and one short training. Deliberately small, because a release that takes two hours is a release you postpone.</p>
+      </div>
+      <div class="piece-list">
+
+        <article class="piece fade-in">
+          <div class="piece-top">
+            <span class="kind">Printable ◆ 2 pages</span>
+            <div class="ph-title">The School Supply Plan filled in by hand</div>
+            <div class="ph-brief">Photograph the real page on a kitchen counter with school lists and a pen beside it.</div>
+          </div>
+          <div class="piece-body">
+            <h3>The School Supply Plan</h3>
+            <p class="pmeta">2 pages ◆ fillable PDF ◆ reuse every year</p>
+            <p>One page per child, with a column for what the school asked for and a column for what you already have in the house. Fill it in once and it works every August after this one.</p>
+            <a href="/members-files/school-supply-plan.pdf" class="btn btn-coral btn-sm" target="_blank" rel="noopener">Open and print</a>
+          </div>
+        </article>
+
+        <article class="piece fade-in">
+          <div class="piece-top">
+            <span class="kind">Printable ◆ 3 pages</span>
+            <div class="ph-title">Lunchboxes lined up on a counter</div>
+            <div class="ph-brief">Real packed lunches, not styled. Slightly chaotic is better here than perfect.</div>
+          </div>
+          <div class="piece-body">
+            <h3>Lunchbox Fortnight</h3>
+            <p class="pmeta">3 pages ◆ fillable PDF ◆ two weeks of lunches</p>
+            <p>Ten school lunches built from pantry staples, with a nut free column and a shopping list already written. Rotate it and school lunches stop being a decision you make at seven in the morning.</p>
+            <a href="/members-files/lunchbox-fortnight.pdf" class="btn btn-outline btn-sm" target="_blank" rel="noopener">Open and print</a>
+          </div>
+        </article>
+
+        <article class="piece fade-in">
+          <div class="piece-top">
+            <span class="kind">Training ◆ 12 minutes</span>
+            <div class="ph-title">Screen recording with Brooke talking over it</div>
+            <div class="ph-brief">Replace this block with the video embed. Phone camera on paper works better than polished.</div>
+          </div>
+          <div class="piece-body">
+            <h3>Where this fund should have started</h3>
+            <p class="pmeta">12 minute training ◆ watch or read</p>
+            <p>Why August hurts, what a school sinking fund actually needs in it, and how to start one in the wrong month without feeling behind. Includes the shoes and clothes conversation, and how to have it without guilt.</p>
+            <a href="/members-vault-sinking-funds" class="btn btn-outline btn-sm">Watch the training</a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CONNECTS TO ==================== -->
+  <section class="connects">
+    <div class="container">
+      <div class="connects-head fade-in">
+        <span class="eyebrow eyebrow-coral">Where this fits</span>
+        <h2>This is not a standalone thing.</h2>
+        <p>Every release plugs into a system you already have. If a piece here interests you, the system behind it is where the rest of the answer lives.</p>
+      </div>
+      <div class="conn-list">
+        <a href="/members-vault-sinking-funds" class="conn fade-in">
+          <div class="cnum">02</div>
+          <h4>The Sinking Fund System</h4>
+          <p>School costs are the textbook case for a sinking fund. Start the one for next August in September, when it is cheap to do.</p>
+        </a>
+        <a href="/members-vault-meals" class="conn fade-in">
+          <div class="cnum">03</div>
+          <h4>The Frugal Family Meal System</h4>
+          <p>Lunchbox Fortnight is the school term version of the meal system. Same principle, smaller boxes.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PAST RELEASES ==================== -->
+  <section class="past">
+    <div class="container">
+      <div class="past-head fade-in">
+        <h2>Every past release</h2>
+        <span class="past-count" id="pastCount"></span>
+      </div>
+      <div class="past-grid" id="pastGrid"></div>
+      <div class="past-empty" id="pastEmpty">
+        <span class="script">this is the first one</span>
+        <h3>Nothing behind you yet.</h3>
+        <p>Every release stays here permanently and stays yours, so this shelf gets longer every month you are a member. Next month there will be two.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== NEXT MONTH ==================== -->
+  <section class="coming">
+    <div class="container">
+      <div class="coming-card fade-in">
+        <h2>What I am working on for September</h2>
+        <ul id="comingList">
+          <li>The autumn rhythms reset, for when the school routine settles and the house does not</li>
+          <li>A heating and utilities planner, before the first cold bill rather than after it</li>
+          <li>Starting the Christmas fund in September, which is the whole trick</li>
+        </ul>
+        <p class="caveat">That is what I am planning, not a promise carved anywhere. Founding members vote on what gets built, so if something else would help you more this autumn, say so and it may well change.</p>
+        <div style="margin-top:1.2rem;">
+          <a href="/members-ask-brooke" class="btn btn-outline btn-sm">Tell me what you need</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== NEXT ==================== -->
+  <section class="next">
+    <div class="container">
+      <span class="eyebrow eyebrow-cream">No rush</span>
+      <h2>It does not expire.</h2>
+      <p>Everything in every release stays in your account for as long as you are a member, and every printable you have downloaded stays yours even if you leave. Nothing here is a thing you have to keep up with.</p>
+      <div class="next-row">
+        <a href="/members-library" class="btn btn-cream">Browse all printables</a>
+        <a href="/members" class="btn btn-ghost">Back to member home</a>
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="diamond">◆ ◆ ◆</div>
+      <nav class="fnav" aria-label="Member footer">
+        <a href="/members">Member home</a>
+        <a href="/members-vault">The Vault</a>
+        <a href="/members-library">Printables</a>
+        <a href="/members-sessions">Live Sessions</a>
+        <a href="/members-circle">The Circle</a>
+        <a href="/members-account">My account</a>
+        <a href="/contact">Help</a>
+      </nav>
+      <p class="legal">
+        © 2026 Purposeful Pennies. Member content, please keep it in the family.
+        &nbsp;·&nbsp;
+        <a href="/terms">Terms</a> ·
+        <a href="/privacy-policy">Privacy</a>
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    /* ============================================================
+       THIS MONTH
+       Update these four fields on release day. The hero reads from
+       them so the badge, title, and counts can never disagree with
+       each other.
+       ============================================================ */
+    const RELEASE = {
+      badge: 'August release',
+      title: 'The back to school reset',
+      added: '1 August',
+      pieces: 3,
+      minutes: 25
+    };
+
+    /* ============================================================
+       PAST RELEASES
+       DELETE THE sample: true ENTRIES BEFORE LAUNCH.
+       On release day, move the outgoing month into the top of this
+       array with its own page link.
+       ============================================================ */
+    const PAST = [
+      { month: 'July 2026', title: 'The five week month', sample: true,
+        blurb: 'What to do when the calendar hands you three paydays and five weeks of groceries.',
+        href: '/members-this-month-2026-07' },
+      { month: 'June 2026', title: 'Summer without the spending', sample: true,
+        blurb: 'Cheap days out that children actually remember, and the childcare gap problem.',
+        href: '/members-this-month-2026-06' },
+      { month: 'May 2026', title: 'The pantry challenge', sample: true,
+        blurb: 'Two weeks of eating from what you already own, and what it saved twelve members.',
+        href: '/members-this-month-2026-05' }
+    ];
+
+    /* ===== HERO FROM CONFIG ===== */
+    (function () {
+      document.getElementById('badge').textContent = RELEASE.badge;
+      document.getElementById('title').textContent = RELEASE.title;
+      document.getElementById('added').textContent = RELEASE.added;
+      document.getElementById('pieceCount').textContent = RELEASE.pieces;
+      document.getElementById('mins').textContent = RELEASE.minutes + ' minutes';
+      document.title = RELEASE.badge + ' \u00B7 The One-Income Circle';
+
+      /* The hero claims a piece count. Check it against what is actually
+         on the page rather than trusting the config. */
+      const actual = document.querySelectorAll('.piece').length;
+      if (actual !== RELEASE.pieces) {
+        console.warn('This Month: RELEASE.pieces says ' + RELEASE.pieces +
+                     ' but there are ' + actual + ' piece cards on the page. Fix one of them.');
+      }
+    })();
+
+    /* ===== PAST RELEASES ===== */
+    (function () {
+      const grid = document.getElementById('pastGrid');
+      const empty = document.getElementById('pastEmpty');
+      const count = document.getElementById('pastCount');
+
+      grid.innerHTML = '';
+      PAST.forEach(function (r) {
+        const el = document.createElement('article');
+        el.className = 'rel';
+        el.innerHTML =
+          (r.sample ? '<span class="sample-ribbon">Sample, delete before launch</span>' : '') +
+          '<div class="rmonth">' + r.month + '</div><h3></h3><p></p>' +
+          '<a class="rlink">Open this release</a>';
+        el.querySelector('h3').textContent = r.title;
+        el.querySelector('p').textContent = r.blurb;
+        el.querySelector('.rlink').href = r.href;
+        grid.appendChild(el);
+      });
+
+      const none = PAST.length === 0;
+      empty.classList.toggle('show', none);
+      grid.style.display = none ? 'none' : '';
+      count.textContent = none ? '' :
+        PAST.length + (PAST.length === 1 ? ' release' : ' releases') + ', all still yours';
+
+      if (PAST.some(function (r) { return r.sample; })) {
+        console.warn('This Month: sample past releases are still in the PAST array. Delete them before launch.');
+      }
+    })();
+
+    /* ===== MOBILE NAV ===== */
+    (function () {
+      const t = document.getElementById('navToggle');
+      const l = document.getElementById('mnavLinks');
+      t.addEventListener('click', function () {
+        const open = l.classList.toggle('open');
+        t.setAttribute('aria-expanded', String(open));
+      });
+    })();
+
+    /* ===== FADE-IN ===== */
+    (function () {
+      const obs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) { en.target.classList.add('visible'); obs.unobserve(en.target); }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+      document.querySelectorAll('.fade-in').forEach(function (el) { obs.observe(el); });
+    })();
+<w:pgSz w:h="15840" w:w="12240" w:orient="portrait"/><w:pgMar w:bottom="1440" w:top="1440" w:left="1440" w:right="1440" w:header="720" w:footer="720"/><w:pgNumType w:start="1"/></w:sectPr></w:pPr><w:r w:rsidDel="00000000" w:rsidR="00000000" w:rsidRPr="00000000"><w:rPr><w:rtl w:val="0"/></w:rPr><w:t xml:space="preserve">  </script>

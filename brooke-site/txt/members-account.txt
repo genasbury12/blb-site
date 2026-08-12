@@ -1,0 +1,572 @@
+<!--
+  ============================================================
+  PURPOSEFUL PENNIES  ·  YOUR ACCOUNT   /members-account
+  Showit + MemberSpace
+  ============================================================
+
+  WHAT THIS PAGE IS, AND IS NOT
+  MemberSpace already owns the real account controls: card on file,
+  plan, renewal date, cancel button, password. Rebuilding those here
+  is not possible and would be a lie if attempted.
+
+  So this page does the two things MemberSpace cannot:
+     1. Sends her to the right control with one obvious button
+     2. States the promises in Brooke's words, in plain language,
+        where she will look for them
+
+  ------------------------------------------------------------
+  THE RULE THAT MATTERS MOST ON THIS PAGE
+  ------------------------------------------------------------
+  NO INVENTED ACCOUNT DATA. This is a static Showit page. It cannot
+  know her renewal date, her card, or what she paid. Printing a
+  plausible looking "next payment 11 September" would be a fabricated
+  number on a billing page, which is the worst place in the whole
+  build to put one.
+
+  Anything specific therefore says so and links to MemberSpace.
+  data-ms-member-info="firstName" is the only member value used, and
+  it is one MemberSpace genuinely fills in. If you later confirm other
+  data attributes work on your plan, they can be added, but check them
+  on a real logged in account first.
+
+  ------------------------------------------------------------
+  NO DARK PATTERNS, DELIBERATELY
+  ------------------------------------------------------------
+  Four pages already promise cancelling takes two clicks with nobody
+  trying to talk her out of it. So the cancel section is a plain
+  button and a clear explanation, with no retention offer in front of
+  it, no survey, and no guilt. If that promise is ever softened here,
+  it contradicts the sales page, the FAQ, the thank you page, and the
+  Circle. Leave it alone.
+
+  ------------------------------------------------------------
+  MEMBERSPACE
+  ------------------------------------------------------------
+  Protection inherited from the /members-* prefix rule.
+  Every ms-link needs the MemberSpace Link pasted in. There are more
+  of them on this page than anywhere else, which is the point.
+  The Showit override armour block is included. Do not remove it.
+
+  FORMATTING RULE. Zero em dashes, zero en dashes. Separator is the
+  diamond glyph.
+  ============================================================
+-->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Your Account · The One-Income Circle</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&amp;family=DM+Serif+Display&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --deep-sage: #2E3E2F; --sage: #5C6E47; --sage-soft: #8B9E75;
+      --warm-tan: #C28954; --warm-tan-dark: #A77246;
+      --cream: #FBF4D7; --cream-warm: #F7ECC4; --charcoal: #2A2A2A;
+      --soft-gray: #7E867D; --light-sage: #DBE3CE; --pale-tan: #EFE0C1; --white: #FFFFFF;
+      --coral: #DD6B4E; --coral-deep: #C25441; --coral-soft: #F7D0BE; --coral-blush: #FBE3D5;
+      --gold: #D4A83F; --gold-soft: #EDD98D; --gold-deep: #B8912E;
+      --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 17px; scroll-behavior: smooth; }
+    @media (min-width: 720px) { html { font-size: 18px; } }
+    body {
+      font-family: Georgia, 'Times New Roman', serif; font-size: 1.05rem; line-height: 1.68;
+      color: var(--charcoal); background: var(--cream);
+      -webkit-font-smoothing: antialiased; overflow-x: hidden;
+    }
+    .container { max-width: 1080px; margin: 0 auto; padding: 0 1.5rem; }
+    section { padding: 3rem 0; position: relative; }
+    @media (max-width: 700px) { section { padding: 2.25rem 0; } }
+    .script { font-family: 'Caveat', cursive; font-weight: 700; }
+    h1, h2, h3, h4 { font-family: Georgia, serif; color: var(--deep-sage); }
+    h1 { font-size: clamp(2rem, 4.6vw, 2.9rem); font-weight: bold; line-height: 1.08; }
+    h2 { font-size: clamp(1.4rem, 2.9vw, 1.9rem); font-weight: bold; line-height: 1.18; }
+    h3 { font-size: 1.12rem; font-weight: bold; line-height: 1.32; }
+    h4 { font-size: 1rem; font-weight: bold; }
+    p { margin-bottom: 0.95rem; } p:last-child { margin-bottom: 0; }
+    a { color: var(--coral-deep); }
+    .eyebrow {
+      font-size: 0.74rem; font-weight: bold; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--warm-tan-dark); display: inline-flex; align-items: center; gap: 0.7rem;
+    }
+    .eyebrow::before { content: ""; width: 24px; height: 1px; background: var(--warm-tan); }
+    .eyebrow-coral { color: var(--coral-deep); }
+    .eyebrow-coral::before { background: var(--coral); }
+    .eyebrow-cream { color: var(--coral-soft); }
+    .eyebrow-cream::before { background: var(--coral); }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.55rem; background: var(--warm-tan);
+      color: white; font-family: Georgia, serif; font-size: 1rem; font-weight: bold;
+      padding: 0.9rem 1.9rem; border: none; border-radius: 999px; cursor: pointer;
+      text-decoration: none; transition: all 0.25s var(--ease); box-shadow: 0 3px 0 var(--warm-tan-dark);
+    }
+    .btn:hover { background: var(--warm-tan-dark); transform: translateY(-2px); box-shadow: 0 5px 0 var(--warm-tan-dark); color: white; }
+    .btn::after { content: "\2192"; transition: transform 0.25s var(--ease); }
+    .btn:hover::after { transform: translateX(3px); }
+    .btn-coral { background: var(--coral); box-shadow: 0 3px 0 var(--coral-deep); }
+    .btn-coral:hover { background: var(--coral-deep); box-shadow: 0 5px 0 var(--coral-deep); }
+    .btn-outline { background: transparent; color: var(--warm-tan-dark); border: 2px solid var(--warm-tan); padding: calc(0.9rem - 2px) calc(1.9rem - 2px); box-shadow: none; }
+    .btn-outline:hover { background: var(--pale-tan); color: var(--warm-tan-dark); box-shadow: none; }
+    .btn-cream { background: var(--cream); color: var(--deep-sage); box-shadow: 0 3px 0 rgba(0,0,0,0.18); }
+    .btn-cream:hover { background: var(--cream-warm); color: var(--deep-sage); box-shadow: 0 5px 0 rgba(0,0,0,0.18); }
+    .btn-ghost { background: transparent; color: var(--cream); border: 2px solid var(--coral-soft); box-shadow: none; padding: calc(0.9rem - 2px) calc(1.9rem - 2px); }
+    .btn-ghost:hover { background: rgba(255,255,255,0.1); color: var(--cream); box-shadow: none; }
+    .btn-lg { font-size: 1.1rem; padding: 1.05rem 2.2rem; }
+    .btn-sm { font-size: 0.88rem; padding: 0.6rem 1.25rem; }
+    .btn-quiet {
+      background: transparent; color: var(--sage); border: 1px solid rgba(92,110,71,0.4);
+      box-shadow: none; padding: calc(0.9rem - 1px) calc(1.9rem - 1px); font-weight: normal;
+    }
+    .btn-quiet:hover { background: var(--light-sage); color: var(--deep-sage); box-shadow: none; }
+
+    /* ===== MEMBER NAV ===== */
+    .mnav { background: var(--deep-sage); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(46,62,47,0.18); }
+    .mnav-inner { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding: 0.85rem 1.5rem; max-width: 1280px; margin: 0 auto; }
+    .mnav-logo { font-family: Georgia, serif; font-size: 1.12rem; font-weight: bold; color: var(--cream); text-decoration: none; display: flex; align-items: center; gap: 0.5rem; white-space: nowrap; }
+    .mnav-logo .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--coral); }
+    .mnav-links { display: flex; align-items: center; gap: 1.6rem; }
+    .mnav-links a { color: var(--cream); text-decoration: none; font-size: 0.94rem; opacity: 0.88; position: relative; padding-bottom: 2px; white-space: nowrap; }
+    .mnav-links a::after { content: ""; position: absolute; left: 0; right: 0; bottom: -3px; height: 2px; background: var(--coral); transform: scaleX(0); transform-origin: left; transition: transform 0.25s var(--ease); border-radius: 2px; }
+    .mnav-links a:hover { opacity: 1; }
+    .mnav-links a:hover::after, .mnav-links a.current::after { transform: scaleX(1); }
+    .mnav-links a.current { opacity: 1; font-weight: bold; }
+    .mnav-account { background: var(--coral); color: white !important; padding: 0.5rem 1.1rem; border-radius: 999px; font-size: 0.86rem !important; font-weight: bold; opacity: 1 !important; box-shadow: 0 2px 0 var(--coral-deep); }
+    .mnav-account::after { display: none; }
+    .mnav-account:hover { background: var(--coral-deep); }
+    .mnav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 0.4rem; }
+    .mnav-toggle span { display: block; width: 24px; height: 2px; background: var(--cream); margin: 5px 0; border-radius: 2px; }
+    @media (max-width: 1080px) {
+      .mnav-toggle { display: block; }
+      .mnav-links { position: absolute; top: 100%; left: 0; right: 0; background: var(--deep-sage); flex-direction: column; align-items: stretch; gap: 0; padding: 0 1.5rem; max-height: 0; overflow: hidden; transition: max-height 0.35s var(--ease), padding 0.35s var(--ease); }
+      .mnav-links.open { max-height: 32rem; padding: 0.75rem 1.5rem 1.5rem; }
+      .mnav-links a { padding: 0.75rem 0; font-size: 1.02rem; }
+      .mnav-links a::after { display: none; }
+      .mnav-account { text-align: center; margin-top: 0.75rem; }
+    }
+
+    /* ===== SHOWIT OVERRIDE ARMOUR =====
+       Showit injects its own link colours over anything pasted into
+       Custom Head HTML, and it beat the logo rule on the live site: the
+       logo rendered dark on the dark nav and was effectively invisible.
+       The nav links happened to survive, but they are one template
+       change away from the same problem.
+
+       Every colour in the nav is therefore pinned here with high
+       specificity and !important. These are the same colours the
+       component already intended, nothing new. Do not remove this
+       block. If a nav element ever renders the wrong colour on Showit
+       again, add it here rather than editing the rules above. */
+    .mnav .mnav-logo,
+    .mnav .mnav-logo:link,
+    .mnav .mnav-logo:visited,
+    .mnav .mnav-logo:hover,
+    .mnav .mnav-logo:focus,
+    .mnav .mnav-logo:active,
+    .mnav .mnav-logo * { color: var(--cream) !important; }
+    .mnav .mnav-logo .dot { background: var(--coral) !important; }
+
+    .mnav .mnav-links a,
+    .mnav .mnav-links a:link,
+    .mnav .mnav-links a:visited,
+    .mnav .mnav-links a:hover,
+    .mnav .mnav-links a:active { color: var(--cream) !important; }
+
+    .mnav .mnav-links a.mnav-account,
+    .mnav .mnav-links a.mnav-account:link,
+    .mnav .mnav-links a.mnav-account:visited,
+    .mnav .mnav-links a.mnav-account:hover,
+    .mnav .mnav-links a.mnav-account:active { color: #FFFFFF !important; }
+    .mnav .mnav-toggle span { background: var(--cream) !important; }
+    .mnav .mnav-logo, .mnav .mnav-links a { text-decoration: none !important; }
+
+    /* ===== HERO ===== */
+    .acc-hero { background: var(--cream); padding: 2.5rem 0 2.25rem; position: relative; overflow: hidden; }
+    .acc-hero::before {
+      content: ""; position: absolute; top: -170px; right: -150px; width: 430px; height: 430px;
+      background: radial-gradient(circle, var(--coral-blush) 0%, transparent 65%); opacity: 0.8; pointer-events: none;
+    }
+    .acc-hero-inner { position: relative; z-index: 2; }
+    .crumb { font-size: 0.85rem; color: var(--soft-gray); margin-bottom: 1rem; }
+    .crumb a { color: var(--sage); text-decoration: none; border-bottom: 1px solid rgba(92,110,71,0.3); }
+    .greeting { font-family: 'Caveat', cursive; font-size: 1.7rem; color: var(--coral-deep); display: block; margin-bottom: 0.15rem; }
+    .acc-hero h1 { margin-bottom: 0.85rem; }
+    .acc-hero p.sub { font-size: 1.1rem; font-style: italic; color: var(--sage); max-width: 40rem; }
+
+    /* ===== TWO DOORS ===== */
+    .doors { background: var(--coral-blush); }
+    .door-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    @media (max-width: 860px) { .door-grid { grid-template-columns: 1fr; } }
+    .door { background: white; border-radius: 16px; padding: 1.9rem 1.9rem; display: flex; flex-direction: column; }
+    .door.primary { border: 2px solid var(--coral); }
+    .door h2 { font-size: 1.28rem; margin-bottom: 0.5rem; }
+    .door p { font-size: 0.96rem; color: var(--sage); margin-bottom: 1rem; }
+    .door ul { list-style: none; margin-bottom: 1.35rem; }
+    .door li { padding: 0.35rem 0 0.35rem 1.5rem; position: relative; font-size: 0.95rem; }
+    .door li::before {
+      content: ""; position: absolute; left: 0; top: 0.68rem; width: 14px; height: 14px;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23DD6B4E' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center/contain no-repeat;
+    }
+    .door .btn { align-self: flex-start; margin-top: auto; }
+    .door .heretoo { font-size: 0.88rem; color: var(--soft-gray); font-style: italic; margin-top: 0.9rem; }
+
+    /* ===== PROMISES ===== */
+    .promises { background: var(--white); }
+    .promises-head { max-width: 42rem; margin-bottom: 1.85rem; }
+    .promises-head h2 { margin: 0.85rem 0 0.7rem; }
+    .p-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; }
+    @media (max-width: 820px) { .p-list { grid-template-columns: 1fr; } }
+    .p-card { background: var(--cream); border-radius: 12px; padding: 1.5rem 1.55rem; border-left: 4px solid var(--sage-soft); }
+    .p-card.warm { border-left-color: var(--coral); }
+    .p-card.gold { border-left-color: var(--gold); }
+    .p-card h3 { margin-bottom: 0.4rem; }
+    .p-card p { font-size: 0.94rem; margin: 0; }
+    .p-card p + p { margin-top: 0.6rem; }
+    .p-card a { color: var(--coral-deep); }
+
+    /* ===== CANCEL ===== */
+    .cancel { background: var(--light-sage); }
+    .cancel-card { max-width: 46rem; margin: 0 auto; background: white; border-radius: 14px; padding: 2rem 2.1rem; }
+    .cancel-card h2 { font-size: 1.4rem; margin-bottom: 0.7rem; }
+    .cancel-card p { font-size: 0.99rem; }
+    .steps { list-style: none; counter-reset: s; margin: 1.1rem 0 1.3rem; }
+    .steps li {
+      counter-increment: s; padding: 0.45rem 0 0.45rem 2.1rem; position: relative; font-size: 0.97rem;
+    }
+    .steps li::before {
+      content: counter(s); position: absolute; left: 0; top: 0.5rem;
+      width: 22px; height: 22px; border-radius: 50%; background: var(--sage); color: white;
+      font-size: 0.75rem; font-weight: bold; display: flex; align-items: center; justify-content: center;
+    }
+    .keeps { background: var(--cream-warm); border-radius: 10px; padding: 1.1rem 1.25rem; margin-top: 1.2rem; font-size: 0.95rem; }
+    .keeps b { color: var(--deep-sage); }
+    .cancel-actions { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 1.3rem; align-items: center; }
+
+    /* ===== HELP ===== */
+    .help { background: var(--cream-warm); }
+    .help-head { max-width: 40rem; margin-bottom: 1.6rem; }
+    .help-head h2 { margin: 0.85rem 0 0; }
+    .faq { max-width: 48rem; }
+    .fitem { background: white; border: 1px solid rgba(194,137,84,0.28); border-radius: 12px; margin-bottom: 0.75rem; overflow: hidden; }
+    .fq {
+      width: 100%; background: none; border: none; cursor: pointer; text-align: left;
+      font-family: Georgia, serif; font-size: 1rem; font-weight: bold; color: var(--deep-sage);
+      padding: 1.05rem 3rem 1.05rem 1.3rem; position: relative; line-height: 1.4;
+    }
+    .fq:hover { color: var(--coral-deep); }
+    .fq::after { content: "+"; position: absolute; right: 1.2rem; top: 50%; transform: translateY(-50%); color: var(--coral); font-size: 1.45rem; line-height: 1; }
+    .fitem.open .fq::after { content: "\2212"; }
+    .fa { max-height: 0; overflow: hidden; transition: max-height 0.35s var(--ease), padding 0.35s var(--ease); padding: 0 1.3rem; }
+    .fitem.open .fa { padding: 0 1.3rem 1.25rem; }
+    .fa p { font-size: 0.96rem; }
+    .fa a { color: var(--coral-deep); }
+
+    /* ===== NEXT ===== */
+    .next { background: var(--deep-sage); color: var(--cream); text-align: center; padding: 3rem 0; }
+    .next h2 { color: var(--cream); margin: 0.85rem 0 0.9rem; }
+    .next p { color: var(--cream); opacity: 0.92; max-width: 36rem; margin: 0 auto 1.4rem; }
+    .next-row { display: flex; flex-wrap: wrap; gap: 0.9rem; justify-content: center; }
+
+    footer { background: var(--deep-sage); color: var(--cream); padding: 2.25rem 0 2rem; text-align: center; border-top: 1px solid rgba(221,107,78,0.22); }
+    footer .diamond { color: var(--coral); font-size: 0.8rem; letter-spacing: 1.1em; padding-left: 1.1em; opacity: 0.7; margin-bottom: 1.25rem; }
+    footer .fnav { display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem 1.75rem; margin-bottom: 1.25rem; }
+    footer .fnav a { color: var(--cream); opacity: 0.85; text-decoration: none; font-size: 0.9rem; }
+    footer .fnav a:hover { opacity: 1; color: var(--coral-soft); }
+    footer .legal { font-size: 0.8rem; opacity: 0.6; }
+    footer .legal a { color: var(--cream); opacity: 0.85; text-decoration: none; margin: 0 0.35rem; }
+
+    .fade-in { opacity: 0; transform: translateY(16px); transition: opacity 0.6s var(--ease), transform 0.6s var(--ease); }
+    .fade-in.visible { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+      html { scroll-behavior: auto; }
+      .fade-in { opacity: 1; transform: none; }
+    }
+    :focus-visible { outline: 3px solid var(--coral); outline-offset: 3px; }
+    .skip-link { position: absolute; left: -9999px; background: var(--coral); color: white; padding: 0.7rem 1.2rem; z-index: 200; }
+    .skip-link:focus { left: 0; }
+  </style>
+
+
+
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <nav class="mnav">
+    <div class="mnav-inner">
+      <a href="/members" class="mnav-logo"><span class="dot"></span> The One-Income Circle</a>
+      <button class="mnav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="mnavLinks">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="mnav-links" id="mnavLinks">
+        <a href="/members">Home</a>
+        <a href="/members-vault">The Vault</a>
+        <a href="/members-library">Printables</a>
+        <a href="/members-sessions">Live Sessions</a>
+        <a href="/members-circle">The Circle</a>
+        <a href="/members-ask-brooke">Ask Brooke</a>
+        <a href="/members-account" class="mnav-account current" aria-current="page">My account</a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main">
+
+  <!-- ==================== HERO ==================== -->
+  <section class="acc-hero">
+    <div class="container acc-hero-inner">
+      <p class="crumb"><a href="/members">Member home</a> ◆ Your account</p>
+      <span class="greeting">Hello again, <span data-ms-member-info="firstName" id="memberName">friend</span></span>
+      <h1>Your account</h1>
+      <p class="sub">Everything to do with your membership, and no small print. If you cannot find what you need here, email me and I will sort it.</p>
+    </div>
+  </section>
+
+  <!-- ==================== TWO DOORS ==================== -->
+  <section class="doors">
+    <div class="container">
+      <div class="door-grid">
+        <div class="door primary fade-in">
+          <span class="eyebrow eyebrow-coral">The controls</span>
+          <h2>Billing and your details</h2>
+          <p>Your plan, your card, your renewal date, and the cancel button all live in one secure place. Click through and it opens straight to your own account.</p>
+          <ul>
+            <li>See your plan and what you pay</li>
+            <li>Check your next renewal date</li>
+            <li>Update the card on file</li>
+            <li>Change your email or password</li>
+            <li>Cancel, any time</li>
+          </ul>
+          <a href="#" class="btn btn-coral ms-link">Open my account settings</a>
+          <p class="heretoo">Opens your secure account area. I cannot see or store your card details, and neither can this website.</p>
+        </div>
+        <div class="door fade-in">
+          <span class="eyebrow">The plain English</span>
+          <h2>How everything works</h2>
+          <p>The promises, written the way I would say them rather than the way a terms page would. All of it is further down this page.</p>
+          <ul>
+            <li>What happens when you renew</li>
+            <li>What the founding rate actually means</li>
+            <li>The thirty day promise, and how to use it</li>
+            <li>Cancelling, and what you keep</li>
+            <li>What to do if a payment fails</li>
+          </ul>
+          <a href="#promises" class="btn btn-outline">Read it in plain words</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PROMISES ==================== -->
+  <section class="promises" id="promises">
+    <div class="container">
+      <div class="promises-head fade-in">
+        <span class="eyebrow">No small print</span>
+        <h2>How your membership works.</h2>
+        <p>Five things worth knowing, none of which should be a surprise later.</p>
+      </div>
+      <div class="p-list">
+
+        <div class="p-card fade-in">
+          <h3>Your renewal</h3>
+          <p>You are charged on the same date each cycle, and an email goes out before every renewal so it never arrives unannounced. Your exact date is in your account settings, because this page cannot see it.</p>
+          <p><a href="#" class="ms-link">Check my renewal date</a></p>
+        </div>
+
+        <div class="p-card gold fade-in">
+          <h3>Your founding rate</h3>
+          <p>Founding members pay the founding price for as long as they stay a member. When the price goes up for the next group, yours does not move.</p>
+          <p>If you cancel and come back within ninety days, your founding rate comes back with you. After ninety days it becomes whatever the current rate is.</p>
+        </div>
+
+        <div class="p-card warm fade-in">
+          <h3>The Peaceful Month Promise</h3>
+          <p>In your first thirty days, use it properly and if money still feels like the same knot in your stomach, email me and say so. I refund your first payment in full and you keep every printable you downloaded.</p>
+          <p>No form, no hoops. Just tell me. <a href="/contact">Email me here</a>.</p>
+        </div>
+
+        <div class="p-card fade-in">
+          <h3>If a payment fails</h3>
+          <p>Cards expire, and it happens to everyone. You get an email, and the payment is retried a few times over the following days rather than your access being cut off immediately.</p>
+          <p>Update the card whenever you notice and everything carries on as normal. Nothing is lost in the meantime.</p>
+        </div>
+
+        <div class="p-card fade-in">
+          <h3>Emails from me</h3>
+          <p>Two kinds. The ones about your account, like receipts and renewal notices, which you need and always get. And the ones from me about the membership, which you can turn off at the bottom of any of them without leaving the Circle.</p>
+        </div>
+
+        <div class="p-card fade-in">
+          <h3>Your printables</h3>
+          <p>Anything you have downloaded is yours permanently. Not licensed, not on loan, and not something that stops working if you leave. Print them again in five years if you like.</p>
+          <p>Please do not share them outside your own household, which is the only thing I ask.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CANCELLING ==================== -->
+  <section class="cancel">
+    <div class="container">
+      <div class="cancel-card fade-in">
+        <h2>If you need to cancel</h2>
+        <p>I promised on the sales page that this takes two clicks with nobody trying to talk you out of it, so here is exactly how, with no offer in front of it and no survey.</p>
+        <ol class="steps">
+          <li>Open your account settings using the button below.</li>
+          <li>Choose cancel. That is it, it takes effect at the end of the period you have already paid for.</li>
+        </ol>
+        <div class="keeps">
+          <p><b>What you keep:</b> every printable you have already downloaded, permanently. <b>What stops:</b> the vault, the live sessions, the Circle, and any further charges. <b>If you come back within ninety days:</b> your founding rate comes back with you.</p>
+        </div>
+        <div class="cancel-actions">
+          <a href="#" class="btn btn-quiet ms-link">Open my account settings</a>
+          <span style="font-size:0.9rem;color:var(--soft-gray);font-style:italic;">No hard feelings, and the door stays open.</span>
+        </div>
+        <p style="margin-top:1.2rem;font-size:0.95rem;color:var(--sage);">
+          One thing, only because people ask and not to keep you: if the reason is that this month is genuinely tight rather than that the membership is not working, tell me before you cancel and we will find something that works. If it simply is not for you, cancel with my blessing and take the free library with you.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== HELP ==================== -->
+  <section class="help">
+    <div class="container">
+      <div class="help-head fade-in">
+        <span class="eyebrow eyebrow-coral">Account questions</span>
+        <h2>The ones that come up most.</h2>
+      </div>
+      <div class="faq">
+
+        <div class="fitem fade-in">
+          <button class="fq" type="button">I cannot log in</button>
+          <div class="fa"><p>Use the password reset on the login screen first, since that fixes it about nine times in ten. If it does not, email me from the address you signed up with and I will get you back in. Do not create a second account, that only makes it harder to untangle.</p></div>
+        </div>
+
+        <div class="fitem fade-in">
+          <button class="fq" type="button">Can I switch from monthly to yearly, or back?</button>
+          <div class="fa"><p>Yes, either direction, from your account settings. Switching to yearly keeps your founding rate and gets you the two free months. Switching back to monthly is fine too and does not cost you your founding rate.</p></div>
+        </div>
+
+        <div class="fitem fade-in">
+          <button class="fq" type="button">I need a receipt or an invoice</button>
+          <div class="fa"><p>Receipts email automatically after every payment. Past ones are in your account settings. If you need something specific for your own records, ask me and I will send it.</p></div>
+        </div>
+
+        <div class="fitem fade-in">
+          <button class="fq" type="button">Can my husband or my sister use my login?</button>
+          <div class="fa"><p>Your household, absolutely, that is what it is for. Please do not pass it around beyond that. This is a small membership at a low price and it only works if the people using it are the people paying for it. I would rather ask you plainly than fill the site with locks.</p></div>
+        </div>
+
+        <div class="fitem fade-in">
+          <button class="fq" type="button">Was I charged twice?</button>
+          <div class="fa"><p>Occasionally a card issuer shows a pending authorisation next to the real charge and it looks like two. It normally clears within a few days. If it has not, send me the date and the amount and I will look into it and refund anything that should not be there.</p></div>
+        </div>
+
+        <div class="fitem fade-in">
+          <button class="fq" type="button">Can I delete my data?</button>
+          <div class="fa"><p>Yes. Email me and I will remove your account and personal details. Payment records have to be kept for tax purposes, which is a legal requirement rather than a preference. See the <a href="/privacy-policy">privacy policy</a> for the full detail.</p></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== NEXT ==================== -->
+  <section class="next">
+    <div class="container">
+      <span class="eyebrow eyebrow-cream">Still stuck</span>
+      <h2>Ask me, not a help desk.</h2>
+      <p>There is no support team here. Anything about billing, logins, or your membership comes straight to me, and you will usually hear back the same day.</p>
+      <div class="next-row">
+        <a href="/contact" class="btn btn-cream">Email Brooke</a>
+        <a href="/members" class="btn btn-ghost">Back to member home</a>
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="diamond">◆ ◆ ◆</div>
+      <nav class="fnav" aria-label="Member footer">
+        <a href="/members">Member home</a>
+        <a href="/members-vault">The Vault</a>
+        <a href="/members-library">Printables</a>
+        <a href="/members-sessions">Live Sessions</a>
+        <a href="/members-circle">The Circle</a>
+        <a href="/members-account">My account</a>
+        <a href="/contact">Help</a>
+      </nav>
+      <p class="legal">
+        © 2026 Purposeful Pennies. Member content, please keep it in the family.
+        &nbsp;·&nbsp;
+        <a href="/terms">Terms</a> ·
+        <a href="/privacy-policy">Privacy</a>
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    /* ===== NAME FALLBACK ===== */
+    (function () {
+      const el = document.getElementById('memberName');
+      setTimeout(function () { if (!el.textContent.trim()) el.textContent = 'friend'; }, 1200);
+    })();
+
+    /* ===== ACCORDION ===== */
+    document.querySelectorAll('.fitem').forEach(function (item) {
+      const q = item.querySelector('.fq');
+      const a = item.querySelector('.fa');
+      q.setAttribute('aria-expanded', 'false');
+      q.addEventListener('click', function () {
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.fitem.open').forEach(function (o) {
+          o.classList.remove('open');
+          o.querySelector('.fa').style.maxHeight = null;
+          o.querySelector('.fq').setAttribute('aria-expanded', 'false');
+        });
+        if (!isOpen) {
+          item.classList.add('open');
+          a.style.maxHeight = (a.scrollHeight + 40) + 'px';
+          q.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+
+    /* ===== MOBILE NAV ===== */
+    (function () {
+      const t = document.getElementById('navToggle');
+      const l = document.getElementById('mnavLinks');
+      t.addEventListener('click', function () {
+        const open = l.classList.toggle('open');
+        t.setAttribute('aria-expanded', String(open));
+      });
+    })();
+
+    /* ===== FADE-IN ===== */
+    (function () {
+      const obs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) { en.target.classList.add('visible'); obs.unobserve(en.target); }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+      document.querySelectorAll('.fade-in').forEach(function (el) { obs.observe(el); });
+    })();
+
+    /* ===== ms-link REMINDER =====
+       This page leans on the MemberSpace Link more than any other. If it
+       is still unset, every billing control here is a dead end, which is
+       the worst possible page for that. */
+    (function () {
+      const unset = Array.prototype.slice.call(document.querySelectorAll('a.ms-link'))
+        .filter(function (a) { return (a.getAttribute('href') || '#') === '#'; });
+      if (unset.length) {
+        console.warn('Account page: ' + unset.length + ' ms-link buttons still point at "#". ' +
+                     'Paste the MemberSpace Link into each before launch, or billing and cancelling both dead end here.');
+      }
+    })();
+<w:pgSz w:h="15840" w:w="12240" w:orient="portrait"/><w:pgMar w:bottom="1440" w:top="1440" w:left="1440" w:right="1440" w:header="720" w:footer="720"/><w:pgNumType w:start="1"/></w:sectPr></w:pPr><w:r w:rsidDel="00000000" w:rsidR="00000000" w:rsidRPr="00000000"><w:rPr><w:rtl w:val="0"/></w:rPr><w:t xml:space="preserve">  </script>

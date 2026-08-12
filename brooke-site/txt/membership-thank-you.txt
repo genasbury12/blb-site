@@ -1,0 +1,884 @@
+<!--
+  ============================================================
+  PURPOSEFUL PENNIES  ·  MEMBERSHIP THANK YOU   /membership-thank-you
+  Draft domain: https://purposefulpenniesdraft.showit.site
+  ============================================================
+
+  This is where the payment processor sends a new member after a
+  successful charge. Set it as the success redirect in Stripe or
+  ThriveCart.
+
+  ONE CONFIG BLOCK runs this page. It sits at the top of the script
+  at the bottom of the file. Fill in six things:
+
+    MEMBER_AREA_URL   where the vault lives
+    QUICKSTART_URL    the first thing she should open
+    COMMUNITY_URL     the Circle doorway at /members-circle
+    ASK_BROOKE_URL    the monthly question thread
+    SENDER_EMAIL      the address her login email arrives from
+    FIRST_SESSION     date, time, and join link for the next live reset
+
+  Until those are filled in, every button points at the member area
+  placeholder and the page still reads correctly end to end.
+
+  URL PARAMETERS. If the processor can pass them, this page reads
+  ?plan=monthly or ?plan=yearly and ?name=Katie to personalise the
+  greeting and the billing line. If it cannot, sensible defaults show
+  and nothing looks broken.
+
+  NOINDEX is set on purpose. Post-purchase pages should never appear
+  in search results.
+
+  FORMATTING RULE. Zero em dashes, zero en dashes. The brand
+  separator is the diamond glyph.
+  ============================================================
+-->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>You are in · The One-Income Circle</title>
+  <meta name="description" content="Your membership is active. Here is exactly what to do first.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&amp;family=DM+Serif+Display&amp;display=swap" rel="stylesheet">
+  <style>
+    /* ===== BRAND TOKENS ===== */
+    :root {
+      --deep-sage: #2E3E2F;
+      --sage: #5C6E47;
+      --sage-soft: #8B9E75;
+      --warm-tan: #C28954;
+      --warm-tan-dark: #A77246;
+      --cream: #FBF4D7;
+      --cream-warm: #F7ECC4;
+      --charcoal: #2A2A2A;
+      --soft-gray: #7E867D;
+      --light-sage: #DBE3CE;
+      --pale-tan: #EFE0C1;
+      --white: #FFFFFF;
+      --coral: #DD6B4E;
+      --coral-deep: #C25441;
+      --coral-soft: #F7D0BE;
+      --coral-blush: #FBE3D5;
+      --gold: #D4A83F;
+      --gold-soft: #EDD98D;
+      --gold-deep: #B8912E;
+      --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+      --bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 17px; scroll-behavior: smooth; }
+    @media (min-width: 720px) { html { font-size: 18px; } }
+    body {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 1.08rem; line-height: 1.7;
+      color: var(--charcoal); background: var(--cream);
+      -webkit-font-smoothing: antialiased; overflow-x: hidden;
+    }
+
+    .container { max-width: 1120px; margin: 0 auto; padding: 0 1.5rem; }
+    .narrow { max-width: 740px; margin: 0 auto; padding: 0 1.5rem; }
+    section { padding: 4.5rem 0; position: relative; }
+    @media (max-width: 700px) { section { padding: 3rem 0; } }
+
+    .script { font-family: 'Caveat', cursive; font-weight: 700; }
+    .eyebrow {
+      font-size: 0.78rem; font-weight: bold; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--warm-tan-dark);
+      display: inline-flex; align-items: center; gap: 0.75rem;
+    }
+    .eyebrow::before { content: ""; display: inline-block; width: 28px; height: 1px; background: var(--warm-tan); }
+    .eyebrow-coral { color: var(--coral-deep); }
+    .eyebrow-coral::before { background: var(--coral); }
+    h1, h2, h3 { font-family: Georgia, serif; color: var(--deep-sage); }
+    h1 { font-size: clamp(2.3rem, 5.6vw, 3.7rem); font-weight: bold; line-height: 1.06; letter-spacing: -0.02em; }
+    h2 { font-size: clamp(1.75rem, 3.8vw, 2.5rem); font-weight: bold; line-height: 1.15; }
+    h3 { font-size: 1.25rem; font-weight: bold; line-height: 1.3; }
+    p { margin-bottom: 1.05rem; }
+    p:last-child { margin-bottom: 0; }
+    .lede { font-size: 1.14rem; line-height: 1.7; }
+
+    /* ===== NAV ===== */
+    .nav {
+      background: rgba(251, 244, 215, 0.95);
+      border-bottom: 1px solid rgba(194, 137, 84, 0.18);
+      position: sticky; top: 0; z-index: 100; backdrop-filter: blur(10px);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.1rem 1.5rem; max-width: 1280px; margin: 0 auto;
+    }
+    .nav-logo {
+      font-family: Georgia, serif; font-size: 1.3rem; font-weight: bold;
+      color: var(--deep-sage); letter-spacing: 0.03em; text-decoration: none;
+      line-height: 1; display: flex; align-items: baseline; gap: 0.5rem;
+    }
+    .nav-logo .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--coral); display: inline-block; }
+    .nav-logo em {
+      display: block; font-family: 'Caveat', cursive; font-weight: 500;
+      font-style: normal; color: var(--coral-deep); font-size: 0.95rem; margin-top: -2px;
+    }
+    .nav-links { display: flex; gap: 1.85rem; align-items: center; }
+    .nav-links a {
+      font-family: Georgia, serif; font-size: 0.95rem; color: var(--deep-sage);
+      text-decoration: none; position: relative; transition: color 0.2s var(--ease);
+    }
+    .nav-links a:not(.nav-cta)::after {
+      content: ""; position: absolute; left: 0; right: 0; bottom: -4px; height: 2px;
+      background: var(--coral); transform: scaleX(0); transform-origin: left;
+      transition: transform 0.25s var(--ease); border-radius: 2px;
+    }
+    .nav-links a:not(.nav-cta):hover::after { transform: scaleX(1); }
+    .nav-links a:hover:not(.nav-cta) { color: var(--coral-deep); }
+    .nav-cta {
+      background: var(--coral); color: white !important; padding: 0.6rem 1.25rem;
+      border-radius: 999px; font-size: 0.85rem !important; font-weight: bold;
+      letter-spacing: 0.04em; transition: all 0.25s var(--ease);
+      box-shadow: 0 3px 0 var(--coral-deep);
+    }
+    .nav-cta:hover { background: var(--coral-deep); transform: translateY(-1px); }
+    .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 0.4rem; }
+    .nav-toggle span { display: block; width: 24px; height: 2px; background: var(--deep-sage); margin: 5px 0; border-radius: 2px; }
+    @media (max-width: 1000px) {
+      .nav-toggle { display: block; }
+      .nav-links {
+        position: absolute; top: 100%; left: 0; right: 0; background: var(--cream);
+        flex-direction: column; gap: 0; padding: 0 1.5rem; max-height: 0; overflow: hidden;
+        transition: max-height 0.35s var(--ease), padding 0.35s var(--ease);
+        border-bottom: 1px solid rgba(194, 137, 84, 0.18);
+      }
+      .nav-links.open { max-height: 30rem; padding: 1rem 1.5rem 1.75rem; }
+      .nav-links a { width: 100%; padding: 0.7rem 0; font-size: 1.05rem; }
+      .nav-cta { text-align: center; margin-top: 0.75rem; }
+    }
+
+    /* ===== BUTTONS ===== */
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      background: var(--warm-tan); color: white; font-family: Georgia, serif;
+      font-size: 1.05rem; font-weight: bold; padding: 1.05rem 2.2rem;
+      border: none; border-radius: 999px; cursor: pointer; text-decoration: none;
+      transition: all 0.25s var(--ease); letter-spacing: 0.02em;
+      box-shadow: 0 3px 0 var(--warm-tan-dark);
+    }
+    .btn:hover { background: var(--warm-tan-dark); transform: translateY(-2px); box-shadow: 0 5px 0 var(--warm-tan-dark); }
+    .btn::after { content: "\2192"; transition: transform 0.25s var(--ease); }
+    .btn:hover::after { transform: translateX(4px); }
+    .btn-coral { background: var(--coral); box-shadow: 0 3px 0 var(--coral-deep); }
+    .btn-coral:hover { background: var(--coral-deep); box-shadow: 0 5px 0 var(--coral-deep); }
+    .btn-outline {
+      background: transparent; color: var(--warm-tan-dark); border: 2px solid var(--warm-tan);
+      padding: calc(1.05rem - 2px) calc(2.2rem - 2px); box-shadow: none;
+    }
+    .btn-outline:hover { background: var(--pale-tan); box-shadow: none; }
+    .btn-sm { font-size: 0.92rem; padding: 0.75rem 1.5rem; }
+    .btn-lg { font-size: 1.14rem; padding: 1.2rem 2.5rem; }
+    .btn-plain::after { content: ""; }
+    .trust-line { font-style: italic; font-size: 0.92rem; color: var(--soft-gray); margin-top: 0.85rem; }
+    .sticker {
+      display: inline-block; background: var(--gold); color: white;
+      font-family: Georgia, serif; font-weight: bold; font-size: 0.72rem;
+      letter-spacing: 0.15em; text-transform: uppercase; padding: 0.5rem 0.9rem;
+      border-radius: 4px; transform: rotate(-3deg); box-shadow: 0 3px 0 var(--gold-deep);
+    }
+    .sticker.coral { background: var(--coral); box-shadow: 0 3px 0 var(--coral-deep); transform: rotate(2deg); }
+
+    /* ===== IMAGE PLACEHOLDER ===== */
+    .img-ph {
+      background: linear-gradient(135deg, var(--coral-blush) 0%, var(--pale-tan) 50%, var(--light-sage) 100%);
+      position: relative; overflow: hidden; display: flex; align-items: center;
+      justify-content: center; flex-direction: column; padding: 1.75rem;
+      text-align: center; border: 1px dashed rgba(194, 137, 84, 0.5);
+    }
+    .img-ph .ph-icon {
+      width: 46px; height: 46px; border: 1.5px solid var(--coral); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; margin-bottom: 0.85rem;
+      color: var(--coral); font-size: 1.4rem; background: rgba(255, 255, 255, 0.6);
+    }
+    .img-ph .ph-tag {
+      font-size: 0.68rem; font-weight: bold; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--coral-deep); margin-bottom: 0.6rem;
+    }
+    .img-ph .ph-title { font-size: 1rem; font-weight: bold; color: var(--deep-sage); margin-bottom: 0.4rem; }
+    .img-ph .ph-brief { font-size: 0.82rem; font-style: italic; color: var(--sage); line-height: 1.5; max-width: 22rem; }
+
+    /* ===== 01 CONFIRMATION HERO ===== */
+    .confirm {
+      background: var(--cream); padding: 4rem 0 4.5rem;
+      position: relative; overflow: hidden; text-align: center;
+    }
+    .confirm::before {
+      content: ""; position: absolute; top: -200px; left: 50%; transform: translateX(-50%);
+      width: 760px; height: 560px;
+      background: radial-gradient(circle, var(--coral-blush) 0%, transparent 65%);
+      opacity: 0.85; pointer-events: none;
+    }
+    .confirm-inner { position: relative; z-index: 2; }
+    .check-badge {
+      width: 96px; height: 96px; border-radius: 50%; background: var(--coral);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1.75rem; box-shadow: 0 12px 30px rgba(221, 107, 78, 0.35);
+      position: relative; animation: pop 0.6s var(--bounce) both;
+    }
+    @keyframes pop { from { transform: scale(0.4); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+    .check-badge svg { width: 46px; height: 46px; }
+    .confirm h1 { margin: 0.75rem 0 1.25rem; }
+    .confirm .script-line {
+      font-family: 'Caveat', cursive; font-size: 1.9rem;
+      color: var(--coral-deep); display: block; margin-bottom: 0.25rem;
+    }
+    .confirm-sub {
+      font-size: 1.18rem; font-style: italic; color: var(--sage);
+      max-width: 40rem; margin: 0 auto 2.25rem; line-height: 1.6;
+    }
+    .order-card {
+      background: white; border-radius: 14px; padding: 1.75rem 1.85rem;
+      max-width: 34rem; margin: 0 auto; text-align: left;
+      box-shadow: 0 18px 45px rgba(46, 62, 47, 0.1);
+      border-top: 5px solid var(--coral);
+    }
+    .order-card h3 { font-size: 0.76rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--coral-deep); margin-bottom: 1.1rem; }
+    .order-row {
+      display: flex; justify-content: space-between; gap: 1rem;
+      padding: 0.6rem 0; border-bottom: 1px dashed rgba(194, 137, 84, 0.35);
+      font-size: 0.98rem;
+    }
+    .order-row:last-of-type { border-bottom: none; }
+    .order-row .k { color: var(--sage); }
+    .order-row .v { font-weight: bold; color: var(--deep-sage); text-align: right; }
+    .order-note { margin-top: 1.1rem; font-size: 0.88rem; font-style: italic; color: var(--soft-gray); }
+
+    /* confetti */
+    .confetti {
+      position: fixed; top: 22%; left: 50%; width: 9px; height: 9px;
+      pointer-events: none; z-index: 120; opacity: 0;
+    }
+    .confetti.animate {
+      animation: burst 1.6s var(--ease) forwards;
+    }
+    @keyframes burst {
+      0% { opacity: 1; transform: translate(0, 0) rotate(0deg); }
+      100% { opacity: 0; transform: translate(var(--dx), var(--dy)) rotate(var(--rot)); }
+    }
+
+    /* ===== 02 CHECK EMAIL ===== */
+    .email-step { background: var(--coral-blush); padding: 3.5rem 0; }
+    .email-card {
+      max-width: 46rem; margin: 0 auto; background: white; border-radius: 14px;
+      padding: 2.25rem 2.1rem; display: grid; grid-template-columns: auto 1fr; gap: 1.5rem;
+      align-items: start; box-shadow: 0 14px 36px rgba(46, 62, 47, 0.08);
+    }
+    @media (max-width: 620px) { .email-card { grid-template-columns: 1fr; } }
+    .email-icon {
+      width: 56px; height: 56px; border-radius: 50%; background: var(--gold-soft);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem; color: var(--gold-deep);
+    }
+    .email-card h2 { font-size: clamp(1.45rem, 3vw, 1.85rem); margin-bottom: 0.75rem; }
+    .email-card p { font-size: 1rem; }
+    .sender {
+      display: inline-block; font-family: Georgia, serif; font-weight: bold;
+      background: var(--cream); border: 1px dashed var(--warm-tan);
+      border-radius: 6px; padding: 0.3rem 0.7rem; color: var(--deep-sage);
+      font-size: 0.95rem;
+    }
+
+    /* ===== 03 FIRST FIFTEEN MINUTES ===== */
+    .first { background: var(--white); }
+    .first-head { text-align: center; max-width: 42rem; margin: 0 auto 2.5rem; }
+    .first-head h2 { margin: 1rem 0 0.85rem; }
+    .progress-wrap { max-width: 46rem; margin: 0 auto 2rem; }
+    .progress-bar {
+      height: 10px; background: var(--light-sage); border-radius: 999px; overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%; width: 0%; background: var(--coral);
+      border-radius: 999px; transition: width 0.4s var(--ease);
+    }
+    .progress-label { text-align: center; margin-top: 0.7rem; font-size: 0.92rem; color: var(--sage); font-style: italic; }
+    .task-list { max-width: 46rem; margin: 0 auto; }
+    .task {
+      display: grid; grid-template-columns: auto 1fr auto; gap: 1.15rem;
+      align-items: center; background: var(--cream); border-radius: 12px;
+      padding: 1.35rem 1.5rem; margin-bottom: 0.9rem;
+      border: 1px solid rgba(194, 137, 84, 0.25);
+      transition: border-color 0.25s var(--ease), background 0.25s var(--ease);
+    }
+    @media (max-width: 620px) {
+      .task { grid-template-columns: auto 1fr; }
+      .task .task-action { grid-column: 1 / -1; }
+    }
+    .task.done { background: var(--light-sage); border-color: var(--sage-soft); }
+    .task.done .task-title { text-decoration: line-through; opacity: 0.65; }
+    .task-check {
+      width: 32px; height: 32px; border-radius: 50%; border: 2px solid var(--coral);
+      background: white; cursor: pointer; display: flex; align-items: center;
+      justify-content: center; padding: 0; flex-shrink: 0;
+      transition: all 0.25s var(--ease);
+    }
+    .task-check::after {
+      content: "\2713"; color: white; font-size: 1rem; font-weight: bold; opacity: 0;
+      transition: opacity 0.2s var(--ease);
+    }
+    .task.done .task-check { background: var(--sage); border-color: var(--sage); }
+    .task.done .task-check::after { opacity: 1; }
+    .task-title { font-family: Georgia, serif; font-weight: bold; color: var(--deep-sage); font-size: 1.05rem; line-height: 1.35; }
+    .task-note { font-size: 0.92rem; color: var(--sage); margin-top: 0.2rem; line-height: 1.5; }
+    .task-time {
+      display: inline-block; font-size: 0.72rem; font-weight: bold; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--warm-tan-dark); margin-top: 0.45rem;
+    }
+    .first-foot { text-align: center; margin-top: 2.25rem; }
+
+    /* ===== 04 FIRST SESSION ===== */
+    .session { background: var(--deep-sage); color: var(--cream); }
+    .session-grid {
+      max-width: 54rem; margin: 0 auto; display: grid;
+      grid-template-columns: auto 1fr; gap: 2.5rem; align-items: center;
+    }
+    @media (max-width: 700px) { .session-grid { grid-template-columns: 1fr; gap: 1.75rem; text-align: center; } }
+    .date-block {
+      background: var(--cream); border-radius: 14px; padding: 1.25rem 1.75rem;
+      text-align: center; color: var(--deep-sage); min-width: 148px;
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.22);
+    }
+    @media (max-width: 700px) { .date-block { max-width: 200px; margin: 0 auto; } }
+    .date-block .m { font-size: 0.78rem; font-weight: bold; letter-spacing: 0.2em; text-transform: uppercase; color: var(--coral-deep); }
+    .date-block .d { font-family: 'DM Serif Display', Georgia, serif; font-size: 3.2rem; line-height: 1.05; }
+    .date-block .t { font-size: 0.88rem; color: var(--sage); font-style: italic; }
+    .session-text h2 { color: var(--cream); margin: 0.85rem 0 1rem; }
+    .session-text p { color: var(--cream); opacity: 0.92; }
+    .session-cta-row { display: flex; flex-wrap: wrap; gap: 0.85rem; margin-top: 1.5rem; }
+    @media (max-width: 700px) { .session-cta-row { justify-content: center; } }
+    .session-cta-row .btn-cream { background: var(--cream); color: var(--deep-sage); box-shadow: 0 3px 0 rgba(0,0,0,0.2); }
+    .session-cta-row .btn-cream:hover { background: var(--cream-warm); color: var(--deep-sage); box-shadow: 0 5px 0 rgba(0,0,0,0.2); }
+    .session-cta-row .btn-ghost {
+      background: transparent; color: var(--cream); border: 2px solid var(--coral-soft);
+      box-shadow: none; padding: calc(1.05rem - 2px) calc(2.2rem - 2px);
+    }
+    .session-cta-row .btn-ghost:hover { background: rgba(255,255,255,0.1); color: var(--cream); box-shadow: none; }
+    .session-fine { margin-top: 1.25rem; font-size: 0.9rem; font-style: italic; opacity: 0.8; }
+
+    /* ===== 05 WHERE THINGS LIVE ===== */
+    .places { background: var(--cream-warm); }
+    .places-head { text-align: center; max-width: 40rem; margin: 0 auto 2.75rem; }
+    .places-head h2 { margin: 1rem 0 0; }
+    .places-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.6rem; }
+    @media (max-width: 900px) { .places-grid { grid-template-columns: 1fr; max-width: 32rem; margin: 0 auto; } }
+    .place-card {
+      background: white; border-radius: 14px; padding: 2rem 1.75rem; text-align: center;
+      border: 1px solid rgba(194, 137, 84, 0.25);
+      transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+      display: flex; flex-direction: column;
+    }
+    .place-card:hover { transform: translateY(-5px); box-shadow: 0 16px 36px rgba(46, 62, 47, 0.12); }
+    .place-icon {
+      width: 52px; height: 52px; border-radius: 50%; background: var(--coral-blush);
+      color: var(--coral-deep); display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; margin: 0 auto 1.1rem;
+    }
+    .place-card h3 { margin-bottom: 0.6rem; }
+    .place-card p { font-size: 0.96rem; margin-bottom: 1.35rem; }
+    .place-card .btn { margin-top: auto; justify-content: center; }
+
+    /* ===== 06 NOTE FROM BROOKE ===== */
+    .note { background: var(--coral-blush); }
+    .note-grid {
+      max-width: 60rem; margin: 0 auto; display: grid;
+      grid-template-columns: 0.8fr 1.2fr; gap: 3rem; align-items: center;
+    }
+    @media (max-width: 850px) { .note-grid { grid-template-columns: 1fr; gap: 2rem; } }
+    .note-image { aspect-ratio: 1 / 1; width: 100%; max-width: 320px; }
+    .note-image .img-ph { width: 100%; height: 100%; border-radius: 50%; }
+    .note-text h2 { margin: 0.85rem 0 1.1rem; }
+    .note-sign { font-family: 'Caveat', cursive; font-size: 1.9rem; color: var(--coral-deep); margin-top: 1.25rem; }
+
+    /* ===== 07 HOUSEKEEPING ===== */
+    .keeping { background: var(--white); padding: 4rem 0; }
+    .keeping-head { text-align: center; max-width: 38rem; margin: 0 auto 2.25rem; }
+    .keeping-head h2 { font-size: clamp(1.5rem, 3vw, 2rem); margin: 0.85rem 0 0; }
+    .keeping-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; max-width: 52rem; margin: 0 auto; }
+    @media (max-width: 700px) { .keeping-grid { grid-template-columns: 1fr; } }
+    .keeping-item {
+      background: var(--cream); border-radius: 12px; padding: 1.4rem 1.5rem;
+      border-left: 4px solid var(--warm-tan);
+    }
+    .keeping-item h3 { font-size: 1.05rem; margin-bottom: 0.4rem; }
+    .keeping-item p { font-size: 0.94rem; }
+    .keeping-item a { color: var(--coral-deep); text-decoration: underline; text-underline-offset: 3px; }
+
+    /* ===== FOOTER ===== */
+    footer { background: var(--deep-sage); color: var(--cream); padding: 4rem 0 2rem; text-align: center; }
+    footer .brand-line { font-family: 'DM Serif Display', Georgia, serif; font-size: 2rem; letter-spacing: 0.04em; }
+    footer .tagline { font-family: 'Caveat', cursive; color: var(--coral-soft); margin: 0.5rem 0 2rem; font-size: 1.5rem; }
+    footer .diamond { padding: 0 0 2rem; color: var(--coral); font-size: 0.9rem; letter-spacing: 1.2em; padding-left: 1.2em; opacity: 0.8; }
+    footer .footer-nav {
+      display: flex; justify-content: center; flex-wrap: wrap; gap: 1.5rem 2rem;
+      margin: 0 0 2rem; padding-top: 2.5rem; border-top: 1px solid rgba(221, 107, 78, 0.25);
+    }
+    footer .footer-nav a { color: var(--cream); opacity: 0.85; text-decoration: none; font-size: 0.95rem; }
+    footer .footer-nav a:hover { opacity: 1; color: var(--coral-soft); }
+    footer .legal {
+      padding-top: 1.25rem; margin-top: 1.5rem;
+      border-top: 1px solid rgba(221, 107, 78, 0.15);
+      font-size: 0.82rem; opacity: 0.65;
+    }
+    footer .legal a { color: var(--cream); opacity: 0.8; text-decoration: none; margin: 0 0.4rem; }
+    footer .built { margin-top: 1rem; font-family: 'Caveat', cursive; font-size: 1.1rem; color: var(--coral-soft); opacity: 0.85; }
+
+    /* ===== FADE-IN ===== */
+    .fade-in { opacity: 0; transform: translateY(18px); transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); }
+    .fade-in.visible { opacity: 1; transform: none; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+      html { scroll-behavior: auto; }
+      .fade-in { opacity: 1; transform: none; }
+      .confetti { display: none; }
+    }
+    :focus-visible { outline: 3px solid var(--coral); outline-offset: 3px; }
+    .skip-link { position: absolute; left: -9999px; background: var(--coral); color: white; padding: 0.75rem 1.25rem; z-index: 200; }
+    .skip-link:focus { left: 0; }
+  
+    /* Real photos placed in the placeholder frames (photo shoot, Aug 2026) */
+    .img-ph.has-img { padding: 0; border: none; }
+    .img-ph.has-img::before { display: none; }
+    .img-ph.has-img > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+  </style>
+
+
+
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <!-- Nav  ◆  no announcement bar here, she has already joined -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">
+        <span class="dot"></span>
+        Purposeful Pennies
+        <em>&nbsp;spend with intention</em>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-links" id="navLinks">
+        <a href="/start-here">Start Here</a>
+        <a href="/about">About</a>
+        <a href="/free-resources">Free Resources</a>
+        <a href="/blog">Blog</a>
+        <a href="/contact">Contact</a>
+        <a href="#" class="nav-cta js-member-area">Member area</a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main">
+
+  <!-- ==================== 01 CONFIRMATION ==================== -->
+  <section class="confirm">
+    <div class="narrow confirm-inner">
+      <div class="check-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+      </div>
+      <span class="script-line" id="greeting">You made it, friend</span>
+      <h1>You are in.</h1>
+      <p class="confirm-sub">Your seat in the One-Income Circle is active right now. Take one breath, because the hardest part was deciding. Everything below takes fifteen minutes and I have laid it out in order.</p>
+
+      <div class="order-card">
+        <h3>What just happened</h3>
+        <div class="order-row"><span class="k">Your membership</span><span class="v">The One-Income Circle</span></div>
+        <div class="order-row"><span class="k">Your plan</span><span class="v" id="planLine">$19 a month, founding rate</span></div>
+        <div class="order-row"><span class="k">Next payment</span><span class="v" id="nextBilling">In one month</span></div>
+        <div class="order-row"><span class="k">Access</span><span class="v">Everything, starting now</span></div>
+        <div class="order-row"><span class="k">Your promise</span><span class="v">Thirty day Peaceful Month</span></div>
+        <p class="order-note">A receipt is on its way to your inbox from the payment processor. Your login details come separately, in the email described below.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 02 CHECK EMAIL ==================== -->
+  <section class="email-step">
+    <div class="container">
+      <div class="email-card fade-in">
+        <div class="email-icon" aria-hidden="true">✉</div>
+        <div>
+          <span class="eyebrow eyebrow-coral">Step one, right now</span>
+          <h2>Go check your email before you close this tab.</h2>
+          <p>Your login link is already sent. It comes from <span class="sender js-sender">hello@purposefulpennies.com</span> with the subject line <strong>Welcome to the Circle, here is your login</strong>.</p>
+          <p>If it is not there in five minutes, look in promotions or spam, then drag it to your main inbox. That one drag tells your email provider I am a friend and not a stranger, and it means you will actually see the monthly reset reminders.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 03 FIRST FIFTEEN MINUTES ==================== -->
+  <section class="first">
+    <div class="container">
+      <div class="first-head fade-in">
+        <span class="eyebrow">Your first fifteen minutes</span>
+        <h2>Four small things, in this order.</h2>
+        <p class="lede">Not the whole vault. Not tonight. Just these, and you will have done more than most people do in a month.</p>
+      </div>
+
+      <div class="progress-wrap fade-in">
+        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+        <p class="progress-label" id="progressLabel">Nothing ticked off yet, and that is a perfectly fine place to start.</p>
+      </div>
+
+      <div class="task-list" id="taskList">
+        <div class="task fade-in">
+          <button class="task-check" type="button" aria-label="Mark step one complete" aria-pressed="false"></button>
+          <div>
+            <div class="task-title">Open the Quick Start and print the two pages inside.</div>
+            <p class="task-note">One budget page, one payday page. Paper on the counter beats an app you forget to open.</p>
+            <span class="task-time">Three minutes</span>
+          </div>
+          <a href="#" class="btn btn-coral btn-sm task-action js-quickstart">Open Quick Start</a>
+        </div>
+
+        <div class="task fade-in">
+          <button class="task-check" type="button" aria-label="Mark step two complete" aria-pressed="false"></button>
+          <div>
+            <div class="task-title">Watch the five minute welcome walkthrough.</div>
+            <p class="task-note">I show you where everything lives and which system to touch first. Watch it with a cup of something warm.</p>
+            <span class="task-time">Five minutes</span>
+          </div>
+          <a href="#" class="btn btn-outline btn-sm task-action js-quickstart">Watch it</a>
+        </div>
+
+        <div class="task fade-in">
+          <button class="task-check" type="button" aria-label="Mark step three complete" aria-pressed="false"></button>
+          <div>
+            <div class="task-title">Say hello in the Circle.</div>
+            <p class="task-note">First name, how many people you feed, and the one thing you want to be different by next payday. That is the whole introduction. No one here is judging.</p>
+            <span class="task-time">Two minutes</span>
+          </div>
+          <a href="/members-circle" class="btn btn-outline btn-sm task-action">Introduce yourself</a>
+        </div>
+
+        <div class="task fade-in">
+          <button class="task-check" type="button" aria-label="Mark step four complete" aria-pressed="false"></button>
+          <div>
+            <div class="task-title">Put the Monthly Money Reset on your calendar.</div>
+            <p class="task-note">It is the one thing that keeps the rest of it going. Details and the calendar buttons are just below.</p>
+            <span class="task-time">One minute</span>
+          </div>
+          <a href="#session" class="btn btn-outline btn-sm task-action">Get the date</a>
+        </div>
+      </div>
+
+      <div class="first-foot fade-in">
+        <a href="#" class="btn btn-coral btn-lg js-member-area">Take me to the vault</a>
+        <p class="trust-line">The ticks on this page are just for tonight. Nothing is being tracked or graded.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 04 FIRST LIVE SESSION ==================== -->
+  <section class="session" id="session">
+    <div class="container">
+      <div class="session-grid">
+        <div class="date-block fade-in">
+          <div class="m" id="sessionMonth">MONTH</div>
+          <div class="d" id="sessionDay">00</div>
+          <div class="t" id="sessionTime">time to be set</div>
+        </div>
+        <div class="session-text">
+          <span class="eyebrow eyebrow-coral fade-in" style="color: var(--coral-soft);">Save the date</span>
+          <h2 class="fade-in">Your first Monthly Money Reset.</h2>
+          <p class="fade-in" id="sessionBlurb">Forty five minutes where we plan the month out loud together. We set the grocery number, check the sinking funds, and you can bring any question you have. Come with your notebook and your coffee. Cameras are always optional.</p>
+          <div class="session-cta-row fade-in">
+            <a href="#" class="btn btn-cream" id="gcalBtn" target="_blank" rel="noopener">Add to Google Calendar</a>
+            <a href="#" class="btn btn-ghost" id="icsBtn" download="one-income-circle-monthly-reset.ics">Download the invite</a>
+          </div>
+          <p class="session-fine fade-in">Cannot make it live? Every session is recorded and lands in the replay library the next morning. Bedtime wins sometimes, and that is allowed.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 05 WHERE THINGS LIVE ==================== -->
+  <section class="places">
+    <div class="container">
+      <div class="places-head fade-in">
+        <span class="eyebrow">Three doors, that is all</span>
+        <h2>Where everything lives.</h2>
+      </div>
+      <div class="places-grid">
+        <div class="place-card fade-in">
+          <div class="place-icon" aria-hidden="true">▣</div>
+          <h3>The System Vault</h3>
+          <p>All seven systems, every printable, and the replay library. This is your home base.</p>
+          <a href="#" class="btn btn-coral btn-sm js-member-area">Go to the vault</a>
+        </div>
+        <div class="place-card fade-in">
+          <div class="place-icon" aria-hidden="true">♡</div>
+          <h3>The Circle</h3>
+          <p>The private room where moms share wins, ask before they spend, and swap real dinner ideas.</p>
+          <a href="/members-circle" class="btn btn-outline btn-sm">Come say hello</a>
+        </div>
+        <div class="place-card fade-in">
+          <div class="place-icon" aria-hidden="true">✍</div>
+          <h3>Ask Brooke</h3>
+          <p>Post your actual numbers and your actual mess. I answer every week, and no question is too small.</p>
+          <a href="#" class="btn btn-outline btn-sm js-ask">Ask me something</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 06 NOTE FROM BROOKE ==================== -->
+  <section class="note">
+    <div class="container">
+      <div class="note-grid">
+        <div class="note-image fade-in">
+          <div class="img-ph has-img"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/brookes-images-folder-sf3xp4/brooke-site-images/circle-welcome.jpg" alt="Brooke smiling at her kitchen table, reaching for her coffee mug" loading="lazy"></div>
+        </div>
+        <div class="note-text">
+          <span class="eyebrow eyebrow-coral fade-in">One more thing</span>
+          <h2 class="fade-in">I do not take this lightly.</h2>
+          <p class="lede fade-in">I know what it costs a one-income family to spend money on something for themselves. I remember doing that math in the car. So thank you, sincerely.</p>
+          <p class="fade-in">Here is my promise back to you. I will not fill your inbox with noise, I will not pretend I have it all figured out, and I will not let you sit in that room unanswered. If something is confusing, tell me. If a month falls apart, come back anyway. Progress over perfection is not a slogan I picked. It is how I got through it myself.</p>
+          <p class="note-sign fade-in">so glad you are here, Brooke</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 07 HOUSEKEEPING ==================== -->
+  <section class="keeping">
+    <div class="container">
+      <div class="keeping-head fade-in">
+        <span class="eyebrow">The boring but useful part</span>
+        <h2>Housekeeping, in plain words.</h2>
+      </div>
+      <div class="keeping-grid">
+        <div class="keeping-item fade-in">
+          <h3>Your receipt</h3>
+          <p>It arrives by email within a few minutes. If you need a second copy for your own records, just ask me.</p>
+        </div>
+        <div class="keeping-item fade-in">
+          <h3>Billing</h3>
+          <p>Your card is charged on the same date each cycle at your founding rate. You get an email before every renewal, so nothing is ever a surprise.</p>
+        </div>
+        <div class="keeping-item fade-in">
+          <h3>Cancelling</h3>
+          <p>Two clicks inside your account, any time, and no one will try to talk you out of it. You keep every printable you already downloaded.</p>
+        </div>
+        <div class="keeping-item fade-in">
+          <h3>Need a hand</h3>
+          <p>Email me or use the <a href="/contact">contact page</a> and you will hear back from me, not a team. Also see the <a href="/terms">terms</a> and the <a href="/privacy-policy">privacy policy</a>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer>
+    <div class="container">
+      <div class="brand-line">Purposeful Pennies</div>
+      <p class="tagline">spend with intention. save with purpose.</p>
+      <div class="diamond">◆ ◆ ◆</div>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="/start-here">Start Here</a>
+        <a href="/about">About</a>
+        <a href="/free-resources">Free Resources</a>
+        <a href="/membership">Membership</a>
+        <a href="/blog">Blog</a>
+        <a href="/contact">Contact</a>
+      </nav>
+      <p class="legal">
+        © 2026 Purposeful Pennies. All rights reserved.
+        &nbsp;·&nbsp;
+        <a href="/privacy-policy">Privacy</a> ·
+        <a href="/terms">Terms</a> ·
+        <a href="/disclaimer">Disclaimer</a> ·
+        <a href="/affiliate-disclosure">Affiliate Disclosure</a>
+      </p>
+      <p class="built">built with love for one-income families everywhere</p>
+    </div>
+  </footer>
+
+  <script>
+    /* ============================================================
+       CONFIG  ◆  fill these six in and the page is live
+       ============================================================ */
+    const MEMBER_AREA_URL = '/members';                       /* the vault */
+    const QUICKSTART_URL  = '/members-quick-start';            /* first thing to open */
+    const COMMUNITY_URL   = '/members-circle';   /* the Circle doorway, NOT the group itself.
+                                                    A brand new member needs the house rules and
+                                                    the first post template before the group. */
+    const ASK_BROOKE_URL  = '/members-ask-brooke';             /* monthly question thread */
+    const SENDER_EMAIL    = 'hello@purposefulpennies.com';     /* login email sender */
+
+    const FIRST_SESSION = {
+      title: 'The Monthly Money Reset  ◆  One-Income Circle',
+      /*
+        IMPORTANT. Always include the offset on the end.
+        Eastern daylight time is -04:00, eastern standard time is -05:00.
+        Without an offset the browser reads the time in whatever zone the
+        member is sitting in, and a mom in California gets the wrong hour
+        in her calendar. With the offset, every timezone is correct.
+      */
+      start: '2026-08-11T20:00:00-04:00',
+      end:   '2026-08-11T20:45:00-04:00',
+      timeLabel: '8:00 pm eastern',
+      joinUrl: MEMBER_AREA_URL,
+      details: 'Forty five minutes together. Bring your notebook. Replay lands the next morning.'
+    };
+
+    /* PRICING mirror, so the billing line matches the sales page */
+    const PLANS = {
+      monthly: { line: '$19 a month, founding rate', next: 'In one month' },
+      yearly:  { line: '$190 a year, founding rate', next: 'In twelve months' }
+    };
+
+    /* ===== WIRE THE LINKS ===== */
+    document.querySelectorAll('.js-member-area').forEach(function (a) { a.href = MEMBER_AREA_URL; });
+    document.querySelectorAll('.js-quickstart').forEach(function (a) { a.href = QUICKSTART_URL; });
+    document.querySelectorAll('.js-community').forEach(function (a) { a.href = COMMUNITY_URL; });
+    document.querySelectorAll('.js-ask').forEach(function (a) { a.href = ASK_BROOKE_URL; });
+    document.querySelectorAll('.js-sender').forEach(function (el) { el.textContent = SENDER_EMAIL; });
+
+    /* ===== URL PARAMETERS  ◆  optional personalisation ===== */
+    const params = new URLSearchParams(window.location.search);
+
+    const rawName = (params.get('name') || '').trim().replace(/[^A-Za-z\s'.-]/g, '').slice(0, 30);
+    if (rawName) {
+      document.getElementById('greeting').textContent = 'You made it, ' + rawName;
+    }
+
+    const plan = params.get('plan') === 'yearly' ? 'yearly' : 'monthly';
+    document.getElementById('planLine').textContent = PLANS[plan].line;
+    document.getElementById('nextBilling').textContent = PLANS[plan].next;
+
+    /* ===== SESSION DATE BLOCK ===== */
+    (function () {
+      /* Read the date literally off the config string, so the day shown here
+         is the day Brooke scheduled and never shifts for a member abroad. */
+      const m = FIRST_SESSION.start.match(/^(\d{4})-(\d{2})-(\d{2})/);
+      if (!m) return;
+      const months = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+      document.getElementById('sessionMonth').textContent = months[parseInt(m[2], 10) - 1];
+      document.getElementById('sessionDay').textContent = String(parseInt(m[3], 10));
+      document.getElementById('sessionTime').textContent = FIRST_SESSION.timeLabel;
+    })();
+
+    /* ===== CALENDAR LINKS ===== */
+    function toUTCStamp(local) {
+      const d = new Date(local);
+      return d.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
+    }
+    (function buildCalendar() {
+      const s = toUTCStamp(FIRST_SESSION.start);
+      const e = toUTCStamp(FIRST_SESSION.end);
+      const loc = window.location.origin + FIRST_SESSION.joinUrl;
+
+      /* Google Calendar */
+      const g = new URL('https://calendar.google.com/calendar/render');
+      g.searchParams.set('action', 'TEMPLATE');
+      g.searchParams.set('text', FIRST_SESSION.title);
+      g.searchParams.set('dates', s + '/' + e);
+      g.searchParams.set('details', FIRST_SESSION.details + ' Join here: ' + loc);
+      g.searchParams.set('location', loc);
+      document.getElementById('gcalBtn').href = g.toString();
+
+      /* ICS file for Apple Calendar and Outlook */
+      const ics = [
+        'BEGIN:VCALENDAR',
+        'VERSION:2.0',
+        'PRODID:-//Purposeful Pennies//One-Income Circle//EN',
+        'BEGIN:VEVENT',
+        'UID:' + s + '-circle@purposefulpennies.com',
+        'DTSTAMP:' + s,
+        'DTSTART:' + s,
+        'DTEND:' + e,
+        'SUMMARY:' + FIRST_SESSION.title,
+        'DESCRIPTION:' + FIRST_SESSION.details,
+        'LOCATION:' + loc,
+        'BEGIN:VALARM',
+        'TRIGGER:-PT60M',
+        'ACTION:DISPLAY',
+        'DESCRIPTION:Monthly Money Reset starts in one hour',
+        'END:VALARM',
+        'END:VEVENT',
+        'END:VCALENDAR'
+      ].join('\r\n');
+      const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+      document.getElementById('icsBtn').href = URL.createObjectURL(blob);
+    })();
+
+    /* ===== CHECKLIST  ◆  in memory only, nothing stored or tracked ===== */
+    const tasks = Array.prototype.slice.call(document.querySelectorAll('.task'));
+    const fill = document.getElementById('progressFill');
+    const label = document.getElementById('progressLabel');
+    const labels = [
+      'Nothing ticked off yet, and that is a perfectly fine place to start.',
+      'One down. That is the hardest one out of the way.',
+      'Two down. You are already ahead of where you were this morning.',
+      'Three down. One little thing left.',
+      'All four done. Go put your feet up, you have earned it.'
+    ];
+    function refresh() {
+      const done = tasks.filter(function (t) { return t.classList.contains('done'); }).length;
+      fill.style.width = Math.round((done / tasks.length) * 100) + '%';
+      label.textContent = labels[done];
+    }
+    tasks.forEach(function (t) {
+      const btn = t.querySelector('.task-check');
+      btn.addEventListener('click', function () {
+        const done = t.classList.toggle('done');
+        btn.setAttribute('aria-pressed', String(done));
+        refresh();
+      });
+    });
+    refresh();
+
+    /* ===== MOBILE NAV ===== */
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    navToggle.addEventListener('click', function () {
+      const open = navLinks.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', String(open));
+    });
+
+    /* ===== FADE-IN ===== */
+    const fadeObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          fadeObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
+    document.querySelectorAll('.fade-in').forEach(function (el) { fadeObserver.observe(el); });
+
+    /* ===== CONFETTI  ◆  one small celebration on arrival ===== */
+    (function celebrate() {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const colors = ['#DD6B4E', '#D4A83F', '#5C6E47', '#C28954', '#F7D0BE'];
+      const count = 46;
+      for (let i = 0; i < count; i++) {
+        const el = document.createElement('div');
+        el.className = 'confetti';
+        const angle = (Math.PI * 2 * i) / count + Math.random() * 0.5;
+        const distance = 120 + Math.random() * 220;
+        const size = 6 + Math.random() * 8;
+        el.style.background = colors[i % colors.length];
+        el.style.width = size + 'px';
+        el.style.height = size + 'px';
+        el.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+        el.style.setProperty('--dx', Math.cos(angle) * distance + 'px');
+        el.style.setProperty('--dy', (Math.sin(angle) * distance + 120) + 'px');
+        el.style.setProperty('--rot', ((Math.random() - 0.5) * 720) + 'deg');
+        document.body.appendChild(el);
+        requestAnimationFrame(function () { el.classList.add('animate'); });
+        setTimeout(function () { el.remove(); }, 1800);
+      }
+    })();
+<w:pgSz w:h="15840" w:w="12240" w:orient="portrait"/><w:pgMar w:bottom="1440" w:top="1440" w:left="1440" w:right="1440" w:header="720" w:footer="720"/><w:pgNumType w:start="1"/></w:sectPr></w:pPr><w:r w:rsidDel="00000000" w:rsidR="00000000" w:rsidRPr="00000000"><w:rPr><w:rtl w:val="0"/></w:rPr><w:t xml:space="preserve">  </script>

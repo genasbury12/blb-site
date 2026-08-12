@@ -1,0 +1,465 @@
+<!--
+  ============================================================
+  PURPOSEFUL PENNIES  ·  TERMS OF USE
+  URL: /terms
+  ============================================================
+
+  CONDITIONAL SECTIONS THAT NEED A DECISION
+  Section 04, refunds: must state the real policy and must match the
+  membership sales page word for word.
+  Section 14, disputes: court versus binding arbitration is a genuine
+  decision to take with an attorney.
+
+  BEFORE THIS GOES LIVE
+  Fill the BUSINESS object in the script at the bottom. Every blank
+  on the page reads from it. Anything left empty stays visible as a
+  [PLACEHOLDER] so nothing ships half finished by accident.
+
+  This is a drafted document, not legal advice, and it has not been
+  reviewed by an attorney. Have it checked before you rely on it.
+
+  No em dashes or en dashes anywhere.
+  ============================================================
+-->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terms of Use · Purposeful Pennies</title>
+  <meta name="description" content="The agreement between you and us when you use this site.">
+  <link rel="canonical" href="https://purposefulpenniesdraft.showit.site/terms">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&amp;family=DM+Serif+Display&amp;display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --deep-sage:#2E3E2F;--sage:#5C6E47;--warm-tan:#C28954;--warm-tan-dark:#A77246;
+      --cream:#FBF4D7;--cream-warm:#F7ECC4;--charcoal:#2A2A2A;--soft-gray:#7E867D;
+      --light-sage:#DBE3CE;--pale-tan:#EFE0C1;--white:#FFFFFF;
+      --coral:#DD6B4E;--coral-deep:#C25441;--coral-soft:#F7D0BE;--coral-blush:#FBE3D5;
+      --gold:#D4A83F;--gold-soft:#EDD98D;--gold-deep:#B8912E;
+      --ease:cubic-bezier(.22,.61,.36,1);
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{font-size:17px;scroll-behavior:smooth;}
+    @media(min-width:720px){html{font-size:18px;}}
+    body{font-family:Georgia,'Times New Roman',serif;font-size:1.04rem;line-height:1.75;
+      color:var(--charcoal);background:var(--cream);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+    .container{max-width:1240px;margin:0 auto;padding:0 1.5rem;}
+    .doc{max-width:52rem;margin:0 auto;padding:0 1.5rem;}
+    h1,h2,h3{font-family:Georgia,serif;color:var(--deep-sage);}
+    .script{font-family:'Caveat',cursive;font-weight:700;}
+    a{color:var(--coral-deep);}
+
+    /* nav, same as the public pages */
+    .nav{background:rgba(251,244,215,.95);border-bottom:1px solid rgba(194,137,84,.18);
+      position:sticky;top:0;z-index:100;backdrop-filter:blur(10px);}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 1.5rem;
+      max-width:1280px;margin:0 auto;position:relative;}
+    .nav-logo{font-size:1.3rem;font-weight:bold;color:var(--deep-sage);letter-spacing:.03em;
+      text-decoration:none;line-height:1;display:flex;align-items:baseline;gap:.5rem;}
+    .nav-logo .dot{width:8px;height:8px;border-radius:50%;background:var(--coral);display:inline-block;}
+    .nav-logo em{display:block;font-family:'Caveat',cursive;font-weight:500;font-style:normal;
+      color:var(--coral-deep);font-size:.95rem;margin-top:-2px;}
+    .nav-links{display:flex;gap:1.6rem;align-items:center;}
+    .nav-links a{font-size:.95rem;color:var(--deep-sage);text-decoration:none;position:relative;
+      white-space:nowrap;transition:color .2s var(--ease);}
+    .nav-links a:not(.nav-cta):hover{color:var(--coral-deep);}
+    .nav-cta{background:var(--coral);color:#fff!important;padding:.6rem 1.25rem;border-radius:999px;
+      font-size:.85rem!important;font-weight:bold;letter-spacing:.04em;box-shadow:0 3px 0 var(--coral-deep);
+      transition:all .25s var(--ease);}
+    .nav-cta:hover{background:var(--coral-deep);transform:translateY(-1px);}
+    .nav-toggle{display:none;background:none;border:none;width:44px;height:44px;cursor:pointer;
+      flex-direction:column;align-items:center;justify-content:center;gap:5px;}
+    .nav-toggle span{display:block;width:24px;height:2px;background:var(--deep-sage);border-radius:2px;
+      transition:transform .28s var(--ease),opacity .2s var(--ease);}
+    .nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+    .nav-toggle.open span:nth-child(2){opacity:0;}
+    .nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+    @media(max-width:1000px){
+      .nav-toggle{display:flex;}
+      .nav-links{position:absolute;top:100%;left:0;right:0;background:var(--cream);flex-direction:column;
+        align-items:stretch;gap:0;padding:0 1.5rem;max-height:0;overflow:hidden;
+        transition:max-height .35s var(--ease),padding .35s var(--ease);
+        border-bottom:1px solid rgba(194,137,84,.18);box-shadow:0 18px 40px rgba(46,62,47,.08);}
+      .nav-links.open{max-height:560px;padding-bottom:1.5rem;}
+      .nav-links a{padding:.95rem 0;border-bottom:1px solid rgba(194,137,84,.15);font-size:1.05rem;}
+      .nav-cta{text-align:center;margin-top:1.1rem;border-bottom:none;padding:.9rem 1.25rem;}
+    }
+
+    /* header */
+    .legal-hero{background:var(--cream);padding:3.5rem 0 2.5rem;position:relative;overflow:hidden;}
+    .legal-hero::before{content:"";position:absolute;top:-190px;right:-150px;width:500px;height:500px;
+      background:radial-gradient(circle,var(--coral-blush)0%,transparent 65%);opacity:.7;pointer-events:none;}
+    .legal-hero .doc{position:relative;z-index:2;}
+    .legal-kicker{font-size:.76rem;font-weight:bold;letter-spacing:.2em;text-transform:uppercase;
+      color:var(--coral-deep);display:inline-flex;align-items:center;gap:.7rem;margin-bottom:.9rem;}
+    .legal-kicker::before{content:"";width:28px;height:1px;background:var(--coral);display:inline-block;}
+    .legal-hero h1{font-size:clamp(2rem,5vw,3.1rem);line-height:1.06;letter-spacing:-.02em;margin-bottom:1rem;}
+    .legal-lead{font-size:1.1rem;font-style:italic;color:var(--sage);}
+    .dates{margin-top:1.5rem;padding-top:1.25rem;border-top:1px solid rgba(194,137,84,.3);
+      font-size:.9rem;color:var(--soft-gray);}
+    .dates b{color:var(--deep-sage);}
+
+    /* body */
+    .legal-body{background:var(--white);padding:3rem 0 4rem;}
+    .toc{background:var(--cream);border-radius:12px;padding:1.6rem 1.85rem;margin-bottom:2.75rem;
+      border-left:5px solid var(--coral);}
+    .toc h2{font-size:.78rem;font-weight:bold;letter-spacing:.18em;text-transform:uppercase;
+      color:var(--coral-deep);margin-bottom:.9rem;}
+    .toc ol{list-style:none;counter-reset:toc;columns:2;column-gap:2rem;}
+    @media(max-width:640px){.toc ol{columns:1;}}
+    .toc li{counter-increment:toc;padding:.28rem 0 .28rem 1.9rem;position:relative;font-size:.95rem;
+      break-inside:avoid;}
+    .toc li::before{content:counter(toc,decimal-leading-zero);position:absolute;left:0;
+      font-family:'DM Serif Display',Georgia,serif;font-size:.85rem;color:var(--warm-tan);}
+    .toc a{text-decoration:none;color:var(--deep-sage);}
+    .toc a:hover{color:var(--coral-deep);text-decoration:underline;}
+
+    section.s{margin-bottom:2.5rem;scroll-margin-top:6rem;}
+    section.s > h2{font-size:1.32rem;line-height:1.3;margin-bottom:.85rem;
+      padding-bottom:.5rem;border-bottom:2px solid var(--pale-tan);}
+    section.s > h2 .num{font-family:'DM Serif Display',Georgia,serif;color:var(--coral-deep);
+      margin-right:.6rem;}
+    section.s h3{font-size:1.05rem;margin:1.4rem 0 .5rem;color:var(--sage);}
+    section.s p{margin-bottom:1rem;}
+    section.s ul{margin:0 0 1rem;list-style:none;}
+    section.s ul li{padding:.32rem 0 .32rem 1.6rem;position:relative;}
+    section.s ul li::before{content:"\25C6";position:absolute;left:0;top:.5rem;color:var(--coral);
+      font-size:.6rem;}
+    section.s strong{color:var(--deep-sage);}
+
+    .callout{background:var(--coral-blush);border-radius:12px;padding:1.4rem 1.7rem;margin:1.5rem 0;
+      border-left:5px solid var(--coral);}
+    .callout p{margin-bottom:.6rem;}
+    .callout p:last-child{margin-bottom:0;}
+    .callout b{color:var(--coral-deep);}
+    .hard{background:var(--deep-sage);color:var(--cream);border-radius:12px;padding:1.6rem 1.85rem;
+      margin:1.75rem 0;}
+    .hard h3{color:var(--gold-soft);margin:0 0 .6rem;font-size:1rem;letter-spacing:.06em;
+      text-transform:uppercase;}
+    .hard p{margin-bottom:.7rem;}
+    .hard p:last-child{margin-bottom:0;}
+
+    table.t{width:100%;border-collapse:collapse;margin:1.1rem 0 1.4rem;font-size:.95rem;}
+    table.t th{text-align:left;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
+      color:var(--coral-deep);padding:.55rem .7rem;border-bottom:2px solid var(--pale-tan);}
+    table.t td{padding:.6rem .7rem;border-bottom:1px solid rgba(46,62,47,.09);vertical-align:top;}
+    table.t tr:last-child td{border-bottom:none;}
+
+    /* cross links */
+    .legal-nav{background:var(--light-sage);padding:2.75rem 0;}
+    .legal-nav h2{text-align:center;font-size:1.15rem;margin-bottom:1.5rem;}
+    .legal-nav-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;max-width:60rem;margin:0 auto;}
+    @media(max-width:820px){.legal-nav-grid{grid-template-columns:repeat(2,1fr);}}
+    @media(max-width:460px){.legal-nav-grid{grid-template-columns:1fr;}}
+    .legal-nav-grid a{background:var(--white);border-radius:10px;padding:1.1rem 1.15rem;text-decoration:none;
+      display:block;border:1px solid rgba(221,107,78,.18);transition:all .25s var(--ease);}
+    .legal-nav-grid a:hover{transform:translateY(-4px);box-shadow:0 16px 32px rgba(46,62,47,.1);}
+    .legal-nav-grid a.here{background:var(--cream-warm);border-color:var(--coral);}
+    .legal-nav-grid b{display:block;color:var(--deep-sage);font-size:.99rem;margin-bottom:.2rem;}
+    .legal-nav-grid span{font-size:.84rem;color:var(--sage);font-style:italic;}
+
+    footer{background:var(--deep-sage);color:var(--cream);padding:3.5rem 0 2rem;text-align:center;}
+    footer .brand-line{font-family:'DM Serif Display',Georgia,serif;font-size:1.8rem;color:var(--cream);
+      text-decoration:none;display:inline-block;}
+    footer .tagline{font-family:'Caveat',cursive;color:var(--coral-soft);font-size:1.35rem;margin:.4rem 0 2rem;}
+    footer .footer-nav{display:flex;justify-content:center;flex-wrap:wrap;gap:1.25rem 2rem;margin:2rem 0;
+      padding-top:2rem;border-top:1px solid rgba(221,107,78,.2);}
+    footer .footer-nav a{color:var(--cream);opacity:.85;text-decoration:none;font-size:.95rem;}
+    footer .footer-nav a:hover{opacity:1;color:var(--coral-soft);}
+    footer .legal{padding-top:1rem;margin-top:1.25rem;border-top:1px solid rgba(221,107,78,.12);
+      font-size:.82rem;opacity:.65;}
+    footer .legal a{color:var(--cream);opacity:.8;text-decoration:none;margin:0 .4rem;}
+
+    @media(prefers-reduced-motion:reduce){*{transition-duration:.01ms!important;}}
+    :focus-visible{outline:3px solid var(--coral);outline-offset:3px;}
+</style>
+
+
+
+  <nav class="nav" aria-label="Main">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo"><span class="dot"></span>Purposeful Pennies<em>&nbsp;spend with intention</em></a>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-links" id="navLinks">
+        <a href="/start-here">Start Here</a>
+        <a href="/about">About</a>
+        <a href="/free-resources">Free Resources</a>
+        <a href="/membership">Membership</a>
+        <a href="/blog">Blog</a>
+        <a href="/contact">Contact</a>
+        <a href="/opt-in" class="nav-cta">Free Reality Check</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="legal-hero">
+    <div class="doc">
+      <span class="legal-kicker">The agreement</span>
+      <h1>Terms of Use</h1>
+      <p class="legal-lead">The agreement between you and us when you use this site.</p>
+      <p class="dates">
+        <b>Effective</b> <span data-legal="effective">[DATE]</span>
+        &nbsp;◆&nbsp;
+        <b>Last updated</b> <span data-legal="updated">[DATE]</span>
+      </p>
+    </div>
+  </section>
+
+  <div class="legal-body">
+    <div class="doc">
+      <nav class="toc" aria-label="On this page">
+        <h2>On this page</h2>
+        <ol>
+        <li><a href="#s1">Agreement</a></li>
+        <li><a href="#s2">Who may use this site</a></li>
+        <li><a href="#s3">The free resources</a></li>
+        <li><a href="#s4">The membership</a></li>
+        <li><a href="#s5">What belongs to us</a></li>
+        <li><a href="#s6">How you may not use the site</a></li>
+        <li><a href="#s7">Anything you post</a></li>
+        <li><a href="#s8">Other people’s services</a></li>
+        <li><a href="#s9">No professional advice</a></li>
+        <li><a href="#s10">No guarantee of results</a></li>
+        <li><a href="#s11">Limitation of liability</a></li>
+        <li><a href="#s12">Indemnity</a></li>
+        <li><a href="#s13">Ending access</a></li>
+        <li><a href="#s14">Governing law and disputes</a></li>
+        <li><a href="#s15">Changes to these terms</a></li>
+        <li><a href="#s16">Contact</a></li>
+        </ol>
+      </nav>
+
+      <section class="s" id="s1">
+        <h2><span class="num">01</span>Agreement</h2>
+
+        <p>These terms are an agreement between you and <span data-legal="name">[BUSINESS LEGAL NAME]</span>, <span data-legal="entity">[ENTITY TYPE AND STATE]</span>, trading as Purposeful Pennies. By using this site, downloading a resource, subscribing to our emails or joining the membership, you agree to them. If you do not agree, please do not use the site.</p>
+        <p>Please also read our <a href="/disclaimer">Disclaimer</a>, which is part of these terms and explains an important limit on what this site provides.</p>
+      </section>
+
+      <section class="s" id="s2">
+        <h2><span class="num">02</span>Who may use this site</h2>
+
+        <p>You must be at least 18 years old, or the age of majority where you live, to subscribe, purchase or hold an account. By using the site you confirm you meet that requirement and that any information you give us is accurate.</p>
+      </section>
+
+      <section class="s" id="s3">
+        <h2><span class="num">03</span>The free resources</h2>
+
+        <p>Our free resources are provided for <strong>your own personal, household use</strong>. You may:</p>
+        <ul>
+          <li>Download them and keep them.</li>
+          <li>Print as many copies as your own family needs.</li>
+          <li>Make your own editable copy to fill in.</li>
+        </ul>
+        <p>You may not:</p>
+        <ul>
+          <li>Sell them, or include them in anything you sell.</li>
+          <li>Republish or post the files publicly, or share the download links.</li>
+          <li>Remove our branding, or present the work as your own.</li>
+          <li>Distribute them to a group, class, ministry or organization without asking us first.</li>
+        </ul>
+        <div class="callout">
+          <p><b>About group use.</b> We say yes to church groups, small groups and classes almost every time. We only ask that you <a href="/contact">contact us first</a> so we know where the materials are going. Please send people to the site to get their own copy rather than forwarding the files.</p>
+        </div>
+      </section>
+
+      <section class="s" id="s4">
+        <h2><span class="num">04</span>The membership</h2>
+
+        <h3>What you are buying</h3>
+        <p>Access to the membership content for as long as your subscription is active. Content is added and updated over time. We may change, add to or retire individual materials, but we will not reduce the substance of what you are paying for without telling you.</p>
+        <h3>Billing and renewal</h3>
+        <ul>
+          <li>Your subscription <strong>renews automatically</strong> at the end of each billing period until you cancel.</li>
+          <li>We charge the payment method on file. If it fails, we may retry and may suspend access until payment succeeds.</li>
+          <li>Prices may change. If a price changes, we will give you notice before it applies to your renewal.</li>
+        </ul>
+        <h3>Cancelling</h3>
+        <p>You can cancel at any time from your account. Cancelling stops future charges. Your access continues to the end of the period you have already paid for, and then ends.</p>
+        <h3>Refunds</h3>
+        <div class="callout">
+          <p><b>To confirm before publishing.</b> This section must state the actual refund policy, and it must match whatever the sales page promises. If the membership carries a money-back guarantee, state the window, what qualifies, and how to request it. If it does not, say plainly that payments are non-refundable except where the law requires otherwise. A mismatch between this page and the sales page is the single most common source of payment disputes.</p>
+        </div>
+        <h3>Access and conduct</h3>
+        <p>Your account is for you. Do not share login details, and do not download and redistribute member materials. We may suspend or end access, without refund, for sharing credentials, redistributing content, or behaving abusively toward us or other members.</p>
+      </section>
+
+      <section class="s" id="s5">
+        <h2><span class="num">05</span>What belongs to us</h2>
+
+        <p>All content on this site, including text, worksheets, printables, designs, photographs, logos and the Purposeful Pennies name, is owned by us or licensed to us and is protected by copyright and trademark law.</p>
+        <p>You may quote a short passage with credit and a link. You may not reproduce substantial portions, republish our materials, or use our content to train or fine-tune an artificial intelligence model without our written permission.</p>
+      </section>
+
+      <section class="s" id="s6">
+        <h2><span class="num">06</span>How you may not use the site</h2>
+
+        <ul>
+          <li>Breaking the law, or encouraging anyone else to.</li>
+          <li>Copying or scraping the site at scale, automated or otherwise.</li>
+          <li>Attempting to access areas you have not paid for, or interfering with security features.</li>
+          <li>Uploading anything harmful, or attempting to disrupt the site.</li>
+          <li>Impersonating us or anyone else.</li>
+          <li>Harassing, threatening or abusing us, our team or other members.</li>
+        </ul>
+      </section>
+
+      <section class="s" id="s7">
+        <h2><span class="num">07</span>Anything you post</h2>
+
+        <p>If you post a comment, reply in a community space, or send us a testimonial or story, you keep ownership of it, and you grant us a non-exclusive, royalty-free license to use, display and reproduce it in connection with our business, including in marketing. You confirm it is yours to share and that it is not unlawful.</p>
+        <p>We may remove anything, at any time, for any reason.</p>
+      </section>
+
+      <section class="s" id="s8">
+        <h2><span class="num">08</span>Other people’s services</h2>
+
+        <p>The site relies on third-party services for hosting, email, membership, payments and file delivery, and it links to other websites. We do not control those services and are not responsible for them. Your use of them is governed by their own terms.</p>
+      </section>
+
+      <section class="s" id="s9">
+        <h2><span class="num">09</span>No professional advice</h2>
+
+        <div class="hard">
+          <h3>Read this part carefully</h3>
+          <p>Everything on this site is <strong>general educational information</strong> about household budgeting. It is not financial, investment, tax, legal or accounting advice, and it is not tailored to your circumstances.</p>
+          <p>Brooke is not a licensed financial advisor, accountant, attorney or tax professional. No relationship of professional advisor and client is created by using this site, subscribing, or joining the membership.</p>
+          <p>Before making a financial decision that matters, speak to a qualified professional who knows your actual situation. Our full <a href="/disclaimer" style="color:var(--gold-soft)">Disclaimer</a> forms part of these terms.</p>
+        </div>
+      </section>
+
+      <section class="s" id="s10">
+        <h2><span class="num">10</span>No guarantee of results</h2>
+
+        <p>We describe what worked in our own household and what has worked for others. Those are examples, not promises. Any figures mentioned anywhere on this site, including amounts saved or debt paid off, are illustrations of what has been possible and not a prediction of your result.</p>
+        <p><strong>Your outcome depends on your income, expenses, circumstances and choices, none of which we control.</strong> We do not guarantee that you will save money, reduce debt, or achieve any particular financial outcome.</p>
+      </section>
+
+      <section class="s" id="s11">
+        <h2><span class="num">11</span>Limitation of liability</h2>
+
+        <p>The site and everything on it is provided "as is" and "as available", without warranties of any kind, whether express or implied, including any implied warranty of merchantability, fitness for a particular purpose, or non-infringement. We do not warrant that the site will be uninterrupted, error free, or that the content is complete or current.</p>
+        <p>To the fullest extent permitted by law, we are not liable for any indirect, incidental, special, consequential or punitive damages, or for any loss of profits, savings, data or goodwill, arising from your use of the site or reliance on its content.</p>
+        <p>Where liability cannot be excluded, <strong>our total liability to you is limited to the greater of the amount you paid us in the twelve months before the claim, or fifty US dollars.</strong></p>
+        <p>Some jurisdictions do not allow certain exclusions or limitations, so parts of this section may not apply to you.</p>
+      </section>
+
+      <section class="s" id="s12">
+        <h2><span class="num">12</span>Indemnity</h2>
+
+        <p>You agree to indemnify and hold harmless <span data-legal="name">[BUSINESS LEGAL NAME]</span> and anyone working with us from any claim, loss or expense, including reasonable legal fees, arising out of your use of the site, your breach of these terms, or anything you post.</p>
+      </section>
+
+      <section class="s" id="s13">
+        <h2><span class="num">13</span>Ending access</h2>
+
+        <p>We may suspend or end your access to the site or the membership at any time if you breach these terms. You may stop using the site at any time. Sections covering intellectual property, disclaimers, limitation of liability and indemnity survive the end of this agreement.</p>
+      </section>
+
+      <section class="s" id="s14">
+        <h2><span class="num">14</span>Governing law and disputes</h2>
+
+        <p>These terms are governed by the laws of the State of <span data-legal="state">[STATE]</span>, without regard to its conflict of laws rules. Any dispute will be brought in the state or federal courts located in <span data-legal="state">[STATE]</span>, and you consent to their jurisdiction.</p>
+        <div class="callout">
+          <p><b>To confirm before publishing.</b> Some businesses prefer binding arbitration and a class action waiver instead of court. That is a real decision with real tradeoffs and it should be made with an attorney rather than by default.</p>
+        </div>
+      </section>
+
+      <section class="s" id="s15">
+        <h2><span class="num">15</span>Changes to these terms</h2>
+
+        <p>We may update these terms. The "last updated" date at the top will change. If a change is significant, we will tell subscribers by email. Continuing to use the site after a change means you accept the new terms.</p>
+      </section>
+
+      <section class="s" id="s16">
+        <h2><span class="num">16</span>Contact</h2>
+
+        <p>Questions about these terms:</p>
+        <ul>
+          <li><strong>Email</strong> <span data-legal="email">[LEGAL CONTACT EMAIL]</span></li>
+          <li><strong>Post</strong> <span data-legal="address">[MAILING ADDRESS]</span></li>
+          <li><strong>Or use</strong> <a href="/contact">the contact form</a></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+
+  <section class="legal-nav">
+    <div class="container">
+      <h2>The other three, while you are here</h2>
+      <div class="legal-nav-grid">
+        <a href="/privacy-policy"><b>Privacy Policy</b><span>What we collect, why, and what you can ask us to do about it.</span></a>
+        <a href="/terms" class="here"><b>Terms of Use</b><span>The agreement between you and us when you use this site.</span></a>
+        <a href="/disclaimer"><b>Disclaimer</b><span>What this site is, and just as importantly, what it is not.</span></a>
+        <a href="/affiliate-disclosure"><b>Affiliate Disclosure</b><span>When a link earns us something, and how we choose what to recommend.</span></a>
+      </div>
+    </div>
+  </section>
+
+
+  <footer>
+    <div class="container">
+      <a href="/" class="brand-line">Purposeful Pennies</a>
+      <p class="tagline">spend with intention. save with purpose.</p>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="/start-here">Start Here</a>
+        <a href="/about">About</a>
+        <a href="/free-resources">Free Resources</a>
+        <a href="/membership">Membership</a>
+        <a href="/blog">Blog</a>
+        <a href="/contact">Contact</a>
+        <a href="/opt-in">Free Reality Check</a>
+      </nav>
+      <p class="legal">
+        © 2026 <span data-legal="name">[BUSINESS LEGAL NAME]</span>. All rights reserved.
+        &nbsp;·&nbsp;
+        <a href="/privacy-policy">Privacy</a> ·
+        <a href="/terms">Terms</a> ·
+        <a href="/disclaimer">Disclaimer</a> ·
+        <a href="/affiliate-disclosure">Affiliate Disclosure</a>
+      </p>
+    </div>
+  </footer>
+
+
+  <script>
+  /* =========================================================
+     FILL THESE IN ONCE. Every blank on the page reads from here.
+     Anything left unset keeps its visible [PLACEHOLDER] text so
+     you can see at a glance what is still missing.
+     ========================================================= */
+  var BUSINESS = {
+    name:      '',   /* legal entity name, e.g. Purposeful Pennies LLC */
+    trading:   'Purposeful Pennies',
+    entity:    '',   /* e.g. an Ohio limited liability company */
+    address:   '',   /* mailing address for legal notices */
+    email:     '',   /* address for privacy and legal contact */
+    state:     '',   /* governing law, e.g. Ohio */
+    effective: 'July 25, 2026',
+    updated:   'July 25, 2026'
+  };
+
+  Object.keys(BUSINESS).forEach(function (k) {
+    if (!BUSINESS[k]) return;
+    document.querySelectorAll('[data-legal="' + k + '"]').forEach(function (el) {
+      el.textContent = BUSINESS[k];
+      el.removeAttribute('style');
+    });
+  });
+
+  /* mobile nav */
+  (function () {
+    var t = document.getElementById('navToggle'), l = document.getElementById('navLinks');
+    if (!t || !l) return;
+    t.addEventListener('click', function () {
+      var open = l.classList.toggle('open');
+      t.classList.toggle('open', open);
+      t.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    l.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { l.classList.remove('open'); t.classList.remove('open'); });
+    });
+  })();
+<w:pgSz w:h="15840" w:w="12240" w:orient="portrait"/><w:pgMar w:bottom="1440" w:top="1440" w:left="1440" w:right="1440" w:header="720" w:footer="720"/><w:pgNumType w:start="1"/></w:sectPr></w:pPr><w:r w:rsidDel="00000000" w:rsidR="00000000" w:rsidRPr="00000000"><w:rPr><w:rtl w:val="0"/></w:rPr><w:t xml:space="preserve">  </script>

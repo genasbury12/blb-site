@@ -1,0 +1,709 @@
+<!--
+  ============================================================
+  PURPOSEFUL PENNIES  ·  THE CIRCLE   /members-circle
+  Showit + MemberSpace
+  ============================================================
+
+  WHY THIS PAGE EXISTS
+  MemberSpace does not host community, so the Circle itself lives
+  somewhere else, currently a private Facebook group. That leaves two
+  options: drop a bare link in the nav, or build a proper doorway.
+
+  This is the doorway. A bare link sends a nervous first time poster
+  into a room full of strangers with no idea what to say, and she
+  posts nothing, and three weeks later she cancels because "the
+  community was not for me". This page gives her the house rules, the
+  five rooms, and a first post she can copy word for word.
+
+  ------------------------------------------------------------
+  LINKING RULE, SO THE FOUR PAGES AGREE
+  ------------------------------------------------------------
+     Nav "The Circle"                  ->  /members-circle   (here)
+     Quick Start "Introduce yourself"  ->  /members-circle   (here)
+     Thank you "Introduce yourself"    ->  /members-circle   (here)
+     Member home "Go to the Circle"    ->  COMMUNITY_URL     (direct)
+
+  New members get the doorway, returning members scanning recent
+  activity on the member home go straight through. Those three files
+  have been updated to match.
+
+  ------------------------------------------------------------
+  MEMBERSPACE
+  ------------------------------------------------------------
+  Protection inherited from the /members-* prefix rule. See the member
+  home file for the full protection setup.
+  Account links point at /members-account, which is the one page that
+  carries the MemberSpace Link. Nothing on this page needs it.
+
+  ------------------------------------------------------------
+  ONE THING WORTH RAISING WITH BROOKE
+  ------------------------------------------------------------
+  Hosting the Circle on Facebook means any member who is not on
+  Facebook, or who left it deliberately, cannot reach a pillar she is
+  paying for. That is a real gap, not a technicality. Section 8 of
+  this page gives those members an honest alternative rather than
+  pretending the problem does not exist, but the cleanest fix is a
+  community platform on the members' own side of the wall.
+
+  FORMATTING RULE. Zero em dashes, zero en dashes. Separator is the
+  diamond glyph.
+  ============================================================
+-->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>The Circle · The One-Income Circle</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&amp;family=DM+Serif+Display&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --deep-sage: #2E3E2F; --sage: #5C6E47; --sage-soft: #8B9E75;
+      --warm-tan: #C28954; --warm-tan-dark: #A77246;
+      --cream: #FBF4D7; --cream-warm: #F7ECC4; --charcoal: #2A2A2A;
+      --soft-gray: #7E867D; --light-sage: #DBE3CE; --pale-tan: #EFE0C1; --white: #FFFFFF;
+      --coral: #DD6B4E; --coral-deep: #C25441; --coral-soft: #F7D0BE; --coral-blush: #FBE3D5;
+      --gold: #D4A83F; --gold-soft: #EDD98D; --gold-deep: #B8912E;
+      --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 17px; scroll-behavior: smooth; }
+    @media (min-width: 720px) { html { font-size: 18px; } }
+    body {
+      font-family: Georgia, 'Times New Roman', serif; font-size: 1.05rem; line-height: 1.68;
+      color: var(--charcoal); background: var(--cream);
+      -webkit-font-smoothing: antialiased; overflow-x: hidden;
+    }
+    .container { max-width: 1120px; margin: 0 auto; padding: 0 1.5rem; }
+    .narrow { max-width: 780px; margin: 0 auto; padding: 0 1.5rem; }
+    section { padding: 3rem 0; position: relative; }
+    @media (max-width: 700px) { section { padding: 2.25rem 0; } }
+    .script { font-family: 'Caveat', cursive; font-weight: 700; }
+    h1, h2, h3, h4 { font-family: Georgia, serif; color: var(--deep-sage); }
+    h1 { font-size: clamp(2.05rem, 4.8vw, 3.05rem); font-weight: bold; line-height: 1.08; }
+    h2 { font-size: clamp(1.5rem, 3.1vw, 2.05rem); font-weight: bold; line-height: 1.18; }
+    h3 { font-size: 1.15rem; font-weight: bold; line-height: 1.32; }
+    h4 { font-size: 1rem; font-weight: bold; }
+    p { margin-bottom: 0.95rem; } p:last-child { margin-bottom: 0; }
+    a { color: var(--coral-deep); }
+    .eyebrow {
+      font-size: 0.74rem; font-weight: bold; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--warm-tan-dark); display: inline-flex; align-items: center; gap: 0.7rem;
+    }
+    .eyebrow::before { content: ""; width: 24px; height: 1px; background: var(--warm-tan); }
+    .eyebrow-coral { color: var(--coral-deep); }
+    .eyebrow-coral::before { background: var(--coral); }
+    .eyebrow-cream { color: var(--coral-soft); }
+    .eyebrow-cream::before { background: var(--coral); }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.55rem; background: var(--warm-tan);
+      color: white; font-family: Georgia, serif; font-size: 1rem; font-weight: bold;
+      padding: 0.9rem 1.9rem; border: none; border-radius: 999px; cursor: pointer;
+      text-decoration: none; transition: all 0.25s var(--ease); box-shadow: 0 3px 0 var(--warm-tan-dark);
+    }
+    .btn:hover { background: var(--warm-tan-dark); transform: translateY(-2px); box-shadow: 0 5px 0 var(--warm-tan-dark); color: white; }
+    .btn::after { content: "\2192"; transition: transform 0.25s var(--ease); }
+    .btn:hover::after { transform: translateX(3px); }
+    .btn-coral { background: var(--coral); box-shadow: 0 3px 0 var(--coral-deep); }
+    .btn-coral:hover { background: var(--coral-deep); box-shadow: 0 5px 0 var(--coral-deep); }
+    .btn-outline {
+      background: transparent; color: var(--warm-tan-dark); border: 2px solid var(--warm-tan);
+      padding: calc(0.9rem - 2px) calc(1.9rem - 2px); box-shadow: none;
+    }
+    .btn-outline:hover { background: var(--pale-tan); color: var(--warm-tan-dark); box-shadow: none; }
+    .btn-cream { background: var(--cream); color: var(--deep-sage); box-shadow: 0 3px 0 rgba(0,0,0,0.18); }
+    .btn-cream:hover { background: var(--cream-warm); color: var(--deep-sage); box-shadow: 0 5px 0 rgba(0,0,0,0.18); }
+    .btn-ghost { background: transparent; color: var(--cream); border: 2px solid var(--coral-soft); box-shadow: none; padding: calc(0.9rem - 2px) calc(1.9rem - 2px); }
+    .btn-ghost:hover { background: rgba(255,255,255,0.1); color: var(--cream); box-shadow: none; }
+    .btn-lg { font-size: 1.12rem; padding: 1.1rem 2.3rem; }
+    .btn-sm { font-size: 0.88rem; padding: 0.6rem 1.25rem; }
+    .btn-plain::after { content: ""; }
+
+    /* ===== MEMBER NAV ===== */
+    .mnav { background: var(--deep-sage); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(46,62,47,0.18); }
+    .mnav-inner { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding: 0.85rem 1.5rem; max-width: 1280px; margin: 0 auto; }
+    .mnav-logo { font-family: Georgia, serif; font-size: 1.12rem; font-weight: bold; color: var(--cream); text-decoration: none; display: flex; align-items: center; gap: 0.5rem; white-space: nowrap; }
+    .mnav-logo .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--coral); }
+    .mnav-links { display: flex; align-items: center; gap: 1.6rem; }
+    .mnav-links a { color: var(--cream); text-decoration: none; font-size: 0.94rem; opacity: 0.88; position: relative; padding-bottom: 2px; white-space: nowrap; }
+    .mnav-links a::after { content: ""; position: absolute; left: 0; right: 0; bottom: -3px; height: 2px; background: var(--coral); transform: scaleX(0); transform-origin: left; transition: transform 0.25s var(--ease); border-radius: 2px; }
+    .mnav-links a:hover { opacity: 1; }
+    .mnav-links a:hover::after, .mnav-links a.current::after { transform: scaleX(1); }
+    .mnav-links a.current { opacity: 1; font-weight: bold; }
+    .mnav-account { background: var(--coral); color: white !important; padding: 0.5rem 1.1rem; border-radius: 999px; font-size: 0.86rem !important; font-weight: bold; opacity: 1 !important; box-shadow: 0 2px 0 var(--coral-deep); }
+    .mnav-account::after { display: none; }
+    .mnav-account:hover { background: var(--coral-deep); }
+    .mnav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 0.4rem; }
+    .mnav-toggle span { display: block; width: 24px; height: 2px; background: var(--cream); margin: 5px 0; border-radius: 2px; }
+    @media (max-width: 1080px) {
+      .mnav-toggle { display: block; }
+      .mnav-links { position: absolute; top: 100%; left: 0; right: 0; background: var(--deep-sage); flex-direction: column; align-items: stretch; gap: 0; padding: 0 1.5rem; max-height: 0; overflow: hidden; transition: max-height 0.35s var(--ease), padding 0.35s var(--ease); }
+      .mnav-links.open { max-height: 32rem; padding: 0.75rem 1.5rem 1.5rem; }
+      .mnav-links a { padding: 0.75rem 0; font-size: 1.02rem; }
+      .mnav-links a::after { display: none; }
+      .mnav-account { text-align: center; margin-top: 0.75rem; }
+    }
+
+
+    /* ===== SHOWIT OVERRIDE ARMOUR =====
+       Showit injects its own link colours over anything pasted into
+       Custom Head HTML, and it beat the logo rule on the live site: the
+       logo rendered dark on the dark nav and was effectively invisible.
+       The nav links happened to survive, but they are one template
+       change away from the same problem.
+
+       Every colour in the nav is therefore pinned here with high
+       specificity and !important. These are the same colours the
+       component already intended, nothing new. Do not remove this
+       block. If a nav element ever renders the wrong colour on Showit
+       again, add it here rather than editing the rules above. */
+    .mnav .mnav-logo,
+    .mnav .mnav-logo:link,
+    .mnav .mnav-logo:visited,
+    .mnav .mnav-logo:hover,
+    .mnav .mnav-logo:focus,
+    .mnav .mnav-logo:active,
+    .mnav .mnav-logo * { color: var(--cream) !important; }
+    .mnav .mnav-logo .dot { background: var(--coral) !important; }
+
+    .mnav .mnav-links a,
+    .mnav .mnav-links a:link,
+    .mnav .mnav-links a:visited,
+    .mnav .mnav-links a:active { color: var(--cream) !important; }
+    .mnav .mnav-links a:hover { color: var(--cream) !important; }
+
+    .mnav .mnav-links a.mnav-account,
+    .mnav .mnav-links a.mnav-account:link,
+    .mnav .mnav-links a.mnav-account:visited,
+    .mnav .mnav-links a.mnav-account:hover,
+    .mnav .mnav-links a.mnav-account:active { color: #FFFFFF !important; }
+    .mnav .mnav-toggle span { background: var(--cream) !important; }
+    .mnav .mnav-logo, .mnav .mnav-links a { text-decoration: none !important; }
+
+    /* ===== HERO ===== */
+    .c-hero { background: var(--cream); padding: 2.5rem 0 2.5rem; position: relative; overflow: hidden; }
+    .c-hero::before {
+      content: ""; position: absolute; top: -170px; right: -150px; width: 440px; height: 440px;
+      background: radial-gradient(circle, var(--coral-blush) 0%, transparent 65%); opacity: 0.8; pointer-events: none;
+    }
+    .c-hero-inner { position: relative; z-index: 2; }
+    .crumb { font-size: 0.85rem; color: var(--soft-gray); margin-bottom: 1rem; }
+    .crumb a { color: var(--sage); text-decoration: none; border-bottom: 1px solid rgba(92,110,71,0.3); }
+    .crumb a:hover { color: var(--coral-deep); }
+    .c-hero h1 { margin-bottom: 0.9rem; }
+    .c-hero-sub { font-size: 1.14rem; font-style: italic; color: var(--sage); max-width: 40rem; margin-bottom: 1.6rem; }
+    .hero-cta { display: flex; flex-wrap: wrap; gap: 0.9rem; align-items: center; }
+    .where {
+      margin-top: 1.15rem; font-size: 0.9rem; color: var(--soft-gray); font-style: italic;
+    }
+    .where a { color: var(--sage); }
+
+    /* ===== WHAT IT IS ===== */
+    .isnt { background: var(--coral-blush); }
+    .isnt-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    @media (max-width: 820px) { .isnt-grid { grid-template-columns: 1fr; } }
+    .isnt-col { background: white; border-radius: 14px; padding: 1.85rem 1.85rem; }
+    .isnt-col h2 { font-size: 1.3rem; margin-bottom: 1rem; }
+    .isnt-col ul { list-style: none; }
+    .isnt-col li { padding: 0.5rem 0 0.5rem 1.7rem; position: relative; font-size: 0.98rem; line-height: 1.55; }
+    .isnt-col.is li::before {
+      content: ""; position: absolute; left: 0; top: 0.85rem; width: 15px; height: 15px;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23DD6B4E' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center/contain no-repeat;
+    }
+    .isnt-col.not li::before {
+      content: "\00D7"; position: absolute; left: 0.25rem; top: 0.42rem;
+      color: var(--soft-gray); font-size: 1.25rem; font-weight: bold;
+    }
+
+    /* ===== SPACES ===== */
+    .spaces { background: var(--white); }
+    .spaces-head { max-width: 42rem; margin-bottom: 2rem; }
+    .spaces-head h2 { margin: 0.85rem 0 0.75rem; }
+    .space-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; }
+    @media (max-width: 860px) { .space-list { grid-template-columns: 1fr; } }
+    .space {
+      background: var(--cream); border: 1px solid rgba(194,137,84,0.28); border-radius: 14px;
+      padding: 1.5rem 1.6rem; min-width: 0;
+      transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease), border-color 0.25s var(--ease);
+    }
+    .space:hover { transform: translateY(-4px); box-shadow: 0 14px 30px rgba(46,62,47,0.1); border-color: var(--coral); }
+    .space-top { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.6rem; flex-wrap: wrap; }
+    .space-icon {
+      width: 38px; height: 38px; border-radius: 50%; background: var(--coral-blush);
+      color: var(--coral-deep); display: flex; align-items: center; justify-content: center;
+      font-size: 1.05rem; flex-shrink: 0;
+    }
+    .space h3 { margin: 0; }
+    .space p { font-size: 0.95rem; color: var(--sage); margin-bottom: 0.75rem; }
+    .space .post-what {
+      font-size: 0.86rem; color: var(--deep-sage); background: rgba(255,255,255,0.75);
+      border-left: 3px solid var(--coral-soft); padding: 0.55rem 0.75rem; border-radius: 0 6px 6px 0;
+    }
+    .space .post-what b { color: var(--coral-deep); }
+
+    /* ===== RHYTHM ===== */
+    .rhythm { background: var(--light-sage); }
+    .rhythm-head { max-width: 40rem; margin-bottom: 1.85rem; }
+    .rhythm-head h2 { margin: 0.85rem 0 0.7rem; }
+    .days { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+    @media (max-width: 900px) { .days { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 520px) { .days { grid-template-columns: 1fr; } }
+    .day { background: white; border-radius: 12px; padding: 1.3rem 1.3rem; }
+    .day .d-name { font-size: 0.68rem; font-weight: bold; letter-spacing: 0.16em; text-transform: uppercase; color: var(--coral-deep); margin-bottom: 0.45rem; }
+    .day h4 { margin-bottom: 0.3rem; }
+    .day p { font-size: 0.88rem; color: var(--sage); margin: 0; }
+    .rhythm-note { margin-top: 1.75rem; font-style: italic; color: var(--deep-sage); font-size: 0.98rem; }
+
+    /* ===== FIRST POST ===== */
+    .firstpost { background: var(--cream-warm); }
+    .fp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: start; }
+    @media (max-width: 900px) { .fp-grid { grid-template-columns: 1fr; gap: 1.75rem; } }
+    .fp-text h2 { margin: 0.85rem 0 0.9rem; }
+    .fp-text p { font-size: 1rem; }
+    .nervous {
+      margin-top: 1.35rem; background: white; border-radius: 12px; padding: 1.25rem 1.35rem;
+      border-left: 4px solid var(--gold);
+    }
+    .nervous h4 { margin-bottom: 0.3rem; }
+    .nervous p { font-size: 0.94rem; color: var(--sage); margin: 0; }
+    .template {
+      background: white; border-radius: 14px; padding: 1.6rem 1.7rem;
+      border: 1px solid rgba(194,137,84,0.3);
+    }
+    .template h3 { font-size: 0.76rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--coral-deep); margin-bottom: 1rem; }
+    .template-body {
+      background: var(--cream); border-radius: 10px; padding: 1.15rem 1.25rem;
+      font-size: 0.98rem; line-height: 1.7; color: var(--charcoal); white-space: pre-wrap;
+    }
+    .template-body .fill { color: var(--coral-deep); font-weight: bold; }
+    .copy-row { display: flex; align-items: center; gap: 0.9rem; margin-top: 1.1rem; flex-wrap: wrap; }
+    .copy-status { font-size: 0.88rem; color: var(--sage); font-style: italic; }
+    .copy-status.ok { color: var(--coral-deep); font-weight: bold; font-style: normal; }
+
+    /* ===== RULES ===== */
+    .rules { background: var(--deep-sage); color: var(--cream); }
+    .rules-head { max-width: 42rem; margin-bottom: 2rem; }
+    .rules-head h2 { color: var(--cream); margin: 0.85rem 0 0.7rem; }
+    .rules-head p { color: var(--cream); opacity: 0.9; }
+    .rule-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.1rem; }
+    @media (max-width: 860px) { .rule-list { grid-template-columns: 1fr; } }
+    .rule {
+      background: rgba(255,255,255,0.07); border: 1px solid rgba(221,107,78,0.28);
+      border-radius: 12px; padding: 1.3rem 1.4rem;
+    }
+    .rule .r-n { font-family: 'Caveat', cursive; font-size: 1.5rem; color: var(--coral-soft); line-height: 1; margin-bottom: 0.3rem; }
+    .rule h4 { color: var(--cream); margin-bottom: 0.3rem; }
+    .rule p { color: var(--cream); opacity: 0.88; font-size: 0.92rem; margin: 0; }
+    .rules-foot { margin-top: 1.85rem; font-size: 0.94rem; color: var(--cream); opacity: 0.85; font-style: italic; max-width: 44rem; }
+
+    /* ===== NOT ON FACEBOOK ===== */
+    .nofb { background: var(--white); }
+    .nofb-card {
+      max-width: 46rem; margin: 0 auto; background: var(--cream); border-radius: 14px;
+      padding: 2rem 2.1rem; border-left: 5px solid var(--warm-tan);
+    }
+    .nofb-card h2 { font-size: 1.4rem; margin-bottom: 0.75rem; }
+    .nofb-card p { font-size: 0.99rem; }
+    .nofb-card ul { list-style: none; margin: 1rem 0 1.2rem; }
+    .nofb-card li { padding: 0.4rem 0 0.4rem 1.5rem; position: relative; font-size: 0.96rem; }
+    .nofb-card li::before { content: "\25C6"; position: absolute; left: 0; top: 0.55rem; color: var(--warm-tan); font-size: 0.6rem; }
+
+    /* ===== NEXT ===== */
+    .next { background: var(--coral-blush); text-align: center; padding: 3rem 0; }
+    .next h2 { margin: 0.85rem 0 0.9rem; }
+    .next p { max-width: 36rem; margin: 0 auto 1.4rem; color: var(--sage); }
+    .next-row { display: flex; flex-wrap: wrap; gap: 0.9rem; justify-content: center; }
+
+    footer { background: var(--deep-sage); color: var(--cream); padding: 2.25rem 0 2rem; text-align: center; border-top: 1px solid rgba(221,107,78,0.22); }
+    footer .diamond { color: var(--coral); font-size: 0.8rem; letter-spacing: 1.1em; padding-left: 1.1em; opacity: 0.7; margin-bottom: 1.25rem; }
+    footer .fnav { display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem 1.75rem; margin-bottom: 1.25rem; }
+    footer .fnav a { color: var(--cream); opacity: 0.85; text-decoration: none; font-size: 0.9rem; }
+    footer .fnav a:hover { opacity: 1; color: var(--coral-soft); }
+    footer .legal { font-size: 0.8rem; opacity: 0.6; }
+    footer .legal a { color: var(--cream); opacity: 0.85; text-decoration: none; margin: 0 0.35rem; }
+
+    .fade-in { opacity: 0; transform: translateY(16px); transition: opacity 0.6s var(--ease), transform 0.6s var(--ease); }
+    .fade-in.visible { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+      html { scroll-behavior: auto; }
+      .fade-in { opacity: 1; transform: none; }
+    }
+    :focus-visible { outline: 3px solid var(--coral); outline-offset: 3px; }
+    .skip-link { position: absolute; left: -9999px; background: var(--coral); color: white; padding: 0.7rem 1.2rem; z-index: 200; }
+    .skip-link:focus { left: 0; }
+  </style>
+
+
+
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <nav class="mnav">
+    <div class="mnav-inner">
+      <a href="/members" class="mnav-logo"><span class="dot"></span> The One-Income Circle</a>
+      <button class="mnav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="mnavLinks">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="mnav-links" id="mnavLinks">
+        <a href="/members">Home</a>
+        <a href="/members-vault">The Vault</a>
+        <a href="/members-library">Printables</a>
+        <a href="/members-sessions">Live Sessions</a>
+        <a href="/members-circle" class="current" aria-current="page">The Circle</a>
+        <a href="/members-ask-brooke" class="">Ask Brooke</a>
+        <a href="/members-account" class="mnav-account">My account</a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main">
+
+  <!-- ==================== HERO ==================== -->
+  <section class="c-hero">
+    <div class="container c-hero-inner">
+      <p class="crumb"><a href="/members">Member home</a> ◆ The Circle</p>
+      <h1>The Circle</h1>
+      <p class="c-hero-sub">A private room of moms making one income work. No comparison, no judgment, and nobody pretending their month went perfectly. Come in, say hello, and lurk as long as you like.</p>
+      <div class="hero-cta">
+        <a href="#" class="btn btn-coral btn-lg js-community">Open the Circle</a>
+        <a href="#first-post" class="btn btn-outline">Help me write my first post</a>
+      </div>
+      <p class="where">The room lives in a private Facebook group, so nothing you post there shows up on your own page or in anyone’s feed but ours. <a href="#no-facebook">Not on Facebook?</a></p>
+    </div>
+  </section>
+
+  <!-- ==================== WHAT IT IS AND IS NOT ==================== -->
+  <section class="isnt">
+    <div class="container">
+      <div class="isnt-grid">
+        <div class="isnt-col is fade-in">
+          <h2>What this room is for</h2>
+          <ul>
+            <li>Saying the number out loud when you cannot say it to anyone else.</li>
+            <li>Asking before you spend, when you want a second opinion at nine at night.</li>
+            <li>Small wins. Genuinely small ones. Under budget by four dollars counts.</li>
+            <li>What is for dinner, from people cooking on the same kind of budget.</li>
+            <li>Finding out you are not the only one, which is most of why it works.</li>
+          </ul>
+        </div>
+        <div class="isnt-col not fade-in">
+          <h2>What it is not</h2>
+          <ul>
+            <li>A place anyone will judge your numbers. That is the whole point of a private room.</li>
+            <li>A performance. Nobody here has it together, including me.</li>
+            <li>Somewhere you have to post to belong. Reading quietly is allowed forever.</li>
+            <li>A marketplace. No selling, no recruiting, no affiliate links.</li>
+            <li>Professional financial advice, mine included.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== THE FIVE SPACES ==================== -->
+  <section class="spaces">
+    <div class="container">
+      <div class="spaces-head fade-in">
+        <span class="eyebrow">Five rooms, that is all</span>
+        <h2>Where to put what.</h2>
+        <p>Deliberately few. Twelve half empty rooms feel abandoned. Five busy ones feel like somewhere worth coming back to.</p>
+      </div>
+      <div class="space-list">
+        <div class="space fade-in">
+          <div class="space-top">
+            <span class="space-icon" aria-hidden="true">☻</span>
+            <h3>Welcome and introductions</h3>
+          </div>
+          <p>The one post everybody makes when they join. It is the easiest post you will ever write and it makes the next one much easier.</p>
+          <p class="post-what"><b>Post here:</b> your first hello. Template further down this page if you want one.</p>
+        </div>
+        <div class="space fade-in">
+          <div class="space-top">
+            <span class="space-icon" aria-hidden="true">★</span>
+            <h3>Weekly wins</h3>
+          </div>
+          <p>The room that keeps people going. Wins here are small on purpose, because small is what actually happens on a Tuesday.</p>
+          <p class="post-what"><b>Post here:</b> anything that went right. Packed lunches all week. Said no to something. Filled in the page.</p>
+        </div>
+        <div class="space fade-in">
+          <div class="space-top">
+            <span class="space-icon" aria-hidden="true">?</span>
+            <h3>Ask the room</h3>
+          </div>
+          <p>Peer answers from women in the same season. Faster than waiting for me, and often better, because somebody has just done the exact thing.</p>
+          <p class="post-what"><b>Post here:</b> should I buy this, how do you handle that, is this normal.</p>
+        </div>
+        <div class="space fade-in">
+          <div class="space-top">
+            <span class="space-icon" aria-hidden="true">☕</span>
+            <h3>What is for dinner</h3>
+          </div>
+          <p>Usually the busiest room, and the one people join for the budget and stay for. Real meals from real one-income kitchens.</p>
+          <p class="post-what"><b>Post here:</b> what you made, what it cost, and whether the children ate it.</p>
+        </div>
+        <div class="space fade-in">
+          <div class="space-top">
+            <span class="space-icon" aria-hidden="true">✎</span>
+            <h3>Ask Brooke</h3>
+          </div>
+          <p>Kept separate so my answers are findable later. I read everything and answer every week.</p>
+          <p class="post-what"><b>Post here:</b> your actual numbers and your actual mess. Nothing is too small.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== WEEKLY RHYTHM ==================== -->
+  <section class="rhythm">
+    <div class="container">
+      <div class="rhythm-head fade-in">
+        <span class="eyebrow">The heartbeat</span>
+        <h2>What happens when.</h2>
+        <p>The room has a rhythm so it never feels like an empty page. You do not have to show up on any of these days, but they are there if you like knowing.</p>
+      </div>
+      <div class="days">
+        <div class="day fade-in">
+          <div class="d-name">Monday</div>
+          <h4>Win thread</h4>
+          <p>I post it, you drop last week’s win in the comments. One line is a perfectly good win.</p>
+        </div>
+        <div class="day fade-in">
+          <div class="d-name">Wednesday</div>
+          <h4>Ask the room</h4>
+          <p>An open question thread. Bring the thing you have been going back and forth on.</p>
+        </div>
+        <div class="day fade-in">
+          <div class="d-name">Thursday</div>
+          <h4>What is for dinner</h4>
+          <p>Meal ideas before the weekend shop, when they are actually useful.</p>
+        </div>
+        <div class="day fade-in">
+          <div class="d-name">Monthly</div>
+          <h4>The live reset</h4>
+          <p>We plan the month together. Details and the calendar links are on the <a href="/members-sessions">sessions page</a>.</p>
+        </div>
+      </div>
+      <p class="rhythm-note fade-in">Everything else happens whenever somebody needs it, which is most of the value. The threads are just a floor, not a schedule you have to keep up with.</p>
+    </div>
+  </section>
+
+  <!-- ==================== FIRST POST ==================== -->
+  <section class="firstpost" id="first-post">
+    <div class="container">
+      <div class="fp-grid">
+        <div class="fp-text">
+          <span class="eyebrow eyebrow-coral fade-in">The hardest post is the first one</span>
+          <h2 class="fade-in">Here is exactly what to say.</h2>
+          <p class="fade-in">Copy this, fill in the four blanks, post it in Welcome and introductions. It takes about ninety seconds and it is the single thing that most predicts whether somebody is still here in six months.</p>
+          <p class="fade-in">You do not have to be clever, and you absolutely do not have to explain how you got here. Four facts is plenty.</p>
+          <div class="nervous fade-in">
+            <h4>If the thought of posting makes you feel a bit sick</h4>
+            <p>That is normal and you are not the only one reading this thinking it. Nobody in that room is scoring your introduction, and every single one of them was exactly this nervous. If it still feels like too much today, read for a week first. The door does not close.</p>
+          </div>
+        </div>
+        <div class="template fade-in">
+          <h3>Your first post</h3>
+          <div class="template-body" id="templateBody">Hi, I’m <span class="fill">[your name]</span> and we are in <span class="fill">[your state]</span>.
+
+We feed <span class="fill">[how many]</span> on one income.
+
+The one thing I want to be different by next payday is <span class="fill">[the thing]</span>.
+
+Right now I am working on <span class="fill">[which system]</span>. Glad to be here.</div>
+          <div class="copy-row">
+            <button class="btn btn-coral btn-sm btn-plain" id="copyBtn" type="button">Copy this template</button>
+            <span class="copy-status" id="copyStatus">Then paste it straight into the group.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== HOUSE RULES ==================== -->
+  <section class="rules">
+    <div class="container">
+      <div class="rules-head fade-in">
+        <span class="eyebrow eyebrow-cream">The house rules</span>
+        <h2>Seven things that keep this room safe.</h2>
+        <p>Short, and I do enforce them. A room where women share real numbers only works if it is genuinely safe, and that does not happen by accident.</p>
+      </div>
+      <div class="rule-list">
+        <div class="rule fade-in">
+          <div class="r-n">one</div>
+          <h4>No judgment about numbers. Ever.</h4>
+          <p>Not about the debt, not about the income, not about the thing she bought. Everyone here started somewhere and nobody knows the full story.</p>
+        </div>
+        <div class="rule fade-in">
+          <div class="r-n">two</div>
+          <h4>What is shared here stays here.</h4>
+          <p>No screenshots, no repeating somebody’s situation outside the room, not even without a name attached.</p>
+        </div>
+        <div class="rule fade-in">
+          <div class="r-n">three</div>
+          <h4>No selling, recruiting, or affiliate links.</h4>
+          <p>This room is full of women being honest about money, which makes it a target. It is not a customer list and I will remove anyone treating it like one.</p>
+        </div>
+        <div class="rule fade-in">
+          <div class="r-n">four</div>
+          <h4>Offer advice, do not prescribe it.</h4>
+          <p>“Here is what worked for us” lands very differently from “you should”. Her house, her call, always.</p>
+        </div>
+        <div class="rule fade-in">
+          <div class="r-n">five</div>
+          <h4>Food is food here.</h4>
+          <p>We talk about meals as meals and budgets as budgets. No diet talk, no calorie counting, no comments about anybody’s body.</p>
+        </div>
+        <div class="rule fade-in">
+          <div class="r-n">six</div>
+          <h4>Nobody here is a financial adviser.</h4>
+          <p>Me included. This is women sharing what worked in their own homes. For anything with legal or tax weight to it, please talk to a professional.</p>
+        </div>
+        <div class="rule fade-in">
+          <div class="r-n">seven</div>
+          <h4>Lurking is allowed forever.</h4>
+          <p>Plenty of members never post and get their money’s worth from reading. You are not doing it wrong.</p>
+        </div>
+      </div>
+      <p class="rules-foot fade-in">One more thing worth saying plainly. If somebody in that room makes you feel small, tell me and I will deal with it. I would rather lose a member than let this become another place where women feel bad about money.</p>
+    </div>
+  </section>
+
+  <!-- ==================== NOT ON FACEBOOK ==================== -->
+  <section class="nofb" id="no-facebook">
+    <div class="container">
+      <div class="nofb-card fade-in">
+        <h2>Not on Facebook, and not planning to be?</h2>
+        <p>Then this part is honest rather than tidy. The Circle is on Facebook for now because that is where this group of women already are every day, and a community nobody visits is not a community. But if you are not on there, you should not be quietly missing a piece of what you pay for.</p>
+        <p>So, until the room moves somewhere better:</p>
+        <ul>
+          <li>Ask Brooke works entirely without Facebook. Post there and you get the same answer from me.</li>
+          <li>The monthly live session is the community bit in real time, and it is on Zoom, not Facebook.</li>
+          <li>Email me and I will pass a question into the room for you and bring the answers back.</li>
+        </ul>
+        <p>And if enough of you tell me this is a problem, that moves the room. Founding members vote on what gets built, and this is exactly the sort of thing that vote is for.</p>
+        <div class="copy-row" style="margin-top: 1.2rem;">
+          <a href="/members-ask-brooke" class="btn btn-outline btn-sm">Use Ask Brooke instead</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== NEXT ==================== -->
+  <section class="next">
+    <div class="container">
+      <span class="eyebrow eyebrow-coral">Ready when you are</span>
+      <h2>Come and say hello.</h2>
+      <p>Ninety seconds, four blanks filled in, and then you can go back to your evening. The room will still be there tomorrow.</p>
+      <div class="next-row">
+        <a href="#" class="btn btn-coral btn-lg js-community">Open the Circle</a>
+        <a href="/members" class="btn btn-outline">Back to member home</a>
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="diamond">◆ ◆ ◆</div>
+      <nav class="fnav" aria-label="Member footer">
+        <a href="/members">Member home</a>
+        <a href="/members-vault">The Vault</a>
+        <a href="/members-library">Printables</a>
+        <a href="/members-sessions">Live Sessions</a>
+        <a href="/members-account">My account</a>
+        <a href="/contact">Help</a>
+      </nav>
+      <p class="legal">
+        © 2026 Purposeful Pennies. Member content, please keep it in the family.
+        &nbsp;·&nbsp;
+        <a href="/terms">Terms</a> ·
+        <a href="/privacy-policy">Privacy</a>
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    /* ============================================================
+       CONFIG
+       ============================================================ */
+    const COMMUNITY_URL = 'https://www.facebook.com/groups/your-group-id';
+
+    document.querySelectorAll('.js-community').forEach(function (a) {
+      a.href = COMMUNITY_URL; a.target = '_blank'; a.rel = 'noopener';
+    });
+
+    /* ===== COPY THE FIRST POST TEMPLATE =====
+       navigator.clipboard needs a secure context and is not guaranteed,
+       so there is a textarea fallback and, failing both, an honest
+       message telling her to select it by hand. Nothing pretends to
+       have worked when it has not. */
+    (function () {
+      const btn = document.getElementById('copyBtn');
+      const status = document.getElementById('copyStatus');
+      const source = document.getElementById('templateBody');
+
+      function plainText() {
+        return source.innerText.replace(/\u00A0/g, ' ').trim();
+      }
+
+      function ok() {
+        status.textContent = 'Copied. Now paste it into Welcome and introductions.';
+        status.classList.add('ok');
+        btn.textContent = 'Copied';
+        setTimeout(function () {
+          btn.textContent = 'Copy this template';
+          status.textContent = 'Then paste it straight into the group.';
+          status.classList.remove('ok');
+        }, 4000);
+      }
+
+      function fallback(text) {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'fixed';
+        ta.style.top = '-1000px';
+        document.body.appendChild(ta);
+        ta.select();
+        let done = false;
+        try { done = document.execCommand('copy'); } catch (e) { done = false; }
+        document.body.removeChild(ta);
+        if (done) ok();
+        else {
+          status.textContent = 'Copying is blocked in this browser. Select the text above and copy it by hand.';
+          status.classList.add('ok');
+        }
+      }
+
+      btn.addEventListener('click', function () {
+        const text = plainText();
+        if (navigator.clipboard && window.isSecureContext) {
+          navigator.clipboard.writeText(text).then(ok).catch(function () { fallback(text); });
+        } else {
+          fallback(text);
+        }
+      });
+    })();
+
+    /* ===== MOBILE NAV ===== */
+    (function () {
+      const t = document.getElementById('navToggle');
+      const l = document.getElementById('mnavLinks');
+      t.addEventListener('click', function () {
+        const open = l.classList.toggle('open');
+        t.setAttribute('aria-expanded', String(open));
+      });
+    })();
+
+    /* ===== FADE-IN ===== */
+    (function () {
+      const obs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) { en.target.classList.add('visible'); obs.unobserve(en.target); }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+      document.querySelectorAll('.fade-in').forEach(function (el) { obs.observe(el); });
+    })();
+<w:pgSz w:h="15840" w:w="12240" w:orient="portrait"/><w:pgMar w:bottom="1440" w:top="1440" w:left="1440" w:right="1440" w:header="720" w:footer="720"/><w:pgNumType w:start="1"/></w:sectPr></w:pPr><w:r w:rsidDel="00000000" w:rsidR="00000000" w:rsidRPr="00000000"><w:rPr><w:rtl w:val="0"/></w:rPr><w:t xml:space="preserve">  </script>

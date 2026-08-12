@@ -1,0 +1,1617 @@
+<!--
+  ============================================================
+  PURPOSEFUL PENNIES  ·  MEMBERSHIP SALES PAGE   /membership
+  Draft domain: https://purposefulpenniesdraft.showit.site
+  ============================================================
+
+  TWO DECISIONS TO CONFIRM (each is a single edit)
+
+  1. OFFER NAME.  Currently "The One-Income Circle".
+     Find and replace that string if Brooke wants a different name.
+
+  2. PRICE.  Currently $19/month or $190/year (founding rate).
+     Every price on the page is driven by the PRICING object in the
+     script at the bottom. Change it there once and the hero line, the
+     toggle, the stack card, the FAQ, and the floating CTA all follow.
+
+  CHECKOUT.  All join buttons carry class="js-join". Their href is set
+  from CHECKOUT_URL in the script. It defaults to /membership-thank-you
+  so the funnel is click-testable on the draft site before Stripe or
+  ThriveCart is connected. Swap in the real checkout link there.
+
+  IMAGES.  Every photo slot is a styled placeholder with a written
+  photo brief inside it. Nothing to guess at when the shoot happens.
+
+  FORMATTING RULE.  Zero em dashes, zero en dashes anywhere in this
+  file. The brand separator is the diamond glyph.
+  ============================================================
+-->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The One-Income Circle · Purposeful Pennies</title>
+  <meta name="description" content="A membership for one-income families. Every budget, meal, and grocery system in one place, plus a fifteen minute weekly reset and a mom who has been exactly where you are. Founding rate, cancel anytime.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&amp;family=DM+Serif+Display&amp;display=swap" rel="stylesheet">
+  <style>
+    /* ===== BRAND TOKENS (identical to homepage, about, start here) ===== */
+    :root {
+      --deep-sage: #2E3E2F;
+      --sage: #5C6E47;
+      --sage-soft: #8B9E75;
+      --warm-tan: #C28954;
+      --warm-tan-dark: #A77246;
+      --cream: #FBF4D7;
+      --cream-warm: #F7ECC4;
+      --charcoal: #2A2A2A;
+      --soft-gray: #7E867D;
+      --light-sage: #DBE3CE;
+      --pale-tan: #EFE0C1;
+      --white: #FFFFFF;
+
+      --coral: #DD6B4E;
+      --coral-deep: #C25441;
+      --coral-soft: #F7D0BE;
+      --coral-blush: #FBE3D5;
+      --gold: #D4A83F;
+      --gold-soft: #EDD98D;
+      --gold-deep: #B8912E;
+      --dusty-rose: #E8B4A0;
+
+      --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+      --bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 17px; scroll-behavior: smooth; }
+    @media (min-width: 720px) { html { font-size: 18px; } }
+
+    body {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 1.08rem;
+      line-height: 1.7;
+      color: var(--charcoal);
+      background: var(--cream);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ===== LAYOUT ===== */
+    .container { max-width: 1240px; margin: 0 auto; padding: 0 1.5rem; }
+    .narrow { max-width: 760px; margin: 0 auto; padding: 0 1.5rem; }
+    .mid { max-width: 980px; margin: 0 auto; padding: 0 1.5rem; }
+    section { padding: 5rem 0; position: relative; }
+    @media (max-width: 700px) { section { padding: 3.5rem 0; } }
+
+    /* ===== TYPOGRAPHY ===== */
+    .script { font-family: 'Caveat', cursive; font-weight: 700; }
+    .eyebrow {
+      font-size: 0.78rem;
+      font-weight: bold;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--warm-tan-dark);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .eyebrow::before {
+      content: "";
+      display: inline-block;
+      width: 28px; height: 1px;
+      background: var(--warm-tan);
+    }
+    .eyebrow-coral { color: var(--coral-deep); }
+    .eyebrow-coral::before { background: var(--coral); }
+    .eyebrow-cream { color: var(--coral-soft); }
+    .eyebrow-cream::before { background: var(--coral); }
+    h1, h2, h3 { font-family: Georgia, serif; color: var(--deep-sage); }
+    h1 { font-size: clamp(2.35rem, 6vw, 4.1rem); font-weight: bold; line-height: 1.04; letter-spacing: -0.02em; }
+    h2 { font-size: clamp(1.9rem, 4.2vw, 3rem); font-weight: bold; line-height: 1.1; letter-spacing: -0.01em; }
+    h3 { font-size: 1.35rem; font-weight: bold; line-height: 1.3; }
+    p { margin-bottom: 1.1rem; }
+    p:last-child { margin-bottom: 0; }
+    .lede { font-size: 1.15rem; line-height: 1.72; }
+
+    /* Squiggly underline accent */
+    .squiggle-wrap { display: inline-block; position: relative; white-space: nowrap; }
+    .squiggle-wrap svg {
+      position: absolute; bottom: -0.2em; left: 0;
+      width: 100%; height: 0.35em; pointer-events: none;
+    }
+
+    /* ===== ANNOUNCEMENT ===== */
+    .announce {
+      background: var(--coral);
+      color: white;
+      text-align: center;
+      padding: 0.7rem 1rem;
+      font-size: 0.9rem;
+    }
+    .announce .script { color: var(--gold-soft); font-size: 1.15rem; margin-right: 0.5rem; }
+    .announce a {
+      color: white;
+      text-decoration: underline;
+      text-decoration-color: rgba(255,255,255,0.5);
+      text-underline-offset: 3px;
+      font-weight: bold;
+    }
+
+    /* ===== NAV ===== */
+    .nav {
+      background: rgba(251, 244, 215, 0.95);
+      border-bottom: 1px solid rgba(194, 137, 84, 0.18);
+      position: sticky; top: 0; z-index: 100;
+      backdrop-filter: blur(10px);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.1rem 1.5rem; max-width: 1280px; margin: 0 auto;
+    }
+    .nav-logo {
+      font-family: Georgia, serif; font-size: 1.3rem; font-weight: bold;
+      color: var(--deep-sage); letter-spacing: 0.03em; text-decoration: none;
+      line-height: 1; display: flex; align-items: baseline; gap: 0.5rem;
+    }
+    .nav-logo .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--coral); display: inline-block; }
+    .nav-logo em {
+      display: block; font-family: 'Caveat', cursive; font-weight: 500;
+      font-style: normal; color: var(--coral-deep); font-size: 0.95rem;
+      letter-spacing: 0.02em; margin-top: -2px;
+    }
+    .nav-links { display: flex; gap: 2rem; align-items: center; }
+    .nav-links a {
+      font-family: Georgia, serif; font-size: 0.95rem; color: var(--deep-sage);
+      text-decoration: none; position: relative; transition: color 0.2s var(--ease);
+    }
+    .nav-links a:not(.nav-cta)::after {
+      content: ""; position: absolute; left: 0; right: 0; bottom: -4px;
+      height: 2px; background: var(--coral); transform: scaleX(0);
+      transform-origin: left; transition: transform 0.25s var(--ease); border-radius: 2px;
+    }
+    .nav-links a:not(.nav-cta):hover::after { transform: scaleX(1); }
+    .nav-links a.current::after { transform: scaleX(1); }
+    .nav-links a:hover:not(.nav-cta) { color: var(--coral-deep); }
+    .nav-cta {
+      background: var(--coral); color: white !important;
+      padding: 0.6rem 1.25rem; border-radius: 999px;
+      font-size: 0.85rem !important; font-weight: bold; letter-spacing: 0.04em;
+      transition: all 0.25s var(--ease); box-shadow: 0 3px 0 var(--coral-deep);
+    }
+    .nav-cta:hover { background: var(--coral-deep); transform: translateY(-1px); }
+    .nav-toggle {
+      display: none; background: none; border: none; cursor: pointer;
+      padding: 0.4rem; color: var(--deep-sage);
+    }
+    .nav-toggle span {
+      display: block; width: 24px; height: 2px; background: var(--deep-sage);
+      margin: 5px 0; border-radius: 2px; transition: all 0.25s var(--ease);
+    }
+    @media (max-width: 1000px) {
+      .nav-toggle { display: block; }
+      .nav-links {
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: var(--cream); flex-direction: column; gap: 0;
+        padding: 0 1.5rem; max-height: 0; overflow: hidden;
+        transition: max-height 0.35s var(--ease), padding 0.35s var(--ease);
+        border-bottom: 1px solid rgba(194, 137, 84, 0.18);
+      }
+      .nav-links.open { max-height: 32rem; padding: 1rem 1.5rem 1.75rem; }
+      .nav-links a { width: 100%; padding: 0.7rem 0; font-size: 1.05rem; }
+      .nav-links a:not(.nav-cta)::after { display: none; }
+      .nav-cta { text-align: center; margin-top: 0.75rem; }
+    }
+
+    /* ===== BUTTONS ===== */
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      background: var(--warm-tan); color: white;
+      font-family: Georgia, serif; font-size: 1.05rem; font-weight: bold;
+      padding: 1.1rem 2.3rem; border: none; border-radius: 999px;
+      cursor: pointer; text-decoration: none;
+      transition: all 0.25s var(--ease); letter-spacing: 0.02em;
+      box-shadow: 0 3px 0 var(--warm-tan-dark);
+    }
+    .btn:hover { background: var(--warm-tan-dark); transform: translateY(-2px); box-shadow: 0 5px 0 var(--warm-tan-dark); }
+    .btn::after { content: "\2192"; transition: transform 0.25s var(--ease); }
+    .btn:hover::after { transform: translateX(4px); }
+    .btn-coral { background: var(--coral); box-shadow: 0 3px 0 var(--coral-deep); }
+    .btn-coral:hover { background: var(--coral-deep); box-shadow: 0 5px 0 var(--coral-deep); }
+    .btn-outline {
+      background: transparent; color: var(--warm-tan-dark);
+      border: 2px solid var(--warm-tan);
+      padding: calc(1.1rem - 2px) calc(2.3rem - 2px); box-shadow: none;
+    }
+    .btn-outline:hover { background: var(--pale-tan); color: var(--warm-tan-dark); box-shadow: none; }
+    .btn-cream { background: var(--cream); color: var(--deep-sage); box-shadow: 0 3px 0 rgba(0,0,0,0.15); }
+    .btn-cream:hover { background: var(--cream-warm); color: var(--deep-sage); box-shadow: 0 5px 0 rgba(0,0,0,0.15); }
+    .btn-lg { font-size: 1.15rem; padding: 1.25rem 2.6rem; }
+    .trust-line {
+      font-family: Georgia, serif; font-style: italic; font-size: 0.92rem;
+      color: var(--soft-gray); margin-top: 0.85rem;
+    }
+
+    /* ===== STICKER ===== */
+    .sticker {
+      display: inline-block; background: var(--gold); color: white;
+      font-family: Georgia, serif; font-weight: bold; font-size: 0.72rem;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      padding: 0.5rem 0.9rem; border-radius: 4px;
+      transform: rotate(-3deg); box-shadow: 0 3px 0 var(--gold-deep);
+    }
+    .sticker.coral { background: var(--coral); box-shadow: 0 3px 0 var(--coral-deep); transform: rotate(2deg); }
+    .sticker.sage { background: var(--sage); box-shadow: 0 3px 0 var(--deep-sage); }
+
+    /* ===== IMAGE PLACEHOLDER ===== */
+    .img-ph {
+      background: linear-gradient(135deg, var(--coral-blush) 0%, var(--pale-tan) 50%, var(--light-sage) 100%);
+      position: relative; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; padding: 2rem; text-align: center;
+      border: 1px dashed rgba(194, 137, 84, 0.5);
+    }
+    .img-ph::before {
+      content: ""; position: absolute; inset: 0;
+      background-image:
+        radial-gradient(circle at 20% 30%, rgba(221, 107, 78, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(212, 168, 63, 0.1) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .img-ph .ph-icon {
+      width: 52px; height: 52px; border: 1.5px solid var(--coral);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1rem; color: var(--coral); font-size: 1.6rem;
+      background: rgba(255, 255, 255, 0.6); position: relative; z-index: 1;
+    }
+    .img-ph .ph-tag {
+      font-family: Georgia, serif; font-size: 0.7rem; font-weight: bold;
+      letter-spacing: 0.2em; text-transform: uppercase; color: var(--coral-deep);
+      margin-bottom: 0.75rem; position: relative; z-index: 1;
+    }
+    .img-ph .ph-title {
+      font-family: Georgia, serif; font-size: 1.05rem; font-weight: bold;
+      color: var(--deep-sage); margin-bottom: 0.5rem; position: relative; z-index: 1;
+    }
+    .img-ph .ph-brief {
+      font-family: Georgia, serif; font-size: 0.85rem; font-style: italic;
+      color: var(--sage); line-height: 1.5; max-width: 26rem;
+      position: relative; z-index: 1;
+    }
+
+    /* ===== 01 HERO ===== */
+    .hero { background: var(--cream); padding: 3.5rem 0 5rem; position: relative; overflow: hidden; }
+    .hero::before {
+      content: ""; position: absolute; top: -180px; right: -180px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, var(--coral-blush) 0%, transparent 65%);
+      opacity: 0.7; pointer-events: none;
+    }
+    .hero::after {
+      content: ""; position: absolute; bottom: -100px; left: -100px;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, var(--gold-soft) 0%, transparent 60%);
+      opacity: 0.4; pointer-events: none;
+    }
+    .hero-grid {
+      display: grid; grid-template-columns: 1.15fr 1fr; gap: 4rem;
+      align-items: center; position: relative;
+    }
+    @media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+    .hero-trust-row { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+    .hero-text h1 { margin: 0 0 1.5rem; }
+    .hero-subhead {
+      font-style: italic; font-size: clamp(1.1rem, 2.2vw, 1.3rem);
+      line-height: 1.55; color: var(--sage); margin-bottom: 1.75rem; max-width: 36rem;
+    }
+    .hero-price-line {
+      display: inline-flex; align-items: baseline; gap: 0.6rem;
+      background: white; border: 2px solid var(--coral);
+      border-radius: 999px; padding: 0.6rem 1.4rem; margin-bottom: 1.75rem;
+      box-shadow: 0 6px 20px rgba(221, 107, 78, 0.15);
+    }
+    .hero-price-line .amt {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 1.6rem; color: var(--coral-deep); line-height: 1;
+    }
+    .hero-price-line .per { font-size: 0.92rem; color: var(--sage); }
+    .hero-price-line .sep { color: var(--warm-tan); }
+    .hero-cta-row { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; }
+    .hero-proof {
+      display: flex; align-items: center; gap: 0.85rem;
+      margin-top: 2.5rem; padding-top: 2rem;
+      border-top: 1px solid rgba(221, 107, 78, 0.3);
+    }
+    .hero-proof-avatars { display: flex; }
+    .hero-proof-avatar {
+      width: 42px; height: 42px; border-radius: 50%;
+      border: 2px solid var(--cream); margin-left: -12px;
+      font-family: Georgia, serif; color: white; font-weight: bold;
+      display: flex; align-items: center; justify-content: center; font-size: 0.9rem;
+    }
+    .hero-proof-avatar:first-child { margin-left: 0; }
+    .hero-proof-text { font-size: 0.9rem; font-style: italic; color: var(--sage); line-height: 1.5; }
+    .hero-image { aspect-ratio: 4 / 5; width: 100%; }
+    .hero-image .img-ph { width: 100%; height: 100%; border-radius: 200px 200px 12px 12px; }
+
+    /* ===== 02 THE LOOP ===== */
+    .loop { background: var(--coral-blush); }
+    .loop-head { text-align: center; max-width: 46rem; margin: 0 auto 3rem; }
+    .loop-head h2 { margin: 1.1rem 0 1.1rem; }
+    .loop-head .script { display: block; font-size: 1.6rem; color: var(--coral-deep); margin-bottom: 0.35rem; }
+    .loop-card {
+      background: white; border-radius: 14px; padding: 2.75rem 2.5rem;
+      box-shadow: 0 20px 50px rgba(46, 62, 47, 0.08);
+      max-width: 46rem; margin: 0 auto; border-top: 5px solid var(--coral);
+    }
+    @media (max-width: 600px) { .loop-card { padding: 2rem 1.5rem; } }
+    .loop-list { list-style: none; }
+    .loop-list li {
+      padding: 0.85rem 0 0.85rem 2.4rem; position: relative;
+      border-bottom: 1px dashed rgba(194, 137, 84, 0.35); line-height: 1.6;
+    }
+    .loop-list li:last-child { border-bottom: none; }
+    .loop-list li::before {
+      content: "\21BB"; position: absolute; left: 0; top: 0.85rem;
+      color: var(--coral); font-size: 1.2rem; font-weight: bold;
+    }
+    .loop-close {
+      margin-top: 2rem; padding-top: 1.75rem;
+      border-top: 2px solid var(--coral-soft);
+      font-family: Georgia, serif; font-size: 1.15rem; font-weight: bold;
+      color: var(--deep-sage); line-height: 1.5;
+    }
+
+    /* ===== 03 THE OTHER SIDE ===== */
+    .other { background: var(--cream-warm); }
+    .other-head { text-align: center; max-width: 44rem; margin: 0 auto 3rem; }
+    .other-head h2 { margin: 1.1rem 0 0; }
+    .ledger {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+      max-width: 60rem; margin: 0 auto;
+      background: white; border-radius: 14px; overflow: hidden;
+      box-shadow: 0 20px 50px rgba(46, 62, 47, 0.08);
+    }
+    @media (max-width: 760px) { .ledger { grid-template-columns: 1fr; } }
+    .ledger-col { padding: 2.25rem 2rem; }
+    .ledger-col.now { background: var(--light-sage); }
+    .ledger-col h3 {
+      font-size: 0.78rem; letter-spacing: 0.2em; text-transform: uppercase;
+      margin-bottom: 1.5rem; padding-bottom: 0.85rem;
+    }
+    .ledger-col.now h3 { color: var(--sage); border-bottom: 1px solid rgba(92, 110, 71, 0.3); }
+    .ledger-col.next h3 { color: var(--coral-deep); border-bottom: 1px solid rgba(221, 107, 78, 0.3); }
+    .ledger-col ul { list-style: none; }
+    .ledger-col li { padding: 0.7rem 0 0.7rem 1.6rem; position: relative; font-size: 1rem; line-height: 1.55; }
+    .ledger-col.now li::before { content: "\00B7"; position: absolute; left: 0.3rem; top: 0.55rem; color: var(--sage); font-size: 1.5rem; }
+    .ledger-col.next li::before {
+      content: ""; position: absolute; left: 0; top: 1.05rem;
+      width: 16px; height: 16px;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23DD6B4E' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center/contain no-repeat;
+    }
+    .other-note { text-align: center; margin-top: 2.5rem; font-style: italic; color: var(--sage); max-width: 40rem; margin-left: auto; margin-right: auto; }
+
+    /* ===== 04 PROOF NUMBERS ===== */
+    .numbers { background: var(--deep-sage); color: var(--cream); }
+    .numbers-head { text-align: center; max-width: 44rem; margin: 0 auto 3rem; }
+    .numbers-head h2 { color: var(--cream); margin: 1.1rem 0 1rem; }
+    .numbers-head p { color: var(--cream); opacity: 0.9; }
+    .numbers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; max-width: 62rem; margin: 0 auto; }
+    @media (max-width: 800px) { .numbers-grid { grid-template-columns: 1fr; gap: 2.25rem; } }
+    .number-item { text-align: center; }
+    .number-item .num {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(2.6rem, 6vw, 3.8rem); color: var(--gold-soft);
+      line-height: 1; margin-bottom: 0.75rem;
+    }
+    .number-item .label { font-size: 0.95rem; color: var(--cream); opacity: 0.88; font-style: italic; line-height: 1.5; }
+    .numbers-foot {
+      text-align: center; margin-top: 3rem; padding-top: 2.5rem;
+      border-top: 1px solid rgba(221, 107, 78, 0.3);
+      font-size: 1.1rem; color: var(--cream); max-width: 42rem;
+      margin-left: auto; margin-right: auto;
+    }
+    .numbers-foot .script { color: var(--coral-soft); font-size: 1.5rem; display: block; margin-bottom: 0.5rem; }
+
+    /* ===== 05 INTRODUCING ===== */
+    .intro-sec { background: var(--cream); }
+    .intro-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 4rem; align-items: center; }
+    @media (max-width: 900px) { .intro-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+    .intro-text h2 { margin: 1.1rem 0 1.25rem; }
+    .intro-name {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(2rem, 4.5vw, 2.9rem);
+      color: var(--coral-deep); line-height: 1.15; margin-bottom: 1rem;
+    }
+    .intro-valueprop {
+      font-size: 1.2rem; font-style: italic; color: var(--sage);
+      line-height: 1.6; padding-left: 1.35rem;
+      border-left: 3px solid var(--coral); margin-bottom: 1.75rem;
+    }
+    .walkaway { list-style: none; margin-top: 1.5rem; }
+    .walkaway li { padding: 0.55rem 0 0.55rem 2.2rem; position: relative; line-height: 1.6; }
+    .walkaway li::before {
+      content: "\002B"; position: absolute; left: 0.15rem; top: 0.5rem;
+      color: var(--coral); font-weight: bold; font-size: 1.25rem;
+    }
+    .intro-image { aspect-ratio: 1 / 1; width: 100%; }
+    .intro-image .img-ph { width: 100%; height: 100%; border-radius: 12px; }
+
+    /* ===== 06 WHAT IS INSIDE ===== */
+    .inside { background: var(--white); }
+    .inside-head { text-align: center; max-width: 46rem; margin: 0 auto 3.25rem; }
+    .inside-head h2 { margin: 1.1rem 0 1rem; }
+    .inside-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.75rem; }
+    @media (max-width: 1000px) { .inside-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 680px) { .inside-grid { grid-template-columns: 1fr; } }
+    .inside-card {
+      background: var(--cream); border-radius: 14px; padding: 2rem 1.75rem;
+      border: 1px solid rgba(194, 137, 84, 0.25);
+      transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease), border-color 0.3s var(--ease);
+      position: relative; overflow: hidden;
+    }
+    .inside-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 18px 40px rgba(46, 62, 47, 0.12);
+      border-color: var(--coral);
+    }
+    .inside-card .card-num {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 2.1rem; color: var(--coral-soft); line-height: 1; margin-bottom: 0.6rem;
+    }
+    .inside-card h3 { margin-bottom: 0.75rem; font-size: 1.22rem; }
+    .inside-card p { font-size: 0.98rem; color: var(--charcoal); margin-bottom: 1rem; }
+    .inside-card ul { list-style: none; }
+    .inside-card li {
+      font-size: 0.92rem; color: var(--sage); line-height: 1.5;
+      padding: 0.3rem 0 0.3rem 1.1rem; position: relative;
+    }
+    .inside-card li::before { content: "\25C6"; position: absolute; left: 0; top: 0.3rem; color: var(--warm-tan); font-size: 0.6rem; }
+    .inside-foot {
+      text-align: center; margin-top: 3rem; font-size: 1.1rem;
+      font-style: italic; color: var(--sage);
+      max-width: 40rem; margin-left: auto; margin-right: auto;
+    }
+
+    /* ===== 07 HOW IT WORKS ===== */
+    .how { background: var(--light-sage); }
+    .how-head { text-align: center; max-width: 42rem; margin: 0 auto 3rem; }
+    .how-head h2 { margin: 1.1rem 0 0; }
+    .how-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+    @media (max-width: 850px) { .how-grid { grid-template-columns: 1fr; gap: 1.5rem; } }
+    .how-step { background: white; border-radius: 14px; padding: 2.25rem 1.9rem; position: relative; }
+    .how-step .how-num {
+      width: 46px; height: 46px; border-radius: 50%;
+      background: var(--coral); color: white;
+      font-family: 'DM Serif Display', Georgia, serif; font-size: 1.4rem;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.25rem; box-shadow: 0 4px 0 var(--coral-deep);
+    }
+    .how-step h3 { margin-bottom: 0.7rem; }
+    .how-step p { font-size: 0.98rem; }
+    .how-cta { text-align: center; margin-top: 3rem; }
+
+    /* ===== 08 BONUSES ===== */
+    .bonus { background: var(--gold-soft); position: relative; }
+    .bonus-head { text-align: center; max-width: 42rem; margin: 0 auto 2.75rem; }
+    .bonus-head h2 { margin: 1.1rem 0 0.85rem; }
+    .bonus-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.75rem; max-width: 64rem; margin: 0 auto; }
+    @media (max-width: 900px) { .bonus-grid { grid-template-columns: 1fr; } }
+    .bonus-card {
+      background: white; border-radius: 14px; padding: 2rem 1.75rem;
+      border: 2px dashed var(--gold-deep); text-align: center;
+    }
+    .bonus-card .bonus-tag {
+      font-size: 0.7rem; font-weight: bold; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--gold-deep); margin-bottom: 0.85rem;
+    }
+    .bonus-card h3 { margin-bottom: 0.7rem; font-size: 1.18rem; }
+    .bonus-card p { font-size: 0.96rem; }
+    .bonus-card .bonus-value {
+      display: inline-block; margin-top: 1rem;
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 1.2rem; color: var(--coral-deep);
+    }
+    .bonus-note { text-align: center; margin-top: 2.5rem; font-style: italic; color: var(--deep-sage); }
+
+    /* ===== 09 STARBUCKS TEST ===== */
+    .anchor { background: var(--coral-blush); }
+    .anchor-head { text-align: center; max-width: 42rem; margin: 0 auto 3rem; }
+    .anchor-head h2 { margin: 1.1rem 0 0; }
+    .anchor-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; max-width: 58rem; margin: 0 auto; }
+    @media (max-width: 760px) { .anchor-grid { grid-template-columns: 1fr; } }
+    .anchor-item {
+      background: white; border-radius: 12px; padding: 1.5rem 1.6rem;
+      display: flex; gap: 1.1rem; align-items: flex-start;
+    }
+    .anchor-item .amt {
+      font-family: 'DM Serif Display', Georgia, serif; font-size: 1.5rem;
+      color: var(--warm-tan-dark); line-height: 1.1; white-space: nowrap;
+    }
+    .anchor-item .what { font-size: 0.98rem; line-height: 1.5; }
+    .anchor-close {
+      max-width: 44rem; margin: 3rem auto 0; text-align: center;
+      background: var(--deep-sage); color: var(--cream);
+      border-radius: 14px; padding: 2.25rem 2rem;
+    }
+    .anchor-close p { color: var(--cream); font-size: 1.1rem; }
+    .anchor-close .script { color: var(--gold-soft); font-size: 1.6rem; display: block; margin-bottom: 0.5rem; }
+
+    /* ===== 10 THE STACK + PRICE ===== */
+    .stack { background: var(--cream); }
+    .stack-head { text-align: center; max-width: 44rem; margin: 0 auto 3rem; }
+    .stack-head h2 { margin: 1.1rem 0 0; }
+    .stack-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 3rem; align-items: start; }
+    @media (max-width: 900px) { .stack-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+    .receipt {
+      background: white; border-radius: 14px; padding: 2.25rem 2rem;
+      box-shadow: 0 18px 45px rgba(46, 62, 47, 0.08);
+    }
+    .receipt h3 {
+      font-size: 0.78rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--coral-deep); margin-bottom: 1.5rem;
+    }
+    .receipt-row {
+      display: flex; justify-content: space-between; gap: 1.25rem;
+      padding: 0.8rem 0; border-bottom: 1px dashed rgba(194, 137, 84, 0.35);
+      font-size: 0.98rem; line-height: 1.5;
+    }
+    .receipt-row .val { font-family: 'DM Serif Display', Georgia, serif; color: var(--warm-tan-dark); white-space: nowrap; }
+    .receipt-total {
+      display: flex; justify-content: space-between; gap: 1rem;
+      align-items: baseline; margin-top: 1.5rem; padding-top: 1.5rem;
+      border-top: 2px solid var(--deep-sage);
+    }
+    .receipt-total .lbl { font-weight: bold; color: var(--deep-sage); }
+    .receipt-total .amt { font-family: 'DM Serif Display', Georgia, serif; font-size: 1.9rem; color: var(--deep-sage); }
+    .receipt-note { margin-top: 1.25rem; font-size: 0.9rem; font-style: italic; color: var(--soft-gray); }
+
+    .price-card {
+      background: white; border: 2px solid var(--coral); border-radius: 16px;
+      padding: 2.5rem 2rem; text-align: center; position: relative;
+      box-shadow: 0 24px 60px rgba(46, 62, 47, 0.12);
+    }
+    .price-sticker {
+      position: absolute; top: -1.4rem; left: 50%; transform: translateX(-50%) rotate(-2deg);
+      background: var(--coral); color: white; font-weight: bold;
+      font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase;
+      padding: 0.5rem 1.1rem; border-radius: 4px; box-shadow: 0 3px 0 var(--coral-deep);
+      white-space: nowrap;
+    }
+    .toggle-row {
+      display: inline-flex; background: var(--cream); border-radius: 999px;
+      padding: 0.3rem; margin: 1.25rem 0 1.75rem; border: 1px solid rgba(194, 137, 84, 0.35);
+    }
+    .toggle-btn {
+      background: none; border: none; cursor: pointer;
+      font-family: Georgia, serif; font-size: 0.92rem; font-weight: bold;
+      color: var(--sage); padding: 0.55rem 1.3rem; border-radius: 999px;
+      transition: all 0.25s var(--ease);
+    }
+    .toggle-btn.active { background: var(--coral); color: white; box-shadow: 0 2px 0 var(--coral-deep); }
+    .price-amount {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(3rem, 8vw, 4.4rem); color: var(--deep-sage); line-height: 1;
+    }
+    .price-per { font-size: 1rem; color: var(--sage); font-style: italic; margin-top: 0.4rem; }
+    .price-second { font-size: 0.95rem; color: var(--coral-deep); font-weight: bold; margin-top: 0.85rem; min-height: 1.5rem; }
+    .price-includes { list-style: none; text-align: left; margin: 1.75rem 0; }
+    .price-includes li {
+      padding: 0.45rem 0 0.45rem 1.9rem; position: relative;
+      font-size: 0.96rem; line-height: 1.5;
+    }
+    .price-includes li::before {
+      content: ""; position: absolute; left: 0; top: 0.75rem;
+      width: 16px; height: 16px;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23DD6B4E' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center/contain no-repeat;
+    }
+    .price-card .btn { width: 100%; justify-content: center; }
+    .price-fine { font-size: 0.88rem; color: var(--soft-gray); font-style: italic; margin-top: 1rem; line-height: 1.5; }
+
+    /* ===== 11 SCARCITY ===== */
+    .scarcity { background: var(--white); padding: 3.5rem 0; }
+    .scarcity-card {
+      max-width: 48rem; margin: 0 auto; background: var(--cream-warm);
+      border-left: 5px solid var(--gold); border-radius: 12px;
+      padding: 2.25rem 2.25rem;
+    }
+    .scarcity-card h3 { margin-bottom: 0.85rem; }
+    .scarcity-card p { font-size: 1rem; }
+
+    /* ===== 12 TESTIMONIALS ===== */
+    .proof2 { background: var(--coral-blush); }
+    .proof2-head { text-align: center; max-width: 42rem; margin: 0 auto 3rem; }
+    .proof2-head h2 { margin: 1.1rem 0 0; }
+    .proof2-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.75rem; }
+    @media (max-width: 950px) { .proof2-grid { grid-template-columns: 1fr; max-width: 34rem; margin: 0 auto; } }
+    .t-card { background: white; border-radius: 14px; padding: 2rem 1.75rem; border-top: 4px solid var(--gold); }
+    .t-stars { color: var(--gold); letter-spacing: 0.2em; margin-bottom: 1rem; font-size: 0.95rem; }
+    .t-quote { font-style: italic; line-height: 1.65; color: var(--charcoal); margin-bottom: 1.5rem; }
+    .t-author { display: flex; align-items: center; gap: 0.85rem; }
+    .t-avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-weight: bold; font-family: Georgia, serif;
+    }
+    .t-name { font-weight: bold; color: var(--deep-sage); font-size: 0.98rem; }
+    .t-context { font-size: 0.85rem; color: var(--soft-gray); font-style: italic; }
+    .proof2-holding {
+      text-align: center; margin-top: 2.75rem; font-style: italic;
+      color: var(--sage); max-width: 38rem; margin-left: auto; margin-right: auto;
+    }
+
+    /* ===== 13 GUARANTEE ===== */
+    .guarantee { background: var(--light-sage); }
+    .g-card {
+      max-width: 46rem; margin: 0 auto; background: white;
+      border-radius: 16px; padding: 3rem 2.5rem; text-align: center;
+      box-shadow: 0 20px 50px rgba(46, 62, 47, 0.1);
+    }
+    @media (max-width: 600px) { .g-card { padding: 2.25rem 1.5rem; } }
+    .g-seal {
+      width: 104px; height: 104px; border-radius: 50%;
+      border: 2px solid var(--sage); background: var(--cream);
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; margin: 0 auto 1.75rem;
+      color: var(--sage); text-align: center; line-height: 1.15;
+    }
+    .g-seal .g-seal-num { font-family: 'DM Serif Display', Georgia, serif; font-size: 1.9rem; color: var(--deep-sage); }
+    .g-seal .g-seal-word { font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; font-weight: bold; }
+    .g-card h2 { font-size: clamp(1.6rem, 3.4vw, 2.2rem); margin-bottom: 1.25rem; }
+    .g-card p { font-size: 1.05rem; }
+    .g-card .g-link { color: var(--coral-deep); text-decoration: underline; text-underline-offset: 3px; }
+
+    /* ===== 14 CREDIBILITY ===== */
+    .cred { background: var(--cream); }
+    .cred-grid { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 4rem; align-items: center; }
+    @media (max-width: 900px) { .cred-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+    .cred-image { aspect-ratio: 4 / 5; width: 100%; max-width: 420px; }
+    .cred-image .img-ph { width: 100%; height: 100%; border-radius: 12px; }
+    .cred-text h2 { margin: 1.1rem 0 1.25rem; }
+    .cred-sign {
+      font-family: 'Caveat', cursive; font-size: 1.9rem;
+      color: var(--coral-deep); margin-top: 1.5rem;
+    }
+
+    /* ===== 15 ATTRACT / REPEL ===== */
+    .fit { background: var(--white); }
+    .fit-head { text-align: center; max-width: 42rem; margin: 0 auto 3rem; }
+    .fit-head h2 { margin: 1.1rem 0 0; }
+    .fit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    @media (max-width: 850px) { .fit-grid { grid-template-columns: 1fr; } }
+    .fit-col { border-radius: 14px; padding: 2.25rem 2rem; }
+    .fit-col.yes { background: var(--coral-blush); border: 1px solid rgba(221, 107, 78, 0.35); }
+    .fit-col.no { background: var(--cream-warm); border: 1px solid rgba(194, 137, 84, 0.3); }
+    .fit-col h3 { margin-bottom: 1.35rem; font-size: 1.25rem; }
+    .fit-col ul { list-style: none; }
+    .fit-col li { padding: 0.7rem 0 0.7rem 2rem; position: relative; line-height: 1.6; font-size: 0.99rem; }
+    .fit-col.yes li::before {
+      content: ""; position: absolute; left: 0; top: 1.05rem;
+      width: 16px; height: 16px;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23DD6B4E' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center/contain no-repeat;
+    }
+    .fit-col.no li::before {
+      content: "\00D7"; position: absolute; left: 0.3rem; top: 0.6rem;
+      color: var(--soft-gray); font-size: 1.3rem; font-weight: bold;
+    }
+
+    /* ===== 16 FAQ ===== */
+    .faq { background: var(--cream); }
+    .faq-head { text-align: center; max-width: 40rem; margin: 0 auto 2.75rem; }
+    .faq-head h2 { margin: 1.1rem 0 0; }
+    .faq-list { max-width: 48rem; margin: 0 auto; }
+    .faq-item {
+      background: white; border-radius: 12px; margin-bottom: 0.9rem;
+      border: 1px solid rgba(194, 137, 84, 0.25); overflow: hidden;
+    }
+    .faq-q {
+      width: 100%; background: none; border: none; cursor: pointer;
+      text-align: left; font-family: Georgia, serif; font-size: 1.05rem;
+      font-weight: bold; color: var(--deep-sage);
+      padding: 1.35rem 3.25rem 1.35rem 1.5rem; position: relative;
+      line-height: 1.45;
+    }
+    .faq-q::after {
+      content: "+"; position: absolute; right: 1.4rem; top: 50%;
+      transform: translateY(-50%); color: var(--coral);
+      font-size: 1.6rem; font-weight: normal; line-height: 1;
+      transition: transform 0.25s var(--ease);
+    }
+    .faq-item.open .faq-q::after { content: "\2212"; }
+    .faq-q:hover { color: var(--coral-deep); }
+    .faq-a {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.35s var(--ease), padding 0.35s var(--ease);
+      padding: 0 1.5rem;
+    }
+    .faq-item.open .faq-a { padding: 0 1.5rem 1.5rem; }
+    .faq-a p { font-size: 1rem; }
+    .faq-a a { color: var(--coral-deep); text-decoration: underline; text-underline-offset: 3px; }
+    .faq-foot { text-align: center; margin-top: 2.5rem; font-style: italic; color: var(--sage); }
+    .faq-foot a { color: var(--coral-deep); }
+
+    /* ===== 17 CTA CLOSE ===== */
+    .cta-close { background: var(--deep-sage); color: var(--cream); text-align: center; padding: 6rem 0; }
+    .cta-close h2 { color: var(--cream); margin: 1.1rem 0 1.5rem; }
+    .cta-close .script { color: var(--coral-soft); font-size: 1.8rem; display: block; }
+    .cta-close p { color: var(--cream); opacity: 0.92; font-size: 1.12rem; max-width: 36rem; margin-left: auto; margin-right: auto; }
+    .recap {
+      list-style: none; max-width: 34rem; margin: 2.5rem auto;
+      text-align: left; padding: 1.75rem 2rem;
+      background: rgba(255,255,255,0.07); border-radius: 12px;
+      border: 1px solid rgba(221, 107, 78, 0.3);
+    }
+    .recap li {
+      padding: 0.4rem 0 0.4rem 1.7rem; position: relative;
+      color: var(--cream); font-size: 0.99rem; line-height: 1.55;
+    }
+    .recap li::before { content: "\25C6"; position: absolute; left: 0; top: 0.45rem; color: var(--coral); font-size: 0.65rem; }
+    .cta-close-row { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-top: 1.5rem; }
+    .cta-close-fine { margin-top: 1.75rem; font-size: 0.92rem; font-style: italic; opacity: 0.8; }
+    .cta-close-soft { margin-top: 2.5rem; font-size: 0.95rem; opacity: 0.85; }
+    .cta-close-soft a { color: var(--coral-soft); text-decoration: underline; text-underline-offset: 3px; }
+
+    /* ===== FOOTER ===== */
+    footer { background: var(--deep-sage); color: var(--cream); padding: 4rem 0 2rem; text-align: center; border-top: 1px solid rgba(221, 107, 78, 0.25); }
+    footer .brand-line { font-family: 'DM Serif Display', Georgia, serif; font-size: 2rem; letter-spacing: 0.04em; color: var(--cream); }
+    footer .tagline { font-family: 'Caveat', cursive; color: var(--coral-soft); margin: 0.5rem 0 2.5rem; font-size: 1.5rem; }
+    footer .diamond { text-align: center; padding: 0 0 2.5rem; color: var(--coral); font-size: 0.9rem; letter-spacing: 1.2em; padding-left: 1.2em; opacity: 0.8; }
+    footer .closing-quote {
+      font-style: italic; font-size: clamp(1.05rem, 2.2vw, 1.2rem);
+      color: var(--cream); max-width: 32em; margin: 0 auto 2.5rem;
+      line-height: 1.7; opacity: 0.92;
+    }
+    footer .footer-nav {
+      display: flex; justify-content: center; flex-wrap: wrap;
+      gap: 1.5rem 2rem; margin: 2.5rem 0 2rem; padding-top: 2.5rem;
+      border-top: 1px solid rgba(221, 107, 78, 0.25);
+    }
+    footer .footer-nav a { color: var(--cream); opacity: 0.85; text-decoration: none; font-size: 0.95rem; transition: opacity 0.2s var(--ease); }
+    footer .footer-nav a:hover { opacity: 1; color: var(--coral-soft); }
+    footer .legal {
+      padding-top: 1.25rem; margin-top: 1.5rem;
+      border-top: 1px solid rgba(221, 107, 78, 0.15);
+      font-size: 0.82rem; color: var(--cream); opacity: 0.65;
+    }
+    footer .legal a { color: var(--cream); opacity: 0.8; text-decoration: none; margin: 0 0.4rem; }
+    footer .built { margin-top: 1rem; font-family: 'Caveat', cursive; font-size: 1.1rem; color: var(--coral-soft); opacity: 0.85; }
+
+    /* ===== FADE-IN ===== */
+    .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); }
+    .fade-in.visible { opacity: 1; transform: none; }
+
+    /* ===== FLOATING CTA ===== */
+    .floating-cta {
+      position: fixed; bottom: -140px; right: 2rem; z-index: 90;
+      transition: bottom 0.4s var(--ease); opacity: 0;
+      display: flex; align-items: center; gap: 0.9rem;
+      background: white; border: 2px solid var(--coral);
+      border-radius: 999px; padding: 0.5rem 0.6rem 0.5rem 1.4rem;
+      box-shadow: 0 12px 32px rgba(46, 62, 47, 0.18);
+    }
+    .floating-cta.visible { bottom: 2rem; opacity: 1; }
+    .floating-cta .fc-price { font-size: 0.9rem; color: var(--sage); white-space: nowrap; }
+    .floating-cta .fc-price strong { color: var(--coral-deep); }
+    .floating-cta .btn { padding: 0.8rem 1.5rem; font-size: 0.95rem; background: var(--coral); box-shadow: 0 3px 0 var(--coral-deep); }
+    .floating-cta .btn:hover { background: var(--coral-deep); }
+    @media (max-width: 700px) {
+      .floating-cta { right: 1rem; left: 1rem; justify-content: space-between; padding: 0.5rem 0.6rem 0.5rem 1.1rem; }
+      .floating-cta .fc-price { font-size: 0.82rem; }
+    }
+
+    /* ===== ACCESSIBILITY ===== */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+      html { scroll-behavior: auto; }
+      .fade-in { opacity: 1; transform: none; }
+    }
+    :focus-visible { outline: 3px solid var(--coral); outline-offset: 3px; }
+    .skip-link {
+      position: absolute; left: -9999px; top: 0; background: var(--coral);
+      color: white; padding: 0.75rem 1.25rem; z-index: 200; border-radius: 0 0 8px 0;
+    }
+    .skip-link:focus { left: 0; }
+  
+    /* Real photos placed in the placeholder frames (photo shoot, Aug 2026) */
+    .img-ph.has-img { padding: 0; border: none; }
+    .img-ph.has-img::before { display: none; }
+    .img-ph.has-img > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+  </style>
+
+
+
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <!-- Announcement bar -->
+  <div class="announce">
+    <span class="script">Psst…</span>Not ready to join? <a href="/opt-in">Grab the free 5-Minute Money Reality Check</a> instead →
+  </div>
+
+  <!-- Nav -->
+  <nav class="nav" id="mainNav">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">
+        <span class="dot"></span>
+        Purposeful Pennies
+        <em>&nbsp;spend with intention</em>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-links" id="navLinks">
+        <a href="/start-here">Start Here</a>
+        <a href="/about">About</a>
+        <a href="/free-resources">Free Resources</a>
+        <a href="/membership" class="current" aria-current="page">Membership</a>
+        <a href="/blog">Blog</a>
+        <a href="/contact">Contact</a>
+        <a href="/opt-in" class="nav-cta">Free Reality Check</a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main">
+
+  <!-- ==================== 01 HERO  (problem and pining) ==================== -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-text">
+          <div class="hero-trust-row fade-in">
+            <span class="sticker coral">Founding member rate</span>
+            <span class="eyebrow eyebrow-coral">The Purposeful Pennies membership</span>
+          </div>
+          <h1 class="fade-in">
+            Payday should not feel like
+            <span class="squiggle-wrap">bracing for bad news.<svg viewBox="0 0 300 12" preserveAspectRatio="none" aria-hidden="true"><path d="M2 8 Q 40 2, 75 7 T 150 7 T 225 7 T 298 6" fill="none" stroke="#DD6B4E" stroke-width="4" stroke-linecap="round"></path></svg></span>
+          </h1>
+          <p class="hero-subhead fade-in">
+            The One-Income Circle is where moms making one income work keep every budget, meal, and grocery system in one place, run a fifteen minute weekly reset, and have someone who has stood exactly where they are standing.
+          </p>
+          <div class="fade-in">
+            <span class="hero-price-line">
+              <span class="amt js-price-hero">$19</span>
+              <span class="per">a month</span>
+              <span class="sep">◆</span>
+              <span class="per">cancel anytime</span>
+            </span>
+          </div>
+          <div class="hero-cta-row fade-in">
+            <a href="#join" class="btn btn-coral btn-lg">Join the Circle</a>
+            <a href="#inside" class="btn btn-outline">See what is inside</a>
+          </div>
+          <p class="trust-line fade-in">Instant access ◆ No contract ◆ Thirty day Peaceful Month Promise</p>
+          <div class="hero-proof fade-in">
+            <div class="hero-proof-avatars" aria-hidden="true">
+              <div class="hero-proof-avatar" style="background: var(--coral);">K</div>
+              <div class="hero-proof-avatar" style="background: var(--warm-tan);">M</div>
+              <div class="hero-proof-avatar" style="background: var(--sage);">J</div>
+              <div class="hero-proof-avatar" style="background: var(--gold);">A</div>
+            </div>
+            <p class="hero-proof-text">Built for the mom who has read every piece of budget advice on the internet and still dreads the first of the month.</p>
+          </div>
+        </div>
+        <div class="hero-image fade-in">
+          <div class="img-ph has-img"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/brookes-images-folder-sf3xp4/brooke-site-images/membership-hero.jpg" alt="Brooke at the kitchen table with her budget notebook open, pen in hand, smiling" loading="lazy"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 02 THE LOOP  (agitate) ==================== -->
+  <section class="loop">
+    <div class="container">
+      <div class="loop-head fade-in">
+        <span class="script">i want to say the part out loud</span>
+        <span class="eyebrow eyebrow-coral">Why it keeps falling apart</span>
+        <h2>You have tried. That is the part nobody sees.</h2>
+      </div>
+      <div class="loop-card fade-in">
+        <ul class="loop-list">
+          <li>You download the free printable at eleven at night, full of hope, and by the fourteenth you have quietly stopped filling it in.</li>
+          <li>You start a budget on Sunday. By Wednesday the car needs tires and the whole thing is off the rails.</li>
+          <li>You save three grocery tricks to a board you have not opened since March.</li>
+          <li>You add up the numbers, feel the knot in your stomach, close the app, and decide to look at it later.</li>
+          <li>You tell yourself next month is the month you finally get organized.</li>
+          <li>Then payday lands, and you are right back at the start, wondering if you are the problem.</li>
+        </ul>
+        <p class="loop-close">You are not the problem. You have been handed a hundred tips and never once handed a system. Tips fall apart the second real life walks in the door. Systems do not.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 03 THE OTHER SIDE  (reminder of what they want) ==================== -->
+  <section class="other">
+    <div class="container">
+      <div class="other-head fade-in">
+        <span class="eyebrow">What you are actually after</span>
+        <h2>What you want is smaller than everyone makes it sound.</h2>
+      </div>
+      <div class="ledger fade-in">
+        <div class="ledger-col now">
+          <h3>How it feels right now</h3>
+          <ul>
+            <li>Checking the balance with one eye closed.</li>
+            <li>Dreading the group text about a birthday gift.</li>
+            <li>Standing at the fridge at five o’clock with no idea what dinner is.</li>
+            <li>Feeling behind in a way you cannot quite explain to anyone.</li>
+            <li>Quietly wondering if you are just bad with money.</li>
+          </ul>
+        </div>
+        <div class="ledger-col next">
+          <h3>How it could feel by next payday</h3>
+          <ul>
+            <li>Opening the account because you already know what it says.</li>
+            <li>Saying yes to the gift, because there is a line for gifts.</li>
+            <li>Dinner decided on Sunday from food already in your kitchen.</li>
+            <li>Fifteen minutes on payday, and the rest of the week is yours.</li>
+            <li>Knowing money is a tool and not a scorecard, and actually believing it.</li>
+          </ul>
+        </div>
+      </div>
+      <p class="other-note fade-in">Not one thing on that second list needs a raise. It needs clarity, and clarity is a system. It is not a personality trait some women were born with.</p>
+    </div>
+  </section>
+
+  <!-- ==================== 04 NUMBERS  (interesting fact and proof) ==================== -->
+  <section class="numbers">
+    <div class="container">
+      <div class="numbers-head fade-in">
+        <span class="eyebrow eyebrow-cream">The honest math</span>
+        <h2>This was not built from theory.</h2>
+        <p>It was built at one kitchen table, on one income, by a mom with the same grocery bill and the same growing kids’ shoes as you.</p>
+      </div>
+      <div class="numbers-grid">
+        <div class="number-item fade-in">
+          <div class="num" data-target="34000" data-prefix="$">$0</div>
+          <p class="label">Paid off on one income, with a budget written by hand in a notebook.</p>
+        </div>
+        <div class="number-item fade-in">
+          <div class="num" data-target="15">0</div>
+          <p class="label">Minutes a week. That is the whole payday routine. Not an hour, not a spreadsheet weekend.</p>
+        </div>
+        <div class="number-item fade-in">
+          <div class="num" data-target="12">0</div>
+          <p class="label">Free resources already on this site. The Circle is what happens when you want them connected.</p>
+        </div>
+      </div>
+      <p class="numbers-foot fade-in">
+        <span class="script">here is the part I will not dress up</span>
+        Nothing inside the Circle is a secret trick. It is the same plain work I did at my own table, put in order, with someone walking next to you while you do it.
+      </p>
+    </div>
+  </section>
+
+  <!-- ==================== 05 INTRODUCING  (solution and onlyness) ==================== -->
+  <section class="intro-sec">
+    <div class="container">
+      <div class="intro-grid">
+        <div class="intro-text">
+          <span class="eyebrow eyebrow-coral fade-in">The solution</span>
+          <h2 class="fade-in">So here is what we built instead.</h2>
+          <div class="intro-name fade-in">The One-Income Circle</div>
+          <p class="intro-valueprop fade-in">A membership for one-income families where every budget, meal, grocery, and home system lives in one place, and a real person shows up every month to help you use them.</p>
+          <p class="lede fade-in">It is not a course you binge on a Tuesday and forget by Friday. It is a rhythm. You get the systems, you get the fifteen minute routine that holds them together, and you get a room full of moms doing the exact same thing in the exact same kind of month.</p>
+          <p class="fade-in"><strong>You will walk away with:</strong></p>
+          <ul class="walkaway fade-in">
+            <li>A payday routine that takes fifteen minutes and tells you where every dollar is going.</li>
+            <li>Dinner decided before Monday, built from what is already in your pantry.</li>
+            <li>A grocery number you set on purpose instead of discovering at the register.</li>
+            <li>Sinking funds for the surprises, so a set of tires stops wrecking the whole month.</li>
+            <li>Moms in the same season as you, so it stops feeling like you are the only one.</li>
+            <li>Me, answering your real question about your real situation, every single month.</li>
+          </ul>
+        </div>
+        <div class="intro-image fade-in">
+          <div class="img-ph has-img"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/brookes-images-folder-sf3xp4/brooke-site-images/membership-product.jpg" alt="The One-Income Circle printables spread out on a kitchen table" loading="lazy"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 06 WHAT IS INSIDE  (unwrap) ==================== -->
+  <section class="inside" id="inside">
+    <div class="container">
+      <div class="inside-head fade-in">
+        <span class="eyebrow">Unwrapping it</span>
+        <h2>Everything that comes with your seat.</h2>
+        <p class="lede">Six pieces. Each one solves something you are dealing with this week, not someday.</p>
+      </div>
+      <div class="inside-grid">
+        <div class="inside-card fade-in">
+          <div class="card-num">01</div>
+          <h3>The System Vault</h3>
+          <p>Seven systems that work together, so you stop stitching advice together from a dozen strangers.</p>
+          <ul>
+            <li>The One-Income Budget System</li>
+            <li>The Sinking Fund System</li>
+            <li>The Frugal Family Meal System</li>
+            <li>The Grocery Strategy System</li>
+            <li>Simple Home Rhythms</li>
+            <li>The Money Is a Tool Mindset Kit</li>
+            <li>The Quick Start Implementation Guide</li>
+          </ul>
+        </div>
+        <div class="inside-card fade-in">
+          <div class="card-num">02</div>
+          <h3>The Monthly Money Reset</h3>
+          <p>One live session a month where we plan the month together, out loud, in real numbers.</p>
+          <ul>
+            <li>Forty five minutes, once a month</li>
+            <li>We set the grocery number and the sinking funds</li>
+            <li>Recorded, so bedtime does not cost you the call</li>
+            <li>Replay library going back to your first month</li>
+          </ul>
+        </div>
+        <div class="inside-card fade-in">
+          <div class="card-num">03</div>
+          <h3>The Circle</h3>
+          <p>A private group of moms in the same season. No comparison, no judgment, no one pretending.</p>
+          <ul>
+            <li>Weekly win thread, small wins welcome</li>
+            <li>Ask the room before you spend</li>
+            <li>Meal ideas from real one-income kitchens</li>
+            <li>Quiet is allowed. Lurking is allowed.</li>
+          </ul>
+        </div>
+        <div class="inside-card fade-in">
+          <div class="card-num">04</div>
+          <h3>Ask Brooke</h3>
+          <p>Bring me your actual numbers and your actual mess. I will tell you what I would do.</p>
+          <ul>
+            <li>Monthly question and answer session</li>
+            <li>Post any time, I answer every week</li>
+            <li>Real specifics, not general advice</li>
+            <li>Nothing you ask is too small</li>
+          </ul>
+        </div>
+        <div class="inside-card fade-in">
+          <div class="card-num">05</div>
+          <h3>The Printable Library</h3>
+          <p>Print it, fill it in, stick it on the fridge. Paper works when apps get ignored.</p>
+          <ul>
+            <li>Budget pages, trackers, bill calendar</li>
+            <li>Meal planners and grocery sheets</li>
+            <li>Sinking fund and debt payoff pages</li>
+            <li>New pieces added every month</li>
+          </ul>
+        </div>
+        <div class="inside-card fade-in">
+          <div class="card-num">06</div>
+          <h3>Something new each month</h3>
+          <p>Real life is seasonal. Your plan should be too.</p>
+          <ul>
+            <li>Back to school and holiday game plans</li>
+            <li>Seasonal grocery and produce guides</li>
+            <li>Christmas sinking fund, started in July</li>
+            <li>Short trainings on what members ask for</li>
+          </ul>
+        </div>
+      </div>
+      <p class="inside-foot fade-in">Everything in here connects to everything else. Nothing in the vault is random, and nothing in it assumes you have a spare hour you have not told anyone about.</p>
+    </div>
+  </section>
+
+  <!-- ==================== 07 HOW IT WORKS  (break it down now) ==================== -->
+  <section class="how">
+    <div class="container">
+      <div class="how-head fade-in">
+        <span class="eyebrow">How this actually goes</span>
+        <h2>Three steps. The first one takes fifteen minutes.</h2>
+      </div>
+      <div class="how-grid">
+        <div class="how-step fade-in">
+          <div class="how-num">1</div>
+          <h3>You join and open the Quick Start.</h3>
+          <p>No forty module maze. The first thing you see is one short path: print two pages, watch a five minute walkthrough, and pick the one area you want to work on first.</p>
+        </div>
+        <div class="how-step fade-in">
+          <div class="how-num">2</div>
+          <h3>You run your first payday reset this week.</h3>
+          <p>Fifteen minutes, one page. Every dollar gets a job, the bills get a date, and the grocery number gets set before you walk into the store instead of after.</p>
+        </div>
+        <div class="how-step fade-in">
+          <div class="how-num">3</div>
+          <h3>You keep going, and it gets quiet.</h3>
+          <p>Come to the monthly reset, add one system at a time, and by month three payday is a routine you barely think about. That is the whole goal. Not a perfect budget. A calm one.</p>
+        </div>
+      </div>
+      <div class="how-cta fade-in">
+        <a href="#join" class="btn btn-coral btn-lg">Start with step one</a>
+        <p class="trust-line">You can be through step one tonight, after the kids are down.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 08 BONUSES  (founding members) ==================== -->
+  <section class="bonus">
+    <div class="container">
+      <div class="bonus-head fade-in">
+        <span class="sticker sage">Founding members only</span>
+        <h2>Three things for coming in early.</h2>
+        <p>The Circle is new. You joining now shapes what gets built next, and that is worth something.</p>
+      </div>
+      <div class="bonus-grid">
+        <div class="bonus-card fade-in">
+          <div class="bonus-tag">Bonus one</div>
+          <h3>Your rate stays your rate</h3>
+          <p>The founding price is locked for as long as you stay a member, even after it goes up for the group that comes after you.</p>
+          <div class="bonus-value">Locked for life</div>
+        </div>
+        <div class="bonus-card fade-in">
+          <div class="bonus-tag">Bonus two</div>
+          <h3>The First 30 Days Roadmap</h3>
+          <p>A week by week plan for your first month so you never open the vault and wonder what you are supposed to do today.</p>
+          <div class="bonus-value">$47 value</div>
+        </div>
+        <div class="bonus-card fade-in">
+          <div class="bonus-tag">Bonus three</div>
+          <h3>A say in what gets built</h3>
+          <p>Founding members vote on the next printables and the next trainings. The first calendar gets built around what you tell me you need.</p>
+          <div class="bonus-value">Yours only now</div>
+        </div>
+      </div>
+      <p class="bonus-note fade-in">When the founding group closes, the rate goes up and these three go away. Nothing dramatic about it, that is just how it works.</p>
+    </div>
+  </section>
+
+  <!-- ==================== 09 PRICE ANCHORING  (Starbucks test) ==================== -->
+  <section class="anchor">
+    <div class="container">
+      <div class="anchor-head fade-in">
+        <span class="eyebrow eyebrow-coral">Let us talk about cost</span>
+        <h2>What else costs about nineteen dollars?</h2>
+      </div>
+      <div class="anchor-grid">
+        <div class="anchor-item fade-in">
+          <div class="amt">$19</div>
+          <div class="what">Two coffees and a pastry on a Saturday morning you will not remember by Monday.</div>
+        </div>
+        <div class="anchor-item fade-in">
+          <div class="amt">$38</div>
+          <div class="what">One pizza night for a family of four, ordered because nobody knew what dinner was.</div>
+        </div>
+        <div class="anchor-item fade-in">
+          <div class="amt">$60</div>
+          <div class="what">A single grocery trip that went sideways because you shopped hungry with no list.</div>
+        </div>
+        <div class="anchor-item fade-in">
+          <div class="amt">$120</div>
+          <div class="what">Three months of a streaming stack nobody in the house has opened since spring.</div>
+        </div>
+      </div>
+      <div class="anchor-close fade-in">
+        <p><span class="script">so here is the real question</span>
+        Trim one unplanned takeout night a month and the Circle has paid for itself with change left over. The money is going to leave your account either way. This is the version where you decide where it goes.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 10 THE STACK AND PRICE ==================== -->
+  <section class="stack" id="join">
+    <div class="container">
+      <div class="stack-head fade-in">
+        <span class="eyebrow">Everything, added up</span>
+        <h2>Here it is, line by line.</h2>
+      </div>
+      <div class="stack-grid">
+        <div class="receipt fade-in">
+          <h3>What comes with your seat</h3>
+          <div class="receipt-row"><span>Every system from the Frugal Living Starter Bundle, all seven</span><span class="val">$197</span></div>
+          <div class="receipt-row"><span>The One Income Budget Toolkit, templates, trackers, bill calendar</span><span class="val">$27</span></div>
+          <div class="receipt-row"><span>Twelve live Monthly Money Reset sessions, plus every replay</span><span class="val">$228</span></div>
+          <div class="receipt-row"><span>Twelve months of new printables and seasonal plans</span><span class="val">$108</span></div>
+          <div class="receipt-row"><span>Ask Brooke, monthly sessions and answers all year</span><span class="val">Included</span></div>
+          <div class="receipt-row"><span>The Circle, a private room of one-income moms</span><span class="val">Not sold anywhere</span></div>
+          <div class="receipt-row"><span>The First 30 Days Roadmap, founding members</span><span class="val">$47</span></div>
+          <div class="receipt-total">
+            <span class="lbl">Value in your first year</span>
+            <span class="amt">$607</span>
+          </div>
+          <p class="receipt-note">Those are the real prices these pieces sell for on their own. No padded numbers, because inflating a value to look generous is exactly the kind of thing I would not do to you.</p>
+        </div>
+
+        <div class="price-card fade-in">
+          <div class="price-sticker">Founding member rate</div>
+          <div class="toggle-row" role="group" aria-label="Billing options">
+            <button class="toggle-btn active" id="btnMonthly" type="button" aria-pressed="true">Monthly</button>
+            <button class="toggle-btn" id="btnYearly" type="button" aria-pressed="false">Yearly</button>
+          </div>
+          <div class="price-amount" id="priceAmount">$19</div>
+          <div class="price-per" id="pricePer">per month, cancel anytime</div>
+          <div class="price-second" id="priceSecond">Or $190 for the year and two months are free</div>
+          <ul class="price-includes">
+            <li>All seven systems, the day you join</li>
+            <li>The monthly live reset, plus replays</li>
+            <li>Ask Brooke, every month</li>
+            <li>The Circle community</li>
+            <li>New printables every month</li>
+            <li>Founding rate locked for as long as you stay</li>
+          </ul>
+          <a href="/membership-thank-you" class="btn btn-coral btn-lg js-join">Join the Circle</a>
+          <p class="price-fine">Thirty day Peaceful Month Promise. Cancel in two clicks, keep every printable you already downloaded.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 11 SCARCITY  (honest version) ==================== -->
+  <section class="scarcity">
+    <div class="container">
+      <div class="scarcity-card fade-in">
+        <h3>The only real deadline on this page.</h3>
+        <p>You will not find a countdown clock here. I do not use them, and I am not going to start with you. Here is what is actually true: the rate is low because the Circle is new and the founding group is helping build it. When the calendar is full and the vault is finished, the price goes up for whoever comes next. Yours will not. And if this turns out to be the wrong thing for your family, you cancel in two clicks and we are still friends.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 12 SOCIAL PROOF  (placeholders, see note) ==================== -->
+  <!--
+    TESTIMONIAL NOTE FOR BROOKE
+    These three cards are placeholders on purpose. Real quotes pull far
+    harder than anything drafted for you. Ask the first ten members three
+    questions: what was money like before, what did you do inside the
+    Circle, what is different now. Drop their answers straight in and
+    delete the holding line underneath.
+  -->
+  <section class="proof2">
+    <div class="container">
+      <div class="proof2-head fade-in">
+        <span class="eyebrow eyebrow-coral">From inside the Circle</span>
+        <h2>What members say once the knot loosens.</h2>
+      </div>
+      <div class="proof2-grid">
+        <div class="t-card fade-in">
+          <div class="t-stars">★ ★ ★ ★ ★</div>
+          <p class="t-quote">[Placeholder. The first payday reset. What she expected to feel versus what she actually felt. The moment the number stopped being scary.]</p>
+          <div class="t-author">
+            <div class="t-avatar" style="background: var(--coral);">M</div>
+            <div>
+              <div class="t-name">[First name]</div>
+              <div class="t-context">[Family context, state]</div>
+            </div>
+          </div>
+        </div>
+        <div class="t-card fade-in">
+          <div class="t-stars">★ ★ ★ ★ ★</div>
+          <p class="t-quote">[Placeholder. The grocery and meal side. A real dollar figure if she will give you one, and what that money went toward instead.]</p>
+          <div class="t-author">
+            <div class="t-avatar" style="background: var(--sage);">J</div>
+            <div>
+              <div class="t-name">[First name]</div>
+              <div class="t-context">[Family context, state]</div>
+            </div>
+          </div>
+        </div>
+        <div class="t-card fade-in">
+          <div class="t-stars">★ ★ ★ ★ ★</div>
+          <p class="t-quote">[Placeholder. The community angle. The I thought it was just us moment, and what it felt like to hear another mom say the same thing out loud.]</p>
+          <div class="t-author">
+            <div class="t-avatar" style="background: var(--warm-tan);">A</div>
+            <div>
+              <div class="t-name">[First name]</div>
+              <div class="t-context">[Family context, state]</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="proof2-holding fade-in">The Circle is new, so this space is honest instead of stuffed. You might be one of the first stories that lands here, and that is not nothing.</p>
+    </div>
+  </section>
+
+  <!-- ==================== 13 GUARANTEE ==================== -->
+  <section class="guarantee">
+    <div class="container">
+      <div class="g-card fade-in">
+        <div class="g-seal">
+          <span class="g-seal-num">30</span>
+          <span class="g-seal-word">day promise</span>
+        </div>
+        <span class="eyebrow">Risk, removed</span>
+        <h2>The Peaceful Month Promise</h2>
+        <p>Come in and actually use it for thirty days. Run one payday reset, come to one live session, and try the meal plan for two weeks. If money still feels like the same knot in your stomach, email me and tell me so. I will refund your first payment in full and you keep every printable you downloaded.</p>
+        <p>I have been the mom counting the days to the end of the month. I am not interested in keeping money from a family that is already stretched thin.</p>
+        <p><a href="/terms" class="g-link">Read the full refund policy</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 14 CREDIBILITY ==================== -->
+  <section class="cred">
+    <div class="container">
+      <div class="cred-grid">
+        <div class="cred-image fade-in">
+          <div class="img-ph has-img"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/brookes-images-folder-sf3xp4/brooke-site-images/membership-portrait.jpg" alt="Brooke smiling warmly at her kitchen table, pen in hand over her budget notebook" loading="lazy"></div>
+        </div>
+        <div class="cred-text">
+          <span class="eyebrow eyebrow-coral fade-in">And who am I</span>
+          <h2 class="fade-in">I am Brooke, and I built this at my own kitchen table.</h2>
+          <p class="lede fade-in">I am a mom living on one income who paid off thirty four thousand dollars with a budget I wrote by hand, in a notebook, while learning that peace comes from clarity and not from earning more.</p>
+          <p class="fade-in">I made the Circle because I kept getting the same message from women who had already found the free printables and read the blog posts. They did not need another download. They needed the pieces connected, and they needed someone to check in with while the habit took hold.</p>
+          <p class="fade-in">I am not a financial advisor and I will never pretend to be one. I am the mom two steps ahead of you on the same road, and I would be glad to walk it with you.</p>
+          <p class="cred-sign fade-in">so glad you are here, Brooke</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 15 ATTRACT AND REPEL ==================== -->
+  <section class="fit">
+    <div class="container">
+      <div class="fit-head fade-in">
+        <span class="eyebrow">Being straight with you</span>
+        <h2>This is not for everyone, and that is fine.</h2>
+      </div>
+      <div class="fit-grid">
+        <div class="fit-col yes fade-in">
+          <h3>You will feel at home here if…</h3>
+          <ul>
+            <li>Your household runs on one income, or close to it, and every dollar already has somewhere it needs to be.</li>
+            <li>You have tried apps, envelopes, and spreadsheets, and what you are missing is a rhythm you can keep.</li>
+            <li>You want progress over perfection, and no plan that shames you when a week goes sideways.</li>
+            <li>Fifteen minutes a week is realistic and two hours a week is not.</li>
+            <li>You would rather have one steady friend in your corner than a hundred strangers shouting advice.</li>
+          </ul>
+        </div>
+        <div class="fit-col no fade-in">
+          <h3>This is not the place for you if…</h3>
+          <ul>
+            <li>You are looking for investing advice, credit repair, or a way to make money quickly.</li>
+            <li>You want someone to do the work for you. I will walk beside you, but the fifteen minutes are yours.</li>
+            <li>You have two full incomes and want advanced wealth building. There are better rooms for that.</li>
+            <li>You want tips to collect rather than a system to run.</li>
+            <li>Nineteen dollars would take food off your table this month. Take the free library instead, and come back when it is the right season.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 16 FAQ ==================== -->
+  <section class="faq">
+    <div class="container">
+      <div class="faq-head fade-in">
+        <span class="eyebrow eyebrow-coral">Before you decide</span>
+        <h2>Questions other moms asked first.</h2>
+      </div>
+      <div class="faq-list" id="faqList">
+
+        <div class="faq-item fade-in">
+          <button class="faq-q" type="button">I have quit every budget I have ever started. Why would this be different?</button>
+          <div class="faq-a"><p>Because most budgets fail on the follow through, not on the math. The Circle is built around one fifteen minute routine you repeat on payday, and a live session once a month where we do it together. The systems matter, but the rhythm is what keeps it going. And when you do fall off, you come back to the same page and pick it up. Nobody here is keeping score.</p></div>
+        </div>
+
+        <div class="faq-item fade-in">
+          <button class="faq-q" type="button">Our income changes every month. Does this still work?</button>
+          <div class="faq-a"><p>Yes, and the routine matters more when it does. Variable income is exactly why we set the grocery number and the sinking funds first and let the flexible things move around them. There is a version of the budget page built for pay that changes, and the monthly reset is where we adjust it out loud together.</p></div>
+        </div>
+
+        <div class="faq-item fade-in">
+          <button class="faq-q" type="button">How much time is this really going to take?</button>
+          <div class="faq-a"><p>Fifteen minutes on payday, plus a Sunday meal plan that takes about ten. The monthly live session is forty five minutes and it is recorded, so if bedtime runs long you watch it later. That is the honest answer. If a program needs more of your week than that, it was not built for a mom running a household.</p></div>
+        </div>
+
+        <div class="faq-item fade-in">
+          <button class="faq-q" type="button">Can I cancel?</button>
+          <div class="faq-a"><p>Any time, in two clicks, with no email to write and nobody trying to talk you out of it. You keep every printable you already downloaded. If you cancel and want to come back later, your founding rate comes back with you for the first ninety days.</p></div>
+        </div>
+
+        <div class="faq-item fade-in">
+          <button class="faq-q" type="button">Do I need to be good with spreadsheets or technology?</button>
+          <div class="faq-a"><p>No. Everything has a printable version, because paper works when apps get ignored. If you would rather type, the templates work in Google Sheets and each one has a short walkthrough. If you can print a page and hold a pen, you can do all of this.</p></div>
+        </div>
+
+        <div class="faq-item fade-in">
+          <button class="faq-q" type="button">Is this a faith-based membership?</button>
+          <div class="faq-a"><p>I am a believer, and that shapes how I see money and how I treat people. Inside the Circle that looks like grace when a month goes badly and no shame about where you are starting. There is no required study and no preaching. Families of every background are welcome at this table.</p></div>
+        </div>
+
+        <div class="faq-item fade-in">
+          <button class="faq-q" type="button">What if I already bought the Budget Toolkit or the Frugal Living Bundle?</button>
+          <div class="faq-a"><p>Then you already own a piece of the vault, and I do not want you paying for it twice. Email me from the address you purchased with and I will credit what you spent toward your membership. <a href="/contact">Send me a note here</a> and I will take care of it.</p></div>
+        </div>
+
+        <div class="faq-item fade-in">
+          <button class="faq-q" type="button">What happens if I fall behind?</button>
+          <div class="faq-a"><p>Nothing happens. There is no group to keep up with and no lessons expiring. Miss a month, come back, print the page, and start with the next payday. Progress over perfection is not a slogan I put on a card. It is how the whole thing is built.</p></div>
+        </div>
+
+      </div>
+      <p class="faq-foot fade-in">Still wondering something? <a href="/contact">Ask me directly</a> and you will hear back from me, not a team.</p>
+    </div>
+  </section>
+
+  <!-- ==================== 17 CTA CLOSE  (recap) ==================== -->
+  <section class="cta-close">
+    <div class="narrow">
+      <span class="script fade-in">one fifteen minute start</span>
+      <h2 class="fade-in">Payday is coming either way.</h2>
+      <p class="fade-in">You can meet it the way you met the last one, with the knot and the guessing and the quiet math in the car. Or you can meet it with a page in front of you and a plan you wrote on purpose.</p>
+      <ul class="recap fade-in">
+        <li>Seven systems for budget, meals, groceries, home, and mindset</li>
+        <li>A fifteen minute payday routine that holds it all together</li>
+        <li>A live Monthly Money Reset, recorded for the nights that get away from you</li>
+        <li>Ask Brooke every month, with your real numbers</li>
+        <li>A private circle of moms making one income work</li>
+        <li>New printables and seasonal plans every month</li>
+        <li>Your founding rate, locked for as long as you stay</li>
+      </ul>
+      <div class="cta-close-row fade-in">
+        <a href="/membership-thank-you" class="btn btn-coral btn-lg js-join">Join the Circle for <span class="js-price-cta">$19</span> a month</a>
+        <a href="/opt-in" class="btn btn-cream">Start with the free worksheet</a>
+      </div>
+      <p class="cta-close-fine fade-in">Thirty day Peaceful Month Promise ◆ Cancel in two clicks ◆ Keep your printables either way</p>
+      <p class="cta-close-soft fade-in">Not sure yet? <a href="/free-resources">Take the free library for a spin</a> or <a href="/about">read the whole story first</a>. There is no wrong door here.</p>
+    </div>
+  </section>
+
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer>
+    <div class="container">
+      <div class="brand-line">Purposeful Pennies</div>
+      <p class="tagline">spend with intention. save with purpose.</p>
+      <div class="diamond">◆ ◆ ◆</div>
+      <p class="closing-quote">“I want families to say, this helped us breathe again.”</p>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="/start-here">Start Here</a>
+        <a href="/about">About</a>
+        <a href="/free-resources">Free Resources</a>
+        <a href="/membership">Membership</a>
+        <a href="/blog">Blog</a>
+        <a href="/contact">Contact</a>
+        <a href="/opt-in">Free Reality Check</a>
+      </nav>
+      <p class="legal">
+        © 2026 Purposeful Pennies. All rights reserved.
+        &nbsp;·&nbsp;
+        <a href="/privacy-policy">Privacy</a> ·
+        <a href="/terms">Terms</a> ·
+        <a href="/disclaimer">Disclaimer</a> ·
+        <a href="/affiliate-disclosure">Affiliate Disclosure</a>
+      </p>
+      <p class="built">built with love for one-income families everywhere</p>
+    </div>
+  </footer>
+
+  <!-- Floating CTA -->
+  <div class="floating-cta" id="floatingCta">
+    <span class="fc-price"><strong class="js-price-float">$19</strong> a month ◆ cancel anytime</span>
+    <a href="/membership-thank-you" class="btn js-join">Join</a>
+  </div>
+
+  <script>
+    /* ============================================================
+       CONFIG  &#9670;  change these two things and the page follows
+       ============================================================ */
+    const CHECKOUT_URL = '/membership-thank-you';   /* swap in Stripe or ThriveCart link */
+    const PRICING = {
+      monthly: {
+        amount: '$19',
+        per: 'per month, cancel anytime',
+        second: 'Or $190 for the year and two months are free'
+      },
+      yearly: {
+        amount: '$190',
+        per: 'per year, cancel anytime',
+        second: 'That works out to $15.83 a month'
+      }
+    };
+
+    /* Wire every join button to the checkout URL */
+    document.querySelectorAll('.js-join').forEach(function (a) { a.href = CHECKOUT_URL; });
+
+    /* Hero, CTA, and floating bar always show the monthly figure */
+    document.querySelectorAll('.js-price-hero, .js-price-cta, .js-price-float').forEach(function (el) {
+      el.textContent = PRICING.monthly.amount;
+    });
+
+    /* ===== PRICE TOGGLE ===== */
+    const btnMonthly = document.getElementById('btnMonthly');
+    const btnYearly = document.getElementById('btnYearly');
+    const priceAmount = document.getElementById('priceAmount');
+    const pricePer = document.getElementById('pricePer');
+    const priceSecond = document.getElementById('priceSecond');
+
+    function setPlan(plan) {
+      const p = PRICING[plan];
+      priceAmount.textContent = p.amount;
+      pricePer.textContent = p.per;
+      priceSecond.textContent = p.second;
+      const yearly = plan === 'yearly';
+      btnYearly.classList.toggle('active', yearly);
+      btnMonthly.classList.toggle('active', !yearly);
+      btnYearly.setAttribute('aria-pressed', String(yearly));
+      btnMonthly.setAttribute('aria-pressed', String(!yearly));
+    }
+    btnMonthly.addEventListener('click', function () { setPlan('monthly'); });
+    btnYearly.addEventListener('click', function () { setPlan('yearly'); });
+    setPlan('monthly');
+
+    /* ===== MOBILE NAV ===== */
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    navToggle.addEventListener('click', function () {
+      const open = navLinks.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', String(open));
+    });
+    navLinks.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () {
+        navLinks.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    /* ===== FAQ ACCORDION ===== */
+    document.querySelectorAll('.faq-item').forEach(function (item) {
+      const q = item.querySelector('.faq-q');
+      const a = item.querySelector('.faq-a');
+      q.setAttribute('aria-expanded', 'false');
+      q.addEventListener('click', function () {
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item.open').forEach(function (other) {
+          other.classList.remove('open');
+          other.querySelector('.faq-a').style.maxHeight = null;
+          other.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+        });
+        if (!isOpen) {
+          item.classList.add('open');
+          a.style.maxHeight = (a.scrollHeight + 40) + 'px';
+          q.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+
+    /* ===== FADE-IN ===== */
+    const fadeObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          fadeObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
+    document.querySelectorAll('.fade-in').forEach(function (el) { fadeObserver.observe(el); });
+
+    /* ===== COUNTERS ===== */
+    function animateCounter(el) {
+      const target = parseInt(el.dataset.target, 10);
+      const prefix = el.dataset.prefix || '';
+      const suffix = el.dataset.suffix || '';
+      const duration = 1800;
+      const start = performance.now();
+      function step(now) {
+        const progress = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = prefix + Math.floor(target * eased).toLocaleString() + suffix;
+        if (progress < 1) requestAnimationFrame(step);
+        else el.textContent = prefix + target.toLocaleString() + suffix;
+      }
+      requestAnimationFrame(step);
+    }
+    const counterObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          animateCounter(entry.target);
+          counterObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('[data-target]').forEach(function (c) { counterObserver.observe(c); });
+
+    /* ===== FLOATING CTA  shows after the hero, hides over the price card ===== */
+    const floatingCta = document.getElementById('floatingCta');
+    const heroSection = document.querySelector('.hero');
+    const joinSection = document.getElementById('join');
+    function updateFloating() {
+      const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
+      const joinTop = joinSection.offsetTop;
+      const joinBottom = joinTop + joinSection.offsetHeight;
+      const y = window.scrollY;
+      const inJoin = y > joinTop - 500 && y < joinBottom;
+      if (y > heroBottom - 100 && !inJoin) floatingCta.classList.add('visible');
+      else floatingCta.classList.remove('visible');
+    }
+    window.addEventListener('scroll', updateFloating, { passive: true });
+    updateFloating();
+<w:pgSz w:h="15840" w:w="12240" w:orient="portrait"/><w:pgMar w:bottom="1440" w:top="1440" w:left="1440" w:right="1440" w:header="720" w:footer="720"/><w:pgNumType w:start="1"/></w:sectPr></w:pPr><w:r w:rsidDel="00000000" w:rsidR="00000000" w:rsidRPr="00000000"><w:rPr><w:rtl w:val="0"/></w:rPr><w:t xml:space="preserve">  </script>

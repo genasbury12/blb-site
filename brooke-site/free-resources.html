@@ -1,0 +1,693 @@
+<!--
+  ============================================================
+  PURPOSEFUL PENNIES  ·  FREE RESOURCES (fully linked)
+  URL: /free-resources
+  Draft: https://purposefulpenniesdraft.showit.site/free-resources
+  ============================================================
+
+  PURPOSE
+  The freebie library. This page exists to build the email list,
+  so every resource is gated behind one signup. The model is
+  deliberately "one email, the whole library" rather than eleven
+  separate opt-ins, because eleven separate signups is eleven
+  chances for her to bounce.
+
+  SECTION ORDER
+    1  Hero              free means free, sets the count
+    2  Flagship          the 5-Minute Money Reality Check
+    3  The library       filterable grid, 11 resources
+    4  How it works      three steps, sets expectations
+    5  What will not     the trust block, kills signup anxiety
+    6  Membership bridge honest soft bridge, no pressure
+    7  CTA close         deep sage, mirrors Home / About / Start Here
+
+  TRACKING WHICH FREEBIE CONVERTS
+  Every resource button points to /opt-in with a ?r= slug, for
+  example /opt-in?r=monthly-budget. Read that param on the
+  opt-in page to tag the Flodesk segment, so you learn which
+  freebie actually pulls. Strip the param if you would rather
+  keep the URLs bare.
+
+  No empty-anchor placeholders. No em dashes or en dashes.
+  ============================================================
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Budget Resources · Purposeful Pennies</title>
+<meta name="description" content="Free printables, budget templates, meal planners and trackers for one-income families. One signup, the whole library, no cost and no catch.">
+<link rel="canonical" href="https://purposefulpenniesdraft.showit.site/free-resources">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&amp;family=DM+Serif+Display&amp;display=swap" rel="stylesheet">
+<style>
+  :root {
+    --deep-sage: #2E3E2F;
+    --sage: #5C6E47;
+    --sage-soft: #8B9E75;
+    --warm-tan: #C28954;
+    --warm-tan-dark: #A77246;
+    --cream: #FBF4D7;
+    --cream-warm: #F7ECC4;
+    --charcoal: #2A2A2A;
+    --soft-gray: #7E867D;
+    --light-sage: #DBE3CE;
+    --pale-tan: #EFE0C1;
+    --white: #FFFFFF;
+    --coral: #DD6B4E;
+    --coral-deep: #C25441;
+    --coral-soft: #F7D0BE;
+    --coral-blush: #FBE3D5;
+    --gold: #D4A83F;
+    --gold-soft: #EDD98D;
+    --gold-deep: #B8912E;
+    --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 17px; scroll-behavior: smooth; }
+  @media (min-width: 720px) { html { font-size: 18px; } }
+  body {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.08rem; line-height: 1.7; color: var(--charcoal);
+    background: var(--cream); -webkit-font-smoothing: antialiased; overflow-x: hidden;
+  }
+  .container { max-width: 1240px; margin: 0 auto; padding: 0 1.5rem; }
+  .narrow { max-width: 780px; margin: 0 auto; padding: 0 1.5rem; }
+  section { padding: 5rem 0; position: relative; }
+  @media (max-width: 700px) { section { padding: 3.5rem 0; } }
+
+  .skip-link { position: absolute; left: -9999px; top: 0; background: var(--deep-sage); color: var(--cream); padding: 0.75rem 1.25rem; z-index: 200; text-decoration: none; }
+  .skip-link:focus { left: 0.5rem; top: 0.5rem; }
+
+  .script { font-family: 'Caveat', cursive; font-weight: 700; }
+  .eyebrow { font-size: 0.78rem; font-weight: bold; letter-spacing: 0.22em; text-transform: uppercase; color: var(--warm-tan-dark); display: inline-flex; align-items: center; gap: 0.75rem; }
+  .eyebrow::before { content: ""; display: inline-block; width: 28px; height: 1px; background: var(--warm-tan); }
+  .eyebrow-coral { color: var(--coral-deep); }
+  .eyebrow-coral::before { background: var(--coral); }
+  h1, h2, h3 { font-family: Georgia, serif; color: var(--deep-sage); }
+  h1 { font-size: clamp(2.3rem, 5.5vw, 4rem); font-weight: bold; line-height: 1.04; letter-spacing: -0.02em; }
+  h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: bold; line-height: 1.12; letter-spacing: -0.01em; }
+  h3 { font-size: 1.25rem; font-weight: bold; line-height: 1.3; }
+  p { margin-bottom: 1.1rem; }
+  p:last-child { margin-bottom: 0; }
+
+  .inline-link { color: var(--coral-deep); font-weight: bold; text-decoration: none; border-bottom: 2px solid var(--coral); padding-bottom: 1px; transition: color 0.2s var(--ease); }
+  .inline-link:hover { color: var(--coral); }
+
+  .squiggle-wrap { display: inline-block; position: relative; white-space: nowrap; }
+  .squiggle-wrap svg { position: absolute; bottom: -0.2em; left: 0; width: 100%; height: 0.35em; pointer-events: none; }
+  .squiggle-wrap svg path { fill: none; stroke: var(--coral); stroke-width: 4; stroke-linecap: round; }
+
+  /* NAV */
+  .nav { background: rgba(251, 244, 215, 0.95); border-bottom: 1px solid rgba(194, 137, 84, 0.18); position: sticky; top: 0; z-index: 100; backdrop-filter: blur(10px); }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 1.1rem 1.5rem; max-width: 1280px; margin: 0 auto; position: relative; }
+  .nav-logo { font-family: Georgia, serif; font-size: 1.3rem; font-weight: bold; color: var(--deep-sage); letter-spacing: 0.03em; text-decoration: none; line-height: 1; display: flex; align-items: baseline; gap: 0.5rem; }
+  .nav-logo .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--coral); display: inline-block; }
+  .nav-logo em { display: block; font-family: 'Caveat', cursive; font-weight: 500; font-style: normal; color: var(--coral-deep); font-size: 0.95rem; letter-spacing: 0.02em; margin-top: -2px; }
+  .nav-links { display: flex; gap: 1.6rem; align-items: center; }
+  .nav-links a { font-family: Georgia, serif; font-size: 0.95rem; color: var(--deep-sage); text-decoration: none; position: relative; transition: color 0.2s var(--ease); white-space: nowrap; }
+  .nav-links a:not(.nav-cta)::after { content: ""; position: absolute; left: 0; right: 0; bottom: -4px; height: 2px; background: var(--coral); transform: scaleX(0); transform-origin: left; transition: transform 0.25s var(--ease); border-radius: 2px; }
+  .nav-links a:not(.nav-cta):hover::after { transform: scaleX(1); }
+  .nav-links a:hover:not(.nav-cta) { color: var(--coral-deep); }
+  .nav-links a.active { color: var(--coral-deep); }
+  .nav-links a.active:not(.nav-cta)::after { transform: scaleX(1); }
+  .nav-cta { background: var(--coral); color: white !important; padding: 0.6rem 1.25rem; border-radius: 999px; font-size: 0.85rem !important; font-weight: bold; letter-spacing: 0.04em; transition: all 0.25s var(--ease); box-shadow: 0 3px 0 var(--coral-deep); }
+  .nav-cta:hover { background: var(--coral-deep); color: white !important; transform: translateY(-1px); }
+  .nav-toggle { display: none; background: none; border: none; width: 44px; height: 44px; cursor: pointer; flex-direction: column; align-items: center; justify-content: center; gap: 5px; }
+  .nav-toggle span { display: block; width: 24px; height: 2px; background: var(--deep-sage); border-radius: 2px; transition: transform 0.28s var(--ease), opacity 0.2s var(--ease); }
+  .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-toggle.open span:nth-child(2) { opacity: 0; }
+  .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  @media (max-width: 1000px) {
+    .nav-toggle { display: flex; }
+    .nav-links { position: absolute; top: 100%; left: 0; right: 0; background: var(--cream); flex-direction: column; align-items: stretch; gap: 0; padding: 0 1.5rem; max-height: 0; overflow: hidden; transition: max-height 0.35s var(--ease), padding 0.35s var(--ease); border-bottom: 1px solid rgba(194, 137, 84, 0.18); box-shadow: 0 18px 40px rgba(46, 62, 47, 0.08); }
+    .nav-links.open { max-height: 560px; padding-bottom: 1.5rem; }
+    .nav-links a { padding: 0.95rem 0; border-bottom: 1px solid rgba(194, 137, 84, 0.15); font-size: 1.05rem; }
+    .nav-links a:not(.nav-cta)::after { display: none; }
+    .nav-cta { text-align: center; margin-top: 1.1rem; border-bottom: none; padding: 0.9rem 1.25rem; }
+  }
+
+  /* BUTTONS */
+  .btn { display: inline-flex; align-items: center; gap: 0.6rem; background: var(--warm-tan); color: white; font-family: Georgia, serif; font-size: 1.05rem; font-weight: bold; padding: 1.1rem 2.3rem; border: none; border-radius: 999px; cursor: pointer; text-decoration: none; transition: all 0.25s var(--ease); letter-spacing: 0.02em; box-shadow: 0 3px 0 var(--warm-tan-dark); }
+  .btn:hover { background: var(--warm-tan-dark); transform: translateY(-2px); box-shadow: 0 5px 0 var(--warm-tan-dark); }
+  .btn::after { content: "\2192"; transition: transform 0.25s var(--ease); }
+  .btn:hover::after { transform: translateX(4px); }
+  .btn-coral { background: var(--coral); box-shadow: 0 3px 0 var(--coral-deep); }
+  .btn-coral:hover { background: var(--coral-deep); box-shadow: 0 5px 0 var(--coral-deep); }
+  .btn-cream { background: var(--cream); color: var(--deep-sage); box-shadow: 0 3px 0 rgba(0,0,0,0.15); }
+  .btn-cream:hover { background: var(--white); color: var(--deep-sage); box-shadow: 0 5px 0 rgba(0,0,0,0.15); }
+  .btn-outline { background: transparent; color: var(--warm-tan-dark); border: 2px solid var(--warm-tan); padding: calc(1.1rem - 2px) calc(2.3rem - 2px); box-shadow: none; }
+  .btn-outline:hover { background: var(--pale-tan); color: var(--warm-tan-dark); box-shadow: none; }
+  .btn-sm { font-size: 0.92rem; padding: 0.8rem 1.5rem; }
+  .trust-line { font-family: Georgia, serif; font-style: italic; font-size: 0.92rem; color: var(--soft-gray); margin-top: 0.9rem; }
+
+  .sticker { display: inline-block; background: var(--gold); color: white; font-family: Georgia, serif; font-weight: bold; font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.5rem 0.9rem; border-radius: 4px; transform: rotate(-3deg); box-shadow: 0 3px 0 var(--gold-deep); }
+  .sticker.coral { background: var(--coral); box-shadow: 0 3px 0 var(--coral-deep); transform: rotate(2deg); }
+
+  /* IMG PLACEHOLDER */
+  .img-ph { background: linear-gradient(135deg, var(--coral-blush) 0%, var(--pale-tan) 50%, var(--light-sage) 100%); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; flex-direction: column; padding: 2rem; text-align: center; border: 1px dashed rgba(194, 137, 84, 0.5); }
+  .img-ph::before { content: ""; position: absolute; inset: 0; background-image: radial-gradient(circle at 20% 30%, rgba(221, 107, 78, 0.1) 0%, transparent 50%), radial-gradient(circle at 80% 70%, rgba(212, 168, 63, 0.1) 0%, transparent 50%); pointer-events: none; }
+  .img-ph .ph-icon { width: 52px; height: 52px; border: 1.5px solid var(--coral); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; color: var(--coral); font-size: 1.6rem; background: rgba(255,255,255,0.6); position: relative; z-index: 1; }
+  .img-ph .ph-tag { font-family: Georgia, serif; font-size: 0.7rem; font-weight: bold; letter-spacing: 0.2em; text-transform: uppercase; color: var(--coral-deep); margin-bottom: 0.75rem; position: relative; z-index: 1; }
+  .img-ph .ph-title { font-family: Georgia, serif; font-size: 1.05rem; font-weight: bold; color: var(--deep-sage); margin-bottom: 0.5rem; position: relative; z-index: 1; }
+  .img-ph .ph-brief { font-family: Georgia, serif; font-size: 0.85rem; font-style: italic; color: var(--sage); line-height: 1.5; max-width: 26rem; position: relative; z-index: 1; }
+
+  /* ===== 1. HERO ===== */
+  .fr-hero { background: var(--cream); padding: 4rem 0 4.5rem; position: relative; overflow: hidden; text-align: center; }
+  .fr-hero::before { content: ""; position: absolute; top: -190px; right: -140px; width: 500px; height: 500px; background: radial-gradient(circle, var(--coral-blush) 0%, transparent 65%); opacity: 0.75; pointer-events: none; }
+  .fr-hero::after { content: ""; position: absolute; bottom: -150px; left: -130px; width: 430px; height: 430px; background: radial-gradient(circle, var(--gold-soft) 0%, transparent 60%); opacity: 0.4; pointer-events: none; }
+  .fr-hero .narrow { position: relative; z-index: 2; }
+  .fr-hero .script { display: block; font-family: 'Caveat', cursive; font-size: 2rem; color: var(--coral-deep); margin-bottom: 0.35rem; }
+  .fr-hero h1 { margin: 0 0 1.35rem; }
+  .fr-hero-lead { font-style: italic; font-size: clamp(1.1rem, 2.2vw, 1.28rem); line-height: 1.6; color: var(--sage); max-width: 34rem; margin: 0 auto 2rem; }
+  .fr-hero-cta-row { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
+  .fr-badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.85rem; margin-top: 2.25rem; }
+  .fr-badge { background: white; border: 1px solid rgba(221, 107, 78, 0.28); border-radius: 999px; padding: 0.6rem 1.25rem; font-size: 0.88rem; color: var(--deep-sage); display: inline-flex; align-items: center; gap: 0.5rem; box-shadow: 0 3px 12px rgba(46, 62, 47, 0.05); }
+  .fr-badge b { color: var(--coral-deep); }
+
+  /* ===== 2. FLAGSHIP ===== */
+  .flagship { background: var(--coral-blush); }
+  .flagship-card { background: white; border-radius: 18px; overflow: hidden; max-width: 1040px; margin: 0 auto; box-shadow: 0 26px 70px rgba(46, 62, 47, 0.11); border: 2px solid var(--coral); display: grid; grid-template-columns: 0.85fr 1.15fr; position: relative; }
+  @media (max-width: 880px) { .flagship-card { grid-template-columns: 1fr; } }
+  .flagship-img { position: relative; min-height: 340px; }
+  .flagship-img .img-ph { width: 100%; height: 100%; border: none; border-radius: 0; }
+  .flagship-seal { position: absolute; top: 1.25rem; left: 1.25rem; width: 88px; height: 88px; background: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-direction: column; text-align: center; color: white; font-family: 'Caveat', cursive; font-size: 1.5rem; font-weight: 700; line-height: 1; transform: rotate(-12deg); box-shadow: 0 8px 22px rgba(212, 168, 63, 0.45); z-index: 2; }
+  .flagship-seal small { font-family: Georgia, serif; font-weight: bold; font-size: 0.5rem; letter-spacing: 0.14em; text-transform: uppercase; margin-top: 0.15rem; }
+  .flagship-body { padding: 3rem 3rem 2.75rem; }
+  @media (max-width: 600px) { .flagship-body { padding: 2rem 1.75rem; } }
+  .flagship-body .eyebrow { margin-bottom: 1rem; }
+  .flagship-body h2 { font-size: clamp(1.6rem, 3.2vw, 2.2rem); margin-bottom: 1rem; }
+  .flagship-body > p { font-size: 1.05rem; }
+  .flagship-list { list-style: none; margin: 1.5rem 0; }
+  .flagship-list li { padding: 0.45rem 0 0.45rem 2rem; position: relative; font-size: 0.99rem; line-height: 1.55; }
+  .flagship-list li::before { content: ""; position: absolute; left: 0; top: 0.55rem; width: 18px; height: 18px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23DD6B4E' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center/contain no-repeat; }
+  .flagship-meta { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 1.75rem; }
+  .flagship-meta span { background: var(--cream); border-radius: 6px; padding: 0.4rem 0.8rem; font-size: 0.8rem; font-weight: bold; letter-spacing: 0.06em; color: var(--sage); }
+
+  /* ===== 3. LIBRARY ===== */
+  .library { background: var(--white); }
+  .library-head { text-align: center; max-width: 700px; margin: 0 auto 2.5rem; }
+  .library-head .eyebrow { justify-content: center; margin-bottom: 1rem; }
+  .library-head .script { display: block; font-family: 'Caveat', cursive; font-size: 1.85rem; color: var(--coral-deep); margin-bottom: 0.25rem; }
+  .library-head p { font-style: italic; color: var(--sage); font-size: 1.06rem; margin-top: 1rem; }
+  .filters { display: flex; flex-wrap: wrap; gap: 0.65rem; justify-content: center; margin-bottom: 1.25rem; }
+  .chip { font-family: Georgia, serif; font-size: 0.92rem; background: var(--cream); border: 2px solid transparent; color: var(--deep-sage); padding: 0.6rem 1.25rem; border-radius: 999px; cursor: pointer; transition: all 0.22s var(--ease); }
+  .chip:hover { border-color: var(--coral); background: var(--coral-blush); }
+  .chip.on { background: var(--coral); border-color: var(--coral); color: white; box-shadow: 0 3px 0 var(--coral-deep); }
+  .chip .n { opacity: 0.65; font-size: 0.84rem; margin-left: 0.3rem; }
+  .filter-count { text-align: center; font-size: 0.9rem; font-style: italic; color: var(--soft-gray); margin-bottom: 2.5rem; }
+  .res-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  @media (max-width: 980px) { .res-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 640px) { .res-grid { grid-template-columns: 1fr; } }
+  .res-card { background: var(--cream); border-radius: 14px; padding: 1.85rem 1.75rem 1.75rem; border: 1px solid rgba(221, 107, 78, 0.16); display: flex; flex-direction: column; transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease), opacity 0.3s var(--ease); position: relative; overflow: hidden; }
+  .res-card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 5px; background: var(--coral); transform: scaleX(0.25); transform-origin: left; transition: transform 0.4s var(--ease); }
+  .res-card:hover { transform: translateY(-6px); box-shadow: 0 24px 48px rgba(46, 62, 47, 0.12); }
+  .res-card:hover::before { transform: scaleX(1); }
+  .res-card[data-cat="groceries"]::before { background: var(--gold); }
+  .res-card[data-cat="home"]::before { background: var(--sage); }
+  .res-card[data-cat="mindset"]::before { background: var(--warm-tan); }
+  .res-card.hide { display: none; }
+  .res-icon { width: 50px; height: 50px; border-radius: 12px; background: var(--coral-blush); color: var(--coral-deep); display: flex; align-items: center; justify-content: center; font-size: 1.45rem; margin-bottom: 1.15rem; }
+  .res-card[data-cat="groceries"] .res-icon { background: var(--gold-soft); color: var(--gold-deep); }
+  .res-card[data-cat="home"] .res-icon { background: var(--light-sage); color: var(--sage); }
+  .res-card[data-cat="mindset"] .res-icon { background: var(--pale-tan); color: var(--warm-tan-dark); }
+  .res-cat { font-size: 0.68rem; font-weight: bold; letter-spacing: 0.18em; text-transform: uppercase; color: var(--coral-deep); margin-bottom: 0.5rem; }
+  .res-card[data-cat="groceries"] .res-cat { color: var(--gold-deep); }
+  .res-card[data-cat="home"] .res-cat { color: var(--sage); }
+  .res-card[data-cat="mindset"] .res-cat { color: var(--warm-tan-dark); }
+  .res-card h3 { font-size: 1.15rem; margin-bottom: 0.6rem; line-height: 1.35; }
+  .res-card p { font-size: 0.95rem; line-height: 1.6; color: var(--charcoal); margin-bottom: 1.1rem; flex-grow: 1; }
+  .res-meta { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.25rem; }
+  .res-meta span { background: white; border: 1px solid rgba(46, 62, 47, 0.1); border-radius: 5px; padding: 0.28rem 0.6rem; font-size: 0.74rem; font-weight: bold; letter-spacing: 0.05em; color: var(--soft-gray); }
+  .res-get { align-self: flex-start; }
+  .res-empty { display: none; text-align: center; padding: 3rem 1rem; font-style: italic; color: var(--sage); }
+  .res-empty.show { display: block; }
+
+  /* ===== 4. HOW IT WORKS ===== */
+  .how { background: var(--gold-soft); }
+  .how-head { text-align: center; max-width: 660px; margin: 0 auto 3.5rem; }
+  .how-head .eyebrow { justify-content: center; margin-bottom: 1rem; color: var(--gold-deep); }
+  .how-head .eyebrow::before { background: var(--gold-deep); }
+  .how-head p { font-style: italic; color: var(--sage); font-size: 1.06rem; margin-top: 1rem; }
+  .how-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; max-width: 1000px; margin: 0 auto; position: relative; }
+  @media (max-width: 900px) { .how-grid { grid-template-columns: 1fr; gap: 2rem; } }
+  .how-grid::before { content: ""; position: absolute; top: 33px; left: 14%; right: 14%; height: 2px; background-image: linear-gradient(to right, var(--gold-deep) 0 8px, transparent 8px 16px); background-size: 16px 2px; opacity: 0.4; z-index: 0; }
+  @media (max-width: 900px) { .how-grid::before { display: none; } }
+  .how-step { text-align: center; position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; }
+  .how-num { width: 66px; height: 66px; border-radius: 50%; background: white; border: 3px solid var(--gold-deep); display: flex; align-items: center; justify-content: center; font-family: 'DM Serif Display', Georgia, serif; font-size: 1.6rem; color: var(--gold-deep); margin-bottom: 1.35rem; box-shadow: 0 6px 18px rgba(184, 145, 46, 0.2); }
+  .how-step:last-child .how-num { background: var(--deep-sage); border-color: var(--deep-sage); color: var(--gold-soft); }
+  .how-step h3 { margin-bottom: 0.6rem; font-size: 1.18rem; }
+  .how-step p { font-size: 0.97rem; line-height: 1.62; max-width: 21rem; }
+
+  /* ===== 5. WHAT WILL NOT HAPPEN ===== */
+  .nots { background: var(--light-sage); }
+  .nots-inner { max-width: 860px; margin: 0 auto; padding: 0 1.5rem; }
+  .nots-head { text-align: center; margin-bottom: 2.5rem; }
+  .nots-head .eyebrow { justify-content: center; margin-bottom: 1rem; }
+  .nots-head .script { display: block; font-family: 'Caveat', cursive; font-size: 1.85rem; color: var(--coral-deep); margin-bottom: 0.25rem; }
+  .nots-card { background: white; border-radius: 16px; padding: 2.75rem 3rem; box-shadow: 0 16px 44px rgba(46, 62, 47, 0.08); }
+  @media (max-width: 600px) { .nots-card { padding: 2rem 1.75rem; } }
+  .nots-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 0.35rem 2.5rem; }
+  @media (max-width: 780px) { .nots-list { grid-template-columns: 1fr; } }
+  .nots-list li { padding: 0.7rem 0 0.7rem 2.2rem; position: relative; font-size: 1rem; line-height: 1.55; border-bottom: 1px solid rgba(46, 62, 47, 0.07); }
+  .nots-list li::before {
+    content: ""; position: absolute; left: 0; top: 0.85rem; width: 18px; height: 18px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235C6E47' stroke-width='3' stroke-linecap='round'%3E%3Cline x1='18' y1='6' x2='6' y2='18'/%3E%3Cline x1='6' y1='6' x2='18' y2='18'/%3E%3C/svg%3E") center/contain no-repeat;
+  }
+  .nots-close { text-align: center; margin-top: 2.25rem; padding-top: 2rem; border-top: 1px solid rgba(221, 107, 78, 0.22); font-family: Georgia, serif; font-style: italic; font-weight: bold; font-size: clamp(1.12rem, 2.4vw, 1.4rem); color: var(--deep-sage); line-height: 1.45; }
+
+  /* ===== 6. MEMBERSHIP BRIDGE ===== */
+  .bridge { background: var(--cream); }
+  .bridge-card { max-width: 900px; margin: 0 auto; background: white; border-radius: 16px; padding: 3rem; display: grid; grid-template-columns: 1fr auto; gap: 2.5rem; align-items: center; border: 1px solid rgba(221, 107, 78, 0.18); box-shadow: 0 14px 40px rgba(46, 62, 47, 0.07); }
+  @media (max-width: 800px) { .bridge-card { grid-template-columns: 1fr; gap: 1.75rem; padding: 2.25rem 1.85rem; text-align: center; } }
+  .bridge-card .eyebrow { margin-bottom: 0.85rem; }
+  @media (max-width: 800px) { .bridge-card .eyebrow { justify-content: center; } }
+  .bridge-card h2 { font-size: clamp(1.5rem, 2.8vw, 2rem); margin-bottom: 0.85rem; }
+  .bridge-card p { font-size: 1.01rem; margin-bottom: 0; }
+
+  /* ===== 7. CTA CLOSE ===== */
+  .cta-close { background: var(--deep-sage); color: var(--cream); text-align: center; overflow: hidden; }
+  .cta-close::before { content: ""; position: absolute; top: -100px; left: -100px; width: 400px; height: 400px; background: radial-gradient(circle, rgba(221,107,78,0.15) 0%, transparent 65%); }
+  .cta-close::after { content: ""; position: absolute; bottom: -120px; right: -120px; width: 440px; height: 440px; background: radial-gradient(circle, rgba(212,168,63,0.1) 0%, transparent 65%); }
+  .cta-close .narrow { position: relative; z-index: 2; }
+  .cta-close .script { font-family: 'Caveat', cursive; font-size: 1.9rem; color: var(--coral-soft); display: block; margin-bottom: 0.5rem; }
+  .cta-close h2 { color: var(--cream); margin-bottom: 1.25rem; }
+  .cta-close p { font-size: 1.12rem; opacity: 0.9; margin-bottom: 2.25rem; max-width: 34rem; margin-left: auto; margin-right: auto; }
+  .cta-close-row { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
+  .cta-close .trust { margin-top: 1.5rem; font-style: italic; font-size: 0.92rem; opacity: 0.7; }
+  .cta-close .soft-links { margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(221, 107, 78, 0.25); font-style: italic; font-size: 1rem; opacity: 0.9; }
+  .cta-close .soft-links a { color: var(--gold-soft); font-weight: bold; text-decoration: none; border-bottom: 1px solid rgba(237, 217, 141, 0.5); }
+  .cta-close .soft-links a:hover { color: var(--coral-soft); border-bottom-color: var(--coral-soft); }
+
+  /* FOOTER */
+  footer { background: var(--deep-sage); color: var(--cream); padding: 4rem 0 2rem; text-align: center; border-top: 1px solid rgba(221, 107, 78, 0.2); }
+  footer .brand-line { font-family: 'DM Serif Display', Georgia, serif; font-size: 1.8rem; color: var(--cream); text-decoration: none; display: inline-block; }
+  footer .tagline { font-family: 'Caveat', cursive; color: var(--coral-soft); margin: 0.4rem 0 2rem; font-size: 1.35rem; }
+  footer .footer-nav { display: flex; justify-content: center; flex-wrap: wrap; gap: 1.5rem 2rem; margin: 2rem 0; padding-top: 2rem; border-top: 1px solid rgba(221, 107, 78, 0.2); }
+  footer .footer-nav a { color: var(--cream); opacity: 0.85; text-decoration: none; font-size: 0.95rem; transition: opacity 0.2s var(--ease); }
+  footer .footer-nav a:hover { opacity: 1; color: var(--coral-soft); }
+  footer .legal { padding-top: 1rem; margin-top: 1.25rem; border-top: 1px solid rgba(221, 107, 78, 0.12); font-size: 0.82rem; opacity: 0.65; }
+  footer .legal a { color: var(--cream); opacity: 0.8; text-decoration: none; margin: 0 0.4rem; }
+  footer .built { margin-top: 0.85rem; font-family: 'Caveat', cursive; font-size: 1.05rem; color: var(--coral-soft); opacity: 0.85; }
+
+  /* FADE IN */
+  .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); }
+  .fade-in.visible { opacity: 1; transform: none; }
+
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } html { scroll-behavior: auto; } .fade-in { opacity: 1; transform: none; } }
+  :focus-visible { outline: 3px solid var(--coral); outline-offset: 3px; }
+
+    /* Real photos placed in the placeholder frames (photo shoot, Aug 2026) */
+    .img-ph.has-img { padding: 0; border: none; }
+    .img-ph.has-img::before { display: none; }
+    .img-ph.has-img > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+  </style>
+
+
+
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <!-- NAV -->
+  <nav class="nav" aria-label="Main">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo"><span class="dot"></span>Purposeful Pennies<em>&nbsp;spend with intention</em></a>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-links" id="navLinks">
+        <a href="/start-here">Start Here</a>
+        <a href="/about">About</a>
+        <a href="/free-resources" class="active" aria-current="page">Free Resources</a>
+        <a href="/membership">Membership</a>
+        <a href="/blog">Blog</a>
+        <a href="/contact">Contact</a>
+        <a href="/opt-in" class="nav-cta">Free Reality Check</a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main">
+
+  <!-- ==================== 1. HERO ==================== -->
+  <section class="fr-hero">
+    <div class="narrow">
+      <span class="script fade-in">no catch, I promise</span>
+      <h1 class="fade-in">Free budget resources for <span class="squiggle-wrap">real, one-income life.<svg viewBox="0 0 200 12" preserveAspectRatio="none"><path d="M2,7 Q25,1 50,7 T100,7 T150,7 T198,7"></path></svg></span></h1>
+      <p class="fr-hero-lead fade-in">Twelve printables, templates, and trackers I built for my own family first. One signup opens the whole library. No credit card, no trial that starts billing you, no bait.</p>
+      <div class="fr-hero-cta-row fade-in">
+        <a href="/opt-in?r=library" class="btn btn-coral">Unlock the whole library</a>
+        <a href="#the-library" class="btn btn-outline">See what is in it</a>
+      </div>
+      <div class="fr-badges fade-in">
+        <span class="fr-badge"><b>◆</b> 12 free downloads</span>
+        <span class="fr-badge"><b>◆</b> Print at home, no fancy paper</span>
+        <span class="fr-badge"><b>◆</b> Built on one income, by a mom on one income</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 2. FLAGSHIP ==================== -->
+  <section class="flagship">
+    <div class="container">
+      <div class="flagship-card fade-in">
+        <div class="flagship-img">
+          <div class="flagship-seal">
+            Free!
+            <small>start here</small>
+          </div>
+          <div class="img-ph has-img"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/brookes-images-folder-sf3xp4/brooke-site-images/free-mockup.jpg" alt="The 5-Minute Money Reality Check worksheet being filled in by hand at the kitchen table" loading="lazy"></div>
+        </div>
+        <div class="flagship-body">
+          <span class="eyebrow eyebrow-coral">Start with this one</span>
+          <h2>The 5-Minute Money Reality Check</h2>
+          <p>If you only take one thing from this page, take this. It is one page, it takes five minutes, and it is the single thing I wish someone had handed me back when we were $34,000 in the hole and I was too scared to open the bank app.</p>
+          <ul class="flagship-list">
+            <li>What is actually coming in, and where it is actually going</li>
+            <li>The Big Four expense check: housing, transport, food, utilities</li>
+            <li>The quiet leaks you did not know were bleeding money</li>
+            <li>Your Reality Number, in plain math you can use tonight</li>
+            <li>One clear next step. Not ten. Just one, picked by you.</li>
+          </ul>
+          <div class="flagship-meta">
+            <span>PDF</span>
+            <span>1 page</span>
+            <span>5 minutes</span>
+            <span>Print or fill on your phone</span>
+          </div>
+          <a href="/opt-in?r=reality-check" class="btn btn-coral">Send me the Reality Check</a>
+          <p class="trust-line">Free, and it unlocks everything else below at the same time.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 3. THE LIBRARY ==================== -->
+  <section class="library" id="the-library">
+    <div class="container">
+      <div class="library-head fade-in">
+        <span class="script">the whole shelf</span>
+        <span class="eyebrow eyebrow-coral">Everything else, also free</span>
+        <h2>The free resource library.</h2>
+        <p>Grab one, grab all of them. They are yours either way, and one signup covers the lot.</p>
+      </div>
+
+      <div class="filters" role="group" aria-label="Filter resources by category">
+        <button class="chip on" data-filter="all">Everything <span class="n">11</span></button>
+        <button class="chip" data-filter="budget">Budgeting <span class="n">4</span></button>
+        <button class="chip" data-filter="groceries">Groceries and meals <span class="n">3</span></button>
+        <button class="chip" data-filter="home">Home and family <span class="n">2</span></button>
+        <button class="chip" data-filter="mindset">Mindset <span class="n">2</span></button>
+      </div>
+      <p class="filter-count" id="filterCount" role="status" aria-live="polite">Showing all 11, plus the Reality Check above. Twelve in total.</p>
+
+      <div class="res-grid" id="resGrid">
+
+        <!-- BUDGETING -->
+        <article class="res-card fade-in" data-cat="budget">
+          <div class="res-icon">▣</div>
+          <div class="res-cat">Budgeting</div>
+          <h3>The One-Page Monthly Budget</h3>
+          <p>The whole month on one sheet, laid out the way a real family spends rather than the way accounting software thinks you do. This is the exact format I still use.</p>
+          <div class="res-meta"><span>PDF</span><span>1 page</span><span>Printable</span></div>
+          <a href="/opt-in?r=monthly-budget" class="btn btn-coral btn-sm res-get">Get it free</a>
+        </article>
+
+        <article class="res-card fade-in" data-cat="budget">
+          <div class="res-icon">☼</div>
+          <div class="res-cat">Budgeting</div>
+          <h3>Bill Due Date Calendar</h3>
+          <p>Every bill, mapped to the payday it actually comes out of. The month we finally did this was the month we stopped getting surprised by our own bills.</p>
+          <div class="res-meta"><span>PDF</span><span>2 pages</span><span>Printable</span></div>
+          <a href="/opt-in?r=bill-calendar" class="btn btn-coral btn-sm res-get">Get it free</a>
+        </article>
+
+        <article class="res-card fade-in" data-cat="budget">
+          <div class="res-icon">◉</div>
+          <div class="res-cat">Budgeting</div>
+          <h3>Sinking Fund Starter Sheet</h3>
+          <p>Christmas, car tires, the dentist, the field trip you forgot about. Six funds, tiny monthly amounts, and no more emergencies that were never really emergencies.</p>
+          <div class="res-meta"><span>PDF</span><span>1 page</span><span>Printable</span></div>
+          <a href="/opt-in?r=sinking-funds" class="btn btn-coral btn-sm res-get">Get it free</a>
+        </article>
+
+        <article class="res-card fade-in" data-cat="budget">
+          <div class="res-icon">▲</div>
+          <div class="res-cat">Budgeting</div>
+          <h3>Debt Payoff Progress Tracker</h3>
+          <p>A color-in tracker, because watching it fill in does something for you that a spreadsheet never will. Mine was taped inside a cabinet door for two years.</p>
+          <div class="res-meta"><span>PDF</span><span>1 page</span><span>Printable</span></div>
+          <a href="/opt-in?r=debt-tracker" class="btn btn-coral btn-sm res-get">Get it free</a>
+        </article>
+
+        <!-- GROCERIES AND MEALS -->
+        <article class="res-card fade-in" data-cat="groceries">
+          <div class="res-icon">▢</div>
+          <div class="res-cat">Groceries and meals</div>
+          <h3>Two-Week Pantry Meal Plan</h3>
+          <p>Fourteen dinners built from things you probably already have, with a short shopping list for the gaps. Kid-tested in a house where someone always objects.</p>
+          <div class="res-meta"><span>PDF</span><span>4 pages</span><span>Printable</span></div>
+          <a href="/opt-in?r=pantry-meal-plan" class="btn btn-coral btn-sm res-get">Get it free</a>
+        </article>
+
+        <article class="res-card fade-in" data-cat="groceries">
+          <div class="res-icon">▭</div>
+          <div class="res-cat">Groceries and meals</div>
+          <h3>Grocery Trip Cheat Sheet</h3>
+          <p>The one-page list I take into the store, plus the five habits that cut our bill without a single coupon. Fold it into your purse and stop wandering the aisles.</p>
+          <div class="res-meta"><span>PDF</span><span>1 page</span><span>Pocket size</span></div>
+          <a href="/opt-in?r=grocery-cheat-sheet" class="btn btn-coral btn-sm res-get">Get it free</a>
+        </article>
+
+        <article class="res-card fade-in" data-cat="groceries">
+          <div class="res-icon">✿</div>
+          <div class="res-cat">Groceries and meals</div>
+          <h3>Freezer and Pantry Inventory</h3>
+          <p>You cannot eat what you forgot you bought. Two simple sheets so nothing gets buried, freezer-burned, or bought for the third time.</p>
+          <div class="res-meta"><span>PDF</span><span>2 pages</span><span>Printable</span></div>
+          <a href="/opt-in?r=freezer-inventory" class="btn btn-coral btn-sm res-get">Get it free</a>
+        </article>
+
+        <!-- HOME AND FAMILY -->
+        <article class="res-card fade-in" data-cat="home">
+          <div class="res-icon">☉</div>
+          <div class="res-cat">Home and family</div>
+          <h3>The Fifteen-Minute Payday Reset</h3>
+          <p>A checklist of exactly what I do every payday, in order. Fifteen minutes, and payday stops feeling like a fire you are putting out and starts feeling like a plan.</p>
+          <div class="res-meta"><span>PDF</span><span>1 page</span><span>Checklist</span></div>
+          <a href="/opt-in?r=payday-reset" class="btn btn-coral btn-sm res-get">Get it free</a>
+        </article>
+
+        <article class="res-card fade-in" data-cat="home">
+          <div class="res-icon">◯</div>
+          <div class="res-cat">Home and family</div>
+          <h3>Weekly Home Rhythm Planner</h3>
+          <p>Not a colour-coded cleaning schedule you will abandon. A gentle weekly rhythm that keeps the house running when money is tight and everyone still needs feeding.</p>
+          <div class="res-meta"><span>PDF</span><span>2 pages</span><span>Printable</span></div>
+          <a href="/opt-in?r=home-rhythm" class="btn btn-coral btn-sm res-get">Get it free</a>
+        </article>
+
+        <!-- MINDSET -->
+        <article class="res-card fade-in" data-cat="mindset">
+          <div class="res-icon">❤</div>
+          <div class="res-cat">Mindset</div>
+          <h3>Money Is a Tool Reflection Pages</h3>
+          <p>Three quiet pages for the part nobody hands you a worksheet for. Where your money beliefs came from, and what you want them to be instead. Faith-friendly, never pushy.</p>
+          <div class="res-meta"><span>PDF</span><span>3 pages</span><span>Journal</span></div>
+          <a href="/opt-in?r=money-reflection" class="btn btn-coral btn-sm res-get">Get it free</a>
+        </article>
+
+        <article class="res-card fade-in" data-cat="mindset">
+          <div class="res-icon">☯</div>
+          <div class="res-cat">Mindset</div>
+          <h3>Talking to Kids About Money</h3>
+          <p>Twenty conversation starters by age, so your kids grow up knowing what neither of us was taught. Short, honest, and no lectures at the dinner table.</p>
+          <div class="res-meta"><span>PDF</span><span>2 pages</span><span>By age group</span></div>
+          <a href="/opt-in?r=kids-and-money" class="btn btn-coral btn-sm res-get">Get it free</a>
+        </article>
+
+      </div>
+
+      <p class="res-empty" id="resEmpty">Nothing in that category yet. <button class="chip" data-filter="all" style="margin-left:0.5rem;">Show everything</button></p>
+    </div>
+  </section>
+
+  <!-- ==================== 4. HOW IT WORKS ==================== -->
+  <section class="how">
+    <div class="container">
+      <div class="how-head fade-in">
+        <span class="eyebrow">How you actually get them</span>
+        <h2>Three steps, and none of them cost anything.</h2>
+        <p>I would rather tell you exactly how this works than have you wondering what the catch is.</p>
+      </div>
+      <div class="how-grid">
+        <div class="how-step fade-in">
+          <div class="how-num">1</div>
+          <h3>Pick whichever one you need.</h3>
+          <p>Click any resource above. You do not have to want all twelve. Most people start with one thing that is bothering them this week.</p>
+        </div>
+        <div class="how-step fade-in">
+          <div class="how-num">2</div>
+          <h3>Give me your first name and email.</h3>
+          <p>That is the whole form. No credit card, no phone number, no survey about your household income. Just somewhere to send the file.</p>
+        </div>
+        <div class="how-step fade-in">
+          <div class="how-num">3</div>
+          <h3>The whole library opens up.</h3>
+          <p>You get the one you asked for right away, plus access to everything else on this page. One signup, all twelve, forever.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 5. WHAT WILL NOT HAPPEN ==================== -->
+  <section class="nots">
+    <div class="nots-inner">
+      <div class="nots-head fade-in">
+        <span class="script">let me set your mind at ease</span>
+        <span class="eyebrow eyebrow-coral">The honest fine print</span>
+        <h2>What is not going to happen.</h2>
+      </div>
+      <div class="nots-card fade-in">
+        <ul class="nots-list">
+          <li>No credit card, not now and not later.</li>
+          <li>No free trial that quietly starts billing you.</li>
+          <li>No daily emails clogging up your inbox.</li>
+          <li>Your email address is never sold or shared. Ever.</li>
+          <li>No countdown timers pressuring you into a purchase.</li>
+          <li>No shame if you take the freebies and never buy a thing.</li>
+          <li>No pretending I have it all perfectly figured out.</li>
+          <li>No hard feelings if you unsubscribe. One click, done.</li>
+        </ul>
+        <p class="nots-close">You are not a lead to me. You are a mom trying to make one income work, and I have been exactly where you are.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 6. MEMBERSHIP BRIDGE ==================== -->
+  <section class="bridge">
+    <div class="container">
+      <div class="bridge-card fade-in">
+        <div>
+          <span class="eyebrow eyebrow-coral">If and only if you want more</span>
+          <h2>Plenty of families never go past this page.</h2>
+          <p>That is completely fine by me, and I mean that. But if the free pieces start working and you want them all connected in one place, with me walking alongside you while you build it, that is what the membership is for.</p>
+        </div>
+        <a href="/membership" class="btn btn-outline">See what is inside</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 7. CTA CLOSE ==================== -->
+  <section class="cta-close">
+    <div class="narrow">
+      <span class="script fade-in">one signup, that is it</span>
+      <h2 class="fade-in">Twelve free resources, waiting on you.</h2>
+      <p class="fade-in">Start with the 5-Minute Money Reality Check and the rest of the library opens with it. Five minutes tonight, and money stops being the thing you avoid thinking about.</p>
+      <div class="cta-close-row fade-in">
+        <a href="/opt-in?r=library-close" class="btn btn-coral">Unlock the free library</a>
+        <a href="/start-here" class="btn btn-cream">Not sure? Start here</a>
+      </div>
+      <p class="trust fade-in">No spam. No shame. No credit card. Just clarity.</p>
+      <p class="soft-links fade-in">Question about any of these first? <a href="/contact">Send me a note</a>. Or <a href="/blog">read the blog</a> for a while and come back when you are ready.</p>
+    </div>
+  </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <a href="/" class="brand-line">Purposeful Pennies</a>
+      <p class="tagline">spend with intention. save with purpose.</p>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="/start-here">Start Here</a>
+        <a href="/about">About</a>
+        <a href="/free-resources">Free Resources</a>
+        <a href="/membership">Membership</a>
+        <a href="/blog">Blog</a>
+        <a href="/contact">Contact</a>
+        <a href="/opt-in">Free Reality Check</a>
+      </nav>
+      <p class="legal">
+        © 2026 Purposeful Pennies. All rights reserved.
+        &nbsp;·&nbsp;
+        <a href="/privacy-policy">Privacy</a> ·
+        <a href="/terms">Terms</a> ·
+        <a href="/disclaimer">Disclaimer</a> ·
+        <a href="/affiliate-disclosure">Affiliate Disclosure</a>
+      </p>
+      <p class="built">built with love for one-income families everywhere</p>
+    </div>
+  </footer>
+
+  <script>
+    /* ---------- mobile nav ---------- */
+    (function () {
+      var toggle = document.getElementById('navToggle');
+      var links = document.getElementById('navLinks');
+      if (!toggle || !links) return;
+      toggle.addEventListener('click', function () {
+        var open = links.classList.toggle('open');
+        toggle.classList.toggle('open', open);
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      });
+      links.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () {
+          links.classList.remove('open');
+          toggle.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+        });
+      });
+    })();
+
+    /* ---------- fade in ---------- */
+    (function () {
+      var els = document.querySelectorAll('.fade-in');
+      var obs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+      els.forEach(function (el) { obs.observe(el); });
+    })();
+
+    /* ---------- library filter ---------- */
+    (function () {
+      var cards = Array.prototype.slice.call(document.querySelectorAll('.res-card'));
+      var count = document.getElementById('filterCount');
+      var empty = document.getElementById('resEmpty');
+      var labels = {
+        all: 'resources',
+        budget: 'budgeting resources',
+        groceries: 'grocery and meal resources',
+        home: 'home and family resources',
+        mindset: 'mindset resources'
+      };
+
+      function apply(filter) {
+        var shown = 0;
+        cards.forEach(function (card) {
+          var match = (filter === 'all' || card.dataset.cat === filter);
+          card.classList.toggle('hide', !match);
+          if (match) {
+            shown++;
+            /* cards revealed by a filter should not sit invisible */
+            card.classList.add('visible');
+          }
+        });
+
+        document.querySelectorAll('.filters .chip').forEach(function (c) {
+          c.classList.toggle('on', c.dataset.filter === filter);
+        });
+
+        count.textContent = filter === 'all'
+          ? 'Showing all ' + shown + ', plus the Reality Check above. Twelve in total.'
+          : 'Showing ' + shown + ' ' + labels[filter];
+        empty.classList.toggle('show', shown === 0);
+      }
+
+      document.querySelectorAll('[data-filter]').forEach(function (btn) {
+        btn.addEventListener('click', function () { apply(btn.dataset.filter); });
+      });
+    })();
+<w:pgSz w:h="15840" w:w="12240" w:orient="portrait"/><w:pgMar w:bottom="1440" w:top="1440" w:left="1440" w:right="1440" w:header="720" w:footer="720"/><w:pgNumType w:start="1"/></w:sectPr></w:pPr><w:r w:rsidDel="00000000" w:rsidR="00000000" w:rsidRPr="00000000"><w:rPr><w:rtl w:val="0"/></w:rPr><w:t xml:space="preserve">  </script>

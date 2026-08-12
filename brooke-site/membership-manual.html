@@ -1,0 +1,793 @@
+<meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Running Your Membership · Purposeful Pennies</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&amp;family=DM+Serif+Display&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --deep-sage: #2E3E2F; --sage: #5C6E47; --sage-soft: #8B9E75;
+      --warm-tan: #C28954; --warm-tan-dark: #A77246;
+      --cream: #FBF4D7; --cream-warm: #F7ECC4; --charcoal: #2A2A2A;
+      --soft-gray: #7E867D; --light-sage: #DBE3CE; --pale-tan: #EFE0C1; --white: #FFFFFF;
+      --coral: #DD6B4E; --coral-deep: #C25441; --coral-soft: #F7D0BE; --coral-blush: #FBE3D5;
+      --gold: #D4A83F; --gold-soft: #EDD98D; --gold-deep: #B8912E;
+      --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+      --ink: #1F2A20;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 17px; scroll-behavior: smooth; }
+    body {
+      font-family: Georgia, 'Times New Roman', serif; font-size: 1.05rem; line-height: 1.7;
+      color: var(--charcoal); background: var(--cream); -webkit-font-smoothing: antialiased;
+    }
+    .wrap { max-width: 1180px; margin: 0 auto; padding: 0 1.5rem; display: grid; grid-template-columns: 250px 1fr; gap: 3rem; align-items: start; }
+    @media (max-width: 940px) { .wrap { grid-template-columns: 1fr; gap: 1.5rem; } }
+    h1,h2,h3,h4 { font-family: Georgia, serif; color: var(--deep-sage); }
+    h1 { font-size: clamp(2rem,4.5vw,2.9rem); line-height: 1.1; }
+    h2 { font-size: clamp(1.5rem,3vw,2rem); line-height: 1.2; margin-bottom: 0.6rem; }
+    h3 { font-size: 1.2rem; margin-bottom: 0.4rem; }
+    h4 { font-size: 1rem; margin-bottom: 0.3rem; }
+    p { margin-bottom: 0.9rem; } p:last-child { margin-bottom: 0; }
+    a { color: var(--coral-deep); }
+    strong { color: var(--deep-sage); }
+
+    /* header */
+    .top { background: var(--deep-sage); color: var(--cream); padding: 2.5rem 0 2.25rem; }
+    .top .wrap { display: block; }
+    .top .kicker { font-family: 'Caveat', cursive; font-size: 1.6rem; color: var(--coral-soft); }
+    .top h1 { color: var(--cream); margin: 0.2rem 0 0.7rem; }
+    .top p { max-width: 44rem; opacity: 0.92; }
+    .top .meta { margin-top: 1.2rem; font-size: 0.88rem; opacity: 0.75; font-style: italic; }
+
+    /* sidebar */
+    .toc { position: sticky; top: 1.5rem; background: white; border-radius: 14px; padding: 1.35rem 1.35rem; border: 1px solid rgba(194,137,84,0.3); }
+    @media (max-width: 940px) { .toc { position: static; } }
+    .toc h4 { font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--coral-deep); margin-bottom: 0.8rem; }
+    .toc ol { list-style: none; counter-reset: t; }
+    .toc li { counter-increment: t; margin-bottom: 0.4rem; }
+    .toc a { display: block; text-decoration: none; color: var(--sage); font-size: 0.92rem; line-height: 1.4; padding-left: 1.5rem; position: relative; }
+    .toc a::before { content: counter(t); position: absolute; left: 0; color: var(--coral-soft); font-weight: bold; font-size: 0.8rem; top: 0.15rem; }
+    .toc a:hover { color: var(--coral-deep); }
+
+    /* Grid children default to min-width auto, so the wide code blocks
+       were forcing the whole column past the viewport instead of letting
+       .code scroll inside itself. min-width 0 lets the column shrink. */
+    main, .task, .task .body { min-width: 0; }
+    .code { max-width: 100%; }
+
+    main section { background: white; border-radius: 16px; padding: 2rem 2.1rem; margin-bottom: 1.5rem; border: 1px solid rgba(194,137,84,0.25); }
+    @media (max-width: 600px) { main section { padding: 1.5rem 1.25rem; } }
+    section > .eyebrow { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--warm-tan-dark); font-weight: bold; display: block; margin-bottom: 0.5rem; }
+
+    .lead { font-size: 1.08rem; color: var(--sage); font-style: italic; margin-bottom: 1.3rem; }
+
+    /* callouts */
+    .note, .warn, .win { border-radius: 10px; padding: 1.05rem 1.2rem; margin: 1.1rem 0; font-size: 0.97rem; }
+    .note { background: var(--cream); border-left: 4px solid var(--sage-soft); }
+    .warn { background: var(--coral-blush); border-left: 4px solid var(--coral); }
+    .win  { background: var(--cream-warm); border-left: 4px solid var(--gold); }
+    .note b, .warn b, .win b { color: var(--deep-sage); }
+
+    /* steps */
+    ol.steps { list-style: none; counter-reset: s; margin: 1rem 0; }
+    ol.steps > li { counter-increment: s; padding: 0.55rem 0 0.55rem 2.4rem; position: relative; }
+    ol.steps > li::before {
+      content: counter(s); position: absolute; left: 0; top: 0.6rem; width: 26px; height: 26px;
+      border-radius: 50%; background: var(--coral); color: white; font-size: 0.8rem; font-weight: bold;
+      display: flex; align-items: center; justify-content: center; font-family: Georgia, serif;
+    }
+    ul.plain { list-style: none; margin: 0.8rem 0; }
+    ul.plain li { padding: 0.35rem 0 0.35rem 1.5rem; position: relative; }
+    ul.plain li::before { content: "\25C6"; position: absolute; left: 0; top: 0.62rem; color: var(--warm-tan); font-size: 0.6rem; }
+
+    /* code */
+    .code {
+      position: relative; background: var(--ink); color: #E8EDE6; border-radius: 10px;
+      padding: 1.1rem 1.2rem; margin: 0.9rem 0; overflow-x: auto;
+      font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 0.82rem; line-height: 1.65;
+    }
+    .code pre { white-space: pre; }
+    .code .cm { color: #9DB39A; }
+    .code .str { color: #F1C48A; }
+    .copy {
+      position: absolute; top: 0.6rem; right: 0.6rem; background: var(--coral); color: white;
+      border: none; border-radius: 6px; padding: 0.35rem 0.7rem; font-family: Georgia, serif;
+      font-size: 0.75rem; font-weight: bold; cursor: pointer;
+    }
+    .copy:hover { background: var(--coral-deep); }
+    .copy.done { background: var(--sage); }
+    code.inline { background: var(--cream-warm); padding: 0.1rem 0.35rem; border-radius: 4px; font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 0.86em; color: var(--deep-sage); }
+
+    /* tables */
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.94rem; }
+    th, td { text-align: left; padding: 0.65rem 0.7rem; border-bottom: 1px solid rgba(194,137,84,0.3); vertical-align: top; }
+    th { font-family: Georgia, serif; color: var(--deep-sage); font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; }
+    tbody tr:last-child td { border-bottom: none; }
+
+    /* task accordions */
+    .task { border: 1px solid rgba(194,137,84,0.3); border-radius: 12px; margin-bottom: 0.7rem; overflow: hidden; background: var(--cream); }
+    .task > button {
+      width: 100%; text-align: left; background: none; border: none; cursor: pointer;
+      font-family: Georgia, serif; font-size: 1.02rem; font-weight: bold; color: var(--deep-sage);
+      padding: 1rem 3rem 1rem 1.2rem; position: relative; line-height: 1.4;
+    }
+    .task > button:hover { color: var(--coral-deep); }
+    .task > button::after { content: "+"; position: absolute; right: 1.1rem; top: 50%; transform: translateY(-50%); color: var(--coral); font-size: 1.4rem; line-height: 1; }
+    .task.open > button::after { content: "\2212"; }
+    .task .body { max-height: 0; overflow: hidden; transition: max-height 0.4s var(--ease), padding 0.4s var(--ease); padding: 0 1.2rem; background: white; }
+    .task.open .body { padding: 1.2rem 1.2rem 1.4rem; }
+    .task .tag { display: inline-block; font-size: 0.62rem; font-weight: bold; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.2rem 0.45rem; border-radius: 3px; color: white; margin-right: 0.5rem; vertical-align: 2px; }
+    .tag.easy { background: var(--sage); } .tag.care { background: var(--warm-tan); } .tag.month { background: var(--coral); }
+
+    /* checklist */
+    .check { list-style: none; }
+    .check li { display: flex; gap: 0.75rem; align-items: flex-start; padding: 0.5rem 0; border-bottom: 1px dashed rgba(194,137,84,0.35); }
+    .check li:last-child { border-bottom: none; }
+    .check input { margin-top: 0.45rem; accent-color: var(--coral); width: 17px; height: 17px; flex-shrink: 0; }
+    .check .when { font-size: 0.76rem; font-weight: bold; letter-spacing: 0.1em; text-transform: uppercase; color: var(--coral-deep); display: block; }
+    .check label { cursor: pointer; }
+    .check li.done label { opacity: 0.5; text-decoration: line-through; }
+    .progress { height: 8px; background: var(--light-sage); border-radius: 99px; overflow: hidden; margin: 0.8rem 0 0.4rem; }
+    .progress span { display: block; height: 100%; width: 0; background: var(--coral); border-radius: 99px; transition: width 0.35s var(--ease); }
+
+    .foot { text-align: center; padding: 2.5rem 1.5rem 3rem; color: var(--sage); font-size: 0.92rem; }
+    .foot .script { font-family: 'Caveat', cursive; font-size: 1.5rem; color: var(--coral-deep); display: block; margin-bottom: 0.3rem; }
+
+    @media print {
+      body { background: white; font-size: 11pt; }
+      .toc, .copy, .top { display: none; }
+      .wrap { display: block; max-width: 100%; }
+      main section { break-inside: avoid; border: none; padding: 0 0 1rem; margin-bottom: 1.2rem; border-bottom: 1px solid #ccc; border-radius: 0; }
+      .task .body { max-height: none !important; padding: 0.5rem 0 !important; }
+      .task > button::after { display: none; }
+      .code { background: #f4f4f4; color: #222; border: 1px solid #ccc; }
+      .code .cm { color: #666; } .code .str { color: #884400; }
+    }
+    :focus-visible { outline: 3px solid var(--coral); outline-offset: 3px; }
+  </style>
+
+
+
+<header class="top">
+  <div class="wrap">
+    <span class="kicker">you describe it, Claude writes it, you paste it</span>
+    <h1>Running Your Membership</h1>
+    <p>You do not need to learn code to run this site. You copy a page, tell Claude what you want changed in plain English, and paste back what it gives you. This shows you exactly how, with the words to use.</p>
+    <p class="meta">Keep this bookmarked. It prints properly too, if you would rather have it on paper beside you.</p>
+  </div>
+</header>
+
+<div class="wrap" style="padding-top:2rem;">
+
+  <aside class="toc">
+    <h4>What is in here</h4>
+    <ol>
+      <li><a href="#s1">How this works now</a></li>
+      <li><a href="#s2">Your Standing Instructions</a></li>
+      <li><a href="#s3">The four steps in detail</a></li>
+      <li><a href="#s4">Ready made requests</a></li>
+      <li><a href="#s5">Checking Claude’s work</a></li>
+      <li><a href="#s6">Jobs that skip Claude</a></li>
+      <li><a href="#s7">Your monthly rhythm</a></li>
+      <li><a href="#s8">Before you launch</a></li>
+      <li><a href="#s9">When something goes wrong</a></li>
+      <li><a href="#s10">Never do these five things</a></li>
+    </ol>
+  </aside>
+
+  <main>
+
+  <!-- 1 -->
+  <section id="s1">
+    <span class="eyebrow">Section one</span>
+    <h2>How this works now</h2>
+    <p class="lead">Four steps. Once you have done it twice it takes about ten minutes.</p>
+
+    <ol class="steps">
+      <li><strong>Give Claude the page.</strong> Upload the file into a Claude chat, or paste the whole thing in.</li>
+      <li><strong>Tell it what you want.</strong> Paste your Standing Instructions from Section 2, then describe the change in your own words.</li>
+      <li><strong>Get the finished file back.</strong> Claude returns the complete page with your change made, and a short list of what it did.</li>
+      <li><strong>Paste it into Showit and publish.</strong> Then check it in an incognito window.</li>
+    </ol>
+
+    <div class="win">
+      <p><b>You are the editor, not the typist.</b> Your job is to say clearly what you want and then check the result. Claude does the fiddly part. You never have to find a comma in a wall of code again.</p>
+    </div>
+
+    <div class="note">
+      <p><b>Claude is very good at this and still gets things wrong sometimes.</b> That is why Section 5 exists and why you always keep a copy of the old file. Checking takes two minutes and saves an evening.</p>
+    </div>
+
+    <h3>What you need</h3>
+    <ul class="plain">
+      <li>A Claude account. The free one works, a paid one handles these large files more comfortably.</li>
+      <li>The eleven page files, kept in one folder on your computer.</li>
+      <li>Your Showit login.</li>
+      <li>A plain text editor for saving files. TextEdit, Notepad, or the free VS Code. <strong>Never Word.</strong></li>
+    </ul>
+  </section>
+
+  <!-- 2 -->
+  <section id="s2">
+    <span class="eyebrow">Section two</span>
+    <h2>Your Standing Instructions</h2>
+    <p class="lead">This is the most important thing in this whole document. Paste it at the top of every request.</p>
+
+    <p>Claude does not know your brand rules unless you tell it. Without this block it will cheerfully add em dashes, rewrite things you did not ask it to touch, or hand you a fragment instead of the whole file. With it, you get back exactly what you need.</p>
+
+    <div class="code">
+      <button class="copy" type="button">Copy</button>
+      <pre>You are helping me edit one page of my membership website.
+Follow these rules for every change.
+
+ABOUT THE SITE
+- Purposeful Pennies, a warm faith friendly money membership for
+  one income families. My name is Brooke.
+- Each page is one standalone HTML file that gets pasted into
+  Showit as Custom Head HTML.
+- The members area is locked with MemberSpace.
+
+RULES YOU MUST FOLLOW
+1. Give me back the COMPLETE file, from the first line to the
+   last line. Never a snippet. Never say the rest stays the same.
+2. Change only what I ask for. Leave everything else exactly
+   as it is, including spacing and comments.
+3. No em dashes and no en dashes anywhere, ever. If you need a
+   separator use the diamond character.
+4. Never remove or alter the block commented
+   SHOWIT OVERRIDE ARMOUR. It stops my menu going invisible.
+5. Do not change anything inside the style section unless I
+   specifically ask you to.
+6. Keep every attribute starting data-ms- and every link with
+   class ms-link exactly as it is. Those are my membership plugin.
+7. All internal links look like /members-something with hyphens.
+   Never /members/something with slashes.
+8. Keep my voice warm, plain and calm. No hype, no exclamation
+   marks, no words like hustle, boss babe, girlboss or manifest.
+9. If what I am asking would break something, or contradicts
+   something already written elsewhere on the page, tell me
+   before you change it.
+10. After the file, list in plain English exactly what you
+    changed, so I can check it.
+
+WHAT I WANT CHANGED
+</pre>
+    </div>
+
+    <div class="win">
+      <p><b>Save this somewhere you can grab it fast.</b> A note on your desktop, a pinned note on your phone, or the top of a Google Doc. You will use it several times a month.</p>
+    </div>
+
+    <div class="note">
+      <p><b>Rule 1 is the one that matters most.</b> Without it Claude often replies with just the bit it changed, which is useless to you because you need the whole file to paste into Showit. If you ever get back a fragment, just reply: <em>please give me the complete file from the first line to the last</em>.</p>
+    </div>
+  </section>
+
+  <!-- 3 -->
+  <section id="s3">
+    <span class="eyebrow">Section three</span>
+    <h2>The four steps in detail</h2>
+
+    <h3>Step 1 ◆ Give Claude the page</h3>
+    <ol class="steps">
+      <li><strong>Make a copy of the file first.</strong> Duplicate it and put today’s date in the name, like <code class="inline">MemberLibrary-2026-08-01.html</code>. This is your undo button.</li>
+      <li>Start a <strong>new Claude chat</strong>.</li>
+      <li><strong>Upload the file</strong> using the paperclip or plus button. This is better than pasting, because these files are long and uploading keeps the chat tidy.</li>
+    </ol>
+    <div class="note">
+      <p><b>One page per chat.</b> If you are changing the library and the sessions page, do them in two separate chats. Mixing them is how Claude gets confused about which file it is meant to be returning.</p>
+    </div>
+
+    <h3>Step 2 ◆ Tell it what you want</h3>
+    <ol class="steps">
+      <li>Paste your <strong>Standing Instructions</strong> from Section 2.</li>
+      <li>Underneath <em>WHAT I WANT CHANGED</em>, describe the change the way you would explain it to a person.</li>
+      <li>Send it.</li>
+    </ol>
+    <p><strong>Vague gets vague.</strong> Compare these:</p>
+    <table>
+      <thead><tr><th>Not enough</th><th>Much better</th></tr></thead>
+      <tbody>
+        <tr><td>Fix the library page</td><td>Add a new printable called the Christmas Fund Planner. It is 2 pages, it belongs in the budgeting filter and the sinking funds system, the file is christmas-fund-planner.pdf, and it should have the New badge.</td></tr>
+        <tr><td>Change the wording</td><td>On the sessions page, change the line about cameras being optional so it also says people can join by phone if their internet is slow.</td></tr>
+        <tr><td>Make it better</td><td>The paragraph under Do This First is too long. Cut it to about two sentences, keep the point about using last year’s numbers.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Step 3 ◆ Get the finished file back</h3>
+    <ul class="plain">
+      <li>Claude gives you the whole page and a list of what it changed. <strong>Read that list.</strong> It is your first check.</li>
+      <li>Copy the file using the copy button at the top of the code block.</li>
+      <li>Paste it into your text editor, save with the <code class="inline">.html</code> ending.</li>
+      <li><strong>Double click the file to open it in your browser and look at it</strong> before it goes anywhere near Showit.</li>
+    </ul>
+    <div class="warn">
+      <p><b>If the answer stops halfway.</b> Very long files occasionally get cut off. Just reply: <em>that got cut off, please continue from where you stopped</em>. Or ask for it in two halves. Do not paste a half finished file into Showit.</p>
+    </div>
+
+    <h3>Step 4 ◆ Paste it into Showit</h3>
+    <ol class="steps">
+      <li>Select the whole file in your text editor with Command A or Control A, then copy.</li>
+      <li>In Showit, click <strong>the page itself</strong> in the left menu. Not a text box, the page.</li>
+      <li>Open <strong>Advanced Settings</strong>, then <strong>Custom Head HTML</strong>.</li>
+      <li><strong>Delete everything already in that box</strong>, then paste. Never paste underneath what is there.</li>
+      <li>Publish.</li>
+      <li>Open the live page in an <strong>incognito or private window</strong> and check it.</li>
+    </ol>
+    <div class="warn">
+      <p><b>Member pages must be blank Showit pages.</b> No text boxes, no images on the canvas. The pasted file is the whole page. Anything you drag on in Showit sits on top and looks broken.</p>
+    </div>
+  </section>
+
+  <!-- 4 -->
+  <section id="s4">
+    <span class="eyebrow">Section four</span>
+    <h2>Ready made requests</h2>
+    <p class="lead">Copy the wording, change the details in square brackets, paste it under your Standing Instructions.</p>
+
+    <div class="task">
+      <button type="button"><span class="tag month">Monthly</span>Add a new printable to the library</button>
+      <div class="body">
+        <p>Upload the PDF in Showit first and copy its link. File to give Claude: <code class="inline">MemberLibrary</code>.</p>
+        <div class="code"><button class="copy" type="button">Copy</button><pre>Add a new printable to the library.
+
+Title: [The Christmas Fund Planner]
+Pages: [2]
+What it is for: [one sentence in my voice]
+File name: [christmas-fund-planner.pdf]
+Filter category: [budgeting / groceries and meals /
+                  home and family / mindset]
+Which system it belongs to: [02 Sinking Funds]
+Give it the New badge: [yes]
+
+Also remove the New badge from anything that has it from
+last month, and tell me which ones you removed.</pre></div>
+        <div class="warn"><p><b>Then do the vault too.</b> Each vault card says how many printables that system has. In a separate chat, give Claude the vault page and say: <em>system 02 now has 4 printables instead of 3, please update that card</em>.</p></div>
+      </div>
+    </div>
+
+    <div class="task">
+      <button type="button"><span class="tag month">Monthly</span>Publish the monthly release</button>
+      <div class="body">
+        <p>The biggest job. Three separate chats, in this order. About 45 minutes.</p>
+        <h4>Chat 1, file: <code class="inline">MemberLibrary</code></h4>
+        <div class="code"><button class="copy" type="button">Copy</button><pre>Add these new printables and remove the New badge from
+last month's ones.
+
+New printable 1:
+Title: [name]  Pages: [2]  File: [file-name.pdf]
+Category: [budgeting]  System: [05 Simple Home Rhythms]
+What it is for: [one sentence]
+
+New printable 2:
+Title: [name]  Pages: [3]  File: [file-name.pdf]
+Category: [home and family]  System: [monthly release]
+What it is for: [one sentence]
+
+Tell me which items you removed the New badge from.</pre></div>
+        <h4>Chat 2, file: <code class="inline">MemberThisMonth</code></h4>
+        <div class="code"><button class="copy" type="button">Copy</button><pre>Update this page for the new month's release.
+
+Month: [September release]
+Title: [The autumn rhythms reset]
+Date added: [1 September]
+Why this month, in my voice: [two sentences]
+
+The one thing to do first: [what it is and why]
+
+Piece 1: [name], [2] pages, file [file-name.pdf],
+         description [one sentence]
+Piece 2: [name], [3] pages, file [file-name.pdf],
+         description [one sentence]
+Piece 3: [training name], [12] minutes,
+         description [one sentence]
+
+Move last month into the past releases list. Last month was
+[August release, The back to school reset] and its page is
+[/members-this-month-2026-08].
+
+Update what I am planning for next month to:
+[three short lines]</pre></div>
+        <h4>Chat 3, file: <code class="inline">MemberHome</code></h4>
+        <div class="code"><button class="copy" type="button">Copy</button><pre>Update the This Month card on this page so it matches the
+new release.
+
+Month: [September release]
+Title: [The autumn rhythms reset]
+Four short bullet points: [list them]
+
+Also add these new printables to the quick printables list
+and remove the New badge from last month's:
+[names and file names]</pre></div>
+        <p>Then email members through Flodesk and post it in the Facebook group.</p>
+      </div>
+    </div>
+
+    <div class="task">
+      <button type="button"><span class="tag month">Monthly</span>Add a session replay</button>
+      <div class="body">
+        <p>File: <code class="inline">MemberSessions</code>.</p>
+        <div class="code"><button class="copy" type="button">Copy</button><pre>Add a new replay to the top of the replay list.
+
+Date: [2026-09-08]
+Title: [What we covered]
+Length: [45] minutes
+What was covered: [one or two sentences]
+Link to watch: [paste link]
+Link to the notes PDF: [paste link]</pre></div>
+        <p>Then move the session date forward in the Showit settings block, which is Section 6.</p>
+      </div>
+    </div>
+
+    <div class="task">
+      <button type="button"><span class="tag month">Monthly</span>Publish an answered question</button>
+      <div class="body">
+        <p>File: <code class="inline">MemberAskBrooke</code>. Only for questions where she chose anonymous.</p>
+        <div class="code"><button class="copy" type="button">Copy</button><pre>Add a new answered question to the top of the archive.
+
+The question: [her question, tidied up, with her name,
+               town and any identifying figures removed]
+Which system it relates to: [02 Sinking Funds]
+Date answered: [2026-09-12]
+My answer: [write it however it comes out, Claude can tidy
+            it but must keep my voice and my meaning]
+
+Check the question for anything that could identify her and
+tell me if you spot something I have missed.</pre></div>
+      </div>
+    </div>
+
+    <div class="task">
+      <button type="button"><span class="tag easy">Easy</span>Change any wording anywhere</button>
+      <div class="body">
+        <div class="code"><button class="copy" type="button">Copy</button><pre>Change some wording on this page.
+
+Find: [paste the sentence exactly as it appears on the page]
+Change it to: [what you want it to say]
+
+If that sentence appears more than once, tell me and ask me
+which one I meant before changing anything.</pre></div>
+        <p>Or, if you are not sure of the exact words: <em>near the top of the page there is a paragraph about printing two pages, please make it shorter and mention that they can also fill it in on a phone.</em></p>
+      </div>
+    </div>
+
+    <div class="task">
+      <button type="button"><span class="tag care">Care</span>Put a real photo where a placeholder is</button>
+      <div class="body">
+        <p>Upload the photo in Showit first and copy its link.</p>
+        <div class="code"><button class="copy" type="button">Copy</button><pre>Replace one of the dotted photo placeholders with a real
+photo.
+
+Which placeholder: [describe it, for example the one at the
+top of the page that says Brooke at the kitchen table]
+Image link: [paste the Showit image link]
+Description for screen readers: [short description of what
+is in the photo]
+
+Keep the same shape and size the placeholder had.</pre></div>
+      </div>
+    </div>
+
+    <div class="task">
+      <button type="button"><span class="tag care">Care</span>Ask Claude to check a page before you publish</button>
+      <div class="body">
+        <p>Useful after any big change, or any time you are unsure.</p>
+        <div class="code"><button class="copy" type="button">Copy</button><pre>Do not change anything. Just check this page and tell me:
+
+1. Are there any em dashes or en dashes anywhere
+2. Is the SHOWIT OVERRIDE ARMOUR block still there
+3. Are all internal links in the /members-something format
+4. Are there any links that go nowhere
+5. Does anything look broken or half finished
+6. Is there any placeholder or sample content still in it
+
+List anything you find. Do not give me the file back.</pre></div>
+      </div>
+    </div>
+
+    <div class="task">
+      <button type="button"><span class="tag care">Care</span>Build a brand new member page</button>
+      <div class="body">
+        <p>Give Claude an existing member page as the starting point so the menu, footer, and colour fix all come with it.</p>
+        <div class="code"><button class="copy" type="button">Copy</button><pre>Using this page as the starting point, build me a new page.
+
+New page address: [/members-something]
+Page title: [what it is called]
+What the page is for: [describe it in a few sentences]
+What should be on it: [list the sections you want]
+
+Keep the same menu, the same footer, the same colours, and
+the same SHOWIT OVERRIDE ARMOUR block. Mark the new page as
+the current one in the menu if it belongs there.</pre></div>
+        <div class="warn"><p><b>The name must start with <code class="inline">members-</code>.</b> That is what makes MemberSpace lock it. Anything else is public the moment it exists and nothing will warn you. After publishing, log out and try to open it.</p></div>
+      </div>
+    </div>
+
+    <div class="task">
+      <button type="button"><span class="tag care">Care</span>Delete the sample content before launch</button>
+      <div class="body">
+        <p>Do this once, on three pages, before you open the doors.</p>
+        <div class="code"><button class="copy" type="button">Copy</button><pre>Delete all the sample content from this page. It is the
+entries marked sample true, the ones with the grey ribbon
+saying delete before launch.
+
+Leave the empty state message in place so the page still
+reads properly with nothing in it.</pre></div>
+        <p>Do it on <code class="inline">MemberSessions</code>, <code class="inline">MemberAskBrooke</code>, and <code class="inline">MemberThisMonth</code>. The sales page testimonials need real quotes instead, so that one is a rewrite rather than a delete.</p>
+      </div>
+    </div>
+
+    <div class="task">
+      <button type="button"><span class="tag easy">Easy</span>Fix something that looks wrong</button>
+      <div class="body">
+        <div class="code"><button class="copy" type="button">Copy</button><pre>Something is wrong with this page.
+
+What I see: [describe it, for example the filter buttons
+             stopped working, or the menu is doubled up]
+What I did just before it happened: [what you changed]
+
+Find the problem and fix it. Tell me what was wrong.</pre></div>
+        <p>If you still have the backup from before your change, upload that too and say <em>this is the version that worked</em>. That makes it much easier to spot.</p>
+      </div>
+    </div>
+
+    <div class="task">
+      <button type="button"><span class="tag easy">Easy</span>Ask Claude to explain something</button>
+      <div class="body">
+        <p>You are allowed to just ask. Nothing breaks.</p>
+        <div class="code"><button class="copy" type="button">Copy</button><pre>Do not change anything. Explain to me in plain English:
+
+[what does the bit near the top that says PP session do]
+[where in this file is the text that appears under the
+ heading on the live page]
+[what would happen if I deleted this section]</pre></div>
+      </div>
+    </div>
+
+    <div class="task">
+      <button type="button"><span class="tag easy">Easy</span>Write something new in your voice</button>
+      <div class="body">
+        <div class="code"><button class="copy" type="button">Copy</button><pre>Write me [a new FAQ answer / a new section / a paragraph]
+for this page.
+
+Topic: [what it is about]
+Roughly how long: [two sentences / a short paragraph]
+The point I want to land: [what she should feel or do]
+
+Write it in my voice, warm and plain, then show me where on
+the page you would put it. Ask me before you add it in.</pre></div>
+        <div class="note"><p><b>Ask to see it first.</b> Adding <em>ask me before you add it in</em> means you get to read the words on their own rather than hunting for them in a wall of code.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 -->
+  <section id="s5">
+    <span class="eyebrow">Section five</span>
+    <h2>Checking Claude’s work</h2>
+    <p class="lead">Two minutes, every time, before it goes into Showit. This is the habit that keeps you safe.</p>
+
+    <ol class="steps">
+      <li><strong>Read the change list.</strong> Claude tells you what it did. Does that match what you asked for? If it mentions changing something you did not ask about, ask why before you use it.</li>
+      <li><strong>Check the top and bottom.</strong> The file must start with <code class="inline">&lt;!DOCTYPE html&gt;</code> and end with <code class="inline">&lt;/html&gt;</code>. If not, you have a fragment.</li>
+      <li><strong>Search for a long dash.</strong> In your text editor press Command F or Control F and search for a long dash character. There should be none. If there are, ask Claude to replace them with the diamond.</li>
+      <li><strong>Open it in your browser.</strong> Double click the saved file. Does the menu look right? Is the text you changed correct? Click two or three links.</li>
+      <li><strong>Look for the colour fix.</strong> Search the file for <code class="inline">SHOWIT OVERRIDE ARMOUR</code>. If it is gone, ask Claude to put it back.</li>
+      <li><strong>Then publish, and check the live page in incognito.</strong></li>
+    </ol>
+
+    <div class="win">
+      <p><b>Shortcut.</b> Paste the Ask Claude To Check A Page request from Section 4 into the same chat after it gives you the file. It will check its own work against that list, which catches most things in about ten seconds.</p>
+    </div>
+  </section>
+
+  <!-- 6 -->
+  <section id="s6">
+    <span class="eyebrow">Section six</span>
+    <h2>Jobs that skip Claude</h2>
+    <p class="lead">Some things are faster done directly. No files, no chat.</p>
+
+    <h3>The settings block, for the date and the price</h3>
+    <p>The session date, the price shown on the sales page, the Facebook group link, and the checkout link all live in <strong>one block in Showit</strong>, not in the pages. Change it there and every page follows.</p>
+    <ol class="steps">
+      <li>Showit, <strong>Settings</strong>, then <strong>Advanced</strong>, then <strong>Head HTML</strong>. The site wide one.</li>
+      <li>Find the block below, change the values, publish.</li>
+    </ol>
+    <div class="code">
+      <button class="copy" type="button">Copy</button>
+      <pre>&lt;script&gt;
+window.PP = {
+  session: {
+    start:     '2026-08-11T20:00:00-04:00',
+    end:       '2026-08-11T20:45:00-04:00',
+    timeLabel: '8:00 pm eastern',
+    joinUrl:   'https://zoom.us/j/YOUR-ROOM-NUMBER',
+    recurText: 'It runs on the second Tuesday of every month.'
+  },
+  communityUrl: 'https://www.facebook.com/groups/YOUR-GROUP',
+  checkoutUrl:  'https://YOUR-CHECKOUT-LINK',
+  pricing: {
+    monthly: { amount: '$19',  per: 'per month, cancel anytime',
+               second: 'Or $190 for the year and two months are free' },
+    yearly:  { amount: '$190', per: 'per year, cancel anytime',
+               second: 'That works out to $15.83 a month' }
+  },
+  supportEmail: 'hello@purposefulpennies.com'
+};
+&lt;/script&gt;</pre>
+    </div>
+    <div class="warn">
+      <p><b>Keep the quote marks and the commas.</b> If a page shows the old date after you edit this, you have almost certainly lost one. Paste a fresh copy and change one line at a time.</p>
+      <p><b>The <code class="inline">-04:00</code> matters.</b> Use <code class="inline">-04:00</code> from mid March to early November and <code class="inline">-05:00</code> the rest of the year, or members in other states see the wrong time.</p>
+    </div>
+
+    <h3>Everything else that skips Claude</h3>
+    <table>
+      <thead><tr><th>Job</th><th>Where</th></tr></thead>
+      <tbody>
+        <tr><td>Refund someone</td><td>MemberSpace. Then email her yourself, the automatic one is cold.</td></tr>
+        <tr><td>Cancel someone</td><td>MemberSpace. No sales pitch, you promised.</td></tr>
+        <tr><td>Change what you actually charge</td><td>MemberSpace, as a <strong>new plan</strong> for new joiners. Never edit the plan founding members are on.</td></tr>
+        <tr><td>Upload a PDF or a photo</td><td>Showit, same as any image. Copy the link it gives you.</td></tr>
+        <tr><td>Lock a page</td><td>MemberSpace, protect <code class="inline">/members</code> and <code class="inline">/members-*</code>.</td></tr>
+        <tr><td>Send an email to members</td><td>Flodesk.</td></tr>
+        <tr><td>Post in the group, run the session</td><td>Facebook and Zoom.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 7 -->
+  <section id="s7">
+    <span class="eyebrow">Section seven</span>
+    <h2>Your monthly rhythm</h2>
+    <p class="lead">The same shape every month. Tick as you go, it resets when you reload.</p>
+
+    <div class="progress"><span id="bar"></span></div>
+    <p style="font-size:0.86rem;color:var(--sage);font-style:italic;" id="barLabel">Nothing ticked yet</p>
+
+    <ul class="check" id="checklist">
+      <li><input type="checkbox"><label><span class="when">Week 1 ◆ release week</span> Upload the new PDFs in Showit and copy their links</label></li>
+      <li><input type="checkbox"><label><span class="when">Week 1</span> Chat 1: library, add new printables and clear last month’s New badges</label></li>
+      <li><input type="checkbox"><label><span class="when">Week 1</span> Chat 2: This Month page, new release and move the old one to the archive</label></li>
+      <li><input type="checkbox"><label><span class="when">Week 1</span> Chat 3: member home, update the This Month card to match</label></li>
+      <li><input type="checkbox"><label><span class="when">Week 1</span> Email members through Flodesk and post in the group</label></li>
+      <li><input type="checkbox"><label><span class="when">Week 2 ◆ session week</span> Post the reminder in the group the day before</label></li>
+      <li><input type="checkbox"><label><span class="when">Week 2</span> Run the live session and record it</label></li>
+      <li><input type="checkbox"><label><span class="when">Week 2</span> Upload the replay, then add it to the sessions page with Claude</label></li>
+      <li><input type="checkbox"><label><span class="when">Week 2</span> Move the session date forward in the Showit settings block</label></li>
+      <li><input type="checkbox"><label><span class="when">Week 3</span> Answer the Ask Brooke questions and publish the anonymous ones</label></li>
+      <li><input type="checkbox"><label><span class="when">Week 3</span> Post the wins thread and the dinner thread in the group</label></li>
+      <li><input type="checkbox"><label><span class="when">Week 4</span> Plan next month and ask the group what they need</label></li>
+      <li><input type="checkbox"><label><span class="when">Week 4</span> Check MemberSpace for failed payments and email anyone affected</label></li>
+      <li><input type="checkbox"><label><span class="when">Week 4</span> Open every member page in incognito and confirm they are still locked</label></li>
+    </ul>
+
+    <div class="note">
+      <p><b>If a month gets away from you,</b> the two that matter are the live session and answering questions. Those are what members notice. A release can land a week late and almost nobody will mention it.</p>
+    </div>
+  </section>
+
+  <!-- 8 -->
+  <section id="s8">
+    <span class="eyebrow">Section eight</span>
+    <h2>Before you launch</h2>
+
+    <table>
+      <thead><tr><th>Job</th><th>How</th></tr></thead>
+      <tbody>
+        <tr><td>Delete the sample replays, sample answers, and sample past releases</td><td>Claude, using the request in Section 4. Three pages.</td></tr>
+        <tr><td>Replace the placeholder testimonials on the sales page</td><td>Get real quotes from your first members, then ask Claude to put them in.</td></tr>
+        <tr><td>Paste the MemberSpace Link into the four places that need it</td><td>By hand or with Claude. One on the member home, three on the account page.</td></tr>
+        <tr><td>Fill in the settings block with your real details</td><td>Showit, Section 6.</td></tr>
+        <tr><td>Set the Ask Brooke form to go to your form service</td><td>Claude, tell it your form link.</td></tr>
+        <tr><td>Create the two Quick Start PDFs</td><td>You. Four pages link to them and nothing works properly without them.</td></tr>
+        <tr><td>Write the terms page</td><td>You. Your money back promise links to it from two places.</td></tr>
+        <tr><td>Lock the member pages and test while logged out</td><td>MemberSpace, then an incognito window.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 9 -->
+  <section id="s9">
+    <span class="eyebrow">Section nine</span>
+    <h2>When something goes wrong</h2>
+
+    <table>
+      <thead><tr><th>What happened</th><th>What to do</th></tr></thead>
+      <tbody>
+        <tr><td>Claude gave me only part of the file</td><td>Reply: <em>please give me the complete file from the first line to the last</em>.</td></tr>
+        <tr><td>The answer got cut off</td><td>Reply: <em>that got cut off, please continue from where you stopped</em>.</td></tr>
+        <tr><td>Claude changed things I did not ask about</td><td>Upload your backup and say: <em>this is the original, make only this one change</em>.</td></tr>
+        <tr><td>Page is blank or half missing</td><td>You did not copy the whole file. Recopy from the first line to the last.</td></tr>
+        <tr><td>Two menus, page looks doubled</td><td>You pasted underneath the old version. Clear the box, paste once.</td></tr>
+        <tr><td>Buttons or filters stopped working</td><td>Upload the file to Claude and use the Fix Something request.</td></tr>
+        <tr><td>Logo or menu is dark and unreadable</td><td>The colour fix block was removed. Ask Claude to put the SHOWIT OVERRIDE ARMOUR block back.</td></tr>
+        <tr><td>Curly quotes and odd characters</td><td>You saved it in Word. Start from your backup and use a plain text editor.</td></tr>
+        <tr><td>The time is an hour out for some members</td><td>Daylight saving. Switch between <code class="inline">-04:00</code> and <code class="inline">-05:00</code>.</td></tr>
+        <tr><td>My change is not showing</td><td>Your browser is remembering the old page. Check in incognito.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="win">
+      <p><b>You can always go back.</b> That dated copy you made before you started is a working page. Paste it into Showit and you are back where you were, whatever happened in between.</p>
+    </div>
+  </section>
+
+  <!-- 10 -->
+  <section id="s10">
+    <span class="eyebrow">Section ten</span>
+    <h2>Never do these five things</h2>
+
+    <ol class="steps">
+      <li><strong>Never publish without checking.</strong> Two minutes with Section 5. Claude is good and it is not infallible, and the live site is where your paying members are.</li>
+      <li><strong>Never edit or save these files in Word or Google Docs.</strong> They silently change quote marks and break the page. Plain text editors only.</li>
+      <li><strong>Never skip the backup copy.</strong> There is no undo once it is published.</li>
+      <li><strong>Never name a member page anything that does not start <code class="inline">members-</code>.</strong> It becomes public instantly and nothing warns you.</li>
+      <li><strong>Never change the price on the plan your existing members are on.</strong> Make a new plan for new joiners. Their founding rate was promised in writing.</li>
+    </ol>
+
+    <div class="note">
+      <p><b>When to send it to Genasys instead.</b> Anything to do with the design or layout, a whole new kind of page, changing how the vault or library work, or anything you have asked Claude twice and it still is not right. Send us the file and say what you wanted. Quick for us, and it saves you an evening.</p>
+    </div>
+  </section>
+
+  </main>
+</div>
+
+<p class="foot">
+  <span class="script">you have got this</span>
+  Purposeful Pennies ◆ Membership Operations Manual ◆ prepared by Genasys
+</p>
+
+<script>
+  /* accordions */
+  document.querySelectorAll('.task').forEach(function (t) {
+    var btn = t.querySelector('button'), body = t.querySelector('.body');
+    btn.setAttribute('aria-expanded','false');
+    btn.addEventListener('click', function () {
+      var open = t.classList.toggle('open');
+      btn.setAttribute('aria-expanded', String(open));
+      body.style.maxHeight = open ? (body.scrollHeight + 80) + 'px' : null;
+    });
+  });
+
+  /* copy buttons */
+  document.querySelectorAll('.copy').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var text = btn.parentElement.querySelector('pre').innerText;
+      function ok() { btn.textContent = 'Copied'; btn.classList.add('done');
+        setTimeout(function(){ btn.textContent='Copy'; btn.classList.remove('done'); }, 2500); }
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(ok).catch(fallback);
+      } else { fallback(); }
+      function fallback() {
+        var ta=document.createElement('textarea'); ta.value=text; ta.style.position='fixed'; ta.style.top='-1000px';
+        document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); ok(); } catch(e){ btn.textContent='Select it by hand'; }
+        document.body.removeChild(ta);
+      }
+    });
+  });
+
+  /* checklist */
+  (function () {
+    var boxes = Array.prototype.slice.call(document.querySelectorAll('#checklist input'));
+    var bar = document.getElementById('bar'), label = document.getElementById('barLabel');
+    function refresh() {
+      var done = boxes.filter(function(b){ return b.checked; }).length;
+      bar.style.width = Math.round(done / boxes.length * 100) + '%';
+      label.textContent = done === 0 ? 'Nothing ticked yet'
+        : done === boxes.length ? 'Every job done. Go and put the kettle on.'
+        : done + ' of ' + boxes.length + ' done this month';
+    }
+    boxes.forEach(function (b) {
+      b.addEventListener('change', function () {
+        b.closest('li').classList.toggle('done', b.checked);
+        refresh();
+      });
+    });
+    refresh();
+  })();
+<w:pgSz w:h="15840" w:w="12240" w:orient="portrait"/><w:pgMar w:bottom="1440" w:top="1440" w:left="1440" w:right="1440" w:header="720" w:footer="720"/><w:pgNumType w:start="1"/></w:sectPr></w:pPr><w:r w:rsidDel="00000000" w:rsidR="00000000" w:rsidRPr="00000000"><w:rPr><w:rtl w:val="0"/></w:rPr><w:t xml:space="preserve"></script>

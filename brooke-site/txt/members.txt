@@ -1,0 +1,1015 @@
+<!--
+  ============================================================
+  PURPOSEFUL PENNIES  ·  MEMBER HOME   /members
+  Showit + MemberSpace
+  ============================================================
+
+  WHAT THIS PAGE IS
+  The logged in home screen. The first thing a member sees after login
+  and the page she will come back to most. One screen, calm, and it
+  answers three questions without scrolling: what is new, what is next,
+  and where do I go.
+
+  ------------------------------------------------------------
+  MEMBERSPACE SETUP
+  ------------------------------------------------------------
+  1. INSTALL CODE. Paste the MemberSpace install snippet into Showit
+     under Settings > Advanced > Head HTML so it loads on every page.
+     Grab it from MemberSpace: Customize > Integrations > Showit.
+
+  2. PROTECT THESE PATHS. In MemberSpace, create the plan, then protect
+     by URL path. Showit uses flat page slugs, so there is no nesting
+     to inherit from. Every member page is a top level slug beginning
+     members- and protection has to be a prefix rule:
+
+        /members            <- this page
+        /members-*          <- every other member page
+
+     VERIFY THE WILDCARD ACTUALLY MATCHES before launch. Add a member
+     page, log out, and try to open it. A prefix rule that silently
+     fails to match does not throw an error, it just serves paid
+     content to the public. Test it, do not assume it.
+
+     Leave the whole public site unprotected. Never protect
+     /membership or /membership-thank-you.
+
+     NOTE ON FILES. PDFs live under /members-files/ which is an asset
+     path, not a Showit page. MemberSpace URL protection does not
+     cover direct file links, so anyone given a URL can open one.
+     If that matters, host the PDFs as MemberSpace Space file content
+     instead, which gates them properly and reports who opened what.
+
+  3. MEMBERSPACE LINK. Grab it from Customize > Integrations > Showit >
+     MemberSpace Link. It is one link that adapts by itself: it shows
+     login to a visitor and account to a member.
+
+     It only needs pasting in FOUR places in the whole build, because
+     every "My account" link now routes to /members-account instead:
+
+        this page   1  the logged out notice at the top
+        /members-account  3  the two settings buttons and the
+                             renewal date link
+
+     Anything marked class="ms-link" with href="#" still needs it.
+     Nothing else does.
+
+  4. DATA ATTRIBUTES USED HERE. These are real MemberSpace attributes,
+     confirmed against their developer docs:
+
+        data-ms-member-info="firstName"   prints the member's first name
+        data-ms-hide="auth"               hidden once she is logged in
+        data-ms-show="plan(PLAN_ID)"      founding member badge only
+
+     On any data-ms-show element MemberSpace recommends inline
+     style="display:none" so it does not flash before the script runs.
+     That is done below. Swap PLAN_ID for the real founding plan id,
+     which sits at the end of that plan's signup link.
+
+  5. MEMBER MENU. MemberSpace shows its own floating member button with
+     a What is New feed. Keep it on. This page is the warm front door,
+     that button is the quick shortcut. They do not fight.
+
+  ------------------------------------------------------------
+  TWO THINGS MEMBERSPACE DOES NOT DO
+  ------------------------------------------------------------
+  The sales page promises a community and a monthly live session.
+  MemberSpace gates pages and takes payments, and it gives comments and
+  reactions on content, but it is not a community platform and it does
+  not host live video. So both need a home before doors open:
+
+     The Circle    ->  a private Facebook group is the pragmatic
+                       choice, or a Circle account later. Point
+                       COMMUNITY_URL at whichever wins.
+     Live sessions ->  Zoom or Google Meet. The join link lives on a
+                       protected page, and the replay is embedded on
+                       /members-sessions afterwards.
+
+  Nothing on this page breaks either way. Both are single constants in
+  the config block at the bottom.
+
+  FORMATTING RULE. Zero em dashes, zero en dashes. The separator is the
+  diamond glyph.
+  ============================================================
+-->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Member Home · The One-Income Circle</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&amp;family=DM+Serif+Display&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --deep-sage: #2E3E2F;
+      --sage: #5C6E47;
+      --sage-soft: #8B9E75;
+      --warm-tan: #C28954;
+      --warm-tan-dark: #A77246;
+      --cream: #FBF4D7;
+      --cream-warm: #F7ECC4;
+      --charcoal: #2A2A2A;
+      --soft-gray: #7E867D;
+      --light-sage: #DBE3CE;
+      --pale-tan: #EFE0C1;
+      --white: #FFFFFF;
+      --coral: #DD6B4E;
+      --coral-deep: #C25441;
+      --coral-soft: #F7D0BE;
+      --coral-blush: #FBE3D5;
+      --gold: #D4A83F;
+      --gold-soft: #EDD98D;
+      --gold-deep: #B8912E;
+      --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+      --bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 17px; scroll-behavior: smooth; }
+    @media (min-width: 720px) { html { font-size: 18px; } }
+    body {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 1.05rem; line-height: 1.65;
+      color: var(--charcoal); background: var(--cream);
+      -webkit-font-smoothing: antialiased; overflow-x: hidden;
+    }
+    .container { max-width: 1180px; margin: 0 auto; padding: 0 1.5rem; }
+    section { padding: 3.25rem 0; position: relative; }
+    @media (max-width: 700px) { section { padding: 2.5rem 0; } }
+    .script { font-family: 'Caveat', cursive; font-weight: 700; }
+    h1, h2, h3, h4 { font-family: Georgia, serif; color: var(--deep-sage); }
+    h1 { font-size: clamp(2rem, 4.6vw, 3rem); font-weight: bold; line-height: 1.08; letter-spacing: -0.01em; }
+    h2 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: bold; line-height: 1.18; }
+    h3 { font-size: 1.2rem; font-weight: bold; line-height: 1.3; }
+    h4 { font-size: 1.02rem; font-weight: bold; }
+    p { margin-bottom: 0.95rem; }
+    p:last-child { margin-bottom: 0; }
+    a { color: var(--coral-deep); }
+
+    .section-head {
+      display: flex; align-items: baseline; justify-content: space-between;
+      gap: 1.5rem; margin-bottom: 1.5rem; flex-wrap: wrap;
+    }
+    .section-head h2 { margin: 0; }
+    .section-head .see-all {
+      font-size: 0.92rem; color: var(--coral-deep); text-decoration: none;
+      border-bottom: 1px solid rgba(221, 107, 78, 0.4); padding-bottom: 2px;
+    }
+    .section-head .see-all:hover { border-bottom-color: var(--coral); }
+    .eyebrow {
+      font-size: 0.74rem; font-weight: bold; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--warm-tan-dark);
+      display: inline-flex; align-items: center; gap: 0.7rem;
+    }
+    .eyebrow::before { content: ""; width: 24px; height: 1px; background: var(--warm-tan); }
+    .eyebrow-coral { color: var(--coral-deep); }
+    .eyebrow-coral::before { background: var(--coral); }
+    .eyebrow-cream { color: var(--coral-soft); }
+    .eyebrow-cream::before { background: var(--coral); }
+
+    /* ===== BUTTONS ===== */
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.55rem;
+      background: var(--warm-tan); color: white; font-family: Georgia, serif;
+      font-size: 1rem; font-weight: bold; padding: 0.9rem 1.9rem;
+      border: none; border-radius: 999px; cursor: pointer; text-decoration: none;
+      transition: all 0.25s var(--ease); box-shadow: 0 3px 0 var(--warm-tan-dark);
+    }
+    .btn:hover { background: var(--warm-tan-dark); transform: translateY(-2px); box-shadow: 0 5px 0 var(--warm-tan-dark); color: white; }
+    .btn::after { content: "\2192"; transition: transform 0.25s var(--ease); }
+    .btn:hover::after { transform: translateX(3px); }
+    .btn-coral { background: var(--coral); box-shadow: 0 3px 0 var(--coral-deep); }
+    .btn-coral:hover { background: var(--coral-deep); box-shadow: 0 5px 0 var(--coral-deep); }
+    .btn-outline {
+      background: transparent; color: var(--warm-tan-dark); border: 2px solid var(--warm-tan);
+      padding: calc(0.9rem - 2px) calc(1.9rem - 2px); box-shadow: none;
+    }
+    .btn-outline:hover { background: var(--pale-tan); color: var(--warm-tan-dark); box-shadow: none; }
+    .btn-cream { background: var(--cream); color: var(--deep-sage); box-shadow: 0 3px 0 rgba(0,0,0,0.18); }
+    .btn-cream:hover { background: var(--cream-warm); color: var(--deep-sage); box-shadow: 0 5px 0 rgba(0,0,0,0.18); }
+    .btn-ghost { background: transparent; color: var(--cream); border: 2px solid var(--coral-soft); box-shadow: none; padding: calc(0.9rem - 2px) calc(1.9rem - 2px); }
+    .btn-ghost:hover { background: rgba(255,255,255,0.1); color: var(--cream); box-shadow: none; }
+    .btn-sm { font-size: 0.9rem; padding: 0.65rem 1.35rem; }
+    .btn-plain::after { content: ""; }
+
+    /* ===== IMAGE PLACEHOLDER ===== */
+    .img-ph {
+      background: linear-gradient(135deg, var(--coral-blush) 0%, var(--pale-tan) 50%, var(--light-sage) 100%);
+      position: relative; display: flex; align-items: center; justify-content: center;
+      flex-direction: column; padding: 1.5rem; text-align: center;
+      border: 1px dashed rgba(194, 137, 84, 0.5); overflow: hidden;
+    }
+    .img-ph .ph-tag {
+      font-size: 0.64rem; font-weight: bold; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--coral-deep); margin-bottom: 0.4rem;
+    }
+    .img-ph .ph-title { font-size: 0.95rem; font-weight: bold; color: var(--deep-sage); margin-bottom: 0.3rem; }
+    .img-ph .ph-brief { font-size: 0.78rem; font-style: italic; color: var(--sage); line-height: 1.45; max-width: 20rem; }
+
+    /* ===== MEMBER NAV ===== */
+    .mnav {
+      background: var(--deep-sage); position: sticky; top: 0; z-index: 100;
+      box-shadow: 0 2px 12px rgba(46, 62, 47, 0.18);
+    }
+    .mnav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 1.5rem; padding: 0.85rem 1.5rem; max-width: 1280px; margin: 0 auto;
+    }
+    .mnav-logo {
+      font-family: Georgia, serif; font-size: 1.12rem; font-weight: bold;
+      color: var(--cream); text-decoration: none; letter-spacing: 0.02em;
+      display: flex; align-items: center; gap: 0.5rem; white-space: nowrap;
+    }
+    .mnav-logo .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--coral); }
+    .mnav-links { display: flex; align-items: center; gap: 1.6rem; }
+    .mnav-links a {
+      color: var(--cream); text-decoration: none; font-size: 0.94rem;
+      opacity: 0.88; position: relative; padding-bottom: 2px; white-space: nowrap;
+    }
+    .mnav-links a::after {
+      content: ""; position: absolute; left: 0; right: 0; bottom: -3px; height: 2px;
+      background: var(--coral); transform: scaleX(0); transform-origin: left;
+      transition: transform 0.25s var(--ease); border-radius: 2px;
+    }
+    .mnav-links a:hover { opacity: 1; }
+    .mnav-links a:hover::after, .mnav-links a.current::after { transform: scaleX(1); }
+    .mnav-links a.current { opacity: 1; font-weight: bold; }
+    .mnav-account {
+      background: var(--coral); color: white !important; padding: 0.5rem 1.1rem;
+      border-radius: 999px; font-size: 0.86rem !important; font-weight: bold;
+      opacity: 1 !important; box-shadow: 0 2px 0 var(--coral-deep);
+    }
+    .mnav-account::after { display: none; }
+    .mnav-account:hover { background: var(--coral-deep); }
+    .mnav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 0.4rem; }
+    .mnav-toggle span { display: block; width: 24px; height: 2px; background: var(--cream); margin: 5px 0; border-radius: 2px; }
+    @media (max-width: 1080px) {
+      .mnav-toggle { display: block; }
+      .mnav-links {
+        position: absolute; top: 100%; left: 0; right: 0; background: var(--deep-sage);
+        flex-direction: column; align-items: stretch; gap: 0; padding: 0 1.5rem;
+        max-height: 0; overflow: hidden;
+        transition: max-height 0.35s var(--ease), padding 0.35s var(--ease);
+      }
+      .mnav-links.open { max-height: 32rem; padding: 0.75rem 1.5rem 1.5rem; }
+      .mnav-links a { padding: 0.75rem 0; font-size: 1.02rem; }
+      .mnav-links a::after { display: none; }
+      .mnav-account { text-align: center; margin-top: 0.75rem; }
+    }
+
+    /* ===== SHOWIT OVERRIDE ARMOUR =====
+       Showit injects its own link colours over anything pasted into
+       Custom Head HTML, and it beat the logo rule on the live site: the
+       logo rendered dark on the dark nav and was effectively invisible.
+       The nav links happened to survive, but they are one template
+       change away from the same problem.
+
+       Every colour in the nav is therefore pinned here with high
+       specificity and !important. These are the same colours the
+       component already intended, nothing new. Do not remove this
+       block. If a nav element ever renders the wrong colour on Showit
+       again, add it here rather than editing the rules above. */
+    .mnav .mnav-logo,
+    .mnav .mnav-logo:link,
+    .mnav .mnav-logo:visited,
+    .mnav .mnav-logo:hover,
+    .mnav .mnav-logo:focus,
+    .mnav .mnav-logo:active,
+    .mnav .mnav-logo * { color: var(--cream) !important; }
+    .mnav .mnav-logo .dot { background: var(--coral) !important; }
+
+    .mnav .mnav-links a,
+    .mnav .mnav-links a:link,
+    .mnav .mnav-links a:visited,
+    .mnav .mnav-links a:hover,
+    .mnav .mnav-links a:active { color: var(--cream) !important; }
+
+    .mnav .mnav-links a.mnav-account,
+    .mnav .mnav-links a.mnav-account:link,
+    .mnav .mnav-links a.mnav-account:visited,
+    .mnav .mnav-links a.mnav-account:hover,
+    .mnav .mnav-links a.mnav-account:active { color: #FFFFFF !important; }
+    .mnav .mnav-toggle span { background: var(--cream) !important; }
+    .mnav .mnav-logo, .mnav .mnav-links a { text-decoration: none !important; }
+
+
+    /* logged out notice, MemberSpace hides this once she is in */
+    .logged-out-note {
+      background: var(--gold-soft); color: var(--deep-sage);
+      text-align: center; padding: 0.7rem 1.25rem; font-size: 0.92rem;
+    }
+    .logged-out-note a { color: var(--coral-deep); font-weight: bold; }
+
+    /* ===== 01 WELCOME ===== */
+    .welcome { background: var(--cream); padding: 2.75rem 0 2.5rem; position: relative; overflow: hidden; }
+    .welcome::before {
+      content: ""; position: absolute; top: -160px; right: -140px;
+      width: 430px; height: 430px;
+      background: radial-gradient(circle, var(--coral-blush) 0%, transparent 65%);
+      opacity: 0.75; pointer-events: none;
+    }
+    .welcome-inner { position: relative; z-index: 2; }
+    .welcome-top { display: flex; align-items: center; gap: 0.9rem; flex-wrap: wrap; margin-bottom: 0.5rem; }
+    .greeting { font-family: 'Caveat', cursive; font-size: 1.85rem; color: var(--coral-deep); line-height: 1.1; }
+    .founding-badge {
+      background: var(--gold); color: white; font-size: 0.66rem; font-weight: bold;
+      letter-spacing: 0.14em; text-transform: uppercase; padding: 0.4rem 0.75rem;
+      border-radius: 4px; box-shadow: 0 2px 0 var(--gold-deep); transform: rotate(-2deg);
+    }
+    .welcome h1 { margin-bottom: 0.9rem; }
+    .welcome-sub { font-size: 1.1rem; font-style: italic; color: var(--sage); max-width: 40rem; }
+    .welcome-actions { display: flex; flex-wrap: wrap; gap: 0.85rem; margin-top: 1.75rem; }
+
+    /* new member strip */
+    .newbie {
+      margin-top: 2rem; background: white; border-radius: 12px;
+      border-left: 5px solid var(--coral); padding: 1.35rem 1.5rem;
+      display: grid; grid-template-columns: 1fr auto auto; gap: 1.25rem; align-items: center;
+      box-shadow: 0 10px 26px rgba(46, 62, 47, 0.07);
+    }
+    @media (max-width: 780px) { .newbie { grid-template-columns: 1fr; } }
+    .newbie h4 { margin-bottom: 0.2rem; }
+    .newbie p { font-size: 0.94rem; color: var(--sage); margin: 0; }
+    .newbie-dismiss {
+      background: none; border: none; cursor: pointer; color: var(--soft-gray);
+      font-family: Georgia, serif; font-size: 0.88rem; text-decoration: underline;
+      text-underline-offset: 3px; padding: 0.4rem;
+    }
+    .newbie-dismiss:hover { color: var(--charcoal); }
+
+    /* ===== 02 NEXT SESSION ===== */
+    .session { background: var(--deep-sage); color: var(--cream); padding: 3rem 0; }
+    .session-card {
+      display: grid; grid-template-columns: auto 1fr auto; gap: 2.25rem; align-items: center;
+    }
+    @media (max-width: 940px) { .session-card { grid-template-columns: auto 1fr; } .session-card .session-actions { grid-column: 1 / -1; } }
+    @media (max-width: 620px) { .session-card { grid-template-columns: 1fr; text-align: center; } }
+    .date-block {
+      background: var(--cream); color: var(--deep-sage); border-radius: 12px;
+      padding: 1rem 1.5rem; text-align: center; min-width: 128px;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.22);
+    }
+    @media (max-width: 620px) { .date-block { max-width: 180px; margin: 0 auto; } }
+    .date-block .m { font-size: 0.72rem; font-weight: bold; letter-spacing: 0.18em; text-transform: uppercase; color: var(--coral-deep); }
+    .date-block .d { font-family: 'DM Serif Display', Georgia, serif; font-size: 2.7rem; line-height: 1.05; }
+    .date-block .t { font-size: 0.82rem; font-style: italic; color: var(--sage); }
+    .session-text h2 { color: var(--cream); margin: 0.5rem 0 0.5rem; }
+    .session-text p { color: var(--cream); opacity: 0.9; font-size: 0.98rem; }
+    .session-actions { display: flex; flex-direction: column; gap: 0.6rem; }
+    @media (max-width: 940px) { .session-actions { flex-direction: row; flex-wrap: wrap; } }
+    .session-cal {
+      display: flex; gap: 1rem; font-size: 0.86rem; margin-top: 0.35rem;
+    }
+    @media (max-width: 940px) { .session-cal { width: 100%; } }
+    .session-cal a { color: var(--coral-soft); text-decoration: underline; text-underline-offset: 3px; }
+
+    /* ===== 03 THIS MONTH ===== */
+    .month { background: var(--coral-blush); }
+    .month-card {
+      background: white; border-radius: 16px; overflow: hidden;
+      display: grid; grid-template-columns: 0.85fr 1.15fr;
+      box-shadow: 0 18px 44px rgba(46, 62, 47, 0.1);
+    }
+    @media (max-width: 860px) { .month-card { grid-template-columns: 1fr; } }
+    .month-image { min-height: 260px; }
+    .month-image .img-ph { width: 100%; height: 100%; border: none; border-right: 1px dashed rgba(194,137,84,0.5); }
+    @media (max-width: 860px) { .month-image .img-ph { border-right: none; border-bottom: 1px dashed rgba(194,137,84,0.5); min-height: 200px; } }
+    .month-body { padding: 2.25rem 2.25rem; }
+    @media (max-width: 600px) { .month-body { padding: 1.75rem 1.5rem; } }
+    .month-tag {
+      display: inline-block; background: var(--coral); color: white;
+      font-size: 0.66rem; font-weight: bold; letter-spacing: 0.14em;
+      text-transform: uppercase; padding: 0.35rem 0.7rem; border-radius: 4px; margin-bottom: 0.9rem;
+    }
+    .month-body h2 { margin-bottom: 0.75rem; }
+    .month-list { list-style: none; margin: 1.1rem 0 1.6rem; }
+    .month-list li { padding: 0.35rem 0 0.35rem 1.6rem; position: relative; font-size: 0.96rem; }
+    .month-list li::before {
+      content: ""; position: absolute; left: 0; top: 0.7rem; width: 15px; height: 15px;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23DD6B4E' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center/contain no-repeat;
+    }
+
+    /* ===== 04 THE VAULT ===== */
+    .vault { background: var(--white); }
+    .vault-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.15rem; }
+    @media (max-width: 1040px) { .vault-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 780px) { .vault-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 520px) { .vault-grid { grid-template-columns: 1fr; } }
+    .system {
+      background: var(--cream); border-radius: 12px; padding: 1.4rem 1.35rem;
+      border: 1px solid rgba(194, 137, 84, 0.25); text-decoration: none;
+      display: flex; flex-direction: column; gap: 0.5rem;
+      transition: transform 0.28s var(--ease), box-shadow 0.28s var(--ease), border-color 0.28s var(--ease);
+    }
+    .system:hover { transform: translateY(-5px); box-shadow: 0 14px 32px rgba(46, 62, 47, 0.12); border-color: var(--coral); }
+    .system-num {
+      font-family: 'DM Serif Display', Georgia, serif; font-size: 1.5rem;
+      color: var(--coral-soft); line-height: 1;
+    }
+    .system h3 { font-size: 1.05rem; }
+    .system p { font-size: 0.88rem; color: var(--sage); margin: 0; line-height: 1.5; }
+    .system .start-here {
+      display: inline-block; align-self: flex-start; margin-top: 0.35rem;
+      background: var(--sage); color: white; font-size: 0.62rem; font-weight: bold;
+      letter-spacing: 0.12em; text-transform: uppercase; padding: 0.3rem 0.6rem; border-radius: 4px;
+    }
+
+    /* ===== 05 LIBRARY ===== */
+    .library { background: var(--cream-warm); }
+    .chips { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 1.75rem; }
+    .chip {
+      background: white; border: 1px solid rgba(194, 137, 84, 0.4);
+      color: var(--sage); font-family: Georgia, serif; font-size: 0.88rem;
+      padding: 0.5rem 1.05rem; border-radius: 999px; cursor: pointer;
+      transition: all 0.22s var(--ease);
+    }
+    .chip:hover { border-color: var(--coral); color: var(--coral-deep); }
+    .chip.active { background: var(--coral); border-color: var(--coral); color: white; font-weight: bold; }
+    .lib-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.15rem; }
+    @media (max-width: 900px) { .lib-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 560px) { .lib-grid { grid-template-columns: 1fr; } }
+    .lib-item {
+      background: white; border-radius: 12px; padding: 1.25rem 1.35rem;
+      display: flex; gap: 0.95rem; align-items: flex-start; text-decoration: none;
+      border: 1px solid rgba(194, 137, 84, 0.2);
+      transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
+    }
+    .lib-item:hover { transform: translateY(-3px); box-shadow: 0 12px 26px rgba(46, 62, 47, 0.1); }
+    .lib-icon {
+      width: 38px; height: 46px; flex-shrink: 0; border-radius: 4px;
+      background: var(--coral-blush); border: 1px solid var(--coral-soft);
+      position: relative;
+    }
+    .lib-icon::after {
+      content: ""; position: absolute; top: 0; right: 0;
+      border-width: 0 10px 10px 0; border-style: solid;
+      border-color: transparent var(--white) transparent transparent;
+    }
+    .lib-item h4 { font-size: 0.98rem; margin-bottom: 0.15rem; line-height: 1.3; }
+    .lib-item .meta { font-size: 0.8rem; color: var(--soft-gray); font-style: italic; }
+    .lib-item .new-flag {
+      display: inline-block; background: var(--gold); color: white;
+      font-size: 0.58rem; font-weight: bold; letter-spacing: 0.1em;
+      text-transform: uppercase; padding: 0.18rem 0.42rem; border-radius: 3px;
+      margin-left: 0.4rem; vertical-align: 2px;
+    }
+    .lib-empty { text-align: center; padding: 2rem; color: var(--sage); font-style: italic; display: none; }
+
+    /* ===== 06 CIRCLE AND ASK ===== */
+    .together { background: var(--white); }
+    .together-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.6rem; }
+    @media (max-width: 860px) { .together-grid { grid-template-columns: 1fr; } }
+    .t-card {
+      border-radius: 14px; padding: 2rem 1.9rem; display: flex; flex-direction: column;
+    }
+    .t-card.circle { background: var(--light-sage); }
+    .t-card.ask { background: var(--coral-blush); }
+    .t-card h2 { font-size: 1.5rem; margin-bottom: 0.65rem; }
+    .t-card p { font-size: 0.96rem; }
+    .thread-list { list-style: none; margin: 1.25rem 0 1.5rem; }
+    .thread-list li {
+      background: rgba(255,255,255,0.75); border-radius: 8px;
+      padding: 0.7rem 0.9rem; margin-bottom: 0.55rem; font-size: 0.9rem;
+      color: var(--charcoal); line-height: 1.45;
+    }
+    .thread-list li span { display: block; font-size: 0.78rem; color: var(--soft-gray); font-style: italic; margin-top: 0.2rem; }
+    .t-card .btn { align-self: flex-start; margin-top: auto; }
+
+    /* ===== 07 HELP ===== */
+    .help { background: var(--cream); padding: 2.75rem 0; }
+    .help-card {
+      background: white; border-radius: 14px; padding: 1.75rem 1.9rem;
+      display: grid; grid-template-columns: 1fr auto; gap: 1.5rem; align-items: center;
+      border: 1px solid rgba(194, 137, 84, 0.25);
+    }
+    @media (max-width: 700px) { .help-card { grid-template-columns: 1fr; } }
+    .help-card h3 { margin-bottom: 0.3rem; }
+    .help-card p { font-size: 0.95rem; color: var(--sage); margin: 0; }
+    .help-links { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+
+    /* ===== FOOTER ===== */
+    footer { background: var(--deep-sage); color: var(--cream); padding: 2.75rem 0 2rem; text-align: center; }
+    footer .brand-line { font-family: 'DM Serif Display', Georgia, serif; font-size: 1.5rem; }
+    footer .tagline { font-family: 'Caveat', cursive; color: var(--coral-soft); font-size: 1.25rem; margin: 0.3rem 0 1.5rem; }
+    footer .diamond { color: var(--coral); font-size: 0.8rem; letter-spacing: 1.1em; padding-left: 1.1em; opacity: 0.75; margin-bottom: 1.5rem; }
+    footer .fnav { display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem 1.75rem; margin-bottom: 1.5rem; }
+    footer .fnav a { color: var(--cream); opacity: 0.85; text-decoration: none; font-size: 0.9rem; }
+    footer .fnav a:hover { opacity: 1; color: var(--coral-soft); }
+    footer .legal { font-size: 0.8rem; opacity: 0.6; padding-top: 1.25rem; border-top: 1px solid rgba(221, 107, 78, 0.18); }
+    footer .legal a { color: var(--cream); opacity: 0.85; text-decoration: none; margin: 0 0.35rem; }
+
+    /* ===== FADE-IN ===== */
+    .fade-in { opacity: 0; transform: translateY(16px); transition: opacity 0.6s var(--ease), transform 0.6s var(--ease); }
+    .fade-in.visible { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+      html { scroll-behavior: auto; }
+      .fade-in { opacity: 1; transform: none; }
+    }
+    :focus-visible { outline: 3px solid var(--coral); outline-offset: 3px; }
+    .skip-link { position: absolute; left: -9999px; background: var(--coral); color: white; padding: 0.7rem 1.2rem; z-index: 200; }
+    .skip-link:focus { left: 0; }
+  
+    /* Real photos placed in the placeholder frames (photo shoot, Aug 2026) */
+    .img-ph.has-img { padding: 0; border: none; }
+    .img-ph.has-img::before { display: none; }
+    .img-ph.has-img > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+  </style>
+
+
+
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <!--
+    MemberSpace hides this the moment she is logged in.
+    Useful safety net if this page is ever left unprotected by mistake.
+  -->
+  <div class="logged-out-note" data-ms-hide="auth">
+    You are looking at the member home. <a href="#" class="ms-link">Log in to see your content</a>, or <a href="/membership">read about the Circle</a>.
+  </div>
+
+  <!-- ==================== MEMBER NAV ==================== -->
+  <nav class="mnav">
+    <div class="mnav-inner">
+      <a href="/members" class="mnav-logo">
+        <span class="dot"></span>
+        The One-Income Circle
+      </a>
+      <button class="mnav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="mnavLinks">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="mnav-links" id="mnavLinks">
+        <a href="/members" class="current" aria-current="page">Home</a>
+        <a href="/members-vault">The Vault</a>
+        <a href="/members-library">Printables</a>
+        <a href="/members-sessions">Live Sessions</a>
+        <a href="/members-circle">The Circle</a>
+        <a href="/members-ask-brooke" class="">Ask Brooke</a>
+        <a href="/members-account" class="mnav-account">My account</a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main">
+
+  <!-- ==================== 01 WELCOME ==================== -->
+  <section class="welcome">
+    <div class="container welcome-inner">
+      <div class="welcome-top">
+        <!--
+          data-ms-member-info prints her first name. The fallback text
+          inside the span shows if she has no first name on file, and the
+          small script at the bottom tidies the greeting either way.
+        -->
+        <span class="greeting" id="greeting">
+          <span id="greetTime">Hello</span>, <span data-ms-member-info="firstName" id="memberName">friend</span>
+        </span>
+        <!-- Founding members only. Swap PLAN_ID for the real founding plan id. -->
+        <span class="founding-badge" data-ms-show="plan(PLAN_ID)" style="display:none;">Founding member</span>
+      </div>
+      <h1>Here is what matters this week.</h1>
+      <p class="welcome-sub">Nothing on this page is urgent. Pick one thing, do it, and close the tab. That is how this works.</p>
+      <div class="welcome-actions">
+        <a href="/members-library?r=payday-page" class="btn btn-coral">Print this week’s payday page</a>
+        <a href="#this-month" class="btn btn-outline">See what is new this month</a>
+      </div>
+
+      <div class="newbie" id="newbieStrip">
+        <div>
+          <h4>New here? Start with the Quick Start.</h4>
+          <p>Two pages to print, one five minute video, and one decision. Fifteen minutes and you are properly started.</p>
+        </div>
+        <a href="/members-quick-start" class="btn btn-sm">Open Quick Start</a>
+        <button class="newbie-dismiss" id="newbieDismiss" type="button">I have done this</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 02 NEXT LIVE SESSION ==================== -->
+  <section class="session">
+    <div class="container">
+      <div class="session-card">
+        <div class="date-block fade-in">
+          <div class="m" id="sessionMonth">MONTH</div>
+          <div class="d" id="sessionDay">00</div>
+          <div class="t" id="sessionTime">time to be set</div>
+        </div>
+        <div class="session-text fade-in">
+          <span class="eyebrow eyebrow-cream">Your next live session</span>
+          <h2>The Monthly Money Reset</h2>
+          <p>Forty five minutes together. We set the grocery number, check the sinking funds, and you can bring any question you have. Cameras always optional, pyjamas encouraged.</p>
+        </div>
+        <div class="session-actions fade-in">
+          <a href="#" class="btn btn-cream js-join-session">Join the room</a>
+          <div class="session-cal">
+            <a href="#" id="gcalBtn" target="_blank" rel="noopener">Add to Google Calendar</a>
+            <a href="#" id="icsBtn" download="monthly-money-reset.ics">Download invite</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 03 THIS MONTH ==================== -->
+  <section class="month" id="this-month">
+    <div class="container">
+      <div class="section-head fade-in">
+        <h2>New this month</h2>
+        <a href="/members-this-month" class="see-all">See every past month →</a>
+      </div>
+      <div class="month-card fade-in">
+        <div class="month-image">
+          <div class="img-ph has-img"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/brookes-images-folder-sf3xp4/brooke-site-images/members-monthly.jpg" alt="A handwritten budget notebook with a calculator, tea and glasses on the kitchen table" loading="lazy"></div>
+        </div>
+        <div class="month-body">
+          <span class="month-tag">August release</span>
+          <h2>The back to school reset</h2>
+          <p>School supply season is the month that quietly wrecks a good budget, so this one lands before it does instead of after.</p>
+          <ul class="month-list">
+            <li>A school supply plan you fill in once and reuse every year</li>
+            <li>The shoes and clothes conversation, and how to have it without guilt</li>
+            <li>Two weeks of lunchbox meals from pantry staples</li>
+            <li>A short training on where the sinking fund for this should have started</li>
+          </ul>
+          <a href="/members-this-month" class="btn btn-coral">Open the August release</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 04 THE VAULT ==================== -->
+  <section class="vault">
+    <div class="container">
+      <div class="section-head fade-in">
+        <h2>The System Vault</h2>
+        <a href="/members-vault" class="see-all">Open the full vault →</a>
+      </div>
+      <div class="vault-grid">
+        <a href="/members-vault-budget" class="system fade-in">
+          <span class="system-num">01</span>
+          <h3>The One-Income Budget</h3>
+          <p>The fifteen minute payday routine, and the page it runs on.</p>
+          <span class="start-here">Start here</span>
+        </a>
+        <a href="/members-vault-sinking-funds" class="system fade-in">
+          <span class="system-num">02</span>
+          <h3>Sinking Funds</h3>
+          <p>So tires and dentists stop taking the whole month down with them.</p>
+        </a>
+        <a href="/members-vault-meals" class="system fade-in">
+          <span class="system-num">03</span>
+          <h3>Family Meals</h3>
+          <p>Dinner decided on Sunday, from what is already in your kitchen.</p>
+        </a>
+        <a href="/members-vault-groceries" class="system fade-in">
+          <span class="system-num">04</span>
+          <h3>Grocery Strategy</h3>
+          <p>Set the number before you walk in, not after you check out.</p>
+        </a>
+        <a href="/members-vault-home-rhythms" class="system fade-in">
+          <span class="system-num">05</span>
+          <h3>Simple Home Rhythms</h3>
+          <p>Daily and weekly patterns that keep the house from piling up.</p>
+        </a>
+        <a href="/members-vault-mindset" class="system fade-in">
+          <span class="system-num">06</span>
+          <h3>Money Is a Tool</h3>
+          <p>The shame part. Worth doing, even though it is the one we skip.</p>
+        </a>
+        <a href="/members-vault-implementation" class="system fade-in">
+          <span class="system-num">07</span>
+          <h3>What To Do First</h3>
+          <p>The order to add things in, so you never add two at once.</p>
+        </a>
+        <a href="/members-quick-start" class="system fade-in">
+          <span class="system-num">◆</span>
+          <h3>Quick Start</h3>
+          <p>Fifteen minutes, start to finish. Come back to it whenever a month gets away from you.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 05 PRINTABLE LIBRARY ==================== -->
+  <section class="library">
+    <div class="container">
+      <div class="section-head fade-in">
+        <h2>Printables</h2>
+        <a href="/members-library" class="see-all">See all in the library →</a>
+      </div>
+      <div class="chips fade-in" id="chips" role="group" aria-label="Filter printables">
+        <button class="chip active" type="button" data-filter="all">Everything</button>
+        <button class="chip" type="button" data-filter="new">New this month</button>
+        <button class="chip" type="button" data-filter="budgeting">Budgeting</button>
+        <button class="chip" type="button" data-filter="meals">Groceries and meals</button>
+        <button class="chip" type="button" data-filter="home">Home and family</button>
+        <button class="chip" type="button" data-filter="mindset">Mindset</button>
+      </div>
+      <div class="lib-grid" id="libGrid">
+        <a href="/members-files/payday-reset-page.pdf" class="lib-item fade-in" data-cat="budgeting">
+          <span class="lib-icon" aria-hidden="true"></span>
+          <span>
+            <h4>The Payday Reset Page</h4>
+            <span class="meta">1 page ◆ print two, one per payday</span>
+          </span>
+        </a>
+        <a href="/members-files/one-page-monthly-budget.pdf" class="lib-item fade-in" data-cat="budgeting">
+          <span class="lib-icon" aria-hidden="true"></span>
+          <span>
+            <h4>The One-Page Monthly Budget</h4>
+            <span class="meta">2 pages ◆ planned against actual</span>
+          </span>
+        </a>
+        <a href="/members-files/bill-due-date-calendar.pdf" class="lib-item fade-in" data-cat="budgeting">
+          <span class="lib-icon" aria-hidden="true"></span>
+          <span>
+            <h4>Bill Due Date Calendar</h4>
+            <span class="meta">2 pages ◆ which payday covers what</span>
+          </span>
+        </a>
+        <a href="/members-files/sinking-fund-starter.pdf" class="lib-item fade-in" data-cat="budgeting">
+          <span class="lib-icon" aria-hidden="true"></span>
+          <span>
+            <h4>Sinking Fund Starter Sheet</h4>
+            <span class="meta">1 page ◆ twelve funds, one number each</span>
+          </span>
+        </a>
+        <a href="/members-files/lunchbox-fortnight.pdf" class="lib-item fade-in" data-cat="meals new">
+          <span class="lib-icon" aria-hidden="true"></span>
+          <span>
+            <h4>Lunchbox Fortnight<span class="new-flag">New</span></h4>
+            <span class="meta">3 pages ◆ pantry staples only</span>
+          </span>
+        </a>
+        <a href="/members-files/weekly-meal-planner.pdf" class="lib-item fade-in" data-cat="meals">
+          <span class="lib-icon" aria-hidden="true"></span>
+          <span>
+            <h4>Weekly Meal Planner</h4>
+            <span class="meta">1 page ◆ the fridge copy</span>
+          </span>
+        </a>
+        <a href="/members-files/grocery-cheat-sheet.pdf" class="lib-item fade-in" data-cat="meals">
+          <span class="lib-icon" aria-hidden="true"></span>
+          <span>
+            <h4>Grocery Trip Cheat Sheet</h4>
+            <span class="meta">1 page ◆ the number goes at the top</span>
+          </span>
+        </a>
+        <a href="/members-files/school-supply-plan.pdf" class="lib-item fade-in" data-cat="home new">
+          <span class="lib-icon" aria-hidden="true"></span>
+          <span>
+            <h4>School Supply Plan<span class="new-flag">New</span></h4>
+            <span class="meta">2 pages ◆ fill in once, reuse yearly</span>
+          </span>
+        </a>
+        <a href="/members-files/home-rhythm-planner.pdf" class="lib-item fade-in" data-cat="home">
+          <span class="lib-icon" aria-hidden="true"></span>
+          <span>
+            <h4>Weekly Home Rhythm Planner</h4>
+            <span class="meta">1 page ◆ morning, afternoon, evening</span>
+          </span>
+        </a>
+        <a href="/members-files/reflection-pages.pdf" class="lib-item fade-in" data-cat="mindset">
+          <span class="lib-icon" aria-hidden="true"></span>
+          <span>
+            <h4>Reflection Pages</h4>
+            <span class="meta">4 pages ◆ for a quiet ten minutes</span>
+          </span>
+        </a>
+        <a href="/members-files/wins-and-gratitude.pdf" class="lib-item fade-in" data-cat="mindset">
+          <span class="lib-icon" aria-hidden="true"></span>
+          <span>
+            <h4>Wins and Gratitude Pages</h4>
+            <span class="meta">2 pages ◆ small wins count</span>
+          </span>
+        </a>
+        <a href="/members-files/talking-to-kids.pdf" class="lib-item fade-in" data-cat="home">
+          <span class="lib-icon" aria-hidden="true"></span>
+          <span>
+            <h4>Talking to Kids About Money</h4>
+            <span class="meta">3 pages ◆ by age group</span>
+          </span>
+        </a>
+      </div>
+      <p class="lib-empty" id="libEmpty">Nothing in that category yet. It is coming, I promise.</p>
+    </div>
+  </section>
+
+  <!-- ==================== 06 THE CIRCLE AND ASK BROOKE ==================== -->
+  <section class="together">
+    <div class="container">
+      <div class="together-grid">
+        <div class="t-card circle fade-in">
+          <span class="eyebrow">The Circle</span>
+          <h2>Who is around today.</h2>
+          <p>The room where nobody is pretending. Small wins welcome, questions welcome, lurking welcome.</p>
+          <ul class="thread-list">
+            <li>[Placeholder. Latest post in the wins thread.]<span>Replace with a real recent post once the room is live</span></li>
+            <li>[Placeholder. Latest question in Ask the room.]<span>Three recent posts is the right number here</span></li>
+            <li>[Placeholder. Latest dinner idea.]<span>The dinner thread is usually the busiest</span></li>
+          </ul>
+          <a href="#" class="btn js-community">Go to the Circle</a>
+        </div>
+        <div class="t-card ask fade-in">
+          <span class="eyebrow eyebrow-coral">Ask Brooke</span>
+          <h2>Bring me the real numbers.</h2>
+          <p>Stuck on a line in the budget? Not sure which fund to start first? Post it and I will tell you what I would do in your shoes. I answer every week and nothing you ask is too small.</p>
+          <ul class="thread-list">
+            <li>[Placeholder. A recent question and the first line of Brooke’s answer.]<span>Showing a real answered question here does more than any promise</span></li>
+          </ul>
+          <a href="/members-ask-brooke" class="btn btn-coral">Ask me something</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 07 HELP ==================== -->
+  <section class="help">
+    <div class="container">
+      <div class="help-card fade-in">
+        <div>
+          <h3>Need anything at all?</h3>
+          <p>Billing, a page that will not print, or a month that fell apart. Same answer for all three, just tell me.</p>
+        </div>
+        <div class="help-links">
+          <a href="/members-account" class="btn btn-outline btn-sm">Account and billing</a>
+          <a href="/contact" class="btn btn-sm">Email Brooke</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer>
+    <div class="container">
+      <div class="brand-line">Purposeful Pennies</div>
+      <p class="tagline">spend with intention. save with purpose.</p>
+      <div class="diamond">◆ ◆ ◆</div>
+      <nav class="fnav" aria-label="Member footer">
+        <a href="/members">Member home</a>
+        <a href="/members-vault">The Vault</a>
+        <a href="/members-library">Printables</a>
+        <a href="/members-sessions">Live Sessions</a>
+        <a href="/members-account">My account</a>
+        <a href="/contact">Help</a>
+        <a href="/">Public site</a>
+      </nav>
+      <p class="legal">
+        © 2026 Purposeful Pennies. Member content, please keep it in the family.
+        &nbsp;·&nbsp;
+        <a href="/terms">Terms</a> ·
+        <a href="/privacy-policy">Privacy</a>
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    /* ============================================================
+       CONFIG
+       ============================================================ */
+    /* The group itself, not the doorway. This page is for returning members
+       scanning recent activity, so it goes straight through. New members are
+       sent to /members-circle from the nav, Quick Start, and the thank you page. */
+    const COMMUNITY_URL = 'https://www.facebook.com/groups/your-group-id';
+
+    const NEXT_SESSION = {
+      title: 'The Monthly Money Reset  ◆  One-Income Circle',
+      /* Always include the UTC offset. Eastern daylight is -04:00, standard is -05:00.
+         Without it the calendar invite is built in the member's own timezone and
+         a mom in California gets the wrong hour. */
+      start: '2026-08-11T20:00:00-04:00',
+      end:   '2026-08-11T20:45:00-04:00',
+      timeLabel: '8:00 pm eastern',
+      joinUrl: 'https://zoom.us/j/your-recurring-meeting-id',
+      details: 'Forty five minutes together. Bring your notebook. Replay lands the next morning.'
+    };
+
+    /* ===== WIRE LINKS ===== */
+    document.querySelectorAll('.js-community').forEach(function (a) { a.href = COMMUNITY_URL; });
+    document.querySelectorAll('.js-join-session').forEach(function (a) {
+      a.href = NEXT_SESSION.joinUrl;
+      a.target = '_blank';
+      a.rel = 'noopener';
+    });
+
+    /* ===== GREETING  ◆  time of day, then MemberSpace fills the name ===== */
+    (function () {
+      const h = new Date().getHours();
+      const word = h < 12 ? 'Good morning' : (h < 17 ? 'Good afternoon' : 'Good evening');
+      document.getElementById('greetTime').textContent = word;
+
+      /* If MemberSpace has not filled the name in a moment, keep the friendly
+         fallback rather than showing an empty space. */
+      const nameEl = document.getElementById('memberName');
+      setTimeout(function () {
+        if (!nameEl.textContent.trim()) nameEl.textContent = 'friend';
+      }, 1200);
+    })();
+
+    /* ===== SESSION DATE AND CALENDAR ===== */
+    (function () {
+      const m = NEXT_SESSION.start.match(/^(\d{4})-(\d{2})-(\d{2})/);
+      if (m) {
+        const months = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+        document.getElementById('sessionMonth').textContent = months[parseInt(m[2], 10) - 1];
+        document.getElementById('sessionDay').textContent = String(parseInt(m[3], 10));
+        document.getElementById('sessionTime').textContent = NEXT_SESSION.timeLabel;
+      }
+
+      function stamp(t) { return new Date(t).toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, ''); }
+      const s = stamp(NEXT_SESSION.start);
+      const e = stamp(NEXT_SESSION.end);
+
+      const g = new URL('https://calendar.google.com/calendar/render');
+      g.searchParams.set('action', 'TEMPLATE');
+      g.searchParams.set('text', NEXT_SESSION.title);
+      g.searchParams.set('dates', s + '/' + e);
+      g.searchParams.set('details', NEXT_SESSION.details + ' Join here: ' + NEXT_SESSION.joinUrl);
+      g.searchParams.set('location', NEXT_SESSION.joinUrl);
+      document.getElementById('gcalBtn').href = g.toString();
+
+      const ics = [
+        'BEGIN:VCALENDAR','VERSION:2.0',
+        'PRODID:-//Purposeful Pennies//One-Income Circle//EN',
+        'BEGIN:VEVENT',
+        'UID:' + s + '-reset@purposefulpennies.com',
+        'DTSTAMP:' + s, 'DTSTART:' + s, 'DTEND:' + e,
+        'SUMMARY:' + NEXT_SESSION.title,
+        'DESCRIPTION:' + NEXT_SESSION.details,
+        'LOCATION:' + NEXT_SESSION.joinUrl,
+        'BEGIN:VALARM','TRIGGER:-PT60M','ACTION:DISPLAY',
+        'DESCRIPTION:Monthly Money Reset starts in one hour','END:VALARM',
+        'END:VEVENT','END:VCALENDAR'
+      ].join('\r\n');
+      document.getElementById('icsBtn').href = URL.createObjectURL(new Blob([ics], { type: 'text/calendar;charset=utf-8' }));
+    })();
+
+    /* ===== NEW MEMBER STRIP  ◆  dismisses for this visit only =====
+       Deliberately not stored. If you want it to stay dismissed, the clean
+       way on MemberSpace is member metadata: MemberSpace.updateMemberMetadata
+       to set a flag, then read it with getMemberMetadata on load. */
+    (function () {
+      const strip = document.getElementById('newbieStrip');
+      document.getElementById('newbieDismiss').addEventListener('click', function () {
+        strip.style.transition = 'opacity 0.3s, transform 0.3s';
+        strip.style.opacity = '0';
+        strip.style.transform = 'translateY(-6px)';
+        setTimeout(function () { strip.style.display = 'none'; }, 320);
+      });
+    })();
+
+    /* ===== LIBRARY FILTER ===== */
+    (function () {
+      const chips = Array.prototype.slice.call(document.querySelectorAll('.chip'));
+      const items = Array.prototype.slice.call(document.querySelectorAll('.lib-item'));
+      const empty = document.getElementById('libEmpty');
+      chips.forEach(function (chip) {
+        chip.addEventListener('click', function () {
+          chips.forEach(function (c) { c.classList.remove('active'); });
+          chip.classList.add('active');
+          const f = chip.dataset.filter;
+          let shown = 0;
+          items.forEach(function (item) {
+            const cats = (item.dataset.cat || '').split(' ');
+            const show = f === 'all' || cats.indexOf(f) !== -1;
+            item.style.display = show ? '' : 'none';
+            if (show) shown++;
+          });
+          empty.style.display = shown ? 'none' : 'block';
+        });
+      });
+    })();
+
+    /* ===== MOBILE NAV ===== */
+    (function () {
+      const t = document.getElementById('navToggle');
+      const l = document.getElementById('mnavLinks');
+      t.addEventListener('click', function () {
+        const open = l.classList.toggle('open');
+        t.setAttribute('aria-expanded', String(open));
+      });
+    })();
+
+    /* ===== FADE-IN ===== */
+    (function () {
+      const obs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) { en.target.classList.add('visible'); obs.unobserve(en.target); }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+      document.querySelectorAll('.fade-in').forEach(function (el) { obs.observe(el); });
+    })();
+
+    /* ===== PREVIEW SHIM  ◆  DELETE THIS BLOCK BEFORE GOING LIVE =====
+       MemberSpace is not loaded in a local preview, so anything marked
+       data-ms-show stays hidden and the founding badge cannot be reviewed.
+       This reveals those elements only when MemberSpace is absent. It never
+       runs on the live site, but delete it anyway so nothing is left to
+       misfire. */
+    (function previewShim() {
+      setTimeout(function () {
+        if (window.MemberSpace) return;
+        document.querySelectorAll('[data-ms-show]').forEach(function (el) { el.style.display = ''; });
+      }, 600);
+    })();
+<w:pgSz w:h="15840" w:w="12240" w:orient="portrait"/><w:pgMar w:bottom="1440" w:top="1440" w:left="1440" w:right="1440" w:header="720" w:footer="720"/><w:pgNumType w:start="1"/></w:sectPr></w:pPr><w:r w:rsidDel="00000000" w:rsidR="00000000" w:rsidRPr="00000000"><w:rPr><w:rtl w:val="0"/></w:rPr><w:t xml:space="preserve">  </script>
