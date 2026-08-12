@@ -317,7 +317,8 @@
   <section class="acc-hero">
     <div class="container acc-hero-inner">
       <p class="crumb"><a href="/members">Member home</a> ◆ Your account</p>
-      <span class="greeting">Hello again, <span data-ms-member-info="firstName" id="memberName">friend</span></span>
+            <img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/brookes-images-folder-sf3xp4/brooke-site-images/members-account.jpg" alt="Brooke smiling over her coffee at the kitchen table" loading="lazy" style="width:110px;height:110px;border-radius:50%;object-fit:cover;display:block;margin:0 0 1.25rem;border:3px solid rgba(212,168,63,.6);box-shadow:0 10px 26px rgba(46,62,47,.2);">
+<span class="greeting">Hello again, <span data-ms-member-info="firstName" id="memberName">friend</span></span>
       <h1>Your account</h1>
       <p class="sub">Everything to do with your membership, and no small print. If you cannot find what you need here, email me and I will sort it.</p>
     </div>

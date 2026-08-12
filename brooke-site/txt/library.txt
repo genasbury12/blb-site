@@ -213,7 +213,8 @@
 <section class="gate" id="gate">
   <div class="gate-card">
     <span class="gate-logo"><span class="dot"></span>PURPOSEFUL PENNIES</span>
-    <span class="script">welcome, friend</span>
+        <img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/brookes-images-folder-sf3xp4/brooke-site-images/legal-note.jpg" alt="Brooke smiling at her kitchen table" loading="lazy" style="width:104px;height:104px;border-radius:50%;object-fit:cover;display:block;margin:0 auto 1.25rem;border:3px solid rgba(212,168,63,.6);box-shadow:0 10px 26px rgba(46,62,47,.2);">
+<span class="script">welcome, friend</span>
     <h1>Your free resource library</h1>
     <p>Pop in the password from your welcome email and everything is yours.</p>
 
@@ -246,6 +247,7 @@
       <span class="script">you are in!</span>
       <h1>The Free Resource Library</h1>
       <p>Twelve resources, twenty one pages, and not a single thing you have to pay for. Take what you need and ignore the rest.</p>
+      <div style="max-width:720px;margin:2rem auto 0;"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/brookes-images-folder-sf3xp4/brooke-site-images/library-hero.jpg" alt="The free printable library spread out on a wooden kitchen table" loading="lazy" style="width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:14px;box-shadow:0 18px 40px rgba(46,62,47,.18);display:block;"></div>
     </div>
 
     <!-- THE LOUD BIT -->

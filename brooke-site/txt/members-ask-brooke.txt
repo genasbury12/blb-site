@@ -373,7 +373,8 @@
   <section class="a-hero">
     <div class="container a-hero-inner">
       <p class="crumb"><a href="/members">Member home</a> ◆ Ask Brooke</p>
-      <span class="greeting">Go on then, <span data-ms-member-info="firstName" id="memberName">friend</span></span>
+            <img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/brookes-images-folder-sf3xp4/brooke-site-images/members-ask-brooke.jpg" alt="Brooke leaning in at her kitchen table with her mug" loading="lazy" style="width:128px;height:128px;border-radius:50%;object-fit:cover;display:block;margin:0 0 1.25rem;border:3px solid rgba(212,168,63,.6);box-shadow:0 10px 26px rgba(46,62,47,.2);">
+<span class="greeting">Go on then, <span data-ms-member-info="firstName" id="memberName">friend</span></span>
       <h1>Bring me the real numbers.</h1>
       <p class="a-hero-sub">Stuck on a line in the budget. Not sure which fund to start. Something happened this month and the whole plan is off. Tell me what is actually going on and I will tell you what I would do standing in your kitchen.</p>
       <div class="promise-row">
