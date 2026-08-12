@@ -199,206 +199,229 @@
     <div class="doc">
       <img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/brookes-images-folder-sf3xp4/brooke-site-images/legal-note.jpg" alt="Brooke at her kitchen table" loading="lazy" style="width:96px;height:96px;border-radius:50%;object-fit:cover;display:block;margin:0 0 1.25rem;border:3px solid rgba(212,168,63,.6);box-shadow:0 10px 26px rgba(46,62,47,.2);">
       <span class="legal-kicker">The agreement</span>
-      <h1>Terms of Use</h1>
+      <h1>Terms and Conditions</h1>
       <p class="legal-lead">The agreement between you and us when you use this site.</p>
       <p class="dates">
-        <b>Effective</b> <span data-legal="effective">[DATE]</span>
+        <b>Effective</b> <span data-legal="effective">August 12, 2026</span>
         &nbsp;◆&nbsp;
-        <b>Last updated</b> <span data-legal="updated">[DATE]</span>
+        <b>Last updated</b> <span data-legal="updated">August 12, 2026</span>
       </p>
     </div>
   </section>
 
   <div class="legal-body">
     <div class="doc">
+            <div class="callout" style="background:var(--coral-blush);border-radius:12px;padding:1.6rem 1.85rem;margin-bottom:2rem;border:1px solid rgba(221,107,78,.25);">
+        <p style="font-family:'Caveat',cursive;font-size:1.45rem;color:var(--coral-deep);margin-bottom:.5rem;">the human version, first</p>
+        <p>Hi, and welcome. This page covers the practical agreement between you and Purposeful Pennies. It is written to be as plain as legal language can reasonably be, because you deserve to understand what you are agreeing to before you agree to it.</p><p>Please read it. By using this website, joining the email list, downloading a free resource, or purchasing anything from Purposeful Pennies, you are agreeing to these Terms.</p>
+      </div>
       <nav class="toc" aria-label="On this page">
         <h2>On this page</h2>
         <ol>
-        <li><a href="#s1">Agreement</a></li>
-        <li><a href="#s2">Who may use this site</a></li>
-        <li><a href="#s3">The free resources</a></li>
-        <li><a href="#s4">The membership</a></li>
-        <li><a href="#s5">What belongs to us</a></li>
-        <li><a href="#s6">How you may not use the site</a></li>
-        <li><a href="#s7">Anything you post</a></li>
-        <li><a href="#s8">Other people’s services</a></li>
-        <li><a href="#s9">No professional advice</a></li>
-        <li><a href="#s10">No guarantee of results</a></li>
-        <li><a href="#s11">Limitation of liability</a></li>
-        <li><a href="#s12">Indemnity</a></li>
-        <li><a href="#s13">Ending access</a></li>
-        <li><a href="#s14">Governing law and disputes</a></li>
-        <li><a href="#s15">Changes to these terms</a></li>
-        <li><a href="#s16">Contact</a></li>
+        <li><a href="#s1">Who you are dealing with</a></li>
+        <li><a href="#s2">Agreeing to these Terms</a></li>
+        <li><a href="#s3">Who may use this site</a></li>
+        <li><a href="#s4">What we sell</a></li>
+        <li><a href="#s5">Prices, payment, and taxes</a></li>
+        <li><a href="#s6">Free resources</a></li>
+        <li><a href="#s7">Refunds and guarantees</a></li>
+        <li><a href="#s8">Membership billing and cancellation</a></li>
+        <li><a href="#s9">Chargebacks and payment disputes</a></li>
+        <li><a href="#s10">What you get when you buy</a></li>
+        <li><a href="#s11">What you may not do with our materials</a></li>
+        <li><a href="#s12">Sharing our free blog content</a></li>
+        <li><a href="#s13">Content you submit</a></li>
+        <li><a href="#s14">Community and member conduct</a></li>
+        <li><a href="#s15">Accounts and logins</a></li>
+        <li><a href="#s16">Using the website</a></li>
+        <li><a href="#s17">Availability, errors, and changes</a></li>
+        <li><a href="#s18">Links and tools we do not control</a></li>
+        <li><a href="#s19">Disclaimer and limitation of liability</a></li>
+        <li><a href="#s20">Indemnity</a></li>
+        <li><a href="#s21">Ending access</a></li>
+        <li><a href="#s22">Governing law</a></li>
+        <li><a href="#s23">Resolving disputes</a></li>
+        <li><a href="#s24">Changes to these Terms</a></li>
+        <li><a href="#s25">The rest of the fine print</a></li>
+        <li><a href="#s26">Getting in touch</a></li>
         </ol>
       </nav>
-
       <section class="s" id="s1">
-        <h2><span class="num">01</span>Agreement</h2>
-
-        <p>These terms are an agreement between you and <span data-legal="name">[BUSINESS LEGAL NAME]</span>, <span data-legal="entity">[ENTITY TYPE AND STATE]</span>, trading as Purposeful Pennies. By using this site, downloading a resource, subscribing to our emails or joining the membership, you agree to them. If you do not agree, please do not use the site.</p>
-        <p>Please also read our <a href="/disclaimer">Disclaimer</a>, which is part of these terms and explains an important limit on what this site provides.</p>
+        <h2><span class="num">01</span>Who you are dealing with</h2>
+        <p>Purposeful Pennies is owned and operated by Brooke Michelle Watrous, a sole proprietor based in Michigan, United States.</p>
+        <p>Throughout this page, "we," "us," and "our" mean Purposeful Pennies. "You" means you, the person visiting the site, subscribing, or purchasing.</p>
+        <div class="callout"><p><strong>Contact for legal and general questions:</strong><br>Purposeful Pennies<br>64466 Norton Rd<br>Constantine, MI 49042<br><a href="mailto:hello@purposefulpennies.com">hello@purposefulpennies.com</a></p></div>
+        <p>These Terms apply to the Purposeful Pennies website and to every connected product, membership, community space, resource library, and checkout page we operate.</p>
       </section>
-
       <section class="s" id="s2">
-        <h2><span class="num">02</span>Who may use this site</h2>
-
-        <p>You must be at least 18 years old, or the age of majority where you live, to subscribe, purchase or hold an account. By using the site you confirm you meet that requirement and that any information you give us is accurate.</p>
+        <h2><span class="num">02</span>Agreeing to these Terms</h2>
+        <p>By browsing the site, entering your email address, downloading a free resource, creating a login, or buying a product, you confirm that you have read these Terms and agree to be bound by them. If you do not agree, please do not use the site or purchase from us.</p>
+        <p>These Terms apply to free resources exactly as they apply to paid ones.</p>
       </section>
-
       <section class="s" id="s3">
-        <h2><span class="num">03</span>The free resources</h2>
-
-        <p>Our free resources are provided for <strong>your own personal, household use</strong>. You may:</p>
+        <h2><span class="num">03</span>Who may use this site</h2>
+        <p>You must be at least 18 years old to purchase anything from Purposeful Pennies, and you confirm that you are when you buy. The site is intended for adults and is not directed at children.</p>
+        <p>We welcome visitors and customers from outside the United States. If you are buying from another country, you are responsible for complying with your own local laws, and you accept that your information will be processed in the United States.</p>
+      </section>
+      <section class="s" id="s4">
+        <h2><span class="num">04</span>What we sell</h2>
+        <p>Purposeful Pennies currently offers, or plans to offer:</p>
         <ul>
-          <li>Download them and keep them.</li>
-          <li>Print as many copies as your own family needs.</li>
-          <li>Make your own editable copy to fill in.</li>
+          <li>Free resources and printables, including a free resource library</li>
+          <li>A budget toolkit</li>
+          <li>A frugal living bundle</li>
+          <li>A signature program</li>
+          <li>A monthly and annual membership</li>
         </ul>
+        <p>Everything we sell is digital. We do not sell physical products, and we do not currently offer coaching, one to one sessions, or done for you services. If that changes, these Terms will be updated to cover it.</p>
+        <p>Product descriptions, contents, formats, and bonuses may change over time as we improve them.</p>
+      </section>
+      <section class="s" id="s5">
+        <h2><span class="num">05</span>Prices, payment, and taxes</h2>
+        <p>All prices are listed in United States dollars.</p>
+        <p>Payments are processed by a third party payment processor. We never see or store your full card details. The processor handles all payment data on secure systems of its own.</p>
+        <p>Prices are exclusive of any applicable tax. We are responsible for remitting the taxes we owe on sales. You are responsible for any import, VAT, or local charges your own country may apply to a digital purchase.</p>
+        <p>We reserve the right to change our prices, our offers, our bonuses, and this website at any time and without notice. A price change never affects an order you have already completed.</p>
+        <p>Any coupon or discount code we issue may carry its own conditions, may be limited in time or quantity, cannot be combined with other offers unless we say so, and may be withdrawn at any point before you use it.</p>
+      </section>
+      <section class="s" id="s6">
+        <h2><span class="num">06</span>Free resources</h2>
+        <p>Some of what we offer is free. Free resources are usually delivered in exchange for your email address, and by requesting one you are agreeing to join our email list. You can leave that list at any time.</p>
+        <p>Free resources are protected by the same copyright and usage rules as our paid products, and they carry no refund or guarantee of any kind because no money changes hands. Bonuses, fast action gifts, and anything included at no charge alongside a paid purchase are excluded from all refunds and guarantees.</p>
+      </section>
+      <section class="s" id="s7">
+        <h2><span class="num">07</span>Refunds and guarantees</h2>
+        <p>Because everything we sell is digital and available immediately, <strong>all sales are final and we do not offer refunds once a product has been purchased, downloaded, or accessed.</strong></p>
+        <p>Please read the product description before you buy, and email <a href="mailto:hello@purposefulpennies.com">hello@purposefulpennies.com</a> with any question at all beforehand. We would much rather answer a question than process a disappointment.</p>
+        <p><strong>Where a specific offer carries a written money back guarantee,</strong> the guarantee terms shown on that product's sales page govern. Those guarantees are conditional, not automatic. Where a guarantee requires you to show your completed workbook or other proof that you did the work, that proof must be submitted by email within the stated window, and a request without it will not qualify.</p>
+        <p>Technical trouble is not a reason for a refund, but it is absolutely a reason to email us. If you cannot open, access, or download something you paid for, contact us and we will fix it.</p>
+      </section>
+      <section class="s" id="s8">
+        <h2><span class="num">08</span>Membership billing and cancellation</h2>
+        <p>Our membership is billed monthly or annually and renews automatically until you cancel.</p>
+        <p>You may cancel at any time before your next billing date. When you cancel, you keep access for the remainder of the period you have already paid for, and your membership simply does not renew after that.</p>
+        <p>Membership payments are not refundable, including partial months and unused time. There is no penalty and no minimum term. You are free to leave whenever you like.</p>
+        <p>If a payment fails or is declined, we will let you know and ask you to provide a different payment method. If the payment is not resolved, access may be paused or ended until it is.</p>
+        <p>When your membership ends, for any reason, your access to member only pages, resources, and community spaces ends with it. Please download anything you want to keep before you go.</p>
+      </section>
+      <section class="s" id="s9">
+        <h2><span class="num">09</span>Chargebacks and payment disputes</h2>
+        <p>If something goes wrong with an order, please email <a href="mailto:hello@purposefulpennies.com">hello@purposefulpennies.com</a> first. We are one person and a real inbox, and most problems can be sorted out in a day.</p>
+        <p>You agree to contact us and give us a reasonable opportunity to resolve the issue before filing a chargeback or payment dispute with your bank or card issuer.</p>
+        <p>Filing a chargeback for a product that was properly delivered, and that you accessed or downloaded, is a breach of these Terms. Where that happens we may immediately suspend or terminate your access to all products, memberships, and community spaces, permanently decline future purchases from you, and pursue the amount owed together with any fees, costs, and reasonable expenses we incur in recovering it.</p>
+      </section>
+      <section class="s" id="s10">
+        <h2><span class="num">10</span>What you get when you buy</h2>
+        <p>When you buy a product, you are buying a limited, personal, non transferable, non exclusive licence to use it. You are not buying ownership of the materials, and the copyright stays with us.</p>
+        <p>Access periods vary by product and are stated on each sales page. Some products carry lifetime access, meaning for as long as we continue to make that product available. Some carry a fixed access window. Membership resources are available for as long as your membership is active.</p>
+        <p>"Lifetime" means the commercially reasonable lifetime of the product, not a promise that any particular product, platform, or website will exist forever.</p>
+      </section>
+      <section class="s" id="s11">
+        <h2><span class="num">11</span>What you may not do with our materials</h2>
+        <p>Our printables, templates, worksheets, trackers, lessons, videos, and written content are for <strong>your personal use only</strong>. They are not licensed for commercial or client use.</p>
         <p>You may not:</p>
         <ul>
-          <li>Sell them, or include them in anything you sell.</li>
-          <li>Republish or post the files publicly, or share the download links.</li>
-          <li>Remove our branding, or present the work as your own.</li>
-          <li>Distribute them to a group, class, ministry or organization without asking us first.</li>
+          <li>Resell, licence, rent, or redistribute our materials</li>
+          <li>Share your login, password, or member access with anyone else</li>
+          <li>Share, upload, or forward downloaded files to other people</li>
+          <li>Copy our content, wording, or materials into your own products, freebies, or offers</li>
+          <li>Reproduce our materials for a class, group, workplace, or client</li>
+          <li>Remove our branding or claim our work as your own</li>
+          <li>Use our content to train an artificial intelligence model or system</li>
         </ul>
-        <div class="callout">
-          <p><b>About group use.</b> We say yes to church groups, small groups and classes almost every time. We only ask that you <a href="/contact">contact us first</a> so we know where the materials are going. Please send people to the site to get their own copy rather than forwarding the files.</p>
-        </div>
+        <p>Doing any of these things ends your licence immediately, with no refund, and may leave you liable for copyright infringement.</p>
       </section>
-
-      <section class="s" id="s4">
-        <h2><span class="num">04</span>The membership</h2>
-
-        <h3>What you are buying</h3>
-        <p>Access to the membership content for as long as your subscription is active. Content is added and updated over time. We may change, add to or retire individual materials, but we will not reduce the substance of what you are paying for without telling you.</p>
-        <h3>Billing and renewal</h3>
-        <ul>
-          <li>Your subscription <strong>renews automatically</strong> at the end of each billing period until you cancel.</li>
-          <li>We charge the payment method on file. If it fails, we may retry and may suspend access until payment succeeds.</li>
-          <li>Prices may change. If a price changes, we will give you notice before it applies to your renewal.</li>
-        </ul>
-        <h3>Cancelling</h3>
-        <p>You can cancel at any time from your account. Cancelling stops future charges. Your access continues to the end of the period you have already paid for, and then ends.</p>
-        <h3>Refunds</h3>
-        <div class="callout">
-          <p><b>To confirm before publishing.</b> This section must state the actual refund policy, and it must match whatever the sales page promises. If the membership carries a money-back guarantee, state the window, what qualifies, and how to request it. If it does not, say plainly that payments are non-refundable except where the law requires otherwise. A mismatch between this page and the sales page is the single most common source of payment disputes.</p>
-        </div>
-        <h3>Access and conduct</h3>
-        <p>Your account is for you. Do not share login details, and do not download and redistribute member materials. We may suspend or end access, without refund, for sharing credentials, redistributing content, or behaving abusively toward us or other members.</p>
-      </section>
-
-      <section class="s" id="s5">
-        <h2><span class="num">05</span>What belongs to us</h2>
-
-        <p>All content on this site, including text, worksheets, printables, designs, photographs, logos and the Purposeful Pennies name, is owned by us or licensed to us and is protected by copyright and trademark law.</p>
-        <p>You may quote a short passage with credit and a link. You may not reproduce substantial portions, republish our materials, or use our content to train or fine-tune an artificial intelligence model without our written permission.</p>
-      </section>
-
-      <section class="s" id="s6">
-        <h2><span class="num">06</span>How you may not use the site</h2>
-
-        <ul>
-          <li>Breaking the law, or encouraging anyone else to.</li>
-          <li>Copying or scraping the site at scale, automated or otherwise.</li>
-          <li>Attempting to access areas you have not paid for, or interfering with security features.</li>
-          <li>Uploading anything harmful, or attempting to disrupt the site.</li>
-          <li>Impersonating us or anyone else.</li>
-          <li>Harassing, threatening or abusing us, our team or other members.</li>
-        </ul>
-      </section>
-
-      <section class="s" id="s7">
-        <h2><span class="num">07</span>Anything you post</h2>
-
-        <p>If you post a comment, reply in a community space, or send us a testimonial or story, you keep ownership of it, and you grant us a non-exclusive, royalty-free license to use, display and reproduce it in connection with our business, including in marketing. You confirm it is yours to share and that it is not unlawful.</p>
-        <p>We may remove anything, at any time, for any reason.</p>
-      </section>
-
-      <section class="s" id="s8">
-        <h2><span class="num">08</span>Other people’s services</h2>
-
-        <p>The site relies on third-party services for hosting, email, membership, payments and file delivery, and it links to other websites. We do not control those services and are not responsible for them. Your use of them is governed by their own terms.</p>
-      </section>
-
-      <section class="s" id="s9">
-        <h2><span class="num">09</span>No professional advice</h2>
-
-        <div class="hard">
-          <h3>Read this part carefully</h3>
-          <p>Everything on this site is <strong>general educational information</strong> about household budgeting. It is not financial, investment, tax, legal or accounting advice, and it is not tailored to your circumstances.</p>
-          <p>Brooke is not a licensed financial advisor, accountant, attorney or tax professional. No relationship of professional advisor and client is created by using this site, subscribing, or joining the membership.</p>
-          <p>Before making a financial decision that matters, speak to a qualified professional who knows your actual situation. Our full <a href="/disclaimer" style="color:var(--gold-soft)">Disclaimer</a> forms part of these terms.</p>
-        </div>
-      </section>
-
-      <section class="s" id="s10">
-        <h2><span class="num">10</span>No guarantee of results</h2>
-
-        <p>We describe what worked in our own household and what has worked for others. Those are examples, not promises. Any figures mentioned anywhere on this site, including amounts saved or debt paid off, are illustrations of what has been possible and not a prediction of your result.</p>
-        <p><strong>Your outcome depends on your income, expenses, circumstances and choices, none of which we control.</strong> We do not guarantee that you will save money, reduce debt, or achieve any particular financial outcome.</p>
-      </section>
-
-      <section class="s" id="s11">
-        <h2><span class="num">11</span>Limitation of liability</h2>
-
-        <p>The site and everything on it is provided "as is" and "as available", without warranties of any kind, whether express or implied, including any implied warranty of merchantability, fitness for a particular purpose, or non-infringement. We do not warrant that the site will be uninterrupted, error free, or that the content is complete or current.</p>
-        <p>To the fullest extent permitted by law, we are not liable for any indirect, incidental, special, consequential or punitive damages, or for any loss of profits, savings, data or goodwill, arising from your use of the site or reliance on its content.</p>
-        <p>Where liability cannot be excluded, <strong>our total liability to you is limited to the greater of the amount you paid us in the twelve months before the claim, or fifty US dollars.</strong></p>
-        <p>Some jurisdictions do not allow certain exclusions or limitations, so parts of this section may not apply to you.</p>
-      </section>
-
       <section class="s" id="s12">
-        <h2><span class="num">12</span>Indemnity</h2>
-
-        <p>You agree to indemnify and hold harmless <span data-legal="name">[BUSINESS LEGAL NAME]</span> and anyone working with us from any claim, loss or expense, including reasonable legal fees, arising out of your use of the site, your breach of these terms, or anything you post.</p>
+        <h2><span class="num">12</span>Sharing our free blog content</h2>
+        <p>You are very welcome to quote a short excerpt from our blog, share a link, or reference our work, as long as you credit Purposeful Pennies clearly and link back to the original page. Please do not republish a whole post, and please do not use our images without asking first.</p>
       </section>
-
       <section class="s" id="s13">
-        <h2><span class="num">13</span>Ending access</h2>
-
-        <p>We may suspend or end your access to the site or the membership at any time if you breach these terms. You may stop using the site at any time. Sections covering intellectual property, disclaimers, limitation of liability and indemnity survive the end of this agreement.</p>
+        <h2><span class="num">13</span>Content you submit</h2>
+        <p>If you leave a comment, post in the community, send us a testimonial, complete a survey, or share your story with us, you keep ownership of what you wrote. You also give us a non exclusive, royalty free, worldwide permission to use, reproduce, edit for length or clarity, and display that content in our marketing, on our website, in our emails, and on social media, alongside your first name or the name you gave us.</p>
+        <p>Please only submit content that is yours to share, that is honest, and that does not infringe anyone else's rights.</p>
+        <p>We may remove or decline to publish anything at our discretion.</p>
       </section>
-
       <section class="s" id="s14">
-        <h2><span class="num">14</span>Governing law and disputes</h2>
-
-        <p>These terms are governed by the laws of the State of <span data-legal="state">[STATE]</span>, without regard to its conflict of laws rules. Any dispute will be brought in the state or federal courts located in <span data-legal="state">[STATE]</span>, and you consent to their jurisdiction.</p>
-        <div class="callout">
-          <p><b>To confirm before publishing.</b> Some businesses prefer binding arbitration and a class action waiver instead of court. That is a real decision with real tradeoffs and it should be made with an attorney rather than by default.</p>
-        </div>
-      </section>
-
-      <section class="s" id="s15">
-        <h2><span class="num">15</span>Changes to these terms</h2>
-
-        <p>We may update these terms. The "last updated" date at the top will change. If a change is significant, we will tell subscribers by email. Continuing to use the site after a change means you accept the new terms.</p>
-      </section>
-
-      <section class="s" id="s16">
-        <h2><span class="num">16</span>Contact</h2>
-
-        <p>Questions about these terms:</p>
+        <h2><span class="num">14</span>Community and member conduct</h2>
+        <p>Our membership and community exist to be a kind, steady, safe place for people working through hard money seasons. To keep it that way, the following will get a member removed:</p>
         <ul>
-          <li><strong>Email</strong> <span data-legal="email">[LEGAL CONTACT EMAIL]</span></li>
-          <li><strong>Post</strong> <span data-legal="address">[MAILING ADDRESS]</span></li>
-          <li><strong>Or use</strong> <a href="/contact">the contact form</a></li>
+          <li>Misuse of our products, including copying, sharing, or reselling them</li>
+          <li>Hateful, cruel, discriminatory, or harassing comments</li>
+          <li>Crude or abusive language</li>
+          <li>Sharing another member's story, words, or personal details outside the community</li>
+          <li>Promoting your own business, offers, or affiliate links without permission</li>
+          <li>Giving professional financial, legal, or tax advice to other members</li>
         </ul>
+        <p>We reserve the right to suspend, remove, or terminate any member's access on these grounds, at our discretion, without refund.</p>
+        <p>If the community closes or moves, we will give reasonable notice. Posts and comments within the community are not permanently archived for you, so save anything you want to keep.</p>
       </section>
-    </div>
-  </div>
-
-  <section class="legal-nav">
-    <div class="container">
-      <h2>The other three, while you are here</h2>
-      <div class="legal-nav-grid">
-        <a href="/privacy-policy"><b>Privacy Policy</b><span>What we collect, why, and what you can ask us to do about it.</span></a>
-        <a href="/terms" class="here"><b>Terms of Use</b><span>The agreement between you and us when you use this site.</span></a>
-        <a href="/disclaimer"><b>Disclaimer</b><span>What this site is, and just as importantly, what it is not.</span></a>
-        <a href="/affiliate-disclosure"><b>Affiliate Disclosure</b><span>When a link earns us something, and how we choose what to recommend.</span></a>
-      </div>
-    </div>
-  </section>
+      <section class="s" id="s15">
+        <h2><span class="num">15</span>Accounts and logins</h2>
+        <p>Some parts of this site require a login. You are responsible for keeping your login details private and for everything that happens under your account. Logins are for one person only. If you believe someone else is using your account, tell us right away.</p>
+      </section>
+      <section class="s" id="s16">
+        <h2><span class="num">16</span>Using the website</h2>
+        <p>When you use this site, you agree not to:</p>
+        <ul>
+          <li>Scrape, harvest, or automatically collect content or data from it</li>
+          <li>Upload viruses, malicious code, or harmful files</li>
+          <li>Impersonate Brooke, Purposeful Pennies, or any other person</li>
+          <li>Misuse our forms, comments, or contact tools, including for spam</li>
+          <li>Attempt to gain access to member areas or systems you have not paid for</li>
+          <li>Interfere with the operation or security of the site</li>
+        </ul>
+        <p>We moderate blog comments and may edit, decline, or remove any comment at our discretion, including spam, promotional comments, and anything unkind.</p>
+      </section>
+      <section class="s" id="s17">
+        <h2><span class="num">17</span>Availability, errors, and changes</h2>
+        <p>We work hard to keep this site running and accurate, but we cannot promise that it will always be available, error free, or fully up to date. Content, prices, and details may occasionally be outdated or contain mistakes, and links may break. Downtime happens, especially during platform updates.</p>
+        <p>We may change, pause, or discontinue any part of the site, any product, or any offer at any time without notice.</p>
+      </section>
+      <section class="s" id="s18">
+        <h2><span class="num">18</span>Links and tools we do not control</h2>
+        <p>Our site links to other websites, tools, and services that we do not own or run. We are not responsible for their content, their practices, or their privacy policies. When you follow a link away from our site, you are subject to that site's own terms.</p>
+      </section>
+      <section class="s" id="s19">
+        <h2><span class="num">19</span>Disclaimer and limitation of liability</h2>
+        <p>Purposeful Pennies shares educational and informational personal finance content based on Brooke's own experience. It is not professional financial, legal, tax, accounting, or investment advice. Please read our full <a href="/disclaimer">Disclaimer</a>, which forms part of these Terms.</p>
+        <p>Everything on this site and in our products is provided on an "as is" and "as available" basis, without warranties of any kind, express or implied, including any implied warranty of merchantability, fitness for a particular purpose, or accuracy.</p>
+        <p>To the fullest extent permitted by law, Purposeful Pennies and Brooke Michelle Watrous will not be liable for any indirect, incidental, consequential, special, or punitive damages, or for any loss of income, profit, savings, data, or opportunity, arising from your use of this site, our content, or our products, however that loss arises.</p>
+        <p>Where liability cannot lawfully be excluded, our total liability to you for any claim is limited to the amount you actually paid us for the product the claim relates to, or fifty United States dollars, whichever is greater.</p>
+        <p>You are responsible for your own financial decisions and their outcomes.</p>
+      </section>
+      <section class="s" id="s20">
+        <h2><span class="num">20</span>Indemnity</h2>
+        <p>You agree to indemnify and hold harmless Purposeful Pennies and Brooke Michelle Watrous from any claim, loss, liability, or expense, including reasonable legal fees, arising from your breach of these Terms, your misuse of our materials, or content you submit to us.</p>
+      </section>
+      <section class="s" id="s21">
+        <h2><span class="num">21</span>Ending access</h2>
+        <p>We may suspend or end your access to the site, a product, or the membership if you breach these Terms, misuse our materials, file an unwarranted chargeback, or behave in a way that harms other members. Where the breach is serious, that decision is final and no refund is given.</p>
+      </section>
+      <section class="s" id="s22">
+        <h2><span class="num">22</span>Governing law</h2>
+        <p>These Terms are governed by the laws of the State of Michigan, United States, without regard to its conflict of law rules.</p>
+      </section>
+      <section class="s" id="s23">
+        <h2><span class="num">23</span>Resolving disputes</h2>
+        <p>If a dispute comes up, we ask that you email <a href="mailto:hello@purposefulpennies.com">hello@purposefulpennies.com</a> first and give us thirty days to work it out informally. Most things end there.</p>
+        <p>If it cannot be resolved informally, the dispute will be settled by binding arbitration administered in the State of Michigan, or in small claims court where the claim qualifies. Any court proceeding that does go forward will take place in St. Joseph County, Michigan.</p>
+        <p><strong>Class action waiver.</strong> You and Purposeful Pennies each agree that any dispute will be brought individually, and not as a plaintiff or member of any class, collective, or representative action.</p>
+      </section>
+      <section class="s" id="s24">
+        <h2><span class="num">24</span>Changes to these Terms</h2>
+        <p>We may update these Terms from time to time as the business grows. The current version always lives on this page, with the date it was last updated at the top. Continuing to use the site or buy from us after a change means you accept the updated Terms.</p>
+      </section>
+      <section class="s" id="s25">
+        <h2><span class="num">25</span>The rest of the fine print</h2>
+        <p>If any part of these Terms is found to be unenforceable, the rest still stands. If we do not enforce a term straight away, we have not given up the right to enforce it later. These Terms, together with our Disclaimer and Privacy Policy, make up the whole agreement between us. You may not transfer your rights under these Terms to anyone else.</p>
+      </section>
+      <section class="s" id="s26">
+        <h2><span class="num">26</span>Getting in touch</h2>
+        <p>Questions about these Terms are welcome, always.</p>
+        <p><strong>Email:</strong> <a href="mailto:hello@purposefulpennies.com">hello@purposefulpennies.com</a> <strong>Mail:</strong> Purposeful Pennies, 64466 Norton Rd, Constantine, MI 49042</p>
+        <p>Thank you for being here, and for reading all the way to the bottom of a legal page. That says something about you.</p>
+      </section>
+      <p style="text-align:center;margin-top:3rem;font-family:'Caveat',cursive;font-size:1.5rem;color:var(--coral-deep);">Purposeful Pennies ◆ spend with intention, save with purpose</p>
 
 
   <footer>
@@ -415,7 +438,7 @@
         <a href="/opt-in">Free Reality Check</a>
       </nav>
       <p class="legal">
-        © 2026 <span data-legal="name">[BUSINESS LEGAL NAME]</span>. All rights reserved.
+        © 2026 <span data-legal="name">Brooke Michelle Watrous</span>. All rights reserved.
         &nbsp;·&nbsp;
         <a href="/privacy-policy">Privacy</a> ·
         <a href="/terms">Terms</a> ·
@@ -433,14 +456,14 @@
      you can see at a glance what is still missing.
      ========================================================= */
   var BUSINESS = {
-    name:      '',   /* legal entity name, e.g. Purposeful Pennies LLC */
+    name:      'Brooke Michelle Watrous',   /* legal entity name, e.g. Purposeful Pennies LLC */
     trading:   'Purposeful Pennies',
-    entity:    '',   /* e.g. an Ohio limited liability company */
-    address:   '',   /* mailing address for legal notices */
-    email:     '',   /* address for privacy and legal contact */
-    state:     '',   /* governing law, e.g. Ohio */
-    effective: 'July 25, 2026',
-    updated:   'July 25, 2026'
+    entity:    'a Michigan sole proprietorship',   /* e.g. an Ohio limited liability company */
+    address:   '64466 Norton Rd, Constantine, MI 49042',   /* mailing address for legal notices */
+    email:     'hello@purposefulpennies.com',   /* address for privacy and legal contact */
+    state:     'Michigan',   /* governing law, e.g. Ohio */
+    effective: 'August 12, 2026',
+    updated:   'August 12, 2026'
   };
 
   Object.keys(BUSINESS).forEach(function (k) {

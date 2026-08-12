@@ -201,201 +201,194 @@
       <h1>Privacy Policy</h1>
       <p class="legal-lead">What we collect, why we collect it, and what you can ask us to do about it.</p>
       <p class="dates">
-        <b>Effective</b> <span data-legal="effective">[DATE]</span>
+        <b>Effective</b> <span data-legal="effective">August 12, 2026</span>
         &nbsp;◆&nbsp;
-        <b>Last updated</b> <span data-legal="updated">[DATE]</span>
+        <b>Last updated</b> <span data-legal="updated">August 12, 2026</span>
       </p>
     </div>
   </section>
 
   <div class="legal-body">
     <div class="doc">
+            <div class="callout" style="background:var(--coral-blush);border-radius:12px;padding:1.6rem 1.85rem;margin-bottom:2rem;border:1px solid rgba(221,107,78,.25);">
+        <p style="font-family:'Caveat',cursive;font-size:1.45rem;color:var(--coral-deep);margin-bottom:.5rem;">the short version, first</p>
+        <p>Your information matters, and so does your trust. This page explains, in plain English, what we collect, why we collect it, who touches it, and what you can do about it.</p><p>The short version: we collect what we need to run a small business well, we never sell your data, and you can ask us to delete you at any time.</p>
+      </div>
       <nav class="toc" aria-label="On this page">
         <h2>On this page</h2>
         <ol>
         <li><a href="#s1">Who we are</a></li>
-        <li><a href="#s2">What we collect</a></li>
-        <li><a href="#s3">How we use it</a></li>
-        <li><a href="#s4">Emails, and how to stop them</a></li>
-        <li><a href="#s5">Cookies and tracking</a></li>
-        <li><a href="#s6">Who we share it with</a></li>
-        <li><a href="#s7">Third-party sites</a></li>
-        <li><a href="#s8">How long we keep it</a></li>
-        <li><a href="#s9">Security</a></li>
-        <li><a href="#s10">Your rights</a></li>
-        <li><a href="#s11">Children</a></li>
-        <li><a href="#s12">Changes to this policy</a></li>
-        <li><a href="#s13">Contact us</a></li>
+        <li><a href="#s2">What this policy covers</a></li>
+        <li><a href="#s3">Information you give us</a></li>
+        <li><a href="#s4">Information collected automatically</a></li>
+        <li><a href="#s5">Cookies, analytics, and tracking</a></li>
+        <li><a href="#s6">Why we collect your information</a></li>
+        <li><a href="#s7">Legal basis for processing (for visitors in the EU and UK)</a></li>
+        <li><a href="#s8">Email and marketing</a></li>
+        <li><a href="#s9">We do not sell your information</a></li>
+        <li><a href="#s10">Who we share information with</a></li>
+        <li><a href="#s11">Where your information is processed</a></li>
+        <li><a href="#s12">How long we keep your information</a></li>
+        <li><a href="#s13">How we keep your information safe</a></li>
+        <li><a href="#s14">If something goes wrong</a></li>
+        <li><a href="#s15">Your rights</a></li>
+        <li><a href="#s16">Children</a></li>
+        <li><a href="#s17">Do Not Track</a></li>
+        <li><a href="#s18">Changes to this policy</a></li>
+        <li><a href="#s19">Contact us</a></li>
         </ol>
       </nav>
-
       <section class="s" id="s1">
         <h2><span class="num">01</span>Who we are</h2>
-
-        <p>This site is operated by <span data-legal="name">[BUSINESS LEGAL NAME]</span>, <span data-legal="entity">[ENTITY TYPE AND STATE]</span>, trading as Purposeful Pennies. In this policy, "we", "us" and "our" mean that business. "You" means anyone who visits the site, subscribes to our emails, downloads a free resource, or joins the membership.</p>
-        <p>This policy explains what personal information we collect, why we collect it, who we share it with, and what you can ask us to do about it. If anything here is unclear, write to us at <span data-legal="email">[LEGAL CONTACT EMAIL]</span> and we will explain it in plain language.</p>
+        <p>Purposeful Pennies is owned and operated by Brooke Michelle Watrous, a sole proprietor based in Michigan, United States. We are the data controller for the information described here.</p>
+        <div class="callout"><p><strong>Privacy contact:</strong><br>Purposeful Pennies<br>64466 Norton Rd<br>Constantine, MI 49042<br><a href="mailto:hello@purposefulpennies.com">hello@purposefulpennies.com</a></p></div>
       </section>
-
       <section class="s" id="s2">
-        <h2><span class="num">02</span>What we collect</h2>
-
-        <h3>Information you give us</h3>
-        <ul>
-          <li><strong>Your first name and email address</strong> when you sign up for the free resource library or our emails.</li>
-          <li><strong>Which resource you clicked</strong> to reach the signup form, so we can learn what people find most useful.</li>
-          <li><strong>Whatever you write to us</strong> if you use the contact form, including your name, email address and the content of your message.</li>
-          <li><strong>Account and billing details</strong> if you join the membership. Payment card numbers are handled by our payment processor and never reach us.</li>
-        </ul>
-        <h3>Information collected automatically</h3>
-        <ul>
-          <li><strong>Usage data</strong> such as pages viewed, time on page, referring site and rough location derived from your IP address.</li>
-          <li><strong>Device data</strong> such as browser type, operating system and screen size.</li>
-          <li><strong>Email engagement</strong> such as whether an email was opened and which links were clicked.</li>
-        </ul>
-        <div class="callout">
-          <p><b>We do not collect sensitive financial information.</b> Nothing on this site asks you to enter your bank balance, account numbers, income or debts. Our worksheets are filled in privately by you, on paper or in your own document, and the numbers never come to us.</p>
-        </div>
+        <h2><span class="num">02</span>What this policy covers</h2>
+        <p>This policy covers the Purposeful Pennies website and every connected service we run, including our email list, checkout, free resource library, membership area, and community space.</p>
+        <p>It does not cover other websites we link to. Those have their own policies.</p>
       </section>
-
       <section class="s" id="s3">
-        <h2><span class="num">03</span>How we use it</h2>
-
+        <h2><span class="num">03</span>Information you give us</h2>
+        <p>We collect the information you choose to give us, which may include:</p>
         <ul>
-          <li>To deliver the free resources you asked for.</li>
-          <li>To send you emails you have signed up for.</li>
-          <li>To answer your questions when you contact us.</li>
-          <li>To provide and administer the membership if you join.</li>
-          <li>To understand which content and resources are useful, so we can make better ones.</li>
-          <li>To keep the site working, secure and free of abuse.</li>
-          <li>To meet our legal and accounting obligations.</li>
+          <li>Your name</li>
+          <li>Your email address</li>
+          <li>Your mailing address, where relevant to an order</li>
+          <li>Your phone number, where you provide it</li>
+          <li>Payment information, handled by our payment processor rather than by us</li>
+          <li>Anything you write to us, post in the community, or share in a survey or testimonial</li>
         </ul>
-        <p>We do not sell your personal information. We do not rent, trade or share your email address with other businesses for their own marketing.</p>
+        <p>We collect it through opt in forms, checkout, blog comments, our contact form, surveys, membership signup, and direct emails.</p>
+        <p>We do not collect sensitive or financial information beyond what the payment processor needs to take your payment.</p>
       </section>
-
       <section class="s" id="s4">
-        <h2><span class="num">04</span>Emails, and how to stop them</h2>
-
-        <p>If you sign up, we will email you the resources you requested, a short welcome series, and roughly one email a week after that. Some of those emails mention things we sell.</p>
-        <p><strong>Every email has an unsubscribe link at the bottom.</strong> One click and you are off the list, permanently, with no further messages and no questions asked. You can also reply and ask us to remove you, or write to <span data-legal="email">[LEGAL CONTACT EMAIL]</span>.</p>
-        <p>If you unsubscribe, we keep a minimal record of your email address on a suppression list. That is how we make sure we do not accidentally email you again.</p>
+        <h2><span class="num">04</span>Information collected automatically</h2>
+        <p>Like most websites, ours and the platforms we use may automatically collect limited technical information when you visit, including your IP address, browser type, device type, referring page, pages viewed, and how long you spend on them.</p>
+        <p>This is standard analytics data. We use it to understand what is useful and what is not, not to identify you personally.</p>
       </section>
-
       <section class="s" id="s5">
-        <h2><span class="num">05</span>Cookies and tracking</h2>
-
-        <p>Cookies are small files stored by your browser. We and our service providers use them to keep the site working, remember preferences, and understand how the site is used.</p>
-        <table class="t">
-          <thead><tr><th>Type</th><th>What it does</th></tr></thead>
-          <tbody>
-            <tr><td>Essential</td><td>Makes core functions work, including membership login and form submission. The site cannot function without these.</td></tr>
-            <tr><td>Analytics</td><td>Tells us, in aggregate, which pages are read and where people arrive from.</td></tr>
-            <tr><td>Marketing</td><td>Used only if we run advertising. See the note below.</td></tr>
-          </tbody>
-        </table>
-        <p>You can block or delete cookies in your browser settings. If you block essential cookies, parts of the site will stop working.</p>
-        <div class="callout">
-          <p><b>To confirm before publishing.</b> This section must list the specific tools actually in use. If you run Google Analytics, a Meta or Pinterest pixel, or any advertising tag, each one needs naming here, and a cookie consent banner may be required for visitors in the EU, UK and some US states.</p>
-        </div>
+        <h2><span class="num">05</span>Cookies, analytics, and tracking</h2>
+        <p>Our website uses cookies and similar technologies. Cookies are small files stored by your browser that keep the site working properly and help us understand how it is used.</p>
+        <p>We use:</p>
+        <ul>
+          <li><strong>Essential cookies</strong> that make the site, logins, and checkout function</li>
+          <li><strong>Google Analytics</strong> to see how people find and use the site</li>
+          <li><strong>Social and advertising pixels</strong>, which may include the Meta (Facebook) Pixel and the Pinterest Tag, to measure how well our content and offers perform</li>
+        </ul>
+        <p>We do not currently run retargeting ad campaigns that follow you around the internet after you leave, and we do not currently embed third party video or social feeds. If that changes, this policy will be updated.</p>
+        <p>You can block or delete cookies through your browser settings at any time. Some parts of the site may not work properly if you do. Where required by law in your region, we will ask for your consent to non essential cookies before they are set.</p>
       </section>
-
       <section class="s" id="s6">
-        <h2><span class="num">06</span>Who we share it with</h2>
-
-        <p>We share personal information only with service providers who help us run the business, and only as far as they need it to do their job. Each one is bound to protect it.</p>
-        <table class="t">
-          <thead><tr><th>Provider</th><th>Purpose</th></tr></thead>
-          <tbody>
-            <tr><td>Email platform</td><td>Storing our subscriber list and sending emails</td></tr>
-            <tr><td>Website and hosting</td><td>Serving the site and its pages</td></tr>
-            <tr><td>Membership platform</td><td>Managing member accounts and access</td></tr>
-            <tr><td>Payment processor</td><td>Taking payment and handling billing</td></tr>
-            <tr><td>Analytics provider</td><td>Aggregate site usage reporting</td></tr>
-            <tr><td>File and document hosting</td><td>Storing and delivering the downloadable resources</td></tr>
-          </tbody>
-        </table>
-        <p>We may also disclose information if the law requires it, if we need to protect our legal rights, or if the business is sold or transferred, in which case your information would move with it.</p>
+        <h2><span class="num">06</span>Why we collect your information</h2>
+        <p>We use your information to:</p>
+        <ul>
+          <li>Deliver the free and paid products you request</li>
+          <li>Process orders, payments, and refunds</li>
+          <li>Give you access to the membership and member resources</li>
+          <li>Send you the emails you signed up for</li>
+          <li>Answer your questions and provide support</li>
+          <li>Improve the website, our content, and our products</li>
+          <li>Keep proper business, tax, and order records</li>
+          <li>Protect the site and prevent fraud or misuse</li>
+        </ul>
+        <p>We do not use your information for automated decision making or profiling.</p>
       </section>
-
       <section class="s" id="s7">
-        <h2><span class="num">07</span>Third-party sites</h2>
-
-        <p>This site links to other websites, including document hosting for the free resources and any tools we recommend. Once you follow a link away from here, this policy no longer applies. Those sites have their own privacy policies and we do not control them.</p>
+        <h2><span class="num">07</span>Legal basis for processing (for visitors in the EU and UK)</h2>
+        <p>Where the UK GDPR or EU GDPR applies to you, we rely on:</p>
+        <ul>
+          <li><strong>Consent</strong>, when you join our email list or accept non essential cookies. You may withdraw consent at any time.</li>
+          <li><strong>Contract</strong>, when we need your details to deliver something you bought.</li>
+          <li><strong>Legitimate interests</strong>, for basic analytics, site security, and improving what we offer, balanced against your rights.</li>
+          <li><strong>Legal obligation</strong>, for tax and accounting records.</li>
+        </ul>
       </section>
-
       <section class="s" id="s8">
-        <h2><span class="num">08</span>How long we keep it</h2>
-
-        <ul>
-          <li><strong>Subscriber details</strong> for as long as you are subscribed, and afterwards only the minimum needed to honor your unsubscribe.</li>
-          <li><strong>Contact form messages</strong> for as long as needed to resolve the conversation, then a reasonable period afterwards for reference.</li>
-          <li><strong>Membership and billing records</strong> for as long as required by tax and accounting law.</li>
-          <li><strong>Analytics data</strong> in aggregate, according to our analytics provider's retention settings.</li>
-        </ul>
+        <h2><span class="num">08</span>Email and marketing</h2>
+        <p>We use Flodesk as our email service provider. When you join our list, your name and email address are stored there.</p>
+        <p>You join our list by requesting a free resource, filling in an opt in form, or making a purchase, and by doing so you consent to receiving emails from us. Those emails include content, encouragement, resources, and information about our products and offers.</p>
+        <p><strong>Every email we send includes an unsubscribe link.</strong> One click and you are out, no hard feelings and no questions asked. You can also email <a href="mailto:hello@purposefulpennies.com">hello@purposefulpennies.com</a> and ask to be removed.</p>
+        <p>Unsubscribing from marketing emails does not stop essential transactional messages, such as a receipt, a delivery link, or a note about your membership.</p>
+        <p>We do not currently use SMS or text message marketing. If we ever do, it will be opt in only and separate from your email consent.</p>
       </section>
-
       <section class="s" id="s9">
-        <h2><span class="num">09</span>Security</h2>
-
-        <p>We use reputable providers, keep access limited to those who need it, and rely on encrypted connections for the site and its forms. No system is perfectly secure, and we cannot guarantee that information sent over the internet is completely safe. If we ever become aware of a breach affecting your personal information, we will notify you as required by law.</p>
+        <h2><span class="num">09</span>We do not sell your information</h2>
+        <p><strong>We do not sell, rent, trade, or share your personal information with anyone for their own marketing purposes. Not ever.</strong></p>
       </section>
-
       <section class="s" id="s10">
-        <h2><span class="num">10</span>Your rights</h2>
-
-        <p>Wherever you live, you can ask us to:</p>
+        <h2><span class="num">10</span>Who we share information with</h2>
+        <p>We share information only with the service providers we need in order to run the business. These may include:</p>
         <ul>
-          <li>Tell you what personal information we hold about you.</li>
-          <li>Correct it if it is wrong.</li>
-          <li>Delete it.</li>
-          <li>Stop sending you marketing emails.</li>
+          <li><strong>Showit</strong>, our website host</li>
+          <li><strong>Flodesk</strong>, our email service provider</li>
+          <li><strong>MemberSpace</strong>, which manages membership access</li>
+          <li>Our <strong>payment processor</strong>, which handles checkout and card data</li>
+          <li><strong>Google Analytics</strong>, for website analytics</li>
+          <li><strong>Meta and Pinterest</strong>, where their pixels are active</li>
+          <li>Any cart, course, scheduling, form, or file storage tool we use to deliver a product</li>
         </ul>
-        <p>Write to <span data-legal="email">[LEGAL CONTACT EMAIL]</span> and we will respond within the time the law allows. We may need to verify who you are first.</p>
-        <h3>If you live in California</h3>
-        <p>Under California law you have the right to know what personal information we collect, use, disclose and sell, the right to request deletion, the right to correct inaccurate information, and the right not to be discriminated against for exercising those rights. <strong>We do not sell personal information, and we do not share it for cross-context behavioral advertising.</strong> You may make a request through an authorized agent.</p>
-        <h3>If you live in the EU, the UK or Switzerland</h3>
-        <p>You additionally have the right to access, rectification, erasure, restriction of processing, data portability, and the right to object to processing. Where we rely on consent, you may withdraw it at any time. You may also lodge a complaint with your local data protection authority. Our lawful bases are consent for marketing emails, contract for delivering the membership, and legitimate interests for running and improving the site.</p>
-        <div class="callout">
-          <p><b>To confirm before publishing.</b> If you knowingly serve EU or UK visitors, this section may need expanding, including naming a lawful basis per activity and describing international data transfers. Worth a conversation with an attorney if that audience matters to you.</p>
-        </div>
+        <p>Each of these companies handles your data under its own privacy policy and only for the purpose of providing its service to us.</p>
+        <p>We may also disclose information where we are legally required to, or where it is necessary to protect our rights, our members, or the security of the site.</p>
       </section>
-
       <section class="s" id="s11">
-        <h2><span class="num">11</span>Children</h2>
-
-        <p>This site is written for adults managing a household. It is not directed at children, and we do not knowingly collect personal information from anyone under 13. If you believe a child has given us their information, write to <span data-legal="email">[LEGAL CONTACT EMAIL]</span> and we will delete it.</p>
-        <p>Our resource on talking to children about money is written for the adult, not the child.</p>
+        <h2><span class="num">11</span>Where your information is processed</h2>
+        <p>We operate from the United States, and most of our service providers store and process data there. If you are visiting from outside the United States, your information will be transferred to and processed in the United States, where privacy laws may differ from your own. By using this site, you consent to that transfer.</p>
       </section>
-
       <section class="s" id="s12">
-        <h2><span class="num">12</span>Changes to this policy</h2>
-
-        <p>We may update this policy as the business changes or the law does. When we do, we will change the "last updated" date at the top. If the change is significant, we will say so in an email to subscribers. Continuing to use the site after a change means you accept the updated policy.</p>
-      </section>
-
-      <section class="s" id="s13">
-        <h2><span class="num">13</span>Contact us</h2>
-
-        <p>Questions about this policy, or a request about your information:</p>
+        <h2><span class="num">12</span>How long we keep your information</h2>
+        <p>We keep your information only as long as we reasonably need it:</p>
         <ul>
-          <li><strong>Email</strong> <span data-legal="email">[LEGAL CONTACT EMAIL]</span></li>
-          <li><strong>Post</strong> <span data-legal="address">[MAILING ADDRESS]</span></li>
-          <li><strong>Or use</strong> <a href="/contact">the contact form</a></li>
+          <li><strong>Email subscribers:</strong> for as long as you stay subscribed, plus a short period after you unsubscribe so we do not accidentally re add you</li>
+          <li><strong>Customers and members:</strong> for the life of your access, and for a period afterwards for records, support, and tax purposes</li>
+          <li><strong>Order and financial records:</strong> for as long as tax and accounting law requires</li>
+          <li><strong>Comments and community posts:</strong> until you or we remove them</li>
         </ul>
+        <p>You can ask us to delete your information sooner, and we will unless we are legally required to keep it.</p>
       </section>
-    </div>
-  </div>
-
-  <section class="legal-nav">
-    <div class="container">
-      <h2>The other three, while you are here</h2>
-      <div class="legal-nav-grid">
-        <a href="/privacy-policy" class="here"><b>Privacy Policy</b><span>What we collect, why, and what you can ask us to do about it.</span></a>
-        <a href="/terms"><b>Terms of Use</b><span>The agreement between you and us when you use this site.</span></a>
-        <a href="/disclaimer"><b>Disclaimer</b><span>What this site is, and just as importantly, what it is not.</span></a>
-        <a href="/affiliate-disclosure"><b>Affiliate Disclosure</b><span>When a link earns us something, and how we choose what to recommend.</span></a>
-      </div>
-    </div>
-  </section>
+      <section class="s" id="s13">
+        <h2><span class="num">13</span>How we keep your information safe</h2>
+        <p>We work with reputable, established platforms that maintain their own security standards. Our site uses SSL encryption, access to accounts and data is limited, and we use strong passwords and sensible account security.</p>
+        <p>No website or online service can promise perfect security. We do our honest best, and we ask you to protect your own login details too.</p>
+      </section>
+      <section class="s" id="s14">
+        <h2><span class="num">14</span>If something goes wrong</h2>
+        <p>In the event of a data breach affecting your personal information, we will notify affected users and any relevant authority as promptly as we reasonably can, and within any timeframe the law requires, along with what happened and what you should do.</p>
+      </section>
+      <section class="s" id="s15">
+        <h2><span class="num">15</span>Your rights</h2>
+        <p>Wherever you live, you may email <a href="mailto:hello@purposefulpennies.com">hello@purposefulpennies.com</a> to:</p>
+        <ul>
+          <li>Ask what personal information we hold about you</li>
+          <li>Ask for a copy of it</li>
+          <li>Ask us to correct anything inaccurate</li>
+          <li>Ask us to delete it</li>
+          <li>Unsubscribe from our emails</li>
+          <li>Object to or restrict how we use it</li>
+        </ul>
+        <p>We will respond within thirty days, or sooner where the law requires. We may need to verify your identity before we act, simply to make sure we are not handing your details to someone else.</p>
+        <p><strong>If you are in the EU or UK,</strong> you also have the right to data portability, the right to withdraw consent at any time, and the right to lodge a complaint with your local data protection authority.</p>
+        <p><strong>If you are in California,</strong> the CCPA and CPRA give you the right to know what personal information we collect, use, and disclose, the right to request deletion, the right to correct inaccurate information, the right to opt out of the sale or sharing of personal information, and the right not to be discriminated against for exercising any of these rights. We do not sell personal information as that term is commonly understood. Where the use of advertising pixels is treated as sharing under California law, you may opt out by emailing us or by disabling cookies in your browser.</p>
+      </section>
+      <section class="s" id="s16">
+        <h2><span class="num">16</span>Children</h2>
+        <p>This website is intended for adults. We do not knowingly collect personal information from children under 13, or under 16 where local law sets that threshold. If you believe a child has given us personal information, please email <a href="mailto:hello@purposefulpennies.com">hello@purposefulpennies.com</a> and we will delete it promptly.</p>
+      </section>
+      <section class="s" id="s17">
+        <h2><span class="num">17</span>Do Not Track</h2>
+        <p>Some browsers send a Do Not Track signal. There is no common industry standard for responding to it, so our site does not currently respond to those signals.</p>
+      </section>
+      <section class="s" id="s18">
+        <h2><span class="num">18</span>Changes to this policy</h2>
+        <p>We may update this Privacy Policy as the business grows or as the law changes. The current version always lives on this page with the date it was last updated at the top. Where a change is significant, we will say so by email or with a notice on the site. Continuing to use the site after an update means you accept it.</p>
+      </section>
+      <section class="s" id="s19">
+        <h2><span class="num">19</span>Contact us</h2>
+        <p>Questions about your privacy, your data, or this policy are always welcome.</p>
+        <p><strong>Email:</strong> <a href="mailto:hello@purposefulpennies.com">hello@purposefulpennies.com</a> <strong>Mail:</strong> Purposeful Pennies, 64466 Norton Rd, Constantine, MI 49042</p>
+        <p>Please also read our <a href="/terms">Terms and Conditions</a> and our <a href="/disclaimer">Disclaimer</a>.</p>
+      </section>
+      <p style="text-align:center;margin-top:3rem;font-family:'Caveat',cursive;font-size:1.5rem;color:var(--coral-deep);">Purposeful Pennies ◆ spend with intention, save with purpose</p>
 
 
   <footer>
@@ -412,7 +405,7 @@
         <a href="/opt-in">Free Reality Check</a>
       </nav>
       <p class="legal">
-        © 2026 <span data-legal="name">[BUSINESS LEGAL NAME]</span>. All rights reserved.
+        © 2026 <span data-legal="name">Brooke Michelle Watrous</span>. All rights reserved.
         &nbsp;·&nbsp;
         <a href="/privacy-policy">Privacy</a> ·
         <a href="/terms">Terms</a> ·
@@ -430,14 +423,14 @@
      you can see at a glance what is still missing.
      ========================================================= */
   var BUSINESS = {
-    name:      '',   /* legal entity name, e.g. Purposeful Pennies LLC */
+    name:      'Brooke Michelle Watrous',   /* legal entity name, e.g. Purposeful Pennies LLC */
     trading:   'Purposeful Pennies',
-    entity:    '',   /* e.g. an Ohio limited liability company */
-    address:   '',   /* mailing address for legal notices */
-    email:     '',   /* address for privacy and legal contact */
-    state:     '',   /* governing law, e.g. Ohio */
-    effective: 'July 25, 2026',
-    updated:   'July 25, 2026'
+    entity:    'a Michigan sole proprietorship',   /* e.g. an Ohio limited liability company */
+    address:   '64466 Norton Rd, Constantine, MI 49042',   /* mailing address for legal notices */
+    email:     'hello@purposefulpennies.com',   /* address for privacy and legal contact */
+    state:     'Michigan',   /* governing law, e.g. Ohio */
+    effective: 'August 12, 2026',
+    updated:   'August 12, 2026'
   };
 
   Object.keys(BUSINESS).forEach(function (k) {
