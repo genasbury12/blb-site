@@ -1,0 +1,51 @@
+PURPOSEFUL PENNIES · FLODESK EMAIL KIT
+15 PNG files, rendered at retina resolution (2x), on brand.
+All images are 600px-email-width friendly. In Flodesk, add an
+Image block, upload the PNG, and set the link where noted.
+
+HEADERS (pick one per email, top of the layout)
+header-clean.png     cream, wordmark + tagline. The everyday one.
+header-dark.png      deep sage, "a note from the kitchen table". For
+                     heartfelt or announcement emails.
+header-script.png    blush, big "hey friend!". For warm, casual notes.
+Link any header to the homepage.
+
+FOOTER
+footer.png           deep sage sign-off block. Place ABOVE Flodesk's
+                     required unsubscribe/address footer, never
+                     instead of it.
+
+SIGNATURE
+signature.png        "with you at the kitchen table, Brooke".
+                     Transparent background. Sits on cream or white.
+
+DIVIDERS (transparent, use between sections)
+divider-squiggle.png coral hand-drawn squiggle
+divider-diamonds.png gold rule with coral diamonds
+
+BADGE
+badge.png            round "spend with intention · save with purpose"
+                     seal. Transparent. Nice small (120 to 160px wide)
+                     beside text or under the signature.
+
+CTA BUTTONS (transparent around the pill; set the link on the image)
+cta-worksheet.png    Grab the free worksheet        link to /opt-in
+cta-reality.png      Take the 5-Minute Reality Check link to /opt-in
+cta-library.png      Open the free library          link to /library
+cta-membership.png   See the membership             link to /membership
+cta-readpost.png     Read the post                  link to the post
+Tip: keep ONE coral button per email as the main ask. Use the others
+as secondary asks in different colors.
+
+EXTRAS
+polaroid.png         Brooke polaroid, "hi from my kitchen". Lovely in
+                     welcome emails. Around 300 to 360px wide.
+quote.png            "Money is a tool, not a scorecard" quote card.
+
+BRAND COLORS FOR FLODESK SETTINGS
+Background      #FBF4D7   (cream, use instead of pure white)
+Alt background  #FBE3D5   (blush, for highlight sections)
+Text            #2A2A2A   (charcoal) and #2E3E2F (deep sage headings)
+Buttons         #DD6B4E   (coral, one per email)
+Accents         #D4A83F   (gold) and #5C6E47 (sage)
+Rule of thumb: cream background, deep sage headings, one coral button.
