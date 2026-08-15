@@ -416,7 +416,7 @@
           Set the Flodesk success redirect to /thank-you
         -->
         <div class="form-wrap fade-in" id="getit">
-          <form class="optin-form" id="optinForm" novalidate="">
+          <div class="optin-form">
             <div class="form-seal">
               12
               <small>free</small>
@@ -426,29 +426,14 @@
               <h2>Where should I send all twelve?</h2>
             </div>
 
-            <div class="field" id="f-name">
-              <label for="firstName">First name</label>
-              <input type="text" id="firstName" name="first_name" autocomplete="given-name" placeholder="What should I call you?" required="">
-              <span class="field-error">I would love to know what to call you.</span>
-            </div>
+            <!-- ============ FLODESK INLINE FORM ============
+                 The design lives in the CSS overrides below; in Flodesk,
+                 keep this form bare: First name + Email fields only,
+                 no title or description, button text
+                 "Yes, unlock the free library", success redirect to
+                 /thank-you . -->
+            <div class="fd-embed" id="fd-form-6a80834e4572a4dfc4380a81"></div>
 
-            <div class="field" id="f-email">
-              <label for="email">Email address</label>
-              <input type="email" id="email" name="email" autocomplete="email" placeholder="Where should I send the library?" required="">
-              <span class="field-error">Please check that address so the library actually reaches you.</span>
-            </div>
-
-            <!-- which freebie brought them here, read from ?r= for Flodesk segmenting -->
-            <input type="hidden" id="resourceField" name="resource" value="library">
-
-            <!-- honeypot -->
-            <div class="honeypot" aria-hidden="true">
-              <label for="_gotcha">Leave this empty</label>
-              <input type="text" id="_gotcha" name="_gotcha" tabindex="-1" autocomplete="off">
-            </div>
-
-            <button type="submit" class="btn" id="submitBtn">Yes, unlock the free library</button>
-            <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
             <p class="form-legal">I will only email you things I think actually help. Unsubscribe any time. <a href="/privacy-policy">Privacy Policy</a>.</p>
 
             <div class="form-micro">
@@ -456,7 +441,7 @@
               <span><b>◆</b> No spam</span>
               <span><b>◆</b> No shame</span>
             </div>
-          </form>
+          </div>
         </div>
 
       </div>
@@ -759,13 +744,13 @@
 
     if (GENERIC.indexOf(slug) !== -1) {          /* generic: track it, no banner */
       REF_SLUG = slug;
-      document.getElementById('resourceField').value = slug;
+      var rf = document.getElementById('resourceField'); if (rf) rf.value = slug;
       return;
     }
     if (!RESOURCES[slug]) return;                /* unknown or malformed: silent fallback */
 
     REF_SLUG = slug;
-    document.getElementById('resourceField').value = slug;
+    var rf = document.getElementById('resourceField'); if (rf) rf.value = slug;
     document.getElementById('refName').textContent = RESOURCES[slug];
     document.getElementById('refBanner').classList.add('show');
   })();
@@ -871,3 +856,61 @@
     });
   })();
   </script>
+
+<!-- ============ FLODESK: universal loader + form init + design overrides ============ -->
+<style>
+  /* Flodesk renders its own markup inside our card; these overrides restyle it
+     to match the original form design. Attribute patterns, not exact class
+     names, so Flodesk updates do not break them. */
+  .fd-embed { min-height: 250px; }
+  #fd-form-6a80834e4572a4dfc4380a81 * { box-sizing: border-box !important; }
+  #fd-form-6a80834e4572a4dfc4380a81 [class*="__container"] { padding: 0 !important; margin: 0 !important; max-width: none !important; background: transparent !important; }
+  #fd-form-6a80834e4572a4dfc4380a81 form { margin: 0 !important; padding: 0 !important; background: transparent !important; }
+  #fd-form-6a80834e4572a4dfc4380a81 [class*="__header"] { display: none !important; }
+  #fd-form-6a80834e4572a4dfc4380a81 [class*="__fields"] { display: grid !important; grid-template-columns: 1fr !important; gap: 0 !important; margin: 0 !important; padding: 0 !important; }
+  #fd-form-6a80834e4572a4dfc4380a81 [class*="__field"] { margin: 0 0 1.3rem !important; padding: 0 !important; width: 100% !important; }
+  #fd-form-6a80834e4572a4dfc4380a81 label { display: block !important; font-family: Georgia, serif !important; font-size: 0.75rem !important; font-weight: bold !important; letter-spacing: 0.15em !important; text-transform: uppercase !important; color: var(--coral-deep) !important; margin: 0 0 0.45rem !important; }
+  #fd-form-6a80834e4572a4dfc4380a81 input {
+    width: 100% !important; padding: 1rem !important;
+    border: 1px solid rgba(126, 134, 125, 0.35) !important; border-radius: 8px !important;
+    font-family: Georgia, serif !important; font-size: 16px !important;
+    color: var(--charcoal) !important; background: var(--cream) !important;
+    box-shadow: none !important; line-height: 1.4 !important; height: auto !important;
+    transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease) !important;
+  }
+  #fd-form-6a80834e4572a4dfc4380a81 input:focus { border-color: var(--coral) !important; outline: none !important; box-shadow: 0 0 0 3px rgba(221, 107, 78, 0.14) !important; background: white !important; }
+  #fd-form-6a80834e4572a4dfc4380a81 input::placeholder { color: var(--soft-gray) !important; opacity: 0.85 !important; }
+  #fd-form-6a80834e4572a4dfc4380a81 [class*="__button"],
+  #fd-form-6a80834e4572a4dfc4380a81 button {
+    width: 100% !important; display: inline-flex !important; align-items: center !important; justify-content: center !important;
+    background: var(--coral) !important; color: white !important;
+    font-family: Georgia, serif !important; font-size: 1.04rem !important; font-weight: bold !important;
+    padding: 1.1rem 2.3rem !important; border: none !important; border-radius: 999px !important;
+    cursor: pointer !important; letter-spacing: 0.02em !important; margin-top: 0.5rem !important;
+    box-shadow: 0 3px 0 var(--coral-deep) !important; transition: all 0.25s var(--ease) !important; text-transform: none !important;
+  }
+  #fd-form-6a80834e4572a4dfc4380a81 [class*="__button"]:hover,
+  #fd-form-6a80834e4572a4dfc4380a81 button:hover { background: var(--coral-deep) !important; transform: translateY(-2px) !important; box-shadow: 0 5px 0 var(--coral-deep) !important; }
+  #fd-form-6a80834e4572a4dfc4380a81 [class*="error"] { font-family: Georgia, serif !important; font-size: 0.85rem !important; color: var(--coral-deep) !important; margin-top: 0.35rem !important; }
+  #fd-form-6a80834e4572a4dfc4380a81 [class*="success"] { font-family: Georgia, serif !important; font-style: italic !important; font-size: 1.05rem !important; color: var(--sage) !important; text-align: center !important; padding: 1rem 0 !important; }
+</style>
+<script>
+  /* Flodesk universal loader. The trailing 'fd' argument is required. */
+  (function(w, d, t, h, s, n) {
+    w.FlodeskObject = n;
+    var fn = function() { (w[n].q = w[n].q || []).push(arguments); };
+    w[n] = w[n] || fn;
+    var f = d.getElementsByTagName(t)[0];
+    var v = '?v=' + Math.floor(new Date().getTime() / (120 * 1000)) * 60;
+    var sm = d.createElement(t); sm.async = true; sm.type = 'module'; sm.src = h + s + '.mjs' + v;
+    f.parentNode.insertBefore(sm, f);
+    var sn = d.createElement(t); sn.async = true; sn.noModule = true; sn.src = h + s + '.js' + v;
+    f.parentNode.insertBefore(sn, f);
+  })(window, document, 'script', 'https://assets.flodesk.com', '/universal', 'fd');
+</script>
+<script>
+  window.fd('form', {
+    formId: '6a80834e4572a4dfc4380a81',
+    containerEl: '#fd-form-6a80834e4572a4dfc4380a81'
+  });
+</script>
