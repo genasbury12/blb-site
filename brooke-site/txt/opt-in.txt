@@ -882,7 +882,7 @@
 
   /* fields stack with the original rhythm */
   #fd-form-6a80834e4572a4dfc4380a81 [class*="__fields"] { display: grid !important; grid-template-columns: 1fr !important; gap: 0 !important; margin: 0 !important; padding: 0 !important; }
-  #fd-form-6a80834e4572a4dfc4380a81 [class*="__field"] { position: static !important; margin: 0 0 1.3rem !important; padding: 0 !important; width: 100% !important; min-height: 0 !important; }
+  #fd-form-6a80834e4572a4dfc4380a81 [class*="__field"] { position: static !important; margin: 0 0 1.3rem !important; padding: 0 !important; width: 100% !important; min-height: 0 !important; background: transparent !important; border: none !important; box-shadow: none !important; }
 
   /* field wrappers that are not the input itself must not paint chrome */
   #fd-form-6a80834e4572a4dfc4380a81 [class*="control"]:not(input):not(button):not(select):not(textarea) { background: transparent !important; border: none !important; padding: 0 !important; margin: 0 !important; min-height: 0 !important; box-shadow: none !important; }
