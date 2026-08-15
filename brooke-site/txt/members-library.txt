@@ -570,7 +570,7 @@
 
       /* monthly release, 2 */
       { title: 'School Supply Plan', pages: 2, cat: 'home', system: 'monthly', isNew: true,
-        blurb: 'Fill it in once and reuse it every August. The month that quietly wrecks a good budget.', file: 'school-supply-plan.pdf' },
+        blurb: 'Fill it in once and reuse it every August. The month that quietly wrecks a good budget.', file: 'school-supply-plan.pdf', link: 'https://docs.google.com/spreadsheets/d/1jPSAGo_rO0pyJL5MooWn9puNSO6bLNpp4RkCVcR3Z5w/copy' },
       { title: 'Talking to Kids About Money', pages: 3, cat: 'home', system: 'monthly',
         blurb: 'Twenty conversation starters by age, and five things worth not saying.', file: 'talking-to-kids.pdf' }
     ];
