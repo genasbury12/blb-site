@@ -859,41 +859,72 @@
 
 <!-- ============ FLODESK: universal loader + form init + design overrides ============ -->
 <style>
-  /* Flodesk renders its own markup inside our card; these overrides restyle it
+/* Flodesk renders its own markup inside our card; these overrides restyle it
      to match the original form design. Attribute patterns, not exact class
      names, so Flodesk updates do not break them. */
   .fd-embed { min-height: 250px; }
   #fd-form-6a80834e4572a4dfc4380a81 * { box-sizing: border-box !important; }
-  #fd-form-6a80834e4572a4dfc4380a81 [class*="__container"] { padding: 0 !important; margin: 0 !important; max-width: none !important; background: transparent !important; }
-  #fd-form-6a80834e4572a4dfc4380a81 form { margin: 0 !important; padding: 0 !important; background: transparent !important; }
-  #fd-form-6a80834e4572a4dfc4380a81 [class*="__header"] { display: none !important; }
+
+  /* zero every wrapper so there is no dead gap above the fields */
+  #fd-form-6a80834e4572a4dfc4380a81 [class*="__container"],
+  #fd-form-6a80834e4572a4dfc4380a81 [class*="content"],
+  #fd-form-6a80834e4572a4dfc4380a81 form { padding: 0 !important; margin: 0 !important; min-height: 0 !important; max-width: none !important; background: transparent !important; border: none !important; box-shadow: none !important; }
+
+  /* the card already has its own heading: hide anything Flodesk adds above the fields */
+  #fd-form-6a80834e4572a4dfc4380a81 [class*="header"],
+  #fd-form-6a80834e4572a4dfc4380a81 [class*="__title"],
+  #fd-form-6a80834e4572a4dfc4380a81 [class*="__subtitle"],
+  #fd-form-6a80834e4572a4dfc4380a81 [class*="description"],
+  #fd-form-6a80834e4572a4dfc4380a81 h1, #fd-form-6a80834e4572a4dfc4380a81 h2 { display: none !important; }
+
+  /* Flodesk ghost placeholder elements render half-loaded font gibberish: remove */
+  #fd-form-6a80834e4572a4dfc4380a81 [class*="placeholder"] { display: none !important; }
+
+  /* fields stack with the original rhythm */
   #fd-form-6a80834e4572a4dfc4380a81 [class*="__fields"] { display: grid !important; grid-template-columns: 1fr !important; gap: 0 !important; margin: 0 !important; padding: 0 !important; }
-  #fd-form-6a80834e4572a4dfc4380a81 [class*="__field"] { margin: 0 0 1.3rem !important; padding: 0 !important; width: 100% !important; }
-  #fd-form-6a80834e4572a4dfc4380a81 label { display: block !important; font-family: Georgia, serif !important; font-size: 0.75rem !important; font-weight: bold !important; letter-spacing: 0.15em !important; text-transform: uppercase !important; color: var(--coral-deep) !important; margin: 0 0 0.45rem !important; }
+  #fd-form-6a80834e4572a4dfc4380a81 [class*="__field"] { position: static !important; margin: 0 0 1.3rem !important; padding: 0 !important; width: 100% !important; min-height: 0 !important; }
+
+  /* field wrappers that are not the input itself must not paint chrome */
+  #fd-form-6a80834e4572a4dfc4380a81 [class*="control"]:not(input):not(button):not(select):not(textarea) { background: transparent !important; border: none !important; padding: 0 !important; margin: 0 !important; min-height: 0 !important; box-shadow: none !important; }
+
+  /* labels: Flodesk floats them over the input; pin them static above it */
+  #fd-form-6a80834e4572a4dfc4380a81 label,
+  #fd-form-6a80834e4572a4dfc4380a81 [class*="label"] {
+    position: static !important; transform: none !important; inset: auto !important;
+    top: auto !important; left: auto !important; pointer-events: auto !important;
+    display: block !important; opacity: 1 !important; background: transparent !important;
+    font-family: Georgia, serif !important; font-size: 0.75rem !important; font-weight: bold !important;
+    letter-spacing: 0.15em !important; text-transform: uppercase !important;
+    color: var(--coral-deep) !important; margin: 0 0 0.45rem !important; padding: 0 !important;
+    line-height: 1.4 !important; text-align: left !important;
+  }
   #fd-form-6a80834e4572a4dfc4380a81 input {
-    width: 100% !important; padding: 1rem !important;
+    position: static !important; width: 100% !important; padding: 1rem !important;
     border: 1px solid rgba(126, 134, 125, 0.35) !important; border-radius: 8px !important;
     font-family: Georgia, serif !important; font-size: 16px !important;
     color: var(--charcoal) !important; background: var(--cream) !important;
-    box-shadow: none !important; line-height: 1.4 !important; height: auto !important;
+    box-shadow: none !important; line-height: 1.4 !important; height: auto !important; min-height: 0 !important;
+    text-align: left !important;
     transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease) !important;
   }
   #fd-form-6a80834e4572a4dfc4380a81 input:focus { border-color: var(--coral) !important; outline: none !important; box-shadow: 0 0 0 3px rgba(221, 107, 78, 0.14) !important; background: white !important; }
-  #fd-form-6a80834e4572a4dfc4380a81 input::placeholder { color: var(--soft-gray) !important; opacity: 0.85 !important; }
+  #fd-form-6a80834e4572a4dfc4380a81 input::placeholder { color: var(--soft-gray) !important; opacity: 0.85 !important; font-family: Georgia, serif !important; }
   #fd-form-6a80834e4572a4dfc4380a81 [class*="__button"],
   #fd-form-6a80834e4572a4dfc4380a81 button {
     width: 100% !important; display: inline-flex !important; align-items: center !important; justify-content: center !important;
     background: var(--coral) !important; color: white !important;
     font-family: Georgia, serif !important; font-size: 1.04rem !important; font-weight: bold !important;
     padding: 1.1rem 2.3rem !important; border: none !important; border-radius: 999px !important;
-    cursor: pointer !important; letter-spacing: 0.02em !important; margin-top: 0.5rem !important;
+    cursor: pointer !important; letter-spacing: 0.02em !important; margin: 0.5rem 0 0 !important;
     box-shadow: 0 3px 0 var(--coral-deep) !important; transition: all 0.25s var(--ease) !important; text-transform: none !important;
+    min-height: 0 !important; height: auto !important;
   }
   #fd-form-6a80834e4572a4dfc4380a81 [class*="__button"]:hover,
   #fd-form-6a80834e4572a4dfc4380a81 button:hover { background: var(--coral-deep) !important; transform: translateY(-2px) !important; box-shadow: 0 5px 0 var(--coral-deep) !important; }
-  #fd-form-6a80834e4572a4dfc4380a81 [class*="error"] { font-family: Georgia, serif !important; font-size: 0.85rem !important; color: var(--coral-deep) !important; margin-top: 0.35rem !important; }
-  #fd-form-6a80834e4572a4dfc4380a81 [class*="success"] { font-family: Georgia, serif !important; font-style: italic !important; font-size: 1.05rem !important; color: var(--sage) !important; text-align: center !important; padding: 1rem 0 !important; }
-</style>
+  #fd-form-6a80834e4572a4dfc4380a81 [class*="footer"] { padding: 0 !important; margin: 0 !important; }
+  #fd-form-6a80834e4572a4dfc4380a81 [class*="error"] { display: block !important; font-family: Georgia, serif !important; font-size: 0.85rem !important; color: var(--coral-deep) !important; margin-top: 0.35rem !important; }
+  #fd-form-6a80834e4572a4dfc4380a81 [class*="success"] { display: block !important; font-family: Georgia, serif !important; font-style: italic !important; font-size: 1.05rem !important; color: var(--sage) !important; text-align: center !important; padding: 1rem 0 !important; }
+  </style>
 <script>
   /* Flodesk universal loader. The trailing 'fd' argument is required. */
   (function(w, d, t, h, s, n) {
