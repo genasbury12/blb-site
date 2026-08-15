@@ -882,7 +882,7 @@
 
   /* fields stack with the original rhythm */
   #fd-form-6a80834e4572a4dfc4380a81 [class*="__fields"] { display: grid !important; grid-template-columns: 1fr !important; gap: 0 !important; margin: 0 !important; padding: 0 !important; }
-  #fd-form-6a80834e4572a4dfc4380a81 [class*="__field"] { position: static !important; margin: 0 0 1.3rem !important; padding: 0 !important; width: 100% !important; min-height: 0 !important; background: transparent !important; border: none !important; box-shadow: none !important; }
+  #fd-form-6a80834e4572a4dfc4380a81 [class*="__field"] { position: static !important; display: flex !important; flex-direction: column !important; margin: 0 0 1.3rem !important; padding: 0 !important; width: 100% !important; min-height: 0 !important; background: transparent !important; border: none !important; box-shadow: none !important; }
 
   /* field wrappers that are not the input itself must not paint chrome */
   #fd-form-6a80834e4572a4dfc4380a81 [class*="control"]:not(input):not(button):not(select):not(textarea) { background: transparent !important; border: none !important; padding: 0 !important; margin: 0 !important; min-height: 0 !important; box-shadow: none !important; }
@@ -890,7 +890,7 @@
   /* labels: Flodesk floats them over the input; pin them static above it */
   #fd-form-6a80834e4572a4dfc4380a81 label,
   #fd-form-6a80834e4572a4dfc4380a81 [class*="label"] {
-    position: static !important; transform: none !important; inset: auto !important;
+    position: static !important; order: -1 !important; transform: none !important; inset: auto !important;
     top: auto !important; left: auto !important; pointer-events: auto !important;
     display: block !important; opacity: 1 !important; background: transparent !important;
     font-family: Georgia, serif !important; font-size: 0.75rem !important; font-weight: bold !important;
@@ -922,8 +922,8 @@
   #fd-form-6a80834e4572a4dfc4380a81 [class*="__button"]:hover,
   #fd-form-6a80834e4572a4dfc4380a81 button:hover { background: var(--coral-deep) !important; transform: translateY(-2px) !important; box-shadow: 0 5px 0 var(--coral-deep) !important; }
   #fd-form-6a80834e4572a4dfc4380a81 [class*="footer"] { padding: 0 !important; margin: 0 !important; }
-  #fd-form-6a80834e4572a4dfc4380a81 [class*="error"] { display: block !important; font-family: Georgia, serif !important; font-size: 0.85rem !important; color: var(--coral-deep) !important; margin-top: 0.35rem !important; }
-  #fd-form-6a80834e4572a4dfc4380a81 [class*="success"] { display: block !important; font-family: Georgia, serif !important; font-style: italic !important; font-size: 1.05rem !important; color: var(--sage) !important; text-align: center !important; padding: 1rem 0 !important; }
+  #fd-form-6a80834e4572a4dfc4380a81 [class*="error"] { font-family: Georgia, serif !important; font-size: 0.85rem !important; color: var(--coral-deep) !important; margin-top: 0.35rem !important; }
+  #fd-form-6a80834e4572a4dfc4380a81 [class*="success"] { font-family: Georgia, serif !important; font-style: italic !important; font-size: 1.05rem !important; color: var(--sage) !important; text-align: center !important; padding: 1rem 0 !important; }
   </style>
 <script>
   /* Flodesk universal loader. The trailing 'fd' argument is required. */
@@ -945,3 +945,28 @@
     containerEl: '#fd-form-6a80834e4572a4dfc4380a81'
   });
 </script>
+<script>
+  /* Flodesk renders inputs before labels and ships scrambled placeholder
+     text until its own fonts load. Reorder is handled in CSS; this keeps
+     the placeholders on brand whatever Flodesk puts there. */
+  (function () {
+    var box = document.getElementById('fd-form-6a80834e4572a4dfc4380a81');
+    if (!box) return;
+    var JUNK = /^[A-Z0-9]{5,}$/;
+    function fix() {
+      var t = box.querySelector('input[type="text"]');
+      var e = box.querySelector('input[type="email"]');
+      if (t) {
+        if (t.getAttribute('placeholder') !== 'What should I call you?') t.setAttribute('placeholder', 'What should I call you?');
+        if (JUNK.test(t.value) && document.activeElement !== t) t.value = '';
+      }
+      if (e) {
+        if (e.getAttribute('placeholder') !== 'Where should I send the library?') e.setAttribute('placeholder', 'Where should I send the library?');
+        if (JUNK.test(e.value) && document.activeElement !== e) e.value = '';
+      }
+    }
+    new MutationObserver(fix).observe(box, { childList: true, subtree: true, attributes: true, attributeFilter: ['placeholder'] });
+    fix();
+  })();
+</script>
+
