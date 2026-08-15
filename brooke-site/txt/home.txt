@@ -1753,12 +1753,13 @@ window.scrollTo({top:0,behavior:rm?'auto':'smooth'});});})();</script>
     border: 1px solid rgba(126, 134, 125, 0.35) !important; border-radius: 6px !important;
     font-family: Georgia, serif !important; font-size: 16px !important;
     color: var(--charcoal) !important; background: var(--cream) !important;
+    text-transform: none !important; letter-spacing: normal !important; text-align: left !important;
     box-shadow: none !important; line-height: 1.4 !important; height: auto !important; min-height: 0 !important;
     text-align: left !important;
     transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease) !important;
   }
   #fd-form-6a80834e4572a4dfc4380a81 input:focus { border-color: var(--coral) !important; outline: none !important; box-shadow: 0 0 0 3px rgba(221, 107, 78, 0.14) !important; background: white !important; }
-  #fd-form-6a80834e4572a4dfc4380a81 input::placeholder { color: var(--soft-gray) !important; opacity: 0.85 !important; font-family: Georgia, serif !important; }
+  #fd-form-6a80834e4572a4dfc4380a81 input::placeholder { color: var(--soft-gray) !important; opacity: 0.85 !important; font-family: Georgia, serif !important; text-transform: none !important; letter-spacing: normal !important; }
   #fd-form-6a80834e4572a4dfc4380a81 [class*="__button"],
   #fd-form-6a80834e4572a4dfc4380a81 button {
     width: 100% !important; display: inline-flex !important; align-items: center !important; justify-content: center !important;
@@ -1790,33 +1791,54 @@ window.scrollTo({top:0,behavior:rm?'auto':'smooth'});});})();</script>
   })(window, document, 'script', 'https://assets.flodesk.com', '/universal', 'fd');
 </script>
 <script>
-  window.fd('form', {
-    formId: '6a80834e4572a4dfc4380a81',
-    containerEl: '#fd-form-6a80834e4572a4dfc4380a81'
-  });
+  /* Guarded init: even if another Flodesk snippet is pasted elsewhere on
+     this Showit page, this init runs exactly once. */
+  if (!window.__ppFdInit) {
+    window.__ppFdInit = true;
+    window.fd('form', {
+      formId: '6a80834e4572a4dfc4380a81',
+      containerEl: '#fd-form-6a80834e4572a4dfc4380a81'
+    });
+  }
 </script>
 <script>
-  /* Flodesk renders inputs before labels and ships scrambled placeholder
-     text until its own fonts load. Reorder is handled in CSS; this keeps
-     the placeholders on brand whatever Flodesk puts there. */
+  /* Keeper script, runs continuously:
+     1. If the form gets rendered more than once (duplicate Flodesk embeds
+        somewhere on the page), every copy after the first is removed.
+     2. Placeholders stay on brand and Flodesk's scrambled preload text is
+        cleared, on every input, every render.
+     Guarded so it never triggers itself. */
   (function () {
     var box = document.getElementById('fd-form-6a80834e4572a4dfc4380a81');
-    if (!box) return;
+    if (!box || box.__ppKeeper) return;
+    box.__ppKeeper = true;
     var JUNK = /^[A-Z0-9]{5,}$/;
-    function fix() {
-      var t = box.querySelector('input[type="text"]');
-      var e = box.querySelector('input[type="email"]');
-      if (t) {
-        if (t.getAttribute('placeholder') !== 'What should I call you?') t.setAttribute('placeholder', 'What should I call you?');
-        if (JUNK.test(t.value) && document.activeElement !== t) t.value = '';
-      }
-      if (e) {
-        if (e.getAttribute('placeholder') !== 'Where should I send the library?') e.setAttribute('placeholder', 'Where should I send the library?');
-        if (JUNK.test(e.value) && document.activeElement !== e) e.value = '';
-      }
+    var busy = false;
+    function sweep() {
+      if (busy) return;
+      busy = true;
+      try {
+        /* 1: remove duplicate renders, keep the first */
+        var forms = box.querySelectorAll('form');
+        for (var i = 1; i < forms.length; i++) {
+          var root = forms[i];
+          while (root.parentElement && root.parentElement !== box) root = root.parentElement;
+          (root.parentElement === box ? root : forms[i]).remove();
+        }
+        /* 2: brand the inputs */
+        box.querySelectorAll('input[type="text"]').forEach(function (t) {
+          if (t.getAttribute('placeholder') !== 'What should I call you?') t.setAttribute('placeholder', 'What should I call you?');
+          if (JUNK.test(t.value) && document.activeElement !== t) t.value = '';
+        });
+        box.querySelectorAll('input[type="email"]').forEach(function (e) {
+          if (e.getAttribute('placeholder') !== 'Where should I send the library?') e.setAttribute('placeholder', 'Where should I send the library?');
+          if (JUNK.test(e.value) && document.activeElement !== e) e.value = '';
+        });
+      } finally { busy = false; }
     }
-    new MutationObserver(fix).observe(box, { childList: true, subtree: true, attributes: true, attributeFilter: ['placeholder'] });
-    fix();
+    new MutationObserver(sweep).observe(box, { childList: true, subtree: true });
+    sweep();
+    setInterval(sweep, 1500);
   })();
 </script>
 
