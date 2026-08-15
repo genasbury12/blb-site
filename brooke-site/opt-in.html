@@ -438,7 +438,7 @@
               <button type="submit" class="btn">Yes, unlock the free library</button>
               <p class="pp-status" style="display:none;font-size:0.9rem;font-style:italic;color:var(--coral-deep);margin-top:0.75rem;text-align:center;"></p>
             </form>
-            <div aria-hidden="true" style="position:absolute;left:-9999px;top:0;width:1px;height:1px;overflow:hidden;">
+            <div aria-hidden="true" style="position:fixed;left:-200vw;top:0;width:420px;height:640px;overflow:hidden;pointer-events:none;">
               <div id="fd-form-6a80834e4572a4dfc4380a81"></div>
             </div>
 
@@ -886,57 +886,94 @@
   }
 </script>
 <script>
-  /* The visible form is ours; Flodesk's widget lives off-screen and only
-     receives the values. Nothing Flodesk renders can affect the layout. */
+  /* The visible form is ours. Flodesk's widget mounts off-screen (full size,
+     so it actually renders) and the values are relayed into it. If the
+     widget cannot confirm delivery, a direct post to Flodesk's form
+     endpoint is the backup. The visitor is only sent to the thank-you page
+     when delivery was confirmed or genuinely attempted; hard failures show
+     an honest message instead. */
   (function () {
     var form = document.getElementById('ppFdProxy');
     var hidden = document.getElementById('fd-form-6a80834e4572a4dfc4380a81');
     if (!form || !hidden || form.__pp) return;
     form.__pp = true;
+    var FORM_ID = '6a80834e4572a4dfc4380a81';
     var btn = form.querySelector('button[type="submit"]');
     var status = form.querySelector('.pp-status');
     var btnText = btn ? btn.textContent : '';
-    function say(msg) { if (status) { status.textContent = msg; status.style.display = msg ? 'block' : 'none'; } }
+    function say(m) { if (status) { status.textContent = m; status.style.display = m ? 'block' : 'none'; } }
+    function busy(m) { if (btn) { btn.disabled = true; btn.textContent = m; } }
+    function reset() { if (btn) { btn.disabled = false; btn.textContent = btnText; } }
+    function go() { window.location.href = '/thank-you?r=library'; }
     function setNative(input, value) {
       var d = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value');
       d.set.call(input, value);
       input.dispatchEvent(new Event('input', { bubbles: true }));
       input.dispatchEvent(new Event('change', { bubbles: true }));
     }
-    form.addEventListener('submit', function (ev) {
-      var name = form.querySelector('input[type="text"]');
-      var email = form.querySelector('input[type="email"]');
+    function widgetReady() {
+      return hidden.querySelector('input[type="email"]') &&
+             hidden.querySelector('button[type="submit"], [class*="__button"]');
+    }
+    function relayToWidget(nameV, emailV, cb) {
       var fdName = hidden.querySelector('input[type="text"]');
       var fdEmail = hidden.querySelector('input[type="email"]');
       var fdBtn = hidden.querySelector('button[type="submit"], [class*="__button"]');
-      if (!fdEmail || !fdBtn) return; /* Flodesk not loaded: let the form fall back to its action */
-      ev.preventDefault();
-      if (!email.value || !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.value.trim())) { say('Please check that email address so the library actually reaches you.'); email.focus(); return; }
-      if (name && fdName) setNative(fdName, name.value.trim());
-      setNative(fdEmail, email.value.trim());
-      if (btn) { btn.disabled = true; btn.textContent = 'Sending it over...'; }
-      say('');
-      fdBtn.click();
-      var done = false;
-      var watch = setInterval(function () {
-        if (done) return;
-        var ok = hidden.querySelector('[class*="success"]');
-        var bad = hidden.querySelector('[class*="error"]');
-        if (ok && getComputedStyle(ok).display !== 'none') {
-          done = true; clearInterval(watch);
-          window.location.href = '/thank-you?r=library';
-        } else if (bad && getComputedStyle(bad).display !== 'none' && bad.textContent.trim()) {
-          done = true; clearInterval(watch);
-          if (btn) { btn.disabled = false; btn.textContent = btnText; }
-          say('Hmm, that did not go through. Mind checking the email address and trying once more?');
-        }
-      }, 300);
+      if (fdName) setNative(fdName, nameV);
+      setNative(fdEmail, emailV);
       setTimeout(function () {
-        if (done) return;
-        done = true; clearInterval(watch);
-        /* no clear answer from Flodesk: assume the best and send them on */
-        window.location.href = '/thank-you?r=library';
-      }, 9000);
+        if (fdEmail.value !== emailV) setNative(fdEmail, emailV); /* widget state check, retype once */
+        fdBtn.click();
+        var t0 = Date.now();
+        var watch = setInterval(function () {
+          var ok = hidden.querySelector('[class*="success"]');
+          var bad = hidden.querySelector('[class*="error"]');
+          if (ok && getComputedStyle(ok).display !== 'none') { clearInterval(watch); cb(true); }
+          else if (bad && getComputedStyle(bad).display !== 'none' && bad.textContent.trim()) { clearInterval(watch); cb(false); }
+          else if (Date.now() - t0 > 6000) { clearInterval(watch); cb(null); }
+        }, 250);
+      }, 350);
+    }
+    function directPost(nameV, emailV, cb) {
+      try {
+        fetch('https://form.flodesk.com/forms/' + FORM_ID + '/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: emailV, firstName: nameV, first_name: nameV, name: nameV })
+        }).then(function (r) { cb(!!r.ok); }).catch(function () { cb(false); });
+      } catch (e) { cb(false); }
+    }
+    form.addEventListener('submit', function (ev) {
+      ev.preventDefault();
+      var name = form.querySelector('input[type="text"]');
+      var email = form.querySelector('input[type="email"]');
+      var nameV = name ? name.value.trim() : '';
+      var emailV = email ? email.value.trim() : '';
+      if (!emailV || !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(emailV)) {
+        say('Please check that email address so the library actually reaches you.');
+        if (email) email.focus();
+        return;
+      }
+      busy('Sending it over...'); say('');
+      var waited = 0;
+      (function waitWidget() {
+        if (widgetReady()) {
+          relayToWidget(nameV, emailV, function (okWidget) {
+            if (okWidget === true) return go();
+            directPost(nameV, emailV, function (okPost) {
+              if (okPost || okWidget === null) return go();
+              reset(); say('Hmm, that did not go through. Mind trying once more? If it keeps happening, email hello@purposefulpennies.com and I will add you myself.');
+            });
+          });
+        } else if (waited < 7000) {
+          waited += 250; setTimeout(waitWidget, 250);
+        } else {
+          directPost(nameV, emailV, function (okPost) {
+            if (okPost) return go();
+            reset(); say('Hmm, the signup helper is not answering right now. Mind trying once more in a minute? Or email hello@purposefulpennies.com and I will add you myself.');
+          });
+        }
+      })();
     });
   })();
 </script>
