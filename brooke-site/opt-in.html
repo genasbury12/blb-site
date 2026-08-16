@@ -852,26 +852,38 @@
   </script>
 <!-- ============ FLODESK FORM: loader and brand overrides (playbook recipe, no JS touches the widget) ============ -->
 <style>
-  /* Playbook overrides ONLY. Nothing here touches display, position, or
-     visibility of Flodesk's field elements: their stylesheet hides decoy
-     anti-bot fields, and forcing display reveals them as fake duplicates. */
-  #pp-fd-library-form { min-height: 200px; }
-  #pp-fd-library-form [class*="__container"] { padding: 0 !important; margin: 0 !important; max-width: none !important; background: transparent !important; }
-  #pp-fd-library-form [class*="__fields"] { display: grid !important; grid-template-columns: 1fr !important; gap: 12px !important; }
+  /* Playbook overrides, cosmetics only. SAFE PROPERTIES ONLY: spacing,
+     width, typography, color. Never display, position, visibility, or
+     opacity: Flodesk hides anti-bot decoy fields with those, and
+     overriding them exposes fake duplicate fields. */
+  #pp-fd-library-form { min-height: 120px; }
+  #pp-fd-library-form [class*="__container"],
+  #pp-fd-library-form [class*="content"],
+  #pp-fd-library-form [class*="header"],
+  #pp-fd-library-form form {
+    padding: 0 !important; margin: 0 !important; min-height: 0 !important;
+    max-width: none !important; background: transparent !important;
+    border: none !important; box-shadow: none !important;
+  }
+  #pp-fd-library-form [class*="__fields"] { display: grid !important; grid-template-columns: 1fr !important; gap: 12px !important; padding: 0 !important; margin: 0 !important; }
+  #pp-fd-library-form [class*="__field"] { width: 100% !important; max-width: none !important; padding: 0 !important; margin: 0 !important; }
   #pp-fd-library-form input {
-    width: 100% !important; padding: 0.95rem 1rem !important;
+    width: 100% !important; max-width: none !important; padding: 0.95rem 1rem !important;
     border: 1px solid rgba(126, 134, 125, 0.35) !important; border-radius: 8px !important;
     font-family: Georgia, serif !important; font-size: 16px !important;
     color: var(--charcoal) !important; background: var(--cream) !important;
+    text-transform: none !important; letter-spacing: normal !important; text-align: left !important;
   }
   #pp-fd-library-form input:focus { border-color: var(--coral) !important; outline: none !important; box-shadow: 0 0 0 3px rgba(221, 107, 78, 0.14) !important; background: white !important; }
+  #pp-fd-library-form input::placeholder { color: var(--soft-gray) !important; opacity: 0.85 !important; font-family: Georgia, serif !important; font-size: 16px !important; text-transform: none !important; letter-spacing: normal !important; }
   #pp-fd-library-form [class*="__button"],
   #pp-fd-library-form button[type="submit"] {
-    width: 100% !important; background: var(--coral) !important; color: white !important;
+    width: 100% !important; max-width: none !important;
+    background: var(--coral) !important; color: white !important;
     font-family: Georgia, serif !important; font-size: 1.04rem !important; font-weight: bold !important;
     padding: 1.1rem 2.3rem !important; border: none !important; border-radius: 999px !important;
-    cursor: pointer !important; letter-spacing: 0.02em !important;
-    box-shadow: 0 3px 0 var(--coral-deep) !important;
+    cursor: pointer !important; letter-spacing: 0.02em !important; text-transform: none !important;
+    box-shadow: 0 3px 0 var(--coral-deep) !important; margin-top: 0.5rem !important;
   }
   #pp-fd-library-form [class*="__button"]:hover,
   #pp-fd-library-form button[type="submit"]:hover { background: var(--coral-deep) !important; }
