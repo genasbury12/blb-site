@@ -426,21 +426,7 @@
               <h2>Where should I send all twelve?</h2>
             </div>
 
-            <form class="optin-form-fields" id="ppFdProxy" action="/thank-you" method="get" novalidate="">
-              <div class="field">
-                <label for="ppFirstName">First name</label>
-                <input type="text" id="ppFirstName" name="first_name" autocomplete="given-name" placeholder="What should I call you?" required="">
-              </div>
-              <div class="field">
-                <label for="ppEmail">Email address</label>
-                <input type="email" id="ppEmail" name="email" autocomplete="email" placeholder="Where should I send the library?" required="">
-              </div>
-              <button type="submit" class="btn">Yes, unlock the free library</button>
-              <p class="pp-status" style="display:none;font-size:0.9rem;font-style:italic;color:var(--coral-deep);margin-top:0.75rem;text-align:center;"></p>
-            </form>
-            <div aria-hidden="true" style="position:fixed;left:-200vw;top:0;width:420px;height:640px;overflow:hidden;pointer-events:none;">
-              <div id="fd-form-6a80834e4572a4dfc4380a81"></div>
-            </div>
+            <div class="fd-embed" id="fd-form-6a80834e4572a4dfc4380a81"></div>
 
             <p class="form-legal">I will only email you things I think actually help. Unsubscribe any time. <a href="/privacy-policy">Privacy Policy</a>.</p>
 
@@ -864,8 +850,62 @@
     });
   })();
   </script>
+<!-- ============ FLODESK FORM: loader, brand overrides, keeper ============ -->
+<style>
+  /* Playbook recipe: the widget renders visibly inside our designed card and
+     is restyled with scoped attribute-pattern overrides. */
+  #fd-form-6a80834e4572a4dfc4380a81 { min-height: 240px; }
+  #fd-form-6a80834e4572a4dfc4380a81 * { box-sizing: border-box !important; }
+  #fd-form-6a80834e4572a4dfc4380a81 [class*="__container"],
+  #fd-form-6a80834e4572a4dfc4380a81 [class*="content"],
+  #fd-form-6a80834e4572a4dfc4380a81 form { padding: 0 !important; margin: 0 !important; min-height: 0 !important; max-width: none !important; background: transparent !important; border: none !important; box-shadow: none !important; }
+  #fd-form-6a80834e4572a4dfc4380a81 [class*="header"],
+  #fd-form-6a80834e4572a4dfc4380a81 [class*="__title"],
+  #fd-form-6a80834e4572a4dfc4380a81 [class*="__subtitle"],
+  #fd-form-6a80834e4572a4dfc4380a81 [class*="description"],
+  #fd-form-6a80834e4572a4dfc4380a81 h1, #fd-form-6a80834e4572a4dfc4380a81 h2 { display: none !important; }
+  #fd-form-6a80834e4572a4dfc4380a81 [class*="placeholder"] { display: none !important; }
+  #fd-form-6a80834e4572a4dfc4380a81 [class*="__fields"] { display: grid !important; grid-template-columns: 1fr !important; gap: 12px !important; margin: 0 !important; padding: 0 !important; }
+  #fd-form-6a80834e4572a4dfc4380a81 [class*="__field"] { position: static !important; display: flex !important; flex-direction: column !important; margin: 0 !important; padding: 0 !important; width: 100% !important; min-height: 0 !important; background: transparent !important; border: none !important; box-shadow: none !important; }
+  #fd-form-6a80834e4572a4dfc4380a81 [class*="control"]:not(input):not(button):not(select):not(textarea) { background: transparent !important; border: none !important; padding: 0 !important; margin: 0 !important; min-height: 0 !important; box-shadow: none !important; }
+  #fd-form-6a80834e4572a4dfc4380a81 label,
+  #fd-form-6a80834e4572a4dfc4380a81 [class*="label"] {
+    position: static !important; order: -1 !important; transform: none !important; inset: auto !important;
+    display: block !important; opacity: 1 !important; background: transparent !important; pointer-events: auto !important;
+    font-family: Georgia, serif !important; font-size: 0.75rem !important; font-weight: bold !important;
+    letter-spacing: 0.15em !important; text-transform: uppercase !important;
+    color: var(--coral-deep) !important; margin: 0 0 0.45rem !important; padding: 0 !important;
+    line-height: 1.4 !important; text-align: left !important;
+  }
+  #fd-form-6a80834e4572a4dfc4380a81 input {
+    position: static !important; width: 100% !important; padding: 0.95rem 1rem !important;
+    border: 1px solid rgba(126, 134, 125, 0.35) !important; border-radius: 8px !important;
+    font-family: Georgia, serif !important; font-size: 16px !important;
+    color: var(--charcoal) !important; background: var(--cream) !important;
+    text-transform: none !important; letter-spacing: normal !important; text-align: left !important;
+    box-shadow: none !important; line-height: 1.4 !important; height: auto !important; min-height: 0 !important;
+  }
+  #fd-form-6a80834e4572a4dfc4380a81 input:focus { border-color: var(--coral) !important; outline: none !important; box-shadow: 0 0 0 3px rgba(221, 107, 78, 0.14) !important; background: white !important; }
+  #fd-form-6a80834e4572a4dfc4380a81 input::placeholder { color: var(--soft-gray) !important; opacity: 0.85 !important; font-family: Georgia, serif !important; text-transform: none !important; letter-spacing: normal !important; }
+  #fd-form-6a80834e4572a4dfc4380a81 [class*="__button"],
+  #fd-form-6a80834e4572a4dfc4380a81 button {
+    width: 100% !important; display: inline-flex !important; align-items: center !important; justify-content: center !important;
+    background: var(--coral) !important; color: white !important;
+    font-family: Georgia, serif !important; font-size: 1.04rem !important; font-weight: bold !important;
+    padding: 1.1rem 2.3rem !important; border: none !important; border-radius: 999px !important;
+    cursor: pointer !important; letter-spacing: 0.02em !important; margin: 0.75rem 0 0 !important;
+    box-shadow: 0 3px 0 var(--coral-deep) !important; transition: all 0.25s var(--ease) !important; text-transform: none !important;
+    min-height: 0 !important; height: auto !important;
+  }
+  #fd-form-6a80834e4572a4dfc4380a81 [class*="__button"]:hover,
+  #fd-form-6a80834e4572a4dfc4380a81 button:hover { background: var(--coral-deep) !important; transform: translateY(-2px) !important; box-shadow: 0 5px 0 var(--coral-deep) !important; }
+  #fd-form-6a80834e4572a4dfc4380a81 [class*="footer"] { padding: 0 !important; margin: 0 !important; }
+  #fd-form-6a80834e4572a4dfc4380a81 [class*="error"] { font-family: Georgia, serif !important; font-size: 0.85rem !important; color: var(--coral-deep) !important; margin-top: 0.35rem !important; }
+  #fd-form-6a80834e4572a4dfc4380a81 [class*="success"] { font-family: Georgia, serif !important; font-style: italic !important; font-size: 1.05rem !important; color: var(--sage) !important; text-align: center !important; padding: 1rem 0 !important; }
+</style>
 <script>
-  /* Flodesk loader (guarded once per page) */
+  /* Flodesk universal loader; the trailing fd argument is required. Guarded
+     so a stray second snippet on the page cannot double-init. */
   if (!window.__ppFdInit) {
     window.__ppFdInit = true;
     (function(w, d, t, h, s, n) {
@@ -886,94 +926,42 @@
   }
 </script>
 <script>
-  /* The visible form is ours. Flodesk's widget mounts off-screen (full size,
-     so it actually renders) and the values are relayed into it. If the
-     widget cannot confirm delivery, a direct post to Flodesk's form
-     endpoint is the backup. The visitor is only sent to the thank-you page
-     when delivery was confirmed or genuinely attempted; hard failures show
-     an honest message instead. */
+  /* Keeper: removes duplicate renders, keeps placeholders on brand, and
+     sends the visitor to the thank-you page when Flodesk confirms the
+     signup (backup for the redirect configured in Flodesk itself). */
   (function () {
-    var form = document.getElementById('ppFdProxy');
-    var hidden = document.getElementById('fd-form-6a80834e4572a4dfc4380a81');
-    if (!form || !hidden || form.__pp) return;
-    form.__pp = true;
-    var FORM_ID = '6a80834e4572a4dfc4380a81';
-    var btn = form.querySelector('button[type="submit"]');
-    var status = form.querySelector('.pp-status');
-    var btnText = btn ? btn.textContent : '';
-    function say(m) { if (status) { status.textContent = m; status.style.display = m ? 'block' : 'none'; } }
-    function busy(m) { if (btn) { btn.disabled = true; btn.textContent = m; } }
-    function reset() { if (btn) { btn.disabled = false; btn.textContent = btnText; } }
-    function go() { window.location.href = '/thank-you?r=library'; }
-    function setNative(input, value) {
-      var d = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value');
-      d.set.call(input, value);
-      input.dispatchEvent(new Event('input', { bubbles: true }));
-      input.dispatchEvent(new Event('change', { bubbles: true }));
-    }
-    function widgetReady() {
-      return hidden.querySelector('input[type="email"]') &&
-             hidden.querySelector('button[type="submit"], [class*="__button"]');
-    }
-    function relayToWidget(nameV, emailV, cb) {
-      var fdName = hidden.querySelector('input[type="text"]');
-      var fdEmail = hidden.querySelector('input[type="email"]');
-      var fdBtn = hidden.querySelector('button[type="submit"], [class*="__button"]');
-      if (fdName) setNative(fdName, nameV);
-      setNative(fdEmail, emailV);
-      setTimeout(function () {
-        if (fdEmail.value !== emailV) setNative(fdEmail, emailV); /* widget state check, retype once */
-        fdBtn.click();
-        var t0 = Date.now();
-        var watch = setInterval(function () {
-          var ok = hidden.querySelector('[class*="success"]');
-          var bad = hidden.querySelector('[class*="error"]');
-          if (ok && getComputedStyle(ok).display !== 'none') { clearInterval(watch); cb(true); }
-          else if (bad && getComputedStyle(bad).display !== 'none' && bad.textContent.trim()) { clearInterval(watch); cb(false); }
-          else if (Date.now() - t0 > 6000) { clearInterval(watch); cb(null); }
-        }, 250);
-      }, 350);
-    }
-    function directPost(nameV, emailV, cb) {
+    var box = document.getElementById('fd-form-6a80834e4572a4dfc4380a81');
+    if (!box || box.__ppKeeper) return;
+    box.__ppKeeper = true;
+    var JUNK = /^[A-Z0-9]{5,}$/;
+    var busy = false, sent = false;
+    function sweep() {
+      if (busy) return;
+      busy = true;
       try {
-        fetch('https://form.flodesk.com/forms/' + FORM_ID + '/submit', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email: emailV, firstName: nameV, first_name: nameV, name: nameV })
-        }).then(function (r) { cb(!!r.ok); }).catch(function () { cb(false); });
-      } catch (e) { cb(false); }
-    }
-    form.addEventListener('submit', function (ev) {
-      ev.preventDefault();
-      var name = form.querySelector('input[type="text"]');
-      var email = form.querySelector('input[type="email"]');
-      var nameV = name ? name.value.trim() : '';
-      var emailV = email ? email.value.trim() : '';
-      if (!emailV || !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(emailV)) {
-        say('Please check that email address so the library actually reaches you.');
-        if (email) email.focus();
-        return;
-      }
-      busy('Sending it over...'); say('');
-      var waited = 0;
-      (function waitWidget() {
-        if (widgetReady()) {
-          relayToWidget(nameV, emailV, function (okWidget) {
-            if (okWidget === true) return go();
-            directPost(nameV, emailV, function (okPost) {
-              if (okPost || okWidget === null) return go();
-              reset(); say('Hmm, that did not go through. Mind trying once more? If it keeps happening, email hello@purposefulpennies.com and I will add you myself.');
-            });
-          });
-        } else if (waited < 7000) {
-          waited += 250; setTimeout(waitWidget, 250);
-        } else {
-          directPost(nameV, emailV, function (okPost) {
-            if (okPost) return go();
-            reset(); say('Hmm, the signup helper is not answering right now. Mind trying once more in a minute? Or email hello@purposefulpennies.com and I will add you myself.');
-          });
+        var forms = box.querySelectorAll('form');
+        for (var i = 1; i < forms.length; i++) {
+          var root = forms[i];
+          while (root.parentElement && root.parentElement !== box) root = root.parentElement;
+          (root.parentElement === box ? root : forms[i]).remove();
         }
-      })();
-    });
+        box.querySelectorAll('input[type="text"]').forEach(function (t) {
+          if (t.getAttribute('placeholder') !== 'What should I call you?') t.setAttribute('placeholder', 'What should I call you?');
+          if (JUNK.test(t.value) && document.activeElement !== t) t.value = '';
+        });
+        box.querySelectorAll('input[type="email"]').forEach(function (e) {
+          if (e.getAttribute('placeholder') !== 'Where should I send it?') e.setAttribute('placeholder', 'Where should I send it?');
+          if (JUNK.test(e.value) && document.activeElement !== e) e.value = '';
+        });
+        var ok = box.querySelector('[class*="success"], [class*="thank"]');
+        if (!sent && ok && getComputedStyle(ok).display !== 'none' && ok.textContent.trim()) {
+          sent = true;
+          setTimeout(function () { window.location.href = '/thank-you?r=library'; }, 900);
+        }
+      } finally { busy = false; }
+    }
+    new MutationObserver(sweep).observe(box, { childList: true, subtree: true });
+    sweep();
+    setInterval(sweep, 1500);
   })();
 </script>

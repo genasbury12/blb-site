@@ -506,17 +506,17 @@
     const ITEMS = [
       /* 01 budget, 4 */
       { title: 'The Payday Reset Page', pages: 1, cat: 'budget', system: 'budget', starter: true,
-        blurb: 'Every dollar of this paycheck given a job before it goes anywhere. The page the whole thing hangs off.', file: 'payday-reset-page.pdf' },
+        blurb: 'Every dollar of this paycheck given a job before it goes anywhere. The page the whole thing hangs off.', file: 'payday-reset-page.pdf', link: 'https://docs.google.com/document/d/1isk_5Q6HF56yFwnQeVmctulexFk1AywErio9HOh97kU/export?format=pdf' },
       { title: 'The One-Page Monthly Budget', pages: 2, cat: 'budget', system: 'budget', starter: true,
-        blurb: 'The month on one sheet, with a column for planned and a column for what actually happened.', file: 'one-page-monthly-budget.pdf' },
+        blurb: 'The month on one sheet, with a column for planned and a column for what actually happened.', file: 'one-page-monthly-budget.pdf', link: 'https://docs.google.com/document/d/1coWlslWKiGslyoLl3vc8IvwvcmezIqbGEBxRdhxY27E/export?format=pdf' },
       { title: 'Bill Due Date Calendar', pages: 2, cat: 'budget', system: 'budget',
-        blurb: 'Which payday covers what, so nothing lands in the wrong week again.', file: 'bill-due-date-calendar.pdf' },
+        blurb: 'Which payday covers what, so nothing lands in the wrong week again.', file: 'bill-due-date-calendar.pdf', link: 'https://docs.google.com/document/d/13R_O0TE-Uxq_rue-68xqSt5OMSrLKT93Bt-GmbVbaEc/export?format=pdf' },
       { title: 'Debt Payoff Progress Tracker', pages: 1, cat: 'budget', system: 'budget',
-        blurb: 'One hundred squares to colour in. Slow progress you can actually see is progress you keep making.', file: 'debt-payoff-tracker.pdf' },
+        blurb: 'One hundred squares to colour in. Slow progress you can actually see is progress you keep making.', file: 'debt-payoff-tracker.pdf', link: 'https://docs.google.com/document/d/1Hf9oww3SCud_d7eu-8731lXvaEncSAFMC_84vcxK1lQ/export?format=pdf' },
 
       /* 02 sinking funds, 3 */
       { title: 'Sinking Fund Starter Sheet', pages: 1, cat: 'budget', system: 'sinking', starter: true,
-        blurb: 'Twelve funds, one number each. Start with one and add the rest when you are ready.', file: 'sinking-fund-starter.pdf' },
+        blurb: 'Twelve funds, one number each. Start with one and add the rest when you are ready.', file: 'sinking-fund-starter.pdf', link: 'https://docs.google.com/document/d/1rofF_VebBjBE9fzaqqRa7kYuuimwtAhlfCOeAKsuQUk/export?format=pdf' },
       { title: 'Monthly Contribution Calculator', pages: 1, cat: 'budget', system: 'sinking',
         blurb: 'Work out what each fund needs a month so Christmas stops arriving as a surprise in December.', file: 'contribution-calculator.pdf', link: 'https://docs.google.com/spreadsheets/d/1kBGwZa-JXzdrNlH_BEOjfqUnQnimSGBRMw70HQYUkd0/copy' },
       { title: 'Sinking Fund Progress Tracker', pages: 1, cat: 'budget', system: 'sinking',
@@ -524,7 +524,7 @@
 
       /* 03 meals, 4 */
       { title: 'The Two-Week Pantry Meal Plan', pages: 4, cat: 'food', system: 'meals',
-        blurb: 'Fourteen dinners built from pantry staples, with the shopping list already written.', file: 'two-week-pantry-plan.pdf' },
+        blurb: 'Fourteen dinners built from pantry staples, with the shopping list already written.', file: 'two-week-pantry-plan.pdf', link: 'https://docs.google.com/document/d/1FIdUL8sGdv98fDkL_0l4mXsiGk37CFAFkenvc-UWHdY/export?format=pdf' },
       { title: 'Weekly Meal Planner', pages: 1, cat: 'food', system: 'meals',
         blurb: 'The fridge copy. Seven dinners, decided on Sunday, so five o clock stops being a decision.', file: 'weekly-meal-planner.pdf', link: 'https://docs.google.com/document/d/1WnhML8LPMzfpxDgxe9WJ1uwRBwkceW7Aw4ulNzu0uHc/export?format=pdf' },
       { title: 'Lunchbox Fortnight', pages: 3, cat: 'food', system: 'meals', isNew: true,
@@ -534,7 +534,7 @@
 
       /* 04 groceries, 4 */
       { title: 'Grocery Trip Cheat Sheet', pages: 1, cat: 'food', system: 'groceries',
-        blurb: 'Folds to pocket size, with your number at the top and a running total down the side.', file: 'grocery-cheat-sheet.pdf' },
+        blurb: 'Folds to pocket size, with your number at the top and a running total down the side.', file: 'grocery-cheat-sheet.pdf', link: 'https://docs.google.com/document/d/1okYGhw4rs2QIfDY1J3nVXOComTrGF5mBy3ii2ILevp4/export?format=pdf' },
       { title: 'Weekly Grocery Number Worksheet', pages: 1, cat: 'food', system: 'groceries',
         blurb: 'Set the number on purpose, using what you actually spent for the last month.', file: 'grocery-number.pdf', link: 'https://docs.google.com/spreadsheets/d/1ghMp1B3JtAfrK30FD5AZAxr6rk17PSvV-mDPppRQ0CI/copy' },
       { title: 'Bulk Buying Calculator', pages: 1, cat: 'food', system: 'groceries',
@@ -544,11 +544,11 @@
 
       /* 05 home, 4 */
       { title: 'Weekly Home Rhythm Planner', pages: 2, cat: 'home', system: 'home',
-        blurb: 'Morning, afternoon, evening. Rhythms rather than a cleaning schedule you will resent by Thursday.', file: 'home-rhythm-planner.pdf' },
+        blurb: 'Morning, afternoon, evening. Rhythms rather than a cleaning schedule you will resent by Thursday.', file: 'home-rhythm-planner.pdf', link: 'https://docs.google.com/document/d/13MlgITK1dpV5BqjWeMQTVtikEKNyo3RGs1b36mErM_E/export?format=pdf' },
       { title: 'Daily Rhythm Cards', pages: 2, cat: 'home', system: 'home',
         blurb: 'Cut them out and stick them where you need them. Good for kids who like to know what happens next.', file: 'daily-rhythm-cards.pdf', link: 'https://docs.google.com/document/d/1rqr_l9BBRVzPmVz_mbjdtmPYT2tt1DwmOEOdg_BbVFA/export?format=pdf' },
       { title: 'Freezer and Pantry Inventory', pages: 2, cat: 'home', system: 'home',
-        blurb: 'Stops you buying a fourth jar of the thing you already have three of.', file: 'freezer-pantry-inventory.pdf' },
+        blurb: 'Stops you buying a fourth jar of the thing you already have three of.', file: 'freezer-pantry-inventory.pdf', link: 'https://docs.google.com/document/d/1SS9ImZ9GbIDmqbCdp--JD6qpR_i_C0EXpEJvL5FYKKQ/export?format=pdf' },
       { title: 'The Laundry System Page', pages: 1, cat: 'home', system: 'home',
         blurb: 'One load a day, sorted by who it belongs to. Unglamorous, and it works.', file: 'laundry-system.pdf', link: 'https://docs.google.com/document/d/1m5ilRPqTKZ3xspj9vayhlOm53KYp6qP8PnnHwR64-cc/export?format=pdf' },
 
@@ -556,7 +556,7 @@
       { title: 'Money Is a Tool Workbook', pages: 6, cat: 'mind', system: 'mindset',
         blurb: 'The full workbook that goes with the training. Do it once, properly, with nobody reading over your shoulder.', file: 'money-is-a-tool-workbook.pdf', link: 'https://docs.google.com/document/d/1WwZAQZKg8U5GkDNlG8xFx0ltOKlxBhUDyvu43_YScBw/export?format=pdf' },
       { title: 'Reflection Pages', pages: 4, cat: 'mind', system: 'mindset',
-        blurb: 'For a quiet ten minutes. One optional faith prompt, and it is genuinely optional.', file: 'reflection-pages.pdf' },
+        blurb: 'For a quiet ten minutes. One optional faith prompt, and it is genuinely optional.', file: 'reflection-pages.pdf', link: 'https://docs.google.com/document/d/1Pia--u483RpahaED_THpJ7oUzJjiqwq8dhxHPEC_XnI/export?format=pdf' },
       { title: 'Money Values Pages', pages: 2, cat: 'mind', system: 'mindset',
         blurb: 'For working out what you actually want the money for, which makes saying no to the rest easier.', file: 'money-values.pdf', link: 'https://docs.google.com/document/d/1JhLeyd7rpdtfF7PQYJKFPQERrKXpeFMuYJQmyuGpYzI/export?format=pdf' },
       { title: 'Wins and Gratitude Pages', pages: 2, cat: 'mind', system: 'mindset',
@@ -572,7 +572,7 @@
       { title: 'School Supply Plan', pages: 2, cat: 'home', system: 'monthly', isNew: true,
         blurb: 'Fill it in once and reuse it every August. The month that quietly wrecks a good budget.', file: 'school-supply-plan.pdf', link: 'https://docs.google.com/spreadsheets/d/1jPSAGo_rO0pyJL5MooWn9puNSO6bLNpp4RkCVcR3Z5w/copy' },
       { title: 'Talking to Kids About Money', pages: 3, cat: 'home', system: 'monthly',
-        blurb: 'Twenty conversation starters by age, and five things worth not saying.', file: 'talking-to-kids.pdf' }
+        blurb: 'Twenty conversation starters by age, and five things worth not saying.', file: 'talking-to-kids.pdf', link: 'https://docs.google.com/document/d/1wrrC_77USC3ejvUypSv_D-EmDVahd8IRa4_upLKBTXQ/export?format=pdf' }
     ];
 
     /* ===== WIRE LINKS ===== */
