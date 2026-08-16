@@ -426,7 +426,7 @@
               <h2>Where should I send all twelve?</h2>
             </div>
 
-            <div class="fd-embed" id="fd-form-6a80834e4572a4dfc4380a81"></div>
+            <div class="fd-embed" id="pp-fd-library-form"></div>
 
             <p class="form-legal">I will only email you things I think actually help. Unsubscribe any time. <a href="/privacy-policy">Privacy Policy</a>.</p>
 
@@ -850,26 +850,26 @@
     });
   })();
   </script>
-<!-- ============ FLODESK FORM: loader, brand overrides, keeper ============ -->
+<!-- ============ FLODESK FORM: loader and brand overrides (playbook recipe, no JS touches the widget) ============ -->
 <style>
   /* Playbook recipe: the widget renders visibly inside our designed card and
      is restyled with scoped attribute-pattern overrides. */
-  #fd-form-6a80834e4572a4dfc4380a81 { min-height: 240px; }
-  #fd-form-6a80834e4572a4dfc4380a81 * { box-sizing: border-box !important; }
-  #fd-form-6a80834e4572a4dfc4380a81 [class*="__container"],
-  #fd-form-6a80834e4572a4dfc4380a81 [class*="content"],
-  #fd-form-6a80834e4572a4dfc4380a81 form { padding: 0 !important; margin: 0 !important; min-height: 0 !important; max-width: none !important; background: transparent !important; border: none !important; box-shadow: none !important; }
-  #fd-form-6a80834e4572a4dfc4380a81 [class*="header"],
-  #fd-form-6a80834e4572a4dfc4380a81 [class*="__title"],
-  #fd-form-6a80834e4572a4dfc4380a81 [class*="__subtitle"],
-  #fd-form-6a80834e4572a4dfc4380a81 [class*="description"],
-  #fd-form-6a80834e4572a4dfc4380a81 h1, #fd-form-6a80834e4572a4dfc4380a81 h2 { display: none !important; }
-  #fd-form-6a80834e4572a4dfc4380a81 [class*="placeholder"] { display: none !important; }
-  #fd-form-6a80834e4572a4dfc4380a81 [class*="__fields"] { display: grid !important; grid-template-columns: 1fr !important; gap: 12px !important; margin: 0 !important; padding: 0 !important; }
-  #fd-form-6a80834e4572a4dfc4380a81 [class*="__field"] { position: static !important; display: flex !important; flex-direction: column !important; margin: 0 !important; padding: 0 !important; width: 100% !important; min-height: 0 !important; background: transparent !important; border: none !important; box-shadow: none !important; }
-  #fd-form-6a80834e4572a4dfc4380a81 [class*="control"]:not(input):not(button):not(select):not(textarea) { background: transparent !important; border: none !important; padding: 0 !important; margin: 0 !important; min-height: 0 !important; box-shadow: none !important; }
-  #fd-form-6a80834e4572a4dfc4380a81 label,
-  #fd-form-6a80834e4572a4dfc4380a81 [class*="label"] {
+  #pp-fd-library-form { min-height: 240px; }
+  #pp-fd-library-form * { box-sizing: border-box !important; }
+  #pp-fd-library-form [class*="__container"],
+  #pp-fd-library-form [class*="content"],
+  #pp-fd-library-form form { padding: 0 !important; margin: 0 !important; min-height: 0 !important; max-width: none !important; background: transparent !important; border: none !important; box-shadow: none !important; }
+  #pp-fd-library-form [class*="header"],
+  #pp-fd-library-form [class*="__title"],
+  #pp-fd-library-form [class*="__subtitle"],
+  #pp-fd-library-form [class*="description"],
+  #pp-fd-library-form h1, #pp-fd-library-form h2 { display: none !important; }
+  #pp-fd-library-form [class*="placeholder"] { display: none !important; }
+  #pp-fd-library-form [class*="__fields"] { display: grid !important; grid-template-columns: 1fr !important; gap: 12px !important; margin: 0 !important; padding: 0 !important; }
+  #pp-fd-library-form [class*="__field"] { position: static !important; display: flex !important; flex-direction: column !important; margin: 0 !important; padding: 0 !important; width: 100% !important; min-height: 0 !important; background: transparent !important; border: none !important; box-shadow: none !important; }
+  #pp-fd-library-form [class*="control"]:not(input):not(button):not(select):not(textarea) { background: transparent !important; border: none !important; padding: 0 !important; margin: 0 !important; min-height: 0 !important; box-shadow: none !important; }
+  #pp-fd-library-form label,
+  #pp-fd-library-form [class*="label"] {
     position: static !important; order: -1 !important; transform: none !important; inset: auto !important;
     display: block !important; opacity: 1 !important; background: transparent !important; pointer-events: auto !important;
     font-family: Georgia, serif !important; font-size: 0.75rem !important; font-weight: bold !important;
@@ -877,7 +877,7 @@
     color: var(--coral-deep) !important; margin: 0 0 0.45rem !important; padding: 0 !important;
     line-height: 1.4 !important; text-align: left !important;
   }
-  #fd-form-6a80834e4572a4dfc4380a81 input {
+  #pp-fd-library-form input {
     position: static !important; width: 100% !important; padding: 0.95rem 1rem !important;
     border: 1px solid rgba(126, 134, 125, 0.35) !important; border-radius: 8px !important;
     font-family: Georgia, serif !important; font-size: 16px !important;
@@ -885,10 +885,10 @@
     text-transform: none !important; letter-spacing: normal !important; text-align: left !important;
     box-shadow: none !important; line-height: 1.4 !important; height: auto !important; min-height: 0 !important;
   }
-  #fd-form-6a80834e4572a4dfc4380a81 input:focus { border-color: var(--coral) !important; outline: none !important; box-shadow: 0 0 0 3px rgba(221, 107, 78, 0.14) !important; background: white !important; }
-  #fd-form-6a80834e4572a4dfc4380a81 input::placeholder { color: var(--soft-gray) !important; opacity: 0.85 !important; font-family: Georgia, serif !important; text-transform: none !important; letter-spacing: normal !important; }
-  #fd-form-6a80834e4572a4dfc4380a81 [class*="__button"],
-  #fd-form-6a80834e4572a4dfc4380a81 button {
+  #pp-fd-library-form input:focus { border-color: var(--coral) !important; outline: none !important; box-shadow: 0 0 0 3px rgba(221, 107, 78, 0.14) !important; background: white !important; }
+  #pp-fd-library-form input::placeholder { color: var(--soft-gray) !important; opacity: 0.85 !important; font-family: Georgia, serif !important; text-transform: none !important; letter-spacing: normal !important; }
+  #pp-fd-library-form [class*="__button"],
+  #pp-fd-library-form button {
     width: 100% !important; display: inline-flex !important; align-items: center !important; justify-content: center !important;
     background: var(--coral) !important; color: white !important;
     font-family: Georgia, serif !important; font-size: 1.04rem !important; font-weight: bold !important;
@@ -897,11 +897,11 @@
     box-shadow: 0 3px 0 var(--coral-deep) !important; transition: all 0.25s var(--ease) !important; text-transform: none !important;
     min-height: 0 !important; height: auto !important;
   }
-  #fd-form-6a80834e4572a4dfc4380a81 [class*="__button"]:hover,
-  #fd-form-6a80834e4572a4dfc4380a81 button:hover { background: var(--coral-deep) !important; transform: translateY(-2px) !important; box-shadow: 0 5px 0 var(--coral-deep) !important; }
-  #fd-form-6a80834e4572a4dfc4380a81 [class*="footer"] { padding: 0 !important; margin: 0 !important; }
-  #fd-form-6a80834e4572a4dfc4380a81 [class*="error"] { font-family: Georgia, serif !important; font-size: 0.85rem !important; color: var(--coral-deep) !important; margin-top: 0.35rem !important; }
-  #fd-form-6a80834e4572a4dfc4380a81 [class*="success"] { font-family: Georgia, serif !important; font-style: italic !important; font-size: 1.05rem !important; color: var(--sage) !important; text-align: center !important; padding: 1rem 0 !important; }
+  #pp-fd-library-form [class*="__button"]:hover,
+  #pp-fd-library-form button:hover { background: var(--coral-deep) !important; transform: translateY(-2px) !important; box-shadow: 0 5px 0 var(--coral-deep) !important; }
+  #pp-fd-library-form [class*="footer"] { padding: 0 !important; margin: 0 !important; }
+  #pp-fd-library-form [class*="error"] { font-family: Georgia, serif !important; font-size: 0.85rem !important; color: var(--coral-deep) !important; margin-top: 0.35rem !important; }
+  #pp-fd-library-form [class*="success"] { font-family: Georgia, serif !important; font-style: italic !important; font-size: 1.05rem !important; color: var(--sage) !important; text-align: center !important; padding: 1rem 0 !important; }
 </style>
 <script>
   /* Flodesk universal loader; the trailing fd argument is required. Guarded
@@ -921,60 +921,8 @@
     })(window, document, 'script', 'https://assets.flodesk.com', '/universal', 'fd');
     window.fd('form', {
       formId: '6a80834e4572a4dfc4380a81',
-      containerEl: '#fd-form-6a80834e4572a4dfc4380a81'
+      containerEl: '#pp-fd-library-form'
     });
   }
 </script>
-<script>
-  /* Keeper v3. Handles what Showit actually does: multiple copies of the
-     embed (and any stray Flodesk snippets) all render into the first
-     container. Dedupe works on render roots, not form tags; placeholders
-     are branded by each field's label; a success watcher backs up the
-     Flodesk redirect. */
-  (function () {
-    if (window.__ppKeeper3) return;
-    window.__ppKeeper3 = true;
-    var JUNK = /^[A-Z0-9]{5,}$/;
-    var busy = false, sent = false;
-    function boxes() {
-      return Array.prototype.slice.call(document.querySelectorAll('[id="fd-form-6a80834e4572a4dfc4380a81"]'));
-    }
-    function sweep() {
-      if (busy) return;
-      busy = true;
-      try {
-        var all = boxes();
-        if (!all.length) return;
-        /* collect every render root across every container copy */
-        var roots = [];
-        all.forEach(function (b) {
-          Array.prototype.slice.call(b.children).forEach(function (c) { roots.push(c); });
-        });
-        /* keep the first render, remove every other render root */
-        for (var i = 1; i < roots.length; i++) roots[i].remove();
-        var keeperBox = roots.length ? roots[0].parentElement : all[0];
-        /* brand placeholders using each field's label, never the input type */
-        keeperBox.querySelectorAll('input').forEach(function (inp) {
-          if (inp.type === 'hidden' || inp.type === 'checkbox' || inp.type === 'submit') return;
-          var wrap = inp.closest('[class*="field"]') || inp.parentElement;
-          var lab = wrap ? wrap.querySelector('label') : null;
-          var isEmail = inp.type === 'email' || (lab && /mail/i.test(lab.textContent || ''));
-          var want = isEmail ? 'Where should I send it?' : 'What should I call you?';
-          if (inp.getAttribute('placeholder') !== want) inp.setAttribute('placeholder', want);
-          if (JUNK.test(inp.value) && document.activeElement !== inp) inp.value = '';
-        });
-        /* success: Flodesk swaps in a confirmation; send them to the thank-you page */
-        var ok = keeperBox.querySelector('[class*="success"], [class*="thank"]');
-        if (!sent && ok && getComputedStyle(ok).display !== 'none' && ok.textContent.trim()) {
-          sent = true;
-          setTimeout(function () { window.location.href = '/thank-you?r=library'; }, 900);
-        }
-      } finally { busy = false; }
-    }
-    var mo = new MutationObserver(sweep);
-    boxes().forEach(function (b) { mo.observe(b, { childList: true, subtree: true }); });
-    mo.observe(document.body, { childList: true });
-    sweep();
-    setInterval(sweep, 1200);
-  })();
-</script>
+
