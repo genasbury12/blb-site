@@ -1782,42 +1782,55 @@ window.scrollTo({top:0,behavior:rm?'auto':'smooth'});});})();</script>
   }
 </script>
 <script>
-  /* Keeper: removes duplicate renders, keeps placeholders on brand, and
-     sends the visitor to the thank-you page when Flodesk confirms the
-     signup (backup for the redirect configured in Flodesk itself). */
+  /* Keeper v3. Handles what Showit actually does: multiple copies of the
+     embed (and any stray Flodesk snippets) all render into the first
+     container. Dedupe works on render roots, not form tags; placeholders
+     are branded by each field's label; a success watcher backs up the
+     Flodesk redirect. */
   (function () {
-    var box = document.getElementById('fd-form-6a80834e4572a4dfc4380a81');
-    if (!box || box.__ppKeeper) return;
-    box.__ppKeeper = true;
+    if (window.__ppKeeper3) return;
+    window.__ppKeeper3 = true;
     var JUNK = /^[A-Z0-9]{5,}$/;
     var busy = false, sent = false;
+    function boxes() {
+      return Array.prototype.slice.call(document.querySelectorAll('[id="fd-form-6a80834e4572a4dfc4380a81"]'));
+    }
     function sweep() {
       if (busy) return;
       busy = true;
       try {
-        var forms = box.querySelectorAll('form');
-        for (var i = 1; i < forms.length; i++) {
-          var root = forms[i];
-          while (root.parentElement && root.parentElement !== box) root = root.parentElement;
-          (root.parentElement === box ? root : forms[i]).remove();
-        }
-        box.querySelectorAll('input[type="text"]').forEach(function (t) {
-          if (t.getAttribute('placeholder') !== 'What should I call you?') t.setAttribute('placeholder', 'What should I call you?');
-          if (JUNK.test(t.value) && document.activeElement !== t) t.value = '';
+        var all = boxes();
+        if (!all.length) return;
+        /* collect every render root across every container copy */
+        var roots = [];
+        all.forEach(function (b) {
+          Array.prototype.slice.call(b.children).forEach(function (c) { roots.push(c); });
         });
-        box.querySelectorAll('input[type="email"]').forEach(function (e) {
-          if (e.getAttribute('placeholder') !== 'Where should I send it?') e.setAttribute('placeholder', 'Where should I send it?');
-          if (JUNK.test(e.value) && document.activeElement !== e) e.value = '';
+        /* keep the first render, remove every other render root */
+        for (var i = 1; i < roots.length; i++) roots[i].remove();
+        var keeperBox = roots.length ? roots[0].parentElement : all[0];
+        /* brand placeholders using each field's label, never the input type */
+        keeperBox.querySelectorAll('input').forEach(function (inp) {
+          if (inp.type === 'hidden' || inp.type === 'checkbox' || inp.type === 'submit') return;
+          var wrap = inp.closest('[class*="field"]') || inp.parentElement;
+          var lab = wrap ? wrap.querySelector('label') : null;
+          var isEmail = inp.type === 'email' || (lab && /mail/i.test(lab.textContent || ''));
+          var want = isEmail ? 'Where should I send it?' : 'What should I call you?';
+          if (inp.getAttribute('placeholder') !== want) inp.setAttribute('placeholder', want);
+          if (JUNK.test(inp.value) && document.activeElement !== inp) inp.value = '';
         });
-        var ok = box.querySelector('[class*="success"], [class*="thank"]');
+        /* success: Flodesk swaps in a confirmation; send them to the thank-you page */
+        var ok = keeperBox.querySelector('[class*="success"], [class*="thank"]');
         if (!sent && ok && getComputedStyle(ok).display !== 'none' && ok.textContent.trim()) {
           sent = true;
           setTimeout(function () { window.location.href = '/thank-you?r=library'; }, 900);
         }
       } finally { busy = false; }
     }
-    new MutationObserver(sweep).observe(box, { childList: true, subtree: true });
+    var mo = new MutationObserver(sweep);
+    boxes().forEach(function (b) { mo.observe(b, { childList: true, subtree: true }); });
+    mo.observe(document.body, { childList: true });
     sweep();
-    setInterval(sweep, 1500);
+    setInterval(sweep, 1200);
   })();
 </script>
