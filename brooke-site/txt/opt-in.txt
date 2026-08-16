@@ -852,56 +852,29 @@
   </script>
 <!-- ============ FLODESK FORM: loader and brand overrides (playbook recipe, no JS touches the widget) ============ -->
 <style>
-  /* Playbook recipe: the widget renders visibly inside our designed card and
-     is restyled with scoped attribute-pattern overrides. */
-  #pp-fd-library-form { min-height: 240px; }
-  #pp-fd-library-form * { box-sizing: border-box !important; }
-  #pp-fd-library-form [class*="__container"],
-  #pp-fd-library-form [class*="content"],
-  #pp-fd-library-form form { padding: 0 !important; margin: 0 !important; min-height: 0 !important; max-width: none !important; background: transparent !important; border: none !important; box-shadow: none !important; }
-  #pp-fd-library-form [class*="header"],
-  #pp-fd-library-form [class*="__title"],
-  #pp-fd-library-form [class*="__subtitle"],
-  #pp-fd-library-form [class*="description"],
-  #pp-fd-library-form h1, #pp-fd-library-form h2 { display: none !important; }
-  #pp-fd-library-form [class*="placeholder"] { display: none !important; }
-  #pp-fd-library-form [class*="__fields"] { display: grid !important; grid-template-columns: 1fr !important; gap: 12px !important; margin: 0 !important; padding: 0 !important; }
-  #pp-fd-library-form [class*="__field"] { position: static !important; display: flex !important; flex-direction: column !important; margin: 0 !important; padding: 0 !important; width: 100% !important; min-height: 0 !important; background: transparent !important; border: none !important; box-shadow: none !important; }
-  #pp-fd-library-form [class*="control"]:not(input):not(button):not(select):not(textarea) { background: transparent !important; border: none !important; padding: 0 !important; margin: 0 !important; min-height: 0 !important; box-shadow: none !important; }
-  #pp-fd-library-form label,
-  #pp-fd-library-form [class*="label"] {
-    position: static !important; order: -1 !important; transform: none !important; inset: auto !important;
-    display: block !important; opacity: 1 !important; background: transparent !important; pointer-events: auto !important;
-    font-family: Georgia, serif !important; font-size: 0.75rem !important; font-weight: bold !important;
-    letter-spacing: 0.15em !important; text-transform: uppercase !important;
-    color: var(--coral-deep) !important; margin: 0 0 0.45rem !important; padding: 0 !important;
-    line-height: 1.4 !important; text-align: left !important;
-  }
+  /* Playbook overrides ONLY. Nothing here touches display, position, or
+     visibility of Flodesk's field elements: their stylesheet hides decoy
+     anti-bot fields, and forcing display reveals them as fake duplicates. */
+  #pp-fd-library-form { min-height: 200px; }
+  #pp-fd-library-form [class*="__container"] { padding: 0 !important; margin: 0 !important; max-width: none !important; background: transparent !important; }
+  #pp-fd-library-form [class*="__fields"] { display: grid !important; grid-template-columns: 1fr !important; gap: 12px !important; }
   #pp-fd-library-form input {
-    position: static !important; width: 100% !important; padding: 0.95rem 1rem !important;
+    width: 100% !important; padding: 0.95rem 1rem !important;
     border: 1px solid rgba(126, 134, 125, 0.35) !important; border-radius: 8px !important;
     font-family: Georgia, serif !important; font-size: 16px !important;
     color: var(--charcoal) !important; background: var(--cream) !important;
-    text-transform: none !important; letter-spacing: normal !important; text-align: left !important;
-    box-shadow: none !important; line-height: 1.4 !important; height: auto !important; min-height: 0 !important;
   }
   #pp-fd-library-form input:focus { border-color: var(--coral) !important; outline: none !important; box-shadow: 0 0 0 3px rgba(221, 107, 78, 0.14) !important; background: white !important; }
-  #pp-fd-library-form input::placeholder { color: var(--soft-gray) !important; opacity: 0.85 !important; font-family: Georgia, serif !important; text-transform: none !important; letter-spacing: normal !important; }
   #pp-fd-library-form [class*="__button"],
-  #pp-fd-library-form button {
-    width: 100% !important; display: inline-flex !important; align-items: center !important; justify-content: center !important;
-    background: var(--coral) !important; color: white !important;
+  #pp-fd-library-form button[type="submit"] {
+    width: 100% !important; background: var(--coral) !important; color: white !important;
     font-family: Georgia, serif !important; font-size: 1.04rem !important; font-weight: bold !important;
     padding: 1.1rem 2.3rem !important; border: none !important; border-radius: 999px !important;
-    cursor: pointer !important; letter-spacing: 0.02em !important; margin: 0.75rem 0 0 !important;
-    box-shadow: 0 3px 0 var(--coral-deep) !important; transition: all 0.25s var(--ease) !important; text-transform: none !important;
-    min-height: 0 !important; height: auto !important;
+    cursor: pointer !important; letter-spacing: 0.02em !important;
+    box-shadow: 0 3px 0 var(--coral-deep) !important;
   }
   #pp-fd-library-form [class*="__button"]:hover,
-  #pp-fd-library-form button:hover { background: var(--coral-deep) !important; transform: translateY(-2px) !important; box-shadow: 0 5px 0 var(--coral-deep) !important; }
-  #pp-fd-library-form [class*="footer"] { padding: 0 !important; margin: 0 !important; }
-  #pp-fd-library-form [class*="error"] { font-family: Georgia, serif !important; font-size: 0.85rem !important; color: var(--coral-deep) !important; margin-top: 0.35rem !important; }
-  #pp-fd-library-form [class*="success"] { font-family: Georgia, serif !important; font-style: italic !important; font-size: 1.05rem !important; color: var(--sage) !important; text-align: center !important; padding: 1rem 0 !important; }
+  #pp-fd-library-form button[type="submit"]:hover { background: var(--coral-deep) !important; }
 </style>
 <script>
   /* Flodesk universal loader; the trailing fd argument is required. Guarded
