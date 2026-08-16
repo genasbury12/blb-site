@@ -1745,6 +1745,23 @@ window.scrollTo({top:0,behavior:rm?'auto':'smooth'});});})();</script>
   }
   #pp-fd-library-form [class*="__button"]:hover,
   #pp-fd-library-form button[type="submit"]:hover { background: var(--coral-deep) !important; }
+  /* collapse space-holding blocks the :empty rule missed:
+     - divs with no element children (whitespace defeats :empty)
+     - reserved title/description/image/success areas that Flodesk hides
+       with opacity, which keeps their box height */
+  #pp-fd-library-form div:not(:has(*)):not([class*="field"]):not([class*="button"]) {
+    height: 0 !important; min-height: 0 !important; overflow: hidden !important;
+    padding: 0 !important; margin: 0 !important;
+  }
+  #pp-fd-library-form [class*="title"],
+  #pp-fd-library-form [class*="description"],
+  #pp-fd-library-form [class*="image"],
+  #pp-fd-library-form [class*="success"],
+  #pp-fd-library-form [class*="thank"],
+  #pp-fd-library-form [class*="confirmation"] {
+    max-height: 0 !important; min-height: 0 !important; overflow: hidden !important;
+    padding: 0 !important; margin: 0 !important;
+  }
 </style>
 <script>
   /* Flodesk universal loader; the trailing fd argument is required. Guarded
