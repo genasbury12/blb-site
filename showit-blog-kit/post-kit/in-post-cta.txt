@@ -1,0 +1,48 @@
+<!--
+============================================================
+IN-POST CTA - FREE COURSE LIBRARY (HTML version)
+============================================================
+WHERE: inside a blog post. In WordPress, add a block, choose
+CUSTOM HTML, and paste this whole file where you want the
+CTA to appear (usually mid-post and again near the end).
+
+The entire card is one big link. It goes to your freebies
+page, where your real Flodesk form lives. If you ever want
+it to go straight to a Flodesk hosted form instead, change
+the ONE href line marked below.
+
+Zero JavaScript, so it works perfectly on the blog template.
+============================================================
+-->
+
+<div class="blbcta">
+<style>
+.blbcta{margin:34px 0}
+.blbcta a.blbcta-card{position:relative;display:block;overflow:hidden;background:#FBF6EE !important;border:2px solid #A93F63 !important;border-radius:24px !important;padding:34px 30px 30px !important;text-decoration:none !important;font-family:'Karla',sans-serif;transition:box-shadow .25s ease,transform .25s ease}
+.blbcta a.blbcta-card:hover{transform:translateY(-4px);box-shadow:0 30px 55px -24px rgba(169,63,99,.5)}
+.blbcta .blbcta-glow{position:absolute;top:-90px;right:-70px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(240,220,226,.9),transparent 70%);pointer-events:none}
+.blbcta .blbcta-tag{position:absolute;top:18px;right:-38px;background:#A93F63;color:#fff !important;font-weight:700;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;padding:8px 44px;transform:rotate(38deg)}
+.blbcta .blbcta-script{font-family:'Ephesis',cursive;font-size:26px;line-height:1.2;color:#BC8A47 !important;margin:0 0 2px}
+.blbcta .blbcta-h{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:clamp(24px,4vw,32px);line-height:1.15;color:#2E1F27 !important;margin:0 0 10px}
+.blbcta .blbcta-h em{font-style:italic;color:#A93F63 !important}
+.blbcta .blbcta-p{font-size:15.5px;line-height:1.6;color:#6E5C63 !important;max-width:520px;margin:0 0 20px}
+.blbcta .blbcta-btn{display:inline-block;background:#A93F63;color:#fff !important;font-weight:700;font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;padding:16px 32px;border-radius:60px;box-shadow:0 16px 30px -12px rgba(124,43,72,.55)}
+.blbcta a.blbcta-card:hover .blbcta-btn{background:#2E1F27}
+.blbcta .blbcta-m{font-weight:700;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#7C2B48 !important;margin:14px 0 0}
+@media (max-width:600px){
+  .blbcta a.blbcta-card{padding:28px 20px 26px !important}
+  .blbcta .blbcta-btn{display:block;text-align:center}
+}
+</style>
+
+<!-- CHANGE THIS ONE LINE to send people somewhere else -->
+<a class="blbcta-card" href="https://bossladybloggers.com/freebies">
+  <span class="blbcta-glow"></span>
+  <span class="blbcta-tag">100% free</span>
+  <p class="blbcta-script">wait, you're missing these</p>
+  <p class="blbcta-h">Six full blogging courses. <em>Zero dollars.</em></p>
+  <p class="blbcta-p">Starting your blog, finding what to sell, getting traffic, making your first sale. One signup unlocks the whole library.</p>
+  <span class="blbcta-btn">Unlock the free courses &rarr;</span>
+  <p class="blbcta-m">Straight to your inbox &#10022; unsubscribe whenever</p>
+</a>
+</div>

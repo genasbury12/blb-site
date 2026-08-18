@@ -501,6 +501,15 @@ mobile-verified at 390px, delivered as .txt files."
 =====================================================================
 CHANGELOG (newest first)
 =====================================================================
+2026-08-12  v2.5  In-post course library CTA, two formats:
+                  (a) PNG banners (wide 1500x750 + square 1080)
+                  rendered from HTML with local brand fonts,
+                  transparent corners, inserted as a linked
+                  image in WordPress; (b) a zero-JS HTML card
+                  (Custom HTML block) with scoped .blbcta
+                  styles, whole card is one link to the page
+                  hosting the Flodesk form. Both mobile-checked
+                  in a mock post column.
 2026-08-10  v2.4  Portfolio: /portfolio page with one featured
                   case study card (scrolling homepage shot in a
                   panel, palette dots, scope tags, two CTAs) and
