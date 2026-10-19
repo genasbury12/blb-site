@@ -47,7 +47,7 @@ Before writing any code, gather:
     too (portfolio). From there, move them somewhere with stable
     direct URLs for the site to serve; we used a GitHub repo
     branch and raw.githubusercontent.com URLs.
-[ ] Links: booking (Calendly), payment (Cash App/Stripe links),
+[ ] Links: booking (Calendly), payment (Stripe payment links),
     social, podcast platforms, YouTube testimonial videos (IDs),
     email platform embed code (Flodesk form snippet).
 [ ] The page list. Ours: home, about, program/offer page, coaching,
@@ -501,6 +501,19 @@ mobile-verified at 390px, delivered as .txt files."
 =====================================================================
 CHANGELOG (newest first)
 =====================================================================
+2026-10-19  v2.6  Pricing strategy switch: program investment is
+                  now HIDDEN sitewide ("shared on your free call")
+                  across the offer page, homepage, coming-soon,
+                  payments page, course upsells, both FAQ copies
+                  (visible + JSON-LD schema must be edited in
+                  PAIRS), and the blog-kit promo embeds. Payments
+                  moved from Cash App to Stripe: coaching buttons
+                  go straight to Stripe checkout links, program
+                  checkout buttons route to the free call, and
+                  the privacy policy's processor references were
+                  updated to match. Sweep command: grep for the
+                  dollar amounts AND the old processor name over
+                  html+txt before calling it done.
 2026-08-12  v2.5  In-post course library CTA, two formats:
                   (a) PNG banners (wide 1500x750 + square 1080)
                   rendered from HTML with local brand fonts,

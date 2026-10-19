@@ -44,6 +44,6 @@ roughly 460px tall on desktop, full width.
   </div>
   <a class="btn" href="/blog-accelerator">See the program &rarr;</a>
   <a class="btn ghost" href="/book-a-call">Book a free call</a>
-  <div class="fine">$3,000 with payment plans available</div>
+  <div class="fine">Payment plans available &middot; pricing shared on your free call</div>
 </div>
 </div>
