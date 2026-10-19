@@ -34,12 +34,12 @@ roughly 460px tall on desktop, full width.
 <div class="card">
   <div class="glow"></div><div class="glow two"></div>
   <div class="script">ready to skip the guesswork?</div>
-  <h2>Your blog, built to sell,<br>in <em>21 days</em></h2>
+  <h2>Your blog, built to sell,<br><em>coached every week</em></h2>
   <p>The Blog Accelerator is my done-with-you program: your offer nailed down, sales copy written, and a custom website designed around it. You blog, it sells.</p>
   <div class="chips">
     <span class="chip">Custom design</span>
     <span class="chip">Offer + copy</span>
-    <span class="chip">21 days</span>
+    <span class="chip">Weekly 1:1 calls</span>
     <span class="chip">Only 3 spots at a time</span>
   </div>
   <a class="btn" href="/blog-accelerator">See the program &rarr;</a>

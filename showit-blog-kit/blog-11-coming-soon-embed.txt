@@ -219,7 +219,7 @@ progress bar, sheen, even the mobile menu) is pure CSS.
       <div class="card c-accel">
         <span class="num" style="color:#A93F63">03.</span>
         <h3>Skip the reading. Get it built.</h3>
-        <p>The Blog Accelerator is my done-with-you program: your offer nailed down, sales copy written, and a custom website designed around it. In 21 days.</p>
+        <p>The Blog Accelerator is my done-with-you program: your offer nailed down, sales copy written, and a custom website designed around it. With a 1:1 coaching call every week.</p>
         <div class="price">Payment plans available &middot; pricing on your free call</div>
         <a class="btn" href="/blog-accelerator">See the program &rarr;</a>
       </div>

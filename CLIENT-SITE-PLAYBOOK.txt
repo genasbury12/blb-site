@@ -501,6 +501,22 @@ mobile-verified at 390px, delivered as .txt files."
 =====================================================================
 CHANGELOG (newest first)
 =====================================================================
+2026-10-19  v3.1  Program restructure: the Accelerator is now
+                  "Blog Coaching + Web Design", done with you
+                  AND for you, 12 weeks, one 1-hour 1:1 call
+                  every week (replaces the 21-day sprint
+                  everywhere: hero, marquees, stats, timeline
+                  now phased W1-2/W3-4/W5-7/W8-12, FAQ, final
+                  CTA, plus every cross-sell mention on other
+                  pages and embeds). Added two sections to the
+                  offer page: an ink-band objection section
+                  ("Why would I start a blog when AI answers
+                  everything?") and a named framework, The
+                  Unreplicable Blog Method (offer first,
+                  only-you content, selling ecosystem, owned
+                  audience), plus two AI-objection FAQs in
+                  schema+visible pairs. Terms still describe the
+                  21-day program and need her updated legal copy.
 2026-10-19  v3.0  Removed every claim that the business uses
                   AI: the "You use AI" FAQ pairs (schema +
                   visible) on the homepage and offer page, and

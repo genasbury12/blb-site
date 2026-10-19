@@ -41,7 +41,7 @@ blog templates, full width. Roughly 900px tall on desktop.
   <span class="eyebrow">Done reading, ready to build?</span>
   <h2>Let's build your blog <em>together.</em></h2>
   <div class="script">this is the fun part</div>
-  <p>The Blog Accelerator is where reading turns into launching: your offer, copy, brand and a gorgeous custom website, built with you in 21 days.</p>
+  <p>The Blog Accelerator is where reading turns into launching: your offer, copy, brand and a gorgeous custom website, built with you, with coaching every week.</p>
   <a class="btn" href="/blog-accelerator">Work with me &rarr;</a>
 </div>
 <footer>
