@@ -241,7 +241,7 @@ progress bar, sheen, even the mobile menu) is pure CSS.
   <div class="fgrid">
     <div>
       <div class="flogo">Boss <em>Lady</em> Bloggers</div>
-      <p>Gorgeous, business-first blogs for women who want an actual business, not a hobby that might pay off in three years.</p>
+      <p>Gorgeous blogs and selling ecosystems for women making real money with digital products and services. The kind of business AI can't replace.</p>
       <div class="fpods">
         <a href="https://podcasts.apple.com/us/podcast/boss-lady-bloggers-start-a-blog-and-business/id1514838049" target="_blank" rel="noopener" class="fpod apple"><span class="d"></span> Apple Podcasts</a>
         <a href="https://open.spotify.com/show/104sYmQooO65IELDPNbrfv?si=9e60292cd17a4bc0&amp;nd=1&amp;dlsi=7a5d709d42984612" target="_blank" rel="noopener" class="fpod spotify"><span class="d"></span> Spotify</a>

@@ -501,6 +501,19 @@ mobile-verified at 390px, delivered as .txt files."
 =====================================================================
 CHANGELOG (newest first)
 =====================================================================
+2026-10-19  v2.8  Message repositioning for the AI era: lead
+                  with the objection ("AI didn't kill blogging,
+                  it killed blogging for pageviews") and own one
+                  lane (blog coaching for selling digital
+                  products + services via a gorgeous site and a
+                  selling ecosystem). Changes land as a LAYER:
+                  heroes + subs on the money pages, an
+                  objection-handling FAQ added FIRST in both the
+                  visible FAQ and the JSON-LD schema (always in
+                  pairs, re-validate the JSON parses), SEO
+                  titles/descriptions, the sitewide footer
+                  positioning line, and one tie-in line each on
+                  start-here/about. Design untouched; copy only.
 2026-10-19  v2.7  Nav capacity lesson: adding ONE menu item
                   (Portfolio) overflowed the desktop nav on
                   laptops - links wrapped into two-line stacks.
