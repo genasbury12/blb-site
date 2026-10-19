@@ -501,6 +501,12 @@ mobile-verified at 390px, delivered as .txt files."
 =====================================================================
 CHANGELOG (newest first)
 =====================================================================
+2026-10-19  v2.9  Copy rule locked in: the H1 sells the DESIRED
+                  OUTCOME ("a gorgeous blog that sells your
+                  digital products while you sleep"); the
+                  objection handling (AI killed blogging etc.)
+                  lives in the sub-headline and the first FAQ,
+                  never as the headline itself.
 2026-10-19  v2.8  Message repositioning for the AI era: lead
                   with the objection ("AI didn't kill blogging,
                   it killed blogging for pageviews") and own one
