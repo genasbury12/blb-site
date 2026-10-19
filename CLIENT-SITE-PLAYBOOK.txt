@@ -501,6 +501,17 @@ mobile-verified at 390px, delivered as .txt files."
 =====================================================================
 CHANGELOG (newest first)
 =====================================================================
+2026-10-19  v2.7  Nav capacity lesson: adding ONE menu item
+                  (Portfolio) overflowed the desktop nav on
+                  laptops - links wrapped into two-line stacks.
+                  Fix on every page and both blog nav embeds:
+                  white-space:nowrap on links/logo/CTA, tighter
+                  gap (16px) and letter-spacing (.12em), font a
+                  step smaller, and the burger breakpoint raised
+                  from 920px to 1120px so the menu collapses
+                  before it can crowd. RULE: after adding any
+                  nav item, re-test the nav at 1140-1680px wide
+                  and confirm every link renders on one line.
 2026-10-19  v2.6  Pricing strategy switch: program investment is
                   now HIDDEN sitewide ("shared on your free call")
                   across the offer page, homepage, coming-soon,

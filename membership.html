@@ -281,7 +281,11 @@
   .mobile-menu a{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:1.6rem;text-decoration:none;color:#2E1F27}
   .mobile-menu a:hover{color:#A93F63;font-style:italic}
   .mobile-close{position:absolute;top:24px;right:26px;background:none;border:none;font-size:2.2rem;line-height:1;cursor:pointer;color:#2E1F27}
-  @media (max-width:920px){.nav-links,.nav-cta{display:none}.burger{display:flex}}
+  .nav-links{gap:16px;flex-wrap:nowrap}
+  .nav-links a{white-space:nowrap;font-size:.68rem;letter-spacing:.12em}
+  a.logo,.logo{white-space:nowrap}
+  nav .nav-cta{white-space:nowrap;font-size:.68rem;letter-spacing:.12em;padding:11px 18px}
+  @media (max-width:1120px){.nav-links,.nav-cta{display:none}.burger{display:flex}}
 
   /* ==== sitewide standard footer (matches homepage) ==== */
   footer{background:#2E1F27;color:#B9A9A0;border-top:1px solid rgba(251,246,238,.14);padding:70px 0 40px;overflow:hidden;text-align:left}

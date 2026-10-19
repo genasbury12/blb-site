@@ -37,8 +37,8 @@ progress bar, sheen, even the mobile menu) is pure CSS.
 #blbSoon .nv-bar{max-width:1200px;margin:0 auto;padding:18px 22px;display:flex;align-items:center;gap:26px}
 #blbSoon .nv-logo{font-family:'Fraunces',Georgia,serif;font-size:22px;color:#2E1F27;text-decoration:none;white-space:nowrap}
 #blbSoon .nv-logo em{font-style:italic;color:#A93F63}
-#blbSoon .nv-links{display:flex;align-items:center;gap:24px;margin-left:auto;list-style:none}
-#blbSoon .nv-links a{font-weight:700;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:#2E1F27;text-decoration:none;transition:color .2s}
+#blbSoon .nv-links{display:flex;align-items:center;gap:14px;margin-left:auto;list-style:none;flex-wrap:nowrap}
+#blbSoon .nv-links a{white-space:nowrap;font-weight:700;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#2E1F27;text-decoration:none;transition:color .2s}
 #blbSoon .nv-links a:hover{color:#A93F63}
 #blbSoon .nv-cta{border:1px solid #2E1F27;border-radius:60px;padding:14px 26px !important;transition:all .2s !important}
 #blbSoon .nv-cta:hover{background:#A93F63;border-color:#A93F63;color:#fff !important}
@@ -50,7 +50,7 @@ progress bar, sheen, even the mobile menu) is pure CSS.
 #blbSoon .nv input:checked ~ .nv-menu{display:block}
 #blbSoon .nv input:checked ~ .nv-bar .nv-burg s:first-child{transform:translateY(4px) rotate(45deg)}
 #blbSoon .nv input:checked ~ .nv-bar .nv-burg s:last-child{transform:translateY(-4px) rotate(-45deg)}
-@media (max-width:900px){
+@media (max-width:1120px){
   #blbSoon .nv-links{display:none}
   #blbSoon .nv-burg{display:flex}
 }
