@@ -501,6 +501,13 @@ mobile-verified at 390px, delivered as .txt files."
 =====================================================================
 CHANGELOG (newest first)
 =====================================================================
+2026-10-19  v3.0  Removed every claim that the business uses
+                  AI: the "You use AI" FAQ pairs (schema +
+                  visible) on the homepage and offer page, and
+                  the robot/automated QA language on the
+                  portfolio and case study. AI now appears on
+                  the site only as the problem the coaching
+                  solves, never as part of the process.
 2026-10-19  v2.9  Copy rule locked in: the H1 sells the DESIRED
                   OUTCOME ("a gorgeous blog that sells your
                   digital products while you sleep"); the
