@@ -149,8 +149,8 @@ progress bar, sheen, even the mobile menu) is pure CSS.
     <a class="nv-logo" href="/">Boss Lady <em>Bloggers</em></a>
     <ul class="nv-links">
       <li><a href="/about">About</a></li>
-      <li><a href="/blog-accelerator">The Program</a></li>
-      <li><a href="/blog-coaching">Blog Coaching</a></li>
+      <li><a href="/blog-accelerator">Build Club</a></li>
+      <li><a href="/blog-coaching">Fast Track</a></li>
       <li><a href="/portfolio">Portfolio</a></li>
       <li><a href="/podcast">Podcast</a></li>
       <li><a href="/freebies">Freebies</a></li>
@@ -160,8 +160,8 @@ progress bar, sheen, even the mobile menu) is pure CSS.
   </div>
   <div class="nv-menu">
     <a href="/about">About</a>
-    <a href="/blog-accelerator">The Program</a>
-    <a href="/blog-coaching">Blog Coaching</a>
+    <a href="/blog-accelerator">Build Club</a>
+    <a href="/blog-coaching">Fast Track</a>
     <a href="/portfolio">Portfolio</a>
     <a href="/podcast">Podcast</a>
     <a href="/freebies">Freebies</a>
@@ -219,7 +219,7 @@ progress bar, sheen, even the mobile menu) is pure CSS.
       <div class="card c-accel">
         <span class="num" style="color:#A93F63">03.</span>
         <h3>Skip the reading. Get it built.</h3>
-        <p>The Blog Accelerator is my done-with-you program: your offer nailed down, sales copy written, and a custom website designed around it. With a 1:1 coaching call every week.</p>
+        <p>The Blog Build Club is my build-it-with-you membership: your digital product nailed down, a website designed to sell it, and weekly blog coaching. $99 a month.</p>
         <div class="price">Payment plans available &middot; pricing on your free call</div>
         <a class="btn" href="/blog-accelerator">See the program &rarr;</a>
       </div>
@@ -261,8 +261,8 @@ progress bar, sheen, even the mobile menu) is pure CSS.
     <div>
       <h4>Work With Me</h4>
       <ul>
-        <li><a href="/blog-accelerator">The Blog Accelerator</a></li>
-        <li><a href="/blog-coaching">Blog Coaching</a></li>
+        <li><a href="/blog-accelerator">Blog Build Club</a></li>
+        <li><a href="/blog-coaching">Fast Track</a></li>
         <li><a href="/book-a-call">Book a Free Call</a></li>
       </ul>
     </div>

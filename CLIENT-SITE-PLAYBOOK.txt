@@ -501,6 +501,28 @@ mobile-verified at 390px, delivered as .txt files."
 =====================================================================
 CHANGELOG (newest first)
 =====================================================================
+2026-10-19  v3.2  Offer replacement: the Blog Accelerator and
+                  coaching packages are retired. /blog-accelerator
+                  now sells the Blog Build Club ($99/mo, 6-month
+                  membership, weekly group coaching, 3-month
+                  launch) and /blog-coaching sells the Fast Track
+                  Private Build Club ($333/mo, private weekly
+                  calls, done-for-you piece monthly, 8-week
+                  launch). Pages built from the client's PAS
+                  long-form copy: problem hero, agitate, dream,
+                  story, solution + deliverable cards, month/week
+                  plan steps, stats, price anchoring, stack +
+                  join card (terms checkbox gates the Join
+                  button), existing video testimonials + built
+                  sites reused as proof, launch promise,
+                  credibility, fit check, FAQ (schema+visible),
+                  recap CTA. Fast Track adds the tier comparison
+                  table. Bracketed placeholders (testimonials,
+                  scarcity, call/payment policies) were omitted,
+                  not invented. Nav renamed sitewide: Build Club
+                  + Fast Track; every Accelerator/package mention
+                  updated. Join buttons point to /book-a-call
+                  until the two Stripe subscription links exist.
 2026-10-19  v3.1  Program restructure: the Accelerator is now
                   "Blog Coaching + Web Design", done with you
                   AND for you, 12 weeks, one 1-hour 1:1 call
