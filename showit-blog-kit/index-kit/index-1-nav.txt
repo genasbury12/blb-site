@@ -60,7 +60,7 @@ template does can break it.
 
 <a class="ann" href="/freebies" aria-label="Get the free blogging courses">
   <div class="ann-in">
-    <b>FREE BLOGGING COURSES</b><i>&#10022;</i>six full courses, zero dollars<i>&#10022;</i>everything I wish I'd known in year one<i>&#10022;</i><b>GET THEM FREE &rarr;</b><i>&#10022;</i><b>FREE BLOGGING COURSES</b><i>&#10022;</i>six full courses, zero dollars<i>&#10022;</i>everything I wish I'd known in year one<i>&#10022;</i><b>GET THEM FREE &rarr;</b><i>&#10022;</i>
+    <b>SIX FREE COURSES</b><i>&#10022;</i>the order that gets bloggers paid<i>&#10022;</i>no card, no catch<i>&#10022;</i><b>GET THEM FREE &rarr;</b><i>&#10022;</i><b>SIX FREE COURSES</b><i>&#10022;</i>the order that gets bloggers paid<i>&#10022;</i>no card, no catch<i>&#10022;</i><b>GET THEM FREE &rarr;</b><i>&#10022;</i>
   </div>
 </a>
 
@@ -70,24 +70,24 @@ template does can break it.
     <a class="logo" href="/">Boss Lady <em>Bloggers</em></a>
     <ul class="links">
       <li><a href="/about">About</a></li>
-      <li><a href="/blog-accelerator">Build Club</a></li>
+      <li><a href="/blog-accelerator">Blog to Booked</a></li>
       <li><a href="/blog-coaching">Fast Track</a></li>
       <li><a href="/portfolio">Portfolio</a></li>
       <li><a class="on" href="/blog">Blog</a></li>
-      <li><a href="/podcast">Podcast</a></li>
-      <li><a href="/freebies">Freebies</a></li>
+      <li><a href="/podcast">Listen &amp; Watch</a></li>
+      <li><a href="/freebies">Free Courses</a></li>
       <li><a class="cta" href="/book-a-call">Book a Free Call</a></li>
     </ul>
     <label class="burg" for="bxNavT" aria-label="Open menu"><s></s><s></s></label>
   </div>
   <div class="menu">
     <a href="/about">About</a>
-    <a href="/blog-accelerator">Build Club</a>
+    <a href="/blog-accelerator">Blog to Booked</a>
     <a href="/blog-coaching">Fast Track</a>
     <a href="/portfolio">Portfolio</a>
+    <a href="/podcast">Listen &amp; Watch</a>
     <a href="/blog">Blog</a>
-    <a href="/podcast">Podcast</a>
-    <a href="/freebies">Freebies</a>
+    <a href="/freebies">Free Courses</a>
     <a class="mcta" href="/book-a-call">Book a Free Call &rarr;</a>
     <div class="mscript">blog like she means business</div>
   </div>

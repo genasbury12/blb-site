@@ -39,10 +39,10 @@ Zero JavaScript, so it works perfectly on the blog template.
 <a class="blbcta-card" href="https://bossladybloggers.com/freebies">
   <span class="blbcta-glow"></span>
   <span class="blbcta-tag">100% free</span>
-  <p class="blbcta-script">wait, you're missing these</p>
-  <p class="blbcta-h">Six full blogging courses. <em>Zero dollars.</em></p>
-  <p class="blbcta-p">Starting your blog, finding what to sell, getting traffic, making your first sale. One signup unlocks the whole library.</p>
-  <span class="blbcta-btn">Unlock the free courses &rarr;</span>
+  <p class="blbcta-script">before you keep scrolling</p>
+  <p class="blbcta-h">Want clients <em>without posting every day?</em></p>
+  <p class="blbcta-p">My free course shows exactly how YouTube, my podcast and email bring me clients. Steal the whole system.</p>
+  <span class="blbcta-btn">Send me the free course &rarr;</span>
   <p class="blbcta-m">Straight to your inbox &#10022; unsubscribe whenever</p>
 </a>
 </div>

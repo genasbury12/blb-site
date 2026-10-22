@@ -57,15 +57,15 @@ blog templates, full width. Roughly 900px tall on desktop.
         <ul>
           <li><a href="/about">About</a></li>
           <li><a href="/start-here">Start Here</a></li>
+          <li><a href="/podcast">Listen &amp; Watch</a></li>
           <li><a href="/blog">Blog</a></li>
-          <li><a href="/podcast">Podcast</a></li>
           <li><a href="/freebies">Free Courses</a></li>
         </ul>
       </div>
       <div>
         <h4>Work With Me</h4>
         <ul>
-          <li><a href="/blog-accelerator">Blog Build Club</a></li>
+          <li><a href="/blog-accelerator">Blog to Booked</a></li>
           <li><a href="/blog-coaching">Blog Coaching</a></li>
           <li><a href="/book-a-call">Book a Free Call</a></li>
         </ul>
@@ -80,7 +80,7 @@ blog templates, full width. Roughly 900px tall on desktop.
         </ul>
       </div>
     </div>
-    <div class="tag">gorgeous blogs that actually make money</div>
+    <div class="tag">content that books calls, not likes</div>
     <div class="copy">&copy; <span id="blbYr"></span> Boss Lady Bloggers. All rights reserved.</div>
   </div>
 </footer>

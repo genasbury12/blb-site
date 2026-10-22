@@ -501,6 +501,23 @@ mobile-verified at 390px, delivered as .txt files."
 =====================================================================
 CHANGELOG (newest first)
 =====================================================================
+2026-10-22  v3.4  Full-site copy release from the client's
+                  "Blog to Booked" copy doc (25-page PDF): home,
+                  about, both sales pages, start here, free
+                  courses, listen & watch (podcast + YouTube),
+                  blog header, portfolio, book a call, contact,
+                  nav (About / Blog to Booked / Fast Track /
+                  Portfolio / Listen & Watch / Blog / Free
+                  Courses), footer brand + bottom lines,
+                  announcement bar, SEO titles/metas, and the
+                  in-post CTA embed. Process: read the doc in
+                  full, generators for the big pages, surgical
+                  asserted swaps for the rest, banned-phrase
+                  sweep (while you sleep / autopilot / dream
+                  clients), then overflow-check every page.
+                  Lesson: scope component rules to direct
+                  children (.x > div), a bare descendant div
+                  selector grabs grandchildren and shreds grids.
 2026-10-22  v3.3  Sales page design v2, skimmable-first: both
                   offer pages rebuilt with an sx- component
                   system where no two sections share a layout.

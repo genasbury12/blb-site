@@ -50,7 +50,7 @@ nothing here needs a script. Zero JavaScript.
   <div class="fgrid">
     <div>
       <div class="flogo">Boss <em>Lady</em> Bloggers</div>
-      <p>Gorgeous blogs and selling ecosystems for women making real money with digital products and services. The kind of business AI can't replace.</p>
+      <p>Get clients and customers from your content, not your feed. Blog coaching and gorgeous Showit sites for boss lady bloggers.</p>
       <div class="fpods">
         <a href="https://podcasts.apple.com/us/podcast/boss-lady-bloggers-start-a-blog-and-business/id1514838049" target="_blank" rel="noopener" class="fpod apple"><span class="d"></span> Apple Podcasts</a>
         <a href="https://open.spotify.com/show/104sYmQooO65IELDPNbrfv?si=9e60292cd17a4bc0&amp;nd=1&amp;dlsi=7a5d709d42984612" target="_blank" rel="noopener" class="fpod spotify"><span class="d"></span> Spotify</a>
@@ -62,15 +62,15 @@ nothing here needs a script. Zero JavaScript.
         <li><a href="/about">About</a></li>
           <li><a href="/portfolio">Portfolio</a></li>
         <li><a href="/start-here">Start Here</a></li>
+        <li><a href="/podcast">Listen &amp; Watch</a></li>
         <li><a href="/blog">Blog</a></li>
-        <li><a href="/podcast">Podcast</a></li>
         <li><a href="/freebies">Free Courses</a></li>
       </ul>
     </div>
     <div>
       <h4>Work With Me</h4>
       <ul>
-        <li><a href="/blog-accelerator">Blog Build Club</a></li>
+        <li><a href="/blog-accelerator">Blog to Booked</a></li>
         <li><a href="/blog-coaching">Fast Track</a></li>
       <li><a href="/portfolio">Portfolio</a></li>
         <li><a href="/book-a-call">Book a Free Call</a></li>
@@ -86,7 +86,7 @@ nothing here needs a script. Zero JavaScript.
       </ul>
     </div>
   </div>
-  <div class="fbot">gorgeous blogs that actually make money</div>
+  <div class="fbot">content that books calls, not likes</div>
   <div class="fcopy">&copy; 2026 Boss Lady Bloggers. All rights reserved.</div>
 </div>
 </div>
