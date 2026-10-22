@@ -501,6 +501,24 @@ mobile-verified at 390px, delivered as .txt files."
 =====================================================================
 CHANGELOG (newest first)
 =====================================================================
+2026-10-22  v3.3  Sales page design v2, skimmable-first: both
+                  offer pages rebuilt with an sx- component
+                  system where no two sections share a layout.
+                  Numbered editorial kickers (01 / sound
+                  familiar), sticky-note cards with tape, old
+                  way struck-through vs new way pink flow pills,
+                  ink dream sections with glowing checklists,
+                  stat tiles with arrows, a giant
+                  outline/pink/italic manifesto stack, zigzag
+                  month cards with script numerals, crossed-out
+                  "other ways" cards vs the winning offer, a
+                  contract-style Launch Promise with signature
+                  and seal, and check vs strikethrough fit
+                  lists. Tier identity: Club = paper hero, Fast
+                  Track = dark ink hero + gold luxe cards +
+                  $7,000 -> $333 anchor. Rule: body copy on sales
+                  pages lives in chips, tiles, and one-line
+                  checks; paragraphs max 2-3 lines.
 2026-10-19  v3.2  Offer replacement: the Blog Accelerator and
                   coaching packages are retired. /blog-accelerator
                   now sells the Blog Build Club ($99/mo, 6-month
