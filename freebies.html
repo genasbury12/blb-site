@@ -105,6 +105,21 @@ html.js:not(.nomo) .split.go .w>span{transform:none}
 .mq .hrt{color:var(--pink);font-size:.9em}
 @keyframes mq{to{transform:translateX(-100%)}}
 html.nomo .mq>div{animation:none}
+/* marquee bands + spin badge */
+.mqband{background:var(--ink);color:var(--paper);padding:17px 0;overflow:hidden}
+.mqband .mq span{text-transform:uppercase;font-family:var(--body);font-weight:700;font-size:.8rem;letter-spacing:.24em}
+.mqband .mq .hrt{color:var(--rose)}
+.mqband.gold{background:var(--gold);color:#fff}
+.mqband.gold .mq .hrt{color:var(--ink)}
+.mqband.blush{background:var(--blush);color:var(--purple)}
+.mqband.blush .mq .hrt{color:var(--pink)}
+.spinb{position:relative;width:138px;height:138px;display:inline-grid;place-items:center;text-decoration:none;flex-shrink:0}
+.spinb svg{position:absolute;inset:0;width:100%;height:100%;animation:spinb 14s linear infinite}
+html.nomo .spinb svg{animation:none}
+@keyframes spinb{to{transform:rotate(360deg)}}
+.spinb svg text{font-family:var(--body);font-weight:700;font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;fill:currentColor}
+.spinb .ctr{width:54px;height:54px;border-radius:50%;background:var(--pink);color:#fff;display:grid;place-items:center;font-size:1.3rem;transition:transform .3s,background .3s}
+.spinb:hover .ctr{transform:scale(1.12);background:var(--ink)}
 /* floating blobs + grain */
 .blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.55;pointer-events:none;animation:drift 16s ease-in-out infinite alternate}
 @keyframes drift{from{transform:translate(0,0) scale(1)}to{transform:translate(40px,-40px) scale(1.12)}}
@@ -243,6 +258,7 @@ html,body{overflow-x:hidden;overflow-x:clip}
     <div class="cta-row" data-rv style="--d:.45s"><a class="btn" href="#signup">Send me the free courses</a></div>
   </div>
 </header>
+<div class="mqband gold"><div class="mq" style="--mqs:26s"><div><span>free to start <span class="hrt">&#10084;</span></span><span>six free courses <span class="hrt">&#10084;</span></span><span>no card, no catch <span class="hrt">&#10084;</span></span><span>start the right way, babe <span class="hrt">&#10084;</span></span><span>free to start <span class="hrt">&#10084;</span></span><span>six free courses <span class="hrt">&#10084;</span></span><span>no card, no catch <span class="hrt">&#10084;</span></span><span>start the right way, babe <span class="hrt">&#10084;</span></span><span>free to start <span class="hrt">&#10084;</span></span><span>six free courses <span class="hrt">&#10084;</span></span><span>no card, no catch <span class="hrt">&#10084;</span></span><span>start the right way, babe <span class="hrt">&#10084;</span></span></div><div aria-hidden="true"><span>free to start <span class="hrt">&#10084;</span></span><span>six free courses <span class="hrt">&#10084;</span></span><span>no card, no catch <span class="hrt">&#10084;</span></span><span>start the right way, babe <span class="hrt">&#10084;</span></span><span>free to start <span class="hrt">&#10084;</span></span><span>six free courses <span class="hrt">&#10084;</span></span><span>no card, no catch <span class="hrt">&#10084;</span></span><span>start the right way, babe <span class="hrt">&#10084;</span></span><span>free to start <span class="hrt">&#10084;</span></span><span>six free courses <span class="hrt">&#10084;</span></span><span>no card, no catch <span class="hrt">&#10084;</span></span><span>start the right way, babe <span class="hrt">&#10084;</span></span></div></div></div>
 
 <section class="sec-tint">
   <div class="wrap">
@@ -257,7 +273,7 @@ html,body{overflow-x:hidden;overflow-x:clip}
   <div class="wrap">
     <div class="signup" data-rv="s">
       <span class="eyebrow">Get the whole library</span>
-      <h2>Get the free courses <em>sent to your inbox.</em></h2>
+      <div style="display:flex;align-items:center;gap:26px;flex-wrap:wrap;position:relative"><h2 style="margin:12px 0 14px">Get the free courses <em>sent to your inbox.</em></h2><a class="spinb" href="#signup" aria-label="six free courses &#183; no card &#183; no catch &#183; grab them &#183;"><svg viewBox="0 0 138 138"><defs><path id="sbc" d="M69,69 m-54,0 a54,54 0 1,1 108,0 a54,54 0 1,1 -108,0"/></defs><text><textPath href="#sbc">six free courses &#183; no card &#183; no catch &#183; grab them &#183;</textPath></text></svg><span class="ctr">&#8595;</span></a></div>
       <p>Hop on the list and I'll send the good stuff to start a blog the right way. <b style="color:#fff">No spam, ever. Unsubscribe anytime.</b></p>
       <div style="display:grid;grid-template-columns:1fr 1.2fr;gap:26px;align-items:stretch;margin-top:26px;position:relative" class="suGrid">
         <div class="phframe" style="min-height:280px"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_022.jpeg" alt="The free blogging course library" loading="lazy"></div>

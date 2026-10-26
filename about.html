@@ -105,6 +105,21 @@ html.js:not(.nomo) .split.go .w>span{transform:none}
 .mq .hrt{color:var(--pink);font-size:.9em}
 @keyframes mq{to{transform:translateX(-100%)}}
 html.nomo .mq>div{animation:none}
+/* marquee bands + spin badge */
+.mqband{background:var(--ink);color:var(--paper);padding:17px 0;overflow:hidden}
+.mqband .mq span{text-transform:uppercase;font-family:var(--body);font-weight:700;font-size:.8rem;letter-spacing:.24em}
+.mqband .mq .hrt{color:var(--rose)}
+.mqband.gold{background:var(--gold);color:#fff}
+.mqband.gold .mq .hrt{color:var(--ink)}
+.mqband.blush{background:var(--blush);color:var(--purple)}
+.mqband.blush .mq .hrt{color:var(--pink)}
+.spinb{position:relative;width:138px;height:138px;display:inline-grid;place-items:center;text-decoration:none;flex-shrink:0}
+.spinb svg{position:absolute;inset:0;width:100%;height:100%;animation:spinb 14s linear infinite}
+html.nomo .spinb svg{animation:none}
+@keyframes spinb{to{transform:rotate(360deg)}}
+.spinb svg text{font-family:var(--body);font-weight:700;font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;fill:currentColor}
+.spinb .ctr{width:54px;height:54px;border-radius:50%;background:var(--pink);color:#fff;display:grid;place-items:center;font-size:1.3rem;transition:transform .3s,background .3s}
+.spinb:hover .ctr{transform:scale(1.12);background:var(--ink)}
 /* floating blobs + grain */
 .blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.55;pointer-events:none;animation:drift 16s ease-in-out infinite alternate}
 @keyframes drift{from{transform:translate(0,0) scale(1)}to{transform:translate(40px,-40px) scale(1.12)}}
@@ -266,6 +281,7 @@ html,body{overflow-x:hidden;overflow-x:clip}
     <div class="photo" data-rv="r" style="--d:.2s"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_047.jpeg" alt="Genasys, founder of Boss Lady Bloggers"><span class="sticker" style="top:22px;right:22px">est. 2017</span></div>
   </div>
 </header>
+<div class="mqband "><div class="mq" style="--mqs:28s"><div><span>blog coach + web designer <span class="hrt">&#10084;</span></span><span>since 2017 <span class="hrt">&#10084;</span></span><span>done with you, not at you <span class="hrt">&#10084;</span></span><span>business first, blog second <span class="hrt">&#10084;</span></span><span>blog coach + web designer <span class="hrt">&#10084;</span></span><span>since 2017 <span class="hrt">&#10084;</span></span><span>done with you, not at you <span class="hrt">&#10084;</span></span><span>business first, blog second <span class="hrt">&#10084;</span></span><span>blog coach + web designer <span class="hrt">&#10084;</span></span><span>since 2017 <span class="hrt">&#10084;</span></span><span>done with you, not at you <span class="hrt">&#10084;</span></span><span>business first, blog second <span class="hrt">&#10084;</span></span></div><div aria-hidden="true"><span>blog coach + web designer <span class="hrt">&#10084;</span></span><span>since 2017 <span class="hrt">&#10084;</span></span><span>done with you, not at you <span class="hrt">&#10084;</span></span><span>business first, blog second <span class="hrt">&#10084;</span></span><span>blog coach + web designer <span class="hrt">&#10084;</span></span><span>since 2017 <span class="hrt">&#10084;</span></span><span>done with you, not at you <span class="hrt">&#10084;</span></span><span>business first, blog second <span class="hrt">&#10084;</span></span><span>blog coach + web designer <span class="hrt">&#10084;</span></span><span>since 2017 <span class="hrt">&#10084;</span></span><span>done with you, not at you <span class="hrt">&#10084;</span></span><span>business first, blog second <span class="hrt">&#10084;</span></span></div></div></div>
 
 <section class="sec-tint">
   <div class="wrap">
@@ -374,6 +390,7 @@ html,body{overflow-x:hidden;overflow-x:clip}
     <h2 data-rv="clip">If you read this far, <em>I think we'd get along.</em></h2>
     <p data-rv>Book the free call. We'll look at your blog or your idea, figure out what you should be selling, and map your first 90 days. <b>If Blog to Paid is the right fit, I'll tell you. If it isn't, I'll tell you that too.</b></p>
     <div class="cta-row" data-rv>
+      <a class="spinb" href="/book-a-call" aria-label="free 30-min call &#183; you + me &#183; a real plan &#183;"><svg viewBox="0 0 138 138"><defs><path id="sbc" d="M69,69 m-54,0 a54,54 0 1,1 108,0 a54,54 0 1,1 -108,0"/></defs><text><textPath href="#sbc">free 30-min call &#183; you + me &#183; a real plan &#183;</textPath></text></svg><span class="ctr">&#10084;</span></a>
       <a class="btn" href="/book-a-call">Book my free Fast Track call</a>
       <a class="btn-ghost" href="/blog-to-paid">See Blog to Paid</a>
     </div>

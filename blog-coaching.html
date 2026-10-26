@@ -105,6 +105,21 @@ html.js:not(.nomo) .split.go .w>span{transform:none}
 .mq .hrt{color:var(--pink);font-size:.9em}
 @keyframes mq{to{transform:translateX(-100%)}}
 html.nomo .mq>div{animation:none}
+/* marquee bands + spin badge */
+.mqband{background:var(--ink);color:var(--paper);padding:17px 0;overflow:hidden}
+.mqband .mq span{text-transform:uppercase;font-family:var(--body);font-weight:700;font-size:.8rem;letter-spacing:.24em}
+.mqband .mq .hrt{color:var(--rose)}
+.mqband.gold{background:var(--gold);color:#fff}
+.mqband.gold .mq .hrt{color:var(--ink)}
+.mqband.blush{background:var(--blush);color:var(--purple)}
+.mqband.blush .mq .hrt{color:var(--pink)}
+.spinb{position:relative;width:138px;height:138px;display:inline-grid;place-items:center;text-decoration:none;flex-shrink:0}
+.spinb svg{position:absolute;inset:0;width:100%;height:100%;animation:spinb 14s linear infinite}
+html.nomo .spinb svg{animation:none}
+@keyframes spinb{to{transform:rotate(360deg)}}
+.spinb svg text{font-family:var(--body);font-weight:700;font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;fill:currentColor}
+.spinb .ctr{width:54px;height:54px;border-radius:50%;background:var(--pink);color:#fff;display:grid;place-items:center;font-size:1.3rem;transition:transform .3s,background .3s}
+.spinb:hover .ctr{transform:scale(1.12);background:var(--ink)}
 /* floating blobs + grain */
 .blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.55;pointer-events:none;animation:drift 16s ease-in-out infinite alternate}
 @keyframes drift{from{transform:translate(0,0) scale(1)}to{transform:translate(40px,-40px) scale(1.12)}}
@@ -253,6 +268,7 @@ html,body{overflow-x:hidden;overflow-x:clip}
     <div class="phframe" data-rv="r" style="min-height:420px;transform:rotate(1.5deg)"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_026.jpeg" alt="A Boss Lady Bloggers custom site build"><span class="sticker" style="top:22px;right:22px;z-index:1">built by hand</span></div>
   </div>
 </header>
+<div class="mqband blush"><div class="mq" style="--mqs:26s"><div><span>the power hour <span class="hrt">&#10084;</span></span><span>the momentum pack <span class="hrt">&#10084;</span></span><span>the deep dive <span class="hrt">&#10084;</span></span><span>one call, one plan <span class="hrt">&#10084;</span></span><span>the power hour <span class="hrt">&#10084;</span></span><span>the momentum pack <span class="hrt">&#10084;</span></span><span>the deep dive <span class="hrt">&#10084;</span></span><span>one call, one plan <span class="hrt">&#10084;</span></span><span>the power hour <span class="hrt">&#10084;</span></span><span>the momentum pack <span class="hrt">&#10084;</span></span><span>the deep dive <span class="hrt">&#10084;</span></span><span>one call, one plan <span class="hrt">&#10084;</span></span></div><div aria-hidden="true"><span>the power hour <span class="hrt">&#10084;</span></span><span>the momentum pack <span class="hrt">&#10084;</span></span><span>the deep dive <span class="hrt">&#10084;</span></span><span>one call, one plan <span class="hrt">&#10084;</span></span><span>the power hour <span class="hrt">&#10084;</span></span><span>the momentum pack <span class="hrt">&#10084;</span></span><span>the deep dive <span class="hrt">&#10084;</span></span><span>one call, one plan <span class="hrt">&#10084;</span></span><span>the power hour <span class="hrt">&#10084;</span></span><span>the momentum pack <span class="hrt">&#10084;</span></span><span>the deep dive <span class="hrt">&#10084;</span></span><span>one call, one plan <span class="hrt">&#10084;</span></span></div></div></div>
 
 <section class="sec-tint">
   <div class="wrap">
