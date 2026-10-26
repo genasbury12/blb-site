@@ -245,6 +245,12 @@ html.nomo .phone .ph-play{animation:none}
 .diff .dn{font-family:var(--script);font-size:3rem;color:var(--gold);line-height:.9}
 .diff h3{font-size:1.3rem;margin-bottom:6px}
 .diff p{color:var(--muted)}
+.diffwrap{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:stretch;margin-top:50px}
+.diffwrap .diff{margin-top:0}
+.buildph{position:relative;border-radius:26px;overflow:hidden;border:1.5px solid rgba(46,31,39,.12);min-height:340px;box-shadow:0 34px 60px -36px rgba(46,31,39,.45);transform:rotate(1.2deg)}
+.buildph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.buildph .bcap{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);background:var(--paper);padding:8px 18px;border-radius:50px;font-weight:700;font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--purple);white-space:nowrap}
+@media(max-width:900px){.diffwrap{grid-template-columns:1fr}.buildph{min-height:300px;transform:none}}
 /* 12 months sticky stack */
 .months{margin-top:60px;display:grid;gap:30px}
 .mcard{position:sticky;background:var(--paper);border-radius:28px;padding:46px 44px;border:1.5px solid rgba(46,31,39,.12);box-shadow:0 -20px 50px -30px rgba(46,31,39,.3)}
@@ -498,10 +504,13 @@ html.nomo .phone .ph-play{animation:none}
   <div class="wrap">
     <span class="eyebrow" data-rv><span class="no">05</span>How this works and why it's different</span>
     <h2 class="h" data-rv>Part blog coach, part designer, <em>fully in your corner.</em></h2>
+    <div class="diffwrap">
     <div class="diff">
       <div data-rv><span class="dn">1</span><div><h3>Real coaching, not content.</h3><p>You get me, live and 1:1. <b>Not a stack of videos you'll never finish.</b></p></div></div>
       <div data-rv style="--d:.1s"><span class="dn">2</span><div><h3>I build it with you.</h3><p>We design your site together while I teach you the why, <b>so you understand your own business by the end.</b></p></div></div>
       <div data-rv style="--d:.2s"><span class="dn">3</span><div><h3>You launch for real.</h3><p>You don't walk away with notes. You walk away with <b>a live blog, an offer that's yours, a freebie and funnel, and a coach for the rest of the year.</b></p></div></div>
+    </div>
+    <div class="buildph" data-rv="r"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_026.jpeg" alt="A Boss Lady Bloggers custom site build" loading="lazy"><span class="sticker" style="top:20px;right:20px;z-index:1">built by hand</span><span class="bcap">a real client build</span></div>
     </div>
   </div>
 </section>

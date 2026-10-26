@@ -167,7 +167,11 @@ html,body{overflow-x:hidden;overflow-x:clip}
 .hero{position:relative;padding:110px 0 90px;overflow:hidden}
 .hero .blob.b1{width:520px;height:520px;background:radial-gradient(circle,#F0DCE2,transparent 65%);top:-140px;right:-120px}
 .hero .blob.b2{width:420px;height:420px;background:radial-gradient(circle,rgba(188,138,71,.35),transparent 65%);bottom:-160px;left:-120px;animation-delay:-8s}
-.hero-inner{position:relative;max-width:900px}
+.hero-inner{position:relative;display:grid;grid-template-columns:1.15fr .85fr;gap:54px;align-items:center}
+.hero-ph{position:relative;border-radius:230px 230px 26px 26px;overflow:hidden;border:1.5px solid rgba(46,31,39,.12);min-height:480px;transform:rotate(1.5deg);box-shadow:0 40px 70px -40px rgba(46,31,39,.45)}
+.hero-ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero-ph .cap{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);background:var(--paper);padding:8px 18px;border-radius:50px;font-weight:700;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--purple);white-space:nowrap}
+@media(max-width:920px){.hero-inner{grid-template-columns:1fr}.hero-ph{min-height:380px;max-width:420px}}
 .h1{font-size:clamp(2.9rem,7.2vw,5.6rem);line-height:1.02;margin:22px 0 8px}
 .h1 .ln{display:block}
 .h1 .pay{color:var(--pink);font-style:italic;position:relative}
@@ -242,6 +246,12 @@ html.nomo .h1 .pay path,html:not(.js) .h1 .pay path,.go .pay path{stroke-dashoff
 .zrow h3{font-size:1.45rem;margin-bottom:8px}
 .zrow h3 em{font-style:italic;color:var(--pink)}
 .zrow p{color:var(--muted);max-width:640px}
+.trio5{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:56px}
+.trio5 figure{background:#fff;border:1.5px solid rgba(46,31,39,.12);border-radius:10px;padding:12px 12px 14px;transform:rotate(var(--r,0deg));box-shadow:0 26px 46px -26px rgba(46,31,39,.35);transition:transform .35s}
+.trio5 figure:hover{transform:rotate(0) translateY(-6px)}
+.trio5 img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:6px;display:block}
+.trio5 figcaption{font-family:var(--script);color:var(--gold);font-size:1.4rem;text-align:center;margin-top:8px}
+@media(max-width:700px){.trio5{grid-template-columns:1fr;max-width:340px;margin-left:auto;margin-right:auto}}
 .z-close{margin-top:46px;text-align:center}
 .z-close .script{font-size:clamp(1.9rem,4vw,2.7rem)}
 @media(max-width:640px){.zrow,.zrow:nth-child(even){grid-template-columns:1fr}.zrow:nth-child(even) .zn{order:0;text-align:left}}
@@ -418,6 +428,7 @@ html.nomo .pod .play::before{animation:none}
 <header class="hero">
   <div class="blob b1"></div><div class="blob b2"></div><div class="grain"></div>
   <div class="wrap hero-inner">
+    <div>
     <span class="eyebrow" data-rv>Blog coach + blog website designer &middot; since 2017</span>
     <h1 class="h1 split go"><span class="ln">Start the blog.</span><span class="ln">Build the brand.</span><span class="ln"><span class="pay">Get paid.<svg viewBox="0 0 300 22" preserveAspectRatio="none"><path d="M4 16 C 80 6, 220 4, 296 12"/></svg></span></span></h1>
     <p class="hb" data-rv style="--d:.3s">You've had the idea sitting in your notes app for <b>actual years</b>. You just don't know where to start, what to sell, or how the h*ll anyone makes real money from a blog without begging Google for traffic. <b>That's exactly what I'm for.</b> I'm your blog coach, your bestie with a business plan, and the woman who finally tells you what to do next. <mark>No more someday.</mark></p>
@@ -426,6 +437,8 @@ html.nomo .pod .play::before{animation:none}
       <a class="btn-ghost" href="#how">Show me how it works</a>
     </div>
     <p class="under" data-rv style="--d:.55s">1:1 blog coaching + a custom website that brings you clients and customers. Built with you. Not a course you'll never finish.</p>
+    </div>
+    <div class="hero-ph" data-rv="r" style="--d:.35s"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_030.jpeg" alt="Genasys, blog coach at Boss Lady Bloggers" fetchpriority="high"><span class="sticker" style="top:54%;right:14px;z-index:1">your blog coach</span><span class="cap">gen &middot; boss lady bloggers</span></div>
   </div>
 </header>
 
@@ -525,6 +538,11 @@ html.nomo .pod .play::before{animation:none}
       <div class="zrow" data-rv><span class="zn">4</span><div><h3>Proof <em>you did it.</em></h3><p>That quiet, earned pride of saying you would, and then pulling it off.</p></div></div>
     </div>
     <div class="z-close" data-rv><span class="script">A blog is just the vehicle, babe. That feeling is the destination.</span><p style="margin-top:10px;color:var(--muted)">And that's exactly what we build here.</p></div>
+    <div class="trio5">
+      <figure data-rv style="--r:-3deg;--d:.05s"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_024.jpeg" alt="Life at Boss Lady Bloggers" loading="lazy"><figcaption>the real life</figcaption></figure>
+      <figure data-rv style="--r:2deg;--d:.15s"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_028.jpeg" alt="Life at Boss Lady Bloggers" loading="lazy"><figcaption>the dream</figcaption></figure>
+      <figure data-rv style="--r:-1.5deg;--d:.25s"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_016.jpeg" alt="Life at Boss Lady Bloggers" loading="lazy"><figcaption>the work</figcaption></figure>
+    </div>
   </div>
 </section>
 
