@@ -29,8 +29,11 @@ section{padding:92px 0;position:relative}
 .sec-tint{background:var(--tint)}
 .sec-ink{background:var(--ink);color:var(--paper)}
 .sec-blush{background:var(--blush)}
+.eyebrow::before{content:"\2726";color:var(--gold);font-size:.9em}
 .eyebrow{display:inline-flex;align-items:center;gap:10px;font-weight:700;font-size:.72rem;letter-spacing:.26em;text-transform:uppercase;color:var(--purple)}
-.eyebrow .no{display:inline-grid;place-items:center;width:30px;height:30px;border:1.5px solid currentColor;border-radius:50%;font-size:.68rem;letter-spacing:0}
+.wm{position:absolute;top:10px;right:-10px;font-family:var(--display);font-style:italic;font-size:clamp(5rem,15vw,11rem);line-height:1;color:transparent;-webkit-text-stroke:1.5px rgba(169,63,99,.13);pointer-events:none;user-select:none;white-space:nowrap;z-index:0}
+.sec-ink .wm{-webkit-text-stroke:1.5px rgba(251,246,238,.1)}
+.wm.lo{top:auto;bottom:10px;left:-10px;right:auto}
 .sec-ink .eyebrow{color:var(--rose)}
 .script{font-family:var(--script);font-weight:400;color:var(--gold);font-size:clamp(1.6rem,3vw,2.3rem);line-height:1.2;display:block}
 .sec-ink .script{color:var(--rose)}
@@ -44,12 +47,13 @@ mark::after{content:"";position:absolute;left:-.12em;right:-.12em;bottom:.06em;h
 .sec-ink mark::after,.mark-deep mark::after{background:rgba(169,63,99,.4)}
 .inview mark::after,html.nomo mark::after,html:not(.js) mark::after{transform:scaleX(1)}
 /* buttons */
-.btn{display:inline-flex;align-items:center;gap:10px;background:var(--pink);color:#fff;font-weight:700;font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;padding:19px 34px;border-radius:60px;text-decoration:none;border:0;cursor:pointer;position:relative;overflow:hidden;transition:transform .3s,box-shadow .3s,background .3s;box-shadow:0 18px 34px -14px rgba(124,43,72,.5)}
+:root{--hot:#D8427D;--hot2:#B42E60}
+.btn{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(120deg,var(--hot),var(--hot2));color:#fff;font-weight:700;font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;padding:19px 34px;border-radius:60px;text-decoration:none;border:0;cursor:pointer;position:relative;overflow:hidden;transition:transform .3s,box-shadow .3s,background .3s;box-shadow:0 18px 38px -12px rgba(216,66,125,.55)}
 .btn::after{content:"\2192";font-weight:400;transition:transform .3s}
 .btn:hover{transform:translateY(-3px);background:var(--ink);box-shadow:0 24px 44px -16px rgba(46,31,39,.5)}
+.btn.gold{background:var(--gold)}
 .btn:hover::after{transform:translateX(5px)}
 .sec-ink .btn:hover{background:var(--paper);color:var(--ink)}
-.btn.gold{background:var(--gold)}
 .btn-ghost{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;color:var(--purple);text-decoration:none;padding:19px 6px;border-bottom:2px solid var(--blush);transition:border-color .3s,color .3s}
 .btn-ghost:hover{color:var(--pink);border-color:var(--pink)}
 .sec-ink .btn-ghost{color:var(--rose);border-color:rgba(232,169,192,.35)}
@@ -71,7 +75,7 @@ nav#nav.hide{transform:translateY(-110%)}
 .nav-links a{text-decoration:none;font-weight:700;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);white-space:nowrap;position:relative;padding:6px 0}
 .nav-links a::after{content:"";position:absolute;left:0;bottom:0;width:100%;height:2px;background:var(--pink);transform:scaleX(0);transform-origin:right;transition:transform .35s}
 .nav-links a:hover::after{transform:scaleX(1);transform-origin:left}
-.nav-cta{background:var(--pink);color:#fff;font-weight:700;font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;padding:13px 24px;border-radius:50px;text-decoration:none;white-space:nowrap;transition:background .3s,transform .3s}
+.nav-cta{background:linear-gradient(120deg,var(--hot),var(--hot2));color:#fff;font-weight:700;font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;padding:13px 24px;border-radius:50px;text-decoration:none;white-space:nowrap;transition:background .3s,transform .3s}
 .nav-cta:hover{background:var(--ink);transform:translateY(-2px)}
 .burger{display:none;background:none;border:0;cursor:pointer;padding:10px;margin-left:auto}
 .burger i{display:block;width:26px;height:2px;background:var(--ink);margin:6px 0;transition:.3s}
@@ -118,7 +122,7 @@ html.nomo .mq>div{animation:none}
 html.nomo .spinb svg{animation:none}
 @keyframes spinb{to{transform:rotate(360deg)}}
 .spinb svg text{font-family:var(--body);font-weight:700;font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;fill:currentColor}
-.spinb .ctr{width:54px;height:54px;border-radius:50%;background:var(--pink);color:#fff;display:grid;place-items:center;font-size:1.3rem;transition:transform .3s,background .3s}
+.spinb .ctr{width:54px;height:54px;border-radius:50%;background:linear-gradient(120deg,var(--hot),var(--hot2));color:#fff;display:grid;place-items:center;font-size:1.3rem;transition:transform .3s,background .3s}
 .spinb:hover .ctr{transform:scale(1.12);background:var(--ink)}
 /* floating blobs + grain */
 .blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.55;pointer-events:none;animation:drift 16s ease-in-out infinite alternate}
@@ -177,6 +181,8 @@ html,body{overflow-x:hidden;overflow-x:clip}
   html{scroll-behavior:auto}
   *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
 }
+
+section{overflow:hidden}
 
 .phframe{position:relative;border-radius:26px;overflow:hidden;border:1.5px solid rgba(46,31,39,.12);box-shadow:0 34px 60px -36px rgba(46,31,39,.45)}
 .phframe img{display:block;width:100%;height:100%;object-fit:cover}
@@ -256,14 +262,15 @@ html,body{overflow-x:hidden;overflow-x:clip}
     <h1 class="split go">Free blog coaching. No catch, no credit card, no <em>“just kidding, that part costs money.”</em></h1>
     <p class="hb" data-rv style="--d:.3s">Everything here is free because <b>I'd rather you start the right way than waste a year on advice from someone who's never sold a thing.</b> Grab what you need, hop on my list, and I'll send the rest.</p>
     <div class="cta-row" data-rv style="--d:.45s"><a class="btn" href="#signup">Send me the free courses</a></div>
+    <div class="phframe" data-rv="r" style="max-width:440px;min-height:280px;margin-top:36px;transform:rotate(1deg)"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_041.jpeg" alt="The free course library" loading="lazy"><span class="sticker" style="top:18px;right:18px;z-index:1">all free</span></div>
   </div>
 </header>
 <div class="mqband gold"><div class="mq" style="--mqs:26s"><div><span>free to start <span class="hrt">&#10084;</span></span><span>six free courses <span class="hrt">&#10084;</span></span><span>no card, no catch <span class="hrt">&#10084;</span></span><span>start the right way, babe <span class="hrt">&#10084;</span></span><span>free to start <span class="hrt">&#10084;</span></span><span>six free courses <span class="hrt">&#10084;</span></span><span>no card, no catch <span class="hrt">&#10084;</span></span><span>start the right way, babe <span class="hrt">&#10084;</span></span><span>free to start <span class="hrt">&#10084;</span></span><span>six free courses <span class="hrt">&#10084;</span></span><span>no card, no catch <span class="hrt">&#10084;</span></span><span>start the right way, babe <span class="hrt">&#10084;</span></span></div><div aria-hidden="true"><span>free to start <span class="hrt">&#10084;</span></span><span>six free courses <span class="hrt">&#10084;</span></span><span>no card, no catch <span class="hrt">&#10084;</span></span><span>start the right way, babe <span class="hrt">&#10084;</span></span><span>free to start <span class="hrt">&#10084;</span></span><span>six free courses <span class="hrt">&#10084;</span></span><span>no card, no catch <span class="hrt">&#10084;</span></span><span>start the right way, babe <span class="hrt">&#10084;</span></span><span>free to start <span class="hrt">&#10084;</span></span><span>six free courses <span class="hrt">&#10084;</span></span><span>no card, no catch <span class="hrt">&#10084;</span></span><span>start the right way, babe <span class="hrt">&#10084;</span></span></div></div></div>
 
 <section class="sec-tint">
   <div class="wrap">
-    <span class="eyebrow" data-rv><span class="no">01</span>Start here</span>
-    <h2 class="h" data-rv>The Free <em>Course Library.</em></h2>
+    <span class="eyebrow" data-rv>Start here</span>
+    <span class="wm" aria-hidden="true">free</span><h2 class="h" data-rv>The Free <em>Course Library.</em></h2>
     <p class="lead" data-rv>Six short courses in the order you need them. Start a blog, pick your offer, build your freebie, set up your email list, write posts that bring the right readers, and plan content that fits your week. <b>Like a membership, for $0.</b></p>
     <div class="fcards"><div class="fc" data-rv style="--r:-0.8deg;--d:0.00s"><span class="ftag">free ebook + workbook</span><h3>Turn Your Blog Into Clients and Customers</h3><p>My whole formula for getting clients and customers from your blog, with the workbook to fill in as you go. <b>Start here if you only grab one thing.</b></p><a class="gf" href="#signup">Grab it free</a></div><div class="fc" data-rv style="--r:0.7deg;--d:0.06s"><span class="ftag">the guide</span><h3>The Start Your Blog the Right Way Guide</h3><p>The ten things to settle before you write a single post, how to pick a niche you won't quit in three months, and the mistake every new blogger makes.</p><a class="gf" href="#signup">Grab it free</a></div><div class="fc" data-rv style="--r:-0.6deg;--d:0.12s"><span class="ftag">cheat sheet</span><h3>The Rule of 1s Cheat Sheet</h3><p>One purpose, one person, one offer. The one-page version of how I build every blog.</p><a class="gf" href="#signup">Grab it free</a></div><div class="fc" data-rv style="--r:0.9deg;--d:0.18s"><span class="ftag">the list</span><h3>50 Things You Can Sell</h3><p>Because “I don't know what my product would be” is the most common thing I hear, and <b>it's fixable in ten minutes.</b></p><a class="gf" href="#signup">Grab it free</a></div><div class="fc" data-rv style="--r:-0.9deg;--d:0.24s"><span class="ftag">checklist</span><h3>Website That Sells Checklist</h3><p>The pages, the buttons, and the words a blog website needs to turn a reader into a buyer.</p><a class="gf" href="#signup">Grab it free</a></div><div class="fc" data-rv style="--r:0.6deg;--d:0.30s"><span class="ftag">starter kit</span><h3>Blog Business Starter Kit</h3><p>The planner I use with 1:1 clients to decide what you're selling before you touch a design.</p><a class="gf" href="#signup">Grab it free</a></div></div>
   </div>
@@ -287,6 +294,7 @@ html,body{overflow-x:hidden;overflow-x:clip}
 <section class="sec-blush">
   <div class="wrap honest1">
     <span class="eyebrow" data-rv>One honest note</span>
+    <h2 class="h" data-rv>One freebie, <em>done this week.</em></h2>
     <div data-rv><span class="script">small action beats another saved download.</span></div>
     <p class="lead" data-rv style="margin:16px auto 0;max-width:560px">Pick one freebie, do it this week, then come back for the next. <b>I'm not going anywhere.</b></p>
   </div>
@@ -294,7 +302,7 @@ html,body{overflow-x:hidden;overflow-x:clip}
 
 <section>
   <div class="wrap">
-    <span class="eyebrow" data-rv><span class="no">02</span>The podcast</span>
+    <span class="eyebrow" data-rv>The podcast</span>
     <h2 class="h" data-rv>Blog coaching you can <em>press play on.</em></h2>
     <p class="lead" data-rv>New episodes weekly. Real talk about starting a blog, selling your own thing, and building a blog that pays you.</p>
     <div class="cta-row" data-rv>

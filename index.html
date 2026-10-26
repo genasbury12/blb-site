@@ -29,8 +29,11 @@ section{padding:92px 0;position:relative}
 .sec-tint{background:var(--tint)}
 .sec-ink{background:var(--ink);color:var(--paper)}
 .sec-blush{background:var(--blush)}
+.eyebrow::before{content:"\2726";color:var(--gold);font-size:.9em}
 .eyebrow{display:inline-flex;align-items:center;gap:10px;font-weight:700;font-size:.72rem;letter-spacing:.26em;text-transform:uppercase;color:var(--purple)}
-.eyebrow .no{display:inline-grid;place-items:center;width:30px;height:30px;border:1.5px solid currentColor;border-radius:50%;font-size:.68rem;letter-spacing:0}
+.wm{position:absolute;top:10px;right:-10px;font-family:var(--display);font-style:italic;font-size:clamp(5rem,15vw,11rem);line-height:1;color:transparent;-webkit-text-stroke:1.5px rgba(169,63,99,.13);pointer-events:none;user-select:none;white-space:nowrap;z-index:0}
+.sec-ink .wm{-webkit-text-stroke:1.5px rgba(251,246,238,.1)}
+.wm.lo{top:auto;bottom:10px;left:-10px;right:auto}
 .sec-ink .eyebrow{color:var(--rose)}
 .script{font-family:var(--script);font-weight:400;color:var(--gold);font-size:clamp(1.6rem,3vw,2.3rem);line-height:1.2;display:block}
 .sec-ink .script{color:var(--rose)}
@@ -44,12 +47,13 @@ mark::after{content:"";position:absolute;left:-.12em;right:-.12em;bottom:.06em;h
 .sec-ink mark::after,.mark-deep mark::after{background:rgba(169,63,99,.4)}
 .inview mark::after,html.nomo mark::after,html:not(.js) mark::after{transform:scaleX(1)}
 /* buttons */
-.btn{display:inline-flex;align-items:center;gap:10px;background:var(--pink);color:#fff;font-weight:700;font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;padding:19px 34px;border-radius:60px;text-decoration:none;border:0;cursor:pointer;position:relative;overflow:hidden;transition:transform .3s,box-shadow .3s,background .3s;box-shadow:0 18px 34px -14px rgba(124,43,72,.5)}
+:root{--hot:#D8427D;--hot2:#B42E60}
+.btn{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(120deg,var(--hot),var(--hot2));color:#fff;font-weight:700;font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;padding:19px 34px;border-radius:60px;text-decoration:none;border:0;cursor:pointer;position:relative;overflow:hidden;transition:transform .3s,box-shadow .3s,background .3s;box-shadow:0 18px 38px -12px rgba(216,66,125,.55)}
 .btn::after{content:"\2192";font-weight:400;transition:transform .3s}
 .btn:hover{transform:translateY(-3px);background:var(--ink);box-shadow:0 24px 44px -16px rgba(46,31,39,.5)}
+.btn.gold{background:var(--gold)}
 .btn:hover::after{transform:translateX(5px)}
 .sec-ink .btn:hover{background:var(--paper);color:var(--ink)}
-.btn.gold{background:var(--gold)}
 .btn-ghost{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;color:var(--purple);text-decoration:none;padding:19px 6px;border-bottom:2px solid var(--blush);transition:border-color .3s,color .3s}
 .btn-ghost:hover{color:var(--pink);border-color:var(--pink)}
 .sec-ink .btn-ghost{color:var(--rose);border-color:rgba(232,169,192,.35)}
@@ -71,7 +75,7 @@ nav#nav.hide{transform:translateY(-110%)}
 .nav-links a{text-decoration:none;font-weight:700;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);white-space:nowrap;position:relative;padding:6px 0}
 .nav-links a::after{content:"";position:absolute;left:0;bottom:0;width:100%;height:2px;background:var(--pink);transform:scaleX(0);transform-origin:right;transition:transform .35s}
 .nav-links a:hover::after{transform:scaleX(1);transform-origin:left}
-.nav-cta{background:var(--pink);color:#fff;font-weight:700;font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;padding:13px 24px;border-radius:50px;text-decoration:none;white-space:nowrap;transition:background .3s,transform .3s}
+.nav-cta{background:linear-gradient(120deg,var(--hot),var(--hot2));color:#fff;font-weight:700;font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;padding:13px 24px;border-radius:50px;text-decoration:none;white-space:nowrap;transition:background .3s,transform .3s}
 .nav-cta:hover{background:var(--ink);transform:translateY(-2px)}
 .burger{display:none;background:none;border:0;cursor:pointer;padding:10px;margin-left:auto}
 .burger i{display:block;width:26px;height:2px;background:var(--ink);margin:6px 0;transition:.3s}
@@ -118,7 +122,7 @@ html.nomo .mq>div{animation:none}
 html.nomo .spinb svg{animation:none}
 @keyframes spinb{to{transform:rotate(360deg)}}
 .spinb svg text{font-family:var(--body);font-weight:700;font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;fill:currentColor}
-.spinb .ctr{width:54px;height:54px;border-radius:50%;background:var(--pink);color:#fff;display:grid;place-items:center;font-size:1.3rem;transition:transform .3s,background .3s}
+.spinb .ctr{width:54px;height:54px;border-radius:50%;background:linear-gradient(120deg,var(--hot),var(--hot2));color:#fff;display:grid;place-items:center;font-size:1.3rem;transition:transform .3s,background .3s}
 .spinb:hover .ctr{transform:scale(1.12);background:var(--ink)}
 /* floating blobs + grain */
 .blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.55;pointer-events:none;animation:drift 16s ease-in-out infinite alternate}
@@ -177,6 +181,8 @@ html,body{overflow-x:hidden;overflow-x:clip}
   html{scroll-behavior:auto}
   *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
 }
+
+section{overflow:hidden}
 
 /* ---- hero ---- */
 .hero{position:relative;padding:110px 0 90px;overflow:hidden}
@@ -461,7 +467,7 @@ html.nomo .pod .play::before{animation:none}
 
 <div class="freebar">
   <div class="wrap">
-    <span class="ft">Free to start</span>
+    <div><h2 style="font-family:var(--display);font-weight:500;font-size:1.35rem;margin-bottom:4px">Not ready yet? <em style="color:var(--pink)">Start free.</em></h2><span class="ft">Free to start</span></div>
     <p><b>Not ready to work together yet? Totally fine.</b> Grab the free blogging courses, hop on my list, and I'll send you the good stuff to start a blog the right way.</p>
     <a class="btn gold" href="/freebies">Send me the free courses</a>
   </div>
@@ -469,8 +475,8 @@ html.nomo .pod .play::before{animation:none}
 
 <section class="sec-tint">
   <div class="wrap">
-    <span class="eyebrow" data-rv><span class="no">01</span>Sound familiar?</span>
-    <h2 class="h" data-rv>Go ahead. <em>Try not to feel personally attacked.</em></h2>
+    <span class="eyebrow" data-rv>Sound familiar?</span>
+    <span class="wm" aria-hidden="true">11pm</span><h2 class="h" data-rv>Go ahead. <em>Try not to feel personally attacked.</em></h2>
     <p class="lead" data-rv>This is the stuff running through your head at 11pm when you're supposed to be sleeping. If you see yourself here, good. It means <b>you're my kind of woman</b>, and you're closer than you think.</p>
     <div class="quotes"><div class="qcard " data-rv style="--r:-1.2deg;--d:0.00s">I've wanted to start a blog for years and I keep telling myself I'll do it later.</div><div class="qcard alt" data-rv style="--r:.9deg;--d:0.07s">I started one and now it just sits there. Crickets. Not one sale, not one comment.</div><div class="qcard ink" data-rv style="--r:-0.7deg;--d:0.14s">Everyone says start a blog, but nobody explains how you actually make money from the thing.</div><div class="qcard " data-rv style="--r:1.1deg;--d:0.21s">I have no clue what my niche is or what I'm supposed to be writing about.</div><div class="qcard alt" data-rv style="--r:-1deg;--d:0.28s">My site looks like a free template threw up and I'm embarrassed to send the link.</div><div class="qcard " data-rv style="--r:.7deg;--d:0.35s">I've bought three courses and I'm more confused than when I started.</div><div class="qcard ink" data-rv style="--r:-1.3deg;--d:0.42s">I don't have hours a day. I've got a job, a kid, a whole life already happening.</div><div class="qcard alt" data-rv style="--r:.8deg;--d:0.49s">Is it even worth it? Everyone says blogging is dead and AI does it all now anyway.</div></div>
     <div class="q-close" data-rv><span class="scr">yeah, I've heard every single one.</span><p>I've said half of them at 2am. <b>Breathe, babe. You just found the right blog coach.</b></p></div>
@@ -480,7 +486,7 @@ html.nomo .pod .play::before{animation:none}
 <section class="sec-ink dead">
   <div class="grain"></div>
   <div class="wrap">
-    <span class="eyebrow" data-rv><span class="no">02</span>Here's what nobody tells you</span>
+    <span class="eyebrow" data-rv>Here's what nobody tells you</span>
     <h2 data-rv="clip"><span class="o">Blogging isn't dead.</span><span class="f">Bad strategy is.</span></h2>
     <div class="dead-grid">
       <div data-rv>
@@ -505,7 +511,7 @@ html.nomo .pod .play::before{animation:none}
   <div class="wrap">
     <div class="ai-wrap">
       <div class="ai-left" data-rv="l">
-        <span class="eyebrow"><span class="no">03</span>But what about AI?</span>
+        <span class="eyebrow">But what about AI?</span>
         <h2 class="h">AI made starting a blog <em>easy</em>. It made making money from one <em>harder</em>.</h2>
         <div class="ai-big" aria-hidden="true">AI</div>
       </div>
@@ -520,10 +526,10 @@ html.nomo .pod .play::before{animation:none}
 
 <section class="sec-blush">
   <div class="wrap">
-    <div class="gen-grid">
+    <span class="wm lo" aria-hidden="true">bestie</span><div class="gen-grid" style="position:relative;z-index:1">
       <div class="gen-frame" data-rv="l"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_047.jpeg" alt="Gen, your blog coach" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:inherit"><span class="cap" style="background:var(--paper);padding:8px 16px;border-radius:50px;z-index:1">your blogging lady &middot; est. 2017</span><span class="sticker" style="top:24px;right:24px;z-index:1">hi, bestie</span></div>
       <div>
-        <span class="eyebrow" data-rv><span class="no">04</span>Meet your blog coach</span>
+        <span class="eyebrow" data-rv>Meet your blog coach</span>
         <h2 class="h" data-rv>Hi, I'm Gen. <em>Your blogging lady and your new favorite bestie.</em></h2>
         <p class="gp" data-rv>I started with a free template, a dream way too big for my skill set, and the audacity to think I could figure it out. <b>Spoiler: I did.</b> But not before launching things nobody bought, crying over my analytics at midnight, and rebuilding more times than I'll admit out loud.</p>
         <p class="gp" data-rv>So when you tell me you feel lost and don't know where to begin, I'm not going to nod politely. I'm going to say <mark>“girl, same”</mark> and hand you the exact plan I wish someone had handed me. No fluff, no 47-step funnels, no “just stay consistent” nonsense.</p>
@@ -542,7 +548,7 @@ html.nomo .pod .play::before{animation:none}
 
 <section>
   <div class="wrap">
-    <span class="eyebrow" data-rv><span class="no">05</span>Let's be real for a sec</span>
+    <span class="eyebrow" data-rv>Let's be real for a sec</span>
     <h2 class="h" data-rv>This was never really <em>about blogging.</em></h2>
     <p class="lead" data-rv>Nobody lies awake dreaming about “starting a blog.” What you want runs deeper than that. You want something that's yours. Not your boss's, not the company's, not something that vanishes the second someone decides they don't need you anymore.</p>
     <p class="lead" data-rv style="margin-top:16px">You want to spend your days on something you love instead of something you tolerate. You want it to make money, <b>real money</b>, because a passion that stays broke isn't freedom, it's an expensive hobby. And underneath all of it, <mark>you want to prove to yourself you could do it.</mark></p>
@@ -563,7 +569,7 @@ html.nomo .pod .play::before{animation:none}
 
 <section class="sec-tint">
   <div class="wrap">
-    <span class="eyebrow" data-rv><span class="no">06</span>The part that changes everything</span>
+    <span class="eyebrow" data-rv>The part that changes everything</span>
     <h2 class="h" data-rv>It really comes down to <em>two things.</em></h2>
     <p class="lead" data-rv>A blog that pays you isn't about posting more or going viral. It's two pieces working together: <b>something to sell, and a way to lead people to it.</b> Nail those two and everything else gets easier.</p>
     <div class="two">
@@ -597,7 +603,7 @@ html.nomo .pod .play::before{animation:none}
 
 <section>
   <div class="wrap">
-    <span class="eyebrow" data-rv><span class="no">07</span>What you actually get</span>
+    <span class="eyebrow" data-rv>What you actually get</span>
     <h2 class="h" data-rv>Everything it takes to go <em>from idea to income.</em></h2>
     <p class="lead" data-rv>No vague modules. No homework you cry over alone. Here's what we build together.</p>
     <div class="getrows"><div class="grow" data-rv style="--d:0.00s"><span class="gn">01</span><div><h3>A plan that finally makes sense.</h3><p>What you're selling and who's buying it, before we touch a single design.</p></div></div><div class="grow" data-rv style="--d:0.05s"><span class="gn">02</span><div><h3>Your first real offer.</h3><p>The thing you'll sell, mapped and priced, so you're not praying for affiliate pennies.</p></div></div><div class="grow" data-rv style="--d:0.10s"><span class="gn">03</span><div><h3>Your brand, head to toe.</h3><p>Colors, fonts, the whole vibe, so your blog looks like the business it is.</p></div></div><div class="grow" data-rv style="--d:0.15s"><span class="gn">04</span><div><h3>A custom blog website.</h3><p>Designed around you from scratch. No templates, no “looks like everyone else” energy.</p></div></div><div class="grow" data-rv style="--d:0.20s"><span class="gn">05</span><div><h3>A freebie and a simple funnel.</h3><p>A way to grow your list and turn readers into buyers without the tech overwhelm.</p></div></div><div class="grow" data-rv style="--d:0.25s"><span class="gn">06</span><div><h3>1:1 blog coaching for a full year.</h3><p>Me, in your corner, answering your questions and keeping you moving.</p></div></div></div>
@@ -606,7 +612,7 @@ html.nomo .pod .play::before{animation:none}
 
 <section class="sec-blush" id="how">
   <div class="wrap">
-    <span class="eyebrow" data-rv><span class="no">08</span>How it works</span>
+    <span class="eyebrow" data-rv>How it works</span>
     <h2 class="h" data-rv>Get clear. Get gorgeous. <em>Get paid.</em></h2>
     <div class="steps3">
       <div class="s3" data-rv><span class="sn">1</span><h3>Get clear</h3><p>We nail down your purpose, your person, and what you're selling. <b>Most blogs skip this and wonder why they flop.</b> Not yours.</p></div>
@@ -618,7 +624,7 @@ html.nomo .pod .play::before{animation:none}
 
 <section class="sec-tint">
   <div class="wrap">
-    <span class="eyebrow" data-rv><span class="no">09</span>Why custom</span>
+    <span class="eyebrow" data-rv>Why custom</span>
     <h2 class="h" data-rv>A free template is <em>the most expensive thing</em> you'll ever use.</h2>
     <p class="lead" data-rv>When you're starting out, a cheap template feels safe. But you end up with a site that looks like a thousand others, fights you every time you change one little thing, and quietly tells everyone you're not serious yet.</p>
     <p class="lead" data-rv style="margin-top:16px">A custom blog site is built around <b>what you sell and how you sell it</b>. It's gorgeous, it's unmistakably yours, and once it's done you can update it yourself without spiraling. That's the difference between whispering “hobby” and saying <mark>“open for business.”</mark></p>
@@ -633,7 +639,7 @@ html.nomo .pod .play::before{animation:none}
   <div class="wrap">
     <div class="showit-grid">
       <div>
-        <span class="eyebrow" data-rv><span class="no">10</span>About the website</span>
+        <span class="eyebrow" data-rv>About the website</span>
         <h2 class="h" data-rv>Yes, there's a reason I build blogs <em>on Showit.</em></h2>
         <p class="lead" data-rv>I don't design on Showit because it's trendy. I design on it because it gives you two things that almost never come together: <b>a site that's genuinely gorgeous and fully custom, and one you can run yourself once it's live.</b></p>
         <ul class="sw-checks">
@@ -655,15 +661,15 @@ html.nomo .pod .play::before{animation:none}
 
 <section class="sec-ink">
   <div class="wrap">
-    <span class="eyebrow" data-rv><span class="no">11</span>Picture it</span>
-    <h2 class="h" data-rv>Same girl. <em>Completely different bank account.</em></h2>
+    <span class="eyebrow" data-rv>Picture it</span>
+    <span class="wm" aria-hidden="true">soon</span><h2 class="h" data-rv>Same girl. <em>Completely different bank account.</em></h2>
     <div class="flips"><div class="flip" data-rv style="--d:0.00s"><span class="was">You open your blog, sigh, and close the tab.</span><span class="ar">&#10230;</span><span class="now">You share your link before anyone asks.</span></div><div class="flip" data-rv style="--d:0.06s"><span class="was">You dread anyone asking for the link.</span><span class="ar">&#10230;</span><span class="now">You know exactly what you're selling and to who.</span></div><div class="flip" data-rv style="--d:0.12s"><span class="was">You're guessing at every decision.</span><span class="ar">&#10230;</span><span class="now">Your site looks like you mean business.</span></div><div class="flip" data-rv style="--d:0.18s"><span class="was">You compare yourself to women ten years in.</span><span class="ar">&#10230;</span><span class="now">You get your first sale and scream into a pillow.</span></div><div class="flip" data-rv style="--d:0.24s"><span class="was">Your big idea is still rotting in your notes app.</span><span class="ar">&#10230;</span><span class="now">That idea is live, real, and making money.</span></div></div>
   </div>
 </section>
 
 <section>
   <div class="wrap">
-    <span class="eyebrow" data-rv><span class="no">12</span>Real talk</span>
+    <span class="eyebrow" data-rv>Real talk</span>
     <h2 class="h" data-rv>Let's not waste <em>each other's time, babe.</em></h2>
     <div class="fit">
       <div class="yes" data-rv><h3>This is for you if:</h3><ul>
@@ -702,6 +708,7 @@ html.nomo .pod .play::before{animation:none}
         <h2 class="h" data-rv>Nine years of doing this. <em>Not a course I made last spring.</em></h2>
         <p class="lead" data-rv>Every client I've worked with was selling something of her own. <b>Not one was an affiliate blog.</b></p>
         <p class="rl" data-rv>Want to hear it from them? <b>I'll connect you with past clients on your call.</b></p>
+        <div data-rv style="margin-top:24px;background:#fff;border:1.5px solid rgba(46,31,39,.12);border-radius:10px;padding:10px 10px 12px;max-width:260px;transform:rotate(1.5deg);box-shadow:0 22px 40px -24px rgba(46,31,39,.35)"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_048.jpeg" alt="Gen at work on a client site" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:6px;display:block"><div style="font-family:var(--script);color:var(--gold);font-size:1.3rem;text-align:center;margin-top:6px">nine years in</div></div>
       </div>
     </div>
   </div>
@@ -711,7 +718,7 @@ html.nomo .pod .play::before{animation:none}
   <div class="wrap">
     <div class="ladies">
       <div>
-        <span class="eyebrow" data-rv><span class="no">13</span>Want in for less?</span>
+        <span class="eyebrow" data-rv>Want in for less?</span>
         <h2 class="h" data-rv>Not ready for Blog to Paid? <em>Join the ladies.</em></h2>
         <p class="lead" data-rv><b>The Blogging Ladies.</b> Live group blog coaching every month, the full course and template library, and a room full of women building blogs that sell something of their own. All the support, for way less than 1:1.</p>
         <div class="cta-row" data-rv><a class="btn" href="/blogging-ladies">Join the Blogging Ladies</a></div>
@@ -728,7 +735,8 @@ html.nomo .pod .play::before{animation:none}
 
 <section class="sec-ink urg">
   <div class="grain"></div>
-  <div class="wrap">
+  <div class="wrap" style="display:grid;grid-template-columns:1fr;position:relative">
+    <img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_045.jpeg" alt="Gen from Boss Lady Bloggers" loading="lazy" style="width:150px;height:150px;object-fit:cover;border-radius:50%;border:4px solid var(--rose);margin:0 auto 24px;display:block">
     <span class="eyebrow" data-rv>Right now</span>
     <h2 data-rv>Your dream readers are scrolling right now. <em>Without you.</em></h2>
     <p data-rv>Every day you wait, someone who needed exactly what you've got scrolled right past, because you weren't there yet. That's a customer walking out the door, babe. <b>Let's go get her.</b></p>
@@ -738,7 +746,7 @@ html.nomo .pod .play::before{animation:none}
 
 <section>
   <div class="wrap">
-    <span class="eyebrow" data-rv><span class="no">14</span>From the blog</span>
+    <span class="eyebrow" data-rv>From the blog</span>
     <h2 class="h" data-rv>Honest, no-fluff blog advice <em>while you're here.</em></h2>
     <div class="bcards">
       <a class="bcard" href="/blog" data-rv><span class="bk">Start a blog</span><h3>The right way, in the right order.</h3><p>Niche, platform, Showit vs WordPress, and the business-first setup most bloggers skip.</p><span class="rm">Read the blog &rarr;</span></a>
@@ -751,10 +759,10 @@ html.nomo .pod .play::before{animation:none}
 
 <section class="sec-tint">
   <div class="wrap">
-    <div class="pod">
+    <span class="wm lo" aria-hidden="true">play</span><div class="pod" style="position:relative;z-index:1">
       <div class="play" data-rv="s"><span></span></div>
       <div>
-        <span class="eyebrow" data-rv><span class="no">15</span>The podcast</span>
+        <span class="eyebrow" data-rv>The podcast</span>
         <h2 class="h" data-rv>Blog coaching you can <em>press play on.</em></h2>
         <p class="lead" data-rv>Real, honest conversations about starting a blog, selling your own thing, and building a blog that pays you. <b>New episodes weekly, totally free.</b></p>
         <div class="cta-row" data-rv>
@@ -768,7 +776,7 @@ html.nomo .pod .play::before{animation:none}
 
 <section>
   <div class="wrap-n">
-    <span class="eyebrow" data-rv><span class="no">16</span>Before you ask</span>
+    <span class="eyebrow" data-rv>Before you ask</span>
     <h2 class="h" data-rv>I already know <em>what you're thinking.</em></h2>
     <div data-rv><div class="faq"><details open><summary><span class="fn">01</span>Isn't it too late? Everyone says blogging is dead and AI does it all now.<span class="plus">+</span></summary><div class="fa">Blogging as “post a lot, get Google traffic, collect ad money” is dead. Good riddance. A blog that sells something of your own to a small list of the right readers is doing better than ever, because everyone else is busy churning out the same AI posts. AI made starting a blog easy. It didn't make anyone's blog pay. That part is still strategy, and that's what we do.</div></details><details><summary><span class="fn">02</span>Can't I just use AI for all this?<span class="plus">+</span></summary><div class="fa">For the writing, mostly yes, and we will. AI can't pick your offer, tell you your price is wrong, build your Showit site, or notice when you've gone quiet for three weeks. That's what you're paying for. The answers are free now. Doing it is still the hard part.</div></details><details><summary><span class="fn">03</span>I'm not techy. Like, at all.<span class="plus">+</span></summary><div class="fa">Good, because I build it. Showit is drag and drop, and you get two simple manuals and a live walkthrough when I hand you the keys. If you can use Canva, you can run your site.</div></details><details><summary><span class="fn">04</span>I'm just starting out. Do I need a big audience already?<span class="plus">+</span></summary><div class="fa">No. Every client I've had started with a small list or none. You need one thing to sell and the right 100 readers, not 100,000 strangers. We build the list on purpose, from the freebie up.</div></details><details><summary><span class="fn">05</span>I barely have time. Can I even do this?<span class="plus">+</span></summary><div class="fa">About 2 to 3 hours a week. One call a month, one thing to do between calls. I built it this way because it's how I have to work too, around a job and my son. Fall behind a week? You pick up where you left off.</div></details><details><summary><span class="fn">06</span>Do I need my niche figured out first?<span class="plus">+</span></summary><div class="fa">No. That's phase one. We figure out your purpose, your person, and your offer together before I touch a single design.</div></details><details><summary><span class="fn">07</span>What platform do you build on and why?<span class="plus">+</span></summary><div class="fa">Showit, with WordPress underneath for your posts. Fully custom, no code, and you own everything. Your domain, your content, your blog. It all comes with you.</div></details></div></div>
   </div>
@@ -791,7 +799,7 @@ html.nomo .pod .play::before{animation:none}
 
 <div class="fguide">
   <div class="wrap">
-    <h3>Free guide before you go?</h3>
+    <h2 style="font-family:var(--display);font-weight:500;font-size:1.5rem">Free guide before you go?</h2>
     <p>Grab the free blogging courses before you go. Honest blog coaching, fresh posts, and the occasional freebie in your inbox. <b>No spam, ever. Unsubscribe anytime.</b></p>
     <a class="btn" href="/freebies">Send me the free courses</a>
   </div>

@@ -29,8 +29,11 @@ section{padding:92px 0;position:relative}
 .sec-tint{background:var(--tint)}
 .sec-ink{background:var(--ink);color:var(--paper)}
 .sec-blush{background:var(--blush)}
+.eyebrow::before{content:"\2726";color:var(--gold);font-size:.9em}
 .eyebrow{display:inline-flex;align-items:center;gap:10px;font-weight:700;font-size:.72rem;letter-spacing:.26em;text-transform:uppercase;color:var(--purple)}
-.eyebrow .no{display:inline-grid;place-items:center;width:30px;height:30px;border:1.5px solid currentColor;border-radius:50%;font-size:.68rem;letter-spacing:0}
+.wm{position:absolute;top:10px;right:-10px;font-family:var(--display);font-style:italic;font-size:clamp(5rem,15vw,11rem);line-height:1;color:transparent;-webkit-text-stroke:1.5px rgba(169,63,99,.13);pointer-events:none;user-select:none;white-space:nowrap;z-index:0}
+.sec-ink .wm{-webkit-text-stroke:1.5px rgba(251,246,238,.1)}
+.wm.lo{top:auto;bottom:10px;left:-10px;right:auto}
 .sec-ink .eyebrow{color:var(--rose)}
 .script{font-family:var(--script);font-weight:400;color:var(--gold);font-size:clamp(1.6rem,3vw,2.3rem);line-height:1.2;display:block}
 .sec-ink .script{color:var(--rose)}
@@ -44,12 +47,13 @@ mark::after{content:"";position:absolute;left:-.12em;right:-.12em;bottom:.06em;h
 .sec-ink mark::after,.mark-deep mark::after{background:rgba(169,63,99,.4)}
 .inview mark::after,html.nomo mark::after,html:not(.js) mark::after{transform:scaleX(1)}
 /* buttons */
-.btn{display:inline-flex;align-items:center;gap:10px;background:var(--pink);color:#fff;font-weight:700;font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;padding:19px 34px;border-radius:60px;text-decoration:none;border:0;cursor:pointer;position:relative;overflow:hidden;transition:transform .3s,box-shadow .3s,background .3s;box-shadow:0 18px 34px -14px rgba(124,43,72,.5)}
+:root{--hot:#D8427D;--hot2:#B42E60}
+.btn{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(120deg,var(--hot),var(--hot2));color:#fff;font-weight:700;font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;padding:19px 34px;border-radius:60px;text-decoration:none;border:0;cursor:pointer;position:relative;overflow:hidden;transition:transform .3s,box-shadow .3s,background .3s;box-shadow:0 18px 38px -12px rgba(216,66,125,.55)}
 .btn::after{content:"\2192";font-weight:400;transition:transform .3s}
 .btn:hover{transform:translateY(-3px);background:var(--ink);box-shadow:0 24px 44px -16px rgba(46,31,39,.5)}
+.btn.gold{background:var(--gold)}
 .btn:hover::after{transform:translateX(5px)}
 .sec-ink .btn:hover{background:var(--paper);color:var(--ink)}
-.btn.gold{background:var(--gold)}
 .btn-ghost{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;color:var(--purple);text-decoration:none;padding:19px 6px;border-bottom:2px solid var(--blush);transition:border-color .3s,color .3s}
 .btn-ghost:hover{color:var(--pink);border-color:var(--pink)}
 .sec-ink .btn-ghost{color:var(--rose);border-color:rgba(232,169,192,.35)}
@@ -71,7 +75,7 @@ nav#nav.hide{transform:translateY(-110%)}
 .nav-links a{text-decoration:none;font-weight:700;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);white-space:nowrap;position:relative;padding:6px 0}
 .nav-links a::after{content:"";position:absolute;left:0;bottom:0;width:100%;height:2px;background:var(--pink);transform:scaleX(0);transform-origin:right;transition:transform .35s}
 .nav-links a:hover::after{transform:scaleX(1);transform-origin:left}
-.nav-cta{background:var(--pink);color:#fff;font-weight:700;font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;padding:13px 24px;border-radius:50px;text-decoration:none;white-space:nowrap;transition:background .3s,transform .3s}
+.nav-cta{background:linear-gradient(120deg,var(--hot),var(--hot2));color:#fff;font-weight:700;font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;padding:13px 24px;border-radius:50px;text-decoration:none;white-space:nowrap;transition:background .3s,transform .3s}
 .nav-cta:hover{background:var(--ink);transform:translateY(-2px)}
 .burger{display:none;background:none;border:0;cursor:pointer;padding:10px;margin-left:auto}
 .burger i{display:block;width:26px;height:2px;background:var(--ink);margin:6px 0;transition:.3s}
@@ -118,7 +122,7 @@ html.nomo .mq>div{animation:none}
 html.nomo .spinb svg{animation:none}
 @keyframes spinb{to{transform:rotate(360deg)}}
 .spinb svg text{font-family:var(--body);font-weight:700;font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;fill:currentColor}
-.spinb .ctr{width:54px;height:54px;border-radius:50%;background:var(--pink);color:#fff;display:grid;place-items:center;font-size:1.3rem;transition:transform .3s,background .3s}
+.spinb .ctr{width:54px;height:54px;border-radius:50%;background:linear-gradient(120deg,var(--hot),var(--hot2));color:#fff;display:grid;place-items:center;font-size:1.3rem;transition:transform .3s,background .3s}
 .spinb:hover .ctr{transform:scale(1.12);background:var(--ink)}
 /* floating blobs + grain */
 .blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.55;pointer-events:none;animation:drift 16s ease-in-out infinite alternate}
@@ -177,6 +181,8 @@ html,body{overflow-x:hidden;overflow-x:clip}
   html{scroll-behavior:auto}
   *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
 }
+
+section{overflow:hidden}
 
 .phframe{position:relative;border-radius:26px;overflow:hidden;border:1.5px solid rgba(46,31,39,.12);box-shadow:0 34px 60px -36px rgba(46,31,39,.45)}
 .phframe img{display:block;width:100%;height:100%;object-fit:cover}
@@ -273,8 +279,8 @@ html,body{overflow-x:hidden;overflow-x:clip}
 
 <section class="sec-tint">
   <div class="wrap">
-    <span class="eyebrow" data-rv><span class="no">01</span>What you get</span>
-    <h2 class="h" data-rv>A coach, a library, and <em>women who get it.</em></h2>
+    <span class="eyebrow" data-rv>What you get</span>
+    <span class="wm" aria-hidden="true">ladies</span><h2 class="h" data-rv>A coach, a library, and <em>women who get it.</em></h2>
     <div class="wget">
       <div data-rv><span class="gi">1</span><h3>A live group blog coaching call every month.</h3><p>Bring your blog, your offer, or your stuck spot. <b>I fix it live</b>, and you learn from everyone else's too.</p></div>
       <div data-rv style="--d:.08s"><span class="gi">2</span><h3>The full course and template library.</h3><p>Every course I've made, in the order you need it. Start a blog, pick your offer, build your freebie, write your emails.</p></div>
@@ -286,7 +292,7 @@ html,body{overflow-x:hidden;overflow-x:clip}
 
 <section>
   <div class="wrap">
-    <span class="eyebrow" data-rv><span class="no">02</span>Who it's for</span>
+    <span class="eyebrow" data-rv>Who it's for</span>
     <h2 class="h" data-rv>You'll do the building. <em>You won't do it alone.</em></h2>
     <p class="lead" data-rv>You're starting or restarting a blog, you want to sell something of your own, and you want a blog coach in the room without the 1:1 price. <b>You'll do the building yourself with the courses and the calls.</b></p>
     <p class="lead" data-rv style="margin-top:14px">If you want me to build the site for you and coach you for a year, <a href="/blog-to-paid" style="color:var(--pink);font-weight:700">that's Blog to Paid</a>.</p>
@@ -296,7 +302,7 @@ html,body{overflow-x:hidden;overflow-x:clip}
 <section class="sec-ink">
   <div class="grain"></div>
   <div class="wrap">
-    <span class="eyebrow" data-rv><span class="no">03</span>What a month looks like</span>
+    <span class="eyebrow" data-rv>What a month looks like</span>
     <h2 class="h" data-rv>Simple, <em>on purpose.</em></h2>
     <div class="month3">
       <div data-rv><p><b>The call lands on the calendar.</b> You bring one thing.</p></div>
@@ -308,7 +314,8 @@ html,body{overflow-x:hidden;overflow-x:clip}
 
 <section>
   <div class="wrap">
-    <span class="eyebrow" data-rv style="display:flex;justify-content:center"><span class="no">04</span>Behind the scenes</span>
+    <div style="text-align:center"><span class="eyebrow" data-rv>Behind the scenes</span>
+    <h2 class="h" data-rv>Come see <em>what we're building.</em></h2></div>
     <div class="trioB">
       <figure data-rv style="--r:-3deg;--d:.05s"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_002.jpeg" alt="Behind the scenes at Boss Lady Bloggers" loading="lazy"><figcaption>the room</figcaption></figure>
       <figure data-rv style="--r:2deg;--d:.15s"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_009.jpeg" alt="Behind the scenes at Boss Lady Bloggers" loading="lazy"><figcaption>the ladies</figcaption></figure>
@@ -319,10 +326,13 @@ html,body{overflow-x:hidden;overflow-x:clip}
 
 <section class="sec-blush">
   <div class="wrap">
-    <span class="eyebrow" data-rv style="display:flex;justify-content:center"><span class="no">05</span>Real talk</span>
-    <div class="realt" data-rv="s" style="margin-top:24px">
+    <div style="text-align:center"><span class="eyebrow" data-rv>Real talk</span>
+    <h2 class="h" data-rv>A room, <em>not a done-for-you service.</em></h2></div>
+    <div class="realt" data-rv="s" style="margin-top:24px;display:grid;grid-template-columns:140px 1fr;gap:26px;align-items:center">
+    <img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_001.jpeg" alt="The Blogging Ladies" loading="lazy" style="width:140px;height:140px;object-fit:cover;border-radius:50%;border:4px solid #fff">
       <p>This is $100 a month because <b>it's a room, not a done-for-you service.</b> If you need someone to build your website, this isn't that. If you need a coach, a library, and women who get it, <b>this is exactly that.</b></p>
     </div>
+    <style>@media(max-width:640px){.realt{grid-template-columns:1fr !important}}</style>
   </div>
 </section>
 

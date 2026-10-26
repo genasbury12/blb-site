@@ -501,6 +501,32 @@ mobile-verified at 390px, delivered as .txt files."
 =====================================================================
 CHANGELOG (newest first)
 =====================================================================
+2026-10-26  v3.6  Client audit round ("find your mistakes"). Fixes:
+                  (1) CTA color: buttons now a bright pink gradient
+                  (--hot #D8427D -> --hot2 #B42E60) on .btn, .nav-cta
+                  and spin-badge centers; deep boss pink stays for
+                  text accents. Lesson: the brand's "action color"
+                  must read BRIGHT at button scale, not plum-dark.
+                  (2) Removed the numbered 01/02 kicker circles
+                  sitewide (client: unprofessional); eyebrows now
+                  carry a gold sparkle (eyebrow::before \2726).
+                  (3) Heading audit: every <section> on every page
+                  now contains an H1 or H2 (added to free-start bar,
+                  gold guide bar, About honest card, Ladies real-talk
+                  + behind-the-scenes, Freebies honest note, Book-a-
+                  Call steps, Contact email column). Automated check:
+                  count sections without h1/h2 per page = 0.
+                  (4) Images: 16 -> 33 placements from the client's
+                  56-photo library (urgency circle, receipts
+                  polaroid, freedom polaroid, investment + coaching
+                  + ladies circle portraits, freebies hero, podcast
+                  studio shot, about who-for frame).
+                  (5) Section differentiation: giant italic outline
+                  watermark words (.wm) behind key sections; every
+                  section gets overflow:hidden to clip them.
+                  NOTE: the client's live domain is proxy-blocked
+                  from the cloud box; audits run on the repo pages
+                  plus rendered screenshots, never on guesses.
 2026-10-26  v3.5  THE BLOG TO PAID ERA: full-site rebuild from the
                   Oct 25 "Full Website Copy" doc (28-page PDF).
                   New offer: Blog to Paid ($500 to start then
