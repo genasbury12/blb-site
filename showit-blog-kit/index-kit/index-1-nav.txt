@@ -70,11 +70,11 @@ template does can break it.
     <a class="logo" href="/">Boss Lady <em>Bloggers</em></a>
     <ul class="links">
       <li><a href="/about">About</a></li>
-      <li><a href="/blog-accelerator">Blog to Booked</a></li>
+      <li><a href="/blog-to-paid">Blog to Paid</a></li>
       <li><a href="/blog-coaching">Fast Track</a></li>
       <li><a href="/portfolio">Portfolio</a></li>
       <li><a class="on" href="/blog">Blog</a></li>
-      <li><a href="/podcast">Listen &amp; Watch</a></li>
+      <li><a href="/podcast">Podcast</a></li>
       <li><a href="/freebies">Free Courses</a></li>
       <li><a class="cta" href="/book-a-call">Book a Free Call</a></li>
     </ul>
@@ -82,10 +82,10 @@ template does can break it.
   </div>
   <div class="menu">
     <a href="/about">About</a>
-    <a href="/blog-accelerator">Blog to Booked</a>
+    <a href="/blog-to-paid">Blog to Paid</a>
     <a href="/blog-coaching">Fast Track</a>
     <a href="/portfolio">Portfolio</a>
-    <a href="/podcast">Listen &amp; Watch</a>
+    <a href="/podcast">Podcast</a>
     <a href="/blog">Blog</a>
     <a href="/freebies">Free Courses</a>
     <a class="mcta" href="/book-a-call">Book a Free Call &rarr;</a>

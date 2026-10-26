@@ -501,6 +501,49 @@ mobile-verified at 390px, delivered as .txt files."
 =====================================================================
 CHANGELOG (newest first)
 =====================================================================
+2026-10-26  v3.5  THE BLOG TO PAID ERA: full-site rebuild from the
+                  Oct 25 "Full Website Copy" doc (28-page PDF).
+                  New offer: Blog to Paid ($500 to start then
+                  $333 x 11, or $3,600 PIF saving $563; 4 founding
+                  spots; enrollment Fri Nov 27 - Mon Nov 30
+                  11:59pm ET). "Fast Track call" is now the FREE
+                  CALL name; primary button sitewide is "Book my
+                  free Fast Track call". The Blogging Ladies
+                  membership returns at $100/month. Blog coaching
+                  is by-the-call (Power Hour $150 / Momentum Pack
+                  $400 / Deep Dive $750, same Stripe links). New
+                  nav: Home/About/Blog to Paid/Coaching/Free
+                  Courses/Blog/Podcast + Book a free call. Footer
+                  tagline "Beautiful blogs, built to sell." AI
+                  stance is now OPEN (we use AI for drafts).
+                  NEW v5 MOTION SYSTEM (2026): shared core with
+                  scroll reveals (IntersectionObserver + data-rv
+                  variants incl. clip-path), split-word hero
+                  headlines, marquee strips, count-up stats,
+                  tilt + magnetic buttons, floating blobs +
+                  grain, scroll progress bar, live countdown to
+                  Nov 30 (annbar chip, [data-cd]), sticky
+                  stacking month cards, receipt cards with
+                  perforated edges, phone video mock, FAQ
+                  accordions with JSON-LD pairs. All of it
+                  guarded by prefers-reduced-motion and a .js
+                  class so content shows without JS.
+                  Pages rebuilt: index, blog-to-paid (NEW, also
+                  mirrored into blog-accelerator.html until the
+                  Showit page is renamed), about, blog-coaching,
+                  blogging-ladies (NEW, mirrored to membership),
+                  freebies, podcast, blog, book-a-call (no main
+                  nav, Calendly embedded), contact, freebies-
+                  thank-you, call-booked (NEW), blog-to-paid-
+                  welcome (NEW), 404 (NEW). Every other page +
+                  blog-kit embeds swept for old labels/offers.
+                  LESSONS: (1) data-rv="l/r" horizontal reveal
+                  offsets create page overflow on mobile before
+                  they fire - switch them to translateY under
+                  760px and add html,body overflow-x:clip.
+                  (2) Full-page screenshots of scroll-reveal
+                  sites capture blank sections - force .inview
+                  on everything before screenshotting.
 2026-10-22  v3.4  Full-site copy release from the client's
                   "Blog to Booked" copy doc (25-page PDF): home,
                   about, both sales pages, start here, free

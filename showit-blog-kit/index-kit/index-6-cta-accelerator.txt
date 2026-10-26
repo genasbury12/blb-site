@@ -39,15 +39,15 @@ the payment plan line. Zero JavaScript.
   <div class="glow"></div><div class="glow two"></div>
   <div class="script">ready to skip the guesswork?</div>
   <h2>Your blog, built to sell,<br><em>coached every week</em></h2>
-  <p>The Blog Build Club is my build-it-with-you membership: your digital product nailed down, a website designed to sell it, and weekly blog coaching. You blog, it sells.</p>
+  <p>The Blog to Paid is my build-it-with-you membership: your digital product nailed down, a website designed to sell it, and weekly blog coaching. You blog, it sells.</p>
   <div class="chips">
     <span class="chip">Custom design</span>
     <span class="chip">Offer + copy</span>
     <span class="chip">Weekly 1:1 calls</span>
-    <span class="chip">$99/month</span>
+    <span class="chip">$500 to startnth</span>
   </div>
-  <a class="btn" href="/blog-accelerator">See the program &rarr;</a>
+  <a class="btn" href="/blog-to-paid">See the program &rarr;</a>
   <a class="btn ghost" href="/book-a-call">Book a free call</a>
-  <div class="fine">$99/month &middot; cancel anytime</div>
+  <div class="fine">$500 to startnth &middot; cancel anytime</div>
 </div>
 </div>

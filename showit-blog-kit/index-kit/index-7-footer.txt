@@ -62,7 +62,7 @@ nothing here needs a script. Zero JavaScript.
         <li><a href="/about">About</a></li>
           <li><a href="/portfolio">Portfolio</a></li>
         <li><a href="/start-here">Start Here</a></li>
-        <li><a href="/podcast">Listen &amp; Watch</a></li>
+        <li><a href="/podcast">Podcast</a></li>
         <li><a href="/blog">Blog</a></li>
         <li><a href="/freebies">Free Courses</a></li>
       </ul>
@@ -70,7 +70,7 @@ nothing here needs a script. Zero JavaScript.
     <div>
       <h4>Work With Me</h4>
       <ul>
-        <li><a href="/blog-accelerator">Blog to Booked</a></li>
+        <li><a href="/blog-to-paid">Blog to Paid</a></li>
         <li><a href="/blog-coaching">Fast Track</a></li>
       <li><a href="/portfolio">Portfolio</a></li>
         <li><a href="/book-a-call">Book a Free Call</a></li>
