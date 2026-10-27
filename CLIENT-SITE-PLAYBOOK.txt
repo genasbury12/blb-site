@@ -501,6 +501,31 @@ mobile-verified at 390px, delivered as .txt files."
 =====================================================================
 CHANGELOG (newest first)
 =====================================================================
+2026-10-27  v3.7  Live-site bug round (client screenshots of
+                  bossladybloggers.com). ROOT CAUSE, BIG LESSON:
+                  the reveal system's final state applied
+                  clip-path:inset(0) to EVERY [data-rv] element,
+                  so each revealed element clipped its own border
+                  box forever. Symptoms: the How-It-Works step
+                  circles (negative-margin pop-outs) sliced in
+                  half, and descenders (p/g/y tails) shaved off
+                  tight-leading display headings, i.e. "bottoms of
+                  letters cut off". Fix: the final reveal state
+                  only resets opacity/transform; clip-path belongs
+                  ONLY to the data-rv="clip" variant, and its final
+                  inset must be NEGATIVE (-8% to -18%) so ink can
+                  overhang. Second fix: split-headline word
+                  wrappers (.w, overflow:hidden) get
+                  padding-bottom:.16em / margin-bottom:-.16em so
+                  italic descenders survive; display line-height
+                  raised 1.08 -> 1.12. RULE: never leave a
+                  zero-inset clip-path on resting content, and any
+                  overflow:hidden text wrapper needs descender
+                  padding. NOTE: the live Showit paste has edits
+                  made outside this repo (SHOP nav item, "Express
+                  Build" copy in Get Gorgeous, research line in Get
+                  Clear) - re-pasting repo files over those pages
+                  will drop them unless they're merged here first.
 2026-10-26  v3.6  Client audit round ("find your mistakes"). Fixes:
                   (1) CTA color: buttons now a bright pink gradient
                   (--hot #D8427D -> --hot2 #B42E60) on .btn, .nav-cta
