@@ -3,6 +3,47 @@
 Status of The BOSS Business System portal build. Updated at every milestone (contract step 3).
 **Nothing is deployed. Nothing is live.** No real credentials, payments, or emails have been used.
 
+## Where things stand
+| Slice (handoff 06) | State |
+|---|---|
+| 0 Repository and infrastructure | Done |
+| 1 Authentication and authorization | Built and tested at the database and route level. Signed in browser journeys wait on a Supabase test project (I-23) |
+| 2 Catalog and lesson progress | Student side built (eight modules, lessons, progress, published only). Admin publishing UI, file downloads, and video playback are next |
+| 3 Audit and roadmap | Built: versioned 30 questions, autosave, deterministic scoring, path choice, report, roadmap, retakes. PDF report is next (I-24) |
+| 4 to 8 | Not started |
+
+## Milestone 2: First vertical slice UI (2026-11-01)
+
+### What works (tested)
+- Design system from D01: Cormorant Garamond and DM Sans, brand tokens with measured contrast, skip link, visible focus, reduced motion.
+- Auth: sign in, sign up with email confirmation, forgot and reset password, email link handler, sign out. Generic error messages (no account enumeration), open redirect protection on `next`.
+- Proxy refreshes sessions and sends signed out visitors from `/app` and `/admin` to sign in. Every page and server action authorizes again, and Postgres RLS is the final boundary.
+- Member area: dashboard (one next action, top three priorities, learning and milestone progress shown separately, roadmap month, access dates, billing grace notice), audit (eight sections, 30 questions, autosave each answer, Back and Resume, review, submit), report (scores, path, strengths, priorities with reasons and lessons, six month roadmap, path choice, history), training (eight modules, lessons, mark complete, next lesson, SAMPLE badges, missing video state), roadmap (done toggles, earlier completed items kept), account (name, access table with dates, purchases).
+- Atomic audit submission (`record_audit_submission`, service role only): run, roadmap items, onboarding state, and draft consumption commit together or not at all.
+- States: loading, empty, no access or expired, payment grace and suspension, missing media, save failure with retry, error boundary.
+
+### Changed files
+`portal/src/app/**` (auth pages, member pages, preview), `portal/src/components/**`, `portal/src/lib/{supabase,server,validation}/**`, `portal/src/proxy.ts`, `portal/src/domain/audit/{submission,labels}.ts`, `portal/supabase/migrations/20261101000500_audit_submission.sql`, `portal/tests/**`.
+
+### Tests run
+| Command | Result |
+|---|---|
+| `npm run lint` | pass |
+| `npm run typecheck` | pass |
+| `npm run check:copy` | pass |
+| `npm test` (unit + database authorization) | 141 tests pass (12 files) |
+| `npm run build` | pass |
+| `npm run test:e2e` (desktop and mobile Chromium) | 34 pass, 4 signed in journeys skipped pending Supabase test project |
+
+### Screenshots
+`docs/screenshots/m2-*.png`: home, sign in, sign up, and the fixture preview (dashboard pieces, audit stepper, report), at desktop and mobile widths.
+
+### Manual verification
+1. `cd portal && npm ci && npm run build && npm start`, then open `/preview` for the audit and report with fixture data.
+2. Open `/app` signed out: you land on `/login?next=%2Fapp`.
+3. With a Supabase test project: set the env values, `npx supabase db push`, run `supabase/seed.sql` against the TEST project only, create a confirmed account, grant it with `select public.admin_grant_entitlement(...)` as an admin or by inserting a paid order with the service role, then sign in and walk dashboard, audit, report, training, and account.
+
+
 ## Milestone 1: Slice 0 foundation, data layer, and domain engines (2026-11-01)
 
 ### What works (tested)

@@ -1,26 +1,56 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Brand tokens (D01). Contrast verified in src/components/ui/tokens.test.ts. */
+@theme {
+  --color-rose: #e8c8cb;
+  --color-rose-soft: #f3e2e3;
+  --color-mauve: #a56c78;
+  --color-ivory: #f7eee9;
+  --color-plum: #65474f;
+  --color-plum-deep: #4e363d;
+  --color-ink: #30282c;
+  --color-ink-muted: #5a4a50;
+  --color-danger: #8e2a35;
+  --color-success: #2f5d3a;
+
+  --font-display: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  --font-sans: var(--font-dm-sans), "DM Sans", system-ui, sans-serif;
+
+  --radius-card: 1rem;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html {
+    color-scheme: light;
   }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  body {
+    background: var(--color-ivory);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+  }
+  /* Visible focus for keyboard users everywhere (WCAG 2.4.7, 2.4.11). */
+  :focus-visible {
+    outline: 3px solid var(--color-plum);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
 }

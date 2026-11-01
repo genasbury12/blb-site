@@ -104,3 +104,75 @@ describe("runs", () => {
     await expectDenied(db, other, "insert into public.path_overrides (user_id, audit_run_id, chosen_path, actor_id) values ($1, $2, 'build_from_scratch', $1)", [other, runId]);
   });
 });
+
+describe("atomic submission", () => {
+  it("only the service role can record a submission, and it writes run, roadmap, and consumes the draft together", async () => {
+    const learner = await createUser(db, "submitter");
+    await paidOrder(db, learner, "blueprint");
+    const draft = await db.query<{ id: string }>(
+      "insert into public.audit_drafts (user_id, version_id, answers_json) values ($1, $2, '{\"Q1\":\"A\"}') returning id",
+      [learner, versionId],
+    );
+    const run = {
+      user_id: learner, version_id: versionId, scoring_version: "audit-v1/engine-1.0.0", answers_snapshot_json: { Q1: "A" },
+      category_scores_json: {}, overall_score: 12.5, assigned_path: "build_from_scratch", recommendation_snapshot_json: {},
+    };
+    const roadmap = [{ month_number: 1, priority_order: 1, title: "Work through Module 1", reason: "r", recommended_module_number: 1, recommended_lesson_id: null }];
+
+    await expectDenied(db, learner, "select public.record_audit_submission($1, $2, $3)", [run, JSON.stringify(roadmap), draft.rows[0]!.id]);
+
+    await db.query("begin");
+    await db.query("set local role service_role");
+    const { rows } = await db.query<{ id: string }>("select public.record_audit_submission($1, $2, $3) as id", [run, JSON.stringify(roadmap), draft.rows[0]!.id]);
+    await db.query("commit");
+    const runId = rows[0]!.id;
+    const items = await db.query("select count(*)::int as n from public.roadmap_items where source_audit_run_id = $1", [runId]);
+    expect(items.rows[0].n).toBe(1);
+    const drafts = await db.query("select count(*)::int as n from public.audit_drafts where user_id = $1", [learner]);
+    expect(drafts.rows[0].n).toBe(0);
+    const profile = await db.query("select onboarding_state from public.profiles where user_id = $1", [learner]);
+    expect(profile.rows[0].onboarding_state).toBe("audit_completed");
+  });
+
+  it("rolls back everything when any part fails", async () => {
+    const learner = await createUser(db, "rollback");
+    await paidOrder(db, learner, "blueprint");
+    const run = {
+      user_id: learner, version_id: versionId, scoring_version: "x", answers_snapshot_json: { Q1: "A" },
+      category_scores_json: {}, overall_score: 1, assigned_path: "build_from_scratch", recommendation_snapshot_json: {},
+    };
+    const badRoadmap = [{ month_number: 9, priority_order: 1, title: "Invalid month", reason: "r" }];
+    await db.query("begin");
+    await db.query("set local role service_role");
+    await expect(db.query("select public.record_audit_submission($1, $2, gen_random_uuid())", [run, JSON.stringify(badRoadmap)])).rejects.toThrow();
+    await db.query("rollback");
+    const runs = await db.query("select count(*)::int as n from public.audit_runs where user_id = $1", [learner]);
+    expect(runs.rows[0].n).toBe(0);
+  });
+
+  it("a retake leaves earlier runs, lesson progress, and roadmap items untouched", async () => {
+    const learner = await createUser(db, "retake");
+    await paidOrder(db, learner, "blueprint");
+    const lesson = await db.query<{ id: string }>("select id from public.lessons where status = 'published' limit 1");
+    await db.query("insert into public.lesson_progress (user_id, lesson_id) values ($1, $2)", [learner, lesson.rows[0]!.id]);
+    const mk = (score: number) => ({
+      user_id: learner, version_id: versionId, scoring_version: "audit-v1/engine-1.0.0", answers_snapshot_json: { Q1: "A" },
+      category_scores_json: {}, overall_score: score, assigned_path: "build_from_scratch", recommendation_snapshot_json: {},
+    });
+    const roadmap = JSON.stringify([{ month_number: 1, priority_order: 1, title: "Work through Module 1", reason: "r" }]);
+    await db.query("set role service_role");
+    const first = await db.query<{ id: string }>("select public.record_audit_submission($1, $2, gen_random_uuid()) as id", [mk(10), roadmap]);
+    await db.query("reset role");
+    await db.query("update public.roadmap_items set state = 'done', completed_at = now() where source_audit_run_id = $1", [first.rows[0]!.id]);
+    await db.query("set role service_role");
+    await db.query("select public.record_audit_submission($1, $2, gen_random_uuid())", [mk(60), roadmap]);
+    await db.query("reset role");
+
+    const runs = await db.query("select overall_score::float as s from public.audit_runs where user_id = $1 order by submitted_at", [learner]);
+    expect(runs.rows.map((r) => r.s)).toEqual([10, 60]);
+    const progress = await db.query("select count(*)::int as n from public.lesson_progress where user_id = $1", [learner]);
+    expect(progress.rows[0].n).toBe(1);
+    const done = await db.query("select count(*)::int as n from public.roadmap_items where user_id = $1 and state = 'done'", [learner]);
+    expect(done.rows[0].n).toBe(1);
+  });
+});
