@@ -1,0 +1,726 @@
+{
+  "version": 1,
+  "source": "Phase 2: 02 BOSS Business Audit and Scoring.docx (Drive id 1OfuSXorxrJO55ermW3KFx4nrrdJddvZj), imported 2026-11-01",
+  "questions": [
+    {
+      "code": "Q1",
+      "number": 1,
+      "category": "foundation",
+      "prompt": "Which best describes your blogging business?",
+      "options": [
+        {
+          "key": "A",
+          "label": "I haven't started."
+        },
+        {
+          "key": "B",
+          "label": "I have a blog but no clear business."
+        },
+        {
+          "key": "C",
+          "label": "I have a blog and offer but inconsistent sales."
+        },
+        {
+          "key": "D",
+          "label": "I make sales and want to improve or automate."
+        }
+      ]
+    },
+    {
+      "code": "Q2",
+      "number": 2,
+      "category": "foundation",
+      "prompt": "How clearly can you describe your customer?",
+      "options": [
+        {
+          "key": "A",
+          "label": "No defined customer."
+        },
+        {
+          "key": "B",
+          "label": "General audience."
+        },
+        {
+          "key": "C",
+          "label": "Clear customer and problems."
+        },
+        {
+          "key": "D",
+          "label": "Detailed customer understanding used in marketing."
+        }
+      ]
+    },
+    {
+      "code": "Q3",
+      "number": 3,
+      "category": "foundation",
+      "prompt": "How clear is your business promise?",
+      "options": [
+        {
+          "key": "A",
+          "label": "No promise."
+        },
+        {
+          "key": "B",
+          "label": "General idea."
+        },
+        {
+          "key": "C",
+          "label": "Clear problem and result."
+        },
+        {
+          "key": "D",
+          "label": "Consistent message supported by feedback."
+        }
+      ]
+    },
+    {
+      "code": "Q4",
+      "number": 4,
+      "category": "foundation",
+      "prompt": "Do you have a digital product or offer?",
+      "options": [
+        {
+          "key": "A",
+          "label": "No idea."
+        },
+        {
+          "key": "B",
+          "label": "Unvalidated idea."
+        },
+        {
+          "key": "C",
+          "label": "Defined offer in development."
+        },
+        {
+          "key": "D",
+          "label": "Offer for sale with sales."
+        }
+      ]
+    },
+    {
+      "code": "Q5",
+      "number": 5,
+      "category": "brand",
+      "prompt": "Website status?",
+      "options": [
+        {
+          "key": "A",
+          "label": "None."
+        },
+        {
+          "key": "B",
+          "label": "In development."
+        },
+        {
+          "key": "C",
+          "label": "Live and functional."
+        },
+        {
+          "key": "D",
+          "label": "Maintained and optimized."
+        }
+      ]
+    },
+    {
+      "code": "Q6",
+      "number": 6,
+      "category": "brand",
+      "prompt": "Brand consistency?",
+      "options": [
+        {
+          "key": "A",
+          "label": "None."
+        },
+        {
+          "key": "B",
+          "label": "Some inconsistent elements."
+        },
+        {
+          "key": "C",
+          "label": "Mostly consistent."
+        },
+        {
+          "key": "D",
+          "label": "Documented and consistently applied."
+        }
+      ]
+    },
+    {
+      "code": "Q7",
+      "number": 7,
+      "category": "brand",
+      "prompt": "Can visitors understand your offer?",
+      "options": [
+        {
+          "key": "A",
+          "label": "No live website."
+        },
+        {
+          "key": "B",
+          "label": "Unclear offer."
+        },
+        {
+          "key": "C",
+          "label": "Offer understandable."
+        },
+        {
+          "key": "D",
+          "label": "Clear journey to purchasing."
+        }
+      ]
+    },
+    {
+      "code": "Q8",
+      "number": 8,
+      "category": "content",
+      "prompt": "How do you choose topics?",
+      "options": [
+        {
+          "key": "A",
+          "label": "No content."
+        },
+        {
+          "key": "B",
+          "label": "Whatever comes to mind."
+        },
+        {
+          "key": "C",
+          "label": "Audience problems."
+        },
+        {
+          "key": "D",
+          "label": "Buyer needs, search intent and offers."
+        }
+      ]
+    },
+    {
+      "code": "Q9",
+      "number": 9,
+      "category": "content",
+      "prompt": "How consistently do you publish?",
+      "options": [
+        {
+          "key": "A",
+          "label": "Not yet."
+        },
+        {
+          "key": "B",
+          "label": "Occasionally."
+        },
+        {
+          "key": "C",
+          "label": "Realistic schedule."
+        },
+        {
+          "key": "D",
+          "label": "Reliable documented workflow."
+        }
+      ]
+    },
+    {
+      "code": "Q10",
+      "number": 10,
+      "category": "content",
+      "prompt": "Does content connect to products?",
+      "options": [
+        {
+          "key": "A",
+          "label": "No content or product."
+        },
+        {
+          "key": "B",
+          "label": "No offer links."
+        },
+        {
+          "key": "C",
+          "label": "Some calls to action."
+        },
+        {
+          "key": "D",
+          "label": "Intentional path to offers or signup."
+        }
+      ]
+    },
+    {
+      "code": "Q11",
+      "number": 11,
+      "category": "content",
+      "prompt": "Is your content process documented?",
+      "options": [
+        {
+          "key": "A",
+          "label": "No."
+        },
+        {
+          "key": "B",
+          "label": "Rough routine."
+        },
+        {
+          "key": "C",
+          "label": "Checklist."
+        },
+        {
+          "key": "D",
+          "label": "Documented templates and QA."
+        }
+      ]
+    },
+    {
+      "code": "Q12",
+      "number": 12,
+      "category": "marketing",
+      "prompt": "How do you promote?",
+      "options": [
+        {
+          "key": "A",
+          "label": "Not yet."
+        },
+        {
+          "key": "B",
+          "label": "Occasionally."
+        },
+        {
+          "key": "C",
+          "label": "Active on one or two channels."
+        },
+        {
+          "key": "D",
+          "label": "Planned distribution."
+        }
+      ]
+    },
+    {
+      "code": "Q13",
+      "number": 13,
+      "category": "marketing",
+      "prompt": "How do you choose channels?",
+      "options": [
+        {
+          "key": "A",
+          "label": "None."
+        },
+        {
+          "key": "B",
+          "label": "Trying many."
+        },
+        {
+          "key": "C",
+          "label": "Based on audience."
+        },
+        {
+          "key": "D",
+          "label": "Evaluate qualified traffic and buyers."
+        }
+      ]
+    },
+    {
+      "code": "Q14",
+      "number": 14,
+      "category": "marketing",
+      "prompt": "What happens after publishing?",
+      "options": [
+        {
+          "key": "A",
+          "label": "Not publishing."
+        },
+        {
+          "key": "B",
+          "label": "Hope for discovery."
+        },
+        {
+          "key": "C",
+          "label": "Some promotion."
+        },
+        {
+          "key": "D",
+          "label": "Repeatable repurposing workflow."
+        }
+      ]
+    },
+    {
+      "code": "Q15",
+      "number": 15,
+      "category": "product",
+      "prompt": "Product status?",
+      "options": [
+        {
+          "key": "A",
+          "label": "None."
+        },
+        {
+          "key": "B",
+          "label": "Idea or outline."
+        },
+        {
+          "key": "C",
+          "label": "In creation."
+        },
+        {
+          "key": "D",
+          "label": "Complete and for sale."
+        }
+      ]
+    },
+    {
+      "code": "Q16",
+      "number": 16,
+      "category": "product",
+      "prompt": "How have you validated demand?",
+      "options": [
+        {
+          "key": "A",
+          "label": "No research."
+        },
+        {
+          "key": "B",
+          "label": "Assumptions."
+        },
+        {
+          "key": "C",
+          "label": "Customer problem research."
+        },
+        {
+          "key": "D",
+          "label": "Direct feedback or purchase evidence."
+        }
+      ]
+    },
+    {
+      "code": "Q17",
+      "number": 17,
+      "category": "product",
+      "prompt": "How defined is the product outcome?",
+      "options": [
+        {
+          "key": "A",
+          "label": "No product."
+        },
+        {
+          "key": "B",
+          "label": "Vague topic."
+        },
+        {
+          "key": "C",
+          "label": "Buyer, outcome and scope clear."
+        },
+        {
+          "key": "D",
+          "label": "Refined with feedback."
+        }
+      ]
+    },
+    {
+      "code": "Q18",
+      "number": 18,
+      "category": "product",
+      "prompt": "How ready is delivery?",
+      "options": [
+        {
+          "key": "A",
+          "label": "Not planned."
+        },
+        {
+          "key": "B",
+          "label": "Idea only."
+        },
+        {
+          "key": "C",
+          "label": "Method and instructions."
+        },
+        {
+          "key": "D",
+          "label": "Tested purchase and access."
+        }
+      ]
+    },
+    {
+      "code": "Q19",
+      "number": 19,
+      "category": "email_sales",
+      "prompt": "How do you collect subscribers?",
+      "options": [
+        {
+          "key": "A",
+          "label": "No list."
+        },
+        {
+          "key": "B",
+          "label": "Platform without effective signup."
+        },
+        {
+          "key": "C",
+          "label": "Connected opt in."
+        },
+        {
+          "key": "D",
+          "label": "Monitored lead system."
+        }
+      ]
+    },
+    {
+      "code": "Q20",
+      "number": 20,
+      "category": "email_sales",
+      "prompt": "What happens after signup?",
+      "options": [
+        {
+          "key": "A",
+          "label": "Nothing."
+        },
+        {
+          "key": "B",
+          "label": "One welcome email."
+        },
+        {
+          "key": "C",
+          "label": "Planned sequence."
+        },
+        {
+          "key": "D",
+          "label": "Relevant automated nurture and offer sequence."
+        }
+      ]
+    },
+    {
+      "code": "Q21",
+      "number": 21,
+      "category": "email_sales",
+      "prompt": "Is checkout ready?",
+      "options": [
+        {
+          "key": "A",
+          "label": "No."
+        },
+        {
+          "key": "B",
+          "label": "Researching."
+        },
+        {
+          "key": "C",
+          "label": "Functional."
+        },
+        {
+          "key": "D",
+          "label": "Fully tested."
+        }
+      ]
+    },
+    {
+      "code": "Q22",
+      "number": 22,
+      "category": "email_sales",
+      "prompt": "How do you track sales?",
+      "options": [
+        {
+          "key": "A",
+          "label": "No tracking."
+        },
+        {
+          "key": "B",
+          "label": "Occasional checks."
+        },
+        {
+          "key": "C",
+          "label": "Track leads and conversions."
+        },
+        {
+          "key": "D",
+          "label": "Review and optimize regularly."
+        }
+      ]
+    },
+    {
+      "code": "Q23",
+      "number": 23,
+      "category": "ai",
+      "prompt": "How do you use AI?",
+      "options": [
+        {
+          "key": "A",
+          "label": "Not yet."
+        },
+        {
+          "key": "B",
+          "label": "Occasionally."
+        },
+        {
+          "key": "C",
+          "label": "Clear repeatable tasks."
+        },
+        {
+          "key": "D",
+          "label": "Documented workflows with review."
+        }
+      ]
+    },
+    {
+      "code": "Q24",
+      "number": 24,
+      "category": "ai",
+      "prompt": "How much work is automated?",
+      "options": [
+        {
+          "key": "A",
+          "label": "None."
+        },
+        {
+          "key": "B",
+          "label": "One or two tasks."
+        },
+        {
+          "key": "C",
+          "label": "Several reliable tasks."
+        },
+        {
+          "key": "D",
+          "label": "Connected workflows."
+        }
+      ]
+    },
+    {
+      "code": "Q25",
+      "number": 25,
+      "category": "ai",
+      "prompt": "How do you quality check?",
+      "options": [
+        {
+          "key": "A",
+          "label": "Not using AI."
+        },
+        {
+          "key": "B",
+          "label": "Rarely review."
+        },
+        {
+          "key": "C",
+          "label": "Review and test."
+        },
+        {
+          "key": "D",
+          "label": "Documented QA and error recovery."
+        }
+      ]
+    },
+    {
+      "code": "Q26",
+      "number": 26,
+      "category": "ai",
+      "prompt": "How connected are your tools?",
+      "options": [
+        {
+          "key": "A",
+          "label": "Not selected."
+        },
+        {
+          "key": "B",
+          "label": "Manual transfers."
+        },
+        {
+          "key": "C",
+          "label": "Some integrations."
+        },
+        {
+          "key": "D",
+          "label": "Reliable documented integrations."
+        }
+      ]
+    },
+    {
+      "code": "Q27",
+      "number": 27,
+      "category": "productivity",
+      "prompt": "How do you set weekly priorities?",
+      "options": [
+        {
+          "key": "A",
+          "label": "No plan."
+        },
+        {
+          "key": "B",
+          "label": "Lists without focus."
+        },
+        {
+          "key": "C",
+          "label": "Goals based priorities."
+        },
+        {
+          "key": "D",
+          "label": "Consistent planned execution."
+        }
+      ]
+    },
+    {
+      "code": "Q28",
+      "number": 28,
+      "category": "productivity",
+      "prompt": "How do you track unfinished work?",
+      "options": [
+        {
+          "key": "A",
+          "label": "Memory."
+        },
+        {
+          "key": "B",
+          "label": "Scattered notes."
+        },
+        {
+          "key": "C",
+          "label": "Central system."
+        },
+        {
+          "key": "D",
+          "label": "Reliable reviews and next actions."
+        }
+      ]
+    },
+    {
+      "code": "Q29",
+      "number": 29,
+      "category": "productivity",
+      "prompt": "How realistic is your workload?",
+      "options": [
+        {
+          "key": "A",
+          "label": "No routine."
+        },
+        {
+          "key": "B",
+          "label": "Often overplan."
+        },
+        {
+          "key": "C",
+          "label": "Plan around available time."
+        },
+        {
+          "key": "D",
+          "label": "Consistently adjust priorities."
+        }
+      ]
+    },
+    {
+      "code": "Q30",
+      "number": 30,
+      "category": "productivity",
+      "prompt": "How do you review performance?",
+      "options": [
+        {
+          "key": "A",
+          "label": "Never."
+        },
+        {
+          "key": "B",
+          "label": "Occasionally."
+        },
+        {
+          "key": "C",
+          "label": "Monthly."
+        },
+        {
+          "key": "D",
+          "label": "Regular results based decisions."
+        }
+      ]
+    }
+  ]
+}
