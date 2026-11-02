@@ -1,6 +1,7 @@
 import "server-only";
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
+import { connection } from "next/server";
 import { publicEnv } from "@/lib/env";
 
 /**
@@ -8,7 +9,10 @@ import { publicEnv } from "@/lib/env";
  * Returns null when Supabase is not configured for this environment.
  */
 export async function createSupabaseServerClient() {
-  // Read cookies first so every caller is request time (never prerendered), with or without config.
+  // Mark every caller as request time (never prerendered), with or without config. connection() is needed in
+  // addition to cookies(): with cacheComponents, the Auth client reads the clock (Date.now()) while loading the
+  // session, which Next.js rejects after runtime data alone ("blocking-prerender-current-time").
+  await connection();
   const cookieStore = await cookies();
   const env = publicEnv();
   if (!env.NEXT_PUBLIC_SUPABASE_URL || !env.NEXT_PUBLIC_SUPABASE_ANON_KEY) return null;

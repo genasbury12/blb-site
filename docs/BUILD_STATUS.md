@@ -14,7 +14,7 @@ Status of The BOSS Business System portal build. Updated at every milestone (con
 | 5 Coaching and community | Built |
 | 6 Elite | Built |
 | 7 Marketing and admin | Admin workspace complete; public sales and masterclass pages wait on approved copy and video |
-| 8 Internal QA and release | Staging Supabase project created and migrated (2026-11-02); test accounts, auth settings, Vercel and Stripe test mode pending; owner sign off pending |
+| 8 Internal QA and release | Staging Supabase migrated, six test accounts provisioned, signed in permission and browser checks passing (2026-11-02); auth settings, Vercel and Stripe test mode pending; owner sign off pending |
 
 ## Milestone 7: Admin completion, design polish, launch readiness docs (2026-11-02)
 
@@ -31,6 +31,10 @@ Status of The BOSS Business System portal build. Updated at every milestone (con
 | lint, typecheck, check:copy, build | pass |
 | `npm test` | 232 pass (25 files) |
 | `npm run test:e2e` | 44 pass, 4 signed in journeys skipped pending staging |
+| Staging (2026-11-02) `scripts/staging-permission-check.mjs` | 113 of 113 pass: entitlements, billing records, audit privacy, coaching, community, feedback, Elite isolation, admin powers, all six roles |
+| Staging (2026-11-02) `signed-in.spec.ts` + `staging-roles.spec.ts` | 41 pass, 1 skipped by design (desktop and mobile) |
+| Local (2026-11-02) full Playwright suite, unconfigured | 44 pass, 50 signed in skipped |
+| Local (2026-11-02) `vitest --project unit`, check:copy, lint, typecheck | pass (145 unit tests) |
 
 ### Screenshots
 `docs/screenshots/m7-*.png`
