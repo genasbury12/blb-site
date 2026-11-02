@@ -103,6 +103,43 @@ describe("six payment plan (D05)", () => {
     expect(await hasFeature(db, u, "feedback.submit", addDays(T0, 1))).toBe(true);
   });
 
+  // Found on staging 2026-11-02: Stripe delivered checkout.session.completed and invoice.paid in the same second;
+  // processed in parallel, neither transaction saw the other's row, so the first installment was never linked.
+  for (const first of ["invoice", "checkout"] as const) {
+    it(`links the first installment when checkout and invoice are processed concurrently (${first} starts first)`, async () => {
+      const u = await createUser(db, "race");
+      const sub = `sub_${randomUUID()}`;
+      const calls = {
+        invoice: ["billing_apply_invoice", invoice(sub, 1, "paid", T0)],
+        checkout: ["billing_apply_checkout", { ...checkout(u, "blueprint", "six_installments"), subscription_id: sub, payment_status: "paid" }],
+      } as const;
+      const second = first === "invoice" ? "checkout" : "invoice";
+      const a = await connect();
+      const b = await connect();
+      try {
+        for (const c of [a, b]) {
+          await c.query("begin");
+          await c.query("set local role service_role");
+        }
+        await a.query(`select public.${calls[first][0]}($1)`, [calls[first][1]]);
+        const pending = b.query(`select public.${calls[second][0]}($1)`, [calls[second][1]]);
+        await new Promise((r) => setTimeout(r, 300));
+        await a.query("commit");
+        await pending;
+        await b.query("commit");
+      } finally {
+        await a.end();
+        await b.end();
+      }
+      const { rows } = await db.query(
+        "select o.installments_paid, o.status, (select count(*)::int from public.order_payments p where p.stripe_subscription_id = $1 and p.order_id is null) as unlinked from public.orders o where o.stripe_subscription_id = $1",
+        [sub],
+      );
+      expect(rows[0]).toMatchObject({ installments_paid: 1, status: "installments_current", unlinked: 0 });
+      expect(await hasFeature(db, u, "curriculum.read", addDays(T0, 1))).toBe(true);
+    });
+  }
+
   it("counts six distinct paid invoices, ignores duplicates, and asks to stop billing after the sixth", async () => {
     const u = await createUser(db, "six");
     const sub = `sub_${randomUUID()}`;
