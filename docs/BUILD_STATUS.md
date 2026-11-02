@@ -11,8 +11,27 @@ Status of The BOSS Business System portal build. Updated at every milestone (con
 | 2 Catalog and lesson progress | Built: admin publishing workflow, lesson editor, milestones, private downloads, Mux signed playback, Implementation Library |
 | 3 Audit and roadmap | Built, including the PDF report |
 | 4 Billing | Built in Stripe test mode; live verification needs a Stripe test account |
-| 5 Coaching and community | Next |
-| 6 to 8 | Not started |
+| 5 Coaching and community | Built |
+| 6 Elite | Next |
+| 7 to 8 | Not started |
+
+## Milestone 5: Coaching hub, workshops, Hot Seat, feedback, community (2026-11-02)
+
+### What works (tested)
+- Coaching Hub: upcoming sessions with private join links (coaching members only), advance questions, cancellation notes, replay library that disappears when coaching ends.
+- Workshops: released and published only, Mux video with captions, transcript.
+- Hot Seat: application for the right month (closes 1 PM Eastern on the first Tuesday, enforced in the database), explicit recording consent, confidentiality requests, edit or withdraw before the close, staff select, not this month, or carry forward, member email notification (suppressed until email is approved).
+- Feedback: two submissions per monthly cycle from coaching activation, enforced in a locked database transaction, no rollover, withdrawal frees a slot before review, response due in three business days excluding published holidays, optional private file and link, staff respond in writing or with a recording link, member notified.
+- Community: feed with tags and pinned announcements, one level threaded replies, own post deletion, reports, staff hide, restore, remove, pin, rate limits, first names only (never emails).
+- Admin: session scheduling (generate weeks of Wednesday drafts skipping holidays, Hot Seat sessions, manual sessions, cancel with note), Hot Seat decisions, workshop library with release date helper, feedback queue with due and overdue counts, moderation with reports, published holidays.
+- Email adapter for Resend: sends nothing unless enabled, allowlist only outside production.
+
+### Tests run
+| Command | Result |
+|---|---|
+| lint, typecheck, check:copy, build | pass |
+| `npm test` | 219 pass (24 files) |
+| `npm run test:e2e` | 41 pass |
 
 ## Milestone 4: Stripe billing in test mode (2026-11-02)
 

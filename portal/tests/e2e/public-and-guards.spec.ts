@@ -134,3 +134,11 @@ test("billing pages require sign in and legal drafts are clearly marked", async 
     await expectNoA11yViolations(page);
   }
 });
+
+test("coaching, workshops, feedback, community and their admin pages require sign in", async ({ request }) => {
+  for (const path of ["/app/coaching", "/app/workshops", "/app/feedback", "/app/community", "/admin/coaching", "/admin/workshops", "/admin/feedback", "/admin/community"]) {
+    const res = await request.get(path, { maxRedirects: 0 });
+    expect(res.status(), path).toBe(307);
+  }
+  expect((await request.get("/api/files/feedback/00000000-0000-0000-0000-000000000000", { maxRedirects: 0 })).status()).toBe(401);
+});

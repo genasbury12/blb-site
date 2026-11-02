@@ -110,3 +110,23 @@ describe("Elite rescheduling notice (D12)", () => {
     expect(canRescheduleWithoutForfeit(start, new Date("2027-02-09T18:00:01Z"))).toBe(false);
   });
 });
+
+import { hotSeatTarget } from "./calendar";
+
+describe("Hot Seat target month", () => {
+  it("applies to this month before the first Tuesday close, otherwise next month", () => {
+    expect(hotSeatTarget(new Date("2027-02-02T17:59:00Z")).targetMonth).toBe("2027-02-01");
+    expect(hotSeatTarget(new Date("2027-02-02T18:00:00Z")).targetMonth).toBe("2027-03-01");
+    expect(hotSeatTarget(new Date("2027-12-20T12:00:00Z")).targetMonth).toBe("2028-01-01");
+  });
+});
+
+import { easternWallToUtc, utcToEasternWall } from "./calendar";
+
+describe("Eastern wall time conversion for admin forms", () => {
+  it("converts in winter and summer and round trips", () => {
+    expect(easternWallToUtc("2027-01-06T13:00").toISOString()).toBe("2027-01-06T18:00:00.000Z");
+    expect(easternWallToUtc("2027-07-07T13:00").toISOString()).toBe("2027-07-07T17:00:00.000Z");
+    expect(utcToEasternWall(new Date("2027-07-07T17:00:00Z"))).toBe("2027-07-07T13:00");
+  });
+});

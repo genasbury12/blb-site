@@ -3,7 +3,7 @@ import { ALLOWED_TRANSITIONS, TRANSITION_LABELS, type ContentStatus } from "@/do
 import { ActionForm } from "./action-form";
 import { StatusPill } from "./fields";
 
-export function StatusControls({ id, table, status, canEdit }: { id: string; table: "lessons" | "modules" | "library_items" | "milestones"; status: ContentStatus; canEdit: boolean }) {
+export function StatusControls({ id, table, status, canEdit }: { id: string; table: "lessons" | "modules" | "library_items" | "milestones" | "workshops"; status: ContentStatus; canEdit: boolean }) {
   return (
     <div className="flex flex-wrap items-center gap-3">
       <span className="text-sm text-ink-muted">Status</span>

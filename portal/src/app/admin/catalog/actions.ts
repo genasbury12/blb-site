@@ -90,7 +90,7 @@ export async function updateLesson(_prev: FormState, fd: FormData): Promise<Form
   return okState("Lesson saved.");
 }
 
-const transitionSchema = z.object({ id: z.string().uuid(), table: z.enum(["lessons", "modules", "library_items", "milestones"]), to: z.enum(STATUSES) });
+const transitionSchema = z.object({ id: z.string().uuid(), table: z.enum(["lessons", "modules", "library_items", "milestones", "workshops"]), to: z.enum(STATUSES) });
 
 export async function changeStatus(_prev: FormState, fd: FormData): Promise<FormState> {
   const parsed = transitionSchema.safeParse({ id: fd.get("id"), table: fd.get("table"), to: fd.get("to") });

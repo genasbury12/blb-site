@@ -137,3 +137,37 @@ export function feedbackRemaining(usedInCycle: number): number {
 export function canRescheduleWithoutForfeit(sessionStartsAt: Date, now: Date): boolean {
   return sessionStartsAt.getTime() - now.getTime() >= SCHEDULE_DEFAULTS.elitePrivate.rescheduleNoticeHours * 3_600_000;
 }
+
+/** The Hot Seat a member can apply for now: this month until its first Tuesday 1 PM close, then next month. */
+export function hotSeatTarget(now: Date): { targetMonth: string; year: number; monthIndex: number; closesAt: Date; sessionAt: Date } {
+  const p = zonedParts(now);
+  for (const offset of [0, 1]) {
+    const d = new Date(Date.UTC(p.year, p.monthIndex + offset, 1));
+    const m = hotSeatForMonth(d.getUTCFullYear(), d.getUTCMonth());
+    if (now.getTime() < m.applicationsCloseAt.getTime()) {
+      return {
+        targetMonth: `${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2, "0")}-01`,
+        year: d.getUTCFullYear(),
+        monthIndex: d.getUTCMonth(),
+        closesAt: m.applicationsCloseAt,
+        sessionAt: m.session.startsAt,
+      };
+    }
+  }
+  throw new Error("unreachable");
+}
+
+/** A datetime-local value ("2027-03-10T13:00") entered as America/New_York wall time, as a UTC instant. */
+export function easternWallToUtc(local: string): Date {
+  const m = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})/.exec(local);
+  if (!m) throw new Error("Invalid date");
+  const [, y, mo, d, h, mi] = m.map(Number) as number[];
+  return zonedInstant(y!, mo! - 1, d!, h!, mi!);
+}
+
+/** UTC instant to a datetime-local value in America/New_York. */
+export function utcToEasternWall(at: Date): string {
+  const p = zonedParts(at);
+  const pad = (n: number) => String(n).padStart(2, "0");
+  return `${p.year}-${pad(p.monthIndex + 1)}-${pad(p.day)}T${pad(p.hour)}:${pad(p.minute)}`;
+}
