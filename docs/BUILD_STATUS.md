@@ -34,6 +34,9 @@ Status of The BOSS Business System portal build. Updated at every milestone (con
 | Staging (2026-11-02) `scripts/staging-permission-check.mjs` | 113 of 113 pass: entitlements, billing records, audit privacy, coaching, community, feedback, Elite isolation, admin powers, all six roles |
 | Staging (2026-11-02) `signed-in.spec.ts` + `staging-roles.spec.ts` | 41 pass, 1 skipped by design (desktop and mobile) |
 | Local (2026-11-02) full Playwright suite, unconfigured | 44 pass, 50 signed in skipped |
+| Staging (2026-11-02) Stripe test mode: pay in full purchase and refund on the deployed site | pass (grant 12 months; refund revokes immediately) |
+| Staging (2026-11-02) six payment lifecycle with Stripe test clock | pass after fix I-49: grace exactly 7 days, cure keeps dates, stops after 6th, no 7th invoice |
+| Local (2026-11-02) `vitest --project db` | 89 pass (adds 2 concurrent webhook tests) |
 | Local (2026-11-02) `vitest --project unit`, check:copy, lint, typecheck | pass (145 unit tests) |
 
 ### Screenshots

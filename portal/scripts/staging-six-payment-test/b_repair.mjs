@@ -1,0 +1,10 @@
+import { load, save, sql, sbAdmin, orderState } from "./lib.mjs";
+const s = load();
+const [o] = await sql(`select checkout_session_id, stripe_customer_id, stripe_subscription_id, sku, payment_plan::text plan from public.orders where user_id='${s.userId}' and stripe_subscription_id is not null`);
+const r = await sbAdmin("POST", "/rest/v1/rpc/billing_apply_checkout", { p: { session_id: o.checkout_session_id, user_id: s.userId, sku: o.sku, plan: o.plan, customer_id: o.stripe_customer_id, subscription_id: o.stripe_subscription_id, payment_status: "paid", email: s.email } });
+console.log("replay result:", JSON.stringify(r));
+s.subscriptionId = o.stripe_subscription_id; save(s);
+const st = await orderState(s.userId);
+console.log(JSON.stringify({ status: st.order.status, paid: `${st.order.installments_paid} of ${st.order.installments_total}`, payments: st.payments }));
+const f = await sql(`select string_agg(feature_key::text, ', ' order by feature_key) f from public.entitlements where user_id='${s.userId}' and state='active'`);
+console.log("active access:", f[0].f);
