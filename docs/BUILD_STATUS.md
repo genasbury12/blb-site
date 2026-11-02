@@ -14,7 +14,7 @@ Status of The BOSS Business System portal build. Updated at every milestone (con
 | 5 Coaching and community | Built |
 | 6 Elite | Built |
 | 7 Marketing and admin | Admin workspace complete; public sales and masterclass pages wait on approved copy and video |
-| 8 Internal QA and release | Needs a staging environment and owner sign off |
+| 8 Internal QA and release | Staging Supabase project created and migrated (2026-11-02); test accounts, auth settings, Vercel and Stripe test mode pending; owner sign off pending |
 
 ## Milestone 7: Admin completion, design polish, launch readiness docs (2026-11-02)
 
