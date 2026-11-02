@@ -10,8 +10,30 @@ Status of The BOSS Business System portal build. Updated at every milestone (con
 | 1 Authentication and authorization | Built and tested at the database and route level. Signed in browser journeys wait on a Supabase test project (I-23) |
 | 2 Catalog and lesson progress | Built: admin publishing workflow, lesson editor, milestones, private downloads, Mux signed playback, Implementation Library |
 | 3 Audit and roadmap | Built, including the PDF report |
-| 4 Billing | Next |
-| 5 to 8 | Not started |
+| 4 Billing | Built in Stripe test mode; live verification needs a Stripe test account |
+| 5 Coaching and community | Next |
+| 6 to 8 | Not started |
+
+## Milestone 4: Stripe billing in test mode (2026-11-02)
+
+### What works (tested)
+- Plans page with the approved prices and transparent six payment totals; checkout for Blueprint and Accelerator (pay in full or six payments), Elite after acceptance, Graduate and Board retention for eligible members (billing deferred until coaching or board access ends). No live payments: live keys are refused without explicit approval.
+- Signed webhook endpoint `/api/stripe/webhook`: signature verification over the raw body, live mode events refused, event ledger with duplicate suppression and retry on failure, one idempotent SQL command per event.
+- Order independent payment ledger: installments counted from distinct paid invoices; invoices arriving before checkout completion are linked later; a paid invoice never reverts to failed; stop after the sixth payment; seventh payment flagged.
+- Failed payments start the seven day grace; cure restores without resetting dates; disputes suspend immediately (won restores, lost revokes); full refunds revoke; partial refunds go to review.
+- Graduate and board memberships: periods synced from subscription events, cancel or resume at period end from the Billing page, Stripe customer portal for payment methods and invoices.
+- Admin Payments: Stripe price ID mapping (approved amounts locked), review queue for exceptions with resolution notes, recent orders, webhook event log.
+- Draft legal pages clearly marked pending legal review.
+
+### Tests run
+| Command | Result |
+|---|---|
+| lint, typecheck, check:copy, build | pass |
+| `npm test` | 196 pass (22 files) |
+| `npm run test:e2e` | 40 pass |
+
+### Needs credentials to verify live
+A Stripe test account: create test prices, paste their IDs in Admin, Payments, add the webhook endpoint, and run the Stripe test clock scenarios in `docs/OWNER_SETUP.md`.
 
 ## Milestone 3: Admin curriculum, storage, video, PDF, design shell (2026-11-02)
 

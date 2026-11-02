@@ -5,12 +5,12 @@ const labels = (f: FeatureKey[], flags = {}) => visibleNav(new Set(f), flags).ma
 
 describe("member navigation", () => {
   it("shows only dashboard and account without grants (expired access keeps account)", () => {
-    expect(labels([])).toEqual(["My Dashboard", "My Account"]);
+    expect(labels([])).toEqual(["My Dashboard", "Billing", "My Account"]);
   });
   it("Blueprint never sees coaching, feedback or Elite", () => {
     const blueprint: FeatureKey[] = ["curriculum.read", "audit.use", "library.read", "roadmap.use"];
     expect(labels(blueprint, { coaching: true, community: true, feedback: true, elite: true })).toEqual([
-      "My Dashboard", "My Training", "Implementation Library", "My Business Audit", "My Roadmap", "My Account",
+      "My Dashboard", "My Training", "Implementation Library", "My Business Audit", "My Roadmap", "Billing", "My Account",
     ]);
   });
   it("hides unbuilt sections even when entitled", () => {

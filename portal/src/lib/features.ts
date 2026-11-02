@@ -44,6 +44,7 @@ export const MEMBER_NAV: NavItem[] = [
   { href: "/app/community", label: "Community", icon: "community", features: ["community.access"], flag: "community" },
   { href: "/app/feedback", label: "Feedback", icon: "feedback", features: ["feedback.submit"], flag: "feedback" },
   { href: "/app/elite", label: "My Elite Workspace", icon: "elite", features: ["elite_board.access", "elite_dfu_hours.use"], flag: "elite" },
+  { href: "/app/billing", label: "Billing", icon: "billing", features: [] },
   { href: "/app/account", label: "My Account", icon: "account", features: [] },
 ];
 

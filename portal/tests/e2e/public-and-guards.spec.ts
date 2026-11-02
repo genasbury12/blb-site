@@ -117,3 +117,20 @@ test("admin pages, downloads and PDF reports refuse anonymous visitors", async (
   const pdf = await request.get("/app/audit/results/00000000-0000-0000-0000-000000000000/pdf", { maxRedirects: 0 });
   expect(pdf.status()).toBe(307);
 });
+
+test("Stripe webhook refuses to process anything when billing is not configured", async ({ request }) => {
+  const res = await request.post("/api/stripe/webhook", { data: "{}", headers: { "stripe-signature": "t=1,v1=forged" } });
+  expect(res.status()).toBe(503);
+});
+
+test("billing pages require sign in and legal drafts are clearly marked", async ({ page, request }) => {
+  for (const path of ["/app/plans", "/app/billing", "/admin/billing"]) {
+    const res = await request.get(path, { maxRedirects: 0 });
+    expect(res.status(), path).toBe(307);
+  }
+  for (const path of ["/refund-policy", "/terms", "/privacy"]) {
+    await page.goto(path);
+    await expect(page.getByText("Draft pending legal review")).toBeVisible();
+    await expectNoA11yViolations(page);
+  }
+});
