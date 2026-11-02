@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { formatDate, NoAccess } from "@/components/member/access-states";
 import { AuditStepper } from "@/components/audit/audit-stepper";
+import { PageHeader } from "@/components/shell/page-header";
 import { Alert } from "@/components/ui/alert";
 import type { AnswerKey } from "@/domain/audit/types";
 import { AUDIT_V1, SECTION_INTROS } from "@/domain/audit/v1";
@@ -23,14 +24,11 @@ export default async function AuditPage() {
 
   return (
     <div className="space-y-8">
-      <header>
-        <h1 className="text-4xl sm:text-5xl">{runs.length ? "Retake your business audit" : "Your business audit"}</h1>
-        <p className="mt-3 max-w-prose text-ink-muted">
-          Thirty questions in eight short sections. Answer based on where your business is today. Every answer saves as you go, so you can
-          leave and come back. Your training stays open whether or not you finish.
-        </p>
-        {runs.length ? <p className="mt-2 text-sm text-ink-muted">A retake creates a new report. Your earlier reports and finished lessons stay exactly as they are.</p> : null}
-      </header>
+      <PageHeader
+        eyebrow="My Business Audit"
+        title={runs.length ? "Retake your business audit" : "Where does your business stand?"}
+        lede={runs.length ? "A retake creates a new report. Your earlier reports and finished lessons stay exactly as they are." : "Thirty questions in eight short sections. Answer based on where your business is today. Every answer saves as you go, so you can leave and come back."}
+      />
 
       <AuditStepper
         questions={AUDIT_V1.questions}

@@ -3,9 +3,12 @@ import { notFound } from "next/navigation";
 import { AuditReport, type ReportRun } from "@/components/audit/audit-report";
 import { Alert } from "@/components/ui/alert";
 import { ButtonLink } from "@/components/ui/button";
-import { Card, CardTitle, Eyebrow } from "@/components/ui/card";
+import { Card, Eyebrow } from "@/components/ui/card";
 import { ProgressBar } from "@/components/ui/progress";
-import { Wordmark } from "@/components/wordmark";
+import { NavLink } from "@/components/member/nav-link";
+import { AppShell } from "@/components/shell/app-shell";
+import { Ornament } from "@/components/shell/page-header";
+import { MEMBER_NAV } from "@/lib/features";
 import { scoreAudit } from "@/domain/audit/score";
 import type { AnswerKey, CatalogLesson } from "@/domain/audit/types";
 import { AUDIT_V1 } from "@/domain/audit/v1";
@@ -42,28 +45,49 @@ export default function PreviewPage() {
   const partial = Object.fromEntries(Object.entries(FIXTURE_ANSWERS).slice(0, 6));
 
   return (
-    <div className="mx-auto w-full max-w-5xl space-y-12 px-4 py-8 sm:px-6">
-      <Wordmark />
+    <AppShell
+      home="/preview"
+      label="Business System"
+      nav={
+        <nav aria-label="Preview navigation">
+          <ul className="space-y-1">
+            {MEMBER_NAV.map((i) => (
+              <li key={i.href}><NavLink href={i.href === "/app" ? "/preview" : i.href} icon={i.icon} exact>{i.label}</NavLink></li>
+            ))}
+          </ul>
+        </nav>
+      }
+    >
+    <div className="space-y-12">
       <Alert tone="warning" title="Design preview with fixture data">
         Everything below uses made up answers and SAMPLE lessons for review. Nothing is saved. This page does not exist in staging or production.
       </Alert>
 
-      <section aria-labelledby="pv-dashboard" className="space-y-4">
-        <h1 id="pv-dashboard" className="text-4xl">Dashboard building blocks</h1>
-        <Card className="border-plum">
-          <Eyebrow>Start here</Eyebrow>
-          <CardTitle className="mt-2 text-3xl">Start your business audit</CardTitle>
-          <p className="mt-2 max-w-prose text-ink-muted">Thirty quick questions show you where your business stands and what to work on first.</p>
-          <ButtonLink href="/app/audit" className="mt-5">Start My Business Audit</ButtonLink>
-        </Card>
-        <div className="grid gap-4 md:grid-cols-2">
-          <Card>
-            <CardTitle className="text-xl">Learning</CardTitle>
-            <div className="mt-3"><ProgressBar value={35} label="7 of 20 essential lessons complete" /></div>
+      <section aria-labelledby="pv-dashboard" className="space-y-6">
+        <header>
+          <p className="text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-mauve-ink">Monday, February 15</p>
+          <h1 id="pv-dashboard" className="mt-2 font-display text-[2.6rem] font-medium leading-[1.05] sm:text-[3.4rem]">Good morning, Jordan</h1>
+          <Ornament className="mt-5" />
+          <p className="mt-4 text-ink-muted">Your path: Build From Scratch</p>
+        </header>
+        <div className="grid gap-5 lg:grid-cols-[1.6fr_1fr]">
+          <Card tone="feature" className="relative overflow-hidden p-8 sm:p-10">
+            <span aria-hidden className="pointer-events-none absolute -right-10 -top-10 size-48 rounded-full bg-rose/40 blur-2xl" />
+            <Eyebrow>Recommended from your audit</Eyebrow>
+            <h2 className="mt-3 max-w-xl font-display text-[2.2rem] font-medium leading-tight">SAMPLE: Module 1 lesson 3</h2>
+            <p className="mt-3 max-w-prose text-ink-muted">This is the starting lesson matched to your top priority.</p>
+            <ButtonLink href="/app/audit" className="mt-6">Open lesson</ButtonLink>
           </Card>
-          <Card>
-            <CardTitle className="text-xl">Business milestones</CardTitle>
-            <div className="mt-3"><ProgressBar value={25} label="2 of 8 milestones done" /></div>
+          <Card className="flex flex-col justify-between">
+            <div>
+              <Eyebrow>Roadmap month 1 of 6</Eyebrow>
+              <p className="mt-2 font-display text-[1.8rem] leading-tight">Clarity &amp; Foundation</p>
+              <p className="mt-2 text-sm text-ink-muted">A suggested focus, not a deadline.</p>
+            </div>
+            <div className="mt-6 space-y-4">
+              <ProgressBar value={35} label="7 of 20 essential lessons" />
+              <ProgressBar value={25} label="2 of 8 business milestones" />
+            </div>
           </Card>
         </div>
         <Alert tone="warning" title="A payment did not go through">Your access continues until February 22, 2027. Update your payment method before then to keep everything open.</Alert>
@@ -85,5 +109,6 @@ export default function PreviewPage() {
         />
       </section>
     </div>
+    </AppShell>
   );
 }

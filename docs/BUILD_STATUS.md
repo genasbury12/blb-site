@@ -13,8 +13,27 @@ Status of The BOSS Business System portal build. Updated at every milestone (con
 | 4 Billing | Built in Stripe test mode; live verification needs a Stripe test account |
 | 5 Coaching and community | Built |
 | 6 Elite | Built |
-| 7 Marketing and admin | Admin built; public sales pages wait on approved copy |
+| 7 Marketing and admin | Admin workspace complete; public sales and masterclass pages wait on approved copy and video |
 | 8 Internal QA and release | Needs a staging environment and owner sign off |
+
+## Milestone 7: Admin completion, design polish, launch readiness docs (2026-11-02)
+
+### What works (tested)
+- Students and access: account directory with search (admin), coach view of assigned members, per student access with grant, suspend, or revoke and a required reason, purchases, audit history, progress, coach assignments, coach role (admin role remains script only).
+- Audit log viewer with filters.
+- Redesigned dashboard (time of day greeting, featured next action, roadmap and progress, numbered priorities, This week panel for coaching, feedback, Elite, community) and editorial headers across every member page.
+- `npm run provision:test-accounts`: creates admin, coach, Blueprint, Accelerator, Elite, and no access accounts on a staging project through the real billing path, prints passwords once, refuses production.
+- Owner documentation: `docs/OWNER_SETUP.md` (exact links and clicks), `docs/FEATURE_CHECKLIST.md`, `docs/LAUNCH_REVIEW.md`.
+
+### Tests run
+| Command | Result |
+|---|---|
+| lint, typecheck, check:copy, build | pass |
+| `npm test` | 232 pass (25 files) |
+| `npm run test:e2e` | 44 pass, 4 signed in journeys skipped pending staging |
+
+### Screenshots
+`docs/screenshots/m7-*.png`
 
 ## Milestone 6: Elite (2026-11-02)
 

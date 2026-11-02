@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { BillingNotices, formatDate } from "@/components/member/access-states";
 import { ProfileForm } from "@/components/member/profile-form";
+import { PageHeader } from "@/components/shell/page-header";
 import { Card, CardTitle } from "@/components/ui/card";
 import { loadGrants } from "@/lib/server/learning";
 import { getBillingNotices, getFeatures, requireSession } from "@/lib/server/session";
@@ -64,7 +65,7 @@ export default async function AccountPage() {
 
   return (
     <div className="space-y-8">
-      <h1 className="text-4xl sm:text-5xl">My Account</h1>
+      <PageHeader eyebrow="My Account" title="Your account" />
       <BillingNotices notices={notices} />
 
       <Card>

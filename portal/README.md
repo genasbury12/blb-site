@@ -44,6 +44,9 @@ npm test
 ```
 The test database gets `supabase/tests/supabase_shim.sql` (Supabase roles, `auth.uid()`, default grants; TEST ONLY), every migration in order, then `supabase/seed.sql`.
 
+## Staging test accounts
+`npm run provision:test-accounts -- --email you@yourdomain.com --with-sample-content` with `APP_ENV=staging`, `NEXT_PUBLIC_SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` set. See `../docs/OWNER_SETUP.md` Step 5.
+
 ## Migrations
 - Create: `npx supabase migration new <name>`
 - Apply to a hosted project (owner approval required for production): `npx supabase link --project-ref <ref>` then `npx supabase db push`

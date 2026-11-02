@@ -30,6 +30,22 @@ function Report({ postId, commentId }: { postId?: string; commentId?: string }) 
   );
 }
 
+function CommentBlock({ c, reply, who, userId, postId }: { c: C; reply?: boolean; who: string; userId: string; postId: string }) {
+  return (
+    <div className={reply ? "ml-6 border-l-2 border-rose pl-4" : ""}>
+      <p className="text-xs text-ink-muted">{who} · {fmtShort(c.created_at)}</p>
+      <p className="mt-1 whitespace-pre-line">{c.body}</p>
+      <div className="mt-1 flex gap-4">
+        {c.user_id === userId ? (
+          <ActionForm action={deleteOwnContent} submitLabel="Delete" variant="quiet" className="text-xs">
+            <input type="hidden" name="id" value={c.id} /><input type="hidden" name="kind" value="comment" />
+          </ActionForm>
+        ) : <Report postId={postId} commentId={c.id} />}
+      </div>
+    </div>
+  );
+}
+
 export default async function PostPage({ params }: { params: Promise<{ postId: string }> }) {
   requireFlag("community");
   const { postId } = await params;
@@ -44,20 +60,6 @@ export default async function PostPage({ params }: { params: Promise<{ postId: s
   const names = await authorNames(supabase, [post.user_id as string, ...comments.map((c) => c.user_id)]);
   const who = (id: string) => { const a = names.get(id); return `${a?.name ?? "Member"}${a?.staff ? " · Coach" : ""}`; };
   const top = comments.filter((c) => !c.parent_comment_id);
-
-  const CommentBlock = ({ c, reply }: { c: C; reply?: boolean }) => (
-    <div className={reply ? "ml-6 border-l-2 border-rose pl-4" : ""}>
-      <p className="text-xs text-ink-muted">{who(c.user_id)} · {fmtShort(c.created_at)}</p>
-      <p className="mt-1 whitespace-pre-line">{c.body}</p>
-      <div className="mt-1 flex gap-4">
-        {c.user_id === user.id ? (
-          <ActionForm action={deleteOwnContent} submitLabel="Delete" variant="quiet" className="text-xs">
-            <input type="hidden" name="id" value={c.id} /><input type="hidden" name="kind" value="comment" />
-          </ActionForm>
-        ) : <Report postId={postId} commentId={c.id} />}
-      </div>
-    </div>
-  );
 
   return (
     <article className="space-y-8">
@@ -79,8 +81,8 @@ export default async function PostPage({ params }: { params: Promise<{ postId: s
         <h2 id="replies" className="font-display text-2xl">{comments.length} {comments.length === 1 ? "reply" : "replies"}</h2>
         {top.map((c) => (
           <Card key={c.id} className="space-y-4 p-5">
-            <CommentBlock c={c} />
-            {comments.filter((r) => r.parent_comment_id === c.id).map((r) => <CommentBlock key={r.id} c={r} reply />)}
+            <CommentBlock c={c} who={who(c.user_id)} userId={user.id} postId={postId} />
+            {comments.filter((r) => r.parent_comment_id === c.id).map((r) => <CommentBlock key={r.id} c={r} reply who={who(r.user_id)} userId={user.id} postId={postId} />)}
             <details className="text-sm">
               <summary className="cursor-pointer font-semibold text-plum">Reply</summary>
               <ActionForm action={createComment} submitLabel="Reply" variant="secondary" className="mt-2 space-y-2">

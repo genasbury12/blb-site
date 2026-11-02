@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { NoAccess } from "@/components/member/access-states";
+import { PageHeader } from "@/components/shell/page-header";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardTitle, Eyebrow } from "@/components/ui/card";
 import { ProgressBar } from "@/components/ui/progress";
@@ -17,10 +18,7 @@ export default async function TrainingPage() {
 
   return (
     <div className="space-y-8">
-      <header>
-        <h1 className="text-4xl sm:text-5xl">My Training</h1>
-        <p className="mt-3 max-w-prose text-ink-muted">All eight modules are open. Start where your audit points you, or anywhere you need help today.</p>
-      </header>
+      <PageHeader eyebrow="My Training" title="Eight modules, all open" lede="Start where your audit points you, or anywhere you need help today. Finishing a lesson and finishing a business milestone are tracked separately." />
       {modules.length === 0 ? (
         <Card>
           <CardTitle className="text-xl">Training is being prepared</CardTitle>
@@ -35,9 +33,14 @@ export default async function TrainingPage() {
             return (
               <li key={m.id}>
                 <Card>
+                  <div className="flex items-start gap-5">
+                    <span className="numeral text-[3.2rem] leading-none text-rose-deep" aria-hidden>{String(m.number).padStart(2, "0")}</span>
+                    <div>
                   <Eyebrow>Module {m.number}</Eyebrow>
                   <CardTitle className="mt-1">{m.title}</CardTitle>
                   <p className="mt-1 text-sm text-ink-muted">{m.outcome}</p>
+                    </div>
+                  </div>
                   {essential.length ? (
                     <div className="mt-4 max-w-md">
                       <ProgressBar value={(done / essential.length) * 100} label={`${done} of ${essential.length} essential lessons complete`} />

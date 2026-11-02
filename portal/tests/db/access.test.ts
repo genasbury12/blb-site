@@ -214,3 +214,22 @@ describe("no self promotion or forged grants (D09)", () => {
     await expect(db.query("delete from public.admin_audit_log")).rejects.toThrow(/append only/);
   });
 });
+
+describe("coach role management", () => {
+  it("only admins grant the coach role, with a reason, and it is audited; nobody can grant admin through the API", async () => {
+    const admin = await createUser(db, "roleadmin");
+    await db.query("insert into public.user_roles (user_id, role) values ($1, 'admin')", [admin]);
+    const target = await createUser(db, "futurecoach");
+    await expectDenied(db, target, "select public.admin_set_coach_role($1, true, 'promote myself')", [target]);
+    await db.query("begin");
+    await db.query("set local role authenticated");
+    await db.query("select set_config('request.jwt.claims', $1, true)", [JSON.stringify({ sub: admin, role: "authenticated" })]);
+    await db.query("select public.admin_set_coach_role($1, true, 'Hired as a coach')", [target]);
+    await db.query("commit");
+    const roles = await db.query("select role from public.user_roles where user_id = $1", [target]);
+    expect(roles.rows).toEqual([{ role: "coach" }]);
+    const log = await db.query("select action from public.admin_audit_log where entity_id = $1", [target]);
+    expect(log.rows).toEqual([{ action: "role.coach.grant" }]);
+    await expectDenied(db, admin, "insert into public.user_roles (user_id, role) values ($1, 'admin')", [target]);
+  });
+});

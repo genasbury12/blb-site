@@ -13,7 +13,8 @@
     "test:e2e": "playwright test",
     "db:test:setup": "bash scripts/db-test-setup.sh",
     "check:copy": "node scripts/check-copy.mjs",
-    "test:unit": "vitest run --project unit"
+    "test:unit": "vitest run --project unit",
+    "provision:test-accounts": "node scripts/provision-test-accounts.mjs"
   },
   "dependencies": {
     "@date-fns/tz": "1.5.0",

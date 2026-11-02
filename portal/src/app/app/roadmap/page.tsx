@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { NoAccess } from "@/components/member/access-states";
 import { RoadmapItemToggle } from "@/components/learning/roadmap-item-toggle";
+import { PageHeader } from "@/components/shell/page-header";
 import { ButtonLink } from "@/components/ui/button";
 import { Card, CardTitle, Eyebrow } from "@/components/ui/card";
 import { loadRuns } from "@/lib/server/audit";
@@ -43,10 +44,7 @@ export default async function RoadmapPage() {
 
   return (
     <div className="space-y-8">
-      <header>
-        <h1 className="text-4xl sm:text-5xl">My Roadmap</h1>
-        <p className="mt-3 max-w-prose text-ink-muted">Six themed months to guide your focus. Nothing is locked and nothing resets if you fall behind.</p>
-      </header>
+      <PageHeader eyebrow="My Roadmap" title="Your six month plan" lede="Six themed months to guide your focus. Nothing is locked and nothing resets if you fall behind." />
       <ol className="grid gap-4 md:grid-cols-2">
         {THEMES.map((theme, i) => {
           const monthItems = current.filter((it) => it.month_number === i + 1);
