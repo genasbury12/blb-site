@@ -12,8 +12,26 @@ Status of The BOSS Business System portal build. Updated at every milestone (con
 | 3 Audit and roadmap | Built, including the PDF report |
 | 4 Billing | Built in Stripe test mode; live verification needs a Stripe test account |
 | 5 Coaching and community | Built |
-| 6 Elite | Next |
-| 7 to 8 | Not started |
+| 6 Elite | Built |
+| 7 Marketing and admin | Admin built; public sales pages wait on approved copy |
+| 8 Internal QA and release | Needs a staging environment and owner sign off |
+
+## Milestone 6: Elite (2026-11-02)
+
+### What works (tested)
+- Public Elite application (behind the Elite flag) with honeypot and per email rate limit; staff move applications through reviewing, discovery call, accepted, declined; accepting holds a seat for 14 days and is refused when all five seats are in use (active clients plus held offers, under a lock).
+- Checkout for Elite opens only for the accepted applicant, matched by account email; payment enrolls the application and provisions the private workspace with a 720 minute included allowance automatically.
+- Private workspace: next private session with join link, cancel (24 hours or more ahead is a reschedule, later is forfeited), weekly four question check-in due 24 hours before (late submissions flagged), custom six month roadmap, tasks and deliverables, coach led audit, shared files, done for you requests with scope, estimate and completion summary, hours meter and time ledger.
+- I-11: after coaching ends, the client keeps requests and hours only until the hours expire.
+- Staff: capacity, application pipeline, client list with hours left, coach assignment (admin), roadmap, audit, tasks, coach only notes, requests, time recorded after the work (append only, never above the allowance, admins can void with a reason), packages recorded by admin with a payment reference, weekly session scheduling, coach cancellation with replacement, check-in review, file sharing.
+- Isolation: client A cannot read client B's board, items, files, sessions or hours; coaches see only boards assigned to them; coach notes are never visible to clients.
+
+### Tests run
+| Command | Result |
+|---|---|
+| lint, typecheck, check:copy, build | pass |
+| `npm test` | 231 pass (25 files) |
+| `npm run test:e2e` | 44 pass |
 
 ## Milestone 5: Coaching hub, workshops, Hot Seat, feedback, community (2026-11-02)
 

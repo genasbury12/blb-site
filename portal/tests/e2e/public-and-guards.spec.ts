@@ -142,3 +142,11 @@ test("coaching, workshops, feedback, community and their admin pages require sig
   }
   expect((await request.get("/api/files/feedback/00000000-0000-0000-0000-000000000000", { maxRedirects: 0 })).status()).toBe(401);
 });
+
+test("Elite workspace and admin require sign in; the application form is hidden while the Elite flag is off", async ({ request }) => {
+  for (const path of ["/app/elite", "/admin/elite", "/admin/elite/00000000-0000-0000-0000-000000000000"]) {
+    expect((await request.get(path, { maxRedirects: 0 })).status(), path).toBe(307);
+  }
+  expect((await request.get("/apply/elite")).status()).toBe(404);
+  expect((await request.get("/api/files/elite/00000000-0000-0000-0000-000000000000", { maxRedirects: 0 })).status()).toBe(401);
+});
