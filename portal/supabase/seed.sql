@@ -36,3 +36,9 @@ from public.modules m where m.number = 1;
 insert into public.milestones (module_id, slug, title, order_index, is_sample, status)
 select m.id, 'sample-milestone', 'SAMPLE: Module ' || m.number || ' milestone', 1, true, 'published'
 from public.modules m;
+
+-- SAMPLE Implementation Library items (local and test only).
+insert into public.library_items (slug, title, kind, summary, module_number, tags, is_sample, status) values
+  ('sample-walkthrough', 'SAMPLE: Platform walkthrough placeholder', 'walkthrough', 'Placeholder summary. Real walkthrough is pending production.', 2, '{sample}', true, 'published'),
+  ('sample-prompt', 'SAMPLE: AI prompt placeholder', 'ai_prompt', 'Placeholder summary. Real prompt is pending production.', 7, '{sample,ai}', true, 'published'),
+  ('sample-draft-item', 'SAMPLE: Draft library item (hidden)', 'template', 'Placeholder summary for a draft item.', 5, '{sample}', true, 'draft');

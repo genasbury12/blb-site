@@ -2,6 +2,7 @@
 export const COLORS = {
   rose: "#E8C8CB",
   mauve: "#A56C78",
+  mauveInk: "#80505B",
   ivory: "#F7EEE9",
   plum: "#65474F",
   plumDeep: "#4E363D",

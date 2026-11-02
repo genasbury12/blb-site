@@ -8,9 +8,30 @@ Status of The BOSS Business System portal build. Updated at every milestone (con
 |---|---|
 | 0 Repository and infrastructure | Done |
 | 1 Authentication and authorization | Built and tested at the database and route level. Signed in browser journeys wait on a Supabase test project (I-23) |
-| 2 Catalog and lesson progress | Student side built (eight modules, lessons, progress, published only). Admin publishing UI, file downloads, and video playback are next |
-| 3 Audit and roadmap | Built: versioned 30 questions, autosave, deterministic scoring, path choice, report, roadmap, retakes. PDF report is next (I-24) |
-| 4 to 8 | Not started |
+| 2 Catalog and lesson progress | Built: admin publishing workflow, lesson editor, milestones, private downloads, Mux signed playback, Implementation Library |
+| 3 Audit and roadmap | Built, including the PDF report |
+| 4 Billing | Next |
+| 5 to 8 | Not started |
+
+## Milestone 3: Admin curriculum, storage, video, PDF, design shell (2026-11-02)
+
+### What works (tested)
+- Decisions recorded for I-07, I-08, I-09, I-11; I-16 moved to `docs/FUTURE_MARKETING_CLEANUP.md`; provisional copy register `docs/COPY_REVIEW.md`.
+- Premium editorial shell shared by member and admin areas: monogram placeholder, icon navigation, no JavaScript mobile menu, editorial page headers with ornament, layered cards, editorial numerals. New text tokens contrast tested.
+- Admin workspace (`/admin`, 404 for non staff): overview with connected services, curriculum list, module settings and milestones, lesson editor (all fields, Mux playback id, captions flag, transcript, AI prompt and assistant link, path callouts), D14 status workflow (draft, review, approved, published, archived) enforced in code and database, downloads upload with type, size and content checks, check then publish, coach edit suggestions, Implementation Library editor.
+- Automatic audit trail on every staff content change (`app.audit_row_change`), and a guard so approved prices cannot be edited from the app (Stripe price IDs can).
+- Members: Implementation Library with search and filters, redesigned lesson page (Mux player when configured, path callout, AI prompt copy, downloads), PDF audit report download.
+- Private storage buckets (Supabase) with 5 minute signed links issued only after the member's RLS query returns the row.
+
+### Tests run
+| Command | Result |
+|---|---|
+| lint, typecheck, check:copy, build | pass |
+| `npm test` | 161 pass (18 files) |
+| `npm run test:e2e` | 36 pass, signed in journeys skipped pending Supabase test project |
+
+### Needs credentials to verify live
+Supabase Storage uploads and downloads, Mux playback.
 
 ## Milestone 2: First vertical slice UI (2026-11-01)
 

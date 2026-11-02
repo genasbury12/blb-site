@@ -1,9 +1,8 @@
-import Link from "next/link";
 import { signOutAction } from "@/app/(auth)/actions";
+import { NavLink } from "@/components/member/nav-link";
 import { isFeatureEnabled } from "@/lib/env";
 import { visibleNav } from "@/lib/features";
-import { getFeatures } from "@/lib/server/session";
-import { NavLink } from "./nav-link";
+import { getFeatures, getSession } from "@/lib/server/session";
 
 export async function MemberNav() {
   const features = await getFeatures();
@@ -15,21 +14,35 @@ export async function MemberNav() {
   });
   return (
     <nav aria-label="Member">
-      <ul className="flex gap-1 overflow-x-auto pb-1 lg:flex-col lg:overflow-visible">
+      <ul className="space-y-1">
         {items.map((item) => (
-          <li key={item.href} className="shrink-0">
-            <NavLink href={item.href}>{item.label}</NavLink>
+          <li key={item.href}>
+            <NavLink href={item.href} icon={item.icon} exact={item.href === "/app"}>
+              {item.label}
+            </NavLink>
           </li>
         ))}
       </ul>
-      <form action={signOutAction} className="mt-2 lg:mt-6">
-        <button type="submit" className="min-h-11 rounded-lg px-3 text-sm font-semibold text-plum underline-offset-4 hover:underline">
+    </nav>
+  );
+}
+
+export async function MemberFooter() {
+  const session = await getSession();
+  const { data: roles } = session ? await session.supabase.from("user_roles").select("role").eq("user_id", session.user.id) : { data: [] };
+  const staff = (roles ?? []).length > 0;
+  return (
+    <div className="space-y-2 text-sm">
+      {staff ? (
+        <a href="/admin" className="block rounded-lg px-3 py-2 font-semibold text-plum hover:bg-white">
+          Open admin workspace
+        </a>
+      ) : null}
+      <form action={signOutAction}>
+        <button type="submit" className="min-h-11 w-full rounded-lg px-3 text-left font-semibold text-ink-muted hover:bg-white hover:text-plum">
           Sign out
         </button>
       </form>
-      <p className="sr-only">
-        <Link href="/app/account">Account and access dates</Link>
-      </p>
-    </nav>
+    </div>
   );
 }

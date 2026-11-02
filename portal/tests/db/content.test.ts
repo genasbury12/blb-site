@@ -86,3 +86,12 @@ describe("lesson progress", () => {
     expect(profile).toHaveLength(1);
   });
 });
+
+describe("Implementation Library", () => {
+  it("members with library access see published items only; others see nothing", async () => {
+    const rows = await asUser(db, student, (q) => q<{ status: string }>("select status from public.library_items"));
+    expect(rows.length).toBeGreaterThanOrEqual(2);
+    expect(rows.every((r) => r.status === "published")).toBe(true);
+    expect(await asUser(db, noAccess, (q) => q("select id from public.library_items"))).toHaveLength(0);
+  });
+});

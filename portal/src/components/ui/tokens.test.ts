@@ -16,6 +16,9 @@ describe("palette contrast (verified, not assumed)", () => {
     ["danger on ivory", C.danger, C.ivory],
     ["danger on white", C.danger, C.white],
     ["success on ivory", C.success, C.ivory],
+    ["mauve ink labels on ivory", C.mauveInk, C.ivory],
+    ["mauve ink labels on white", C.mauveInk, C.white],
+    ["mauve ink labels on soft rose", C.mauveInk, "#F3E2E3"],
   ])("%s meets 4.5:1 for body text", (_, fg, bg) => {
     expect(contrastRatio(fg, bg)).toBeGreaterThanOrEqual(4.5);
   });

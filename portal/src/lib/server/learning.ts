@@ -19,11 +19,15 @@ export type LessonRow = {
   duration_seconds: number | null;
   is_sample: boolean;
   status: CatalogLesson["status"];
+  ai_prompt: string | null;
+  ai_assistant_url: string | null;
+  path_note_build: string | null;
+  path_note_optimize: string | null;
 };
-export type ResourceRow = { id: string; label: string; mime_type: string };
+export type ResourceRow = { id: string; label: string; mime_type: string; size_bytes: number | null };
 
 const LESSON_COLUMNS =
-  "id, module_id, slug, order_index, essential, title, objective, assignment, transcript, video_provider, video_provider_id, captions_ready, duration_seconds, is_sample, status";
+  "id, module_id, slug, order_index, essential, title, objective, assignment, transcript, video_provider, video_provider_id, captions_ready, duration_seconds, is_sample, status, ai_prompt, ai_assistant_url, path_note_build, path_note_optimize";
 
 /** Modules and lessons the student may see. RLS returns published content only, and only with an active curriculum grant. */
 export async function loadCatalog(supabase: UserSupabase) {
@@ -67,7 +71,7 @@ export async function loadMilestoneSummary(supabase: UserSupabase, userId: strin
 }
 
 export async function loadLessonResources(supabase: UserSupabase, lessonId: string): Promise<ResourceRow[]> {
-  const { data } = await supabase.from("lesson_resources").select("id, label, mime_type").eq("lesson_id", lessonId).eq("published", true);
+  const { data } = await supabase.from("lesson_resources").select("id, label, mime_type, size_bytes").eq("lesson_id", lessonId).eq("published", true);
   return (data ?? []) as ResourceRow[];
 }
 

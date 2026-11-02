@@ -35,6 +35,9 @@ export default async function ResultsPage({ params }: { params: Promise<{ runId:
       actions={
         <>
           <ButtonLink href="/app">Back to my dashboard</ButtonLink>
+          <a href={`/app/audit/results/${run.id}/pdf`} className="inline-flex min-h-11 items-center justify-center rounded-full border border-mauve bg-white px-6 text-[0.95rem] font-semibold text-ink hover:bg-rose-soft">
+            Download PDF report
+          </a>
           <ButtonLink href="/app/audit" variant="secondary">
             Retake the audit
           </ButtonLink>

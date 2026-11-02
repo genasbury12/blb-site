@@ -104,3 +104,16 @@ test("design preview renders fixture audit and report, passes axe, and keyboard 
   await expect(page.getByText("Saved", { exact: true })).toBeVisible();
   await expectNoA11yViolations(page);
 });
+
+test("admin pages, downloads and PDF reports refuse anonymous visitors", async ({ request }) => {
+  for (const path of ["/admin/catalog", "/admin/library", "/admin/catalog/lessons/new", "/app/library"]) {
+    const res = await request.get(path, { maxRedirects: 0 });
+    expect(res.status(), path).toBe(307);
+    expect(res.headers().location).toContain("/login?next=");
+  }
+  // API routes are not redirected by the proxy matcher for /api, so they must refuse on their own.
+  const file = await request.get("/api/files/lesson-resource/00000000-0000-0000-0000-000000000000", { maxRedirects: 0 });
+  expect(file.status()).toBe(401);
+  const pdf = await request.get("/app/audit/results/00000000-0000-0000-0000-000000000000/pdf", { maxRedirects: 0 });
+  expect(pdf.status()).toBe(307);
+});
