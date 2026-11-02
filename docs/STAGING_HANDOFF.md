@@ -25,6 +25,8 @@ The owner (non-developer) is setting up a **private staging environment** one st
 
 11. **Site address (2026-11-02):** Vercel `NEXT_PUBLIC_SITE_URL=https://blb-site-portal.vercel.app` (Config type, Production and Preview), redeployed. Supabase `site_url` set to the same and `uri_allow_list` to `https://blb-site-portal.vercel.app/**` only (no wildcard for other vercel.app hosts, so auth links cannot be redirected to a look-alike project domain).
 
+12. **First sign in on the deployed site (2026-11-02):** owner signed in as Test Blueprint at `https://blb-site-portal.vercel.app` and reached the dashboard (Blueprint menu only, audit path and priorities from the E2E run). The first attempt showed Next.js "This page couldn't load": the login page had been opened before the redeploy, so its server action no longer existed; a reload fixed it. Reproduced locally with the live commit and a temporary user (deleted): sign in works. Suggested follow up: an `error.tsx` for the `(auth)` group with a friendly "reload" message (I-48).
+
 ## How to run the staging checks from this container
 - Map env: `APP_ENV=staging NEXT_PUBLIC_SUPABASE_URL=$STAGING_SUPABASE_URL NEXT_PUBLIC_SUPABASE_ANON_KEY=$STAGING_SUPABASE_PUBLISHABLE_KEY SUPABASE_SERVICE_ROLE_KEY=$STAGING_SUPABASE_SECRET_KEY NODE_USE_ENV_PROXY=1` (Node's fetch needs `NODE_USE_ENV_PROXY=1` to use the agent proxy), plus `FEATURE_COACHING=true FEATURE_COMMUNITY=true FEATURE_FEEDBACK=true FEATURE_ELITE=true`, `EMAIL_SENDING_ENABLED=false`, no Stripe key.
 - Permission check: `node scripts/staging-permission-check.mjs --creds FILE` (FILE is the provisioning `--out` file).
