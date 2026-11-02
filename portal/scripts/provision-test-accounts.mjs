@@ -3,20 +3,26 @@
  * Creates QA accounts in a STAGING Supabase project. Never run against production.
  *
  *   APP_ENV=staging NEXT_PUBLIC_SUPABASE_URL=... SUPABASE_SERVICE_ROLE_KEY=... \
- *     node scripts/provision-test-accounts.mjs --email you@example.com [--with-sample-content]
+ *     node scripts/provision-test-accounts.mjs --email you@example.com [--with-sample-content] [--out /private/path/creds.txt]
  *
  * - Emails use plus addressing on your own inbox (you+boss-admin@example.com), so allowlisted test emails reach you.
- * - Passwords are random and printed ONCE to this terminal. They are not saved anywhere. Store them in your password manager.
+ * - Passwords are random (24 characters) and printed ONCE to this terminal. They are not saved anywhere. Store them in your password manager.
+ *   With --out FILE they are written only to FILE (created with owner-only permissions, refused inside the repository)
+ *   and the terminal shows emails only.
  * - Program access is created through the real billing function (billing_apply_checkout) with clearly marked
  *   test fixture ids (cs_test_fixture_..., pi_test_fixture_...). No Stripe charge happens.
  * - --with-sample-content publishes the SAMPLE modules, lessons and library items for walkthroughs (staging only).
  */
 import { randomBytes, randomUUID } from "node:crypto";
+import { writeFileSync, existsSync } from "node:fs";
+import { resolve, relative, dirname } from "node:path";
+import { fileURLToPath } from "node:url";
 import { createClient } from "@supabase/supabase-js";
 
 const args = process.argv.slice(2);
 const emailArg = args[args.indexOf("--email") + 1];
 const withSample = args.includes("--with-sample-content");
+const outArg = args.includes("--out") ? args[args.indexOf("--out") + 1] : undefined;
 const env = process.env.APP_ENV;
 const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -29,9 +35,17 @@ if (env === "production") fail("Refusing to run: APP_ENV is production. Test acc
 if (!url || !key) fail("Set NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY for the STAGING project.");
 if (!emailArg || !/^[^@\s+]+@[^@\s]+\.[^@\s]+$/.test(emailArg)) fail("Pass --email you@example.com (an inbox you own, without a + tag).");
 
+if (args.includes("--out")) {
+  if (!outArg || outArg.startsWith("--")) fail("Pass a file path after --out.");
+  const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..", "..");
+  const rel = relative(repoRoot, resolve(outArg));
+  if (!rel.startsWith("..")) fail("Refusing --out inside the repository. Choose a private path outside it.");
+  if (existsSync(outArg)) fail("Refusing to overwrite an existing --out file.");
+}
+
 const [local, domain] = emailArg.split("@");
 const admin = createClient(url, key, { auth: { persistSession: false, autoRefreshToken: false } });
-const password = () => `${randomBytes(9).toString("base64url")}Aa9`;
+const password = () => `${randomBytes(18).toString("base64url")}Aa9`;
 
 const ACCOUNTS = [
   { tag: "admin", name: "Test Admin", role: "admin" },
@@ -107,9 +121,22 @@ if (withSample) {
   }
 }
 
-console.log("\nTest accounts (save these in your password manager; they are not stored anywhere):\n");
-for (const o of out) console.log(`  ${o.tag.padEnd(12)} ${o.email.padEnd(40)} ${o.pw}`);
-console.log("\nFor the signed in browser tests (run in this terminal only):\n");
+const lines = [
+  "Test accounts (save these in your password manager; they are not stored anywhere else):",
+  "",
+  ...out.map((o) => `  ${o.tag.padEnd(12)} ${o.email.padEnd(40)} ${o.pw}`),
+  "",
+  "For the signed in browser tests (run in a terminal only):",
+  "",
+];
 const b = out.find((o) => o.tag === "blueprint");
 const n = out.find((o) => o.tag === "noaccess");
-console.log(`  export E2E_SUPABASE=1 E2E_BLUEPRINT_EMAIL='${b.email}' E2E_BLUEPRINT_PASSWORD='${b.pw}' E2E_NOACCESS_EMAIL='${n.email}' E2E_NOACCESS_PASSWORD='${n.pw}'\n`);
+lines.push(`  export E2E_SUPABASE=1 E2E_BLUEPRINT_EMAIL='${b.email}' E2E_BLUEPRINT_PASSWORD='${b.pw}' E2E_NOACCESS_EMAIL='${n.email}' E2E_NOACCESS_PASSWORD='${n.pw}'`, "");
+if (outArg) {
+  writeFileSync(outArg, lines.join("\n"), { mode: 0o600, flag: "wx" });
+  console.log(`\nCreated or updated ${out.length} accounts. Passwords were written only to ${outArg}:\n`);
+  for (const o of out) console.log(`  ${o.tag.padEnd(12)} ${o.email}`);
+  console.log("");
+} else {
+  console.log("\n" + lines.join("\n"));
+}
