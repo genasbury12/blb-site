@@ -1,6 +1,6 @@
 "use client";
 
-import { Check } from "lucide-react";
+import { Check, Download } from "lucide-react";
 import { useEffect, useId, useMemo, useState, useTransition } from "react";
 import {
   expandField,
@@ -145,6 +145,14 @@ export function WorksheetForm(props: WorksheetFormProps) {
             <p className="mt-2 text-sm text-ink-muted">You can keep editing. Changes save automatically.</p>
           ) : null}
           {completeMsg ? <p role="status" className="mt-2 text-sm font-medium text-plum">{completeMsg}</p> : null}
+          <a
+            href={`/api/worksheets/${slug}/pdf`}
+            className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-full border border-plum px-5 font-semibold text-plum hover:bg-rose-soft/50"
+          >
+            <Download className="size-4" aria-hidden />
+            Download my worksheet
+            <span className="sr-only"> (PDF)</span>
+          </a>
         </div>
       ) : null}
 

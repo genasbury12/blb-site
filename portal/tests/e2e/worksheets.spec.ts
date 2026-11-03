@@ -95,3 +95,29 @@ test("a later worksheet quotes the Lesson 2 hypothesis back to the member", asyn
   const page = await newDevice(browser, process.env.E2E_WS_CALLBACK_PATH!);
   await expect(page.getByText("I am exploring a business that helps parents of picky eaters solve dinner battles through weekly meal plans.")).toBeVisible();
 });
+
+test("downloads the member's worksheet and module PDFs; signed out visitors get none", async ({ browser, playwright, baseURL }) => {
+  const path = process.env.E2E_WS_LESSON_PATH!;
+  const moduleSlug = path.split("/")[3]!;
+  const page = await newDevice(browser, path);
+  const [download] = await Promise.all([page.waitForEvent("download"), page.getByRole("link", { name: /Download my worksheet/ }).click()]);
+  expect(download.suggestedFilename()).toMatch(/^BOSS_Module\d+_Lesson\d+_Worksheet\.pdf$/);
+  const file = await download.path();
+  const { readFileSync } = await import("node:fs");
+  expect(readFileSync(file).subarray(0, 5).toString()).toBe("%PDF-");
+  if (process.env.E2E_WS_PDF_OUT) await download.saveAs(`${process.env.E2E_WS_PDF_OUT}/downloaded-lesson.pdf`);
+
+  const mod = await page.request.get(`/api/worksheets/module/${moduleSlug}/pdf`);
+  expect(mod.status()).toBe(200);
+  expect(mod.headers()["content-disposition"]).toMatch(/BOSS_Module\d+_Worksheets\.pdf/);
+  expect((await mod.body()).subarray(0, 5).toString()).toBe("%PDF-");
+
+  const anon = await playwright.request.newContext({ baseURL });
+  const slug = new URL(await page.getByRole("link", { name: /Download my worksheet/ }).evaluate((a) => (a as HTMLAnchorElement).href)).pathname.split("/")[3]!;
+  for (const url of [`/api/worksheets/${slug}/pdf`, `/api/worksheets/module/${moduleSlug}/pdf`]) {
+    const r = await anon.get(url, { maxRedirects: 0 });
+    expect([401, 307, 308]).toContain(r.status());
+    expect(r.headers()["content-type"] ?? "").not.toContain("application/pdf");
+  }
+  await anon.dispose();
+});

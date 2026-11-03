@@ -16,6 +16,28 @@ Status of The BOSS Business System portal build. Updated at every milestone (con
 | 7 Marketing and admin | Admin workspace complete; public sales and masterclass pages wait on approved copy and video |
 | 8 Internal QA and release | Staging Supabase migrated, six test accounts provisioned, signed in permission and browser checks passing (2026-11-02); auth settings, Vercel and Stripe test mode pending; owner sign off pending |
 
+## Worksheets, Slice C: PDF export (2026-11-03)
+
+- `src/lib/pdf/worksheet-pdf.tsx`: branded worksheet PDF built only from the member's saved answers (ivory page, plum and mauve, serif headings, section numbers, ratings with notes, the hypothesis sentence, callback quotes).
+  - Prints required fields always ("Not answered" when empty) and optional fields only when answered, so unused idea columns are left out.
+  - Long answers flow across pages; headings keep at least a few lines with them; very long words (pasted links) break instead of running off the page.
+  - Footer on every page: "The BOSS Business System · Module N" and the date.
+- Routes (signed in, the member's own answers only, `Cache-Control: private, no-store`):
+  - `GET /api/worksheets/[slug]/pdf` gives `BOSS_Module1_Lesson2_Worksheet.pdf`.
+  - `GET /api/worksheets/module/[moduleSlug]/pdf` gives `BOSS_Module1_Worksheets.pdf` with every completed worksheet in lesson order; 404 when none are complete.
+  - Signed out: 401. Not visible to the member (draft, no access): 404.
+- "Download my worksheet" button in the worksheet status bar.
+- The "Download all Module 1 worksheets" button is placed in Slice D (Library "Your worksheets") and Slice E (Lesson 9 placeholder).
+
+| Check | Result |
+|---|---|
+| lint, typecheck, check:copy | Pass |
+| `vitest --project unit` | 172 pass (4 new in `worksheet-pdf.test.tsx`: Lesson 2 with long answers, printed fields, module PDF, file names) |
+| `vitest --project db` | 106 pass |
+| `next build` | Pass |
+| Playwright local (staging env unset) | 44 pass, staging only specs skipped |
+| `tests/e2e/worksheets.spec.ts` on staging (local build, temporary member and test worksheets, all removed after) | 3 pass. New: lesson PDF downloads with the right name and is a PDF; module PDF returns 200; signed out requests get no PDF. Downloaded file checked by eye: 2 pages, ratings, notes, sentence and footer present |
+
 ## Worksheets, Slice B: schema driven form, autosave, progress, complete (2026-11-03)
 
 ### What changed

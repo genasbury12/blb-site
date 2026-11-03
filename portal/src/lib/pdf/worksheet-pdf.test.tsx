@@ -38,6 +38,7 @@ describe("worksheet PDF", () => {
     expect(keys).toEqual(expect.arrayContaining(["cred_A", "cred_B", "hypothesis", "review_date"]));
     expect(keys).not.toContain("cred_C");
     expect(keys).not.toContain("need_B");
+    expect(keys).not.toContain("idea_C");
   });
 
   it("renders a module PDF with several worksheets", async () => {

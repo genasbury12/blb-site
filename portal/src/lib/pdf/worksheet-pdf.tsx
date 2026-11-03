@@ -45,7 +45,9 @@ const s = StyleSheet.create({
   sentence: { fontFamily: "Times-Roman", fontSize: 18, lineHeight: 1.35, color: C.plum },
   quote: { borderLeftColor: C.roseDeep, borderLeftWidth: 2, paddingLeft: 10, marginTop: 10 },
   quoteText: { fontFamily: "Times-Italic", fontSize: 13, color: C.plum },
-  footer: { position: "absolute", bottom: 26, left: 54, right: 54, flexDirection: "row", justifyContent: "space-between", fontSize: 7.5, color: C.muted },
+  // Two separately positioned lines: react-pdf drops a fixed, absolutely positioned row container.
+  footerLeft: { position: "absolute", bottom: 26, left: 54, fontSize: 7.5, color: C.muted },
+  footerRight: { position: "absolute", bottom: 26, right: 54, fontSize: 7.5, color: C.muted, textAlign: "right" },
 });
 
 const dateFmt = new Intl.DateTimeFormat("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "America/New_York" });
@@ -114,6 +116,11 @@ function Answer({ field, value, schema, answers }: { field: ConcreteField; value
   }
 }
 
+/** Print required fields always (as "Not answered" when empty) and optional ones only when answered. */
+function printable(c: ConcreteField, answers: Answers) {
+  return isRequired(c) || isFilled(c, answers[c.key]) || Boolean((answers[c.key] as RatingAnswer | undefined)?.rating);
+}
+
 function Fields({ fields, schema, answers, context }: { fields: WorksheetField[]; schema: WorksheetSchema; answers: Answers; context?: string }) {
   return (
     <>
@@ -121,11 +128,12 @@ function Fields({ fields, schema, answers, context }: { fields: WorksheetField[]
         const group = f.repeat ? schema.repeat_groups?.[f.repeat] : undefined;
         return expandField(schema, f)
           // Repeat columns: print the ideas the member actually used (plus any required one).
-          .filter((c) => !c.repeatKey || isRequired(c) || isFilled(c, answers[c.key]) || Boolean((answers[c.key] as RatingAnswer | undefined)?.rating))
+          .filter((c) => printable(c, answers))
           .map((c) => {
             const label = c.repeatKey ? `${context ? `${context}: ` : ""}${labelFrom(group?.label_from, c.repeatKey, answers)}` : (c.label ?? c.key);
+            const length = answerText(c, answers[c.key], schema).length;
             return (
-              <View key={c.key} wrap={false}>
+              <View key={c.key} wrap={length > 700} minPresenceAhead={40}>
                 <Text style={s.label}>{label}</Text>
                 <Answer field={c} value={answers[c.key]} schema={schema} answers={answers} />
               </View>
@@ -152,7 +160,7 @@ function WorksheetPages({ input, generatedAt }: { input: WorksheetPdfInput; gene
         {[input.memberName, input.completedAt ? `Completed ${dateFmt.format(new Date(input.completedAt))}` : "In progress", `Saved copy from ${dateFmt.format(generatedAt)}`].filter(Boolean).join("  ·  ")}
       </Text>
       {schema.sections.map((section) => (
-        <View key={section.key} style={s.section}>
+        <View key={section.key} style={s.section} minPresenceAhead={90}>
           {section.number ? <Text style={s.number}>{section.number}</Text> : null}
           <View style={s.sectionBody}>
             {section.title ? <Text style={s.h2}>{section.title}</Text> : null}
@@ -166,17 +174,23 @@ function WorksheetPages({ input, generatedAt }: { input: WorksheetPdfInput; gene
             <Fields fields={section.fields} schema={schema} answers={answers} />
             {(section.subsections ?? []).map((sub) => (
               <View key={sub.key}>
-                {sub.title ? <Text style={s.h3}>{sub.title}</Text> : null}
+                {sub.title ? (
+                  <Text style={s.h3} minPresenceAhead={70}>
+                    {sub.title}
+                  </Text>
+                ) : null}
                 <Fields fields={sub.fields} schema={schema} answers={answers} context={sub.title} />
               </View>
             ))}
           </View>
         </View>
       ))}
-      <View style={s.footer} fixed>
-        <Text>The BOSS Business System · Module {input.moduleNumber}</Text>
-        <Text render={({ pageNumber, totalPages }) => `${dateFmt.format(generatedAt)}  ·  Page ${pageNumber} of ${totalPages}`} />
-      </View>
+      <Text style={s.footerLeft} fixed>
+        The BOSS Business System · Module {input.moduleNumber}
+      </Text>
+      <Text style={s.footerRight} fixed>
+        {dateFmt.format(generatedAt)}
+      </Text>
     </Page>
   );
 }
@@ -208,6 +222,6 @@ export async function renderModuleWorksheetsPdf(inputs: WorksheetPdfInput[], mod
 /** Keys printed in the PDF, for tests. */
 export function printedKeys(schema: WorksheetSchema, answers: Answers) {
   return concreteFields(schema)
-    .filter((c) => !c.repeatKey || isRequired(c) || isFilled(c, answers[c.key]))
+    .filter((c) => printable(c, answers))
     .map((c) => c.key);
 }
