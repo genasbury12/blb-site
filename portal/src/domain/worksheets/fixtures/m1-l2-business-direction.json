@@ -1,0 +1,278 @@
+{
+  "slug": "m1-l2-business-direction",
+  "module_slug": "module-1",
+  "lesson_slug": "lesson-2",
+  "title": "Lesson 2: Business Direction Workshop",
+  "version": 1,
+  "status": "draft",
+  "intro": {
+    "eyebrow": "Module 1 · Lesson 2 · Your worksheet",
+    "title": "Business Direction Workshop",
+    "lead": "Compare up to three ideas against the same four tests, then pick one to test first. Not forever. First.",
+    "quote": "A business direction is a hypothesis. Not a guarantee.",
+    "notes": [
+      "What this worksheet does not do: it does not tell you whether people will pay. A column full of Strong means this is the most credible direction to research next. Whether she buys is what Lessons 3 and 4 find out.",
+      "Already have a blog? Your current direction is Idea A. Rate it against the same four tests, honestly."
+    ]
+  },
+  "repeat_groups": {
+    "ideas": {
+      "keys": [
+        "A",
+        "B",
+        "C"
+      ],
+      "label_from": "idea_{k}"
+    }
+  },
+  "rating_options": [
+    {
+      "value": "strong",
+      "label": "Strong",
+      "guide": "I have real experience or real evidence."
+    },
+    {
+      "value": "uncertain",
+      "label": "Uncertain",
+      "guide": "I think so, but I haven't checked. This is a normal, honest answer."
+    },
+    {
+      "value": "weak",
+      "label": "Weak",
+      "guide": "I have a reason to doubt it."
+    }
+  ],
+  "sections": [
+    {
+      "key": "ideas",
+      "number": "1",
+      "title": "Name your ideas",
+      "ask": "Who would you help, and with what?",
+      "guide": "One line each. Not a tagline, not a brand name. Just the person and the thing. If you only have one idea, write it as A and leave the others empty.",
+      "fields": [
+        {
+          "key": "idea_A",
+          "type": "text",
+          "label": "Idea A",
+          "required": true,
+          "max_length": 160,
+          "placeholder": "e.g. Meal planning for parents of picky eaters"
+        },
+        {
+          "key": "idea_B",
+          "type": "text",
+          "label": "Idea B",
+          "required": false,
+          "max_length": 160
+        },
+        {
+          "key": "idea_C",
+          "type": "text",
+          "label": "Idea C",
+          "required": false,
+          "max_length": 160
+        }
+      ]
+    },
+    {
+      "key": "tests",
+      "number": "2",
+      "title": "Run the four tests",
+      "ask": "For each idea, each test: one word and one sentence.",
+      "guide": "The word is Strong, Uncertain, or Weak. The sentence is why. The sentence is the real answer, so don't skip it. Read the whole page, not a score: one Weak on credibility sinks an idea no matter how many Strongs it collects.",
+      "subsections": [
+        {
+          "key": "cred",
+          "title": "Credibility",
+          "ask": "Do I know enough to help this person responsibly?",
+          "guide": "From experience, training, work, or results. You don't need to be the leading expert. You need to be trustworthy. If you're not there yet, say what you'd have to learn or who you'd need alongside you.",
+          "fields": [
+            {
+              "key": "cred_{k}",
+              "type": "rating",
+              "repeat": "ideas",
+              "note_required": true,
+              "required_for": [
+                "A"
+              ],
+              "max_length": 600
+            }
+          ]
+        },
+        {
+          "key": "need",
+          "title": "Buyer need",
+          "ask": "Is she actively trying to fix this, and can I reach her?",
+          "guide": "Who exactly is she? What is she trying to change, solve, achieve, or avoid? What evidence do you have that she wants it fixed: questions people ask you, things they already pay for, complaints you keep hearing? And where does she already look for help? Enjoying a topic is not evidence.",
+          "fields": [
+            {
+              "key": "need_{k}",
+              "type": "rating",
+              "repeat": "ideas",
+              "note_required": true,
+              "required_for": [
+                "A"
+              ],
+              "max_length": 600
+            }
+          ]
+        },
+        {
+          "key": "fit",
+          "title": "Delivery fit",
+          "ask": "Can I build and deliver a first version with my real life?",
+          "guide": "Your actual hours, skills, tools, and responsibilities. A daily membership sounds exciting until you remember you have two hours on Tuesdays. How fast could you put a small version in front of real people? Every month spent building is a month not learning.",
+          "fields": [
+            {
+              "key": "fit_{k}",
+              "type": "rating",
+              "repeat": "ideas",
+              "note_required": true,
+              "required_for": [
+                "A"
+              ],
+              "max_length": 600
+            }
+          ]
+        },
+        {
+          "key": "logic",
+          "title": "Commercial logic",
+          "ask": "Can I say what she gets and why she'd pay, in one sentence?",
+          "guide": "Not revenue math. Just whether the model makes sense. What does she receive? Why is that worth money to her? If you can't say it simply, that's information.",
+          "fields": [
+            {
+              "key": "logic_{k}",
+              "type": "rating",
+              "repeat": "ideas",
+              "note_required": true,
+              "required_for": [
+                "A"
+              ],
+              "max_length": 600
+            }
+          ]
+        },
+        {
+          "key": "assume",
+          "title": "What I'm assuming",
+          "ask": "The things I'm treating as true without proof.",
+          "fields": [
+            {
+              "key": "assume_{k}",
+              "type": "textarea",
+              "repeat": "ideas",
+              "required_for": [
+                "A"
+              ],
+              "max_length": 600
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "decision",
+      "number": "3",
+      "title": "Choose one to test",
+      "ask": "The most credible, testable direction. Not the most exciting one.",
+      "guide": "Look across your four tests. Which idea has the fewest serious problems and the fastest path to real feedback? That's the one. It isn't a winner yet. It's the strongest hypothesis you have.",
+      "fields": [
+        {
+          "key": "chosen",
+          "type": "choice",
+          "label": "I'm testing",
+          "options": [
+            "A",
+            "B",
+            "C"
+          ],
+          "option_label_from": "idea_{k}",
+          "required": true
+        },
+        {
+          "key": "hypothesis",
+          "type": "sentence",
+          "label": "My hypothesis",
+          "template": "I am exploring a business that helps {person} solve {problem} through {solution}.",
+          "slots": [
+            {
+              "key": "person",
+              "placeholder": "person",
+              "max_length": 120
+            },
+            {
+              "key": "problem",
+              "placeholder": "problem",
+              "max_length": 120
+            },
+            {
+              "key": "solution",
+              "placeholder": "type of solution",
+              "max_length": 120
+            }
+          ],
+          "required": true
+        },
+        {
+          "key": "why",
+          "type": "textarea",
+          "label": "Why this one",
+          "guide": "Two or three sentences. Point at evidence, not excitement.",
+          "required": true,
+          "max_length": 1200
+        },
+        {
+          "key": "assumption",
+          "type": "textarea",
+          "label": "My biggest unchecked assumption",
+          "required": true,
+          "max_length": 600
+        },
+        {
+          "key": "next_step",
+          "type": "textarea",
+          "label": "One thing I'll do this week to check it",
+          "guide": "Talk to five people. Read what they complain about. Search where they already ask for help.",
+          "required": true,
+          "max_length": 600
+        },
+        {
+          "key": "review_date",
+          "type": "date",
+          "label": "I'll review the evidence on",
+          "required": true
+        }
+      ],
+      "footer": "Choosing a direction to research is cheap and reversible. Paying for branding before you've tested it is not. Stay in the cheap column until the evidence says otherwise."
+    }
+  ],
+  "completion": {
+    "milestone_label": "I chose a provisional direction and wrote my hypothesis",
+    "required_fields": [
+      "idea_A",
+      "cred_A",
+      "need_A",
+      "fit_A",
+      "logic_A",
+      "assume_A",
+      "chosen",
+      "hypothesis",
+      "why",
+      "assumption",
+      "next_step",
+      "review_date"
+    ]
+  },
+  "admin_columns": [
+    "chosen",
+    "cred_{chosen}",
+    "need_{chosen}",
+    "fit_{chosen}",
+    "logic_{chosen}",
+    "assumption"
+  ],
+  "callbacks_provided": {
+    "hypothesis": "Used by m1-l3-customer-research and m1-l9-foundation-blueprint"
+  }
+}

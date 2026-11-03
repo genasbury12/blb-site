@@ -16,6 +16,32 @@ Status of The BOSS Business System portal build. Updated at every milestone (con
 | 7 Marketing and admin | Admin workspace complete; public sales and masterclass pages wait on approved copy and video |
 | 8 Internal QA and release | Staging Supabase migrated, six test accounts provisioned, signed in permission and browser checks passing (2026-11-02); auth settings, Vercel and Stripe test mode pending; owner sign off pending |
 
+## Worksheets, Slice B: schema driven form, autosave, progress, complete (2026-11-03)
+
+### What changed
+- `src/domain/worksheets/schema.ts`: the worksheet schema (Zod) and pure rules: repeat group expansion, `required_for`, progress from `completion.required_fields`, answer validation (unknown keys, types, lengths, options, dates), sentence rendering (`_rendered` rebuilt on the server), callback text. The two Module 1 schemas from the brief are fixtures in `src/domain/worksheets/fixtures/`.
+- Migration `20261103001600_worksheet_save_complete.sql` (applied to staging):
+  - `save_worksheet_answers` shallow merges changed answers and follows the published version.
+  - `complete_worksheet` keeps the first `completed_at`, stays editable, and ticks the module milestone whose title equals `completion.milestone_label`.
+  - Both run as the member, so the RLS from Slice A still applies.
+- Server actions `src/app/app/worksheets/actions.ts`: validate every patch against the published schema; complete only at 100% (checked on the server); logs field keys and slugs, never answer content.
+- `WorksheetForm` (`src/components/worksheets/`): one component for every worksheet.
+  - **Content:** intro with the italic mauve last word, quote and notes; numbered sections with ask, guide and footer; subsections; repeat columns labeled from the idea text.
+  - **Field types:** text, textarea, date; rating pills (Strong plum, Uncertain rose, Weak outlined italic mauve) with a note; choice pills labeled from the ideas; inline sentence inputs.
+  - **Behavior:** "Hypothetical example:" lines, callbacks quoted above a section, a display mode for staff, and a sticky status bar ("Saved h:mm", "Not saved, retrying", percent complete).
+  - **Autosave:** `AutosaveController`, 800 ms per field, one request in flight, latest change queued, backoff retries, and a warning on leaving with unsaved changes.
+  - **Progress:** `useWorksheetProgress(slug)`.
+- Lesson page: "Your worksheet" section below the video and resources when the lesson has a published worksheet.
+
+### Tests run
+| Command | Result |
+|---|---|
+| `vitest --project unit` | 168 pass (16 schema tests, 4 autosave controller tests) |
+| `vitest --project db` | 106 pass (3 new: merge save, refusals, complete with milestone) |
+| `tests/e2e/worksheets.spec.ts` on staging (local build, temporary member and test worksheets, all removed after) | 2 pass. Covered: autosave "Saved", progress 0, 8 and 100 percent, rating pills, notes, choice, sentence, date, Complete, still editable; a second browser context sees every answer; the callback quotes the Lesson 2 hypothesis on a later worksheet |
+| Local unconfigured Playwright suite | 44 pass |
+| lint, typecheck, copy check | pass |
+
 ## Worksheets, Slice A: data model and RLS (2026-11-03)
 
 Brief: `09_IMPLEMENT_WORKSHEETS.md` (owner decision 2026-11-02: worksheets live in the portal).

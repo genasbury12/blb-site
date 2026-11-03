@@ -123,3 +123,49 @@ describe("staff access (D09: coaches see assigned members only)", () => {
     expect(JSON.stringify(log.rows)).not.toContain("Other answer");
   });
 });
+
+describe("Slice B: save and complete functions", () => {
+  it("autosave merges changed answers into saved ones and follows the published version", async () => {
+    const u = await createUser(db, "ws-saver");
+    await paidOrder(db, u, "blueprint");
+    await asUser(db, u, async (q) => {
+      await q("select public.save_worksheet_answers('ws-published', $1)", [JSON.stringify({ q1: "First" })]);
+      await q("select public.save_worksheet_answers('ws-published', $1)", [JSON.stringify({ q2: "Second" })]);
+      await q("select public.save_worksheet_answers('ws-published', $1)", [JSON.stringify({ q1: "First, edited" })]);
+      const [row] = await q<{ answers: Record<string, string>; worksheet_version: number }>("select answers, worksheet_version from public.worksheet_responses where user_id = $1", [u]);
+      expect(row!.answers).toEqual({ q1: "First, edited", q2: "Second" });
+      expect(row!.worksheet_version).toBe(1);
+    });
+  });
+  it("refuses drafts, the unentitled, anonymous callers and non-object patches", async () => {
+    await expectDenied(db, student, "select public.save_worksheet_answers('ws-draft', '{}')");
+    await expectDenied(db, noAccess, "select public.save_worksheet_answers('ws-published', '{}')");
+    await expectDenied(db, null, "select public.save_worksheet_answers('ws-published', '{}')");
+    await expectDenied(db, student, "select public.save_worksheet_answers('ws-published', '[1]')");
+  });
+  it("complete keeps answers editable, keeps the first completed_at, and ticks the matching milestone", async () => {
+    const u = await createUser(db, "ws-completer");
+    await paidOrder(db, u, "blueprint");
+    const label = "I answered the test worksheet";
+    await db.query("update public.worksheets set schema = jsonb_set(schema, '{completion}', $1) where slug = 'ws-published'", [JSON.stringify({ milestone_label: label, required_fields: [] })]);
+    const [ms] = (await db.query<{ id: string }>(
+      "insert into public.milestones (module_id, slug, title, order_index, status) select l.module_id, 'ws-test-milestone', $1, 90, 'published' from public.lessons l where l.id = $2 returning id",
+      [label, lesson],
+    )).rows;
+    await expectDenied(db, u, "select public.complete_worksheet('ws-published')");
+    await db.query("begin");
+    await db.query("set local role authenticated");
+    await db.query("select set_config('request.jwt.claims', $1, true)", [JSON.stringify({ sub: u, role: "authenticated" })]);
+    await db.query("select public.save_worksheet_answers('ws-published', '{\"q1\":\"Done\"}')");
+    const first = (await db.query<{ r: { status: string; milestone: boolean; completed_at: string } }>("select public.complete_worksheet('ws-published') as r")).rows[0]!.r;
+    await db.query("select public.save_worksheet_answers('ws-published', '{\"q1\":\"Edited after completing\"}')");
+    const again = (await db.query<{ r: { completed_at: string } }>("select public.complete_worksheet('ws-published') as r")).rows[0]!.r;
+    await db.query("commit");
+    expect(first).toMatchObject({ status: "complete", milestone: true });
+    expect(again.completed_at).toBe(first.completed_at);
+    const resp = await db.query("select status, answers->>'q1' as q1 from public.worksheet_responses where user_id = $1", [u]);
+    expect(resp.rows[0]).toEqual({ status: "complete", q1: "Edited after completing" });
+    const mp = await db.query("select state from public.milestone_progress where user_id = $1 and milestone_id = $2", [u, ms!.id]);
+    expect(mp.rows[0]?.state).toBe("done");
+  });
+});
