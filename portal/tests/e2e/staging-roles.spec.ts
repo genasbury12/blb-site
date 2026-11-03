@@ -17,7 +17,7 @@ async function signIn(page: Page, role: Role, next = "/app") {
   await page.getByLabel("Email").fill(process.env[`E2E_${R}_EMAIL`]!);
   await page.getByLabel("Password").fill(process.env[`E2E_${R}_PASSWORD`]!);
   await page.getByRole("button", { name: "Sign in" }).click();
-  await page.waitForURL((u) => u.pathname.startsWith(next.startsWith("/admin") ? "/admin" : "/app"));
+  await page.waitForURL((u) => u.pathname.startsWith("/app") || u.pathname.startsWith("/admin"));
 }
 
 async function newSignedInPage(browser: Browser, role: Role, next = "/app") {
@@ -65,6 +65,7 @@ async function expectNotFound(page: Page, path: string) {
 for (const role of Object.keys(EXPECTED_NAV) as Role[]) {
   test(`${role}: menu and member pages match purchased access`, async ({ page }) => {
     await signIn(page, role);
+    if (role === "admin" || role === "coach") await page.goto("/app");
     await expect(page.getByRole("heading", { level: 1 })).toContainText("Test");
     await openMenu(page);
     const nav = page.getByRole("navigation", { name: "Member" });
@@ -83,6 +84,21 @@ for (const role of Object.keys(EXPECTED_NAV) as Role[]) {
     await openMenu(page);
     const staffLink = page.getByRole("link", { name: "Open admin workspace" });
     await expect(staffLink).toHaveCount(role === "admin" || role === "coach" ? 1 : 0);
+  });
+}
+
+// I-43 (owner decision 2026-11-03): staff land in the admin workspace unless a destination was asked for.
+for (const role of Object.keys(EXPECTED_NAV) as Role[]) {
+  test(`${role}: lands on the right home after sign in`, async ({ page }) => {
+    const staff = role === "admin" || role === "coach";
+    await signIn(page, role);
+    await expect(page).toHaveURL(new RegExp(staff ? "/admin$" : "/app$"));
+    if (staff) {
+      await page.getByRole("button", { name: "Sign out" }).click().catch(() => undefined);
+      await page.context().clearCookies();
+      await signIn(page, role, "/app/account");
+      await expect(page).toHaveURL(/\/app\/account$/);
+    }
   });
 }
 

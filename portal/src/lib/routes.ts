@@ -12,3 +12,12 @@ export function safeNextPath(next: string | null | undefined, fallback = "/app")
   if (/[\r\n]/.test(next)) return fallback;
   return isProtectedPath(next.split("?")[0]!) ? next : fallback;
 }
+
+/**
+ * Where to go after sign in (I-43, owner decision 2026-11-03): an explicit destination wins; otherwise staff
+ * (admin or coach) land in the admin workspace and members on their dashboard.
+ */
+export function landingPath(next: string | null | undefined, isStaff: boolean): string {
+  const target = safeNextPath(next);
+  return isStaff && target === "/app" ? "/admin" : target;
+}
