@@ -7,6 +7,7 @@ const ITEMS: { href: string; label: string; icon: string; roles: ("admin" | "coa
   { href: "/admin/students", label: "Students & access", icon: "students", roles: ["admin", "coach"] },
   { href: "/admin/catalog", label: "Curriculum", icon: "catalog", roles: ["admin", "coach"] },
   { href: "/admin/library", label: "Library", icon: "library", roles: ["admin"] },
+  { href: "/admin/worksheets", label: "Worksheets", icon: "worksheets", roles: ["admin", "coach"] },
   { href: "/admin/coaching", label: "Coaching & Hot Seat", icon: "coaching", roles: ["admin", "coach"] },
   { href: "/admin/workshops", label: "Workshops", icon: "workshops", roles: ["admin"] },
   { href: "/admin/feedback", label: "Feedback queue", icon: "feedback", roles: ["admin", "coach"] },

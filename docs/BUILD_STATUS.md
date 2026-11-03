@@ -16,6 +16,24 @@ Status of The BOSS Business System portal build. Updated at every milestone (con
 | 7 Marketing and admin | Admin workspace complete; public sales and masterclass pages wait on approved copy and video |
 | 8 Internal QA and release | Staging Supabase migrated, six test accounts provisioned, signed in permission and browser checks passing (2026-11-02); auth settings, Vercel and Stripe test mode pending; owner sign off pending |
 
+## Worksheets, Slice D: admin views, CSV export, member Library (2026-11-03)
+
+- Admin workspace "Worksheets" (admins and coaches):
+  - `/admin/worksheets`: every worksheet with lesson, status, started and complete counts.
+  - `/admin/worksheets/[slug]`: counts (started, completed, Weak per rating column), status filter, and a table of member, email (admins only), status, completed date and the schema's `admin_columns` (`{chosen}` resolves to each member's chosen idea; ratings as pills with the note).
+  - `/admin/worksheets/[slug]/[responseId]`: the whole worksheet read only (`WorksheetForm` display mode).
+- CSV export `GET /api/admin/worksheets/[slug]/csv`: admins only (coaches and members get 404), one column per field key, ratings as `key_rating` and `key_note`, sentences as text, UTF-8 with a byte order mark for Excel, spreadsheet formula protection. Every export is recorded in the audit log with the row count, never answers (migration `20261103001700_worksheet_export_audit.sql`, applied to staging).
+- Member Library "Your worksheets" (owner addition): each published worksheet the member can open, grouped by module, with Not started / In progress / Complete, a link to its lesson, the PDF when complete, and "Download all Module N worksheets" once one is complete. Same card styling as the Library items.
+- Code: `src/domain/worksheets/admin.ts` (pure), `src/lib/server/worksheets-admin.ts`, `loadMemberWorksheets` in `src/lib/server/worksheets.ts`, `getUserEmails` in `src/lib/server/directory.ts`.
+
+| Check | Result |
+|---|---|
+| lint, typecheck, check:copy | Pass |
+| `vitest --project unit` | 180 pass (8 new in `admin.test.ts`: headers, `{chosen}`, rating cells, Weak counts, CSV columns, quoting and formula guard, file name) |
+| `vitest --project db` | 107 pass (new: only admins can record an export; the entry holds slug and row count only) |
+| `next build`, Playwright local | Pass; 44 pass, staging only specs skipped |
+| `tests/e2e/worksheets.spec.ts` on staging (temporary member, admin and assigned coach) | 6 pass. New: Library statuses, links and PDF downloads; admin list counts, member row with email, ratings and notes, Weak count, filter, read only view, CSV headers and values; coach sees the assigned member without email, no export button, CSV 404 |
+
 ## Brand fonts in PDFs (2026-11-03)
 
 - Worksheet PDFs and the audit report now use Cormorant Garamond (headings) and DM Sans (body) instead of Times and Helvetica (I-63).

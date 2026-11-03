@@ -4,6 +4,7 @@ import {
   BookOpen,
   ClipboardCheck,
   CreditCard,
+  FilePenLine,
   Gem,
   GraduationCap,
   LayoutDashboard,
@@ -41,6 +42,7 @@ const ICONS: Record<string, LucideIcon> = {
   billing: CreditCard,
   log: ScrollText,
   sparkles: Sparkles,
+  worksheets: FilePenLine,
 };
 
 export function NavLink({ href, icon, exact, children }: { href: string; icon?: string; exact?: boolean; children: ReactNode }) {

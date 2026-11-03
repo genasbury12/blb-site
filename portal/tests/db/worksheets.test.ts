@@ -169,3 +169,17 @@ describe("Slice B: save and complete functions", () => {
     expect(mp.rows[0]?.state).toBe("done");
   });
 });
+
+describe("Slice D: CSV export audit", () => {
+  it("only admins can record an export; the entry holds the slug and row count, never answers", async () => {
+    await expectDenied(db, coach, "select public.admin_log_worksheet_export('ws-published', 3)");
+    await expectDenied(db, student, "select public.admin_log_worksheet_export('ws-published', 3)");
+    // asUser rolls back at the end, so read the entry inside the same transaction (as the admin, who may read the log).
+    const rows = await asUser(db, admin, async (q) => {
+      await q("select public.admin_log_worksheet_export('ws-published', 3)");
+      return q("select actor_id, entity_type, entity_id, changed_fields from public.admin_audit_log where action = 'worksheet.export_csv' order by id desc limit 1");
+    });
+    expect(rows[0]).toEqual({ actor_id: admin, entity_type: "worksheet", entity_id: "ws-published", changed_fields: { rows: 3 } });
+    await expect(asUser(db, admin, (q) => q("select public.admin_log_worksheet_export('no-such-worksheet', 1)"))).rejects.toThrow(/unknown worksheet/);
+  });
+});

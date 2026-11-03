@@ -113,3 +113,55 @@ export async function memberDisplayName(supabase: UserSupabase, userId: string) 
   const { data } = await supabase.from("profiles").select("display_name").eq("user_id", userId).maybeSingle();
   return (data?.display_name as string | null) ?? null;
 }
+
+export type MemberWorksheetStatus = "not_started" | "in_progress" | "complete";
+export type MemberWorksheetModule = {
+  moduleNumber: number;
+  moduleSlug: string;
+  moduleTitle: string;
+  anyComplete: boolean;
+  items: { slug: string; title: string; lessonNumber: number; lessonTitle: string; href: string; status: MemberWorksheetStatus }[];
+};
+
+/**
+ * Every published worksheet the member can open, grouped by module, with their own status (Library "Your
+ * worksheets"). RLS only returns worksheets on lessons the member can see, so modules outside their access never
+ * appear. Reads status only, never answers.
+ */
+export async function loadMemberWorksheets(supabase: UserSupabase, userId: string): Promise<MemberWorksheetModule[]> {
+  const { data: worksheets, error } = await supabase.from("worksheets").select("slug, title, lesson_id").eq("status", "published");
+  if (error) throw new Error(error.message);
+  if (!worksheets?.length) return [];
+  const lessonIds = [...new Set(worksheets.map((w) => w.lesson_id as string))];
+  const [lessonsRes, respRes] = await Promise.all([
+    supabase.from("lessons").select("id, slug, title, order_index, module_id").in("id", lessonIds),
+    supabase.from("worksheet_responses").select("worksheet_slug, status").eq("user_id", userId).in("worksheet_slug", worksheets.map((w) => w.slug as string)),
+  ]);
+  const lessons = new Map((lessonsRes.data ?? []).map((l) => [l.id as string, l]));
+  const moduleIds = [...new Set((lessonsRes.data ?? []).map((l) => l.module_id as string))];
+  const { data: mods } = moduleIds.length ? await supabase.from("modules").select("id, slug, number, title").in("id", moduleIds) : { data: [] };
+  const modOf = new Map((mods ?? []).map((m) => [m.id as string, m]));
+  const statusOf = new Map((respRes.data ?? []).map((r) => [r.worksheet_slug as string, r.status as "in_progress" | "complete"]));
+
+  const groups = new Map<string, MemberWorksheetModule>();
+  for (const w of worksheets) {
+    const lesson = lessons.get(w.lesson_id as string);
+    const mod = lesson ? modOf.get(lesson.module_id as string) : undefined;
+    if (!lesson || !mod) continue;
+    const g = groups.get(mod.id as string) ?? { moduleNumber: mod.number as number, moduleSlug: mod.slug as string, moduleTitle: mod.title as string, anyComplete: false, items: [] };
+    const status: MemberWorksheetStatus = statusOf.get(w.slug as string) ?? "not_started";
+    g.items.push({
+      slug: w.slug as string,
+      title: w.title as string,
+      lessonNumber: lesson.order_index as number,
+      lessonTitle: lesson.title as string,
+      href: `/app/training/${mod.slug}/${lesson.slug}#your-worksheet`,
+      status,
+    });
+    g.anyComplete ||= status === "complete";
+    groups.set(mod.id as string, g);
+  }
+  return [...groups.values()]
+    .map((g) => ({ ...g, items: g.items.sort((a, b) => a.lessonNumber - b.lessonNumber) }))
+    .sort((a, b) => a.moduleNumber - b.moduleNumber);
+}
