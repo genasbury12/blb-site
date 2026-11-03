@@ -3,7 +3,7 @@
 import { redirect } from "next/navigation";
 import { publicEnv } from "@/lib/env";
 import { logEvent } from "@/lib/observability";
-import { safeNextPath } from "@/lib/routes";
+import { landingPath } from "@/lib/routes";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { fieldErrors, forgotSchema, resetSchema, signInSchema, signUpSchema, type ActionResult } from "@/lib/validation/auth";
 
@@ -17,12 +17,15 @@ export async function signInAction(input: unknown): Promise<ActionResult> {
   if (!parsed.success) return { ok: false, error: "Check the highlighted fields.", fieldErrors: fieldErrors(parsed.error) };
   const supabase = await createSupabaseServerClient();
   if (!supabase) return NOT_CONFIGURED;
-  const { error } = await supabase.auth.signInWithPassword({ email: parsed.data.email, password: parsed.data.password });
-  if (error) {
+  const { data, error } = await supabase.auth.signInWithPassword({ email: parsed.data.email, password: parsed.data.password });
+  if (error || !data.user) {
     // One message for every failure so the form does not reveal which accounts exist.
     return { ok: false, error: "That email and password did not work, or the email has not been confirmed yet." };
   }
-  redirect(safeNextPath(parsed.data.next));
+  // Staff land in the admin workspace unless they were heading somewhere specific. Only chooses the landing
+  // page; /admin still authorizes on the server and in RLS.
+  const { data: roles } = await supabase.from("user_roles").select("role").eq("user_id", data.user.id);
+  redirect(landingPath(parsed.data.next, (roles ?? []).length > 0));
 }
 
 export async function signUpAction(input: unknown): Promise<ActionResult> {
