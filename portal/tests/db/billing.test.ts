@@ -228,6 +228,18 @@ describe("graduate and board subscriptions", () => {
     expect(await hasFeature(db, u, "community.access", addDays(start, 1))).toBe(true);
   });
 
+  // I-55 (owner decision 2026-11-03): board plan = board + training (new lessons) + workshops; no coaching or DFY.
+  it("the Elite board plan grants the board, training and workshops, and nothing else, for the paid period", async () => {
+    const u = await createUser(db, "boardplan");
+    const start = new Date("2027-11-01T16:00:00Z");
+    await svc("billing_apply_subscription", subEvent(u, "elite_board", "active", start, addMonths(start, 1)));
+    for (const f of ["elite_board.access", "curriculum.read", "workshops.access"]) expect(await hasFeature(db, u, f, addDays(start, 5))).toBe(true);
+    for (const f of ["elite_coaching.access", "elite_dfu_hours.use", "group_coaching.access", "community.access", "feedback.submit", "hotseat.apply"]) {
+      expect(await hasFeature(db, u, f, addDays(start, 5))).toBe(false);
+    }
+    expect(await hasFeature(db, u, "curriculum.read", addMonths(start, 1))).toBe(false);
+  });
+
   it("a failed renewal gets 7 days of grace", async () => {
     const u = await createUser(db, "subgrace");
     const start = new Date("2027-10-01T16:00:00Z");

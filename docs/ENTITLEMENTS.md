@@ -34,7 +34,7 @@ Roles: `guest` (anonymous, not stored), `member` (any authenticated non-staff us
 | `dfy_included_hours` | Elite purchase | enrollment to coaching end + 30 days | 12 hours, ledger in `hour_ledger` |
 | `dfy_package` | Extra hours package purchase (Elite only **[D-14]**) | purchase to purchase + 3 months | 3 / 5 / 10 hours, separate ledger bucket |
 | `graduate_coaching` | Graduate subscription | current paid period; ends at period end after cancellation | Coaching, community, workshops, Hot Seat, replays. **No feedback, no 1:1, no DFY.** Extends curriculum while active |
-| `elite_board` | Board retention subscription | current paid period | Board only. No coaching, no DFY, never extends curriculum |
+| `elite_board` | Board retention subscription | current paid period | Board (Claude board link and portal workspace), training (new lessons) and workshops. No 1:1 or group coaching, community, feedback or DFY. **Changed by owner decision 2026-11-03 (I-55); previously board only, never extending curriculum** |
 | `launch_kit` | Eligible purchase during a published bonus window | **[D-11 duration]** | Five Launch Kit assets |
 
 All windows are half-open intervals `[starts_at, ends_at)` stored as `timestamptz`. "12 months" means `starts_at + interval '12 months'` in `America/New_York` calendar terms **[D-16 confirm exact-instant vs end-of-day]**.

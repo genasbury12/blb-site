@@ -168,3 +168,30 @@ describe("private sessions and check-ins", () => {
     expect(await asUser(db, b, (q) => q("select id from public.elite_checkins where board_id = $1", [boardA]))).toHaveLength(0);
   });
 });
+
+describe("I-54: Claude board link", () => {
+  const url = "https://claude.ai/artifact/0f6c1a2b-3c4d-4e5f-8a9b-0c1d2e3f4a5b";
+  it("the assigned coach or an admin sets it; the client reads only their own; others cannot set it", async () => {
+    await as(coach, "select public.staff_set_claude_board($1, $2)", [boardA, url]);
+    expect((await as(a, "select claude_board_url from public.elite_boards where id = $1", [boardA]))[0].claude_board_url).toBe(url);
+    expect(await as(b, "select claude_board_url from public.elite_boards where id = $1", [boardA])).toHaveLength(0);
+    await expectDenied(db, a, "select public.staff_set_claude_board($1, $2)", [boardA, "https://claude.ai/artifact/mine"]);
+    await expectDenied(db, coach, "select public.staff_set_claude_board($1, $2)", [boardB, url]);
+    await expectDenied(db, null, "select public.staff_set_claude_board($1, $2)", [boardA, url]);
+    const admin = await createUser(db, "cbadmin");
+    await db.query("insert into public.user_roles (user_id, role) values ($1, 'admin')", [admin]);
+    await as(admin, "select public.staff_set_claude_board($1, $2)", [boardB, url]);
+    expect((await db.query("select claude_board_url from public.elite_boards where id = $1", [boardB])).rows[0].claude_board_url).toBe(url);
+  });
+  it("accepts only claude.ai links, clears on empty, and audits every change", async () => {
+    for (const bad of ["http://claude.ai/x", "https://evil.example/claude.ai/", "https://claude.ai.evil.example/x", "javascript:alert(1)", "https://claude.ai/x y"]) {
+      await expect(as(coach, "select public.staff_set_claude_board($1, $2)", [boardA, bad])).rejects.toThrow();
+    }
+    await as(coach, "select public.staff_set_claude_board($1, $2)", [boardA, "  "]);
+    expect((await db.query("select claude_board_url from public.elite_boards where id = $1", [boardA])).rows[0].claude_board_url).toBeNull();
+    const log = await db.query("select action, actor_id from public.admin_audit_log where entity_type = 'elite_board' and entity_id = $1 order by created_at", [boardA]);
+    expect(log.rows.map((r) => r.action)).toEqual(["elite_board.claude_link_set", "elite_board.claude_link_removed"]);
+    expect(log.rows.every((r) => r.actor_id === coach)).toBe(true);
+    await expect(db.query("update public.elite_boards set claude_board_url = 'https://example.com' where id = $1", [boardA])).rejects.toThrow(/check/);
+  });
+});

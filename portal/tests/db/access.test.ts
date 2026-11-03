@@ -103,7 +103,8 @@ describe("tier entitlements and windows (D06)", () => {
     expect(await hasFeature(db, u, "curriculum.read", periodEnd)).toBe(false);
   });
 
-  it("Board retention grants the board only, never curriculum", async () => {
+  // I-55 (owner decision 2026-11-03) replaced "board only, never curriculum": the plan adds training and workshops.
+  it("Board retention grants the board, training and workshops; never coaching, feedback or DFY", async () => {
     const u = await createUser(db, "boardonly");
     const start = new Date("2027-09-01T00:00:00Z");
     const { rows } = await db.query<{ id: string }>(
@@ -113,8 +114,8 @@ describe("tier entitlements and windows (D06)", () => {
     );
     await db.query("select app.sync_subscription_entitlements($1)", [rows[0]!.id]);
     const t = addDays(start, 3);
-    expect(await hasFeature(db, u, "elite_board.access", t)).toBe(true);
-    for (const f of ["curriculum.read", "elite_coaching.access", "feedback.submit", "group_coaching.access", "elite_dfu_hours.use"]) {
+    for (const f of ["elite_board.access", "curriculum.read", "workshops.access"]) expect(await hasFeature(db, u, f, t), f).toBe(true);
+    for (const f of ["elite_coaching.access", "feedback.submit", "group_coaching.access", "community.access", "elite_dfu_hours.use"]) {
       expect(await hasFeature(db, u, f, t), f).toBe(false);
     }
   });

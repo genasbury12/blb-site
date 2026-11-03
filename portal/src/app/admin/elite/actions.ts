@@ -38,6 +38,24 @@ export async function decideApplication(_prev: FormState, fd: FormData): Promise
   return okState(parsed.data.status === "accepted" ? "Accepted. The seat is held for 14 days while they enroll." : "Saved.");
 }
 
+/** I-54: link the client's Claude board. Admin or the board's coach; validated and audited in the database. */
+export async function setClaudeBoard(_prev: FormState, fd: FormData): Promise<FormState> {
+  const parsed = z
+    .object({ board_id: z.string().uuid(), url: z.string().trim().max(500).refine((v) => v === "" || /^https:\/\/claude\.ai\/\S+$/.test(v), "Use the board's claude.ai link (it starts with https://claude.ai/).") })
+    .safeParse({ board_id: fd.get("board_id"), url: fd.get("url") ?? "" });
+  if (!parsed.success) return errorState(parsed.error.issues[0]?.message ?? "Check the link.");
+  try {
+    const { supabase } = await authorizeStaff(["admin", "coach"]);
+    const { error } = await supabase.rpc("staff_set_claude_board", { p_board: parsed.data.board_id, p_url: parsed.data.url || null });
+    if (error) throw new Error(error.message);
+  } catch (err) {
+    return errorState(errorMessage(err));
+  }
+  revalidatePath("/admin/elite", "layout");
+  revalidatePath("/app/elite");
+  return okState(parsed.data.url ? "Claude board linked. Your client now sees an Open your board button." : "Claude board link removed.");
+}
+
 export async function assignCoach(_prev: FormState, fd: FormData): Promise<FormState> {
   const parsed = z.object({ board_id: z.string().uuid(), coach_id: z.string().uuid().or(z.literal("")) }).safeParse({ board_id: fd.get("board_id"), coach_id: fd.get("coach_id") });
   if (!parsed.success) return errorState("Choose a coach.");
