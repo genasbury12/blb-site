@@ -16,6 +16,28 @@ Status of The BOSS Business System portal build. Updated at every milestone (con
 | 7 Marketing and admin | Admin workspace complete; public sales and masterclass pages wait on approved copy and video |
 | 8 Internal QA and release | Staging Supabase migrated, six test accounts provisioned, signed in permission and browser checks passing (2026-11-02); auth settings, Vercel and Stripe test mode pending; owner sign off pending |
 
+## Worksheets, Slice A: data model and RLS (2026-11-03)
+
+Brief: `09_IMPLEMENT_WORKSHEETS.md` (owner decision 2026-11-02: worksheets live in the portal).
+
+### What changed
+- Migration `20261103001500_worksheets.sql`:
+  - `worksheets`: slug and version (unique together), `lesson_id` FK, schema jsonb, `content_status`; one published version per slug.
+  - `worksheet_responses`: one per member per worksheet, answers jsonb (object, at most 200 KB), `in_progress`/`complete`, `completed_at`; FK to the worksheet version.
+  - Plumbing: `updated_at` triggers, staff audit trail on worksheets, and a delete-only audit on responses (records `{"deleted": true}`, never answer text).
+  - A guard so a response cannot move to another account or worksheet.
+- RLS:
+  - **Worksheets:** students see only published worksheets whose lesson is visible to them (reuses `app.lesson_visible_to_student`); staff read all; only admins write.
+  - **Responses:** a member reads their own always; they create or update their own only while the worksheet is published and visible to them. The assigned coach reads (D09); admins read all; only admins delete.
+- Not applied to staging yet (waiting for owner review of this slice).
+
+### Tests run
+| Command | Result |
+|---|---|
+| `vitest --project db` | 103 pass (11 new in `tests/db/worksheets.test.ts`: student, other student, anonymous, unentitled, draft/review hidden, assigned and unassigned coach, admin, audited delete without content) |
+| `vitest --project unit` | 148 pass |
+| lint, typecheck | pass |
+
 ## Milestone 7: Admin completion, design polish, launch readiness docs (2026-11-02)
 
 ### What works (tested)
