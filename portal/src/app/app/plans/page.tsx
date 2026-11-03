@@ -101,7 +101,7 @@ export default async function PlansPage({ searchParams }: { searchParams: Promis
                 <p className="mt-1 text-sm text-ink-muted">
                   {sku === "graduate_coaching"
                     ? "Weekly group coaching, community, new workshops, Hot Seat and replays. Keeps your training open while active. No private feedback, 1:1 or done for you work."
-                    : "Keeps your private Elite workspace. No coaching, done for you work, or training extension."}
+                    : "Keeps your Elite board, your training open for new lessons, and new workshops. No 1:1 coaching or done for you work."}
                 </p>
                 <p className="numeral mt-4 text-[2.4rem] leading-none">{dollars(offer.amountCents)}<span className="font-sans text-base text-ink-muted"> / month</span></p>
                 <p className="mt-1 text-sm text-ink-muted">Cancel anytime. Access continues through the paid period.</p>

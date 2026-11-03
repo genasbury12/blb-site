@@ -24,6 +24,8 @@ export default async function EliteWorkspacePage() {
   const features = await getFeatures();
   const full = features.has("elite_board.access");
   const hours = features.has("elite_dfu_hours.use");
+  // Private sessions and check-ins belong to the coaching period; the board plan (I-55) keeps the board only.
+  const coaching = features.has("elite_coaching.access");
   if (!full && !hours) return <NoAccess what="The Elite workspace" />;
   const { data: board } = await supabase.from("elite_boards").select("id, coach_id, claude_board_url").eq("client_id", user.id).maybeSingle();
   if (!board) return <Alert tone="info" title="Your workspace is being prepared">It appears here as soon as your enrollment is confirmed.</Alert>;
@@ -32,8 +34,8 @@ export default async function EliteWorkspacePage() {
     supabase.from("elite_items").select("id, kind, title, body, status, month_number, due_on, estimated_minutes, completion_summary, created_at").eq("board_id", board.id).neq("status", "archived").order("created_at", { ascending: false }),
     supabase.rpc("elite_hours_summary", { p_board: board.id }),
     supabase.from("elite_time_entries").select("id, minutes, work_date, note, item_id, voided_at").eq("board_id", board.id).is("voided_at", null).order("work_date", { ascending: false }).limit(30),
-    full ? supabase.from("elite_sessions").select("id, starts_at, meeting_url_private, status").eq("board_id", board.id).gte("starts_at", new Date(now.getTime() - 3600000).toISOString()).order("starts_at").limit(4) : Promise.resolve({ data: [] }),
-    full ? supabase.from("elite_checkins").select("session_id, submitted_at, due_at") .eq("board_id", board.id) : Promise.resolve({ data: [] }),
+    coaching ? supabase.from("elite_sessions").select("id, starts_at, meeting_url_private, status").eq("board_id", board.id).gte("starts_at", new Date(now.getTime() - 3600000).toISOString()).order("starts_at").limit(4) : Promise.resolve({ data: [] }),
+    coaching ? supabase.from("elite_checkins").select("session_id, submitted_at, due_at") .eq("board_id", board.id) : Promise.resolve({ data: [] }),
   ]);
   const all = (items.data ?? []) as Item[];
   const requests = all.filter((i) => i.kind === "request");
@@ -45,7 +47,8 @@ export default async function EliteWorkspacePage() {
   return (
     <div className="space-y-14">
       <PageHeader eyebrow="BOSS Elite" title="Your private workspace" lede={full ? "Your private sessions, weekly check-ins, done for you requests and hours. Your roadmap, tasks and files live on your board in Claude. Only you and your coach can see them." : undefined} />
-      {!full ? <Alert tone="info" title="Your coaching period has ended">You can still request work and see your hours until your included hours expire. Board retention keeps the full workspace if you want it.</Alert> : null}
+      {!full ? <Alert tone="info" title="Your coaching period has ended">You can still request work and see your hours until your included hours expire. The Elite board plan keeps your board, new lessons and workshops if you want them.</Alert> : null}
+      {full && !coaching ? <Alert tone="info" title="Your Elite board plan">Your board, new lessons and workshops stay open while your plan is active. Private coaching ended with your program{hours ? ", and you can still use your remaining included hours" : ""}.</Alert> : null}
 
       {full ? (
         <Card tone="feature">
@@ -60,7 +63,7 @@ export default async function EliteWorkspacePage() {
         </Card>
       ) : null}
 
-      {full ? (
+      {coaching ? (
         <section aria-labelledby="week" className="grid gap-5 lg:grid-cols-[1.1fr_1fr]">
           <Card tone="feature">
             <Eyebrow>Your next private session</Eyebrow>
@@ -111,11 +114,13 @@ export default async function EliteWorkspacePage() {
               </li>
             ))}
           </ul>
+          {hours ? (
           <ActionForm action={addRequest} submitLabel="Send request" className="mt-5 space-y-3">
             <input type="hidden" name="board_id" value={board.id as string} />
             <Field label="What do you need done?" htmlFor="rq-t"><TextInput id="rq-t" name="title" required /></Field>
             <Field label="Details, links, and what done looks like" hint="Never paste passwords here. Your coach will set up secure access with you." htmlFor="rq-b"><TextArea id="rq-b" name="body" required /></Field>
           </ActionForm>
+          ) : <p className="mt-5 text-sm text-ink-muted">Done for you work is part of your Elite program and any hour packages. Your request history stays here.</p>}
         </Card>
         <Card>
           <h2 className="font-display text-2xl">Your hours</h2>
