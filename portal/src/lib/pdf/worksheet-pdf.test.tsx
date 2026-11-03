@@ -31,6 +31,9 @@ describe("worksheet PDF", () => {
     const buf = await renderWorksheetPdf({ schema: s2, answers: answers2, moduleNumber: 1, lessonNumber: 2, memberName: "Test Member", completedAt: "2026-11-03T15:00:00Z" });
     expect(buf.subarray(0, 5).toString()).toBe("%PDF-");
     if (process.env.WS_PDF_OUT) writeFileSync(`${process.env.WS_PDF_OUT}/lesson2.pdf`, buf);
+    const raw = buf.toString("latin1");
+    for (const font of ["CormorantGaramond-Medium", "CormorantGaramondItalic-MediumItalic", "DMSans-14pt", "DMSans-14ptSemiBold"]) expect(raw).toMatch(new RegExp(`/BaseFont /[A-Z]{6}\\+${font}`));
+    expect(raw).not.toMatch(/\/BaseFont \/(Helvetica|Times)/);
   }, 30000);
 
   it("prints used idea columns and every required field; skips unused optional ideas", () => {

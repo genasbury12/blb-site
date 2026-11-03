@@ -1,4 +1,4 @@
-import { Document, Font, Page, StyleSheet, Text, View, renderToBuffer } from "@react-pdf/renderer";
+import { Document, Page, StyleSheet, Text, View, renderToBuffer } from "@react-pdf/renderer";
 import {
   answerText,
   concreteFields,
@@ -13,38 +13,35 @@ import {
   type WorksheetField,
   type WorksheetSchema,
 } from "@/domain/worksheets/schema";
+import { PDF_FONTS as F } from "./brand-fonts";
 
 /**
- * Branded worksheet PDF (09_IMPLEMENT_WORKSHEETS, Slice C). Same approach as the audit PDF: PDF standard fonts
- * (Times for display, Helvetica for body) so rendering needs no network and never fails on a missing font file.
- * Built only from the member's saved answers; never logged.
+ * Branded worksheet PDF (09_IMPLEMENT_WORKSHEETS, Slice C). Brand fonts from ./brand-fonts (Cormorant Garamond
+ * display, DM Sans body), read from disk. Built only from the member's saved answers; never logged.
  */
 const C = { plum: "#65474F", ink: "#30282C", muted: "#5A4A50", mauve: "#A56C78", mauveInk: "#80505B", rose: "#E8C8CB", roseDeep: "#D4A5AB", ivory: "#F7EEE9", field: "#FBF6F3", fieldBorder: "#E6D9D9" };
 
-// Break very long words (pasted links) so nothing runs past the page edge.
-Font.registerHyphenationCallback((word) => (word.length > 28 ? (word.match(/.{1,20}/g) ?? [word]) : [word]));
-
 const s = StyleSheet.create({
-  page: { paddingTop: 48, paddingBottom: 64, paddingHorizontal: 54, backgroundColor: C.ivory, color: C.ink, fontFamily: "Helvetica", fontSize: 10, lineHeight: 1.45 },
-  brand: { fontFamily: "Times-Roman", fontSize: 12, color: C.plum, letterSpacing: 0.4 },
+  page: { paddingTop: 48, paddingBottom: 64, paddingHorizontal: 54, backgroundColor: C.ivory, color: C.ink, fontFamily: F.body, fontSize: 10, lineHeight: 1.5 },
+  brand: { fontFamily: F.display, fontSize: 13.5, color: C.plum, letterSpacing: 0.4 },
   rule: { height: 1, backgroundColor: C.rose, marginVertical: 12 },
   eyebrow: { fontSize: 7.5, letterSpacing: 1.6, color: C.mauveInk, textTransform: "uppercase" },
-  title: { fontFamily: "Times-Roman", fontSize: 30, marginTop: 6, lineHeight: 1.15 },
-  titleLast: { fontFamily: "Times-Italic", color: C.mauve },
+  title: { fontFamily: F.display, fontSize: 33, marginTop: 6, lineHeight: 1.15 },
+  titleLast: { fontFamily: F.displayItalic, color: C.mauve },
   meta: { fontSize: 8.5, color: C.muted, marginTop: 6 },
   section: { marginTop: 26, flexDirection: "row" },
-  number: { fontFamily: "Times-Roman", fontSize: 30, color: C.roseDeep, width: 38, lineHeight: 1 },
+  number: { fontFamily: F.display, fontSize: 33, color: C.roseDeep, width: 38, lineHeight: 1 },
   sectionBody: { flex: 1 },
-  h2: { fontFamily: "Times-Roman", fontSize: 18, lineHeight: 1.2 },
-  ask: { fontFamily: "Times-Italic", fontSize: 11.5, color: C.mauveInk, marginTop: 2 },
-  h3: { fontFamily: "Times-Roman", fontSize: 14, marginTop: 14 },
-  label: { fontFamily: "Helvetica-Bold", fontSize: 9, marginTop: 10, marginBottom: 3 },
+  h2: { fontFamily: F.display, fontSize: 20, lineHeight: 1.2 },
+  ask: { fontFamily: F.displayItalic, fontSize: 13, color: C.mauveInk, marginTop: 2 },
+  h3: { fontFamily: F.display, fontSize: 15.5, marginTop: 14 },
+  label: { fontFamily: F.bodyBold, fontSize: 9, marginTop: 10, marginBottom: 3 },
   block: { backgroundColor: C.field, borderColor: C.fieldBorder, borderWidth: 1, borderRadius: 7, paddingVertical: 8, paddingHorizontal: 10 },
-  empty: { fontFamily: "Helvetica-Oblique", color: C.muted },
-  ratingWord: { fontFamily: "Helvetica-Bold" },
-  sentence: { fontFamily: "Times-Roman", fontSize: 18, lineHeight: 1.35, color: C.plum },
+  empty: { fontFamily: F.bodyItalic, color: C.muted },
+  ratingWord: { fontFamily: F.bodyBold },
+  sentence: { fontFamily: F.display, fontSize: 20, lineHeight: 1.35, color: C.plum },
   quote: { borderLeftColor: C.roseDeep, borderLeftWidth: 2, paddingLeft: 10, marginTop: 10 },
-  quoteText: { fontFamily: "Times-Italic", fontSize: 13, color: C.plum },
+  quoteText: { fontFamily: F.displayItalic, fontSize: 14.5, color: C.plum },
   // Two separately positioned lines: react-pdf drops a fixed, absolutely positioned row container.
   footerLeft: { position: "absolute", bottom: 26, left: 54, fontSize: 7.5, color: C.muted },
   footerRight: { position: "absolute", bottom: 26, right: 54, fontSize: 7.5, color: C.muted, textAlign: "right" },

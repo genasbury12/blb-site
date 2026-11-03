@@ -16,6 +16,13 @@ Status of The BOSS Business System portal build. Updated at every milestone (con
 | 7 Marketing and admin | Admin workspace complete; public sales and masterclass pages wait on approved copy and video |
 | 8 Internal QA and release | Staging Supabase migrated, six test accounts provisioned, signed in permission and browser checks passing (2026-11-02); auth settings, Vercel and Stripe test mode pending; owner sign off pending |
 
+## Brand fonts in PDFs (2026-11-03)
+
+- Worksheet PDFs and the audit report now use Cormorant Garamond (headings) and DM Sans (body) instead of Times and Helvetica (I-63).
+- `src/lib/pdf/brand-fonts.ts` and `src/lib/pdf/fonts/` (six static Latin subsets, about 370 KB in total, with their open font licenses). `next.config.ts` ships them with the three PDF routes.
+- Audit report fixes found while checking it by eye: large headings overlapped the line below (explicit line heights), a heading could sit alone at a page bottom, and its footer never printed (now plain text, no page numbers, I-64).
+- Checks: lint, typecheck, check:copy, unit 172, db 106, build, local Playwright 44 pass; worksheet e2e 3 of 3 on staging, and the downloaded PDF embeds only the brand fonts.
+
 ## Worksheets, Slice C: PDF export (2026-11-03)
 
 - `src/lib/pdf/worksheet-pdf.tsx`: branded worksheet PDF built only from the member's saved answers (ivory page, plum and mauve, serif headings, section numbers, ratings with notes, the hypothesis sentence, callback quotes).
