@@ -1,12 +1,12 @@
-import { CalendarClock, FileText, Video } from "lucide-react";
+import { CalendarClock, ExternalLink, Video } from "lucide-react";
 import type { Metadata } from "next";
-import { addRequest, addTask, cancelPrivateSession, setTaskDone, submitCheckin } from "@/app/app/elite/actions";
+import { addRequest, cancelPrivateSession, submitCheckin } from "@/app/app/elite/actions";
 import { ActionForm } from "@/components/admin/action-form";
 import { Field, TextArea, TextInput } from "@/components/admin/fields";
 import { fmtMinutes, HoursMeter, type Bucket } from "@/components/elite/hours-meter";
 import { NoAccess } from "@/components/member/access-states";
 import { fmtDateTime, fmtDay, fmtShort } from "@/components/member/time";
-import { PageHeader, SectionTitle } from "@/components/shell/page-header";
+import { PageHeader } from "@/components/shell/page-header";
 import { Alert } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { Card, Eyebrow } from "@/components/ui/card";
@@ -17,7 +17,6 @@ export const metadata: Metadata = { title: "My Elite Workspace" };
 
 type Item = { id: string; kind: string; title: string; body: string | null; status: string; month_number: number | null; due_on: string | null; estimated_minutes: number | null; completion_summary: string | null; created_at: string };
 const REQ: Record<string, string> = { submitted: "Waiting to be scoped", scoped: "Scoped", in_progress: "In progress", completed: "Completed", declined: "Outside scope" };
-const THEMES = ["Clarity & Foundation", "Brand & Business Home", "Product & Sales Infrastructure", "Content & Visibility", "Systems & Automation", "Launch, Optimize & Grow"];
 
 export default async function EliteWorkspacePage() {
   requireFlag("elite");
@@ -26,16 +25,15 @@ export default async function EliteWorkspacePage() {
   const full = features.has("elite_board.access");
   const hours = features.has("elite_dfu_hours.use");
   if (!full && !hours) return <NoAccess what="The Elite workspace" />;
-  const { data: board } = await supabase.from("elite_boards").select("id, coach_id").eq("client_id", user.id).maybeSingle();
+  const { data: board } = await supabase.from("elite_boards").select("id, coach_id, claude_board_url").eq("client_id", user.id).maybeSingle();
   if (!board) return <Alert tone="info" title="Your workspace is being prepared">It appears here as soon as your enrollment is confirmed.</Alert>;
   const now = new Date();
-  const [items, bucketsRes, entries, sessions, checkins, files] = await Promise.all([
+  const [items, bucketsRes, entries, sessions, checkins] = await Promise.all([
     supabase.from("elite_items").select("id, kind, title, body, status, month_number, due_on, estimated_minutes, completion_summary, created_at").eq("board_id", board.id).neq("status", "archived").order("created_at", { ascending: false }),
     supabase.rpc("elite_hours_summary", { p_board: board.id }),
     supabase.from("elite_time_entries").select("id, minutes, work_date, note, item_id, voided_at").eq("board_id", board.id).is("voided_at", null).order("work_date", { ascending: false }).limit(30),
     full ? supabase.from("elite_sessions").select("id, starts_at, meeting_url_private, status").eq("board_id", board.id).gte("starts_at", new Date(now.getTime() - 3600000).toISOString()).order("starts_at").limit(4) : Promise.resolve({ data: [] }),
     full ? supabase.from("elite_checkins").select("session_id, submitted_at, due_at") .eq("board_id", board.id) : Promise.resolve({ data: [] }),
-    supabase.from("elite_files").select("id, label, created_at").eq("board_id", board.id).order("created_at", { ascending: false }),
   ]);
   const all = (items.data ?? []) as Item[];
   const requests = all.filter((i) => i.kind === "request");
@@ -46,8 +44,21 @@ export default async function EliteWorkspacePage() {
 
   return (
     <div className="space-y-14">
-      <PageHeader eyebrow="BOSS Elite" title="Your private workspace" lede={full ? "Your roadmap, weekly check-ins, private sessions, and done for you work in one place. Only you and your coach can see it." : undefined} />
+      <PageHeader eyebrow="BOSS Elite" title="Your private workspace" lede={full ? "Your private sessions, weekly check-ins, done for you requests and hours. Your roadmap, tasks and files live on your board in Claude. Only you and your coach can see them." : undefined} />
       {!full ? <Alert tone="info" title="Your coaching period has ended">You can still request work and see your hours until your included hours expire. Board retention keeps the full workspace if you want it.</Alert> : null}
+
+      {full ? (
+        <Card tone="feature">
+          <Eyebrow>Your board</Eyebrow>
+          {board.claude_board_url ? (
+            <>
+              <p className="mt-2 font-display text-2xl">Your roadmap, tasks and files</p>
+              <p className="mt-1 text-sm text-ink-muted">Your private board lives in Claude. Sign in to Claude with the email your coach shared it with.</p>
+              <a href={board.claude_board_url as string} target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex min-h-11 items-center gap-2 rounded-full bg-plum px-5 font-semibold text-white hover:bg-plum-deep"><ExternalLink className="size-4" aria-hidden />Open your board in Claude<span className="sr-only"> (opens in a new tab)</span></a>
+            </>
+          ) : <p className="mt-2 text-ink-muted">Your coach is setting up your board. The link appears here as soon as it is ready.</p>}
+        </Card>
+      ) : null}
 
       {full ? (
         <section aria-labelledby="week" className="grid gap-5 lg:grid-cols-[1.1fr_1fr]">
@@ -82,65 +93,6 @@ export default async function EliteWorkspacePage() {
                 </ActionForm>
               </>
             ) : <p className="mt-2 text-sm text-ink-muted">Check-ins open once a session is scheduled.</p>}
-          </Card>
-        </section>
-      ) : null}
-
-      {full ? (
-        <section aria-labelledby="roadmap">
-          <SectionTitle id="roadmap">Your custom roadmap</SectionTitle>
-          <ol className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {THEMES.map((t, i) => {
-              const monthItems = all.filter((x) => x.kind === "roadmap" && x.month_number === i + 1);
-              return (
-                <li key={t}>
-                  <Card className="h-full p-5">
-                    <Eyebrow>Month {i + 1}</Eyebrow>
-                    <p className="font-display text-xl">{t}</p>
-                    {monthItems.length ? <ul className="mt-2 space-y-1 text-sm">{monthItems.map((m) => <li key={m.id}>{m.title}{m.status === "done" ? " (done)" : ""}</li>)}</ul> : <p className="mt-2 text-sm text-ink-muted">Your coach adds this month after your audit.</p>}
-                  </Card>
-                </li>
-              );
-            })}
-          </ol>
-        </section>
-      ) : null}
-
-      {full ? (
-        <section aria-labelledby="tasks" className="grid gap-5 lg:grid-cols-2">
-          <Card>
-            <h2 id="tasks" className="font-display text-2xl">Tasks and deliverables</h2>
-            <ul className="mt-3 divide-y divide-rose-soft">
-              {all.filter((x) => x.kind === "task" || x.kind === "deliverable").map((t) => (
-                <li key={t.id} className="flex flex-wrap items-center gap-3 py-2.5">
-                  <span className={t.status === "done" ? "text-ink-muted line-through" : ""}>{t.title}</span>
-                  {t.kind === "deliverable" ? <Badge>Deliverable</Badge> : null}
-                  {t.due_on ? <span className="text-xs text-ink-muted">Due {fmtDay(t.due_on)}</span> : null}
-                  {t.kind === "task" ? (
-                    <ActionForm action={setTaskDone} submitLabel={t.status === "done" ? "Reopen" : "Done"} variant="quiet" className="ml-auto">
-                      <input type="hidden" name="id" value={t.id} /><input type="hidden" name="done" value={t.status === "done" ? "false" : "true"} />
-                    </ActionForm>
-                  ) : null}
-                </li>
-              ))}
-            </ul>
-            <ActionForm action={addTask} submitLabel="Add task" variant="secondary" className="mt-4 grid gap-3 sm:grid-cols-[1fr_auto_auto] sm:items-end">
-              <input type="hidden" name="board_id" value={board.id as string} />
-              <Field label="New task" htmlFor="t-new"><TextInput id="t-new" name="title" required /></Field>
-              <Field label="Due" htmlFor="t-due"><TextInput id="t-due" name="due_on" type="date" /></Field>
-            </ActionForm>
-          </Card>
-          <Card>
-            <h2 className="font-display text-2xl">Your audit and files</h2>
-            {all.filter((x) => x.kind === "audit").map((a) => (
-              <div key={a.id} className="mt-3 rounded-xl bg-rose-soft/40 p-4"><p className="font-semibold">{a.title}</p>{a.body ? <p className="mt-1 whitespace-pre-line text-sm">{a.body}</p> : null}</div>
-            ))}
-            <ul className="mt-3 space-y-2">
-              {(files.data ?? []).map((f) => (
-                <li key={f.id as string}><a className="inline-flex items-center gap-2 font-medium text-plum underline-offset-4 hover:underline" href={`/api/files/elite/${f.id}`}><FileText className="size-4" aria-hidden />{f.label as string}</a></li>
-              ))}
-            </ul>
-            {!(files.data ?? []).length && !all.some((x) => x.kind === "audit") ? <p className="mt-2 text-sm text-ink-muted">Your coach-led audit and roadmap PDF arrive within seven business days of receiving everything needed.</p> : null}
           </Card>
         </section>
       ) : null}

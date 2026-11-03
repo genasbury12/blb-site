@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { assignCoach, logTime, recordPackage, saveItem, scheduleSessions, setPrivateSessionStatus, uploadEliteFile, voidTime } from "@/app/admin/elite/actions";
+import { assignCoach, logTime, recordPackage, saveItem, scheduleSessions, setClaudeBoard, setPrivateSessionStatus, voidTime } from "@/app/admin/elite/actions";
 import { commentOnItem } from "@/app/app/elite/actions";
 import { ActionForm } from "@/components/admin/action-form";
 import { Field, Select, TextArea, TextInput } from "@/components/admin/fields";
@@ -41,16 +41,15 @@ export default async function AdminEliteBoardPage({ params }: { params: Promise<
   const { boardId } = await params;
   const { supabase, isAdmin } = await requireStaff(["admin", "coach"], `/admin/elite/${boardId}`);
   if (!/^[0-9a-f-]{36}$/i.test(boardId)) notFound();
-  const { data: board } = await supabase.from("elite_boards").select("id, client_id, coach_id").eq("id", boardId).maybeSingle();
+  const { data: board } = await supabase.from("elite_boards").select("id, client_id, coach_id, claude_board_url").eq("id", boardId).maybeSingle();
   if (!board) notFound();
-  const [client, items, buckets, entries, sessions, checkins, files, coaches, comments] = await Promise.all([
+  const [client, items, buckets, entries, sessions, checkins, coaches, comments] = await Promise.all([
     supabase.from("profiles").select("display_name").eq("user_id", board.client_id).maybeSingle(),
     supabase.from("elite_items").select("*").eq("board_id", boardId).order("created_at", { ascending: false }),
     supabase.rpc("elite_hours_summary", { p_board: boardId }),
     supabase.from("elite_time_entries").select("id, minutes, work_date, note, item_id, voided_at, void_reason, bucket_id").eq("board_id", boardId).order("created_at", { ascending: false }),
     supabase.from("elite_sessions").select("*").eq("board_id", boardId).order("starts_at"),
     supabase.from("elite_checkins").select("*").eq("board_id", boardId).order("submitted_at", { ascending: false }),
-    supabase.from("elite_files").select("id, label, created_at").eq("board_id", boardId).order("created_at", { ascending: false }),
     isAdmin ? supabase.from("user_roles").select("user_id").eq("role", "coach") : Promise.resolve({ data: [] }),
     supabase.from("elite_item_comments").select("item_id, body, created_at"),
   ]);
@@ -64,6 +63,16 @@ export default async function AdminEliteBoardPage({ params }: { params: Promise<
   return (
     <div className="space-y-12">
       <PageHeader eyebrow="Elite client" title={(client.data?.display_name as string) ?? "Client"} actions={<Link className="self-center text-sm font-semibold text-plum underline" href="/admin/elite">All Elite clients</Link>} />
+
+      <Card tone="feature">
+        <h2 className="font-display text-2xl">Client board in Claude</h2>
+        <p className="mt-1 text-sm text-ink-muted">Tasks, roadmap, files and day to day notes live on the client&apos;s Claude board. Paste its claude.ai link and the client sees an Open your board button in their workspace. Share the board with the client in Claude as well.</p>
+        {board.claude_board_url ? <p className="mt-3 text-sm"><a className="font-semibold text-plum underline" href={board.claude_board_url as string} target="_blank" rel="noopener noreferrer">Open the board<span className="sr-only"> (opens in a new tab)</span></a></p> : <p className="mt-3 text-sm text-ink-muted">No board linked yet.</p>}
+        <ActionForm action={setClaudeBoard} submitLabel="Save link" variant="secondary" className="mt-4 grid gap-3 sm:grid-cols-[1fr_auto] sm:items-end">
+          <input type="hidden" name="board_id" value={boardId} />
+          <Field label="Claude board link" hint="Starts with https://claude.ai/. Leave empty and save to remove it." htmlFor="cb-url"><TextInput id="cb-url" name="url" type="url" defaultValue={(board.claude_board_url as string) ?? ""} placeholder="https://claude.ai/..." /></Field>
+        </ActionForm>
+      </Card>
 
       <div className="grid gap-5 lg:grid-cols-2">
         <Card>
@@ -172,7 +181,7 @@ export default async function AdminEliteBoardPage({ params }: { params: Promise<
       </section>
 
       <section aria-labelledby="board">
-        <SectionTitle id="board">Roadmap, audit, tasks and notes</SectionTitle>
+        <SectionTitle id="board">Private coach notes and earlier board items</SectionTitle>
         <div className="grid gap-4">
           {all.filter((i) => i.kind !== "request").map((i) => (
             <Card key={i.id} className="p-5">
@@ -186,26 +195,17 @@ export default async function AdminEliteBoardPage({ params }: { params: Promise<
             </Card>
           ))}
           <div className="grid gap-4 md:grid-cols-2">
-            {(["roadmap", "audit", "task", "deliverable", "coach_note"] as const).map((k) => (
+            {(["coach_note"] as const).map((k) => (
               <Card key={k} tone="quiet"><details><summary className="cursor-pointer font-semibold text-plum">Add {KINDS[k].toLowerCase()}</summary><div className="mt-4"><ItemForm boardId={boardId} kind={k} /></div></details></Card>
             ))}
           </div>
         </div>
       </section>
 
-      <section aria-labelledby="files" className="grid gap-5 lg:grid-cols-2">
-        <Card>
-          <h2 id="files" className="font-display text-2xl">Shared files</h2>
-          <ul className="mt-3 space-y-2 text-sm">{(files.data ?? []).map((f) => <li key={f.id as string}><a className="text-plum underline" href={`/api/files/elite/${f.id}`}>{f.label as string}</a></li>)}</ul>
-          <ActionForm action={uploadEliteFile} submitLabel="Share file" variant="secondary" encType="multipart/form-data" className="mt-4 grid gap-3">
-            <input type="hidden" name="board_id" value={boardId} /><input type="hidden" name="item_id" value="" />
-            <Field label="Label" hint="For example: Audit and roadmap PDF" htmlFor="fl-l"><TextInput id="fl-l" name="label" required /></Field>
-            <Field label="File" htmlFor="fl-f"><TextInput id="fl-f" name="file" type="file" required accept=".pdf,.png,.jpg,.jpeg,.webp,.docx,.xlsx,.txt" className="py-2" /></Field>
-          </ActionForm>
-        </Card>
+      <section aria-labelledby="coach" className="grid gap-5 lg:grid-cols-2">
         {isAdmin ? (
           <Card>
-            <h2 className="font-display text-2xl">Coach</h2>
+            <h2 id="coach" className="font-display text-2xl">Coach</h2>
             <ActionForm action={assignCoach} submitLabel="Assign coach" variant="secondary" className="mt-3 grid gap-3">
               <input type="hidden" name="board_id" value={boardId} />
               <Field label="Coach" htmlFor="co"><Select id="co" name="coach_id" defaultValue={(board.coach_id as string) ?? ""}><option value="">Unassigned</option>{(coachNames ?? []).map((c) => <option key={c.user_id as string} value={c.user_id as string}>{(c.display_name as string) ?? "Coach"}</option>)}</Select></Field>

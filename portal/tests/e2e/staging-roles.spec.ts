@@ -159,11 +159,13 @@ test("blueprint: coaching links and replays are not reachable", async ({ page })
   }
 });
 
-test("Elite privacy: client sees roadmap but never coach notes; other roles cannot open the board", async ({ browser }) => {
+test("Elite privacy: client sees their board section but never coach notes; other roles cannot open the board", async ({ browser }) => {
   const elite = await newSignedInPage(browser, "elite", "/app/elite");
   await elite.goto("/app/elite");
   await expect(elite.getByRole("heading", { name: "Your private workspace" })).toBeVisible();
-  await expect(elite.getByText("STAGING TEST: Month 1 roadmap focus")).toBeVisible();
+  // I-54: roadmap, tasks and files live on the client's Claude board; the workspace shows the board link or a setup note.
+  await expect(elite.getByText(/Open your board in Claude|Your coach is setting up your board/)).toBeVisible();
+  await expect(elite.getByText("STAGING TEST: Month 1 roadmap focus")).toHaveCount(0);
   await expect(elite.getByText("STAGING TEST: Private coach note")).toHaveCount(0);
   await expect(elite.getByText("Coach only. Clients must never see this.")).toHaveCount(0);
 
