@@ -101,13 +101,13 @@ test("a staff account is anonymized and blocked instead of deleted", async ({ br
 
 test("the daily job deletes requests past 30 days, and refuses callers without the secret", async ({ playwright, baseURL, browser }) => {
   const api = await playwright.request.newContext({ baseURL });
-  expect((await api.get("/api/cron/data-deletion")).status()).toBe(401);
-  expect((await api.get("/api/cron/data-deletion", { headers: { Authorization: "Bearer wrong" } })).status()).toBe(401);
-  const run = await api.get("/api/cron/data-deletion", { headers: { Authorization: `Bearer ${process.env.CRON_SECRET}` } });
+  expect((await api.get("/api/cron/data-rights")).status()).toBe(401);
+  expect((await api.get("/api/cron/data-rights", { headers: { Authorization: "Bearer wrong" } })).status()).toBe(401);
+  const run = await api.get("/api/cron/data-rights", { headers: { Authorization: `Bearer ${process.env.CRON_SECRET}` } });
   expect(run.status()).toBe(200);
-  const body = (await run.json()) as { due: number; deleted: number; failed: number };
-  expect(body.failed).toBe(0);
-  expect(body.deleted).toBeGreaterThanOrEqual(1);
+  const body = (await run.json()) as { requestsDeleted: number; failures: number; status: string };
+  expect(body.failures).toBe(0);
+  expect(body.requestsDeleted).toBeGreaterThanOrEqual(1);
   await api.dispose();
   await expectSignInRefused(browser, process.env.E2E_DEL_OVERDUE_EMAIL!, process.env.E2E_DEL_OVERDUE_PASSWORD!);
 });

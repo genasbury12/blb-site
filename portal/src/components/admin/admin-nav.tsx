@@ -15,6 +15,7 @@ const ITEMS: { href: string; label: string; icon: string; roles: ("admin" | "coa
   { href: "/admin/elite", label: "Elite clients", icon: "elite", roles: ["admin", "coach"] },
   { href: "/admin/billing", label: "Payments", icon: "billing", roles: ["admin"] },
   { href: "/admin/audit-log", label: "Audit log", icon: "log", roles: ["admin"] },
+  { href: "/admin/settings/data", label: "Data settings", icon: "account", roles: ["admin"] },
 ];
 
 export async function AdminNav() {

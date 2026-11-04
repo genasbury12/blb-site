@@ -1,7 +1,7 @@
 import "server-only";
 import { randomBytes } from "node:crypto";
 import Stripe from "stripe";
-import { deletionCompleted } from "@/domain/email/templates";
+import { deletionCompleted, retentionDeleted } from "@/domain/email/templates";
 import { logEvent } from "@/lib/observability";
 import { createSupabaseAdminClient } from "@/lib/supabase/admin";
 import { sendEmail } from "./email";
@@ -70,7 +70,7 @@ async function deleteStripeCustomers(ids: string[]) {
 
 export async function executeDeletion(requestId: string, adminId: string | null): Promise<DeletionOutcome> {
   const db = createSupabaseAdminClient();
-  const { data: req, error } = await db.from("deletion_requests").select("id, user_id, status").eq("id", requestId).maybeSingle();
+  const { data: req, error } = await db.from("deletion_requests").select("id, user_id, status, origin").eq("id", requestId).maybeSingle();
   if (error) throw new Error(error.message);
   if (!req || !["pending", "processing"].includes(req.status as string)) throw new Error("This request is not open.");
 
@@ -123,7 +123,8 @@ export async function executeDeletion(requestId: string, adminId: string | null)
   const { error: finError } = await db.rpc("erase_member_finish", { p_request: requestId, p_admin: adminId });
   if (finError) throw new Error(finError.message);
 
-  const emailed = email ? (await sendEmail(email, deletionCompleted({ name }))) === "sent" : false;
+  const template = req.origin === "retention" ? retentionDeleted({ name }) : deletionCompleted({ name });
+  const emailed = email ? (await sendEmail(email, template)) === "sent" : false;
   logEvent("info", "deletion completed", { requestId, outcome, files: removed, stripeCustomers, via: adminId ? "admin" : "schedule" });
   return { requestId, outcome, emailed };
 }

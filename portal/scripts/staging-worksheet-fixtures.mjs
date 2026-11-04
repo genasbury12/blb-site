@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 // Test fixtures for the worksheet browser tests on STAGING (never production).
 //
-//   node scripts/staging-worksheet-fixtures.mjs setup   --suite journey|module1|export|deletion --env-out /abs/path/outside/repo.sh
-//   node scripts/staging-worksheet-fixtures.mjs cleanup --suite journey|module1|export|deletion --env-out /abs/path/outside/repo.sh
+//   node scripts/staging-worksheet-fixtures.mjs setup   --suite journey|module1|export|deletion|retention --env-out /abs/path/outside/repo.sh
+//   node scripts/staging-worksheet-fixtures.mjs cleanup --suite journey|module1|export|deletion|retention --env-out /abs/path/outside/repo.sh
 //
 // journey  (tests/e2e/worksheets.spec.ts): two published STAGING TEST worksheets on Module 1 sample lessons 2 and 3,
 //          a temporary Blueprint member, the shared test admin and a temporary coach assigned to the member.
@@ -15,6 +15,9 @@
 //          path choice and an audit entry naming them; a temporary member whose deletion request is already past its
 //          30 days; a temporary coach with a pending request (the staff path); the shared test admin; and a random
 //          CRON_SECRET for the daily job. Cleanup deletes whatever the test did not.
+// retention (tests/e2e/data-retention.spec.ts, 10_DATA_RIGHTS Slice C): temporary members whose access ended 12
+//          months and a day ago (deleted by the job), 12 months less 20 days ago (30 day reminder), 12 months less 5 days
+//          ago (7 day reminder), and one with access; the shared test admin; a random CRON_SECRET.
 //
 // The test admin is ONE reused account (staging-e2e-admin@example.invalid). The CSV export test writes it into the
 // append only audit log, so it can never be deleted; instead each setup gives it a fresh random password and the
@@ -35,8 +38,8 @@ const arg = (name) => {
 };
 const suite = arg("suite");
 const envOut = arg("env-out");
-if (!["setup", "cleanup"].includes(cmd) || !["journey", "module1", "export", "deletion"].includes(suite) || !envOut) {
-  console.error("usage: staging-worksheet-fixtures.mjs setup|cleanup --suite journey|module1|export|deletion --env-out /abs/file.sh");
+if (!["setup", "cleanup"].includes(cmd) || !["journey", "module1", "export", "deletion", "retention"].includes(suite) || !envOut) {
+  console.error("usage: staging-worksheet-fixtures.mjs setup|cleanup --suite journey|module1|export|deletion|retention --env-out /abs/file.sh");
   process.exit(2);
 }
 const repo = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
@@ -338,8 +341,55 @@ async function cleanupDeletion() {
   console.log("deletion cleanup done: temporary accounts removed, shared test admin disabled");
 }
 
+async function setupRetention() {
+  const now = Date.now();
+  const iso = (ms) => new Date(ms).toISOString();
+  const twelveMonthsAgo = (extraDays) => {
+    const d = new Date(now);
+    d.setUTCFullYear(d.getUTCFullYear() - 1);
+    return d.getTime() + extraDays * 864e5;
+  };
+  const people = {
+    expired: await newMember("STAGING TEST retention expired"),
+    thirty: await newMember("STAGING TEST retention 30 days"),
+    seven: await newMember("STAGING TEST retention 7 days"),
+    active: await newMember("STAGING TEST retention active"),
+  };
+  writeFileSync(STATE, JSON.stringify({ memberIds: Object.values(people).map((p) => p.id) }), { mode: 0o600 });
+  // Access ended: a year and a day ago; a year less 20 days ago; a year less 5 days ago.
+  for (const [who, ended] of [["expired", twelveMonthsAgo(-1)], ["thirty", twelveMonthsAgo(20)], ["seven", twelveMonthsAgo(5)]]) {
+    await api("PATCH", `/rest/v1/entitlements?user_id=eq.${people[who].id}`, { starts_at: iso(ended - 365 * 864e5), ends_at: iso(ended) });
+  }
+  const admin = await enableTestAdmin();
+  writeFileSync(STATE, JSON.stringify({ memberIds: Object.values(people).map((p) => p.id), adminId: admin.id }), { mode: 0o600 });
+  writeEnv({
+    E2E_SUPABASE: 1,
+    E2E_RET_EXPIRED_EMAIL: people.expired.email,
+    E2E_RET_EXPIRED_PASSWORD: people.expired.password,
+    E2E_RET_THIRTY_EMAIL: people.thirty.email,
+    E2E_RET_THIRTY_PASSWORD: people.thirty.password,
+    E2E_RET_SEVEN_EMAIL: people.seven.email,
+    E2E_RET_SEVEN_PASSWORD: people.seven.password,
+    E2E_RET_ACTIVE_EMAIL: people.active.email,
+    E2E_RET_ACTIVE_PASSWORD: people.active.password,
+    E2E_RET_ADMIN_EMAIL: admin.email,
+    E2E_RET_ADMIN_PASSWORD: admin.password,
+    CRON_SECRET: randomBytes(24).toString("hex"),
+  });
+  console.log("retention fixtures ready: expired, 30 day, 7 day and active temporary members, shared test admin enabled");
+}
+
+async function cleanupRetention() {
+  const st = readState();
+  for (const id of st.memberIds ?? []) await eraseTestAccount(id);
+  const adminId = st.adminId ?? (await findUser(ADMIN_EMAIL)).hit?.id;
+  if (adminId) await disableTestAdmin(adminId);
+  console.log("retention cleanup done: temporary accounts removed, shared test admin disabled");
+}
+
 if (suite === "journey") await (cmd === "setup" ? setupJourney() : cleanupJourney());
 else if (suite === "module1") await (cmd === "setup" ? setupModule1() : cleanupModule1());
 else if (suite === "export") await (cmd === "setup" ? setupExport() : cleanupExport());
-else await (cmd === "setup" ? setupDeletion() : cleanupDeletion());
+else if (suite === "deletion") await (cmd === "setup" ? setupDeletion() : cleanupDeletion());
+else await (cmd === "setup" ? setupRetention() : cleanupRetention());
 if (cmd === "cleanup") writeFileSync(envOut, "", { mode: 0o600 });

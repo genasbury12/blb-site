@@ -16,6 +16,21 @@ Status of The BOSS Business System portal build. Updated at every milestone (con
 | 7 Marketing and admin | Admin workspace complete; public sales and masterclass pages wait on approved copy and video |
 | 8 Internal QA and release | Staging Supabase migrated, six test accounts provisioned, signed in permission and browser checks passing (2026-11-02); auth settings, Vercel and Stripe test mode pending; owner sign off pending |
 
+## Data rights, Slice C: retention, reminders, privacy text, Data settings (2026-11-04)
+
+- **Rules** in one place, `src/domain/data-rights/retention.ts` (owner defaults): deletion requests within 30 days; after access ends, data and the download stay 12 months, reminders 30 and 7 days before, then the account is deleted by the Slice B process; anonymized purchase records kept 7 years then removed; audit log kept, anonymized; staff never part of retention.
+- **When access ended** (`app.access_ended_at`, migration `20261104002100_data_retention.sql`, applied to staging): per grant the earlier of its end date and the moment it stopped counting (revoked, refund or cancellation, payment past the 7 day grace, subscription ended); the latest across grants. Unclear moments use the later time, so data is kept longer, never shorter. Members who come back are not lapsed; members who never had access are not covered (I-86).
+- **Daily job** (`/api/cron/data-rights`, renamed from `/api/cron/data-deletion`; `src/lib/server/data-rights-job.ts`): reminders (once per lapse, recorded in `retention_notices`; a failed send is retried the next day; after a missed day only the latest reminder goes), retention deletions (a deletion request with origin "retention", carried out at once, with its own "deleted after 12 months" email), members' requests past 30 days, purchase record purge. Every run is recorded in `job_runs` with counts only.
+- **Admin, Data settings** (`/admin/settings/data`, admins only): requests waiting, lapsed members kept, deletions due within 30 days, last run with a warning if none in 36 hours, the rules, and the last 30 runs.
+- **Privacy text:** `docs/data-rights/PRIVACY_SECTION.md`, describing exactly what the code does, for the owner to paste into the policy after legal review.
+
+| Check | Result |
+|---|---|
+| lint, typecheck, check:copy, build, local Playwright (44) | Pass |
+| `vitest --project unit` | 205 pass (7 new: the numbers, month arithmetic with short months and leap days, nothing before 30 days, each reminder once, only the latest after a missed run, deletion exactly at 12 months, staff and open requests skipped) |
+| `vitest --project db` | 126 pass (5 new: end date for active, never, ended and refunded members; job facts list lapsed members only, mark staff and open requests, server only; runs and reminders admins only; purchase records older than 7 years removed, newer and current members' kept) |
+| `tests/e2e/data-retention.spec.ts` on staging (temporary members ended 12 months and a day, 12 months less 20 days and less 5 days ago, and one active) | 2 pass: the job deleted the expired member (cannot sign in), sent one 30 day and one 7 day reminder, left the others signed in; a second run sent nothing and deleted nothing; Data settings shows the rules, counts and both runs. Before running it there, the job's view of staging was checked: no real account was due for a reminder or deletion |
+
 ## Owner follow ups to worksheets and data rights Slice B (2026-11-04)
 
 - Worksheet PDFs print each question's guide line, muted, under the question (same question types as the form). No new copy.
@@ -34,7 +49,7 @@ Status of The BOSS Business System portal build. Updated at every milestone (con
   3. stored files deleted; sign in account deleted;
   4. "deletion.completed" entry; confirmation email to the address on file, which is not kept.
   Staff (any role, or named as actor in the audit log): roles removed, profile and sign in email replaced by the code, password scrambled, sign in blocked; never hard deleted (I-73).
-- **Daily job:** Vercel Cron (`portal/vercel.json`, 07:17 UTC) calls `/api/cron/data-deletion` with CRON_SECRET. It deletes pending requests past 30 days and finishes any left half done. Answers with counts only.
+- **Daily job:** Vercel Cron (`portal/vercel.json`, 07:17 UTC) calls `/api/cron/data-rights` (renamed in Slice C) with CRON_SECRET. It deletes pending requests past 30 days and finishes any left half done. Answers with counts only.
 - **Fixed on the way:** path choices were append only, so no member who had chosen a learning path could ever be deleted. A narrow exception now allows deleting them, and anonymizing audit entries, only inside a deletion run (clients still have no update or delete rights on either table).
 
 | Check | Result |

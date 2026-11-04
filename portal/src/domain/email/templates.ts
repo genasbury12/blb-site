@@ -37,3 +37,19 @@ export function deletionCompleted(p: { name: string | null }): Email {
     text: `Hi ${p.name ?? "there"},\n\nYour BOSS Business System account and your data have been deleted, as you asked. We kept only two things: the record of your purchases, which we need for tax and refunds, and our activity log. In both, your name and email are replaced by an anonymous code. You do not need to do anything else.${sign}`,
   };
 }
+
+/** Data rights Slice C: 30 and 7 days before a lapsed member's account is deleted. */
+export function retentionReminder(p: { name: string | null; endedOn: string; deleteOn: string; daysLeft: number; url: string }): Email {
+  return {
+    subject: p.daysLeft <= 7 ? "Your BOSS account will be deleted in 7 days" : "Your BOSS account will be deleted in 30 days",
+    text: `Hi ${p.name ?? "there"},\n\nYour access to The BOSS Business System ended on ${p.endedOn}. We keep accounts for 12 months after access ends, so we will delete your account and your data on ${p.deleteOn}.\n\nIf you want to keep your worksheet answers, audit and PDFs, download them before then from My Account:\n${p.url}\n\nIf you join again before that date, your account and everything in it stay.${sign}`,
+  };
+}
+
+/** Data rights Slice C: after a lapsed member's account was deleted under the retention rule. */
+export function retentionDeleted(p: { name: string | null }): Email {
+  return {
+    subject: "Your account has been deleted",
+    text: `Hi ${p.name ?? "there"},\n\nYour access to The BOSS Business System ended more than a year ago, so your account and your data have now been deleted. We kept only the record of your purchases, which we need for tax and refunds, and our activity log. In both, your name and email are replaced by an anonymous code.${sign}`,
+  };
+}
