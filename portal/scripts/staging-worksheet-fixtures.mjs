@@ -270,11 +270,27 @@ async function setupDeletion() {
   await api("POST", "/rest/v1/worksheet_responses", { user_id: member.id, worksheet_slug: "m1-l1-starting-point", worksheet_version: 1, answers: L1_ANSWERS, status: "complete", completed_at: iso(now - 3600e3) });
   await api("POST", "/rest/v1/path_overrides", { user_id: member.id, chosen_path: "build_from_scratch", reason: "Test reason", actor_id: member.id });
   await api("POST", "/rest/v1/admin_audit_log", { actor_id: null, action: "test.mention", entity_type: "user", entity_id: member.id, changed_fields: { note: "STAGING TEST entry naming the member", email: member.email } });
+  // A community thread: the member's post with the other member's reply, and the member's reply on the other's post.
+  const [post] = await api("POST", "/rest/v1/community_posts", { user_id: member.id, title: "STAGING TEST post to remove", body: "STAGING TEST words that must disappear" });
+  const [otherPost] = await api("POST", "/rest/v1/community_posts", { user_id: overdue.id, title: "STAGING TEST other post", body: "STAGING TEST other member post" });
+  await api("POST", "/rest/v1/community_comments", { post_id: post.id, user_id: overdue.id, body: "STAGING TEST reply that must stay" });
+  await api("POST", "/rest/v1/community_comments", { post_id: otherPost.id, user_id: member.id, body: "STAGING TEST reply words that must disappear" });
+  writeFileSync(STATE, JSON.stringify({ memberIds: [member.id, overdue.id, coach.id], postIds: [post.id, otherPost.id] }), { mode: 0o600 });
+  // A real Stripe test mode customer for the member (test keys only).
+  let stripeCustomer = "";
+  const sk = process.env.STAGING_STRIPE_SECRET_KEY ?? process.env.STRIPE_SECRET_KEY ?? "";
+  if (sk.startsWith("sk_test_")) {
+    const r = await fetch("https://api.stripe.com/v1/customers", { method: "POST", headers: { Authorization: `Bearer ${sk}`, "Content-Type": "application/x-www-form-urlencoded" }, body: new URLSearchParams({ email: member.email, name: "STAGING TEST deletion", description: "Staging data rights test; deleted by the test" }) });
+    if (!r.ok) throw new Error(`Stripe test customer not created: ${r.status}`);
+    stripeCustomer = (await r.json()).id;
+    await api("POST", "/rest/v1/stripe_customers", { user_id: member.id, stripe_customer_id: stripeCustomer });
+    writeFileSync(STATE, JSON.stringify({ memberIds: [member.id, overdue.id, coach.id], postIds: [post.id, otherPost.id], stripeCustomer }), { mode: 0o600 });
+  }
   await api("POST", "/rest/v1/deletion_requests", { user_id: overdue.id, requested_at: iso(now - 31 * 864e5), due_at: iso(now - 864e5) });
   await api("POST", "/rest/v1/deletion_requests", { user_id: coach.id });
   const admin = await enableTestAdmin();
   const cronSecret = randomBytes(24).toString("hex");
-  writeFileSync(STATE, JSON.stringify({ memberIds: [member.id, overdue.id, coach.id], adminId: admin.id }), { mode: 0o600 });
+  writeFileSync(STATE, JSON.stringify({ memberIds: [member.id, overdue.id, coach.id], postIds: [post.id, otherPost.id], stripeCustomer, adminId: admin.id }), { mode: 0o600 });
   writeEnv({
     E2E_SUPABASE: 1,
     E2E_DEL_EMAIL: member.email,
@@ -286,6 +302,8 @@ async function setupDeletion() {
     E2E_DEL_ADMIN_EMAIL: admin.email,
     E2E_DEL_ADMIN_PASSWORD: admin.password,
     CRON_SECRET: cronSecret,
+    E2E_DEL_STRIPE_CUSTOMER: stripeCustomer,
+    E2E_DEL_POST_ID: post.id,
   });
   console.log("deletion fixtures ready: temporary member, overdue member, staff member with a request, shared test admin enabled");
 }
@@ -311,6 +329,10 @@ async function cleanupDeletion() {
   const st = readState();
   // Accounts the test already deleted are skipped; anonymized staff accounts are removed here (nothing names them).
   for (const id of st.memberIds ?? []) await eraseTestAccount(id);
+  // Test posts outlive their authors by design; remove them (and their replies) from the staging feed.
+  if (st.postIds?.length) await api("DELETE", `/rest/v1/community_posts?id=in.(${st.postIds.join(",")})`);
+  const sk = process.env.STAGING_STRIPE_SECRET_KEY ?? process.env.STRIPE_SECRET_KEY ?? "";
+  if (st.stripeCustomer && sk.startsWith("sk_test_")) await fetch(`https://api.stripe.com/v1/customers/${st.stripeCustomer}`, { method: "DELETE", headers: { Authorization: `Bearer ${sk}` } });
   const adminId = st.adminId ?? (await findUser(ADMIN_EMAIL)).hit?.id;
   if (adminId) await disableTestAdmin(adminId);
   console.log("deletion cleanup done: temporary accounts removed, shared test admin disabled");

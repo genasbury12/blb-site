@@ -1,15 +1,19 @@
 import "server-only";
 import { randomBytes } from "node:crypto";
+import Stripe from "stripe";
 import { deletionCompleted } from "@/domain/email/templates";
 import { logEvent } from "@/lib/observability";
 import { createSupabaseAdminClient } from "@/lib/supabase/admin";
 import { sendEmail } from "./email";
+import { getStripe } from "./stripe";
 
 /**
  * 10_DATA_RIGHTS Slice B: carry out one deletion request. Used by the admin's "Delete now" (after the route checked
  * the admin and the typed email) and by the daily job (adminId null).
  *
- * Order: note the email and stored files; erase_member_prepare (database, one transaction, audit logged first);
+ * Order: note the email, stored files and Stripe customers; delete the Stripe customers (owner decision 2026-11-04;
+ * first, so a Stripe failure leaves everything else untouched and the request can simply be retried);
+ * erase_member_prepare (database, one transaction, audit logged first);
  * delete the stored files; delete the sign in account, or for staff block it and replace its email; finish; email
  * the member at the address noted at the start, then drop it. If a step after the database part fails, the request
  * stays "processing" and the next run (admin or daily job) repeats it safely.
@@ -35,6 +39,35 @@ async function storedFiles(db: Db, userId: string) {
   };
 }
 
+/** The member's Stripe customers: from their account and from orders under their account or email. */
+async function stripeCustomerIds(db: Db, userId: string, email: string | null) {
+  const [linked, byUser, byEmail] = await Promise.all([
+    db.from("stripe_customers").select("stripe_customer_id").eq("user_id", userId),
+    db.from("orders").select("stripe_customer_id").eq("user_id", userId).not("stripe_customer_id", "is", null),
+    email ? db.from("orders").select("stripe_customer_id").ilike("email", email).not("stripe_customer_id", "is", null) : Promise.resolve({ data: [] }),
+  ]);
+  return [...new Set([...(linked.data ?? []), ...(byUser.data ?? []), ...(byEmail.data ?? [])].map((r) => r.stripe_customer_id as string).filter(Boolean))];
+}
+
+/**
+ * Delete the customers in Stripe. Stripe then cancels any of their subscriptions (so an unfinished payment plan stops)
+ * and keeps its own records of past payments, so refunds by payment remain possible. A customer already gone counts
+ * as done.
+ */
+async function deleteStripeCustomers(ids: string[]) {
+  if (!ids.length) return 0;
+  const stripe = getStripe();
+  for (const id of ids) {
+    try {
+      await stripe.customers.del(id);
+    } catch (err) {
+      if (err instanceof Stripe.errors.StripeError && (err.code === "resource_missing" || err.statusCode === 404)) continue;
+      throw new Error(`Stripe customer not deleted: ${err instanceof Error ? err.message.slice(0, 120) : "unknown"}`);
+    }
+  }
+  return ids.length;
+}
+
 export async function executeDeletion(requestId: string, adminId: string | null): Promise<DeletionOutcome> {
   const db = createSupabaseAdminClient();
   const { data: req, error } = await db.from("deletion_requests").select("id, user_id, status").eq("id", requestId).maybeSingle();
@@ -57,6 +90,8 @@ export async function executeDeletion(requestId: string, adminId: string | null)
   // Kept only in this function, for the confirmation email; never stored.
   const email = authUser.user?.email ?? null;
   const name = (profile?.display_name as string | null) ?? null;
+
+  const stripeCustomers = await deleteStripeCustomers(await stripeCustomerIds(db, userId, email));
 
   const { data: prepared, error: prepError } = await db.rpc("erase_member_prepare", { p_request: requestId, p_admin: adminId });
   if (prepError) throw new Error(prepError.message);
@@ -89,7 +124,7 @@ export async function executeDeletion(requestId: string, adminId: string | null)
   if (finError) throw new Error(finError.message);
 
   const emailed = email ? (await sendEmail(email, deletionCompleted({ name }))) === "sent" : false;
-  logEvent("info", "deletion completed", { requestId, outcome, files: removed, via: adminId ? "admin" : "schedule" });
+  logEvent("info", "deletion completed", { requestId, outcome, files: removed, stripeCustomers, via: adminId ? "admin" : "schedule" });
   return { requestId, outcome, emailed };
 }
 

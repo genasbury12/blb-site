@@ -16,6 +16,13 @@ Status of The BOSS Business System portal build. Updated at every milestone (con
 | 7 Marketing and admin | Admin workspace complete; public sales and masterclass pages wait on approved copy and video |
 | 8 Internal QA and release | Staging Supabase migrated, six test accounts provisioned, signed in permission and browser checks passing (2026-11-02); auth settings, Vercel and Stripe test mode pending; owner sign off pending |
 
+## Owner follow ups to worksheets and data rights Slice B (2026-11-04)
+
+- Worksheet PDFs print each question's guide line, muted, under the question (same question types as the form). No new copy.
+- Deleting a member keeps community threads: their posts and replies stay in place, reworded to a removal note, with "Deleted member" as author (migration `20261104002000_deletion_keeps_community_threads.sql`, applied to staging; I-80).
+- Deleting a member deletes their Stripe customers first (I-82). Payment plan conflict logged as I-84.
+- Checks: lint, typecheck, check:copy, unit 198, db 121 (new: thread kept with others' replies intact), build, local Playwright 44; staging deletion test 4 of 4 with a real Stripe test customer (deleted in Stripe) and a community thread (rewritten, others' replies kept); test posts and accounts cleaned up afterwards.
+
 ## Data rights, Slice B: deletion requests (2026-11-04)
 
 - **Member, My Account, Your data:** "Delete my account and data" opens a page that says what is deleted, what is kept and why, and that it is permanent; typing DELETE submits a request. The account then shows "Requested on [date]. Your account will be deleted within 30 days. You'll get an email when it's done." with **Cancel my deletion request** while it is pending.

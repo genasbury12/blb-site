@@ -36,6 +36,8 @@ const s = StyleSheet.create({
   ask: { fontFamily: F.displayItalic, fontSize: 13, color: C.mauveInk, marginTop: 2 },
   h3: { fontFamily: F.display, fontSize: 15.5, marginTop: 14 },
   label: { fontFamily: F.bodyBold, fontSize: 9, marginTop: 10, marginBottom: 3 },
+  // The question's guide line, muted as on the form (owner decision 2026-11-04).
+  guide: { fontSize: 8.5, color: C.muted, marginTop: -1, marginBottom: 4, lineHeight: 1.4 },
   block: { backgroundColor: C.field, borderColor: C.fieldBorder, borderWidth: 1, borderRadius: 7, paddingVertical: 8, paddingHorizontal: 10 },
   empty: { fontFamily: F.bodyItalic, color: C.muted },
   ratingWord: { fontFamily: F.bodyBold },
@@ -114,6 +116,9 @@ function Answer({ field, value, schema, answers }: { field: ConcreteField; value
   }
 }
 
+/** Question types whose guide line the form shows under the question; the PDF prints the same ones. */
+const GUIDED = new Set(["text", "textarea", "date"]);
+
 /** Print required fields always (as "Not answered" when empty) and optional ones only when answered. */
 function printable(c: ConcreteField, answers: Answers) {
   return isRequired(c) || isFilled(c, answers[c.key]) || Boolean((answers[c.key] as RatingAnswer | undefined)?.rating);
@@ -133,6 +138,7 @@ function Fields({ fields, schema, answers, context }: { fields: WorksheetField[]
             return (
               <View key={c.key} wrap={length > 700} minPresenceAhead={40}>
                 <Text style={s.label}>{label}</Text>
+                {c.guide && GUIDED.has(c.type) ? <Text style={s.guide}>{c.guide}</Text> : null}
                 <Answer field={c} value={answers[c.key]} schema={schema} answers={answers} />
               </View>
             );

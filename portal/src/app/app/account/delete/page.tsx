@@ -26,7 +26,7 @@ export default async function DeleteAccountPage() {
           <li>Your business audit, results and roadmap</li>
           <li>Your lesson progress, milestones and every worksheet answer</li>
           <li>Your coaching questions, Hot Seat applications and feedback submissions</li>
-          <li>Your community posts and comments, including replies other members left under your posts</li>
+          <li>The words of your community posts and replies. They stay in place so other members&apos; conversations still make sense, but each one says it was removed and shows &quot;Deleted member&quot; instead of your name.</li>
           <li>Your Elite workspace, check ins and requests, if you have one</li>
           <li>Every file you uploaded</li>
         </ul>
@@ -37,7 +37,7 @@ export default async function DeleteAccountPage() {
         <ul className="mt-3 list-disc space-y-1.5 pl-5 text-sm">
           <li>The record of your purchases (product, amount, dates and payment status), which we need for tax and refunds. Your name and email are removed from it.</li>
           <li>Our activity log of changes made in the portal. Your name, email and account are replaced in it by an anonymous code.</li>
-          <li>Payments are processed by Stripe, which keeps its own records of them.</li>
+          <li>We also delete your customer record at Stripe, our payment processor. Stripe keeps its own records of past payments.</li>
         </ul>
       </Card>
 

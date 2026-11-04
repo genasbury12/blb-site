@@ -38,12 +38,15 @@ export default async function DeletionRequestsPage({ searchParams }: { searchPar
   if (error) throw new Error(error.message);
   const rows = (data ?? []) as Row[];
   const ids = rows.map((r) => r.user_id).filter(Boolean) as string[];
-  const [emails, profiles, roles, actors] = await Promise.all([
+  const [emails, profiles, roles, actors, plans, subs] = await Promise.all([
     getUserEmails(ids),
     ids.length ? supabase.from("profiles").select("user_id, display_name").in("user_id", ids) : Promise.resolve({ data: [] }),
     ids.length ? supabase.from("user_roles").select("user_id").in("user_id", ids) : Promise.resolve({ data: [] }),
     ids.length ? supabase.from("admin_audit_log").select("actor_id").in("actor_id", ids).limit(1000) : Promise.resolve({ data: [] }),
+    ids.length ? supabase.from("orders").select("user_id").in("user_id", ids).in("status", ["installments_current", "installments_past_due"]) : Promise.resolve({ data: [] }),
+    ids.length ? supabase.from("subscriptions").select("user_id").in("user_id", ids).in("status", ["active", "past_due", "unpaid"]) : Promise.resolve({ data: [] }),
   ]);
+  const paying = new Set([...(plans.data ?? []), ...(subs.data ?? [])].map((r) => r.user_id as string));
   const nameOf = new Map((profiles.data ?? []).map((p) => [p.user_id as string, (p.display_name as string | null) ?? "Member"]));
   const staff = new Set([...(roles.data ?? []).map((r) => r.user_id as string), ...(actors.data ?? []).map((a) => a.actor_id as string)]);
   const now = new Date().getTime();
@@ -87,6 +90,11 @@ export default async function DeletionRequestsPage({ searchParams }: { searchPar
                   </p>
                 </div>
                 {email ? <p className="mt-1 text-sm">{email}</p> : null}
+                {r.user_id && paying.has(r.user_id) ? (
+                  <div className="mt-3">
+                    <Alert tone="warning">This member has a payment plan or membership in progress. Deleting their Stripe customer cancels the remaining payments.</Alert>
+                  </div>
+                ) : null}
                 {r.user_id && staff.has(r.user_id) ? (
                   <div className="mt-3">
                     <Alert tone="warning">This account took admin actions and cannot be hard deleted. It will be anonymized and blocked instead.</Alert>

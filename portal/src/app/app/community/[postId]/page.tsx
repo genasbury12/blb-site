@@ -57,8 +57,13 @@ export default async function PostPage({ params }: { params: Promise<{ postId: s
   if (!post || post.deleted_at) notFound();
   const { data: rows } = await supabase.from("community_comments").select("id, user_id, parent_comment_id, body, created_at").eq("post_id", postId).is("deleted_at", null).order("created_at");
   const comments = (rows ?? []) as C[];
-  const names = await authorNames(supabase, [post.user_id as string, ...comments.map((c) => c.user_id)]);
-  const who = (id: string) => { const a = names.get(id); return `${a?.name ?? "Member"}${a?.staff ? " · Coach" : ""}`; };
+  const names = await authorNames(supabase, [post.user_id as string | null, ...comments.map((c) => c.user_id as string | null)]);
+  // A post or reply whose author deleted their account has no author (data rights Slice B).
+  const who = (id: string | null) => {
+    if (!id) return "Deleted member";
+    const a = names.get(id);
+    return `${a?.name ?? "Member"}${a?.staff ? " · Coach" : ""}`;
+  };
   const top = comments.filter((c) => !c.parent_comment_id);
 
   return (

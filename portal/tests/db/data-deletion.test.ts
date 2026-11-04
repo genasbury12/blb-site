@@ -128,6 +128,33 @@ describe("the deletion run", () => {
     });
   });
 
+  it("community threads stay: the member's posts and replies are rewritten without an author; others' replies remain", async () => {
+    await asService(async (q, asSuper) => {
+      await asSuper();
+      const post = (await db.query("insert into public.community_posts (user_id, title, body) values ($1, 'My pricing question', 'Private details here') returning id", [member])).rows[0].id;
+      const theirs = (await db.query("insert into public.community_posts (user_id, title, body) values ($1, 'Another topic', 'Hello all') returning id", [other])).rows[0].id;
+      await db.query("insert into public.community_comments (post_id, user_id, body) values ($1, $2, 'A kind reply from someone else')", [post, other]);
+      await db.query("insert into public.community_comments (post_id, user_id, body) values ($1, $2, 'My reply with details')", [theirs, member]);
+      await db.query("set local role service_role");
+      const id = (await q("insert into public.deletion_requests (user_id) values ($1) returning id", [member]))[0]!.id as string;
+      await q("select public.erase_member_prepare($1, null)", [id]);
+      await asSuper();
+      await db.query("delete from auth.users where id = $1", [member]);
+      expect((await db.query("select user_id, title, body from public.community_posts where id = $1", [post])).rows[0]).toEqual({
+        user_id: null,
+        title: "Removed post",
+        body: "This post was removed because the member deleted their account.",
+      });
+      expect((await db.query("select user_id, body from public.community_comments where post_id = $1", [post])).rows).toEqual([{ user_id: other, body: "A kind reply from someone else" }]);
+      expect((await db.query("select user_id, body from public.community_comments where post_id = $1", [theirs])).rows).toEqual([
+        { user_id: null, body: "This reply was removed because the member deleted their account." },
+      ]);
+      const left = JSON.stringify((await db.query("select title, body from public.community_posts union all select '', body from public.community_comments")).rows);
+      expect(left).not.toContain("Private details");
+      expect(left).not.toContain("My reply with details");
+    });
+  });
+
   it("outside a deletion run the audit log and path choices stay append only", async () => {
     await db.query("begin");
     try {
