@@ -16,6 +16,13 @@ Status of The BOSS Business System portal build. Updated at every milestone (con
 | 7 Marketing and admin | Admin workspace complete; public sales and masterclass pages wait on approved copy and video |
 | 8 Internal QA and release | Staging Supabase migrated, six test accounts provisioned, signed in permission and browser checks passing (2026-11-02); auth settings, Vercel and Stripe test mode pending; owner sign off pending |
 
+## Worksheet test fixtures in the repo (2026-11-04)
+
+- `portal/scripts/staging-worksheet-fixtures.mjs setup|cleanup --suite journey|module1 --env-out FILE` replaces the session only scripts. Staging only (refuses unless sample content is allowed); logins go only to the given file outside the repository.
+- The CSV export test no longer leaves a blocked admin per run: one shared test admin is switched on for each run and off afterwards (I-69). Underlying audit log question logged as I-73.
+- The module1 suite now restores each worksheet's and milestone's previous status instead of forcing draft, so it never undoes the owner's publishing.
+- Checks: journey suite twice in a row on staging (6 pass each, no new accounts); module1 suite once (3 pass, statuses restored); lint and typecheck pass.
+
 ## Worksheets, Slice E: Module 1 seed, Lessons 1, 2 and 9, dashboard card (2026-11-04)
 
 - `scripts/seed-worksheets.mjs` (local and staging only; refuses unless the project allows sample content and APP_ENV is not production; safe to rerun):

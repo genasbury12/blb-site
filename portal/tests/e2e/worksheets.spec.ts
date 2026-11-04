@@ -5,9 +5,12 @@ import { expect, test, type Browser, type Page } from "@playwright/test";
  *   E2E_WS_EMAIL / E2E_WS_PASSWORD   a member with curriculum access and no saved worksheet answers
  *   E2E_WS_LESSON_PATH               lesson page whose published worksheet uses the m1-l2-business-direction schema
  *   E2E_WS_CALLBACK_PATH             lesson page whose worksheet has a callback to that worksheet's hypothesis
- *   E2E_WS_ADMIN_EMAIL / _PASSWORD   (Slice D) a temporary admin
+ *   E2E_WS_ADMIN_EMAIL / _PASSWORD   (Slice D) the shared staging test admin
  *   E2E_WS_COACH_EMAIL / _PASSWORD   (Slice D) a temporary coach assigned to the member
  * Writes the member's own answers; run against staging with a temporary member.
+ * Set up and tear down on staging with (logins go to a file outside the repository):
+ *   node scripts/staging-worksheet-fixtures.mjs setup   --suite journey --env-out /abs/path/journey-env.sh
+ *   node scripts/staging-worksheet-fixtures.mjs cleanup --suite journey --env-out /abs/path/journey-env.sh
  */
 const enabled = process.env.E2E_SUPABASE === "1" && Boolean(process.env.E2E_WS_EMAIL);
 test.skip(!enabled, "Set E2E_SUPABASE=1 and E2E_WS_* to run the worksheet journey.");

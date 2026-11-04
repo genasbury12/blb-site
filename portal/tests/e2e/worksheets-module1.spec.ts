@@ -5,6 +5,9 @@ import { expect, test, type Page } from "@playwright/test";
  *   E2E_M1_EMAIL / E2E_M1_PASSWORD   a new member with curriculum access, no audit and no worksheet answers
  *   E2E_M1_MODULE                    Module 1's slug
  * Lessons 1, 2 and 9 of Module 1 carry m1-l1-starting-point, m1-l2-business-direction and the Lesson 9 placeholder.
+ * Set up and tear down on staging with (logins go to a file outside the repository):
+ *   node scripts/staging-worksheet-fixtures.mjs setup   --suite module1 --env-out /abs/path/module1-env.sh
+ *   node scripts/staging-worksheet-fixtures.mjs cleanup --suite module1 --env-out /abs/path/module1-env.sh
  */
 const enabled = process.env.E2E_SUPABASE === "1" && Boolean(process.env.E2E_M1_EMAIL);
 test.skip(!enabled, "Set E2E_SUPABASE=1 and E2E_M1_* to run the Module 1 worksheet journey.");
