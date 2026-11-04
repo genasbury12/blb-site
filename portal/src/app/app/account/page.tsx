@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { BillingNotices, formatDate } from "@/components/member/access-states";
+import { DataExportButton } from "@/components/member/data-export-button";
 import { ProfileForm } from "@/components/member/profile-form";
 import { PageHeader } from "@/components/shell/page-header";
 import { Card, CardTitle } from "@/components/ui/card";
@@ -120,6 +121,19 @@ export default async function AccountPage() {
         )}
         <p className="mt-4 text-sm text-ink-muted">Payment methods and invoices will be managed here once online payments are connected.</p>
       </Card>
+
+      <section aria-labelledby="your-data">
+        <Card>
+          <CardTitle id="your-data" className="text-xl">Your data</CardTitle>
+          <p className="mt-2 max-w-prose text-sm">
+            Download a copy of everything the portal stores about you: your profile, purchases and access dates, your business audit, progress and milestones, every worksheet answer with a PDF of each completed worksheet, and anything you submitted or posted. It comes as one ZIP file.
+          </p>
+          <div className="mt-4">
+            <DataExportButton endpoint="/api/account/export" label="Download all my data" />
+          </div>
+          <p className="mt-3 text-xs text-ink-muted">You can download once every 10 minutes. Each download is recorded, without its contents. This stays available for 12 months after your program access ends.</p>
+        </Card>
+      </section>
 
       {support ? (
         <Card>

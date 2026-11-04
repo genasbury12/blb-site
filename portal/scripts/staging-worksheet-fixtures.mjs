@@ -1,13 +1,16 @@
 #!/usr/bin/env node
 // Test fixtures for the worksheet browser tests on STAGING (never production).
 //
-//   node scripts/staging-worksheet-fixtures.mjs setup   --suite journey|module1 --env-out /abs/path/outside/repo.sh
-//   node scripts/staging-worksheet-fixtures.mjs cleanup --suite journey|module1 --env-out /abs/path/outside/repo.sh
+//   node scripts/staging-worksheet-fixtures.mjs setup   --suite journey|module1|export --env-out /abs/path/outside/repo.sh
+//   node scripts/staging-worksheet-fixtures.mjs cleanup --suite journey|module1|export --env-out /abs/path/outside/repo.sh
 //
 // journey  (tests/e2e/worksheets.spec.ts): two published STAGING TEST worksheets on Module 1 sample lessons 2 and 3,
 //          a temporary Blueprint member, the shared test admin and a temporary coach assigned to the member.
 // module1  (tests/e2e/worksheets-module1.spec.ts): publishes the seeded Module 1 worksheets and milestones for the
 //          run (cleanup restores whatever status each had before) and adds a temporary Blueprint member.
+// export   (tests/e2e/data-export.spec.ts, 10_DATA_RIGHTS Slice A): a temporary Blueprint member with a completed and
+//          an unfinished Module 1 worksheet, a temporary member whose access ended two days ago with a completed one,
+//          and the shared test admin. Needs the seeded Module 1 worksheets (any status).
 //
 // The test admin is ONE reused account (staging-e2e-admin@example.invalid). The CSV export test writes it into the
 // append only audit log, so it can never be deleted; instead each setup gives it a fresh random password and the
@@ -28,8 +31,8 @@ const arg = (name) => {
 };
 const suite = arg("suite");
 const envOut = arg("env-out");
-if (!["setup", "cleanup"].includes(cmd) || !["journey", "module1"].includes(suite) || !envOut) {
-  console.error("usage: staging-worksheet-fixtures.mjs setup|cleanup --suite journey|module1 --env-out /abs/file.sh");
+if (!["setup", "cleanup"].includes(cmd) || !["journey", "module1", "export"].includes(suite) || !envOut) {
+  console.error("usage: staging-worksheet-fixtures.mjs setup|cleanup --suite journey|module1|export --env-out /abs/file.sh");
   process.exit(2);
 }
 const repo = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
@@ -210,6 +213,47 @@ async function cleanupModule1() {
   console.log("module1 cleanup done: worksheet and milestone statuses restored, temporary member removed");
 }
 
+const L1_ANSWERS = { q1: "My blog posts and Pinterest.", q2: "A simple home system for busy parents.", q3: "Partly. I know who I want to help.", realization: "Start with the person and the problem." };
+
+async function setupExport() {
+  const m1 = await api("GET", "/rest/v1/worksheets?slug=in.(m1-l1-starting-point,m1-l2-business-direction)&version=eq.1&select=slug");
+  if (m1.length !== 2) throw new Error("Run scripts/seed-worksheets.mjs first (the Module 1 worksheets are missing).");
+  const now = Date.now();
+  const iso = (ms) => new Date(ms).toISOString();
+  const member = await newMember("STAGING TEST data export");
+  const lapsed = await newMember("STAGING TEST lapsed member");
+  await api("POST", "/rest/v1/worksheet_responses", [
+    { user_id: member.id, worksheet_slug: "m1-l1-starting-point", worksheet_version: 1, answers: L1_ANSWERS, status: "complete", completed_at: iso(now - 3600e3) },
+    { user_id: member.id, worksheet_slug: "m1-l2-business-direction", worksheet_version: 1, answers: { idea_A: "Meal planning for parents" }, status: "in_progress", completed_at: null },
+    { user_id: lapsed.id, worksheet_slug: "m1-l1-starting-point", worksheet_version: 1, answers: L1_ANSWERS, status: "complete", completed_at: iso(now - 30 * 864e5) },
+  ]);
+  // Access ended two days ago (started 400 days ago).
+  await api("PATCH", `/rest/v1/entitlements?user_id=eq.${lapsed.id}`, { starts_at: iso(now - 400 * 864e5), ends_at: iso(now - 2 * 864e5) });
+  const admin = await enableTestAdmin();
+  writeFileSync(STATE, JSON.stringify({ memberIds: [member.id, lapsed.id], adminId: admin.id }), { mode: 0o600 });
+  writeEnv({
+    E2E_SUPABASE: 1,
+    E2E_DX_EMAIL: member.email,
+    E2E_DX_PASSWORD: member.password,
+    E2E_DX_MEMBER_ID: member.id,
+    E2E_DX_LAPSED_EMAIL: lapsed.email,
+    E2E_DX_LAPSED_PASSWORD: lapsed.password,
+    E2E_DX_ADMIN_EMAIL: admin.email,
+    E2E_DX_ADMIN_PASSWORD: admin.password,
+    E2E_DX_LESSON_PATH: `/app/training/${mod.slug}/sample-lesson-1`,
+  });
+  console.log("export fixtures ready: temporary active and lapsed members with worksheet answers, shared test admin enabled");
+}
+
+async function cleanupExport() {
+  const st = readState();
+  for (const id of st.memberIds ?? []) await deleteMember(id);
+  const adminId = st.adminId ?? (await findUser(ADMIN_EMAIL)).hit?.id;
+  if (adminId) await disableTestAdmin(adminId);
+  console.log("export cleanup done: temporary members deleted, shared test admin disabled");
+}
+
 if (suite === "journey") await (cmd === "setup" ? setupJourney() : cleanupJourney());
-else await (cmd === "setup" ? setupModule1() : cleanupModule1());
+else if (suite === "module1") await (cmd === "setup" ? setupModule1() : cleanupModule1());
+else await (cmd === "setup" ? setupExport() : cleanupExport());
 if (cmd === "cleanup") writeFileSync(envOut, "", { mode: 0o600 });

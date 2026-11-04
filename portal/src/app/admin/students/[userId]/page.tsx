@@ -7,11 +7,12 @@ import { DataTable, Field, Select, TextInput } from "@/components/admin/fields";
 import { fmtDay, fmtShort } from "@/components/member/time";
 import { PageHeader, SectionTitle } from "@/components/shell/page-header";
 import { Badge } from "@/components/ui/badge";
-import { Card, Stat } from "@/components/ui/card";
+import { Card, CardTitle, Stat } from "@/components/ui/card";
 import { PATH_LABELS } from "@/domain/audit/labels";
 import { FEATURE_KEYS } from "@/lib/features";
 import { getUserEmail } from "@/lib/server/directory";
 import { requireStaff } from "@/lib/server/staff";
+import { DataExportButton } from "@/components/member/data-export-button";
 
 export const metadata: Metadata = { title: "Student" };
 
@@ -42,6 +43,15 @@ export default async function StudentPage({ params }: { params: Promise<{ userId
   return (
     <div className="space-y-12">
       <PageHeader eyebrow="Student" title={(profile.data.display_name as string) ?? "Member"} lede={`${email ?? ""}${roleList.length ? ` · Roles: ${roleList.join(", ")}` : ""}`} actions={<Link className="self-center text-sm font-semibold text-plum underline" href="/admin/students">All students</Link>} />
+      {isAdmin ? (
+        <Card>
+          <CardTitle className="text-xl">Member data</CardTitle>
+          <p className="mt-1 text-sm text-ink-muted">The same ZIP the member can download from their account: everything the portal stores about them, with their worksheet and audit PDFs and their uploads. Admins only. Each export is recorded in the audit log.</p>
+          <div className="mt-4">
+            <DataExportButton endpoint={`/api/admin/members/${userId}/export`} label="Export data" variant="secondary" />
+          </div>
+        </Card>
+      ) : null}
       <div className="grid gap-4 sm:grid-cols-3">
         <Card><Stat label="Lessons completed" value={String(progress.count ?? 0)} /></Card>
         <Card><Stat label="Audits taken" value={String(runs.data?.length ?? 0)} hint={runs.data?.[0] ? `Latest ${Math.round(Number(runs.data[0].overall_score))}%, ${PATH_LABELS[runs.data[0].assigned_path as keyof typeof PATH_LABELS]}` : undefined} /></Card>

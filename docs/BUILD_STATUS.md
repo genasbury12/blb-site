@@ -16,6 +16,35 @@ Status of The BOSS Business System portal build. Updated at every milestone (con
 | 7 Marketing and admin | Admin workspace complete; public sales and masterclass pages wait on approved copy and video |
 | 8 Internal QA and release | Staging Supabase migrated, six test accounts provisioned, signed in permission and browser checks passing (2026-11-02); auth settings, Vercel and Stripe test mode pending; owner sign off pending |
 
+## Data rights, Slice A: "Download all my data" (2026-11-04)
+
+Brief: `docs/10_DATA_RIGHTS.md`.
+
+**What already exists (checked in the schema and row security, 2026-11-04)**
+- Member data lives in 27 tables. Keyed to the member: profiles, orders (+ order_payments), subscriptions, stripe_customers, entitlements, lesson_progress, milestone_progress, audit_drafts, audit_runs, roadmap_items, path_overrides, worksheet_responses, coaching_questions, hotseat_applications, feedback_submissions, community_posts, community_comments, community_reports, elite_applications, coach_assignments, elite_boards (+ elite_items, elite_item_comments, elite_sessions, elite_checkins, elite_hour_buckets, elite_time_entries, elite_files).
+- Member files in private storage: student-evidence (milestone evidence), feedback-files, elite-files.
+- Deleting an auth user cascades most member rows. Exceptions: `orders.user_id` and `elite_applications.user_id` become null (records kept, email kept in the row); `admin_audit_log.actor_id` is append only, so deleting anyone it names as actor fails (I-73).
+- Row security lets a member read their own rows; worksheets on lessons they can no longer open are hidden, which is why lapsed members could not get their worksheet PDFs (I-65).
+- A lapsed member can sign in. Every member page checks access and shows "not part of your current access"; lesson pages and content are blocked by row security; Account, Plans and Billing stay reachable.
+- No data export or deletion flow existed (I-59).
+
+**Built**
+- Account page "Your data": **Download all my data** gives one ZIP, built on request and never stored:
+  - `my-data.json` (profile and email, enrollment, payments, subscriptions, access dates, coach name, audit submissions, drafts, roadmap and path choices, lessons and milestones, every worksheet response with schema version, answers, status and dates, coaching questions, Hot Seat applications, feedback, community posts, comments and reports, Elite application and board);
+  - `worksheets/` PDF of every completed worksheet (brand fonts), `audit-report.pdf` for the latest audit, `uploads/` the member's own files, `README.txt` describing exactly what is included.
+- Works for lapsed members (and for any signed in account). Built from each response's own worksheet version, so PDFs come even for lessons they can no longer open.
+- Admin, Students & access, member page: **Export data** gives the same ZIP. Admins only (coaches and members get a 404).
+- Migration `20261104001800_data_export.sql` (applied to staging): `data_exports` records and `start_data_export` / `finish_data_export`. One export per member per 10 minutes (separately for member and admin), a failed one can be retried, and every completed export is written to the audit log with its size and who asked, never content.
+- `fflate` added as a direct dependency (already installed through the PDF library).
+
+| Check | Result |
+|---|---|
+| lint, typecheck, check:copy | Pass |
+| `vitest --project unit` | 194 pass (7 new: JSON shape, what is kept, staff only exclusions, no Elite board, ZIP contents and unique names, file names, README matches contents) |
+| `vitest --project db` | 113 pass (6 new: self or admin only, coach and anonymous refused, 10 minute limit, failed export frees the limit, audit entry content, only the starter can finish, own records only) |
+| `next build`, Playwright local | Pass; 44 pass, staging only specs skipped |
+| `tests/e2e/data-export.spec.ts` on staging (temporary members and the shared test admin) | 3 pass: member ZIP has exactly my-data.json, README.txt and the Lesson 1 worksheet PDF with the right answers, and a second click is limited; lapsed member cannot open the lesson but downloads the PDF; admin export from Students & access; signed out 401, member using the admin export 404. Both temporary members deleted afterwards (proves exports do not block deletion) |
+
 ## Worksheet test fixtures in the repo (2026-11-04)
 
 - `portal/scripts/staging-worksheet-fixtures.mjs setup|cleanup --suite journey|module1 --env-out FILE` replaces the session only scripts. Staging only (refuses unless sample content is allowed); logins go only to the given file outside the repository.
