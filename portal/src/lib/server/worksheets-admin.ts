@@ -11,6 +11,7 @@ import { getUserEmails } from "./directory";
  */
 
 type WorksheetRow = {
+  id: string;
   slug: string;
   version: number;
   title: string;
@@ -55,7 +56,7 @@ async function lessonNumbers(supabase: UserSupabase, lessonIds: string[]) {
 }
 
 export async function listStaffWorksheets(supabase: UserSupabase): Promise<StaffWorksheet[]> {
-  const { data, error } = await supabase.from("worksheets").select("slug, version, title, status, schema, lesson_id");
+  const { data, error } = await supabase.from("worksheets").select("id, slug, version, title, status, schema, lesson_id");
   if (error) throw new Error(error.message);
   const rows = pickVersions((data ?? []) as WorksheetRow[]);
   const [lessons, responses] = await Promise.all([
@@ -83,6 +84,7 @@ export async function listStaffWorksheets(supabase: UserSupabase): Promise<Staff
 }
 
 export type StaffWorksheetDetail = {
+  id: string;
   slug: string;
   version: number;
   title: string;
@@ -94,7 +96,7 @@ export type StaffWorksheetDetail = {
 
 /** One worksheet (published version, otherwise newest), parsed. Null when missing or its schema is invalid. */
 export async function loadStaffWorksheet(supabase: UserSupabase, slug: string, version?: number): Promise<StaffWorksheetDetail | null> {
-  let q = supabase.from("worksheets").select("slug, version, title, status, schema, lesson_id").eq("slug", slug);
+  let q = supabase.from("worksheets").select("id, slug, version, title, status, schema, lesson_id").eq("slug", slug);
   if (version) q = q.eq("version", version);
   const { data, error } = await q;
   if (error) throw new Error(error.message);
@@ -106,7 +108,7 @@ export async function loadStaffWorksheet(supabase: UserSupabase, slug: string, v
     return null;
   }
   const l = (await lessonNumbers(supabase, [row.lesson_id])).get(row.lesson_id);
-  return { slug: row.slug, version: row.version, title: row.title, status: row.status, schema: parsed.data, moduleNumber: l?.moduleNumber ?? null, lessonNumber: l?.lessonNumber ?? null };
+  return { id: row.id, slug: row.slug, version: row.version, title: row.title, status: row.status, schema: parsed.data, moduleNumber: l?.moduleNumber ?? null, lessonNumber: l?.lessonNumber ?? null };
 }
 
 export type ResponseFilter = "all" | "in_progress" | "complete";

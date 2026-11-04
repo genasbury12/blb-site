@@ -16,7 +16,9 @@ const MAX_BACKOFF_MS = 30000;
  */
 export class AutosaveController {
   private timers = new Map<string, ReturnType<typeof setTimeout>>();
+  private latest = new Map<string, AnswerValue>();
   private pending: Record<string, AnswerValue> = {};
+  private failed = false;
   private inFlight = false;
   private backoff = 1000;
   private retryTimer: ReturnType<typeof setTimeout> | null = null;
@@ -30,6 +32,7 @@ export class AutosaveController {
   queue(key: string, value: AnswerValue) {
     const t = this.timers.get(key);
     if (t) clearTimeout(t);
+    this.latest.set(key, value);
     this.timers.set(
       key,
       setTimeout(() => {
@@ -58,6 +61,7 @@ export class AutosaveController {
       result = { ok: false, error: "Not saved, retrying", retry: true };
     }
     this.inFlight = false;
+    this.failed = !result.ok;
     if (result.ok) {
       this.backoff = 1000;
       this.onState({ kind: "saved", at: result.savedAt });
@@ -74,6 +78,33 @@ export class AutosaveController {
     if (this.retryTimer) clearTimeout(this.retryTimer);
     this.retryTimer = setTimeout(() => void this.flush(), this.backoff);
     this.backoff = Math.min(this.backoff * 2, MAX_BACKOFF_MS);
+  }
+
+  /**
+   * Save everything now, skipping the debounce, and resolve once nothing is waiting (used before Complete, so the
+   * server sees the latest answers). Resolves false if a save failed or did not finish in time.
+   */
+  async settle(timeoutMs = 15000): Promise<boolean> {
+    for (const [key, t] of this.timers) {
+      clearTimeout(t);
+      this.pending[key] = this.latest.get(key)!;
+    }
+    this.timers.clear();
+    const deadline = Date.now() + timeoutMs;
+    while (this.inFlight) {
+      if (Date.now() > deadline) return false;
+      await new Promise((r) => setTimeout(r, 50));
+    }
+    if (this.retryTimer) {
+      clearTimeout(this.retryTimer);
+      this.retryTimer = null;
+    }
+    await this.flush();
+    while (this.inFlight) {
+      if (Date.now() > deadline) return false;
+      await new Promise((r) => setTimeout(r, 50));
+    }
+    return !this.failed && !Object.keys(this.pending).length;
   }
 
   dispose() {
@@ -96,5 +127,5 @@ export function useAutosave(slug: string, save: SaveFn, initialSavedAt: string |
     };
   }, [ctl]);
 
-  return { state, queue: (key: string, value: AnswerValue) => ctl.queue(key, value) };
+  return { state, queue: (key: string, value: AnswerValue) => ctl.queue(key, value), settle: () => ctl.settle() };
 }

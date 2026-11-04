@@ -15,6 +15,7 @@ import { isFeatureEnabled } from "@/lib/env";
 import { loadCurrentPath, loadDraft, loadPublishedAuditVersion, loadRun, loadRuns, PATH_LABELS } from "@/lib/server/audit";
 import { latestEnd, loadCatalog, loadCompletedLessonIds, loadGrants, loadMilestoneSummary } from "@/lib/server/learning";
 import { getBillingNotices, getFeatures, requireSession } from "@/lib/server/session";
+import { loadUnfinishedWorksheet } from "@/lib/server/worksheets";
 
 export const metadata: Metadata = { title: "My Dashboard" };
 
@@ -59,7 +60,7 @@ export default async function DashboardPage() {
   const coaching = isFeatureEnabled("coaching") && features.has("group_coaching.access");
   const feedbackOn = isFeatureEnabled("feedback") && features.has("feedback.submit");
   const eliteOn = isFeatureEnabled("elite") && features.has("elite_coaching.access");
-  const [version, runs, catalog, completed, milestones, grants, path, nextGroup, fbCycle, eliteBoard] = await Promise.all([
+  const [version, runs, catalog, completed, milestones, grants, path, nextGroup, fbCycle, eliteBoard, unfinished] = await Promise.all([
     loadPublishedAuditVersion(supabase),
     loadRuns(supabase, user.id),
     loadCatalog(supabase),
@@ -70,6 +71,7 @@ export default async function DashboardPage() {
     coaching ? supabase.from("coaching_sessions").select("title, starts_at, kind").eq("status", "scheduled").gte("starts_at", now.toISOString()).order("starts_at").limit(1).maybeSingle() : Promise.resolve({ data: null }),
     feedbackOn ? supabase.rpc("my_feedback_cycle") : Promise.resolve({ data: null }),
     eliteOn ? supabase.from("elite_boards").select("id").eq("client_id", user.id).maybeSingle() : Promise.resolve({ data: null }),
+    loadUnfinishedWorksheet(supabase, user.id),
   ]);
   const draft = version ? await loadDraft(supabase, user.id, version.id) : null;
   const latest = runs[0] ? await loadRun(supabase, runs[0].id) : null;
@@ -94,6 +96,15 @@ export default async function DashboardPage() {
     next = draft
       ? { eyebrow: "Pick up where you left off", title: "Finish your business audit", body: `You have answered ${answered} of ${AUDIT_V1.questions.length} questions. Your answers are saved.`, href: "/app/audit", cta: "Resume my audit" }
       : { eyebrow: "Start here", title: "Start your business audit", body: "Thirty quick questions show you where your business stands and what to work on first. It takes about ten minutes and saves as you go.", href: "/app/audit", cta: "Start My Business Audit" };
+  } else if (unfinished) {
+    // Slice E: a worksheet the member started and has not finished comes before the next lesson.
+    next = {
+      eyebrow: "Pick up where you left off",
+      title: `Finish your Lesson ${unfinished.lessonNumber} worksheet`,
+      body: `${unfinished.title}. Your answers are saved, so you can pick up right where you stopped.`,
+      href: unfinished.href,
+      cta: "Open my worksheet",
+    };
   } else if (startingRow && !completed.has(startingRow.id)) {
     next = { eyebrow: "Recommended from your audit", title: startingRow.title, body: "This is the starting lesson matched to your top priority.", href: `/app/training/${moduleSlug.get(startingRow.module_id)}/${startingRow.slug}`, cta: "Open lesson" };
   } else if (nextIncomplete) {

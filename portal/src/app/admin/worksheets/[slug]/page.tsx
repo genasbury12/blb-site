@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { DataTable } from "@/components/admin/fields";
+import { StatusControls } from "@/components/admin/status-controls";
 import { fmtShort } from "@/components/member/time";
 import { PageHeader } from "@/components/shell/page-header";
 import { buttonVariants } from "@/components/ui/button";
 import { Card, Stat } from "@/components/ui/card";
 import { RatingPill } from "@/components/worksheets/rating-pill";
+import type { ContentStatus } from "@/domain/content";
 import { adminCell, adminColumns, weakCounts } from "@/domain/worksheets/admin";
 import { cn } from "@/lib/cn";
 import { requireStaff } from "@/lib/server/staff";
@@ -49,6 +51,11 @@ export default async function AdminWorksheetPage({ params, searchParams }: { par
           ) : null
         }
       />
+
+      <Card tone="quiet">
+        <StatusControls id={worksheet.id} table="worksheets" status={worksheet.status as ContentStatus} canEdit={isAdmin} />
+        <p className="mt-2 text-sm text-ink-muted">Members see a worksheet only when it is published and its lesson is open to them.</p>
+      </Card>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <Card><Stat label="Started" value={String(all.length)} /></Card>

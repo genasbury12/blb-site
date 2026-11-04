@@ -165,3 +165,31 @@ export async function loadMemberWorksheets(supabase: UserSupabase, userId: strin
     .map((g) => ({ ...g, items: g.items.sort((a, b) => a.lessonNumber - b.lessonNumber) }))
     .sort((a, b) => a.moduleNumber - b.moduleNumber);
 }
+
+/**
+ * The member's most recently saved worksheet that is still in progress, on a published worksheet they can open
+ * (dashboard: "Finish your Lesson N worksheet"). Reads status only, never answers.
+ */
+export async function loadUnfinishedWorksheet(supabase: UserSupabase, userId: string) {
+  const { data: open } = await supabase
+    .from("worksheet_responses")
+    .select("worksheet_slug, updated_at")
+    .eq("user_id", userId)
+    .eq("status", "in_progress")
+    .order("updated_at", { ascending: false })
+    .limit(10);
+  if (!open?.length) return null;
+  const { data: sheets } = await supabase.from("worksheets").select("slug, title, lesson_id").eq("status", "published").in("slug", open.map((r) => r.worksheet_slug as string));
+  const sheet = open.map((r) => (sheets ?? []).find((w) => w.slug === r.worksheet_slug)).find(Boolean);
+  if (!sheet) return null;
+  const { data: lesson } = await supabase.from("lessons").select("slug, order_index, module_id").eq("id", sheet.lesson_id).maybeSingle();
+  if (!lesson) return null;
+  const { data: mod } = await supabase.from("modules").select("slug, number").eq("id", lesson.module_id).maybeSingle();
+  if (!mod) return null;
+  return {
+    title: sheet.title as string,
+    lessonNumber: lesson.order_index as number,
+    moduleNumber: mod.number as number,
+    href: `/app/training/${mod.slug}/${lesson.slug}#your-worksheet`,
+  };
+}

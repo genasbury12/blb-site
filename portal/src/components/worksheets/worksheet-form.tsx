@@ -3,6 +3,7 @@
 import { Check, Download } from "lucide-react";
 import { useEffect, useId, useMemo, useState, useTransition } from "react";
 import {
+  concreteFields,
   expandField,
   isRequired,
   labelFrom,
@@ -33,6 +34,8 @@ export type WorksheetFormProps = {
   callbacks: Record<string, { label: string; text: string }>;
   /** display: read only render for staff (Slice D); edit: the member's own worksheet. */
   mode?: "edit" | "display";
+  /** The lesson's module, for the "Download all Module N worksheets" button when the schema asks for it. */
+  module?: { slug: string; number: number };
   save?: SaveFn;
   complete?: CompleteFn;
 };
@@ -53,8 +56,10 @@ export function WorksheetForm(props: WorksheetFormProps) {
   const [completeMsg, setCompleteMsg] = useState<string | null>(null);
   const [completing, startCompleting] = useTransition();
   const noopSave: SaveFn = async () => ({ ok: true, savedAt: new Date().toISOString() });
-  const { state, queue } = useAutosave(slug, props.save ?? noopSave, props.initialSavedAt);
+  const { state, queue, settle } = useAutosave(slug, props.save ?? noopSave, props.initialSavedAt);
   const progress = useMemo(() => worksheetProgress(schema, answers), [schema, answers]);
+  // A look back worksheet (Lesson 9 placeholder) only quotes earlier answers: nothing to save or complete.
+  const hasFields = useMemo(() => concreteFields(schema).length > 0, [schema]);
 
   useEffect(() => setWorksheetProgress(slug, progress.percent), [slug, progress.percent]);
 
@@ -67,6 +72,11 @@ export function WorksheetForm(props: WorksheetFormProps) {
   function complete() {
     if (!props.complete) return;
     startCompleting(async () => {
+      // Send any answers still waiting for the autosave pause, so the server checks the latest version.
+      if (!(await settle())) {
+        setCompleteMsg("Your latest answers have not saved yet. Check your connection and try again.");
+        return;
+      }
       const r = await props.complete!({ slug });
       if (r.ok) {
         setStatus("complete");
@@ -100,18 +110,22 @@ export function WorksheetForm(props: WorksheetFormProps) {
 
       {schema.sections.map((section) => (
         <section key={section.key} aria-labelledby={`ws-${section.key}`} className="mt-[54px] border-t border-[rgba(101,71,79,0.12)] pt-[54px]">
-          {props.callbacks[section.key] ? (
-            <figure className="mb-8 rounded-[14px] border border-rose bg-white px-5 py-4">
-              <figcaption className="text-xs font-semibold uppercase tracking-[0.16em] text-mauve-ink">From {props.callbacks[section.key]!.label}</figcaption>
-              <blockquote className="mt-2 font-display text-xl italic leading-snug text-plum">{props.callbacks[section.key]!.text}</blockquote>
-            </figure>
-          ) : null}
           <div className={cn(section.number ? "grid gap-x-8 md:grid-cols-[80px_1fr]" : "")}>
             {section.number ? (
               <p aria-hidden className="font-display text-[4.5rem] leading-none text-rose-deep [font-variant-numeric:lining-nums]">{section.number}</p>
             ) : null}
             <div className="min-w-0">
               <SectionHead id={`ws-${section.key}`} title={section.title} ask={section.ask} guide={section.guide} number={section.number} />
+              {props.callbacks[section.key] ? (
+                <figure className="mt-6 rounded-[14px] border border-rose bg-white px-5 py-4" data-testid={`callback-${section.key}`}>
+                  <figcaption className="text-xs font-semibold uppercase tracking-[0.16em] text-mauve-ink">From {props.callbacks[section.key]!.label}</figcaption>
+                  <blockquote className="mt-2 font-display text-xl italic leading-snug text-plum">{props.callbacks[section.key]!.text}</blockquote>
+                </figure>
+              ) : section.callback && !readOnly ? (
+                <p className="mt-6 rounded-[14px] border border-dashed border-rose bg-white/60 px-5 py-4 text-ink-muted" data-testid={`callback-${section.key}`}>
+                  Your answer from {section.callback.label ?? "an earlier worksheet"} will show here once you fill it in.
+                </p>
+              ) : null}
               <FieldList fields={section.fields} schema={schema} answers={answers} update={update} readOnly={readOnly} context={section.title ?? ""} />
               {(section.subsections ?? []).map((sub) => (
                 <Subsection key={sub.key} sub={sub} schema={schema} answers={answers} update={update} readOnly={readOnly} />
@@ -122,7 +136,13 @@ export function WorksheetForm(props: WorksheetFormProps) {
         </section>
       ))}
 
-      {!readOnly ? (
+      {!readOnly && !hasFields && schema.module_download && props.module ? (
+        <div className="mt-[54px] border-t border-[rgba(101,71,79,0.12)] pt-8">
+          <ModuleDownload module={props.module} />
+        </div>
+      ) : null}
+
+      {!readOnly && hasFields ? (
         <div className="mt-[54px] border-t border-[rgba(101,71,79,0.12)] pt-8">
           {status === "complete" ? (
             <p className="inline-flex items-center gap-2 rounded-full bg-plum px-5 py-2.5 font-semibold text-white">
@@ -153,11 +173,28 @@ export function WorksheetForm(props: WorksheetFormProps) {
             Download my worksheet
             <span className="sr-only"> (PDF)</span>
           </a>
+          {schema.module_download && props.module ? <ModuleDownload module={props.module} className="ml-3" /> : null}
         </div>
       ) : null}
 
-      {!readOnly ? <StatusBar state={state} percent={progress.percent} /> : null}
+      {!readOnly && hasFields ? <StatusBar state={state} percent={progress.percent} /> : null}
     </div>
+  );
+}
+
+function ModuleDownload({ module, className }: { module: { slug: string; number: number }; className?: string }) {
+  return (
+    <>
+      <a
+        href={`/api/worksheets/module/${module.slug}/pdf`}
+        className={cn("mt-5 inline-flex min-h-11 items-center gap-2 rounded-full border border-plum px-5 font-semibold text-plum hover:bg-rose-soft/50", className)}
+      >
+        <Download className="size-4" aria-hidden />
+        Download all Module {module.number} worksheets
+        <span className="sr-only"> (PDF)</span>
+      </a>
+      <p className="mt-2 text-sm text-ink-muted">Includes every Module {module.number} worksheet you have completed.</p>
+    </>
   );
 }
 

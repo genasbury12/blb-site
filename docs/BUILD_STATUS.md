@@ -16,6 +16,27 @@ Status of The BOSS Business System portal build. Updated at every milestone (con
 | 7 Marketing and admin | Admin workspace complete; public sales and masterclass pages wait on approved copy and video |
 | 8 Internal QA and release | Staging Supabase migrated, six test accounts provisioned, signed in permission and browser checks passing (2026-11-02); auth settings, Vercel and Stripe test mode pending; owner sign off pending |
 
+## Worksheets, Slice E: Module 1 seed, Lessons 1, 2 and 9, dashboard card (2026-11-04)
+
+- `scripts/seed-worksheets.mjs` (local and staging only; refuses unless the project allows sample content and APP_ENV is not production; safe to rerun):
+  - adds `m1-l1-starting-point`, `m1-l2-business-direction` and the Lesson 9 placeholder `m1-l9-foundation-blueprint` as drafts on Module 1 lessons 1, 2 and 9;
+  - adds the two milestones Complete ticks ("I answered Lesson 1: Starting Point", "I chose a provisional direction and wrote my hypothesis") as drafts;
+  - run on staging 2026-11-04; staging had no Lesson 9, so it added a published "SAMPLE: Module 1 lesson 9" (I-71).
+- Publishing: admins move a worksheet through draft, review and published on its Admin, Worksheets page (same controls as lessons). Publishing checks the schema first and explains a clash with another published version. The Curriculum lesson page lists the lesson's worksheet.
+- Lesson 9 placeholder: quotes the member's own Lesson 1 q3 and Lesson 2 hypothesis under each heading, shows a note while one is missing, and offers "Download all Module 1 worksheets". Callback quotes now sit under their section heading on every worksheet.
+- Dashboard: after the audit, an unfinished worksheet becomes the next step, "Finish your Lesson N worksheet" (I-70).
+- Fix: Complete saves any answers still in the autosave pause before completing (I-72).
+- **Owner action:** to show the worksheets to members, publish the three worksheets (Admin, Worksheets) and the two milestones (Admin, Curriculum, Module 1).
+
+| Check | Result |
+|---|---|
+| lint, typecheck, check:copy | Pass |
+| `vitest --project unit` | 187 pass (new: seed schemas parse and link up, Lesson 9 callbacks, autosave settle) |
+| `vitest --project db` | 107 pass |
+| `next build`, Playwright local | Pass; 44 pass, staging only specs skipped |
+| `tests/e2e/worksheets-module1.spec.ts` on staging (seeded worksheets and milestones published for the run, then back to draft; temporary member removed) | 3 pass: audit, then "Finish your Lesson 1 worksheet" and its link; Complete straight after typing ticks the milestone and clears the nudge; Lesson 9 quotes both answers and the module PDF downloads |
+| `tests/e2e/worksheets.spec.ts` on staging (regression) | 6 pass |
+
 ## Worksheets, Slice D: admin views, CSV export, member Library (2026-11-03)
 
 - Admin workspace "Worksheets" (admins and coaches):

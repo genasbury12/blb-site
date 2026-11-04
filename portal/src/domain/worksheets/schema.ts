@@ -60,6 +60,8 @@ export const worksheetSchemaSchema = z.object({
   sections: z.array(sectionSchema).min(1),
   completion: z.object({ milestone_label: z.string().optional(), required_fields: z.array(z.string()).default([]) }),
   admin_columns: z.array(z.string()).optional(),
+  /** Show "Download all Module N worksheets" on this worksheet (brief: the module PDF is used at Lesson 9). */
+  module_download: z.boolean().optional(),
 });
 export type WorksheetSchema = z.infer<typeof worksheetSchemaSchema>;
 

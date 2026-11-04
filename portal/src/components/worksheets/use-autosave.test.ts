@@ -64,4 +64,44 @@ describe("worksheet autosave controller", () => {
     expect(save).toHaveBeenCalledTimes(1);
     expect(states.at(-1)).toEqual({ kind: "error", message: "Keep this under 160 characters" });
   });
+
+  it("settle sends answers still in the debounce pause right away (before Complete)", async () => {
+    const save = vi.fn<SaveFn>(async () => ({ ok: true, savedAt: "t" }));
+    const c = new AutosaveController("ws", save, () => {});
+    c.queue("q2", "two");
+    c.queue("q3", "three");
+    const done = c.settle();
+    await vi.advanceTimersByTimeAsync(0);
+    expect(await done).toBe(true);
+    expect(save).toHaveBeenCalledTimes(1);
+    expect(save.mock.calls[0]![0].patch).toEqual({ q2: "two", q3: "three" });
+    // The cancelled debounce timers do not send them a second time.
+    await vi.advanceTimersByTimeAsync(DEBOUNCE_MS * 2);
+    expect(save).toHaveBeenCalledTimes(1);
+  });
+
+  it("settle waits for a request already in flight, then sends what is left", async () => {
+    let release!: () => void;
+    const save = vi.fn<SaveFn>().mockImplementationOnce(() => new Promise((r) => (release = () => r({ ok: true, savedAt: "t1" })))).mockResolvedValue({ ok: true, savedAt: "t2" });
+    const c = new AutosaveController("ws", save, () => {});
+    c.queue("q1", "one");
+    await vi.advanceTimersByTimeAsync(DEBOUNCE_MS + 1);
+    c.queue("q2", "two");
+    const done = c.settle();
+    await vi.advanceTimersByTimeAsync(100);
+    release();
+    await vi.advanceTimersByTimeAsync(100);
+    expect(await done).toBe(true);
+    expect(save.mock.calls.map((x) => x[0].patch)).toEqual([{ q1: "one" }, { q2: "two" }]);
+  });
+
+  it("settle reports a failed save so Complete is not sent", async () => {
+    const save = vi.fn<SaveFn>(async () => ({ ok: false, error: "offline", retry: true }));
+    const c = new AutosaveController("ws", save, () => {});
+    c.queue("q1", "one");
+    const done = c.settle();
+    await vi.advanceTimersByTimeAsync(0);
+    expect(await done).toBe(false);
+    c.dispose();
+  });
 });
