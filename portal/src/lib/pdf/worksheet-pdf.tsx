@@ -13,7 +13,7 @@ import {
   type WorksheetField,
   type WorksheetSchema,
 } from "@/domain/worksheets/schema";
-import { PDF_FONTS as F } from "./brand-fonts";
+import { PDF_FONTS as F, renderWithFreshFonts } from "./brand-fonts";
 
 /**
  * Branded worksheet PDF (09_IMPLEMENT_WORKSHEETS, Slice C). Brand fonts from ./brand-fonts (Cormorant Garamond
@@ -42,6 +42,7 @@ const s = StyleSheet.create({
   sentence: { fontFamily: F.display, fontSize: 20, lineHeight: 1.35, color: C.plum },
   quote: { borderLeftColor: C.roseDeep, borderLeftWidth: 2, paddingLeft: 10, marginTop: 10 },
   quoteText: { fontFamily: F.displayItalic, fontSize: 14.5, color: C.plum },
+  footerNote: { marginTop: 28, paddingTop: 10, borderTopWidth: 1, borderTopColor: C.rose, fontFamily: F.bodyItalic, fontSize: 9, color: C.muted },
   // Two separately positioned lines: react-pdf drops a fixed, absolutely positioned row container.
   footerLeft: { position: "absolute", bottom: 26, left: 54, fontSize: 7.5, color: C.muted },
   footerRight: { position: "absolute", bottom: 26, right: 54, fontSize: 7.5, color: C.muted, textAlign: "right" },
@@ -182,6 +183,11 @@ function WorksheetPages({ input, generatedAt }: { input: WorksheetPdfInput; gene
           </View>
         </View>
       ))}
+      {schema.footer_note ? (
+        <Text style={s.footerNote} wrap={false} minPresenceAhead={20}>
+          {schema.footer_note}
+        </Text>
+      ) : null}
       <Text style={s.footerLeft} fixed>
         The BOSS Business System · Module {input.moduleNumber}
       </Text>
@@ -198,22 +204,22 @@ export function worksheetPdfFilename(moduleNumber: number, lessonNumber?: number
 
 /** One worksheet. */
 export async function renderWorksheetPdf(input: WorksheetPdfInput, generatedAt = new Date()) {
-  return renderToBuffer(
+  return renderWithFreshFonts(() => renderToBuffer(
     <Document title={`${input.schema.title}: worksheet`} author="The BOSS Business System" creator="The BOSS Business System">
       <WorksheetPages input={input} generatedAt={generatedAt} />
     </Document>,
-  );
+  ));
 }
 
 /** Every completed worksheet in a module, in lesson order, each starting on a new page. */
 export async function renderModuleWorksheetsPdf(inputs: WorksheetPdfInput[], moduleNumber: number, generatedAt = new Date()) {
-  return renderToBuffer(
+  return renderWithFreshFonts(() => renderToBuffer(
     <Document title={`Module ${moduleNumber} worksheets`} author="The BOSS Business System" creator="The BOSS Business System">
       {inputs.map((input) => (
         <WorksheetPages key={input.schema.slug} input={input} generatedAt={generatedAt} />
       ))}
     </Document>,
-  );
+  ));
 }
 
 /** Keys printed in the PDF, for tests. */

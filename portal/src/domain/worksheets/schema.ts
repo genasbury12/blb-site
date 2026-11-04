@@ -62,6 +62,8 @@ export const worksheetSchemaSchema = z.object({
   admin_columns: z.array(z.string()).optional(),
   /** Show "Download all Module N worksheets" on this worksheet (brief: the module PDF is used at Lesson 9). */
   module_download: z.boolean().optional(),
+  /** A short closing line printed in muted text at the end of the worksheet's PDF (owner addition 2026-11-04). */
+  footer_note: z.string().trim().min(1).max(300).optional(),
 });
 export type WorksheetSchema = z.infer<typeof worksheetSchemaSchema>;
 

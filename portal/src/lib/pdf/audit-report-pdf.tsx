@@ -2,7 +2,7 @@ import { Document, Page, StyleSheet, Text, View, renderToBuffer } from "@react-p
 import { PATH_LABELS } from "@/domain/audit/labels";
 import { CATEGORIES, CATEGORY_LABELS, CATEGORY_MODULE } from "@/domain/audit/types";
 import type { ReportRun } from "@/components/audit/audit-report";
-import { PDF_FONTS as F } from "./brand-fonts";
+import { PDF_FONTS as F, renderWithFreshFonts } from "./brand-fonts";
 
 /**
  * Branded PDF of an audit run (Phase 2: "PDF report"). Built only from the immutable run snapshot.
@@ -109,5 +109,5 @@ export function AuditReportDocument({ run, memberName }: { run: ReportRun; membe
 }
 
 export async function renderAuditReportPdf(run: ReportRun, memberName: string | null): Promise<Buffer> {
-  return renderToBuffer(<AuditReportDocument run={run} memberName={memberName} />);
+  return renderWithFreshFonts(() => renderToBuffer(<AuditReportDocument run={run} memberName={memberName} />));
 }
