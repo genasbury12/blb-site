@@ -30,6 +30,7 @@ export default async function StudentsPage({ searchParams }: { searchParams: Pro
     );
   }
 
+  const { count: pendingDeletions } = await supabase.from("deletion_requests").select("id", { count: "exact", head: true }).in("status", ["pending", "processing"]);
   let users: DirectoryUser[] = [];
   let hasMore = false;
   let unavailable = false;
@@ -50,7 +51,16 @@ export default async function StudentsPage({ searchParams }: { searchParams: Pro
 
   return (
     <div>
-      <PageHeader eyebrow="Students" title="Students and access" lede="Look up any account, see what they can access and why, and adjust access with a written reason." />
+      <PageHeader
+        eyebrow="Students"
+        title="Students and access"
+        lede="Look up any account, see what they can access and why, and adjust access with a written reason."
+        actions={
+          <Link className="self-center text-sm font-semibold text-plum underline" href="/admin/students/deletions">
+            Deletion requests{pendingDeletions ? ` (${pendingDeletions} pending)` : ""}
+          </Link>
+        }
+      />
       {unavailable ? <Alert tone="info">The account directory needs the Supabase server key in this environment.</Alert> : null}
       <form className="mb-6 flex flex-wrap gap-3" role="search">
         <label className="sr-only" htmlFor="q">Search by email</label>

@@ -46,7 +46,7 @@ export default async function StudentPage({ params }: { params: Promise<{ userId
       {isAdmin ? (
         <Card>
           <CardTitle className="text-xl">Member data</CardTitle>
-          <p className="mt-1 text-sm text-ink-muted">Everything the portal stores about this member, with their worksheet and audit PDFs and their uploads. This admin copy also includes notes staff keep for themselves, which the member's own download leaves out. Admins only. Each export is recorded in the audit log.</p>
+          <p className="mt-1 text-sm text-ink-muted">Everything the portal stores about this member, with their worksheet and audit PDFs and their uploads. This admin copy also includes notes staff keep for themselves, which the member&apos;s own download leaves out. Admins only. Each export is recorded in the audit log.</p>
           <div className="mt-4">
             <DataExportButton endpoint={`/api/admin/members/${userId}/export`} label="Export data" variant="secondary" />
           </div>

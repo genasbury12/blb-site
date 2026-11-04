@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { BillingNotices, formatDate } from "@/components/member/access-states";
 import { DataExportButton } from "@/components/member/data-export-button";
+import { cancelDeletion } from "./data-actions";
 import { ProfileForm } from "@/components/member/profile-form";
 import { PageHeader } from "@/components/shell/page-header";
 import { Card, CardTitle } from "@/components/ui/card";
@@ -44,15 +45,18 @@ const STATUS_LABELS: Record<string, string> = {
   expired: "Checkout expired",
 };
 
-export default async function AccountPage() {
+export default async function AccountPage({ searchParams }: { searchParams: Promise<{ deletion?: string }> }) {
   const { supabase, user } = await requireSession("/app/account");
-  const [features, notices, profile, grants, orders] = await Promise.all([
+  const sp = await searchParams;
+  const [features, notices, profile, grants, orders, deletion] = await Promise.all([
     getFeatures(),
     getBillingNotices(),
     supabase.from("profiles").select("display_name").eq("user_id", user.id).maybeSingle(),
     loadGrants(supabase, user.id),
     supabase.from("orders").select("id, sku, payment_plan, status, installments_paid, installments_total, created_at").eq("user_id", user.id).order("created_at", { ascending: false }),
+    supabase.from("deletion_requests").select("status, requested_at").eq("user_id", user.id).in("status", ["pending", "processing"]).maybeSingle(),
   ]);
+  const openDeletion = deletion.data as { status: string; requested_at: string } | null;
 
   // Latest end date per feature among grants, showing whether each is currently active.
   const byFeature = new Map<string, { ends: string | null; active: boolean }>();
@@ -132,6 +136,31 @@ export default async function AccountPage() {
             <DataExportButton endpoint="/api/account/export" label="Download all my data" />
           </div>
           <p className="mt-3 text-xs text-ink-muted">You can download once every 10 minutes. Each download is recorded, without its contents. This stays available for 12 months after your program access ends.</p>
+
+          <div className="mt-6 border-t border-rose-soft pt-5" data-testid="deletion-status">
+            {openDeletion ? (
+              <>
+                <p className="text-sm font-semibold">Requested on {formatDate(openDeletion.requested_at)}.</p>
+                <p className="mt-1 text-sm">Your account will be deleted within 30 days. You&apos;ll get an email when it&apos;s done.</p>
+                {openDeletion.status === "pending" ? (
+                  <form action={cancelDeletion} className="mt-3">
+                    <button type="submit" className="min-h-11 rounded-full border border-mauve bg-white px-5 text-sm font-semibold text-ink hover:bg-rose-soft">
+                      Cancel my deletion request
+                    </button>
+                  </form>
+                ) : (
+                  <p className="mt-1 text-sm text-ink-muted">Deletion has started and can no longer be cancelled.</p>
+                )}
+              </>
+            ) : (
+              <>
+                {sp.deletion === "cancelled" ? <p className="mb-2 text-sm font-semibold" role="status">Your deletion request is cancelled. Nothing was deleted.</p> : null}
+                <a href="/app/account/delete" className="text-sm font-semibold text-danger underline-offset-4 hover:underline">
+                  Delete my account and data
+                </a>
+              </>
+            )}
+          </div>
         </Card>
       </section>
 

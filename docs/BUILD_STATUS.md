@@ -16,6 +16,27 @@ Status of The BOSS Business System portal build. Updated at every milestone (con
 | 7 Marketing and admin | Admin workspace complete; public sales and masterclass pages wait on approved copy and video |
 | 8 Internal QA and release | Staging Supabase migrated, six test accounts provisioned, signed in permission and browser checks passing (2026-11-02); auth settings, Vercel and Stripe test mode pending; owner sign off pending |
 
+## Data rights, Slice B: deletion requests (2026-11-04)
+
+- **Member, My Account, Your data:** "Delete my account and data" opens a page that says what is deleted, what is kept and why, and that it is permanent; typing DELETE submits a request. The account then shows "Requested on [date]. Your account will be deleted within 30 days. You'll get an email when it's done." with **Cancel my deletion request** while it is pending.
+- **Owner email** on each new request (member's name and the admin link) to OWNER_NOTIFY_EMAIL, or SUPPORT_CONTACT_EMAIL when unset.
+- **Admin, Students & access, Deletion requests** (admins only): Pending, Completed, Cancelled. Each pending request shows days until automatic deletion and **Delete now**, which needs the member's email typed. Staff accounts show "This account took admin actions and cannot be hard deleted. It will be anonymized and blocked instead." Completed rows show only the anonymous code.
+- **What deletion does** (migration `20261104001900_data_deletion.sql`, applied to staging; `src/lib/server/data-deletion.ts`):
+  1. audit entry "deletion.started" before anything changes;
+  2. in one transaction: every mention of the member's id or email in the audit log becomes `deleted-user-<10 hex>`; orders keep product, amounts, dates and status with the email replaced by the same code and the account link removed; all member data deleted (worksheets, audit, roadmap, path choices, progress, milestones, coaching, Hot Seat, feedback, community, Elite workspace, access, subscriptions, export records, Elite applications, profile);
+  3. stored files deleted; sign in account deleted;
+  4. "deletion.completed" entry; confirmation email to the address on file, which is not kept.
+  Staff (any role, or named as actor in the audit log): roles removed, profile and sign in email replaced by the code, password scrambled, sign in blocked; never hard deleted (I-73).
+- **Daily job:** Vercel Cron (`portal/vercel.json`, 07:17 UTC) calls `/api/cron/data-deletion` with CRON_SECRET. It deletes pending requests past 30 days and finishes any left half done. Answers with counts only.
+- **Fixed on the way:** path choices were append only, so no member who had chosen a learning path could ever be deleted. A narrow exception now allows deleting them, and anonymizing audit entries, only inside a deletion run (clients still have no update or delete rights on either table).
+
+| Check | Result |
+|---|---|
+| lint, typecheck, check:copy, build | Pass |
+| `vitest --project unit` | 198 pass |
+| `vitest --project db` | 120 pass (7 new: request, reuse and cancel; others and coaches cannot see; only the server can run a deletion; full run with audit and order anonymization, case insensitive email, unrelated entries untouched, path choice removed, sign in account then deletable, steps logged with the code; append only still enforced outside a run; staff anonymized and kept, safe to rerun; cancelled request cannot run) |
+| `tests/e2e/data-deletion.spec.ts` on staging | 4 pass: member must type DELETE, sees the pending text, cancels, asks again; admin with a wrong email is refused, with the right one deletes, member cannot sign in, completed tab and audit log show only the code; staff account anonymized and blocked; daily job refuses without the secret and deletes the overdue request. Checked in the database afterwards: no member rows or emails left, orders and audit entries show the code |
+
 ## Data rights, Slice A: "Download all my data" (2026-11-04)
 
 Brief: `docs/10_DATA_RIGHTS.md`.

@@ -59,8 +59,6 @@ const omit = (row: Row, keys: string[]) => Object.fromEntries(Object.entries(row
 
 /** Fields that identify staff accounts. Never exported. */
 const STAFF_IDS = ["created_by", "decided_by", "responder_id", "resolved_by", "coach_id", "actor_id", "uploaded_by"];
-/** Notes only staff see: in the admin copy only. */
-const STAFF_NOTES = ["manual_override_reason", "decision_note"];
 
 export type ExportAudience = "member" | "admin";
 

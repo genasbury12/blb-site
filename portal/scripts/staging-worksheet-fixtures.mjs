@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 // Test fixtures for the worksheet browser tests on STAGING (never production).
 //
-//   node scripts/staging-worksheet-fixtures.mjs setup   --suite journey|module1|export --env-out /abs/path/outside/repo.sh
-//   node scripts/staging-worksheet-fixtures.mjs cleanup --suite journey|module1|export --env-out /abs/path/outside/repo.sh
+//   node scripts/staging-worksheet-fixtures.mjs setup   --suite journey|module1|export|deletion --env-out /abs/path/outside/repo.sh
+//   node scripts/staging-worksheet-fixtures.mjs cleanup --suite journey|module1|export|deletion --env-out /abs/path/outside/repo.sh
 //
 // journey  (tests/e2e/worksheets.spec.ts): two published STAGING TEST worksheets on Module 1 sample lessons 2 and 3,
 //          a temporary Blueprint member, the shared test admin and a temporary coach assigned to the member.
@@ -11,6 +11,10 @@
 // export   (tests/e2e/data-export.spec.ts, 10_DATA_RIGHTS Slice A): a temporary Blueprint member with a completed and
 //          an unfinished Module 1 worksheet, a temporary member whose access ended two days ago with a completed one,
 //          and the shared test admin. Needs the seeded Module 1 worksheets (any status).
+// deletion (tests/e2e/data-deletion.spec.ts, 10_DATA_RIGHTS Slice B): a temporary member with worksheet answers, a
+//          path choice and an audit entry naming them; a temporary member whose deletion request is already past its
+//          30 days; a temporary coach with a pending request (the staff path); the shared test admin; and a random
+//          CRON_SECRET for the daily job. Cleanup deletes whatever the test did not.
 //
 // The test admin is ONE reused account (staging-e2e-admin@example.invalid). The CSV export test writes it into the
 // append only audit log, so it can never be deleted; instead each setup gives it a fresh random password and the
@@ -31,8 +35,8 @@ const arg = (name) => {
 };
 const suite = arg("suite");
 const envOut = arg("env-out");
-if (!["setup", "cleanup"].includes(cmd) || !["journey", "module1", "export"].includes(suite) || !envOut) {
-  console.error("usage: staging-worksheet-fixtures.mjs setup|cleanup --suite journey|module1|export --env-out /abs/file.sh");
+if (!["setup", "cleanup"].includes(cmd) || !["journey", "module1", "export", "deletion"].includes(suite) || !envOut) {
+  console.error("usage: staging-worksheet-fixtures.mjs setup|cleanup --suite journey|module1|export|deletion --env-out /abs/file.sh");
   process.exit(2);
 }
 const repo = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
@@ -253,7 +257,67 @@ async function cleanupExport() {
   console.log("export cleanup done: temporary members deleted, shared test admin disabled");
 }
 
+async function setupDeletion() {
+  const now = Date.now();
+  const iso = (ms) => new Date(ms).toISOString();
+  const member = await newMember("STAGING TEST deletion");
+  const overdue = await newMember("STAGING TEST overdue deletion");
+  const coachEmail = `staging-ws-coach-${hex()}@example.invalid`, coachPw = password();
+  const coach = await api("POST", "/auth/v1/admin/users", { email: coachEmail, password: coachPw, email_confirm: true, user_metadata: { display_name: "STAGING TEST staff deletion" } });
+  // Record the accounts first, so cleanup finds them even if a later step fails.
+  writeFileSync(STATE, JSON.stringify({ memberIds: [member.id, overdue.id, coach.id] }), { mode: 0o600 });
+  await api("POST", "/rest/v1/user_roles", { user_id: coach.id, role: "coach" });
+  await api("POST", "/rest/v1/worksheet_responses", { user_id: member.id, worksheet_slug: "m1-l1-starting-point", worksheet_version: 1, answers: L1_ANSWERS, status: "complete", completed_at: iso(now - 3600e3) });
+  await api("POST", "/rest/v1/path_overrides", { user_id: member.id, chosen_path: "build_from_scratch", reason: "Test reason", actor_id: member.id });
+  await api("POST", "/rest/v1/admin_audit_log", { actor_id: null, action: "test.mention", entity_type: "user", entity_id: member.id, changed_fields: { note: "STAGING TEST entry naming the member", email: member.email } });
+  await api("POST", "/rest/v1/deletion_requests", { user_id: overdue.id, requested_at: iso(now - 31 * 864e5), due_at: iso(now - 864e5) });
+  await api("POST", "/rest/v1/deletion_requests", { user_id: coach.id });
+  const admin = await enableTestAdmin();
+  const cronSecret = randomBytes(24).toString("hex");
+  writeFileSync(STATE, JSON.stringify({ memberIds: [member.id, overdue.id, coach.id], adminId: admin.id }), { mode: 0o600 });
+  writeEnv({
+    E2E_SUPABASE: 1,
+    E2E_DEL_EMAIL: member.email,
+    E2E_DEL_PASSWORD: member.password,
+    E2E_DEL_OVERDUE_EMAIL: overdue.email,
+    E2E_DEL_OVERDUE_PASSWORD: overdue.password,
+    E2E_DEL_STAFF_EMAIL: coachEmail,
+    E2E_DEL_STAFF_PASSWORD: coachPw,
+    E2E_DEL_ADMIN_EMAIL: admin.email,
+    E2E_DEL_ADMIN_PASSWORD: admin.password,
+    CRON_SECRET: cronSecret,
+  });
+  console.log("deletion fixtures ready: temporary member, overdue member, staff member with a request, shared test admin enabled");
+}
+
+/** Remove a test account the way the portal does (its path choice can only be removed inside a deletion run). */
+async function eraseTestAccount(id) {
+  const { hit } = await findUserById(id);
+  if (!hit) return;
+  let [req] = await api("GET", `/rest/v1/deletion_requests?user_id=eq.${id}&status=in.(pending,processing)&select=id`);
+  if (!req) [req] = await api("POST", "/rest/v1/deletion_requests", { user_id: id });
+  await api("POST", "/rest/v1/rpc/erase_member_prepare", { p_request: req.id, p_admin: null });
+  await api("DELETE", `/rest/v1/user_roles?user_id=eq.${id}`);
+  await api("DELETE", `/auth/v1/admin/users/${id}`, undefined, [404]);
+  await api("POST", "/rest/v1/rpc/erase_member_finish", { p_request: req.id, p_admin: null });
+}
+
+async function findUserById(id) {
+  const r = await fetch(`${URL_}/auth/v1/admin/users/${id}`, { headers: H });
+  return { hit: r.ok ? await r.json() : undefined };
+}
+
+async function cleanupDeletion() {
+  const st = readState();
+  // Accounts the test already deleted are skipped; anonymized staff accounts are removed here (nothing names them).
+  for (const id of st.memberIds ?? []) await eraseTestAccount(id);
+  const adminId = st.adminId ?? (await findUser(ADMIN_EMAIL)).hit?.id;
+  if (adminId) await disableTestAdmin(adminId);
+  console.log("deletion cleanup done: temporary accounts removed, shared test admin disabled");
+}
+
 if (suite === "journey") await (cmd === "setup" ? setupJourney() : cleanupJourney());
 else if (suite === "module1") await (cmd === "setup" ? setupModule1() : cleanupModule1());
-else await (cmd === "setup" ? setupExport() : cleanupExport());
+else if (suite === "export") await (cmd === "setup" ? setupExport() : cleanupExport());
+else await (cmd === "setup" ? setupDeletion() : cleanupDeletion());
 if (cmd === "cleanup") writeFileSync(envOut, "", { mode: 0o600 });
