@@ -53,10 +53,12 @@ describe("retention facts for the daily job", () => {
       await db.query("insert into public.deletion_requests (user_id) values ($1)", [refunded]);
       await db.query("insert into public.retention_notices (user_id, kind, access_ended_at) values ($1, '30_days', app.access_ended_at($1))", [ended]);
       await db.query("set local role service_role");
-      const rows = (await db.query("select user_id, is_staff, has_open_request, notices from public.retention_facts() where user_id = any($1)", [[active, ended, refunded, staff, never]])).rows;
+      const rows = (await db.query("select user_id, basis, is_staff, has_open_request, held, notices from public.retention_facts() where user_id = any($1)", [[active, ended, refunded, staff, never]])).rows;
       const by = Object.fromEntries(rows.map((r) => [r.user_id, r]));
-      expect(Object.keys(by).sort()).toEqual([ended, refunded, staff].sort());
-      expect(by[ended]).toMatchObject({ is_staff: false, has_open_request: false, notices: ["30_days"] });
+      // Active members are not listed; the account that never bought anything is, under the inactivity rule.
+      expect(Object.keys(by).sort()).toEqual([ended, refunded, staff, never].sort());
+      expect(by[never]).toMatchObject({ basis: "inactive", is_staff: false, held: false });
+      expect(by[ended]).toMatchObject({ basis: "access_ended", is_staff: false, has_open_request: false, held: false, notices: ["30_days"] });
       expect(by[refunded]).toMatchObject({ has_open_request: true });
       expect(by[staff]).toMatchObject({ is_staff: true });
     } finally {
@@ -94,3 +96,45 @@ describe("purchase record retention", () => {
     }
   });
 });
+
+describe("payments still owed hold a deletion", () => {
+  it("counts remaining installments and past due memberships; members see only their own, admins anyone", async () => {
+    const owing = await createUser(db, "ret-owing");
+    try {
+      await paidOrder(db, owing, "blueprint", { plan: "six_installments" });
+      await db.query("update public.orders set installments_paid = 2 where user_id = $1", [owing]);
+      const mine = await asUser(db, owing, (q) => q("select kind, sku, remaining_payments, amount_cents from public.deletion_balances($1)", [[owing, active]]));
+      expect(mine).toEqual([{ kind: "installments", sku: "blueprint", remaining_payments: 4, amount_cents: "38800" }]);
+      expect(await asUser(db, ended, (q) => q("select 1 from public.deletion_balances($1)", [[owing]]))).toHaveLength(0);
+      expect(await asUser(db, admin, (q) => q("select 1 from public.deletion_balances($1)", [[owing]]))).toHaveLength(1);
+      await db.query("begin");
+      try {
+        await db.query("update public.entitlements set starts_at = '2024-01-01', ends_at = '2025-01-01' where user_id = $1", [owing]);
+        await db.query("set local role service_role");
+        const [f] = (await db.query("select held from public.retention_facts() where user_id = $1", [owing])).rows;
+        expect(f).toEqual({ held: true });
+      } finally {
+        await db.query("rollback");
+      }
+    } finally {
+      await db.query("delete from public.orders where user_id = $1", [owing]);
+      await db.query("delete from auth.users where id = $1", [owing]);
+    }
+  });
+});
+
+describe("admins record a deletion request for a member", () => {
+  it("creates one open request, logs the admin, and is admins only", async () => {
+    const rows = await asUser(db, admin, async (q) => {
+      const [first] = await q<{ id: string; recorded_by: string; status: string }>("select * from public.admin_record_deletion($1)", [ended]);
+      const [again] = await q<{ id: string }>("select * from public.admin_record_deletion($1)", [ended]);
+      expect(again!.id).toBe(first!.id);
+      expect(first).toMatchObject({ recorded_by: admin, status: "pending" });
+      return q("select actor_id, action from public.admin_audit_log where entity_id = $1", [first!.id]);
+    });
+    expect(rows).toEqual([{ actor_id: admin, action: "deletion.recorded" }]);
+    await expect(asUser(db, staff, (q) => q("select * from public.admin_record_deletion($1)", [ended]))).rejects.toThrow(/admin role required/);
+    await expect(asUser(db, admin, (q) => q("select * from public.admin_record_deletion($1)", [admin]))).rejects.toThrow(/use My Account/);
+  });
+});
+

@@ -38,12 +38,20 @@ test("the job deletes the member 12 months after access ended, reminds at 30 and
   const first = await runJob(api);
   expect(first.failures).toBe(0);
   expect(first.retentionDeleted).toBeGreaterThanOrEqual(1);
-  expect(first.remindersSent).toBeGreaterThanOrEqual(2);
+  const inactive = Boolean(process.env.E2E_RET_INACTIVE_OLD_EMAIL);
+  // Lapsed: one 30 day and one 7 day reminder; no purchase: one 30 day reminder.
+  expect(first.remindersSent).toBeGreaterThanOrEqual(inactive ? 3 : 2);
+  expect(first.retentionDeleted).toBeGreaterThanOrEqual(inactive ? 2 : 1);
 
   expect(await canSignIn(browser, process.env.E2E_RET_EXPIRED_EMAIL!, process.env.E2E_RET_EXPIRED_PASSWORD!)).toBe(false);
   expect(await canSignIn(browser, process.env.E2E_RET_THIRTY_EMAIL!, process.env.E2E_RET_THIRTY_PASSWORD!)).toBe(true);
   expect(await canSignIn(browser, process.env.E2E_RET_SEVEN_EMAIL!, process.env.E2E_RET_SEVEN_PASSWORD!)).toBe(true);
   expect(await canSignIn(browser, process.env.E2E_RET_ACTIVE_EMAIL!, process.env.E2E_RET_ACTIVE_PASSWORD!)).toBe(true);
+  if (inactive) {
+    // No purchase and no sign in for a year and a day: deleted. Last sign in a year less 20 days ago: kept.
+    expect(await canSignIn(browser, process.env.E2E_RET_INACTIVE_OLD_EMAIL!, process.env.E2E_RET_INACTIVE_OLD_PASSWORD!)).toBe(false);
+    expect(await canSignIn(browser, process.env.E2E_RET_INACTIVE_SOON_EMAIL!, process.env.E2E_RET_INACTIVE_SOON_PASSWORD!)).toBe(true);
+  }
 
   // The next run sends no reminder twice and deletes nothing more.
   const second = await runJob(api);

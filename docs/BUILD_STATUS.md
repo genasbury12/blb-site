@@ -16,6 +16,13 @@ Status of The BOSS Business System portal build. Updated at every milestone (con
 | 7 Marketing and admin | Admin workspace complete; public sales and masterclass pages wait on approved copy and video |
 | 8 Internal QA and release | Staging Supabase migrated, six test accounts provisioned, signed in permission and browser checks passing (2026-11-02); auth settings, Vercel and Stripe test mode pending; owner sign off pending |
 
+## Data rights: owner decisions after Slice C (2026-11-04)
+
+- **Balance owed holds a deletion** (migration `20261104002200_deletion_holds_inactivity_recorded.sql`, applied to staging): payment plan with payments left, or a membership payment past due. The daily job never runs those requests; the card shows "Payments still owed" with each item and "Waits for you"; the member is told the team will review first. Retention for such members opens a request instead of deleting.
+- **Accounts with no purchase** are deleted 12 months after the last sign in, with the same reminders and their own wording.
+- **Record deletion request** on the admin member page.
+- Checks: lint, check:copy, unit 207, db 128; staging deletion suite 5 of 5 (new: owing member left by the job, balance and plan shown, request recorded by an admin), retention suite 2 of 2 including two accounts with no purchase (one deleted after a year without signing in, one kept). Before running, the job's view of staging was checked: every real account it covers is staff (excluded) or due no earlier than November 2027.
+
 ## Data rights, Slice C: retention, reminders, privacy text, Data settings (2026-11-04)
 
 - **Rules** in one place, `src/domain/data-rights/retention.ts` (owner defaults): deletion requests within 30 days; after access ends, data and the download stay 12 months, reminders 30 and 7 days before, then the account is deleted by the Slice B process; anonymized purchase records kept 7 years then removed; audit log kept, anonymized; staff never part of retention.

@@ -10,8 +10,10 @@ import { sendEmail } from "./email";
 /**
  * 10_DATA_RIGHTS daily job (Slices B and C), run by Vercel Cron through /api/cron/data-rights:
  *   1. reminders 30 and 7 days before a lapsed member's account is deleted;
- *   2. lapsed members past 12 months: a deletion request (origin "retention") carried out at once;
- *   3. members' own requests past their 30 days, and any deletion left half done;
+ *   2. lapsed members past 12 months (origin "retention") and accounts with no purchase 12 months after their last
+ *      sign in (origin "inactivity"): a deletion request carried out at once, unless they owe a balance;
+ *   3. members' own requests past their 30 days, and any deletion left half done, again unless a balance is owed
+ *      (those always wait for an admin);
  *   4. anonymized purchase records older than 7 years removed.
  * Each run is recorded in job_runs with counts only.
  */
@@ -25,6 +27,8 @@ export type JobSummary = {
   requestsDeleted: number;
   anonymized: number;
   purchaseRecordsRemoved: number;
+  /** Requests opened for members who owe a balance: they wait for an admin. */
+  heldForAdmin: number;
   failures: number;
 };
 
@@ -34,7 +38,7 @@ export async function runDataRightsJob(now = new Date()): Promise<JobSummary & {
   const db = createSupabaseAdminClient();
   const { data: run, error: runError } = await db.from("job_runs").insert({ job: DATA_RIGHTS_JOB, started_at: now.toISOString() }).select("id").single();
   if (runError) throw new Error(runError.message);
-  const s: JobSummary = { remindersSent: 0, reminderFailures: 0, retentionDeleted: 0, requestsDeleted: 0, anonymized: 0, purchaseRecordsRemoved: 0, failures: 0 };
+  const s: JobSummary = { remindersSent: 0, reminderFailures: 0, retentionDeleted: 0, requestsDeleted: 0, anonymized: 0, purchaseRecordsRemoved: 0, heldForAdmin: 0, failures: 0 };
   const fail = (step: string, err: unknown) => {
     s.failures += 1;
     logEvent("error", "data rights job step failed", { step, message: err instanceof Error ? err.message.slice(0, 200) : "unknown" });
@@ -44,11 +48,13 @@ export async function runDataRightsJob(now = new Date()): Promise<JobSummary & {
   try {
     const { data, error } = await db.rpc("retention_facts", { p_at: now.toISOString() });
     if (error) throw new Error(error.message);
-    const facts: RetentionFact[] = ((data ?? []) as { user_id: string; access_ended_at: string; is_staff: boolean; has_open_request: boolean; notices: string[] }[]).map((r) => ({
+    const facts: RetentionFact[] = ((data ?? []) as { user_id: string; basis: RetentionFact["basis"]; since: string; is_staff: boolean; has_open_request: boolean; held: boolean; notices: string[] }[]).map((r) => ({
       userId: r.user_id,
-      accessEndedAt: new Date(r.access_ended_at),
+      basis: r.basis,
+      since: new Date(r.since),
       isStaff: r.is_staff,
       hasOpenRequest: r.has_open_request,
+      held: r.held,
       notices: r.notices ?? [],
     }));
     for (const a of planRetention(facts, now)) {
@@ -62,7 +68,8 @@ export async function runDataRightsJob(now = new Date()): Promise<JobSummary & {
           const result = email
             ? await sendEmail(email, retentionReminder({
                 name: (profile?.display_name as string | null) ?? null,
-                endedOn: day.format(a.accessEndedAt),
+                basis: a.basis,
+                endedOn: day.format(a.since),
                 deleteOn: day.format(a.deleteOn),
                 daysLeft: a.kind === "7_days" ? 7 : 30,
                 url: `${publicEnv().NEXT_PUBLIC_SITE_URL}/app/account#your-data`,
@@ -73,12 +80,18 @@ export async function runDataRightsJob(now = new Date()): Promise<JobSummary & {
             s.reminderFailures += 1;
             continue;
           }
-          const { error: nErr } = await db.from("retention_notices").insert({ user_id: a.userId, kind: a.kind, access_ended_at: a.accessEndedAt.toISOString() });
+          const { error: nErr } = await db.from("retention_notices").insert({ user_id: a.userId, kind: a.kind, access_ended_at: a.since.toISOString() });
           if (nErr && nErr.code !== "23505") throw new Error(nErr.message);
           s.remindersSent += 1;
         } else {
-          const { data: req, error: rErr } = await db.from("deletion_requests").insert({ user_id: a.userId, origin: "retention", due_at: now.toISOString() }).select("id").single();
+          const origin = a.basis === "inactive" ? "inactivity" : "retention";
+          const { data: req, error: rErr } = await db.from("deletion_requests").insert({ user_id: a.userId, origin, due_at: now.toISOString() }).select("id").single();
           if (rErr) throw new Error(rErr.message);
+          // Owes a balance: the request waits for an admin (shown on Deletion requests with the balance).
+          if (a.held) {
+            s.heldForAdmin += 1;
+            continue;
+          }
           const r = await executeDeletion(req.id as string, null);
           if (r.outcome === "anonymized") s.anonymized += 1;
           else s.retentionDeleted += 1;

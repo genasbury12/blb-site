@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 import { z } from "zod";
 import { executeDeletion } from "@/lib/server/data-deletion";
 import { getUserEmail } from "@/lib/server/directory";
-import { errorState, type FormState } from "@/lib/server/form-result";
+import { errorState, okState, type FormState } from "@/lib/server/form-result";
 import { logEvent } from "@/lib/observability";
 import { authorizeStaff } from "@/lib/server/staff";
 
@@ -36,4 +36,28 @@ export async function deleteNow(_prev: FormState, fd: FormData): Promise<FormSta
   // The request leaves the pending list, so the result is shown at the top of the page.
   revalidatePath("/admin/students/deletions");
   redirect(`/admin/students/deletions?done=${outcome}`);
+}
+
+const recordSchema = z.object({ userId: z.string().uuid(), confirm: z.literal("on") });
+
+/** Owner decision 2026-11-04: an admin records a deletion request the member made another way (for example by email). */
+export async function recordDeletionRequest(_prev: FormState, fd: FormData): Promise<FormState> {
+  const parsed = recordSchema.safeParse({ userId: fd.get("userId"), confirm: fd.get("confirm") });
+  if (!parsed.success) return errorState("Tick the box to confirm the member asked for this.");
+  let admin;
+  try {
+    admin = await authorizeStaff(["admin"]);
+  } catch {
+    return errorState("Your role does not allow this.");
+  }
+  const { data, error } = await admin.supabase.rpc("admin_record_deletion", { p_user: parsed.data.userId }).single();
+  if (error || !data) {
+    if (error?.message.includes("use My Account")) return errorState("This is your own account. Use My Account to delete it.");
+    logEvent("error", "record deletion failed", { code: error?.code ?? null });
+    return errorState("The request could not be recorded. Nothing was changed.");
+  }
+  logEvent("info", "deletion recorded by admin", { requestId: (data as { id: string }).id });
+  revalidatePath(`/admin/students/${parsed.data.userId}`);
+  revalidatePath("/admin/students/deletions");
+  return okState("Recorded. It is on Deletion requests and follows the same rules as a request from the member.");
 }

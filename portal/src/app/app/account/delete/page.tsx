@@ -14,6 +14,8 @@ export default async function DeleteAccountPage() {
   const { supabase, user } = await requireSession("/app/account/delete");
   const { data: open } = await supabase.from("deletion_requests").select("id").eq("user_id", user.id).in("status", ["pending", "processing"]).maybeSingle();
   if (open) redirect("/app/account#your-data");
+  const { data: owed } = await supabase.rpc("deletion_balances", { p_users: [user.id] });
+  const owes = (owed ?? []).length > 0;
 
   return (
     <div className="max-w-2xl space-y-8">
@@ -43,8 +45,13 @@ export default async function DeleteAccountPage() {
 
       <Card>
         <CardTitle className="text-xl">What happens next</CardTitle>
+        {owes ? (
+          <p className="mt-2 text-sm font-semibold">
+            You still have payments due on your plan. Our team will review your request and contact you before your account is deleted.
+          </p>
+        ) : null}
         <p className="mt-2 text-sm">
-          Your account will be deleted within 30 days, and you will get an email when it is done. Until then you can still sign in, download your data and cancel the request from My Account.
+          {owes ? "You will get an email when it is done." : "Your account will be deleted within 30 days, and you will get an email when it is done."} Until then you can still sign in, download your data and cancel the request from My Account.
           If you want a copy of your answers and PDFs, <Link className="text-plum underline" href="/app/account#your-data">download your data</Link> first.
         </p>
         <div className="mt-5">

@@ -123,20 +123,44 @@ export async function executeDeletion(requestId: string, adminId: string | null)
   const { error: finError } = await db.rpc("erase_member_finish", { p_request: requestId, p_admin: adminId });
   if (finError) throw new Error(finError.message);
 
-  const template = req.origin === "retention" ? retentionDeleted({ name }) : deletionCompleted({ name });
+  const template =
+    req.origin === "retention" ? retentionDeleted({ name, basis: "access_ended" }) : req.origin === "inactivity" ? retentionDeleted({ name, basis: "inactive" }) : deletionCompleted({ name });
   const emailed = email ? (await sendEmail(email, template)) === "sent" : false;
   logEvent("info", "deletion completed", { requestId, outcome, files: removed, stripeCustomers, via: adminId ? "admin" : "schedule" });
   return { requestId, outcome, emailed };
 }
 
-/** Requests the daily job runs: pending past their 30 day due date, or stuck in processing for over an hour. */
+/**
+ * Requests the daily job runs: pending past their 30 day due date, or stuck in processing for over an hour. Never a
+ * request from a member who still owes a balance (owner decision 2026-11-04): those wait for an admin.
+ */
 export async function dueDeletionRequests(now = new Date()): Promise<string[]> {
   const db = createSupabaseAdminClient();
   const [due, stuck] = await Promise.all([
-    db.from("deletion_requests").select("id").eq("status", "pending").lte("due_at", now.toISOString()).order("due_at"),
-    db.from("deletion_requests").select("id").eq("status", "processing").lte("processing_started_at", new Date(now.getTime() - 3600e3).toISOString()),
+    db.from("deletion_requests").select("id, user_id").eq("status", "pending").lte("due_at", now.toISOString()).order("due_at"),
+    db.from("deletion_requests").select("id, user_id").eq("status", "processing").lte("processing_started_at", new Date(now.getTime() - 3600e3).toISOString()),
   ]);
   if (due.error) throw new Error(due.error.message);
   if (stuck.error) throw new Error(stuck.error.message);
-  return [...(due.data ?? []), ...(stuck.data ?? [])].map((r) => r.id as string);
+  const rows = [...(due.data ?? []), ...(stuck.data ?? [])];
+  const owing = await usersOwing(rows.map((r) => r.user_id as string).filter(Boolean));
+  return rows.filter((r) => !owing.has(r.user_id as string)).map((r) => r.id as string);
+}
+
+export type Balance = { kind: "installments" | "membership_past_due"; sku: string; remainingPayments: number; amountCents: number };
+
+/** What each member still owes (plan payments left, membership payments past due). Server use. */
+export async function balancesFor(userIds: string[]): Promise<Map<string, Balance[]>> {
+  const out = new Map<string, Balance[]>();
+  if (!userIds.length) return out;
+  const { data, error } = await createSupabaseAdminClient().rpc("deletion_balances", { p_users: userIds });
+  if (error) throw new Error(error.message);
+  for (const r of (data ?? []) as { user_id: string; kind: Balance["kind"]; sku: string; remaining_payments: number; amount_cents: number | string }[]) {
+    out.set(r.user_id, [...(out.get(r.user_id) ?? []), { kind: r.kind, sku: r.sku, remainingPayments: r.remaining_payments, amountCents: Number(r.amount_cents) }]);
+  }
+  return out;
+}
+
+async function usersOwing(userIds: string[]) {
+  return new Set((await balancesFor(userIds)).keys());
 }

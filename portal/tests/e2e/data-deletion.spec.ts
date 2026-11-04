@@ -111,3 +111,32 @@ test("the daily job deletes requests past 30 days, and refuses callers without t
   await api.dispose();
   await expectSignInRefused(browser, process.env.E2E_DEL_OVERDUE_EMAIL!, process.env.E2E_DEL_OVERDUE_PASSWORD!);
 });
+
+test("a member who still owes payments is never deleted by the job; the card shows the balance and waits for an admin", async ({ browser }) => {
+  const page = await (await browser.newContext()).newPage();
+  await page.goto("/login?next=%2Fadmin%2Fstudents%2Fdeletions");
+  await page.getByLabel("Email").fill(process.env.E2E_DEL_ADMIN_EMAIL!);
+  await page.getByLabel("Password").fill(process.env.E2E_DEL_ADMIN_PASSWORD!);
+  await page.getByRole("button", { name: "Sign in" }).click();
+  await page.waitForURL((u) => u.pathname.startsWith("/admin"));
+  await page.goto("/admin/students/deletions", { waitUntil: "networkidle" });
+  // The job above ran after this request was 30 days old, and left it.
+  const card = pendingCard(page, process.env.E2E_DEL_OWING_EMAIL!);
+  await expect(card).toHaveCount(1);
+  await expect(card).toContainText("Waits for you");
+  await expect(card.getByTestId("deletion-balance")).toContainText(/Payments still owed: \$\d[\d,]*\.\d{2}/);
+  await expect(card.getByTestId("deletion-balance")).toContainText("Blueprint payment plan: 5 payments left");
+  await expect(card.getByTestId("deletion-balance")).toContainText("never carried out automatically");
+
+  // Record a request for a member who asked by email.
+  await page.goto(`/admin/students/${process.env.E2E_DEL_RECORD_ID}`, { waitUntil: "networkidle" });
+  await page.getByRole("button", { name: "Record deletion request" }).click();
+  await expect(page.getByText("Tick the box to confirm the member asked for this.")).toBeVisible();
+  await page.getByLabel(/The member asked for their account and data to be deleted/).check();
+  await page.getByRole("button", { name: "Record deletion request" }).click();
+  // The form gives way to the request's status once it is recorded.
+  await expect(page.getByTestId("member-deletion-status")).toContainText(/Deletion requested on \w+ \d+, \d{4}\./);
+  await page.goto("/admin/students/deletions", { waitUntil: "networkidle" });
+  await expect(page.getByTestId("deletion-request").filter({ hasText: "STAGING TEST record deletion" })).toContainText("recorded by an admin");
+});
+

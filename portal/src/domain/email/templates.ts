@@ -38,18 +38,27 @@ export function deletionCompleted(p: { name: string | null }): Email {
   };
 }
 
-/** Data rights Slice C: 30 and 7 days before a lapsed member's account is deleted. */
-export function retentionReminder(p: { name: string | null; endedOn: string; deleteOn: string; daysLeft: number; url: string }): Email {
+/** Data rights Slice C: 30 and 7 days before an account is deleted (access ended, or never bought and not signed in). */
+export function retentionReminder(p: { name: string | null; basis: "access_ended" | "inactive"; endedOn: string; deleteOn: string; daysLeft: number; url: string }): Email {
+  const why =
+    p.basis === "inactive"
+      ? `You have not signed in to The BOSS Business System since ${p.endedOn}. We keep accounts without a purchase for 12 months after the last sign in, so we will delete your account and your data on ${p.deleteOn}.`
+      : `Your access to The BOSS Business System ended on ${p.endedOn}. We keep accounts for 12 months after access ends, so we will delete your account and your data on ${p.deleteOn}.`;
+  const keep = p.basis === "inactive" ? "If you want to keep your account, just sign in before that date." : "If you join again before that date, your account and everything in it stay.";
   return {
     subject: p.daysLeft <= 7 ? "Your BOSS account will be deleted in 7 days" : "Your BOSS account will be deleted in 30 days",
-    text: `Hi ${p.name ?? "there"},\n\nYour access to The BOSS Business System ended on ${p.endedOn}. We keep accounts for 12 months after access ends, so we will delete your account and your data on ${p.deleteOn}.\n\nIf you want to keep your worksheet answers, audit and PDFs, download them before then from My Account:\n${p.url}\n\nIf you join again before that date, your account and everything in it stay.${sign}`,
+    text: `Hi ${p.name ?? "there"},\n\n${why}\n\nIf you want a copy of what is in it, download it before then from My Account:\n${p.url}\n\n${keep}${sign}`,
   };
 }
 
-/** Data rights Slice C: after a lapsed member's account was deleted under the retention rule. */
-export function retentionDeleted(p: { name: string | null }): Email {
+/** Data rights Slice C: after an account was deleted under a retention rule. */
+export function retentionDeleted(p: { name: string | null; basis: "access_ended" | "inactive" }): Email {
+  const why =
+    p.basis === "inactive"
+      ? "You had not signed in to The BOSS Business System for more than a year, so your account and your data have now been deleted."
+      : "Your access to The BOSS Business System ended more than a year ago, so your account and your data have now been deleted.";
   return {
     subject: "Your account has been deleted",
-    text: `Hi ${p.name ?? "there"},\n\nYour access to The BOSS Business System ended more than a year ago, so your account and your data have now been deleted. We kept only the record of your purchases, which we need for tax and refunds, and our activity log. In both, your name and email are replaced by an anonymous code.${sign}`,
+    text: `Hi ${p.name ?? "there"},\n\n${why} We kept only the record of any purchases, which we need for tax and refunds, and our activity log. In both, your name and email are replaced by an anonymous code.${sign}`,
   };
 }

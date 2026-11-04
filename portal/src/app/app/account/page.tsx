@@ -56,6 +56,8 @@ export default async function AccountPage({ searchParams }: { searchParams: Prom
     supabase.from("orders").select("id, sku, payment_plan, status, installments_paid, installments_total, created_at").eq("user_id", user.id).order("created_at", { ascending: false }),
     supabase.from("deletion_requests").select("status, requested_at").eq("user_id", user.id).in("status", ["pending", "processing"]).maybeSingle(),
   ]);
+  // A member who still owes payments is reviewed by the team first (owner decision 2026-11-04).
+  const owes = deletion.data ? ((await supabase.rpc("deletion_balances", { p_users: [user.id] })).data ?? []).length > 0 : false;
   const openDeletion = deletion.data as { status: string; requested_at: string } | null;
 
   // Latest end date per feature among grants, showing whether each is currently active.
@@ -141,7 +143,11 @@ export default async function AccountPage({ searchParams }: { searchParams: Prom
             {openDeletion ? (
               <>
                 <p className="text-sm font-semibold">Requested on {formatDate(openDeletion.requested_at)}.</p>
-                <p className="mt-1 text-sm">Your account will be deleted within 30 days. You&apos;ll get an email when it&apos;s done.</p>
+                {owes ? (
+                  <p className="mt-1 text-sm">You still have payments due on your plan, so our team will review your request and contact you before your account is deleted. You&apos;ll get an email when it&apos;s done.</p>
+                ) : (
+                  <p className="mt-1 text-sm">Your account will be deleted within 30 days. You&apos;ll get an email when it&apos;s done.</p>
+                )}
                 {openDeletion.status === "pending" ? (
                   <form action={cancelDeletion} className="mt-3">
                     <button type="submit" className="min-h-11 rounded-full border border-mauve bg-white px-5 text-sm font-semibold text-ink hover:bg-rose-soft">

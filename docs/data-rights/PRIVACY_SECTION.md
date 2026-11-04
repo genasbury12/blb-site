@@ -30,7 +30,7 @@ This stays available after your program access ends, until your account is delet
 
 ### Delete your account and data
 
-Go to **My Account**, then **Your data**, then **Delete my account and data**. The page explains what will happen, and you confirm by typing DELETE. Your account is deleted within 30 days, and we email you when it is done. Until then you can still sign in, download your data, or cancel the request.
+Go to **My Account**, then **Your data**, then **Delete my account and data**. The page explains what will happen, and you confirm by typing DELETE. Your account is deleted within 30 days, and we email you when it is done. Until then you can still sign in, download your data, or cancel the request. If you still have payments due on a payment plan, our team reviews your request and contacts you before your account is deleted. If you cannot sign in, contact us and we can record the request for you.
 
 **What is deleted:** your account and sign in, your profile, your audit, roadmap, progress, milestones and worksheet answers, your coaching questions, Hot Seat applications and feedback, your Elite workspace, every file you uploaded, and your customer record at Stripe.
 
@@ -46,11 +46,16 @@ Go to **My Account**, then **Your data**, then **Delete my account and data**. T
 
 Your account and everything in it stay for **12 months** after your program access ends, so you can come back or download your data. We email you **30 days** and **7 days** before we delete it. If you join again before then, nothing is deleted. After 12 months, the account is deleted the same way as if you had asked.
 
+### Accounts without a purchase
+
+If you created an account but never bought a program or membership, we delete it **12 months after your last sign in**, with the same reminder emails 30 and 7 days before. Signing in keeps it.
+
 ### How long we keep things
 
 | What | How long |
 |---|---|
 | Your account and your work | While you have access, then 12 months |
+| An account with no purchase | 12 months after the last sign in |
 | A deletion you ask for | Carried out within 30 days |
 | Purchase records (anonymized after deletion) | 7 years |
 | Activity log (anonymized after deletion) | Kept |

@@ -8,6 +8,7 @@ import { Alert } from "@/components/ui/alert";
 import { buttonVariants } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/cn";
+import { balancesFor, type Balance } from "@/lib/server/data-deletion";
 import { getUserEmails } from "@/lib/server/directory";
 import { requireStaff } from "@/lib/server/staff";
 import { deleteNow } from "../deletion-actions";
@@ -21,7 +22,10 @@ const TABS = [
 ] as const;
 type Tab = (typeof TABS)[number]["key"];
 
-type Row = { id: string; user_id: string | null; status: string; outcome: string | null; subject_token: string | null; requested_at: string; due_at: string; cancelled_at: string | null; completed_at: string | null; completed_by: string | null };
+type Row = { id: string; user_id: string | null; status: string; outcome: string | null; subject_token: string | null; requested_at: string; due_at: string; cancelled_at: string | null; completed_at: string | null; completed_by: string | null; origin: string; recorded_by: string | null };
+
+const SKU_LABELS: Record<string, string> = { blueprint: "Blueprint", accelerator: "Accelerator", elite: "Elite", graduate_coaching: "Graduate coaching", elite_board: "Elite board" };
+const money = (cents: number) => new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(cents / 100);
 
 /** 10_DATA_RIGHTS Slice B. Admins only: coaches never see deletion requests (Slice D). */
 export default async function DeletionRequestsPage({ searchParams }: { searchParams: Promise<{ tab?: string; done?: string }> }) {
@@ -31,20 +35,21 @@ export default async function DeletionRequestsPage({ searchParams }: { searchPar
   const statuses = tab === "pending" ? ["pending", "processing"] : [tab];
   const { data, error } = await supabase
     .from("deletion_requests")
-    .select("id, user_id, status, outcome, subject_token, requested_at, due_at, cancelled_at, completed_at, completed_by")
+    .select("id, user_id, status, outcome, subject_token, requested_at, due_at, cancelled_at, completed_at, completed_by, origin, recorded_by")
     .in("status", statuses)
     .order(tab === "pending" ? "due_at" : "requested_at", { ascending: tab === "pending" })
     .limit(200);
   if (error) throw new Error(error.message);
   const rows = (data ?? []) as Row[];
   const ids = rows.map((r) => r.user_id).filter(Boolean) as string[];
-  const [emails, profiles, roles, actors, plans, subs] = await Promise.all([
+  const [emails, profiles, roles, actors, plans, subs, owed] = await Promise.all([
     getUserEmails(ids),
     ids.length ? supabase.from("profiles").select("user_id, display_name").in("user_id", ids) : Promise.resolve({ data: [] }),
     ids.length ? supabase.from("user_roles").select("user_id").in("user_id", ids) : Promise.resolve({ data: [] }),
     ids.length ? supabase.from("admin_audit_log").select("actor_id").in("actor_id", ids).limit(1000) : Promise.resolve({ data: [] }),
     ids.length ? supabase.from("orders").select("user_id").in("user_id", ids).in("status", ["installments_current", "installments_past_due"]) : Promise.resolve({ data: [] }),
     ids.length ? supabase.from("subscriptions").select("user_id").in("user_id", ids).in("status", ["active", "past_due", "unpaid"]) : Promise.resolve({ data: [] }),
+    tab === "pending" ? balancesFor(ids) : Promise.resolve(new Map<string, Balance[]>()),
   ]);
   const paying = new Set([...(plans.data ?? []), ...(subs.data ?? [])].map((r) => r.user_id as string));
   const nameOf = new Map((profiles.data ?? []).map((p) => [p.user_id as string, (p.display_name as string | null) ?? "Member"]));
@@ -86,13 +91,36 @@ export default async function DeletionRequestsPage({ searchParams }: { searchPar
                 <div className="flex flex-wrap items-baseline justify-between gap-3">
                   <h2 className="font-display text-2xl">{r.user_id ? (nameOf.get(r.user_id) ?? "Member") : "Account already removed"}</h2>
                   <p className="text-sm text-ink-muted">
-                    Requested {fmtShort(r.requested_at)} · {r.status === "processing" ? "Deletion started, not finished" : daysLeft > 0 ? `Deleted automatically in ${daysLeft} day${daysLeft === 1 ? "" : "s"}` : "Due now"}
+                    Requested {fmtShort(r.requested_at)}
+                    {r.origin !== "member" ? ` (${r.origin === "inactivity" ? "no sign in for 12 months" : "access ended 12 months ago"})` : r.recorded_by ? " (recorded by an admin)" : ""} ·{" "}
+                    {r.status === "processing"
+                      ? "Deletion started, not finished"
+                      : r.user_id && owed.has(r.user_id)
+                        ? "Waits for you"
+                        : daysLeft > 0
+                          ? `Deleted automatically in ${daysLeft} day${daysLeft === 1 ? "" : "s"}`
+                          : "Due now"}
                   </p>
                 </div>
                 {email ? <p className="mt-1 text-sm">{email}</p> : null}
-                {r.user_id && paying.has(r.user_id) ? (
+                {r.user_id && owed.has(r.user_id) ? (
+                  <div className="mt-3" data-testid="deletion-balance">
+                    <Alert tone="warning" title={`Payments still owed: ${money(owed.get(r.user_id)!.reduce((t, b) => t + b.amountCents, 0))}`}>
+                      <ul className="mt-1 list-disc pl-5">
+                        {owed.get(r.user_id)!.map((b, i) => (
+                          <li key={i}>
+                            {b.kind === "installments"
+                              ? `${SKU_LABELS[b.sku] ?? b.sku} payment plan: ${b.remainingPayments} payment${b.remainingPayments === 1 ? "" : "s"} left, ${money(b.amountCents)}`
+                              : `${SKU_LABELS[b.sku] ?? b.sku} membership: payment past due, ${money(b.amountCents)}`}
+                          </li>
+                        ))}
+                      </ul>
+                      <p className="mt-2">This request is never carried out automatically. Deleting now also deletes the Stripe customer, which cancels the remaining payments.</p>
+                    </Alert>
+                  </div>
+                ) : r.user_id && paying.has(r.user_id) ? (
                   <div className="mt-3">
-                    <Alert tone="warning">This member has a payment plan or membership in progress. Deleting their Stripe customer cancels the remaining payments.</Alert>
+                    <Alert tone="warning">This member has a membership in progress. Deleting their Stripe customer cancels it.</Alert>
                   </div>
                 ) : null}
                 {r.user_id && staff.has(r.user_id) ? (

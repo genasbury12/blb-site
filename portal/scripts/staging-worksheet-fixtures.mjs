@@ -79,11 +79,11 @@ async function findUser(email) {
   return { hit: undefined, users: [] };
 }
 
-async function newMember(displayName) {
+async function newMember(displayName, plan = "pay_in_full") {
   const email = `staging-worksheet-${hex()}@example.invalid`, pw = password();
   const u = await api("POST", "/auth/v1/admin/users", { email, password: pw, email_confirm: true, user_metadata: { display_name: displayName } });
   await api("POST", "/rest/v1/rpc/billing_apply_checkout", {
-    p: { session_id: `cs_test_fixture_${randomUUID()}`, user_id: u.id, email, sku: "blueprint", plan: "pay_in_full", payment_status: "paid", payment_intent_id: `pi_test_fixture_${randomUUID()}` },
+    p: { session_id: `cs_test_fixture_${randomUUID()}`, user_id: u.id, email, sku: "blueprint", plan, payment_status: "paid", payment_intent_id: `pi_test_fixture_${randomUUID()}` },
   });
   return { id: u.id, email, password: pw };
 }
@@ -265,10 +265,15 @@ async function setupDeletion() {
   const iso = (ms) => new Date(ms).toISOString();
   const member = await newMember("STAGING TEST deletion");
   const overdue = await newMember("STAGING TEST overdue deletion");
+  // On a six payment plan with payments left: an overdue request must wait for an admin.
+  const owing = await newMember("STAGING TEST owing deletion", "six_installments");
+  await api("PATCH", `/rest/v1/orders?user_id=eq.${owing.id}`, { status: "installments_current", installments_paid: 1 });
+  // A member with no request, for the admin "Record deletion request" action.
+  const recordable = await newMember("STAGING TEST record deletion");
   const coachEmail = `staging-ws-coach-${hex()}@example.invalid`, coachPw = password();
   const coach = await api("POST", "/auth/v1/admin/users", { email: coachEmail, password: coachPw, email_confirm: true, user_metadata: { display_name: "STAGING TEST staff deletion" } });
   // Record the accounts first, so cleanup finds them even if a later step fails.
-  writeFileSync(STATE, JSON.stringify({ memberIds: [member.id, overdue.id, coach.id] }), { mode: 0o600 });
+  writeFileSync(STATE, JSON.stringify({ memberIds: [member.id, overdue.id, coach.id, owing.id, recordable.id] }), { mode: 0o600 });
   await api("POST", "/rest/v1/user_roles", { user_id: coach.id, role: "coach" });
   await api("POST", "/rest/v1/worksheet_responses", { user_id: member.id, worksheet_slug: "m1-l1-starting-point", worksheet_version: 1, answers: L1_ANSWERS, status: "complete", completed_at: iso(now - 3600e3) });
   await api("POST", "/rest/v1/path_overrides", { user_id: member.id, chosen_path: "build_from_scratch", reason: "Test reason", actor_id: member.id });
@@ -278,7 +283,7 @@ async function setupDeletion() {
   const [otherPost] = await api("POST", "/rest/v1/community_posts", { user_id: overdue.id, title: "STAGING TEST other post", body: "STAGING TEST other member post" });
   await api("POST", "/rest/v1/community_comments", { post_id: post.id, user_id: overdue.id, body: "STAGING TEST reply that must stay" });
   await api("POST", "/rest/v1/community_comments", { post_id: otherPost.id, user_id: member.id, body: "STAGING TEST reply words that must disappear" });
-  writeFileSync(STATE, JSON.stringify({ memberIds: [member.id, overdue.id, coach.id], postIds: [post.id, otherPost.id] }), { mode: 0o600 });
+  writeFileSync(STATE, JSON.stringify({ memberIds: [member.id, overdue.id, coach.id, owing.id, recordable.id], postIds: [post.id, otherPost.id] }), { mode: 0o600 });
   // A real Stripe test mode customer for the member (test keys only).
   let stripeCustomer = "";
   const sk = process.env.STAGING_STRIPE_SECRET_KEY ?? process.env.STRIPE_SECRET_KEY ?? "";
@@ -287,13 +292,14 @@ async function setupDeletion() {
     if (!r.ok) throw new Error(`Stripe test customer not created: ${r.status}`);
     stripeCustomer = (await r.json()).id;
     await api("POST", "/rest/v1/stripe_customers", { user_id: member.id, stripe_customer_id: stripeCustomer });
-    writeFileSync(STATE, JSON.stringify({ memberIds: [member.id, overdue.id, coach.id], postIds: [post.id, otherPost.id], stripeCustomer }), { mode: 0o600 });
+    writeFileSync(STATE, JSON.stringify({ memberIds: [member.id, overdue.id, coach.id, owing.id, recordable.id], postIds: [post.id, otherPost.id], stripeCustomer }), { mode: 0o600 });
   }
   await api("POST", "/rest/v1/deletion_requests", { user_id: overdue.id, requested_at: iso(now - 31 * 864e5), due_at: iso(now - 864e5) });
   await api("POST", "/rest/v1/deletion_requests", { user_id: coach.id });
+  await api("POST", "/rest/v1/deletion_requests", { user_id: owing.id, requested_at: iso(now - 31 * 864e5), due_at: iso(now - 864e5) });
   const admin = await enableTestAdmin();
   const cronSecret = randomBytes(24).toString("hex");
-  writeFileSync(STATE, JSON.stringify({ memberIds: [member.id, overdue.id, coach.id], postIds: [post.id, otherPost.id], stripeCustomer, adminId: admin.id }), { mode: 0o600 });
+  writeFileSync(STATE, JSON.stringify({ memberIds: [member.id, overdue.id, coach.id, owing.id, recordable.id], postIds: [post.id, otherPost.id], stripeCustomer, adminId: admin.id }), { mode: 0o600 });
   writeEnv({
     E2E_SUPABASE: 1,
     E2E_DEL_EMAIL: member.email,
@@ -306,6 +312,9 @@ async function setupDeletion() {
     E2E_DEL_ADMIN_PASSWORD: admin.password,
     CRON_SECRET: cronSecret,
     E2E_DEL_STRIPE_CUSTOMER: stripeCustomer,
+    E2E_DEL_OWING_EMAIL: owing.email,
+    E2E_DEL_OWING_ID: owing.id,
+    E2E_DEL_RECORD_ID: recordable.id,
     E2E_DEL_POST_ID: post.id,
   });
   console.log("deletion fixtures ready: temporary member, overdue member, staff member with a request, shared test admin enabled");
@@ -355,7 +364,25 @@ async function setupRetention() {
     seven: await newMember("STAGING TEST retention 7 days"),
     active: await newMember("STAGING TEST retention active"),
   };
+  // Accounts with no purchase. Their last sign in can only be backdated with database access (the Supabase
+  // management API), so they are added only when SUPABASE_ACCESS_TOKEN is set.
+  const token = process.env.SUPABASE_ACCESS_TOKEN;
+  if (token) {
+    for (const key of ["inactiveOld", "inactiveSoon"]) {
+      const email = `staging-worksheet-${hex()}@example.invalid`, pw = password();
+      const u = await api("POST", "/auth/v1/admin/users", { email, password: pw, email_confirm: true, user_metadata: { display_name: `STAGING TEST ${key}` } });
+      people[key] = { id: u.id, email, password: pw };
+    }
+  }
   writeFileSync(STATE, JSON.stringify({ memberIds: Object.values(people).map((p) => p.id) }), { mode: 0o600 });
+  if (token) {
+    const ref = new URL(URL_).hostname.split(".")[0];
+    const at = (ms) => new Date(ms).toISOString();
+    const sql = `update auth.users set last_sign_in_at = '${at(twelveMonthsAgo(-1))}', created_at = '${at(twelveMonthsAgo(-30))}' where id = '${people.inactiveOld.id}';
+update auth.users set last_sign_in_at = '${at(twelveMonthsAgo(20))}', created_at = '${at(twelveMonthsAgo(-30))}' where id = '${people.inactiveSoon.id}';`;
+    const r = await fetch(`https://api.supabase.com/v1/projects/${ref}/database/query`, { method: "POST", headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" }, body: JSON.stringify({ query: sql }) });
+    if (!r.ok) throw new Error(`backdating sign in failed: ${r.status}`);
+  }
   // Access ended: a year and a day ago; a year less 20 days ago; a year less 5 days ago.
   for (const [who, ended] of [["expired", twelveMonthsAgo(-1)], ["thirty", twelveMonthsAgo(20)], ["seven", twelveMonthsAgo(5)]]) {
     await api("PATCH", `/rest/v1/entitlements?user_id=eq.${people[who].id}`, { starts_at: iso(ended - 365 * 864e5), ends_at: iso(ended) });
@@ -372,6 +399,10 @@ async function setupRetention() {
     E2E_RET_SEVEN_PASSWORD: people.seven.password,
     E2E_RET_ACTIVE_EMAIL: people.active.email,
     E2E_RET_ACTIVE_PASSWORD: people.active.password,
+    E2E_RET_INACTIVE_OLD_EMAIL: people.inactiveOld?.email ?? "",
+    E2E_RET_INACTIVE_OLD_PASSWORD: people.inactiveOld?.password ?? "",
+    E2E_RET_INACTIVE_SOON_EMAIL: people.inactiveSoon?.email ?? "",
+    E2E_RET_INACTIVE_SOON_PASSWORD: people.inactiveSoon?.password ?? "",
     E2E_RET_ADMIN_EMAIL: admin.email,
     E2E_RET_ADMIN_PASSWORD: admin.password,
     CRON_SECRET: randomBytes(24).toString("hex"),
