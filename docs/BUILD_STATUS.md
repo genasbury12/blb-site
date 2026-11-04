@@ -16,6 +16,129 @@ Status of The BOSS Business System portal build. Updated at every milestone (con
 | 7 Marketing and admin | Admin workspace complete; public sales and masterclass pages wait on approved copy and video |
 | 8 Internal QA and release | Staging Supabase migrated, six test accounts provisioned, signed in permission and browser checks passing (2026-11-02); auth settings, Vercel and Stripe test mode pending; owner sign off pending |
 
+## Worksheet test fixtures in the repo (2026-11-04)
+
+- `portal/scripts/staging-worksheet-fixtures.mjs setup|cleanup --suite journey|module1 --env-out FILE` replaces the session only scripts. Staging only (refuses unless sample content is allowed); logins go only to the given file outside the repository.
+- The CSV export test no longer leaves a blocked admin per run: one shared test admin is switched on for each run and off afterwards (I-69). Underlying audit log question logged as I-73.
+- The module1 suite now restores each worksheet's and milestone's previous status instead of forcing draft, so it never undoes the owner's publishing.
+- Checks: journey suite twice in a row on staging (6 pass each, no new accounts); module1 suite once (3 pass, statuses restored); lint and typecheck pass.
+
+## Worksheets, Slice E: Module 1 seed, Lessons 1, 2 and 9, dashboard card (2026-11-04)
+
+- `scripts/seed-worksheets.mjs` (local and staging only; refuses unless the project allows sample content and APP_ENV is not production; safe to rerun):
+  - adds `m1-l1-starting-point`, `m1-l2-business-direction` and the Lesson 9 placeholder `m1-l9-foundation-blueprint` as drafts on Module 1 lessons 1, 2 and 9;
+  - adds the two milestones Complete ticks ("I answered Lesson 1: Starting Point", "I chose a provisional direction and wrote my hypothesis") as drafts;
+  - run on staging 2026-11-04; staging had no Lesson 9, so it added a published "SAMPLE: Module 1 lesson 9" (I-71).
+- Publishing: admins move a worksheet through draft, review and published on its Admin, Worksheets page (same controls as lessons). Publishing checks the schema first and explains a clash with another published version. The Curriculum lesson page lists the lesson's worksheet.
+- Lesson 9 placeholder: quotes the member's own Lesson 1 q3 and Lesson 2 hypothesis under each heading, shows a note while one is missing, and offers "Download all Module 1 worksheets". Callback quotes now sit under their section heading on every worksheet.
+- Dashboard: after the audit, an unfinished worksheet becomes the next step, "Finish your Lesson N worksheet" (I-70).
+- Fix: Complete saves any answers still in the autosave pause before completing (I-72).
+- **Owner action:** to show the worksheets to members, publish the three worksheets (Admin, Worksheets) and the two milestones (Admin, Curriculum, Module 1).
+
+| Check | Result |
+|---|---|
+| lint, typecheck, check:copy | Pass |
+| `vitest --project unit` | 187 pass (new: seed schemas parse and link up, Lesson 9 callbacks, autosave settle) |
+| `vitest --project db` | 107 pass |
+| `next build`, Playwright local | Pass; 44 pass, staging only specs skipped |
+| `tests/e2e/worksheets-module1.spec.ts` on staging (seeded worksheets and milestones published for the run, then back to draft; temporary member removed) | 3 pass: audit, then "Finish your Lesson 1 worksheet" and its link; Complete straight after typing ticks the milestone and clears the nudge; Lesson 9 quotes both answers and the module PDF downloads |
+| `tests/e2e/worksheets.spec.ts` on staging (regression) | 6 pass |
+
+## Worksheets, Slice D: admin views, CSV export, member Library (2026-11-03)
+
+- Admin workspace "Worksheets" (admins and coaches):
+  - `/admin/worksheets`: every worksheet with lesson, status, started and complete counts.
+  - `/admin/worksheets/[slug]`: counts (started, completed, Weak per rating column), status filter, and a table of member, email (admins only), status, completed date and the schema's `admin_columns` (`{chosen}` resolves to each member's chosen idea; ratings as pills with the note).
+  - `/admin/worksheets/[slug]/[responseId]`: the whole worksheet read only (`WorksheetForm` display mode).
+- CSV export `GET /api/admin/worksheets/[slug]/csv`: admins only (coaches and members get 404), one column per field key, ratings as `key_rating` and `key_note`, sentences as text, UTF-8 with a byte order mark for Excel, spreadsheet formula protection. Every export is recorded in the audit log with the row count, never answers (migration `20261103001700_worksheet_export_audit.sql`, applied to staging).
+- Member Library "Your worksheets" (owner addition): each published worksheet the member can open, grouped by module, with Not started / In progress / Complete, a link to its lesson, the PDF when complete, and "Download all Module N worksheets" once one is complete. Same card styling as the Library items.
+- Code: `src/domain/worksheets/admin.ts` (pure), `src/lib/server/worksheets-admin.ts`, `loadMemberWorksheets` in `src/lib/server/worksheets.ts`, `getUserEmails` in `src/lib/server/directory.ts`.
+
+| Check | Result |
+|---|---|
+| lint, typecheck, check:copy | Pass |
+| `vitest --project unit` | 180 pass (8 new in `admin.test.ts`: headers, `{chosen}`, rating cells, Weak counts, CSV columns, quoting and formula guard, file name) |
+| `vitest --project db` | 107 pass (new: only admins can record an export; the entry holds slug and row count only) |
+| `next build`, Playwright local | Pass; 44 pass, staging only specs skipped |
+| `tests/e2e/worksheets.spec.ts` on staging (temporary member, admin and assigned coach) | 6 pass. New: Library statuses, links and PDF downloads; admin list counts, member row with email, ratings and notes, Weak count, filter, read only view, CSV headers and values; coach sees the assigned member without email, no export button, CSV 404 |
+
+## Brand fonts in PDFs (2026-11-03)
+
+- Worksheet PDFs and the audit report now use Cormorant Garamond (headings) and DM Sans (body) instead of Times and Helvetica (I-63).
+- `src/lib/pdf/brand-fonts.ts` and `src/lib/pdf/fonts/` (six static Latin subsets, about 370 KB in total, with their open font licenses). `next.config.ts` ships them with the three PDF routes.
+- Audit report fixes found while checking it by eye: large headings overlapped the line below (explicit line heights), a heading could sit alone at a page bottom, and its footer never printed (now plain text, no page numbers, I-64).
+- Checks: lint, typecheck, check:copy, unit 172, db 106, build, local Playwright 44 pass; worksheet e2e 3 of 3 on staging, and the downloaded PDF embeds only the brand fonts.
+
+## Worksheets, Slice C: PDF export (2026-11-03)
+
+- `src/lib/pdf/worksheet-pdf.tsx`: branded worksheet PDF built only from the member's saved answers (ivory page, plum and mauve, serif headings, section numbers, ratings with notes, the hypothesis sentence, callback quotes).
+  - Prints required fields always ("Not answered" when empty) and optional fields only when answered, so unused idea columns are left out.
+  - Long answers flow across pages; headings keep at least a few lines with them; very long words (pasted links) break instead of running off the page.
+  - Footer on every page: "The BOSS Business System · Module N" and the date.
+- Routes (signed in, the member's own answers only, `Cache-Control: private, no-store`):
+  - `GET /api/worksheets/[slug]/pdf` gives `BOSS_Module1_Lesson2_Worksheet.pdf`.
+  - `GET /api/worksheets/module/[moduleSlug]/pdf` gives `BOSS_Module1_Worksheets.pdf` with every completed worksheet in lesson order; 404 when none are complete.
+  - Signed out: 401. Not visible to the member (draft, no access): 404.
+- "Download my worksheet" button in the worksheet status bar.
+- The "Download all Module 1 worksheets" button is placed in Slice D (Library "Your worksheets") and Slice E (Lesson 9 placeholder).
+
+| Check | Result |
+|---|---|
+| lint, typecheck, check:copy | Pass |
+| `vitest --project unit` | 172 pass (4 new in `worksheet-pdf.test.tsx`: Lesson 2 with long answers, printed fields, module PDF, file names) |
+| `vitest --project db` | 106 pass |
+| `next build` | Pass |
+| Playwright local (staging env unset) | 44 pass, staging only specs skipped |
+| `tests/e2e/worksheets.spec.ts` on staging (local build, temporary member and test worksheets, all removed after) | 3 pass. New: lesson PDF downloads with the right name and is a PDF; module PDF returns 200; signed out requests get no PDF. Downloaded file checked by eye: 2 pages, ratings, notes, sentence and footer present |
+
+## Worksheets, Slice B: schema driven form, autosave, progress, complete (2026-11-03)
+
+### What changed
+- `src/domain/worksheets/schema.ts`: the worksheet schema (Zod) and pure rules: repeat group expansion, `required_for`, progress from `completion.required_fields`, answer validation (unknown keys, types, lengths, options, dates), sentence rendering (`_rendered` rebuilt on the server), callback text. The two Module 1 schemas from the brief are fixtures in `src/domain/worksheets/fixtures/`.
+- Migration `20261103001600_worksheet_save_complete.sql` (applied to staging):
+  - `save_worksheet_answers` shallow merges changed answers and follows the published version.
+  - `complete_worksheet` keeps the first `completed_at`, stays editable, and ticks the module milestone whose title equals `completion.milestone_label`.
+  - Both run as the member, so the RLS from Slice A still applies.
+- Server actions `src/app/app/worksheets/actions.ts`: validate every patch against the published schema; complete only at 100% (checked on the server); logs field keys and slugs, never answer content.
+- `WorksheetForm` (`src/components/worksheets/`): one component for every worksheet.
+  - **Content:** intro with the italic mauve last word, quote and notes; numbered sections with ask, guide and footer; subsections; repeat columns labeled from the idea text.
+  - **Field types:** text, textarea, date; rating pills (Strong plum, Uncertain rose, Weak outlined italic mauve) with a note; choice pills labeled from the ideas; inline sentence inputs.
+  - **Behavior:** "Hypothetical example:" lines, callbacks quoted above a section, a display mode for staff, and a sticky status bar ("Saved h:mm", "Not saved, retrying", percent complete).
+  - **Autosave:** `AutosaveController`, 800 ms per field, one request in flight, latest change queued, backoff retries, and a warning on leaving with unsaved changes.
+  - **Progress:** `useWorksheetProgress(slug)`.
+- Lesson page: "Your worksheet" section below the video and resources when the lesson has a published worksheet.
+
+### Tests run
+| Command | Result |
+|---|---|
+| `vitest --project unit` | 168 pass (16 schema tests, 4 autosave controller tests) |
+| `vitest --project db` | 106 pass (3 new: merge save, refusals, complete with milestone) |
+| `tests/e2e/worksheets.spec.ts` on staging (local build, temporary member and test worksheets, all removed after) | 2 pass. Covered: autosave "Saved", progress 0, 8 and 100 percent, rating pills, notes, choice, sentence, date, Complete, still editable; a second browser context sees every answer; the callback quotes the Lesson 2 hypothesis on a later worksheet |
+| Local unconfigured Playwright suite | 44 pass |
+| lint, typecheck, copy check | pass |
+
+## Worksheets, Slice A: data model and RLS (2026-11-03)
+
+Brief: `09_IMPLEMENT_WORKSHEETS.md` (owner decision 2026-11-02: worksheets live in the portal).
+
+### What changed
+- Migration `20261103001500_worksheets.sql`:
+  - `worksheets`: slug and version (unique together), `lesson_id` FK, schema jsonb, `content_status`; one published version per slug.
+  - `worksheet_responses`: one per member per worksheet, answers jsonb (object, at most 200 KB), `in_progress`/`complete`, `completed_at`; FK to the worksheet version.
+  - Plumbing: `updated_at` triggers, staff audit trail on worksheets, and a delete-only audit on responses (records `{"deleted": true}`, never answer text).
+  - A guard so a response cannot move to another account or worksheet.
+- RLS:
+  - **Worksheets:** students see only published worksheets whose lesson is visible to them (reuses `app.lesson_visible_to_student`); staff read all; only admins write.
+  - **Responses:** a member reads their own always; they create or update their own only while the worksheet is published and visible to them. The assigned coach reads (D09); admins read all; only admins delete.
+- Not applied to staging yet (waiting for owner review of this slice).
+
+### Tests run
+| Command | Result |
+|---|---|
+| `vitest --project db` | 103 pass (11 new in `tests/db/worksheets.test.ts`: student, other student, anonymous, unentitled, draft/review hidden, assigned and unassigned coach, admin, audited delete without content) |
+| `vitest --project unit` | 148 pass |
+| lint, typecheck | pass |
+
 ## Milestone 7: Admin completion, design polish, launch readiness docs (2026-11-02)
 
 ### What works (tested)

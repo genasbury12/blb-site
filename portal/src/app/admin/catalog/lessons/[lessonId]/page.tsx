@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { resolveSuggestion, setResourceState, suggestEdit, updateLesson, uploadResource } from "@/app/admin/catalog/actions";
 import { ActionForm } from "@/components/admin/action-form";
-import { Field, TextArea, TextInput } from "@/components/admin/fields";
+import { Field, StatusPill, TextArea, TextInput } from "@/components/admin/fields";
 import { LessonFields, type LessonDefaults } from "@/components/admin/lesson-fields";
 import { StatusControls } from "@/components/admin/status-controls";
 import { PageHeader, SectionTitle } from "@/components/shell/page-header";
@@ -21,11 +21,12 @@ export default async function EditLessonPage({ params, searchParams }: { params:
   const { created } = await searchParams;
   const { supabase, isAdmin } = await requireStaff(["admin", "coach"], `/admin/catalog/lessons/${lessonId}`);
   if (!UUID.test(lessonId)) notFound();
-  const [lesson, modules, resources, suggestions] = await Promise.all([
+  const [lesson, modules, resources, suggestions, worksheets] = await Promise.all([
     supabase.from("lessons").select("*").eq("id", lessonId).maybeSingle(),
     supabase.from("modules").select("id, number, title").order("number"),
     supabase.from("lesson_resources").select("id, label, file_name, mime_type, size_bytes, published, checked_at").eq("lesson_id", lessonId).order("created_at"),
     supabase.from("content_suggestions").select("id, body, status, created_at").eq("lesson_id", lessonId).order("created_at", { ascending: false }),
+    supabase.from("worksheets").select("slug, version, title, status").eq("lesson_id", lessonId).order("version", { ascending: false }),
   ]);
   if (!lesson.data) notFound();
   const l = lesson.data as LessonDefaults & { id: string; status: ContentStatus; is_sample: boolean; published_at: string | null };
@@ -55,6 +56,26 @@ export default async function EditLessonPage({ params, searchParams }: { params:
           </ActionForm>
         </Card>
       ) : null}
+
+      <section aria-labelledby="worksheet">
+        <SectionTitle id="worksheet">Worksheet</SectionTitle>
+        <Card>
+          {(worksheets.data ?? []).length ? (
+            <ul className="space-y-2">
+              {(worksheets.data ?? []).map((w) => (
+                <li key={`${w.slug}-${w.version}`} className="flex flex-wrap items-center gap-3">
+                  <Link className="font-semibold text-plum underline underline-offset-4" href={`/admin/worksheets/${w.slug}`}>{w.title as string}</Link>
+                  <Badge>Version {w.version as number}</Badge>
+                  <StatusPill status={w.status as ContentStatus} />
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-sm text-ink-muted">No worksheet on this lesson.</p>
+          )}
+          <p className="mt-3 text-sm text-ink-muted">Publish or archive a worksheet from its page. Members see it only when both the worksheet and this lesson are published.</p>
+        </Card>
+      </section>
 
       <section aria-labelledby="resources">
         <SectionTitle id="resources">Downloads</SectionTitle>

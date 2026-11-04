@@ -5,15 +5,17 @@ import { PageHeader } from "@/components/shell/page-header";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { YourWorksheets } from "@/components/worksheets/your-worksheets";
 import { LIBRARY_KINDS, LIBRARY_KIND_LABELS, sanitizeSearch, type LibraryKind } from "@/domain/library";
 import { getFeatures, requireSession } from "@/lib/server/session";
+import { loadMemberWorksheets } from "@/lib/server/worksheets";
 
 export const metadata: Metadata = { title: "Implementation Library" };
 
 type Item = { id: string; slug: string; title: string; kind: LibraryKind; summary: string; module_number: number | null; tags: string[]; is_sample: boolean };
 
 export default async function LibraryPage({ searchParams }: { searchParams: Promise<{ q?: string; kind?: string; module?: string }> }) {
-  const { supabase } = await requireSession("/app/library");
+  const { supabase, user } = await requireSession("/app/library");
   const features = await getFeatures();
   if (!features.has("library.read")) return <NoAccess what="The Implementation Library" />;
   const sp = await searchParams;
@@ -25,7 +27,7 @@ export default async function LibraryPage({ searchParams }: { searchParams: Prom
   if (q) query = query.or(`title.ilike.%${q}%,summary.ilike.%${q}%`);
   if (kind) query = query.eq("kind", kind);
   if (moduleNumber) query = query.eq("module_number", moduleNumber);
-  const { data, error } = await query;
+  const [{ data, error }, worksheets] = await Promise.all([query, loadMemberWorksheets(supabase, user.id)]);
   if (error) throw new Error(error.message);
   const items = (data ?? []) as Item[];
 
@@ -36,6 +38,8 @@ export default async function LibraryPage({ searchParams }: { searchParams: Prom
         title="Walkthroughs, recipes and templates"
         lede="Short, practical references for setting things up. Some tools charge their own fees, and each item says when that applies."
       />
+      <YourWorksheets modules={worksheets} />
+      <h2 className="sr-only">Library items</h2>
       <form className="mb-8 grid gap-3 rounded-[22px] border border-rose/70 bg-white p-4 sm:grid-cols-[2fr_1fr_1fr_auto] sm:items-end" role="search">
         <label className="text-sm font-semibold">
           Search

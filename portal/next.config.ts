@@ -13,6 +13,11 @@ const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
   poweredByHeader: false,
+  // PDF brand fonts are read from disk at runtime (src/lib/pdf/brand-fonts.ts); ship them with the PDF routes.
+  outputFileTracingIncludes: {
+    "/api/worksheets/**": ["./src/lib/pdf/fonts/*.ttf"],
+    "/app/audit/results/**": ["./src/lib/pdf/fonts/*.ttf"],
+  },
   turbopack: {
     rules: {
       "*.css": {

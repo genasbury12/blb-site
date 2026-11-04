@@ -1,0 +1,29 @@
+{
+  "slug": "m1-l9-foundation-blueprint",
+  "title": "Lesson 9: Foundation Blueprint (placeholder)",
+  "version": 1,
+  "status": "draft",
+  "intro": {
+    "eyebrow": "Module 1 · Lesson 9 · Your worksheet",
+    "title": "Look back at your answers",
+    "lead": "Placeholder. The full Lesson 9 worksheet is still being written. For now this page brings back your own answers from Lessons 1 and 2, and lets you download all of your Module 1 worksheets in one PDF."
+  },
+  "sections": [
+    {
+      "key": "look_back_l1",
+      "number": "1",
+      "title": "Where you started",
+      "callback": { "worksheet": "m1-l1-starting-point", "field": "q3", "label": "Lesson 1" },
+      "fields": []
+    },
+    {
+      "key": "look_back_l2",
+      "number": "2",
+      "title": "Your hypothesis",
+      "callback": { "worksheet": "m1-l2-business-direction", "field": "hypothesis", "label": "Lesson 2" },
+      "fields": []
+    }
+  ],
+  "completion": { "required_fields": [] },
+  "module_download": true
+}

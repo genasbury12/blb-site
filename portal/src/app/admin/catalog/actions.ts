@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import { CONTENT_STATUSES as STATUSES, canTransition, type ContentStatus } from "@/domain/content";
+import { worksheetSchemaSchema } from "@/domain/worksheets/schema";
 import { errorMessage, errorState, okState, type FormState } from "@/lib/server/form-result";
 import { authorizeStaff } from "@/lib/server/staff";
 import { removeObject, storeUpload } from "@/lib/server/storage";
@@ -90,7 +91,7 @@ export async function updateLesson(_prev: FormState, fd: FormData): Promise<Form
   return okState("Lesson saved.");
 }
 
-const transitionSchema = z.object({ id: z.string().uuid(), table: z.enum(["lessons", "modules", "library_items", "milestones", "workshops"]), to: z.enum(STATUSES) });
+const transitionSchema = z.object({ id: z.string().uuid(), table: z.enum(["lessons", "modules", "library_items", "milestones", "workshops", "worksheets"]), to: z.enum(STATUSES) });
 
 export async function changeStatus(_prev: FormState, fd: FormData): Promise<FormState> {
   const parsed = transitionSchema.safeParse({ id: fd.get("id"), table: fd.get("table"), to: fd.get("to") });
@@ -101,8 +102,18 @@ export async function changeStatus(_prev: FormState, fd: FormData): Promise<Form
     if (current.error) throw new Error(current.error.message);
     const from = current.data.status as ContentStatus;
     if (!canTransition(from, parsed.data.to)) return errorState(`A ${from} item cannot move straight to ${parsed.data.to}.`);
+    if (parsed.data.table === "worksheets" && parsed.data.to === "published") {
+      // Never publish a worksheet the member form cannot render.
+      const ws = await supabase.from("worksheets").select("schema").eq("id", parsed.data.id).single();
+      if (ws.error) throw new Error(ws.error.message);
+      const check = worksheetSchemaSchema.safeParse(ws.data.schema);
+      if (!check.success) return errorState(`This worksheet's schema is not valid (${check.error.issues[0]?.path.join(".") || "root"}: ${check.error.issues[0]?.message}).`);
+    }
     const { error } = await supabase.from(parsed.data.table).update({ status: parsed.data.to }).eq("id", parsed.data.id);
-    if (error) throw new Error(error.message);
+    if (error) {
+      if (error.message.includes("worksheets_one_published_idx")) return errorState("Another version of this worksheet is already published. Archive it first.");
+      throw new Error(error.message);
+    }
   } catch (err) {
     return errorState(errorMessage(err));
   }

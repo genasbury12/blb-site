@@ -1,0 +1,69 @@
+{
+  "slug": "m1-l1-starting-point",
+  "module_slug": "module-1",
+  "lesson_slug": "lesson-1",
+  "title": "Lesson 1: Starting Point",
+  "version": 1,
+  "status": "draft",
+  "intro": {
+    "eyebrow": "Module 1 · Lesson 1 · Your worksheet",
+    "title": "Starting Point",
+    "lead": "Answer these once, right after Lesson 1. Don't try to make them sound impressive. Honest answers are the useful ones. You'll come back to these at the end of Module 1 and compare them with your finished Business Foundation Blueprint."
+  },
+  "sections": [
+    {
+      "key": "questions",
+      "fields": [
+        {
+          "key": "q1",
+          "type": "textarea",
+          "label": "1. What have you been treating as your blogging business?",
+          "guide": "Name where most of your time and energy has gone so far. Your blog posts, Instagram, Pinterest views, your website design, or something else.",
+          "example": "My blog posts and Pinterest. I've been measuring progress by pageviews and how my homepage looks.",
+          "required": true,
+          "max_length": 1500
+        },
+        {
+          "key": "q2",
+          "type": "textarea",
+          "label": "2. What do you ultimately want someone to pay you for?",
+          "guide": "You don't need the exact product yet. Describe the result, transformation, or solution you want to provide, and who it's for if you already know.",
+          "example": "Helping overwhelmed moms keep their homes organized with young kids. Probably a simple system. Not sure of the format yet.",
+          "required": true,
+          "max_length": 1500
+        },
+        {
+          "key": "q3",
+          "type": "textarea",
+          "label": "3. If your blog disappeared tomorrow, would you still have a business idea?",
+          "guide": "Start with yes, no, or partly. Then write what you would still know: who you want to help, the problem you want to solve, and what you could sell. If the answer is no, that's okay. That's exactly what Module 1 is for.",
+          "example": "Partly. I know who I want to help. I don't know the exact problem they'd pay to fix or what I'd sell.",
+          "required": true,
+          "max_length": 1500
+        },
+        {
+          "key": "realization",
+          "type": "textarea",
+          "label": "4. Your Biggest Realization",
+          "guide": "After Lesson 1, what do you understand differently about building a blogging business? One or two sentences is enough.",
+          "example": "I've been creating content and hoping it turns into a business. I need to start with the person and the problem.",
+          "required": true,
+          "max_length": 800
+        }
+      ]
+    }
+  ],
+  "completion": {
+    "milestone_label": "I answered Lesson 1: Starting Point",
+    "required_fields": [
+      "q1",
+      "q2",
+      "q3",
+      "realization"
+    ]
+  },
+  "admin_columns": [
+    "q3",
+    "realization"
+  ]
+}

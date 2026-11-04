@@ -1,4 +1,5 @@
 // @vitest-environment node
+import { writeFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { scoreAudit } from "@/domain/audit/score";
 import { AUDIT_V1 } from "@/domain/audit/v1";
@@ -14,5 +15,11 @@ describe("audit PDF", () => {
     );
     expect(buf.subarray(0, 5).toString()).toBe("%PDF-");
     expect(buf.length).toBeGreaterThan(3000);
+    // Brand fonts are embedded, not the PDF standard fonts.
+    if (process.env.WS_PDF_OUT) writeFileSync(`${process.env.WS_PDF_OUT}/audit.pdf`, buf);
+    const raw = buf.toString("latin1");
+    expect(raw).toMatch(/\/BaseFont \/[A-Z]{6}\+CormorantGaramond-Medium/);
+    expect(raw).toMatch(/\/BaseFont \/[A-Z]{6}\+DMSans/);
+    expect(raw).not.toMatch(/\/BaseFont \/(Helvetica|Times)/);
   }, 30000);
 });

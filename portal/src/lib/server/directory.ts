@@ -30,3 +30,24 @@ export async function getUserEmail(id: string): Promise<string | null> {
     return null;
   }
 }
+
+/** Emails for a set of accounts (admin views only). Pages through the directory; empty map without the server key. */
+export async function getUserEmails(ids: string[]): Promise<Map<string, string>> {
+  const out = new Map<string, string>();
+  const wanted = new Set(ids);
+  if (!wanted.size) return out;
+  let admin;
+  try {
+    admin = createSupabaseAdminClient();
+  } catch {
+    return out;
+  }
+  const perPage = 1000;
+  for (let page = 1; page <= 50 && out.size < wanted.size; page++) {
+    const { data, error } = await admin.auth.admin.listUsers({ page, perPage });
+    if (error) throw new Error(error.message);
+    for (const u of data.users) if (wanted.has(u.id) && u.email) out.set(u.id, u.email);
+    if (data.users.length < perPage) break;
+  }
+  return out;
+}

@@ -2,10 +2,12 @@ import { Download, ExternalLink, Sparkles } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { completeWorksheet, saveWorksheetAnswers } from "@/app/app/worksheets/actions";
 import { NoAccess } from "@/components/member/access-states";
 import { CompleteToggle } from "@/components/learning/complete-toggle";
 import { CopyPrompt } from "@/components/learning/copy-prompt";
 import { VideoPlayer } from "@/components/learning/video-player";
+import { WorksheetForm } from "@/components/worksheets/worksheet-form";
 import { Badge } from "@/components/ui/badge";
 import { ButtonLink } from "@/components/ui/button";
 import { Card, CardTitle, Eyebrow } from "@/components/ui/card";
@@ -13,6 +15,7 @@ import { loadCurrentPath } from "@/lib/server/audit";
 import { loadCatalog, loadCompletedLessonIds, loadLessonResources } from "@/lib/server/learning";
 import { muxPlaybackTokens } from "@/lib/server/mux";
 import { getFeatures, requireSession } from "@/lib/server/session";
+import { loadLessonWorksheet } from "@/lib/server/worksheets";
 
 export const metadata: Metadata = { title: "Lesson" };
 
@@ -36,7 +39,12 @@ export default async function LessonPage({ params }: { params: Promise<{ moduleS
   const moduleLessons = lessons.filter((l) => l.module_id === mod.id).sort((a, b) => a.order_index - b.order_index);
   const lesson = moduleLessons.find((l) => l.slug === lessonSlug);
   if (!lesson) notFound();
-  const [completed, resources, path] = await Promise.all([loadCompletedLessonIds(supabase, user.id), loadLessonResources(supabase, lesson.id), loadCurrentPath(supabase)]);
+  const [completed, resources, path, worksheet] = await Promise.all([
+    loadCompletedLessonIds(supabase, user.id),
+    loadLessonResources(supabase, lesson.id),
+    loadCurrentPath(supabase),
+    loadLessonWorksheet(supabase, user.id, lesson.id),
+  ]);
   const idx = moduleLessons.indexOf(lesson);
   const prev = moduleLessons[idx - 1];
   const next = moduleLessons[idx + 1];
@@ -151,6 +159,26 @@ export default async function LessonPage({ params }: { params: Promise<{ moduleS
           ) : null}
         </div>
       </div>
+
+      {worksheet ? (
+        <section aria-labelledby="your-worksheet" className="rounded-[28px] bg-ivory px-5 py-10 sm:px-10">
+          <h2 id="your-worksheet" className="sr-only">Your worksheet</h2>
+          <div>
+            <WorksheetForm
+              slug={worksheet.slug}
+              schema={worksheet.schema}
+              initialAnswers={worksheet.answers}
+              initialStatus={worksheet.status}
+              initialSavedAt={worksheet.updatedAt}
+              lessonNumber={lesson.order_index}
+              callbacks={worksheet.callbacks}
+              module={{ slug: mod.slug, number: mod.number }}
+              save={saveWorksheetAnswers}
+              complete={completeWorksheet}
+            />
+          </div>
+        </section>
+      ) : null}
 
       <div className="flex flex-wrap items-start justify-between gap-4 border-t border-rose pt-6">
         <CompleteToggle lessonId={lesson.id} initiallyComplete={completed.has(lesson.id)} />

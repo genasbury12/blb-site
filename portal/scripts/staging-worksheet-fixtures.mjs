@@ -1,0 +1,215 @@
+#!/usr/bin/env node
+// Test fixtures for the worksheet browser tests on STAGING (never production).
+//
+//   node scripts/staging-worksheet-fixtures.mjs setup   --suite journey|module1 --env-out /abs/path/outside/repo.sh
+//   node scripts/staging-worksheet-fixtures.mjs cleanup --suite journey|module1 --env-out /abs/path/outside/repo.sh
+//
+// journey  (tests/e2e/worksheets.spec.ts): two published STAGING TEST worksheets on Module 1 sample lessons 2 and 3,
+//          a temporary Blueprint member, the shared test admin and a temporary coach assigned to the member.
+// module1  (tests/e2e/worksheets-module1.spec.ts): publishes the seeded Module 1 worksheets and milestones for the
+//          run (cleanup restores whatever status each had before) and adds a temporary Blueprint member.
+//
+// The test admin is ONE reused account (staging-e2e-admin@example.invalid). The CSV export test writes it into the
+// append only audit log, so it can never be deleted; instead each setup gives it a fresh random password and the
+// admin role, and each cleanup removes the role, scrambles the password and blocks sign in. No new admin accounts
+// pile up. Members and coaches are temporary and deleted.
+//
+// Needs NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY. Refuses unless the project allows sample content
+// (never true in production). Logins go only to --env-out (mode 0600); nothing secret is printed.
+import { randomBytes, randomUUID } from "node:crypto";
+import { existsSync, readFileSync, writeFileSync } from "node:fs";
+import { dirname, isAbsolute, join, relative, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
+
+const [cmd] = process.argv.slice(2);
+const arg = (name) => {
+  const i = process.argv.indexOf(`--${name}`);
+  return i > 0 ? process.argv[i + 1] : undefined;
+};
+const suite = arg("suite");
+const envOut = arg("env-out");
+if (!["setup", "cleanup"].includes(cmd) || !["journey", "module1"].includes(suite) || !envOut) {
+  console.error("usage: staging-worksheet-fixtures.mjs setup|cleanup --suite journey|module1 --env-out /abs/file.sh");
+  process.exit(2);
+}
+const repo = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
+if (!isAbsolute(envOut) || !relative(repo, envOut).startsWith("..")) throw new Error("--env-out must be an absolute path outside the repository.");
+const STATE = `${envOut}.state.json`;
+
+const URL_ = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
+if (!URL_ || !KEY) throw new Error("Set NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY.");
+if (process.env.APP_ENV === "production") throw new Error("Refusing: APP_ENV is production.");
+const H = { apikey: KEY, Authorization: `Bearer ${KEY}`, "Content-Type": "application/json", Prefer: "return=representation" };
+async function api(method, path, body, okStatuses = []) {
+  const r = await fetch(URL_ + path, { method, headers: H, body: body ? JSON.stringify(body) : undefined });
+  const t = await r.text();
+  if (!r.ok && !okStatuses.includes(r.status)) throw new Error(`${method} ${path.split("?")[0]} ${r.status} ${t.slice(0, 200)}`);
+  return t ? JSON.parse(t) : null;
+}
+const cfg = await api("GET", "/rest/v1/app_config?key=eq.allow_sample_content&select=value");
+if (cfg[0]?.value !== true) throw new Error("Refusing: this project does not allow sample content (staging and local only).");
+
+const password = () => randomBytes(18).toString("base64url");
+const hex = () => randomBytes(3).toString("hex");
+const mod = (await api("GET", "/rest/v1/modules?number=eq.1&select=id,slug"))[0];
+if (!mod) throw new Error("Module 1 not found.");
+const readState = () => (existsSync(STATE) ? JSON.parse(readFileSync(STATE, "utf8")) : {});
+const writeEnv = (vars) =>
+  writeFileSync(envOut, `export ${Object.entries(vars).map(([k, v]) => `${k}='${v}'`).join(" ")}\n`, { mode: 0o600 });
+
+// ---- people -----------------------------------------------------------------------------------------------------
+
+async function findUser(email) {
+  for (let page = 1; page <= 20; page++) {
+    const { users } = await api("GET", `/auth/v1/admin/users?page=${page}&per_page=1000`);
+    const hit = users.find((u) => u.email === email);
+    if (hit || users.length < 1000) return { hit, users };
+  }
+  return { hit: undefined, users: [] };
+}
+
+async function newMember(displayName) {
+  const email = `staging-worksheet-${hex()}@example.invalid`, pw = password();
+  const u = await api("POST", "/auth/v1/admin/users", { email, password: pw, email_confirm: true, user_metadata: { display_name: displayName } });
+  await api("POST", "/rest/v1/rpc/billing_apply_checkout", {
+    p: { session_id: `cs_test_fixture_${randomUUID()}`, user_id: u.id, email, sku: "blueprint", plan: "pay_in_full", payment_status: "paid", payment_intent_id: `pi_test_fixture_${randomUUID()}` },
+  });
+  return { id: u.id, email, password: pw };
+}
+
+async function deleteMember(id) {
+  const orders = await api("GET", `/rest/v1/orders?user_id=eq.${id}&select=id`);
+  for (const o of orders) await api("DELETE", `/rest/v1/order_payments?order_id=eq.${o.id}`);
+  await api("DELETE", `/auth/v1/admin/users/${id}`, undefined, [404]);
+  for (const o of orders) await api("DELETE", `/rest/v1/orders?id=eq.${o.id}`);
+}
+
+const ADMIN_EMAIL = "staging-e2e-admin@example.invalid";
+
+/** The one reused test admin: found by its fixed email, or adopted from an older blocked staging-ws-admin-*. */
+async function enableTestAdmin() {
+  const { hit, users } = await findUser(ADMIN_EMAIL);
+  let admin = hit;
+  if (!admin) {
+    const old = users.filter((u) => /^staging-ws-admin-[0-9a-f]{6}@example\.invalid$/.test(u.email ?? "")).sort((a, b) => a.created_at.localeCompare(b.created_at))[0];
+    admin = old
+      ? await api("PUT", `/auth/v1/admin/users/${old.id}`, { email: ADMIN_EMAIL, email_confirm: true })
+      : await api("POST", "/auth/v1/admin/users", { email: ADMIN_EMAIL, password: password(), email_confirm: true });
+  }
+  const pw = password();
+  await api("PUT", `/auth/v1/admin/users/${admin.id}`, { password: pw, ban_duration: "none", user_metadata: { display_name: "STAGING TEST admin" } });
+  await api("POST", "/rest/v1/user_roles", { user_id: admin.id, role: "admin" }, [409]);
+  return { id: admin.id, email: ADMIN_EMAIL, password: pw };
+}
+
+async function disableTestAdmin(id) {
+  await api("DELETE", `/rest/v1/coach_assignments?coach_id=eq.${id}`);
+  await api("DELETE", `/rest/v1/user_roles?user_id=eq.${id}`);
+  await api("PUT", `/auth/v1/admin/users/${id}`, { password: password(), ban_duration: "876000h" });
+}
+
+async function newCoach(studentId) {
+  const email = `staging-ws-coach-${hex()}@example.invalid`, pw = password();
+  const u = await api("POST", "/auth/v1/admin/users", { email, password: pw, email_confirm: true, user_metadata: { display_name: "STAGING TEST coach" } });
+  await api("POST", "/rest/v1/user_roles", { user_id: u.id, role: "coach" });
+  await api("POST", "/rest/v1/coach_assignments", { coach_id: u.id, student_id: studentId });
+  return { id: u.id, email, password: pw };
+}
+
+async function deleteCoach(id) {
+  await api("DELETE", `/rest/v1/coach_assignments?coach_id=eq.${id}`);
+  await api("DELETE", `/rest/v1/user_roles?user_id=eq.${id}`);
+  const r = await fetch(`${URL_}/auth/v1/admin/users/${id}`, { method: "DELETE", headers: H });
+  // A coach only reads in these tests, so this should never happen; if it does, block the login rather than leave it open.
+  if (!r.ok && r.status !== 404) {
+    await api("PUT", `/auth/v1/admin/users/${id}`, { password: password(), ban_duration: "876000h" });
+    console.log("coach account could not be deleted; its role is removed and sign in is blocked");
+  }
+}
+
+// ---- suites -----------------------------------------------------------------------------------------------------
+
+const TEST_SLUGS = "staging-test-ws-*";
+const M1_SLUGS = "(m1-l1-starting-point,m1-l2-business-direction,m1-l9-foundation-blueprint)";
+const M1_LABELS = ["I answered Lesson 1: Starting Point", "I chose a provisional direction and wrote my hypothesis"];
+const m1Milestones = `module_id=eq.${mod.id}&title=in.(${M1_LABELS.map((l) => `"${l}"`).join(",")})`;
+
+async function setupJourney() {
+  const l2 = JSON.parse(readFileSync(join(repo, "portal/src/domain/worksheets/fixtures/m1-l2-business-direction.json"), "utf8"));
+  const lessons = await api("GET", `/rest/v1/lessons?module_id=eq.${mod.id}&slug=in.(sample-lesson-2,sample-lesson-3)&select=id,slug`);
+  const lid = (s) => {
+    const l = lessons.find((x) => x.slug === s);
+    if (!l) throw new Error(`Module 1 ${s} not found.`);
+    return l.id;
+  };
+  const callbackSchema = {
+    slug: "staging-test-ws-l3",
+    title: "STAGING TEST callback",
+    intro: { title: "Callback check", lead: "Staging test only." },
+    sections: [{ key: "recall", number: "1", title: "Your Lesson 2 hypothesis", callback: { worksheet: "staging-test-ws-l2", field: "hypothesis", label: "Lesson 2" }, fields: [{ key: "reflect", type: "textarea", label: "Has anything changed?", max_length: 500 }] }],
+    completion: { required_fields: [] },
+  };
+  await api("POST", "/rest/v1/worksheets", [
+    { slug: "staging-test-ws-l2", version: 1, lesson_id: lid("sample-lesson-2"), title: "STAGING TEST Lesson 2 worksheet", schema: { ...l2, slug: "staging-test-ws-l2" }, status: "published" },
+    { slug: "staging-test-ws-l3", version: 1, lesson_id: lid("sample-lesson-3"), title: "STAGING TEST Lesson 3 worksheet", schema: callbackSchema, status: "published" },
+  ]);
+  const member = await newMember("STAGING TEST worksheet");
+  const admin = await enableTestAdmin();
+  const coach = await newCoach(member.id);
+  writeFileSync(STATE, JSON.stringify({ memberId: member.id, adminId: admin.id, coachId: coach.id }), { mode: 0o600 });
+  writeEnv({
+    E2E_SUPABASE: 1,
+    E2E_WS_EMAIL: member.email,
+    E2E_WS_PASSWORD: member.password,
+    E2E_WS_LESSON_PATH: `/app/training/${mod.slug}/sample-lesson-2`,
+    E2E_WS_CALLBACK_PATH: `/app/training/${mod.slug}/sample-lesson-3`,
+    E2E_WS_ADMIN_EMAIL: admin.email,
+    E2E_WS_ADMIN_PASSWORD: admin.password,
+    E2E_WS_COACH_EMAIL: coach.email,
+    E2E_WS_COACH_PASSWORD: coach.password,
+  });
+  console.log("journey fixtures ready: 2 test worksheets, temporary member and coach, shared test admin enabled");
+}
+
+async function cleanupJourney() {
+  const st = readState();
+  if (st.memberId) await deleteMember(st.memberId);
+  if (st.coachId) await deleteCoach(st.coachId);
+  // Disable the shared admin even when the state file is gone (an interrupted run).
+  const adminId = st.adminId ?? (await findUser(ADMIN_EMAIL)).hit?.id;
+  if (adminId) await disableTestAdmin(adminId);
+  await api("DELETE", `/rest/v1/worksheet_responses?worksheet_slug=like.${TEST_SLUGS}`);
+  await api("DELETE", `/rest/v1/worksheets?slug=like.${TEST_SLUGS}`);
+  console.log("journey cleanup done: test worksheets and temporary accounts removed, shared test admin disabled");
+}
+
+async function setupModule1() {
+  const sheets = await api("GET", `/rest/v1/worksheets?slug=in.${M1_SLUGS}&version=eq.1&select=id,status`);
+  if (sheets.length !== 3) throw new Error("Run scripts/seed-worksheets.mjs first (the Module 1 worksheets are missing).");
+  const milestones = await api("GET", `/rest/v1/milestones?${m1Milestones}&select=id,status`);
+  // Remember each status so cleanup puts back exactly what was there (the owner may have published them).
+  const before = { worksheets: sheets.map(({ id, status }) => ({ id, status })), milestones: milestones.map(({ id, status }) => ({ id, status })) };
+  await api("PATCH", `/rest/v1/worksheets?slug=in.${M1_SLUGS}&version=eq.1`, { status: "published" });
+  await api("PATCH", `/rest/v1/milestones?${m1Milestones}`, { status: "published" });
+  const member = await newMember("STAGING TEST module one");
+  writeFileSync(STATE, JSON.stringify({ memberId: member.id, before }), { mode: 0o600 });
+  writeEnv({ E2E_SUPABASE: 1, E2E_M1_EMAIL: member.email, E2E_M1_PASSWORD: member.password, E2E_M1_MODULE: mod.slug });
+  console.log("module1 fixtures ready: Module 1 worksheets and milestones published for the run, temporary member added");
+}
+
+async function cleanupModule1() {
+  const st = readState();
+  if (st.memberId) await deleteMember(st.memberId);
+  if (!st.before) {
+    console.log("module1 cleanup: no saved statuses, so worksheet and milestone statuses were left as they are");
+  } else {
+    for (const w of st.before.worksheets) await api("PATCH", `/rest/v1/worksheets?id=eq.${w.id}`, { status: w.status });
+    for (const m of st.before.milestones) await api("PATCH", `/rest/v1/milestones?id=eq.${m.id}`, { status: m.status });
+  }
+  console.log("module1 cleanup done: worksheet and milestone statuses restored, temporary member removed");
+}
+
+if (suite === "journey") await (cmd === "setup" ? setupJourney() : cleanupJourney());
+else await (cmd === "setup" ? setupModule1() : cleanupModule1());
+if (cmd === "cleanup") writeFileSync(envOut, "", { mode: 0o600 });
