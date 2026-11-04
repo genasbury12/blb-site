@@ -4,9 +4,10 @@ import { zipSync, strToU8 } from "fflate";
  * 10_DATA_RIGHTS Slice A: "Download all my data". Pure functions that turn one member's rows into my-data.json, the
  * README and the ZIP, so the shape is tested without a database.
  *
- * What goes in: everything the member wrote or can see about themselves in the portal. What stays out: notes staff
- * keep for themselves (private Elite coach notes and comments on them, admin reasons for manual access changes,
- * Elite application decision notes) and staff account ids. The member's coach appears by name only.
+ * What goes in: everything the member wrote or can see about themselves in the portal. Notes staff keep for
+ * themselves (private Elite coach notes with their comments and files, admin reasons for manual access changes,
+ * Elite application decision notes) go only into the admin copy (owner decision 2026-11-04), never the member's own
+ * download. Staff account ids are never exported. The member's coach appears by name only.
  */
 
 export const EXPORT_FORMAT_VERSION = 1;
@@ -56,22 +57,29 @@ export type ExportFile = { path: string; bytes: Uint8Array };
 const pick = (row: Row, keys: string[]) => Object.fromEntries(keys.filter((k) => k in row).map((k) => [k, row[k] ?? null]));
 const omit = (row: Row, keys: string[]) => Object.fromEntries(Object.entries(row).filter(([k]) => !keys.includes(k)));
 
-/** Fields that identify staff accounts or hold notes only staff see. Never exported. */
-const STAFF_FIELDS = ["created_by", "decided_by", "responder_id", "resolved_by", "coach_id", "actor_id", "manual_override_reason", "uploaded_by"];
+/** Fields that identify staff accounts. Never exported. */
+const STAFF_IDS = ["created_by", "decided_by", "responder_id", "resolved_by", "coach_id", "actor_id", "uploaded_by"];
+/** Notes only staff see: in the admin copy only. */
+const STAFF_NOTES = ["manual_override_reason", "decision_note"];
 
-export function buildExportJson(raw: ExportRaw, files: { path: string; source: string }[] = []) {
+export type ExportAudience = "member" | "admin";
+
+export function buildExportJson(raw: ExportRaw, files: { path: string; source: string }[] = [], audience: ExportAudience = "member") {
+  const forAdmin = audience === "admin";
   const moduleOf = new Map(raw.modules.map((m) => [m.id, m]));
   const lessonOf = new Map(raw.lessons.map((l) => [l.id, l]));
   const milestoneOf = new Map(raw.milestones.map((m) => [m.id, m]));
   const worksheetTitle = new Map(raw.worksheets.map((w) => [`${w.slug}@${w.version}`, w.title]));
-  const privateItems = new Set(raw.eliteItems.filter((i) => i.kind === "coach_note").map((i) => i.id as string));
-  const clean = (rows: Row[], extra: string[] = []) => rows.map((r) => omit(r, [...STAFF_FIELDS, ...extra]));
+  const privateItems = forAdmin ? new Set<string>() : new Set(raw.eliteItems.filter((i) => i.kind === "coach_note").map((i) => i.id as string));
+  const hidden = forAdmin ? STAFF_IDS : [...STAFF_IDS, "manual_override_reason"];
+  const clean = (rows: Row[], extra: string[] = []) => rows.map((r) => omit(r, [...hidden, ...extra]));
 
   return {
     about: {
       what: "Everything The BOSS Business System portal stores about you, as of the time below.",
       generated_at: raw.generatedAt,
       format_version: EXPORT_FORMAT_VERSION,
+      copy: forAdmin ? "admin copy: includes notes staff keep for themselves" : "member copy",
       files: files.map((f) => ({ path: f.path, what: f.source })),
     },
     profile: { email: raw.email, ...(raw.profile ? omit(raw.profile, ["user_id"]) : {}) },
@@ -120,7 +128,7 @@ export function buildExportJson(raw: ExportRaw, files: { path: string; source: s
       reports: clean(raw.communityReports, ["reporter_id"]),
     },
     elite: {
-      applications: clean(raw.eliteApplications, ["user_id", "decision_note"]),
+      applications: clean(raw.eliteApplications, forAdmin ? ["user_id"] : ["user_id", "decision_note"]),
       board: raw.eliteBoard
         ? {
             claude_board_url: raw.eliteBoard.claude_board_url ?? null,
@@ -137,7 +145,7 @@ export function buildExportJson(raw: ExportRaw, files: { path: string; source: s
   };
 }
 
-export function exportReadme(generatedAt: string, paths: string[] = []) {
+export function exportReadme(generatedAt: string, paths: string[] = [], audience: ExportAudience = "member") {
   const day = new Intl.DateTimeFormat("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "America/New_York" }).format(new Date(generatedAt));
   const has = (prefix: string) => paths.some((p) => p.startsWith(prefix));
   const extras = [
@@ -150,7 +158,9 @@ export function exportReadme(generatedAt: string, paths: string[] = []) {
     "",
     "my-data.json holds everything the portal stores about you: your profile, enrollment and payments, access dates, your business audit answers and results, your progress and milestones, every worksheet answer, and anything you posted or submitted for coaching, feedback, the community or Elite. It is a plain text file that any text editor can open.",
     ...(extras.length ? [extras.join(" ")] : []),
-    "Private notes your coaches keep for themselves are not included.",
+    audience === "admin"
+      ? "This is the admin copy. It also includes notes staff keep for themselves, which the member's own download leaves out."
+      : "Private notes your coaches keep for themselves are not included.",
     "",
   ].join("\n");
 }
@@ -160,10 +170,10 @@ export function exportFilename(generatedAt: string) {
 }
 
 /** Zip my-data.json, README.txt and the files. Paths are made unique; nothing is written to disk. */
-export function buildExportZip(json: unknown, generatedAt: string, files: ExportFile[]): Uint8Array {
+export function buildExportZip(json: unknown, generatedAt: string, files: ExportFile[], audience: ExportAudience = "member"): Uint8Array {
   const entries: Record<string, Uint8Array> = {
     "my-data.json": strToU8(JSON.stringify(json, null, 2)),
-    "README.txt": strToU8(exportReadme(generatedAt, files.map((f) => f.path))),
+    "README.txt": strToU8(exportReadme(generatedAt, files.map((f) => f.path), audience)),
   };
   for (const f of files) entries[uniquePath(entries, f.path)] = f.bytes;
   // PDFs and images are already compressed: store them, deflate only text.

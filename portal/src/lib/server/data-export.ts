@@ -1,6 +1,6 @@
 import "server-only";
 import type { ReportRun } from "@/components/audit/audit-report";
-import { buildExportJson, buildExportZip, exportFilename, safeName, type ExportFile, type ExportRaw } from "@/domain/data-export/build";
+import { buildExportJson, buildExportZip, exportFilename, safeName, type ExportAudience, type ExportFile, type ExportRaw } from "@/domain/data-export/build";
 import { answerText, findField, worksheetSchemaSchema, type Answers, type WorksheetSchema } from "@/domain/worksheets/schema";
 import { renderAuditReportPdf } from "@/lib/pdf/audit-report-pdf";
 import { renderWorksheetPdf, worksheetPdfFilename } from "@/lib/pdf/worksheet-pdf";
@@ -176,8 +176,8 @@ async function worksheetPdfs(raw: ExportRaw & { worksheetRows: Row[] }, memberNa
   return out;
 }
 
-async function uploads(db: Admin, raw: ExportRaw): Promise<(ExportFile & { source: string })[]> {
-  const privateItems = new Set(raw.eliteItems.filter((i) => i.kind === "coach_note").map((i) => i.id as string));
+async function uploads(db: Admin, raw: ExportRaw, audience: ExportAudience): Promise<(ExportFile & { source: string })[]> {
+  const privateItems = audience === "admin" ? new Set<string>() : new Set(raw.eliteItems.filter((i) => i.kind === "coach_note").map((i) => i.id as string));
   const wanted: { bucket: string; key: string; path: string; source: string }[] = [
     ...raw.milestoneProgress
       .filter((p) => p.evidence_storage_key)
@@ -204,13 +204,13 @@ function extOf(key: string, label: string | undefined) {
   return label && /\.[a-z0-9]{2,5}$/i.test(label) ? "" : ext;
 }
 
-export async function buildMemberExport(userId: string): Promise<{ zip: Uint8Array; filename: string; fileCount: number }> {
+export async function buildMemberExport(userId: string, audience: ExportAudience = "member"): Promise<{ zip: Uint8Array; filename: string; fileCount: number }> {
   const db = createSupabaseAdminClient();
   const generatedAt = new Date().toISOString();
   const raw = await collect(db, userId, generatedAt);
   const memberName = (raw.profile?.display_name as string | null) ?? null;
 
-  const files = [...(await worksheetPdfs(raw, memberName)), ...(await uploads(db, raw))];
+  const files = [...(await worksheetPdfs(raw, memberName)), ...(await uploads(db, raw, audience))];
   const latestRun = raw.auditRuns.at(-1);
   if (latestRun) {
     try {
@@ -220,8 +220,8 @@ export async function buildMemberExport(userId: string): Promise<{ zip: Uint8Arr
     }
   }
 
-  const json = buildExportJson(raw, files.map((f) => ({ path: f.path, source: f.source })));
-  const zip = buildExportZip(json, generatedAt, files);
+  const json = buildExportJson(raw, files.map((f) => ({ path: f.path, source: f.source })), audience);
+  const zip = buildExportZip(json, generatedAt, files, audience);
   logEvent("info", "data export built", { files: files.length + 2, bytes: zip.byteLength });
   return { zip, filename: exportFilename(generatedAt), fileCount: files.length + 2 };
 }

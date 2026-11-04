@@ -9,7 +9,7 @@ import { buildMemberExport } from "./data-export";
  * enforces "self or admin" and the 10 minute limit; finish_data_export records the size in the audit log before the
  * file is handed over. If recording fails, nothing is handed over.
  */
-export async function dataExportResponse(supabase: UserSupabase, userId: string) {
+export async function dataExportResponse(supabase: UserSupabase, userId: string, audience: "member" | "admin") {
   const start = await supabase.rpc("start_data_export", { p_user: userId });
   if (start.error) {
     if (start.error.message.includes("rate_limited")) {
@@ -21,7 +21,7 @@ export async function dataExportResponse(supabase: UserSupabase, userId: string)
   }
   const exportId = start.data as string;
   try {
-    const { zip, filename } = await buildMemberExport(userId);
+    const { zip, filename } = await buildMemberExport(userId, audience);
     const done = await supabase.rpc("finish_data_export", { p_id: exportId, p_bytes: zip.byteLength });
     if (done.error) throw new Error(`export not recorded: ${done.error.code ?? "unknown"}`);
     return new NextResponse(new Uint8Array(zip), {

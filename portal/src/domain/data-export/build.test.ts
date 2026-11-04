@@ -99,6 +99,20 @@ describe("data export JSON", () => {
     expect(text).not.toContain('"user_id"');
   });
 
+  it("the admin copy also includes the notes staff keep for themselves, still without staff ids", () => {
+    const admin = buildExportJson(raw(), [], "admin");
+    const t = JSON.stringify(admin);
+    expect(admin.about.copy).toMatch(/admin copy/);
+    expect(admin.elite.board?.items.map((i) => i.title)).toEqual(["Set up email", "Private coach note"]);
+    expect(admin.elite.board?.comments).toHaveLength(2);
+    expect(admin.elite.board?.files).toHaveLength(2);
+    expect(admin.enrollment.access[0]).toMatchObject({ manual_override_reason: "staff only note" });
+    expect(admin.elite.applications[0]).toMatchObject({ decision_note: "internal only" });
+    expect(t).not.toContain(STAFF);
+    expect(json.about.copy).toBe("member copy");
+    expect(exportReadme(AT, [], "admin")).toContain("admin copy");
+  });
+
   it("has no Elite board for members without one", () => {
     expect(buildExportJson(raw({ eliteBoard: null })).elite.board).toBeNull();
   });

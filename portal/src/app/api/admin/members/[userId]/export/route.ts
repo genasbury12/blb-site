@@ -13,5 +13,5 @@ export async function POST(_req: Request, ctx: { params: Promise<{ userId: strin
   const session = await getSession();
   if (!session) return NextResponse.json({ error: "unauthorized" }, { status: 401 });
   if (!(await getStaffRoles()).includes("admin") || !UUID.test(userId)) return NextResponse.json({ error: "not_found" }, { status: 404 });
-  return dataExportResponse(session.supabase, userId);
+  return dataExportResponse(session.supabase, userId, "admin");
 }

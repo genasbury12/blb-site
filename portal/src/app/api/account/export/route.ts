@@ -9,5 +9,5 @@ export const maxDuration = 60;
 export async function POST() {
   const session = await getSession();
   if (!session) return NextResponse.json({ error: "unauthorized" }, { status: 401 });
-  return dataExportResponse(session.supabase, session.user.id);
+  return dataExportResponse(session.supabase, session.user.id, "member");
 }
