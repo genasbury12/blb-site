@@ -111,6 +111,10 @@ describe("data export JSON", () => {
     expect(t).not.toContain(STAFF);
     expect(json.about.copy).toBe("member copy");
     expect(exportReadme(AT, [], "admin")).toContain("admin copy");
+    // Stamped with who exported it (Slice D).
+    expect(buildExportJson(raw(), [], "admin", "Genasys").about).toMatchObject({ exported_by: "Genasys" });
+    expect(exportReadme(AT, [], "admin", "Genasys")).toContain("exported by Genasys on November 4, 2026");
+    expect(json.about).not.toHaveProperty("exported_by");
   });
 
   it("has no Elite board for members without one", () => {

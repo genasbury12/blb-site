@@ -62,7 +62,7 @@ const STAFF_IDS = ["created_by", "decided_by", "responder_id", "resolved_by", "c
 
 export type ExportAudience = "member" | "admin";
 
-export function buildExportJson(raw: ExportRaw, files: { path: string; source: string }[] = [], audience: ExportAudience = "member") {
+export function buildExportJson(raw: ExportRaw, files: { path: string; source: string }[] = [], audience: ExportAudience = "member", exportedBy?: string) {
   const forAdmin = audience === "admin";
   const moduleOf = new Map(raw.modules.map((m) => [m.id, m]));
   const lessonOf = new Map(raw.lessons.map((l) => [l.id, l]));
@@ -78,6 +78,7 @@ export function buildExportJson(raw: ExportRaw, files: { path: string; source: s
       generated_at: raw.generatedAt,
       format_version: EXPORT_FORMAT_VERSION,
       copy: forAdmin ? "admin copy: includes notes staff keep for themselves" : "member copy",
+      ...(forAdmin && exportedBy ? { exported_by: exportedBy } : {}),
       files: files.map((f) => ({ path: f.path, what: f.source })),
     },
     profile: { email: raw.email, ...(raw.profile ? omit(raw.profile, ["user_id"]) : {}) },
@@ -143,7 +144,7 @@ export function buildExportJson(raw: ExportRaw, files: { path: string; source: s
   };
 }
 
-export function exportReadme(generatedAt: string, paths: string[] = [], audience: ExportAudience = "member") {
+export function exportReadme(generatedAt: string, paths: string[] = [], audience: ExportAudience = "member", exportedBy?: string) {
   const day = new Intl.DateTimeFormat("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "America/New_York" }).format(new Date(generatedAt));
   const has = (prefix: string) => paths.some((p) => p.startsWith(prefix));
   const extras = [
@@ -157,7 +158,7 @@ export function exportReadme(generatedAt: string, paths: string[] = [], audience
     "my-data.json holds everything the portal stores about you: your profile, enrollment and payments, access dates, your business audit answers and results, your progress and milestones, every worksheet answer, and anything you posted or submitted for coaching, feedback, the community or Elite. It is a plain text file that any text editor can open.",
     ...(extras.length ? [extras.join(" ")] : []),
     audience === "admin"
-      ? "This is the admin copy. It also includes notes staff keep for themselves, which the member's own download leaves out."
+      ? `This is the admin copy${exportedBy ? `, exported by ${exportedBy} on ${day}` : ""}. It also includes notes staff keep for themselves, which the member's own download leaves out. Member answers are private.`
       : "Private notes your coaches keep for themselves are not included.",
     "",
   ].join("\n");
@@ -168,10 +169,10 @@ export function exportFilename(generatedAt: string) {
 }
 
 /** Zip my-data.json, README.txt and the files. Paths are made unique; nothing is written to disk. */
-export function buildExportZip(json: unknown, generatedAt: string, files: ExportFile[], audience: ExportAudience = "member"): Uint8Array {
+export function buildExportZip(json: unknown, generatedAt: string, files: ExportFile[], audience: ExportAudience = "member", exportedBy?: string): Uint8Array {
   const entries: Record<string, Uint8Array> = {
     "my-data.json": strToU8(JSON.stringify(json, null, 2)),
-    "README.txt": strToU8(exportReadme(generatedAt, files.map((f) => f.path), audience)),
+    "README.txt": strToU8(exportReadme(generatedAt, files.map((f) => f.path), audience, exportedBy)),
   };
   for (const f of files) entries[uniquePath(entries, f.path)] = f.bytes;
   // PDFs and images are already compressed: store them, deflate only text.

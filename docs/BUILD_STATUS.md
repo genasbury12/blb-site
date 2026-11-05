@@ -16,6 +16,20 @@ Status of The BOSS Business System portal build. Updated at every milestone (con
 | 7 Marketing and admin | Admin workspace complete; public sales and masterclass pages wait on approved copy and video |
 | 8 Internal QA and release | Staging Supabase migrated, six test accounts provisioned, signed in permission and browser checks passing (2026-11-02); auth settings, Vercel and Stripe test mode pending; owner sign off pending |
 
+## Data rights, Slice D: coach and admin data boundaries (2026-11-05)
+
+- **Coaches never see a member's email.** The one remaining place was Elite applications (the page showed applicant emails to coaches, and the table policy allowed all staff). Migration `20261104002300_coaches_never_see_emails.sql`: admins read the table; coaches read through `coach_elite_applications()`, which leaves the email out; the page shows emails to admins only. Already true elsewhere: Students & access (coaches see names only), member pages, worksheets, feedback, coaching, community. Coaches still cannot export (ZIP or CSV), read orders, see deletion requests, open Data settings, or record a deletion.
+- **"Data handling: Member answers are private. Exports are logged."** at the bottom of every admin screen with member data (Students, Worksheets, Feedback, Coaching, Community, Elite, Payments, Audit log, Data settings), for coaches and admins.
+- **Admin exports name who made them:** the worksheet CSV starts with "Exported by [admin] on [date and time] from The BOSS Business System. Member answers are private."; the admin ZIP's README and my-data.json say who exported it and when.
+- **Found while testing:** a lesson could hold two published worksheets, and its page then showed either one. Migration `20261104002400_one_published_worksheet_per_lesson.sql` allows one per lesson; publishing a second gives "Another worksheet is already published on this lesson. Archive it first." The test fixtures now use lessons 5 and 6, which have no real worksheet.
+
+| Check | Result |
+|---|---|
+| lint, typecheck, check:copy, build, local Playwright (44) | Pass |
+| `vitest --project unit` | 208 pass (new: CSV stamp line, admin ZIP stamp) |
+| `vitest --project db` | 132 pass (new: coach cannot read applicant emails, coach function has no email, admins still can, members get nothing; coaches cannot read orders or deletion requests, export, or record deletions; one published worksheet per lesson) |
+| Staging, all browser suites | Worksheet journey 6 of 6 (new: note shown to admin and coach, CSV stamp line, coach sees no "@" on Elite, Deletion requests and Data settings are not found for coaches), data export 3 of 3 (admin README stamp), Module 1 3 of 3, deletion 5 of 5, retention 2 of 2. Staging afterwards: no temporary accounts or test posts; the owner's Module 1 worksheets still published |
+
 ## Data rights: owner decisions after Slice C (2026-11-04)
 
 - **Balance owed holds a deletion** (migration `20261104002200_deletion_holds_inactivity_recorded.sql`, applied to staging): payment plan with payments left, or a membership payment past due. The daily job never runs those requests; the card shows "Payments still owed" with each item and "Waits for you"; the member is told the team will review first. Retention for such members opens a request instead of deleting.

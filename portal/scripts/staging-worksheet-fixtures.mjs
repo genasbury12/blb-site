@@ -4,7 +4,7 @@
 //   node scripts/staging-worksheet-fixtures.mjs setup   --suite journey|module1|export|deletion|retention --env-out /abs/path/outside/repo.sh
 //   node scripts/staging-worksheet-fixtures.mjs cleanup --suite journey|module1|export|deletion|retention --env-out /abs/path/outside/repo.sh
 //
-// journey  (tests/e2e/worksheets.spec.ts): two published STAGING TEST worksheets on Module 1 sample lessons 2 and 3,
+// journey  (tests/e2e/worksheets.spec.ts): two published STAGING TEST worksheets on Module 1 sample lessons 5 and 6 (lessons without real worksheets),
 //          a temporary Blueprint member, the shared test admin and a temporary coach assigned to the member.
 // module1  (tests/e2e/worksheets-module1.spec.ts): publishes the seeded Module 1 worksheets and milestones for the
 //          run (cleanup restores whatever status each had before) and adds a temporary Blueprint member.
@@ -147,7 +147,7 @@ const m1Milestones = `module_id=eq.${mod.id}&title=in.(${M1_LABELS.map((l) => `"
 
 async function setupJourney() {
   const l2 = JSON.parse(readFileSync(join(repo, "portal/src/domain/worksheets/fixtures/m1-l2-business-direction.json"), "utf8"));
-  const lessons = await api("GET", `/rest/v1/lessons?module_id=eq.${mod.id}&slug=in.(sample-lesson-2,sample-lesson-3)&select=id,slug`);
+  const lessons = await api("GET", `/rest/v1/lessons?module_id=eq.${mod.id}&slug=in.(sample-lesson-5,sample-lesson-6)&select=id,slug`);
   const lid = (s) => {
     const l = lessons.find((x) => x.slug === s);
     if (!l) throw new Error(`Module 1 ${s} not found.`);
@@ -161,8 +161,8 @@ async function setupJourney() {
     completion: { required_fields: [] },
   };
   await api("POST", "/rest/v1/worksheets", [
-    { slug: "staging-test-ws-l2", version: 1, lesson_id: lid("sample-lesson-2"), title: "STAGING TEST Lesson 2 worksheet", schema: { ...l2, slug: "staging-test-ws-l2" }, status: "published" },
-    { slug: "staging-test-ws-l3", version: 1, lesson_id: lid("sample-lesson-3"), title: "STAGING TEST Lesson 3 worksheet", schema: callbackSchema, status: "published" },
+    { slug: "staging-test-ws-l2", version: 1, lesson_id: lid("sample-lesson-5"), title: "STAGING TEST Lesson 2 worksheet", schema: { ...l2, slug: "staging-test-ws-l2" }, status: "published" },
+    { slug: "staging-test-ws-l3", version: 1, lesson_id: lid("sample-lesson-6"), title: "STAGING TEST Lesson 3 worksheet", schema: callbackSchema, status: "published" },
   ]);
   const member = await newMember("STAGING TEST worksheet");
   const admin = await enableTestAdmin();
@@ -172,8 +172,8 @@ async function setupJourney() {
     E2E_SUPABASE: 1,
     E2E_WS_EMAIL: member.email,
     E2E_WS_PASSWORD: member.password,
-    E2E_WS_LESSON_PATH: `/app/training/${mod.slug}/sample-lesson-2`,
-    E2E_WS_CALLBACK_PATH: `/app/training/${mod.slug}/sample-lesson-3`,
+    E2E_WS_LESSON_PATH: `/app/training/${mod.slug}/sample-lesson-5`,
+    E2E_WS_CALLBACK_PATH: `/app/training/${mod.slug}/sample-lesson-6`,
     E2E_WS_ADMIN_EMAIL: admin.email,
     E2E_WS_ADMIN_PASSWORD: admin.password,
     E2E_WS_COACH_EMAIL: coach.email,

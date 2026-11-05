@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import l1 from "./fixtures/m1-l1-starting-point.json";
 import l2 from "./fixtures/m1-l2-business-direction.json";
-import { adminCell, adminColumns, csvCell, resolveColumnKey, weakCounts, worksheetCsv, worksheetCsvFilename, type ResponseRow } from "./admin";
+import { adminCell, adminColumns, csvCell, exportStampLine, resolveColumnKey, weakCounts, worksheetCsv, worksheetCsvFilename, type ResponseRow } from "./admin";
 import { concreteFields, parseWorksheetSchema, validateAnswersPatch } from "./schema";
 
 const s1 = parseWorksheetSchema(l1);
@@ -93,6 +93,16 @@ describe("CSV export", () => {
     expect(csvCell("a,b")).toBe('"a,b"');
     expect(csvCell("line\nbreak")).toBe('"line\nbreak"');
     expect(csvCell(null)).toBe("");
+  });
+
+  it("an admin export starts with who exported it and when, then the column headers", () => {
+    const at = new Date("2026-11-04T18:30:00Z");
+    const csv = worksheetCsv(s2, [row()], { by: "Genasys", at });
+    const [first, header] = csv.slice(1).split("\r\n");
+    expect(first).toBe(csvCell(exportStampLine({ by: "Genasys", at })));
+    expect(first).toContain("Exported by Genasys on November 4, 2026");
+    expect(first).toContain("Member answers are private.");
+    expect(header!.startsWith("name,email,status")).toBe(true);
   });
 
   it("names the file by slug and date", () => {

@@ -128,11 +128,22 @@ function csvValues(field: ConcreteField, answers: Answers): string[] {
 
 const FIXED = ["name", "email", "status", "started_at", "updated_at", "completed_at"];
 
-/** Every response flattened to one column per field key (rating as _rating and _note; sentence as its text). */
-export function worksheetCsv(schema: WorksheetSchema, rows: ResponseRow[]): string {
+export type ExportStamp = { by: string; at: Date };
+
+/** The traceability line at the top of an admin export (10_DATA_RIGHTS Slice D). */
+export function exportStampLine(stamp: ExportStamp) {
+  const day = new Intl.DateTimeFormat("en-US", { month: "long", day: "numeric", year: "numeric", hour: "numeric", minute: "2-digit", timeZone: "America/New_York", timeZoneName: "short" }).format(stamp.at);
+  return `Exported by ${stamp.by} on ${day} from The BOSS Business System. Member answers are private.`;
+}
+
+/**
+ * Every response flattened to one column per field key (rating as _rating and _note; sentence as its text). With a
+ * stamp, the first line says who exported it and when, so a leaked file can be traced; the column headers follow.
+ */
+export function worksheetCsv(schema: WorksheetSchema, rows: ResponseRow[], stamp?: ExportStamp): string {
   const fields = concreteFields(schema);
   const header = [...FIXED, ...fields.flatMap(csvColumns)];
-  const lines = [header.map(csvCell).join(",")];
+  const lines = [...(stamp ? [csvCell(exportStampLine(stamp))] : []), header.map(csvCell).join(",")];
   for (const r of rows) {
     const fixed = [r.name, r.email ?? "", r.status, r.startedAt, r.updatedAt, r.completedAt ?? ""];
     lines.push([...fixed, ...fields.flatMap((f) => csvValues(f, r.answers))].map(csvCell).join(","));

@@ -13,5 +13,8 @@ export async function POST(_req: Request, ctx: { params: Promise<{ userId: strin
   const session = await getSession();
   if (!session) return NextResponse.json({ error: "unauthorized" }, { status: 401 });
   if (!(await getStaffRoles()).includes("admin") || !UUID.test(userId)) return NextResponse.json({ error: "not_found" }, { status: 404 });
-  return dataExportResponse(session.supabase, userId, "admin");
+  // The admin copy says who exported it, so a leaked file can be traced (Slice D).
+  const { data: me } = await session.supabase.from("profiles").select("display_name").eq("user_id", session.user.id).maybeSingle();
+  const exportedBy = (me?.display_name as string | null) || session.user.email || "an admin";
+  return dataExportResponse(session.supabase, userId, "admin", exportedBy);
 }

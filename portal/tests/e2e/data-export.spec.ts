@@ -76,6 +76,9 @@ test("an admin exports a member's data from Students & access; signed out and me
   await expect(page.getByRole("heading", { name: "Member data" })).toBeVisible();
   const { files, json } = await downloadZip(page, "Export data");
   expect(json.profile.email).toBe(process.env.E2E_DX_EMAIL);
+  // The admin copy says who exported it (Slice D).
+  expect(strFromU8(files["README.txt"]!)).toMatch(/This is the admin copy, exported by .+ on \w+ \d+, \d{4}\./);
+  expect((json as unknown as { about: { exported_by?: string } }).about.exported_by).toBeTruthy();
   expect(Object.keys(files)).toContain("worksheets/BOSS_Module1_Lesson1_Worksheet.pdf");
 
   const anon = await playwright.request.newContext({ baseURL });

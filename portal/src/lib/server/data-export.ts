@@ -204,7 +204,7 @@ function extOf(key: string, label: string | undefined) {
   return label && /\.[a-z0-9]{2,5}$/i.test(label) ? "" : ext;
 }
 
-export async function buildMemberExport(userId: string, audience: ExportAudience = "member"): Promise<{ zip: Uint8Array; filename: string; fileCount: number }> {
+export async function buildMemberExport(userId: string, audience: ExportAudience = "member", exportedBy?: string): Promise<{ zip: Uint8Array; filename: string; fileCount: number }> {
   const db = createSupabaseAdminClient();
   const generatedAt = new Date().toISOString();
   const raw = await collect(db, userId, generatedAt);
@@ -220,8 +220,8 @@ export async function buildMemberExport(userId: string, audience: ExportAudience
     }
   }
 
-  const json = buildExportJson(raw, files.map((f) => ({ path: f.path, source: f.source })), audience);
-  const zip = buildExportZip(json, generatedAt, files, audience);
+  const json = buildExportJson(raw, files.map((f) => ({ path: f.path, source: f.source })), audience, exportedBy);
+  const zip = buildExportZip(json, generatedAt, files, audience, exportedBy);
   logEvent("info", "data export built", { files: files.length + 2, bytes: zip.byteLength });
   return { zip, filename: exportFilename(generatedAt), fileCount: files.length + 2 };
 }
