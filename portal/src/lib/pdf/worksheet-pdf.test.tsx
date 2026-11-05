@@ -1,9 +1,12 @@
 // @vitest-environment node
-import { writeFileSync } from "node:fs";
+import { readdirSync, readFileSync, writeFileSync } from "node:fs";
+import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import l1 from "@/domain/worksheets/fixtures/m1-l1-starting-point.json";
 import l2 from "@/domain/worksheets/fixtures/m1-l2-business-direction.json";
 import l3 from "@/domain/worksheets/fixtures/m1-l3-customer-research.json";
+import { resolveCallbacks, type CallbackSource } from "@/domain/worksheets/callbacks";
+import { exampleAnswers } from "@/domain/worksheets/example";
 import { parseWorksheetSchema, validateAnswersPatch } from "@/domain/worksheets/schema";
 import { printedKeys, renderModuleWorksheetsPdf, renderWorksheetPdf, worksheetPdfFilename } from "./worksheet-pdf";
 
@@ -97,4 +100,26 @@ describe("worksheet PDF", () => {
     expect(worksheetPdfFilename(1, 2)).toBe("BOSS_Module1_Lesson2_Worksheet.pdf");
     expect(worksheetPdfFilename(1)).toBe("BOSS_Module1_Worksheets.pdf");
   });
+});
+
+describe("Module 1 worksheet PDFs (brief 18)", () => {
+  const dir = join(__dirname, "../../domain/worksheets/fixtures");
+  const raw = readdirSync(dir)
+    .filter((f) => f.startsWith("m1-") && f.endsWith(".json"))
+    .map((f) => JSON.parse(readFileSync(join(dir, f), "utf8")) as { slug: string; example_response?: unknown });
+  const now = new Date("2026-11-05T12:00:00Z");
+  const sources = new Map<string, CallbackSource>();
+  for (const r of raw) {
+    const s = parseWorksheetSchema(r);
+    if (r.example_response) sources.set(r.slug, { title: s.title, schema: s, answers: exampleAnswers(s, r.example_response, now), status: "complete" });
+  }
+
+  it.each(raw.filter((r) => r.example_response).map((r) => [r.slug, r] as const))("%s renders with its worked example and quotes", async (slug, r) => {
+    const schema = parseWorksheetSchema(r);
+    const { sections, top } = resolveCallbacks(schema, sources);
+    const lesson = Number(slug.match(/^m1-l(\d)/)![1]);
+    const buf = await renderWorksheetPdf({ schema, answers: sources.get(slug)!.answers, moduleNumber: 1, lessonNumber: lesson, memberName: "Test Member", completedAt: "2026-11-05T15:00:00Z", callbacks: sections, topCallbacks: top });
+    expect(buf.subarray(0, 5).toString()).toBe("%PDF-");
+    if (process.env.WS_PDF_OUT) writeFileSync(`${process.env.WS_PDF_OUT}/${slug}.pdf`, buf);
+  }, 30000);
 });

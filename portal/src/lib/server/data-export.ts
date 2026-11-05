@@ -167,6 +167,7 @@ async function worksheetPdfs(raw: ExportRaw & { worksheetRows: Row[] }, memberNa
         completedAt: (r.completed_at as string | null) ?? null,
         callbacks: callbacks.sections,
         topCallbacks: callbacks.top,
+        inlineCallbacks: callbacks.inline,
       });
       out.push({ path: `worksheets/${worksheetPdfFilename(mod.number, lesson.order_index)}`, bytes: new Uint8Array(pdf), source: `worksheet ${r.worksheet_slug}` });
     } catch {

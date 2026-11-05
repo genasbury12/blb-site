@@ -1,11 +1,13 @@
 import { Document, Page, StyleSheet, Text, View, renderToBuffer } from "@react-pdf/renderer";
-import type { ResolvedTopCallback } from "@/domain/worksheets/callbacks";
+import { decisionCards, groupTopCallbacks, type DecisionCard, type InlineCallback, type ResolvedTopCallback } from "@/domain/worksheets/callbacks";
 import {
   answerText,
   choiceOptions,
+  findField,
   expandField,
   isFilled,
   isRequired,
+  groupHeading,
   labelFrom,
   rowHasContent,
   type Answers,
@@ -54,6 +56,7 @@ const s = StyleSheet.create({
   sentence: { fontFamily: F.display, fontSize: 20, lineHeight: 1.35, color: C.plum },
   quote: { borderLeftColor: C.roseDeep, borderLeftWidth: 2, paddingLeft: 10, marginTop: 10 },
   quoteText: { fontFamily: F.displayItalic, fontSize: 14.5, color: C.plum },
+  cover: { marginTop: 16, paddingVertical: 10, paddingHorizontal: 14, borderLeftWidth: 2, borderLeftColor: C.mauve, backgroundColor: C.field },
   footerNote: { marginTop: 28, paddingTop: 10, borderTopWidth: 1, borderTopColor: C.rose, fontFamily: F.bodyItalic, fontSize: 9, color: C.muted },
   // Two separately positioned lines: react-pdf drops a fixed, absolutely positioned row container.
   footerLeft: { position: "absolute", bottom: 26, left: 54, fontSize: 7.5, color: C.muted },
@@ -73,6 +76,7 @@ export type WorksheetPdfInput = {
   callbacks?: Record<string, { label: string; text: string }>;
   /** Quotes before section 1 (Lesson 3 "Where you started"); printed only when the quote is there. */
   topCallbacks?: ResolvedTopCallback[];
+  inlineCallbacks?: Record<string, InlineCallback[]>;
 };
 
 function fmtDate(v: string) {
@@ -146,7 +150,10 @@ function printable(c: ConcreteField, answers: Answers) {
   return isRequired(c) || isFilled(c, answers[c.key]) || Boolean((answers[c.key] as RatingAnswer | undefined)?.rating);
 }
 
-type PrintItem = { kind: "field"; field: ConcreteField; label: string } | { kind: "row"; key: string; heading: string; fields: ConcreteField[] };
+type PrintItem =
+  | { kind: "field"; field: ConcreteField; label: string }
+  | { kind: "row"; key: string; heading: string; fields: ConcreteField[] }
+  | { kind: "guides"; key: string; lines: string[] };
 
 /**
  * What a list of schema fields prints as. Labelled repeat groups print row by row (a variable length group only
@@ -157,10 +164,13 @@ function printPlan(fields: WorksheetField[], schema: WorksheetSchema, answers: A
   const carded = new Set<string>();
   for (const f of fields) {
     const group = f.repeat ? schema.repeat_groups?.[f.repeat] : undefined;
-    if (f.repeat && group?.label) {
+    if (f.repeat && group?.label && !group.label_from) {
       if (carded.has(f.repeat)) continue;
       carded.add(f.repeat);
       const members = fields.filter((x) => x.repeat === f.repeat);
+      // Each field's guide once above the rows, as on the form.
+      const guides = members.filter((m) => m.guide && GUIDED.has(m.type)).map((m) => (members.length > 1 && m.label ? `${m.label.replaceAll(" {k}", "").replaceAll("{k}", "")}: ${m.guide}` : m.guide!));
+      if (guides.length) out.push({ kind: "guides", key: `guides-${f.repeat}`, lines: guides });
       for (const k of group.keys) {
         const row = members.map((m) => expandField(schema, m).find((c) => c.repeatKey === k)).filter((c): c is ConcreteField => Boolean(c));
         const content = rowHasContent(schema, f.repeat, k, answers);
@@ -172,7 +182,8 @@ function printPlan(fields: WorksheetField[], schema: WorksheetSchema, answers: A
     for (const c of expandField(schema, f)) {
       // Repeat columns: print the ideas the member actually used (plus any required one).
       if (!printable(c, answers)) continue;
-      const label = c.repeatKey ? `${context ? `${context}: ` : ""}${labelFrom(group?.label_from, c.repeatKey, answers)}` : (c.label ?? c.key);
+      // A label written per key ("Problem {k}, stated as a problem") is used as is; otherwise the column's name.
+      const label = !c.repeatKey ? (c.label ?? c.key) : f.label?.includes("{k}") ? c.label! : `${context ? `${context}: ` : ""}${groupHeading(group, c.repeatKey, answers)}`;
       out.push({ kind: "field", field: c, label });
     }
   }
@@ -200,6 +211,16 @@ function FieldBlock({ field, label, schema, answers }: { field: ConcreteField; l
 
 function PrintItemView({ item, schema, answers }: { item: PrintItem; schema: WorksheetSchema; answers: Answers }) {
   if (item.kind === "field") return <FieldBlock field={item.field} label={item.label} schema={schema} answers={answers} />;
+  if (item.kind === "guides")
+    return (
+      <View style={{ marginTop: 8 }}>
+        {item.lines.map((l) => (
+          <Text key={l} style={s.guide}>
+            {l}
+          </Text>
+        ))}
+      </View>
+    );
   return (
     <View wrap={false}>
       <Text style={s.rowHead}>{item.heading}</Text>
@@ -208,7 +229,6 @@ function PrintItemView({ item, schema, answers }: { item: PrintItem; schema: Wor
           <View key={c.key}>
             {/* "Problem 1" under the heading "Problem 1" says it twice: the heading is enough. */}
             {c.label !== item.heading ? <Text style={s.rowLabel}>{c.label ?? c.key}</Text> : <View style={{ height: 5 }} />}
-            {c.guide && GUIDED.has(c.type) ? <Text style={s.rowGuide}>{c.guide}</Text> : null}
             {isFilled(c, answers[c.key]) ? <Text style={s.rowValue}>{rowAnswer(c, answers, schema)}</Text> : <Text style={[s.rowValue, s.empty]}>Not answered</Text>}
           </View>
         ))}
@@ -217,7 +237,7 @@ function PrintItemView({ item, schema, answers }: { item: PrintItem; schema: Wor
   );
 }
 
-const itemKey = (item: PrintItem) => (item.kind === "field" ? item.field.key : `row-${item.key}-${item.heading}`);
+const itemKey = (item: PrintItem) => (item.kind === "field" ? item.field.key : item.kind === "guides" ? item.key : `row-${item.key}-${item.heading}`);
 
 function Fields({ items, schema, answers }: { items: PrintItem[]; schema: WorksheetSchema; answers: Answers }) {
   return (
@@ -232,13 +252,45 @@ function Fields({ items, schema, answers }: { items: PrintItem[]; schema: Worksh
 /** Short enough to keep with its section heading on one page (a long answer is left free to break). */
 function keepable(item: PrintItem | undefined, schema: WorksheetSchema, answers: Answers) {
   if (!item) return false;
-  return item.kind === "row" || answerText(item.field, answers[item.field.key], schema).length <= 700;
+  return item.kind !== "field" || answerText(item.field, answers[item.field.key], schema).length <= 700;
+}
+
+/** Lesson 9: one decision as on the form, the quoted earlier answer(s) and then the verdict, evidence and note. */
+function DecisionCardPdf({ card, fields, schema, answers }: { card: DecisionCard; fields: WorksheetField[]; schema: WorksheetSchema; answers: Answers }) {
+  return (
+    <View wrap={false} style={{ marginTop: 14 }}>
+      <Text style={s.rowHead}>{card.heading}</Text>
+      <View style={s.rowCard}>
+        <Text style={[s.quoteText, { marginTop: 4 }]}>{card.text ?? card.missingText}</Text>
+        {card.extras
+          .filter((x) => x.text)
+          .map((x) => (
+            <View key={x.key}>
+              <Text style={s.rowLabel}>{x.heading}</Text>
+              <Text style={[s.quoteText, { fontSize: 12.5 }]}>{x.text}</Text>
+            </View>
+          ))}
+        {printPlan(fields, schema, answers).map((item) =>
+          item.kind === "field" ? (
+            <View key={item.field.key}>
+              <Text style={s.rowLabel}>{item.label}</Text>
+              {isFilled(item.field, answers[item.field.key]) ? <Text style={s.rowValue}>{rowAnswer(item.field, answers, schema)}</Text> : <Text style={[s.rowValue, s.empty]}>Not answered</Text>}
+            </View>
+          ) : null,
+        )}
+      </View>
+    </View>
+  );
 }
 
 function WorksheetPages({ input, generatedAt }: { input: WorksheetPdfInput; generatedAt: Date }) {
   const { schema, answers } = input;
   const words = schema.intro.title.trim().split(" ");
   const last = words.pop();
+  // Lesson 9 Blueprint: the member's business sentence on the cover, under the title.
+  const coverField = schema.pdf?.cover_sentence_field ? findField(schema, schema.pdf.cover_sentence_field) : undefined;
+  const cover = coverField && isFilled(coverField, answers[coverField.key]) ? answerText(coverField, answers[coverField.key], schema) : "";
+  const cards = schema.callback_layout ? decisionCards(input.topCallbacks ?? []) : [];
   return (
     <Page size="LETTER" style={s.page}>
       <Text style={s.brand}>The BOSS Business System</Text>
@@ -250,18 +302,33 @@ function WorksheetPages({ input, generatedAt }: { input: WorksheetPdfInput; gene
       <Text style={s.meta}>
         {[input.memberName, input.completedAt ? `Completed ${dateFmt.format(new Date(input.completedAt))}` : "In progress", `Saved copy from ${dateFmt.format(generatedAt)}`].filter(Boolean).join("  ·  ")}
       </Text>
-      {(input.topCallbacks ?? [])
-        .filter((cb) => cb.text)
-        .map((cb) => (
-          <View key={cb.key} style={[s.quote, { marginTop: 22 }]} wrap={false}>
-            <Text style={s.eyebrow}>{cb.heading}</Text>
-            <Text style={s.quoteText}>{cb.text}</Text>
+      {cover ? (
+        <View style={s.cover} wrap={false}>
+          <Text style={s.sentence}>{cover}</Text>
+        </View>
+      ) : null}
+      {(schema.callback_layout ? [] : groupTopCallbacks(input.topCallbacks ?? []))
+        .filter((g) => g.lines.length)
+        .map((g) => (
+          <View key={g.key} style={[s.quote, { marginTop: 18 }]} wrap={false}>
+            {g.heading ? <Text style={s.eyebrow}>{g.heading}</Text> : null}
+            {g.lines.map((l) => (
+              <Text key={l} style={s.quoteText}>
+                {l}
+              </Text>
+            ))}
           </View>
         ))}
-      {schema.sections.map((section) => {
-        const items = printPlan(section.fields, schema, answers);
+      {schema.sections.map((section, si) => {
+        const decisions = si === 0 && cards.length ? cards : [];
+        const cardFields = (n: string) => section.fields.filter((f) => new RegExp(`_${n}$`).test(f.key));
+        const items = printPlan(decisions.length ? section.fields.filter((f) => !decisions.some((c) => cardFields(c.n).includes(f))) : section.fields, schema, answers);
+        // An optional section with nothing written in it is left out (Lesson 9 "If you already have a business").
+        if (section.optional && !items.length) return null;
+        const inline = (input.inlineCallbacks?.[section.key] ?? []).filter((cb) => cb.text);
         // The heading, any quote and the first answer move to a new page together, so a heading never ends a page.
-        const kept = keepable(items[0], schema, answers) ? items.slice(0, 1) : [];
+        const lead = items[0]?.kind === "guides" ? 1 : 0;
+        const kept = keepable(items[lead], schema, answers) ? items.slice(0, lead + 1) : items.slice(0, lead);
         return (
           <View key={section.key}>
             <View style={s.section} wrap={false}>
@@ -275,11 +342,24 @@ function WorksheetPages({ input, generatedAt }: { input: WorksheetPdfInput; gene
                     <Text style={s.quoteText}>{input.callbacks[section.key]!.text}</Text>
                   </View>
                 ) : null}
-                <Fields items={kept} schema={schema} answers={answers} />
+                {inline.map((cb) => (
+                  <View key={cb.key} style={s.quote}>
+                    <Text style={s.eyebrow}>{cb.heading}</Text>
+                    <Text style={s.quoteText}>{cb.text}</Text>
+                  </View>
+                ))}
+                {decisions.length ? (
+                  <DecisionCardPdf card={decisions[0]!} fields={cardFields(decisions[0]!.n)} schema={schema} answers={answers} />
+                ) : (
+                  <Fields items={kept} schema={schema} answers={answers} />
+                )}
               </View>
             </View>
             <View style={s.sectionRest}>
-              <Fields items={items.slice(kept.length)} schema={schema} answers={answers} />
+              {decisions.slice(1).map((c) => (
+                <DecisionCardPdf key={c.key} card={c} fields={cardFields(c.n)} schema={schema} answers={answers} />
+              ))}
+              <Fields items={decisions.length ? items : items.slice(kept.length)} schema={schema} answers={answers} />
               {(section.subsections ?? []).map((sub) => {
                 const subItems = printPlan(sub.fields, schema, answers, sub.title);
                 const subKept = keepable(subItems[0], schema, answers) ? subItems.slice(0, 1) : [];
@@ -319,7 +399,7 @@ export function worksheetPdfFilename(moduleNumber: number, lessonNumber?: number
 /** One worksheet. */
 export async function renderWorksheetPdf(input: WorksheetPdfInput, generatedAt = new Date()) {
   return renderWithFreshFonts(() => renderToBuffer(
-    <Document title={`${input.schema.title}: worksheet`} author="The BOSS Business System" creator="The BOSS Business System">
+    <Document title={input.schema.pdf?.title ?? `${input.schema.title}: worksheet`} author="The BOSS Business System" creator="The BOSS Business System">
       <WorksheetPages input={input} generatedAt={generatedAt} />
     </Document>,
   ));
@@ -340,5 +420,5 @@ export async function renderModuleWorksheetsPdf(inputs: WorksheetPdfInput[], mod
 export function printedKeys(schema: WorksheetSchema, answers: Answers) {
   return schema.sections
     .flatMap((sec) => [...printPlan(sec.fields, schema, answers), ...(sec.subsections ?? []).flatMap((sub) => printPlan(sub.fields, schema, answers, sub.title))])
-    .flatMap((item) => (item.kind === "field" ? [item.field.key] : item.fields.map((f) => f.key)));
+    .flatMap((item) => (item.kind === "field" ? [item.field.key] : item.kind === "row" ? item.fields.map((f) => f.key) : []));
 }

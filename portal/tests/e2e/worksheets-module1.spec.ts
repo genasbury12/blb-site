@@ -1,10 +1,15 @@
 import { expect, test, type Page } from "@playwright/test";
+import type { CallbackSource } from "../../src/domain/worksheets/callbacks";
+import { validateAnswersPatch } from "../../src/domain/worksheets/schema";
+import { completeWorksheet, exampleFor, expectCallbacks, loadSheet } from "./worksheet-fill";
 
 /**
- * 09_IMPLEMENT_WORKSHEETS Slice E exit test, on staging with the seeded Module 1 worksheets published for the run:
- *   E2E_M1_EMAIL / E2E_M1_PASSWORD   a new member with curriculum access, no audit and no worksheet answers
- *   E2E_M1_MODULE                    Module 1's slug
- * Lessons 1, 2 and 9 of Module 1 carry m1-l1-starting-point, m1-l2-business-direction and the Lesson 9 placeholder.
+ * Module 1 worksheets on staging (Slice E, brief 11 and brief 18), with all nine seeded worksheets published for the run:
+ *   E2E_M1_EMAIL / E2E_M1_PASSWORD               a new member with curriculum access, no audit and no worksheet answers
+ *   E2E_M1_MODULE                                Module 1's slug
+ *   E2E_M1_ADMIN_EMAIL / E2E_M1_ADMIN_PASSWORD   the shared staging test admin
+ * Lessons 1 to 9 of Module 1 carry m1-l1-starting-point to m1-l9-foundation-blueprint. The member does Lesson 1, then
+ * Lessons 2 to 9 in order with each schema's worked example, and every quote is checked against those answers.
  * Set up and tear down on staging with (logins go to a file outside the repository):
  *   node scripts/staging-worksheet-fixtures.mjs setup   --suite module1 --env-out /abs/path/module1-env.sh
  *   node scripts/staging-worksheet-fixtures.mjs cleanup --suite module1 --env-out /abs/path/module1-env.sh
@@ -67,29 +72,6 @@ test("completing Lesson 1 ticks its milestone and clears the dashboard nudge", a
   await expect(page.getByRole("heading", { name: /^Finish your Lesson \d+ worksheet$/ })).toHaveCount(0);
 });
 
-test("the Lesson 9 placeholder quotes the member's own Lesson 1 and 2 answers and offers the module PDF", async () => {
-  // Before Lesson 2 is answered, its look back shows a gentle note instead.
-  await page.goto(lessonPath(9), { waitUntil: "networkidle" });
-  await expect(page.getByTestId("callback-look_back_l1")).toContainText(Q3);
-  await expect(page.getByTestId("callback-look_back_l2")).toContainText("will show here once you fill it in");
-  await expect(page.getByRole("button", { name: /Complete Lesson/ })).toHaveCount(0);
-
-  await page.goto(lessonPath(2), { waitUntil: "networkidle" });
-  await page.getByLabel("My hypothesis: person").fill("busy parents");
-  await page.getByLabel("My hypothesis: problem").fill("cluttered homes");
-  await fillAndSave("My hypothesis: type of solution", "a weekly reset plan");
-  await page.goto("/app", { waitUntil: "networkidle" });
-  await expect(page.getByRole("heading", { name: "Finish your Lesson 2 worksheet" })).toBeVisible();
-
-  await page.goto(lessonPath(9), { waitUntil: "networkidle" });
-  await expect(page.getByTestId("callback-look_back_l2")).toContainText("I am exploring a business that helps busy parents solve cluttered homes through a weekly reset plan.");
-  const all = page.getByRole("link", { name: /Download all Module 1 worksheets/ });
-  await expect(all).toBeVisible();
-  const pdf = await page.request.get((await all.getAttribute("href"))!);
-  expect(pdf.status()).toBe(200);
-  expect((await pdf.body()).subarray(0, 5).toString()).toBe("%PDF-");
-});
-
 // ---- Lesson 3 (11_LESSON3_WORKSHEET) -----------------------------------------------------------------------------
 
 const row = (group: string, k: number) => page.getByTestId(`row-${group}-${k}`);
@@ -98,24 +80,6 @@ const shot = async (name: string, locator?: ReturnType<Page["getByTestId"]>) => 
   if (locator) await locator.screenshot({ path: `${process.env.E2E_SHOTS}/${name}.png` });
   else await page.screenshot({ path: `${process.env.E2E_SHOTS}/${name}.png`, fullPage: false });
 };
-const SAID_1 = "\"I keep buying groceries and still order takeout, every single week, and I hate it.\"";
-const OBSERVATIONS = [
-  [SAID_1, "Conversation with a friend, Nov 2", "Planning friction, or an unpredictable schedule.", "Walk me through the last time that happened.", "Observed"],
-  ["\"By 5pm I can't make one more decision.\"", "Reply to my story question, Oct 30", "Decision fatigue may matter more than variety.", "What makes dinner hard on your busiest day?", "Observed"],
-  ["\"My four-year-old eats five things. Five.\"", "Public group thread, Oct 28", "Picky eating may be the real constraint.", "What happens when you cook outside the five?", "Confirmed"],
-  ["\"I throw out half the produce I buy.\"", "Same thread, different parent, Oct 28", "Waste is the pain she feels.", "What did you try to fix that?", "Hypothesis"],
-  ["\"I bought a meal plan PDF and used it for one week.\"", "Conversation with a coworker, Nov 1", "She will pay; a static plan does not stick.", "What happened in week two?", "Observed"],
-] as const;
-
-async function fillObservation(k: number, [said, source, meaning, question, conf]: readonly string[]) {
-  const r = row("evidence", k);
-  await r.getByLabel("What she said or did").fill(said!);
-  await r.getByLabel("Source and date").fill(source!);
-  await r.getByLabel("What it might mean").fill(meaning!);
-  await r.getByLabel("The question I'd ask next").fill(question!);
-  await r.getByRole("radiogroup", { name: "Confidence" }).getByText(conf!, { exact: true }).click();
-}
-
 test("Lesson 3 opens with a note while Lesson 2 is unfinished, shows five observation cards and adds more up to eight", async () => {
   await page.goto(lessonPath(3), { waitUntil: "networkidle" });
   await expect(page.getByTestId("callback-l2_hypothesis")).toContainText("You haven't finished your Lesson 2 worksheet yet.");
@@ -142,92 +106,97 @@ test("Lesson 3 opens with a note while Lesson 2 is unfinished, shows five observ
   await expect(page.getByRole("button", { name: "Add another observation" })).toBeVisible();
 });
 
-test("Lesson 3: confidence chips, ticking supporting observations, and completing ticks the milestone", async () => {
-  test.setTimeout(180_000);
-  await page.goto(lessonPath(3), { waitUntil: "networkidle" });
-  const supports1 = row("themes", 1).getByRole("group", { name: /Supported by observations/ });
-  // Row 7 has content (a source), so it is offered, without words yet.
-  await expect(supports1.getByRole("checkbox")).toHaveCount(1);
+// ---- Lessons 2 to 9 (brief 18) -------------------------------------------------------------------------------------
 
-  await fillObservation(1, OBSERVATIONS[0]!);
-  await expect(page.getByTestId("guide-ev_conf_1")).toHaveText("One or two people said or did this.");
-  // The option shows the first 60 characters of what she said.
-  const label1 = `Observation 1: ${SAID_1.slice(0, 60).trimEnd()}…`;
-  await expect(supports1.getByRole("checkbox", { name: label1 })).toBeVisible();
-  for (let k = 2; k <= 5; k++) await fillObservation(k, OBSERVATIONS[k - 1]!);
-  await expect(supports1.getByRole("checkbox")).toHaveCount(6);
-  await shot("l3-observation-card", row("evidence", 1));
+const L1_ANSWERS = { q1: "My blog posts and Pinterest.", q2: "A simple home system for busy parents.", q3: Q3, realization: "Start with the person and the problem." };
+const SLUGS = ["", "m1-l1-starting-point", "m1-l2-business-direction", "m1-l3-customer-research", "m1-l4-problem-validation", "m1-l5-product-direction", "m1-l6-positioning", "m1-l7-messaging", "m1-l8-blog-to-buyer", "m1-l9-foundation-blueprint"];
+const sources = new Map<string, CallbackSource>();
+const quotes: Record<number, string[]> = {};
 
-  const themes = [
-    ["Deciding what to cook is harder than cooking it", [1, 2]],
-    ["Any plan has to survive a picky four-year-old", [3]],
-    ["Static plans get abandoned in a week", [4, 5]],
-  ] as const;
-  for (const [i, [text, rows]] of themes.entries()) {
-    const r = row("themes", i + 1);
-    await r.getByRole("textbox", { name: `Problem ${i + 1}` }).fill(text);
-    for (const k of rows) await r.getByRole("checkbox", { name: new RegExp(`^Observation ${k}:`) }).check();
+/** Lesson 2 has no worked example: these answers set up the hypothesis Lessons 3 and 9 quote. */
+function lesson2Answers(schema: ReturnType<typeof loadSheet>["schema"]) {
+  const r = (rating: string) => ({ rating, note: "Ten years of feeding my own picky eaters." });
+  return validateAnswersPatch(schema, {
+    idea_A: "Meal planning for parents of picky eaters",
+    cred_A: r("strong"),
+    need_A: r("uncertain"),
+    fit_A: r("strong"),
+    logic_A: r("uncertain"),
+    assume_A: "That parents will pay for a plan rather than free recipes.",
+    chosen: "A",
+    hypothesis: { person: "parents of picky eaters", problem: "dinner battles", solution: "a weekly meal reset" },
+    why: "Parents ask me about this every week.",
+    assumption: "They will pay.",
+    next_step: "Talk to five parents.",
+    review_date: "2026-11-20",
+  });
+}
+
+test("a member completes Lessons 2 to 9 in order with the worked examples, and every quote shows the right earlier answer", async () => {
+  test.setTimeout(900_000);
+  const l1 = loadSheet(SLUGS[1]!);
+  sources.set(SLUGS[1]!, { title: l1.schema.title, schema: l1.schema, answers: L1_ANSWERS, status: "complete" });
+
+  for (let n = 2; n <= 9; n++) {
+    const slug = SLUGS[n]!;
+    const { schema } = loadSheet(slug);
+    const answers = n === 2 ? lesson2Answers(schema) : exampleFor(slug).answers;
+    await page.goto(lessonPath(n), { waitUntil: "networkidle" });
+    await expect(page.getByRole("heading", { name: "Your worksheet" })).toBeAttached();
+    // Every quote from Lessons 1 to n-1, before she types anything.
+    quotes[n] = await expectCallbacks(page, schema, sources);
+
+    if (n === 3) {
+      // Where you started: the Lesson 2 hypothesis, word for word.
+      await expect(page.getByTestId("callback-l2_hypothesis")).toContainText("In Lesson 2 you wrote: I am exploring a business that helps parents of picky eaters solve dinner battles through a weekly meal reset.");
+    }
+    if (n === 4) {
+      // Lesson 3's problems are copied in as the starting point, and the scorecard is one grid.
+      const l3 = sources.get(SLUGS[3]!)!.answers;
+      for (const k of ["1", "2", "3"]) await expect(page.locator(`[data-field="problem_${k}"]`)).toHaveValue(l3[`theme_${k}`] as string);
+      await expect(page.getByTestId("matrix-problems")).toBeVisible();
+    }
+    if (n === 9) {
+      await expect(page.getByTestId("decision-1")).toBeVisible();
+      await expect(page.getByTestId("toggle-existing")).toHaveAttribute("aria-expanded", "false");
+    }
+
+    sources.set(slug, await completeWorksheet(page, n, schema, answers));
+    const label = schema.completion.milestone_label;
+    if (label) await expect(page.getByText(`Milestone ticked: ${label}`)).toBeVisible();
+    if (n === 3) await expect(page.getByTestId("guide-ev_conf_1")).toHaveText("One or two people said or did this.");
+    if (n === 4) await shot("l4-grid", page.getByTestId("matrix-problems"));
+    if (n === 5) await shot("l5-top", page.getByTestId("callback-l4_priority_problem"));
+    if (n === 9) {
+      await shot("l9-decision-3", page.getByTestId("decision-3"));
+      await shot("l9-where-you-started", page.getByTestId("section-started"));
+    }
   }
-  await shot("l3-themes", page.getByTestId("rows-themes"));
-
-  await page.getByLabel(/^Her current situation/).fill("Two kids under six, works until 5.");
-  await page.getByLabel(/^The trigger moment/).fill("Threw out spinach again and ordered pizza.");
-  await page.getByLabel(/^The result she wants/).fill("To know what dinner is before 5pm.");
-  await page.getByLabel(/^What she's already tried/).fill("A meal plan PDF, a recipe app.");
-  await page.getByLabel(/^Her practical constraints/).fill("Fifteen minutes on Sunday.");
-  await page.getByLabel(/^What would stop her buying/).fill("Another PDF she will not use.");
-  await page.getByLabel(/^Her words/).fill("\"Eats five things.\" \"Used it for one week.\"");
-  await page.getByLabel("In one sentence: situation").fill("two picky kids and no decisions left by 5pm");
-  await page.getByLabel("In one sentence: result").fill("dinner decided before she is tired");
-  await page.getByLabel("In one sentence: barrier").fill("buying one more plan she abandons");
-  await page.getByLabel(/^The first-offer audience/).fill("Parents of picky eaters under six.");
-  await page.getByLabel(/^One thing this research changes/).fill("It has to fit in fifteen minutes.");
-  await page.getByLabel(/^What I still don't know/).fill("Whether she would pay monthly.");
-  await page.getByLabel(/^My next validation step/).fill("Ask the five people the week two question.");
-  await page.getByLabel(/^I'll have done it by/).fill("2026-11-15");
-
-  await expect(page.getByTestId("worksheet-progress")).toHaveText("100% complete");
-  await page.getByRole("button", { name: "Complete Lesson 3" }).click();
-  await expect(page.getByText("Milestone ticked: I built a buyer snapshot from real evidence")).toBeVisible();
-
-  // The ticks survive a reload, in row order.
-  await page.reload({ waitUntil: "networkidle" });
-  await expect(row("themes", 1).getByRole("checkbox", { checked: true })).toHaveCount(2);
-  await expect(row("evidence", 3).getByRole("radio", { name: /^Confirmed/ })).toBeChecked();
+  // Lesson 9 quotes all of Lessons 1 to 8.
+  expect(quotes[9]!.length).toBeGreaterThanOrEqual(14);
 });
 
-test("once Lesson 2 is complete, Lesson 3 quotes its hypothesis under Where you started, and the PDF downloads", async () => {
-  test.setTimeout(180_000);
-  await page.goto(lessonPath(2), { waitUntil: "networkidle" });
-  const idea = "Weekly reset plans for busy parents";
-  await page.getByRole("textbox", { name: /^Idea A/ }).fill(idea);
-  for (const t of ["Credibility", "Buyer need", "Delivery fit", "Commercial logic"]) {
-    const group = page.getByRole("radiogroup", { name: `${t} for ${idea}` });
-    await group.getByText("Uncertain", { exact: true }).click();
-    await page.getByLabel(`Why, for ${t} for ${idea}`).fill("Not checked yet.");
-  }
-  await page.getByLabel(`What I'm assuming for ${idea}`).fill("That they will pay.");
-  await page.getByRole("radiogroup", { name: "I'm testing" }).getByText(idea).click();
-  await page.getByLabel(/^Why this one/).fill("People ask me about it.");
-  await page.getByLabel(/^My biggest unchecked assumption/).fill("They will pay.");
-  await page.getByLabel(/^One thing I'll do this week/).fill("Talk to five parents.");
-  await page.getByLabel(/^I'll review the evidence on/).fill("2026-12-01");
-  await expect(page.getByTestId("worksheet-progress")).toHaveText("100% complete");
-  await page.getByRole("button", { name: "Complete Lesson 2" }).click();
-  await expect(page.getByText(/^Lesson 2 complete$/)).toBeVisible();
-
-  await page.goto(lessonPath(3), { waitUntil: "networkidle" });
-  const quote = page.getByTestId("callback-l2_hypothesis");
-  await expect(quote).toContainText("Where you started");
-  await expect(quote).toContainText("In Lesson 2 you wrote: I am exploring a business that helps busy parents solve cluttered homes through a weekly reset plan.");
-  await quote.scrollIntoViewIfNeeded();
-  await shot("l3-where-you-started");
-
-  const pdf = await page.request.get("/api/worksheets/m1-l3-customer-research/pdf");
+test("the Lesson 9 Blueprint PDF and the Download all Module 1 worksheets bundle", async () => {
+  await page.goto(lessonPath(9), { waitUntil: "networkidle" });
+  const pdf = await page.request.get("/api/worksheets/m1-l9-foundation-blueprint/pdf");
   expect(pdf.status()).toBe(200);
-  const body = await pdf.body();
-  expect(body.subarray(0, 5).toString()).toBe("%PDF-");
-  if (process.env.E2E_SHOTS) (await import("node:fs")).writeFileSync(`${process.env.E2E_SHOTS}/lesson3.pdf`, body);
+  const one = await pdf.body();
+  expect(one.subarray(0, 5).toString()).toBe("%PDF-");
+  const all = page.getByRole("link", { name: /Download all Module 1 worksheets/ });
+  await expect(all).toBeVisible();
+  const bundle = await page.request.get((await all.getAttribute("href"))!);
+  expect(bundle.status()).toBe(200);
+  const many = await bundle.body();
+  expect(many.subarray(0, 5).toString()).toBe("%PDF-");
+  // Nine completed worksheets: the bundle is several times the size of the Blueprint alone.
+  expect(many.length).toBeGreaterThan(one.length * 3);
+  const pages = (b: Buffer) => (b.toString("latin1").match(/\/Type\s*\/Page[^s]/g) ?? []).length;
+  expect(pages(many)).toBeGreaterThan(pages(one) + 8);
+  if (process.env.E2E_SHOTS) {
+    const fs = await import("node:fs");
+    fs.writeFileSync(`${process.env.E2E_SHOTS}/lesson9-blueprint.pdf`, one);
+    fs.writeFileSync(`${process.env.E2E_SHOTS}/module1-all.pdf`, many);
+  }
 });
 
 test("the admin worksheet page counts observations and tallies confidence; the CSV lists ticked rows as 1, 2", async ({ browser }) => {

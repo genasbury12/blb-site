@@ -153,7 +153,7 @@ test("the Library lists the member's worksheets with status, lesson link and PDF
   const other = page.locator("[data-testid^='ws-item-']").filter({ hasNotText: "Complete" }).first();
   await expect(other).toContainText("Not started");
   await expect(other.getByRole("link", { name: /Download PDF/ })).toHaveCount(0);
-  const all = page.getByRole("link", { name: /Download all Module 1 worksheets/ });
+  const all = page.getByRole("link", { name: /Download all Module 2 worksheets/ });
   await expect(all).toHaveAttribute("href", /^\/api\/worksheets\/module\/[a-z0-9-]+\/pdf$/);
   expect((await page.request.get((await all.getAttribute("href"))!)).status()).toBe(200);
   await item.getByRole("link", { name: /worksheet/i }).first().click();

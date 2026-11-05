@@ -1,0 +1,165 @@
+{
+  "slug": "m1-l9-foundation-blueprint",
+  "module_slug": "module-1",
+  "lesson_slug": "lesson-9",
+  "title": "Lesson 9: Business Foundation Blueprint",
+  "version": 1,
+  "status": "draft",
+  "replaces": "Lesson 9 placeholder seeded in Slice E",
+  "intro": {
+    "eyebrow": "Module 1 · Lesson 9 · Your blueprint",
+    "title": "Business Foundation Blueprint",
+    "lead": "Every decision you made in this module, on one page, with an honest label on each one. Then three things you'll do in the next 30 days.",
+    "quote": "You don't graduate because every answer sounds confident. You graduate because you can explain your decisions and name what you still need to learn.",
+    "notes": [
+      "Nothing here is new work. Your answers from Lessons 2 to 8 are quoted back to you. Your job is to read each one and decide: keep it, revise it, or park it.",
+      "Unknown is a legal answer. An unknown you've written down is a research priority. An unknown you've papered over is a problem you'll meet in Module 2.",
+      "Already running a business? Compare each decision with what's live on your site today and mark what to keep, improve, remove, or test."
+    ]
+  },
+  "callbacks": [
+    { "key": "cb_direction", "source_worksheet": "m1-l2-business-direction", "source_field": "hypothesis", "heading": "1. Business direction", "template": "I am exploring a business that helps {person} solve {problem} through {solution}.", "missing_text": "Lesson 2 isn't complete." },
+    { "key": "cb_buyer", "source_worksheet": "m1-l3-customer-research", "source_field": "snapshot", "heading": "2. The buyer", "template": "She's dealing with {situation}, wants {result}, and is worried about {barrier}.", "missing_text": "Lesson 3 isn't complete." },
+    { "key": "cb_problem", "source_worksheet": "m1-l4-problem-validation", "source_field": "priority_problem", "heading": "3. The priority problem", "missing_text": "Lesson 4 isn't complete." },
+    { "key": "cb_problem_rule", "source_worksheet": "m1-l4-problem-validation", "source_field": "rule_continue", "heading": "Your decision rule was", "missing_text": "" },
+    { "key": "cb_product", "source_worksheet": "m1-l5-product-direction", "source_field": "product_concept", "heading": "4. The offer direction", "missing_text": "Lesson 5 isn't complete." },
+    { "key": "cb_promise", "source_worksheet": "m1-l5-product-direction", "source_field": "outcome_promise", "heading": "The promise", "template": "She gets {result} in {timeframe} without {cost}.", "missing_text": "" },
+    { "key": "cb_positioning", "source_worksheet": "m1-l6-positioning", "source_field": "positioning", "heading": "5. Positioning", "template": "I help {person} {outcome} through {method}, unlike {alternative}.", "missing_text": "Lesson 6 isn't complete." },
+    { "key": "cb_headline", "source_worksheet": "m1-l7-messaging", "source_field": "headline", "heading": "Your headline", "missing_text": "Lesson 7 isn't complete." },
+    { "key": "cb_journey", "source_worksheet": "m1-l8-blog-to-buyer", "source_field": "first_topic", "heading": "6. Blog to buyer", "missing_text": "Lesson 8 isn't complete." },
+    { "key": "cb_cta", "source_worksheet": "m1-l8-blog-to-buyer", "source_field": "cta", "heading": "leads to", "missing_text": "" },
+    { "key": "cb_offer_dest", "source_worksheet": "m1-l8-blog-to-buyer", "source_field": "offer_destination", "heading": "and then to", "missing_text": "" }
+  ],
+  "callback_layout": "Each numbered callback is followed immediately by its matching verdict and evidence fields from section 1 (dec_{n}, ev_{n}, note_{n}). Render as one card per decision: the quote on top, the controls beneath.",
+  "verdict_options": [
+    { "value": "keep", "label": "Keep", "guide": "I'd make the same call today." },
+    { "value": "revise", "label": "Revise", "guide": "Mostly right. Say what changes in the note." },
+    { "value": "park", "label": "Park", "guide": "Not ready to decide. Say what I need to learn first." }
+  ],
+  "evidence_options": [
+    { "value": "established", "label": "Established", "guide": "Real people said or did this. More than once." },
+    { "value": "promising", "label": "Promising, untested", "guide": "Good reasons to think so. No test yet." },
+    { "value": "unknown", "label": "Unknown", "guide": "I haven't checked. This is a research priority, not a failure." }
+  ],
+  "sections": [
+    {
+      "key": "decisions",
+      "number": "1",
+      "title": "Your six decisions",
+      "ask": "Read each one out loud. Could a stranger understand it? Would you make the same call today?",
+      "guide": "Each decision depends on the one before it. If you revise the buyer, look again at the problem. If you revise the offer, look again at the blog pathway. That isn't failure. That's a connected strategy.",
+      "fields": [
+        { "key": "dec_1", "type": "choice", "label": "Direction", "options_from": "verdict_options", "required": true },
+        { "key": "ev_1", "type": "choice", "label": "Evidence", "options_from": "evidence_options", "required": true },
+        { "key": "note_1", "type": "textarea", "label": "If revised or parked: what changes, or what I need to learn", "max_length": 400 },
+        { "key": "dec_2", "type": "choice", "label": "Buyer", "options_from": "verdict_options", "required": true },
+        { "key": "ev_2", "type": "choice", "label": "Evidence", "options_from": "evidence_options", "required": true },
+        { "key": "note_2", "type": "textarea", "label": "If revised or parked", "max_length": 400 },
+        { "key": "dec_3", "type": "choice", "label": "Priority problem", "options_from": "verdict_options", "required": true },
+        { "key": "ev_3", "type": "choice", "label": "Evidence", "options_from": "evidence_options", "required": true },
+        { "key": "note_3", "type": "textarea", "label": "If revised or parked. Did your Lesson 4 test happen? What did it show?", "max_length": 400 },
+        { "key": "dec_4", "type": "choice", "label": "Offer direction", "options_from": "verdict_options", "required": true },
+        { "key": "ev_4", "type": "choice", "label": "Evidence", "options_from": "evidence_options", "required": true },
+        { "key": "note_4", "type": "textarea", "label": "If revised or parked", "max_length": 400 },
+        { "key": "dec_5", "type": "choice", "label": "Positioning and headline", "options_from": "verdict_options", "required": true },
+        { "key": "ev_5", "type": "choice", "label": "Evidence", "options_from": "evidence_options", "required": true },
+        { "key": "note_5", "type": "textarea", "label": "If revised or parked. Does the headline promise more than you can prove?", "max_length": 400 },
+        { "key": "dec_6", "type": "choice", "label": "Blog to buyer pathway", "options_from": "verdict_options", "required": true },
+        { "key": "ev_6", "type": "choice", "label": "Evidence", "options_from": "evidence_options", "required": true },
+        { "key": "note_6", "type": "textarea", "label": "If revised or parked. Is there a working link at every step?", "max_length": 400 }
+      ],
+      "footer": "A blueprint with two Unknowns and four Keeps is a real plan. A blueprint with six Keeps and no evidence is a wish."
+    },
+    {
+      "key": "existing",
+      "number": "2",
+      "title": "If you already have a business",
+      "ask": "Compare the blueprint with what's live today.",
+      "guide": "Skip this if you're building from scratch. Otherwise, one line each: what to keep, what to improve, what to remove, what to test. Don't rebuild a working thing because a new template looks prettier.",
+      "optional": true,
+      "fields": [
+        { "key": "audit_keep", "type": "textarea", "label": "Keep", "max_length": 400 },
+        { "key": "audit_improve", "type": "textarea", "label": "Improve", "max_length": 400 },
+        { "key": "audit_remove", "type": "textarea", "label": "Remove", "max_length": 400 },
+        { "key": "audit_test", "type": "textarea", "label": "Test", "max_length": 400 }
+      ]
+    },
+    {
+      "key": "thirty",
+      "number": "3",
+      "title": "Your next 30 days",
+      "ask": "Three actions. Not \"work on my brand.\"",
+      "guide": "One that reduces your biggest unknown (look at your Unknowns above; that's the list). One that makes the buyer's experience better. One that gets you ready for Module 2. Each one has a date and a way to know it's done. If you have five hours a week, this is a five-hour plan.",
+      "fields": [
+        { "key": "act_1", "type": "textarea", "label": "Reduce the biggest unknown", "placeholder": "e.g. Ask five people from my evidence log the week-two question", "required": true, "max_length": 300 },
+        { "key": "act_1_date", "type": "date", "label": "By", "required": true },
+        { "key": "act_1_done", "type": "text", "label": "Done when", "placeholder": "e.g. Five answers written into my Lesson 3 log", "required": true, "max_length": 160 },
+        { "key": "act_2", "type": "textarea", "label": "Improve the buyer's experience", "placeholder": "e.g. Rewrite my homepage headline to the Lesson 7 version", "required": true, "max_length": 300 },
+        { "key": "act_2_date", "type": "date", "label": "By", "required": true },
+        { "key": "act_2_done", "type": "text", "label": "Done when", "required": true, "max_length": 160 },
+        { "key": "act_3", "type": "textarea", "label": "Get ready for Module 2", "placeholder": "e.g. Collect the five phrases from my snapshot into one note for the brand work", "required": true, "max_length": 300 },
+        { "key": "act_3_date", "type": "date", "label": "By", "required": true },
+        { "key": "act_3_done", "type": "text", "label": "Done when", "required": true, "max_length": 160 },
+        { "key": "hours_per_week", "type": "text", "label": "Hours I actually have per week", "required": true, "max_length": 40 }
+      ]
+    },
+    {
+      "key": "started",
+      "number": "4",
+      "title": "Where you started",
+      "ask": "Read your Lesson 1 answers. Then write the business in one sentence.",
+      "guide": "This is the whole point of the module. Compare the person who wrote those answers with the one reading them now.",
+      "callbacks_inline": [
+        { "source_worksheet": "m1-l1-starting-point", "source_field": "q1_treating_as_business", "heading": "What you'd been treating as your business" },
+        { "source_worksheet": "m1-l1-starting-point", "source_field": "q2_pay_for", "heading": "What you wanted someone to pay you for" },
+        { "source_worksheet": "m1-l1-starting-point", "source_field": "q3_blog_disappeared", "heading": "If your blog disappeared tomorrow" },
+        { "source_worksheet": "m1-l1-starting-point", "source_field": "realization", "heading": "Your biggest realization in Lesson 1" }
+      ],
+      "fields": [
+        { "key": "business_sentence", "type": "sentence", "label": "My business, in one sentence", "template": "I help {person} get {result} through {offer}, and my blog brings her to it.", "slots": [
+          { "key": "person", "placeholder": "person", "max_length": 100 },
+          { "key": "result", "placeholder": "result", "max_length": 100 },
+          { "key": "offer", "placeholder": "offer", "max_length": 100 }
+        ], "required": true },
+        { "key": "changed", "type": "textarea", "label": "What I understand differently now", "guide": "Two or three sentences. Compare with your Lesson 1 realization.", "required": true, "max_length": 800 },
+        { "key": "open_questions", "type": "textarea", "label": "The questions I'm carrying into Module 2", "guide": "Your Unknowns, in order of how much they'd change if the answer were bad.", "required": true, "max_length": 800 },
+        { "key": "coaching_question", "type": "textarea", "label": "For coaching: my biggest unresolved decision", "guide": "Accelerator and Elite members: bring this to your next session. Blueprint members: this is the one to think hardest about.", "max_length": 400 }
+      ],
+      "footer": "You came in thinking you needed to do more blogging. You're leaving with a picture of the business your blog is supposed to support. That's the foundation. Module 2 builds on it."
+    }
+  ],
+  "completion": {
+    "milestone_label": "I finished my Business Foundation Blueprint",
+    "required_fields": ["dec_1", "ev_1", "dec_2", "ev_2", "dec_3", "ev_3", "dec_4", "ev_4", "dec_5", "ev_5", "dec_6", "ev_6", "act_1", "act_1_date", "act_1_done", "act_2", "act_2_date", "act_2_done", "act_3", "act_3_date", "act_3_done", "hours_per_week", "business_sentence", "changed", "open_questions"]
+  },
+  "admin_columns": ["business_sentence", "dec_1", "dec_2", "dec_3", "dec_4", "dec_5", "dec_6", "act_1", "coaching_question"],
+  "admin_counts": [
+    { "label": "Decisions kept / revised / parked", "tally": "dec_{n}" },
+    { "label": "Evidence: established / promising / unknown", "tally": "ev_{n}" }
+  ],
+  "pdf": {
+    "title": "Business Foundation Blueprint",
+    "include_callbacks": true,
+    "cover_sentence_field": "business_sentence",
+    "bundle_label": "Download all Module 1 worksheets"
+  },
+  "footer_note": "This is your Module 1 blueprint. Module 2 opens with it.",
+  "example_response": {
+    "label": "Hypothetical example shown to students as a worked sample. Not a real person.",
+    "dec_1": "keep", "ev_1": "established", "note_1": "",
+    "dec_2": "revise", "ev_2": "established", "note_2": "Narrowed from \"parents of picky eaters\" to parents of picky eaters under six. Every conversation was about a preschooler.",
+    "dec_3": "keep", "ev_3": "promising", "note_3": "Asked five people the week-two question. Four abandoned the plan in week two because it didn't bend around the kid. Not yet a purchase, so promising, not established.",
+    "dec_4": "keep", "ev_4": "promising", "note_4": "",
+    "dec_5": "revise", "ev_5": "unknown", "note_5": "Headline promises \"dinner decided before 5\". I haven't shown it to anyone yet. Testing it in Module 2.",
+    "dec_6": "park", "ev_6": "unknown", "note_6": "No freebie exists yet, so the pathway is a drawing. Build the five-food reset checklist first.",
+    "audit_keep": "", "audit_improve": "", "audit_remove": "", "audit_test": "",
+    "act_1": "Show the headline and the one-sentence promise to the five parents in my log and ask what they think it means.", "act_1_date": "+10d", "act_1_done": "Five answers in my Lesson 3 log, with their words",
+    "act_2": "Write the five-food weekly reset checklist as a one-page PDF so the pathway has a real freebie.", "act_2_date": "+21d", "act_2_done": "PDF exists and two parents have used it for a week",
+    "act_3": "Pull the twelve phrases from my snapshot and objections into one note for the brand work.", "act_3_date": "+28d", "act_3_done": "Note saved in my Module 2 folder",
+    "hours_per_week": "5",
+    "business_sentence": { "person": "parents of picky eaters under six", "result": "dinner decided before 5pm without a fight", "offer": "a fifteen-minute weekly reset kit" },
+    "changed": "In Lesson 1 I wrote that my business was my blog and my Pinterest numbers. It's a kit for one specific parent, and the blog is how she finds it. I also stopped thinking \"more recipes\" was the product. The product is fewer decisions.",
+    "open_questions": "Will she pay monthly or once? Does the partner cook at all? Does the headline mean to her what it means to me?",
+    "coaching_question": "Whether to build the kit as a one-time PDF or a monthly membership before I've sold either."
+  }
+}

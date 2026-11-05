@@ -1,0 +1,175 @@
+{
+  "slug": "m1-l8-blog-to-buyer",
+  "module_slug": "module-1",
+  "lesson_slug": "lesson-8",
+  "title": "Lesson 8: Blog to Buyer Journey Map",
+  "version": 1,
+  "status": "draft",
+  "intro": {
+    "eyebrow": "Module 1 · Lesson 8 · Your worksheet",
+    "title": "Blog to Buyer Journey Map",
+    "lead": "Draw the line from one blog post to the offer you named in Lesson 5. Then click every link on that line and find out whether it holds.",
+    "quote": "Not every post sells. Every post points.",
+    "notes": [
+      "One post first. Map one post completely before you touch posts two and three. A single post with a working path beats ten posts that go nowhere.",
+      "\"Needs building\" is an honest answer. If the freebie, the sales page or the checkout doesn't exist yet, say so. A blank tells you nothing; \"needs building\" tells you what to do next.",
+      "Already have a blog? Map your most-read post, not your favourite one. Then follow its path on your phone and write down where it stops."
+    ]
+  },
+  "callbacks": [
+    {
+      "key": "l5_product_concept",
+      "source_worksheet": "m1-l5-product-direction",
+      "source_field": "product_concept",
+      "heading": "What you're selling",
+      "template": "In Lesson 5 you named your product: {product_concept}.",
+      "missing_text": "You haven't finished your Lesson 5 worksheet yet. Do that first; this map points every post at the product you name there."
+    },
+    {
+      "key": "l7_headline",
+      "source_worksheet": "m1-l7-messaging",
+      "source_field": "headline",
+      "heading": "How you say it",
+      "template": "In Lesson 7 you wrote the headline: \"{headline}\"",
+      "missing_text": "Your Lesson 7 headline isn't written yet. You can still map the path; come back and check the headline matches your call to action once it's done."
+    }
+  ],
+  "repeat_groups": {
+    "posts": { "keys": ["2", "3"], "label": "Post {k}" }
+  },
+  "stage_options": [
+    { "value": "curious", "label": "Curious", "guide": "She's browsing. She hasn't admitted there's a problem yet. \"Easy weeknight dinners.\"" },
+    { "value": "frustrated", "label": "Frustrated", "guide": "She's in it, tonight. \"My four-year-old only eats five foods, what do I do.\"" },
+    { "value": "looking", "label": "Actively looking", "guide": "She wants a thing and she wants it now. \"Meal planning template for picky eaters.\"" }
+  ],
+  "exists_options": [
+    { "value": "exists", "label": "Exists" },
+    { "value": "needs_building", "label": "Needs building" },
+    { "value": "not_yet", "label": "Not needed yet" }
+  ],
+  "tested_options": [
+    { "value": "yes", "label": "Yes, I clicked through on my phone" },
+    { "value": "no", "label": "No, not yet" },
+    { "value": "nothing", "label": "Nothing to test yet" }
+  ],
+  "sections": [
+    {
+      "key": "marketing",
+      "number": "1",
+      "title": "What the blog is marketing",
+      "ask": "Your blog is the front door. What is it the front door to?",
+      "guide": "Write the one sentence every post has to serve. The person comes from Lesson 3, the offer from Lesson 5; don't invent a new one here. Then tick the pieces that exist today, as they are, not as you plan them.",
+      "fields": [
+        { "key": "blog_job", "type": "sentence", "label": "The blog's job", "template": "Every post exists to bring {person} one step closer to {offer}.", "slots": [
+          { "key": "person", "placeholder": "who, in one phrase", "max_length": 120 },
+          { "key": "offer", "placeholder": "the Lesson 5 product", "max_length": 120 }
+        ], "required": true },
+        { "key": "pieces_exist", "type": "multichoice", "label": "What exists today", "guide": "Tick only what a stranger could find and use right now. A draft doesn't count. If nothing exists yet, tick nothing; that's fine, this is Module 1.", "options": [
+          { "value": "posts", "label": "Published blog posts" },
+          { "value": "freebie", "label": "A free resource people can download" },
+          { "value": "email", "label": "An email list with at least one email that goes out" },
+          { "value": "sales_page", "label": "A sales page for the offer" },
+          { "value": "checkout", "label": "A working checkout" }
+        ], "required": false }
+      ],
+      "footer": "Plenty of people have a sales page and no path that reaches it. The rest of this map is the path."
+    },
+    {
+      "key": "one_post",
+      "number": "2",
+      "title": "Map one post",
+      "ask": "One post. Four things.",
+      "guide": "Topic, the reader's question in the words she'd type, her stage, and the call to action that fits the stage. Curious gets another post or the free thing, never the sales page. Frustrated gets the freebie that hands her one small win tonight. Actively looking gets the offer, directly.",
+      "fields": [
+        { "key": "first_topic", "type": "text", "label": "Post topic", "guide": "The working title. Specific enough that you could write it this week.", "placeholder": "e.g. Realistic weeknight dinners for picky eaters", "required": true, "max_length": 160 },
+        { "key": "reader_question", "type": "text", "label": "The reader's question", "guide": "In her words, the way she'd type it into a search bar or ask a friend. If you have her exact phrase from your Lesson 3 evidence log, use it unchanged.", "placeholder": "e.g. What can I cook tonight that my kid will actually eat?", "required": true, "max_length": 200 },
+        { "key": "reader_stage", "type": "choice", "label": "Her stage when she lands", "guide": "Read the question again. Browsing, in it tonight, or shopping for a thing? Pick the one the question actually shows, not the one you'd prefer.", "options_from": "stage_options", "required": true },
+        { "key": "cta", "type": "text", "label": "The call to action", "guide": "One action, matched to the stage. Write the button, not the strategy: \"Download the five-dinner fallback list,\" not \"nurture her.\" If your stage is actively looking and your CTA isn't the offer, fix one of them.", "placeholder": "e.g. Download the five-dinner fallback list", "required": true, "max_length": 200 }
+      ],
+      "footer": "The most common mistake: a sales pitch on a curious post, and no pitch at all on the post where she's actively looking."
+    },
+    {
+      "key": "destinations",
+      "number": "3",
+      "title": "Where it leads",
+      "ask": "A call to action is a promise about where the click goes. Where does it go?",
+      "guide": "Write both destinations even if they don't exist yet. Then click the path yourself, on your phone, today. Post to button, button to freebie, freebie to email, email to sales page, sales page to checkout. One broken handoff undoes everything before it.",
+      "fields": [
+        { "key": "email_destination", "type": "text", "label": "Email destination", "guide": "What she gets when she hands over her address, and what follows it. Name the freebie and the one or two emails after it. If you have no email path and your CTA goes straight to the offer, write \"none, CTA goes to offer.\"", "placeholder": "e.g. Five-dinner fallback list, then two emails: how to pick a fallback meal, how the weekly reset works", "required": true, "max_length": 300 },
+        { "key": "email_exists", "type": "choice", "label": "Does it exist?", "options_from": "exists_options", "required": true },
+        { "key": "offer_destination", "type": "text", "label": "Offer destination", "guide": "The sales page or checkout for the Lesson 5 product. A URL if it exists, a page name if it doesn't. This is where the whole map is pointing.", "placeholder": "e.g. yoursite.com/weekly-reset (sales page, then checkout)", "required": true, "max_length": 300 },
+        { "key": "offer_exists", "type": "choice", "label": "Does it exist?", "options_from": "exists_options", "required": true },
+        { "key": "link_tested", "type": "choice", "label": "Link tested", "guide": "Not \"I'm sure it works.\" Did you click it, on your phone, today, all the way to the end? If anything isn't built yet, pick \"nothing to test yet\" and put the build in step 4.", "options_from": "tested_options", "required": true },
+        { "key": "break_found", "type": "textarea", "label": "Where the path stops", "guide": "If you clicked through and it worked end to end, write \"holds.\" If it stopped, write exactly where: the button, the opt-in page, the email, the link in the email, the sales page, the checkout.", "placeholder": "e.g. Holds. Or: the link in email two goes to the old sales page.", "required": true, "max_length": 400 }
+      ],
+      "footer": "Not every reader opts in. Not every subscriber buys. That's normal. The map doesn't promise they will. It makes sure the ones who want to, can."
+    },
+    {
+      "key": "plan",
+      "number": "4",
+      "title": "The first three posts and the next improvement",
+      "ask": "Two more posts, shorter. Then the one thing you'll fix or build next.",
+      "guide": "Posts two and three point at the same offer. Different questions, maybe different stages, same destination. Then name the next improvement: the first thing to build if you're starting from scratch, or the first broken handoff if you already have a blog. One thing, with a date.",
+      "fields": [
+        { "key": "post_topic_{k}", "type": "text", "repeat": "posts", "label": "Post {k} topic", "placeholder": "e.g. Why Sunday meal plans die by Wednesday", "required_for": ["2", "3"], "max_length": 160 },
+        { "key": "post_question_{k}", "type": "text", "repeat": "posts", "label": "Her question", "placeholder": "e.g. Why can't I stick to a meal plan?", "required_for": ["2", "3"], "max_length": 200 },
+        { "key": "post_stage_{k}", "type": "choice", "repeat": "posts", "label": "Her stage", "options_from": "stage_options", "required_for": ["2", "3"] },
+        { "key": "post_cta_{k}", "type": "text", "repeat": "posts", "label": "Call to action", "guide": "Matched to the stage, same rule as step 2.", "placeholder": "e.g. Download the five-dinner fallback list", "required_for": ["2", "3"], "max_length": 200 },
+        { "key": "next_improvement", "type": "textarea", "label": "The next improvement", "guide": "One thing. Building from scratch: the first piece the path can't work without, usually the freebie or the sales page. Existing blog: the first broken handoff from step 3. Not \"write more posts.\" You may need a stronger call to action on one post far more than ten new posts.", "placeholder": "e.g. Build the five-dinner fallback list as a one-page PDF and put the opt-in on the picky eaters post.", "required": true, "max_length": 500 },
+        { "key": "improvement_date", "type": "date", "label": "I'll have done it by", "required": true }
+      ],
+      "footer": "Before you write another post, you should be able to say whose question it answers, what stage she's in, and where the click goes. If you can't, it isn't a post yet. It's a topic."
+    }
+  ],
+  "completion": {
+    "milestone_label": "I mapped one post to my offer and tested the path",
+    "required_fields": [
+      "blog_job",
+      "first_topic", "reader_question", "reader_stage", "cta",
+      "email_destination", "email_exists", "offer_destination", "offer_exists", "link_tested", "break_found",
+      "post_topic_2", "post_question_2", "post_stage_2", "post_cta_2",
+      "post_topic_3", "post_question_3", "post_stage_3", "post_cta_3",
+      "next_improvement", "improvement_date"
+    ]
+  },
+  "admin_columns": ["first_topic", "reader_stage", "cta", "offer_destination", "link_tested", "next_improvement", "improvement_date"],
+  "admin_counts": [
+    { "label": "Reader stage: curious / frustrated / actively looking", "tally": "reader_stage" },
+    { "label": "Link tested: yes / no / nothing to test yet", "tally": "link_tested" }
+  ],
+  "callbacks_provided": {
+    "first_topic": "Used by m1-l9-foundation-blueprint",
+    "reader_question": "Used by m1-l9-foundation-blueprint",
+    "reader_stage": "Used by m1-l9-foundation-blueprint",
+    "cta": "Used by m1-l9-foundation-blueprint",
+    "email_destination": "Used by m1-l9-foundation-blueprint",
+    "offer_destination": "Used by m1-l9-foundation-blueprint",
+    "next_improvement": "Used by m1-l9-foundation-blueprint"
+  },
+  "footer_note": "Your first post, its call to action, both destinations and your next improvement all reappear in Lesson 9, where every Module 1 decision goes on one page.",
+  "example_response": {
+    "label": "Hypothetical example shown to students as a worked sample. Not a real blog, not real people.",
+    "blog_job": { "person": "parents of picky eaters who are out of decisions by 5pm", "offer": "the weekly fifteen-minute meal reset" },
+    "pieces_exist": ["posts"],
+    "first_topic": "Realistic weeknight dinners for picky eaters",
+    "reader_question": "What can I cook tonight that my kid will actually eat?",
+    "reader_stage": "frustrated",
+    "cta": "Download the five-dinner fallback list",
+    "email_destination": "Five-dinner fallback list (one-page PDF), then two emails: how to pick a fallback meal, and how the weekly reset works with a link to the sales page.",
+    "email_exists": "needs_building",
+    "offer_destination": "Sales page for the weekly fifteen-minute meal reset, then a simple checkout. Page name: /weekly-reset.",
+    "offer_exists": "needs_building",
+    "link_tested": "nothing",
+    "break_found": "Nothing to click yet. The post exists; the button, the PDF, the emails and the sales page don't.",
+    "post_topic_2": "Why Sunday meal plans die by Wednesday",
+    "post_question_2": "Why can't I stick to a meal plan?",
+    "post_stage_2": "curious",
+    "post_cta_2": "Read: realistic weeknight dinners for picky eaters",
+    "post_topic_3": "A fifteen-minute weekly meal reset for picky eaters",
+    "post_question_3": "Is there a meal planning system that works for picky eaters?",
+    "post_stage_3": "looking",
+    "post_cta_3": "See how the weekly reset works",
+    "next_improvement": "Build the five-dinner fallback list as a one-page PDF and put the opt-in button on the picky eaters post. Sales page comes after the list has been live two weeks.",
+    "improvement_date": "+14d"
+  }
+}

@@ -1,0 +1,175 @@
+{
+  "slug": "m1-l7-messaging",
+  "module_slug": "module-1",
+  "lesson_slug": "lesson-7",
+  "title": "Lesson 7: Brand Messaging Builder",
+  "version": 1,
+  "status": "draft",
+  "intro": {
+    "eyebrow": "Module 1 · Lesson 7 · Your worksheet",
+    "title": "Brand Messaging Builder",
+    "lead": "Write the words that go on your homepage. Start from what she actually said, build a headline she'd recognize herself in, back every benefit with a real feature, answer her two biggest worries honestly, and cut every claim you can't prove.",
+    "quote": "Copy isn't decoration. It's the conversation between your business and the person deciding whether you can help her.",
+    "notes": [
+      "Her words, not yours. Your Lesson 3 phrases and your Lesson 6 positioning are quoted at the top. The headline comes from those. If you find yourself writing 'transform', 'unlock' or 'ultimate', stop and go back to what she said.",
+      "No invented proof. A hypothetical example is not a customer result. A testimonial needs a real person who gave permission. If you don't have proof for a claim yet, say so in step 5 and remove the claim.",
+      "Already have a homepage? Paste your current headline into the 'before' box in step 2 and rewrite it with this method. Compare the two against the questions real customers actually ask you."
+    ]
+  },
+  "callbacks": [
+    {
+      "key": "l6_positioning",
+      "source_worksheet": "m1-l6-positioning",
+      "source_field": "positioning",
+      "heading": "Where you stand",
+      "template": "In Lesson 6 you wrote: I help {person} {outcome} through {method}, unlike {alternative}.",
+      "missing_text": "You haven't finished your Lesson 6 worksheet yet. Do that first; your headline is built from the positioning sentence you write there."
+    },
+    {
+      "key": "l6_differentiator",
+      "source_worksheet": "m1-l6-positioning",
+      "source_field": "differentiator",
+      "heading": "What makes you different",
+      "template": "From Lesson 6: {value}",
+      "missing_text": "No differentiator from Lesson 6 yet. Finish that worksheet first."
+    },
+    {
+      "key": "l3_snap_language",
+      "source_worksheet": "m1-l3-customer-research",
+      "source_field": "snap_language",
+      "heading": "Her words",
+      "template": "From your Lesson 3 snapshot: {value}",
+      "missing_text": "Your Lesson 3 snapshot has no phrases in it yet. Go back and fill 'Her words' there; this worksheet starts from them."
+    },
+    {
+      "key": "l3_snap_objections",
+      "source_worksheet": "m1-l3-customer-research",
+      "source_field": "snap_objections",
+      "heading": "What would stop her buying",
+      "template": "From your Lesson 3 snapshot: {value}",
+      "missing_text": "Your Lesson 3 snapshot has no objections in it yet. Step 4 of this worksheet answers them, so fill that field first."
+    }
+  ],
+  "repeat_groups": {
+    "phrases": { "keys": ["1", "2", "3"], "label": "Phrase {k}" },
+    "benefits": { "keys": ["1", "2", "3"], "label": "Benefit {k}" },
+    "objections": { "keys": ["1", "2"], "label": "Objection {k}" }
+  },
+  "sections": [
+    {
+      "key": "words",
+      "number": "1",
+      "title": "Her words",
+      "ask": "What did she say, and where is she when she reads this?",
+      "guide": "Pick the three phrases from your Lesson 3 snapshot that hit hardest. Copy them exactly. Don't polish them; the roughness is what makes her recognize herself. Then describe the moment she lands on your homepage. Not 'she's busy.' The actual moment.",
+      "fields": [
+        { "key": "phrase_{k}", "type": "text", "repeat": "phrases", "label": "Phrase {k}, copied exactly", "placeholder": "e.g. \"I can't make one more decision.\"", "required_for": ["1", "2", "3"], "max_length": 160 },
+        { "key": "moment", "type": "textarea", "label": "The moment she lands on your page", "guide": "What just happened, what time it is, what she typed into the search bar. Pull it from your Lesson 3 trigger. If you can't picture it, you can't write to it.", "placeholder": "e.g. It's 5:10pm on a Tuesday. She's about to throw out a bag of spinach and she just searched 'easy dinners for picky toddler'.", "required": true, "max_length": 500 }
+      ],
+      "footer": "If none of your Lesson 3 phrases feel strong enough to build on, that's a research gap, not a writing problem. Go back and ask three more people before you write."
+    },
+    {
+      "key": "headline",
+      "number": "2",
+      "title": "The headline and supporting statement",
+      "ask": "Would she recognize her own situation in the first line?",
+      "guide": "The headline names a moment or a result she'd recognize, in words close to hers. It does not name your product, your passion, or a transformation. The supporting statement is one or two sentences that say what it is and how it works, using the method from your Lesson 6 positioning. If it would fit any business in your niche, it's not done.",
+      "fields": [
+        { "key": "headline_before", "type": "text", "label": "The generic version (optional)", "guide": "Your current headline, or the first thing you'd have written before this lesson. Keeping it here makes the rewrite honest.", "placeholder": "e.g. Transform your family dinners with the ultimate meal planning solution.", "required": false, "max_length": 200 },
+        { "key": "headline", "type": "text", "label": "Homepage headline", "guide": "Under fifteen words. Built from one of your three phrases. Test: could she read it and think 'that's me'? If it starts with your product name, start again.", "placeholder": "e.g. Know what dinner is before 5pm. Even with a kid who eats five things.", "required": true, "max_length": 160 },
+        { "key": "supporting_statement", "type": "textarea", "label": "Supporting statement", "guide": "One or two sentences. What it is, how it works, who it's for. The 'method' from your Lesson 6 sentence belongs here. No adjectives doing the work of explanations.", "placeholder": "e.g. A fifteen-minute Sunday reset that builds the week around the foods your kid already eats, with a grocery list to match and a backup for the night that falls apart.", "required": true, "max_length": 500 }
+      ],
+      "footer": "Read both aloud. If you hear 'transform', 'unlock', 'ultimate', 'journey' or 'effortless', cut the word and say what you actually mean."
+    },
+    {
+      "key": "benefits",
+      "number": "3",
+      "title": "Three benefits, each tied to a feature",
+      "ask": "What does she get, and what makes that true?",
+      "guide": "A benefit is why it matters to her. A feature is the thing she actually receives that makes the benefit true. Write them in pairs. A benefit with no feature behind it is a wish. A feature with no benefit is a spec sheet. Use her constraints from Lesson 3: if she has fifteen minutes, 'fast' isn't a benefit, 'done in fifteen minutes on Sunday' is.",
+      "fields": [
+        { "key": "benefit_{k}", "type": "text", "repeat": "benefits", "label": "Benefit {k}: why it matters to her", "placeholder": "e.g. No decisions after 5pm", "required_for": ["1", "2", "3"], "max_length": 160 },
+        { "key": "feature_{k}", "type": "text", "repeat": "benefits", "label": "The feature that makes it true", "guide": "Something that exists, or will exist, in your smallest version from Lesson 5. Not a promise. A thing.", "placeholder": "e.g. A weekly plan you set once on Sunday, in fifteen minutes", "required_for": ["1", "2", "3"], "max_length": 200 }
+      ]
+    },
+    {
+      "key": "objections",
+      "number": "4",
+      "title": "Two objections, answered honestly",
+      "ask": "What would stop her at the checkout, and what's the true answer?",
+      "guide": "Take the two biggest worries from your Lesson 3 snapshot, write each as the question she'd actually ask, and answer it truthfully. Truthfully means the answer sometimes includes 'this isn't for you if'. An objection you answer with a promise you can't keep is worse than one you leave alone.",
+      "fields": [
+        { "key": "objection_{k}", "type": "text", "repeat": "objections", "label": "Objection {k}, as the question she'd ask", "placeholder": "e.g. Will this be another PDF I use for one week?", "required_for": ["1", "2"], "max_length": 200 },
+        { "key": "objection_answer_{k}", "type": "textarea", "repeat": "objections", "label": "The honest answer", "guide": "Say how it works, what it needs from her, and who it won't suit. If the honest answer is 'I don't know yet', write that and note what would tell you.", "placeholder": "e.g. It might. It's a reset you do every Sunday, not a plan you read once. If you skip the Sunday reset it won't work, and I'd rather say that now.", "required_for": ["1", "2"], "max_length": 600 }
+      ],
+      "footer": "Where these answers go (homepage, sales page, FAQ, welcome email) is a Lesson 8 question. For now, get the answer true."
+    },
+    {
+      "key": "proof",
+      "number": "5",
+      "title": "Proof you actually have, and claims to remove",
+      "ask": "What can you show, and what have you written that you can't back up?",
+      "guide": "Proof is something a stranger could check: a walkthrough of the thing working, a verified quote from a real person who gave permission, your own documented process. List only what you have today. Then read everything above aloud and list every phrase that sounds impressive but can't be supported. Remove those from your copy before it goes anywhere.",
+      "fields": [
+        { "key": "proof_available", "type": "textarea", "label": "Proof I have right now", "guide": "Be specific: 'a screen recording of my Sunday reset', 'two quotes with written permission'. Not 'testimonials' if you don't have any. If the honest answer is 'none yet', write that; it's a better position than a fake one.", "placeholder": "e.g. A walkthrough of my own Sunday reset. Two parents from my research who said I can quote them once I ask properly in writing.", "required": true, "max_length": 600 },
+        { "key": "proof_gap", "type": "textarea", "label": "Proof I don't have yet, and how I'd get it", "guide": "The thing that would make the strongest claim true. Who you'd ask, what you'd record, by when.", "placeholder": "e.g. One real customer who's used it for four weeks. No 'parents love it' line until I have that.", "required": false, "max_length": 500 },
+        { "key": "claims_to_remove", "type": "textarea", "label": "Claims to remove or verify", "guide": "Every phrase from your headline, statement, benefits and answers that you can't prove. Guarantees, numbers you made up, 'works for everyone', 'never stress again'. Put the phrase here and take it out of the copy.", "placeholder": "e.g. 'Transform your dinners.' 'Never stress about dinner again.' 'Save $500 a month' (I made that number up).", "required": true, "max_length": 700 },
+        { "key": "read_aloud", "type": "choice", "label": "I read the whole thing aloud and cut what sounded impressive but said nothing", "options": [
+          { "value": "done", "label": "Done" },
+          { "value": "not_yet", "label": "Not yet" }
+        ], "required": true }
+      ],
+      "footer": "Cut adjectives before you cut explanations. Keep the details that help her decide. Remove the language that only makes you sound impressive. Next, Lesson 8 gives this copy somewhere to lead."
+    }
+  ],
+  "completion": {
+    "milestone_label": "I wrote a headline in her words and cut the claims I can't back up",
+    "required_fields": [
+      "phrase_1", "phrase_2", "phrase_3", "moment",
+      "headline", "supporting_statement",
+      "benefit_1", "feature_1", "benefit_2", "feature_2", "benefit_3", "feature_3",
+      "objection_1", "objection_answer_1", "objection_2", "objection_answer_2",
+      "proof_available", "claims_to_remove", "read_aloud"
+    ]
+  },
+  "admin_columns": ["headline", "supporting_statement", "benefit_1", "objection_1", "proof_available", "claims_to_remove"],
+  "admin_counts": [
+    { "label": "Read aloud and cut: done / not yet", "tally": "read_aloud" }
+  ],
+  "callbacks_provided": {
+    "headline": "Used by m1-l8-blog-to-buyer as the promise the blog leads to, and by m1-l9-foundation-blueprint",
+    "supporting_statement": "Used by m1-l9-foundation-blueprint",
+    "benefit_1": "Used by m1-l9-foundation-blueprint",
+    "benefit_2": "Used by m1-l9-foundation-blueprint",
+    "benefit_3": "Used by m1-l9-foundation-blueprint",
+    "objection_1": "Used by m1-l9-foundation-blueprint (answer lives in objection_answer_1)",
+    "objection_2": "Used by m1-l9-foundation-blueprint (answer lives in objection_answer_2)",
+    "proof_available": "Used by m1-l9-foundation-blueprint",
+    "claims_to_remove": "Used by m1-l9-foundation-blueprint"
+  },
+  "footer_note": "You'll see your headline again in Lesson 8, where the blog gets a reason to point at it, and everything on this page again in Lesson 9 when you confirm, revise or park each decision.",
+  "example_response": {
+    "label": "Hypothetical example shown to students as a worked sample. Not a real business, not a real customer, no real results.",
+    "phrase_1": "\"I can't make one more decision.\"",
+    "phrase_2": "\"Eats five things. Five.\"",
+    "phrase_3": "\"I bought a meal plan PDF and used it for one week.\"",
+    "moment": "It's 5:10pm on a Tuesday. She's standing in the kitchen with a bag of spinach she's about to throw out, one kid asking what's for dinner and the other refusing whatever the answer is. She just searched 'easy dinners for picky toddler' on her phone.",
+    "headline_before": "Transform your family dinners with the ultimate meal planning solution.",
+    "headline": "Know what dinner is before 5pm. Even with a kid who eats five things.",
+    "supporting_statement": "A fifteen-minute Sunday reset that builds the week around the foods your kid already eats, with a grocery list that matches it and a backup for the night that falls apart.",
+    "benefit_1": "No decisions after 5pm",
+    "feature_1": "A weekly plan you set once on Sunday, in fifteen minutes",
+    "benefit_2": "One dinner, not two",
+    "feature_2": "Every meal built around your kid's five foods, with a swap list for the adults",
+    "benefit_3": "Less produce in the bin",
+    "feature_3": "A grocery list generated from the plan, nothing on it the plan doesn't use",
+    "objection_1": "Will this just be another PDF I use for one week?",
+    "objection_answer_1": "It might. It's a reset you do every Sunday, not a plan you read once. Fifteen minutes, same time every week. If you skip the Sunday reset it won't work, and I'd rather say that now than after you've paid.",
+    "objection_2": "Will it actually work for a kid who only eats five things?",
+    "objection_answer_2": "It's built for exactly that. You list the five foods first and every meal is built around them. If your kid currently eats fewer than three foods, this isn't the right fit yet, and I'd say so.",
+    "proof_available": "A screen recording of my own Sunday reset, start to finish. Two parents from my Lesson 3 research who tried the five-food list and said I could quote them once I ask properly in writing. No sales numbers, no before and after stats.",
+    "proof_gap": "One real customer who has used it for four weeks. I don't have that yet, so no 'parents love it' line until I do. I'll ask the two parents from my research to try it for a month and tell me what happened in week two.",
+    "claims_to_remove": "'Transform your dinners.' 'Never stress about dinner again.' 'Works for every family.' 'Save $500 a month on groceries' (I made that number up). 'Effortless evenings.'",
+    "read_aloud": "done"
+  }
+}

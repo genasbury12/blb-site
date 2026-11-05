@@ -16,6 +16,28 @@ Status of The BOSS Business System portal build. Updated at every milestone (con
 | 7 Marketing and admin | Admin workspace complete; public sales and masterclass pages wait on approved copy and video |
 | 8 Internal QA and release | Staging Supabase migrated, six test accounts provisioned, signed in permission and browser checks passing (2026-11-02); auth settings, Vercel and Stripe test mode pending; owner sign off pending |
 
+## Module 1 worksheets, Lessons 4 to 9 (brief 18, 2026-11-05)
+
+Briefs: `docs/18_MODULE1_WORKSHEETS_ALL.md` and dev notes `docs/12_` to `docs/17_`. Schemas: `docs/worksheet_m1-l4` to `l9` (copied to `portal/src/domain/worksheets/fixtures/`).
+
+**Seeded on staging, all as drafts with their milestones as drafts:** Lessons 4 to 8 on sample lessons 4 to 8 (staging had no Lesson 8, so the seed added `SAMPLE: Module 1 lesson 8`, like Lesson 9 before it). Lesson 9 replaced the Slice E placeholder in place (same slug, version 1; it had no answers) and went from published to draft, as brief 17 asks.
+
+**Lesson 1 keys (owner decision 2026-11-05: map, don't rename).** Briefs name them `q1_treating_as_business`, `q2_pay_for`, `q3_blog_disappeared`, `realization`; the seeded Lesson 1 uses `q1`, `q2`, `q3`, `realization`. `SOURCE_KEY_ALIASES` in `src/domain/worksheets/callbacks.ts` maps the first three; nothing in Lesson 1 changed.
+
+**Built once, reused across the set:**
+- Named option lists: any top level `*_options` list works with `options_from` (confidence, format, decision, stage, exists, tested, verdict, evidence). Inline options can be plain values or value/label/guide objects.
+- `multichoice` with inline options (Lesson 8): stored as values, shown as labels joined with ", ".
+- Callbacks: `{value}` (or the field's own name) quotes the whole answer; sentence slots fill by name; no template means the whole answer. A callback with an empty heading joins the box above it (Lesson 4's three problems), and an empty `missing_text` shows nothing.
+- Lesson 4: `prefill_from` copies Lesson 3 problems into `problem_{k}`; the five questions x three problems scorecard is one grid on desktop and stacks by problem on mobile (one set of inputs, reordered with CSS; only groups with a fallback label such as "Problem {k}", so Lesson 2 keeps its reviewed layout); `note_placeholder`; `count_value` tiles count members with any Weak.
+- Lessons 5 to 8: optional fields shown muted with an "Optional" tag; card rows print each field's guide once above the rows; ratings without their own list use Strong, Uncertain, Weak.
+- Lesson 9: `callback_layout` decision cards (quote on top, the decision's verdict, evidence and note beneath, unnumbered quotes inside the card before them); `callbacks_inline` quotes four Lesson 1 answers in section 4; `optional: true` section 2 starts closed behind Show; the `pdf` block puts `business_sentence` on the PDF cover, prints each decision with its quote, and keeps "Download all Module 1 worksheets"; tallies over `dec_{n}` and `ev_{n}`.
+- PDF: a repeat field labelled per key prints that label; an empty optional section is left out.
+
+**Tests:**
+- Unit: 268 passed. New `module1.test.ts` checks every schema parses, brief 18's key contract, every callback and prefill points at a real field (through the Lesson 1 mapping), every worked example is valid and complete, and every quote resolves. Every lesson's PDF renders from its worked example.
+- Staging: `worksheets-module1.spec.ts`. A new member does the audit and Lesson 1, then Lessons 2 to 9 in order with each worked example (Lesson 2 has none, so the test writes one), checking every quote before filling each lesson, the Lesson 4 prefill and grid, Lesson 9's decision cards and closed optional section, each milestone, the Lesson 9 PDF and the 38 page Module 1 bundle, then the admin tiles and CSV.
+- The older journey suite (`worksheets.spec.ts`) now uses Module 2 sample lessons 1 and 2, since every Module 1 lesson has its own worksheet.
+
 ## Lesson 3 worksheet: Customer Research Workbook (2026-11-05)
 
 Brief: `docs/11_LESSON3_WORKSHEET.md`. Schema: `docs/worksheet_m1-l3-customer-research.json` (copied to `portal/src/domain/worksheets/fixtures/`).

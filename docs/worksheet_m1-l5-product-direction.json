@@ -1,0 +1,173 @@
+{
+  "slug": "m1-l5-product-direction",
+  "module_slug": "module-1",
+  "lesson_slug": "lesson-5",
+  "title": "Lesson 5: Product Direction Evaluator",
+  "version": 1,
+  "status": "draft",
+  "intro": {
+    "eyebrow": "Module 1 · Lesson 5 · Your worksheet",
+    "title": "Product Direction Evaluator",
+    "lead": "Decide what you'd build for the problem you chose in Lesson 4. One concept, one promise you can keep, the smallest version you could test, and a decision: test, revise, or pause.",
+    "quote": "A strong product is complete enough to deliver its promise and small enough that she actually uses it.",
+    "notes": [
+      "You are not building the product here. You are deciding whether it's worth building, and what the smallest test looks like.",
+      "The promise has a fixed shape on purpose. If you can't fill all three slots honestly, the concept isn't ready.",
+      "Already selling something? Run your current offer through these five steps instead of inventing a new one. Fixing the promise or the format on an existing product usually beats building another."
+    ]
+  },
+  "callbacks": [
+    {
+      "key": "l4_priority_problem",
+      "source_worksheet": "m1-l4-problem-validation",
+      "source_field": "priority_problem",
+      "heading": "The problem you chose",
+      "template": "In Lesson 4 you chose this priority problem: {priority_problem}",
+      "missing_text": "You haven't finished your Lesson 4 worksheet yet. Do that first; this one builds a product around the problem you chose there."
+    },
+    {
+      "key": "l3_constraints",
+      "source_worksheet": "m1-l3-customer-research",
+      "source_field": "snap_constraints",
+      "heading": "Her constraints",
+      "template": "In Lesson 3 you wrote her practical constraints: {snap_constraints}",
+      "missing_text": "Your Lesson 3 snapshot isn't complete, so her constraints can't be shown here. Fill them in there; every format decision below depends on them."
+    }
+  ],
+  "repeat_groups": {
+    "steps": { "keys": ["1", "2", "3", "4", "5"], "label": "Step {k}", "min_visible": 3, "add_label": "Add another step" }
+  },
+  "format_options": [
+    { "value": "template", "label": "Checklist or template", "guide": "She fills it in herself. Cheap to deliver, needs clear instructions." },
+    { "value": "guided_tool", "label": "Guided tool or toolkit", "guide": "A short process with a worksheet or planner. Good when she needs to make one decision." },
+    { "value": "workshop", "label": "Live workshop", "guide": "Helps people finish. Your calendar becomes part of the product." },
+    { "value": "course", "label": "Self-paced course", "guide": "Only if the result genuinely needs several lessons. Most first products don't." },
+    { "value": "coaching", "label": "Coaching or a call", "guide": "Fastest to test. Doesn't scale, and that's fine for a first version." },
+    { "value": "membership", "label": "Membership", "guide": "Needs new value every month, not just a launch. Rarely a first product." },
+    { "value": "other", "label": "Something else", "guide": "Describe it in the reason box." }
+  ],
+  "decision_options": [
+    { "value": "test", "label": "Test", "guide": "The promise is clear, I can deliver it, and there's enough signal to put the smallest version in front of five people." },
+    { "value": "revise", "label": "Revise", "guide": "The problem is real but the concept doesn't fit it yet. Wrong format, promise too big, or I can't deliver it with my current hours." },
+    { "value": "pause", "label": "Pause", "guide": "The evidence isn't there. I'd be building something nobody asked for." }
+  ],
+  "sections": [
+    {
+      "key": "problem",
+      "number": "1",
+      "title": "The problem you're solving",
+      "ask": "Who is she, and where does she start?",
+      "guide": "Read the Lesson 4 problem and the Lesson 3 constraints above before you write a word. The buyer and her starting point are the brief. Be specific enough that bad product ideas disqualify themselves.",
+      "fields": [
+        { "key": "buyer", "type": "text", "label": "The buyer", "guide": "Not a demographic. The person from your Lesson 3 snapshot, at the moment she goes looking.", "placeholder": "e.g. A parent of a picky eater under six who works until 5", "required": true, "max_length": 200 },
+        { "key": "before", "type": "textarea", "label": "Where she starts", "guide": "What her situation looks like the week before she buys. Pull from your evidence, not your imagination.", "placeholder": "e.g. Decides dinner every afternoon with no decisions left, cooks two meals most nights, throws out produce, has abandoned a meal plan PDF after one week.", "required": true, "max_length": 600 }
+      ]
+    },
+    {
+      "key": "concept",
+      "number": "2",
+      "title": "The concept and the promise",
+      "ask": "What does it do for her?",
+      "guide": "The concept is one sentence about what the product does, not what it is. Then the promise in its fixed shape. The result must be concrete, the timeframe must be one she told you she has, and the \"without\" should come from her objections. Then write what you are not promising.",
+      "fields": [
+        { "key": "product_concept", "type": "text", "label": "Product concept", "guide": "One sentence. What it does for her, not the file type. \"A weekly reset that decides dinner for her\" beats \"a meal planning PDF.\"", "placeholder": "e.g. A fifteen-minute Sunday reset that plans the week's dinners around the five foods her kid eats", "required": true, "max_length": 240 },
+        { "key": "outcome_promise", "type": "sentence", "label": "The outcome promise", "template": "She gets {result} in {timeframe} without {cost}.", "slots": [
+          { "key": "result", "placeholder": "result", "max_length": 140 },
+          { "key": "timeframe", "placeholder": "timeframe", "max_length": 80 },
+          { "key": "cost", "placeholder": "cost she avoids", "max_length": 140 }
+        ], "guide": "If you can't deliver it to every buyer, it doesn't go in this sentence.", "required": true },
+        { "key": "not_promising", "type": "textarea", "label": "What I'm not promising", "guide": "The outcomes you can't control. Her kid loving every meal. Never feeling stressed again. Write them down now so you don't stretch later in sales copy.", "placeholder": "e.g. That every meal gets eaten. That she'll never order takeout again.", "required": true, "max_length": 400 }
+      ]
+    },
+    {
+      "key": "format",
+      "number": "3",
+      "title": "Format and the smallest useful version",
+      "ask": "What shape fits her constraints, and what could you put in front of five people in two weeks?",
+      "guide": "Format follows the result. Pick the one that fits her constraints, say why, then list the three to five steps she goes through inside it. Then describe the smallest version you could test within two weeks. If your answer takes longer than that, you've described the finished product, not the test.",
+      "fields": [
+        { "key": "format", "type": "choice", "label": "Format", "options_from": "format_options", "required": true },
+        { "key": "format_reason", "type": "textarea", "label": "Why this format fits her", "guide": "Tie it to a constraint. \"She has fifteen minutes on Sunday, so it's a one-page planner, not a course.\"", "placeholder": "e.g. She won't open a long PDF and has no decisions left at 5pm, so the deciding has to happen once, on Sunday, with a guided one-pager.", "required": true, "max_length": 500 },
+        { "key": "step_{k}", "type": "text", "repeat": "steps", "label": "Step {k}", "guide": "What she does, in order. Three is enough. Five is the limit.", "placeholder": "e.g. Pick this week's five-food dinners from the list", "required_for": ["1", "2", "3"], "max_length": 160 },
+        { "key": "smallest_version", "type": "textarea", "label": "The smallest useful version", "guide": "What you could hand to five real people within two weeks. A Google Doc and a short video count. A fifteen-minute call counts. Not the pretty version.", "placeholder": "e.g. A one-page Google Doc planner with the five-food meal list, a ten-minute Loom walking through one Sunday, and a text check-in on Wednesday. Sent to five parents from my Lesson 3 log.", "required": true, "max_length": 700 },
+        { "key": "test_terms", "type": "textarea", "label": "How I'll offer the test", "guide": "Optional. Free beta, pilot, or preorder with clear terms. If you'll charge, say what and say it's a test price, not a market benchmark.", "placeholder": "e.g. Pilot at a small test price, refunded if they don't use it by week two.", "required": false, "max_length": 400 }
+      ],
+      "footer": "A thirty-video course for a one-decision problem is the most common first-product mistake. The second most common is a seven dollar printable for a problem she'd pay real money to solve."
+    },
+    {
+      "key": "reality",
+      "number": "4",
+      "title": "Delivery reality and evidence of demand",
+      "ask": "Can you deliver it, and has anyone asked for it?",
+      "guide": "Two honesty checks. Rate each one Strong, Uncertain, or Weak and say why. Count evidence from your Lesson 3 log and your Lesson 4 validation activity, not from your hopes. Zero evidence is a useful answer. Then name the one assumption that, if false, kills the product.",
+      "fields": [
+        { "key": "delivery_rating", "type": "rating", "label": "I can deliver this with the hours I actually have", "guide": "Think about the format you picked. A workshop costs evenings. A membership costs every month. A template costs instructions and support.", "required": true },
+        { "key": "support_burden", "type": "textarea", "label": "What she'll need from me after she buys", "guide": "Questions, feedback, troubleshooting, check-ins. That's part of the product and part of your hours.", "placeholder": "e.g. A quick answer when her kid's five foods change. Probably one message a week in the pilot.", "required": true, "max_length": 400 },
+        { "key": "evidence_rating", "type": "rating", "label": "Real people have shown they want this", "guide": "Strong means several people said or did something that points at this concept. Weak means it's mostly you.", "required": true },
+        { "key": "evidence_demand", "type": "textarea", "label": "The evidence, specifically", "guide": "Who, what they said or did, when. Point at rows in your Lesson 3 log where you can. No invented quotes.", "placeholder": "e.g. Three of five parents in my log said deciding is harder than cooking. One bought a plan PDF and abandoned it. Two said they'd try a weekly version when I asked in Lesson 4.", "required": true, "max_length": 700 },
+        { "key": "biggest_assumption", "type": "textarea", "label": "My biggest assumption", "guide": "The one thing that has to be true for this to work, and that nobody has proven yet.", "placeholder": "e.g. That she'll actually sit down for fifteen minutes on Sunday.", "required": true, "max_length": 400 }
+      ]
+    },
+    {
+      "key": "decision",
+      "number": "5",
+      "title": "The decision",
+      "ask": "Test, revise, or pause?",
+      "guide": "Pick one. Test means go put the smallest version in front of five people. Revise means fix the concept, not the problem. Pause means the evidence isn't there, and that's a good decision, not a failure. Then say why, name the next test, and date it.",
+      "fields": [
+        { "key": "product_decision", "type": "choice", "label": "Decision", "options_from": "decision_options", "required": true },
+        { "key": "decision_reason", "type": "textarea", "label": "Why", "guide": "Two sentences. Point at your ratings and your evidence, not your excitement.", "placeholder": "e.g. The promise fits her constraints exactly and three people are already waiting. Delivery is a Google Doc. There's no reason not to test.", "required": true, "max_length": 500 },
+        { "key": "next_test", "type": "textarea", "label": "The next test", "guide": "Who gets the smallest version, how you'll know it worked, and what you'll ask them afterwards.", "placeholder": "e.g. Send the planner to five parents from my log. It worked if three of them use it two Sundays running. Ask: what did you skip?", "required": true, "max_length": 500 },
+        { "key": "review_date", "type": "date", "label": "I'll have the result by", "required": true }
+      ],
+      "footer": "You are not building the product in this lesson. You're making the decision that makes building it worth your time. Next, Lesson 6 takes your concept and your promise and positions them against everything else she could choose."
+    }
+  ],
+  "completion": {
+    "milestone_label": "I chose a product concept and wrote a promise I can keep",
+    "required_fields": [
+      "buyer", "before",
+      "product_concept", "outcome_promise", "not_promising",
+      "format", "format_reason", "step_1", "step_2", "step_3", "smallest_version",
+      "delivery_rating", "support_burden", "evidence_rating", "evidence_demand", "biggest_assumption",
+      "product_decision", "decision_reason", "next_test", "review_date"
+    ]
+  },
+  "admin_columns": ["product_concept", "outcome_promise", "format", "delivery_rating", "evidence_rating", "product_decision", "review_date"],
+  "admin_counts": [
+    { "label": "Decision: test / revise / pause", "tally": "product_decision" },
+    { "label": "Format chosen", "tally": "format" }
+  ],
+  "callbacks_provided": {
+    "product_concept": "Used by m1-l6-positioning, m1-l8-blog-to-buyer and m1-l9-foundation-blueprint",
+    "format": "Used by m1-l9-foundation-blueprint",
+    "smallest_version": "Used by m1-l9-foundation-blueprint",
+    "outcome_promise": "Used by m1-l6-positioning and m1-l9-foundation-blueprint",
+    "product_decision": "Used by m1-l9-foundation-blueprint"
+  },
+  "footer_note": "You'll see your concept and your promise again in Lesson 6, your concept again in Lesson 8, and every decision on this page again in Lesson 9.",
+  "example_response": {
+    "label": "Hypothetical example shown to students as a worked sample. Not real people, not real prices, not real results.",
+    "buyer": "A parent of a picky eater under six who works until 5 and has no decisions left by dinner",
+    "before": "Decides dinner every afternoon when she's already done. Cooks two meals most nights because one child eats five foods. Throws out produce weekly. Bought a meal plan PDF and used it for one week.",
+    "product_concept": "A fifteen-minute Sunday reset that plans the week's dinners around the five foods her kid already eats",
+    "outcome_promise": { "result": "a week of dinners decided before Monday", "timeframe": "fifteen minutes on Sunday", "cost": "cooking two separate meals or buying another plan she'll abandon" },
+    "not_promising": "That every meal gets eaten without complaint. That she'll never order pizza again. That her kid will try new foods.",
+    "format": "guided_tool",
+    "format_reason": "She has fifteen minutes on Sunday and nothing left at 5pm, so the deciding has to happen once, on Sunday, with a guided one-pager. A course would be another thing she doesn't finish.",
+    "step_1": "Pick this week's dinners from the five-food meal list",
+    "step_2": "Fill the grocery list from what she picked",
+    "step_3": "Set two fallback dinners for the nights that fall apart",
+    "smallest_version": "A one-page Google Doc planner with the five-food meal list, a ten-minute Loom walking through one Sunday, and a text check-in on Wednesday. Sent to five parents from my Lesson 3 log.",
+    "test_terms": "Free pilot for the first five. Ask what they'd pay at the end, not the start.",
+    "delivery_rating": { "value": "strong", "note": "It's a Google Doc and a short video. I can make it in a weekend." },
+    "support_burden": "A quick answer when a kid's five foods change. Probably one message a week per parent during the pilot.",
+    "evidence_rating": { "value": "uncertain", "note": "People described the problem clearly. Nobody has used anything like this yet." },
+    "evidence_demand": "Three of five parents in my log said deciding is harder than cooking. One bought a plan PDF and abandoned it in a week. Two said they'd try a weekly version when I asked during the Lesson 4 validation calls.",
+    "biggest_assumption": "That she'll actually sit down for fifteen minutes on Sunday. If Sunday doesn't happen, nothing else matters.",
+    "product_decision": "test",
+    "decision_reason": "The promise fits her constraints exactly and two people are already waiting. Delivery is a Google Doc. The only unknown is the Sunday habit, and a two-week pilot will show it.",
+    "next_test": "Send the planner to five parents from my log. It worked if three of them use it two Sundays running. Afterwards ask: what did you skip, and what would you pay?",
+    "review_date": "+14d"
+  }
+}

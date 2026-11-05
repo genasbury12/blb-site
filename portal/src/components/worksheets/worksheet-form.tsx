@@ -1,15 +1,17 @@
 "use client";
 
 import { Check, Download } from "lucide-react";
-import { useEffect, useId, useMemo, useRef, useState, useTransition, type ReactNode } from "react";
-import type { ResolvedTopCallback } from "@/domain/worksheets/callbacks";
+import { Fragment, useEffect, useId, useMemo, useRef, useState, useTransition, type CSSProperties, type ReactNode } from "react";
+import { decisionCards, groupTopCallbacks, type DecisionCard, type InlineCallback, type ResolvedTopCallback } from "@/domain/worksheets/callbacks";
 import {
   choiceOptions,
   concreteFields,
   expandField,
+  groupHeading,
   isRequired,
   labelFrom,
   renderSentence,
+  multichoiceValues,
   repeatOptions,
   visibleRows,
   worksheetProgress,
@@ -38,6 +40,10 @@ export type WorksheetFormProps = {
   callbacks: Record<string, { label: string; text: string }>;
   /** Quotes before section 1, e.g. Lesson 3 "Where you started" (or its missing_text). */
   topCallbacks?: ResolvedTopCallback[];
+  /** Quotes inside a section (callbacks_inline), keyed by section key. */
+  inlineCallbacks?: Record<string, InlineCallback[]>;
+  /** Empty fields started from earlier answers (prefill_from). Shown and saved as the member's own answer. */
+  prefill?: Answers;
   /** display: read only render for staff (Slice D); edit: the member's own worksheet. */
   mode?: "edit" | "display";
   /** The lesson's module, for the "Download all Module N worksheets" button when the schema asks for it. */
@@ -57,7 +63,7 @@ function timeLabel(iso: string) {
 export function WorksheetForm(props: WorksheetFormProps) {
   const { slug, schema, mode = "edit", lessonNumber } = props;
   const readOnly = mode === "display";
-  const [answers, setAnswers] = useState<Answers>(props.initialAnswers);
+  const [answers, setAnswers] = useState<Answers>(() => ({ ...props.initialAnswers, ...(readOnly ? {} : props.prefill) }));
   const [status, setStatus] = useState(props.initialStatus);
   const [completeMsg, setCompleteMsg] = useState<string | null>(null);
   const [completing, startCompleting] = useTransition();
@@ -66,8 +72,18 @@ export function WorksheetForm(props: WorksheetFormProps) {
   const progress = useMemo(() => worksheetProgress(schema, answers), [schema, answers]);
   // A look back worksheet (Lesson 9 placeholder) only quotes earlier answers: nothing to save or complete.
   const hasFields = useMemo(() => concreteFields(schema).length > 0, [schema]);
+  // "Download all Module N worksheets": the Lesson 9 placeholder's module_download, or the Blueprint's pdf block.
+  const hasBundle = Boolean(schema.module_download || schema.pdf?.bundle_label);
 
   useEffect(() => setWorksheetProgress(slug, progress.percent), [slug, progress.percent]);
+
+  // Copied-forward answers are saved straight away, so progress and Complete agree with what the server holds.
+  const prefillSaved = useRef(false);
+  useEffect(() => {
+    if (readOnly || prefillSaved.current || !props.prefill) return;
+    prefillSaved.current = true;
+    for (const [k, v] of Object.entries(props.prefill)) queue(k, v);
+  }, [readOnly, props.prefill, queue]);
 
   function update(key: string, value: AnswerValue) {
     if (readOnly) return;
@@ -114,21 +130,21 @@ export function WorksheetForm(props: WorksheetFormProps) {
         ) : null}
       </header>
 
-      {!readOnly && props.topCallbacks?.length ? (
+      {!readOnly && props.topCallbacks?.length && !schema.callback_layout ? (
         <section aria-label={props.topCallbacks[0]!.heading} className="mt-[54px] border-t border-[rgba(101,71,79,0.12)] pt-[54px]">
           <div className="grid gap-x-8 md:grid-cols-[80px_1fr]">
             <div aria-hidden className="hidden md:block" />
             <div className="min-w-0 max-w-2xl space-y-4">
-              {props.topCallbacks.map((cb) => (
-                <CallbackQuote key={cb.key} testId={`callback-${cb.key}`} caption={cb.heading} text={cb.text} missing={cb.missingText} />
+              {groupTopCallbacks(props.topCallbacks).map((g) => (
+                <CallbackQuote key={g.key} testId={`callback-${g.key}`} caption={g.heading} lines={g.lines} missing={g.missingText} />
               ))}
             </div>
           </div>
         </section>
       ) : null}
 
-      {schema.sections.map((section) => (
-        <section key={section.key} aria-labelledby={`ws-${section.key}`} className="mt-[54px] border-t border-[rgba(101,71,79,0.12)] pt-[54px]">
+      {schema.sections.map((section, si) => (
+        <section key={section.key} aria-labelledby={`ws-${section.key}`} className="mt-[54px] border-t border-[rgba(101,71,79,0.12)] pt-[54px]" data-testid={`section-${section.key}`}>
           <div className={cn(section.number ? "grid gap-x-8 md:grid-cols-[80px_1fr]" : "")}>
             {section.number ? (
               <p aria-hidden className="font-display text-[4.5rem] leading-none text-rose-deep [font-variant-numeric:lining-nums]">{section.number}</p>
@@ -140,22 +156,44 @@ export function WorksheetForm(props: WorksheetFormProps) {
                   <CallbackQuote
                     testId={`callback-${section.key}`}
                     caption={`From ${props.callbacks[section.key]?.label ?? section.callback?.label ?? ""}`}
-                    text={props.callbacks[section.key]?.text ?? null}
+                    lines={props.callbacks[section.key] ? [props.callbacks[section.key]!.text] : []}
                     missing={`Your answer from ${section.callback?.label ?? "an earlier worksheet"} will show here once you fill it in.`}
                   />
                 </div>
               ) : null}
-              <FieldList fields={section.fields} schema={schema} answers={answers} update={update} readOnly={readOnly} context={section.title ?? ""} />
-              {(section.subsections ?? []).map((sub) => (
-                <Subsection key={sub.key} sub={sub} schema={schema} answers={answers} update={update} readOnly={readOnly} />
-              ))}
+              {props.inlineCallbacks?.[section.key]?.length ? (
+                <div className="mt-6 max-w-2xl space-y-3">
+                  {props.inlineCallbacks[section.key]!.map((cb) => (
+                    <CallbackQuote key={cb.key} testId={`inline-${cb.key}`} caption={cb.heading} lines={cb.text ? [cb.text] : []} missing={`Your answer from ${cb.source} will show here once you fill it in.`} />
+                  ))}
+                </div>
+              ) : null}
+              <OptionalSection section={section} answers={answers}>
+                {si === 0 && schema.callback_layout ? (
+                  <DecisionCards
+                    cards={decisionCards(props.topCallbacks ?? (schema.callbacks ?? []).map((c) => ({ key: c.key, heading: c.heading, text: null, missingText: c.missing_text })))}
+                    fields={section.fields}
+                    schema={schema}
+                    answers={answers}
+                    update={update}
+                    readOnly={readOnly}
+                  />
+                ) : (
+                  <FieldList fields={section.fields} schema={schema} answers={answers} update={update} readOnly={readOnly} context={section.title ?? ""} />
+                )}
+              </OptionalSection>
+              {matrixGroup(schema, section.subsections) ? (
+                <RepeatMatrix subs={section.subsections!} group={matrixGroup(schema, section.subsections)!} schema={schema} answers={answers} update={update} readOnly={readOnly} />
+              ) : (
+                (section.subsections ?? []).map((sub) => <Subsection key={sub.key} sub={sub} schema={schema} answers={answers} update={update} readOnly={readOnly} />)
+              )}
               {section.footer ? <p className="mt-8 max-w-2xl font-display text-lg italic leading-snug text-mauve-ink">{section.footer}</p> : null}
             </div>
           </div>
         </section>
       ))}
 
-      {!readOnly && !hasFields && schema.module_download && props.module ? (
+      {!readOnly && !hasFields && hasBundle && props.module ? (
         <div className="mt-[54px] border-t border-[rgba(101,71,79,0.12)] pt-8">
           <ModuleDownload module={props.module} />
         </div>
@@ -192,7 +230,7 @@ export function WorksheetForm(props: WorksheetFormProps) {
             Download my worksheet
             <span className="sr-only"> (PDF)</span>
           </a>
-          {schema.module_download && props.module ? <ModuleDownload module={props.module} className="ml-3" /> : null}
+          {hasBundle && props.module ? <ModuleDownload module={props.module} className="ml-3" /> : null}
         </div>
       ) : null}
 
@@ -201,19 +239,89 @@ export function WorksheetForm(props: WorksheetFormProps) {
   );
 }
 
-/** A quote from the member's earlier worksheet, or a dashed note while it is not there yet (Lessons 3 and 9). */
-function CallbackQuote({ testId, caption, text, missing }: { testId: string; caption: string; text: string | null; missing: string }) {
-  if (!text)
-    return (
+/** Quotes from the member's earlier worksheets, or a dashed note while they are not there yet (Lessons 3 to 9). */
+function CallbackQuote({ testId, caption, lines, missing }: { testId: string; caption: string; lines: string[]; missing: string }) {
+  if (!lines.length)
+    return missing ? (
       <p className="rounded-[14px] border border-dashed border-rose bg-white/60 px-5 py-4 text-ink-muted" data-testid={testId}>
         {missing}
       </p>
-    );
+    ) : null;
   return (
     <figure className="rounded-[14px] border border-rose bg-white px-5 py-4" data-testid={testId}>
-      <figcaption className="text-xs font-semibold uppercase tracking-[0.16em] text-mauve-ink">{caption}</figcaption>
-      <blockquote className="mt-2 font-display text-xl italic leading-snug text-plum">{text}</blockquote>
+      {caption ? <figcaption className="text-xs font-semibold uppercase tracking-[0.16em] text-mauve-ink">{caption}</figcaption> : null}
+      <blockquote className="mt-2 space-y-2 font-display text-xl italic leading-snug text-plum">
+        {lines.map((l) => (
+          <p key={l}>{l}</p>
+        ))}
+      </blockquote>
     </figure>
+  );
+}
+
+/** optional: true sections (Lesson 9 section 2) start closed unless already answered; not needed to finish. */
+function OptionalSection({ section, answers, children }: { section: WorksheetSchema["sections"][number]; answers: Answers; children: ReactNode }) {
+  const keys = section.fields.map((f) => f.key);
+  const [open, setOpen] = useState(() => keys.some((k) => typeof answers[k] === "string" && (answers[k] as string).trim()));
+  const id = useId();
+  if (!section.optional) return <>{children}</>;
+  return (
+    <div className="mt-6">
+      <p className="text-sm text-ink-muted">Optional. You can finish the worksheet without it.</p>
+      <button
+        type="button"
+        aria-expanded={open}
+        aria-controls={id}
+        onClick={() => setOpen(!open)}
+        className="mt-2 inline-flex min-h-11 items-center rounded-full border border-plum px-5 font-semibold text-plum hover:bg-rose-soft/50"
+        data-testid={`toggle-${section.key}`}
+      >
+        {open ? "Hide" : "Show"}
+        <span className="sr-only"> {section.title}</span>
+      </button>
+      <div id={id} hidden={!open}>
+        {children}
+      </div>
+    </div>
+  );
+}
+
+/**
+ * callback_layout (Lesson 9): one card per decision. The quoted answer on top (plus any second quote such as the
+ * decision rule), then that decision's fields: dec_n, ev_n, note_n. Fields not tied to a card follow.
+ */
+function DecisionCards({ cards, fields, ...ctx }: FieldCtx & { cards: DecisionCard[]; fields: WorksheetField[] }) {
+  const inCard = (n: string) => fields.filter((f) => new RegExp(`_${n}$`).test(f.key));
+  const rest = fields.filter((f) => !cards.some((c) => inCard(c.n).includes(f)));
+  return (
+    <div className="mt-8 space-y-6">
+      {cards.map((c) => (
+        <div key={c.key} className="rounded-[20px] border border-[rgba(101,71,79,0.16)] bg-white/70 px-5 py-5 sm:px-6" data-testid={`decision-${c.n}`}>
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-mauve-ink">{c.heading}</p>
+          <div data-testid={`callback-${c.key}`}>
+            {c.text ? (
+              <blockquote className="mt-2 font-display text-xl italic leading-snug text-plum">{c.text}</blockquote>
+            ) : !ctx.readOnly && c.missingText ? (
+              <p className="mt-2 rounded-[12px] border border-dashed border-rose px-4 py-3 text-ink-muted">{c.missingText}</p>
+            ) : null}
+          </div>
+          {c.extras.map((x) =>
+            x.text || (!ctx.readOnly && x.missingText) ? (
+              <div key={x.key} className="mt-3" data-testid={`callback-${x.key}`}>
+                <p className="text-xs font-semibold uppercase tracking-[0.14em] text-mauve-ink">{x.heading}</p>
+                {x.text ? <p className="mt-1 font-display text-lg italic leading-snug text-plum">{x.text}</p> : <p className="mt-1 text-sm text-ink-muted">{x.missingText}</p>}
+              </div>
+            ) : null,
+          )}
+          <div className="mt-5 space-y-5 border-t border-rose/60 pt-5">
+            {inCard(c.n).map((f) => (
+              <FieldView key={f.key} field={expandField(ctx.schema, f)[0]!} {...ctx} compact />
+            ))}
+          </div>
+        </div>
+      ))}
+      {rest.length ? <FieldList fields={rest} context="" {...ctx} /> : null}
+    </div>
   );
 }
 
@@ -275,8 +383,9 @@ function FieldList({ fields, context, ...ctx }: FieldCtx & { fields: WorksheetFi
   const carded = new Set<string>();
   for (const f of fields) {
     const group = f.repeat ? ctx.schema.repeat_groups?.[f.repeat] : undefined;
-    if (f.repeat && group?.label) {
-      // A labelled group renders row by row: one card per row holding every field of that row.
+    if (f.repeat && group?.label && !group.label_from) {
+      // A labelled group renders row by row: one card per row holding every field of that row. A group that names
+      // its columns from answers (label_from: ideas, problems) renders as columns instead.
       if (carded.has(f.repeat)) continue;
       carded.add(f.repeat);
       items.push(<RepeatCards key={`group-${f.repeat}`} group={f.repeat} fields={fields.filter((x) => x.repeat === f.repeat)} {...ctx} />);
@@ -305,8 +414,20 @@ function RepeatCards({ group, fields, ...ctx }: FieldCtx & { group: string; fiel
     listRef.current?.querySelector<HTMLElement>(`[data-row="${k}"] input, [data-row="${k}"] textarea`)?.focus();
   }, [shown]);
 
+  // Each field's guide once above the rows, not in every card (brief 14).
+  const guides = fields.filter((f) => f.guide);
   return (
     <div className="space-y-6" ref={listRef} data-testid={`rows-${group}`}>
+      {guides.length ? (
+        <ul className="max-w-2xl space-y-1 text-[0.95rem] leading-relaxed text-ink-muted">
+          {guides.map((f) => (
+            <li key={f.key}>
+              {fields.length > 1 && f.label ? <span className="font-semibold text-ink">{f.label.replaceAll(" {k}", "").replaceAll("{k}", "")}: </span> : null}
+              {f.guide}
+            </li>
+          ))}
+        </ul>
+      ) : null}
       {keys.map((k) => {
         const row = fields.map((f) => expandField(ctx.schema, f).find((c) => c.repeatKey === k)).filter((c): c is ConcreteField => Boolean(c));
         const heading = g.label!.replaceAll("{k}", k);
@@ -319,7 +440,7 @@ function RepeatCards({ group, fields, ...ctx }: FieldCtx & { group: string; fiel
             <div className="mt-2 space-y-5">
               {row.map((c) => (
                 // "Problem 1" in a card headed "Problem 1": the legend says it, so the field keeps it only as its name.
-                <FieldView key={c.key} field={c} {...ctx} hideRequired compact hideLabel={c.label === heading} ariaLabel={c.label === heading ? heading : undefined} />
+                <FieldView key={c.key} field={c} {...ctx} hideRequired hideGuide compact hideLabel={c.label === heading} ariaLabel={c.label === heading ? heading : undefined} />
               ))}
             </div>
           </fieldset>
@@ -352,6 +473,67 @@ function Subsection({ sub, ...ctx }: FieldCtx & { sub: WorksheetSubsection }) {
   );
 }
 
+/**
+ * Subsections that each ask one question of every column (Lesson 4: five questions x three problems) render as one
+ * grid. The group they repeat over, or null when the subsections are ordinary.
+ */
+function matrixGroup(schema: WorksheetSchema, subs: WorksheetSubsection[] | undefined): string | null {
+  if (!subs || subs.length < 2) return null;
+  const group = subs[0]!.fields[0]?.repeat;
+  const g = group ? schema.repeat_groups?.[group] : undefined;
+  // Columns named from answers with a fallback label ("Problem {k}", Lesson 4). Lesson 2's ideas have no fallback
+  // label and keep their reviewed layout: one grid per test.
+  if (!group || !g?.label_from || !g.label) return null;
+  return subs.every((sub) => sub.fields.length === 1 && sub.fields[0]!.repeat === group) ? group : null;
+}
+
+/**
+ * One grid for every question x column. Desktop: a row per question under its heading, a column per problem.
+ * Mobile stacks by problem (brief 12): all five questions for Problem 1, then Problem 2. One set of inputs either
+ * way; CSS order moves them, so nothing is rendered twice.
+ */
+function RepeatMatrix({ subs, group, ...ctx }: FieldCtx & { subs: WorksheetSubsection[]; group: string }) {
+  const g = ctx.schema.repeat_groups![group]!;
+  const order = (n: number) => ({ "--o": n }) as CSSProperties;
+  return (
+    <div className="mt-10 flex flex-col gap-5 md:grid md:grid-cols-3 md:gap-x-6 md:gap-y-4" data-testid={`matrix-${group}`}>
+      {g.keys.map((k) => (
+        <p key={`col-${k}`} className="hidden text-xs font-semibold uppercase tracking-[0.14em] text-mauve-ink md:block" data-testid={`col-head-${group}-${k}`}>
+          {groupHeading(g, k, ctx.answers)}
+        </p>
+      ))}
+      {g.keys.map((k, ki) => (
+        <h4 key={`row-${k}`} style={order((ki + 1) * 100)} className="order-(--o) mt-4 border-t border-rose pt-5 font-display text-2xl font-medium md:hidden">
+          {groupHeading(g, k, ctx.answers)}
+        </h4>
+      ))}
+      {subs.map((sub, si) => (
+        <Fragment key={sub.key}>
+          <div className="mt-6 hidden max-w-2xl md:col-span-3 md:block">
+            <h4 className="font-display text-2xl font-medium">{sub.title}</h4>
+            {sub.ask ? <p className="mt-1 font-display text-lg italic text-mauve-ink">{sub.ask}</p> : null}
+            {sub.guide ? <p className="mt-2 leading-relaxed text-ink-muted">{sub.guide}</p> : null}
+          </div>
+          {expandField(ctx.schema, sub.fields[0]!).map((c, ki) => {
+            const heading = groupHeading(g, c.repeatKey!, ctx.answers);
+            return (
+              <div key={c.key} style={order((ki + 1) * 100 + si + 1)} className="order-(--o) min-w-0 md:order-none" data-testid={`cell-${c.key}`}>
+                <div className="mb-2 md:hidden">
+                  <p className="font-semibold">{sub.title}</p>
+                  {sub.ask ? <p className="text-sm italic text-mauve-ink">{sub.ask}</p> : null}
+                  {/* The question's guide once, under the first problem, so the phone page stays short. */}
+                  {ki === 0 && sub.guide ? <p className="mt-1 text-sm leading-relaxed text-ink-muted">{sub.guide}</p> : null}
+                </div>
+                <FieldView field={c} {...ctx} ariaLabel={`${sub.title} for ${heading}`} hideLabel />
+              </div>
+            );
+          })}
+        </Fragment>
+      ))}
+    </div>
+  );
+}
+
 /** repeat: "ideas" renders the field once per key in a three column grid (stacks on mobile). */
 function RepeatGrid({ field, context, ...ctx }: FieldCtx & { field: WorksheetField; context: string }) {
   const group = field.repeat ? ctx.schema.repeat_groups?.[field.repeat] : undefined;
@@ -359,7 +541,7 @@ function RepeatGrid({ field, context, ...ctx }: FieldCtx & { field: WorksheetFie
   return (
     <div className="grid gap-6 md:grid-cols-3">
       {concrete.map((c) => {
-        const heading = labelFrom(group?.label_from, c.repeatKey!, ctx.answers);
+        const heading = groupHeading(group, c.repeatKey!, ctx.answers);
         return (
           <div key={c.key} className="min-w-0">
             <p className="mb-2 text-xs font-semibold uppercase tracking-[0.14em] text-mauve-ink" data-testid={`col-${c.key}`}>
@@ -376,9 +558,12 @@ function RepeatGrid({ field, context, ...ctx }: FieldCtx & { field: WorksheetFie
 
 function Label({ field, htmlFor, hide, hideRequired }: { field: ConcreteField; htmlFor: string; hide?: boolean; hideRequired?: boolean }) {
   if (hide || !field.label) return null;
+  // required: false means "optional on purpose" (Lesson 5 test_terms, Lesson 7 headline_before): shown muted.
+  const optional = field.required === false;
   return (
-    <label htmlFor={htmlFor} className="block font-semibold text-ink">
+    <label htmlFor={htmlFor} className={cn("block font-semibold", optional ? "text-ink-muted" : "text-ink")}>
       {field.label}
+      {optional ? <span className="ml-2 text-xs font-medium uppercase tracking-[0.12em] text-ink-muted">Optional</span> : null}
       {isRequired(field) && !hideRequired ? <span className="ml-2 text-xs font-medium uppercase tracking-[0.12em] text-ink-muted">Required</span> : null}
     </label>
   );
@@ -393,9 +578,9 @@ function Help({ field }: { field: ConcreteField }) {
   );
 }
 
-type ViewOpts = { ariaLabel?: string; hideLabel?: boolean; hideRequired?: boolean; compact?: boolean };
+type ViewOpts = { ariaLabel?: string; hideLabel?: boolean; hideRequired?: boolean; hideGuide?: boolean; compact?: boolean };
 
-function FieldView({ field, ariaLabel, hideLabel, hideRequired, compact, ...ctx }: FieldCtx & ViewOpts & { field: ConcreteField }) {
+function FieldView({ field, ariaLabel, hideLabel, hideRequired, hideGuide, compact, ...ctx }: FieldCtx & ViewOpts & { field: ConcreteField }) {
   const id = useId();
   const value = ctx.answers[field.key];
   const common = { id, disabled: ctx.readOnly, "aria-label": hideLabel ? ariaLabel : undefined, "data-field": field.key } as const;
@@ -405,7 +590,7 @@ function FieldView({ field, ariaLabel, hideLabel, hideRequired, compact, ...ctx 
       return (
         <div className="max-w-2xl">
           <Label field={field} htmlFor={id} hide={hideLabel} hideRequired={hideRequired} />
-          <Help field={field} />
+          {hideGuide ? null : <Help field={field} />}
           <input
             {...common}
             type={field.type === "date" ? "date" : "text"}
@@ -421,7 +606,7 @@ function FieldView({ field, ariaLabel, hideLabel, hideRequired, compact, ...ctx 
       return (
         <div className="max-w-2xl">
           <Label field={field} htmlFor={id} hide={hideLabel} hideRequired={hideRequired} />
-          <Help field={field} />
+          {hideGuide ? null : <Help field={field} />}
           <textarea
             {...common}
             className={cn(inputCls, "mt-2 leading-relaxed", compact ? "min-h-24" : "min-h-32")}
@@ -486,15 +671,22 @@ function RatingField({ field, value, ariaLabel, hideLabel, ...ctx }: FieldCtx & 
       </label>
       <textarea
         id={noteId}
+        data-field={`${field.key}.note`}
         disabled={ctx.readOnly}
         className={cn(inputCls, "mt-3 min-h-24 text-[0.95rem] leading-relaxed")}
-        placeholder={field.note_required ? "Why? One sentence." : "Why? (optional)"}
+        placeholder={field.note_placeholder ?? (field.note_required ? "Why? One sentence." : "Why? (optional)")}
         maxLength={field.max_length}
         value={current.note}
         onChange={(e) => ctx.update(field.key, { ...current, note: e.target.value })}
       />
     </div>
   );
+}
+
+/** "Problem" for option_label_from "problem_{k}" when its repeat group is labelled "Problem {k}"; else "Idea". */
+function labelGroupWord(schema: WorksheetSchema, template: string) {
+  const g = Object.values(schema.repeat_groups ?? {}).find((x) => x.label_from === template && x.label);
+  return g?.label ? g.label.replace("{k}", "").trim() : "Idea";
 }
 
 function RequiredTag({ field, hide }: { field: ConcreteField; hide?: boolean }) {
@@ -504,8 +696,9 @@ function RequiredTag({ field, hide }: { field: ConcreteField; hide?: boolean }) 
 function ChoiceField({ field, value, hideRequired, ...ctx }: FieldCtx & { field: Extract<ConcreteField, { type: "choice" }>; value: string; hideRequired?: boolean }) {
   const guideId = useId();
   const options = choiceOptions(ctx.schema, field);
-  // A choice list such as confidence_options: smaller chips, each option's guide on hover and the chosen one's beneath.
-  const listed = Boolean(field.options_from);
+  // A list with guides (confidence_options, format_options): smaller chips, each guide on hover and the chosen one's
+  // beneath.
+  const listed = Boolean(field.options_from) || options.some((o) => o.guide);
   const chosen = options.find((o) => o.value === value);
   return (
     <div>
@@ -515,8 +708,10 @@ function ChoiceField({ field, value, hideRequired, ...ctx }: FieldCtx & { field:
       </p>
       <div role="radiogroup" aria-label={field.label ?? field.key} className={cn("flex flex-wrap gap-2", listed ? "mt-2" : "mt-3")} data-field={field.key}>
         {options.map((o) => {
-          const label = field.option_label_from ? labelFrom(field.option_label_from, o.value, ctx.answers) : o.label;
-          const named = !field.option_label_from || label !== `Idea ${o.value}`;
+          // "Problem 1" or "Idea A" chips name an answer; they can be chosen once that answer is written.
+          const source = field.option_label_from ? ctx.answers[field.option_label_from.replace("{k}", o.value)] : undefined;
+          const named = !field.option_label_from || (typeof source === "string" && source.trim().length > 0);
+          const label = field.option_label_from ? (named ? (source as string).trim() : labelFrom(field.option_label_from, o.value, ctx.answers, labelGroupWord(ctx.schema, field.option_label_from))) : o.label;
           const on = value === o.value;
           return (
             <label
@@ -545,15 +740,20 @@ function ChoiceField({ field, value, hideRequired, ...ctx }: FieldCtx & { field:
   );
 }
 
-/** Tick which rows of another repeat group support this answer (Lesson 3 themes). Only rows with content are offered. */
+/**
+ * Tick any number: an inline list (Lesson 8), or the rows of another repeat group that have content (Lesson 3
+ * themes, each shown by number and the first words of the row).
+ */
 function MultiChoiceField({ field, value, hideRequired, ...ctx }: FieldCtx & { field: Extract<ConcreteField, { type: "multichoice" }>; value: string[]; hideRequired?: boolean }) {
-  const group = ctx.schema.repeat_groups?.[field.options_from_repeat];
-  const keys = group?.keys ?? [];
-  const offered = repeatOptions(ctx.schema, field.options_from_repeat, ctx.answers);
-  // A ticked row emptied later stays listed, so it can be unticked.
-  const options = keys
-    .filter((k) => offered.some((o) => o.key === k) || value.includes(k))
-    .map((k) => ({ key: k, label: offered.find((o) => o.key === k)?.label ?? "" }));
+  const group = field.options_from_repeat ? ctx.schema.repeat_groups?.[field.options_from_repeat] : undefined;
+  const keys = multichoiceValues(ctx.schema, field);
+  const offered = field.options_from_repeat ? repeatOptions(ctx.schema, field.options_from_repeat, ctx.answers) : [];
+  // Inline options are all offered. Repeat rows: a ticked row emptied later stays listed, so it can be unticked.
+  const options = field.options
+    ? field.options.map((o) => ({ key: o.value, label: o.label, numbered: false }))
+    : keys
+        .filter((k) => offered.some((o) => o.key === k) || value.includes(k))
+        .map((k) => ({ key: k, label: offered.find((o) => o.key === k)?.label ?? "", numbered: true }));
   const rowName = (k: string) => (group?.label ?? "{k}").replaceAll("{k}", k);
   function toggle(k: string, on: boolean) {
     const next = on ? [...value, k] : value.filter((x) => x !== k);
@@ -580,12 +780,16 @@ function MultiChoiceField({ field, value, hideRequired, ...ctx }: FieldCtx & { f
                   ctx.readOnly && "cursor-default",
                 )}
               >
-                <input type="checkbox" className="mt-1 size-4 shrink-0 accent-[#65474F]" checked={on} disabled={ctx.readOnly} onChange={(e) => toggle(o.key, e.target.checked)} />
-                <span className="min-w-0">
-                  <span className="sr-only">{rowName(o.key)}: </span>
-                  <span aria-hidden className="mr-2 font-semibold text-plum">{o.key}</span>
-                  <span className="text-ink">{o.label}</span>
-                </span>
+                <input type="checkbox" value={o.key} className="mt-1 size-4 shrink-0 accent-[#65474F]" checked={on} disabled={ctx.readOnly} onChange={(e) => toggle(o.key, e.target.checked)} />
+                {o.numbered ? (
+                  <span className="min-w-0">
+                    <span className="sr-only">{rowName(o.key)}: </span>
+                    <span aria-hidden className="mr-2 font-semibold text-plum">{o.key}</span>
+                    <span className="text-ink">{o.label}</span>
+                  </span>
+                ) : (
+                  <span className="min-w-0 text-ink">{o.label}</span>
+                )}
               </label>
             );
           })}
@@ -619,6 +823,7 @@ function SentenceField({ field, value, ...ctx }: FieldCtx & { field: Extract<Con
             <input
               key={i}
               aria-label={`${field.label ?? "Sentence"}: ${slot.placeholder ?? slot.key}`}
+              data-field={`${field.key}.${slot.key}`}
               disabled={ctx.readOnly}
               className="mx-1 inline-block max-w-full rounded-lg border-b-[1.5px] border-mauve bg-[#FBF6F3] px-2 align-baseline font-display italic text-plum placeholder:text-mauve/70"
               size={Math.max((slot.placeholder ?? slot.key).length, v.length) + 1}

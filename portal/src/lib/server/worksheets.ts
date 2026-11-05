@@ -1,5 +1,5 @@
 import "server-only";
-import { callbackSourceSlugs, resolveCallbacks, type CallbackSource, type ResolvedTopCallback } from "@/domain/worksheets/callbacks";
+import { callbackSourceSlugs, prefillAnswers, resolveCallbacks, type CallbackSource, type InlineCallback, type ResolvedTopCallback } from "@/domain/worksheets/callbacks";
 import { worksheetSchemaSchema, type Answers, type WorksheetSchema } from "@/domain/worksheets/schema";
 import { logEvent } from "@/lib/observability";
 import type { UserSupabase } from "@/lib/supabase/server";
@@ -17,6 +17,10 @@ export type LessonWorksheet = {
   callbacks: Record<string, { label: string; text: string }>;
   /** Quotes shown before section 1 (Lesson 3 "Where you started"), or their missing_text. */
   topCallbacks: ResolvedTopCallback[];
+  /** Quotes inside a section (callbacks_inline), keyed by section key. */
+  inlineCallbacks: Record<string, InlineCallback[]>;
+  /** Starting values for empty fields copied from earlier worksheets (prefill_from); saved once the form opens. */
+  prefill: Answers;
 };
 
 /** Loads the published worksheet for a lesson (RLS hides drafts), parsed and validated. Null when none. */
@@ -70,6 +74,8 @@ export async function loadLessonWorksheet(supabase: UserSupabase, userId: string
     updatedAt: (resp?.updated_at as string) ?? null,
     callbacks: resolved.sections,
     topCallbacks: resolved.top,
+    inlineCallbacks: resolved.inline,
+    prefill: prefillAnswers(ws.schema, ((resp?.answers as Answers) ?? {}) as Answers, sources),
   };
 }
 

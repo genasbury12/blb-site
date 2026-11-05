@@ -4,9 +4,9 @@
 //   node scripts/staging-worksheet-fixtures.mjs setup   --suite journey|module1|export|deletion|retention --env-out /abs/path/outside/repo.sh
 //   node scripts/staging-worksheet-fixtures.mjs cleanup --suite journey|module1|export|deletion|retention --env-out /abs/path/outside/repo.sh
 //
-// journey  (tests/e2e/worksheets.spec.ts): two published STAGING TEST worksheets on Module 1 sample lessons 5 and 6 (lessons without real worksheets),
+// journey  (tests/e2e/worksheets.spec.ts): two published STAGING TEST worksheets on Module 2 sample lessons 1 and 2 (lessons without real worksheets),
 //          a temporary Blueprint member, the shared test admin and a temporary coach assigned to the member.
-// module1  (tests/e2e/worksheets-module1.spec.ts): publishes the seeded Module 1 worksheets (Lessons 1, 2, 3 and 9) and
+// module1  (tests/e2e/worksheets-module1.spec.ts): publishes the seeded Module 1 worksheets (Lessons 1 to 9) and
 //          milestones for the run (cleanup restores whatever status each had before), adds a temporary Blueprint
 //          member and enables the shared test admin.
 // export   (tests/e2e/data-export.spec.ts, 10_DATA_RIGHTS Slice A): a temporary Blueprint member with a completed and
@@ -142,16 +142,41 @@ async function deleteCoach(id) {
 // ---- suites -----------------------------------------------------------------------------------------------------
 
 const TEST_SLUGS = "staging-test-ws-*";
-const M1_SLUGS = "(m1-l1-starting-point,m1-l2-business-direction,m1-l3-customer-research,m1-l9-foundation-blueprint)";
-const M1_LABELS = ["I answered Lesson 1: Starting Point", "I chose a provisional direction and wrote my hypothesis", "I built a buyer snapshot from real evidence"];
+const M1_SLUG_LIST = [
+  "m1-l1-starting-point",
+  "m1-l2-business-direction",
+  "m1-l3-customer-research",
+  "m1-l4-problem-validation",
+  "m1-l5-product-direction",
+  "m1-l6-positioning",
+  "m1-l7-messaging",
+  "m1-l8-blog-to-buyer",
+  "m1-l9-foundation-blueprint",
+];
+const M1_SLUGS = `(${M1_SLUG_LIST.join(",")})`;
+const M1_LABELS = [
+  "I answered Lesson 1: Starting Point",
+  "I chose a provisional direction and wrote my hypothesis",
+  "I built a buyer snapshot from real evidence",
+  "I chose a priority problem and wrote my decision rule",
+  "I chose a product concept and wrote a promise I can keep",
+  "I wrote a positioning sentence and named who it's not for",
+  "I wrote a headline in her words and cut the claims I can't back up",
+  "I mapped one post to my offer and tested the path",
+  "I finished my Business Foundation Blueprint",
+];
 const m1Milestones = `module_id=eq.${mod.id}&title=in.(${M1_LABELS.map((l) => `"${l}"`).join(",")})`;
 
 async function setupJourney() {
   const l2 = JSON.parse(readFileSync(join(repo, "portal/src/domain/worksheets/fixtures/m1-l2-business-direction.json"), "utf8"));
-  const lessons = await api("GET", `/rest/v1/lessons?module_id=eq.${mod.id}&slug=in.(sample-lesson-5,sample-lesson-6)&select=id,slug`);
+  // Module 2's sample lessons 1 and 2: every Module 1 lesson now has its own seeded worksheet, and a lesson shows
+  // only one published worksheet.
+  const mod2 = (await api("GET", "/rest/v1/modules?number=eq.2&select=id,slug"))[0];
+  if (!mod2) throw new Error("Module 2 not found.");
+  const lessons = await api("GET", `/rest/v1/lessons?module_id=eq.${mod2.id}&slug=in.(sample-lesson-1,sample-lesson-2)&select=id,slug`);
   const lid = (s) => {
     const l = lessons.find((x) => x.slug === s);
-    if (!l) throw new Error(`Module 1 ${s} not found.`);
+    if (!l) throw new Error(`Module 2 ${s} not found.`);
     return l.id;
   };
   const callbackSchema = {
@@ -162,8 +187,8 @@ async function setupJourney() {
     completion: { required_fields: [] },
   };
   await api("POST", "/rest/v1/worksheets", [
-    { slug: "staging-test-ws-l2", version: 1, lesson_id: lid("sample-lesson-5"), title: "STAGING TEST Lesson 2 worksheet", schema: { ...l2, slug: "staging-test-ws-l2" }, status: "published" },
-    { slug: "staging-test-ws-l3", version: 1, lesson_id: lid("sample-lesson-6"), title: "STAGING TEST Lesson 3 worksheet", schema: callbackSchema, status: "published" },
+    { slug: "staging-test-ws-l2", version: 1, lesson_id: lid("sample-lesson-1"), title: "STAGING TEST Lesson 2 worksheet", schema: { ...l2, slug: "staging-test-ws-l2" }, status: "published" },
+    { slug: "staging-test-ws-l3", version: 1, lesson_id: lid("sample-lesson-2"), title: "STAGING TEST Lesson 3 worksheet", schema: callbackSchema, status: "published" },
   ]);
   const member = await newMember("STAGING TEST worksheet");
   const admin = await enableTestAdmin();
@@ -173,8 +198,8 @@ async function setupJourney() {
     E2E_SUPABASE: 1,
     E2E_WS_EMAIL: member.email,
     E2E_WS_PASSWORD: member.password,
-    E2E_WS_LESSON_PATH: `/app/training/${mod.slug}/sample-lesson-5`,
-    E2E_WS_CALLBACK_PATH: `/app/training/${mod.slug}/sample-lesson-6`,
+    E2E_WS_LESSON_PATH: `/app/training/${mod2.slug}/sample-lesson-1`,
+    E2E_WS_CALLBACK_PATH: `/app/training/${mod2.slug}/sample-lesson-2`,
     E2E_WS_ADMIN_EMAIL: admin.email,
     E2E_WS_ADMIN_PASSWORD: admin.password,
     E2E_WS_COACH_EMAIL: coach.email,
@@ -197,7 +222,7 @@ async function cleanupJourney() {
 
 async function setupModule1() {
   const sheets = await api("GET", `/rest/v1/worksheets?slug=in.${M1_SLUGS}&version=eq.1&select=id,status`);
-  if (sheets.length !== 4) throw new Error("Run scripts/seed-worksheets.mjs first (the Module 1 worksheets are missing).");
+  if (sheets.length !== M1_SLUG_LIST.length) throw new Error("Run scripts/seed-worksheets.mjs first (the Module 1 worksheets are missing).");
   const milestones = await api("GET", `/rest/v1/milestones?${m1Milestones}&select=id,status`);
   // Remember each status so cleanup puts back exactly what was there (the owner may have published them).
   const before = { worksheets: sheets.map(({ id, status }) => ({ id, status })), milestones: milestones.map(({ id, status }) => ({ id, status })) };

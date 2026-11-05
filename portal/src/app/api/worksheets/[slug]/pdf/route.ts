@@ -23,6 +23,7 @@ export async function GET(_req: Request, ctx: { params: Promise<{ slug: string }
     completedAt: c.worksheet.completedAt,
     callbacks: c.worksheet.callbacks,
     topCallbacks: c.worksheet.topCallbacks,
+    inlineCallbacks: c.worksheet.inlineCallbacks,
   });
   logEvent("info", "worksheet pdf downloaded", { slug });
   return new NextResponse(new Uint8Array(pdf), {

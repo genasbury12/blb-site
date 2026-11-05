@@ -103,6 +103,14 @@ export function weakCounts(schema: WorksheetSchema, rows: Pick<ResponseRow, "ans
     }));
 }
 
+/** "ev_said_{k}" or "dec_{n}": every key of that shape, whether a repeat group or plain numbered fields (Lesson 9). */
+function matchesKey(f: ConcreteField, spec: string) {
+  if (f.baseKey === spec || f.key === spec) return true;
+  if (!/\{[a-z]+\}/i.test(spec)) return false;
+  const re = new RegExp(`^${spec.split(/\{[a-z]+\}/i).map((p) => p.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("[A-Za-z0-9]+")}$`);
+  return re.test(f.key);
+}
+
 export type AdminCount = { label: string; value: string; hint: string };
 
 /**
@@ -114,14 +122,23 @@ export function adminCounts(schema: WorksheetSchema, rows: Pick<ResponseRow, "an
   const fields = concreteFields(schema);
   return (schema.admin_counts ?? []).flatMap((spec) => {
     if (spec.count_filled) {
-      const matching = fields.filter((f) => f.baseKey === spec.count_filled || f.key === spec.count_filled);
+      const matching = fields.filter((f) => matchesKey(f, spec.count_filled!));
       const perMember = rows.map((r) => matching.filter((f) => isFilled(f, r.answers[f.key])).length);
       const total = perMember.reduce((a, b) => a + b, 0);
       const [lo, hi] = [Math.min(...perMember), Math.max(...perMember)];
       const hint = !perMember.length ? "No responses yet" : lo === hi ? `${lo} per member` : `${lo} to ${hi} per member`;
       return [{ label: spec.label, value: String(total), hint }];
     }
-    const matching = fields.filter((f) => f.baseKey === spec.tally || f.key === spec.tally);
+    if (spec.count_value) {
+      // Members, not cells: one member with two Weak ratings counts once.
+      const cv = spec.count_value;
+      const matching = fields.filter((f) => matchesKey(f, cv.field));
+      const hit = (v: unknown) =>
+        cv.rating ? typeof v === "object" && v !== null && (v as RatingAnswer).rating === cv.rating : Array.isArray(v) ? v.includes(cv.value) : v === cv.value;
+      const members = rows.filter((r) => matching.some((f) => hit(r.answers[f.key]))).length;
+      return [{ label: spec.label, value: String(members), hint: rows.length ? `of ${rows.length} ${rows.length === 1 ? "member" : "members"}` : "No responses yet" }];
+    }
+    const matching = fields.filter((f) => matchesKey(f, spec.tally!));
     const first = matching[0];
     if (!first || first.type !== "choice") return [];
     const options = choiceOptions(schema, first);

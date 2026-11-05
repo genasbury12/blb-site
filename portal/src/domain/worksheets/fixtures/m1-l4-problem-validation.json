@@ -1,0 +1,171 @@
+{
+  "slug": "m1-l4-problem-validation",
+  "module_slug": "module-1",
+  "lesson_slug": "lesson-4",
+  "title": "Lesson 4: Problem Validation Scorecard",
+  "version": 1,
+  "status": "draft",
+  "intro": {
+    "eyebrow": "Module 1 · Lesson 4 · Your worksheet",
+    "title": "Problem Validation Scorecard",
+    "lead": "Score the three problems you found in Lesson 3, choose the one worth building a paid solution around, and write the test you'll run in the next seven days.",
+    "quote": "Write what would change your mind before you test.",
+    "notes": [
+      "A score is a word and the evidence next to it. The evidence is the real answer. If you don't have any, write \"unknown.\" That's honest. A number you made up is not.",
+      "Nothing here is validated because it scored well. It's validated when a real person does something: tells you what she tried, shows you what she paid for, says yes to a small pilot.",
+      "Already have customers? Use what they've actually bought and asked for as your evidence, and pick a test that uses your existing list."
+    ]
+  },
+  "callbacks": [
+    {
+      "key": "l3_theme_1",
+      "source_worksheet": "m1-l3-customer-research",
+      "source_field": "theme_1",
+      "heading": "Your three problems from Lesson 3",
+      "template": "Problem 1: {value}",
+      "missing_text": "You haven't finished your Lesson 3 worksheet yet. Do that first; this scorecard scores the three problems you wrote there."
+    },
+    {
+      "key": "l3_theme_2",
+      "source_worksheet": "m1-l3-customer-research",
+      "source_field": "theme_2",
+      "heading": "",
+      "template": "Problem 2: {value}",
+      "missing_text": ""
+    },
+    {
+      "key": "l3_theme_3",
+      "source_worksheet": "m1-l3-customer-research",
+      "source_field": "theme_3",
+      "heading": "",
+      "template": "Problem 3: {value}",
+      "missing_text": ""
+    },
+    {
+      "key": "l3_snapshot",
+      "source_worksheet": "m1-l3-customer-research",
+      "source_field": "snapshot",
+      "heading": "The woman you're scoring these for",
+      "template": "She's dealing with {situation}, wants {result}, and is worried about {barrier}.",
+      "missing_text": ""
+    }
+  ],
+  "repeat_groups": {
+    "problems": { "keys": ["1", "2", "3"], "label_from": "problem_{k}", "label": "Problem {k}" }
+  },
+  "rating_options": [
+    { "value": "strong", "label": "Strong", "guide": "I have evidence: something she said, did, or paid for." },
+    { "value": "uncertain", "label": "Uncertain", "guide": "Mixed signals, or I don't know yet. Write \"unknown\" in the note if that's the truth." },
+    { "value": "weak", "label": "Weak", "guide": "The evidence points the other way, or the situation is too vague to score." }
+  ],
+  "sections": [
+    {
+      "key": "problems",
+      "number": "1",
+      "title": "The three problems, as problems",
+      "ask": "Is it a topic, or a problem?",
+      "guide": "Your Lesson 3 problems are quoted above. Restate each one here as a specific situation a specific person is in. \"I need more dinner recipes\" is a topic. \"Deciding what to cook after work with a picky four-year-old and no decisions left\" is a problem. If a theme won't sharpen, that's information: it will score Weak on specificity, and that's fine.",
+      "fields": [
+        { "key": "problem_{k}", "type": "text", "repeat": "problems", "label": "Problem {k}, stated as a problem", "prefill_from": { "worksheet": "m1-l3-customer-research", "field": "theme_{k}" }, "placeholder": "e.g. Deciding what to cook after work, with a picky eater and no energy left", "required_for": ["1", "2", "3"], "max_length": 200 }
+      ]
+    },
+    {
+      "key": "scorecard",
+      "number": "2",
+      "title": "Score each on five questions",
+      "ask": "A word, then the evidence. Or \"unknown.\"",
+      "guide": "Ask every problem the same five questions. Pick Strong, Uncertain, or Weak, then write the evidence that made you pick it: what she said, did, or paid for, and where that came from. No evidence? Write \"unknown.\" Read the whole page, not a total. A Weak on \"can I credibly help\" sinks a problem no matter how many Strongs it collects.",
+      "subsections": [
+        { "key": "spec", "title": "Specificity", "ask": "How specific is the situation?", "guide": "Who, when, and what's going wrong. \"Busy women\" is Weak. \"A mom with two picky kids and no decisions left by 5pm\" is Strong.", "fields": [ { "key": "spec_{k}", "type": "rating", "repeat": "problems", "note_required": true, "note_placeholder": "The evidence, or \"unknown\"", "required_for": ["1", "2", "3"], "max_length": 400 } ] },
+        { "key": "recur", "title": "Recurrence", "ask": "How often does it happen?", "guide": "Once a year is a topic. Every weeknight is a problem. Say how you know.", "fields": [ { "key": "recur_{k}", "type": "rating", "repeat": "problems", "note_required": true, "note_placeholder": "The evidence, or \"unknown\"", "required_for": ["1", "2", "3"], "max_length": 400 } ] },
+        { "key": "cost", "title": "Cost to her", "ask": "What does it cost in time, money, energy, or missed opportunity?", "guide": "Her words where you have them: \"I throw out half the produce I buy.\" Not your guess at how bad it must feel.", "fields": [ { "key": "cost_{k}", "type": "rating", "repeat": "problems", "note_required": true, "note_placeholder": "The evidence, or \"unknown\"", "required_for": ["1", "2", "3"], "max_length": 400 } ] },
+        { "key": "tried", "title": "What she's tried or paid for", "ask": "Has she already spent time or money on this?", "guide": "The strongest signal on the page. A paid meal plan she dropped after a week still proves she'll spend. Nothing tried, nothing bought: that's Weak, even if she complains a lot.", "fields": [ { "key": "tried_{k}", "type": "rating", "repeat": "problems", "note_required": true, "note_placeholder": "The evidence, or \"unknown\"", "required_for": ["1", "2", "3"], "max_length": 400 } ] },
+        { "key": "help", "title": "Can I credibly help", "ask": "Can I, with what I actually know, make a meaningful difference?", "guide": "Not \"could someone help.\" You. If helping would mean promising a health result, a financial result, or anything you can't responsibly deliver, this is Weak and the problem is out.", "fields": [ { "key": "help_{k}", "type": "rating", "repeat": "problems", "note_required": true, "note_placeholder": "The evidence, or \"unknown\"", "required_for": ["1", "2", "3"], "max_length": 400 } ] }
+      ],
+      "footer": "A problem that scores well deserves investigation. It is not validated because you gave it five stars."
+    },
+    {
+      "key": "priority",
+      "number": "3",
+      "title": "Pick the priority problem",
+      "ask": "Not the most dramatic one. The one a real buyer is already acting on and you can actually help with.",
+      "guide": "Severity and willingness to pay are two different things. Someone can have an urgent need and no budget, no trust, or no way to use what you'd sell. Look hardest at \"what she's tried or paid for\" and \"can I credibly help.\" Then choose, and say what you still don't know. That's what you test next.",
+      "fields": [
+        { "key": "priority_choice", "type": "choice", "label": "My priority problem is", "options": ["1", "2", "3"], "option_label_from": "problem_{k}", "required": true },
+        { "key": "priority_problem", "type": "text", "label": "In one sentence", "guide": "The problem, the person, the moment. This sentence is what Lesson 5 builds a product around, so make it the sharpest version you have.", "placeholder": "e.g. Parents of picky eaters under six can't decide what to cook after work, and the plans they buy don't survive a week", "required": true, "max_length": 240 },
+        { "key": "priority_evidence", "type": "textarea", "label": "My strongest evidence for it", "guide": "Real things real people said, did, or paid for. Point back to your Lesson 3 log. If your strongest evidence is a feeling, write that down honestly; it tells you how much testing you need.", "required": true, "max_length": 800 },
+        { "key": "priority_unknown", "type": "textarea", "label": "What I still don't know", "guide": "The gaps in your scorecard. Every \"unknown\" you wrote above is a candidate. Pick the one that would change your decision if it came back the wrong way.", "required": true, "max_length": 600 }
+      ]
+    },
+    {
+      "key": "plan",
+      "number": "4",
+      "title": "The validation plan",
+      "ask": "One small activity in the next seven days, and the decision rule written before you run it.",
+      "guide": "Evidence comes in rungs: expressed interest, repeated behavior, existing spending, concrete commitment, purchase, successful use. Your activity should move you up at least one rung from where you are. Asking three people what they paid for last time beats a poll. A small, transparent pilot beats a waitlist. Then write both outcomes before you see a single result.",
+      "fields": [
+        { "key": "validation_activity", "type": "textarea", "label": "In the next seven days I will", "guide": "Who, what, how. Three people walking you through the last time it happened. The reviews of the alternative she uses now. A clear concept with a real next step. If money is involved, say exactly what exists, when it's delivered, and how refunds work.", "placeholder": "e.g. Message the five parents in my log, ask what they did about dinner last Tuesday and what they've paid to fix it, and offer three of them a one-week trial of the Sunday reset", "required": true, "max_length": 800 },
+        { "key": "review_date", "type": "date", "label": "I'll have done it by", "guide": "Seven days from today, not \"soon.\"", "required": true },
+        { "key": "rule_continue", "type": "textarea", "label": "I continue if", "guide": "A result you could observe, with a number where you can. \"If at least two of five describe the problem unprompted and one says yes to the trial.\" Not \"if people seem interested.\"", "required": true, "max_length": 600 },
+        { "key": "rule_revise", "type": "textarea", "label": "I revise if", "guide": "The result that would change your mind. If you can't think of one, you're not testing, you're confirming. Revise can mean switching to a different problem, or pausing this idea entirely.", "required": true, "max_length": 600 }
+      ],
+      "footer": "If you decide what the results mean after you've seen them, you can talk yourself into anything. Next, Lesson 5 turns your priority problem into a focused product direction."
+    }
+  ],
+  "completion": {
+    "milestone_label": "I chose a priority problem and wrote my decision rule",
+    "required_fields": [
+      "problem_1", "problem_2", "problem_3",
+      "spec_1", "spec_2", "spec_3",
+      "recur_1", "recur_2", "recur_3",
+      "cost_1", "cost_2", "cost_3",
+      "tried_1", "tried_2", "tried_3",
+      "help_1", "help_2", "help_3",
+      "priority_choice", "priority_problem", "priority_evidence", "priority_unknown",
+      "validation_activity", "review_date", "rule_continue", "rule_revise"
+    ]
+  },
+  "admin_columns": ["priority_problem", "priority_choice", "validation_activity", "review_date", "rule_continue", "rule_revise"],
+  "admin_counts": [
+    { "label": "Weak on \"can I credibly help\"", "count_value": { "field": "help_{k}", "rating": "weak" } },
+    { "label": "Weak on \"what she's tried or paid for\"", "count_value": { "field": "tried_{k}", "rating": "weak" } }
+  ],
+  "callbacks_provided": {
+    "priority_problem": "Used by m1-l5-product-direction as the problem the product is built around, and by m1-l9-foundation-blueprint",
+    "priority_evidence": "Used by m1-l5-product-direction and m1-l9-foundation-blueprint",
+    "validation_activity": "Used by m1-l9-foundation-blueprint",
+    "rule_continue": "Used by m1-l5-product-direction and m1-l9-foundation-blueprint",
+    "rule_revise": "Used by m1-l5-product-direction and m1-l9-foundation-blueprint",
+    "review_date": "Used by m1-l5-product-direction to check whether the test has run"
+  },
+  "footer_note": "Your priority problem shows up again in Lesson 5, where it becomes the product. Your decision rule and review date come back in Lessons 5 and 9.",
+  "example_response": {
+    "label": "Hypothetical example shown to students as a worked sample. Not real people, not real results.",
+    "problem_1": "Deciding what to cook after work, with a picky eater and no decisions left by 5pm",
+    "problem_2": "Feeding a four-year-old who eats five things without cooking two dinners",
+    "problem_3": "Sticking with any meal plan past the first week",
+    "spec_1": { "rating": "strong", "note": "Two parents described the same 5pm moment in their own words (log rows 1 and 2)." },
+    "recur_1": { "rating": "strong", "note": "\"Every weeknight.\" Both said it happens on work days, not weekends." },
+    "cost_1": { "rating": "strong", "note": "Takeout she didn't plan for, and \"I throw out half the produce I buy\" (row 4)." },
+    "tried_1": { "rating": "strong", "note": "Bought a meal plan PDF, used it one week (row 5). Tried a recipe app, too many choices." },
+    "help_1": { "rating": "strong", "note": "I've lived this with my own kid and I already write about it. I can build a fifteen-minute weekly reset." },
+    "spec_2": { "rating": "strong", "note": "\"My four-year-old eats five things. Five.\" (row 3). Very specific." },
+    "recur_2": { "rating": "strong", "note": "Daily, by definition." },
+    "cost_2": { "rating": "uncertain", "note": "Cooking two dinners most nights (snapshot). Nobody put a cost on it in their own words yet. Unknown beyond that." },
+    "tried_2": { "rating": "uncertain", "note": "Unknown. Nobody mentioned paying for picky-eater help. One mentioned a pediatrician conversation." },
+    "help_2": { "rating": "weak", "note": "Picky eating can be a feeding or health issue. I'm not qualified to promise a child will eat more foods, and I won't." },
+    "spec_3": { "rating": "uncertain", "note": "Only one parent described the week-two drop-off in detail (row 5). The others implied it." },
+    "recur_3": { "rating": "uncertain", "note": "Unknown. I don't know how many plans she's bought and dropped, or how often." },
+    "cost_3": { "rating": "uncertain", "note": "The cost of the PDF itself, plus guilt. Unknown how much that matters to her." },
+    "tried_3": { "rating": "strong", "note": "She paid for a plan. That's proof she'll spend on this category." },
+    "help_3": { "rating": "uncertain", "note": "I can design for the drop-off (short, built around her five foods), but I don't know yet why week two failed." },
+    "priority_choice": "1",
+    "priority_problem": "Parents of picky eaters under six can't decide what to cook after work, and the plans they've bought don't survive a week",
+    "priority_evidence": "Two of five parents described the 5pm decision moment unprompted. One bought a meal plan and dropped it after a week, so she'll spend on this. The picky-eater constraint came up in every conversation, which is why it's baked into the problem statement rather than scored as its own product.",
+    "priority_unknown": "Why week two of the PDF actually failed. Whether the real issue is the planning or the picky eating; if it's the picky eating, Problem 1 is the wrong frame. Whether she'd pay weekly or once.",
+    "validation_activity": "Message the five parents in my log. Ask each one: what did you do about dinner last Tuesday, and what have you paid for to fix this? Offer three of them a one-week trial of the Sunday fifteen-minute reset built around their kid's five foods, for a small refundable price, delivered as a shared doc by Sunday night. Say clearly it's a first version and what's in it.",
+    "review_date": "+7d",
+    "rule_continue": "At least two of the five describe the 5pm decision problem without me leading them, and at least one says yes to the paid trial.",
+    "rule_revise": "If three or more say the real issue is getting the kid to eat, not deciding what to cook, Problem 1 is the wrong frame and I go back to the scorecard. If nobody will pay even a small refundable amount, I revise the problem statement before I touch pricing."
+  }
+}

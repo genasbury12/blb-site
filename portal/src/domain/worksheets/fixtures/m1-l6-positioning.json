@@ -1,0 +1,417 @@
+{
+  "slug": "m1-l6-positioning",
+  "module_slug": "module-1",
+  "lesson_slug": "lesson-6",
+  "title": "Lesson 6: Positioning Builder",
+  "version": 1,
+  "status": "draft",
+  "intro": {
+    "eyebrow": "Module 1 · Lesson 6 · Your worksheet",
+    "title": "Positioning Builder",
+    "lead": "Decide where your offer sits in her head: next to what she does now, the free option, and whoever else is selling to her. End with one sentence she can recognize herself in, and a clear line about who it's not for.",
+    "quote": "If your positioning sentence could be true of fifty other businesses, it isn't positioning. It's a description.",
+    "notes": [
+      "You are positioning the offer from Lesson 5, not your whole brand. The brand follows the thing people actually buy.",
+      "Be fair to the alternatives. Write what each does well before you write where it breaks. You don't need a competitor to be bad for you to be the better fit.",
+      "Adjectives are not differences. Simple, proven, powerful: fifty businesses can say those. A difference is something you can point at. If you have no evidence yet, write \"nothing yet.\""
+    ]
+  },
+  "callbacks": [
+    {
+      "key": "l5_product_concept",
+      "source_worksheet": "m1-l5-product-direction",
+      "source_field": "product_concept",
+      "heading": "What you're positioning",
+      "template": "In Lesson 5 you decided to test: {product_concept}",
+      "missing_text": "You haven't finished your Lesson 5 worksheet yet. Do that first; this lesson positions the product you chose there."
+    },
+    {
+      "key": "l5_outcome_promise",
+      "source_worksheet": "m1-l5-product-direction",
+      "source_field": "outcome_promise",
+      "heading": "Your outcome promise",
+      "template": "You promised: she gets {result} in {timeframe} without {cost}.",
+      "missing_text": "Your Lesson 5 outcome promise is empty. Finish it first; it is the outcome half of your position."
+    }
+  ],
+  "repeat_groups": {
+    "alternatives": {
+      "keys": [
+        "1",
+        "2",
+        "3"
+      ],
+      "label": "Alternative {k}"
+    }
+  },
+  "sections": [
+    {
+      "key": "anchor",
+      "number": "1",
+      "title": "The person and the outcome",
+      "ask": "Who is this for, and what does she get?",
+      "guide": "Pull both straight from the Lesson 5 promise quoted above. Plain words, one line each. No demographics. \"Busy moms\" is a category; \"parents of a four-year-old who eats five things\" is a person who recognizes herself.",
+      "fields": [
+        {
+          "key": "person",
+          "type": "text",
+          "label": "The person",
+          "guide": "The specific buyer at the moment she goes looking. Use the words from your Lesson 3 snapshot if they still fit.",
+          "placeholder": "e.g. parents of picky eaters under six",
+          "required": true,
+          "max_length": 140
+        },
+        {
+          "key": "outcome",
+          "type": "text",
+          "label": "The outcome, in plain words",
+          "guide": "The result from your promise, shortened to fit a sentence. Not \"a better life.\" The specific thing.",
+          "placeholder": "e.g. get dinner decided for the week in fifteen minutes",
+          "required": true,
+          "max_length": 140
+        },
+        {
+          "key": "concept_status",
+          "type": "choice",
+          "label": "Is the Lesson 5 concept still what you're positioning?",
+          "options": [
+            {
+              "value": "same",
+              "label": "Yes, unchanged"
+            },
+            {
+              "value": "revised",
+              "label": "I've revised it since"
+            }
+          ],
+          "required": true
+        },
+        {
+          "key": "concept_revised",
+          "type": "textarea",
+          "label": "If revised, what is it now?",
+          "guide": "One or two lines. Leave blank if unchanged. Update your Lesson 5 worksheet too so Lesson 9 quotes the right thing.",
+          "required": false,
+          "max_length": 400
+        }
+      ]
+    },
+    {
+      "key": "alternatives",
+      "number": "2",
+      "title": "The alternatives she's comparing you to",
+      "ask": "What would she do instead of buying from you?",
+      "guide": "Three alternatives, every time. Alternative 1 is what she does now. Alternative 2 is the free option (an app, a free printable, a blog post, an AI chat). Alternative 3 is a paid competitor or generic template. For each, write what it does well first, then where it breaks for her specifically. Look at your Lesson 3 snapshot: what she's already tried is usually alternative 1.",
+      "fields": [
+        {
+          "key": "alt_name_{k}",
+          "type": "text",
+          "repeat": "alternatives",
+          "label": "The alternative",
+          "guide": "1: what she does now. 2: the free option. 3: the paid option.",
+          "placeholder": "e.g. A list on Sunday that's gone by Wednesday, then takeout",
+          "required_for": [
+            "1",
+            "2",
+            "3"
+          ],
+          "max_length": 200
+        },
+        {
+          "key": "alt_good_{k}",
+          "type": "textarea",
+          "repeat": "alternatives",
+          "label": "What it does well",
+          "guide": "Be fair. If you can't name anything, you haven't looked hard enough. Go look.",
+          "placeholder": "e.g. Free. Thousands of recipes. Already on her phone.",
+          "required_for": [
+            "1",
+            "2",
+            "3"
+          ],
+          "max_length": 300
+        },
+        {
+          "key": "alt_fails_{k}",
+          "type": "textarea",
+          "repeat": "alternatives",
+          "label": "Where it breaks for her",
+          "guide": "For her specifically, with her constraints. Not \"it's bad.\"",
+          "placeholder": "e.g. Hands her more choices when choices are the problem.",
+          "required_for": [
+            "1",
+            "2",
+            "3"
+          ],
+          "max_length": 300
+        }
+      ],
+      "footer": "Don't trash anyone. Strong positioning never needs a competitor to be bad."
+    },
+    {
+      "key": "difference",
+      "number": "3",
+      "title": "Your difference, backed by evidence",
+      "ask": "Why does your approach fit her better than that alternative?",
+      "guide": "First pick the one alternative she'd actually choose instead of you. Then your differentiator: it comes from one of five places (the problem you focus on, the way you teach, the format you deliver in, the constraints you understand, or the evidence you can show). Write it as something you can point at, not an adjective. Then name the evidence behind it and the tradeoff it costs you.",
+      "fields": [
+        {
+          "key": "main_alternative",
+          "type": "text",
+          "label": "The alternative I'm positioning against",
+          "placeholder": "e.g. a recipe app that hands her more choices",
+          "required": true,
+          "max_length": 160,
+          "guide": "Of the three in step 2, the one she's most likely to choose instead of you. Usually the free option or what she does now, not the paid competitor. This one goes in your sentence."
+        },
+        {
+          "key": "diff_source",
+          "type": "choice",
+          "label": "Where my difference comes from",
+          "options": [
+            {
+              "value": "problem",
+              "label": "The problem I focus on"
+            },
+            {
+              "value": "method",
+              "label": "The way I teach or solve it"
+            },
+            {
+              "value": "format",
+              "label": "The format or delivery"
+            },
+            {
+              "value": "constraints",
+              "label": "The constraints I understand"
+            },
+            {
+              "value": "evidence",
+              "label": "The evidence I can show"
+            }
+          ],
+          "required": true
+        },
+        {
+          "key": "differentiator",
+          "type": "textarea",
+          "label": "My differentiator",
+          "guide": "One or two sentences. \"Built around the five foods her kid already eats, done in fifteen minutes\" is a differentiator. \"The Signature Nourish Method\" is a label. \"Simple and proven\" is an adjective.",
+          "placeholder": "e.g. The reset is built around the five foods her kid already eats, so every plan survives a picky four-year-old, and it takes fifteen minutes because she has no decisions left by 5pm.",
+          "required": true,
+          "max_length": 600
+        },
+        {
+          "key": "diff_evidence",
+          "type": "textarea",
+          "label": "The evidence behind it",
+          "guide": "A step in your process, a constraint you designed around, your own documented result, or a client example you have permission to share. If you have none yet, write \"nothing yet\" and say how you'll get it. Never write \"proven\" with nothing behind it.",
+          "placeholder": "e.g. Nothing yet. My own household ran this reset for six weeks; I'll ask the first five students for permission to share what happened.",
+          "required": true,
+          "max_length": 600
+        },
+        {
+          "key": "diff_tradeoff",
+          "type": "textarea",
+          "label": "The tradeoff I'm accepting",
+          "guide": "Every real difference costs something. Less variety, less depth, narrower audience. Say it plainly; she will notice it anyway.",
+          "placeholder": "e.g. Far less variety than a recipe library. Someone who wants new meals every week will find it boring.",
+          "required": true,
+          "max_length": 400
+        },
+        {
+          "key": "diff_rating",
+          "type": "rating",
+          "label": "How defensible is this difference?",
+          "guide": "Strong: she can see it and the alternative can't easily copy it. Uncertain: it's real but thin. Weak: it's mostly a word choice.",
+          "required": true
+        }
+      ]
+    },
+    {
+      "key": "sentence",
+      "number": "4",
+      "title": "The sentence, and who it's not for",
+      "ask": "Can she recognize herself in one sentence?",
+      "guide": "Fill the four slots from steps 1 to 3. It will not be poetic. That's fine. Then write who this is not for, and test the sentence on one real person who doesn't know your business.",
+      "fields": [
+        {
+          "key": "positioning",
+          "type": "sentence",
+          "label": "My positioning sentence",
+          "template": "I help {person} {outcome} through {method}, unlike {alternative}.",
+          "slots": [
+            {
+              "key": "person",
+              "placeholder": "person",
+              "max_length": 140
+            },
+            {
+              "key": "outcome",
+              "placeholder": "outcome",
+              "max_length": 140
+            },
+            {
+              "key": "method",
+              "placeholder": "method",
+              "max_length": 160
+            },
+            {
+              "key": "alternative",
+              "placeholder": "alternative",
+              "max_length": 160
+            }
+          ],
+          "required": true
+        },
+        {
+          "key": "not_for",
+          "type": "textarea",
+          "label": "Who this is not for",
+          "guide": "The person who would buy, be disappointed, and ask for a refund. Naming her saves you both. Two or three lines.",
+          "placeholder": "e.g. Parents who want variety. Families with no food battles who'd be happier with a big recipe library. Anyone looking for nutrition advice.",
+          "required": true,
+          "max_length": 500
+        },
+        {
+          "key": "test_who",
+          "type": "text",
+          "label": "Who I read it to",
+          "guide": "One person who doesn't know your business. First name or relationship only.",
+          "placeholder": "e.g. My neighbor",
+          "required": true,
+          "max_length": 120
+        },
+        {
+          "key": "test_heard",
+          "type": "textarea",
+          "label": "What they said I sell, and who it's for",
+          "guide": "Ask: \"What do you think I sell, and who is it for?\" Not \"do you like it?\" Write what they said, as close to their words as you can. If you haven't done it yet, write who you'll ask and by when.",
+          "placeholder": "e.g. \"Dinner planning for parents whose kids are fussy. Sounds quick.\"",
+          "required": true,
+          "max_length": 500
+        },
+        {
+          "key": "test_result",
+          "type": "choice",
+          "label": "Did they get it?",
+          "options": [
+            {
+              "value": "got_it",
+              "label": "Got it"
+            },
+            {
+              "value": "partly",
+              "label": "Partly. I'll simplify the part they missed"
+            },
+            {
+              "value": "missed",
+              "label": "Missed it. The sentence isn't done"
+            },
+            {
+              "value": "not_yet",
+              "label": "Not tested yet"
+            }
+          ],
+          "required": true
+        },
+        {
+          "key": "review_date",
+          "type": "date",
+          "label": "I'll have tested or retested it by",
+          "required": true
+        }
+      ],
+      "footer": "Clarity first. A real difference second. Cleverness last. Next, Lesson 7 writes the headline and copy from this sentence. Don't touch your homepage until then."
+    }
+  ],
+  "completion": {
+    "milestone_label": "I wrote a positioning sentence and named who it's not for",
+    "required_fields": [
+      "person",
+      "outcome",
+      "concept_status",
+      "alt_name_1",
+      "alt_good_1",
+      "alt_fails_1",
+      "alt_name_2",
+      "alt_good_2",
+      "alt_fails_2",
+      "alt_name_3",
+      "alt_good_3",
+      "alt_fails_3",
+      "main_alternative",
+      "diff_source",
+      "differentiator",
+      "diff_evidence",
+      "diff_tradeoff",
+      "diff_rating",
+      "positioning",
+      "not_for",
+      "test_who",
+      "test_heard",
+      "test_result",
+      "review_date"
+    ]
+  },
+  "admin_columns": [
+    "positioning",
+    "differentiator",
+    "diff_source",
+    "main_alternative",
+    "not_for",
+    "test_result"
+  ],
+  "admin_counts": [
+    {
+      "label": "Difference source: problem / method / format / constraints / evidence",
+      "tally": "diff_source"
+    },
+    {
+      "label": "Explain-back test: got it / partly / missed / not yet",
+      "tally": "test_result"
+    }
+  ],
+  "callbacks_provided": {
+    "positioning": "Used by m1-l7-messaging as the sentence the headline is written from, and by m1-l9-foundation-blueprint",
+    "differentiator": "Used by m1-l7-messaging for the supporting statement, and by m1-l9-foundation-blueprint",
+    "not_for": "Used by m1-l9-foundation-blueprint"
+  },
+  "footer_note": "Your positioning sentence and differentiator appear again at the top of Lesson 7, and all three of these decisions are reviewed in Lesson 9.",
+  "example_response": {
+    "label": "Hypothetical example shown to students as a worked sample. Not real people, not a real product.",
+    "person": "parents of picky eaters under six",
+    "outcome": "get dinner decided for the week in fifteen minutes",
+    "concept_status": "same",
+    "concept_revised": "",
+    "alt_name_1": "A list on Sunday that's gone by Wednesday, then takeout",
+    "alt_good_1": "Free. Takes no setup. She already knows how to do it.",
+    "alt_fails_1": "It doesn't survive the week. By Wednesday she's back to deciding at 5pm with no decisions left, and takeout costs more than any plan.",
+    "alt_name_2": "A free recipe app",
+    "alt_good_2": "Thousands of recipes. Already on her phone. Search by ingredient. Genuinely more variety than I'll ever offer.",
+    "alt_fails_2": "It hands her more choices, and choices are the problem. Nothing in it knows her kid eats five things.",
+    "alt_name_3": "A generic meal plan PDF",
+    "alt_good_3": "Cheap. One purchase. Someone else did the deciding.",
+    "alt_fails_3": "It assumes her kid eats normal food. She used one for a week and abandoned it, which is exactly the thing she's afraid of repeating.",
+    "main_alternative": "a recipe app that hands her more choices when choices are the problem",
+    "diff_source": "constraints",
+    "differentiator": "The reset is built around the five foods her kid already eats, so every week's plan survives a picky four-year-old. And it takes fifteen minutes on Sunday because she has no decisions left by 5pm on a weekday.",
+    "diff_evidence": "Nothing yet that I can publish. My own household has run the reset for six weeks and the plan held every week. I'll ask the first five students for permission to share what happened for them.",
+    "diff_tradeoff": "Far less variety than a recipe library. The same five foods rotate. A parent who wants new meals every week will find it boring, and she isn't who this is for.",
+    "diff_rating": {
+      "value": "uncertain",
+      "note": "The constraint is real and no app is designed around it, but I only have my own household as evidence."
+    },
+    "positioning": {
+      "person": "parents of picky eaters under six",
+      "outcome": "get dinner decided for the week in fifteen minutes",
+      "method": "a weekly reset built around the five foods their kid already eats",
+      "alternative": "a recipe app that hands them more choices when choices are the problem"
+    },
+    "not_for": "Parents who want variety. Families with no food battles who'd be happier with a big recipe library. Anyone looking for nutrition or feeding-therapy advice; this is a planning tool, not a feeding program.",
+    "test_who": "My neighbor",
+    "test_heard": "\"Dinner planning for parents whose kids are fussy eaters. Sounds like it's quick.\" She didn't mention the app comparison at all.",
+    "test_result": "partly",
+    "review_date": "+7d"
+  }
+}

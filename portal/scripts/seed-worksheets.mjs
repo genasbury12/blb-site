@@ -3,6 +3,9 @@
 //
 //   node scripts/seed-worksheets.mjs            insert what is missing, change nothing that exists
 //   node scripts/seed-worksheets.mjs --update   also refresh the schema of worksheets that are still draft
+//   node scripts/seed-worksheets.mjs --replace-placeholder
+//                                               replace the Slice E Lesson 9 placeholder (no fields) with the full
+//                                               Lesson 9 schema, as a draft (brief 17). Refuses if anyone has answers.
 //
 // Needs NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY. Refuses unless the project allows sample content
 // (app_config.allow_sample_content, which must never be true in production) and APP_ENV is not production.
@@ -16,6 +19,7 @@ const FIXTURES = join(here, "../src/domain/worksheets/fixtures");
 const URL_ = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
 const update = process.argv.includes("--update");
+const replacePlaceholder = process.argv.includes("--replace-placeholder");
 
 if (!URL_ || !KEY) throw new Error("Set NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY.");
 if (process.env.APP_ENV === "production") throw new Error("Refusing to seed: APP_ENV is production.");
@@ -36,6 +40,11 @@ const SHEETS = [
   { file: "m1-l1-starting-point.json", lesson: 1 },
   { file: "m1-l2-business-direction.json", lesson: 2 },
   { file: "m1-l3-customer-research.json", lesson: 3 },
+  { file: "m1-l4-problem-validation.json", lesson: 4 },
+  { file: "m1-l5-product-direction.json", lesson: 5 },
+  { file: "m1-l6-positioning.json", lesson: 6 },
+  { file: "m1-l7-messaging.json", lesson: 7 },
+  { file: "m1-l8-blog-to-buyer.json", lesson: 8 },
   { file: "m1-l9-foundation-blueprint.json", lesson: 9 },
 ];
 
@@ -46,30 +55,42 @@ const lessons = await api("GET", `/rest/v1/lessons?module_id=eq.${mod.id}&select
 async function lessonAt(order) {
   const hit = lessons.find((l) => l.order_index === order);
   if (hit) return hit;
-  if (order !== 9) throw new Error(`Module 1 has no lesson at position ${order}.`);
-  // No Lesson 9 yet: add a SAMPLE lesson so the placeholder has a home (sample content cannot exist in production).
+  // No lesson there yet: add a SAMPLE lesson so the worksheet has a home (sample content cannot exist in production).
   const [created] = await api("POST", "/rest/v1/lessons", {
     module_id: mod.id,
-    slug: "sample-lesson-9",
-    order_index: 9,
+    slug: `sample-lesson-${order}`,
+    order_index: order,
     essential: true,
-    title: "SAMPLE: Module 1 lesson 9",
+    title: `SAMPLE: Module 1 lesson ${order}`,
     objective: "Placeholder objective. Real lesson content is pending production.",
     assignment: "Placeholder assignment. Real assignment is pending production.",
     is_sample: true,
     status: "published",
   });
-  console.log("created SAMPLE: Module 1 lesson 9 (published sample, like lessons 1 to 7)");
+  console.log(`created SAMPLE: Module 1 lesson ${order} (published sample, like the other sample lessons)`);
+  lessons.push(created);
   return created;
+}
+
+/** The Slice E placeholder only quotes earlier lessons: it has no fields of its own. */
+function isPlaceholder(row) {
+  return (row.schema?.sections ?? []).every((s) => !(s.fields ?? []).length && !(s.subsections ?? []).length);
 }
 
 for (const { file, lesson } of SHEETS) {
   const schema = read(file);
   const target = await lessonAt(lesson);
-  const existing = await api("GET", `/rest/v1/worksheets?slug=eq.${schema.slug}&version=eq.1&select=id,status`);
+  const existing = await api("GET", `/rest/v1/worksheets?slug=eq.${schema.slug}&version=eq.1&select=id,status,schema`);
   if (!existing.length) {
     await api("POST", "/rest/v1/worksheets", { slug: schema.slug, version: 1, lesson_id: target.id, title: schema.title, schema, status: "draft" });
     console.log(`added ${schema.slug} as draft on Module 1 lesson ${lesson} (${target.slug})`);
+  } else if (replacePlaceholder && schema.slug === "m1-l9-foundation-blueprint" && isPlaceholder(existing[0])) {
+    // Brief 17: the full Lesson 9 replaces the placeholder under the same slug, as a draft. The placeholder has no
+    // fields, so no member can have answers in it; refuse anyway if any answer is stored.
+    const answered = await api("GET", `/rest/v1/worksheet_responses?worksheet_slug=eq.${schema.slug}&select=answers`);
+    if (answered.some((r) => r.answers && Object.keys(r.answers).length)) throw new Error("Refusing: the Lesson 9 placeholder has stored answers.");
+    await api("PATCH", `/rest/v1/worksheets?id=eq.${existing[0].id}`, { lesson_id: target.id, title: schema.title, schema, status: "draft" });
+    console.log(`replaced the Lesson 9 placeholder with ${schema.slug} (was ${existing[0].status}, now draft)`);
   } else if (update && existing[0].status === "draft") {
     await api("PATCH", `/rest/v1/worksheets?id=eq.${existing[0].id}`, { lesson_id: target.id, title: schema.title, schema });
     console.log(`refreshed draft ${schema.slug}`);
