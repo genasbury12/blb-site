@@ -3,6 +3,7 @@ import { writeFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import l1 from "@/domain/worksheets/fixtures/m1-l1-starting-point.json";
 import l2 from "@/domain/worksheets/fixtures/m1-l2-business-direction.json";
+import l3 from "@/domain/worksheets/fixtures/m1-l3-customer-research.json";
 import { parseWorksheetSchema, validateAnswersPatch } from "@/domain/worksheets/schema";
 import { printedKeys, renderModuleWorksheetsPdf, renderWorksheetPdf, worksheetPdfFilename } from "./worksheet-pdf";
 
@@ -61,6 +62,35 @@ describe("worksheet PDF", () => {
     );
     expect(buf.subarray(0, 5).toString()).toBe("%PDF-");
     if (process.env.WS_PDF_OUT) writeFileSync(`${process.env.WS_PDF_OUT}/module1.pdf`, buf);
+  }, 30000);
+
+  it("Lesson 3 prints only observation rows with content, ticked rows as numbers, and the Lesson 2 quote", async () => {
+    const s3 = parseWorksheetSchema(l3);
+    const raw: Record<string, unknown> = { ...(l3.example_response as Record<string, unknown>), review_date: "2026-11-15" };
+    delete raw.label;
+    const answers = validateAnswersPatch(s3, { ...raw, ev_said_7: "\"I would pay for someone to just decide.\"", ev_conf_7: "hypothesis" });
+    const keys = printedKeys(s3, answers);
+    // Rows 1 to 5 and 7 have content; 6 and 8 do not print at all.
+    expect(keys.filter((k) => k.startsWith("ev_said_"))).toEqual(["ev_said_1", "ev_said_2", "ev_said_3", "ev_said_4", "ev_said_5", "ev_said_7"]);
+    // Within a row, an empty optional field is left out.
+    expect(keys).toContain("ev_conf_7");
+    expect(keys).not.toContain("ev_source_7");
+    // An empty required observation row is still left out (brief: only rows with content).
+    expect(printedKeys(s3, { ev_said_1: "x" }).filter((k) => k.startsWith("ev_"))).toEqual(["ev_said_1", "ev_source_1", "ev_meaning_1", "ev_question_1", "ev_conf_1"]);
+    // The three problems are required, so they print even when empty.
+    expect(printedKeys(s3, {})).toEqual(expect.arrayContaining(["theme_1", "theme_rows_3", "snapshot", "review_date"]));
+
+    const buf = await renderWorksheetPdf({
+      schema: s3,
+      answers,
+      moduleNumber: 1,
+      lessonNumber: 3,
+      memberName: "Test Member",
+      completedAt: "2026-11-05T15:00:00Z",
+      topCallbacks: [{ key: "l2_hypothesis", heading: "Where you started", text: "In Lesson 2 you wrote: I am exploring a business that helps parents solve dinner battles through meal plans.", missingText: "x" }],
+    });
+    expect(buf.subarray(0, 5).toString()).toBe("%PDF-");
+    if (process.env.WS_PDF_OUT) writeFileSync(`${process.env.WS_PDF_OUT}/lesson3.pdf`, buf);
   }, 30000);
 
   it("names files as the brief asks", () => {

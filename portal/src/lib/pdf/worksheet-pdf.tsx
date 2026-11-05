@@ -1,11 +1,13 @@
 import { Document, Page, StyleSheet, Text, View, renderToBuffer } from "@react-pdf/renderer";
+import type { ResolvedTopCallback } from "@/domain/worksheets/callbacks";
 import {
   answerText,
-  concreteFields,
+  choiceOptions,
   expandField,
   isFilled,
   isRequired,
   labelFrom,
+  rowHasContent,
   type Answers,
   type ConcreteField,
   type RatingAnswer,
@@ -32,9 +34,17 @@ const s = StyleSheet.create({
   section: { marginTop: 26, flexDirection: "row" },
   number: { fontFamily: F.display, fontSize: 33, color: C.roseDeep, width: 38, lineHeight: 1 },
   sectionBody: { flex: 1 },
+  // Everything after a section's first answer, lined up under its heading (the number column is 38pt wide).
+  sectionRest: { marginLeft: 38 },
   h2: { fontFamily: F.display, fontSize: 20, lineHeight: 1.2 },
   ask: { fontFamily: F.displayItalic, fontSize: 13, color: C.mauveInk, marginTop: 2 },
   h3: { fontFamily: F.display, fontSize: 15.5, marginTop: 14 },
+  rowHead: { fontSize: 7.5, letterSpacing: 1.4, color: C.mauveInk, textTransform: "uppercase", marginTop: 14 },
+  // One observation (or problem) as one compact card, as on the form.
+  rowCard: { backgroundColor: C.field, borderColor: C.fieldBorder, borderWidth: 1, borderRadius: 7, paddingVertical: 4, paddingHorizontal: 10, marginTop: 3 },
+  rowLabel: { fontFamily: F.bodyBold, fontSize: 8, color: C.mauveInk, marginTop: 5 },
+  rowGuide: { fontSize: 7.5, color: C.muted, lineHeight: 1.35 },
+  rowValue: { marginBottom: 1 },
   label: { fontFamily: F.bodyBold, fontSize: 9, marginTop: 10, marginBottom: 3 },
   // The question's guide line, muted as on the form (owner decision 2026-11-04).
   guide: { fontSize: 8.5, color: C.muted, marginTop: -1, marginBottom: 4, lineHeight: 1.4 },
@@ -61,6 +71,8 @@ export type WorksheetPdfInput = {
   memberName: string | null;
   completedAt: string | null;
   callbacks?: Record<string, { label: string; text: string }>;
+  /** Quotes before section 1 (Lesson 3 "Where you started"); printed only when the quote is there. */
+  topCallbacks?: ResolvedTopCallback[];
 };
 
 function fmtDate(v: string) {
@@ -98,7 +110,17 @@ function Answer({ field, value, schema, answers }: { field: ConcreteField; value
     case "choice":
       return (
         <View style={s.block}>
-          <Text>{field.option_label_from ? labelFrom(field.option_label_from, value as string, answers) : (value as string)}</Text>
+          <Text>
+            {field.option_label_from
+              ? labelFrom(field.option_label_from, value as string, answers)
+              : (choiceOptions(schema, field).find((o) => o.value === value)?.label ?? (value as string))}
+          </Text>
+        </View>
+      );
+    case "multichoice":
+      return (
+        <View style={s.block}>
+          <Text>{rowAnswer(field, answers, schema)}</Text>
         </View>
       );
     case "date":
@@ -124,28 +146,93 @@ function printable(c: ConcreteField, answers: Answers) {
   return isRequired(c) || isFilled(c, answers[c.key]) || Boolean((answers[c.key] as RatingAnswer | undefined)?.rating);
 }
 
-function Fields({ fields, schema, answers, context }: { fields: WorksheetField[]; schema: WorksheetSchema; answers: Answers; context?: string }) {
+type PrintItem = { kind: "field"; field: ConcreteField; label: string } | { kind: "row"; key: string; heading: string; fields: ConcreteField[] };
+
+/**
+ * What a list of schema fields prints as. Labelled repeat groups print row by row (a variable length group only
+ * the rows with content, brief 11); other repeat fields print one block per idea the member used.
+ */
+function printPlan(fields: WorksheetField[], schema: WorksheetSchema, answers: Answers, context?: string): PrintItem[] {
+  const out: PrintItem[] = [];
+  const carded = new Set<string>();
+  for (const f of fields) {
+    const group = f.repeat ? schema.repeat_groups?.[f.repeat] : undefined;
+    if (f.repeat && group?.label) {
+      if (carded.has(f.repeat)) continue;
+      carded.add(f.repeat);
+      const members = fields.filter((x) => x.repeat === f.repeat);
+      for (const k of group.keys) {
+        const row = members.map((m) => expandField(schema, m).find((c) => c.repeatKey === k)).filter((c): c is ConcreteField => Boolean(c));
+        const content = rowHasContent(schema, f.repeat, k, answers);
+        if (group.min_visible ? !content : !row.some((c) => printable(c, answers))) continue;
+        out.push({ kind: "row", key: k, heading: group.label.replaceAll("{k}", k), fields: row.filter((c) => printable(c, answers)) });
+      }
+      continue;
+    }
+    for (const c of expandField(schema, f)) {
+      // Repeat columns: print the ideas the member actually used (plus any required one).
+      if (!printable(c, answers)) continue;
+      const label = c.repeatKey ? `${context ? `${context}: ` : ""}${labelFrom(group?.label_from, c.repeatKey, answers)}` : (c.label ?? c.key);
+      out.push({ kind: "field", field: c, label });
+    }
+  }
+  return out;
+}
+
+/** An answer inside a row card, as plain text. */
+function rowAnswer(c: ConcreteField, answers: Answers, schema: WorksheetSchema) {
+  const v = answers[c.key];
+  if (c.type === "date" && typeof v === "string") return fmtDate(v);
+  if (c.type === "multichoice" && Array.isArray(v)) return `${v.length === 1 ? "Observation" : "Observations"} ${v.join(", ")}`;
+  return answerText(c, v, schema);
+}
+
+function FieldBlock({ field, label, schema, answers }: { field: ConcreteField; label: string; schema: WorksheetSchema; answers: Answers }) {
+  const length = answerText(field, answers[field.key], schema).length;
+  return (
+    <View wrap={length > 700} minPresenceAhead={40}>
+      <Text style={s.label}>{label}</Text>
+      {field.guide && GUIDED.has(field.type) ? <Text style={s.guide}>{field.guide}</Text> : null}
+      <Answer field={field} value={answers[field.key]} schema={schema} answers={answers} />
+    </View>
+  );
+}
+
+function PrintItemView({ item, schema, answers }: { item: PrintItem; schema: WorksheetSchema; answers: Answers }) {
+  if (item.kind === "field") return <FieldBlock field={item.field} label={item.label} schema={schema} answers={answers} />;
+  return (
+    <View wrap={false}>
+      <Text style={s.rowHead}>{item.heading}</Text>
+      <View style={s.rowCard}>
+        {item.fields.map((c) => (
+          <View key={c.key}>
+            {/* "Problem 1" under the heading "Problem 1" says it twice: the heading is enough. */}
+            {c.label !== item.heading ? <Text style={s.rowLabel}>{c.label ?? c.key}</Text> : <View style={{ height: 5 }} />}
+            {c.guide && GUIDED.has(c.type) ? <Text style={s.rowGuide}>{c.guide}</Text> : null}
+            {isFilled(c, answers[c.key]) ? <Text style={s.rowValue}>{rowAnswer(c, answers, schema)}</Text> : <Text style={[s.rowValue, s.empty]}>Not answered</Text>}
+          </View>
+        ))}
+      </View>
+    </View>
+  );
+}
+
+const itemKey = (item: PrintItem) => (item.kind === "field" ? item.field.key : `row-${item.key}-${item.heading}`);
+
+function Fields({ items, schema, answers }: { items: PrintItem[]; schema: WorksheetSchema; answers: Answers }) {
   return (
     <>
-      {fields.flatMap((f) => {
-        const group = f.repeat ? schema.repeat_groups?.[f.repeat] : undefined;
-        return expandField(schema, f)
-          // Repeat columns: print the ideas the member actually used (plus any required one).
-          .filter((c) => printable(c, answers))
-          .map((c) => {
-            const label = c.repeatKey ? `${context ? `${context}: ` : ""}${labelFrom(group?.label_from, c.repeatKey, answers)}` : (c.label ?? c.key);
-            const length = answerText(c, answers[c.key], schema).length;
-            return (
-              <View key={c.key} wrap={length > 700} minPresenceAhead={40}>
-                <Text style={s.label}>{label}</Text>
-                {c.guide && GUIDED.has(c.type) ? <Text style={s.guide}>{c.guide}</Text> : null}
-                <Answer field={c} value={answers[c.key]} schema={schema} answers={answers} />
-              </View>
-            );
-          });
-      })}
+      {items.map((item) => (
+        <PrintItemView key={itemKey(item)} item={item} schema={schema} answers={answers} />
+      ))}
     </>
   );
+}
+
+/** Short enough to keep with its section heading on one page (a long answer is left free to break). */
+function keepable(item: PrintItem | undefined, schema: WorksheetSchema, answers: Answers) {
+  if (!item) return false;
+  return item.kind === "row" || answerText(item.field, answers[item.field.key], schema).length <= 700;
 }
 
 function WorksheetPages({ input, generatedAt }: { input: WorksheetPdfInput; generatedAt: Date }) {
@@ -163,32 +250,53 @@ function WorksheetPages({ input, generatedAt }: { input: WorksheetPdfInput; gene
       <Text style={s.meta}>
         {[input.memberName, input.completedAt ? `Completed ${dateFmt.format(new Date(input.completedAt))}` : "In progress", `Saved copy from ${dateFmt.format(generatedAt)}`].filter(Boolean).join("  ·  ")}
       </Text>
-      {schema.sections.map((section) => (
-        <View key={section.key} style={s.section} minPresenceAhead={90}>
-          {section.number ? <Text style={s.number}>{section.number}</Text> : null}
-          <View style={s.sectionBody}>
-            {section.title ? <Text style={s.h2}>{section.title}</Text> : null}
-            {section.ask ? <Text style={s.ask}>{section.ask}</Text> : null}
-            {input.callbacks?.[section.key] ? (
-              <View style={s.quote} wrap={false}>
-                <Text style={s.eyebrow}>From {input.callbacks[section.key]!.label}</Text>
-                <Text style={s.quoteText}>{input.callbacks[section.key]!.text}</Text>
-              </View>
-            ) : null}
-            <Fields fields={section.fields} schema={schema} answers={answers} />
-            {(section.subsections ?? []).map((sub) => (
-              <View key={sub.key}>
-                {sub.title ? (
-                  <Text style={s.h3} minPresenceAhead={70}>
-                    {sub.title}
-                  </Text>
-                ) : null}
-                <Fields fields={sub.fields} schema={schema} answers={answers} context={sub.title} />
-              </View>
-            ))}
+      {(input.topCallbacks ?? [])
+        .filter((cb) => cb.text)
+        .map((cb) => (
+          <View key={cb.key} style={[s.quote, { marginTop: 22 }]} wrap={false}>
+            <Text style={s.eyebrow}>{cb.heading}</Text>
+            <Text style={s.quoteText}>{cb.text}</Text>
           </View>
-        </View>
-      ))}
+        ))}
+      {schema.sections.map((section) => {
+        const items = printPlan(section.fields, schema, answers);
+        // The heading, any quote and the first answer move to a new page together, so a heading never ends a page.
+        const kept = keepable(items[0], schema, answers) ? items.slice(0, 1) : [];
+        return (
+          <View key={section.key}>
+            <View style={s.section} wrap={false}>
+              {section.number ? <Text style={s.number}>{section.number}</Text> : null}
+              <View style={s.sectionBody}>
+                {section.title ? <Text style={s.h2}>{section.title}</Text> : null}
+                {section.ask ? <Text style={s.ask}>{section.ask}</Text> : null}
+                {input.callbacks?.[section.key] ? (
+                  <View style={s.quote}>
+                    <Text style={s.eyebrow}>From {input.callbacks[section.key]!.label}</Text>
+                    <Text style={s.quoteText}>{input.callbacks[section.key]!.text}</Text>
+                  </View>
+                ) : null}
+                <Fields items={kept} schema={schema} answers={answers} />
+              </View>
+            </View>
+            <View style={s.sectionRest}>
+              <Fields items={items.slice(kept.length)} schema={schema} answers={answers} />
+              {(section.subsections ?? []).map((sub) => {
+                const subItems = printPlan(sub.fields, schema, answers, sub.title);
+                const subKept = keepable(subItems[0], schema, answers) ? subItems.slice(0, 1) : [];
+                return (
+                  <View key={sub.key}>
+                    <View wrap={false}>
+                      {sub.title ? <Text style={s.h3}>{sub.title}</Text> : null}
+                      <Fields items={subKept} schema={schema} answers={answers} />
+                    </View>
+                    <Fields items={subItems.slice(subKept.length)} schema={schema} answers={answers} />
+                  </View>
+                );
+              })}
+            </View>
+          </View>
+        );
+      })}
       {schema.footer_note ? (
         <Text style={s.footerNote} wrap={false} minPresenceAhead={20}>
           {schema.footer_note}
@@ -230,7 +338,7 @@ export async function renderModuleWorksheetsPdf(inputs: WorksheetPdfInput[], mod
 
 /** Keys printed in the PDF, for tests. */
 export function printedKeys(schema: WorksheetSchema, answers: Answers) {
-  return concreteFields(schema)
-    .filter((c) => printable(c, answers))
-    .map((c) => c.key);
+  return schema.sections
+    .flatMap((sec) => [...printPlan(sec.fields, schema, answers), ...(sec.subsections ?? []).flatMap((sub) => printPlan(sub.fields, schema, answers, sub.title))])
+    .flatMap((item) => (item.kind === "field" ? [item.field.key] : item.fields.map((f) => f.key)));
 }

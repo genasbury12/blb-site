@@ -35,6 +35,7 @@ const read = (name) => JSON.parse(readFileSync(join(FIXTURES, name), "utf8"));
 const SHEETS = [
   { file: "m1-l1-starting-point.json", lesson: 1 },
   { file: "m1-l2-business-direction.json", lesson: 2 },
+  { file: "m1-l3-customer-research.json", lesson: 3 },
   { file: "m1-l9-foundation-blueprint.json", lesson: 9 },
 ];
 

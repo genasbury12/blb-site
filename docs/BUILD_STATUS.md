@@ -16,6 +16,21 @@ Status of The BOSS Business System portal build. Updated at every milestone (con
 | 7 Marketing and admin | Admin workspace complete; public sales and masterclass pages wait on approved copy and video |
 | 8 Internal QA and release | Staging Supabase migrated, six test accounts provisioned, signed in permission and browser checks passing (2026-11-02); auth settings, Vercel and Stripe test mode pending; owner sign off pending |
 
+## Lesson 3 worksheet: Customer Research Workbook (2026-11-05)
+
+Brief: `docs/11_LESSON3_WORKSHEET.md`. Schema: `docs/worksheet_m1-l3-customer-research.json` (copied to `portal/src/domain/worksheets/fixtures/`).
+
+- Seeded on staging as a **draft** on Module 1 Lesson 3 (sample-lesson-3), with the milestone "I built a buyer snapshot from real evidence" as a draft. Publish both from Admin when ready.
+- **Variable length rows.** `repeat_groups` take `label`, `min_visible` and `add_label`. A group with a label renders one card per row (Observation 1 to 8); five show first, "Add another observation" reveals the next and moves focus into it; rows that already have answers always show. The PDF prints only observation rows with content.
+- **Supported by observations.** New field type `multichoice` with `options_from_repeat`. Offers the evidence rows with content, labelled with the first 60 characters of what she said; stored as a list of row numbers in row order; admin table and CSV show "1, 2".
+- **Where you started.** Top level `callbacks[]` quote the Lesson 2 hypothesis before section 1, in the same quote box as the Lesson 9 placeholder. Until Lesson 2 is complete it shows `missing_text`; the member can still work. Shared resolver in `src/domain/worksheets/callbacks.ts`, used by the lesson page, the PDF and the data export.
+- **Confidence.** `confidence_options` is a choice list: three small chips, guide on hover and the chosen one's guide beneath.
+- **Admin tiles.** `admin_counts`: observations logged (total, and the per member range) and the confidence tally "hypothesis / observed / confirmed".
+- `callbacks_provided` keys are kept and tested; `footer_note` prints muted at the end of the PDF.
+- PDF: section and subsection headings now stay with their first answer instead of ending a page (Lesson 2 benefited too).
+
+Tests: unit 226 passed (new `lesson3.test.ts`, PDF and fixture tests); lint, typecheck and copy rules clean; staging `worksheets-module1.spec.ts` 7 of 7 on desktop and 7 of 7 on mobile, each with a fresh member, then cleaned up (statuses restored, member removed, test admin disabled).
+
 ## Data rights, Slice D: coach and admin data boundaries (2026-11-05)
 
 - **Coaches never see a member's email.** The one remaining place was Elite applications (the page showed applicant emails to coaches, and the table policy allowed all staff). Migration `20261104002300_coaches_never_see_emails.sql`: admins read the table; coaches read through `coach_elite_applications()`, which leaves the email out; the page shows emails to admins only. Already true elsewhere: Students & access (coaches see names only), member pages, worksheets, feedback, coaching, community. Coaches still cannot export (ZIP or CSV), read orders, see deletion requests, open Data settings, or record a deletion.

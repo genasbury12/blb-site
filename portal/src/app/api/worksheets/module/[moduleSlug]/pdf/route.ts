@@ -17,7 +17,7 @@ export async function GET(_req: Request, ctx: { params: Promise<{ moduleSlug: st
   if (!m.items.length) return NextResponse.json({ error: "no_completed_worksheets", message: "Complete a worksheet in this module first." }, { status: 404 });
   const name = await memberDisplayName(session.supabase, session.user.id);
   const pdf = await renderModuleWorksheetsPdf(
-    m.items.map((c) => ({ schema: c.worksheet.schema, answers: c.worksheet.answers, moduleNumber: c.moduleNumber, lessonNumber: c.lessonNumber, memberName: name, completedAt: c.worksheet.completedAt, callbacks: c.worksheet.callbacks })),
+    m.items.map((c) => ({ schema: c.worksheet.schema, answers: c.worksheet.answers, moduleNumber: c.moduleNumber, lessonNumber: c.lessonNumber, memberName: name, completedAt: c.worksheet.completedAt, callbacks: c.worksheet.callbacks, topCallbacks: c.worksheet.topCallbacks })),
     m.moduleNumber,
   );
   logEvent("info", "module worksheets pdf downloaded", { module: moduleSlug, count: m.items.length });

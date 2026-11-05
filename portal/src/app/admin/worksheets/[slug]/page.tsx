@@ -9,7 +9,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { Card, Stat } from "@/components/ui/card";
 import { RatingPill } from "@/components/worksheets/rating-pill";
 import type { ContentStatus } from "@/domain/content";
-import { adminCell, adminColumns, weakCounts } from "@/domain/worksheets/admin";
+import { adminCell, adminColumns, adminCounts, weakCounts } from "@/domain/worksheets/admin";
 import { cn } from "@/lib/cn";
 import { requireStaff } from "@/lib/server/staff";
 import { loadStaffResponses, loadStaffWorksheet, type ResponseFilter } from "@/lib/server/worksheets-admin";
@@ -35,6 +35,7 @@ export default async function AdminWorksheetPage({ params, searchParams }: { par
   const rows = filter === "all" ? all : all.filter((r) => r.status === filter);
   const columns = adminColumns(worksheet.schema);
   const weak = weakCounts(worksheet.schema, all);
+  const counts = adminCounts(worksheet.schema, all);
   const head = ["Member", ...(isAdmin ? ["Email"] : []), "Status", "Completed", ...columns.map((c) => c.header)];
 
   return (
@@ -62,6 +63,9 @@ export default async function AdminWorksheetPage({ params, searchParams }: { par
         <Card><Stat label="Completed" value={String(all.filter((r) => r.status === "complete").length)} /></Card>
         {weak.map((w) => (
           <Card key={w.header}><Stat label={`Weak: ${w.header}`} value={String(w.weak)} /></Card>
+        ))}
+        {counts.map((c) => (
+          <Card key={c.label} data-testid="ws-admin-count"><Stat label={c.label} value={c.value} hint={c.hint} /></Card>
         ))}
       </div>
 

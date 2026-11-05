@@ -172,6 +172,7 @@ export default async function LessonPage({ params }: { params: Promise<{ moduleS
               initialSavedAt={worksheet.updatedAt}
               lessonNumber={lesson.order_index}
               callbacks={worksheet.callbacks}
+              topCallbacks={worksheet.topCallbacks}
               module={{ slug: mod.slug, number: mod.number }}
               save={saveWorksheetAnswers}
               complete={completeWorksheet}

@@ -1,6 +1,8 @@
 import {
   answerText,
+  choiceOptions,
   concreteFields,
+  isFilled,
   type Answers,
   type ConcreteField,
   type RatingAnswer,
@@ -51,7 +53,11 @@ export function adminColumns(schema: WorksheetSchema): AdminColumn[] {
     const token = spec.match(TOKEN)?.[1];
     const baseKey = token ? spec.replace(TOKEN, "{k}") : spec;
     const hit = all.find(({ field }) => field.key === baseKey) ?? all.find(({ field }) => !field.repeat && field.key === spec);
-    if (!hit) return [];
+    if (!hit) {
+      // A single row of a repeat group, e.g. "theme_1" (Lesson 3): its own label, "Problem 1".
+      const concrete = concreteFields(schema).find((f) => f.key === spec);
+      return concrete ? [{ spec, header: concrete.label ?? spec, type: concrete.type }] : [];
+    }
     const label = hit.field.label ?? hit.context ?? baseKey;
     return [{ spec, header: token ? `${label} (${token})` : label, type: hit.field.type }];
   });
@@ -97,6 +103,33 @@ export function weakCounts(schema: WorksheetSchema, rows: Pick<ResponseRow, "ans
     }));
 }
 
+export type AdminCount = { label: string; value: string; hint: string };
+
+/**
+ * The schema's admin_counts as tiles (brief 11). count_filled: how many rows each member filled (e.g. observations
+ * logged), shown as the total with the per member spread. tally: how often each option of a choice field was picked
+ * across every row and member, in the option list's order ("12 / 9 / 4").
+ */
+export function adminCounts(schema: WorksheetSchema, rows: Pick<ResponseRow, "answers">[]): AdminCount[] {
+  const fields = concreteFields(schema);
+  return (schema.admin_counts ?? []).flatMap((spec) => {
+    if (spec.count_filled) {
+      const matching = fields.filter((f) => f.baseKey === spec.count_filled || f.key === spec.count_filled);
+      const perMember = rows.map((r) => matching.filter((f) => isFilled(f, r.answers[f.key])).length);
+      const total = perMember.reduce((a, b) => a + b, 0);
+      const [lo, hi] = [Math.min(...perMember), Math.max(...perMember)];
+      const hint = !perMember.length ? "No responses yet" : lo === hi ? `${lo} per member` : `${lo} to ${hi} per member`;
+      return [{ label: spec.label, value: String(total), hint }];
+    }
+    const matching = fields.filter((f) => f.baseKey === spec.tally || f.key === spec.tally);
+    const first = matching[0];
+    if (!first || first.type !== "choice") return [];
+    const options = choiceOptions(schema, first);
+    const tally = options.map((o) => rows.reduce((n, r) => n + matching.filter((f) => r.answers[f.key] === o.value).length, 0));
+    return [{ label: spec.label, value: tally.join(" / "), hint: options.map((o, i) => `${o.label} ${tally[i]}`).join(", ") }];
+  });
+}
+
 // ---------------------------------------------------------------------------------------------------------------
 // CSV
 // ---------------------------------------------------------------------------------------------------------------
@@ -123,6 +156,7 @@ function csvValues(field: ConcreteField, answers: Answers): string[] {
     const filled = s && Object.entries(s).some(([k, v]) => k !== "_rendered" && typeof v === "string" && v.trim());
     return [filled ? (s._rendered ?? "") : ""];
   }
+  if (field.type === "multichoice") return [Array.isArray(value) ? value.join(", ") : ""];
   return [typeof value === "string" ? value : ""];
 }
 

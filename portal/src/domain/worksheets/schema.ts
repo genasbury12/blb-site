@@ -21,7 +21,16 @@ const fieldBase = {
 const fieldSchema = z.discriminatedUnion("type", [
   z.object({ ...fieldBase, type: z.enum(["text", "textarea", "date"]) }),
   z.object({ ...fieldBase, type: z.literal("rating"), note_required: z.boolean().optional() }),
-  z.object({ ...fieldBase, type: z.literal("choice"), options: z.array(z.string()).min(1), option_label_from: z.string().optional() }),
+  z.object({
+    ...fieldBase,
+    type: z.literal("choice"),
+    /** Plain options, or `options_from` naming a top level option list such as "confidence_options". */
+    options: z.array(z.string()).min(1).optional(),
+    options_from: z.string().optional(),
+    option_label_from: z.string().optional(),
+  }),
+  /** Tick any of a repeat group's rows (Lesson 3: which observations support a theme). Stored as an array of keys. */
+  z.object({ ...fieldBase, type: z.literal("multichoice"), options_from_repeat: z.string() }),
   z.object({
     ...fieldBase,
     type: z.literal("sentence"),
@@ -50,13 +59,47 @@ const sectionSchema = subsectionSchema.extend({
 export type WorksheetSection = z.infer<typeof sectionSchema>;
 export type WorksheetSubsection = z.infer<typeof subsectionSchema>;
 
+const optionSchema = z.object({ value: z.string(), label: z.string(), guide: z.string().optional() });
+export type WorksheetOption = z.infer<typeof optionSchema>;
+
+const repeatGroupSchema = z.object({
+  keys: z.array(z.string()).min(1),
+  /** Column heading from another answer, e.g. "idea_{k}" (Lesson 2). */
+  label_from: z.string().optional(),
+  /** Row heading, e.g. "Observation {k}". A group with a label renders as one card per row. */
+  label: z.string().optional(),
+  /** Variable length: show this many rows first; `add_label` reveals the next one, up to every key. */
+  min_visible: z.number().int().positive().optional(),
+  add_label: z.string().optional(),
+});
+export type RepeatGroup = z.infer<typeof repeatGroupSchema>;
+
+/** A quote from an earlier worksheet shown before section 1 (Lesson 3: "Where you started"). */
+const topCallbackSchema = z.object({
+  key: z.string(),
+  source_worksheet: z.string(),
+  source_field: z.string(),
+  heading: z.string(),
+  /** {slot} tokens are the source sentence's slots; {answer} is the source answer as text. */
+  template: z.string(),
+  missing_text: z.string(),
+});
+export type TopCallback = z.infer<typeof topCallbackSchema>;
+
+const adminCountSchema = z
+  .object({ label: z.string(), count_filled: z.string().optional(), tally: z.string().optional() })
+  .refine((c) => Boolean(c.count_filled) !== Boolean(c.tally), "Give count_filled or tally");
+
 export const worksheetSchemaSchema = z.object({
   slug: z.string(),
   title: z.string(),
   version: z.number().int().positive().optional(),
   intro: z.object({ eyebrow: z.string().optional(), title: z.string(), lead: z.string().optional(), quote: z.string().optional(), notes: z.array(z.string()).optional() }),
-  repeat_groups: z.record(z.string(), z.object({ keys: z.array(z.string()).min(1), label_from: z.string().optional() })).optional(),
-  rating_options: z.array(z.object({ value: z.string(), label: z.string(), guide: z.string().optional() })).optional(),
+  repeat_groups: z.record(z.string(), repeatGroupSchema).optional(),
+  rating_options: z.array(optionSchema).optional(),
+  /** A choice list (not a rating), used by choice fields with options_from: "confidence_options". */
+  confidence_options: z.array(optionSchema).min(1).optional(),
+  callbacks: z.array(topCallbackSchema).optional(),
   sections: z.array(sectionSchema).min(1),
   completion: z.object({ milestone_label: z.string().optional(), required_fields: z.array(z.string()).default([]) }),
   admin_columns: z.array(z.string()).optional(),
@@ -64,12 +107,27 @@ export const worksheetSchemaSchema = z.object({
   module_download: z.boolean().optional(),
   /** A short closing line printed in muted text at the end of the worksheet's PDF (owner addition 2026-11-04). */
   footer_note: z.string().trim().min(1).max(300).optional(),
+  /** Extra tiles on the admin worksheet page: filled rows per member, or a tally of a choice field's values. */
+  admin_counts: z.array(adminCountSchema).optional(),
+  /** Keys later worksheets quote. Nothing reads it yet; kept so the keys stay stable (tested). */
+  callbacks_provided: z.record(z.string(), z.string()).optional(),
+}).superRefine((ws, ctx) => {
+  const lists: Record<string, unknown> = { rating_options: ws.rating_options, confidence_options: ws.confidence_options };
+  const all = [...ws.sections.flatMap((s) => [...s.fields, ...(s.subsections ?? []).flatMap((sub) => sub.fields)])];
+  for (const f of all) {
+    if (f.repeat && !ws.repeat_groups?.[f.repeat]) ctx.addIssue({ code: "custom", message: `${f.key}: unknown repeat group ${f.repeat}` });
+    if (f.type === "choice" && !f.options && !(f.options_from && Array.isArray(lists[f.options_from])))
+      ctx.addIssue({ code: "custom", message: `${f.key}: give options, or options_from naming a declared option list` });
+    if (f.type === "multichoice" && !ws.repeat_groups?.[f.options_from_repeat]) ctx.addIssue({ code: "custom", message: `${f.key}: unknown repeat group ${f.options_from_repeat}` });
+  }
+  for (const [name, g] of Object.entries(ws.repeat_groups ?? {}))
+    if (g.min_visible && g.min_visible > g.keys.length) ctx.addIssue({ code: "custom", message: `${name}: min_visible is more than its keys` });
 });
 export type WorksheetSchema = z.infer<typeof worksheetSchemaSchema>;
 
 export type RatingAnswer = { rating: string | null; note: string };
 export type SentenceAnswer = Record<string, string> & { _rendered?: string };
-export type AnswerValue = string | RatingAnswer | SentenceAnswer;
+export type AnswerValue = string | string[] | RatingAnswer | SentenceAnswer;
 export type Answers = Record<string, AnswerValue>;
 
 /** A field with its repeat key resolved (cred_{k} -> cred_A). */
@@ -83,7 +141,49 @@ export function expandField(schema: WorksheetSchema, field: WorksheetField): Con
   if (!field.repeat) return [{ ...field, baseKey: field.key }];
   const group = schema.repeat_groups?.[field.repeat];
   if (!group) return [];
-  return group.keys.map((k) => ({ ...field, key: field.key.replace("{k}", k), repeatKey: k, baseKey: field.key }));
+  const sub = (v: string | undefined, k: string) => (v === undefined ? v : v.replaceAll("{k}", k));
+  return group.keys.map((k) => ({ ...field, key: field.key.replace("{k}", k), label: sub(field.label, k), placeholder: sub(field.placeholder, k), repeatKey: k, baseKey: field.key }));
+}
+
+/** The options a choice field offers: its own list, or the top level list it names (options_from). */
+export function choiceOptions(schema: WorksheetSchema, field: Extract<WorksheetField, { type: "choice" }>): WorksheetOption[] {
+  if (field.options) return field.options.map((o) => ({ value: o, label: o }));
+  const list = field.options_from === "confidence_options" ? schema.confidence_options : field.options_from === "rating_options" ? schema.rating_options : undefined;
+  return list ?? [];
+}
+
+/** Every concrete field in one row of a repeat group, in display order (ev_said_3, ev_source_3, ...). */
+export function repeatRow(schema: WorksheetSchema, group: string, key: string): ConcreteField[] {
+  return concreteFields(schema).filter((f) => f.repeat === group && f.repeatKey === key);
+}
+
+/** A row "has content" when any of its fields is filled. */
+export function rowHasContent(schema: WorksheetSchema, group: string, key: string, answers: Answers): boolean {
+  return repeatRow(schema, group, key).some((f) => isFilled(f, answers[f.key]));
+}
+
+/** The rows a multichoice offers: rows of its group with content, labelled "k" plus the first 60 characters of the row's first field. */
+export function repeatOptions(schema: WorksheetSchema, group: string, answers: Answers): { key: string; label: string }[] {
+  return (schema.repeat_groups?.[group]?.keys ?? [])
+    .filter((k) => rowHasContent(schema, group, k, answers))
+    .map((k) => {
+      const first = repeatRow(schema, group, k)[0];
+      const raw = first ? answers[first.key] : undefined;
+      const text = typeof raw === "string" ? raw.trim().replace(/\s+/g, " ") : "";
+      return { key: k, label: text.length > 60 ? `${text.slice(0, 60).trimEnd()}\u2026` : text };
+    });
+}
+
+/** How many rows of a group to show: min_visible, or more when a later row already has content. */
+export function visibleRows(schema: WorksheetSchema, group: string, answers: Answers): number {
+  const g = schema.repeat_groups?.[group];
+  if (!g) return 0;
+  if (!g.min_visible) return g.keys.length;
+  let last = 0;
+  g.keys.forEach((k, i) => {
+    if (rowHasContent(schema, group, k, answers)) last = i + 1;
+  });
+  return Math.max(g.min_visible, last);
 }
 
 /** Every concrete field in the worksheet, in display order. */
@@ -122,8 +222,10 @@ export function isFilled(field: ConcreteField | undefined, value: AnswerValue | 
     }
     case "sentence": {
       const s = value as SentenceAnswer;
-      return typeof s === "object" && field.slots.every((slot) => Boolean(s[slot.key]?.trim()));
+      return typeof s === "object" && !Array.isArray(s) && field.slots.every((slot) => Boolean(s[slot.key]?.trim()));
     }
+    case "multichoice":
+      return Array.isArray(value) && value.length > 0;
     default:
       return typeof value === "string" && value.trim().length > 0;
   }
@@ -176,8 +278,16 @@ export function validateAnswersPatch(schema: WorksheetSchema, patch: unknown): A
         break;
       }
       case "choice": {
-        if (typeof raw !== "string" || (raw !== "" && !field.options.includes(raw))) throw new WorksheetAnswerError(key, "Choose one of the options");
+        if (typeof raw !== "string" || (raw !== "" && !choiceOptions(schema, field).some((o) => o.value === raw))) throw new WorksheetAnswerError(key, "Choose one of the options");
         out[key] = raw;
+        break;
+      }
+      case "multichoice": {
+        const allowed = schema.repeat_groups?.[field.options_from_repeat]?.keys ?? [];
+        if (!Array.isArray(raw) || raw.some((v) => typeof v !== "string" || !allowed.includes(v)) || new Set(raw).size !== raw.length)
+          throw new WorksheetAnswerError(key, "Choose from your observations");
+        // Stored in the group's own order, so "1, 2" reads the same however they were ticked.
+        out[key] = allowed.filter((k) => raw.includes(k));
         break;
       }
       case "rating": {
@@ -211,6 +321,8 @@ export function validateAnswersPatch(schema: WorksheetSchema, patch: unknown): A
 export function answerText(field: ConcreteField | undefined, value: AnswerValue | undefined, schema?: WorksheetSchema): string {
   if (!field || value === undefined || value === null) return "";
   if (field.type === "sentence") return (value as SentenceAnswer)._rendered ?? "";
+  if (field.type === "multichoice") return Array.isArray(value) ? value.join(", ") : "";
+  if (field.type === "choice" && typeof value === "string" && schema && field.options_from) return choiceOptions(schema, field).find((o) => o.value === value)?.label ?? value;
   if (field.type === "rating") {
     const r = value as RatingAnswer;
     const label = schema?.rating_options?.find((o) => o.value === r.rating)?.label ?? r.rating ?? "";

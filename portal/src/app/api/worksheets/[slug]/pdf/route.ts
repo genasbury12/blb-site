@@ -22,6 +22,7 @@ export async function GET(_req: Request, ctx: { params: Promise<{ slug: string }
     memberName: await memberDisplayName(session.supabase, session.user.id),
     completedAt: c.worksheet.completedAt,
     callbacks: c.worksheet.callbacks,
+    topCallbacks: c.worksheet.topCallbacks,
   });
   logEvent("info", "worksheet pdf downloaded", { slug });
   return new NextResponse(new Uint8Array(pdf), {

@@ -1,5 +1,6 @@
 import "server-only";
-import { answerText, findField, worksheetSchemaSchema, type Answers, type WorksheetSchema } from "@/domain/worksheets/schema";
+import { callbackSourceSlugs, resolveCallbacks, type CallbackSource, type ResolvedTopCallback } from "@/domain/worksheets/callbacks";
+import { worksheetSchemaSchema, type Answers, type WorksheetSchema } from "@/domain/worksheets/schema";
 import { logEvent } from "@/lib/observability";
 import type { UserSupabase } from "@/lib/supabase/server";
 
@@ -14,6 +15,8 @@ export type LessonWorksheet = {
   updatedAt: string | null;
   /** Read only quotes from the member's other worksheets, keyed by section key (brief: callbacks). */
   callbacks: Record<string, { label: string; text: string }>;
+  /** Quotes shown before section 1 (Lesson 3 "Where you started"), or their missing_text. */
+  topCallbacks: ResolvedTopCallback[];
 };
 
 /** Loads the published worksheet for a lesson (RLS hides drafts), parsed and validated. Null when none. */
@@ -43,24 +46,21 @@ export async function loadLessonWorksheet(supabase: UserSupabase, userId: string
     .eq("worksheet_slug", ws.slug)
     .maybeSingle();
 
-  const callbacks: LessonWorksheet["callbacks"] = {};
-  const sources = ws.schema.sections.filter((s) => s.callback).map((s) => s.callback!.worksheet);
-  if (sources.length) {
+  const sources = new Map<string, CallbackSource>();
+  const slugs = callbackSourceSlugs(ws.schema);
+  if (slugs.length) {
     const [respRes, wsRes] = await Promise.all([
-      supabase.from("worksheet_responses").select("worksheet_slug, answers").eq("user_id", userId).in("worksheet_slug", sources),
-      supabase.from("worksheets").select("slug, title, schema").eq("status", "published").in("slug", sources),
+      supabase.from("worksheet_responses").select("worksheet_slug, answers, status").eq("user_id", userId).in("worksheet_slug", slugs),
+      supabase.from("worksheets").select("slug, title, schema").eq("status", "published").in("slug", slugs),
     ]);
-    for (const section of ws.schema.sections) {
-      const cb = section.callback;
-      if (!cb) continue;
-      const src = (wsRes.data ?? []).find((w) => w.slug === cb.worksheet);
-      const answers = (respRes.data ?? []).find((r) => r.worksheet_slug === cb.worksheet)?.answers as Answers | undefined;
-      const srcSchema = src ? worksheetSchemaSchema.safeParse(src.schema) : null;
-      if (!src || !answers || !srcSchema?.success) continue;
-      const text = answerText(findField(srcSchema.data, cb.field), answers[cb.field], srcSchema.data).trim();
-      if (text) callbacks[section.key] = { label: cb.label ?? (src.title as string), text };
+    for (const src of wsRes.data ?? []) {
+      const resp = (respRes.data ?? []).find((r) => r.worksheet_slug === src.slug);
+      const parsed = worksheetSchemaSchema.safeParse(src.schema);
+      if (!resp || !parsed.success) continue;
+      sources.set(src.slug as string, { title: src.title as string, schema: parsed.data, answers: (resp.answers ?? {}) as Answers, status: resp.status as CallbackSource["status"] });
     }
   }
+  const resolved = resolveCallbacks(ws.schema, sources);
 
   return {
     ...ws,
@@ -68,7 +68,8 @@ export async function loadLessonWorksheet(supabase: UserSupabase, userId: string
     status: (resp?.status as LessonWorksheet["status"]) ?? "in_progress",
     completedAt: (resp?.completed_at as string) ?? null,
     updatedAt: (resp?.updated_at as string) ?? null,
-    callbacks,
+    callbacks: resolved.sections,
+    topCallbacks: resolved.top,
   };
 }
 

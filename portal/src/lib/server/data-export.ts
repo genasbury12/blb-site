@@ -1,7 +1,8 @@
 import "server-only";
 import type { ReportRun } from "@/components/audit/audit-report";
 import { buildExportJson, buildExportZip, exportFilename, safeName, type ExportAudience, type ExportFile, type ExportRaw } from "@/domain/data-export/build";
-import { answerText, findField, worksheetSchemaSchema, type Answers, type WorksheetSchema } from "@/domain/worksheets/schema";
+import { resolveCallbacks, type CallbackSource } from "@/domain/worksheets/callbacks";
+import { worksheetSchemaSchema, type Answers, type WorksheetSchema } from "@/domain/worksheets/schema";
 import { renderAuditReportPdf } from "@/lib/pdf/audit-report-pdf";
 import { renderWorksheetPdf, worksheetPdfFilename } from "@/lib/pdf/worksheet-pdf";
 import { logEvent } from "@/lib/observability";
@@ -139,7 +140,13 @@ async function worksheetPdfs(raw: ExportRaw & { worksheetRows: Row[] }, memberNa
     const versions = raw.worksheetRows.filter((w) => w.slug === slug).sort((a, b) => (b.status === "published" ? 1 : 0) - (a.status === "published" ? 1 : 0) || (b.version as number) - (a.version as number));
     return versions[0] ? schemaOf.get(`${slug}@${versions[0].version}`) : undefined;
   };
-  const answersOf = new Map(raw.worksheetResponses.map((r) => [r.worksheet_slug as string, (r.answers ?? {}) as Answers]));
+  const sources = new Map<string, CallbackSource>();
+  for (const r of raw.worksheetResponses) {
+    const slug = r.worksheet_slug as string;
+    const src = latestSchema(slug);
+    const title = raw.worksheetRows.find((w) => w.slug === slug)?.title as string | undefined;
+    if (src) sources.set(slug, { title: title ?? src.title, schema: src, answers: (r.answers ?? {}) as Answers, status: r.status as CallbackSource["status"] });
+  }
   const lessonOf = new Map(raw.lessons.map((l) => [l.id, l]));
   const moduleOf = new Map(raw.modules.map((m) => [m.id, m]));
   const out: (ExportFile & { source: string })[] = [];
@@ -149,15 +156,7 @@ async function worksheetPdfs(raw: ExportRaw & { worksheetRows: Row[] }, memberNa
     const lesson = row ? lessonOf.get(row.lesson_id as string) : undefined;
     const mod = lesson ? moduleOf.get(lesson.module_id) : undefined;
     if (!schema || !lesson || !mod) continue;
-    const callbacks: Record<string, { label: string; text: string }> = {};
-    for (const section of schema.sections) {
-      const cb = section.callback;
-      const src = cb ? latestSchema(cb.worksheet) : undefined;
-      const answers = cb ? answersOf.get(cb.worksheet) : undefined;
-      if (!cb || !src || !answers) continue;
-      const text = answerText(findField(src, cb.field), answers[cb.field], src).trim();
-      if (text) callbacks[section.key] = { label: cb.label ?? src.title, text };
-    }
+    const callbacks = resolveCallbacks(schema, sources);
     try {
       const pdf = await renderWorksheetPdf({
         schema,
@@ -166,7 +165,8 @@ async function worksheetPdfs(raw: ExportRaw & { worksheetRows: Row[] }, memberNa
         lessonNumber: lesson.order_index,
         memberName,
         completedAt: (r.completed_at as string | null) ?? null,
-        callbacks,
+        callbacks: callbacks.sections,
+        topCallbacks: callbacks.top,
       });
       out.push({ path: `worksheets/${worksheetPdfFilename(mod.number, lesson.order_index)}`, bytes: new Uint8Array(pdf), source: `worksheet ${r.worksheet_slug}` });
     } catch {

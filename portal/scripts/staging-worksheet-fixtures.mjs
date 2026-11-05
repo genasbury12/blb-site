@@ -6,8 +6,9 @@
 //
 // journey  (tests/e2e/worksheets.spec.ts): two published STAGING TEST worksheets on Module 1 sample lessons 5 and 6 (lessons without real worksheets),
 //          a temporary Blueprint member, the shared test admin and a temporary coach assigned to the member.
-// module1  (tests/e2e/worksheets-module1.spec.ts): publishes the seeded Module 1 worksheets and milestones for the
-//          run (cleanup restores whatever status each had before) and adds a temporary Blueprint member.
+// module1  (tests/e2e/worksheets-module1.spec.ts): publishes the seeded Module 1 worksheets (Lessons 1, 2, 3 and 9) and
+//          milestones for the run (cleanup restores whatever status each had before), adds a temporary Blueprint
+//          member and enables the shared test admin.
 // export   (tests/e2e/data-export.spec.ts, 10_DATA_RIGHTS Slice A): a temporary Blueprint member with a completed and
 //          an unfinished Module 1 worksheet, a temporary member whose access ended two days ago with a completed one,
 //          and the shared test admin. Needs the seeded Module 1 worksheets (any status).
@@ -141,8 +142,8 @@ async function deleteCoach(id) {
 // ---- suites -----------------------------------------------------------------------------------------------------
 
 const TEST_SLUGS = "staging-test-ws-*";
-const M1_SLUGS = "(m1-l1-starting-point,m1-l2-business-direction,m1-l9-foundation-blueprint)";
-const M1_LABELS = ["I answered Lesson 1: Starting Point", "I chose a provisional direction and wrote my hypothesis"];
+const M1_SLUGS = "(m1-l1-starting-point,m1-l2-business-direction,m1-l3-customer-research,m1-l9-foundation-blueprint)";
+const M1_LABELS = ["I answered Lesson 1: Starting Point", "I chose a provisional direction and wrote my hypothesis", "I built a buyer snapshot from real evidence"];
 const m1Milestones = `module_id=eq.${mod.id}&title=in.(${M1_LABELS.map((l) => `"${l}"`).join(",")})`;
 
 async function setupJourney() {
@@ -196,7 +197,7 @@ async function cleanupJourney() {
 
 async function setupModule1() {
   const sheets = await api("GET", `/rest/v1/worksheets?slug=in.${M1_SLUGS}&version=eq.1&select=id,status`);
-  if (sheets.length !== 3) throw new Error("Run scripts/seed-worksheets.mjs first (the Module 1 worksheets are missing).");
+  if (sheets.length !== 4) throw new Error("Run scripts/seed-worksheets.mjs first (the Module 1 worksheets are missing).");
   const milestones = await api("GET", `/rest/v1/milestones?${m1Milestones}&select=id,status`);
   // Remember each status so cleanup puts back exactly what was there (the owner may have published them).
   const before = { worksheets: sheets.map(({ id, status }) => ({ id, status })), milestones: milestones.map(({ id, status }) => ({ id, status })) };
@@ -204,20 +205,32 @@ async function setupModule1() {
   await api("PATCH", `/rest/v1/milestones?${m1Milestones}`, { status: "published" });
   const member = await newMember("STAGING TEST module one");
   writeFileSync(STATE, JSON.stringify({ memberId: member.id, before }), { mode: 0o600 });
-  writeEnv({ E2E_SUPABASE: 1, E2E_M1_EMAIL: member.email, E2E_M1_PASSWORD: member.password, E2E_M1_MODULE: mod.slug });
-  console.log("module1 fixtures ready: Module 1 worksheets and milestones published for the run, temporary member added");
+  // The shared test admin checks the Lesson 3 count tiles and CSV.
+  const admin = await enableTestAdmin();
+  writeFileSync(STATE, JSON.stringify({ memberId: member.id, adminId: admin.id, before }), { mode: 0o600 });
+  writeEnv({
+    E2E_SUPABASE: 1,
+    E2E_M1_EMAIL: member.email,
+    E2E_M1_PASSWORD: member.password,
+    E2E_M1_MODULE: mod.slug,
+    E2E_M1_ADMIN_EMAIL: admin.email,
+    E2E_M1_ADMIN_PASSWORD: admin.password,
+  });
+  console.log("module1 fixtures ready: Module 1 worksheets and milestones published for the run, temporary member added, shared test admin enabled");
 }
 
 async function cleanupModule1() {
   const st = readState();
   if (st.memberId) await deleteMember(st.memberId);
+  const adminId = st.adminId ?? (await findUser(ADMIN_EMAIL)).hit?.id;
+  if (adminId) await disableTestAdmin(adminId);
   if (!st.before) {
     console.log("module1 cleanup: no saved statuses, so worksheet and milestone statuses were left as they are");
   } else {
     for (const w of st.before.worksheets) await api("PATCH", `/rest/v1/worksheets?id=eq.${w.id}`, { status: w.status });
     for (const m of st.before.milestones) await api("PATCH", `/rest/v1/milestones?id=eq.${m.id}`, { status: m.status });
   }
-  console.log("module1 cleanup done: worksheet and milestone statuses restored, temporary member removed");
+  console.log("module1 cleanup done: worksheet and milestone statuses restored, temporary member removed, shared test admin disabled");
 }
 
 const L1_ANSWERS = { q1: "My blog posts and Pinterest.", q2: "A simple home system for busy parents.", q3: "Partly. I know who I want to help.", realization: "Start with the person and the problem." };

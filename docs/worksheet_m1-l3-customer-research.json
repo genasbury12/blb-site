@@ -1,0 +1,175 @@
+{
+  "slug": "m1-l3-customer-research",
+  "module_slug": "module-1",
+  "lesson_slug": "lesson-3",
+  "title": "Lesson 3: Customer Research Workbook",
+  "version": 1,
+  "status": "draft",
+  "intro": {
+    "eyebrow": "Module 1 · Lesson 3 · Your worksheet",
+    "title": "Customer Research Workbook",
+    "lead": "Go find out whether the person in your hypothesis is real. Write down what she actually says, decide what it might mean, and end with a decision.",
+    "quote": "A buyer profile is only useful if it changes a business decision.",
+    "notes": [
+      "Evidence, not invention. Every row in step 1 must come from something a real person said or did: a conversation, a survey you had permission to run, a support email, a public post used ethically, a product review. If you made it up, it isn't evidence.",
+      "No names. Write what she said, not who she is. Anonymize anything that could identify a real person.",
+      "Already have customers? Start with them: support messages, pre-purchase questions, refund reasons, and the difference between people who read you and people who buy from you."
+    ]
+  },
+  "callbacks": [
+    {
+      "key": "l2_hypothesis",
+      "source_worksheet": "m1-l2-business-direction",
+      "source_field": "hypothesis",
+      "heading": "Where you started",
+      "template": "In Lesson 2 you wrote: I am exploring a business that helps {person} solve {problem} through {solution}.",
+      "missing_text": "You haven't finished your Lesson 2 worksheet yet. Do that first; this one tests the hypothesis you wrote there."
+    }
+  ],
+  "repeat_groups": {
+    "evidence": { "keys": ["1", "2", "3", "4", "5", "6", "7", "8"], "label": "Observation {k}", "min_visible": 5, "add_label": "Add another observation" },
+    "themes": { "keys": ["1", "2", "3"], "label": "Problem {k}" }
+  },
+  "confidence_options": [
+    { "value": "hypothesis", "label": "Hypothesis", "guide": "I think this is true. Nobody has said it yet." },
+    { "value": "observed", "label": "Observed", "guide": "One or two people said or did this." },
+    { "value": "confirmed", "label": "Confirmed", "guide": "It keeps coming up, from different people." }
+  ],
+  "sections": [
+    {
+      "key": "evidence",
+      "number": "1",
+      "title": "Evidence log",
+      "ask": "What did she actually say or do?",
+      "guide": "At least five observations. Each one is three things: her exact words or the specific thing she did, where it came from, and what you think it might mean. Then the question you'd ask her next. Keep the words hers. Keep the interpretation yours. Never mix the two columns.",
+      "fields": [
+        { "key": "ev_said_{k}", "type": "textarea", "repeat": "evidence", "label": "What she said or did", "placeholder": "e.g. \"I keep buying groceries and still order takeout.\"", "required_for": ["1", "2", "3", "4", "5"], "max_length": 400 },
+        { "key": "ev_source_{k}", "type": "text", "repeat": "evidence", "label": "Source and date", "placeholder": "e.g. Conversation with a friend, Nov 2", "required_for": ["1", "2", "3", "4", "5"], "max_length": 160 },
+        { "key": "ev_meaning_{k}", "type": "textarea", "repeat": "evidence", "label": "What it might mean", "guide": "A guess, written as a guess. Two guesses are fine.", "placeholder": "e.g. Planning friction. Or an unpredictable schedule. I don't know which yet.", "required_for": ["1", "2", "3", "4", "5"], "max_length": 400 },
+        { "key": "ev_question_{k}", "type": "text", "repeat": "evidence", "label": "The question I'd ask next", "placeholder": "e.g. Walk me through the last time that happened.", "required_for": ["1", "2", "3", "4", "5"], "max_length": 240 },
+        { "key": "ev_conf_{k}", "type": "choice", "repeat": "evidence", "label": "Confidence", "options_from": "confidence_options", "required_for": ["1", "2", "3", "4", "5"] }
+      ],
+      "footer": "Good follow-up questions ask about the last time, not the general case. \"Walk me through the last time that happened.\" \"What did you try?\" \"What happened next?\" Never \"Would you buy my course?\""
+    },
+    {
+      "key": "themes",
+      "number": "2",
+      "title": "The three problems that keep coming up",
+      "ask": "What repeats?",
+      "guide": "Read your log top to bottom. Group what repeats into no more than three problems, in her words where you can. Point each one at the observations that support it. If a problem only has one observation behind it, it's a hypothesis, not a theme. These three are what Lesson 4 scores.",
+      "fields": [
+        { "key": "theme_{k}", "type": "text", "repeat": "themes", "label": "Problem {k}", "placeholder": "e.g. Deciding what to cook after work is harder than cooking it", "required_for": ["1", "2", "3"], "max_length": 200 },
+        { "key": "theme_rows_{k}", "type": "multichoice", "repeat": "themes", "label": "Supported by observations", "options_from_repeat": "evidence", "required_for": ["1", "2", "3"] }
+      ]
+    },
+    {
+      "key": "snapshot",
+      "number": "3",
+      "title": "Buyer snapshot",
+      "ask": "Who is she, at the moment she goes looking for help?",
+      "guide": "Fill the seven fields from your evidence, not from your imagination. Then write the sentence. If a field is empty because nobody told you, write \"don't know yet\" and add the question to your log. That's an honest snapshot.",
+      "fields": [
+        { "key": "snap_situation", "type": "textarea", "label": "Her current situation", "guide": "What her week looks like. Kids, job, hours, the thing that's not working.", "required": true, "max_length": 500 },
+        { "key": "snap_trigger", "type": "textarea", "label": "The trigger moment", "guide": "What happened that made her start looking. This week, not in general.", "required": true, "max_length": 400 },
+        { "key": "snap_result", "type": "textarea", "label": "The result she wants", "guide": "In her words. Not \"a better life.\" The specific thing.", "required": true, "max_length": 400 },
+        { "key": "snap_tried", "type": "textarea", "label": "What she's already tried", "guide": "And why it didn't stick.", "required": true, "max_length": 500 },
+        { "key": "snap_constraints", "type": "textarea", "label": "Her practical constraints", "guide": "Time, money, energy, tech. If she has twenty minutes a day, that's a design rule, not a detail.", "required": true, "max_length": 400 },
+        { "key": "snap_objections", "type": "textarea", "label": "What would stop her buying", "guide": "The worry she'd have at the checkout. Another unfinished download? Too much time? Doesn't trust it will work for her?", "required": true, "max_length": 400 },
+        { "key": "snap_language", "type": "textarea", "label": "Her words", "guide": "Three to five phrases she actually used. These go on your homepage later, unchanged.", "required": true, "max_length": 500 },
+        { "key": "snapshot", "type": "sentence", "label": "In one sentence", "template": "She's dealing with {situation}, wants {result}, and is worried about {barrier}.", "slots": [
+          { "key": "situation", "placeholder": "situation", "max_length": 140 },
+          { "key": "result", "placeholder": "result", "max_length": 120 },
+          { "key": "barrier", "placeholder": "barrier", "max_length": 120 }
+        ], "required": true }
+      ]
+    },
+    {
+      "key": "decision",
+      "number": "4",
+      "title": "What this changes",
+      "ask": "If nothing in your business changes because of this research, you have a biography, not buyer intelligence.",
+      "guide": "Pick the first-offer audience. Say what the research changed. Name the next thing you'll go and check. Keep it provisional; you'll revise this when Lesson 4 scores the problems.",
+      "fields": [
+        { "key": "first_audience", "type": "textarea", "label": "The first-offer audience", "guide": "If your evidence split into two groups (first-time parents vs. parents returning to work), which one is the clearer first audience, and why?", "required": true, "max_length": 600 },
+        { "key": "changes", "type": "textarea", "label": "One thing this research changes", "guide": "About the product, the message, the delivery, or where you show up. Be specific: \"A four-hour plan is out. It has to fit in twenty minutes.\"", "required": true, "max_length": 600 },
+        { "key": "still_unknown", "type": "textarea", "label": "What I still don't know", "guide": "The questions in your log you haven't asked yet. Pull the three most important.", "required": true, "max_length": 600 },
+        { "key": "next_validation", "type": "textarea", "label": "My next validation step", "guide": "Who you'll talk to, what you'll ask, by when.", "required": true, "max_length": 400 },
+        { "key": "review_date", "type": "date", "label": "I'll have done it by", "required": true }
+      ],
+      "footer": "Your customer is not a demographic box. She's a person trying to solve something in a real life with real constraints. Next, Lesson 4 decides which of her problems is worth building a paid solution around."
+    }
+  ],
+  "completion": {
+    "milestone_label": "I built a buyer snapshot from real evidence",
+    "required_fields": [
+      "ev_said_1", "ev_source_1", "ev_meaning_1", "ev_question_1", "ev_conf_1",
+      "ev_said_2", "ev_source_2", "ev_meaning_2", "ev_question_2", "ev_conf_2",
+      "ev_said_3", "ev_source_3", "ev_meaning_3", "ev_question_3", "ev_conf_3",
+      "ev_said_4", "ev_source_4", "ev_meaning_4", "ev_question_4", "ev_conf_4",
+      "ev_said_5", "ev_source_5", "ev_meaning_5", "ev_question_5", "ev_conf_5",
+      "theme_1", "theme_rows_1", "theme_2", "theme_rows_2", "theme_3", "theme_rows_3",
+      "snap_situation", "snap_trigger", "snap_result", "snap_tried", "snap_constraints", "snap_objections", "snap_language", "snapshot",
+      "first_audience", "changes", "still_unknown", "next_validation", "review_date"
+    ]
+  },
+  "admin_columns": ["snapshot", "theme_1", "theme_2", "theme_3", "first_audience", "changes", "next_validation"],
+  "admin_counts": [
+    { "label": "Observations logged", "count_filled": "ev_said_{k}" },
+    { "label": "Confidence: hypothesis / observed / confirmed", "tally": "ev_conf_{k}" }
+  ],
+  "callbacks_provided": {
+    "theme_1": "Used by m1-l4-problem-validation as candidate problem 1",
+    "theme_2": "Used by m1-l4-problem-validation as candidate problem 2",
+    "theme_3": "Used by m1-l4-problem-validation as candidate problem 3",
+    "snapshot": "Used by m1-l7-messaging and m1-l9-foundation-blueprint",
+    "snap_language": "Used by m1-l7-messaging"
+  },
+  "footer_note": "You'll see your three problems again in Lesson 4, and your snapshot again in Lessons 7 and 9.",
+  "example_response": {
+    "label": "Hypothetical example shown to students as a worked sample. Not real people.",
+    "ev_said_1": "\"I keep buying groceries and still order takeout.\"",
+    "ev_source_1": "Conversation with a friend, Nov 2",
+    "ev_meaning_1": "Planning friction? Or her schedule is unpredictable and the plan dies by Wednesday. Don't know which.",
+    "ev_question_1": "Walk me through the last time that happened.",
+    "ev_conf_1": "observed",
+    "ev_said_2": "\"By 5pm I can't make one more decision.\"",
+    "ev_source_2": "Reply to my Instagram story question, Oct 30",
+    "ev_meaning_2": "Decision fatigue may matter more than recipe variety.",
+    "ev_question_2": "What makes dinner hard on your busiest day specifically?",
+    "ev_conf_2": "observed",
+    "ev_said_3": "\"My four-year-old eats five things. Five.\"",
+    "ev_source_3": "Facebook group thread (public), Oct 28",
+    "ev_meaning_3": "Picky eating may be the real constraint on any plan.",
+    "ev_question_3": "What happens when you cook something outside the five?",
+    "ev_conf_3": "confirmed",
+    "ev_said_4": "\"I throw out half the produce I buy.\"",
+    "ev_source_4": "Same thread, different parent, Oct 28",
+    "ev_meaning_4": "Waste is the pain she feels, even if planning is the cause.",
+    "ev_question_4": "What did you try to fix that?",
+    "ev_conf_4": "observed",
+    "ev_said_5": "\"I bought a meal plan PDF and used it for one week.\"",
+    "ev_source_5": "Conversation with a coworker, Nov 1",
+    "ev_meaning_5": "She'll pay. She won't stick with a static plan. Delivery matters.",
+    "ev_question_5": "What happened in week two?",
+    "ev_conf_5": "observed",
+    "theme_1": "Deciding what to cook is harder than cooking it",
+    "theme_rows_1": ["1", "2"],
+    "theme_2": "Any plan has to survive a picky four-year-old",
+    "theme_rows_2": ["3"],
+    "theme_3": "Static plans get abandoned in a week",
+    "theme_rows_3": ["4", "5"],
+    "snap_situation": "Two kids under six, works until 5, cooks two dinners most nights because one child won't eat the other's food.",
+    "snap_trigger": "Threw out a bag of spinach for the third week running and ordered pizza. Felt like she was failing at something simple.",
+    "snap_result": "To know what dinner is before 5pm without thinking about it, and for everyone to eat it.",
+    "snap_tried": "A meal plan PDF (one week), a recipe app (too many choices), writing a list on Sunday (gone by Wednesday).",
+    "snap_constraints": "Fifteen minutes on Sunday to plan. Zero decisions after 5pm. Grocery budget is tight; waste makes her feel guilty.",
+    "snap_objections": "Another PDF she won't use. A plan that assumes her kid will eat normal food. Anything that takes an hour to set up.",
+    "snap_language": "\"I can't make one more decision.\" \"Eats five things.\" \"Throw out half the produce.\" \"Used it for one week.\"",
+    "snapshot": { "situation": "two picky kids and no decisions left by 5pm", "result": "dinner decided before she's tired", "barrier": "buying one more plan she abandons" },
+    "first_audience": "Parents of picky eaters under six, not \"busy families.\" The picky-eater constraint showed up in every conversation and it's the thing other meal plans ignore.",
+    "changes": "The product can't be a static plan. It has to be a weekly reset that takes fifteen minutes and builds around the five foods her kid will eat.",
+    "still_unknown": "Whether she'd pay monthly or once. Whether the partner cooks at all. What week two of the abandoned PDF actually looked like.",
+    "next_validation": "Ask the five people in my log the week-two question, and ask two of them what they'd pay for a weekly version.",
+    "review_date": "+10d"
+  }
+}
