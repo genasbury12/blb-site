@@ -174,6 +174,7 @@ test("admin sees the member's answers, counts and a read only view, and exports 
   await expect(row).toContainText("Strong");
   await expect(row).toContainText("Ten years as a pediatric dietitian.");
   await expect(page.getByText("Weak: Delivery fit (chosen)")).toBeVisible();
+  await expect(page.getByTestId("data-handling-note")).toHaveText("Data handling: Member answers are private. Exports are logged.");
   await page.getByRole("link", { name: "Complete", exact: true }).click();
   await expect(page).toHaveURL(new RegExp(`/admin/worksheets/${slug}\\?status=complete`));
   await expect(page.getByTestId("ws-response-row")).not.toHaveCount(0);
@@ -188,7 +189,9 @@ test("admin sees the member's answers, counts and a read only view, and exports 
   expect(csv.headers()["content-type"]).toContain("text/csv");
   expect(csv.headers()["content-disposition"]).toContain(`${slug}_responses_`);
   const text = (await csv.text()).replace(/^\uFEFF/, "");
-  const [header, ...lines] = text.trimEnd().split("\r\n");
+  const [stamp, header, ...lines] = text.trimEnd().split("\r\n");
+  // First line: who exported it and when (data rights Slice D).
+  expect(stamp).toMatch(/^"?Exported by .+ from The BOSS Business System\. Member answers are private\.?"?$/);
   expect(header!.split(",").slice(0, 8)).toEqual(["name", "email", "status", "started_at", "updated_at", "completed_at", "idea_A", "idea_B"]);
   expect(header).toContain("cred_A_rating,cred_A_note");
   const mine = lines.find((l) => l.includes(process.env.E2E_WS_EMAIL!));
@@ -205,5 +208,14 @@ test("an assigned coach reads answers without emails and cannot export", async (
   await expect(page.getByTestId("ws-response-row")).toContainText("STAGING TEST worksheet");
   await expect(page.getByTestId("ws-response-row")).not.toContainText(process.env.E2E_WS_EMAIL!);
   await expect(page.getByRole("link", { name: "Export CSV" })).toHaveCount(0);
+  await expect(page.getByTestId("data-handling-note")).toBeVisible();
+  // Coaches never see emails, exports or deletion requests anywhere (data rights Slice D).
+  await page.goto("/admin/elite", { waitUntil: "networkidle" });
+  await expect(page.locator("main")).not.toContainText("@");
+  // Admin only pages render the not found page for coaches (streamed, so the status line stays 200).
+  for (const path of ["/admin/students/deletions", "/admin/settings/data"]) {
+    await page.goto(path, { waitUntil: "networkidle" });
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText("404");
+  }
   expect((await page.request.get(`/api/admin/worksheets/${slug}/csv`)).status()).toBe(404);
 });

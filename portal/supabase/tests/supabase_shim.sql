@@ -21,6 +21,8 @@ create table if not exists auth.users (
   raw_user_meta_data jsonb not null default '{}'::jsonb,
   created_at timestamptz not null default now()
 );
+-- Supabase Auth keeps the last sign in time; the retention rule for accounts with no purchase uses it.
+alter table auth.users add column if not exists last_sign_in_at timestamptz;
 
 create or replace function auth.jwt() returns jsonb language sql stable as $$
   select coalesce(nullif(current_setting('request.jwt.claims', true), ''), '{}')::jsonb;

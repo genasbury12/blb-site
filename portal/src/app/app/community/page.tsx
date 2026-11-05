@@ -29,7 +29,7 @@ export default async function CommunityPage({ searchParams }: { searchParams: Pr
   const { data: comments } = ids.length ? await supabase.from("community_comments").select("post_id").in("post_id", ids).is("deleted_at", null) : { data: [] };
   const counts = new Map<string, number>();
   for (const c of comments ?? []) counts.set(c.post_id as string, (counts.get(c.post_id as string) ?? 0) + 1);
-  const names = await authorNames(supabase, (posts ?? []).map((p) => p.user_id as string));
+  const names = await authorNames(supabase, (posts ?? []).map((p) => p.user_id as string | null));
 
   return (
     <div className="grid gap-10 lg:grid-cols-[1fr_320px]">
@@ -53,7 +53,7 @@ export default async function CommunityPage({ searchParams }: { searchParams: Pr
                     <div className="flex flex-wrap items-center gap-2 text-xs text-ink-muted">
                       {p.pinned ? <span className="inline-flex items-center gap-1 font-semibold text-plum"><Pin className="size-3.5" aria-hidden />Pinned</span> : null}
                       {p.tag ? <Badge>{COMMUNITY_TAGS[p.tag as keyof typeof COMMUNITY_TAGS]}</Badge> : null}
-                      <span>{a?.name ?? "Member"}{a?.staff ? " · Coach" : ""} · {fmtShort(p.created_at as string)}</span>
+                      <span>{p.user_id ? `${a?.name ?? "Member"}${a?.staff ? " · Coach" : ""}` : "Deleted member"} · {fmtShort(p.created_at as string)}</span>
                       {p.moderation_status !== "visible" ? <Badge>Hidden by a moderator</Badge> : null}
                     </div>
                     <p className="mt-2 font-display text-2xl leading-snug">{p.title as string}</p>

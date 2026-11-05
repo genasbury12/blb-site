@@ -27,6 +27,11 @@ describe("Module 1 seed worksheets", () => {
         if (section.callback) expect(findField(sheets[section.callback.worksheet]!, section.callback.field), `${s.slug} -> ${section.callback.worksheet}.${section.callback.field}`).toBeDefined();
   });
 
+  it("Lesson 1 carries its closing footer note for the PDF", () => {
+    expect(sheets[l1.slug]!.footer_note).toBe("You\u2019ll read these answers again in Lesson 9.");
+    expect(sheets[l2.slug]!.footer_note).toBeUndefined();
+  });
+
   it("required fields named in completion exist", () => {
     for (const s of Object.values(sheets)) for (const k of s.completion.required_fields) expect(findField(s, k), `${s.slug}.${k}`).toBeDefined();
   });

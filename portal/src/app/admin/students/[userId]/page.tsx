@@ -7,11 +7,13 @@ import { DataTable, Field, Select, TextInput } from "@/components/admin/fields";
 import { fmtDay, fmtShort } from "@/components/member/time";
 import { PageHeader, SectionTitle } from "@/components/shell/page-header";
 import { Badge } from "@/components/ui/badge";
-import { Card, Stat } from "@/components/ui/card";
+import { Card, CardTitle, Stat } from "@/components/ui/card";
 import { PATH_LABELS } from "@/domain/audit/labels";
 import { FEATURE_KEYS } from "@/lib/features";
 import { getUserEmail } from "@/lib/server/directory";
 import { requireStaff } from "@/lib/server/staff";
+import { DataExportButton } from "@/components/member/data-export-button";
+import { recordDeletionRequest } from "../deletion-actions";
 
 export const metadata: Metadata = { title: "Student" };
 
@@ -32,6 +34,9 @@ export default async function StudentPage({ params }: { params: Promise<{ userId
   ]);
   if (!profile.data) notFound();
   const email = isAdmin ? await getUserEmail(userId) : null;
+  const openDeletion = isAdmin
+    ? (await supabase.from("deletion_requests").select("requested_at").eq("user_id", userId).in("status", ["pending", "processing"]).maybeSingle()).data
+    : null;
   const roleList = (roles.data ?? []).map((r) => r.role as string);
   const coachIds = (coaches.data ?? []).map((c) => c.user_id as string);
   const assignedIds = (assignments.data ?? []).map((a) => a.coach_id as string);
@@ -42,6 +47,31 @@ export default async function StudentPage({ params }: { params: Promise<{ userId
   return (
     <div className="space-y-12">
       <PageHeader eyebrow="Student" title={(profile.data.display_name as string) ?? "Member"} lede={`${email ?? ""}${roleList.length ? ` · Roles: ${roleList.join(", ")}` : ""}`} actions={<Link className="self-center text-sm font-semibold text-plum underline" href="/admin/students">All students</Link>} />
+      {isAdmin ? (
+        <Card>
+          <CardTitle className="text-xl">Member data</CardTitle>
+          <p className="mt-1 text-sm text-ink-muted">Everything the portal stores about this member, with their worksheet and audit PDFs and their uploads. This admin copy also includes notes staff keep for themselves, which the member&apos;s own download leaves out. Admins only. Each export is recorded in the audit log.</p>
+          <div className="mt-4">
+            <DataExportButton endpoint={`/api/admin/members/${userId}/export`} label="Export data" variant="secondary" />
+          </div>
+          <div className="mt-6 border-t border-rose-soft pt-5">
+            {openDeletion ? (
+              <p className="text-sm" data-testid="member-deletion-status">
+                Deletion requested on {fmtDay(openDeletion.requested_at as string)}. See{" "}
+                <Link className="text-plum underline" href="/admin/students/deletions">Deletion requests</Link>.
+              </p>
+            ) : (
+              <ActionForm action={recordDeletionRequest} submitLabel="Record deletion request" pendingLabel="Recording" variant="secondary">
+                <input type="hidden" name="userId" value={userId} />
+                <label className="flex items-start gap-2 text-sm">
+                  <input type="checkbox" name="confirm" className="mt-1" />
+                  <span>The member asked for their account and data to be deleted (for example by email). This opens a request with the same 30 day rule as one they make themselves.</span>
+                </label>
+              </ActionForm>
+            )}
+          </div>
+        </Card>
+      ) : null}
       <div className="grid gap-4 sm:grid-cols-3">
         <Card><Stat label="Lessons completed" value={String(progress.count ?? 0)} /></Card>
         <Card><Stat label="Audits taken" value={String(runs.data?.length ?? 0)} hint={runs.data?.[0] ? `Latest ${Math.round(Number(runs.data[0].overall_score))}%, ${PATH_LABELS[runs.data[0].assigned_path as keyof typeof PATH_LABELS]}` : undefined} /></Card>

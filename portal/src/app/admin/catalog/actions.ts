@@ -112,6 +112,7 @@ export async function changeStatus(_prev: FormState, fd: FormData): Promise<Form
     const { error } = await supabase.from(parsed.data.table).update({ status: parsed.data.to }).eq("id", parsed.data.id);
     if (error) {
       if (error.message.includes("worksheets_one_published_idx")) return errorState("Another version of this worksheet is already published. Archive it first.");
+      if (error.message.includes("worksheets_one_published_per_lesson_idx")) return errorState("Another worksheet is already published on this lesson. Archive it first.");
       throw new Error(error.message);
     }
   } catch (err) {

@@ -13,7 +13,7 @@ import {
   type WorksheetField,
   type WorksheetSchema,
 } from "@/domain/worksheets/schema";
-import { PDF_FONTS as F } from "./brand-fonts";
+import { PDF_FONTS as F, renderWithFreshFonts } from "./brand-fonts";
 
 /**
  * Branded worksheet PDF (09_IMPLEMENT_WORKSHEETS, Slice C). Brand fonts from ./brand-fonts (Cormorant Garamond
@@ -36,12 +36,15 @@ const s = StyleSheet.create({
   ask: { fontFamily: F.displayItalic, fontSize: 13, color: C.mauveInk, marginTop: 2 },
   h3: { fontFamily: F.display, fontSize: 15.5, marginTop: 14 },
   label: { fontFamily: F.bodyBold, fontSize: 9, marginTop: 10, marginBottom: 3 },
+  // The question's guide line, muted as on the form (owner decision 2026-11-04).
+  guide: { fontSize: 8.5, color: C.muted, marginTop: -1, marginBottom: 4, lineHeight: 1.4 },
   block: { backgroundColor: C.field, borderColor: C.fieldBorder, borderWidth: 1, borderRadius: 7, paddingVertical: 8, paddingHorizontal: 10 },
   empty: { fontFamily: F.bodyItalic, color: C.muted },
   ratingWord: { fontFamily: F.bodyBold },
   sentence: { fontFamily: F.display, fontSize: 20, lineHeight: 1.35, color: C.plum },
   quote: { borderLeftColor: C.roseDeep, borderLeftWidth: 2, paddingLeft: 10, marginTop: 10 },
   quoteText: { fontFamily: F.displayItalic, fontSize: 14.5, color: C.plum },
+  footerNote: { marginTop: 28, paddingTop: 10, borderTopWidth: 1, borderTopColor: C.rose, fontFamily: F.bodyItalic, fontSize: 9, color: C.muted },
   // Two separately positioned lines: react-pdf drops a fixed, absolutely positioned row container.
   footerLeft: { position: "absolute", bottom: 26, left: 54, fontSize: 7.5, color: C.muted },
   footerRight: { position: "absolute", bottom: 26, right: 54, fontSize: 7.5, color: C.muted, textAlign: "right" },
@@ -113,6 +116,9 @@ function Answer({ field, value, schema, answers }: { field: ConcreteField; value
   }
 }
 
+/** Question types whose guide line the form shows under the question; the PDF prints the same ones. */
+const GUIDED = new Set(["text", "textarea", "date"]);
+
 /** Print required fields always (as "Not answered" when empty) and optional ones only when answered. */
 function printable(c: ConcreteField, answers: Answers) {
   return isRequired(c) || isFilled(c, answers[c.key]) || Boolean((answers[c.key] as RatingAnswer | undefined)?.rating);
@@ -132,6 +138,7 @@ function Fields({ fields, schema, answers, context }: { fields: WorksheetField[]
             return (
               <View key={c.key} wrap={length > 700} minPresenceAhead={40}>
                 <Text style={s.label}>{label}</Text>
+                {c.guide && GUIDED.has(c.type) ? <Text style={s.guide}>{c.guide}</Text> : null}
                 <Answer field={c} value={answers[c.key]} schema={schema} answers={answers} />
               </View>
             );
@@ -182,6 +189,11 @@ function WorksheetPages({ input, generatedAt }: { input: WorksheetPdfInput; gene
           </View>
         </View>
       ))}
+      {schema.footer_note ? (
+        <Text style={s.footerNote} wrap={false} minPresenceAhead={20}>
+          {schema.footer_note}
+        </Text>
+      ) : null}
       <Text style={s.footerLeft} fixed>
         The BOSS Business System · Module {input.moduleNumber}
       </Text>
@@ -198,22 +210,22 @@ export function worksheetPdfFilename(moduleNumber: number, lessonNumber?: number
 
 /** One worksheet. */
 export async function renderWorksheetPdf(input: WorksheetPdfInput, generatedAt = new Date()) {
-  return renderToBuffer(
+  return renderWithFreshFonts(() => renderToBuffer(
     <Document title={`${input.schema.title}: worksheet`} author="The BOSS Business System" creator="The BOSS Business System">
       <WorksheetPages input={input} generatedAt={generatedAt} />
     </Document>,
-  );
+  ));
 }
 
 /** Every completed worksheet in a module, in lesson order, each starting on a new page. */
 export async function renderModuleWorksheetsPdf(inputs: WorksheetPdfInput[], moduleNumber: number, generatedAt = new Date()) {
-  return renderToBuffer(
+  return renderWithFreshFonts(() => renderToBuffer(
     <Document title={`Module ${moduleNumber} worksheets`} author="The BOSS Business System" creator="The BOSS Business System">
       {inputs.map((input) => (
         <WorksheetPages key={input.schema.slug} input={input} generatedAt={generatedAt} />
       ))}
     </Document>,
-  );
+  ));
 }
 
 /** Keys printed in the PDF, for tests. */

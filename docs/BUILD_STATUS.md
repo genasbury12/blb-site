@@ -16,6 +16,99 @@ Status of The BOSS Business System portal build. Updated at every milestone (con
 | 7 Marketing and admin | Admin workspace complete; public sales and masterclass pages wait on approved copy and video |
 | 8 Internal QA and release | Staging Supabase migrated, six test accounts provisioned, signed in permission and browser checks passing (2026-11-02); auth settings, Vercel and Stripe test mode pending; owner sign off pending |
 
+## Data rights, Slice D: coach and admin data boundaries (2026-11-05)
+
+- **Coaches never see a member's email.** The one remaining place was Elite applications (the page showed applicant emails to coaches, and the table policy allowed all staff). Migration `20261104002300_coaches_never_see_emails.sql`: admins read the table; coaches read through `coach_elite_applications()`, which leaves the email out; the page shows emails to admins only. Already true elsewhere: Students & access (coaches see names only), member pages, worksheets, feedback, coaching, community. Coaches still cannot export (ZIP or CSV), read orders, see deletion requests, open Data settings, or record a deletion.
+- **"Data handling: Member answers are private. Exports are logged."** at the bottom of every admin screen with member data (Students, Worksheets, Feedback, Coaching, Community, Elite, Payments, Audit log, Data settings), for coaches and admins.
+- **Admin exports name who made them:** the worksheet CSV starts with "Exported by [admin] on [date and time] from The BOSS Business System. Member answers are private."; the admin ZIP's README and my-data.json say who exported it and when.
+- **Found while testing:** a lesson could hold two published worksheets, and its page then showed either one. Migration `20261104002400_one_published_worksheet_per_lesson.sql` allows one per lesson; publishing a second gives "Another worksheet is already published on this lesson. Archive it first." The test fixtures now use lessons 5 and 6, which have no real worksheet.
+
+| Check | Result |
+|---|---|
+| lint, typecheck, check:copy, build, local Playwright (44) | Pass |
+| `vitest --project unit` | 208 pass (new: CSV stamp line, admin ZIP stamp) |
+| `vitest --project db` | 132 pass (new: coach cannot read applicant emails, coach function has no email, admins still can, members get nothing; coaches cannot read orders or deletion requests, export, or record deletions; one published worksheet per lesson) |
+| Staging, all browser suites | Worksheet journey 6 of 6 (new: note shown to admin and coach, CSV stamp line, coach sees no "@" on Elite, Deletion requests and Data settings are not found for coaches), data export 3 of 3 (admin README stamp), Module 1 3 of 3, deletion 5 of 5, retention 2 of 2. Staging afterwards: no temporary accounts or test posts; the owner's Module 1 worksheets still published |
+
+## Data rights: owner decisions after Slice C (2026-11-04)
+
+- **Balance owed holds a deletion** (migration `20261104002200_deletion_holds_inactivity_recorded.sql`, applied to staging): payment plan with payments left, or a membership payment past due. The daily job never runs those requests; the card shows "Payments still owed" with each item and "Waits for you"; the member is told the team will review first. Retention for such members opens a request instead of deleting.
+- **Accounts with no purchase** are deleted 12 months after the last sign in, with the same reminders and their own wording.
+- **Record deletion request** on the admin member page.
+- Checks: lint, check:copy, unit 207, db 128; staging deletion suite 5 of 5 (new: owing member left by the job, balance and plan shown, request recorded by an admin), retention suite 2 of 2 including two accounts with no purchase (one deleted after a year without signing in, one kept). Before running, the job's view of staging was checked: every real account it covers is staff (excluded) or due no earlier than November 2027.
+
+## Data rights, Slice C: retention, reminders, privacy text, Data settings (2026-11-04)
+
+- **Rules** in one place, `src/domain/data-rights/retention.ts` (owner defaults): deletion requests within 30 days; after access ends, data and the download stay 12 months, reminders 30 and 7 days before, then the account is deleted by the Slice B process; anonymized purchase records kept 7 years then removed; audit log kept, anonymized; staff never part of retention.
+- **When access ended** (`app.access_ended_at`, migration `20261104002100_data_retention.sql`, applied to staging): per grant the earlier of its end date and the moment it stopped counting (revoked, refund or cancellation, payment past the 7 day grace, subscription ended); the latest across grants. Unclear moments use the later time, so data is kept longer, never shorter. Members who come back are not lapsed; members who never had access are not covered (I-86).
+- **Daily job** (`/api/cron/data-rights`, renamed from `/api/cron/data-deletion`; `src/lib/server/data-rights-job.ts`): reminders (once per lapse, recorded in `retention_notices`; a failed send is retried the next day; after a missed day only the latest reminder goes), retention deletions (a deletion request with origin "retention", carried out at once, with its own "deleted after 12 months" email), members' requests past 30 days, purchase record purge. Every run is recorded in `job_runs` with counts only.
+- **Admin, Data settings** (`/admin/settings/data`, admins only): requests waiting, lapsed members kept, deletions due within 30 days, last run with a warning if none in 36 hours, the rules, and the last 30 runs.
+- **Privacy text:** `docs/data-rights/PRIVACY_SECTION.md`, describing exactly what the code does, for the owner to paste into the policy after legal review.
+
+| Check | Result |
+|---|---|
+| lint, typecheck, check:copy, build, local Playwright (44) | Pass |
+| `vitest --project unit` | 205 pass (7 new: the numbers, month arithmetic with short months and leap days, nothing before 30 days, each reminder once, only the latest after a missed run, deletion exactly at 12 months, staff and open requests skipped) |
+| `vitest --project db` | 126 pass (5 new: end date for active, never, ended and refunded members; job facts list lapsed members only, mark staff and open requests, server only; runs and reminders admins only; purchase records older than 7 years removed, newer and current members' kept) |
+| `tests/e2e/data-retention.spec.ts` on staging (temporary members ended 12 months and a day, 12 months less 20 days and less 5 days ago, and one active) | 2 pass: the job deleted the expired member (cannot sign in), sent one 30 day and one 7 day reminder, left the others signed in; a second run sent nothing and deleted nothing; Data settings shows the rules, counts and both runs. Before running it there, the job's view of staging was checked: no real account was due for a reminder or deletion |
+
+## Owner follow ups to worksheets and data rights Slice B (2026-11-04)
+
+- Worksheet PDFs print each question's guide line, muted, under the question (same question types as the form). No new copy.
+- Deleting a member keeps community threads: their posts and replies stay in place, reworded to a removal note, with "Deleted member" as author (migration `20261104002000_deletion_keeps_community_threads.sql`, applied to staging; I-80).
+- Deleting a member deletes their Stripe customers first (I-82). Payment plan conflict logged as I-84.
+- Checks: lint, typecheck, check:copy, unit 198, db 121 (new: thread kept with others' replies intact), build, local Playwright 44; staging deletion test 4 of 4 with a real Stripe test customer (deleted in Stripe) and a community thread (rewritten, others' replies kept); test posts and accounts cleaned up afterwards.
+
+## Data rights, Slice B: deletion requests (2026-11-04)
+
+- **Member, My Account, Your data:** "Delete my account and data" opens a page that says what is deleted, what is kept and why, and that it is permanent; typing DELETE submits a request. The account then shows "Requested on [date]. Your account will be deleted within 30 days. You'll get an email when it's done." with **Cancel my deletion request** while it is pending.
+- **Owner email** on each new request (member's name and the admin link) to OWNER_NOTIFY_EMAIL, or SUPPORT_CONTACT_EMAIL when unset.
+- **Admin, Students & access, Deletion requests** (admins only): Pending, Completed, Cancelled. Each pending request shows days until automatic deletion and **Delete now**, which needs the member's email typed. Staff accounts show "This account took admin actions and cannot be hard deleted. It will be anonymized and blocked instead." Completed rows show only the anonymous code.
+- **What deletion does** (migration `20261104001900_data_deletion.sql`, applied to staging; `src/lib/server/data-deletion.ts`):
+  1. audit entry "deletion.started" before anything changes;
+  2. in one transaction: every mention of the member's id or email in the audit log becomes `deleted-user-<10 hex>`; orders keep product, amounts, dates and status with the email replaced by the same code and the account link removed; all member data deleted (worksheets, audit, roadmap, path choices, progress, milestones, coaching, Hot Seat, feedback, community, Elite workspace, access, subscriptions, export records, Elite applications, profile);
+  3. stored files deleted; sign in account deleted;
+  4. "deletion.completed" entry; confirmation email to the address on file, which is not kept.
+  Staff (any role, or named as actor in the audit log): roles removed, profile and sign in email replaced by the code, password scrambled, sign in blocked; never hard deleted (I-73).
+- **Daily job:** Vercel Cron (`portal/vercel.json`, 07:17 UTC) calls `/api/cron/data-rights` (renamed in Slice C) with CRON_SECRET. It deletes pending requests past 30 days and finishes any left half done. Answers with counts only.
+- **Fixed on the way:** path choices were append only, so no member who had chosen a learning path could ever be deleted. A narrow exception now allows deleting them, and anonymizing audit entries, only inside a deletion run (clients still have no update or delete rights on either table).
+
+| Check | Result |
+|---|---|
+| lint, typecheck, check:copy, build | Pass |
+| `vitest --project unit` | 198 pass |
+| `vitest --project db` | 120 pass (7 new: request, reuse and cancel; others and coaches cannot see; only the server can run a deletion; full run with audit and order anonymization, case insensitive email, unrelated entries untouched, path choice removed, sign in account then deletable, steps logged with the code; append only still enforced outside a run; staff anonymized and kept, safe to rerun; cancelled request cannot run) |
+| `tests/e2e/data-deletion.spec.ts` on staging | 4 pass: member must type DELETE, sees the pending text, cancels, asks again; admin with a wrong email is refused, with the right one deletes, member cannot sign in, completed tab and audit log show only the code; staff account anonymized and blocked; daily job refuses without the secret and deletes the overdue request. Checked in the database afterwards: no member rows or emails left, orders and audit entries show the code |
+
+## Data rights, Slice A: "Download all my data" (2026-11-04)
+
+Brief: `docs/10_DATA_RIGHTS.md`.
+
+**What already exists (checked in the schema and row security, 2026-11-04)**
+- Member data lives in 27 tables. Keyed to the member: profiles, orders (+ order_payments), subscriptions, stripe_customers, entitlements, lesson_progress, milestone_progress, audit_drafts, audit_runs, roadmap_items, path_overrides, worksheet_responses, coaching_questions, hotseat_applications, feedback_submissions, community_posts, community_comments, community_reports, elite_applications, coach_assignments, elite_boards (+ elite_items, elite_item_comments, elite_sessions, elite_checkins, elite_hour_buckets, elite_time_entries, elite_files).
+- Member files in private storage: student-evidence (milestone evidence), feedback-files, elite-files.
+- Deleting an auth user cascades most member rows. Exceptions: `orders.user_id` and `elite_applications.user_id` become null (records kept, email kept in the row); `admin_audit_log.actor_id` is append only, so deleting anyone it names as actor fails (I-73).
+- Row security lets a member read their own rows; worksheets on lessons they can no longer open are hidden, which is why lapsed members could not get their worksheet PDFs (I-65).
+- A lapsed member can sign in. Every member page checks access and shows "not part of your current access"; lesson pages and content are blocked by row security; Account, Plans and Billing stay reachable.
+- No data export or deletion flow existed (I-59).
+
+**Built**
+- Account page "Your data": **Download all my data** gives one ZIP, built on request and never stored:
+  - `my-data.json` (profile and email, enrollment, payments, subscriptions, access dates, coach name, audit submissions, drafts, roadmap and path choices, lessons and milestones, every worksheet response with schema version, answers, status and dates, coaching questions, Hot Seat applications, feedback, community posts, comments and reports, Elite application and board);
+  - `worksheets/` PDF of every completed worksheet (brand fonts), `audit-report.pdf` for the latest audit, `uploads/` the member's own files, `README.txt` describing exactly what is included.
+- Works for lapsed members (and for any signed in account). Built from each response's own worksheet version, so PDFs come even for lessons they can no longer open.
+- Admin, Students & access, member page: **Export data** gives the same ZIP. Admins only (coaches and members get a 404).
+- Migration `20261104001800_data_export.sql` (applied to staging): `data_exports` records and `start_data_export` / `finish_data_export`. One export per member per 10 minutes (separately for member and admin), a failed one can be retried, and every completed export is written to the audit log with its size and who asked, never content.
+- `fflate` added as a direct dependency (already installed through the PDF library).
+
+| Check | Result |
+|---|---|
+| lint, typecheck, check:copy | Pass |
+| `vitest --project unit` | 194 pass (7 new: JSON shape, what is kept, staff only exclusions, no Elite board, ZIP contents and unique names, file names, README matches contents) |
+| `vitest --project db` | 113 pass (6 new: self or admin only, coach and anonymous refused, 10 minute limit, failed export frees the limit, audit entry content, only the starter can finish, own records only) |
+| `next build`, Playwright local | Pass; 44 pass, staging only specs skipped |
+| `tests/e2e/data-export.spec.ts` on staging (temporary members and the shared test admin) | 3 pass: member ZIP has exactly my-data.json, README.txt and the Lesson 1 worksheet PDF with the right answers, and a second click is limited; lapsed member cannot open the lesson but downloads the PDF; admin export from Students & access; signed out 401, member using the admin export 404. Both temporary members deleted afterwards (proves exports do not block deletion) |
+
 ## Worksheet test fixtures in the repo (2026-11-04)
 
 - `portal/scripts/staging-worksheet-fixtures.mjs setup|cleanup --suite journey|module1 --env-out FILE` replaces the session only scripts. Staging only (refuses unless sample content is allowed); logins go only to the given file outside the repository.

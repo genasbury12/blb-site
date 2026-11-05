@@ -11,6 +11,8 @@ export function getStripe(): Stripe {
     client = new Stripe(assertStripeKeyAllowed(process.env.STRIPE_SECRET_KEY, process.env.STRIPE_LIVE_MODE_APPROVAL), {
       appInfo: { name: "The BOSS Business System" },
       maxNetworkRetries: 2,
+      // Behind an outbound proxy (test containers), use fetch, which honors it; Vercel has none and keeps the default.
+      ...(process.env.HTTPS_PROXY ? { httpClient: Stripe.createFetchHttpClient() } : {}),
     });
   }
   return client;

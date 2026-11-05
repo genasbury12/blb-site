@@ -13,10 +13,13 @@ export const metadata: Metadata = { title: "Elite clients" };
 const STATUS: Record<string, string> = { submitted: "New", reviewing: "Reviewing", discovery_scheduled: "Discovery call scheduled", accepted: "Accepted, awaiting enrollment", declined: "Declined", withdrawn: "Withdrawn", enrolled: "Enrolled" };
 
 export default async function AdminElitePage() {
-  const { supabase } = await requireStaff(["admin", "coach"], "/admin/elite");
+  const { supabase, isAdmin } = await requireStaff(["admin", "coach"], "/admin/elite");
   const [cap, apps, boards] = await Promise.all([
     supabase.rpc("elite_capacity"),
-    supabase.from("elite_applications").select("*").not("status", "in", "(enrolled,withdrawn)").order("created_at"),
+    // Coaches never see applicants' email addresses (data rights Slice D): they read through a function without it.
+    isAdmin
+      ? supabase.from("elite_applications").select("*").not("status", "in", "(enrolled,withdrawn)").order("created_at")
+      : supabase.rpc("coach_elite_applications").not("status", "in", "(enrolled,withdrawn)").order("created_at"),
     supabase.from("elite_boards").select("id, client_id, coach_id, created_at").order("created_at", { ascending: false }),
   ]);
   const capacity = (cap.data as { seats_total: number; seats_used: number }[] | null)?.[0] ?? { seats_total: 5, seats_used: 0 };
@@ -25,23 +28,24 @@ export default async function AdminElitePage() {
   const name = new Map((profiles ?? []).map((p) => [p.user_id as string, (p.display_name as string) ?? "Member"]));
   const hours = await Promise.all((boards.data ?? []).map(async (b) => ((await supabase.rpc("elite_hours_summary", { p_board: b.id })).data ?? []) as { minutes_granted: number; minutes_used: number; expires_at: string }[]));
 
+  const appRows = (apps.data ?? []) as Record<string, unknown>[];
   return (
     <div className="space-y-12">
       <PageHeader eyebrow="Elite" title="Elite clients" lede="Application, discovery call, acceptance, then checkout. Accepting holds a seat for 14 days. The cap of five includes accepted offers." />
       <div className="grid gap-4 sm:grid-cols-3">
         <Card><Stat label="Seats in use" value={`${capacity.seats_used} of ${capacity.seats_total}`} /></Card>
-        <Card><Stat label="Applications to review" value={String((apps.data ?? []).filter((a) => ["submitted", "reviewing", "discovery_scheduled"].includes(a.status as string)).length)} /></Card>
+        <Card><Stat label="Applications to review" value={String(appRows.filter((a) => ["submitted", "reviewing", "discovery_scheduled"].includes(a.status as string)).length)} /></Card>
         <Card><Stat label="Workspaces" value={String(boards.data?.length ?? 0)} /></Card>
       </div>
 
       <section aria-labelledby="apps">
         <SectionTitle id="apps">Applications</SectionTitle>
-        {(apps.data ?? []).length === 0 ? <Card tone="quiet"><p className="text-ink-muted">No open applications.</p></Card> : null}
+        {appRows.length === 0 ? <Card tone="quiet"><p className="text-ink-muted">No open applications.</p></Card> : null}
         <div className="grid gap-4">
-          {(apps.data ?? []).map((a) => (
+          {appRows.map((a) => (
             <Card key={a.id as string}>
               <div className="flex flex-wrap items-center gap-3"><h3 className="font-display text-2xl">{a.name as string}</h3><Badge tone={a.status === "accepted" ? "plum" : "neutral"}>{STATUS[a.status as string]}</Badge></div>
-              <p className="text-sm text-ink-muted">{a.email as string} · Applied {fmtShort(a.created_at as string)}{a.business_url ? <> · <a className="underline" href={a.business_url as string} target="_blank" rel="noopener noreferrer">website</a></> : null}{a.hours_per_week != null ? ` · ${a.hours_per_week} hours a week` : ""}</p>
+              <p className="text-sm text-ink-muted">{isAdmin && a.email ? `${a.email as string} · ` : ""}Applied {fmtShort(a.created_at as string)}{a.business_url ? <> · <a className="underline" href={a.business_url as string} target="_blank" rel="noopener noreferrer">website</a></> : null}{a.hours_per_week != null ? ` · ${a.hours_per_week} hours a week` : ""}</p>
               <dl className="mt-3 grid gap-3 text-sm md:grid-cols-3">
                 <div><dt className="font-semibold">Business today</dt><dd className="whitespace-pre-line">{a.business_stage as string}</dd></div>
                 <div><dt className="font-semibold">Six month goals</dt><dd className="whitespace-pre-line">{a.goals as string}</dd></div>

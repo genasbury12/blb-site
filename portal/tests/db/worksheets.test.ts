@@ -54,7 +54,12 @@ describe("worksheets visibility (draft never served)", () => {
     await expectDenied(db, coach, "insert into public.worksheets (slug, lesson_id, title, schema) values ('ws-coach', $1, 'Coach made', '{}')", [lesson]);
     expect(await asUser(db, admin, (q) => q("update public.worksheets set title = 'Published worksheet' where slug = 'ws-published' returning id"))).toHaveLength(1);
   });
-  it("one published version per worksheet", async () => {
+  it("one published worksheet per lesson", async () => {
+    await expect(
+      db.query("insert into public.worksheets (slug, version, lesson_id, title, schema, status) values ('ws-second-on-lesson', 1, $1, 'Second on lesson', '{}', 'published')", [lesson]),
+    ).rejects.toThrow(/worksheets_one_published_per_lesson_idx/);
+  });
+    it("one published version per worksheet", async () => {
     await expect(
       db.query("insert into public.worksheets (slug, version, lesson_id, title, schema, status) values ('ws-published', 2, $1, 'Second', '{}', 'published')", [lesson]),
     ).rejects.toThrow(/worksheets_one_published_idx/);

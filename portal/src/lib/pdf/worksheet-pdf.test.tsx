@@ -44,6 +44,13 @@ describe("worksheet PDF", () => {
     expect(keys).not.toContain("idea_C");
   });
 
+  it("renders the Lesson 1 worksheet with its footer note", async () => {
+    const buf = await renderWorksheetPdf({ schema: s1, answers: { q1: "Blog posts", q2: "A home system", q3: "Partly", realization: "Start with the person." }, moduleNumber: 1, lessonNumber: 1, memberName: null, completedAt: "2026-11-02T15:00:00Z" });
+    expect(s1.footer_note).toBeTruthy();
+    expect(buf.subarray(0, 5).toString()).toBe("%PDF-");
+    if (process.env.WS_PDF_OUT) writeFileSync(`${process.env.WS_PDF_OUT}/lesson1.pdf`, buf);
+  }, 30000);
+
   it("renders a module PDF with several worksheets", async () => {
     const buf = await renderModuleWorksheetsPdf(
       [

@@ -3,8 +3,9 @@ import { createClient } from "@supabase/supabase-js";
 import { publicEnv } from "@/lib/env";
 
 /**
- * Service role client. Bypasses RLS. Server only, used solely for writes that clients must never
- * make directly (scored audit runs, entitlement grants from verified Stripe events).
+ * Service role client. Bypasses RLS. Server only, used for writes that clients must never make directly (scored
+ * audit runs, entitlement grants from verified Stripe events), staff directory lookups, and reading one member's
+ * own data for their data export (10_DATA_RIGHTS), where every query is filtered to that member.
  * Callers must authenticate and authorize the user first.
  */
 export function createSupabaseAdminClient() {

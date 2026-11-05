@@ -1,13 +1,23 @@
 #!/usr/bin/env node
 // Test fixtures for the worksheet browser tests on STAGING (never production).
 //
-//   node scripts/staging-worksheet-fixtures.mjs setup   --suite journey|module1 --env-out /abs/path/outside/repo.sh
-//   node scripts/staging-worksheet-fixtures.mjs cleanup --suite journey|module1 --env-out /abs/path/outside/repo.sh
+//   node scripts/staging-worksheet-fixtures.mjs setup   --suite journey|module1|export|deletion|retention --env-out /abs/path/outside/repo.sh
+//   node scripts/staging-worksheet-fixtures.mjs cleanup --suite journey|module1|export|deletion|retention --env-out /abs/path/outside/repo.sh
 //
-// journey  (tests/e2e/worksheets.spec.ts): two published STAGING TEST worksheets on Module 1 sample lessons 2 and 3,
+// journey  (tests/e2e/worksheets.spec.ts): two published STAGING TEST worksheets on Module 1 sample lessons 5 and 6 (lessons without real worksheets),
 //          a temporary Blueprint member, the shared test admin and a temporary coach assigned to the member.
 // module1  (tests/e2e/worksheets-module1.spec.ts): publishes the seeded Module 1 worksheets and milestones for the
 //          run (cleanup restores whatever status each had before) and adds a temporary Blueprint member.
+// export   (tests/e2e/data-export.spec.ts, 10_DATA_RIGHTS Slice A): a temporary Blueprint member with a completed and
+//          an unfinished Module 1 worksheet, a temporary member whose access ended two days ago with a completed one,
+//          and the shared test admin. Needs the seeded Module 1 worksheets (any status).
+// deletion (tests/e2e/data-deletion.spec.ts, 10_DATA_RIGHTS Slice B): a temporary member with worksheet answers, a
+//          path choice and an audit entry naming them; a temporary member whose deletion request is already past its
+//          30 days; a temporary coach with a pending request (the staff path); the shared test admin; and a random
+//          CRON_SECRET for the daily job. Cleanup deletes whatever the test did not.
+// retention (tests/e2e/data-retention.spec.ts, 10_DATA_RIGHTS Slice C): temporary members whose access ended 12
+//          months and a day ago (deleted by the job), 12 months less 20 days ago (30 day reminder), 12 months less 5 days
+//          ago (7 day reminder), and one with access; the shared test admin; a random CRON_SECRET.
 //
 // The test admin is ONE reused account (staging-e2e-admin@example.invalid). The CSV export test writes it into the
 // append only audit log, so it can never be deleted; instead each setup gives it a fresh random password and the
@@ -28,8 +38,8 @@ const arg = (name) => {
 };
 const suite = arg("suite");
 const envOut = arg("env-out");
-if (!["setup", "cleanup"].includes(cmd) || !["journey", "module1"].includes(suite) || !envOut) {
-  console.error("usage: staging-worksheet-fixtures.mjs setup|cleanup --suite journey|module1 --env-out /abs/file.sh");
+if (!["setup", "cleanup"].includes(cmd) || !["journey", "module1", "export", "deletion", "retention"].includes(suite) || !envOut) {
+  console.error("usage: staging-worksheet-fixtures.mjs setup|cleanup --suite journey|module1|export|deletion|retention --env-out /abs/file.sh");
   process.exit(2);
 }
 const repo = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
@@ -69,11 +79,11 @@ async function findUser(email) {
   return { hit: undefined, users: [] };
 }
 
-async function newMember(displayName) {
+async function newMember(displayName, plan = "pay_in_full") {
   const email = `staging-worksheet-${hex()}@example.invalid`, pw = password();
   const u = await api("POST", "/auth/v1/admin/users", { email, password: pw, email_confirm: true, user_metadata: { display_name: displayName } });
   await api("POST", "/rest/v1/rpc/billing_apply_checkout", {
-    p: { session_id: `cs_test_fixture_${randomUUID()}`, user_id: u.id, email, sku: "blueprint", plan: "pay_in_full", payment_status: "paid", payment_intent_id: `pi_test_fixture_${randomUUID()}` },
+    p: { session_id: `cs_test_fixture_${randomUUID()}`, user_id: u.id, email, sku: "blueprint", plan, payment_status: "paid", payment_intent_id: `pi_test_fixture_${randomUUID()}` },
   });
   return { id: u.id, email, password: pw };
 }
@@ -137,7 +147,7 @@ const m1Milestones = `module_id=eq.${mod.id}&title=in.(${M1_LABELS.map((l) => `"
 
 async function setupJourney() {
   const l2 = JSON.parse(readFileSync(join(repo, "portal/src/domain/worksheets/fixtures/m1-l2-business-direction.json"), "utf8"));
-  const lessons = await api("GET", `/rest/v1/lessons?module_id=eq.${mod.id}&slug=in.(sample-lesson-2,sample-lesson-3)&select=id,slug`);
+  const lessons = await api("GET", `/rest/v1/lessons?module_id=eq.${mod.id}&slug=in.(sample-lesson-5,sample-lesson-6)&select=id,slug`);
   const lid = (s) => {
     const l = lessons.find((x) => x.slug === s);
     if (!l) throw new Error(`Module 1 ${s} not found.`);
@@ -151,8 +161,8 @@ async function setupJourney() {
     completion: { required_fields: [] },
   };
   await api("POST", "/rest/v1/worksheets", [
-    { slug: "staging-test-ws-l2", version: 1, lesson_id: lid("sample-lesson-2"), title: "STAGING TEST Lesson 2 worksheet", schema: { ...l2, slug: "staging-test-ws-l2" }, status: "published" },
-    { slug: "staging-test-ws-l3", version: 1, lesson_id: lid("sample-lesson-3"), title: "STAGING TEST Lesson 3 worksheet", schema: callbackSchema, status: "published" },
+    { slug: "staging-test-ws-l2", version: 1, lesson_id: lid("sample-lesson-5"), title: "STAGING TEST Lesson 2 worksheet", schema: { ...l2, slug: "staging-test-ws-l2" }, status: "published" },
+    { slug: "staging-test-ws-l3", version: 1, lesson_id: lid("sample-lesson-6"), title: "STAGING TEST Lesson 3 worksheet", schema: callbackSchema, status: "published" },
   ]);
   const member = await newMember("STAGING TEST worksheet");
   const admin = await enableTestAdmin();
@@ -162,8 +172,8 @@ async function setupJourney() {
     E2E_SUPABASE: 1,
     E2E_WS_EMAIL: member.email,
     E2E_WS_PASSWORD: member.password,
-    E2E_WS_LESSON_PATH: `/app/training/${mod.slug}/sample-lesson-2`,
-    E2E_WS_CALLBACK_PATH: `/app/training/${mod.slug}/sample-lesson-3`,
+    E2E_WS_LESSON_PATH: `/app/training/${mod.slug}/sample-lesson-5`,
+    E2E_WS_CALLBACK_PATH: `/app/training/${mod.slug}/sample-lesson-6`,
     E2E_WS_ADMIN_EMAIL: admin.email,
     E2E_WS_ADMIN_PASSWORD: admin.password,
     E2E_WS_COACH_EMAIL: coach.email,
@@ -210,6 +220,207 @@ async function cleanupModule1() {
   console.log("module1 cleanup done: worksheet and milestone statuses restored, temporary member removed");
 }
 
+const L1_ANSWERS = { q1: "My blog posts and Pinterest.", q2: "A simple home system for busy parents.", q3: "Partly. I know who I want to help.", realization: "Start with the person and the problem." };
+
+async function setupExport() {
+  const m1 = await api("GET", "/rest/v1/worksheets?slug=in.(m1-l1-starting-point,m1-l2-business-direction)&version=eq.1&select=slug");
+  if (m1.length !== 2) throw new Error("Run scripts/seed-worksheets.mjs first (the Module 1 worksheets are missing).");
+  const now = Date.now();
+  const iso = (ms) => new Date(ms).toISOString();
+  const member = await newMember("STAGING TEST data export");
+  const lapsed = await newMember("STAGING TEST lapsed member");
+  await api("POST", "/rest/v1/worksheet_responses", [
+    { user_id: member.id, worksheet_slug: "m1-l1-starting-point", worksheet_version: 1, answers: L1_ANSWERS, status: "complete", completed_at: iso(now - 3600e3) },
+    { user_id: member.id, worksheet_slug: "m1-l2-business-direction", worksheet_version: 1, answers: { idea_A: "Meal planning for parents" }, status: "in_progress", completed_at: null },
+    { user_id: lapsed.id, worksheet_slug: "m1-l1-starting-point", worksheet_version: 1, answers: L1_ANSWERS, status: "complete", completed_at: iso(now - 30 * 864e5) },
+  ]);
+  // Access ended two days ago (started 400 days ago).
+  await api("PATCH", `/rest/v1/entitlements?user_id=eq.${lapsed.id}`, { starts_at: iso(now - 400 * 864e5), ends_at: iso(now - 2 * 864e5) });
+  const admin = await enableTestAdmin();
+  writeFileSync(STATE, JSON.stringify({ memberIds: [member.id, lapsed.id], adminId: admin.id }), { mode: 0o600 });
+  writeEnv({
+    E2E_SUPABASE: 1,
+    E2E_DX_EMAIL: member.email,
+    E2E_DX_PASSWORD: member.password,
+    E2E_DX_MEMBER_ID: member.id,
+    E2E_DX_LAPSED_EMAIL: lapsed.email,
+    E2E_DX_LAPSED_PASSWORD: lapsed.password,
+    E2E_DX_ADMIN_EMAIL: admin.email,
+    E2E_DX_ADMIN_PASSWORD: admin.password,
+    E2E_DX_LESSON_PATH: `/app/training/${mod.slug}/sample-lesson-1`,
+  });
+  console.log("export fixtures ready: temporary active and lapsed members with worksheet answers, shared test admin enabled");
+}
+
+async function cleanupExport() {
+  const st = readState();
+  for (const id of st.memberIds ?? []) await deleteMember(id);
+  const adminId = st.adminId ?? (await findUser(ADMIN_EMAIL)).hit?.id;
+  if (adminId) await disableTestAdmin(adminId);
+  console.log("export cleanup done: temporary members deleted, shared test admin disabled");
+}
+
+async function setupDeletion() {
+  const now = Date.now();
+  const iso = (ms) => new Date(ms).toISOString();
+  const member = await newMember("STAGING TEST deletion");
+  const overdue = await newMember("STAGING TEST overdue deletion");
+  // On a six payment plan with payments left: an overdue request must wait for an admin.
+  const owing = await newMember("STAGING TEST owing deletion", "six_installments");
+  await api("PATCH", `/rest/v1/orders?user_id=eq.${owing.id}`, { status: "installments_current", installments_paid: 1 });
+  // A member with no request, for the admin "Record deletion request" action.
+  const recordable = await newMember("STAGING TEST record deletion");
+  const coachEmail = `staging-ws-coach-${hex()}@example.invalid`, coachPw = password();
+  const coach = await api("POST", "/auth/v1/admin/users", { email: coachEmail, password: coachPw, email_confirm: true, user_metadata: { display_name: "STAGING TEST staff deletion" } });
+  // Record the accounts first, so cleanup finds them even if a later step fails.
+  writeFileSync(STATE, JSON.stringify({ memberIds: [member.id, overdue.id, coach.id, owing.id, recordable.id] }), { mode: 0o600 });
+  await api("POST", "/rest/v1/user_roles", { user_id: coach.id, role: "coach" });
+  await api("POST", "/rest/v1/worksheet_responses", { user_id: member.id, worksheet_slug: "m1-l1-starting-point", worksheet_version: 1, answers: L1_ANSWERS, status: "complete", completed_at: iso(now - 3600e3) });
+  await api("POST", "/rest/v1/path_overrides", { user_id: member.id, chosen_path: "build_from_scratch", reason: "Test reason", actor_id: member.id });
+  await api("POST", "/rest/v1/admin_audit_log", { actor_id: null, action: "test.mention", entity_type: "user", entity_id: member.id, changed_fields: { note: "STAGING TEST entry naming the member", email: member.email } });
+  // A community thread: the member's post with the other member's reply, and the member's reply on the other's post.
+  const [post] = await api("POST", "/rest/v1/community_posts", { user_id: member.id, title: "STAGING TEST post to remove", body: "STAGING TEST words that must disappear" });
+  const [otherPost] = await api("POST", "/rest/v1/community_posts", { user_id: overdue.id, title: "STAGING TEST other post", body: "STAGING TEST other member post" });
+  await api("POST", "/rest/v1/community_comments", { post_id: post.id, user_id: overdue.id, body: "STAGING TEST reply that must stay" });
+  await api("POST", "/rest/v1/community_comments", { post_id: otherPost.id, user_id: member.id, body: "STAGING TEST reply words that must disappear" });
+  writeFileSync(STATE, JSON.stringify({ memberIds: [member.id, overdue.id, coach.id, owing.id, recordable.id], postIds: [post.id, otherPost.id] }), { mode: 0o600 });
+  // A real Stripe test mode customer for the member (test keys only).
+  let stripeCustomer = "";
+  const sk = process.env.STAGING_STRIPE_SECRET_KEY ?? process.env.STRIPE_SECRET_KEY ?? "";
+  if (sk.startsWith("sk_test_")) {
+    const r = await fetch("https://api.stripe.com/v1/customers", { method: "POST", headers: { Authorization: `Bearer ${sk}`, "Content-Type": "application/x-www-form-urlencoded" }, body: new URLSearchParams({ email: member.email, name: "STAGING TEST deletion", description: "Staging data rights test; deleted by the test" }) });
+    if (!r.ok) throw new Error(`Stripe test customer not created: ${r.status}`);
+    stripeCustomer = (await r.json()).id;
+    await api("POST", "/rest/v1/stripe_customers", { user_id: member.id, stripe_customer_id: stripeCustomer });
+    writeFileSync(STATE, JSON.stringify({ memberIds: [member.id, overdue.id, coach.id, owing.id, recordable.id], postIds: [post.id, otherPost.id], stripeCustomer }), { mode: 0o600 });
+  }
+  await api("POST", "/rest/v1/deletion_requests", { user_id: overdue.id, requested_at: iso(now - 31 * 864e5), due_at: iso(now - 864e5) });
+  await api("POST", "/rest/v1/deletion_requests", { user_id: coach.id });
+  await api("POST", "/rest/v1/deletion_requests", { user_id: owing.id, requested_at: iso(now - 31 * 864e5), due_at: iso(now - 864e5) });
+  const admin = await enableTestAdmin();
+  const cronSecret = randomBytes(24).toString("hex");
+  writeFileSync(STATE, JSON.stringify({ memberIds: [member.id, overdue.id, coach.id, owing.id, recordable.id], postIds: [post.id, otherPost.id], stripeCustomer, adminId: admin.id }), { mode: 0o600 });
+  writeEnv({
+    E2E_SUPABASE: 1,
+    E2E_DEL_EMAIL: member.email,
+    E2E_DEL_PASSWORD: member.password,
+    E2E_DEL_OVERDUE_EMAIL: overdue.email,
+    E2E_DEL_OVERDUE_PASSWORD: overdue.password,
+    E2E_DEL_STAFF_EMAIL: coachEmail,
+    E2E_DEL_STAFF_PASSWORD: coachPw,
+    E2E_DEL_ADMIN_EMAIL: admin.email,
+    E2E_DEL_ADMIN_PASSWORD: admin.password,
+    CRON_SECRET: cronSecret,
+    E2E_DEL_STRIPE_CUSTOMER: stripeCustomer,
+    E2E_DEL_OWING_EMAIL: owing.email,
+    E2E_DEL_OWING_ID: owing.id,
+    E2E_DEL_RECORD_ID: recordable.id,
+    E2E_DEL_POST_ID: post.id,
+  });
+  console.log("deletion fixtures ready: temporary member, overdue member, staff member with a request, shared test admin enabled");
+}
+
+/** Remove a test account the way the portal does (its path choice can only be removed inside a deletion run). */
+async function eraseTestAccount(id) {
+  const { hit } = await findUserById(id);
+  if (!hit) return;
+  let [req] = await api("GET", `/rest/v1/deletion_requests?user_id=eq.${id}&status=in.(pending,processing)&select=id`);
+  if (!req) [req] = await api("POST", "/rest/v1/deletion_requests", { user_id: id });
+  await api("POST", "/rest/v1/rpc/erase_member_prepare", { p_request: req.id, p_admin: null });
+  await api("DELETE", `/rest/v1/user_roles?user_id=eq.${id}`);
+  await api("DELETE", `/auth/v1/admin/users/${id}`, undefined, [404]);
+  await api("POST", "/rest/v1/rpc/erase_member_finish", { p_request: req.id, p_admin: null });
+}
+
+async function findUserById(id) {
+  const r = await fetch(`${URL_}/auth/v1/admin/users/${id}`, { headers: H });
+  return { hit: r.ok ? await r.json() : undefined };
+}
+
+async function cleanupDeletion() {
+  const st = readState();
+  // Accounts the test already deleted are skipped; anonymized staff accounts are removed here (nothing names them).
+  for (const id of st.memberIds ?? []) await eraseTestAccount(id);
+  // Test posts outlive their authors by design; remove them (and their replies) from the staging feed.
+  if (st.postIds?.length) await api("DELETE", `/rest/v1/community_posts?id=in.(${st.postIds.join(",")})`);
+  const sk = process.env.STAGING_STRIPE_SECRET_KEY ?? process.env.STRIPE_SECRET_KEY ?? "";
+  if (st.stripeCustomer && sk.startsWith("sk_test_")) await fetch(`https://api.stripe.com/v1/customers/${st.stripeCustomer}`, { method: "DELETE", headers: { Authorization: `Bearer ${sk}` } });
+  const adminId = st.adminId ?? (await findUser(ADMIN_EMAIL)).hit?.id;
+  if (adminId) await disableTestAdmin(adminId);
+  console.log("deletion cleanup done: temporary accounts removed, shared test admin disabled");
+}
+
+async function setupRetention() {
+  const now = Date.now();
+  const iso = (ms) => new Date(ms).toISOString();
+  const twelveMonthsAgo = (extraDays) => {
+    const d = new Date(now);
+    d.setUTCFullYear(d.getUTCFullYear() - 1);
+    return d.getTime() + extraDays * 864e5;
+  };
+  const people = {
+    expired: await newMember("STAGING TEST retention expired"),
+    thirty: await newMember("STAGING TEST retention 30 days"),
+    seven: await newMember("STAGING TEST retention 7 days"),
+    active: await newMember("STAGING TEST retention active"),
+  };
+  // Accounts with no purchase. Their last sign in can only be backdated with database access (the Supabase
+  // management API), so they are added only when SUPABASE_ACCESS_TOKEN is set.
+  const token = process.env.SUPABASE_ACCESS_TOKEN;
+  if (token) {
+    for (const key of ["inactiveOld", "inactiveSoon"]) {
+      const email = `staging-worksheet-${hex()}@example.invalid`, pw = password();
+      const u = await api("POST", "/auth/v1/admin/users", { email, password: pw, email_confirm: true, user_metadata: { display_name: `STAGING TEST ${key}` } });
+      people[key] = { id: u.id, email, password: pw };
+    }
+  }
+  writeFileSync(STATE, JSON.stringify({ memberIds: Object.values(people).map((p) => p.id) }), { mode: 0o600 });
+  if (token) {
+    const ref = new URL(URL_).hostname.split(".")[0];
+    const at = (ms) => new Date(ms).toISOString();
+    const sql = `update auth.users set last_sign_in_at = '${at(twelveMonthsAgo(-1))}', created_at = '${at(twelveMonthsAgo(-30))}' where id = '${people.inactiveOld.id}';
+update auth.users set last_sign_in_at = '${at(twelveMonthsAgo(20))}', created_at = '${at(twelveMonthsAgo(-30))}' where id = '${people.inactiveSoon.id}';`;
+    const r = await fetch(`https://api.supabase.com/v1/projects/${ref}/database/query`, { method: "POST", headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" }, body: JSON.stringify({ query: sql }) });
+    if (!r.ok) throw new Error(`backdating sign in failed: ${r.status}`);
+  }
+  // Access ended: a year and a day ago; a year less 20 days ago; a year less 5 days ago.
+  for (const [who, ended] of [["expired", twelveMonthsAgo(-1)], ["thirty", twelveMonthsAgo(20)], ["seven", twelveMonthsAgo(5)]]) {
+    await api("PATCH", `/rest/v1/entitlements?user_id=eq.${people[who].id}`, { starts_at: iso(ended - 365 * 864e5), ends_at: iso(ended) });
+  }
+  const admin = await enableTestAdmin();
+  writeFileSync(STATE, JSON.stringify({ memberIds: Object.values(people).map((p) => p.id), adminId: admin.id }), { mode: 0o600 });
+  writeEnv({
+    E2E_SUPABASE: 1,
+    E2E_RET_EXPIRED_EMAIL: people.expired.email,
+    E2E_RET_EXPIRED_PASSWORD: people.expired.password,
+    E2E_RET_THIRTY_EMAIL: people.thirty.email,
+    E2E_RET_THIRTY_PASSWORD: people.thirty.password,
+    E2E_RET_SEVEN_EMAIL: people.seven.email,
+    E2E_RET_SEVEN_PASSWORD: people.seven.password,
+    E2E_RET_ACTIVE_EMAIL: people.active.email,
+    E2E_RET_ACTIVE_PASSWORD: people.active.password,
+    E2E_RET_INACTIVE_OLD_EMAIL: people.inactiveOld?.email ?? "",
+    E2E_RET_INACTIVE_OLD_PASSWORD: people.inactiveOld?.password ?? "",
+    E2E_RET_INACTIVE_SOON_EMAIL: people.inactiveSoon?.email ?? "",
+    E2E_RET_INACTIVE_SOON_PASSWORD: people.inactiveSoon?.password ?? "",
+    E2E_RET_ADMIN_EMAIL: admin.email,
+    E2E_RET_ADMIN_PASSWORD: admin.password,
+    CRON_SECRET: randomBytes(24).toString("hex"),
+  });
+  console.log("retention fixtures ready: expired, 30 day, 7 day and active temporary members, shared test admin enabled");
+}
+
+async function cleanupRetention() {
+  const st = readState();
+  for (const id of st.memberIds ?? []) await eraseTestAccount(id);
+  const adminId = st.adminId ?? (await findUser(ADMIN_EMAIL)).hit?.id;
+  if (adminId) await disableTestAdmin(adminId);
+  console.log("retention cleanup done: temporary accounts removed, shared test admin disabled");
+}
+
 if (suite === "journey") await (cmd === "setup" ? setupJourney() : cleanupJourney());
-else await (cmd === "setup" ? setupModule1() : cleanupModule1());
+else if (suite === "module1") await (cmd === "setup" ? setupModule1() : cleanupModule1());
+else if (suite === "export") await (cmd === "setup" ? setupExport() : cleanupExport());
+else if (suite === "deletion") await (cmd === "setup" ? setupDeletion() : cleanupDeletion());
+else await (cmd === "setup" ? setupRetention() : cleanupRetention());
 if (cmd === "cleanup") writeFileSync(envOut, "", { mode: 0o600 });

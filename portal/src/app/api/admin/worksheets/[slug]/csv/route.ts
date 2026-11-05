@@ -27,7 +27,9 @@ export async function GET(_req: Request, ctx: { params: Promise<{ slug: string }
     return NextResponse.json({ error: "export_failed" }, { status: 500 });
   }
   logEvent("info", "worksheet csv exported", { slug, rows: rows.length });
-  return new NextResponse(worksheetCsv(worksheet.schema, rows), {
+  const { data: me } = await session.supabase.from("profiles").select("display_name").eq("user_id", session.user.id).maybeSingle();
+  const stamp = { by: (me?.display_name as string | null) || session.user.email || "an admin", at: new Date() };
+  return new NextResponse(worksheetCsv(worksheet.schema, rows, stamp), {
     headers: {
       "Content-Type": "text/csv; charset=utf-8",
       "Content-Disposition": `attachment; filename="${worksheetCsvFilename(slug)}"`,
