@@ -16,6 +16,12 @@ Status of The BOSS Business System portal build. Updated at every milestone (con
 | 7 Marketing and admin | Admin workspace complete; public sales and masterclass pages wait on approved copy and video |
 | 8 Internal QA and release | Staging Supabase migrated, six test accounts provisioned, signed in permission and browser checks passing (2026-11-02); auth settings, Vercel and Stripe test mode pending; owner sign off pending |
 
+## Admin lesson forms: specific duplicate errors, values kept on a failed save (2026-11-06)
+
+- A save that hits a unique constraint names the lesson already there: "Position 1 in this module is taken by "SAMPLE: Module 2 lesson 1". Choose another position, or move that lesson first." or "That slug is already used by "..." in this module." The constraint is read from the database error (`lessons_module_id_order_index_key`, `lessons_module_id_slug_key`), then the other lesson is looked up. Any other duplicate still gets the general message.
+- A failed save (a form check or a database refusal) sends the submitted values back, and the shared admin form fills them in again after React's automatic form reset. Hidden and file inputs are left alone; unchecked boxes stay unchecked.
+- Tests: unit `form-result.test.ts`; staging `admin-lesson-form.spec.ts` (new suite `catalog` in the fixture script), 3 of 3 on desktop and on mobile: a new lesson into a taken position, an edit onto a used slug and then a taken position, and a form check failure; every field, the Mux ID and a 120 line transcript included, is still filled in each time. Run against the previous form component, the same test fails with the title emptied.
+
 ## Module 1 worksheets, Lessons 4 to 9 (brief 18, 2026-11-05)
 
 Briefs: `docs/18_MODULE1_WORKSHEETS_ALL.md` and dev notes `docs/12_` to `docs/17_`. Schemas: `docs/worksheet_m1-l4` to `l9` (copied to `portal/src/domain/worksheets/fixtures/`).

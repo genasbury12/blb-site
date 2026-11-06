@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 // Test fixtures for the worksheet browser tests on STAGING (never production).
 //
-//   node scripts/staging-worksheet-fixtures.mjs setup   --suite journey|module1|export|deletion|retention --env-out /abs/path/outside/repo.sh
-//   node scripts/staging-worksheet-fixtures.mjs cleanup --suite journey|module1|export|deletion|retention --env-out /abs/path/outside/repo.sh
+//   node scripts/staging-worksheet-fixtures.mjs setup   --suite journey|module1|export|deletion|retention|catalog --env-out /abs/path/outside/repo.sh
+//   node scripts/staging-worksheet-fixtures.mjs cleanup --suite journey|module1|export|deletion|retention|catalog --env-out /abs/path/outside/repo.sh
 //
 // journey  (tests/e2e/worksheets.spec.ts): two published STAGING TEST worksheets on Module 2 sample lessons 1 and 2 (lessons without real worksheets),
 //          a temporary Blueprint member, the shared test admin and a temporary coach assigned to the member.
@@ -39,8 +39,8 @@ const arg = (name) => {
 };
 const suite = arg("suite");
 const envOut = arg("env-out");
-if (!["setup", "cleanup"].includes(cmd) || !["journey", "module1", "export", "deletion", "retention"].includes(suite) || !envOut) {
-  console.error("usage: staging-worksheet-fixtures.mjs setup|cleanup --suite journey|module1|export|deletion|retention --env-out /abs/file.sh");
+if (!["setup", "cleanup"].includes(cmd) || !["journey", "module1", "export", "deletion", "retention", "catalog"].includes(suite) || !envOut) {
+  console.error("usage: staging-worksheet-fixtures.mjs setup|cleanup --suite journey|module1|export|deletion|retention|catalog --env-out /abs/file.sh");
   process.exit(2);
 }
 const repo = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
@@ -456,7 +456,38 @@ async function cleanupRetention() {
   console.log("retention cleanup done: temporary accounts removed, shared test admin disabled");
 }
 
-if (suite === "journey") await (cmd === "setup" ? setupJourney() : cleanupJourney());
+// catalog (tests/e2e/admin-lesson-form.spec.ts): the shared test admin, and which Module 2 lessons hold positions 1
+//          and 2 (the test saves into them to hit the unique constraints). Cleanup deletes the draft lesson the test
+//          creates (slug staging-test-lesson-*), which nothing else can reference.
+async function setupCatalog() {
+  const mod2 = (await api("GET", "/rest/v1/modules?number=eq.2&select=id,slug"))[0];
+  if (!mod2) throw new Error("Module 2 not found.");
+  const taken = await api("GET", `/rest/v1/lessons?module_id=eq.${mod2.id}&order_index=in.(1,2)&select=order_index,slug,title&order=order_index`);
+  if (taken.length !== 2) throw new Error("Module 2 needs lessons at positions 1 and 2.");
+  const admin = await enableTestAdmin();
+  writeFileSync(STATE, JSON.stringify({ adminId: admin.id }), { mode: 0o600 });
+  writeEnv({
+    E2E_SUPABASE: 1,
+    E2E_CAT_ADMIN_EMAIL: admin.email,
+    E2E_CAT_ADMIN_PASSWORD: admin.password,
+    E2E_CAT_MODULE_ID: mod2.id,
+    E2E_CAT_TITLE_1: taken[0].title,
+    E2E_CAT_TITLE_2: taken[1].title,
+    E2E_CAT_SLUG_2: taken[1].slug,
+  });
+  console.log("catalog fixtures ready: shared test admin enabled, Module 2 positions 1 and 2 noted");
+}
+
+async function cleanupCatalog() {
+  const st = readState();
+  await api("DELETE", "/rest/v1/lessons?slug=like.staging-test-lesson-*");
+  const adminId = st.adminId ?? (await findUser(ADMIN_EMAIL)).hit?.id;
+  if (adminId) await disableTestAdmin(adminId);
+  console.log("catalog cleanup done: test lesson deleted, shared test admin disabled");
+}
+
+if (suite === "catalog") await (cmd === "setup" ? setupCatalog() : cleanupCatalog());
+else if (suite === "journey") await (cmd === "setup" ? setupJourney() : cleanupJourney());
 else if (suite === "module1") await (cmd === "setup" ? setupModule1() : cleanupModule1());
 else if (suite === "export") await (cmd === "setup" ? setupExport() : cleanupExport());
 else if (suite === "deletion") await (cmd === "setup" ? setupDeletion() : cleanupDeletion());

@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 import { z } from "zod";
 import { CONTENT_STATUSES as STATUSES, canTransition, type ContentStatus } from "@/domain/content";
 import { worksheetSchemaSchema } from "@/domain/worksheets/schema";
-import { errorMessage, errorState, okState, type FormState } from "@/lib/server/form-result";
+import { duplicateConstraint, errorMessage, errorState, formValues, okState, type FormState } from "@/lib/server/form-result";
 import { authorizeStaff } from "@/lib/server/staff";
 import { removeObject, storeUpload } from "@/lib/server/storage";
 
@@ -59,32 +59,61 @@ function toRow(d: z.infer<typeof lessonSchema>) {
   };
 }
 
+type StaffSupabase = Awaited<ReturnType<typeof authorizeStaff>>["supabase"];
+
+/**
+ * A lesson save that hit a unique constraint, as a message naming the lesson already there: its position in the
+ * module, or its slug. Null when the error is not one of those (the caller falls back to the general message).
+ */
+async function lessonConflictMessage(supabase: StaffSupabase, message: string, d: z.infer<typeof lessonSchema>, selfId?: string): Promise<string | null> {
+  const constraint = duplicateConstraint(message);
+  const field = constraint === "lessons_module_id_order_index_key" ? "order_index" : constraint === "lessons_module_id_slug_key" ? "slug" : null;
+  if (!field) return null;
+  let q = supabase.from("lessons").select("title").eq("module_id", d.module_id).eq(field, d[field]);
+  if (selfId) q = q.neq("id", selfId);
+  const { data } = await q.limit(1).maybeSingle();
+  const other = data?.title ? `"${data.title as string}"` : "another lesson";
+  return field === "order_index"
+    ? `Position ${d.order_index} in this module is taken by ${other}. Choose another position, or move that lesson first.`
+    : `That slug is already used by ${other} in this module. Choose another slug.`;
+}
+
 export async function createLesson(_prev: FormState, fd: FormData): Promise<FormState> {
+  const values = formValues(fd);
   const parsed = lessonFromForm(fd);
-  if (!parsed.success) return errorState(parsed.error.issues[0]?.message ?? "Check the form.");
+  if (!parsed.success) return errorState(parsed.error.issues[0]?.message ?? "Check the form.", values);
   let id: string;
   try {
     const { supabase } = await authorizeStaff(["admin"]);
     const { data, error } = await supabase.from("lessons").insert({ ...toRow(parsed.data), status: "draft" }).select("id").single();
-    if (error) throw new Error(error.message);
+    if (error) {
+      const conflict = await lessonConflictMessage(supabase, error.message, parsed.data);
+      if (conflict) return errorState(conflict, values);
+      throw new Error(error.message);
+    }
     id = data.id as string;
   } catch (err) {
-    return errorState(errorMessage(err));
+    return errorState(errorMessage(err), values);
   }
   revalidatePath("/admin/catalog");
   redirect(`/admin/catalog/lessons/${id}?created=1`);
 }
 
 export async function updateLesson(_prev: FormState, fd: FormData): Promise<FormState> {
+  const values = formValues(fd);
   const id = z.string().uuid().safeParse(fd.get("id"));
   const parsed = lessonFromForm(fd);
-  if (!id.success || !parsed.success) return errorState(parsed.success ? "Invalid lesson." : parsed.error.issues[0]?.message ?? "Check the form.");
+  if (!id.success || !parsed.success) return errorState(parsed.success ? "Invalid lesson." : parsed.error.issues[0]?.message ?? "Check the form.", values);
   try {
     const { supabase } = await authorizeStaff(["admin"]);
     const { error } = await supabase.from("lessons").update(toRow(parsed.data)).eq("id", id.data);
-    if (error) throw new Error(error.message);
+    if (error) {
+      const conflict = await lessonConflictMessage(supabase, error.message, parsed.data, id.data);
+      if (conflict) return errorState(conflict, values);
+      throw new Error(error.message);
+    }
   } catch (err) {
-    return errorState(errorMessage(err));
+    return errorState(errorMessage(err), values);
   }
   revalidatePath("/admin/catalog");
   revalidatePath("/app", "layout");
