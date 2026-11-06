@@ -2,7 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { DataTable } from "@/components/admin/fields";
+import { ActionForm } from "@/components/admin/action-form";
+import { TextArea } from "@/components/admin/fields";
 import { StatusControls } from "@/components/admin/status-controls";
+import { LessonPicker } from "@/components/admin/worksheet-pickers";
+import { Alert } from "@/components/ui/alert";
 import { fmtShort } from "@/components/member/time";
 import { PageHeader } from "@/components/shell/page-header";
 import { buttonVariants } from "@/components/ui/button";
@@ -12,7 +16,9 @@ import type { ContentStatus } from "@/domain/content";
 import { adminCell, adminColumns, adminCounts, weakCounts } from "@/domain/worksheets/admin";
 import { cn } from "@/lib/cn";
 import { requireStaff } from "@/lib/server/staff";
-import { loadStaffResponses, loadStaffWorksheet, type ResponseFilter } from "@/lib/server/worksheets-admin";
+import { concreteFields } from "@/domain/worksheets/schema";
+import { loadLessonOptions, loadStaffResponses, loadStaffWorksheet, type ResponseFilter } from "@/lib/server/worksheets-admin";
+import { replaceWorksheetQuestions, setWorksheetLesson } from "../actions";
 
 export const metadata: Metadata = { title: "Worksheet answers" };
 
@@ -22,7 +28,7 @@ const FILTERS: { value: ResponseFilter; label: string }[] = [
   { value: "complete", label: "Complete" },
 ];
 
-export default async function AdminWorksheetPage({ params, searchParams }: { params: Promise<{ slug: string }>; searchParams: Promise<{ status?: string }> }) {
+export default async function AdminWorksheetPage({ params, searchParams }: { params: Promise<{ slug: string }>; searchParams: Promise<{ status?: string; created?: string }> }) {
   const { slug } = await params;
   const { supabase, isAdmin } = await requireStaff(["admin", "coach"], `/admin/worksheets/${slug}`);
   const sp = await searchParams;
@@ -30,6 +36,9 @@ export default async function AdminWorksheetPage({ params, searchParams }: { par
 
   const worksheet = await loadStaffWorksheet(supabase, slug);
   if (!worksheet) notFound();
+  const modules = isAdmin ? await loadLessonOptions(supabase) : [];
+  const questionCount = concreteFields(worksheet.schema).length;
+  const hasQuestions = questionCount > 0 || Boolean(worksheet.schema.callbacks?.length) || worksheet.schema.sections.some((x) => x.callback || x.callbacks_inline?.length);
   // Counts always cover every response the caller may read; the table follows the filter.
   const all = await loadStaffResponses(supabase, slug, { isAdmin });
   const rows = filter === "all" ? all : all.filter((r) => r.status === filter);
@@ -41,7 +50,7 @@ export default async function AdminWorksheetPage({ params, searchParams }: { par
   return (
     <div className="space-y-10">
       <PageHeader
-        eyebrow={worksheet.moduleNumber ? `Module ${worksheet.moduleNumber}, Lesson ${worksheet.lessonNumber}` : "Worksheet"}
+        eyebrow={worksheet.lessonLabel ?? "Worksheet, not attached to a lesson"}
         title={worksheet.title}
         lede={isAdmin ? "Every member's answers. Open a row to read the whole worksheet." : "Answers from members assigned to you. Read only."}
         actions={
@@ -52,6 +61,45 @@ export default async function AdminWorksheetPage({ params, searchParams }: { par
           ) : null
         }
       />
+
+      {sp.created ? <Alert tone="success">Worksheet created as a draft.</Alert> : null}
+
+      {isAdmin ? (
+        <Card>
+          <ActionForm action={setWorksheetLesson} submitLabel="Save lesson">
+            <input type="hidden" name="slug" value={worksheet.slug} />
+            <LessonPicker slug={worksheet.slug} currentLessonId={worksheet.lessonId} modules={modules} />
+          </ActionForm>
+        </Card>
+      ) : (
+        <Card tone="quiet">
+          <p className="text-sm">{worksheet.lessonLabel ? `Attached to ${worksheet.lessonLabel}.` : "Not attached to a lesson."}</p>
+        </Card>
+      )}
+
+      {isAdmin ? (
+        <Card tone="quiet">
+          <h2 className="font-display text-xl">Questions</h2>
+          {hasQuestions ? (
+            <p className="mt-1 text-sm text-ink-muted">{questionCount} {questionCount === 1 ? "question" : "questions"}. They come from the worksheet&apos;s schema file.</p>
+          ) : (
+            <p className="mt-1 text-sm text-ink" data-testid="no-questions">
+              This worksheet has no questions yet, so it cannot be published. Questions are written as a schema file (JSON); the admin cannot build them field by field yet.
+            </p>
+          )}
+          {worksheet.status === "draft" ? (
+            <ActionForm action={replaceWorksheetQuestions} submitLabel={hasQuestions ? "Replace questions" : "Load questions"} variant="secondary">
+              <input type="hidden" name="id" value={worksheet.id} />
+              <label htmlFor="questions" className="mt-3 block text-sm font-semibold">
+                Paste a schema file
+              </label>
+              <TextArea id="questions" name="questions" className="min-h-40 font-mono text-sm" placeholder='{ "title": "...", "intro": { ... }, "sections": [ ... ] }' />
+            </ActionForm>
+          ) : (
+            <p className="mt-2 text-sm text-ink-muted">Move it back to draft to replace its questions.</p>
+          )}
+        </Card>
+      ) : null}
 
       <Card tone="quiet">
         <StatusControls id={worksheet.id} table="worksheets" status={worksheet.status as ContentStatus} canEdit={isAdmin} />

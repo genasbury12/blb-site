@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { DeleteSampleLessonsButton } from "@/components/admin/delete-lesson";
 import { StatusPill } from "@/components/admin/fields";
+import { MoveLessonButtons } from "@/components/admin/move-lesson";
+import { Alert } from "@/components/ui/alert";
 import { PageHeader } from "@/components/shell/page-header";
 import { Badge } from "@/components/ui/badge";
 import { ButtonLink } from "@/components/ui/button";
@@ -9,8 +12,9 @@ import { requireStaff } from "@/lib/server/staff";
 
 export const metadata: Metadata = { title: "Curriculum" };
 
-export default async function CatalogPage() {
+export default async function CatalogPage({ searchParams }: { searchParams: Promise<{ notice?: string }> }) {
   const { supabase, isAdmin } = await requireStaff(["admin", "coach"], "/admin/catalog");
+  const { notice } = await searchParams;
   const [modules, lessons] = await Promise.all([
     supabase.from("modules").select("id, number, title, status").order("number"),
     supabase.from("lessons").select("id, module_id, title, order_index, status, essential, is_sample, video_provider_id, captions_ready").order("order_index"),
@@ -21,8 +25,20 @@ export default async function CatalogPage() {
         eyebrow="Curriculum"
         title="Eight modules"
         lede="Lessons move from draft to review to approved before they can be published. Members only ever see published lessons."
-        actions={isAdmin ? <ButtonLink href="/admin/catalog/lessons/new">New lesson</ButtonLink> : null}
+        actions={
+          isAdmin ? (
+            <div className="flex flex-wrap gap-3">
+              <ButtonLink href="/admin/catalog/lessons/new">New lesson</ButtonLink>
+              <DeleteSampleLessonsButton count={(lessons.data ?? []).filter((l) => l.is_sample).length} />
+            </div>
+          ) : null
+        }
       />
+      {notice ? (
+        <div className="mb-6" data-testid="catalog-notice">
+          <Alert tone="success">{notice.slice(0, 2000)}</Alert>
+        </div>
+      ) : null}
       <ol className="space-y-5">
         {(modules.data ?? []).map((m) => {
           const ls = (lessons.data ?? []).filter((l) => l.module_id === m.id);
@@ -43,8 +59,9 @@ export default async function CatalogPage() {
                 </div>
                 {ls.length ? (
                   <ul className="mt-4 divide-y divide-rose-soft">
-                    {ls.map((l) => (
-                      <li key={l.id as string} className="flex flex-wrap items-center gap-3 py-2.5">
+                    {ls.map((l, i) => (
+                      <li key={l.id as string} className="flex flex-wrap items-center gap-3 py-2.5" data-testid={`lesson-row-${l.id}`}>
+                        {isAdmin ? <MoveLessonButtons id={l.id as string} title={l.title as string} first={i === 0} last={i === ls.length - 1} /> : null}
                         <span className="numeral w-7 text-xl text-mauve-ink">{l.order_index as number}</span>
                         <Link className="font-medium text-ink hover:text-plum hover:underline" href={`/admin/catalog/lessons/${l.id}`}>
                           {l.title as string}

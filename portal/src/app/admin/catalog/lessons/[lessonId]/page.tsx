@@ -3,6 +3,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { resolveSuggestion, setResourceState, suggestEdit, updateLesson, uploadResource } from "@/app/admin/catalog/actions";
 import { ActionForm } from "@/components/admin/action-form";
+import { DeleteLessonButton, type DeletePreview } from "@/components/admin/delete-lesson";
+import { WorksheetPicker } from "@/components/admin/worksheet-pickers";
 import { Field, StatusPill, TextArea, TextInput } from "@/components/admin/fields";
 import { LessonFields, type LessonDefaults } from "@/components/admin/lesson-fields";
 import { StatusControls } from "@/components/admin/status-controls";
@@ -12,6 +14,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import type { ContentStatus } from "@/domain/content";
 import { requireStaff } from "@/lib/server/staff";
+import { loadWorksheetOptions } from "@/lib/server/worksheets-admin";
 
 export const metadata: Metadata = { title: "Edit lesson" };
 const UUID = /^[0-9a-f-]{36}$/i;
@@ -30,6 +33,15 @@ export default async function EditLessonPage({ params, searchParams }: { params:
   ]);
   if (!lesson.data) notFound();
   const l = lesson.data as LessonDefaults & { id: string; status: ContentStatus; is_sample: boolean; published_at: string | null };
+  // Admin only: every worksheet for the picker, and what a delete would remove.
+  const [worksheetOptions, preview] = isAdmin
+    ? await Promise.all([loadWorksheetOptions(supabase), supabase.rpc("lesson_delete_preview", { p_lesson_id: l.id })])
+    : [[], null];
+  const p = preview?.data as { title: string; is_sample: boolean; progress: number; answers: number; resources: number; suggestions: number; worksheets: { slug: string; title: string }[] } | undefined;
+  const deletePreview: DeletePreview | null = p
+    ? { title: p.title, isSample: p.is_sample, progress: p.progress, answers: p.answers, resources: p.resources, suggestions: p.suggestions, worksheets: p.worksheets }
+    : null;
+  const currentWorksheet = worksheetOptions.find((w) => w.lessonId === l.id) ?? null;
 
   return (
     <div className="space-y-8">
@@ -42,7 +54,7 @@ export default async function EditLessonPage({ params, searchParams }: { params:
       {l.is_sample ? <Alert tone="warning" title="Sample content">This is SAMPLE content for testing. It can never be published in production.</Alert> : null}
 
       <Card>
-        <StatusControls id={l.id} table="lessons" status={l.status} canEdit={isAdmin} />
+        <StatusControls id={l.id} table="lessons" status={l.status} canEdit={isAdmin} extra={deletePreview ? <DeleteLessonButton id={l.id} preview={deletePreview} /> : null} />
         <p className="mt-3 text-sm text-ink-muted">
           Publishing checks that video lessons have captions and a transcript. {l.published_at ? `First published ${new Date(l.published_at).toLocaleDateString("en-US")}.` : ""}
         </p>
@@ -53,6 +65,7 @@ export default async function EditLessonPage({ params, searchParams }: { params:
           <ActionForm action={updateLesson} submitLabel="Save lesson">
             <input type="hidden" name="id" value={l.id} />
             <LessonFields d={l} modules={(modules.data ?? []) as { id: string; number: number; title: string }[]} />
+            <WorksheetPicker lessonId={l.id} current={currentWorksheet} options={worksheetOptions} />
           </ActionForm>
         </Card>
       ) : null}
@@ -73,7 +86,7 @@ export default async function EditLessonPage({ params, searchParams }: { params:
           ) : (
             <p className="text-sm text-ink-muted">No worksheet on this lesson.</p>
           )}
-          <p className="mt-3 text-sm text-ink-muted">Publish or archive a worksheet from its page. Members see it only when both the worksheet and this lesson are published.</p>
+          <p className="mt-3 text-sm text-ink-muted">Attach, move or detach it with the Worksheet field in the lesson form above. Publish or archive it from its own page. Members see it only when both the worksheet and this lesson are published.</p>
         </Card>
       </section>
 

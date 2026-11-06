@@ -18,7 +18,11 @@ const enabled = process.env.E2E_SUPABASE === "1" && Boolean(process.env.E2E_M1_E
 test.skip(!enabled, "Set E2E_SUPABASE=1 and E2E_M1_* to run the Module 1 worksheet journey.");
 test.describe.configure({ mode: "serial" });
 
-const lessonPath = (n: number) => `/app/training/${process.env.E2E_M1_MODULE}/sample-lesson-${n}`;
+// Which lesson carries each Module 1 worksheet for this run (the fixture uses the real lesson when the worksheet is
+// attached to a published one, else a temporary lesson), and the number that lesson shows ("Complete Lesson 901").
+const LESSONS = JSON.parse(process.env.E2E_M1_LESSONS ?? "{}") as Record<string, { path: string; number: number }>;
+const lessonPath = (n: number) => LESSONS[n]!.path;
+const num = (n: number) => LESSONS[n]!.number;
 const Q3 = "Partly. I know who I want to help, not yet what they would pay for.";
 
 let page: Page;
@@ -55,7 +59,7 @@ test("after the audit, an unfinished Lesson 1 worksheet becomes the dashboard's 
   await fillAndSave(/^1\. What have you been treating/, "My blog posts and Pinterest.");
 
   await page.goto("/app", { waitUntil: "networkidle" });
-  await expect(page.getByRole("heading", { name: "Finish your Lesson 1 worksheet" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: `Finish your Lesson ${num(1)} worksheet` })).toBeVisible();
   await page.getByRole("link", { name: /Open my worksheet/ }).click();
   await page.waitForURL((u) => u.pathname === lessonPath(1));
   await expect(page.getByLabel(/^1\. What have you been treating/)).toHaveValue("My blog posts and Pinterest.");
@@ -66,7 +70,7 @@ test("completing Lesson 1 ticks its milestone and clears the dashboard nudge", a
   await page.getByLabel(/^3\. If your blog disappeared/).fill(Q3);
   await page.getByLabel(/^4\. Your Biggest Realization/).fill("Start with the person and the problem.");
   // Clicked straight away, inside the autosave pause: Complete must send the last answers first.
-  await page.getByRole("button", { name: "Complete Lesson 1" }).click();
+  await page.getByRole("button", { name: `Complete Lesson ${num(1)}` }).click();
   await expect(page.getByText("Milestone ticked: I answered Lesson 1: Starting Point")).toBeVisible();
   await page.goto("/app", { waitUntil: "networkidle" });
   await expect(page.getByRole("heading", { name: /^Finish your Lesson \d+ worksheet$/ })).toHaveCount(0);
@@ -161,7 +165,7 @@ test("a member completes Lessons 2 to 9 in order with the worked examples, and e
       await expect(page.getByTestId("toggle-existing")).toHaveAttribute("aria-expanded", "false");
     }
 
-    sources.set(slug, await completeWorksheet(page, n, schema, answers));
+    sources.set(slug, await completeWorksheet(page, num(n), schema, answers));
     const label = schema.completion.milestone_label;
     if (label) await expect(page.getByText(`Milestone ticked: ${label}`)).toBeVisible();
     if (n === 3) await expect(page.getByTestId("guide-ev_conf_1")).toHaveText("One or two people said or did this.");

@@ -17,6 +17,8 @@ async function signIn(page: import("@playwright/test").Page, email: string, pass
   await page.waitForURL((u) => u.pathname.startsWith("/app"));
 }
 
+let firstLesson = "/app/training/business-foundation/sample-lesson-1";
+
 test("Blueprint member: audit draft survives sign out, submits, and a retake keeps lesson completion", async ({ page, browser }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop", "Writes data; runs once per suite on desktop.");
   test.setTimeout(300_000);
@@ -26,7 +28,10 @@ test("Blueprint member: audit draft survives sign out, submits, and a retake kee
   await expect(page.getByRole("link", { name: "My Elite Workspace" })).toHaveCount(0);
 
   await page.goto("/app/training");
-  await page.getByRole("link", { name: "SAMPLE: Module 1 lesson 1" }).click();
+  // The first Module 1 lesson, whatever it is called (sample lessons come and go on staging).
+  await page.locator('a[href^="/app/training/business-foundation/"]').first().click();
+  await page.waitForURL(/\/app\/training\/business-foundation\/[a-z0-9-]+$/);
+  firstLesson = new URL(page.url()).pathname;
   const toggle = page.getByRole("button", { name: /Mark lesson complete|Completed/ });
   if ((await toggle.getAttribute("aria-pressed")) !== "true") await toggle.click();
   await expect(page.getByRole("button", { name: /Completed/ })).toBeVisible();
@@ -77,7 +82,7 @@ test("Blueprint member: audit draft survives sign out, submits, and a retake kee
     await expect(accel.getByRole("heading", { level: 1 })).toHaveText("404");
   }
 
-  await page.goto("/app/training/business-foundation/sample-lesson-1");
+  await page.goto(firstLesson);
   await expect(page.getByRole("button", { name: /Completed/ })).toBeVisible();
 });
 

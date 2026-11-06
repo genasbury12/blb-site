@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 // Test fixtures for the worksheet browser tests on STAGING (never production).
 //
-//   node scripts/staging-worksheet-fixtures.mjs setup   --suite journey|module1|export|deletion|retention|catalog --env-out /abs/path/outside/repo.sh
-//   node scripts/staging-worksheet-fixtures.mjs cleanup --suite journey|module1|export|deletion|retention|catalog --env-out /abs/path/outside/repo.sh
+//   node scripts/staging-worksheet-fixtures.mjs setup   --suite journey|module1|export|deletion|retention|catalog|admin --env-out /abs/path/outside/repo.sh
+//   node scripts/staging-worksheet-fixtures.mjs cleanup --suite journey|module1|export|deletion|retention|catalog|admin --env-out /abs/path/outside/repo.sh
 //
 // journey  (tests/e2e/worksheets.spec.ts): two published STAGING TEST worksheets on Module 2 sample lessons 1 and 2 (lessons without real worksheets),
 //          a temporary Blueprint member, the shared test admin and a temporary coach assigned to the member.
@@ -39,8 +39,8 @@ const arg = (name) => {
 };
 const suite = arg("suite");
 const envOut = arg("env-out");
-if (!["setup", "cleanup"].includes(cmd) || !["journey", "module1", "export", "deletion", "retention", "catalog"].includes(suite) || !envOut) {
-  console.error("usage: staging-worksheet-fixtures.mjs setup|cleanup --suite journey|module1|export|deletion|retention|catalog --env-out /abs/file.sh");
+if (!["setup", "cleanup"].includes(cmd) || !["journey", "module1", "export", "deletion", "retention", "catalog", "admin"].includes(suite) || !envOut) {
+  console.error("usage: staging-worksheet-fixtures.mjs setup|cleanup --suite journey|module1|export|deletion|retention|catalog|admin --env-out /abs/file.sh");
   process.exit(2);
 }
 const repo = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
@@ -139,6 +139,45 @@ async function deleteCoach(id) {
   }
 }
 
+// ---- temporary lessons ------------------------------------------------------------------------------------------
+// Staging keeps only the owner's real lessons, so each suite makes its own published SAMPLE lessons far down a module
+// (positions 900 and up) and removes them on cleanup. Their slugs start staging-test-lesson-<suite>-.
+
+const TEMP_LESSON = "staging-test-lesson-";
+
+async function tempLessons(moduleId, suite, labels, opts = {}) {
+  const used = (await api("GET", `/rest/v1/lessons?module_id=eq.${moduleId}&select=order_index`)).map((l) => l.order_index);
+  const out = [];
+  let pos = 900;
+  for (const label of labels) {
+    while (used.includes(pos)) pos++;
+    used.push(pos);
+    const real = opts.real?.includes(label);
+    const [row] = await api("POST", "/rest/v1/lessons", {
+      module_id: moduleId,
+      slug: `${TEMP_LESSON}${suite}-${label}`,
+      order_index: pos,
+      essential: true,
+      title: real ? `STAGING TEST ${suite} ${label}` : `SAMPLE: STAGING TEST ${suite} ${label}`,
+      objective: "Staging test lesson. Removed after the test run.",
+      is_sample: !real,
+      status: real ? "draft" : "published",
+    });
+    out.push(row);
+  }
+  return out;
+}
+
+/** Detaches whatever is on a suite's temporary lessons, then deletes them (the service role may delete directly). */
+async function removeTempLessons(suite) {
+  const temps = await api("GET", `/rest/v1/lessons?slug=like.${TEMP_LESSON}${suite}-*&select=id`);
+  if (!temps.length) return 0;
+  const ids = temps.map((t) => t.id).join(",");
+  await api("PATCH", `/rest/v1/worksheets?lesson_id=in.(${ids})`, { lesson_id: null });
+  await api("DELETE", `/rest/v1/lessons?id=in.(${ids})`);
+  return temps.length;
+}
+
 // ---- suites -----------------------------------------------------------------------------------------------------
 
 const TEST_SLUGS = "staging-test-ws-*";
@@ -169,16 +208,10 @@ const m1Milestones = `module_id=eq.${mod.id}&title=in.(${M1_LABELS.map((l) => `"
 
 async function setupJourney() {
   const l2 = JSON.parse(readFileSync(join(repo, "portal/src/domain/worksheets/fixtures/m1-l2-business-direction.json"), "utf8"));
-  // Module 2's sample lessons 1 and 2: every Module 1 lesson now has its own seeded worksheet, and a lesson shows
-  // only one published worksheet.
+  // Two temporary lessons in Module 2 (Module 1 lessons carry the real worksheets; one worksheet per lesson).
   const mod2 = (await api("GET", "/rest/v1/modules?number=eq.2&select=id,slug"))[0];
   if (!mod2) throw new Error("Module 2 not found.");
-  const lessons = await api("GET", `/rest/v1/lessons?module_id=eq.${mod2.id}&slug=in.(sample-lesson-1,sample-lesson-2)&select=id,slug`);
-  const lid = (s) => {
-    const l = lessons.find((x) => x.slug === s);
-    if (!l) throw new Error(`Module 2 ${s} not found.`);
-    return l.id;
-  };
+  const [first, second] = await tempLessons(mod2.id, "journey", ["one", "two"]);
   const callbackSchema = {
     slug: "staging-test-ws-l3",
     title: "STAGING TEST callback",
@@ -187,8 +220,8 @@ async function setupJourney() {
     completion: { required_fields: [] },
   };
   await api("POST", "/rest/v1/worksheets", [
-    { slug: "staging-test-ws-l2", version: 1, lesson_id: lid("sample-lesson-1"), title: "STAGING TEST Lesson 2 worksheet", schema: { ...l2, slug: "staging-test-ws-l2" }, status: "published" },
-    { slug: "staging-test-ws-l3", version: 1, lesson_id: lid("sample-lesson-2"), title: "STAGING TEST Lesson 3 worksheet", schema: callbackSchema, status: "published" },
+    { slug: "staging-test-ws-l2", version: 1, lesson_id: first.id, title: "STAGING TEST Lesson 2 worksheet", schema: { ...l2, slug: "staging-test-ws-l2" }, status: "published" },
+    { slug: "staging-test-ws-l3", version: 1, lesson_id: second.id, title: "STAGING TEST Lesson 3 worksheet", schema: callbackSchema, status: "published" },
   ]);
   const member = await newMember("STAGING TEST worksheet");
   const admin = await enableTestAdmin();
@@ -198,8 +231,8 @@ async function setupJourney() {
     E2E_SUPABASE: 1,
     E2E_WS_EMAIL: member.email,
     E2E_WS_PASSWORD: member.password,
-    E2E_WS_LESSON_PATH: `/app/training/${mod2.slug}/sample-lesson-1`,
-    E2E_WS_CALLBACK_PATH: `/app/training/${mod2.slug}/sample-lesson-2`,
+    E2E_WS_LESSON_PATH: `/app/training/${mod2.slug}/${first.slug}`,
+    E2E_WS_CALLBACK_PATH: `/app/training/${mod2.slug}/${second.slug}`,
     E2E_WS_ADMIN_EMAIL: admin.email,
     E2E_WS_ADMIN_PASSWORD: admin.password,
     E2E_WS_COACH_EMAIL: coach.email,
@@ -217,27 +250,49 @@ async function cleanupJourney() {
   if (adminId) await disableTestAdmin(adminId);
   await api("DELETE", `/rest/v1/worksheet_responses?worksheet_slug=like.${TEST_SLUGS}`);
   await api("DELETE", `/rest/v1/worksheets?slug=like.${TEST_SLUGS}`);
-  console.log("journey cleanup done: test worksheets and temporary accounts removed, shared test admin disabled");
+  await removeTempLessons("journey");
+  console.log("journey cleanup done: test worksheets, temporary lessons and accounts removed, shared test admin disabled");
 }
 
 async function setupModule1() {
-  const sheets = await api("GET", `/rest/v1/worksheets?slug=in.${M1_SLUGS}&version=eq.1&select=id,status`);
+  const sheets = await api("GET", `/rest/v1/worksheets?slug=in.${M1_SLUGS}&version=eq.1&select=id,slug,status,lesson_id`);
   if (sheets.length !== M1_SLUG_LIST.length) throw new Error("Run scripts/seed-worksheets.mjs first (the Module 1 worksheets are missing).");
+  // Each worksheet runs on the lesson it is attached to when that is a published Module 1 lesson; otherwise on a
+  // temporary lesson for the run. Cleanup puts every worksheet back where it was.
+  const attachedIds = sheets.map((w) => w.lesson_id).filter(Boolean);
+  const attached = attachedIds.length ? await api("GET", `/rest/v1/lessons?id=in.(${attachedIds.join(",")})&select=id,slug,order_index,status,module_id`) : [];
+  const lessonOf = {};
+  const needTemp = [];
+  M1_SLUG_LIST.forEach((slug, i) => {
+    const w = sheets.find((x) => x.slug === slug);
+    const l = attached.find((x) => x.id === w.lesson_id);
+    if (l && l.status === "published" && l.module_id === mod.id) lessonOf[i + 1] = l;
+    else needTemp.push(i + 1);
+  });
+  const lessonsBefore = sheets.map(({ slug, lesson_id }) => ({ slug, lesson_id }));
+  writeFileSync(STATE, JSON.stringify({ lessonsBefore }), { mode: 0o600 });
+  const temps = await tempLessons(mod.id, "m1", needTemp.map((n) => `l${n}`));
+  for (const [i, n] of needTemp.entries()) {
+    lessonOf[n] = temps[i];
+    await api("PATCH", `/rest/v1/worksheets?slug=eq.${M1_SLUG_LIST[n - 1]}`, { lesson_id: temps[i].id });
+  }
+  const lessonEnv = Object.fromEntries(Object.entries(lessonOf).map(([n, l]) => [n, { path: `/app/training/${mod.slug}/${l.slug}`, number: l.order_index }]));
   const milestones = await api("GET", `/rest/v1/milestones?${m1Milestones}&select=id,status`);
   // Remember each status so cleanup puts back exactly what was there (the owner may have published them).
   const before = { worksheets: sheets.map(({ id, status }) => ({ id, status })), milestones: milestones.map(({ id, status }) => ({ id, status })) };
   await api("PATCH", `/rest/v1/worksheets?slug=in.${M1_SLUGS}&version=eq.1`, { status: "published" });
   await api("PATCH", `/rest/v1/milestones?${m1Milestones}`, { status: "published" });
   const member = await newMember("STAGING TEST module one");
-  writeFileSync(STATE, JSON.stringify({ memberId: member.id, before }), { mode: 0o600 });
+  writeFileSync(STATE, JSON.stringify({ memberId: member.id, before, lessonsBefore }), { mode: 0o600 });
   // The shared test admin checks the Lesson 3 count tiles and CSV.
   const admin = await enableTestAdmin();
-  writeFileSync(STATE, JSON.stringify({ memberId: member.id, adminId: admin.id, before }), { mode: 0o600 });
+  writeFileSync(STATE, JSON.stringify({ memberId: member.id, adminId: admin.id, before, lessonsBefore }), { mode: 0o600 });
   writeEnv({
     E2E_SUPABASE: 1,
     E2E_M1_EMAIL: member.email,
     E2E_M1_PASSWORD: member.password,
     E2E_M1_MODULE: mod.slug,
+    E2E_M1_LESSONS: JSON.stringify(lessonEnv),
     E2E_M1_ADMIN_EMAIL: admin.email,
     E2E_M1_ADMIN_PASSWORD: admin.password,
   });
@@ -255,10 +310,27 @@ async function cleanupModule1() {
     for (const w of st.before.worksheets) await api("PATCH", `/rest/v1/worksheets?id=eq.${w.id}`, { status: w.status });
     for (const m of st.before.milestones) await api("PATCH", `/rest/v1/milestones?id=eq.${m.id}`, { status: m.status });
   }
-  console.log("module1 cleanup done: worksheet and milestone statuses restored, temporary member removed, shared test admin disabled");
+  // Put every worksheet back on the lesson it had before the run (or none), then drop the temporary lessons.
+  for (const w of st.lessonsBefore ?? []) {
+    await api("PATCH", `/rest/v1/worksheets?slug=eq.${w.slug}`, { lesson_id: w.lesson_id }).catch(async () => {
+      console.log(`module1 cleanup: ${w.slug} could not go back to its lesson, so it is left detached`);
+      await api("PATCH", `/rest/v1/worksheets?slug=eq.${w.slug}`, { lesson_id: null });
+    });
+  }
+  const removed = await removeTempLessons("m1");
+  console.log(`module1 cleanup done: statuses and lessons restored, ${removed} temporary lessons and the temporary member removed, shared test admin disabled`);
 }
 
 const L1_ANSWERS = { q1: "My blog posts and Pinterest.", q2: "A simple home system for busy parents.", q3: "Partly. I know who I want to help.", realization: "Start with the person and the problem." };
+
+/** A published Module 1 lesson for the lapsed member to be turned away from: Lesson 1's, else the first one. */
+async function exportLessonPath() {
+  const [w] = await api("GET", "/rest/v1/worksheets?slug=eq.m1-l1-starting-point&select=lesson_id&limit=1");
+  const q = w?.lesson_id ? `id=eq.${w.lesson_id}&status=eq.published` : `module_id=eq.${mod.id}&status=eq.published&order=order_index`;
+  const [l] = await api("GET", `/rest/v1/lessons?${q}&select=slug&limit=1`);
+  if (!l) throw new Error("Module 1 has no published lesson for the export test.");
+  return `/app/training/${mod.slug}/${l.slug}`;
+}
 
 async function setupExport() {
   const m1 = await api("GET", "/rest/v1/worksheets?slug=in.(m1-l1-starting-point,m1-l2-business-direction)&version=eq.1&select=slug");
@@ -285,7 +357,7 @@ async function setupExport() {
     E2E_DX_LAPSED_PASSWORD: lapsed.password,
     E2E_DX_ADMIN_EMAIL: admin.email,
     E2E_DX_ADMIN_PASSWORD: admin.password,
-    E2E_DX_LESSON_PATH: `/app/training/${mod.slug}/sample-lesson-1`,
+    E2E_DX_LESSON_PATH: await exportLessonPath(),
   });
   console.log("export fixtures ready: temporary active and lapsed members with worksheet answers, shared test admin enabled");
 }
@@ -456,37 +528,71 @@ async function cleanupRetention() {
   console.log("retention cleanup done: temporary accounts removed, shared test admin disabled");
 }
 
-// catalog (tests/e2e/admin-lesson-form.spec.ts): the shared test admin, and which Module 2 lessons hold positions 1
-//          and 2 (the test saves into them to hit the unique constraints). Cleanup deletes the draft lesson the test
-//          creates (slug staging-test-lesson-*), which nothing else can reference.
+// admin: only the shared test admin, for a one-off admin task done through the real admin pages.
+async function setupAdminOnly() {
+  const admin = await enableTestAdmin();
+  writeFileSync(STATE, JSON.stringify({ adminId: admin.id }), { mode: 0o600 });
+  writeEnv({ E2E_SUPABASE: 1, E2E_ADMIN_EMAIL: admin.email, E2E_ADMIN_PASSWORD: admin.password });
+  console.log("admin fixtures ready: shared test admin enabled");
+}
+
+async function cleanupAdminOnly() {
+  const st = readState();
+  const adminId = st.adminId ?? (await findUser(ADMIN_EMAIL)).hit?.id;
+  if (adminId) await disableTestAdmin(adminId);
+  console.log("admin cleanup done: shared test admin disabled");
+}
+
+// catalog (tests/e2e/admin-lesson-form.spec.ts): four temporary Module 2 lessons (three samples, one real draft with a
+//          member's progress and answers), two test worksheets and the shared test admin. Cleanup deletes every lesson
+//          and worksheet the run made.
 async function setupCatalog() {
   const mod2 = (await api("GET", "/rest/v1/modules?number=eq.2&select=id,slug"))[0];
   if (!mod2) throw new Error("Module 2 not found.");
-  const taken = await api("GET", `/rest/v1/lessons?module_id=eq.${mod2.id}&order_index=in.(1,2)&select=order_index,slug,title&order=order_index`);
-  if (taken.length !== 2) throw new Error("Module 2 needs lessons at positions 1 and 2.");
+  // a, b, c: published sample lessons (positions for the conflict checks, moves and the simple delete).
+  // real: a draft non-sample lesson with one member's progress and answers (the typed-title delete).
+  const [a, b, c, real] = await tempLessons(mod2.id, "catalog", ["a", "b", "c", "real"], { real: ["real"] });
+  const sheet = { intro: { title: "Catalog check" }, sections: [{ key: "s", title: "One question", fields: [{ key: "q1", type: "text", label: "Anything?", max_length: 200 }] }], completion: { required_fields: [] } };
+  await api("POST", "/rest/v1/worksheets", [
+    { slug: "staging-test-ws-move", version: 1, lesson_id: a.id, title: "STAGING TEST worksheet to move", schema: { ...sheet, slug: "staging-test-ws-move", title: "Move" }, status: "draft" },
+    { slug: "staging-test-ws-kept", version: 1, lesson_id: real.id, title: "STAGING TEST worksheet kept", schema: { ...sheet, slug: "staging-test-ws-kept", title: "Kept" }, status: "draft" },
+  ]);
+  const member = await newMember("STAGING TEST catalog member");
+  writeFileSync(STATE, JSON.stringify({ memberId: member.id }), { mode: 0o600 });
+  await api("POST", "/rest/v1/lesson_progress", { user_id: member.id, lesson_id: real.id });
+  await api("POST", "/rest/v1/worksheet_responses", { user_id: member.id, worksheet_slug: "staging-test-ws-kept", worksheet_version: 1, answers: { q1: "kept" } });
   const admin = await enableTestAdmin();
-  writeFileSync(STATE, JSON.stringify({ adminId: admin.id }), { mode: 0o600 });
+  writeFileSync(STATE, JSON.stringify({ memberId: member.id, adminId: admin.id }), { mode: 0o600 });
   writeEnv({
     E2E_SUPABASE: 1,
     E2E_CAT_ADMIN_EMAIL: admin.email,
     E2E_CAT_ADMIN_PASSWORD: admin.password,
     E2E_CAT_MODULE_ID: mod2.id,
-    E2E_CAT_TITLE_1: taken[0].title,
-    E2E_CAT_TITLE_2: taken[1].title,
-    E2E_CAT_SLUG_2: taken[1].slug,
+    E2E_CAT_LESSONS: JSON.stringify({ a, b, c, real }),
   });
-  console.log("catalog fixtures ready: shared test admin enabled, Module 2 positions 1 and 2 noted");
+  console.log("catalog fixtures ready: four temporary Module 2 lessons, two test worksheets, a member with data, shared test admin enabled");
 }
 
 async function cleanupCatalog() {
   const st = readState();
-  await api("DELETE", "/rest/v1/lessons?slug=like.staging-test-lesson-*");
+  if (st.memberId) await deleteMember(st.memberId);
+  // Lessons the test itself created (staging-test-lesson-<random>) and the suite's own.
+  const made = await api("GET", "/rest/v1/lessons?slug=like.staging-test-lesson-*&select=id,slug");
+  const own = made.filter((l) => !/^staging-test-lesson-(journey|m1)-/.test(l.slug));
+  if (own.length) {
+    const ids = own.map((l) => l.id).join(",");
+    await api("PATCH", `/rest/v1/worksheets?lesson_id=in.(${ids})`, { lesson_id: null });
+    await api("DELETE", `/rest/v1/lessons?id=in.(${ids})`);
+  }
+  await api("DELETE", "/rest/v1/worksheet_responses?worksheet_slug=like.staging-test-ws-*");
+  await api("DELETE", "/rest/v1/worksheets?slug=like.staging-test-ws-*");
   const adminId = st.adminId ?? (await findUser(ADMIN_EMAIL)).hit?.id;
   if (adminId) await disableTestAdmin(adminId);
-  console.log("catalog cleanup done: test lesson deleted, shared test admin disabled");
+  console.log(`catalog cleanup done: ${own.length} test lessons and the test worksheets deleted, member removed, shared test admin disabled`);
 }
 
-if (suite === "catalog") await (cmd === "setup" ? setupCatalog() : cleanupCatalog());
+if (suite === "admin") await (cmd === "setup" ? setupAdminOnly() : cleanupAdminOnly());
+else if (suite === "catalog") await (cmd === "setup" ? setupCatalog() : cleanupCatalog());
 else if (suite === "journey") await (cmd === "setup" ? setupJourney() : cleanupJourney());
 else if (suite === "module1") await (cmd === "setup" ? setupModule1() : cleanupModule1());
 else if (suite === "export") await (cmd === "setup" ? setupExport() : cleanupExport());

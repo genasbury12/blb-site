@@ -142,6 +142,11 @@ const worksheetObjectSchema = z.object({
     .optional(),
   /** Extra tiles on the admin worksheet page: filled rows per member, or a tally of a choice field's values. */
   admin_counts: z.array(adminCountSchema).optional(),
+  /**
+   * The worked sample answers (hypothetical, never a real person). Shown to members collapsed under "See an example"
+   * in each section and labelled "Hypothetical example" (owner decision 2026-11-06); never printed in the PDF.
+   */
+  example_response: z.record(z.string(), z.unknown()).optional(),
   /** Keys later worksheets quote. Nothing reads it yet; kept so the keys stay stable (tested). */
   callbacks_provided: z.record(z.string(), z.string()).optional(),
 }).superRefine((ws, ctx) => {

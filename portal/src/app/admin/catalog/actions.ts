@@ -4,9 +4,11 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import { CONTENT_STATUSES as STATUSES, canTransition, type ContentStatus } from "@/domain/content";
-import { worksheetSchemaSchema } from "@/domain/worksheets/schema";
+import { concreteFields, worksheetSchemaSchema } from "@/domain/worksheets/schema";
 import { duplicateConstraint, errorMessage, errorState, formValues, okState, type FormState } from "@/lib/server/form-result";
 import { authorizeStaff } from "@/lib/server/staff";
+import { attachWorksheetTo } from "@/lib/server/worksheet-attach";
+import { logEvent } from "@/lib/observability";
 import { removeObject, storeUpload } from "@/lib/server/storage";
 
 const optional = (max: number) => z.string().trim().max(max).transform((v) => (v === "" ? null : v));
@@ -16,7 +18,7 @@ const lessonSchema = z.object({
   module_id: z.string().uuid(),
   title: z.string().trim().min(3).max(140),
   slug,
-  order_index: z.coerce.number().int().min(1).max(99),
+  order_index: z.coerce.number({ message: "Use a position from 1 to 999." }).int("Use a whole number for the position.").min(1, "Use a position from 1 to 999.").max(999, "Use a position from 1 to 999."),
   essential: z.boolean(),
   objective: optional(2000),
   assignment: optional(4000),
@@ -99,11 +101,14 @@ export async function createLesson(_prev: FormState, fd: FormData): Promise<Form
   redirect(`/admin/catalog/lessons/${id}?created=1`);
 }
 
+const worksheetSlug = z.string().regex(/^[a-z0-9-]{3,80}$/);
+
 export async function updateLesson(_prev: FormState, fd: FormData): Promise<FormState> {
   const values = formValues(fd);
   const id = z.string().uuid().safeParse(fd.get("id"));
   const parsed = lessonFromForm(fd);
   if (!id.success || !parsed.success) return errorState(parsed.success ? "Invalid lesson." : parsed.error.issues[0]?.message ?? "Check the form.", values);
+  let worksheetNote = "";
   try {
     const { supabase } = await authorizeStaff(["admin"]);
     const { error } = await supabase.from("lessons").update(toRow(parsed.data)).eq("id", id.data);
@@ -112,12 +117,25 @@ export async function updateLesson(_prev: FormState, fd: FormData): Promise<Form
       if (conflict) return errorState(conflict, values);
       throw new Error(error.message);
     }
+    // The Worksheet picker (edit page only): attach, move here, or detach with None.
+    if (fd.has("worksheet_slug")) {
+      const chosen = String(fd.get("worksheet_slug") ?? "");
+      if (chosen && !worksheetSlug.safeParse(chosen).success) return errorState("Lesson saved, but that worksheet is not valid. Refresh the page.", values);
+      const { data: here } = await supabase.from("worksheets").select("slug").eq("lesson_id", id.data).limit(1).maybeSingle();
+      const current = (here?.slug as string | undefined) ?? "";
+      if (chosen !== current) {
+        const failed = chosen ? await attachWorksheetTo(supabase, chosen, id.data) : await attachWorksheetTo(supabase, current, null);
+        if (failed) return errorState(`Lesson saved, but the worksheet did not change: ${failed}`, values);
+        worksheetNote = chosen ? " Worksheet attached." : " Worksheet detached.";
+      }
+    }
   } catch (err) {
     return errorState(errorMessage(err), values);
   }
-  revalidatePath("/admin/catalog");
+  revalidatePath("/admin/catalog", "layout");
+  revalidatePath("/admin/worksheets", "layout");
   revalidatePath("/app", "layout");
-  return okState("Lesson saved.");
+  return okState(`Lesson saved.${worksheetNote}`);
 }
 
 const transitionSchema = z.object({ id: z.string().uuid(), table: z.enum(["lessons", "modules", "library_items", "milestones", "workshops", "worksheets"]), to: z.enum(STATUSES) });
@@ -137,6 +155,11 @@ export async function changeStatus(_prev: FormState, fd: FormData): Promise<Form
       if (ws.error) throw new Error(ws.error.message);
       const check = worksheetSchemaSchema.safeParse(ws.data.schema);
       if (!check.success) return errorState(`This worksheet's schema is not valid (${check.error.issues[0]?.path.join(".") || "root"}: ${check.error.issues[0]?.message}).`);
+      // A worksheet made in the admin starts without questions; never publish an empty page. (A look back page such
+      // as the old Lesson 9 placeholder has quotes instead of questions, and may be published.)
+      const s = check.data;
+      const quotes = (s.callbacks?.length ?? 0) + s.sections.filter((x) => x.callback || x.callbacks_inline?.length).length;
+      if (!concreteFields(s).length && !quotes) return errorState("This worksheet has no questions yet. Add its questions before publishing.");
     }
     const { error } = await supabase.from(parsed.data.table).update({ status: parsed.data.to }).eq("id", parsed.data.id);
     if (error) {
@@ -324,4 +347,102 @@ export async function saveLibraryItem(_prev: FormState, fd: FormData): Promise<F
   revalidatePath("/admin/library");
   if (newId) redirect(`/admin/library/${newId}`);
   return okState("Library item saved.");
+}
+
+// ---------------------------------------------------------------------------------------------------------------
+// Lesson order and sample lesson deletion (migration 2500)
+// ---------------------------------------------------------------------------------------------------------------
+
+const moveSchema = z.object({ id: z.string().uuid(), direction: z.enum(["up", "down"]) });
+
+/** Swaps a lesson with its neighbour in the module. The database does the swap in one transaction. */
+export async function moveLesson(_prev: FormState, fd: FormData): Promise<FormState> {
+  const parsed = moveSchema.safeParse({ id: fd.get("id"), direction: fd.get("direction") });
+  if (!parsed.success) return errorState("Invalid move.");
+  try {
+    const { supabase } = await authorizeStaff(["admin"]);
+    const { data, error } = await supabase.rpc("move_lesson", { p_lesson_id: parsed.data.id, p_direction: parsed.data.direction });
+    if (error) throw new Error(error.message);
+    if (!(data as { moved: boolean }).moved) return errorState(parsed.data.direction === "up" ? "Already first in this module." : "Already last in this module.");
+  } catch (err) {
+    return errorState(errorMessage(err));
+  }
+  revalidatePath("/admin/catalog", "layout");
+  revalidatePath("/admin/worksheets", "layout");
+  revalidatePath("/app", "layout");
+  return okState("Moved.");
+}
+
+type Removed = { progress: number; answers: number; resources: number; suggestions: number; roadmap_links: number; worksheets_detached: { slug: string; title: string }[] };
+type DeleteResult = { title: string; removed: Removed; storage_keys: string[] };
+
+/** The stored files of deleted downloads. Their rows are gone with the lesson; a file that fails to delete is logged. */
+async function removeFiles(keys: string[]) {
+  for (const key of keys) await removeObject("lesson-resources", key).catch(() => logEvent("error", "lesson delete: file not removed", { key }));
+}
+
+function summary(r: Removed) {
+  const parts = [
+    r.progress ? `${r.progress} progress ${r.progress === 1 ? "record" : "records"}` : "",
+    r.resources ? `${r.resources} ${r.resources === 1 ? "download" : "downloads"}` : "",
+    r.suggestions ? `${r.suggestions} ${r.suggestions === 1 ? "suggestion" : "suggestions"}` : "",
+  ].filter(Boolean);
+  return parts.length ? `Also removed ${parts.join(", ")}.` : "";
+}
+
+/**
+ * Deletes a lesson for good (archive stays separate). The database detaches its worksheet (kept, with every answer),
+ * removes its progress, downloads and suggestions, frees its position, checks the typed title when members have data
+ * on it, and writes one audit entry listing what went.
+ */
+export async function deleteLesson(_prev: FormState, fd: FormData): Promise<FormState> {
+  const id = z.string().uuid().safeParse(fd.get("id"));
+  if (!id.success) return errorState("Invalid lesson.");
+  const typed = String(fd.get("confirm_title") ?? "");
+  let result: DeleteResult;
+  try {
+    const { supabase } = await authorizeStaff(["admin"]);
+    const { data, error } = await supabase.rpc("delete_lesson", { p_lesson_id: id.data, p_confirm_title: typed || null });
+    if (error) {
+      if (/Type the lesson title/.test(error.message)) return errorState("Type the lesson title exactly as shown to confirm.");
+      if (/Lesson not found/.test(error.message)) return errorState("That lesson no longer exists.");
+      throw new Error(error.message);
+    }
+    result = data as DeleteResult;
+  } catch (err) {
+    return errorState(errorMessage(err));
+  }
+  await removeFiles(result.storage_keys);
+  refreshCatalog();
+  const detached = result.removed.worksheets_detached.map((w) => `"${w.title}"`).join(", ");
+  const note = [`Deleted "${result.title}".`, detached ? `Worksheet ${detached} detached and kept, with its answers.` : "", summary(result.removed)].filter(Boolean).join(" ");
+  redirect(`/admin/catalog?notice=${encodeURIComponent(note)}`);
+}
+
+/** Curriculum page: delete every sample lesson, detaching their worksheets first. Lists what was detached. */
+export async function deleteAllSampleLessons(_prev: FormState, fd: FormData): Promise<FormState> {
+  if (fd.get("confirm") !== "yes") return errorState("Confirm first.");
+  let results: DeleteResult[];
+  try {
+    const { supabase } = await authorizeStaff(["admin"]);
+    const { data, error } = await supabase.rpc("delete_sample_lessons");
+    if (error) throw new Error(error.message);
+    results = (data ?? []) as DeleteResult[];
+  } catch (err) {
+    return errorState(errorMessage(err));
+  }
+  await removeFiles(results.flatMap((r) => r.storage_keys));
+  refreshCatalog();
+  if (!results.length) return okState("There were no sample lessons.");
+  const detached = results.flatMap((r) => r.removed.worksheets_detached.map((w) => `"${w.title}" (from ${r.title})`));
+  const note = `Deleted ${results.length} sample ${results.length === 1 ? "lesson" : "lessons"}. ${
+    detached.length ? `Worksheets detached and kept, with their answers: ${detached.join("; ")}.` : "No worksheets were attached to them."
+  }`;
+  redirect(`/admin/catalog?notice=${encodeURIComponent(note)}`);
+}
+
+function refreshCatalog() {
+  revalidatePath("/admin/catalog", "layout");
+  revalidatePath("/admin/worksheets", "layout");
+  revalidatePath("/app", "layout");
 }

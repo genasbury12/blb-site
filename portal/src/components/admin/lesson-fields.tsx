@@ -31,8 +31,9 @@ export function LessonFields({ d, modules }: { d: LessonDefaults; modules: { id:
             ))}
           </Select>
         </Field>
-        <Field label="Order in module" htmlFor="order_index">
-          <TextInput id="order_index" name="order_index" type="number" min={1} max={99} required defaultValue={d.order_index ?? 1} />
+        <Field label="Order in module" hint="1 to 999. To swap two lessons, use the arrows on the Curriculum page." htmlFor="order_index">
+          {/* No min or max here: the server says what is wrong in the page, instead of a browser pop-up that is easy to miss. */}
+          <TextInput id="order_index" name="order_index" type="number" step={1} required defaultValue={d.order_index ?? 1} />
         </Field>
       </div>
       <Field label="Title" htmlFor="title">

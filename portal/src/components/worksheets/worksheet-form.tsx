@@ -2,6 +2,7 @@
 
 import { Check, Download } from "lucide-react";
 import { Fragment, useEffect, useId, useMemo, useRef, useState, useTransition, type CSSProperties, type ReactNode } from "react";
+import { exampleCaption, sectionExample } from "@/domain/worksheets/example";
 import { decisionCards, groupTopCallbacks, type DecisionCard, type InlineCallback, type ResolvedTopCallback } from "@/domain/worksheets/callbacks";
 import {
   choiceOptions,
@@ -77,22 +78,26 @@ export function WorksheetForm(props: WorksheetFormProps) {
 
   useEffect(() => setWorksheetProgress(slug, progress.percent), [slug, progress.percent]);
 
-  // Copied-forward answers are saved straight away, so progress and Complete agree with what the server holds.
-  const prefillSaved = useRef(false);
-  useEffect(() => {
-    if (readOnly || prefillSaved.current || !props.prefill) return;
-    prefillSaved.current = true;
-    for (const [k, v] of Object.entries(props.prefill)) queue(k, v);
-  }, [readOnly, props.prefill, queue]);
+  // Copied-forward answers (Lesson 4) are shown but not saved on open: opening a page never creates a response
+  // (owner decision 2026-11-06). They are saved with her first edit, or when she presses Complete.
+  const pendingPrefill = useRef<Answers | null>(props.prefill && Object.keys(props.prefill).length ? props.prefill : null);
+  function flushPrefill(except?: string) {
+    const pending = pendingPrefill.current;
+    if (!pending) return;
+    pendingPrefill.current = null;
+    for (const [k, v] of Object.entries(pending)) if (k !== except) queue(k, v);
+  }
 
   function update(key: string, value: AnswerValue) {
     if (readOnly) return;
+    flushPrefill(key);
     setAnswers((a) => ({ ...a, [key]: value }));
     queue(key, value);
   }
 
   function complete() {
     if (!props.complete) return;
+    flushPrefill();
     startCompleting(async () => {
       // Send any answers still waiting for the autosave pause, so the server checks the latest version.
       if (!(await settle())) {
@@ -168,6 +173,7 @@ export function WorksheetForm(props: WorksheetFormProps) {
                   ))}
                 </div>
               ) : null}
+              {!readOnly ? <SectionExample schema={schema} section={section} /> : null}
               <OptionalSection section={section} answers={answers}>
                 {si === 0 && schema.callback_layout ? (
                   <DecisionCards
@@ -256,6 +262,31 @@ function CallbackQuote({ testId, caption, lines, missing }: { testId: string; ca
         ))}
       </blockquote>
     </figure>
+  );
+}
+
+/**
+ * The worked example for a section, collapsed under "See an example" and labelled "Hypothetical example" every time
+ * (owner decision 2026-11-06). Read only: it never fills her answers.
+ */
+function SectionExample({ schema, section }: { schema: WorksheetSchema; section: WorksheetSchema["sections"][number] }) {
+  const lines = sectionExample(schema, section);
+  if (!lines.length) return null;
+  const caption = exampleCaption(schema);
+  return (
+    <details className="group mt-5 max-w-2xl rounded-[14px] border border-rose bg-white/70 px-5 py-3" data-testid={`example-${section.key}`}>
+      <summary className="cursor-pointer font-semibold text-plum">See an example</summary>
+      <p className="mt-3 text-xs font-semibold uppercase tracking-[0.16em] text-mauve-ink">Hypothetical example</p>
+      {caption ? <p className="mt-1 text-sm text-ink-muted">{caption}</p> : null}
+      <dl className="mt-3 space-y-3">
+        {lines.map((l) => (
+          <div key={l.key}>
+            <dt className="text-sm font-semibold text-ink">{l.label}</dt>
+            <dd className="mt-0.5 whitespace-pre-line text-[0.95rem] leading-relaxed text-ink-muted">{l.text}</dd>
+          </div>
+        ))}
+      </dl>
+    </details>
   );
 }
 

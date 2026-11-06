@@ -11,6 +11,9 @@ let coach: string;
 let otherCoach: string;
 let admin: string;
 let lesson: string;
+let lessonDraft: string;
+let lessonReview: string;
+let freeLesson: string;
 
 const insertOwn = "insert into public.worksheet_responses (user_id, worksheet_slug, worksheet_version, answers) values ($1, $2, 1, $3) returning id";
 
@@ -23,15 +26,16 @@ beforeAll(async () => {
   await db.query("insert into public.user_roles (user_id, role) values ($1, 'coach'), ($2, 'coach'), ($3, 'admin')", [coach, otherCoach, admin]);
   await db.query("insert into public.coach_assignments (coach_id, student_id) values ($1, $2)", [coach, student]);
   const { rows } = await db.query<{ id: string }>(
-    "select l.id from public.lessons l join public.modules m on m.id = l.module_id where m.number = 1 and l.status = 'published' order by l.order_index limit 1",
+    "select l.id from public.lessons l join public.modules m on m.id = l.module_id where m.number = 1 and l.status = 'published' order by l.order_index limit 4",
   );
-  lesson = rows[0]!.id;
+  // One worksheet per lesson (migration 2500): each on its own published lesson.
+  [lesson, lessonDraft, lessonReview, freeLesson] = rows.map((r) => r.id) as [string, string, string, string];
   await db.query(
     `insert into public.worksheets (slug, version, lesson_id, title, schema, status) values
        ('ws-published', 1, $1, 'Published worksheet', '{"sections": []}', 'published'),
-       ('ws-draft', 1, $1, 'Draft worksheet', '{"sections": []}', 'draft'),
-       ('ws-review', 1, $1, 'Review worksheet', '{"sections": []}', 'review')`,
-    [lesson],
+       ('ws-draft', 1, $2, 'Draft worksheet', '{"sections": []}', 'draft'),
+       ('ws-review', 1, $3, 'Review worksheet', '{"sections": []}', 'review')`,
+    [lesson, lessonDraft, lessonReview],
   );
 });
 afterAll(async () => {
@@ -51,13 +55,14 @@ describe("worksheets visibility (draft never served)", () => {
     // Row security hides rows the caller may not change: the update touches nothing.
     expect(await asUser(db, student, (q) => q("update public.worksheets set title = 'Hacked' where slug = 'ws-published' returning id"))).toHaveLength(0);
     expect(await asUser(db, coach, (q) => q("update public.worksheets set status = 'published' where slug = 'ws-draft' returning id"))).toHaveLength(0);
-    await expectDenied(db, coach, "insert into public.worksheets (slug, lesson_id, title, schema) values ('ws-coach', $1, 'Coach made', '{}')", [lesson]);
+    await expectDenied(db, coach, "insert into public.worksheets (slug, lesson_id, title, schema) values ('ws-coach', $1, 'Coach made', '{}')", [freeLesson]);
     expect(await asUser(db, admin, (q) => q("update public.worksheets set title = 'Published worksheet' where slug = 'ws-published' returning id"))).toHaveLength(1);
   });
-  it("one published worksheet per lesson", async () => {
-    await expect(
-      db.query("insert into public.worksheets (slug, version, lesson_id, title, schema, status) values ('ws-second-on-lesson', 1, $1, 'Second on lesson', '{}', 'published')", [lesson]),
-    ).rejects.toThrow(/worksheets_one_published_per_lesson_idx/);
+  it("one worksheet per lesson, in any status (migration 2500)", async () => {
+    for (const status of ["published", "draft"])
+      await expect(
+        db.query("insert into public.worksheets (slug, version, lesson_id, title, schema, status) values ('ws-second-on-lesson', 1, $1, 'Second on lesson', '{}', $2)", [lesson, status]),
+      ).rejects.toThrow(/already has a worksheet/);
   });
     it("one published version per worksheet", async () => {
     await expect(
@@ -115,7 +120,8 @@ describe("staff access (D09: coaches see assigned members only)", () => {
     expect(await asUser(db, coach, (q) => q("delete from public.worksheet_responses where user_id = $1 returning id", [student]))).toHaveLength(0);
   });
   it("admins read all and delete, and the delete is audited without answer content", async () => {
-    const all = await asUser(db, admin, (q) => q<{ user_id: string }>("select user_id from public.worksheet_responses"));
+    // Only this file's worksheets: other test files run alongside and add their own answers.
+    const all = await asUser(db, admin, (q) => q<{ user_id: string }>("select user_id from public.worksheet_responses where worksheet_slug like 'ws-%'"));
     expect(all.map((a) => a.user_id).sort()).toEqual([student, other].sort());
     await db.query("begin");
     await db.query("set local role authenticated");

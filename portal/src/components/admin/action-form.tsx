@@ -27,6 +27,8 @@ function refill(form: HTMLFormElement, values: FormValues) {
       continue;
     }
     if (sent) el.value = sent[0] ?? "";
+    // A controlled select (the worksheet and lesson pickers) learns its value back through its change handler.
+    if (el instanceof HTMLSelectElement) el.dispatchEvent(new Event("change", { bubbles: true }));
   }
 }
 
@@ -57,7 +59,7 @@ export function ActionForm({
   return (
     <form ref={formRef} action={formAction} className={className} encType={encType}>
       {children}
-      <div aria-live="polite">
+      <div aria-live="polite" data-testid="form-status">
         {state ? <Alert tone={state.ok ? "success" : "danger"}>{state.ok ? state.message : state.error}</Alert> : null}
       </div>
       <Button type="submit" variant={variant} disabled={pending}>

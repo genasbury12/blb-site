@@ -3,6 +3,7 @@ import Link from "next/link";
 import { DataTable } from "@/components/admin/fields";
 import { PageHeader } from "@/components/shell/page-header";
 import { Badge } from "@/components/ui/badge";
+import { ButtonLink } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { requireStaff } from "@/lib/server/staff";
 import { listStaffWorksheets } from "@/lib/server/worksheets-admin";
@@ -20,7 +21,8 @@ export default async function AdminWorksheetsPage() {
       <PageHeader
         eyebrow="Worksheets"
         title="Worksheet answers"
-        lede={isAdmin ? "How many members started and finished each worksheet. Open one to read answers or export them." : "Answers from members assigned to you. Read only."}
+        lede={isAdmin ? "How many members started and finished each worksheet. Open one to read answers, export them, or move it to another lesson." : "Answers from members assigned to you. Read only."}
+        actions={isAdmin ? <ButtonLink href="/admin/worksheets/new">New worksheet</ButtonLink> : null}
       />
       {worksheets.length === 0 ? (
         <Card tone="quiet">
@@ -36,7 +38,7 @@ export default async function AdminWorksheetsPage() {
                   {w.title}
                 </Link>
               </td>
-              <td className="px-4 py-3">{w.moduleNumber ? `Module ${w.moduleNumber}, Lesson ${w.lessonNumber}` : "Unlinked"}</td>
+              <td className="px-4 py-3">{w.lessonLabel ?? "Not attached"}</td>
               <td className="px-4 py-3">
                 <Badge tone={w.status === "published" ? "plum" : "neutral"}>{STATUS_LABEL[w.status] ?? w.status}</Badge>
               </td>

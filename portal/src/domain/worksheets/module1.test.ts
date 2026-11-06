@@ -2,7 +2,7 @@ import { readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { resolveCallbacks, sourceKey, type CallbackSource } from "./callbacks";
-import { exampleAnswers } from "./example";
+import { exampleAnswers, exampleCaption, sectionExample } from "./example";
 import { findField, parseWorksheetSchema, worksheetProgress, type WorksheetSchema } from "./schema";
 
 /**
@@ -86,5 +86,32 @@ describe("Module 1 worksheets as a set (brief 18)", () => {
         expect(cb.text, `${slug}: ${cb.key}`).toBeTruthy();
       }
     }
+  });
+});
+
+describe("worked examples shown to members (owner decision 2026-11-06)", () => {
+  it("every lesson with an example has lines in at least one section, and never shows a key or [object Object]", () => {
+    for (const [slug, s] of Object.entries(sheets)) {
+      if (!raw[slug]!.example_response) continue;
+      const lines = s.sections.flatMap((sec) => sectionExample(s, sec));
+      expect(lines.length, slug).toBeGreaterThan(0);
+      for (const l of lines) expect(l.text, `${slug}.${l.key}`).not.toMatch(/\[object|undefined/);
+      expect(exampleCaption(s), slug).toMatch(/Hypothetical example/);
+    }
+  });
+
+  it("reads rows, ratings, chosen problems and relative dates as a member would", () => {
+    const l3 = sheets["m1-l3-customer-research"]!;
+    const ev = sectionExample(l3, l3.sections[0]!);
+    expect(ev[0]).toMatchObject({ label: "Observation 1: What she said or did" });
+    expect(ev.find((l) => l.key === "ev_conf_1")!.text).toBe("Observed");
+    expect(sectionExample(l3, l3.sections[1]!).find((l) => l.key === "theme_rows_1")!.text).toBe("Observations 1, 2");
+    const l4 = sheets["m1-l4-problem-validation"]!;
+    const lines4 = l4.sections.flatMap((sec) => sectionExample(l4, sec));
+    expect(lines4.find((l) => l.key === "spec_1")!.text).toMatch(/^Strong: /);
+    expect(lines4.find((l) => l.key === "priority_choice")!.text).toMatch(/^1: Deciding what to cook/);
+    expect(lines4.find((l) => l.key === "review_date")!.text).toBe("7 days from today");
+    const l6 = sheets["m1-l6-positioning"]!;
+    expect(l6.sections.flatMap((sec) => sectionExample(l6, sec)).find((l) => l.key === "diff_rating")!.text).toMatch(/^Uncertain: /);
   });
 });

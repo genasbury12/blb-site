@@ -1,9 +1,23 @@
+import type { ReactNode } from "react";
 import { changeStatus } from "@/app/admin/catalog/actions";
 import { ALLOWED_TRANSITIONS, TRANSITION_LABELS, type ContentStatus } from "@/domain/content";
 import { ActionForm } from "./action-form";
 import { StatusPill } from "./fields";
 
-export function StatusControls({ id, table, status, canEdit }: { id: string; table: "lessons" | "modules" | "library_items" | "milestones" | "workshops" | "worksheets"; status: ContentStatus; canEdit: boolean }) {
+export function StatusControls({
+  id,
+  table,
+  status,
+  canEdit,
+  extra,
+}: {
+  id: string;
+  table: "lessons" | "modules" | "library_items" | "milestones" | "workshops" | "worksheets";
+  status: ContentStatus;
+  canEdit: boolean;
+  /** Shown after the status buttons, e.g. Delete next to Archive on a lesson. */
+  extra?: ReactNode;
+}) {
   return (
     <div className="flex flex-wrap items-center gap-3">
       <span className="text-sm text-ink-muted">Status</span>
@@ -17,6 +31,7 @@ export function StatusControls({ id, table, status, canEdit }: { id: string; tab
             </ActionForm>
           ))
         : null}
+      {extra}
     </div>
   );
 }

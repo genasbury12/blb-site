@@ -16,6 +16,18 @@ Status of The BOSS Business System portal build. Updated at every milestone (con
 | 7 Marketing and admin | Admin workspace complete; public sales and masterclass pages wait on approved copy and video |
 | 8 Internal QA and release | Staging Supabase migrated, six test accounts provisioned, signed in permission and browser checks passing (2026-11-02); auth settings, Vercel and Stripe test mode pending; owner sign off pending |
 
+## Admin: manage worksheets and lessons without code (2026-11-06)
+
+- **Worksheet picker** on the lesson edit page: every worksheet with the lesson it is on. Choosing one from another lesson warns "This will remove it from ..." before saving; None detaches. One worksheet per lesson (now a database rule, migration 2500).
+- **Attached to lesson** on the worksheet page, grouped by module, with real lesson titles ("Module 1, Lesson 1: Your Blog Is Not Your Business") here and in the worksheet list.
+- **New worksheet** (Worksheets): title, slug, lesson, draft. Questions are a schema file (JSON); paste one when creating or later on a draft ("Load questions"). A worksheet without questions cannot be published.
+- **Reorder**: up and down arrows on Curriculum swap neighbours in one transaction (the position rule is checked at the end, so a swap never hits it).
+- **Delete** next to Archive: counts of member progress and worksheet answers, a CSV link, the typed title when a real lesson has member data. The worksheet is detached and kept. **Delete all sample lessons** on Curriculum lists the worksheets it detached.
+- Positions run 1 to 999; publish rules no longer block position edits (I-100, I-101).
+- Worked examples shown to members under "See an example"; Lesson 4 copy-forward saved on first edit (owner decisions, I-89, I-92).
+- Staging, done through the admin: "Lesson 1: Starting Point" attached to "Your Blog Is Not Your Business"; all 23 sample lessons deleted (eight Module 1 worksheets detached and kept); Module 1 holds only the two real lessons, at 1 and 2.
+- Tests: database 149 (new `worksheet-attach.test.ts`); unit 273; staging `admin-lesson-form.spec.ts` 10 of 10 on desktop and mobile. The staging suites now make their own temporary lessons, since staging keeps only real lessons.
+
 ## Admin lesson forms: specific duplicate errors, values kept on a failed save (2026-11-06)
 
 - A save that hits a unique constraint names the lesson already there: "Position 1 in this module is taken by "SAMPLE: Module 2 lesson 1". Choose another position, or move that lesson first." or "That slug is already used by "..." in this module." The constraint is read from the database error (`lessons_module_id_order_index_key`, `lessons_module_id_slug_key`), then the other lesson is looked up. Any other duplicate still gets the general message.
