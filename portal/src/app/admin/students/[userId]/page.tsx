@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { assignStudentCoach, grantAccess, setCoachRole, setGrantState } from "@/app/admin/students/actions";
+import { assignStudentCoach, grantAccess, grantProgram, setCoachRole, setGrantState } from "@/app/admin/students/actions";
 import { ActionForm } from "@/components/admin/action-form";
 import { DataTable, Field, Select, TextInput } from "@/components/admin/fields";
 import { fmtDay, fmtShort } from "@/components/member/time";
@@ -106,13 +106,37 @@ export default async function StudentPage({ params }: { params: Promise<{ userId
         </DataTable>
         {isAdmin ? (
           <Card className="mt-4">
+            <h3 className="font-display text-xl">Grant a program</h3>
+            <p className="text-sm text-ink-muted">
+              When she paid another way (a sales call, a bank transfer). Gives everything the program includes, dated from today as a purchase would be: 12 months of the course and 6 months of
+              coaching. Elite also gets her private workspace and 12 included hours. Logged with your reason.
+            </p>
+            <ActionForm action={grantProgram} submitLabel="Grant program" className="mt-3 space-y-3">
+              <input type="hidden" name="user_id" value={userId} />
+              <div className="grid gap-3 sm:grid-cols-[200px_1fr]">
+                <Field label="Program" htmlFor="gp-s">
+                  <Select id="gp-s" name="sku" defaultValue="elite">
+                    <option value="blueprint">Blueprint</option>
+                    <option value="accelerator">Accelerator</option>
+                    <option value="elite">Elite</option>
+                  </Select>
+                </Field>
+                <Field label="Reason" htmlFor="gp-r"><TextInput id="gp-r" name="reason" required minLength={5} placeholder="Paid $4,997 by hand after the sales call" /></Field>
+              </div>
+            </ActionForm>
+          </Card>
+        ) : null}
+        {isAdmin ? (
+          <Card className="mt-4">
             <h3 className="font-display text-xl">Grant access manually</h3>
             <p className="text-sm text-ink-muted">For comps, corrections and support. Every grant needs a reason and is logged.</p>
-            <ActionForm action={grantAccess} submitLabel="Grant access" variant="secondary" className="mt-3 grid gap-3 sm:grid-cols-[1fr_160px_1.4fr_auto] sm:items-end">
+            <ActionForm action={grantAccess} submitLabel="Grant access" variant="secondary" className="mt-3 space-y-3">
               <input type="hidden" name="user_id" value={userId} />
-              <Field label="Feature" htmlFor="ga-f"><Select id="ga-f" name="feature">{FEATURE_KEYS.map((f) => <option key={f} value={f}>{f}</option>)}</Select></Field>
-              <Field label="Ends (optional)" htmlFor="ga-e"><TextInput id="ga-e" name="ends_on" type="date" /></Field>
-              <Field label="Reason" htmlFor="ga-r"><TextInput id="ga-r" name="reason" required minLength={5} /></Field>
+              <div className="grid gap-3 sm:grid-cols-[1fr_160px_1.4fr]">
+                <Field label="Feature" htmlFor="ga-f"><Select id="ga-f" name="feature">{FEATURE_KEYS.map((f) => <option key={f} value={f}>{f}</option>)}</Select></Field>
+                <Field label="Ends (optional)" htmlFor="ga-e"><TextInput id="ga-e" name="ends_on" type="date" /></Field>
+                <Field label="Reason" htmlFor="ga-r"><TextInput id="ga-r" name="reason" required minLength={5} /></Field>
+              </div>
             </ActionForm>
           </Card>
         ) : null}

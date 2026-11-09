@@ -16,6 +16,14 @@ Status of The BOSS Business System portal build. Updated at every milestone (con
 | 7 Marketing and admin | Admin workspace complete; public sales and masterclass pages wait on approved copy and video |
 | 8 Internal QA and release | Staging Supabase migrated, six test accounts provisioned, signed in permission and browser checks passing (2026-11-02); auth settings, Vercel and Stripe test mode pending; owner sign off pending |
 
+## Elite from a sales call, and programs granted by hand (2026-11-09)
+
+- **Accept from a sales call** (Admin, Elite; admins only): her name, her email and an optional note. She is accepted at once with no application: Elite checkout opens for that email for 14 days and holds one of the five seats, exactly like an accepted application. An open application from the same email is accepted instead of adding another. "Email her the sign up link now" is off by default; with it off, the page shows the link to send yourself. Refused when she is already accepted, already has Elite, or all five seats are taken. Logged as `elite_applications.accept_from_call`.
+- **Grant a program** (Students & access, a member's page; admins only): Blueprint, Accelerator or Elite with a reason. Every feature the program includes, dated as a purchase would be (12 months of course, 6 months of coaching, Elite hours 6 months and 30 days), as admin overrides, each logged, plus one `entitlement.grant_program` entry. For when payment is collected outside the portal (I-105).
+- Elite granted by hand now gets what a purchase gets: her private workspace, the 12 included hours, and her accepted application marked enrolled (I-106).
+- Migration 2700 (applied to staging). The admin grant forms on the member page no longer squeeze the Reason box when a message shows.
+- Tests: database 154 (new `elite-sales-call.test.ts`, in rolled back transactions so the seat counts of other tests hold); staging `elite-sales-call.spec.ts` (new fixture suite `elitecall`), 4 of 4 on desktop and mobile: Apply for Elite before, accepted with nothing emailed, a second accept refused, Pay $4,997 and Six payments of $897 offered instead of the application, Elite granted by hand, her workspace open with 12 hours. Cleanup removes the test client, her workspace and application.
+
 ## Admin: manage worksheets and lessons without code (2026-11-06)
 
 - **Worksheet picker** on the lesson edit page: every worksheet with the lesson it is on. Choosing one from another lesson warns "This will remove it from ..." before saving; None detaches. One worksheet per lesson (now a database rule, migration 2500).

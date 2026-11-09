@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { decideApplication } from "@/app/admin/elite/actions";
+import { acceptFromCall, decideApplication } from "@/app/admin/elite/actions";
 import { ActionForm } from "@/components/admin/action-form";
-import { DataTable, Field, TextInput } from "@/components/admin/fields";
+import { Checkbox, DataTable, Field, TextArea, TextInput } from "@/components/admin/fields";
 import { fmtShort } from "@/components/member/time";
 import { PageHeader, SectionTitle } from "@/components/shell/page-header";
 import { Badge } from "@/components/ui/badge";
@@ -37,6 +37,25 @@ export default async function AdminElitePage() {
         <Card><Stat label="Applications to review" value={String(appRows.filter((a) => ["submitted", "reviewing", "discovery_scheduled"].includes(a.status as string)).length)} /></Card>
         <Card><Stat label="Workspaces" value={String(boards.data?.length ?? 0)} /></Card>
       </div>
+
+      {isAdmin ? (
+        <section aria-labelledby="from-call">
+          <SectionTitle id="from-call">Accept from a sales call</SectionTitle>
+          <Card>
+            <p className="text-sm text-ink-muted">
+              No application needed. She is accepted at once: Elite checkout opens for this email for 14 days and holds one of the five seats. She signs up (or signs in) with this same email.
+            </p>
+            <ActionForm action={acceptFromCall} submitLabel="Accept for Elite" className="mt-4 space-y-4">
+              <div className="grid gap-4 sm:grid-cols-2">
+                <Field label="Her name" htmlFor="call-name"><TextInput id="call-name" name="name" required maxLength={100} /></Field>
+                <Field label="Her email" htmlFor="call-email"><TextInput id="call-email" name="email" type="email" required /></Field>
+              </div>
+              <Field label="Note from the call (optional)" htmlFor="call-note"><TextArea id="call-note" name="note" maxLength={2000} /></Field>
+              <Checkbox name="send" label="Email her the sign up link now. Leave unticked if you are collecting payment another way." />
+            </ActionForm>
+          </Card>
+        </section>
+      ) : null}
 
       <section aria-labelledby="apps">
         <SectionTitle id="apps">Applications</SectionTitle>

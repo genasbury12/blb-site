@@ -71,3 +71,27 @@ export async function assignStudentCoach(_prev: FormState, fd: FormData): Promis
   revalidatePath(`/admin/students/${parsed.data.student_id}`);
   return okState("Coach assignment updated.");
 }
+
+/**
+ * Grant a whole program by hand (migration 2700), for payment collected outside the portal: every feature the program
+ * includes, dated as a purchase would be, each with the reason, all in the audit log. Elite also gets its board and hours.
+ */
+export async function grantProgram(_prev: FormState, fd: FormData): Promise<FormState> {
+  const parsed = z
+    .object({ user_id: z.string().uuid(), sku: z.enum(["blueprint", "accelerator", "elite"]), reason: z.string().trim().min(5, "A reason of at least 5 characters is required.").max(500) })
+    .safeParse({ user_id: fd.get("user_id"), sku: fd.get("sku"), reason: fd.get("reason") });
+  if (!parsed.success) return errorState(parsed.error.issues[0]?.message ?? "Check the form.");
+  let n = 0;
+  try {
+    const { supabase } = await authorizeStaff(["admin"]);
+    const { data, error } = await supabase.rpc("admin_grant_program", { p_user: parsed.data.user_id, p_sku: parsed.data.sku, p_reason: parsed.data.reason });
+    if (error) throw new Error(error.message);
+    n = data as number;
+  } catch (err) {
+    return errorState(errorMessage(err));
+  }
+  revalidatePath(`/admin/students/${parsed.data.user_id}`);
+  revalidatePath("/admin/elite");
+  const name = { blueprint: "Blueprint", accelerator: "Accelerator", elite: "Elite" }[parsed.data.sku];
+  return okState(`${name} granted: ${n} kinds of access, dated from today, recorded in the audit log.${parsed.data.sku === "elite" ? " Her Elite workspace and 12 included hours are ready." : ""}`);
+}

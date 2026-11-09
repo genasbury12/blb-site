@@ -225,3 +225,31 @@ export async function uploadEliteFile(_prev: FormState, fd: FormData): Promise<F
   revalidatePath(`/admin/elite/${parsed.data.board_id}`);
   return okState("File shared with the client.");
 }
+
+/**
+ * Accept from a sales call (migration 2700): no application needed. Opens Elite checkout for her email for 14 days and
+ * holds a seat. Emailing her the sign up link is a choice, off by default (payment may be collected another way).
+ */
+export async function acceptFromCall(_prev: FormState, fd: FormData): Promise<FormState> {
+  const parsed = z
+    .object({ name: z.string().trim().min(2, "Enter her name.").max(100), email: z.string().trim().toLowerCase().email("Enter a valid email address."), note: z.string().trim().max(2000), send: z.boolean() })
+    .safeParse({ name: fd.get("name"), email: fd.get("email"), note: fd.get("note") ?? "", send: fd.get("send") === "on" });
+  if (!parsed.success) return errorState(parsed.error.issues[0]?.message ?? "Check the form.");
+  const site = publicEnv().NEXT_PUBLIC_SITE_URL;
+  try {
+    const { supabase } = await authorizeStaff(["admin"]);
+    const { error } = await supabase.rpc("admin_accept_elite_from_call", { p_name: parsed.data.name, p_email: parsed.data.email, p_note: parsed.data.note || null });
+    if (error) {
+      if (/seats|already accepted|already has Elite|valid email|her name/.test(error.message)) return errorState(error.message);
+      throw new Error(error.message);
+    }
+    if (parsed.data.send) await sendEmail(parsed.data.email, eliteDecision({ name: parsed.data.name, accepted: true, url: `${site}/signup` }));
+  } catch (err) {
+    return errorState(errorMessage(err));
+  }
+  revalidatePath("/admin/elite");
+  return okState(
+    `${parsed.data.name} is accepted for Elite until ${new Date(Date.now() + 14 * 864e5).toLocaleDateString("en-US", { month: "long", day: "numeric" })}. ` +
+      `${parsed.data.send ? "We emailed her the sign up link." : "Nothing was emailed."} Her link: ${site}/signup (or ${site}/app/plans if she already has an account), signing up with ${parsed.data.email}.`,
+  );
+}

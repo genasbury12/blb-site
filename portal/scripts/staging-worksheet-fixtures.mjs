@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 // Test fixtures for the worksheet browser tests on STAGING (never production).
 //
-//   node scripts/staging-worksheet-fixtures.mjs setup   --suite journey|module1|export|deletion|retention|catalog|admin --env-out /abs/path/outside/repo.sh
-//   node scripts/staging-worksheet-fixtures.mjs cleanup --suite journey|module1|export|deletion|retention|catalog|admin --env-out /abs/path/outside/repo.sh
+//   node scripts/staging-worksheet-fixtures.mjs setup   --suite journey|module1|export|deletion|retention|catalog|admin|elitecall --env-out /abs/path/outside/repo.sh
+//   node scripts/staging-worksheet-fixtures.mjs cleanup --suite journey|module1|export|deletion|retention|catalog|admin|elitecall --env-out /abs/path/outside/repo.sh
 //
 // journey  (tests/e2e/worksheets.spec.ts): two published STAGING TEST worksheets on Module 2 sample lessons 1 and 2 (lessons without real worksheets),
 //          a temporary Blueprint member, the shared test admin and a temporary coach assigned to the member.
@@ -19,6 +19,10 @@
 // retention (tests/e2e/data-retention.spec.ts, 10_DATA_RIGHTS Slice C): temporary members whose access ended 12
 //          months and a day ago (deleted by the job), 12 months less 20 days ago (30 day reminder), 12 months less 5 days
 //          ago (7 day reminder), and one with access; the shared test admin; a random CRON_SECRET.
+//
+// elitecall (tests/e2e/elite-sales-call.spec.ts): a temporary account with no purchase (the client from a sales call)
+//          and the shared test admin. Cleanup deletes the account (its Elite workspace and access go with it) and the
+//          Elite application made for its email. Needs one free Elite seat.
 //
 // The test admin is ONE reused account (staging-e2e-admin@example.invalid). The CSV export test writes it into the
 // append only audit log, so it can never be deleted; instead each setup gives it a fresh random password and the
@@ -39,8 +43,8 @@ const arg = (name) => {
 };
 const suite = arg("suite");
 const envOut = arg("env-out");
-if (!["setup", "cleanup"].includes(cmd) || !["journey", "module1", "export", "deletion", "retention", "catalog", "admin"].includes(suite) || !envOut) {
-  console.error("usage: staging-worksheet-fixtures.mjs setup|cleanup --suite journey|module1|export|deletion|retention|catalog|admin --env-out /abs/file.sh");
+if (!["setup", "cleanup"].includes(cmd) || !["journey", "module1", "export", "deletion", "retention", "catalog", "admin", "elitecall"].includes(suite) || !envOut) {
+  console.error("usage: staging-worksheet-fixtures.mjs setup|cleanup --suite journey|module1|export|deletion|retention|catalog|admin|elitecall --env-out /abs/file.sh");
   process.exit(2);
 }
 const repo = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
@@ -591,7 +595,35 @@ async function cleanupCatalog() {
   console.log(`catalog cleanup done: ${own.length} test lessons and the test worksheets deleted, member removed, shared test admin disabled`);
 }
 
-if (suite === "admin") await (cmd === "setup" ? setupAdminOnly() : cleanupAdminOnly());
+// elitecall: the sales call client (an account with no purchase) and the shared test admin.
+async function setupEliteCall() {
+  const email = `staging-elitecall-${hex()}@example.invalid`, pw = password();
+  const u = await api("POST", "/auth/v1/admin/users", { email, password: pw, email_confirm: true, user_metadata: { display_name: "STAGING TEST sales call client" } });
+  writeFileSync(STATE, JSON.stringify({ memberId: u.id, email }), { mode: 0o600 });
+  const admin = await enableTestAdmin();
+  writeFileSync(STATE, JSON.stringify({ memberId: u.id, email, adminId: admin.id }), { mode: 0o600 });
+  writeEnv({
+    E2E_SUPABASE: 1,
+    E2E_CALL_ADMIN_EMAIL: admin.email,
+    E2E_CALL_ADMIN_PASSWORD: admin.password,
+    E2E_CALL_CLIENT_ID: u.id,
+    E2E_CALL_CLIENT_EMAIL: email,
+    E2E_CALL_CLIENT_PASSWORD: pw,
+  });
+  console.log("elitecall fixtures ready: temporary client with no purchase, shared test admin enabled");
+}
+
+async function cleanupEliteCall() {
+  const st = readState();
+  if (st.memberId) await deleteMember(st.memberId);
+  if (st.email) await api("DELETE", `/rest/v1/elite_applications?email=eq.${encodeURIComponent(st.email)}`);
+  const adminId = st.adminId ?? (await findUser(ADMIN_EMAIL)).hit?.id;
+  if (adminId) await disableTestAdmin(adminId);
+  console.log("elitecall cleanup done: client, her Elite workspace and application removed, shared test admin disabled");
+}
+
+if (suite === "elitecall") await (cmd === "setup" ? setupEliteCall() : cleanupEliteCall());
+else if (suite === "admin") await (cmd === "setup" ? setupAdminOnly() : cleanupAdminOnly());
 else if (suite === "catalog") await (cmd === "setup" ? setupCatalog() : cleanupCatalog());
 else if (suite === "journey") await (cmd === "setup" ? setupJourney() : cleanupJourney());
 else if (suite === "module1") await (cmd === "setup" ? setupModule1() : cleanupModule1());
