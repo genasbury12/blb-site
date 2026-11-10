@@ -1,0 +1,256 @@
+"""Champagne & Savings site builder.
+Shared skeleton for every Showit embed page: tokens, nav, footer, loader, standard JS.
+Edit shared pieces HERE, then rerun build_all.py. Never patch the generated pages directly."""
+import json, os, html as H
+ROOT = os.path.dirname(os.path.abspath(__file__))
+OUT = os.path.join(ROOT, 'pages'); TXT = os.path.join(ROOT, 'txt')
+
+# ---------- links (swap when Katie sends real ones; see WAITING_ON_KATIE.md) ----------
+L = dict(home='/', about='/about', club='/the-club', match='/color-match', thanks='/color-match-thank-you',
+         makeover='/closet-makeover', shop='/shop', blog='/blog', collab='/work-with-me', contact='/contact',
+         privacy='/privacy-policy', terms='/terms', affiliate='/affiliate-disclosure',
+         checkout='#checkout-link-coming', instagram='#instagram', pinterest='#pinterest', tiktok='#tiktok', ltk='#ltk')
+
+FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
+         '<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Italiana&family=Jost:wght@300;400;500&family=Mrs+Saint+Delafield&display=swap" rel="stylesheet">')
+
+COUPE = ('<svg class="coupe" viewBox="0 0 200 224" aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">'
+         '<ellipse cx="100" cy="76" rx="72" ry="11" stroke-width="3.2"/><path d="M28 76 C34 118 166 118 172 76" stroke-width="3.2"/>'
+         '<path class="fizz" d="M37 85 C60 92 140 92 163 85" stroke-width="1.6"/><path d="M100 108 L100 206" stroke-width="3.2"/>'
+         '<ellipse cx="100" cy="212" rx="40" ry="7" stroke-width="3.2"/>'
+         '<g class="bow" stroke-width="2.7"><path d="M100 156 C84 142 70 156 78 166 C84 172 96 164 100 158"/><path d="M100 156 C116 142 130 156 122 166 C116 172 104 164 100 158"/>'
+         '<path d="M99 160 C95 170 90 178 84 188"/><path d="M101 160 C105 170 110 178 116 188"/></g>'
+         '<g class="bub" stroke="none"><circle cx="92" cy="54" r="3.6"/><circle cx="106" cy="40" r="2.8"/><circle cx="97" cy="26" r="2.1"/><circle cx="112" cy="60" r="2.4"/></g></svg>')
+
+def badge(text='GET DRESSED IN 5 MINUTES ✦ SHOP YOUR CLOSET FIRST ✦ ', idn='b1', size=150, dark=False):
+    cls = 'badge dark' if dark else 'badge'
+    return (f'<div class="{cls}" style="width:{size}px;height:{size}px" aria-hidden="true"><svg viewBox="0 0 200 200" class="spin">'
+            f'<defs><path id="{idn}" d="M100,100 m-74,0 a74,74 0 1,1 148,0 a74,74 0 1,1 -148,0"/></defs>'
+            f'<text><textPath href="#{idn}">{text}</textPath></text></svg><div class="badge-in">{COUPE}</div></div>')
+
+BUBBLES = '<div class="bubbles" aria-hidden="true">' + ''.join(f'<span style="--x:{x}%;--d:{d}s;--s:{s}px;--t:{t}s"></span>' for x,d,s,t in
+           [(8,0,8,9),(18,3,5,11),(31,1.5,10,10),(44,4,6,12),(57,.8,7,9.5),(66,2.6,4,11),(78,5,9,10.5),(88,1.2,6,12.5),(94,3.6,5,9)]) + '</div>'
+
+SQUIG = '<svg class="squig" viewBox="0 0 220 18" aria-hidden="true"><path d="M3 12 C 30 2, 50 18, 78 9 S 130 3, 158 11 S 200 14, 217 6" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>'
+ARROW = '<svg class="doodle-arrow" viewBox="0 0 120 80" aria-hidden="true"><path d="M6 10 C 40 6, 80 30, 96 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M84 58 L97 66 L100 50" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+
+def logo(cls='logo'):
+    return f'<a class="{cls}" href="{L["home"]}" aria-label="Champagne and Savings home"><span>CHAMPAGNE</span><em>&amp;</em><span>SAVINGS</span></a>'
+
+def photo(label, cls='arch'):
+    """Art-directed photo slot. Swap the inner art for <img> when Katie's photos arrive (data-photo names the shot)."""
+    return f'<figure class="{cls} photo" data-photo="{H.escape(label)}"><div class="photo-art">{COUPE}</div>{BUBBLES}</figure>'
+
+BASE_CSS = r"""
+:root{--petal:#F7EAEB;--linen:#F0E7E2;--pink:#E6CECE;--rose:#A47E82;--bord:#5E3F44;--truffle:#3E3333;--gold:#C8AD86;--muted:#6B5759;--white:#FFFDFC;
+--display:'Italiana',Georgia,serif;--serif:'Cormorant Garamond',Georgia,serif;--sans:'Jost',system-ui,sans-serif;--script:'Mrs Saint Delafield',cursive;
+--shadow:0 34px 70px -34px rgba(94,63,68,.42);--r:24px}
+*{box-sizing:border-box}html,body{margin:0;overflow-x:hidden;overflow-x:clip}
+body{background:var(--petal);color:var(--truffle);font-family:var(--serif);font-weight:500;font-size:20px;line-height:1.55;-webkit-font-smoothing:antialiased}
+img,svg{max-width:100%}a{color:inherit}p{margin:0 0 1em}
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.12;letter-spacing:.015em;margin:0 0 .45em;color:var(--truffle)}
+h1{font-size:clamp(44px,6.2vw,86px)}h2{font-size:clamp(36px,4.6vw,62px)}h3{font-size:clamp(26px,2.4vw,32px)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 28px;position:relative;z-index:2}.narrow{max-width:780px}
+section{position:relative;overflow:hidden;padding:clamp(80px,10vw,128px) 0}
+.center{text-align:center}.center .lede{margin-left:auto;margin-right:auto}
+.eyebrow{font-family:var(--sans);font-weight:500;font-size:12.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--bord);display:inline-flex;align-items:center;gap:10px;margin-bottom:18px}
+.eyebrow::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--gold);box-shadow:8px -8px 0 -2px var(--gold)}
+.script{font-family:var(--script);color:var(--rose);font-size:clamp(40px,4.4vw,58px);line-height:1;font-weight:400;display:block}
+.lede{font-size:clamp(21px,2vw,24px);max-width:640px;color:var(--truffle)}.muted{color:var(--muted)}
+.btn{position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:10px;font-family:var(--sans);font-weight:500;font-size:13px;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;
+ background:var(--bord);color:var(--petal);padding:19px 34px;border-radius:60px;border:1.5px solid var(--bord);box-shadow:0 16px 30px -16px rgba(94,63,68,.7);transition:transform .25s,background .25s;white-space:nowrap}
+.btn::after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(100deg,transparent,rgba(247,234,235,.35),transparent);transform:skewX(-20deg);transition:left .7s}
+.btn:hover{background:var(--truffle);transform:translateY(-2px)}.btn:hover::after{left:120%}
+.btn.ghost{background:transparent;color:var(--bord);box-shadow:none}.btn.ghost:hover{background:var(--bord);color:var(--petal)}
+.btn.light{background:var(--petal);color:var(--bord);border-color:var(--petal)}.btn.light:hover{background:var(--pink)}
+.btns{display:flex;flex-wrap:wrap;gap:14px;align-items:center}.center .btns{justify-content:center}
+.textlink{font-family:var(--sans);font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--bord);text-decoration:none;border-bottom:1px solid var(--rose);padding-bottom:3px}
+.chip{display:inline-block;font-family:var(--sans);font-size:12px;letter-spacing:.16em;text-transform:uppercase;background:var(--white);color:var(--bord);padding:9px 16px;border-radius:40px;box-shadow:0 10px 24px -14px rgba(94,63,68,.5)}
+.card{background:var(--white);border-radius:var(--r);box-shadow:var(--shadow);padding:38px 34px;position:relative}
+.wm{position:absolute;font-family:var(--display);font-size:clamp(120px,19vw,300px);line-height:.8;color:transparent;-webkit-text-stroke:1.2px rgba(164,126,130,.26);white-space:nowrap;pointer-events:none;z-index:0;user-select:none}
+.squig{display:block;width:180px;height:16px;color:var(--gold);margin:6px 0 18px}.center .squig{margin-left:auto;margin-right:auto}
+.doodle-arrow{width:90px;color:var(--rose)}
+.bg-linen{background:var(--linen)}.bg-pink{background:var(--pink)}.bg-pink .checks li::before{background-color:var(--white)}.card .chip{background:var(--pink)}.bg-white{background:var(--white)}
+.ink{background:var(--truffle);color:var(--petal)}.ink h1,.ink h2,.ink h3{color:var(--petal)}.ink .eyebrow{color:var(--pink)}.ink .script{color:var(--pink)}
+.ink .wm{-webkit-text-stroke-color:rgba(247,234,235,.12)}.bord{background:var(--bord);color:var(--petal)}.bord h2,.bord h1{color:var(--petal)}.bord .eyebrow,.bord .script{color:var(--pink)}
+/* coupe + badge */
+.coupe{width:100%;height:auto;color:var(--truffle)}.coupe .bow{color:var(--rose)}.coupe .bub{fill:var(--gold)}
+.badge{position:relative;border-radius:50%;background:var(--petal);box-shadow:0 18px 40px -18px rgba(94,63,68,.55)}
+.badge svg.spin{position:absolute;inset:0;width:100%;height:100%}.badge text{font-family:var(--sans);font-size:15.5px;letter-spacing:.21em;fill:var(--truffle)}
+.badge-in{position:absolute;inset:30%;display:grid;place-items:center}.badge.dark{background:var(--bord)}.badge.dark text{fill:var(--petal)}.badge.dark .coupe{color:var(--petal)}.badge.dark .coupe .bow{color:var(--pink)}
+@media (prefers-reduced-motion:no-preference){.spin{animation:spin 22s linear infinite}}
+@keyframes spin{to{transform:rotate(360deg)}}
+/* photo slots */
+.photo{position:relative;margin:0;overflow:hidden;background:radial-gradient(120% 90% at 30% 15%,var(--white) 0%,var(--pink) 55%,var(--rose) 130%);box-shadow:var(--shadow)}
+.arch{border-radius:999px 999px 26px 26px;aspect-ratio:4/5;width:100%}.polaroid-photo{aspect-ratio:1;border-radius:6px}
+.photo-art{position:absolute;inset:28% 26%;display:grid;place-items:center;opacity:.55}
+.bubbles{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.bubbles span{position:absolute;bottom:-20px;left:var(--x);width:var(--s);height:var(--s);border-radius:50%;border:1.4px solid rgba(200,173,134,.85);background:rgba(255,253,252,.35)}
+@media (prefers-reduced-motion:no-preference){.bubbles span{animation:rise var(--t) linear var(--d) infinite}}
+@keyframes rise{0%{transform:translateY(0) translateX(0);opacity:0}10%{opacity:1}50%{transform:translateY(-55vh) translateX(10px)}100%{transform:translateY(-110vh) translateX(-6px);opacity:0}}
+/* announcement bar */
+.ann{background:var(--bord);color:var(--petal);font-family:var(--sans);font-size:12.5px;letter-spacing:.2em;text-transform:uppercase;position:relative;z-index:60;overflow:hidden}
+.ann a{text-decoration:none;display:block;padding:11px 46px 11px 0}.ann .track{display:flex;width:max-content}
+.ann .track span{padding:0 28px;white-space:nowrap}.ann .track span b{color:var(--gold);font-weight:500}
+@media (prefers-reduced-motion:no-preference){.ann .track{animation:marq 34s linear infinite}}
+.ann-x{position:absolute;right:8px;top:50%;transform:translateY(-50%);background:var(--bord);border:0;color:var(--petal);font-size:20px;width:34px;height:34px;cursor:pointer;border-radius:50%}
+@keyframes marq{to{transform:translateX(-50%)}}
+/* nav */
+.nav{position:sticky;top:0;z-index:50;background:rgba(247,234,235,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid rgba(164,126,130,.22)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:78px;gap:20px}
+.logo{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-family:var(--display);font-size:23px;letter-spacing:.14em;color:var(--truffle);white-space:nowrap}
+.logo em{font-family:var(--script);font-style:normal;font-size:40px;letter-spacing:0;color:var(--rose);line-height:0;transform:translateY(4px)}
+.nav-links{display:flex;align-items:center;gap:26px;list-style:none;margin:0;padding:0}
+.nav-links a{font-family:var(--sans);font-size:12.5px;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;color:var(--truffle);white-space:nowrap;position:relative}
+.nav-links a::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:1.5px;background:var(--rose);transform:scaleX(0);transition:transform .3s}
+.nav-links a:hover::after,.nav-links a[aria-current]::after{transform:scaleX(1)}
+.nav .btn{padding:14px 22px;font-size:12px}
+.burger{display:none;background:none;border:0;width:46px;height:46px;cursor:pointer;position:relative}
+.burger span{position:absolute;left:11px;right:11px;height:1.6px;background:var(--truffle);transition:.3s}.burger span:nth-child(1){top:17px}.burger span:nth-child(2){top:23px}.burger span:nth-child(3){top:29px}
+.menu{position:fixed;inset:0;z-index:70;background:var(--petal);display:flex;flex-direction:column;padding:26px 28px 40px;transform:translateY(-102%);transition:transform .55s cubic-bezier(.7,0,.2,1);overflow-y:auto}
+.menu.open{transform:none}.menu-top{display:flex;justify-content:space-between;align-items:center}
+.menu-x{background:none;border:0;font-size:34px;color:var(--truffle);cursor:pointer;width:46px;height:46px}
+.menu ol{list-style:none;padding:0;margin:34px 0 26px;counter-reset:m}.menu li{counter-increment:m;border-bottom:1px solid rgba(164,126,130,.3)}
+.menu li a{display:flex;align-items:baseline;gap:16px;padding:14px 0;text-decoration:none;font-family:var(--display);font-size:34px;color:var(--truffle)}
+.menu li a::before{content:counter(m,decimal-leading-zero);font-family:var(--sans);font-size:12px;letter-spacing:.2em;color:var(--rose)}
+.menu .badge{margin:0 0 22px auto}.menu .btn{justify-content:center}
+@media (max-width:1080px){.nav-links,.nav .btn{display:none}.burger{display:block}}
+/* sections shared */
+.split{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(40px,6vw,90px);align-items:center}
+.split.flip>:first-child{order:2}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:26px}
+.grid3>*,.grid2>*,.split>*{min-width:0}
+.icon{width:58px;height:58px;border-radius:50%;background:var(--pink);display:grid;place-items:center;margin-bottom:22px;color:var(--bord)}
+.icon svg{width:28px;height:28px}
+.checks{list-style:none;padding:0;margin:0}.checks li{position:relative;padding:0 0 14px 38px}
+.checks li::before{content:"";position:absolute;left:0;top:.3em;width:22px;height:22px;border-radius:50%;background:var(--pink) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 12.5l4 4 8-9' fill='none' stroke='%235E3F44' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/16px no-repeat}
+.ink .checks li::before,.bord .checks li::before{background-color:rgba(247,234,235,.16);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 12.5l4 4 8-9' fill='none' stroke='%23E6CECE' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")}
+.xs li::before{background:rgba(164,126,130,.16) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M7 7l10 10M17 7L7 17' fill='none' stroke='%23A47E82' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E") center/14px no-repeat!important}
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;text-align:center}
+.stat b{display:block;font-family:var(--display);font-weight:400;font-size:clamp(54px,6vw,84px);line-height:1;color:var(--bord)}
+.stat span{font-family:var(--sans);font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--truffle)}
+/* faq */
+.faq{max-width:860px;margin:40px auto 0}.faq details{background:var(--white);border-radius:18px;margin-bottom:14px;box-shadow:0 18px 34px -26px rgba(94,63,68,.5)}
+.faq summary{cursor:pointer;list-style:none;padding:24px 64px 24px 28px;font-family:var(--display);font-size:24px;position:relative}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:26px;top:50%;transform:translateY(-50%);width:32px;height:32px;border-radius:50%;background:var(--pink);color:var(--bord);font-family:var(--sans);font-size:20px;display:grid;place-items:center;transition:transform .3s}
+.faq details[open] summary::after{transform:translateY(-50%) rotate(45deg)}.faq details>div{padding:0 28px 24px;color:var(--truffle)}
+/* final cta */
+.final{background:var(--bord);color:var(--petal);text-align:center}.final h2{color:var(--petal)}
+.final .shimmer{background:linear-gradient(100deg,var(--petal) 35%,var(--gold) 50%,var(--petal) 65%);background-size:260% 100%;-webkit-background-clip:text;background-clip:text;color:transparent}
+@media (prefers-reduced-motion:no-preference){.final .shimmer{animation:shim 5s ease-in-out infinite}}
+@keyframes shim{0%{background-position:100% 0}60%,100%{background-position:0 0}}
+.final .script{color:var(--pink)}.final .bubbles span{border-color:rgba(230,206,206,.6);background:transparent}
+/* outline marquee */
+.omarq{overflow:hidden;padding:26px 0;background:var(--petal);border-top:1px solid rgba(164,126,130,.25)}
+.omarq .track{display:flex;width:max-content}.omarq span{font-family:var(--display);font-size:clamp(46px,6vw,80px);color:transparent;-webkit-text-stroke:1.1px var(--rose);padding:0 28px;white-space:nowrap}
+.omarq span i{font-style:normal;color:var(--gold);-webkit-text-stroke:0;font-size:.5em;vertical-align:middle}
+@media (prefers-reduced-motion:no-preference){.omarq .track{animation:marq 40s linear infinite reverse}}
+/* footer */
+.foot{background:var(--truffle);color:var(--petal);padding:90px 0 34px;position:relative;overflow:hidden}
+.foot .giant{font-family:var(--display);font-size:clamp(40px,8.2vw,124px);line-height:.9;color:transparent;-webkit-text-stroke:1px rgba(230,206,206,.38);white-space:nowrap;margin:0 0 56px;text-align:center}
+.foot-cols{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:36px}.foot h4{font-family:var(--sans);font-weight:500;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin:0 0 16px}
+.foot ul{list-style:none;padding:0;margin:0}.foot li{margin-bottom:9px}.foot a{text-decoration:none;color:var(--petal);opacity:.88}.foot a:hover{opacity:1;color:var(--pink)}
+.foot .sign{font-family:var(--script);font-size:54px;color:var(--pink);line-height:1;margin-top:10px}
+.socials{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}.socials a{font-family:var(--sans);font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;border:1px solid rgba(247,234,235,.35);padding:9px 14px;border-radius:40px}
+.foot-bottom{margin-top:56px;padding-top:24px;border-top:1px solid rgba(247,234,235,.16);display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-family:var(--sans);font-size:12.5px;letter-spacing:.06em;opacity:.8}
+/* loader */
+.loader{position:fixed;inset:0;z-index:100;background:var(--petal);display:grid;place-items:center;transition:opacity .6s,visibility .6s;animation:loaderOut .6s 2.8s forwards}
+.loader .coupe{width:96px}.loader .fizz{stroke:var(--gold)}html.loaded .loader{opacity:0;visibility:hidden}
+@keyframes loaderOut{to{opacity:0;visibility:hidden}}
+html:not(.js) .loader{display:none}
+@media (prefers-reduced-motion:no-preference){.loader .bub circle{animation:pop 1.2s ease-in-out infinite}.loader .bub circle:nth-child(2){animation-delay:.2s}.loader .bub circle:nth-child(3){animation-delay:.4s}}
+@keyframes pop{0%,100%{transform:translateY(0);opacity:.4}50%{transform:translateY(-8px);opacity:1}}
+/* reveal: hide rule is weaker than the show rule, no clip-path on resting content */
+@media (prefers-reduced-motion:no-preference){html.js [data-rv]{opacity:0;transform:translateY(30px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.7,.2,1)}
+html.js [data-rv].in{opacity:1;transform:none}html.js [data-rv="2"]{transition-delay:.12s}html.js [data-rv="3"]{transition-delay:.24s}}
+/* back to top */
+.totop{position:fixed;right:18px;bottom:18px;z-index:40;width:50px;height:50px;border-radius:50%;border:0;background:var(--bord);color:var(--petal);font-size:20px;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .3s;box-shadow:var(--shadow)}
+.totop.show{opacity:1;pointer-events:auto}
+@media (max-width:900px){.split,.grid3,.grid2{grid-template-columns:1fr}.split.flip>:first-child{order:0}.stats{grid-template-columns:1fr 1fr;gap:34px 16px}
+.foot-cols{grid-template-columns:1fr 1fr}body{font-size:19px}.card{padding:30px 24px}}
+@media (max-width:520px){.foot-cols{grid-template-columns:1fr}.btn{white-space:normal;text-align:center;justify-content:center}.logo{font-size:17px;letter-spacing:.1em}.logo em{font-size:32px}}
+"""
+
+ANN = ('<div class="ann" id="ann"><a href="{match}"><div class="track">' + ''.join(
+    '<span>Free quiz: find the colors in your closet that already go together <b>✦</b> Get 5 outfits you can wear this week →</span>' for _ in range(4)) +
+    '</div></a><button class="ann-x" aria-label="Close announcement" type="button">×</button></div>').replace('{match}', L['match'])
+
+NAV_ITEMS = [('About', 'about'), ('The Club', 'club'), ('Blog', 'blog'), ('Shop', 'shop')]
+def nav(active=None):
+    links = ''.join(f'<li><a href="{L[k]}"{" aria-current=\"page\"" if k==active else ""}>{n}</a></li>' for n, k in NAV_ITEMS)
+    menu = ''.join(f'<li><a href="{L[k]}">{n}</a></li>' for n, k in [('Home','home')] + NAV_ITEMS + [('Closet Makeover','makeover'), ('Contact','contact')])
+    return (f'<header class="nav"><div class="wrap">{logo()}<ul class="nav-links">{links}</ul>'
+            f'<a class="btn" href="{L["match"]}">Find my colors</a>'
+            '<button class="burger" aria-label="Open menu" aria-expanded="false" aria-controls="menu" type="button"><span></span><span></span><span></span></button></div></header>'
+            f'<nav class="menu" id="menu" aria-label="Mobile menu"><div class="menu-top">{logo()}<button class="menu-x" aria-label="Close menu" type="button">×</button></div>'
+            f'<ol>{menu}</ol>{badge("CUTE ✦ CURRENT ✦ ON A REAL BUDGET ✦ ", "mb", 130)}'
+            f'<a class="btn" href="{L["match"]}">Take the free Color Match</a></nav>')
+
+def omarq(words=('Shop your closet first', 'Get dressed in 5 minutes', 'Trendy but classic', 'Real mom budget', 'Cute and comfortable')):
+    one = ''.join(f'<span>{w} <i>✦</i></span>' for w in words)
+    return f'<div class="omarq" aria-hidden="true"><div class="track">{one}{one}</div></div>'
+
+def final_cta(head, script, body, btn_text, btn_href, btn2=None):
+    b2 = f'<a class="btn ghost" style="color:var(--petal);border-color:var(--petal)" href="{btn2[1]}">{btn2[0]}</a>' if btn2 else ''
+    return (f'<section class="final">{BUBBLES}<div class="wrap narrow center"><span class="script" data-rv>{script}</span>'
+            f'<h2 class="shimmer" data-rv>{head}</h2><p class="lede" data-rv style="color:var(--petal);margin:0 auto 34px">{body}</p>'
+            f'<div class="btns" data-rv><a class="btn light" href="{btn_href}">{btn_text}</a>{b2}</div></div></section>')
+
+def footer():
+    col = lambda t, items: f'<div><h4>{t}</h4><ul>' + ''.join(f'<li><a href="{L[k]}">{n}</a></li>' for n, k in items) + '</ul></div>'
+    return (f'<footer class="foot"><div class="wrap"><div class="giant" aria-hidden="true">Champagne &amp; Savings</div><div class="foot-cols">'
+            f'<div><p style="max-width:330px">Trendy but classic style for millennial moms on a real budget. Champagne taste, real-life savings.</p><div class="sign">xo, Katie</div>'
+            f'<div class="socials"><a href="{L["instagram"]}">Instagram</a><a href="{L["pinterest"]}">Pinterest</a><a href="{L["tiktok"]}">TikTok</a><a href="{L["ltk"]}">LTK</a></div></div>'
+            + col('Explore', [('Home','home'),('About','about'),('The Club','club'),('Blog','blog'),('Shop','shop')])
+            + col('Work with Katie', [('Closet Makeover','makeover'),('Work With Me','collab'),('Contact','contact'),('Free Color Match','match')])
+            + col('The fine print', [('Privacy Policy','privacy'),('Terms','terms'),('Affiliate Disclosure','affiliate')]) +
+            '</div><div class="foot-bottom"><span>© <span data-year>2026</span> Champagne &amp; Savings. All rights reserved.</span>'
+            '<span>Some links are affiliate links. I may earn a small commission at no extra cost to you.</span></div></div></footer>'
+            '<button class="totop" aria-label="Back to top" type="button">↑</button>')
+
+STD_JS = r"""
+(function(){var d=document,h=d.documentElement,rm=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function done(){h.classList.add('loaded')}window.addEventListener('load',function(){setTimeout(done,350)});setTimeout(done,2500);
+var a=d.getElementById('ann');if(a){try{if(sessionStorage.getItem('cs_ann')==='x')a.remove()}catch(e){}var ax=a.querySelector('.ann-x');ax&&ax.addEventListener('click',function(e){e.preventDefault();a.remove();try{sessionStorage.setItem('cs_ann','x')}catch(e){}})}
+var m=d.getElementById('menu'),b=d.querySelector('.burger');function setM(o){if(!m)return;m.classList.toggle('open',o);b&&b.setAttribute('aria-expanded',o);d.body.style.overflow=o?'hidden':''}
+b&&b.addEventListener('click',function(){setM(true)});var mx=d.querySelector('.menu-x');mx&&mx.addEventListener('click',function(){setM(false)});
+d.addEventListener('keydown',function(e){if(e.key==='Escape')setM(false)});
+var els=[].slice.call(d.querySelectorAll('[data-rv]'));if(!('IntersectionObserver' in window)||rm){els.forEach(function(e){e.classList.add('in')})}
+else{var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}})},{threshold:.12,rootMargin:'0px 0px -6% 0px'});els.forEach(function(e){io.observe(e)});setTimeout(function(){els.forEach(function(e){e.classList.add('in')})},4500)}
+var cs=[].slice.call(d.querySelectorAll('[data-count]'));function cnt(el){var t=+el.getAttribute('data-count'),s=performance.now(),dur=1400;if(rm){el.textContent=t;return}
+(function f(n){var p=Math.min(1,(n-s)/dur);el.textContent=Math.round(t*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(f)})(s)}
+if('IntersectionObserver' in window){var ci=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){cnt(en.target);ci.unobserve(en.target)}})},{threshold:.4});cs.forEach(function(c){ci.observe(c)})}
+[].forEach.call(d.querySelectorAll('[data-words]'),function(el){var w;try{w=JSON.parse(el.getAttribute('data-words'))}catch(e){return}if(rm||!w.length)return;var i=0;
+setInterval(function(){i=(i+1)%w.length;el.style.opacity=0;setTimeout(function(){el.textContent=w[i];el.style.opacity=1},280)},2400)});
+var tt=d.querySelector('.totop');if(tt){window.addEventListener('scroll',function(){tt.classList.toggle('show',window.scrollY>900)},{passive:true});tt.addEventListener('click',function(){window.scrollTo({top:0,behavior:rm?'auto':'smooth'})})}
+[].forEach.call(d.querySelectorAll('[data-year]'),function(y){y.textContent=new Date().getFullYear()});
+})();
+"""
+
+def faq_items_html(items):
+    return '<div class="faq">' + ''.join(f'<details data-rv><summary>{H.escape(q)}</summary><div><p>{a}</p></div></details>' for q, a in items) + '</div>'
+def faq_schema(items):
+    import re
+    data = {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
+        {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": re.sub('<[^>]+>', '', a)}} for q, a in items]}
+    return '<script type="application/ld+json">' + json.dumps(data, ensure_ascii=False) + '</script>'
+
+def page(fname, title, desc, content, extra_css='', extra_js='', active=None, chrome=True, schema=''):
+    head = (f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">'
+            f'<title>{H.escape(title)}</title><meta name="description" content="{H.escape(desc)}">{FONTS}'
+            '<script>document.documentElement.className+=" js"</script>'
+            f'<style>{BASE_CSS}{extra_css}</style>{schema}</head><body>'
+            f'<div class="loader" aria-hidden="true">{COUPE}</div>')
+    if chrome:
+        body = ANN + nav(active) + f'<main>{content}</main>' + omarq() + footer()
+    else:
+        body = f'<header class="nav"><div class="wrap" style="justify-content:center">{logo()}</div></header><main>{content}</main>' + \
+               '<footer class="foot" style="padding:30px 0"><div class="wrap foot-bottom" style="margin:0;border:0;padding:0"><span>© <span data-year>2026</span> Champagne &amp; Savings</span>' + \
+               f'<span><a href="{L["privacy"]}">Privacy</a> · <a href="{L["terms"]}">Terms</a></span></div></footer>'
+    doc = head + body + f'<script>{STD_JS}{extra_js}</script></body></html>'
+    os.makedirs(OUT, exist_ok=True); os.makedirs(TXT, exist_ok=True)
+    open(os.path.join(OUT, fname), 'w').write(doc)
+    open(os.path.join(TXT, fname.replace('.html', '.txt')), 'w').write(doc)
+    return fname
