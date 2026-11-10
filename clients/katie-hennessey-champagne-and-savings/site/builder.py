@@ -254,3 +254,44 @@ def page(fname, title, desc, content, extra_css='', extra_js='', active=None, ch
     open(os.path.join(OUT, fname), 'w').write(doc)
     open(os.path.join(TXT, fname.replace('.html', '.txt')), 'w').write(doc)
     return fname
+
+# ---------- shared icons + small components (added for the full site build) ----------
+def _i(d): return f'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">{d}</svg>'
+ICONS = dict(
+ clock=_i('<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>'),
+ spark=_i('<path d="M12 3l2.2 6.1L20 12l-5.8 2.9L12 21l-2.2-6.1L4 12l5.8-2.9z"/>'),
+ coin=_i('<circle cx="12" cy="12" r="8.5"/><path d="M14.6 9.2c-.5-.9-1.5-1.4-2.6-1.4-1.5 0-2.6.8-2.6 2s1.1 1.7 2.6 2c1.6.3 2.8.9 2.8 2.2s-1.2 2.1-2.8 2.1c-1.2 0-2.2-.5-2.7-1.4M12 6v1.8M12 16.2V18"/>'),
+ hanger=_i('<path d="M12 8a2 2 0 1 1 2-2c0 1-2 1.4-2 3l8.4 6.3a1.3 1.3 0 0 1-.8 2.3H4.4a1.3 1.3 0 0 1-.8-2.3L12 9"/>'),
+ list=_i('<path d="M9 6h11M9 12h11M9 18h11"/><circle cx="4.5" cy="6" r="1"/><circle cx="4.5" cy="12" r="1"/><circle cx="4.5" cy="18" r="1"/>'),
+ cal=_i('<rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/>'),
+ leaf=_i('<path d="M5 19c8 0 14-6 14-14-8 0-14 6-14 14z"/><path d="M5 19l7-7"/>'),
+ trend=_i('<path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/>'),
+ heart=_i('<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/>'),
+ cam=_i('<rect x="3" y="7" width="18" height="13" rx="2"/><circle cx="12" cy="13.5" r="3.5"/><path d="M8 7l1.5-2.5h5L16 7"/>'),
+ video=_i('<rect x="3" y="6" width="13" height="12" rx="2"/><path d="M16 10.5l5-3v9l-5-3"/>'),
+ bag=_i('<path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/>'),
+ pin=_i('<circle cx="12" cy="10" r="6.5"/><path d="M11 14l-2 7"/>'),
+ mail=_i('<rect x="3" y="5.5" width="18" height="13" rx="2"/><path d="M3.5 7l8.5 6 8.5-6"/>'),
+)
+def intro(eyebrow, h2, lede='', center=True, tag='h2'):
+    c = ' center' if center else ''
+    l = f'<p class="lede" data-rv="2">{lede}</p>' if lede else ''
+    return f'<div class="intro{c}"><span class="eyebrow" data-rv>{eyebrow}</span><{tag} data-rv>{h2}</{tag}>{l}</div>'
+
+# Flodesk inline form glow-up (playbook phase 5): scoped overrides by attribute pattern, 16px+ inputs for iOS
+FLODESK_CSS = r"""
+.formcard{background:var(--white);border-radius:28px;padding:40px 34px 34px;box-shadow:var(--shadow);position:relative;overflow:hidden;border:1.5px solid var(--pink)}
+.formcard .ribbon{position:absolute;top:22px;right:-42px;transform:rotate(38deg);background:var(--bord);color:var(--petal);font-family:var(--sans);font-size:11px;letter-spacing:.24em;text-transform:uppercase;padding:8px 54px}
+.formcard::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 40%,rgba(230,206,206,.35) 50%,transparent 60%);background-size:250% 100%;pointer-events:none}
+@media (prefers-reduced-motion:no-preference){.formcard::after{animation:sheen 6s ease-in-out infinite}}
+@keyframes sheen{0%{background-position:120% 0}50%,100%{background-position:-20% 0}}
+.formcard h3{margin-bottom:6px}.formcard .script{font-size:40px;margin-bottom:18px}
+.formcard [class*="__container"]{padding:0!important;margin:0!important;max-width:none!important;background:none!important}
+.formcard [class*="__fields"]{display:grid!important;grid-template-columns:1fr!important;gap:12px!important}
+.formcard input[type=text],.formcard input[type=email],.formcard input:not([type]),.formcard select,.formcard textarea{width:100%!important;font-family:var(--serif)!important;font-size:18px!important;padding:16px 18px!important;border-radius:14px!important;border:1.5px solid var(--pink)!important;background:var(--petal)!important;color:var(--truffle)!important}
+.formcard input:focus,.formcard select:focus,.formcard textarea:focus{outline:none!important;border-color:var(--rose)!important;box-shadow:0 0 0 4px rgba(164,126,130,.18)!important}
+.formcard [class*="__button"],.formcard button[type=submit]{width:100%!important;justify-content:center;margin-top:6px!important;border-radius:60px!important;background:var(--bord)!important;color:var(--petal)!important;font-family:var(--sans)!important;font-size:13px!important;letter-spacing:.2em!important;text-transform:uppercase!important;padding:19px!important;border:0!important;cursor:pointer}
+.formcard label{font-family:var(--sans);font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--bord);display:block;margin:0 0 6px}
+.formcard .fine{font-size:15px;color:var(--muted);text-align:center;margin:14px 0 0}
+.formnote{display:none;background:var(--pink);border-radius:14px;padding:14px 16px;margin-top:14px;font-size:17px}.formnote.show{display:block}
+"""
