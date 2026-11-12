@@ -285,6 +285,22 @@ section{overflow:hidden}
 .proofband p{max-width:640px;margin:16px auto 0;color:var(--muted)}
 .proofband p b{color:var(--ink)}
 .proofband .cta-row{justify-content:center}
+.prfkick{font-weight:700;font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;color:var(--purple);margin:22px 0 6px;text-align:left}
+.rgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:28px;text-align:left}
+.rcpt{background:#fff;border:1.5px solid rgba(46,31,39,.12);border-radius:12px;padding:12px 12px 14px;transform:rotate(var(--r,0deg));box-shadow:0 26px 46px -26px rgba(46,31,39,.35);transition:transform .35s;margin:0}
+.rcpt:hover{transform:rotate(0) translateY(-6px)}
+.rcpt img{width:100%;border-radius:8px;display:block;border:1px solid rgba(46,31,39,.08)}
+.rcpt figcaption{font-size:.85rem;color:var(--muted);margin-top:10px;line-height:1.45}
+.rcpt figcaption b{color:var(--pink);font-family:var(--display);font-size:1.05rem}
+.rcpt.wide{grid-column:1/-1}
+.rcpt.wide img{aspect-ratio:auto}
+.rnote{text-align:center;color:var(--muted);font-size:.88rem;margin-top:22px}
+.rnote b{color:var(--ink)}
+.saidgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:34px;text-align:left}
+.said{background:var(--paper);border:1.5px solid rgba(46,31,39,.12);border-radius:18px;padding:26px 26px 22px;margin:0;font-family:var(--display);font-size:1.02rem;line-height:1.55;transform:rotate(var(--r,0deg));position:relative}
+.said::before{content:"\201C";position:absolute;top:-16px;left:20px;font-size:3rem;color:var(--pink);font-family:var(--display);line-height:1;background:var(--tint);padding:0 6px}
+.said cite{display:block;margin-top:14px;font-family:var(--body);font-style:normal;font-weight:700;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+@media(max-width:860px){.rgrid,.saidgrid{grid-template-columns:1fr}}
 /* ai */
 .ai-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:start}
 .ai-grid p{color:var(--cream);margin-bottom:16px}
@@ -470,10 +486,25 @@ section{overflow:hidden}
 
 <section class="sec-tint proofband">
   <div class="wrap">
+    <span class="wm" aria-hidden="true">receipts</span>
     <span class="eyebrow" data-rv>The proof</span>
-    <h2 class="h" data-rv>You don't have to <em>take my word for it.</em></h2>
-    <p data-rv>I've helped women work through their websites, offers, brand messaging, and blog business strategies. <b>And I'd rather show you what that work looks like than make another big promise about how much money you could earn.</b></p>
-    <div class="cta-row" data-rv><a class="btn" href="/portfolio">See more client stories</a></div>
+    <h2 class="h" data-rv style="text-align:left">You don't have to <em>take my word for it.</em></h2>
+    <p data-rv style="margin:0 0 8px;max-width:680px;text-align:left">I've helped women work through their websites, offers, brand messaging, and blog business strategies. <b>And I'd rather show you what that work looks like than make another big promise about how much money you could earn.</b></p>
+    <p class="prfkick" data-rv>Nine years of blogging. Six years coaching bloggers. Real clients. Real invoices.</p>
+    <div class="rgrid">
+      <figure class="rcpt" data-rv style="--r:-1.5deg"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/redesign-boss-lady-bloggers-r0kbhz/proof/proof-4000-dec-2023.jpg" alt="Payment confirmation for invoice 042: $4,000, December 28, 2023" loading="lazy"><figcaption><b>$4,000</b> &middot; invoice #042 &middot; Dec 2023</figcaption></figure>
+      <figure class="rcpt" data-rv style="--r:1deg;--d:.08s"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/redesign-boss-lady-bloggers-r0kbhz/proof/proof-2499-sep-2023.jpg" alt="Payment confirmation for invoice 035: $2,499, September 7, 2023" loading="lazy"><figcaption><b>$2,499</b> &middot; one of two payments for a custom website + 12 months of coaching</figcaption></figure>
+      <figure class="rcpt" data-rv style="--r:-.8deg;--d:.16s"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/redesign-boss-lady-bloggers-r0kbhz/proof/proof-1500-apr-2023.jpg" alt="Payment confirmation for invoice 019: $1,500, April 21, 2023" loading="lazy"><figcaption><b>$1,500</b> &middot; my first card payment through Stripe &middot; Apr 2023</figcaption></figure>
+      <figure class="rcpt wide" data-rv style="--r:.6deg;--d:.24s"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/redesign-boss-lady-bloggers-r0kbhz/proof/proof-333-monthly-payments.jpg" alt="Nine monthly client payments of $333 from November 2023 to April 2024, names blurred" loading="lazy"><figcaption><b>$333 a month</b> &middot; real monthly coaching clients, Nov 2023 to Apr 2024</figcaption></figure>
+    </div>
+    <p class="rnote" data-rv>These are a few receipts, not a total, and client names stay blurred. <b>Your results depend on you.</b></p>
+    <div class="saidgrid">
+      <blockquote class="said" data-rv style="--r:-1deg">&ldquo;I showed everything to my husband and he was just as impressed as I was. I truly cannot believe all of the value you have packed in here!&rdquo;<cite>client email &middot; January 2025</cite></blockquote>
+      <blockquote class="said" data-rv style="--r:.8deg;--d:.08s">&ldquo;If I had the money I would sign up for your services in a heartbeat. You have already given me direction.&rdquo;<cite>email after a free call &middot; February 2025</cite></blockquote>
+      <blockquote class="said" data-rv style="--r:-.7deg;--d:.16s">&ldquo;Thank you for today! I would like to do the 6 month plan. I want to get this going and earn money ASAP.&rdquo;<cite>client email, sent the same day as her call &middot; February 2025</cite></blockquote>
+    </div>
+    <p class="rnote" data-rv>Real lines from real client emails, shared without names.</p>
+    <div class="cta-row" data-rv style="justify-content:center"><a class="btn" href="/portfolio">See more client stories</a></div>
   </div>
 </section>
 
