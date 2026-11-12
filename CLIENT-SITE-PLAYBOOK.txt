@@ -501,6 +501,31 @@ mobile-verified at 390px, delivered as .txt files."
 =====================================================================
 CHANGELOG (newest first)
 =====================================================================
+2026-11-12  v4.2  REAL PROOF ON THE SITE (from the Proof Bank built
+                  Oct 27-Nov 11). Homepage proof section: 4 blurred
+                  receipts ($4,000 inv #042, $2,499 inv #035-R-001
+                  "one of two payments for a custom website + 12
+                  months of coaching", $1,500 first card payment,
+                  the 9-cell $333/month grid) + 3 VERBATIM client
+                  email quotes shown without names + the kicker
+                  "Nine years of blogging. Six years coaching
+                  bloggers. Real clients. Real invoices." About:
+                  $18.52 first-ever Stripe payout (Apr 2020) and the
+                  81-paid-invoices/$34,481 card ("paid through my
+                  invoices", never all-time income). BBS page:
+                  monthly-invoices strip + one quote. Images live in
+                  repo /proof (blurred versions only), served via
+                  raw.githubusercontent on this branch.
+                  PROOF RULES (binding): receipts are SAMPLES, never
+                  totals or monthly/yearly figures; blurred files
+                  only, never originals (originals show names and
+                  home addresses); email quotes may run verbatim but
+                  WITHOUT names until each client OKs hers; call
+                  lines are Zoom paraphrase - tell as stories only;
+                  client results numbers not cleared; no written
+                  testimonial exists yet - never invent one. Ask-
+                  first list for named testimonials lives in "What
+                  Clients Said" section 7.
 2026-11-12  v4.1  About page rebuilt from the client's new About
                   copy (BOSS era): "two years learning how to blog /
                   nobody taught me the business behind it" hero, the
