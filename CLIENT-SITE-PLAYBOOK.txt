@@ -501,6 +501,29 @@ mobile-verified at 390px, delivered as .txt files."
 =====================================================================
 CHANGELOG (newest first)
 =====================================================================
+2026-11-12  v4.5  BOSS SALES PAGE v2 (priced) from the updated copy.
+                  Headline promise: offer/sales page/freebie/welcome
+                  emails live in 12 weeks or coaching continues free.
+                  THREE TIERS, honest beta pricing: Blueprint $497
+                  (reg $697, 6x$97=$582), Accelerator $1,497 featured
+                  (reg $1,997, 6x$297=$1,782, first-Tuesday 1pm ET
+                  calls, Not Another Course Guarantee), Elite $4,997
+                  (reg $5,997, 6x$897=$5,382, 5 clients, application).
+                  Also: two starting paths + 30-question audit, 4
+                  phases/8 modules, 12-week schedule timeline, 5
+                  differentiators, "real beta price not a fake
+                  countdown" block, Fast Track 3-day bonus, guarantee
+                  pact card with Elite/Blueprint terms + no-refund
+                  line, story with the $50-affiliate/$0-planner/$200-
+                  coach arc and the REAL $18.52 receipt image, proof
+                  section with the "BOSS is new, no program specific
+                  student results yet" line kept verbatim, 13-question
+                  FAQ with JSON-LD, tier chooser + Fast Track call
+                  band + compliance footer line.
+                  TIER BUTTONS are mailto enrollment links until
+                  checkout URLs exist (Blueprint/Accelerator need
+                  Stripe payment links incl. 6-pay plans; Elite needs
+                  an application form link).
 2026-11-12  v4.4  FULL BOSS BUSINESS SYSTEM SALES PAGE from the
                   client's complete copy ("AI can build your entire
                   blog in a day. So why isn't it making you any
