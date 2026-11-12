@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The BOSS Business System | Boss Lady Bloggers</title>
+<meta name="description" content="The BOSS Business System: Gen's signature business building program. Build the business behind your blog, so your content has something meaningful to sell.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400;1,9..144,500;1,9..144,600&family=Karla:wght@400;500;600;700&family=Ephesis&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --paper:#FBF6EE;--tint:#F4EBDE;--ink:#2E1F27;--pink:#A93F63;--purple:#7C2B48;
+  --gold:#BC8A47;--blush:#F0DCE2;--muted:#6E5C63;--cream:#D8CBC3;--rose:#E8A9C0;
+  --display:'Fraunces',Georgia,serif;--body:'Karla',system-ui,sans-serif;--script:'Ephesis',cursive;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:1.03rem;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+::selection{background:var(--pink);color:var(--paper)}
+img{max-width:100%}
+a{color:inherit}
+h1,h2,h3,h4{font-family:var(--display);font-weight:500;line-height:1.12;letter-spacing:-.01em}
+b,strong{font-weight:700}
+.wrap{max-width:1160px;margin:0 auto;padding:0 30px}
+.wrap-n{max-width:860px;margin:0 auto;padding:0 30px}
+section{padding:92px 0;position:relative}
+.sec-tint{background:var(--tint)}
+.sec-ink{background:var(--ink);color:var(--paper)}
+.sec-blush{background:var(--blush)}
+.eyebrow::before{content:"\2726";color:var(--gold);font-size:.9em}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-weight:700;font-size:.72rem;letter-spacing:.26em;text-transform:uppercase;color:var(--purple)}
+.wm{position:absolute;top:10px;right:-10px;font-family:var(--display);font-style:italic;font-size:clamp(5rem,15vw,11rem);line-height:1;color:transparent;-webkit-text-stroke:1.5px rgba(169,63,99,.13);pointer-events:none;user-select:none;white-space:nowrap;z-index:0}
+.sec-ink .wm{-webkit-text-stroke:1.5px rgba(251,246,238,.1)}
+.wm.lo{top:auto;bottom:10px;left:-10px;right:auto}
+.sec-ink .eyebrow{color:var(--rose)}
+.script{font-family:var(--script);font-weight:400;color:var(--gold);font-size:clamp(1.6rem,3vw,2.3rem);line-height:1.2;display:block}
+.sec-ink .script{color:var(--rose)}
+h2.h{font-size:clamp(2.1rem,4.6vw,3.4rem);margin:14px 0 18px}
+h2.h em,.h1 em{font-style:italic;color:var(--pink)}
+.sec-ink h2.h em{color:var(--rose)}
+.lead{font-size:1.1rem;color:var(--muted);max-width:640px}
+.sec-ink .lead{color:var(--cream)}
+mark{background:none;color:inherit;font-weight:700;position:relative;z-index:0;white-space:normal}
+mark::after{content:"";position:absolute;left:-.12em;right:-.12em;bottom:.06em;height:.46em;background:var(--blush);z-index:-1;transform:scaleX(0);transform-origin:left;transition:transform .9s cubic-bezier(.2,.7,.2,1) .15s}
+.sec-ink mark::after,.mark-deep mark::after{background:rgba(169,63,99,.4)}
+.inview mark::after,html.nomo mark::after,html:not(.js) mark::after{transform:scaleX(1)}
+/* buttons */
+:root{--hot:#D8427D;--hot2:#B42E60}
+.btn{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(120deg,var(--hot),var(--hot2));color:#fff;font-weight:700;font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;padding:19px 34px;border-radius:60px;text-decoration:none;border:0;cursor:pointer;position:relative;overflow:hidden;transition:transform .3s,box-shadow .3s,background .3s;box-shadow:0 18px 38px -12px rgba(216,66,125,.55)}
+.btn::after{content:"\2192";font-weight:400;transition:transform .3s}
+.btn:hover{transform:translateY(-3px);background:var(--ink);box-shadow:0 24px 44px -16px rgba(46,31,39,.5)}
+.btn.gold{background:var(--gold)}
+.btn:hover::after{transform:translateX(5px)}
+.sec-ink .btn:hover{background:var(--paper);color:var(--ink)}
+.btn-ghost{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;color:var(--purple);text-decoration:none;padding:19px 6px;border-bottom:2px solid var(--blush);transition:border-color .3s,color .3s}
+.btn-ghost:hover{color:var(--pink);border-color:var(--pink)}
+.sec-ink .btn-ghost{color:var(--rose);border-color:rgba(232,169,192,.35)}
+.sec-ink .btn-ghost:hover{color:#fff;border-color:var(--rose)}
+.cta-row{display:flex;gap:22px;align-items:center;flex-wrap:wrap;margin-top:34px}
+/* progress bar */
+#pbar{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--pink),var(--gold));z-index:300}
+/* announcement bar */
+.annbar{background:var(--ink);color:var(--paper);text-align:center;font-weight:700;font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;padding:11px 16px;position:relative;z-index:120}
+.annbar a{color:var(--rose);text-decoration:none;border-bottom:1px solid var(--rose)}
+.annbar b{color:var(--rose)}
+/* nav */
+nav#nav{position:sticky;top:0;z-index:200;background:rgba(251,246,238,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(46,31,39,.08);transition:transform .4s}
+nav#nav.hide{transform:translateY(-110%)}
+.nav-inner{display:flex;align-items:center;gap:26px;height:74px}
+.logo{font-family:var(--display);font-size:1.22rem;text-decoration:none;white-space:nowrap;letter-spacing:-.01em}
+.logo em{font-style:italic;color:var(--pink)}
+.nav-links{display:flex;list-style:none;gap:18px;margin-left:auto;align-items:center}
+.nav-links a{text-decoration:none;font-weight:700;font-size:.76rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);white-space:nowrap;position:relative;padding:6px 0}
+.nav-links a::after{content:"";position:absolute;left:0;bottom:0;width:100%;height:2px;background:var(--pink);transform:scaleX(0);transform-origin:right;transition:transform .35s}
+.nav-links a:hover::after{transform:scaleX(1);transform-origin:left}
+.nav-cta{background:linear-gradient(120deg,var(--hot),var(--hot2));color:#fff;font-weight:700;font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;padding:13px 24px;border-radius:50px;text-decoration:none;white-space:nowrap;transition:background .3s,transform .3s}
+.nav-cta:hover{background:var(--ink);transform:translateY(-2px)}
+.burger{display:none;background:none;border:0;cursor:pointer;padding:10px;margin-left:auto}
+.burger i{display:block;width:26px;height:2px;background:var(--ink);margin:6px 0;transition:.3s}
+@media(max-width:1240px){
+  .nav-links{display:none}.burger{display:block}.nav-cta{margin-left:0}
+}
+@media(max-width:560px){.nav-cta{display:none}}
+/* mobile menu */
+#mmenu{position:fixed;inset:0;background:var(--ink);color:var(--paper);z-index:400;display:none;flex-direction:column;justify-content:center;padding:40px 34px;overflow:auto}
+#mmenu.on{display:flex}
+#mmenu .mm-close{position:absolute;top:22px;right:26px;background:none;border:0;color:var(--paper);font-size:2rem;cursor:pointer;line-height:1}
+#mmenu a{display:block;color:var(--paper);text-decoration:none;font-family:var(--display);font-size:clamp(1.7rem,6vw,2.6rem);padding:10px 0;border-bottom:1px solid rgba(251,246,238,.1);opacity:0;transform:translateY(16px);animation:mmin .5s forwards;animation-delay:calc(var(--i)*.06s)}
+#mmenu a em{font-style:italic;color:var(--rose)}
+#mmenu .mm-cta{margin-top:26px;background:var(--pink);border:0;border-radius:60px;text-align:center;font-family:var(--body);font-weight:700;font-size:.9rem;letter-spacing:.14em;text-transform:uppercase;padding:18px}
+@keyframes mmin{to{opacity:1;transform:none}}
+/* reveals */
+html.js:not(.nomo) [data-rv]{opacity:0;transform:translateY(34px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0s)}
+html.js:not(.nomo) [data-rv="l"]{transform:translateX(-44px)}
+html.js:not(.nomo) [data-rv="r"]{transform:translateX(44px)}
+html.js:not(.nomo) [data-rv="s"]{transform:scale(.88)}
+html.js:not(.nomo) [data-rv="clip"]{transform:none;clip-path:inset(0 0 100% 0);transition:clip-path 1.1s cubic-bezier(.2,.7,.2,1),opacity .6s}
+html.js:not(.nomo) .inview[data-rv]{opacity:1;transform:none}
+html.js:not(.nomo) .inview[data-rv="clip"]{clip-path:inset(-8% -8% -18% -8%)}
+/* split hero words */
+html.js:not(.nomo) .split .w{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.16em;margin-bottom:-.16em}
+html.js:not(.nomo) .split .w>span{display:inline-block;transform:translateY(110%);transition:transform 1s cubic-bezier(.2,.75,.15,1);transition-delay:calc(var(--wi)*.07s)}
+html.js:not(.nomo) .split.go .w>span{transform:none}
+/* marquee */
+.mq{overflow:hidden;white-space:nowrap;display:flex;user-select:none}
+.mq>div{display:flex;flex-shrink:0;align-items:center;animation:mq var(--mqs,30s) linear infinite}
+.mq span{display:inline-flex;align-items:center;gap:26px;padding-right:26px;font-family:var(--display);font-size:clamp(1.1rem,2.2vw,1.6rem);letter-spacing:.02em}
+.mq .hrt{color:var(--pink);font-size:.9em}
+@keyframes mq{to{transform:translateX(-100%)}}
+html.nomo .mq>div{animation:none}
+/* marquee bands + spin badge */
+.mqband{background:var(--ink);color:var(--paper);padding:17px 0;overflow:hidden}
+.mqband .mq span{text-transform:uppercase;font-family:var(--body);font-weight:700;font-size:.8rem;letter-spacing:.24em}
+.mqband .mq .hrt{color:var(--rose)}
+.mqband.gold{background:var(--gold);color:#fff}
+.mqband.gold .mq .hrt{color:var(--ink)}
+.mqband.blush{background:var(--blush);color:var(--purple)}
+.mqband.blush .mq .hrt{color:var(--pink)}
+.spinb{position:relative;width:138px;height:138px;display:inline-grid;place-items:center;text-decoration:none;flex-shrink:0}
+.spinb svg{position:absolute;inset:0;width:100%;height:100%;animation:spinb 14s linear infinite}
+html.nomo .spinb svg{animation:none}
+@keyframes spinb{to{transform:rotate(360deg)}}
+.spinb svg text{font-family:var(--body);font-weight:700;font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;fill:currentColor}
+.spinb .ctr{width:54px;height:54px;border-radius:50%;background:linear-gradient(120deg,var(--hot),var(--hot2));color:#fff;display:grid;place-items:center;font-size:1.3rem;transition:transform .3s,background .3s}
+.spinb:hover .ctr{transform:scale(1.12);background:var(--ink)}
+/* floating blobs + grain */
+.blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.55;pointer-events:none;animation:drift 16s ease-in-out infinite alternate}
+@keyframes drift{from{transform:translate(0,0) scale(1)}to{transform:translate(40px,-40px) scale(1.12)}}
+html.nomo .blob{animation:none}
+.grain{position:absolute;inset:0;pointer-events:none;opacity:.5;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .05 0'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E")}
+/* ticker numbers */
+.bignum{font-family:var(--display);font-size:clamp(2.6rem,6vw,4.4rem);line-height:1}
+/* tilt */
+[data-tilt]{transform-style:preserve-3d;will-change:transform;transition:transform .25s ease-out}
+/* sticker / tape */
+.sticker{position:absolute;background:var(--gold);color:#fff;font-weight:700;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;padding:10px 18px;border-radius:50px;transform:rotate(8deg);box-shadow:0 10px 22px -8px rgba(188,138,71,.6)}
+.tape{position:absolute;width:110px;height:30px;background:rgba(188,138,71,.3);transform:rotate(-5deg);top:-15px;left:50%;margin-left:-55px}
+/* outline giant type */
+.outline{color:transparent;-webkit-text-stroke:1.5px var(--ink);letter-spacing:-.01em}
+.sec-ink .outline{-webkit-text-stroke:1.5px rgba(251,246,238,.8)}
+.outline.pinkline{-webkit-text-stroke:1.5px var(--pink)}
+/* faq */
+.faq{border-top:1.5px solid rgba(46,31,39,.14)}
+.faq details{border-bottom:1.5px solid rgba(46,31,39,.14)}
+.faq summary{cursor:pointer;list-style:none;display:flex;align-items:baseline;gap:18px;padding:24px 0;font-family:var(--display);font-size:clamp(1.08rem,2vw,1.35rem);transition:color .3s}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary .fn{font-size:.78rem;font-family:var(--body);font-weight:700;color:var(--gold);letter-spacing:.1em;min-width:28px}
+.faq summary .plus{margin-left:auto;width:30px;height:30px;border:1.5px solid var(--ink);border-radius:50%;display:grid;place-items:center;font-family:var(--body);font-weight:400;font-size:1.1rem;flex-shrink:0;transition:transform .4s,background .3s,color .3s}
+.faq details[open] summary{color:var(--pink)}
+.faq details[open] .plus{transform:rotate(45deg);background:var(--pink);border-color:var(--pink);color:#fff}
+.faq .fa{padding:0 0 26px;color:var(--muted);max-width:720px}
+/* footer */
+footer{background:var(--ink);color:var(--paper);padding:0 0 46px;overflow:hidden}
+.foot-mq{border-bottom:1px solid rgba(251,246,238,.12);padding:30px 0}
+.foot-mq .mq span{font-size:clamp(2rem,5vw,3.4rem);color:transparent;-webkit-text-stroke:1px rgba(251,246,238,.55);text-transform:none;gap:34px;padding-right:34px}
+.foot-mq .mq .hrt{color:var(--pink);-webkit-text-stroke:0}
+.foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:44px;padding:60px 0 40px}
+.foot-logo{font-family:var(--display);font-size:1.5rem;margin-bottom:8px}
+.foot-logo em{font-style:italic;color:var(--rose)}
+.foot-tag{font-family:var(--script);color:var(--rose);font-size:1.7rem;margin:2px 0 10px}
+.foot-brand p{color:var(--cream);font-size:.95rem;max-width:300px}
+.foot-pods{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+.fpod{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(251,246,238,.25);border-radius:50px;padding:9px 16px;font-size:.78rem;font-weight:700;text-decoration:none;transition:border-color .3s,background .3s}
+.fpod:hover{border-color:var(--rose);background:rgba(232,169,192,.08)}
+.fpod .d{width:8px;height:8px;border-radius:50%;background:var(--rose)}
+.foot-col h4{font-family:var(--body);font-weight:700;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--rose);margin-bottom:16px}
+.foot-col ul{list-style:none}
+.foot-col li{margin-bottom:10px}
+.foot-col a{color:var(--cream);text-decoration:none;font-size:.95rem;transition:color .3s;border-bottom:1px solid transparent}
+.foot-col a:hover{color:#fff;border-color:var(--rose)}
+.foot-copy{text-align:center;color:rgba(216,203,195,.55);font-size:.8rem;border-top:1px solid rgba(251,246,238,.1);padding-top:28px}
+@media(max-width:900px){.foot-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.foot-grid{grid-template-columns:1fr}}
+@media(max-width:700px){section{padding:68px 0}}
+html,body{overflow-x:hidden;overflow-x:clip}
+@media(max-width:760px){
+  html.js:not(.nomo) [data-rv="l"],html.js:not(.nomo) [data-rv="r"]{transform:translateY(34px)}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
+}
+
+section{overflow:hidden}
+.bhero{background:linear-gradient(165deg,var(--ink) 55%,#46303c);color:var(--paper);padding:104px 0 90px;position:relative;overflow:hidden}
+.bhero .blob.b1{width:560px;height:560px;background:radial-gradient(circle,rgba(169,63,99,.5),transparent 65%);top:-180px;right:-120px}
+.bhero .eyebrow{color:var(--rose)}
+.bhero h1{font-size:clamp(2.6rem,6.6vw,5rem);line-height:1.04;margin:18px 0 10px;font-style:italic;background:linear-gradient(100deg,#fff 10%,var(--rose) 55%,var(--gold) 95%);-webkit-background-clip:text;background-clip:text;color:transparent;padding-bottom:.1em}
+.bhero .sub{font-family:var(--display);font-style:italic;font-size:clamp(1.15rem,2.4vw,1.5rem);color:var(--rose);max-width:720px}
+.bhero p.hb{color:var(--cream);max-width:680px;margin-top:20px;font-size:1.06rem}
+.bhero p.hb b{color:#fff}
+.learns{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:46px}
+.learns>div{background:var(--paper);border:1.5px solid rgba(46,31,39,.12);border-radius:20px;padding:26px;display:grid;grid-template-columns:40px 1fr;gap:14px;align-items:start}
+.learns .ck{width:30px;height:30px;border-radius:50%;background:linear-gradient(120deg,var(--hot),var(--hot2));color:#fff;display:grid;place-items:center;font-size:.8rem;margin-top:2px}
+.learns p{color:var(--muted);font-size:.98rem}
+.learns p b{color:var(--ink)}
+@media(max-width:800px){.learns{grid-template-columns:1fr}}
+.who{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:46px}
+.who>div{border-radius:24px;padding:34px 32px}
+.who .a{background:var(--blush)}
+.who .b{background:var(--paper);border:1.5px solid rgba(46,31,39,.12)}
+.who h3{font-size:1.25rem;margin-bottom:10px}
+.who p{color:var(--muted)}
+@media(max-width:760px){.who{grid-template-columns:1fr}}
+.fin2{text-align:center;padding:110px 0;position:relative;overflow:hidden;background:linear-gradient(170deg,var(--ink) 60%,#3d2a35)}
+.fin2 .blob.b4{width:520px;height:520px;background:radial-gradient(circle,rgba(169,63,99,.5),transparent 65%);bottom:-220px;left:50%;margin-left:-260px}
+.fin2 h2{font-size:clamp(2.1rem,5.2vw,3.7rem);line-height:1.08;max-width:860px;margin:16px auto 22px;color:var(--paper)}
+.fin2 h2 em{font-style:italic;color:var(--rose)}
+.fin2 p{max-width:640px;margin:0 auto;color:var(--cream)}
+.fin2 .cta-row{justify-content:center}
+</style>
+</head>
+<body>
+<div id="pbar"></div>
+<div class="annbar"><b>New</b> &middot; The BOSS Business System &middot; build the business behind your blog &middot; <a href="/boss-business-system">See how it works</a></div>
+<nav id="nav">
+  <div class="wrap nav-inner">
+    <a class="logo" href="/">Boss Lady <em>Bloggers</em></a>
+    <ul class="nav-links"><li><a href="/" aria-label="Home"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11 12 3l9 8"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg></a></li><li><a href="/start-here">Start Here</a></li><li><a href="/boss-business-system">BOSS Business System</a></li><li><a href="/blog-coaching">Blog Coaching</a></li><li><a href="/freebies">Resources</a></li><li><a href="/about">About</a></li></ul>
+    <a href="/boss-business-system" class="nav-cta">Explore BOSS Business System</a>
+    <button class="burger" id="burger" aria-label="Menu"><i></i><i></i><i></i></button>
+  </div>
+</nav>
+<div id="mmenu">
+  <button class="mm-close" aria-label="Close">&times;</button>
+  <a href="/" style="--i:0">Home</a><a href="/start-here" style="--i:1">Start Here</a><a href="/boss-business-system" style="--i:2">BOSS Business System</a><a href="/blog-coaching" style="--i:3">Blog Coaching</a><a href="/freebies" style="--i:4">Resources</a><a href="/about" style="--i:5">About</a>
+  <a class="mm-cta" href="/boss-business-system" style="--i:6">Explore The BOSS Business System</a>
+</div>
+
+<header class="bhero">
+  <div class="blob b1"></div><div class="grain"></div>
+  <div class="wrap">
+    <span class="eyebrow" data-rv>The signature program</span>
+    <h1 class="split go">The BOSS Business System</h1>
+    <p class="sub" data-rv style="--d:.25s">Learn how to build the business behind your blog, so your content has something meaningful to sell.</p>
+    <p class="hb" data-rv style="--d:.35s">My signature business building program for women who are ready to <b>stop guessing their way through blogging</b>. Whether you haven't launched your blog yet or you've been publishing for months without making meaningful income, <b>I'll help you understand what actually needs to happen next.</b></p>
+    <div class="cta-row" data-rv style="--d:.45s">
+      <a class="btn" href="/freebies">Watch the free Business Foundations training</a>
+      <a class="btn-ghost" href="/book-a-call">Talk it through on a free call</a>
+    </div>
+  </div>
+</header>
+
+<div class="mqband gold"><div class="mq" style="--mqs:26s"><div><span>business strategy <span class="hrt">&#10084;</span></span><span>marketing <span class="hrt">&#10084;</span></span><span>sales <span class="hrt">&#10084;</span></span><span>practical AI implementation <span class="hrt">&#10084;</span></span><span>business strategy <span class="hrt">&#10084;</span></span><span>marketing <span class="hrt">&#10084;</span></span><span>sales <span class="hrt">&#10084;</span></span><span>practical AI implementation <span class="hrt">&#10084;</span></span><span>business strategy <span class="hrt">&#10084;</span></span><span>marketing <span class="hrt">&#10084;</span></span><span>sales <span class="hrt">&#10084;</span></span><span>practical AI implementation <span class="hrt">&#10084;</span></span></div><div aria-hidden="true"><span>business strategy <span class="hrt">&#10084;</span></span><span>marketing <span class="hrt">&#10084;</span></span><span>sales <span class="hrt">&#10084;</span></span><span>practical AI implementation <span class="hrt">&#10084;</span></span><span>business strategy <span class="hrt">&#10084;</span></span><span>marketing <span class="hrt">&#10084;</span></span><span>sales <span class="hrt">&#10084;</span></span><span>practical AI implementation <span class="hrt">&#10084;</span></span><span>business strategy <span class="hrt">&#10084;</span></span><span>marketing <span class="hrt">&#10084;</span></span><span>sales <span class="hrt">&#10084;</span></span><span>practical AI implementation <span class="hrt">&#10084;</span></span></div></div></div>
+
+<section>
+  <div class="wrap">
+    <span class="wm" aria-hidden="true">learn</span>
+    <span class="eyebrow" data-rv>Inside the program</span>
+    <h2 class="h" data-rv>You'll learn <em>how to:</em></h2>
+    <div class="learns">
+      <div data-rv><span class="ck">&#10003;</span><p>Figure out <b>who you want to serve</b> and what they're willing to pay for.</p></div>
+      <div data-rv style="--d:.06s"><span class="ck">&#10003;</span><p>Develop offers that <b>solve real problems</b> instead of creating products and hoping someone buys them.</p></div>
+      <div data-rv style="--d:.12s"><span class="ck">&#10003;</span><p>Build a <b>recognizable brand and a website</b> that makes your offer easy to understand.</p></div>
+      <div data-rv style="--d:.18s"><span class="ck">&#10003;</span><p>Create <b>blog content and marketing</b> that bring potential customers into your business.</p></div>
+      <div data-rv style="--d:.24s"><span class="ck">&#10003;</span><p>Build an <b>email and sales system</b> that gives interested readers a clear next step.</p></div>
+      <div data-rv style="--d:.3s"><span class="ck">&#10003;</span><p>Use <b>AI, automation, and better business systems</b> to organize and implement the work.</p></div>
+    </div>
+    <p class="lead" data-rv style="margin-top:30px">You won't be learning a collection of random blogging tricks. <b style="color:var(--ink)">You'll be learning how the pieces of a real online business fit together, and how to put them to work.</b></p>
+  </div>
+</section>
+
+<section class="sec-tint">
+  <div class="wrap">
+    <span class="eyebrow" data-rv>Is this you?</span>
+    <h2 class="h" data-rv>Built for women who are <em>done guessing.</em></h2>
+    <div class="who">
+      <div class="a" data-rv><h3>You haven't launched yet.</h3><p>Start by building the business, not just the blog. You'll know who you're serving, what you're selling, and why, before you spend months on content.</p></div>
+      <div class="b" data-rv style="--d:.1s"><h3>You've been publishing for months.</h3><p>Traffic, posts, maybe an email list, but the income doesn't reflect the work. We find the missing business pieces and put them in place.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="fin2">
+  <div class="blob b4"></div><div class="grain"></div>
+  <div class="wrap">
+    <span class="eyebrow" data-rv>Start here</span>
+    <h2 data-rv="clip">First, we build the business. <em>Then we make it easier to run.</em></h2>
+    <p data-rv>Start with the free Business Foundations training, or bring your questions to a free call.</p>
+    <div class="cta-row" data-rv>
+      <a class="btn" href="/freebies">Watch the free training</a>
+      <a class="btn-ghost" href="/book-a-call">Book a free call</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-mq"><div class="mq" style="--mqs:38s"><div><span>Beautiful blogs, built to sell <span class="hrt">&#10084;</span></span><span>Beautiful blogs, built to sell <span class="hrt">&#10084;</span></span><span>Beautiful blogs, built to sell <span class="hrt">&#10084;</span></span><span>Beautiful blogs, built to sell <span class="hrt">&#10084;</span></span></div><div aria-hidden="true"><span>Beautiful blogs, built to sell <span class="hrt">&#10084;</span></span><span>Beautiful blogs, built to sell <span class="hrt">&#10084;</span></span><span>Beautiful blogs, built to sell <span class="hrt">&#10084;</span></span><span>Beautiful blogs, built to sell <span class="hrt">&#10084;</span></span></div></div></div>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="foot-logo">Boss <em>Lady</em> Bloggers</div>
+        <div class="foot-tag">Beautiful blogs, built to sell.</div>
+        <p>Blog coaching, business strategy, digital products, and smarter systems for women who want to build businesses that sell.</p>
+        <div class="foot-pods">
+          <a href="https://podcasts.apple.com/us/podcast/boss-lady-bloggers-start-a-blog-and-business/id1514838049" target="_blank" rel="noopener" class="fpod"><span class="d"></span> Apple Podcasts</a>
+          <a href="https://open.spotify.com/show/104sYmQooO65IELDPNbrfv" target="_blank" rel="noopener" class="fpod"><span class="d"></span> Spotify</a>
+        </div>
+      </div>
+      <div class="foot-col"><h4>Explore</h4><ul>
+        <li><a href="/about">About</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/podcast">Podcast</a></li>
+        <li><a href="/freebies">Free Courses</a></li>
+        <li><a href="/portfolio">Portfolio</a></li>
+      </ul></div>
+      <div class="foot-col"><h4>Work With Me</h4><ul>
+        <li><a href="/boss-business-system">The BOSS Business System</a></li>
+        <li><a href="/blog-coaching">Blog Coaching</a></li>
+        <li><a href="/blogging-ladies">The Blogging Ladies</a></li>
+        <li><a href="/book-a-call">Book a free call</a></li>
+      </ul></div>
+      <div class="foot-col"><h4>Support</h4><ul>
+        <li><a href="/contact">Contact</a></li>
+        <li><a href="/privacy-policy">Privacy Policy</a></li>
+        <li><a href="/terms-conditions">Terms &amp; Conditions</a></li>
+        <li><a href="/disclaimer">Disclaimer</a></li>
+      </ul></div>
+    </div>
+    <div class="foot-copy">&copy; <span id="yr"></span> Boss Lady Bloggers. All rights reserved.</div>
+  </div>
+</footer>
+<script>
+document.documentElement.classList.add('js');
+if(matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('nomo');
+var NOMO=document.documentElement.classList.contains('nomo');
+/* reveals */
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('inview');io.unobserve(e.target);}});},{threshold:.16});
+document.querySelectorAll('[data-rv],[data-mk]').forEach(function(el){io.observe(el)});
+/* split headlines */
+document.querySelectorAll('.split').forEach(function(h){
+  if(NOMO){h.classList.add('go');return;}
+  var wi=0;
+  (function walk(node){
+    Array.prototype.slice.call(node.childNodes).forEach(function(n){
+      if(n.nodeType===3){
+        var frag=document.createDocumentFragment();
+        n.textContent.split(/(\s+)/).forEach(function(part){
+          if(/^\s+$/.test(part)||part===''){frag.appendChild(document.createTextNode(part));return;}
+          var w=document.createElement('span');w.className='w';
+          var inn=document.createElement('span');inn.style.setProperty('--wi',wi++);inn.textContent=part;
+          w.appendChild(inn);frag.appendChild(w);
+        });
+        node.replaceChild(frag,n);
+      }else if(n.nodeType===1&&!n.classList.contains('w')){walk(n);}
+    });
+  })(h);
+  setTimeout(function(){h.classList.add('go')},80);
+});
+/* count up */
+var cio=new IntersectionObserver(function(es){es.forEach(function(e){
+  if(!e.isIntersecting)return;cio.unobserve(e.target);
+  var el=e.target,end=parseFloat(el.getAttribute('data-count')),suf=el.getAttribute('data-suf')||'';
+  if(NOMO){el.textContent=end+suf;return;}
+  var t0=null;function step(ts){if(!t0)t0=ts;var p=Math.min((ts-t0)/1400,1);p=1-Math.pow(1-p,3);
+    el.textContent=Math.round(end*p)+suf;if(p<1)requestAnimationFrame(step);}
+  requestAnimationFrame(step);
+});},{threshold:.6});
+document.querySelectorAll('[data-count]').forEach(function(el){cio.observe(el)});
+/* nav hide on scroll down */
+var nav=document.getElementById('nav'),ly=0;
+if(nav)addEventListener('scroll',function(){var y=scrollY;nav.classList.toggle('hide',y>ly&&y>340);ly=y;},{passive:true});
+/* progress bar */
+var pb=document.getElementById('pbar');
+if(pb)addEventListener('scroll',function(){var h=document.documentElement;pb.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';},{passive:true});
+/* mobile menu */
+var bg=document.getElementById('burger'),mm=document.getElementById('mmenu');
+if(bg&&mm){bg.addEventListener('click',function(){mm.classList.add('on');document.body.style.overflow='hidden';});
+mm.querySelectorAll('a,.mm-close').forEach(function(a){a.addEventListener('click',function(){mm.classList.remove('on');document.body.style.overflow='';});});}
+/* tilt */
+if(matchMedia('(pointer:fine)').matches&&!NOMO)document.querySelectorAll('[data-tilt]').forEach(function(c){
+  c.addEventListener('mousemove',function(e){var r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+    c.style.transform='perspective(800px) rotateX('+(-y*5)+'deg) rotateY('+(x*5)+'deg) translateY(-4px)';});
+  c.addEventListener('mouseleave',function(){c.style.transform='';});
+});
+/* magnetic buttons */
+if(matchMedia('(pointer:fine)').matches&&!NOMO)document.querySelectorAll('.btn').forEach(function(b){
+  b.addEventListener('mousemove',function(e){var r=b.getBoundingClientRect();
+    b.style.transform='translate('+((e.clientX-r.left-r.width/2)*.12)+'px,'+((e.clientY-r.top-r.height/2)*.3-3)+'px)';});
+  b.addEventListener('mouseleave',function(){b.style.transform='';});
+});
+/* countdown: doors open Fri Nov 27 2026, close Mon Nov 30 11:59pm ET */
+(function(){
+  var open=Date.parse('2026-11-27T05:00:00Z'),close=Date.parse('2026-12-01T04:59:59Z'),now=Date.now();
+  document.querySelectorAll('[data-cd]').forEach(function(el){
+    function tick(){
+      var now=Date.now();
+      if(now<open){el.textContent='Doors open Friday, November 27';return;}
+      if(now>close){el.textContent='This round is closed';return;}
+      var s=Math.floor((close-now)/1000),d=Math.floor(s/86400),h=Math.floor(s%86400/3600),m=Math.floor(s%3600/60);
+      el.textContent='Doors close in '+d+'d '+h+'h '+m+'m';
+      setTimeout(tick,30000);
+    }
+    tick();
+  });
+})();
+document.querySelectorAll('#yr').forEach(function(y){y.textContent=new Date().getFullYear()});
+var yr=document.getElementById('yr');if(yr)yr.textContent=new Date().getFullYear();
+</script>
+</body>
+</html>

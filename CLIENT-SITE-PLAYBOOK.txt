@@ -501,6 +501,29 @@ mobile-verified at 390px, delivered as .txt files."
 =====================================================================
 CHANGELOG (newest first)
 =====================================================================
+2026-11-12  v4.0  THE BOSS BUSINESS SYSTEM ERA. New flagship and
+                  positioning from the client's Nov homepage copy +
+                  sitemap concept: "Blog coaching for women who want
+                  to make money, not just publish content." Homepage
+                  fully rebuilt (pain pills, missing-business reframe,
+                  "Your blog is not your business" manifesto, the five
+                  business pieces, program section, imagine flips,
+                  story, proof band, AI/Claude/ClickUp section, free
+                  training band). New nav per her sitemap with her
+                  requested full name: Home / Start Here / BOSS
+                  Business System / Blog Coaching / Resources
+                  (-> /freebies for now) / About + "Explore BOSS
+                  Business System" CTA. Footer brand line updated to
+                  her new closing line. Annbar: Blog to Paid Nov 27-30
+                  countdown REMOVED (new copy supersedes the offer),
+                  replaced with a BOSS Business System announcement.
+                  Interim /boss-business-system page built strictly
+                  from the homepage's program copy; full sales page
+                  awaits her copy. Blog to Paid pages left intact and
+                  reachable by URL. Testimonial [INSERT] placeholders
+                  omitted per the proof rule. Nav lesson again: longer
+                  item names -> burger breakpoint raised 1120->1240 and
+                  nav tightened; always test 1140-1680 after nav edits.
 2026-10-27  v3.7  Live-site bug round (client screenshots of
                   bossladybloggers.com). ROOT CAUSE, BIG LESSON:
                   the reveal system's final state applied
