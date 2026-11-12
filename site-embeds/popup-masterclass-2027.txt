@@ -1,0 +1,65 @@
+<!--
+============================================================
+POPUP - FREE 2027 BLOGGING MASTERCLASS
+============================================================
+WHERE: paste into an Embed Code block on regular Showit pages
+(NEVER on the two blog templates). One per page is enough.
+
+Shows once after 14 seconds or 45% scroll, whichever comes
+first. After closing, it stays hidden for 7 days. It never
+shows on the masterclass or thank-you pages.
+
+TIP: run ONE popup per page. If this replaces the redesign
+popup, remove that embed from the page first.
+============================================================
+-->
+
+<div id="blbMc27" style="display:none">
+<style>
+#blbMc27{position:fixed;inset:0;z-index:99990;align-items:center;justify-content:center;padding:20px;font-family:'Karla',system-ui,sans-serif}
+#blbMc27 .mc27-bg{position:absolute;inset:0;background:rgba(46,31,39,.62);backdrop-filter:blur(3px)}
+#blbMc27 .mc27-card{position:relative;background:#FBF6EE;border-radius:26px;max-width:520px;width:100%;padding:44px 38px 38px;box-shadow:0 50px 90px -40px rgba(0,0,0,.6);overflow:hidden;animation:mc27in .45s cubic-bezier(.2,.75,.2,1)}
+@keyframes mc27in{from{opacity:0;transform:translateY(26px) scale(.97)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){#blbMc27 .mc27-card{animation:none}}
+#blbMc27 .mc27-glow{position:absolute;top:-90px;right:-70px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(240,220,226,.9),transparent 70%);pointer-events:none}
+#blbMc27 .mc27-x{position:absolute;top:14px;right:16px;background:none;border:0;font-size:1.7rem;line-height:1;color:#6E5C63;cursor:pointer;padding:6px}
+#blbMc27 .mc27-k{position:relative;display:inline-block;font-weight:700;font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:#BC8A47;border:1.5px solid #BC8A47;border-radius:50px;padding:7px 14px;margin-bottom:14px}
+#blbMc27 h2{position:relative;font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:clamp(1.5rem,4.5vw,1.9rem);line-height:1.15;color:#2E1F27;margin:0 0 12px}
+#blbMc27 h2 em{font-style:italic;color:#A93F63}
+#blbMc27 p{position:relative;font-size:.96rem;line-height:1.6;color:#6E5C63;margin:0 0 10px}
+#blbMc27 p b{color:#2E1F27}
+#blbMc27 .mc27-btn{position:relative;display:block;text-align:center;background:linear-gradient(120deg,#D8427D,#B42E60);color:#fff;font-weight:700;font-size:.82rem;letter-spacing:.16em;text-transform:uppercase;padding:17px 26px;border-radius:60px;text-decoration:none;margin-top:18px;box-shadow:0 18px 38px -12px rgba(216,66,125,.55)}
+#blbMc27 .mc27-m{position:relative;text-align:center;font-weight:700;font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:#BC8A47;margin:12px 0 0}
+@media(max-width:560px){#blbMc27 .mc27-card{padding:34px 24px 28px}}
+</style>
+  <div class="mc27-bg" data-mc27close></div>
+  <div class="mc27-card" role="dialog" aria-modal="true" aria-label="Free 2027 blogging masterclass">
+    <span class="mc27-glow"></span>
+    <button class="mc27-x" data-mc27close aria-label="Close">&times;</button>
+    <span class="mc27-k">Starting a blog in 2027?</span>
+    <h2>Before you write another 50 blog posts, <em>watch this.</em></h2>
+    <p>If I were starting my blogging business all over again, I wouldn't start with content. <b>I'd start with the business I wanted that content to grow.</b></p>
+    <p>Get my free training on what I'd build, what I'd skip, and how I'd create a blog with a real plan for making sales.</p>
+    <a class="mc27-btn" href="/free-blogging-masterclass">Send me the free training</a>
+    <p class="mc27-m">Free video training &#10022; delivered to your inbox</p>
+  </div>
+</div>
+<script>
+(function(){
+  var KEY='blbMc27Seen', DAYS=7, el=document.getElementById('blbMc27');
+  if(!el)return;
+  var path=location.pathname||'';
+  if(path.indexOf('free-blogging-masterclass')>-1||path.indexOf('training-thank-you')>-1)return;
+  try{var seen=localStorage.getItem(KEY);if(seen&&Date.now()-(+seen)<DAYS*864e5)return;}catch(e){}
+  var shown=false;
+  function show(){if(shown)return;shown=true;el.style.display='flex';document.documentElement.style.overflow='hidden';}
+  function hide(){el.style.display='none';document.documentElement.style.overflow='';try{localStorage.setItem(KEY,Date.now());}catch(e){}}
+  el.querySelectorAll('[data-mc27close]').forEach(function(c){c.addEventListener('click',hide);});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&shown)hide();});
+  setTimeout(show,14000);
+  window.addEventListener('scroll',function(){
+    var h=document.documentElement;
+    if(h.scrollTop/(h.scrollHeight-h.clientHeight)>0.45)show();
+  },{passive:true});
+})();
+</script>

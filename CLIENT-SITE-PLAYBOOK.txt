@@ -501,6 +501,30 @@ mobile-verified at 390px, delivered as .txt files."
 =====================================================================
 CHANGELOG (newest first)
 =====================================================================
+2026-11-12  v4.3  FREE 2027 MASTERCLASS FUNNEL, per the client's
+                  landing copy + funnel spec. New pages:
+                  /free-blogging-masterclass (SEO title "How to Make
+                  Money Blogging in 2027 | Free Class", distraction-
+                  free mini-nav, ONE prominent Flodesk form card in
+                  the hero per spec, CTAs all anchor to it,
+                  educational-results disclaimer kept verbatim) and
+                  /training-thank-you ("You're In!", confetti, video
+                  player placeholder, 1,000-visitors question, BOSS
+                  pitch). New popup embed popup-masterclass-2027.txt
+                  (14s or 45% scroll, 7-day suppression, never shows
+                  on the funnel pages; run ONE popup per page).
+                  FORM HEADLINE TEST ("test a few"): the form card
+                  rotates 5 headlines per visitor, sticky via
+                  localStorage (blbMcVar), variant tagged on the
+                  element. True conversion attribution needs one
+                  Flodesk form per variant - swap IDs in when made.
+                  All "free training" buttons sitewide now point to
+                  /free-blogging-masterclass. PENDING (Flodesk side):
+                  dedicated masterclass form ID (page uses the
+                  course-library form as placeholder), success
+                  redirect to /training-thank-you, email subject
+                  "Your 2027 blog business training is inside", and
+                  the actual training video embed on the thank-you.
 2026-11-12  v4.2  REAL PROOF ON THE SITE (from the Proof Bank built
                   Oct 27-Nov 11). Homepage proof section: 4 blurred
                   receipts ($4,000 inv #042, $2,499 inv #035-R-001
