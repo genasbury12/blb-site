@@ -501,6 +501,18 @@ mobile-verified at 390px, delivered as .txt files."
 =====================================================================
 CHANGELOG (newest first)
 =====================================================================
+2026-11-12  v4.1  About page rebuilt from the client's new About
+                  copy (BOSS era): "two years learning how to blog /
+                  nobody taught me the business behind it" hero, the
+                  never-ending-list chips, the run-a-blog vs build-a-
+                  business realization, basement/nap-times single-mom
+                  section, the systems+AI second lesson, what-we-look-
+                  at grid, five beliefs, and the NEW three-offer suite
+                  revealed in her copy: The BOSS Business System,
+                  The Productive Blogger Method, The Project Club.
+                  Holding pages created at /productive-blogger-method
+                  and /project-club from her card copy only (full
+                  pages await her copy) so no nav or button 404s.
 2026-11-12  v4.0  THE BOSS BUSINESS SYSTEM ERA. New flagship and
                   positioning from the client's Nov homepage copy +
                   sitemap concept: "Blog coaching for women who want
