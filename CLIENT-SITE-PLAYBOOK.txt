@@ -501,6 +501,30 @@ mobile-verified at 390px, delivered as .txt files."
 =====================================================================
 CHANGELOG (newest first)
 =====================================================================
+2026-11-12  v4.4  FULL BOSS BUSINESS SYSTEM SALES PAGE from the
+                  client's complete copy ("AI can build your entire
+                  blog in a day. So why isn't it making you any
+                  money?"). Replaces the holding page. Sections: AI
+                  hero, done-everything pills, 1,000-visitors outline
+                  number + truth card, two-women split panel, story,
+                  gradient program reveal, 6 what-you'll-build blocks
+                  (script numerals + "So..." pull rules), 8 module
+                  cards, Monday-morning imagine card, ChatGPT
+                  objection (ink), for/not-for fit, PROOF (cleared
+                  receipts + 2 anonymized email quotes + portfolio
+                  case-study band), what-you-receive (confirmed rows
+                  only), cost-of-no-strategy, investment =
+                  "enrollment opens soon" card (free training / free
+                  call / waitlist email) because price+terms aren't
+                  confirmed, 7-question FAQ with JSON-LD, finale with
+                  her P.S. All [INSERT] slots either filled with
+                  verified proof or held honestly - nothing invented.
+                  STILL NEEDED to finish the page: confirmed price,
+                  payment options, support tiers + deliverables,
+                  included resources, access period/start date,
+                  bonuses, refund terms, time commitment, onboarding
+                  flow; plus case-study picks and the first named
+                  testimonial once a client OKs hers.
 2026-11-12  v4.3  FREE 2027 MASTERCLASS FUNNEL, per the client's
                   landing copy + funnel spec. New pages:
                   /free-blogging-masterclass (SEO title "How to Make
