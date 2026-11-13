@@ -501,6 +501,18 @@ mobile-verified at 390px, delivered as .txt files."
 =====================================================================
 CHANGELOG (newest first)
 =====================================================================
+2026-11-13  v5.2  PODCAST ADDED TO NAV (client): NAV_LINKS in v5.py
+                  now Home / Start Here / BOSS Business System /
+                  Blog Coaching / Resources / Podcast / About, with
+                  Podcast -> the existing /podcast page (page
+                  content unchanged). ALL pages rebuilt so the new
+                  nav is in every embed - client must re-paste all
+                  page codes in Showit for the nav to update
+                  sitewide. Nav fit checked at 1250/1320/1440/1680:
+                  one line, no wrap, 26px clear of the CTA; burger
+                  below 1240 unchanged. Verified 15 pages over=0
+                  errs=0 at 1440 + 390.
+
 2026-11-13  v5.1  NEW CONTACT PAGE (client's full copy verbatim)
                   via build6_contact.py -> contact.html (old entry
                   removed from build5_support.py PAGES). Sections:
