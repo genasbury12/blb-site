@@ -501,6 +501,26 @@ mobile-verified at 390px, delivered as .txt files."
 =====================================================================
 CHANGELOG (newest first)
 =====================================================================
+2026-11-13  v5.1  NEW CONTACT PAGE (client's full copy verbatim)
+                  via build6_contact.py -> contact.html (old entry
+                  removed from build5_support.py PAGES). Sections:
+                  hero (File_021, "let's get you to the right
+                  place", skip-to-form ghost btn); routing cards -
+                  BOSS (ink) + Blog Profit Intensive (blush), copy
+                  per client, buttons -> /boss-business-system and
+                  /blog-coaching; contact form card - SAME FormSubmit
+                  endpoint + hidden fields as before (hello@
+                  bossladybloggers.com, _next -> /contact?sent=1,
+                  success banner on ?sent=1) PLUS her new required
+                  dropdown "What are you reaching out about?" with
+                  7 options (BOSS / coaching / customer support /
+                  podcast / brand collab / website design / other),
+                  sent as "topic" in the email; "Before you hit
+                  send" honesty card -> /freebies; stay-connected
+                  socials (Instagram @bossladybloggers, YouTube,
+                  /podcast) + script-font Genasys signoff.
+                  Verified 15 pages over=0 errs=0 at 1440 + 390.
+
 2026-11-13  v5.0  NEW RESOURCES PAGE (client's full copy verbatim)
                   via build6_resources.py -> freebies.html (the nav
                   "Resources" slug; old freebies entry removed from
