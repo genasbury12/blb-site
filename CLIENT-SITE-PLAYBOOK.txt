@@ -501,6 +501,16 @@ mobile-verified at 390px, delivered as .txt files."
 =====================================================================
 CHANGELOG (newest first)
 =====================================================================
+2026-11-13  v4.9  TRAINING AVAILABILITY (client): only 01 Business
+                  Foundations and 05 Sales Diagnostic are finished.
+                  The other 8 training cards on Start Here are now
+                  "coming soon": pink diagonal ribbon over a faded
+                  mockup, no Flodesk link anywhere on the card, CTA
+                  text "Coming soon - stay tuned". Controlled by the
+                  LIVE set in build6_starthere.py - add a number
+                  back to LIVE and rebuild when she says a training
+                  is ready. Do NOT re-link the 8 until she says so.
+
 2026-11-13  v4.8  NEW START HERE PAGE (client's full copy verbatim)
                   via build6_starthere.py -> start-here.html,
                   replacing the old v4-era page. Sections: hero
