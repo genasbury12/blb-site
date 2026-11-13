@@ -501,6 +501,29 @@ mobile-verified at 390px, delivered as .txt files."
 =====================================================================
 CHANGELOG (newest first)
 =====================================================================
+2026-11-13  v4.8  NEW START HERE PAGE (client's full copy verbatim)
+                  via build6_starthere.py -> start-here.html,
+                  replacing the old v4-era page. Sections: hero
+                  (File_030) + wants pills; gold mqband; "your blog
+                  is not your business" ink bizcard; 10 FREE
+                  TRAININGS grid - each card shows its freebie
+                  mockup image (see below), number badge, category,
+                  H3, copy, Flodesk link (build/offer/presell/fix/
+                  sales/site/convert/email/plan/claude); Two Ways to
+                  Work With Me (BOSS + Blog Profit Intensive cards
+                  on ink); YouTube section (@bossladybloggers, topic
+                  pills + 3 featured video cards); podcast section
+                  (File_019 + 3 featured episodes -> /podcast);
+                  Genasys section (File_047); finale. CTAs follow
+                  the client's copy: BBS primary + coaching ghost.
+                  FREEBIE MOCKUPS: client's 10 laptop+phone mockup
+                  PNGs (regular + transparent each) merged from the
+                  freebie-mockups branch into /freebie-mockups on
+                  this branch; used on the Start Here cards via raw
+                  GitHub URLs; share package (zip + link list txt)
+                  sent to client for her page editor. Verified 15
+                  pages over=0 errs=0 at 1440 + 390.
+
 2026-11-13  v4.7  THE BLOG PROFIT INTENSIVE replaces the by-the-call
                   coaching page at /blog-coaching (new builder
                   build6_coaching.py; old COACH_BODY entry removed
