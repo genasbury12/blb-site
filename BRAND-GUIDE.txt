@@ -148,6 +148,10 @@ MOTION (all guarded by prefers-reduced-motion):
     (/free-blogging-masterclass, Flodesk form).
   - Exception: income PROOF receipts (screenshots) stay. They are
     evidence, not price lists.
+  - Exception (client, Nov 13 2026): /blog-coaching (The Blog
+    Profit Intensive) is the ONE page that shows its price:
+    $897 pay in full or 3 x $333, in the enrollment card. Its
+    CTAs still go to /book-a-call.
 
 =====================================================================
 8. PROOF RULES (binding, from the Proof Bank)
