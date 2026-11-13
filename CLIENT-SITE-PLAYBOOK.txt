@@ -501,6 +501,28 @@ mobile-verified at 390px, delivered as .txt files."
 =====================================================================
 CHANGELOG (newest first)
 =====================================================================
+2026-11-13  v5.0  NEW RESOURCES PAGE (client's full copy verbatim)
+                  via build6_resources.py -> freebies.html (the nav
+                  "Resources" slug; old freebies entry removed from
+                  build5_support.py PAGES). Sections: centered hero
+                  ("you don't need another 100 blogging tips" +
+                  tried-pills + still-wondering question cards);
+                  gold mqband; 10 TRAINING+TOOL cards, each with
+                  mockup image, number/category, headline, copy, a
+                  gold-bordered toolbox panel (Your free tool - name
+                  + description + "You'll walk away with"), and a
+                  "Get the free training + <tool>" button; YouTube
+                  section (topics + 3 featured-video cards ->
+                  channel); podcast section (File_019 + 3 episode
+                  rows -> /podcast); 6 blog category cards on ink ->
+                  /blog; BOSS + Blog Profit Intensive program cards;
+                  finale. COMING-SOON RULE APPLIES HERE TOO: only
+                  01 + 05 link to Flodesk; other 8 cards show the
+                  ribbon + "Coming soon - stay tuned" (LIVE set in
+                  build6_resources.py, same rule as Start Here).
+                  Old six-course Flodesk library page is retired
+                  with this. Verified 15 pages over=0 errs=0.
+
 2026-11-13  v4.9  TRAINING AVAILABILITY (client): only 01 Business
                   Foundations and 05 Sales Diagnostic are finished.
                   The other 8 training cards on Start Here are now
