@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>About Gen | Blog Coach + Online Business Mentor | Boss Lady Bloggers</title>
-<meta name="description" content="I spent two years learning how to blog. Nobody taught me how to build the business behind it. Meet Gen, blog coach and founder of Boss Lady Bloggers.">
+<title>About Genasys | Blog Coach + Blog Website Designer Since 2017 | Boss Lady Bloggers</title>
+<meta name="description" content="Meet Genasys: blog coach and Showit blog website designer since 2017. Nine years of building blogs, seven years coaching women 1:1.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400;1,9..144,500;1,9..144,600&family=Karla:wght@400;500;600;700&family=Ephesis&display=swap" rel="stylesheet">
@@ -184,265 +184,210 @@ html,body{overflow-x:hidden;overflow-x:clip}
 }
 
 section{overflow:hidden}
-.pgh{padding:100px 0 80px;position:relative;overflow:hidden}
+
+.phframe{position:relative;border-radius:26px;overflow:hidden;border:1.5px solid rgba(46,31,39,.12);box-shadow:0 34px 60px -36px rgba(46,31,39,.45)}
+.phframe img{display:block;width:100%;height:100%;object-fit:cover}
+.trioB{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:50px}
+.trioB figure{background:#fff;border:1.5px solid rgba(46,31,39,.12);border-radius:10px;padding:12px 12px 14px;transform:rotate(var(--r,0deg));box-shadow:0 26px 46px -26px rgba(46,31,39,.35);transition:transform .35s}
+.trioB figure:hover{transform:rotate(0) translateY(-6px)}
+.trioB img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:6px;display:block}
+.trioB figcaption{font-family:var(--script);color:var(--gold);font-size:1.4rem;text-align:center;margin-top:8px}
+@media(max-width:700px){.trioB{grid-template-columns:1fr;max-width:340px;margin-left:auto;margin-right:auto}}
+@media(max-width:900px){.pgh .heroGrid{display:block !important}.pgh .phframe{margin-top:40px;min-height:320px !important}}
+.pgh{padding:90px 0 70px;position:relative;overflow:hidden}
 .pgh .blob.b1{width:460px;height:460px;background:radial-gradient(circle,#F0DCE2,transparent 65%);top:-140px;right:-100px}
-.ah-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center;position:relative}
-.ah-grid h1{font-size:clamp(2.3rem,5.2vw,3.8rem);line-height:1.08;margin:18px 0 14px}
-.ah-grid h1 em{font-style:italic;color:var(--pink)}
-.ah-grid .why{font-family:var(--display);font-style:italic;font-size:clamp(1.15rem,2.3vw,1.45rem);color:var(--purple);margin-bottom:18px}
-.ah-grid p.hb{color:var(--muted);max-width:620px;margin-bottom:14px}
-.ah-grid p.hb b{color:var(--ink)}
-.photo{border-radius:220px 220px 26px 26px;overflow:hidden;border:1.5px solid rgba(46,31,39,.12);position:relative;min-height:460px;transform:rotate(1.5deg);box-shadow:0 40px 70px -40px rgba(46,31,39,.45)}
-.photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-@media(max-width:900px){.ah-grid{grid-template-columns:1fr}.photo{min-height:380px}}
-/* dream */
-.dream p{max-width:660px;color:var(--muted);margin-bottom:14px}
-.dream p b{color:var(--ink)}
-.chiprow{display:flex;flex-wrap:wrap;gap:12px;margin:26px 0}
-.chiprow span{background:var(--paper);border:1.5px dashed rgba(46,31,39,.3);border-radius:50px;padding:10px 20px;font-size:.9rem;color:var(--muted);transform:rotate(var(--r,0deg))}
-.want{background:var(--ink);color:var(--paper);border-radius:26px;padding:36px 36px;max-width:760px;margin-top:30px;position:relative;overflow:hidden}
-.want::before{content:"";position:absolute;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(169,63,99,.5),transparent 70%);top:-80px;right:-60px}
-.want p{position:relative;font-family:var(--display);font-size:clamp(1.15rem,2.4vw,1.5rem);line-height:1.5;margin:0}
-.want p b{color:var(--rose)}
-/* story */
-.story-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:56px;align-items:start}
-.story-grid .photo2{position:sticky;top:120px;border-radius:26px;overflow:hidden;border:1.5px solid rgba(46,31,39,.12);min-height:420px;transform:rotate(-1.5deg);box-shadow:0 34px 60px -36px rgba(46,31,39,.45)}
-.story-grid .photo2 img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.story-grid p{margin-bottom:15px;color:var(--muted);max-width:640px}
-.story-grid p b{color:var(--ink)}
-.formula{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:22px 0}
-.formula span{background:var(--blush);border-radius:50px;padding:9px 18px;font-weight:700;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--purple)}
-.formula i{color:var(--gold);font-style:normal}
-.realize{border-left:4px solid var(--pink);padding:8px 0 8px 24px;margin:24px 0}
-.realize p{font-family:var(--display);font-size:clamp(1.15rem,2.4vw,1.45rem);line-height:1.5;color:var(--ink);margin:0}
-.realize p b{color:var(--pink)}
-@media(max-width:880px){.story-grid{grid-template-columns:1fr}.story-grid .photo2{position:static;min-height:320px}}
-/* basement (ink) */
-.base-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
-.base-grid p{color:var(--cream);margin-bottom:14px;max-width:620px}
-.base-grid p b{color:#fff}
-.freedomlist{list-style:none;margin:24px 0}
-.freedomlist li{padding:12px 0 12px 34px;position:relative;border-bottom:1px solid rgba(251,246,238,.12);color:var(--cream)}
-.freedomlist li:last-child{border:0}
-.freedomlist li::before{content:"\2713";position:absolute;left:2px;color:var(--rose);font-weight:700}
-.base-ph{position:relative;border-radius:26px 200px 26px 26px;overflow:hidden;border:1px solid rgba(251,246,238,.2);min-height:430px;box-shadow:0 40px 70px -40px rgba(0,0,0,.6);transform:rotate(1.2deg)}
-.base-ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-@media(max-width:880px){.base-grid{grid-template-columns:1fr}.base-ph{min-height:330px}}
-/* systems */
-.sys p{max-width:680px;color:var(--muted);margin-bottom:14px}
-.sys p b{color:var(--ink)}
-.sys .law{background:var(--blush);border-radius:24px;padding:32px 34px;max-width:760px;margin:28px 0}
-.sys .law p{font-family:var(--display);font-size:clamp(1.15rem,2.4vw,1.45rem);line-height:1.5;margin:0;color:var(--ink)}
-.sys .law p b{color:var(--pink)}
-.toolchips{display:flex;flex-wrap:wrap;gap:12px;margin:24px 0}
-.toolchips span{border:1.5px solid rgba(169,63,99,.35);color:var(--purple);border-radius:50px;padding:10px 20px;font-weight:700;font-size:.76rem;letter-spacing:.14em;text-transform:uppercase}
-/* today */
-.lookat{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:36px 0}
-.lookat div{background:var(--paper);border:1.5px solid rgba(46,31,39,.12);border-radius:18px;padding:22px 24px;font-family:var(--display);font-size:1.05rem;line-height:1.45}
-.lookat div::before{content:"\2726";color:var(--gold);margin-right:10px}
-@media(max-width:860px){.lookat{grid-template-columns:1fr}}
-/* beliefs */
-.blv{margin-top:46px;border-top:1.5px solid rgba(46,31,39,.14)}
-.blv>div{display:grid;grid-template-columns:70px 1fr;gap:24px;align-items:baseline;padding:26px 12px;border-bottom:1.5px solid rgba(46,31,39,.14);transition:background .3s,padding .3s}
-.blv>div:hover{background:#fff;padding-left:24px}
-.blv .bn{font-family:var(--script);font-size:2.2rem;color:var(--gold)}
-.blv h3{font-size:1.25rem;margin-bottom:6px}
-.blv h3 em{font-style:italic;color:var(--pink)}
-.blv p{color:var(--muted);max-width:680px}
-@media(max-width:640px){.blv>div{grid-template-columns:48px 1fr}}
-/* offers */
-.offers{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:50px}
-.off{background:var(--paper);border:1.5px solid rgba(46,31,39,.12);border-radius:26px;padding:38px 32px;display:flex;flex-direction:column;transition:transform .35s,box-shadow .35s;position:relative}
-.off:hover{transform:translateY(-6px);box-shadow:0 34px 56px -30px rgba(46,31,39,.35)}
-.off.flag{background:var(--ink);color:var(--paper);transform:scale(1.02)}
-.off .ok{font-weight:700;font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
-.off.flag .ok{color:var(--rose)}
-.off h3{font-size:1.45rem;margin:10px 0 8px}
-.off .for{font-family:var(--display);font-style:italic;color:var(--purple);margin-bottom:12px}
-.off.flag .for{color:var(--rose)}
-.off p.d{color:var(--muted);font-size:.96rem;flex:1}
-.off.flag p.d{color:var(--cream)}
-.off .btn{margin-top:22px;justify-content:center}
-@media(max-width:900px){.offers{grid-template-columns:1fr}.off.flag{transform:none}}
-/* finale */
-.fin2{text-align:center;padding:116px 0;position:relative;overflow:hidden;background:linear-gradient(170deg,var(--ink) 60%,#3d2a35)}
+.pgh h1{font-size:clamp(2.4rem,5.6vw,4.2rem);line-height:1.05;margin:18px 0 20px;max-width:900px}
+.pgh h1 em{font-style:italic;color:var(--pink)}
+.pgh p.hb{font-size:1.1rem;color:var(--muted);max-width:660px}
+.pgh p.hb b{color:var(--ink)}
+.photo{border-radius:26px;overflow:hidden;border:1.5px solid rgba(46,31,39,.12);position:relative}
+.photo img{display:block;width:100%;height:100%;object-fit:cover}
+.checksL{list-style:none;margin-top:30px}
+.checksL li{display:grid;grid-template-columns:40px 1fr;gap:14px;padding:15px 0;border-bottom:1.5px solid rgba(46,31,39,.12);align-items:start}
+.checksL li:last-child{border:0}
+.checksL .ck{width:30px;height:30px;border-radius:50%;background:var(--pink);color:#fff;display:grid;place-items:center;font-size:.8rem;margin-top:3px;flex-shrink:0}
+.checksL b{display:block}
+.checksL span.d{color:var(--muted)}
+.sec-ink .checksL li{border-color:rgba(251,246,238,.14)}
+.sec-ink .checksL span.d{color:var(--cream)}
+.fin2{text-align:center;padding:110px 0;position:relative;overflow:hidden;background:linear-gradient(170deg,var(--ink) 60%,#3d2a35)}
 .fin2 .blob.b4{width:520px;height:520px;background:radial-gradient(circle,rgba(169,63,99,.5),transparent 65%);bottom:-220px;left:50%;margin-left:-260px}
-.fin2 h2{font-size:clamp(2.1rem,5.2vw,3.7rem);line-height:1.08;max-width:880px;margin:16px auto 22px;color:var(--paper)}
+.fin2 h2{font-size:clamp(2.2rem,5.6vw,3.9rem);line-height:1.06;max-width:860px;margin:16px auto 22px;color:var(--paper)}
 .fin2 h2 em{font-style:italic;color:var(--rose)}
-.fin2 p{max-width:660px;margin:0 auto 14px;color:var(--cream)}
+.fin2 p{max-width:640px;margin:0 auto;color:var(--cream)}
 .fin2 p b{color:#fff}
 .fin2 .cta-row{justify-content:center}
+
+.ah-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center;position:relative}
+.ah-grid .photo{min-height:460px;border-radius:220px 220px 26px 26px;transform:rotate(1.5deg)}
+@media(max-width:900px){.ah-grid{grid-template-columns:1fr}.ah-grid .photo{min-height:380px}}
+.honest{background:var(--ink);color:var(--paper);border-radius:28px;padding:46px 44px;max-width:860px;margin:0 auto;position:relative;overflow:hidden}
+.honest::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(169,63,99,.45),transparent 70%);top:-110px;right:-80px}
+.honest p{position:relative;font-family:var(--display);font-size:clamp(1.1rem,2.2vw,1.4rem);line-height:1.6}
+.honest p b{color:var(--rose)}
+.story-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:56px;align-items:start}
+.story-grid .photo{min-height:420px;position:sticky;top:120px;transform:rotate(-1.5deg)}
+.story-grid p{margin-bottom:18px;color:var(--muted)}
+.story-grid p b{color:var(--ink)}
+@media(max-width:860px){.story-grid{grid-template-columns:1fr}.story-grid .photo{position:static;min-height:320px}}
+.tl{margin-top:56px;position:relative;padding-left:40px}
+.tl::before{content:"";position:absolute;left:10px;top:8px;bottom:8px;width:2px;background:linear-gradient(var(--blush),var(--pink),var(--gold))}
+.tl>div{position:relative;padding:0 0 38px 24px}
+.tl>div::before{content:"";position:absolute;left:-37px;top:6px;width:16px;height:16px;border-radius:50%;background:var(--paper);border:3.5px solid var(--pink)}
+.tl .yr{font-family:var(--display);font-style:italic;font-size:1.6rem;color:var(--pink)}
+.tl h3{font-size:1.2rem;margin:4px 0 6px}
+.tl p{color:var(--muted);max-width:620px}
+.blv{margin-top:50px;border-top:1.5px solid rgba(46,31,39,.14)}
+.blv>div{display:grid;grid-template-columns:70px 1fr;gap:24px;align-items:baseline;padding:26px 12px;border-bottom:1.5px solid rgba(46,31,39,.14);transition:background .3s,padding .3s}
+.blv>div:hover{background:var(--blush);padding-left:24px}
+.blv .bn{font-family:var(--script);font-size:2.2rem;color:var(--gold)}
+.blv h3{font-size:1.25rem;display:inline;margin-right:10px}
+.blv p{display:inline;color:var(--muted)}
+.refuse{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:50px}
+.refuse>div{background:rgba(251,246,238,.05);border:1px solid rgba(251,246,238,.16);border-radius:22px;padding:30px 28px;position:relative}
+.refuse .x{width:34px;height:34px;border-radius:50%;background:rgba(169,63,99,.3);color:var(--rose);display:grid;place-items:center;font-weight:700;margin-bottom:14px}
+.refuse h3{font-size:1.15rem;color:#fff;margin-bottom:8px}
+.refuse p{color:var(--cream);font-size:.96rem}
+@media(max-width:760px){.refuse{grid-template-columns:1fr}}
+.flat{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:center}
+.flat .photo{min-height:380px;transform:rotate(1deg)}
+.flat p{margin-bottom:16px;color:var(--ink)}
+@media(max-width:860px){.flat{grid-template-columns:1fr}.flat .photo{min-height:300px}}
+.weird{columns:2;column-gap:24px;margin-top:46px}
+.weird>div{break-inside:avoid;background:var(--paper);border:1.5px solid rgba(46,31,39,.12);border-radius:18px;padding:22px 24px;margin-bottom:24px;transform:rotate(var(--r,0deg));transition:transform .35s}
+.weird>div:hover{transform:rotate(0) translateY(-4px)}
+.weird b{color:var(--pink)}
+@media(max-width:700px){.weird{columns:1}}
 </style>
 </head>
 <body>
-<div id="pbar"></div>
 <div class="annbar"><b>New</b> &middot; The BOSS Business System &middot; build the business behind your blog &middot; <a href="/boss-business-system">See how it works</a></div>
 <nav id="nav">
   <div class="wrap nav-inner">
     <a class="logo" href="/">Boss Lady <em>Bloggers</em></a>
     <ul class="nav-links"><li><a href="/" aria-label="Home"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11 12 3l9 8"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg></a></li><li><a href="/start-here">Start Here</a></li><li><a href="/boss-business-system">BOSS Business System</a></li><li><a href="/blog-coaching">Blog Coaching</a></li><li><a href="/freebies">Resources</a></li><li><a href="/about">About</a></li></ul>
-    <a href="/boss-business-system" class="nav-cta">Explore BOSS Business System</a>
+    <a href="/book-a-call" class="nav-cta">Book a Free Call</a>
     <button class="burger" id="burger" aria-label="Menu"><i></i><i></i><i></i></button>
   </div>
 </nav>
 <div id="mmenu">
   <button class="mm-close" aria-label="Close">&times;</button>
   <a href="/" style="--i:0">Home</a><a href="/start-here" style="--i:1">Start Here</a><a href="/boss-business-system" style="--i:2">BOSS Business System</a><a href="/blog-coaching" style="--i:3">Blog Coaching</a><a href="/freebies" style="--i:4">Resources</a><a href="/about" style="--i:5">About</a>
-  <a class="mm-cta" href="/boss-business-system" style="--i:6">Explore The BOSS Business System</a>
+  <a class="mm-cta" href="/book-a-call" style="--i:6">Book a Free Call</a>
 </div>
 
 <header class="pgh">
   <div class="blob b1"></div><div class="grain"></div>
   <div class="wrap ah-grid">
     <div>
-      <span class="eyebrow" data-rv>About Boss Lady Bloggers</span>
-      <h1 class="split go">I spent two years learning how to blog. <em>Nobody taught me how to build the business behind it.</em></h1>
-      <p class="why" data-rv style="--d:.25s">And that's exactly why I became a blog coach.</p>
-      <p class="hb" data-rv style="--d:.35s">I know what it's like to spend hours creating content, researching keywords, making your website look beautiful, and <b>wondering when all that work is finally going to turn into money.</b></p>
-      <p class="hb" data-rv style="--d:.4s">You keep telling yourself you're getting closer. Just a little more traffic. A few more blog posts. Maybe a better Pinterest strategy. But months go by, and you're still trying to figure out how people actually make money doing this.</p>
-      <p class="hb" data-rv style="--d:.45s"><b>I've been there.</b> And what I eventually discovered changed the entire direction of my business.</p>
-      <div class="cta-row" data-rv style="--d:.5s"><a class="btn" href="/boss-business-system">Discover The BOSS Business System</a></div>
+      <span class="eyebrow" data-rv>Meet your blog coach</span>
+      <h1 class="split go">Hi, I'm Genasys. <em>Just an ordinary mom going all in on the dream again.</em></h1>
+      <p class="hb" data-rv style="--d:.3s">I've run Boss Lady Bloggers <b>since 2017</b>. I have a son, a day job, and a business I'm building on the side, on purpose, around real life. If you came here looking for a highlight reel, wrong page. If you came here for <b>someone who's actually done the thing and will tell you the truth about it</b>, hi.</p>
+      <div class="cta-row" data-rv style="--d:.45s"><a class="btn" href="/book-a-call">Book my free Fast Track call</a></div>
     </div>
-    <div class="photo" data-rv="r" style="--d:.3s"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_047.jpeg" alt="Gen, blog coach and founder of Boss Lady Bloggers" fetchpriority="high"><span class="sticker" style="top:54%;right:14px;z-index:1">hi, I'm Gen</span></div>
+    <div class="photo" data-rv="r" style="--d:.2s"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_047.jpeg" alt="Genasys, founder of Boss Lady Bloggers"><span class="sticker" style="top:22px;right:22px">est. 2017</span></div>
   </div>
 </header>
+<div class="mqband "><div class="mq" style="--mqs:28s"><div><span>blog coach + web designer <span class="hrt">&#10084;</span></span><span>since 2017 <span class="hrt">&#10084;</span></span><span>done with you, not at you <span class="hrt">&#10084;</span></span><span>business first, blog second <span class="hrt">&#10084;</span></span><span>blog coach + web designer <span class="hrt">&#10084;</span></span><span>since 2017 <span class="hrt">&#10084;</span></span><span>done with you, not at you <span class="hrt">&#10084;</span></span><span>business first, blog second <span class="hrt">&#10084;</span></span><span>blog coach + web designer <span class="hrt">&#10084;</span></span><span>since 2017 <span class="hrt">&#10084;</span></span><span>done with you, not at you <span class="hrt">&#10084;</span></span><span>business first, blog second <span class="hrt">&#10084;</span></span></div><div aria-hidden="true"><span>blog coach + web designer <span class="hrt">&#10084;</span></span><span>since 2017 <span class="hrt">&#10084;</span></span><span>done with you, not at you <span class="hrt">&#10084;</span></span><span>business first, blog second <span class="hrt">&#10084;</span></span><span>blog coach + web designer <span class="hrt">&#10084;</span></span><span>since 2017 <span class="hrt">&#10084;</span></span><span>done with you, not at you <span class="hrt">&#10084;</span></span><span>business first, blog second <span class="hrt">&#10084;</span></span><span>blog coach + web designer <span class="hrt">&#10084;</span></span><span>since 2017 <span class="hrt">&#10084;</span></span><span>done with you, not at you <span class="hrt">&#10084;</span></span><span>business first, blog second <span class="hrt">&#10084;</span></span></div></div></div>
 
-<section class="dream sec-tint">
+<section class="sec-tint">
   <div class="wrap">
-    <span class="wm" aria-hidden="true">yours</span>
-    <span class="eyebrow" data-rv>Why you really started</span>
-    <h2 class="h" data-rv>You didn't start your blog because you wanted <em>another thing to maintain.</em></h2>
-    <p data-rv><b>You wanted something that belonged to you.</b> Something you could grow from home. Something that could give you more choices about how you spend your days.</p>
-    <p data-rv>Maybe you pictured being able to work while your kids were napping. Maybe you wanted to stop depending entirely on a paycheck. Or maybe you just wanted to prove to yourself that <b>you could take an idea, turn it into something real, and make money doing it.</b></p>
-    <p data-rv>But somewhere along the way, blogging became a never ending list of things you were supposed to learn.</p>
-    <div class="chiprow" data-rv>
-      <span style="--r:-1deg">SEO</span><span style="--r:.8deg">Pinterest</span><span style="--r:-.6deg">WordPress</span>
-      <span style="--r:1deg">Email marketing</span><span style="--r:-.8deg">Content calendars</span><span style="--r:.6deg">Affiliate programs</span>
+    <div style="text-align:center"><span class="eyebrow" data-rv>Let me be honest from the jump</span>
+    <h2 class="h" data-rv style="max-width:700px;margin-left:auto;margin-right:auto">The truth, <em>before anything else.</em></h2></div>
+    <div class="honest" data-rv="s" style="margin-top:26px">
+      <p>I'm not going to pretend I run this from a beach. <b>I run it from a kitchen table after bedtime.</b> I'm saving for a house, raising my kid, and rebuilding this business alongside all of it. I'm telling you that because the women I work with are doing the same thing, and <b>I built everything here for that version of you.</b></p>
     </div>
-    <p data-rv>And the more you learned, the more it felt like you still didn't know enough.</p>
-    <div class="want" data-rv="s"><p>You know how to work on your blog. <b>What you really want to know is how to make your blog work for you.</b></p></div>
-    <p data-rv style="margin-top:24px;font-family:var(--script);font-size:1.8rem;color:var(--gold)">that's where my story comes in.</p>
   </div>
 </section>
 
 <section>
-  <div class="wrap story-grid">
-    <div class="photo2" data-rv="l"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_021.jpeg" alt="Gen, founder of Boss Lady Bloggers" loading="lazy"><span class="sticker" style="top:20px;right:20px;z-index:1">since 2017</span></div>
-    <div>
-      <span class="eyebrow" data-rv>My story</span>
-      <h2 class="h" data-rv>Hi, I'm Gen. <em>And I didn't figure this out overnight.</em></h2>
-      <p data-rv>I started blogging in 2017. Like so many women starting their first blogs, I thought the formula was pretty straightforward.</p>
-      <div class="formula" data-rv><span>Pick a niche</span><i>&#10230;</i><span>Build a website</span><i>&#10230;</i><span>Write blog posts</span><i>&#10230;</i><span>Get traffic</span><i>&#10230;</i><span>Make money</span></div>
-      <p data-rv>So that's what I focused on. <b>I spent two years trying to make blogging work the way I'd been taught.</b> I learned about content, traffic, and affiliate marketing. But I wasn't building the kind of income I wanted. And eventually I had to face something I hadn't understood when I started.</p>
-      <div class="realize" data-rv><p><b>I'd learned how to run a blog. I hadn't learned how to build a business.</b></p></div>
-      <p data-rv>A business needs someone specific to serve. A problem worth solving. Something people can buy. A way to attract those people. And a clear path from interested visitor to paying customer. <b>Your blog is part of that. But it isn't the whole thing.</b></p>
-      <p data-rv>Once I understood the difference, I started approaching everything differently. Instead of asking what I should publish next, I started asking <mark>what people actually needed help with.</mark> Instead of relying on traffic to somehow become income, I focused on creating offers, building websites with a purpose, and learning how to sell.</p>
-      <p data-rv>And over time, Boss Lady Bloggers became <b>a multi six figure business.</b></p>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:26px" class="prfpair">
-        <figure data-rv style="background:#fff;border:1.5px solid rgba(46,31,39,.12);border-radius:12px;padding:10px 10px 12px;margin:0;transform:rotate(-1.2deg);box-shadow:0 22px 40px -24px rgba(46,31,39,.35)"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/redesign-boss-lady-bloggers-r0kbhz/proof/proof-first-stripe-payouts-2020-2021.jpg" alt="Early Stripe payouts, 2020 to 2021, including the first ever: $18.52" loading="lazy" style="width:100%;border-radius:8px;display:block"><figcaption style="font-size:.84rem;color:var(--muted);margin-top:8px"><b style="color:var(--pink)">$18.52</b> &middot; my first Stripe payout ever, April 2020. It really did start this small.</figcaption></figure>
-        <figure data-rv style="--d:.1s;background:#fff;border:1.5px solid rgba(46,31,39,.12);border-radius:12px;padding:10px 10px 12px;margin:0;transform:rotate(1deg);box-shadow:0 22px 40px -24px rgba(46,31,39,.35)"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/redesign-boss-lady-bloggers-r0kbhz/proof/proof-81-invoices-paid.jpg" alt="Invoice summary: 81 paid invoices totaling $34,481" loading="lazy" style="width:100%;border-radius:8px;display:block"><figcaption style="font-size:.84rem;color:var(--muted);margin-top:8px"><b style="color:var(--pink)">81 paid invoices</b> &middot; $34,481 paid through my invoices on one payment app alone. A sample, not my total.</figcaption></figure>
+  <div class="wrap">
+    <div class="story-grid">
+      <div class="photo" data-rv="l"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_021.jpeg" alt="Genasys off the clock"></div>
+      <div>
+        <span class="eyebrow" data-rv>It started with a Pinterest search and a basement</span>
+        <h2 class="h" data-rv>From basement <em>to business.</em></h2>
+        <p data-rv>In 2017 I was living in my aunt's basement with <b>no job, no money, and a 2010 MacBook.</b> I found blogging on Pinterest and thought, I can do that. I launched a lifestyle blog on a free WordPress theme, hated how it looked, and found out the hard way that <mark>getting traffic and getting paid are two very different things.</mark></p>
+        <p data-rv>I did everything the gurus said. Affiliate links. Ad networks. Post more. <b>I got the traffic. I made almost nothing.</b></p>
+        <p data-rv>Then I hired a blog coach, and she asked me one question that changed everything: <b>what are you actually selling?</b> I had no answer. So I stopped treating my blog like a hobby that might pay me someday and started treating it like a business. One product of my own. One person I was talking to. A site built to sell. <mark>I made $4,000 in my first four months and never looked back.</mark></p>
+        <div class="tl">
+          <div data-rv><span class="yr">2017</span><h3>The spark.</h3><p>A Pinterest search, a basement, a free template.</p></div>
+          <div data-rv><span class="yr">2018&ndash;2019</span><h3>The struggle.</h3><p>Traffic, no income. Every guru, every course.</p></div>
+          <div data-rv><span class="yr">2020</span><h3>The pivot.</h3><p>Hired a coach, dropped the affiliate dream, sold my own offers. <b>First $4,000.</b></p></div>
+          <div data-rv><span class="yr">2021&ndash;2023</span><h3>Boss Lady Bloggers grows.</h3><p>Coaching, custom Showit sites, a podcast, a membership. Six figures. My son is born.</p></div>
+          <div data-rv><span class="yr">2024&ndash;2025</span><h3>Life knocks me flat.</h3><p>Newly single. A move. A day job. I keep the business alive at nap time.</p></div>
+          <div data-rv><span class="yr">2026</span><h3>All in again.</h3><p><b>Blog to Paid</b>, built from nine years of what actually works.</p></div>
+        </div>
       </div>
-      <style>@media(max-width:640px){.prfpair{grid-template-columns:1fr !important}}</style>
+    </div>
+  </div>
+</section>
+
+<section class="sec-blush">
+  <div class="wrap">
+    <span class="eyebrow" data-rv>What I believe</span>
+    <span class="wm" aria-hidden="true">always</span><h2 class="h" data-rv>Business first. Blog second. <em>Always.</em></h2>
+    <div class="blv">
+      <div data-rv><span class="bn">1</span><div><h3>Business first, blogging second.</h3><p>Your blog is a marketing tool that drives people to your offer. It is not the business. The thing you sell is.</p></div></div>
+      <div data-rv><span class="bn">2</span><div><h3>Sell something of your own.</h3><p>Every woman I've coached was selling her own product or service. Not one was an affiliate blog. That's the only kind of blog I know how to build, and the only kind that still pays in 2026.</p></div></div>
+      <div data-rv><span class="bn">3</span><div><h3>Offers before everything else.</h3><p>You decide what you're selling before you touch a logo. Otherwise you're decorating a diary.</p></div></div>
+      <div data-rv><span class="bn">4</span><div><h3>Gorgeous sites that sell.</h3><p>Pretty alone doesn't pay the bills. Pretty plus strategy does.</p></div></div>
+      <div data-rv><span class="bn">5</span><div><h3>Build it right the first time.</h3><p>A free template is the most expensive thing you'll ever use.</p></div></div>
+      <div data-rv><span class="bn">6</span><div><h3>AI is a tool, not a coach.</h3><p>I'll use it for your drafts all day long. I won't let it decide what you sell, who you're talking to, or whether you're going to finish. That's my job.</p></div></div>
+      <div data-rv><span class="bn">7</span><div><h3>Stay true to you.</h3><p>Your blog should sound like you on your best day, not like a brand voice guide.</p></div></div>
     </div>
   </div>
 </section>
 
 <section class="sec-ink">
   <div class="grain"></div>
-  <div class="wrap base-grid">
-    <div>
-      <span class="eyebrow" data-rv>The real backdrop</span>
-      <h2 class="h" data-rv>A lot of that business was built in my aunt's basement, <em>during my son's nap times.</em></h2>
-      <p data-rv>Not in some perfect office with eight uninterrupted hours to work. <b>I was a single mom</b>, trying to build a business around a life that didn't exactly leave me with unlimited time. I knew what it meant to sit down at my laptop with a hundred things that needed doing and no idea how much I'd actually get finished before my son woke up.</p>
-      <p data-rv>And I knew what it felt like to want more. More financial independence. More control over my schedule. More time to be present for my son without giving up on the business I was building.</p>
-      <p data-rv>So when I talk about wanting a business that gives you freedom, I'm not talking about sitting on a beach with a laptop for an Instagram photo. I'm talking about:</p>
-      <ul class="freedomlist" data-rv>
-        <li>Being able to <b style="color:#fff">make decisions about your own day</b></li>
-        <li>Working from home</li>
-        <li>Taking a break when you need one</li>
-        <li>Having something you've built that <b style="color:#fff">doesn't depend on someone else giving you permission to succeed</b></li>
-      </ul>
-      <p data-rv>That's the kind of business I wanted. And it's the reason I care so much about <b>helping women build businesses that make sense for their actual lives.</b></p>
-    </div>
-    <div class="base-ph" data-rv="r"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_013.jpeg" alt="Gen and her son" loading="lazy"><span class="sticker" style="top:22px;right:22px;z-index:1">my why</span></div>
-  </div>
-</section>
-
-<section class="sys">
   <div class="wrap">
-    <span class="wm lo" aria-hidden="true">systems</span>
-    <span class="eyebrow" data-rv>The second lesson</span>
-    <h2 class="h" data-rv>But building a successful business <em>taught me another lesson.</em></h2>
-    <p data-rv><b>Making money is one part of the equation. Running the business without letting it take over your life is another.</b></p>
-    <p data-rv>As Boss Lady Bloggers grew, I found myself juggling clients, content, marketing, websites, offers, projects, and a growing list of things I wanted to create. I became obsessed with productivity tools. I wanted to know how to organize everything, make better decisions, and stop spending so much time figuring out what to work on.</p>
-    <p data-rv>And when AI tools became more capable, I started experimenting with ways to use them to build and manage business systems. Not just to write another blog post. But to <b>organize projects, plan business goals, build dashboards, document workflows, and reduce repetitive work.</b> And something clicked.</p>
-    <div class="law" data-rv="s"><p><b>Building a profitable business and building a business that's easier to run should go together.</b></p></div>
-    <p data-rv>You need strategy so you're working on things that matter. And you need systems so you're not responsible for remembering, planning, and manually managing every little thing. <b>That's why I teach both.</b></p>
-    <div class="toolchips" data-rv><span>Strategy</span><span>Systems</span><span>AI</span><span>ClickUp</span></div>
-  </div>
-</section>
-
-<section class="sec-blush">
-  <div class="wrap">
-    <span class="eyebrow" data-rv>Today</span>
-    <h2 class="h" data-rv>I help women build <em>the business behind the blog.</em></h2>
-    <p class="lead" data-rv>As a blog coach and online business mentor, I help women stop treating blogging like a guessing game. <b style="color:var(--ink)">We look at the actual business.</b></p>
-    <div class="lookat">
-      <div data-rv>Who you're helping</div>
-      <div data-rv style="--d:.05s">What they're struggling with</div>
-      <div data-rv style="--d:.1s">What you're selling</div>
-      <div data-rv style="--d:.15s">How your website communicates its value</div>
-      <div data-rv style="--d:.2s">How your blog and content attract potential customers</div>
-      <div data-rv style="--d:.25s">What happens between someone finding you and deciding to buy</div>
+    <span class="eyebrow" data-rv>What I flat-out refuse to do</span>
+    <h2 class="h" data-rv>A short list of things <em>you'll never get from me.</em></h2>
+    <div class="refuse">
+      <div data-rv><span class="x">&#10005;</span><h3>Teach you to make money from ads or affiliate links.</h3><p>It needs traffic you don't have, and that traffic is shrinking.</p></div>
+      <div data-rv style="--d:.08s"><span class="x">&#10005;</span><h3>Hand you a course and disappear.</h3><p>Everything I do is 1:1 or in a room with me in it.</p></div>
+      <div data-rv style="--d:.16s"><span class="x">&#10005;</span><h3>Promise you income numbers.</h3><p>I'll promise you a finished site, a real offer, and a year of me. What you do with it is yours.</p></div>
+      <div data-rv style="--d:.24s"><span class="x">&#10005;</span><h3>Pretend blogging is easy.</h3><p>It's simple. It is not easy. There's a difference.</p></div>
     </div>
-    <p class="lead" data-rv>Because having a blog that looks beautiful and gets visitors isn't the same thing as having a business that generates revenue. And if you're going to put your time, energy, and money into building something, <b style="color:var(--ink)">I want you to understand how all those pieces are supposed to work together.</b></p>
-    <p class="lead" data-rv style="margin-top:14px"><b style="color:var(--ink)">That's what The BOSS Business System is built to teach</b> &mdash; my signature program for women who want to start or grow a profitable blog based business. Not by chasing every blogging trend or waiting until they have massive traffic. But by building the foundations of a real business, creating offers people want, developing strategic marketing, and connecting the pieces into a system that can generate sales.</p>
-    <div class="cta-row" data-rv><a class="btn" href="/boss-business-system">Explore The BOSS Business System</a></div>
   </div>
 </section>
 
 <section>
   <div class="wrap">
-    <span class="wm" aria-hidden="true">believe</span>
-    <span class="eyebrow" data-rv>What I believe</span>
-    <h2 class="h" data-rv>A few things I believe about <em>building an online business.</em></h2>
-    <div class="blv">
-      <div data-rv><span class="bn">1</span><div><h3>Your blog is marketing, <em>not your entire business.</em></h3><p>Your content should help the right people discover you and understand how you can help them.</p></div></div>
-      <div data-rv><span class="bn">2</span><div><h3>Understand what you're selling <em>before chasing traffic.</em></h3><p>You don't need to know every detail on day one. But you do need a business direction that goes beyond publishing content and hoping for the best.</p></div></div>
-      <div data-rv><span class="bn">3</span><div><h3>A beautiful website should do <em>more than look beautiful.</em></h3><p>Your messaging, design, and customer experience should make it easy for people to understand what you offer and why it matters.</p></div></div>
-      <div data-rv><span class="bn">4</span><div><h3>AI should help you do meaningful work, <em>not simply produce more content.</em></h3><p>The point isn't to automate everything. It's to make the right work easier to manage and execute.</p></div></div>
-      <div data-rv><span class="bn">5</span><div><h3>A business should give you more choices, <em>not consume every minute of your life.</em></h3><p>You still have to do the work. But that work should have a purpose.</p></div></div>
-    </div>
+    <span class="eyebrow" data-rv>Who I'm here for, and why we'll click</span>
+    <h2 class="h" data-rv>You don't need me to be impressed by hustle. <em>You need to know what to do next.</em></h2>
+    <p class="lead" data-rv>You're starting a blog, or starting over, and you want it to be a business this time. You'd rather invest in a coach than learn alone for another year. You're probably doing this around a job, a kid, or both. You need me to tell you what to do next and <b>build the hard parts with you.</b></p>
+    <p class="lead" data-rv style="margin-top:14px"><b>If that's you, I think we'd get along.</b></p>
+    <div class="phframe" data-rv style="max-width:460px;min-height:300px;margin-top:36px;transform:rotate(-1deg)"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_051.jpeg" alt="Gen from Boss Lady Bloggers" loading="lazy"></div>
   </div>
 </section>
 
 <section class="sec-tint">
   <div class="wrap">
-    <span class="eyebrow" data-rv>Ways to work together</span>
-    <h2 class="h" data-rv>You don't have to figure out every piece of your business <em>by yourself.</em></h2>
-    <p class="lead" data-rv>Maybe you're starting with nothing but an idea. Maybe you've already built a blog and you're frustrated because the income hasn't followed. Or maybe you've made a few sales but can't figure out how to make them more consistent. <b style="color:var(--ink)">I've created different ways to help you based on what your business needs.</b></p>
-    <div class="offers">
-      <div class="off flag" data-rv data-tilt>
-        <span class="ok">The signature program</span>
-        <h3>The BOSS Business System</h3>
-        <p class="for">For the woman who wants to build the entire business behind her blog.</p>
-        <p class="d">Learn how to develop your business foundations, offers, brand, website, content, marketing, email, and sales systems.</p>
-        <a class="btn" href="/boss-business-system">Explore BOSS Business</a>
+    <div class="flat">
+      <div class="photo" data-rv="l"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_013.jpeg" alt="Genasys and her son"></div>
+      <div>
+        <span class="eyebrow" data-rv>2025 knocked me flat. Here's the truth.</span>
+        <h2 class="h" data-rv>I'm doing it <em>next to you.</em></h2>
+        <p data-rv>I left a rental in Michigan, moved in with family in Ohio to save for a house, lost the daily support I'd had, and took a day job. I'm not telling you this for sympathy. I'm telling you because when you say <b>“I only have two hours after bedtime,”</b> I don't nod politely. I know exactly what that looks like. <mark>I'm doing it next to you.</mark></p>
       </div>
-      <div class="off" data-rv data-tilt style="--d:.1s">
-        <span class="ok">Productivity + AI</span>
-        <h3>The Productive Blogger Method</h3>
-        <p class="for">For the woman who wants to organize her business and get meaningful work finished.</p>
-        <p class="d">Learn how to use AI, ClickUp, and practical productivity systems to manage projects, plan your work, and create a business operating system that works for you.</p>
-        <a class="btn" href="/productive-blogger-method">Explore the Method</a>
-      </div>
-      <div class="off" data-rv data-tilt style="--d:.2s">
-        <span class="ok">Done-for-you roadmaps</span>
-        <h3>The Project Club</h3>
-        <p class="for">For the woman who's tired of wondering what to work on next.</p>
-        <p class="d">Get personalized business project roadmaps built around your goals, with projects selected from our library of 200 business projects.</p>
-        <a class="btn" href="/project-club">Explore The Project Club</a>
-      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <span class="eyebrow" data-rv>Okay, the real, slightly weird me</span>
+    <h2 class="h" data-rv>Since we're going to be <em>talking every month.</em></h2>
+    <div class="weird">
+      <div data-rv style="--r:-1deg"><b>Cooper's Hawk wine club member.</b> Not sorry.</div>
+      <div data-rv style="--r:.8deg"><b>Decorative summer pants and a basic tee.</b> That's the whole wardrobe.</div>
+      <div data-rv style="--r:-.7deg"><b>I hate clothing stores and I'm a little socially awkward.</b> Email me. We'll be fine.</div>
+      <div data-rv style="--r:1deg"><b>A cabinet full of earrings,</b> partial to blue.</div>
+      <div data-rv style="--r:-.9deg"><b>Overnight oats</b> every single morning.</div>
+      <div data-rv style="--r:.7deg"><b>My son is my first priority.</b> The business comes second, which is exactly why it has to work.</div>
+      <div data-rv style="--r:-1.1deg;padding:12px 12px 14px;background:#fff"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_006.jpeg" alt="Kings Island trips" loading="lazy" style="width:100%;border-radius:6px;display:block"><div style="font-family:var(--script);color:var(--gold);font-size:1.4rem;text-align:center;margin-top:8px">Kings Island szn</div></div>
     </div>
   </div>
 </section>
@@ -450,13 +395,13 @@ section{overflow:hidden}
 <section class="fin2">
   <div class="blob b4"></div><div class="grain"></div>
   <div class="wrap">
-    <span class="eyebrow" data-rv>Before you go</span>
-    <h2 data-rv="clip">Not just a blog you're proud to show people. <em>A business you're proud to own.</em></h2>
-    <p data-rv>The fact that your blog isn't making the money you want doesn't automatically mean you chose the wrong niche. It doesn't mean you need to start over. And it certainly doesn't mean the answer is always another 50 blog posts.</p>
-    <p data-rv><b>Sometimes the thing that's missing is a business strategy that connects all the work you've already done to something people can actually buy.</b> That's what I want to help you build.</p>
+    <span class="eyebrow" data-rv>Okay, your turn</span>
+    <h2 data-rv="clip">If you read this far, <em>I think we'd get along.</em></h2>
+    <p data-rv>Book the free call. We'll look at your blog or your idea, figure out what you should be selling, and map your first 90 days. <b>If Blog to Paid is the right fit, I'll tell you. If it isn't, I'll tell you that too.</b></p>
     <div class="cta-row" data-rv>
-      <a class="btn" href="/boss-business-system">Explore The BOSS Business System</a>
-      <a class="btn-ghost" href="/free-blogging-masterclass">Start with free training</a>
+      <a class="spinb" href="/book-a-call" aria-label="free 30-min call &#183; you + me &#183; a real plan &#183;"><svg viewBox="0 0 138 138"><defs><path id="sbc" d="M69,69 m-54,0 a54,54 0 1,1 108,0 a54,54 0 1,1 -108,0"/></defs><text><textPath href="#sbc">free 30-min call &#183; you + me &#183; a real plan &#183;</textPath></text></svg><span class="ctr">&#10084;</span></a>
+      <a class="btn" href="/book-a-call">Book my free Fast Track call</a>
+      <a class="btn-ghost" href="/boss-business-system">See The BOSS Business System</a>
     </div>
   </div>
 </section>

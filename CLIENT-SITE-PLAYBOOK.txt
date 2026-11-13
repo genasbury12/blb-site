@@ -501,6 +501,37 @@ mobile-verified at 390px, delivered as .txt files."
 =====================================================================
 CHANGELOG (newest first)
 =====================================================================
+2026-11-13  v4.6  CTA + PRICING POLICY (client): the ONLY primary
+                  CTA sitewide is "Book a Free Call" -> /book-a-call,
+                  and NO offer prices appear anywhere public.
+                  Applied: nav button sitewide; home/about/BBS
+                  primary buttons -> free call (page links demoted to
+                  ghost); BOSS page stripped of every tier price,
+                  payment-plan number and the $497 hero line (tier
+                  cards keep contents, buttons -> free call, FAQ
+                  payments answer rewritten numberless, approved
+                  phrasing "payment plans available - pricing on
+                  your free call"); blog-coaching $150/$400/$750 +
+                  Stripe buy buttons removed -> free call; Blogging
+                  Ladies $100 removed everywhere incl. marquee;
+                  blog-to-paid + blog-accelerator retired to
+                  noindex redirect stubs -> /boss-business-system;
+                  every remaining Blog to Paid link/label swept to
+                  BOSS; blog-kit promo embeds de-priced. Income
+                  proof receipts KEPT (evidence, not price lists).
+                  Left as-is, flagged: blog-launch-lab-payments.html
+                  (legacy checkout page with amounts).
+                  BRAND KIT: 6 logo JPGs rendered with the real
+                  Fraunces/Ephesis fonts (repo /brand: primary,
+                  stacked+tagline, blb submark; cream + ink each)
+                  and BRAND-GUIDE.txt rewritten as v2.0, the full
+                  handoff doc for other Claude projects (identity,
+                  logo files+rules, tokens incl. hot-pink gradient,
+                  type, signature elements, motion, voice, CTA/no-
+                  price policy, proof rules, photo library, site
+                  map/tech). Fonts for rendering fetched from
+                  google/fonts on GitHub (googleapis is proxy-
+                  blocked; raw.githubusercontent works).
 2026-11-12  v4.5  BOSS SALES PAGE v2 (priced) from the updated copy.
                   Headline promise: offer/sales page/freebie/welcome
                   emails live in 12 weeks or coaching continues free.

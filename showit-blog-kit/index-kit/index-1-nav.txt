@@ -70,7 +70,7 @@ template does can break it.
     <a class="logo" href="/">Boss Lady <em>Bloggers</em></a>
     <ul class="links">
       <li><a href="/about">About</a></li>
-      <li><a href="/blog-to-paid">Blog to Paid</a></li>
+      <li><a href="/boss-business-system">The BOSS Business System</a></li>
       <li><a href="/blog-coaching">Fast Track</a></li>
       <li><a href="/portfolio">Portfolio</a></li>
       <li><a class="on" href="/blog">Blog</a></li>
@@ -82,7 +82,7 @@ template does can break it.
   </div>
   <div class="menu">
     <a href="/about">About</a>
-    <a href="/blog-to-paid">Blog to Paid</a>
+    <a href="/boss-business-system">The BOSS Business System</a>
     <a href="/blog-coaching">Fast Track</a>
     <a href="/portfolio">Portfolio</a>
     <a href="/podcast">Podcast</a>

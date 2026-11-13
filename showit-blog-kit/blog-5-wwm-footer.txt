@@ -42,7 +42,7 @@ blog templates, full width. Roughly 900px tall on desktop.
   <h2>Let's build your blog <em>together.</em></h2>
   <div class="script">this is the fun part</div>
   <p>The Blog to Paid is where reading turns into launching: your digital product, brand, and a gorgeous website built to sell it, with coaching every week.</p>
-  <a class="btn" href="/blog-to-paid">Work with me &rarr;</a>
+  <a class="btn" href="/boss-business-system">Work with me &rarr;</a>
 </div>
 <footer>
   <div class="wrap">
@@ -65,7 +65,7 @@ blog templates, full width. Roughly 900px tall on desktop.
       <div>
         <h4>Work With Me</h4>
         <ul>
-          <li><a href="/blog-to-paid">Blog to Paid</a></li>
+          <li><a href="/boss-business-system">The BOSS Business System</a></li>
           <li><a href="/blog-coaching">Blog Coaching</a></li>
           <li><a href="/book-a-call">Book a Free Call</a></li>
         </ul>

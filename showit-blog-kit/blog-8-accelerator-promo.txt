@@ -40,10 +40,10 @@ roughly 460px tall on desktop, full width.
     <span class="chip">Custom design</span>
     <span class="chip">Offer + copy</span>
     <span class="chip">Weekly 1:1 calls</span>
-    <span class="chip">$500 to startnth</span>
+    <span class="chip">pricing on your free callnth</span>
   </div>
-  <a class="btn" href="/blog-to-paid">See the program &rarr;</a>
+  <a class="btn" href="/boss-business-system">See the program &rarr;</a>
   <a class="btn ghost" href="/book-a-call">Book a free call</a>
-  <div class="fine">$500 to startnth &middot; cancel anytime</div>
+  <div class="fine">pricing on your free callnth &middot; cancel anytime</div>
 </div>
 </div>
