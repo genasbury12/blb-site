@@ -539,6 +539,19 @@ CHANGELOG (newest first)
                   across Start Here, BBS, Coaching, Resources,
                   About, Contact.
 
+2026-11-14  v6.1  HERO = ABOVE-THE-FOLD SPLIT (client: "not even
+                  boss lady bloggers. Do my above the fold still on
+                  the left and pic on the right"). LEFT: gold "hey
+                  babe!", her H1 in Abril Fatface sentence case
+                  ("make money" in rose .hl pill, "publish
+                  content." rose), italic Fraunces sub, gold hand
+                  note, white pill CTAs. RIGHT: her cutout with the
+                  4 balloons tied in her raised hand, floating in
+                  open dark space (title beside, so nothing can
+                  cover). Duplicate mission section REMOVED (its
+                  copy lives in the hero now). Photo stacks above
+                  text under 920px. Verified clean.
+
 2026-11-14  v6.0  SPLIT HERO - THE KEEPER (client: "balloons have
                   to be in my hand!! boss lady bloggers capitalized
                   to the right and me with balloons in hand").
