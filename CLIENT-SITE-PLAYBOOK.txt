@@ -539,6 +539,19 @@ CHANGELOG (newest first)
                   across Start Here, BBS, Coaching, Resources,
                   About, Contact.
 
+2026-11-14  v5.9  BALLOONS FIXED FOR REAL (client: "now you cant
+                  even see the balloons... make it work"). Behind
+                  the letters they were hidden by the giant type;
+                  anchored at her raised hand they always invade
+                  the title zone. FINAL GEOMETRY: cluster sits IN
+                  FRONT of her (z6, like she's holding them) at her
+                  right shoulder, left:50%/top:24%/width:50% of the
+                  photo box, strings curve down-left to her hand at
+                  the bow (SVG anchor 56,256). Fully visible, zero
+                  letter overlap. Do not move the cluster above
+                  photo-top again - her raised hand is at 35% photo
+                  height so any balloons above it hit the title.
+
 2026-11-14  v5.8  HERO FINAL + CRAZY FEATURES PASS (client: "I
                   love the black actually with the balloons. but it
                   covers the text and I still hate the fonts",
