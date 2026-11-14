@@ -501,6 +501,61 @@ mobile-verified at 390px, delivered as .txt files."
 =====================================================================
 CHANGELOG (newest first)
 =====================================================================
+2026-11-14  v5.4  V7 HOMEPAGE + LINKS PAGE (client: "take jenna
+                  kutcher and spicy website, combine them... build
+                  me a gorgeous site"). Studied both reference sites
+                  section by section (26 pages screenshotted via
+                  Playwright through the proxy; hosts added to the
+                  BLB env: jennakutcher.com, static.showit.co,
+                  lib.showit.com, spicymargarita.tonicsiteshop.com,
+                  fonts, cdnjs). NEW DEVICES now on the homepage
+                  (build7_home.py, all v6 copy preserved):
+                  promo top banner w/ mockup + hand-drawn squiggle
+                  (SVG data-URI) + "Yes! gimme" btn; ghost-name hero
+                  ("boss lady bloggers" giant Fraunces in pink/gold
+                  w/ arch photo overlapping + floating white pill
+                  buttons w/ circle arrows + spin badge); witty
+                  stats trio (2017 / 6 figures+ / 1 little boy - all
+                  facts from her copy); squiggled colored-word
+                  mission H1; "Three doors" stacked wycards (ink/
+                  blush/gold-border, big italic numerals, circular
+                  photo chips, learn-more rotate arrows); oval photo
+                  tags + "Very into:" card on story photo; tilted
+                  colored client-quote cards; "You're in the right
+                  place, babe." hot gradient script strip; script-
+                  the + giant PODCAST stack w/ monospace platforms
+                  line; chunky "NOT YOUR AVERAGE BLOGGING ADVICE"
+                  + numbered blog category rows w/ rotate arrows;
+                  gold folder-tab Free Training Library card w/
+                  spinning starburst "free + tools" badge + mockup
+                  thumbs; squiggles on dark via gold variant; arrow
+                  doodle after dream pullquote. NEW /links page
+                  (build7_links.py, chrome=False, dark): link-in-bio
+                  with circle photo, script tagline, social pills,
+                  7 circle-thumb link rows w/ arrow chips. Client
+                  must CREATE Showit page slug /links (full-page
+                  embed, desktop+mobile). All pages verify over=0
+                  errs=0. NEXT (approved direction): roll v7 devices
+                  across Start Here, BBS, Coaching, Resources,
+                  About, Contact.
+
+2026-11-14  v5.5  FUN FONTS (client: "change my fonts to FUN - same
+                  fonts used in my IG and Pins"). Her IG cards =
+                  bookish serif + handwritten marker accents + pink
+                  highlighter pills. Site serif (Fraunces) already
+                  matches; the script did not. SWAPPED sitewide in
+                  v5.py: Ephesis -> Caveat 500-700 (--script). New
+                  CORE devices: .hl rounded pink highlight pill
+                  (gradient #F3BFD3->rose, clone-break) and .hand
+                  Caveat note (pink, -2deg). Applied on home: "make
+                  money" hl in mission H1, "start here, babe" by
+                  hero pills, "the short version of my story:" over
+                  stats, "no wrong answer!" on ways, "steal these!"
+                  on folder thumbs. Blog canvases updated to Caveat
+                  too (still no JS). ALL pages rebuilt + verified.
+                  Ephesis remains only inside the rendered logo
+                  JPGs. Brand guide type section updated.
+
 2026-11-14  v5.3  BLOG TEMPLATE CANVASES (client: "blog pages code
                   but only as separate site canvases"): new
                   /blog-canvases folder via build6_blogcanvases.py,

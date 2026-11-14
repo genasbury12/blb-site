@@ -80,7 +80,7 @@ RULES
 4. TYPOGRAPHY
 =====================================================================
 Google Fonts embed:
-https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Karla:wght@400;500;600;700&family=Ephesis&display=swap
+https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Karla:wght@400;500;600;700&family=Caveat:wght@500;600;700&display=swap
 
   DISPLAY: Fraunces, weight 500, line-height 1.12, letter-spacing
     -.01em. Headlines mix roman + italic; italic words take Boss
@@ -88,7 +88,9 @@ https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..7
     H1 clamp(2.3rem, 5.4vw, 4rem). Section H2 clamp(2.1rem,4.6vw,3.4rem).
   BODY: Karla 400, 1.03rem, line-height 1.7. Bold = Karla 700.
     Key sentences are BOLDED for skimmers; on dark bg bold = white.
-  SCRIPT: Ephesis, gold (or rose on dark), 22-46px equivalent. For
+  SCRIPT: Caveat (600), replacing Ephesis as of Nov 14 2026 - the
+  client wants the site to match the handwritten marker font on her
+  IG/Pinterest cards. Gold or pink (rose on dark), 22-46px. For
     asides and taglines only. Max one script line per section. Never
     body text.
   LABELS (eyebrows): Karla 700, .72rem, letterspacing .26em,
@@ -112,7 +114,16 @@ https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..7
   - Arch-top (230px radius) photo frames for portraits.
   - Checklists with gradient check circles; crossed-out old-way vs
     bold new-way comparison rows.
-  - Script numerals (Ephesis) for CONTENT lists only.
+  - Script numerals (Caveat) for CONTENT lists only.
+  - .hl HIGHLIGHT PILL: rounded pink highlighter behind 1-3 key
+    words in a headline (gradient #F3BFD3 -> rose, radius .35em,
+    box-decoration-break:clone). Signature IG-card device - use on
+    ONE phrase per page hero, sparingly elsewhere.
+  - .hand HANDWRITTEN NOTE: Caveat 600, pink (rose on dark), small
+    rotated aside ("start here, babe", "steal these!"). 1-4 per
+    page, always lowercase, always warm.
+  - Ephesis stays ONLY in the rendered logo JPGs (do not re-render);
+    all live text script is Caveat now.
 MOTION (all guarded by prefers-reduced-motion):
   - Scroll-in reveals (fade/rise, stagger), split-word hero
     headlines, count-up stats, tilt cards, magnetic buttons, scroll

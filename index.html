@@ -7,13 +7,13 @@
 <meta name="description" content="Boss Lady Bloggers: blog coaching, business strategy, digital products, and smarter systems for women who want to build businesses that sell. Home of The BOSS Business System.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400;1,9..144,500;1,9..144,600&family=Karla:wght@400;500;600;700&family=Ephesis&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400;1,9..144,500;1,9..144,600&family=Karla:wght@400;500;600;700&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
 
 <style>
 :root{
   --paper:#FBF6EE;--tint:#F4EBDE;--ink:#2E1F27;--pink:#A93F63;--purple:#7C2B48;
   --gold:#BC8A47;--blush:#F0DCE2;--muted:#6E5C63;--cream:#D8CBC3;--rose:#E8A9C0;
-  --display:'Fraunces',Georgia,serif;--body:'Karla',system-ui,sans-serif;--script:'Ephesis',cursive;
+  --display:'Fraunces',Georgia,serif;--body:'Karla',system-ui,sans-serif;--script:'Caveat',cursive;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -35,7 +35,11 @@ section{padding:92px 0;position:relative}
 .sec-ink .wm{-webkit-text-stroke:1.5px rgba(251,246,238,.1)}
 .wm.lo{top:auto;bottom:10px;left:-10px;right:auto}
 .sec-ink .eyebrow{color:var(--rose)}
-.script{font-family:var(--script);font-weight:400;color:var(--gold);font-size:clamp(1.6rem,3vw,2.3rem);line-height:1.2;display:block}
+.script{font-family:var(--script);font-weight:600;color:var(--gold);font-size:clamp(1.6rem,3vw,2.3rem);line-height:1.2;display:block}
+.hl{background:linear-gradient(120deg,#F3BFD3,var(--rose));border-radius:.35em;padding:.02em .18em;box-decoration-break:clone;-webkit-box-decoration-break:clone;color:var(--ink)}
+.sec-ink .hl,.fin .hl{color:var(--ink)}
+.hand{font-family:var(--script);font-weight:600;font-size:clamp(1.15rem,2.2vw,1.5rem);color:var(--pink);line-height:1.15;display:inline-block;transform:rotate(-2deg)}
+.sec-ink .hand,.fin .hand{color:var(--rose)}
 .sec-ink .script{color:var(--rose)}
 h2.h{font-size:clamp(2.1rem,4.6vw,3.4rem);margin:14px 0 18px}
 h2.h em,.h1 em{font-style:italic;color:var(--pink)}
@@ -159,7 +163,7 @@ footer{background:var(--ink);color:var(--paper);padding:0 0 46px;overflow:hidden
 .foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:44px;padding:60px 0 40px}
 .foot-logo{font-family:var(--display);font-size:1.5rem;margin-bottom:8px}
 .foot-logo em{font-style:italic;color:var(--rose)}
-.foot-tag{font-family:var(--script);color:var(--rose);font-size:1.7rem;margin:2px 0 10px}
+.foot-tag{font-family:var(--script);font-weight:600;color:var(--rose);font-size:1.9rem;margin:2px 0 10px}
 .foot-brand p{color:var(--cream);font-size:.95rem;max-width:300px}
 .foot-pods{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
 .fpod{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(251,246,238,.25);border-radius:50px;padding:9px 16px;font-size:.78rem;font-weight:700;text-decoration:none;transition:border-color .3s,background .3s}
@@ -184,19 +188,138 @@ html,body{overflow-x:hidden;overflow-x:clip}
 }
 
 section{overflow:hidden}
-/* hero */
-.hero{position:relative;padding:104px 0 90px;overflow:hidden}
-.hero .blob.b1{width:520px;height:520px;background:radial-gradient(circle,#F0DCE2,transparent 65%);top:-140px;right:-120px}
-.hero .blob.b2{width:420px;height:420px;background:radial-gradient(circle,rgba(188,138,71,.35),transparent 65%);bottom:-160px;left:-120px;animation-delay:-8s}
-.hero-inner{position:relative;display:grid;grid-template-columns:1.15fr .85fr;gap:54px;align-items:center}
-.h1{font-size:clamp(2.5rem,5.8vw,4.4rem);line-height:1.06;margin:22px 0 10px}
-.h1 em{font-style:italic;color:var(--pink)}
-.hero .sub{font-family:var(--display);font-style:italic;font-size:clamp(1.15rem,2.4vw,1.5rem);color:var(--purple);margin:14px 0 0}
-.hero-ph{position:relative;border-radius:230px 230px 26px 26px;overflow:hidden;border:1.5px solid rgba(46,31,39,.12);min-height:470px;transform:rotate(1.5deg);box-shadow:0 40px 70px -40px rgba(46,31,39,.45)}
-.hero-ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.hero-ph .cap{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);background:var(--paper);padding:8px 18px;border-radius:50px;font-weight:700;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--purple);white-space:nowrap}
-@media(max-width:920px){.hero-inner{grid-template-columns:1fr}.hero-ph{min-height:380px;max-width:420px}}
-/* pain */
+.sqg{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 12' preserveAspectRatio='none'%3E%3Cpath d='M3 9 Q 15 3 30 7 T 60 7 T 90 7 T 117 5' fill='none' stroke='%23D8427D' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat bottom/100% .32em;padding-bottom:.3em}
+.sec-ink .sqg,.fin .sqg{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 12' preserveAspectRatio='none'%3E%3Cpath d='M3 9 Q 15 3 30 7 T 60 7 T 90 7 T 117 5' fill='none' stroke='%23BC8A47' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E")}
+/* promo banner */
+.promo{background:var(--blush);position:relative;overflow:hidden}
+.promo .wrap{display:grid;grid-template-columns:150px 1fr auto;gap:28px;align-items:center;padding-top:22px;padding-bottom:22px}
+.promo img{width:150px;border-radius:12px;transform:rotate(-4deg);box-shadow:0 16px 30px -14px rgba(46,31,39,.4);border:1px solid rgba(46,31,39,.08)}
+.promo h3{font-size:clamp(1.05rem,2vw,1.3rem);line-height:1.3;margin-bottom:4px}
+.promo h3 .sqg{padding-bottom:.18em;background-size:100% .26em}
+.promo p{color:var(--muted);font-size:.9rem;max-width:560px}
+.promo .btn{white-space:nowrap}
+@media(max-width:860px){.promo .wrap{grid-template-columns:1fr;text-align:center;justify-items:center}.promo img{width:120px}}
+/* v7 ghost-name hero */
+.hero7{position:relative;padding:72px 0 0;text-align:center;overflow:hidden}
+.hero7 .blob.b1{width:520px;height:520px;background:radial-gradient(circle,#F0DCE2,transparent 65%);top:-140px;right:-120px}
+.hero7 .blob.b2{width:420px;height:420px;background:radial-gradient(circle,rgba(188,138,71,.3),transparent 65%);bottom:-100px;left:-120px;animation-delay:-8s}
+.ghname{position:relative;max-width:1100px;margin:0 auto;line-height:.86}
+.ghname .gl{display:block;font-family:var(--display);font-weight:500;font-size:clamp(4.4rem,13.5vw,11.5rem);letter-spacing:.01em;color:var(--pink)}
+.ghname .gl.g2{color:var(--gold);margin-top:-.08em}
+.hero7 .hp{position:relative;margin:clamp(-3rem,-7vw,-6.4rem) auto 0;width:min(430px,78vw);z-index:2}
+.hero7 .hp .ph{border-radius:300px 300px 24px 24px;overflow:hidden;border:1.5px solid rgba(46,31,39,.14);box-shadow:0 44px 80px -40px rgba(46,31,39,.5);position:relative;aspect-ratio:.78}
+.hero7 .hp img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero7 .pillstack{position:absolute;right:-16px;bottom:34px;display:grid;gap:12px;z-index:3;text-align:left}
+.pillb{display:flex;align-items:center;gap:14px;background:#fff;border-radius:60px;padding:10px 12px 10px 24px;font-weight:700;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);text-decoration:none;box-shadow:0 20px 44px -18px rgba(46,31,39,.45);transition:transform .3s}
+.pillb:hover{transform:translateX(5px)}
+.pillb i{font-style:normal;display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:linear-gradient(120deg,var(--hot),var(--hot2));color:#fff;font-size:1rem}
+.pillb.gold i{background:var(--gold)}
+.hero7 .spinwrap{position:absolute;left:4%;bottom:12%;z-index:3}
+@media(max-width:700px){.hero7 .pillstack{position:static;margin:18px auto 0;justify-items:center;text-align:center}.hero7 .spinwrap{display:none}}
+/* witty stats trio */
+.stats7{padding:64px 0 10px}
+.stats7 .wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;text-align:center}
+.stats7 b{display:block;font-family:var(--body);font-weight:300;font-size:clamp(2.6rem,6vw,4.2rem);line-height:1;color:var(--ink);letter-spacing:-.02em}
+.stats7 b em{font-style:normal;color:var(--pink)}
+.stats7 p{color:var(--muted);font-size:.95rem;margin-top:10px}
+@media(max-width:760px){.stats7 .wrap{grid-template-columns:1fr;gap:26px}}
+/* mission statement */
+.mission{padding:84px 0;text-align:center}
+.mission h1{font-size:clamp(2.2rem,5.2vw,3.9rem);line-height:1.14;max-width:960px;margin:0 auto 18px}
+.mission h1 .c1{color:var(--pink)}
+.mission h1 .c2{color:var(--gold)}
+.mission h1 .c3{color:var(--purple);font-style:italic}
+.mission .sub{font-family:var(--display);font-style:italic;font-size:clamp(1.1rem,2.4vw,1.45rem);color:var(--purple);max-width:720px;margin:0 auto 26px}
+.mission .cta-row{justify-content:center}
+/* ways to work together (stacked cards) */
+.ways7{counter-reset:wy}
+.wycard{border-radius:28px;padding:48px 46px;margin-top:26px;display:grid;grid-template-columns:110px 1fr auto;gap:34px;align-items:center;position:relative;overflow:hidden;transition:transform .35s,box-shadow .35s}
+.wycard:hover{transform:translateY(-6px);box-shadow:0 36px 66px -36px rgba(46,31,39,.45)}
+.wycard .num{font-family:var(--display);font-style:italic;font-size:4.2rem;line-height:1;counter-increment:wy}
+.wycard .num::before{content:"0" counter(wy)}
+.wycard h3{font-size:clamp(1.5rem,3vw,2.1rem);line-height:1.15;margin-bottom:10px}
+.wycard h3 em{font-style:italic}
+.wycard p{font-size:.97rem;max-width:640px}
+.wycard .chip{position:absolute;left:46px;bottom:-34px;width:96px;height:96px;border-radius:50%;overflow:hidden;border:4px solid #fff;box-shadow:0 16px 34px -14px rgba(46,31,39,.5);opacity:.95}
+.wycard .chip img{width:100%;height:100%;object-fit:cover}
+.wy-go{display:flex;align-items:center;gap:14px;font-weight:700;font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;white-space:nowrap}
+.wy-go i{font-style:normal;display:grid;place-items:center;width:46px;height:46px;border-radius:50%;background:linear-gradient(120deg,var(--hot),var(--hot2));color:#fff;font-size:1.05rem;transition:transform .3s}
+.wy-go:hover i{transform:rotate(45deg)}
+.wycard.c1{background:var(--ink);color:var(--paper)}
+.wycard.c1 .num{color:var(--rose)}
+.wycard.c1 h3{color:var(--paper)}
+.wycard.c1 h3 em{color:var(--rose)}
+.wycard.c1 p{color:var(--cream)}
+.wycard.c1 .wy-go{color:var(--paper)}
+.wycard.c2{background:var(--blush)}
+.wycard.c2 .num{color:var(--pink)}
+.wycard.c2 h3 em{color:var(--pink)}
+.wycard.c2 p{color:var(--muted)}
+.wycard.c2 .wy-go{color:var(--ink)}
+.wycard.c3{background:var(--paper);border:1.5px solid rgba(188,138,71,.45)}
+.wycard.c3 .num{color:var(--gold)}
+.wycard.c3 h3 em{color:var(--gold)}
+.wycard.c3 p{color:var(--muted)}
+.wycard.c3 .wy-go{color:var(--ink)}
+@media(max-width:860px){.wycard{grid-template-columns:1fr;gap:18px;padding:38px 30px 46px}.wycard .chip{display:none}}
+/* oval label tags */
+.ovaltag{position:absolute;border:1.5px solid var(--ink);border-radius:50%;padding:10px 22px;font-weight:700;font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ink);background:rgba(251,246,238,.88);transform:rotate(var(--r,-6deg));z-index:2;white-space:nowrap}
+/* very-into card */
+.intocard{position:absolute;right:-24px;bottom:30px;background:#fff;border-radius:16px;padding:20px 22px;max-width:240px;box-shadow:0 24px 48px -22px rgba(46,31,39,.45);z-index:2;text-align:left}
+.intocard b{display:block;font-weight:700;font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--pink);margin-bottom:8px}
+.intocard p{font-size:.84rem;color:var(--muted);margin:0;line-height:1.55}
+@media(max-width:880px){.intocard{position:static;margin:16px auto 0;max-width:340px}}
+/* tilted quote cards */
+.tiltq{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:38px;text-align:left}
+.tq{border-radius:22px;padding:30px 28px 24px;margin:0;font-family:var(--display);font-size:1.04rem;line-height:1.55;transform:rotate(var(--r,0deg));transition:transform .35s;position:relative}
+.tq:hover{transform:rotate(0) translateY(-6px)}
+.tq .qm{font-size:2.6rem;line-height:.6;display:block;margin-bottom:14px;font-family:var(--display)}
+.tq cite{display:block;margin-top:16px;font-family:var(--body);font-style:normal;font-weight:700;font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;opacity:.75}
+.tq.t1{background:var(--ink);color:var(--paper)}
+.tq.t1 .qm{color:var(--rose)}
+.tq.t2{background:var(--blush);color:var(--ink)}
+.tq.t2 .qm{color:var(--pink)}
+.tq.t3{background:#E9DDC8;color:var(--ink)}
+.tq.t3 .qm{color:var(--gold)}
+@media(max-width:860px){.tiltq{grid-template-columns:1fr}}
+/* right place strip */
+.rightplace{background:linear-gradient(120deg,var(--hot),var(--hot2));color:#fff;text-align:center;padding:26px 16px;font-family:var(--script);font-size:clamp(1.7rem,4vw,2.5rem)}
+/* folder-tab library card */
+.foldwrap{max-width:980px;margin:44px auto 0;position:relative}
+.foldtab{display:inline-block;background:var(--gold);color:#fff;border-radius:14px 14px 0 0;padding:14px 34px 12px;font-weight:700;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;margin-left:34px;position:relative;z-index:1}
+.foldcard{background:#fff;border-radius:22px;padding:40px;box-shadow:0 36px 64px -36px rgba(46,31,39,.4);display:grid;grid-template-columns:1.1fr .9fr;gap:36px;align-items:center;position:relative}
+.foldcard h3{font-size:clamp(1.5rem,3vw,2rem);margin-bottom:12px}
+.foldcard h3 em{font-style:italic;color:var(--gold)}
+.foldcard p{color:var(--muted);font-size:.96rem;margin-bottom:10px}
+.foldcard p b{color:var(--ink)}
+.foldthumbs{display:grid;grid-template-columns:1fr 1fr;gap:14px;position:relative}
+.foldthumbs img{width:100%;border-radius:12px;border:1px solid rgba(46,31,39,.1);transform:rotate(var(--r,0deg));box-shadow:0 14px 26px -14px rgba(46,31,39,.35)}
+.burst{position:absolute;top:-26px;right:34px;width:96px;height:96px;display:grid;place-items:center;background:var(--pink);color:#fff;font-weight:700;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;text-align:center;border-radius:50%;clip-path:polygon(50% 0%,57.8% 9.4%,69.1% 4.9%,72.7% 16.5%,84.9% 14.6%,84.3% 26.8%,96.2% 29.4%,91.4% 40.5%,100% 50%,91.4% 59.5%,96.2% 70.6%,84.3% 73.2%,84.9% 85.4%,72.7% 83.5%,69.1% 95.1%,57.8% 90.6%,50% 100%,42.2% 90.6%,30.9% 95.1%,27.3% 83.5%,15.1% 85.4%,15.7% 73.2%,3.8% 70.6%,8.6% 59.5%,0% 50%,8.6% 40.5%,3.8% 29.4%,15.7% 26.8%,15.1% 14.6%,27.3% 16.5%,30.9% 4.9%,42.2% 9.4%);animation:burstspin 14s linear infinite}
+@keyframes burstspin{to{transform:rotate(360deg)}}
+@media(max-width:820px){.foldcard{grid-template-columns:1fr}}
+/* podcast stack */
+.podstack{position:relative;text-align:center;padding:96px 0}
+.podstack .scrp{font-family:var(--script);font-size:clamp(2.4rem,6vw,4rem);color:var(--rose);display:block;line-height:.6;position:relative;z-index:2}
+.podstack .bigp{font-family:var(--display);font-weight:500;font-size:clamp(3.4rem,11vw,8.5rem);line-height:.95;color:var(--paper);letter-spacing:.02em;position:relative;z-index:1}
+.podstack .mono{font-family:ui-monospace,Menlo,monospace;font-size:.78rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin:26px 0 8px}
+.podstack p{color:var(--cream);max-width:560px;margin:0 auto 24px}
+.podstack .podart{width:min(300px,70vw);margin:30px auto 0;border-radius:20px;border:1px solid rgba(251,246,238,.2);box-shadow:0 36px 70px -34px rgba(0,0,0,.7);transform:rotate(2deg)}
+.podstack .cta-row{justify-content:center}
+/* blog: chunky + numbered rows */
+.bigblog{font-weight:800;font-family:var(--body);font-size:clamp(2.1rem,6vw,4.3rem);line-height:1.02;text-transform:uppercase;letter-spacing:-.01em;max-width:900px;margin:12px 0 8px}
+.bigblog .w1{color:var(--pink)}
+.bigblog .w2{color:var(--gold)}
+.bigblog .w3{color:var(--ink)}
+.catrows{margin-top:36px;max-width:860px}
+.catrows a{display:grid;grid-template-columns:54px 1fr 46px;gap:18px;align-items:center;padding:20px 8px;border-bottom:1.5px solid rgba(46,31,39,.14);text-decoration:none;transition:background .3s,padding .3s}
+.catrows a:hover{background:#fff;padding-left:20px}
+.catrows .cn{font-family:ui-monospace,Menlo,monospace;font-size:.78rem;color:var(--gold);letter-spacing:.1em}
+.catrows h3{font-family:var(--display);font-weight:500;font-size:clamp(1.1rem,2.4vw,1.5rem);color:var(--ink)}
+.catrows i{font-style:normal;display:grid;place-items:center;width:40px;height:40px;border-radius:50%;border:1.5px solid rgba(46,31,39,.25);color:var(--pink);transition:background .3s,color .3s,transform .3s}
+.catrows a:hover i{background:linear-gradient(120deg,var(--hot),var(--hot2));color:#fff;border-color:transparent;transform:rotate(45deg)}
+/* arrow doodle */
+.doodle{display:inline-block;width:54px;height:54px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'%3E%3Cpath d='M8 6 C 20 30 30 42 50 48 M50 48 l-14 -2 M50 48 l-4 -13' fill='none' stroke='%23BC8A47' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center/contain;vertical-align:middle;margin-left:10px}
+/* carried v6 styles */
 .pain p{max-width:680px;margin:0 0 18px;color:var(--muted)}
 .pain p b{color:var(--ink)}
 .qpills{display:flex;flex-wrap:wrap;gap:12px;margin:30px 0}
@@ -205,14 +328,12 @@ section{overflow:hidden}
 .bigq::before{content:"";position:absolute;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle,rgba(169,63,99,.5),transparent 70%);top:-90px;right:-70px}
 .bigq p{position:relative;font-family:var(--display);font-size:clamp(1.2rem,2.5vw,1.55rem);line-height:1.5;margin:0}
 .bigq p b{color:var(--rose)}
-/* gen intro band */
 .genband{background:var(--blush)}
 .genband .wrap{display:grid;grid-template-columns:auto 1fr auto;gap:36px;align-items:center}
 .genband img{width:130px;height:130px;object-fit:cover;border-radius:50%;border:5px solid #fff;box-shadow:0 20px 38px -18px rgba(46,31,39,.4)}
 .genband p{font-size:1.06rem}
 .genband p b{color:var(--purple)}
 @media(max-width:860px){.genband .wrap{grid-template-columns:1fr;text-align:center;justify-items:center}}
-/* dream */
 .dream .lead2{font-family:var(--display);font-size:clamp(1.3rem,2.8vw,1.8rem);line-height:1.45;max-width:760px;margin:16px 0 22px}
 .dream .lead2 em{font-style:italic;color:var(--pink)}
 .dream p{max-width:680px;color:var(--muted);margin-bottom:16px}
@@ -221,7 +342,6 @@ section{overflow:hidden}
 .treadmill div{display:flex;gap:14px;align-items:center;padding:13px 0;border-bottom:1.5px solid rgba(46,31,39,.12);color:var(--muted);font-size:1rem}
 .treadmill div::before{content:"\2717";color:var(--gold);font-weight:700}
 .pullq{font-family:var(--script);font-size:clamp(1.9rem,4.2vw,2.8rem);color:var(--gold);line-height:1.25;max-width:720px;margin-top:30px;display:block}
-/* reframe (ink) */
 .reframe h2{font-size:clamp(2rem,4.8vw,3.3rem);line-height:1.1;max-width:820px;margin:14px 0 26px}
 .reframe h2 em{font-style:italic;color:var(--rose)}
 .reframe p{color:var(--cream);max-width:680px;margin-bottom:16px}
@@ -233,7 +353,6 @@ section{overflow:hidden}
 .verdict{border-left:4px solid var(--rose);padding:6px 0 6px 24px;margin-top:10px}
 .verdict p{font-family:var(--display);font-size:clamp(1.15rem,2.4vw,1.5rem);color:#fff;margin:0;line-height:1.5}
 .verdict p b{color:var(--rose)}
-/* five pieces */
 .manif{font-size:clamp(2rem,5vw,3.6rem);line-height:1.08;margin:14px 0 10px}
 .manif .o{color:transparent;-webkit-text-stroke:1.5px var(--ink)}
 .manif em{font-style:italic;color:var(--pink)}
@@ -247,7 +366,6 @@ section{overflow:hidden}
 .five-close p{font-family:var(--display);font-size:1.2rem;line-height:1.55}
 .five-close p b{color:var(--pink)}
 @media(max-width:640px){.five>div{grid-template-columns:52px 1fr}}
-/* main event */
 .main-ev{text-align:center;position:relative;overflow:hidden}
 .main-ev .blob.b3{width:600px;height:600px;background:radial-gradient(circle,rgba(169,63,99,.4),transparent 65%);top:-200px;left:50%;margin-left:-300px}
 .main-ev .evh{font-size:clamp(2.6rem,7vw,5.4rem);line-height:1.05;margin:18px 0 8px;font-style:italic;background:linear-gradient(100deg,#fff 10%,var(--rose) 50%,var(--gold) 90%);-webkit-background-clip:text;background-clip:text;color:transparent;padding:0 10px}
@@ -263,7 +381,6 @@ section{overflow:hidden}
 .main-ev .noteline b{color:var(--rose)}
 .main-ev .cta-row{justify-content:center}
 @media(max-width:800px){.learns{grid-template-columns:1fr}}
-/* imagine flips */
 .flips{margin-top:46px;display:grid;gap:14px}
 .flip{display:grid;grid-template-columns:1fr 60px 1fr;gap:16px;align-items:center;background:var(--paper);border:1.5px solid rgba(46,31,39,.12);border-radius:18px;padding:20px 26px}
 .flip .was{color:var(--muted);text-decoration:line-through;text-decoration-color:rgba(169,63,99,.5)}
@@ -273,19 +390,18 @@ section{overflow:hidden}
 .honest-no{max-width:720px;margin:40px auto 0;background:var(--blush);border-radius:22px;padding:30px 32px;text-align:center}
 .honest-no p{font-family:var(--display);font-size:1.15rem;line-height:1.55}
 .honest-no p b{color:var(--pink)}
-/* story */
 .story{display:grid;grid-template-columns:.85fr 1.15fr;gap:56px;align-items:center}
-.story .phframe{position:relative;border-radius:26px 200px 26px 26px;overflow:hidden;border:1.5px solid rgba(46,31,39,.12);min-height:440px;box-shadow:0 34px 60px -36px rgba(46,31,39,.45);transform:rotate(-1.5deg)}
+.story .phframe{position:relative;border-radius:26px 200px 26px 26px;overflow:visible;min-height:440px;transform:rotate(-1.5deg)}
+.story .phframe .phin{position:absolute;inset:0;border-radius:26px 200px 26px 26px;overflow:hidden;border:1.5px solid rgba(46,31,39,.12);box-shadow:0 34px 60px -36px rgba(46,31,39,.45)}
 .story .phframe img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .story p{color:var(--muted);margin-bottom:16px;max-width:620px}
 .story p b{color:var(--ink)}
 @media(max-width:880px){.story{grid-template-columns:1fr}.story .phframe{min-height:330px}}
-/* proof */
 .proofband{text-align:center}
 .proofband p{max-width:640px;margin:16px auto 0;color:var(--muted)}
 .proofband p b{color:var(--ink)}
 .proofband .cta-row{justify-content:center}
-.prfkick{font-weight:700;font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;color:var(--purple);margin:22px 0 6px;text-align:left}
+.prfkick{font-family:ui-monospace,Menlo,monospace;font-weight:400;font-size:.76rem;letter-spacing:.2em;text-transform:uppercase;color:var(--purple);margin:22px 0 6px;text-align:left}
 .rgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:28px;text-align:left}
 .rcpt{background:#fff;border:1.5px solid rgba(46,31,39,.12);border-radius:12px;padding:12px 12px 14px;transform:rotate(var(--r,0deg));box-shadow:0 26px 46px -26px rgba(46,31,39,.35);transition:transform .35s;margin:0}
 .rcpt:hover{transform:rotate(0) translateY(-6px)}
@@ -293,15 +409,9 @@ section{overflow:hidden}
 .rcpt figcaption{font-size:.85rem;color:var(--muted);margin-top:10px;line-height:1.45}
 .rcpt figcaption b{color:var(--pink);font-family:var(--display);font-size:1.05rem}
 .rcpt.wide{grid-column:1/-1}
-.rcpt.wide img{aspect-ratio:auto}
 .rnote{text-align:center;color:var(--muted);font-size:.88rem;margin-top:22px}
 .rnote b{color:var(--ink)}
-.saidgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:34px;text-align:left}
-.said{background:var(--paper);border:1.5px solid rgba(46,31,39,.12);border-radius:18px;padding:26px 26px 22px;margin:0;font-family:var(--display);font-size:1.02rem;line-height:1.55;transform:rotate(var(--r,0deg));position:relative}
-.said::before{content:"\201C";position:absolute;top:-16px;left:20px;font-size:3rem;color:var(--pink);font-family:var(--display);line-height:1;background:var(--tint);padding:0 6px}
-.said cite{display:block;margin-top:14px;font-family:var(--body);font-style:normal;font-weight:700;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
-@media(max-width:860px){.rgrid,.saidgrid{grid-template-columns:1fr}}
-/* ai */
+@media(max-width:860px){.rgrid{grid-template-columns:1fr}}
 .ai-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:start}
 .ai-grid p{color:var(--cream);margin-bottom:16px}
 .ai-grid p b{color:#fff}
@@ -311,17 +421,6 @@ section{overflow:hidden}
 .ai-law p{font-family:var(--display);font-size:1.2rem;line-height:1.55;margin:0;color:var(--paper)}
 .ai-law p b{color:var(--rose)}
 @media(max-width:860px){.ai-grid{grid-template-columns:1fr}}
-/* free training */
-.train{background:var(--gold);color:#fff}
-.train .wrap{display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:center}
-.train h2{font-size:clamp(1.8rem,4vw,2.6rem);margin:10px 0 14px}
-.train p{opacity:.96;max-width:560px}
-.train .eyebrow{color:#fff}
-.train .eyebrow::before{color:var(--ink)}
-.train .btn{background:var(--ink);box-shadow:none}
-.train .btn:hover{background:#fff;color:var(--ink)}
-@media(max-width:800px){.train .wrap{grid-template-columns:1fr}}
-/* finale */
 .fin{text-align:center;padding:120px 0;position:relative;overflow:hidden;background:linear-gradient(170deg,var(--ink) 60%,#3d2a35)}
 .fin .blob.b4{width:560px;height:560px;background:radial-gradient(circle,rgba(169,63,99,.5),transparent 65%);bottom:-240px;left:50%;margin-left:-280px}
 .fin h2{font-size:clamp(2.2rem,5.6vw,4rem);line-height:1.08;max-width:880px;margin:16px auto 24px;color:var(--paper)}
@@ -348,21 +447,56 @@ section{overflow:hidden}
   <a class="mm-cta" href="/book-a-call" style="--i:7">Book a Free Call</a>
 </div>
 
-<header class="hero">
+<div class="promo">
+  <div class="wrap">
+    <img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/redesign-boss-lady-bloggers-r0kbhz/freebie-mockups/01-foundations-builder-mockup.png" alt="The Foundations Builder free tool" data-rv="l">
+    <div data-rv>
+      <h3>New free training: <span class="sqg">why your blog isn't making money</span> (even though you're doing everything they told you)</h3>
+      <p>Watch the Business Foundations training and use The Foundations Builder tool to map the business behind your blog.</p>
+    </div>
+    <a class="btn" href="https://bossladybloggers.myflodesk.com/build" target="_blank" rel="noopener" data-rv>Yes! Gimme that free training</a>
+  </div>
+</div>
+
+<header class="hero7">
   <div class="blob b1"></div><div class="blob b2"></div><div class="grain"></div>
-  <div class="wrap hero-inner">
-    <div>
-      <span class="eyebrow" data-rv>Boss Lady Bloggers</span>
-      <h1 class="h1 split go">Blog coaching for women who want to <em>make money</em>, not just publish content.</h1>
-      <p class="sub" data-rv style="--d:.25s">You've spent enough time building your blog. Isn't it time it started building your income?</p>
-      <div class="cta-row" data-rv style="--d:.4s">
-        <a class="btn" href="/book-a-call">Book my free call</a>
-        <a class="btn-ghost" href="/boss-business-system">See how The BOSS Business System works</a>
+  <div class="wrap">
+    <div class="ghname" data-rv="clip">
+      <span class="gl">boss lady</span>
+      <span class="gl g2">bloggers</span>
+    </div>
+    <div class="hp">
+      <div class="ph" data-rv="s"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_030.jpeg" alt="Gen, blog coach and founder of Boss Lady Bloggers" fetchpriority="high"></div>
+      <div class="pillstack">
+        <span class="hand" data-rv style="--d:.25s">start here, babe &#8595;</span>
+        <a class="pillb" href="/book-a-call" data-rv style="--d:.3s">Book a Free Call <i>&#8599;</i></a>
+        <a class="pillb gold" href="/boss-business-system" data-rv style="--d:.4s">The BOSS Business System <i>&#8599;</i></a>
       </div>
     </div>
-    <div class="hero-ph" data-rv="r" style="--d:.3s"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_030.jpeg" alt="Gen, blog coach and founder of Boss Lady Bloggers" fetchpriority="high"><span class="sticker" style="top:54%;right:14px;z-index:1">your blog coach</span><span class="cap">gen &middot; boss lady bloggers</span></div>
+    <div class="spinwrap"><a class="spinb" href="/about" aria-label="nice to meet you &#183; i'm gen &#183; your blog coach &#183;"><svg viewBox="0 0 138 138"><defs><path id="sbc" d="M69,69 m-54,0 a54,54 0 1,1 108,0 a54,54 0 1,1 -108,0"/></defs><text><textPath href="#sbc">nice to meet you &#183; i'm gen &#183; your blog coach &#183;</textPath></text></svg><span class="ctr">&#9825;</span></a></div>
   </div>
 </header>
+
+<div class="stats7">
+  <div style="text-align:center"><span class="hand" data-rv>the short version of my story:</span></div>
+  <div class="wrap">
+    <div data-rv><b>2017</b><p>the year I hit publish on my first blog post</p></div>
+    <div data-rv style="--d:.08s"><b>6 <em>figures+</em></b><p>built during naptime, from my aunt's basement</p></div>
+    <div data-rv style="--d:.16s"><b>1 <em>little boy</em></b><p>the reason behind all of it</p></div>
+  </div>
+</div>
+
+<section class="mission">
+  <div class="wrap">
+    <span class="eyebrow" data-rv style="display:flex;justify-content:center">Boss Lady Bloggers</span>
+    <h1 class="split go">Blog coaching for women who want to <span class="hl">make money</span>, not just <span class="c3">publish content.</span></h1>
+    <p class="sub" data-rv style="--d:.25s">You've spent enough time building your blog. Isn't it time it started building your income?</p>
+    <div class="cta-row" data-rv style="--d:.4s">
+      <a class="btn" href="/book-a-call">Book my free call</a>
+      <a class="btn-ghost" href="/boss-business-system">See how The BOSS Business System works</a>
+    </div>
+  </div>
+</section>
 
 <div class="strip" style="background:var(--ink);color:var(--paper);padding:18px 0"><div class="mq" style="--mqs:28s"><div><span>build the business behind your blog <span class="hrt">&#10084;</span></span><span>offers people want to buy <span class="hrt">&#10084;</span></span><span>websites designed to sell <span class="hrt">&#10084;</span></span><span>marketing that turns readers into customers <span class="hrt">&#10084;</span></span><span>build the business behind your blog <span class="hrt">&#10084;</span></span><span>offers people want to buy <span class="hrt">&#10084;</span></span><span>websites designed to sell <span class="hrt">&#10084;</span></span><span>marketing that turns readers into customers <span class="hrt">&#10084;</span></span></div><div aria-hidden="true"><span>build the business behind your blog <span class="hrt">&#10084;</span></span><span>offers people want to buy <span class="hrt">&#10084;</span></span><span>websites designed to sell <span class="hrt">&#10084;</span></span><span>marketing that turns readers into customers <span class="hrt">&#10084;</span></span><span>build the business behind your blog <span class="hrt">&#10084;</span></span><span>offers people want to buy <span class="hrt">&#10084;</span></span><span>websites designed to sell <span class="hrt">&#10084;</span></span><span>marketing that turns readers into customers <span class="hrt">&#10084;</span></span></div></div></div>
 
@@ -408,7 +542,7 @@ section{overflow:hidden}
       <div>Redesign your homepage.</div>
     </div>
     <p data-rv>And once you've done all that, maybe someday you'll make enough money to justify the hours you've spent.</p>
-    <span class="pullq" data-rv>Who decided you had to wait that long to start building something worth buying?</span>
+    <span class="pullq" data-rv>Who decided you had to wait that long to start building something worth buying?<span class="doodle" aria-hidden="true"></span></span>
   </div>
 </section>
 
@@ -461,6 +595,41 @@ section{overflow:hidden}
   </div>
 </section>
 
+<section class="sec-tint ways7">
+  <div class="wrap">
+    <span class="wm" aria-hidden="true">pick one</span>
+    <span class="eyebrow" data-rv>Ways to work together</span>
+    <h2 class="h" data-rv>Three doors. <em>Pick the one that fits.</em> <span class="hand">no wrong answer!</span></h2>
+    <div class="wycard c1" data-rv="s">
+      <span class="num"></span>
+      <div>
+        <h3>The BOSS <em>Business System</em></h3>
+        <p>My complete business building program. Develop your offer, build your brand and website, grow your list, and connect it all to a sales process.</p>
+      </div>
+      <a class="wy-go" href="/boss-business-system">Learn more <i>&#8599;</i></a>
+      <span class="chip"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_026.jpeg" alt="" loading="lazy"></span>
+    </div>
+    <div class="wycard c2" data-rv="s" style="--d:.08s">
+      <span class="num"></span>
+      <div>
+        <h3>The Blog Profit <em>Intensive</em></h3>
+        <p>12 weeks of private coaching. We look at YOUR blog, YOUR offer, and YOUR sales process, then build and run your next sales campaign together.</p>
+      </div>
+      <a class="wy-go" href="/blog-coaching">Learn more <i>&#8599;</i></a>
+      <span class="chip"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_047.jpeg" alt="" loading="lazy"></span>
+    </div>
+    <div class="wycard c3" data-rv="s" style="--d:.16s">
+      <span class="num"></span>
+      <div>
+        <h3>The free <em>trainings</em></h3>
+        <p>10 trainings, each paired with a practical tool. Start with the problem that's keeping you stuck and walk away with something you can implement.</p>
+      </div>
+      <a class="wy-go" href="/freebies">Learn more <i>&#8599;</i></a>
+      <span class="chip"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/redesign-boss-lady-bloggers-r0kbhz/freebie-mockups/01-foundations-builder-mockup.png" alt="" loading="lazy"></span>
+    </div>
+  </div>
+</section>
+
 <section class="sec-blush">
   <div class="wrap">
     <span class="eyebrow" data-rv>Picture it</span>
@@ -472,7 +641,16 @@ section{overflow:hidden}
 
 <section>
   <div class="wrap story">
-    <div class="phframe" data-rv="l"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_021.jpeg" alt="Gen, founder of Boss Lady Bloggers" loading="lazy"><span class="sticker" style="top:22px;right:22px;z-index:1">since 2017</span></div>
+    <div class="phframe" data-rv="l">
+      <div class="phin"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_021.jpeg" alt="Gen, founder of Boss Lady Bloggers" loading="lazy"></div>
+      <span class="ovaltag" style="top:-14px;left:8%;--r:-7deg">blog coach</span>
+      <span class="ovaltag" style="top:40px;right:-10px;--r:5deg">designer</span>
+      <span class="ovaltag" style="bottom:84px;left:-16px;--r:-4deg">single mama</span>
+      <div class="intocard" data-rv>
+        <b>Very into:</b>
+        <p>business-first blogging, websites that sell, smart systems, and building things during naptime.</p>
+      </div>
+    </div>
     <div>
       <span class="eyebrow" data-rv>My story</span>
       <h2 class="h" data-rv>I know what it's like to do everything you're told <em>and still wonder where the money is.</em></h2>
@@ -491,7 +669,7 @@ section{overflow:hidden}
     <span class="eyebrow" data-rv>The proof</span>
     <h2 class="h" data-rv style="text-align:left">You don't have to <em>take my word for it.</em></h2>
     <p data-rv style="margin:0 0 8px;max-width:680px;text-align:left">I've helped women work through their websites, offers, brand messaging, and blog business strategies. <b>And I'd rather show you what that work looks like than make another big promise about how much money you could earn.</b></p>
-    <p class="prfkick" data-rv>Nine years of blogging. Six years coaching bloggers. Real clients. Real invoices.</p>
+    <p class="prfkick" data-rv>Nine years of blogging &#183; six years coaching bloggers &#183; real clients &#183; real invoices</p>
     <div class="rgrid">
       <figure class="rcpt" data-rv style="--r:-1.5deg"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/redesign-boss-lady-bloggers-r0kbhz/proof/proof-4000-dec-2023.jpg" alt="Payment confirmation for invoice 042: $4,000, December 28, 2023" loading="lazy"><figcaption><b>$4,000</b> &middot; invoice #042 &middot; Dec 2023</figcaption></figure>
       <figure class="rcpt" data-rv style="--r:1deg;--d:.08s"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/redesign-boss-lady-bloggers-r0kbhz/proof/proof-2499-sep-2023.jpg" alt="Payment confirmation for invoice 035: $2,499, September 7, 2023" loading="lazy"><figcaption><b>$2,499</b> &middot; one of two payments for a custom website + 12 months of coaching</figcaption></figure>
@@ -499,15 +677,16 @@ section{overflow:hidden}
       <figure class="rcpt wide" data-rv style="--r:.6deg;--d:.24s"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/redesign-boss-lady-bloggers-r0kbhz/proof/proof-333-monthly-payments.jpg" alt="Nine monthly client payments of $333 from November 2023 to April 2024, names blurred" loading="lazy"><figcaption><b>$333 a month</b> &middot; real monthly coaching clients, Nov 2023 to Apr 2024</figcaption></figure>
     </div>
     <p class="rnote" data-rv>These are a few receipts, not a total, and client names stay blurred. <b>Your results depend on you.</b></p>
-    <div class="saidgrid">
-      <blockquote class="said" data-rv style="--r:-1deg">&ldquo;I showed everything to my husband and he was just as impressed as I was. I truly cannot believe all of the value you have packed in here!&rdquo;<cite>client email &middot; January 2025</cite></blockquote>
-      <blockquote class="said" data-rv style="--r:.8deg;--d:.08s">&ldquo;If I had the money I would sign up for your services in a heartbeat. You have already given me direction.&rdquo;<cite>email after a free call &middot; February 2025</cite></blockquote>
-      <blockquote class="said" data-rv style="--r:-.7deg;--d:.16s">&ldquo;Thank you for today! I would like to do the 6 month plan. I want to get this going and earn money ASAP.&rdquo;<cite>client email, sent the same day as her call &middot; February 2025</cite></blockquote>
+    <div class="tiltq">
+      <blockquote class="tq t1" data-rv style="--r:-2deg"><span class="qm">&ldquo;</span>I showed everything to my husband and he was just as impressed as I was. I truly cannot believe all of the value you have packed in here!<cite>client email &middot; January 2025</cite></blockquote>
+      <blockquote class="tq t2" data-rv style="--r:1.6deg;--d:.08s"><span class="qm">&ldquo;</span>If I had the money I would sign up for your services in a heartbeat. You have already given me direction.<cite>email after a free call &middot; February 2025</cite></blockquote>
+      <blockquote class="tq t3" data-rv style="--r:-1.4deg;--d:.16s"><span class="qm">&ldquo;</span>Thank you for today! I would like to do the 6 month plan. I want to get this going and earn money ASAP.<cite>client email, sent the same day as her call &middot; February 2025</cite></blockquote>
     </div>
     <p class="rnote" data-rv>Real lines from real client emails, shared without names.</p>
-    <div class="cta-row" data-rv style="justify-content:center"><a class="btn" href="/portfolio">See more client stories</a></div>
   </div>
 </section>
+
+<div class="rightplace" data-rv>You're in the right place, babe.</div>
 
 <section class="sec-ink">
   <div class="grain"></div>
@@ -525,15 +704,52 @@ section{overflow:hidden}
   </div>
 </section>
 
-<section class="train">
+<section class="sec-ink podstack" style="background:linear-gradient(180deg,#241720,var(--ink))">
+  <div class="grain"></div>
   <div class="wrap">
-    <div>
-      <span class="eyebrow" data-rv>Still figuring out where to start?</span>
-      <h2 data-rv>You don't need to make a big decision today.</h2>
-      <p data-rv>Start by learning the difference between building a blog and building a business. I'll show you the essential pieces, how they work together, and what to look at before you spend another month creating content without a clear plan.</p>
+    <span class="scrp" data-rv>the</span>
+    <div class="bigp" data-rv="clip">PODCAST</div>
+    <p class="mono" data-rv>new conversations &#183; apple &#183; spotify &#183; youtube</p>
+    <p data-rv>Real conversations about blogging, business, and making money online, for the days you'd rather press play than read.</p>
+    <img class="podart" src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_019.jpeg" alt="The Boss Lady Bloggers Podcast" loading="lazy" data-rv="s">
+    <div class="cta-row" data-rv style="margin-top:28px"><a class="btn" href="/podcast">Listen to the podcast</a></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <span class="eyebrow" data-rv>From the blog</span>
+    <div class="bigblog" data-rv="clip"><span class="w1">Not your</span> <span class="w2">average</span> <span class="w3">blogging advice.</span></div>
+    <p data-rv style="color:var(--muted);max-width:620px">Practical articles with an actual business behind them. Pick your topic:</p>
+    <div class="catrows">
+      <a href="/blog" data-rv><span class="cn">01</span><h3>Starting a blog</h3><i>&#8599;</i></a>
+      <a href="/blog" data-rv style="--d:.04s"><span class="cn">02</span><h3>Making money blogging</h3><i>&#8599;</i></a>
+      <a href="/blog" data-rv style="--d:.08s"><span class="cn">03</span><h3>Digital products &amp; offers</h3><i>&#8599;</i></a>
+      <a href="/blog" data-rv style="--d:.12s"><span class="cn">04</span><h3>Blogging &amp; SEO</h3><i>&#8599;</i></a>
+      <a href="/blog" data-rv style="--d:.16s"><span class="cn">05</span><h3>Email marketing &amp; sales</h3><i>&#8599;</i></a>
+      <a href="/blog" data-rv style="--d:.2s"><span class="cn">06</span><h3>AI &amp; business productivity</h3><i>&#8599;</i></a>
     </div>
-    <div style="text-align:center">
-      <a class="btn" href="/free-blogging-masterclass" data-rv>Watch the free Business Foundations training</a>
+  </div>
+</section>
+
+<section class="sec-blush" style="padding-top:64px">
+  <div class="wrap">
+    <div class="foldwrap" data-rv="s">
+      <span class="foldtab">The free training library</span>
+      <div class="foldcard">
+        <span class="burst">free<br>+ tools</span>
+        <div>
+          <h3>Still figuring out <em>where to start?</em></h3>
+          <p>You don't need to make a big decision today. Start by learning the difference between building a blog and building a business.</p>
+          <p><b>10 free trainings, each paired with a practical tool.</b> Two are live now, and the rest are on their way.</p>
+          <div class="cta-row" style="margin-top:18px"><a class="btn" href="/freebies">Explore the free trainings</a></div>
+        </div>
+        <div class="foldthumbs">
+          <span class="hand" style="position:absolute;top:-34px;right:8px">steal these! &#8594;</span>
+          <img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/redesign-boss-lady-bloggers-r0kbhz/freebie-mockups/01-foundations-builder-mockup.png" alt="The Foundations Builder" loading="lazy" style="--r:-2deg">
+          <img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/redesign-boss-lady-bloggers-r0kbhz/freebie-mockups/05-sales-leak-finder-mockup.png" alt="The Sales Leak Finder" loading="lazy" style="--r:1.6deg">
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -542,7 +758,7 @@ section{overflow:hidden}
   <div class="blob b4"></div><div class="grain"></div>
   <div class="wrap">
     <span class="eyebrow" data-rv>Okay, your turn</span>
-    <h2 data-rv="clip">You've already spent enough time <em>wondering if this could work.</em></h2>
+    <h2 data-rv="clip">You've already spent enough time <em class="sqg">wondering if this could work.</em></h2>
     <p data-rv>Maybe you're starting from scratch. Maybe you've been blogging for a year. Maybe you have traffic, an email list, and a website you love, but your income still doesn't reflect the work you're putting in.</p>
     <p data-rv>Wherever you're starting, the question is no longer how many more things you can add to your to do list. <b>It's what kind of business you're actually trying to build. And what needs to happen to make it real.</b></p>
     <p data-rv>If you're ready to figure that out, <b>The BOSS Business System is where I'd start.</b></p>

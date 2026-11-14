@@ -1,6 +1,6 @@
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Karla:wght@400;500;700&family=Ephesis&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Karla:wght@400;500;700&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--paper:#FBF6EE;--tint:#F4EBDE;--ink:#2E1F27;--pink:#A93F63;--purple:#7C2B48;--gold:#BC8A47;--blush:#F0DCE2;--muted:#6E5C63;--cream:#D8CBC3;--rose:#E8A9C0;--hot:#D8427D;--hot2:#B42E60;--display:'Fraunces',serif;--body:'Karla',sans-serif;--script:'Ephesis',cursive}
+:root{--paper:#FBF6EE;--tint:#F4EBDE;--ink:#2E1F27;--pink:#A93F63;--purple:#7C2B48;--gold:#BC8A47;--blush:#F0DCE2;--muted:#6E5C63;--cream:#D8CBC3;--rose:#E8A9C0;--hot:#D8427D;--hot2:#B42E60;--display:'Fraunces',serif;--body:'Karla',sans-serif;--script:'Caveat',cursive}
 /* Styles the WordPress post content rendered by the Showit blog template. */
 .sw-blog-content,.entry-content,article{font-family:var(--body);color:var(--ink)}
 .sw-blog-content p,.entry-content p,article p{font-size:1.02rem;line-height:1.8;color:#4a3c42;margin-bottom:1.2em}
