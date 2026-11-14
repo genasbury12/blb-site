@@ -7,13 +7,13 @@
 <meta name="description" content="Boss Lady Bloggers: blog coaching, business strategy, digital products, and smarter systems for women who want to build businesses that sell. Home of The BOSS Business System.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400;1,9..144,500;1,9..144,600&family=Karla:wght@400;500;600;700&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400;1,9..144,500;1,9..144,600&family=Karla:wght@400;500;600;700&family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;0,6..96,600;0,6..96,700;1,6..96,500&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
 
 <style>
 :root{
   --paper:#FBF6EE;--tint:#F4EBDE;--ink:#2E1F27;--pink:#A93F63;--purple:#7C2B48;
   --gold:#BC8A47;--blush:#F0DCE2;--muted:#6E5C63;--cream:#D8CBC3;--rose:#E8A9C0;
-  --display:'Fraunces',Georgia,serif;--body:'Karla',system-ui,sans-serif;--script:'Caveat',cursive;
+  --display:'Fraunces',Georgia,serif;--body:'Karla',system-ui,sans-serif;--script:'Caveat',cursive;--fashion:'Bodoni Moda','Didot','Playfair Display',serif;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -199,27 +199,33 @@ section{overflow:hidden}
 .promo p{color:var(--muted);font-size:.9rem;max-width:560px}
 .promo .btn{white-space:nowrap}
 @media(max-width:860px){.promo .wrap{grid-template-columns:1fr;text-align:center;justify-items:center}.promo img{width:120px}}
-/* v7 ghost-name hero */
-.hero7{position:relative;padding:72px 0 0;text-align:center;overflow:hidden}
-.hero7 .blob.b1{width:520px;height:520px;background:radial-gradient(circle,#F0DCE2,transparent 65%);top:-140px;right:-120px}
-.hero7 .blob.b2{width:420px;height:420px;background:radial-gradient(circle,rgba(188,138,71,.3),transparent 65%);bottom:-100px;left:-120px;animation-delay:-8s}
-.ghname{position:relative;margin:0 auto;line-height:.82;text-align:center}
-.ghname .l1{display:block;font-family:var(--display);font-style:italic;font-weight:500;font-size:clamp(4.6rem,15vw,12.8rem);letter-spacing:-.04em;color:var(--pink)}
-.ghname .lady{position:absolute;top:-.42em;left:8%;font-family:var(--script);font-weight:700;font-size:clamp(1.9rem,5vw,4rem);color:var(--gold);transform:rotate(-8deg);z-index:3}
-.ghname .l2{display:block;font-family:var(--display);font-weight:600;font-size:clamp(4.2rem,14vw,12rem);letter-spacing:.03em;color:transparent;-webkit-text-stroke:clamp(1.5px,.22vw,3px) var(--ink);margin-top:-.14em}
-.hero7 .hp{position:relative;margin:clamp(-3.4rem,-8vw,-7.4rem) auto 0;width:min(470px,82vw);z-index:2}
-.hero7 .hp .cut{position:relative;display:block;width:100%;z-index:2;filter:drop-shadow(0 34px 44px rgba(46,31,39,.32))}
+/* v7 hero: big playful fashion serif on deep burgundy */
+.hero7{position:relative;padding:64px 0 0;background:linear-gradient(175deg,#241720 0%,var(--ink) 55%,#41273344 100%),var(--ink);color:var(--paper);text-align:center;overflow:hidden}
+.hero7 .blob.b1{width:560px;height:560px;background:radial-gradient(circle,rgba(216,66,125,.3),transparent 65%);top:-160px;right:-140px}
+.hero7 .blob.b2{width:460px;height:460px;background:radial-gradient(circle,rgba(232,169,192,.22),transparent 65%);bottom:-120px;left:-140px;animation-delay:-8s}
+.ghname{position:relative;margin:0 auto;line-height:.8;text-align:center}
+.ghname .l1{display:block;font-family:var(--fashion);font-weight:600;font-size:clamp(4.6rem,16vw,14.2rem);letter-spacing:.005em;color:#F6E7DC}
+.ghname .l1 .soft{color:var(--rose);font-style:italic}
+.ghname .lady{position:absolute;top:-.5em;left:7%;font-family:var(--script);font-weight:700;font-size:clamp(1.9rem,5vw,4rem);color:var(--gold);transform:rotate(-8deg);z-index:3}
+.ghname .l2{display:block;font-family:var(--fashion);font-weight:600;font-size:clamp(4.4rem,15.4vw,13.6rem);letter-spacing:.01em;color:#F6E7DC;margin-top:-.05em}
+.hero7 .hp{position:relative;margin:clamp(-5rem,-13vw,-11.5rem) auto 0;width:min(500px,86vw);z-index:2}
+.hero7 .hp .cut{position:relative;display:block;width:100%;z-index:2;filter:drop-shadow(0 34px 44px rgba(0,0,0,.45))}
 .balloons{position:absolute;left:-13%;top:-7%;width:52%;z-index:1;overflow:visible}
 .balloons .bob{animation:bbob 6s ease-in-out infinite;transform-origin:50% 90%}
 @keyframes bbob{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-12px) rotate(-2.5deg)}}
 @media (prefers-reduced-motion:reduce){.balloons .bob{animation:none}}
-.hero7 .pillstack{position:absolute;right:-30px;bottom:34px;display:grid;gap:12px;z-index:3;text-align:left}
-.pillb{display:flex;align-items:center;gap:14px;background:#fff;border-radius:60px;padding:10px 12px 10px 24px;font-weight:700;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);text-decoration:none;box-shadow:0 20px 44px -18px rgba(46,31,39,.45);transition:transform .3s}
+.tagLR{position:absolute;top:60%;max-width:250px;font-weight:700;font-size:clamp(.95rem,1.6vw,1.15rem);line-height:1.5;color:var(--paper);z-index:3}
+.tagL{left:5%}
+.tagR{right:5%}
+.tagLR em{font-style:normal;color:var(--rose)}
+.tagLR .hand{display:block;margin-top:10px}
+.hero7 .pillstack{position:absolute;right:-30px;bottom:40px;display:grid;gap:12px;z-index:3;text-align:left}
+.pillb{display:flex;align-items:center;gap:14px;background:#fff;border-radius:60px;padding:10px 12px 10px 24px;font-weight:700;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);text-decoration:none;box-shadow:0 20px 44px -18px rgba(0,0,0,.55);transition:transform .3s}
 .pillb:hover{transform:translateX(5px)}
 .pillb i{font-style:normal;display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:linear-gradient(120deg,var(--hot),var(--hot2));color:#fff;font-size:1rem}
 .pillb.gold i{background:var(--gold)}
-.hero7 .spinwrap{position:absolute;left:4%;bottom:12%;z-index:3}
-@media(max-width:700px){.hero7 .pillstack{position:static;margin:18px auto 0;justify-items:center;text-align:center}.hero7 .spinwrap{display:none}}
+@media(max-width:700px){.hero7 .pillstack{position:static;margin:18px auto 0;justify-items:center;text-align:center}}
+@media(max-width:980px){.tagLR{position:static;max-width:420px;margin:18px auto 0}}
 /* witty stats trio */
 .stats7{padding:64px 0 10px}
 .stats7 .wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;text-align:center}
@@ -316,7 +322,7 @@ section{overflow:hidden}
 .bigblog .w3{color:transparent;-webkit-text-stroke:2px var(--ink)}
 .catrows{margin-top:36px;max-width:860px}
 .catrows a{display:grid;grid-template-columns:54px 1fr 46px;gap:18px;align-items:center;padding:20px 8px;border-bottom:1.5px solid rgba(46,31,39,.14);text-decoration:none;transition:background .3s,padding .3s}
-.catrows a:hover{background:#fff;padding-left:20px}
+.catrows a:hover{background:var(--tint);padding-left:20px}
 .catrows .cn{font-family:ui-monospace,Menlo,monospace;font-size:.78rem;color:var(--gold);letter-spacing:.1em}
 .catrows h3{font-family:var(--display);font-weight:500;font-size:clamp(1.1rem,2.4vw,1.5rem);color:var(--ink)}
 .catrows i{font-style:normal;display:grid;place-items:center;width:40px;height:40px;border-radius:50%;border:1.5px solid rgba(46,31,39,.25);color:var(--pink);transition:background .3s,color .3s,transform .3s}
@@ -362,7 +368,7 @@ section{overflow:hidden}
 .manif em{font-style:italic;color:var(--pink)}
 .five{margin-top:50px;counter-reset:fv;display:grid;gap:0;border-top:1.5px solid rgba(46,31,39,.14)}
 .five>div{counter-increment:fv;display:grid;grid-template-columns:86px 1fr;gap:26px;padding:28px 14px;border-bottom:1.5px solid rgba(46,31,39,.14);align-items:baseline;transition:background .3s,padding .3s}
-.five>div:hover{background:#fff;padding-left:26px}
+.five>div:hover{background:rgba(255,255,255,.7);padding-left:26px}
 .five>div::before{content:"0" counter(fv);font-family:var(--script);font-size:2.6rem;color:var(--gold);line-height:.8}
 .five h3{font-size:1.3rem;display:inline;margin-right:10px}
 .five p{display:inline;color:var(--muted)}
@@ -464,39 +470,42 @@ section{overflow:hidden}
 
 <header class="hero7">
   <div class="blob b1"></div><div class="blob b2"></div><div class="grain"></div>
-  <div class="wrap">
+  <div class="wrap" style="position:relative">
     <div class="ghname" data-rv="clip">
-      <span class="l1">boss <span style="color:var(--rose)">lady</span></span>
       <span class="lady">hey babe!</span>
+      <span class="l1">boss <span class="soft">lady</span></span>
       <span class="l2">bloggers</span>
     </div>
     <div class="hp">
       <svg class="balloons" viewBox="0 0 300 390" aria-hidden="true"><g class="bob">
-        <path d="M74 150 Q 110 260 150 372" fill="none" stroke="#2E1F27" stroke-width="2" opacity=".5"/><path d="M118 212 Q 134 290 150 372" fill="none" stroke="#2E1F27" stroke-width="2" opacity=".5"/>
-        <path d="M152 122 Q 150 250 150 372" fill="none" stroke="#2E1F27" stroke-width="2" opacity=".5"/>
-        <path d="M226 158 Q 192 268 150 372" fill="none" stroke="#2E1F27" stroke-width="2" opacity=".5"/>
+        <path d="M74 150 Q 110 260 150 372" fill="none" stroke="#FBF6EE" stroke-width="2" opacity=".55"/>
+        <path d="M118 212 Q 134 290 150 372" fill="none" stroke="#FBF6EE" stroke-width="2" opacity=".55"/>
+        <path d="M152 122 Q 150 250 150 372" fill="none" stroke="#FBF6EE" stroke-width="2" opacity=".55"/>
+        <path d="M226 158 Q 192 268 150 372" fill="none" stroke="#FBF6EE" stroke-width="2" opacity=".55"/>
         <ellipse cx="74" cy="100" rx="40" ry="48" fill="#D8427D"/>
         <path d="M74 148 l-7 12 h14 z" fill="#D8427D"/>
         <ellipse cx="152" cy="64" rx="46" ry="56" fill="#E8A9C0"/>
         <path d="M152 120 l-7 12 h14 z" fill="#E8A9C0"/>
         <ellipse cx="226" cy="110" rx="38" ry="46" fill="#F0DCE2"/>
         <path d="M226 156 l-7 12 h14 z" fill="#F0DCE2"/>
-        <ellipse cx="118" cy="182" rx="26" ry="31" fill="#8A3B5C"/><path d="M118 212 l-5 9 h10 z" fill="#8A3B5C"/><ellipse cx="60" cy="84" rx="10" ry="16" fill="#fff" opacity=".35" transform="rotate(-18 60 84)"/>
-        <ellipse cx="136" cy="44" rx="11" ry="18" fill="#fff" opacity=".35" transform="rotate(-18 136 44)"/>
-        <ellipse cx="214" cy="96" rx="9" ry="14" fill="#fff" opacity=".35" transform="rotate(-18 214 96)"/>
+        <ellipse cx="118" cy="182" rx="26" ry="31" fill="#FBF6EE"/>
+        <path d="M118 212 l-5 9 h10 z" fill="#FBF6EE"/>
+        <ellipse cx="60" cy="84" rx="10" ry="16" fill="#fff" opacity=".4" transform="rotate(-18 60 84)"/>
+        <ellipse cx="136" cy="44" rx="11" ry="18" fill="#fff" opacity=".4" transform="rotate(-18 136 44)"/>
+        <ellipse cx="214" cy="96" rx="9" ry="14" fill="#fff" opacity=".4" transform="rotate(-18 214 96)"/>
       </g></svg>
       <img class="cut" data-rv="s" src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/redesign-boss-lady-bloggers-r0kbhz/cutouts/gen-standing-laugh.png" alt="Gen, blog coach and founder of Boss Lady Bloggers, laughing" fetchpriority="high">
       <div class="pillstack">
-        <span class="hand" data-rv style="--d:.25s;text-shadow:0 1px 0 #fff,0 0 14px #fff,0 0 14px #fff">start here, babe &#8595;</span>
         <a class="pillb" href="/book-a-call" data-rv style="--d:.3s">Book a Free Call <i>&#8599;</i></a>
         <a class="pillb gold" href="/boss-business-system" data-rv style="--d:.4s">The BOSS Business System <i>&#8599;</i></a>
       </div>
     </div>
-    <div class="spinwrap"><a class="spinb" href="/about" aria-label="nice to meet you &#183; i'm gen &#183; your blog coach &#183;"><svg viewBox="0 0 138 138"><defs><path id="sbc" d="M69,69 m-54,0 a54,54 0 1,1 108,0 a54,54 0 1,1 -108,0"/></defs><text><textPath href="#sbc">nice to meet you &#183; i'm gen &#183; your blog coach &#183;</textPath></text></svg><span class="ctr">&#9825;</span></a></div>
+    <div class="tagLR tagL" data-rv>You've spent enough time <em>building your blog...</em></div>
+    <div class="tagLR tagR" data-rv>...isn't it time it started <em>building your income?</em><span class="hand" style="color:var(--rose)">that's where I come in</span></div>
   </div>
 </header>
 
-<div class="stats7">
+<div class="stats7" style="background:var(--blush)">
   <div style="text-align:center"><span class="hand" data-rv>the short version of my story:</span></div>
   <div class="wrap">
     <div data-rv><b style="color:var(--gold)">2017</b><p>the year I hit publish on my first blog post</p></div>
@@ -505,7 +514,7 @@ section{overflow:hidden}
   </div>
 </div>
 
-<section class="mission">
+<section class="mission" style="background:#fff">
   <div class="wrap">
     <span class="eyebrow" data-rv style="display:flex;justify-content:center">Boss Lady Bloggers</span>
     <h1 class="split go">Blog coaching for women who want to <span class="hl">make money</span>, not just <span class="c3">publish content.</span></h1>
@@ -581,7 +590,7 @@ section{overflow:hidden}
   </div>
 </section>
 
-<section>
+<section style="background:var(--lavl)">
   <div class="wrap">
     <span class="wm" aria-hidden="true">the shift</span>
     <span class="eyebrow" data-rv>The shift that changes everything I teach</span>
@@ -658,7 +667,7 @@ section{overflow:hidden}
   </div>
 </section>
 
-<section>
+<section style="background:#fff">
   <div class="wrap story">
     <div class="phframe" data-rv="l">
       <div class="phin"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_021.jpeg" alt="Gen, founder of Boss Lady Bloggers" loading="lazy"></div>
@@ -735,7 +744,7 @@ section{overflow:hidden}
   </div>
 </section>
 
-<section>
+<section style="background:#fff">
   <div class="wrap">
     <span class="eyebrow" data-rv>From the blog</span>
     <div class="bigblog" data-rv="clip"><span class="w1">Not your</span> <span class="w2">average</span> <span class="w3">blogging advice.</span></div>

@@ -539,6 +539,27 @@ CHANGELOG (newest first)
                   across Start Here, BBS, Coaching, Resources,
                   About, Contact.
 
+2026-11-14  v5.7  HERO 3.0 - BOLD + FEMININE (client: "I like the
+                  bold font but feminine too", "I dont like the
+                  white bubble font", "play around with different
+                  color backgrounds not all that cream color",
+                  "BIG PLAYFUL"). New fashion display face: BODONI
+                  MODA (--fashion token in v5.py, loaded sitewide,
+                  local TTFs in scratchpad brandfonts for shots).
+                  Hero is now a FULL DEEP-BURGUNDY FIELD: cream
+                  Bodoni "boss lady bloggers" at ~16vw (no outline
+                  letters - she vetoed), "lady" in rose italic,
+                  gold Caveat "hey babe!", her cutout + pink-family
+                  balloon cluster center, split taglines left/right
+                  of her ("You've spent enough time building your
+                  blog... isn't it time it started building your
+                  income?" + hand-note "that's where I come in"),
+                  white pill buttons w/ arrow chips. SECTION COLOR
+                  RHYTHM: stats band blush, mission white (hl pill
+                  pops), five-pieces light mauve, story white, blog
+                  white - less cream everywhere. Verified all
+                  pages over=0 errs=0.
+
 2026-11-14  v5.6  HERO 2.0 + CUTOUTS + BALLOONS + FAMILY PALETTE
                   (client: transparent photos of her, "put back
                   balloons in my hand", "boss lady bloggers doesnt
