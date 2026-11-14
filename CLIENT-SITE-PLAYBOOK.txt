@@ -539,6 +539,29 @@ CHANGELOG (newest first)
                   across Start Here, BBS, Coaching, Resources,
                   About, Contact.
 
+2026-11-14  v5.8  HERO FINAL + CRAZY FEATURES PASS (client: "I
+                  love the black actually with the balloons. but it
+                  covers the text and I still hate the fonts",
+                  "every section of jenna/spicy has CRAZY insane
+                  features"). FONT: --fashion is now ABRIL FATFACE
+                  (Bodoni Moda removed; she hated it). HERO: back
+                  on the black-burgundy field; title has NO JS
+                  reveal any more (pure CSS keyframe - in her
+                  Showit preview the IntersectionObserver reveal
+                  never fired so the title was invisible; NEVER put
+                  data-rv on hero-critical text again); balloons
+                  moved BEHIND the letters (z-index 3 under ghname
+                  z4, cutout z5) so nothing covers the name; curved
+                  SVG divider sweeps hero into the blush stats
+                  band. NEW FEATURES: offer cards are STICKY
+                  STACKING deck (position:sticky top:110px);
+                  ticker words alternate solid/outline (-webkit-
+                  text-stroke rose); scrolling PHOTO MARQUEE
+                  (cutouts + BTS photos + mockups, 40s) between
+                  story and proof. Font strip with 4 candidates
+                  sent (Abril live; DM Serif / Playfair 800 /
+                  Cormorant 700 as alternates). All pages verified.
+
 2026-11-14  v5.7  HERO 3.0 - BOLD + FEMININE (client: "I like the
                   bold font but feminine too", "I dont like the
                   white bubble font", "play around with different
