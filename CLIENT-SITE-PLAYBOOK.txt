@@ -539,6 +539,21 @@ CHANGELOG (newest first)
                   across Start Here, BBS, Coaching, Resources,
                   About, Contact.
 
+2026-11-14  v6.0  SPLIT HERO - THE KEEPER (client: "balloons have
+                  to be in my hand!! boss lady bloggers capitalized
+                  to the right and me with balloons in hand").
+                  Hero is now a 2-column grid on the black-burgundy
+                  field: LEFT = her standing-laugh cutout with the
+                  4-balloon pink cluster tied INTO her raised hand
+                  (original anchor geometry works now because the
+                  title no longer sits above her); RIGHT = BOSS /
+                  LADY / BLOGGERS stacked in Abril Fatface CAPS
+                  (LADY rose + indented), gold "hey babe!", the
+                  build-your-blog/build-your-income line with gold
+                  "that's where I come in", white pill CTAs.
+                  Stacks to one column under 920px. Curve into
+                  blush stats band kept. Verified clean.
+
 2026-11-14  v5.9  BALLOONS FIXED FOR REAL (client: "now you cant
                   even see the balloons... make it work"). Behind
                   the letters they were hidden by the giant type;
