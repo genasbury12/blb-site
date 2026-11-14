@@ -1,0 +1,16 @@
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Karla:wght@400;500;700&family=Ephesis&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#FBF6EE;--tint:#F4EBDE;--ink:#2E1F27;--pink:#A93F63;--purple:#7C2B48;--gold:#BC8A47;--blush:#F0DCE2;--muted:#6E5C63;--cream:#D8CBC3;--rose:#E8A9C0;--hot:#D8427D;--hot2:#B42E60;--display:'Fraunces',serif;--body:'Karla',sans-serif;--script:'Ephesis',cursive}
+.blbbh{font-family:var(--body);background:var(--paper);text-align:center;padding:64px 24px 48px;position:relative;overflow:hidden}
+.blbbh::before{content:"";position:absolute;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,var(--blush),transparent 65%);top:-160px;right:-120px}
+.blbbh-eye{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;color:var(--purple);position:relative}
+.blbbh-eye::before{content:"\2726";color:var(--gold)}
+.blbbh h1{font-family:var(--display);font-weight:500;font-size:clamp(2rem,5vw,3.2rem);line-height:1.12;color:var(--ink);margin:14px auto 12px;max-width:820px;position:relative}
+.blbbh h1 em{font-style:italic;color:var(--pink)}
+.blbbh p{color:var(--muted);max-width:620px;margin:0 auto;position:relative}
+</style>
+<div class="blbbh">
+  <span class="blbbh-eye">The blog</span>
+  <h1>Honest, no-fluff blog advice <em>with a business behind it.</em></h1>
+  <p>Everything about starting a blog, selling your own thing, and getting clients and customers from your content. Written for women with a job and a life.</p>
+</div>

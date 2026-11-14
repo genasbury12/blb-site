@@ -1,0 +1,46 @@
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Karla:wght@400;500;700&family=Ephesis&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#FBF6EE;--tint:#F4EBDE;--ink:#2E1F27;--pink:#A93F63;--purple:#7C2B48;--gold:#BC8A47;--blush:#F0DCE2;--muted:#6E5C63;--cream:#D8CBC3;--rose:#E8A9C0;--hot:#D8427D;--hot2:#B42E60;--display:'Fraunces',serif;--body:'Karla',sans-serif;--script:'Ephesis',cursive}
+.blbft{font-family:var(--body);background:var(--ink);color:var(--cream);padding:56px 24px 28px;border-top:1px solid rgba(251,246,238,.1)}
+.blbft-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:36px}
+.blbft-brand{font-family:var(--display);font-size:1.3rem;color:var(--paper)}
+.blbft-brand em{font-style:italic;color:var(--rose)}
+.blbft-tag{font-family:var(--script);font-size:1.6rem;color:var(--rose);margin:6px 0 10px}
+.blbft p{font-size:.86rem;color:var(--cream);max-width:300px;line-height:1.7}
+.blbft h4{font-weight:700;font-size:.64rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.blbft a{display:block;color:var(--cream);text-decoration:none;font-size:.88rem;padding:5px 0}
+.blbft a:hover{color:var(--rose)}
+.blbft-base{max-width:1200px;margin:36px auto 0;padding-top:20px;border-top:1px solid rgba(251,246,238,.12);display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;font-size:.76rem;color:rgba(216,203,195,.7)}
+@media(max-width:860px){.blbft-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.blbft-grid{grid-template-columns:1fr}}
+</style>
+<div class="blbft">
+  <div class="blbft-grid">
+    <div>
+      <div class="blbft-brand">Boss Lady <em>Bloggers</em></div>
+      <div class="blbft-tag">beautiful blogs, built to sell</div>
+      <p>Blog coaching, business strategy, digital products, and smarter systems for women who want to build businesses that sell.</p>
+    </div>
+    <div>
+      <h4>Explore</h4>
+      <a href="/start-here">Start Here</a>
+      <a href="/freebies">Resources</a>
+      <a href="/podcast">Podcast</a>
+      <a href="/about">About</a>
+    </div>
+    <div>
+      <h4>Work with me</h4>
+      <a href="/boss-business-system">The BOSS Business System</a>
+      <a href="/blog-coaching">Blog Coaching</a>
+      <a href="/book-a-call">Book a free call</a>
+    </div>
+    <div>
+      <h4>Support</h4>
+      <a href="/contact">Contact</a>
+      <a href="/privacy-policy">Privacy Policy</a>
+      <a href="/terms-conditions">Terms &amp; Conditions</a>
+      <a href="/disclaimer">Disclaimer</a>
+    </div>
+  </div>
+  <div class="blbft-base"><span>&copy; 2026 Boss Lady Bloggers. All rights reserved.</span><span>Made with heart &#9825;</span></div>
+</div>

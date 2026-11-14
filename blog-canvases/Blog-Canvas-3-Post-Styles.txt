@@ -1,0 +1,25 @@
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Karla:wght@400;500;700&family=Ephesis&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#FBF6EE;--tint:#F4EBDE;--ink:#2E1F27;--pink:#A93F63;--purple:#7C2B48;--gold:#BC8A47;--blush:#F0DCE2;--muted:#6E5C63;--cream:#D8CBC3;--rose:#E8A9C0;--hot:#D8427D;--hot2:#B42E60;--display:'Fraunces',serif;--body:'Karla',sans-serif;--script:'Ephesis',cursive}
+/* Styles the WordPress post content rendered by the Showit blog template. */
+.sw-blog-content,.entry-content,article{font-family:var(--body);color:var(--ink)}
+.sw-blog-content p,.entry-content p,article p{font-size:1.02rem;line-height:1.8;color:#4a3c42;margin-bottom:1.2em}
+.sw-blog-content h1,.entry-content h1,article h1,
+.sw-blog-content h2,.entry-content h2,article h2,
+.sw-blog-content h3,.entry-content h3,article h3,
+.sw-blog-content h4,.entry-content h4,article h4{font-family:var(--display);font-weight:500;line-height:1.18;color:var(--ink);margin:1.4em 0 .5em}
+.sw-blog-content h2,.entry-content h2,article h2{font-size:1.7rem}
+.sw-blog-content h3,.entry-content h3,article h3{font-size:1.35rem}
+.sw-blog-content a,.entry-content a,article a{color:var(--pink);text-decoration:underline;text-decoration-color:var(--rose);text-underline-offset:3px;font-weight:700}
+.sw-blog-content a:hover,.entry-content a:hover,article a:hover{color:var(--purple)}
+.sw-blog-content img,.entry-content img,article img{border-radius:18px;height:auto;max-width:100%}
+.sw-blog-content blockquote,.entry-content blockquote,article blockquote{border-left:4px solid var(--pink);background:var(--blush);border-radius:0 18px 18px 0;margin:1.6em 0;padding:18px 24px;font-family:var(--display);font-style:italic;font-size:1.12rem;color:var(--purple)}
+.sw-blog-content blockquote p,.entry-content blockquote p,article blockquote p{margin:0;color:var(--purple);font-size:inherit;line-height:1.6}
+.sw-blog-content ul,.entry-content ul,article ul,
+.sw-blog-content ol,.entry-content ol,article ol{margin:0 0 1.2em 1.2em;line-height:1.8;color:#4a3c42}
+.sw-blog-content li,.entry-content li,article li{margin-bottom:.4em}
+.sw-blog-content li::marker,.entry-content li::marker,article li::marker{color:var(--pink)}
+.sw-blog-content hr,.entry-content hr,article hr{border:0;border-top:1.5px dashed rgba(46,31,39,.25);margin:2em 0}
+.sw-blog-content strong,.entry-content strong,article strong{color:var(--ink)}
+.sw-blog-content mark,.entry-content mark,article mark{background:linear-gradient(120deg,transparent 8%,var(--rose) 8%,var(--rose) 92%,transparent 92%);padding:0 4px;color:var(--ink)}
+</style>

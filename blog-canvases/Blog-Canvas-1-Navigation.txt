@@ -1,0 +1,45 @@
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Karla:wght@400;500;700&family=Ephesis&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#FBF6EE;--tint:#F4EBDE;--ink:#2E1F27;--pink:#A93F63;--purple:#7C2B48;--gold:#BC8A47;--blush:#F0DCE2;--muted:#6E5C63;--cream:#D8CBC3;--rose:#E8A9C0;--hot:#D8427D;--hot2:#B42E60;--display:'Fraunces',serif;--body:'Karla',sans-serif;--script:'Ephesis',cursive}
+.blbnav-wrap{font-family:var(--body);background:var(--paper)}
+.blbnav-ann{background:var(--ink);color:var(--cream);text-align:center;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;padding:9px 16px}
+.blbnav-ann b{color:var(--rose)}
+.blbnav-ann a{color:var(--rose);font-weight:700}
+.blbnav{max-width:1360px;margin:0 auto;display:flex;align-items:center;gap:22px;padding:16px 24px}
+.blbnav-logo{font-family:var(--display);font-size:1.25rem;color:var(--ink);text-decoration:none;white-space:nowrap}
+.blbnav-logo em{font-style:italic;color:var(--pink)}
+.blbnav-links{display:flex;align-items:center;gap:18px;margin-left:auto}
+.blbnav-links a{font-weight:700;font-size:.76rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);text-decoration:none}
+.blbnav-links a:hover{color:var(--pink)}
+.blbnav-cta{display:inline-block;background:linear-gradient(120deg,var(--hot),var(--hot2));color:#fff!important;border-radius:50px;padding:12px 22px;font-weight:700;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;white-space:nowrap}
+.blbnav-t{display:none}
+.blbnav-burg{display:none;margin-left:auto;cursor:pointer;width:40px;height:40px;border:1.5px solid rgba(46,31,39,.25);border-radius:10px;position:relative}
+.blbnav-burg i,.blbnav-burg i::before,.blbnav-burg i::after{content:"";position:absolute;left:10px;right:10px;height:2px;background:var(--ink);transition:transform .3s}
+.blbnav-burg i{top:19px}
+.blbnav-burg i::before{top:-6px}
+.blbnav-burg i::after{top:6px}
+@media(max-width:1240px){
+  .blbnav-links{display:none;position:absolute;left:0;right:0;top:100%;background:var(--paper);flex-direction:column;align-items:flex-start;padding:18px 24px 24px;gap:14px;border-bottom:1.5px solid rgba(46,31,39,.12);z-index:50}
+  .blbnav{position:relative;flex-wrap:wrap}
+  .blbnav-burg{display:block}
+  .blbnav-t:checked ~ .blbnav-links{display:flex}
+}
+</style>
+<div class="blbnav-wrap">
+  <div class="blbnav-ann"><b>New</b> &#183; The BOSS Business System &#183; build the business behind your blog &#183; <a href="/boss-business-system">See how it works</a></div>
+  <div class="blbnav">
+    <a class="blbnav-logo" href="/">Boss Lady <em>Bloggers</em></a>
+    <input class="blbnav-t" type="checkbox" id="blbnav-t">
+    <label class="blbnav-burg" for="blbnav-t" aria-label="Menu"><i></i></label>
+    <div class="blbnav-links">
+      <a href="/">Home</a>
+      <a href="/start-here">Start Here</a>
+      <a href="/boss-business-system">BOSS Business System</a>
+      <a href="/blog-coaching">Blog Coaching</a>
+      <a href="/freebies">Resources</a>
+      <a href="/podcast">Podcast</a>
+      <a href="/about">About</a>
+      <a class="blbnav-cta" href="/book-a-call">Book a Free Call</a>
+    </div>
+  </div>
+</div>

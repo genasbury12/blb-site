@@ -501,6 +501,31 @@ mobile-verified at 390px, delivered as .txt files."
 =====================================================================
 CHANGELOG (newest first)
 =====================================================================
+2026-11-14  v5.3  BLOG TEMPLATE CANVASES (client: "blog pages code
+                  but only as separate site canvases"): new
+                  /blog-canvases folder via build6_blogcanvases.py,
+                  5 standalone CSS-ONLY embeds for the two Showit
+                  blog templates (NO JS allowed there, asserted in
+                  the builder): 1-Navigation (annbar + nav incl.
+                  Podcast, checkbox-hack mobile burger, no JS),
+                  2-Blog-Hero (list template heading), 3-Post-Styles
+                  (style-only: themes WP post content - Fraunces
+                  headings, pink links, blush blockquotes, rounded
+                  imgs; targets .sw-blog-content/.entry-content/
+                  article), 4-CTA (liked-this-post -> book a call +
+                  BOSS), 5-Footer (links ONLY to the 17 live pages).
+                  Tested stacked at 1440+390: over=0 errs=0, CSS
+                  menu opens. Zip BLB-blog-canvases.zip sent with
+                  placement README. ALSO: client confirmed her site
+                  is now ONLY 17 pages (Home/About/Contact/Start
+                  Here/Podcast/3 legal/Blog Coaching/BBS/PBM/Project
+                  Club/Book a Call/Call Booked/Freebies/Training
+                  Thank You/Masterclass) - sent BLB-showit-pages.zip
+                  with just those, files named after Showit pages.
+                  Blog landing, blogging-ladies, membership, old
+                  thank-yous etc. are OFF the live site (repo files
+                  kept).
+
 2026-11-13  v5.2  PODCAST ADDED TO NAV (client): NAV_LINKS in v5.py
                   now Home / Start Here / BOSS Business System /
                   Blog Coaching / Resources / Podcast / About, with
