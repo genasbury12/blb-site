@@ -539,6 +539,30 @@ CHANGELOG (newest first)
                   across Start Here, BBS, Coaching, Resources,
                   About, Contact.
 
+2026-11-14  v5.6  HERO 2.0 + CUTOUTS + BALLOONS + FAMILY PALETTE
+                  (client: transparent photos of her, "put back
+                  balloons in my hand", "boss lady bloggers doesnt
+                  look cool", "NOT ORANGE", "stick to blush, mauve,
+                  pink, white, black... more FUN like jenna
+                  kutcher"). 5 transparent cutout PNGs -> /cutouts
+                  (gen-hat-smile, gen-sitting, gen-laugh-hat,
+                  gen-champagne, gen-standing-laugh, 900px wide,
+                  real alpha). NEW HERO LOCKUP: gold Caveat "hey
+                  babe!" + "boss" (pink) + "lady" (dusty rose,
+                  italic) + OUTLINED "bloggers" (text-stroke ink),
+                  her standing-laugh cutout overlapping the
+                  letters, drop-shadow instead of a photo frame,
+                  and an SVG BALLOON CLUSTER (hot pink / rose /
+                  blush / deep mauve, white highlights, strings
+                  meeting her raised hand, 6s bob animation,
+                  reduced-motion safe). PALETTE: briefly trialed
+                  yellow/tangerine/lilac - client vetoed; the new
+                  v5.py tokens are now ALIASES inside the pink
+                  family (see brand guide palette rule). Stats,
+                  pills, quote cards, strips, PODCAST type, blog
+                  words, folder tab all recolored within family.
+                  All pages verify over=0 errs=0.
+
 2026-11-14  v5.5  FUN FONTS (client: "change my fonts to FUN - same
                   fonts used in my IG and Pins"). Her IG cards =
                   bookish serif + handwritten marker accents + pink

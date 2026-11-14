@@ -159,6 +159,15 @@ MOTION (all guarded by prefers-reduced-motion):
     (/free-blogging-masterclass, Flodesk form).
   - Exception: income PROOF receipts (screenshots) stay. They are
     evidence, not price lists.
+  - PALETTE RULE (client, Nov 14 2026): the site stays WITHIN the
+    blush / mauve / pink / cream / white / near-black family. NO
+    orange, no yellow, no lilac/purple-blue - she rejected orange
+    explicitly ("NOT ORANGE"). Extra accent tokens --sun/--sunl/
+    --lav/--lavl/--lavd/--tang/--tangl exist in v5.py but are
+    ALIASED to family tones (rose, white, dusty mauve #C98DA6,
+    light mauve #EAD5DD, deep mauve #8A3B5C, raspberry). Never
+    point them back at orange/yellow/violet.
+
   - Exception (client, Nov 13 2026): /blog-coaching (The Blog
     Profit Intensive) is the ONE page that shows its price:
     $897 pay in full or 3 x $333, in the enrollment card. Its
