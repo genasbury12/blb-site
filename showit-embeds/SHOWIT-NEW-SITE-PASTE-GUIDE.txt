@@ -1,7 +1,7 @@
 BOSS LADY BLOGGERS - NEW WEBSITE ON SHOWIT - PASTE GUIDE
 =========================================================
 
-15 files, one per page. Same workflow as before: one full-page embed
+15 full pages plus 4 small blog-post pieces. Same workflow as before: one full-page embed
 canvas per Showit page, paste the whole file, publish.
 
 THE FILES AND WHERE EACH ONE GOES
@@ -48,6 +48,52 @@ WHAT WORKS, EXACTLY AS DESIGNED
 - All 10 training links to Flodesk, Calendly booking buttons, the
   3 YouTube video cards, Spotify episode links, episode artwork.
 - Coaching price $897 / 3x$333 on /blog-coaching only.
+
+BLOG POST TEMPLATE (the page every blog post uses)
+--------------------------------------------------
+Your blog posts live in WordPress, so the post page itself is a Showit
+BLOG TEMPLATE, not a regular page. On that template, Showit's own blog
+widgets (post title, featured image, post content) pull in each article
+automatically - you cannot replace those with an embed. But you CAN
+place embed canvases around them. That is exactly how the designed
+post page gets rebuilt:
+
+1. STYLE THE WIDGETS (15 min, once). Open Blog > your post template in
+   Showit and set the fonts/colors from the style spec file you already
+   have (SHOWIT-BLOG-TEMPLATE-STYLE-SPEC.txt). That makes the title,
+   featured image and article body match the new brand.
+
+2. PLACE THESE 4 SMALL EMBEDS on the same template page:
+
+   File                   What it is              Where to put it
+   PostAuthorCard.html    "Meet Genasys" card      Sidebar, next to the
+                          with your photo          post content
+   PostDownloadCard.html  Foundations Builder      Sidebar, under the
+                          free download card       author card
+   PostNextStepBand.html  Dark plum CTA band       Under the post
+                                                   content
+   PostRelatedBand.html   "Keep reading" band      Very bottom, full
+                          with 3 recent posts      width
+
+   Each one: add an Embed Code canvas the size shown, paste the file.
+   Sidebar cards: canvas about 340px wide, ~320px tall (author) and
+   ~220px tall (download). Next-step band: full content width, ~140px.
+   Keep-reading band: full page width, ~560px tall.
+
+3. THE KEEP-READING BAND IS AUTOMATIC. It pulls your 3 newest posts
+   (picture + title + link) straight from your WordPress blog every
+   time the page loads, and skips the post the reader is already on.
+   Nothing to update, ever.
+
+4. ONE LINE TO EDIT PER POST (optional). The next-step band has a
+   placeholder line: "[Next step: the free training or offer this post
+   points to]". Showit uses ONE template for all posts, so either
+   replace that line once with something evergreen that fits every
+   post, or skip that band entirely. The button already links to your
+   free trainings page.
+
+Because it is a template, you do all of this ONCE and every blog post
+(old and new) instantly wears the new design.
 
 CONTACT FORM
 ------------
