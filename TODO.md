@@ -9,7 +9,7 @@ Everything the new static site still needs. Nothing here blocks deploying the si
   - /group-waitlist/ form
   - /course-waitlist/ form
   - Replace each `<form data-waitlist action="#">` action with the real Flodesk form endpoint, or embed the Flodesk form code.
-- **Coaching price**: /coaching/ investment panel shows `[CONFIRM PRICE]` exactly as the approved design does. Confirm the Blog Profit Intensive price (old Showit page said $897 or 3x$333; not assumed here).
+- ~~Coaching price~~ CONFIRMED: $897 or 3 payments of $333, live on /coaching/.
 - **Coaching apply link**: "Apply for private blog coaching" pill is `href="#"`. Other CTAs use the on-page #apply anchor.
 - **BOSS booking link**: 4 CTAs on /boss/ ("Yes! Let's build my business", "I want results like these. Book my free call", "Book my free Fast Track call", final P.A.R.I.S. CTA) are `href="#"` until the Fast Track call booking URL exists.
 - **Checkout links**: /group-coaching/ and /course/ buy CTAs route to the waitlist pages per the design; `[GEN: CHECKOUT LINK]` notes kept in place for when Stripe checkout links exist.
