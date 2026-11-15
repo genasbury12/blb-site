@@ -391,6 +391,9 @@ html.no-js .rv{opacity:1;transform:none}
   document.querySelectorAll('[data-tabs]').forEach(function (group) {
     var tabs = Array.prototype.slice.call(group.querySelectorAll('[role="tab"]'));
     var panels = Array.prototype.slice.call(document.querySelectorAll('[data-tabpanel="' + group.getAttribute('data-tabs') + '"]'));
+    // Inline display styles beat the hidden attribute, so remember each
+    // panel's own display value and toggle display directly.
+    panels.forEach(function (p) { p.setAttribute('data-disp', p.style.display || ''); });
     function select(i) {
       tabs.forEach(function (t, j) {
         var on = i === j;
@@ -398,7 +401,11 @@ html.no-js .rv{opacity:1;transform:none}
         t.setAttribute('tabindex', on ? '0' : '-1');
         t.classList.toggle('tab-active', on);
       });
-      panels.forEach(function (p, j) { p.hidden = i !== j; });
+      panels.forEach(function (p, j) {
+        var on = i === j;
+        p.hidden = !on;
+        p.style.display = on ? p.getAttribute('data-disp') : 'none';
+      });
     }
     tabs.forEach(function (t, i) {
       t.addEventListener('click', function () { select(i); });
@@ -464,9 +471,8 @@ html.no-js .rv{opacity:1;transform:none}
     });
   });
 
-  /* ---------- Instagram feed (homepage strip) ---------- */
-  var feed = document.querySelector('[data-instagram-feed]');
-  if (feed) {
+  /* ---------- Instagram feed (any page with a strip) ---------- */
+  document.querySelectorAll('[data-instagram-feed]').forEach(function (feed) {
     var FEED_URL = 'https://feeds.behold.so/3p9InkPKcoMGdzJUSdtH';
     if (FEED_URL) {
       var cached = null;
@@ -495,7 +501,7 @@ html.no-js .rv{opacity:1;transform:none}
         render(posts);
       }).catch(function () {/* keep branded placeholders */});
     }
-  }
+  });
   /* Showit safety: reveal anything still hidden after 2.5s */
   setTimeout(function () {
     document.querySelectorAll('.rv:not(.in)').forEach(function (el) { el.classList.add('in'); });
