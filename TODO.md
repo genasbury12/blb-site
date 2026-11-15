@@ -15,7 +15,7 @@ Everything the new static site still needs. Nothing here blocks deploying the si
 - ~~BOSS booking link~~ CONFIRMED: all 4 /boss/ call CTAs go to calendly.com/bossladybloggers/15min.
 - **Checkout links**: /group-coaching/ and /course/ buy CTAs route to the waitlist pages per the design; `[GEN: CHECKOUT LINK]` notes kept in place for when Stripe checkout links exist.
 - **Terms links**: guarantee sections on /boss/, /group-coaching/ and /course/ link "terms and conditions" to `#`. Needs a real terms page (design note says lawyer check for the group offer).
-- **YouTube**: 3 video embeds each on /start-here/ and /free-trainings/ are `[VIDEO 01-03]` placeholders; need video URLs.
+- ~~YouTube~~ DONE: the 3 videos are live as thumbnail cards on /start-here/ and /free-trainings/, linking out to YouTube.
 - **Apple Podcasts**: /podcast/ "Listen on Apple Podcasts" is `href="#"` (Spotify links are live).
 - ~~Instagram feed~~ LIVE: Behold JSON feed wired into site/js/main.js; homepage strip shows the six latest @blogcoach_gen posts.
 - **Blog categories**: 6 category links on /blog/ and /free-trainings/ are `href="#"` until category pages exist; "Load more posts" button too.
