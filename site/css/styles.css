@@ -1,0 +1,132 @@
+/* ============================================================
+   Boss Lady Bloggers · shared styles
+   Built from the design helmet CSS + CLAUDE.md rules.
+   ============================================================ */
+
+/* ---------- base ---------- */
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--cream);font-family:var(--font-body);color:var(--cocoa);overflow-x:clip}
+img{max-width:100%;display:block}
+a{color:var(--berry)}
+a:hover{color:var(--plum)}
+main{display:block}
+
+/* skip link + focus */
+.skip-link{position:absolute;left:-9999px;top:0;background:var(--plum);color:#fff;padding:12px 20px;border-radius:0 0 12px 0;z-index:200;font:600 14px/1 var(--font-body)}
+.skip-link:focus{left:0}
+:focus-visible{outline:2px solid var(--berry);outline-offset:2px}
+
+/* ---------- design-system classes (from the helmet) ---------- */
+.hl{background:#E9B9CA;padding:0 .14em;border-radius:6px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.hl-dark{background:#A23E66;color:#FFFFFF;padding:0 .14em;border-radius:6px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+
+@keyframes blspin{to{transform:rotate(360deg)}}
+.bl-spin{animation:blspin 26s linear infinite}
+
+@keyframes blmarq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.bl-track{display:flex;width:max-content;animation:blmarq 38s linear infinite}
+.bl-slow{animation-duration:70s}
+.bl-rev{animation-direction:reverse}
+.bl-marquee:hover .bl-track{animation-play-state:paused}
+
+@keyframes blgrad{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.bl-grad{background:linear-gradient(300deg,#F6E1E8,#FBF5EE,#EBDDF2,#F3C9D7);background-size:300% 300%;animation:blgrad 12s ease infinite}
+.bl-grad404{background:linear-gradient(300deg,#3A1C2A,#59253D,#A23E66,#3A1C2A);background-size:300% 300%;animation:blgrad 12s ease infinite}
+
+@keyframes blfloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.bl-float{animation:blfloat 4s ease-in-out infinite}
+
+.pill{display:inline-flex;align-items:center;gap:14px;min-height:48px;padding:6px 8px 6px 24px;border-radius:999px;font:600 15px/1 var(--font-body);text-decoration:none;box-sizing:border-box;border:0;cursor:pointer}
+.pill-plain{padding:6px 26px}
+.navl{color:var(--plum);text-decoration:none}
+.navl:hover,.navl[aria-current="page"]{color:var(--berry)}
+.card-hover{transition:transform .25s ease}
+.card-hover:hover{transform:translateY(-6px);box-shadow:0 24px 50px rgba(58,28,42,.16)}
+
+/* F7: fanned cards straighten on hover */
+.fan-card{transition:transform .3s ease}
+.fan-card:hover{transform:rotate(0deg) translateY(-6px)!important}
+
+/* hero split row: no upward pull once it stacks on small screens */
+@media (max-width:980px){
+  .hero-split{margin-top:16px!important}
+  .hero-split p{text-align:center!important;margin-bottom:0!important}
+}
+
+/* Instagram strip responsive */
+@media (max-width:980px){.ig-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
+@media (max-width:680px){.ig-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+
+/* even grids (keep exactly, per CLAUDE.md §7) */
+.ev2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+.ev3,.ev3b{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+.ev4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+@media (max-width:1100px){.ev4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:980px){.ev3{grid-template-columns:minmax(0,1fr)}.ev3b{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:680px){.ev2,.ev3b,.ev4{grid-template-columns:minmax(0,1fr)}}
+
+/* ---------- header (F5 sticky) ---------- */
+.site-header{position:sticky;top:0;z-index:50;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;padding:14px clamp(16px,4vw,48px);background:rgba(251,245,238,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.site-logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--plum)}
+.site-logo img{width:31px;height:40px}
+.site-logo .wordmark{font:400 26px/1 var(--font-display)}
+.site-logo .wordmark em{font-style:italic;color:var(--berry)}
+.site-nav{display:flex;flex-wrap:wrap;align-items:center;gap:22px;font:500 14px/1 var(--font-body)}
+.menu-btn{width:48px;height:48px;border-radius:999px;border:0;background:var(--berry);cursor:pointer;display:flex;align-items:center;justify-content:center}
+@media (max-width:980px){.site-nav .navl,.site-nav .nav-boss{display:none}}
+
+/* ---------- popout menu (F4) ---------- */
+.popout{position:fixed;inset:0;z-index:100;background:var(--berry);padding:28px clamp(16px,4vw,48px);overflow-y:auto;display:flex;flex-direction:column;gap:40px;opacity:0;transform:translateY(-12px);pointer-events:none;transition:opacity .25s ease,transform .25s ease;visibility:hidden}
+.popout.open{opacity:1;transform:none;pointer-events:auto;visibility:visible}
+.popout-top{display:flex;justify-content:space-between;align-items:center}
+.popout-close{width:48px;height:48px;border-radius:999px;border:2px solid var(--cream);background:transparent;color:var(--cream);font:400 26px/1 var(--font-body);cursor:pointer}
+.popout-grid{display:flex;flex-wrap:wrap;gap:48px;align-items:flex-start}
+.popout-nav{flex:1 1 380px;min-width:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 32px;font:400 32px/1.1 var(--font-display)}
+.popout-nav a{color:#fff;text-decoration:none}
+.popout-nav a:hover{color:var(--pink-pop)}
+.popout-photo{height:260px;border-radius:24px;background:var(--rose);overflow:hidden;display:flex;align-items:flex-end;padding:20px}
+.popout-photo img{width:100%;height:100%;object-fit:cover}
+.popout-photo:has(img){padding:0}
+body.menu-open{overflow:hidden}
+@media (max-width:680px){.popout-nav{font-size:24px}}
+
+/* ---------- FAQ (F12) ---------- */
+.faq details{border-bottom:1.5px solid var(--line)}
+.faq summary{display:flex;justify-content:space-between;align-items:center;gap:18px;cursor:pointer;list-style:none;padding:22px 4px;font:400 clamp(19px,2.2vw,24px)/1.3 var(--font-display);color:var(--plum)}
+.faq summary::-webkit-details-marker{display:none}
+.faq-plus{flex:0 0 auto;width:34px;height:34px;border-radius:999px;border:1.5px solid var(--berry);color:var(--berry);display:flex;align-items:center;justify-content:center;font:400 20px/1 var(--font-body);transition:transform .25s ease}
+.faq details[open] .faq-plus{transform:rotate(45deg)}
+.faq .faq-a{overflow:hidden;font:400 16px/1.65 var(--font-body);color:var(--cocoa);padding:0 4px}
+.faq details[open] .faq-a{padding-bottom:22px}
+
+/* ---------- tabs (F9/F10) ---------- */
+[role="tab"]{cursor:pointer}
+[role="tabpanel"][hidden]{display:none}
+
+/* ---------- scroll reveal (F19) ---------- */
+.rv{opacity:0;transform:translateY(12px);transition:opacity .5s ease,transform .5s ease}
+.rv.in{opacity:1;transform:none}
+html.no-js .rv{opacity:1;transform:none}
+
+/* ---------- sticky side tab (F15) ---------- */
+.side-tab{position:fixed;left:0;top:50%;transform:rotate(180deg) translateY(50%);writing-mode:vertical-rl;z-index:40;background:var(--berry);color:#fff;text-decoration:none;font:600 13px/1 var(--font-body);letter-spacing:.08em;padding:18px 12px;border-radius:0 12px 12px 0}
+@media (max-width:980px){.side-tab{display:none}}
+
+/* ---------- forms ---------- */
+.form-input{width:100%;min-height:52px;padding:12px 18px;border:1.5px solid var(--rose);border-radius:14px;font:400 16px/1.4 var(--font-body);color:var(--plum);background:#fff}
+.form-input:focus{border-color:var(--berry);outline:none}
+.form-label{font:500 12px/1 var(--font-label);letter-spacing:.12em;text-transform:uppercase;color:var(--mauve)}
+.form-success[hidden]{display:none}
+
+/* ---------- misc ---------- */
+.wrapc{max-width:var(--max);margin:0 auto}
+.label{font:500 13px/1 var(--font-label);letter-spacing:.2em;text-transform:uppercase;color:var(--berry)}
+.script-line{font:700 32px/1.1 var(--font-script);color:var(--berry)}
+
+/* reduced motion: stop loops and auto-movement */
+@media (prefers-reduced-motion: reduce){
+  .bl-spin,.bl-track,.bl-grad,.bl-grad404,.bl-float{animation:none}
+  .rv{opacity:1;transform:none;transition:none}
+  .card-hover,.card-hover:hover{transition:none;transform:none}
+  .fan-card{transition:none}
+}
