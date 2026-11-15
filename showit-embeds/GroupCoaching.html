@@ -1,0 +1,673 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=Caveat:wght@600;700&display=swap">
+<style>
+/* Boss Lady Bloggers brand tokens. Use these variables everywhere. */
+:root{
+  --plum:#3A1C2A;      /* headlines, dark sections, footer */
+  --berry:#A23E66;     /* buttons, accents, the logo arch */
+  --rose:#E9B9CA;      /* highlights on plum, photo frames */
+  --blush:#F6E1E8;     /* section backgrounds, soft cards */
+  --cream:#FBF5EE;     /* main background */
+  --pink-pop:#F6C9D8;  /* italic words on berry heroes (display size only) */
+  --lilac:#EBDDF2;     /* rare accent */
+  --cocoa:#4A2F3B;     /* body text */
+  --mauve:#6E4B5B;     /* captions, muted labels */
+  --white-soft:#FFFCFA;
+  --line:#F0DCE3;
+
+  --font-display:'Instrument Serif',Georgia,serif;
+  --font-body:'Inter',Arial,sans-serif;
+  --font-label:'DM Mono','Courier New',monospace;
+  --font-script:'Caveat','Brush Script MT',cursive;
+
+  --radius-card:24px; --radius-lg:32px; --radius-pill:999px;
+  --max:1180px;
+  --shadow-soft:0 30px 60px rgba(58,28,42,.18);
+}
+/* Google Fonts link (put in <head> of every page):
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=Caveat:wght@600;700&display=swap">
+*/
+
+/* ============================================================
+   Boss Lady Bloggers · shared styles
+   Built from the design helmet CSS + CLAUDE.md rules.
+   ============================================================ */
+
+/* ---------- base ---------- */
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--cream);font-family:var(--font-body);color:var(--cocoa);overflow-x:clip}
+img{max-width:100%;display:block}
+a{color:var(--berry)}
+a:hover{color:var(--plum)}
+main{display:block}
+
+/* skip link + focus */
+.skip-link{position:absolute;left:-9999px;top:0;background:var(--plum);color:#fff;padding:12px 20px;border-radius:0 0 12px 0;z-index:200;font:600 14px/1 var(--font-body)}
+.skip-link:focus{left:0}
+:focus-visible{outline:2px solid var(--berry);outline-offset:2px}
+
+/* ---------- design-system classes (from the helmet) ---------- */
+.hl{background:#E9B9CA;padding:0 .14em;border-radius:6px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.hl-dark{background:#A23E66;color:#FFFFFF;padding:0 .14em;border-radius:6px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+
+@keyframes blspin{to{transform:rotate(360deg)}}
+.bl-spin{animation:blspin 26s linear infinite}
+
+@keyframes blmarq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.bl-track{display:flex;width:max-content;animation:blmarq 38s linear infinite}
+.bl-slow{animation-duration:70s}
+.bl-rev{animation-direction:reverse}
+.bl-marquee:hover .bl-track{animation-play-state:paused}
+
+@keyframes blgrad{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.bl-grad{background:linear-gradient(300deg,#F6E1E8,#FBF5EE,#EBDDF2,#F3C9D7);background-size:300% 300%;animation:blgrad 12s ease infinite}
+.bl-grad404{background:linear-gradient(300deg,#3A1C2A,#59253D,#A23E66,#3A1C2A);background-size:300% 300%;animation:blgrad 12s ease infinite}
+
+@keyframes blfloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.bl-float{animation:blfloat 4s ease-in-out infinite}
+
+.pill{display:inline-flex;align-items:center;gap:14px;min-height:48px;padding:6px 8px 6px 24px;border-radius:999px;font:600 15px/1 var(--font-body);text-decoration:none;box-sizing:border-box;border:0;cursor:pointer}
+.pill-plain{padding:6px 26px}
+.navl{color:var(--plum);text-decoration:none}
+.navl:hover,.navl[aria-current="page"]{color:var(--berry)}
+.card-hover{transition:transform .25s ease}
+.card-hover:hover{transform:translateY(-6px);box-shadow:0 24px 50px rgba(58,28,42,.16)}
+
+/* F7: fanned cards straighten on hover */
+.fan-card{transition:transform .3s ease}
+.fan-card:hover{transform:rotate(0deg) translateY(-6px)!important}
+
+/* hero split row: no upward pull once it stacks on small screens */
+@media (max-width:980px){
+  .hero-split{margin-top:16px!important}
+  .hero-split p{text-align:center!important;margin-bottom:0!important}
+}
+
+/* About: Boss Blend rows compress on phones */
+@media (max-width:680px){
+  .blend-row{grid-template-columns:84px minmax(0,1fr) 84px!important;gap:10px!important}
+  .blend-row>span{font-size:12px!important}
+}
+
+/* Podcast: fixed-size hero scene scales down on phones */
+@media (max-width:480px){
+  .pod-scene{transform:scale(.7);transform-origin:top center;height:380px!important}
+}
+
+/* Instagram strip responsive */
+@media (max-width:980px){.ig-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
+@media (max-width:680px){.ig-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+
+/* even grids (keep exactly, per CLAUDE.md §7) */
+.ev2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+.ev3,.ev3b{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+.ev4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+@media (max-width:1100px){.ev4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:980px){.ev3{grid-template-columns:minmax(0,1fr)}.ev3b{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:680px){.ev2,.ev3b,.ev4{grid-template-columns:minmax(0,1fr)}}
+
+/* ---------- header (F5 sticky) ---------- */
+.site-header{position:sticky;top:0;z-index:50;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;padding:14px clamp(16px,4vw,48px);background:rgba(251,245,238,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.site-logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--plum)}
+.site-logo img{width:31px;height:40px}
+.site-logo .wordmark{font:400 26px/1 var(--font-display)}
+.site-logo .wordmark em{font-style:italic;color:var(--berry)}
+.site-nav{display:flex;flex-wrap:wrap;align-items:center;gap:22px;font:500 14px/1 var(--font-body)}
+.menu-btn{width:48px;height:48px;border-radius:999px;border:0;background:var(--berry);cursor:pointer;display:flex;align-items:center;justify-content:center}
+@media (max-width:980px){.site-nav .navl,.site-nav .nav-boss{display:none}}
+
+/* ---------- popout menu (F4) ---------- */
+.popout{position:fixed;inset:0;z-index:100;background:var(--berry);padding:28px clamp(16px,4vw,48px);overflow-y:auto;display:flex;flex-direction:column;gap:40px;opacity:0;transform:translateY(-12px);pointer-events:none;transition:opacity .25s ease,transform .25s ease;visibility:hidden}
+.popout.open{opacity:1;transform:none;pointer-events:auto;visibility:visible}
+.popout-top{display:flex;justify-content:space-between;align-items:center}
+.popout-close{width:48px;height:48px;border-radius:999px;border:2px solid var(--cream);background:transparent;color:var(--cream);font:400 26px/1 var(--font-body);cursor:pointer}
+.popout-grid{display:flex;flex-wrap:wrap;gap:48px;align-items:flex-start}
+.popout-nav{flex:1 1 380px;min-width:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 32px;font:400 32px/1.1 var(--font-display)}
+.popout-nav a{color:#fff;text-decoration:none}
+.popout-nav a:hover{color:var(--pink-pop)}
+.popout-photo{height:260px;border-radius:24px;background:var(--rose);overflow:hidden;display:flex;align-items:flex-end;padding:20px}
+.popout-photo img{width:100%;height:100%;object-fit:cover}
+.popout-photo:has(img){padding:0}
+body.menu-open{overflow:hidden}
+@media (max-width:680px){.popout-nav{font-size:24px}}
+
+/* ---------- FAQ (F12) ---------- */
+.faq details{border-bottom:1.5px solid var(--line)}
+.faq summary{display:flex;justify-content:space-between;align-items:center;gap:18px;cursor:pointer;list-style:none;padding:22px 4px;font:400 clamp(19px,2.2vw,24px)/1.3 var(--font-display);color:var(--plum)}
+.faq summary::-webkit-details-marker{display:none}
+.faq-plus{flex:0 0 auto;width:34px;height:34px;border-radius:999px;border:1.5px solid var(--berry);color:var(--berry);display:flex;align-items:center;justify-content:center;font:400 20px/1 var(--font-body);transition:transform .25s ease}
+.faq details[open] .faq-plus{transform:rotate(45deg)}
+.faq .faq-a{overflow:hidden;font:400 16px/1.65 var(--font-body);color:var(--cocoa);padding:0 4px}
+.faq details[open] .faq-a{padding-bottom:22px}
+
+/* ---------- tabs (F9/F10) ---------- */
+[role="tab"]{cursor:pointer}
+[role="tabpanel"][hidden]{display:none}
+
+/* ---------- scroll reveal (F19) ---------- */
+.rv{opacity:0;transform:translateY(12px);transition:opacity .5s ease,transform .5s ease}
+.rv.in{opacity:1;transform:none}
+html.no-js .rv{opacity:1;transform:none}
+
+/* ---------- sticky side tab (F15) ---------- */
+.side-tab{position:fixed;left:0;top:50%;transform:rotate(180deg) translateY(50%);writing-mode:vertical-rl;z-index:40;background:var(--berry);color:#fff;text-decoration:none;font:600 13px/1 var(--font-body);letter-spacing:.08em;padding:18px 12px;border-radius:0 12px 12px 0}
+@media (max-width:980px){.side-tab{display:none}}
+
+/* ---------- forms ---------- */
+.form-input{width:100%;min-height:52px;padding:12px 18px;border:1.5px solid var(--rose);border-radius:14px;font:400 16px/1.4 var(--font-body);color:var(--plum);background:#fff}
+.form-input:focus{border-color:var(--berry);outline:none}
+.form-label{font:500 12px/1 var(--font-label);letter-spacing:.12em;text-transform:uppercase;color:var(--mauve)}
+.form-success[hidden]{display:none}
+
+/* ---------- misc ---------- */
+.wrapc{max-width:var(--max);margin:0 auto}
+.label{font:500 13px/1 var(--font-label);letter-spacing:.2em;text-transform:uppercase;color:var(--berry)}
+.script-line{font:700 32px/1.1 var(--font-script);color:var(--berry)}
+
+/* reduced motion: stop loops and auto-movement */
+@media (prefers-reduced-motion: reduce){
+  .bl-spin,.bl-track,.bl-grad,.bl-grad404,.bl-float{animation:none}
+  .rv{opacity:1;transform:none;transition:none}
+  .card-hover,.card-hover:hover{transition:none;transform:none}
+  .fan-card{transition:none}
+}
+
+</style>
+
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <a href="/" class="site-logo">
+    <img src="https://charming-caramel-d2453c.netlify.app/brand/arch-monogram.svg" alt="" width="31" height="40">
+    <span class="wordmark">Boss Lady <em>Bloggers</em></span>
+  </a>
+  <nav aria-label="Main" class="site-nav">
+    <a href="/start-here" class="navl" data-nav="start-here">Start Here</a>
+    <a href="/about" class="navl" data-nav="about">About</a>
+    <a href="/free-trainings" class="navl" data-nav="free-trainings">Free Trainings</a>
+    <a href="/blog-coaching" class="navl" data-nav="coaching" aria-current="page">Coaching</a>
+    <a href="/podcast" class="navl" data-nav="podcast">Podcast</a>
+    <a href="/blog" class="navl" data-nav="blog">Blog</a>
+    <a href="/contact" class="navl" data-nav="contact">Contact</a>
+    <a href="/boss" class="pill pill-plain nav-boss" style="background:#3A1C2A;color:#FFFFFF" data-nav="boss">Explore BOSS</a>
+    <button type="button" class="menu-btn" data-menu-open aria-expanded="false" aria-controls="popout-menu" aria-label="Open full menu">
+      <svg aria-hidden="true" width="18" height="14" viewBox="0 0 18 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M1 1h16M1 7h16M1 13h16"></path></svg>
+    </button>
+  </nav>
+</header>
+
+<div id="popout-menu" class="popout" role="dialog" aria-modal="true" aria-label="Full menu" tabindex="-1">
+  <div class="popout-top">
+    <span style="font:400 26px/1 var(--font-display);color:#FBF5EE">Boss Lady Bloggers</span>
+    <button type="button" class="popout-close" data-menu-close aria-label="Close menu">&times;</button>
+  </div>
+  <div class="popout-grid">
+    <div style="flex:1 1 380px;min-width:0;display:flex;flex-direction:column;gap:18px">
+      <p style="margin:0;font:400 clamp(44px,5vw,72px)/1 var(--font-display);color:#FBF5EE">Helping women build blogs that <em>sell.</em></p>
+      <p style="margin:0;font:400 16px/1.6 var(--font-body);color:#F6E1E8">If you&rsquo;re new here, welcome. Start with the page made for you.</p>
+      <div><a href="/start-here" class="pill pill-plain" style="background:#FBF5EE;color:#3A1C2A">Start here</a></div>
+    </div>
+    <nav aria-label="Full menu" class="popout-nav">
+      <a href="/">Home</a><a href="/about">About</a><a href="/start-here">Start Here</a><a href="/boss">BOSS Business Blueprint</a><a href="/blog-coaching">Blog Coaching</a><a href="/group-coaching">Group Coaching</a><a href="/course">The Course</a><a href="/group-waitlist">Group Waitlist</a><a href="/course-waitlist">Course Waitlist</a><a href="/free-trainings">Free Trainings</a><a href="/podcast">Podcast</a><a href="/blog">Blog</a><a href="/contact">Contact</a><a href="https://www.instagram.com/blogcoach_gen" target="_blank" rel="noopener">Instagram</a>
+    </nav>
+  </div>
+  <div class="popout-photo"><img src="https://charming-caramel-d2453c.netlify.app/images/photos/flatlay-notebook.jpg" alt="Notebook, pen and a Boss mug on a desk" loading="lazy"></div>
+</div>
+<style>
+.group-calltab{position:fixed;left:0;top:96px;z-index:40;background:#A23E66;color:#FFFFFF;text-decoration:none;padding:12px 18px 12px 14px;border-radius:0 999px 999px 0;font:600 13px/1 var(--font-body);letter-spacing:0.04em;box-shadow:0 10px 24px rgba(58,28,42,0.2)}
+@media (max-width:980px){.group-calltab{display:none}}
+.tabs-group [role=tab]{min-height:44px;padding:10px 16px;border-radius:999px;border:1.5px solid rgba(246,225,232,0.4);background:transparent;color:#F6E1E8;font:500 14px/1.2 var(--font-body);cursor:pointer}
+.tabs-group [role=tab].tab-active{background:#E9B9CA;color:#3A1C2A;border-color:#E9B9CA;font-weight:600}
+</style>
+<main id="main">
+
+<a href="/group-waitlist" class="group-calltab">JOIN THE WAITLIST &#183; 15 SPOTS &#8599;</a>
+
+<section style="position:relative;background:#A23E66;padding:clamp(60px,7vw,100px) clamp(16px,4vw,48px) 130px;text-align:center">
+<div style="max-width:1180px;margin:0 auto;display:flex;flex-direction:column;gap:24px;align-items:center">
+<p style="margin:0;font:500 13px/1 var(--font-label);letter-spacing:0.2em;text-transform:uppercase;color:#F6E1E8">The Blogging Business Group Coaching</p>
+<h1 style="margin:0;font:400 clamp(50px,6.6vw,104px)/0.94 var(--font-display);color:#FBF5EE;letter-spacing:-0.025em">My promise to you: your offer, sales page, freebie and welcome emails live in 12 weeks, <em style="color:#F6C9D8">or I keep coaching you free.</em></h1>
+<p style="margin:0;font:400 19px/1.7 var(--font-body);color:#FFFFFF;max-width:720px">Group blog coaching for bloggers who are ready to build the business behind their blog, with a coach checking their work and a community cheering them on.</p>
+<a href="/group-waitlist" class="pill" style="background:#FBF5EE;color:#3A1C2A">Join The Blogging Business Group Coaching <span aria-hidden="true" style="width:34px;height:34px;border-radius:999px;background:#A23E66;display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></span></a>
+</div>
+<div style="position:absolute;left:50%;bottom:-66px;transform:translateX(-50%);width:132px;height:132px;z-index:5"><svg class="bl-spin" width="132" height="132" viewBox="0 0 132 132" aria-hidden="true"><defs><path id="grpb1" d="M66,66 m-47,0 a47,47 0 1,1 94,0 a47,47 0 1,1 -94,0"></path></defs><circle cx="66" cy="66" r="64" fill="#FBF5EE" stroke="#A23E66" stroke-width="2"></circle><text font-family="DM Mono, monospace" font-size="11" letter-spacing="3.2" fill="#3A1C2A"><textPath href="#grpb1">GROUP COACHING &#183; LIVE IN 12 WEEKS &#183; </textPath></text></svg><span aria-hidden="true" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:700 34px/1 var(--font-script);color:#A23E66">Gen</span></div>
+</section>
+
+<section style="padding:140px clamp(16px,4vw,48px) 110px"><div style="max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;gap:56px;align-items:flex-start"><div style="flex:1 1 460px;min-width:0;display:flex;flex-direction:column;gap:18px"><h2 style="margin:0;font:400 clamp(40px,4.6vw,64px)/1.02 var(--font-display);color:#3A1C2A">You&rsquo;ve done what you were told to do.</h2></div><div style="flex:1 1 420px;min-width:0;display:flex;flex-direction:column;gap:20px"><p class="rv" style="margin:0;font:400 17px/1.7 var(--font-body);color:#4A2F3B">The posts, the pins, the affiliate links, maybe AdSense or Journey by Mediavine.</p><p class="rv" style="margin:0;font:400 17px/1.7 var(--font-body);color:#4A2F3B">And your blog still isn't paying you. Or it is, but it's plateaued and you know you need to diversify.</p><div class="rv" style="background:#3A1C2A;border-radius:26px;padding:34px;transform:rotate(2deg)"><p style="margin:0;font:400 clamp(26px,2.6vw,34px)/1.25 var(--font-display);color:#FBF5EE">You&rsquo;ve probably even bought a course to fix it. And it&rsquo;s sitting there, half finished, because life happened and <em style="color:#E9B9CA">nobody was checking in.</em></p></div></div></div></section>
+
+<section style="background:#3A1C2A;padding:110px clamp(16px,4vw,48px)"><div style="max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:36px"><h2 style="margin:0;text-align:center;font:400 clamp(42px,5vw,72px)/1.02 var(--font-display);color:#FBF5EE">It&rsquo;s not that you don&rsquo;t know what to do. <em style="color:#E9B9CA">It&rsquo;s that you&rsquo;re doing it alone.</em></h2>
+<div style="display:flex;flex-wrap:wrap;gap:48px;align-items:center">
+<div style="flex:1 1 440px;min-width:0;display:flex;flex-direction:column;gap:22px"><p class="rv" style="margin:0;font:400 17px/1.7 var(--font-body);color:#F0DCE3">You start strong. You set a goal. Then the week gets away from you, you second-guess everything, and the goal slips again. One woman put it this way:</p>
+<blockquote class="rv" style="margin:0;background:#E9B9CA;border-radius:22px;padding:30px;transform:rotate(-2deg);display:flex;flex-direction:column;gap:12px"><p style="margin:0;font:400 clamp(26px,2.6vw,34px)/1.2 var(--font-display);color:#3A1C2A">&ldquo;I need a community. I get in my head a lot.&rdquo;</p><footer style="font:600 14px/1 var(--font-body);color:#A23E66">Brittany</footer></blockquote></div>
+<div style="flex:1 1 420px;min-width:0;display:flex;flex-direction:column;gap:14px"><p class="rv" style="margin:0;font:400 17px/1.7 var(--font-body);color:#F0DCE3">Here&rsquo;s what going it alone costs you:</p><ul style="margin:0;padding:0;list-style:none"><li class="rv" style="padding:16px 0;border-bottom:1px solid rgba(246,225,232,0.25);font:400 22px/1.25 var(--font-display);color:#FBF5EE">Months spent stuck on one piece because nobody tells you it&rsquo;s good enough</li><li class="rv" style="padding:16px 0;border-bottom:1px solid rgba(246,225,232,0.25);font:400 22px/1.25 var(--font-display);color:#FBF5EE">Second-guessing your offer, your sales page and your emails with no one to ask</li><li class="rv" style="padding:16px 0;border-bottom:1px solid rgba(246,225,232,0.25);font:400 22px/1.25 var(--font-display);color:#FBF5EE">Courses you paid for and never finished</li><li class="rv" style="padding:16px 0;border-bottom:1px solid rgba(246,225,232,0.25);font:400 22px/1.25 var(--font-display);color:#FBF5EE">The fear that you&rsquo;ll still be &ldquo;almost ready&rdquo; a year from now</li></ul></div>
+</div>
+<p class="rv" style="margin:0;font:400 clamp(28px,3.2vw,44px)/1.25 var(--font-display);color:#FBF5EE;text-align:center">You don&rsquo;t need more information. <span class="hl-dark">You need a plan, a deadline and someone checking your work.</span></p></div></section>
+
+<section class="bl-grad" style="padding:110px clamp(16px,4vw,48px)"><div style="max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:36px"><div style="text-align:center;display:flex;flex-direction:column;gap:18px;align-items:center"><h2 style="margin:0;text-align:center;font:400 clamp(42px,5vw,72px)/1.02 var(--font-display);color:#3A1C2A">Picture <span class="hl" style="background:#FFFFFF">week 12.</span></h2><p class="rv" style="margin:0;font:400 18px/1.7 var(--font-body);color:#4A2F3B;max-width:760px">Your offer is chosen and checked with real people. Your sales page is live. Your freebie is growing your list, and your welcome emails are introducing you to every new subscriber.</p></div>
+<div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:center"><span class="rv" style="max-width:340px;background:#FFFFFF;border-radius:16px;padding:22px 24px;transform:rotate(-2deg);font:400 22px/1.2 var(--font-display);color:#3A1C2A;box-shadow:0 12px 30px rgba(58,28,42,0.08)">You know exactly what you sell and who it&rsquo;s for</span><span class="rv" style="max-width:340px;background:#E9B9CA;border-radius:16px;padding:22px 24px;transform:rotate(1.5deg);font:400 22px/1.2 var(--font-display);color:#3A1C2A;box-shadow:0 12px 30px rgba(58,28,42,0.08)">You&rsquo;ve put your offer in front of real people for the first time</span><span class="rv" style="max-width:340px;background:#3A1C2A;border-radius:16px;padding:22px 24px;transform:rotate(-1deg);font:400 22px/1.2 var(--font-display);color:#FBF5EE;box-shadow:0 12px 30px rgba(58,28,42,0.08)">You built it yourself, so you know how every piece works</span><span class="rv" style="max-width:340px;background:#FFFFFF;border-radius:16px;padding:22px 24px;transform:rotate(2deg);font:400 22px/1.2 var(--font-display);color:#3A1C2A;box-shadow:0 12px 30px rgba(58,28,42,0.08)">And you did it with women who get it, cheering you on</span></div>
+<p class="rv" style="font:400 clamp(24px,2.4vw,32px)/1.25 var(--font-display);color:#3A1C2A;text-align:center;max-width:820px;margin:0 auto">And under all of it: income from something you made, being home with your kids, and proof the work was worth it.</p></div></section>
+
+<section style="padding:110px clamp(16px,4vw,48px)"><div style="max-width:1180px;margin:0 auto;display:flex;flex-direction:column;gap:36px"><h2 style="margin:0;text-align:center;font:400 clamp(42px,5vw,72px)/1.02 var(--font-display);color:#3A1C2A">Here&rsquo;s what most blogging advice gets backwards.</h2>
+<div style="display:flex;flex-wrap:wrap;justify-content:center;gap:18px"><article class="card-hover rv" style="flex:1 1 320px;max-width:360px;background:#FFFFFF;border-radius:24px;padding:28px;display:flex;flex-direction:column;gap:14px"><p style="margin:0;font:400 24px/1.15 var(--font-display);color:#A23E66;text-decoration:line-through;text-decoration-thickness:1.5px">&ldquo;I need more traffic before I can make money.&rdquo;</p><p style="margin:0;font:400 15px/1.65 var(--font-body)">You need something to sell first. Traffic with nothing to buy is just visitors.</p></article><article class="card-hover rv" style="flex:1 1 320px;max-width:360px;background:#FFFFFF;border-radius:24px;padding:28px;display:flex;flex-direction:column;gap:14px"><p style="margin:0;font:400 24px/1.15 var(--font-display);color:#A23E66;text-decoration:line-through;text-decoration-thickness:1.5px">&ldquo;Bloggers make money from ads and affiliates.&rdquo;</p><p style="margin:0;font:400 15px/1.65 var(--font-body)">They pay pennies until you&rsquo;re huge. Your own offer can pay you now.</p></article><article class="card-hover rv" style="flex:1 1 320px;max-width:360px;background:#FFFFFF;border-radius:24px;padding:28px;display:flex;flex-direction:column;gap:14px"><p style="margin:0;font:400 24px/1.15 var(--font-display);color:#A23E66;text-decoration:line-through;text-decoration-thickness:1.5px">&ldquo;My blog is my business.&rdquo;</p><p style="margin:0;font:400 15px/1.65 var(--font-body)">Your blog is your marketing. The business is the offer and the path behind it.</p></article><article class="card-hover rv" style="flex:1 1 320px;max-width:360px;background:#FFFFFF;border-radius:24px;padding:28px;display:flex;flex-direction:column;gap:14px"><p style="margin:0;font:400 24px/1.15 var(--font-display);color:#A23E66;text-decoration:line-through;text-decoration-thickness:1.5px">&ldquo;One more course and I&rsquo;ll figure it out.&rdquo;</p><p style="margin:0;font:400 15px/1.65 var(--font-body)">Most courses go unfinished because there&rsquo;s no deadline and no one checking in. Feedback and accountability are what get it live.</p></article><article class="card-hover rv" style="flex:1 1 320px;max-width:360px;background:#FFFFFF;border-radius:24px;padding:28px;display:flex;flex-direction:column;gap:14px"><p style="margin:0;font:400 24px/1.15 var(--font-display);color:#A23E66;text-decoration:line-through;text-decoration-thickness:1.5px">&ldquo;AI can just do this for me.&rdquo;</p><p style="margin:0;font:400 15px/1.65 var(--font-body)">AI can only work with what you give it. Without your foundations, it can&rsquo;t give you answers that fit your business.</p></article></div>
+<div style="display:flex;flex-wrap:wrap;gap:48px;align-items:center;background:#F6E1E8;border-radius:30px;padding:clamp(28px,5vw,60px)">
+<div style="flex:1 1 460px;min-width:0;display:flex;flex-direction:column;gap:16px"><p class="rv" style="margin:0;font:400 17px/1.7 var(--font-body);color:#4A2F3B">I blogged for two years and made about $50 in affiliate money I never got paid. Then I spent my last $200 on a coach, built my offer first, and got my first Stripe payout on April 16, 2020. It was $18.52. Within 3 to 4 months, I&rsquo;d made about $4,000.</p><p class="rv" style="margin:0;font:400 clamp(24px,2.4vw,32px)/1.25 var(--font-display);color:#3A1C2A">What changed was the order, and <span class="hl" style="background:#FFFFFF">having someone to follow.</span></p></div>
+<figure class="rv" style="flex:0 1 300px;margin:0;background:#FFFFFF;border-radius:8px;padding:14px 14px 18px;transform:rotate(3deg);box-shadow:0 20px 40px rgba(58,28,42,0.15)"><div style="height:180px;background:#E9B9CA;border-radius:4px;display:flex;align-items:center;justify-content:center;font:500 11px/1.4 var(--font-label);color:#3A1C2A">[STRIPE PAYOUT SCREENSHOT]</div><figcaption style="margin-top:12px;font:700 26px/1 var(--font-script);color:#A23E66">April 16, 2020 &#183; $18.52</figcaption></figure>
+</div></div></section>
+
+<section style="background:#A23E66;padding:110px clamp(16px,4vw,48px);text-align:center"><div style="max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:26px;align-items:center">
+<p class="rv" style="margin:0;font:700 36px/1 var(--font-script);color:#F6E1E8">That&rsquo;s exactly why I made</p>
+<h2 style="margin:0;font:400 clamp(60px,9vw,144px)/0.88 var(--font-display);color:#FBF5EE;text-transform:uppercase;letter-spacing:-0.03em">The Blogging Business Group Coaching.</h2>
+<div style="width:min(820px,100%);height:340px;border-radius:26px;background:#E9B9CA;display:flex;align-items:center;justify-content:center;padding:24px"><span style="font:500 12px/1.5 var(--font-label);letter-spacing:0.1em;color:#3A1C2A">[GEN: IMAGE. A GROUP ZOOM CALL, PLUS A MOCKUP OF A SALES PAGE AND FREEBIE.]</span></div>
+<p class="rv" style="margin:0;font:400 clamp(22px,2.2vw,30px)/1.25 var(--font-display);color:#FBF5EE;max-width:780px">The Blogging Business Group Coaching is a 12-month group coaching program that gets your offer, sales page, freebie and welcome emails built and live in 12 weeks, with me checking your work every step.</p>
+<p class="rv" style="margin:0;font:400 17px/1.7 var(--font-body);color:#F6E1E8;max-width:720px">You build it yourself, with a plan, a deadline, feedback and a community. Nothing is done for you, and that&rsquo;s the point: you&rsquo;ll know exactly how your business works.</p>
+</div></section>
+
+<section style="padding:100px clamp(16px,4vw,48px)"><div style="max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:36px"><h3 style="margin:0;text-align:center;font:400 clamp(36px,4vw,54px)/1.04 var(--font-display);color:#3A1C2A">You&rsquo;ll walk away with:</h3><ul class="ev3b" style="margin:0;padding:0;list-style:none;gap:12px"><li class="rv" style="display:flex;gap:12px;align-items:flex-start;background:#FFFFFF;border-radius:16px;padding:14px 18px;font:500 16px/1.45 var(--font-body);color:#3A1C2A"><span aria-hidden="true" style="flex:0 0 24px;height:24px;border-radius:999px;background:#A23E66;display:flex;align-items:center;justify-content:center"><svg width="11" height="11" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7.5l3 3 6-7"></path></svg></span>A clear offer, chosen and checked with real people</li><li class="rv" style="display:flex;gap:12px;align-items:flex-start;background:#FFFFFF;border-radius:16px;padding:14px 18px;font:500 16px/1.45 var(--font-body);color:#3A1C2A"><span aria-hidden="true" style="flex:0 0 24px;height:24px;border-radius:999px;background:#A23E66;display:flex;align-items:center;justify-content:center"><svg width="11" height="11" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7.5l3 3 6-7"></path></svg></span>A sales page that sells it</li><li class="rv" style="display:flex;gap:12px;align-items:flex-start;background:#FFFFFF;border-radius:16px;padding:14px 18px;font:500 16px/1.45 var(--font-body);color:#3A1C2A"><span aria-hidden="true" style="flex:0 0 24px;height:24px;border-radius:999px;background:#A23E66;display:flex;align-items:center;justify-content:center"><svg width="11" height="11" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7.5l3 3 6-7"></path></svg></span>A freebie and opt-in page that grow your list</li><li class="rv" style="display:flex;gap:12px;align-items:flex-start;background:#FFFFFF;border-radius:16px;padding:14px 18px;font:500 16px/1.45 var(--font-body);color:#3A1C2A"><span aria-hidden="true" style="flex:0 0 24px;height:24px;border-radius:999px;background:#A23E66;display:flex;align-items:center;justify-content:center"><svg width="11" height="11" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7.5l3 3 6-7"></path></svg></span>A welcome email sequence that introduces you on autopilot</li><li class="rv" style="display:flex;gap:12px;align-items:flex-start;background:#FFFFFF;border-radius:16px;padding:14px 18px;font:500 16px/1.45 var(--font-body);color:#3A1C2A"><span aria-hidden="true" style="flex:0 0 24px;height:24px;border-radius:999px;background:#A23E66;display:flex;align-items:center;justify-content:center"><svg width="11" height="11" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7.5l3 3 6-7"></path></svg></span>Your first time putting your offer in front of buyers</li><li class="rv" style="display:flex;gap:12px;align-items:flex-start;background:#FFFFFF;border-radius:16px;padding:14px 18px;font:500 16px/1.45 var(--font-body);color:#3A1C2A"><span aria-hidden="true" style="flex:0 0 24px;height:24px;border-radius:999px;background:#A23E66;display:flex;align-items:center;justify-content:center"><svg width="11" height="11" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7.5l3 3 6-7"></path></svg></span>The confidence that comes from building it yourself</li></ul></div></section>
+
+<section style="background:#3A1C2A;padding:0 0 110px">
+<div class="bl-marquee" aria-hidden="true" style="overflow:hidden;padding:50px 0 30px"><div class="bl-track" style="font:400 clamp(64px,8vw,120px)/1 var(--font-display);color:#FBF5EE;white-space:nowrap"><span>/ HERE&rsquo;S WHAT YOU GET / HERE&rsquo;S WHAT YOU GET&#160;</span><span aria-hidden="true">/ HERE&rsquo;S WHAT YOU GET / HERE&rsquo;S WHAT YOU GET&#160;</span></div></div>
+<div style="max-width:1100px;margin:0 auto;padding:0 clamp(16px,4vw,48px);display:flex;flex-direction:column;gap:32px">
+<h2 style="margin:0;text-align:center;font:400 clamp(38px,4.4vw,60px)/1.04 var(--font-display);color:#FBF5EE">When you unwrap The Blogging Business Group Coaching, here&rsquo;s what you get</h2>
+<div class="tabs-group" data-tabs="group-things" role="tablist" aria-label="Fabulous things" style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center">
+<button type="button" role="tab">#1 The 12-week build</button>
+<button type="button" role="tab">#2 Monthly group calls</button>
+<button type="button" role="tab">#3 Two live workshops a month</button>
+<button type="button" role="tab">#4 A monthly Hot Seat</button>
+<button type="button" role="tab">#5 Feedback on 2 submissions</button>
+<button type="button" role="tab">#6 The full BOSS Business System</button>
+<button type="button" role="tab">#7 A community that gets it</button>
+</div>
+<article data-tabpanel="group-things" style="background:#FBF5EE;border-radius:30px;padding:clamp(28px,5vw,56px);display:flex;flex-wrap:wrap;gap:40px">
+<div style="flex:0 0 180px;height:180px;border-radius:999px;background:#E9B9CA;display:flex;flex-direction:column;align-items:center;justify-content:center"><span style="font:700 24px/1 var(--font-script);color:#A23E66">fabulous thing</span><span style="font:400 84px/0.9 var(--font-display);color:#3A1C2A">#1</span></div>
+<div style="flex:1 1 420px;min-width:0;display:flex;flex-direction:column;gap:14px">
+<h3 style="margin:0;font:400 clamp(34px,3.6vw,50px)/1.02 var(--font-display);color:#3A1C2A">The 12-week build</h3>
+<p style="margin:0;font:600 17px/1.5 var(--font-body);color:#A23E66">Four pieces, built in order, two weeks at a time.</p>
+<ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column">
+<li style="padding:12px 0;border-bottom:1px solid #F0DCE3;font:400 16px/1.55 var(--font-body)">Weeks 1 to 2: your audit, roadmap, customer and her problem</li>
+<li style="padding:12px 0;border-bottom:1px solid #F0DCE3;font:400 16px/1.55 var(--font-body)">Weeks 3 to 4: your offer, chosen and checked with real people</li>
+<li style="padding:12px 0;border-bottom:1px solid #F0DCE3;font:400 16px/1.55 var(--font-body)">Weeks 5 to 6: your message and sales page</li>
+<li style="padding:12px 0;border-bottom:1px solid #F0DCE3;font:400 16px/1.55 var(--font-body)">Weeks 7 to 8: your freebie and opt-in page</li>
+<li style="padding:12px 0;border-bottom:1px solid #F0DCE3;font:400 16px/1.55 var(--font-body)">Weeks 9 to 10: your welcome email sequence</li>
+<li style="padding:12px 0;border-bottom:1px solid #F0DCE3;font:400 16px/1.55 var(--font-body)">Weeks 11 to 12: all of it live, and your offer in front of people</li>
+</ul>
+<p style="margin:6px 0 0;align-self:flex-start;background:#3A1C2A;color:#FBF5EE;border-radius:999px;padding:10px 18px;font:500 14px/1.4 var(--font-body)">Objection it busts: &ldquo;I start strong and never finish.&rdquo;</p>
+</div>
+</article>
+<article data-tabpanel="group-things" hidden style="background:#FBF5EE;border-radius:30px;padding:clamp(28px,5vw,56px);display:flex;flex-wrap:wrap;gap:40px">
+<div style="flex:0 0 180px;height:180px;border-radius:999px;background:#E9B9CA;display:flex;flex-direction:column;align-items:center;justify-content:center"><span style="font:700 24px/1 var(--font-script);color:#A23E66">fabulous thing</span><span style="font:400 84px/0.9 var(--font-display);color:#3A1C2A">#2</span></div>
+<div style="flex:1 1 420px;min-width:0;display:flex;flex-direction:column;gap:14px">
+<h3 style="margin:0;font:400 clamp(34px,3.6vw,50px)/1.02 var(--font-display);color:#3A1C2A">Monthly group coaching calls</h3>
+<ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column">
+<li style="padding:12px 0;border-bottom:1px solid #F0DCE3;font:400 16px/1.55 var(--font-body)">12 live calls on Zoom, the first Tuesday of every month at 1 pm ET. Bring your questions, get real answers. Can&rsquo;t make it live? Watch the replay.</li>
+</ul>
+<p style="margin:6px 0 0;align-self:flex-start;background:#3A1C2A;color:#FBF5EE;border-radius:999px;padding:10px 18px;font:500 14px/1.4 var(--font-body)">Objection it busts: &ldquo;I have no one to ask.&rdquo;</p>
+</div>
+</article>
+<article data-tabpanel="group-things" hidden style="background:#FBF5EE;border-radius:30px;padding:clamp(28px,5vw,56px);display:flex;flex-wrap:wrap;gap:40px">
+<div style="flex:0 0 180px;height:180px;border-radius:999px;background:#E9B9CA;display:flex;flex-direction:column;align-items:center;justify-content:center"><span style="font:700 24px/1 var(--font-script);color:#A23E66">fabulous thing</span><span style="font:400 84px/0.9 var(--font-display);color:#3A1C2A">#3</span></div>
+<div style="flex:1 1 420px;min-width:0;display:flex;flex-direction:column;gap:14px">
+<h3 style="margin:0;font:400 clamp(34px,3.6vw,50px)/1.02 var(--font-display);color:#3A1C2A">Two live workshops a month</h3>
+<ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column">
+<li style="padding:12px 0;border-bottom:1px solid #F0DCE3;font:400 16px/1.55 var(--font-body)">Hands-on workshops on AI, systems and launches, so you're building alongside me.</li>
+</ul>
+<p style="margin:6px 0 0;align-self:flex-start;background:#3A1C2A;color:#FBF5EE;border-radius:999px;padding:10px 18px;font:500 14px/1.4 var(--font-body)">Objection it busts: &ldquo;I learn better when I can see it done.&rdquo;</p>
+</div>
+</article>
+<article data-tabpanel="group-things" hidden style="background:#FBF5EE;border-radius:30px;padding:clamp(28px,5vw,56px);display:flex;flex-wrap:wrap;gap:40px">
+<div style="flex:0 0 180px;height:180px;border-radius:999px;background:#E9B9CA;display:flex;flex-direction:column;align-items:center;justify-content:center"><span style="font:700 24px/1 var(--font-script);color:#A23E66">fabulous thing</span><span style="font:400 84px/0.9 var(--font-display);color:#3A1C2A">#4</span></div>
+<div style="flex:1 1 420px;min-width:0;display:flex;flex-direction:column;gap:14px">
+<h3 style="margin:0;font:400 clamp(34px,3.6vw,50px)/1.02 var(--font-display);color:#3A1C2A">A monthly Hot Seat</h3>
+<ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column">
+<li style="padding:12px 0;border-bottom:1px solid #F0DCE3;font:400 16px/1.55 var(--font-body)">Get your business looked at live, with specific next steps you can act on that week.</li>
+</ul>
+<p style="margin:6px 0 0;align-self:flex-start;background:#3A1C2A;color:#FBF5EE;border-radius:999px;padding:10px 18px;font:500 14px/1.4 var(--font-body)">Objection it busts: &ldquo;Generic advice doesn&rsquo;t fit my blog.&rdquo;</p>
+</div>
+</article>
+<article data-tabpanel="group-things" hidden style="background:#FBF5EE;border-radius:30px;padding:clamp(28px,5vw,56px);display:flex;flex-wrap:wrap;gap:40px">
+<div style="flex:0 0 180px;height:180px;border-radius:999px;background:#E9B9CA;display:flex;flex-direction:column;align-items:center;justify-content:center"><span style="font:700 24px/1 var(--font-script);color:#A23E66">fabulous thing</span><span style="font:400 84px/0.9 var(--font-display);color:#3A1C2A">#5</span></div>
+<div style="flex:1 1 420px;min-width:0;display:flex;flex-direction:column;gap:14px">
+<h3 style="margin:0;font:400 clamp(34px,3.6vw,50px)/1.02 var(--font-display);color:#3A1C2A">Feedback on 2 submissions a month</h3>
+<ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column">
+<li style="padding:12px 0;border-bottom:1px solid #F0DCE3;font:400 16px/1.55 var(--font-body)">Send me your offer, sales page, freebie or emails, and I'll tell you exactly what to fix.</li>
+</ul>
+<p style="margin:6px 0 0;align-self:flex-start;background:#3A1C2A;color:#FBF5EE;border-radius:999px;padding:10px 18px;font:500 14px/1.4 var(--font-body)">Objection it busts: &ldquo;I don&rsquo;t know if what I made is any good.&rdquo;</p>
+</div>
+</article>
+<article data-tabpanel="group-things" hidden style="background:#FBF5EE;border-radius:30px;padding:clamp(28px,5vw,56px);display:flex;flex-wrap:wrap;gap:40px">
+<div style="flex:0 0 180px;height:180px;border-radius:999px;background:#E9B9CA;display:flex;flex-direction:column;align-items:center;justify-content:center"><span style="font:700 24px/1 var(--font-script);color:#A23E66">fabulous thing</span><span style="font:400 84px/0.9 var(--font-display);color:#3A1C2A">#6</span></div>
+<div style="flex:1 1 420px;min-width:0;display:flex;flex-direction:column;gap:14px">
+<h3 style="margin:0;font:400 clamp(34px,3.6vw,50px)/1.02 var(--font-display);color:#3A1C2A">The full BOSS Business System</h3>
+<p style="margin:0;font:600 17px/1.5 var(--font-body);color:#A23E66">All 8 modules, open from day one: Business Foundation, Brand and Website, Content Production Engine, Marketing and Distribution, Digital Product Development, Email and Sales Systems, AI and Automation Hub, and CEO Productivity System.</p>
+<ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column">
+<li style="padding:12px 0;border-bottom:1px solid #F0DCE3;font:400 16px/1.55 var(--font-body)">Your BOSS Business Audit and personalized roadmap</li>
+<li style="padding:12px 0;border-bottom:1px solid #F0DCE3;font:400 16px/1.55 var(--font-body)">Worksheets in your BOSS app and an AI coach inside every lesson</li>
+<li style="padding:12px 0;border-bottom:1px solid #F0DCE3;font:400 16px/1.55 var(--font-body)">The implementation library: prompts, templates, checklists and workflow maps</li>
+<li style="padding:12px 0;border-bottom:1px solid #F0DCE3;font:400 16px/1.55 var(--font-body)">12 months of access</li>
+</ul>
+<p style="margin:6px 0 0;align-self:flex-start;background:#3A1C2A;color:#FBF5EE;border-radius:999px;padding:10px 18px;font:500 14px/1.4 var(--font-body)">Objection it busts: &ldquo;I need the whole picture, not just one piece.&rdquo;</p>
+</div>
+</article>
+<article data-tabpanel="group-things" hidden style="background:#FBF5EE;border-radius:30px;padding:clamp(28px,5vw,56px);display:flex;flex-wrap:wrap;gap:40px">
+<div style="flex:0 0 180px;height:180px;border-radius:999px;background:#E9B9CA;display:flex;flex-direction:column;align-items:center;justify-content:center"><span style="font:700 24px/1 var(--font-script);color:#A23E66">fabulous thing</span><span style="font:400 84px/0.9 var(--font-display);color:#3A1C2A">#7</span></div>
+<div style="flex:1 1 420px;min-width:0;display:flex;flex-direction:column;gap:14px">
+<h3 style="margin:0;font:400 clamp(34px,3.6vw,50px)/1.02 var(--font-display);color:#3A1C2A">A community that gets it</h3>
+<ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column">
+<li style="padding:12px 0;border-bottom:1px solid #F0DCE3;font:400 16px/1.55 var(--font-body)">A private community inside your BOSS app, full of women building the same thing you are.</li>
+</ul>
+<p style="margin:6px 0 0;align-self:flex-start;background:#3A1C2A;color:#FBF5EE;border-radius:999px;padding:10px 18px;font:500 14px/1.4 var(--font-body)">Objection it busts: &ldquo;I get in my head when I do this alone.&rdquo;</p>
+</div>
+</article>
+</div>
+</section>
+
+<section style="padding:110px clamp(16px,4vw,48px)"><div style="max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:36px"><h2 style="margin:0;text-align:center;font:400 clamp(42px,5vw,72px)/1.02 var(--font-display);color:#3A1C2A">How does it work?</h2><div class="ev3" style="border-top:1px solid #E9B9CA;border-bottom:1px solid #E9B9CA"><div class="rv" style="padding:36px 28px;display:flex;flex-direction:column;gap:12px;border-right:1px solid #E9B9CA"><span style="font:500 12px/1 var(--font-label);letter-spacing:0.18em;color:#A23E66">STEP 1</span><h3 style="margin:0;font:400 34px/1.05 var(--font-display);color:#3A1C2A">Plan it</h3><p style="margin:0;font:400 16px/1.65 var(--font-body)">Take the audit and get your roadmap. You&rsquo;ll know exactly what to build first.</p></div><div class="rv" style="padding:36px 28px;display:flex;flex-direction:column;gap:12px;border-right:1px solid #E9B9CA"><span style="font:500 12px/1 var(--font-label);letter-spacing:0.18em;color:#A23E66">STEP 2</span><h3 style="margin:0;font:400 34px/1.05 var(--font-display);color:#3A1C2A">Build it</h3><p style="margin:0;font:400 16px/1.65 var(--font-body)">Follow the 12-week build, with calls, workshops and feedback along the way.</p></div><div class="rv" style="padding:36px 28px;display:flex;flex-direction:column;gap:12px"><span style="font:500 12px/1 var(--font-label);letter-spacing:0.18em;color:#A23E66">STEP 3</span><h3 style="margin:0;font:400 34px/1.05 var(--font-display);color:#3A1C2A">Launch it</h3><p style="margin:0;font:400 16px/1.65 var(--font-body)">Your offer goes live and in front of real people by week 12.</p></div></div></div></section>
+
+<section style="background:#F6E1E8;padding:110px clamp(16px,4vw,48px)"><div style="max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:36px"><h2 style="margin:0;text-align:center;font:400 clamp(42px,5vw,72px)/1.02 var(--font-display);color:#3A1C2A">And did someone say <span class="hl" style="background:#FFFFFF">bonus?</span></h2>
+<div class="rv" style="align-self:center;width:min(640px,100%);background:#A23E66;border-radius:28px;padding:clamp(28px,4vw,48px);text-align:center"><p style="margin:0;font:500 13px/1.6 var(--font-label);letter-spacing:0.08em;color:#FBF5EE">[GEN: A BONUS YOU&rsquo;LL ACTUALLY DELIVER]</p></div>
+<div style="align-self:center"><a href="/group-waitlist" class="pill" style="background:#3A1C2A;color:#FFFFFF">Join The Blogging Business Group Coaching <span aria-hidden="true" style="width:34px;height:34px;border-radius:999px;background:#A23E66;display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></span></a></div></div></section>
+
+<section style="padding:110px clamp(16px,4vw,48px)"><div style="max-width:1000px;margin:0 auto;display:flex;flex-direction:column;gap:36px"><p style="margin:0;text-align:center;font:500 13px/1 var(--font-label);letter-spacing:0.14em;color:#A23E66">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
+<blockquote class="rv" style="margin:0;text-align:center;display:flex;flex-direction:column;gap:18px"><p style="margin:0;font:400 clamp(28px,3.2vw,44px)/1.2 var(--font-display);color:#3A1C2A">&ldquo;I really liked your authenticity and you break things down in a way that feels understandable and relatable.&rdquo;</p><footer style="font:600 15px/1 var(--font-body);color:#A23E66">Morgan</footer></blockquote></div></section>
+
+<section style="background:#3A1C2A;padding:110px clamp(16px,4vw,48px)"><div style="max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:36px"><h2 style="margin:0;text-align:center;font:400 clamp(40px,4.8vw,68px)/1.02 var(--font-display);color:#FBF5EE">Sure, you could keep trying it alone.</h2>
+<div class="ev3" style="gap:18px"><article class="rv" style="background:rgba(251,245,238,0.06);border:1px solid rgba(246,225,232,0.25);border-radius:24px;padding:30px;display:flex;flex-direction:column;gap:12px"><span style="font:500 12px/1 var(--font-label);letter-spacing:0.16em;color:#E9B9CA">WAY #1</span><h3 style="margin:0;font:400 28px/1.08 var(--font-display);color:#FBF5EE">Another self-paced course.</h3><p style="margin:0;font:400 15px/1.6 var(--font-body);color:#F0DCE3">It&rsquo;ll teach you what to do. But with no deadline and no one checking in, it&rsquo;s easy to stall halfway.</p></article><article class="rv" style="background:rgba(251,245,238,0.06);border:1px solid rgba(246,225,232,0.25);border-radius:24px;padding:30px;display:flex;flex-direction:column;gap:12px"><span style="font:500 12px/1 var(--font-label);letter-spacing:0.16em;color:#E9B9CA">WAY #2</span><h3 style="margin:0;font:400 28px/1.08 var(--font-display);color:#FBF5EE">Hire a 1:1 coach.</h3><p style="margin:0;font:400 15px/1.6 var(--font-body);color:#F0DCE3">Private coaching works, but it costs more. My own 1:1 done-for-you program, the BOSS Business Blueprint, is $4,997.</p></article><article class="rv" style="background:rgba(251,245,238,0.06);border:1px solid rgba(246,225,232,0.25);border-radius:24px;padding:30px;display:flex;flex-direction:column;gap:12px"><span style="font:500 12px/1 var(--font-label);letter-spacing:0.16em;color:#E9B9CA">WAY #3</span><h3 style="margin:0;font:400 28px/1.08 var(--font-display);color:#FBF5EE">Keep figuring it out for free.</h3><p style="margin:0;font:400 15px/1.6 var(--font-body);color:#F0DCE3">Free advice comes in random order, and every month without an offer is another month your blog doesn&rsquo;t pay you.</p></article></div>
+<div class="rv" style="background:#E9B9CA;border-radius:28px;padding:clamp(28px,5vw,56px);text-align:center;display:flex;flex-direction:column;gap:14px;align-items:center"><p style="margin:0;font:700 34px/1 var(--font-script);color:#A23E66">So what&rsquo;s the cost of this?</p><p style="margin:0;font:400 clamp(26px,2.8vw,38px)/1.25 var(--font-display);color:#3A1C2A;max-width:780px">$1,497, or 6 payments of $297, for 12 months of coaching, feedback and community, and a plan that gets you live in 12 weeks.</p></div></div></section>
+
+<section id="cta" style="padding:110px clamp(16px,4vw,48px);background:#F6E1E8"><div style="max-width:860px;margin:0 auto;display:flex;flex-direction:column;gap:28px;align-items:center">
+<div style="width:100%;background:#3A1C2A;border-radius:32px;padding:clamp(28px,5vw,60px);box-shadow:0 30px 60px rgba(58,28,42,0.25);display:flex;flex-direction:column;gap:20px">
+<h2 style="margin:0;text-align:center;font:400 clamp(36px,4vw,54px)/1.04 var(--font-display);color:#FBF5EE">Your investment for The Blogging Business Group Coaching</h2>
+<ul style="margin:0;padding:0;list-style:none">
+<li style="display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid rgba(246,225,232,0.2);font:400 16px/1.45 var(--font-body);color:#F0DCE3"><span aria-hidden="true" style="flex:0 0 24px;height:24px;border-radius:999px;background:#A23E66;display:flex;align-items:center;justify-content:center"><svg width="11" height="11" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7.5l3 3 6-7"></path></svg></span>The 12-week build: offer, sales page, freebie and welcome emails</li>
+<li style="display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid rgba(246,225,232,0.2);font:400 16px/1.45 var(--font-body);color:#F0DCE3"><span aria-hidden="true" style="flex:0 0 24px;height:24px;border-radius:999px;background:#A23E66;display:flex;align-items:center;justify-content:center"><svg width="11" height="11" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7.5l3 3 6-7"></path></svg></span>12 monthly group coaching calls on Zoom</li>
+<li style="display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid rgba(246,225,232,0.2);font:400 16px/1.45 var(--font-body);color:#F0DCE3"><span aria-hidden="true" style="flex:0 0 24px;height:24px;border-radius:999px;background:#A23E66;display:flex;align-items:center;justify-content:center"><svg width="11" height="11" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7.5l3 3 6-7"></path></svg></span>2 live workshops a month</li>
+<li style="display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid rgba(246,225,232,0.2);font:400 16px/1.45 var(--font-body);color:#F0DCE3"><span aria-hidden="true" style="flex:0 0 24px;height:24px;border-radius:999px;background:#A23E66;display:flex;align-items:center;justify-content:center"><svg width="11" height="11" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7.5l3 3 6-7"></path></svg></span>A monthly Hot Seat</li>
+<li style="display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid rgba(246,225,232,0.2);font:400 16px/1.45 var(--font-body);color:#F0DCE3"><span aria-hidden="true" style="flex:0 0 24px;height:24px;border-radius:999px;background:#A23E66;display:flex;align-items:center;justify-content:center"><svg width="11" height="11" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7.5l3 3 6-7"></path></svg></span>Feedback on 2 submissions a month</li>
+<li style="display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid rgba(246,225,232,0.2);font:400 16px/1.45 var(--font-body);color:#F0DCE3"><span aria-hidden="true" style="flex:0 0 24px;height:24px;border-radius:999px;background:#A23E66;display:flex;align-items:center;justify-content:center"><svg width="11" height="11" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7.5l3 3 6-7"></path></svg></span>The full 8-module BOSS Business System, with your audit and roadmap</li>
+<li style="display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid rgba(246,225,232,0.2);font:400 16px/1.45 var(--font-body);color:#F0DCE3"><span aria-hidden="true" style="flex:0 0 24px;height:24px;border-radius:999px;background:#A23E66;display:flex;align-items:center;justify-content:center"><svg width="11" height="11" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7.5l3 3 6-7"></path></svg></span>An AI coach in every lesson and the implementation library</li>
+<li style="display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid rgba(246,225,232,0.2);font:400 16px/1.45 var(--font-body);color:#F0DCE3"><span aria-hidden="true" style="flex:0 0 24px;height:24px;border-radius:999px;background:#A23E66;display:flex;align-items:center;justify-content:center"><svg width="11" height="11" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7.5l3 3 6-7"></path></svg></span>A private community in your BOSS app</li>
+<li style="display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid rgba(246,225,232,0.2);font:400 16px/1.45 var(--font-body);color:#F0DCE3"><span aria-hidden="true" style="flex:0 0 24px;height:24px;border-radius:999px;background:#A23E66;display:flex;align-items:center;justify-content:center"><svg width="11" height="11" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7.5l3 3 6-7"></path></svg></span>12 months of access</li>
+<li style="display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid rgba(246,225,232,0.2);font:400 16px/1.45 var(--font-body);color:#F0DCE3"><span aria-hidden="true" style="flex:0 0 24px;height:24px;border-radius:999px;background:#A23E66;display:flex;align-items:center;justify-content:center"><svg width="11" height="11" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7.5l3 3 6-7"></path></svg></span>The Not-Another-Course Guarantee</li>
+</ul>
+<div style="text-align:center;display:flex;flex-direction:column;gap:8px;padding-top:10px"><p style="margin:0;font:400 clamp(36px,4vw,54px)/1.05 var(--font-display);color:#FBF5EE">One-time payment of $1,497 <span style="font-size:0.6em;color:#E9B9CA;text-decoration:line-through">$1,997</span></p><p style="margin:0;font:500 16px/1.4 var(--font-body);color:#E9B9CA">or 6 payments of $297 ($1,782 total)</p></div>
+<div style="align-self:center"><a href="/group-waitlist" class="pill" style="background:#A23E66;color:#FFFFFF">Join The Blogging Business Group Coaching <span aria-hidden="true" style="width:34px;height:34px;border-radius:999px;background:#FFFFFF;display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#A23E66" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></span></a></div>
+<p style="margin:0;text-align:center;font:400 14px/1.6 var(--font-body);color:#F0DCE3">You&rsquo;ll get instant access to your BOSS app. Your first step is the audit, and your next group call is the first Tuesday of the month.</p>
+<p style="margin:0;text-align:center;font:500 11px/1.5 var(--font-label);color:#E9B9CA">[GEN: CHECKOUT LINK]</p>
+</div>
+<div class="rv" style="width:100%;background:#FFFFFF;border-radius:26px;padding:28px 32px"><p style="margin:0;font:400 16px/1.7 var(--font-body);color:#4A2F3B">This is beta pricing. It goes up when I'm booked out, and I can raise it any time. <span style="font:500 12px/1.5 var(--font-label);color:#A23E66">[GEN: DECIDE A CAP ON GROUP MEMBERS]</span></p></div>
+</div></section>
+
+<section style="padding:110px clamp(16px,4vw,48px)"><div style="max-width:1180px;margin:0 auto;display:flex;flex-direction:column;gap:36px"><div class="fan" style="display:flex;flex-wrap:wrap;gap:24px;justify-content:center;align-items:flex-start"><blockquote class="fan-card" style="margin:0;flex:1 1 300px;max-width:380px;background:#EBDDF2;border-radius:20px;padding:30px;transform:rotate(-3deg);box-shadow:0 18px 40px rgba(58,28,42,0.14);display:flex;flex-direction:column;gap:14px"><p style="margin:0;font:400 23px/1.25 var(--font-display);color:#3A1C2A">&ldquo;Honestly, our chat was so lovely yesterday! :) I felt encouraged and supported but with no pressure to work with you.&rdquo;</p><footer style="font:600 14px/1.4 var(--font-body);color:#A23E66">Sadie</footer></blockquote><blockquote class="fan-card" style="margin:40px 0 0;flex:1 1 300px;max-width:380px;background:#A23E66;border-radius:20px;padding:30px;transform:rotate(2deg);box-shadow:0 18px 40px rgba(58,28,42,0.14);display:flex;flex-direction:column;gap:14px"><p style="margin:0;font:400 23px/1.25 var(--font-display);color:#FFFFFF">&ldquo;I decided to hire Gen because she was relatable, genuine, very intentional about the work she does and can do. I really feel like she was saying what most other bloggers do not say and thus she was more transparent.&rdquo;</p><footer style="font:600 14px/1.4 var(--font-body);color:#F6E1E8">Ashleigh</footer></blockquote><blockquote class="fan-card" style="margin:0;flex:1 1 300px;max-width:380px;background:#F6E1E8;border-radius:20px;padding:30px;transform:rotate(-1.5deg);box-shadow:0 18px 40px rgba(58,28,42,0.14);display:flex;flex-direction:column;gap:14px"><p style="margin:0;font:400 23px/1.25 var(--font-display);color:#3A1C2A">&ldquo;She gave me a clear vision how to move my business forward and make money doing what I love.&rdquo;</p><footer style="font:600 14px/1.4 var(--font-body);color:#A23E66">Tesha</footer></blockquote></div><div style="align-self:center"><a href="/group-waitlist" class="pill" style="background:#3A1C2A;color:#FFFFFF">I want to be live in 12 weeks <span aria-hidden="true" style="width:34px;height:34px;border-radius:999px;background:#A23E66;display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></span></a></div></div></section>
+
+<section style="background:#F6E1E8;padding:110px clamp(16px,4vw,48px)"><div style="max-width:900px;margin:0 auto;display:flex;flex-direction:column;gap:36px"><div style="position:relative;background:#FFFFFF;border-radius:30px;padding:clamp(28px,5vw,60px);box-shadow:0 24px 60px rgba(58,28,42,0.1);display:flex;flex-direction:column;gap:18px">
+<div style="position:absolute;right:24px;top:-44px;width:124px;height:124px"><svg class="bl-spin" width="124" height="124" viewBox="0 0 132 132" aria-hidden="true"><defs><path id="grpg" d="M66,66 m-47,0 a47,47 0 1,1 94,0 a47,47 0 1,1 -94,0"></path></defs><circle cx="66" cy="66" r="64" fill="#A23E66" stroke="#A23E66" stroke-width="2"></circle><text font-family="DM Mono, monospace" font-size="11" letter-spacing="2.4" fill="#FFFFFF"><textPath href="#grpg">THE NOT-ANOTHER-COURSE GUARANTEE &#183; </textPath></text></svg></div>
+<h2 style="margin:0;font:400 clamp(36px,4vw,54px)/1.04 var(--font-display);color:#A23E66">The Not-Another-Course Guarantee</h2>
+<p style="margin:0;font:400 clamp(24px,2.4vw,32px)/1.25 var(--font-display);color:#3A1C2A">By week 12, you&rsquo;ll have your offer, sales page, freebie and welcome email sequence live. If you did your part and they aren&rsquo;t, I&rsquo;ll keep coaching you for free until they are, <span class="hl">for up to 3 extra months.</span></p><p style="margin:0;font:400 16px/1.7 var(--font-body);color:#4A2F3B">Your part: complete the audit, attend or watch every group call and workshop held during your 12 weeks, and turn in each worksheet by its due date.</p><p style="margin:0;font:400 14px/1.7 var(--font-body);color:#6E4B5B">There are no refunds, and this guarantee is never tied to income. <a href="#">Read the full terms and conditions.</a> <span style="font:500 12px/1.5 var(--font-label);color:#A23E66">[GEN: UPDATE TERMS FOR THIS OFFER, LAWYER CHECK]</span></p>
+</div></div></section>
+
+<section style="display:flex;flex-wrap:wrap;background:#FBF5EE"><div style="position:relative;flex:1 1 420px;min-width:0;min-height:480px;background:#E9B9CA;display:flex;align-items:flex-end;justify-content:center;overflow:hidden"><img src="https://charming-caramel-d2453c.netlify.app/images/photos/sitting-glass.jpg" alt="Genasys sitting with a glass of champagne" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%"></div>
+<div style="flex:1 1 520px;min-width:0;padding:clamp(40px,6vw,90px);display:flex;flex-direction:column;gap:18px;justify-content:center"><p class="rv" style="margin:0;font:700 36px/1 var(--font-script);color:#A23E66">And just who am I?</p><p class="rv" style="margin:0;font:400 clamp(24px,2.4vw,32px)/1.25 var(--font-display);color:#3A1C2A">I&rsquo;m Genasys, founder of Boss Lady Bloggers. I&rsquo;ve been blogging since 2017 and coaching bloggers since 2020.</p><p class="rv" style="margin:0;font:400 17px/1.7 var(--font-body);color:#4A2F3B">My blog only started paying me after I got a coach and built my offer first. I made this program so you get that same plan and support, without the price of 1:1.</p></div></section>
+
+<section style="padding:110px clamp(16px,4vw,48px)"><div style="max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:36px"><h2 style="margin:0;text-align:center;font:400 clamp(40px,4.8vw,68px)/1.02 var(--font-display);color:#3A1C2A">You&rsquo;re a perfect fit for The Blogging Business Group Coaching if:</h2><div class="ev2" style="gap:16px"><article class="rv" style="background:#F6E1E8;border-radius:22px;padding:26px;display:flex;flex-direction:column;gap:10px"><span style="font:400 26px/1.1 var(--font-display);color:#3A1C2A">You want to build it yourself, with backup.</span><span style="font:400 15px/1.6 var(--font-body)">You don&rsquo;t need it done for you. You need someone checking your work.</span></article><article class="rv" style="background:#F6E1E8;border-radius:22px;padding:26px;display:flex;flex-direction:column;gap:10px"><span style="font:400 26px/1.1 var(--font-display);color:#3A1C2A">You do better with a deadline.</span><span style="font:400 15px/1.6 var(--font-body)">A 12-week plan and monthly calls keep you moving.</span></article><article class="rv" style="background:#F6E1E8;border-radius:22px;padding:26px;display:flex;flex-direction:column;gap:10px"><span style="font:400 26px/1.1 var(--font-display);color:#3A1C2A">You want a community.</span><span style="font:400 15px/1.6 var(--font-body)">Women building the same thing you are, cheering you on.</span></article><article class="rv" style="background:#F6E1E8;border-radius:22px;padding:26px;display:flex;flex-direction:column;gap:10px"><span style="font:400 26px/1.1 var(--font-display);color:#3A1C2A">You can give it 5 to 10 hours a week.</span><span style="font:400 15px/1.6 var(--font-body)">Small steps, every week.</span></article></div><div class="rv" style="background:#3A1C2A;border-radius:24px;padding:30px"><p style="margin:0;font:400 17px/1.7 var(--font-body);color:#F0DCE3">This isn&rsquo;t for you if you&rsquo;d rather work completely on your own (look at <a href="/course" style="color:inherit">The Blogging Business Course</a>), or you want everything built for you (look at <a href="/boss" style="color:inherit">the BOSS Business Blueprint</a>).</p></div></div></section>
+
+<section style="background:#3A1C2A;padding:110px clamp(16px,4vw,48px)"><div class="faq" style="max-width:780px;margin:0 auto;display:flex;flex-direction:column;gap:14px"><h2 style="margin:0 0 20px;font:400 clamp(44px,5vw,72px)/1.02 var(--font-display);color:#FBF5EE">Questions?</h2>
+<details style="border:1.5px solid rgba(246,225,232,0.5);border-radius:28px;padding:6px 24px"><summary style="display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:48px;font:600 16px/1.3 var(--font-body);color:#FBF5EE;padding:0">How much time does it take?<span class="faq-plus" aria-hidden="true" style="flex:0 0 auto;width:auto;height:auto;border:0;background:transparent;font:400 24px/1 var(--font-body);color:#E9B9CA">+</span></summary><div class="faq-a"><p style="margin:4px 0 16px;font:400 15px/1.6 var(--font-body);color:#F0DCE3">About 5 to 10 hours a week during the 12-week build.</p></div></details>
+<details style="border:1.5px solid rgba(246,225,232,0.5);border-radius:28px;padding:6px 24px"><summary style="display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:48px;font:600 16px/1.3 var(--font-body);color:#FBF5EE;padding:0">What if I can&rsquo;t make the live calls?<span class="faq-plus" aria-hidden="true" style="flex:0 0 auto;width:auto;height:auto;border:0;background:transparent;font:400 24px/1 var(--font-body);color:#E9B9CA">+</span></summary><div class="faq-a"><p style="margin:4px 0 16px;font:400 15px/1.6 var(--font-body);color:#F0DCE3">Watch the replay. It still counts toward your guarantee.</p></div></details>
+<details style="border:1.5px solid rgba(246,225,232,0.5);border-radius:28px;padding:6px 24px"><summary style="display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:48px;font:600 16px/1.3 var(--font-body);color:#FBF5EE;padding:0">How is this different from the course?<span class="faq-plus" aria-hidden="true" style="flex:0 0 auto;width:auto;height:auto;border:0;background:transparent;font:400 24px/1 var(--font-body);color:#E9B9CA">+</span></summary><div class="faq-a"><p style="margin:4px 0 16px;font:400 15px/1.6 var(--font-body);color:#F0DCE3">Same curriculum, plus monthly calls, workshops, Hot Seats, feedback on your work, community and the 12-week guarantee.</p></div></details>
+<details style="border:1.5px solid rgba(246,225,232,0.5);border-radius:28px;padding:6px 24px"><summary style="display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:48px;font:600 16px/1.3 var(--font-body);color:#FBF5EE;padding:0">Will anything be done for me?<span class="faq-plus" aria-hidden="true" style="flex:0 0 auto;width:auto;height:auto;border:0;background:transparent;font:400 24px/1 var(--font-body);color:#E9B9CA">+</span></summary><div class="faq-a"><p style="margin:4px 0 16px;font:400 15px/1.6 var(--font-body);color:#F0DCE3">No. You build it, and I coach and review it. If you want it built for you, that&rsquo;s the BOSS Business Blueprint.</p></div></details>
+<details style="border:1.5px solid rgba(246,225,232,0.5);border-radius:28px;padding:6px 24px"><summary style="display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:48px;font:600 16px/1.3 var(--font-body);color:#FBF5EE;padding:0">I don&rsquo;t have much traffic. Is it too early?<span class="faq-plus" aria-hidden="true" style="flex:0 0 auto;width:auto;height:auto;border:0;background:transparent;font:400 24px/1 var(--font-body);color:#E9B9CA">+</span></summary><div class="faq-a"><p style="margin:4px 0 16px;font:400 15px/1.6 var(--font-body);color:#F0DCE3">No. Build what you&rsquo;ll sell first, and every visitor has somewhere to go.</p></div></details>
+<details style="border:1.5px solid rgba(246,225,232,0.5);border-radius:28px;padding:6px 24px"><summary style="display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:48px;font:600 16px/1.3 var(--font-body);color:#FBF5EE;padding:0">Is there a payment plan?<span class="faq-plus" aria-hidden="true" style="flex:0 0 auto;width:auto;height:auto;border:0;background:transparent;font:400 24px/1 var(--font-body);color:#E9B9CA">+</span></summary><div class="faq-a"><p style="margin:4px 0 16px;font:400 15px/1.6 var(--font-body);color:#F0DCE3">Yes. 6 payments of $297, $1,782 total.</p></div></details>
+<details style="border:1.5px solid rgba(246,225,232,0.5);border-radius:28px;padding:6px 24px"><summary style="display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:48px;font:600 16px/1.3 var(--font-body);color:#FBF5EE;padding:0">Do you offer refunds?<span class="faq-plus" aria-hidden="true" style="flex:0 0 auto;width:auto;height:auto;border:0;background:transparent;font:400 24px/1 var(--font-body);color:#E9B9CA">+</span></summary><div class="faq-a"><p style="margin:4px 0 16px;font:400 15px/1.6 var(--font-body);color:#F0DCE3">No. You get the Not-Another-Course Guarantee instead.</p></div></details>
+<details style="border:1.5px solid rgba(246,225,232,0.5);border-radius:28px;padding:6px 24px"><summary style="display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:48px;font:600 16px/1.3 var(--font-body);color:#FBF5EE;padding:0">Will I make money?<span class="faq-plus" aria-hidden="true" style="flex:0 0 auto;width:auto;height:auto;border:0;background:transparent;font:400 24px/1 var(--font-body);color:#E9B9CA">+</span></summary><div class="faq-a"><p style="margin:4px 0 16px;font:400 15px/1.6 var(--font-body);color:#F0DCE3">I can&rsquo;t promise income, and no honest coach can. I can promise your pieces will be live by week 12, or I keep coaching you free.</p></div></details>
+<details style="border:1.5px solid rgba(246,225,232,0.5);border-radius:28px;padding:6px 24px"><summary style="display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:48px;font:600 16px/1.3 var(--font-body);color:#FBF5EE;padding:0">How many women are in the group?<span class="faq-plus" aria-hidden="true" style="flex:0 0 auto;width:auto;height:auto;border:0;background:transparent;font:400 24px/1 var(--font-body);color:#E9B9CA">+</span></summary><div class="faq-a"><p style="margin:4px 0 16px;font:400 15px/1.6 var(--font-body);color:#F0DCE3">[GEN: group size]</p></div></details>
+<div style="margin-top:16px"><a href="/group-waitlist" class="pill" style="background:#FBF5EE;color:#3A1C2A">Join The Blogging Business Group Coaching <span aria-hidden="true" style="width:34px;height:34px;border-radius:999px;background:#FFFFFF;display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#A23E66" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></span></a></div></div></section>
+
+<section style="padding:120px clamp(16px,4vw,48px)"><div style="max-width:1000px;margin:0 auto;display:flex;flex-direction:column;gap:36px"><h2 style="margin:0;text-align:center;font:400 clamp(48px,6.4vw,96px)/0.96 var(--font-display);color:#3A1C2A;text-transform:uppercase">Stop building it alone. <em style="color:#A23E66">Be live in 12 weeks.</em></h2>
+<div style="display:flex;flex-direction:column"><div class="rv" style="display:flex;flex-wrap:wrap;gap:8px 28px;align-items:baseline;padding:20px 0;border-bottom:1px solid #E9B9CA"><span style="flex:0 0 150px;font:500 12px/1.6 var(--font-label);letter-spacing:0.16em;text-transform:uppercase;color:#A23E66">Right now</span><span style="font:400 17px/1.65 var(--font-body)">Your blog isn&rsquo;t paying you, or it&rsquo;s plateaued on ads and affiliates.</span></div><div class="rv" style="display:flex;flex-wrap:wrap;gap:8px 28px;align-items:baseline;padding:20px 0;border-bottom:1px solid #E9B9CA"><span style="flex:0 0 150px;font:500 12px/1.6 var(--font-label);letter-spacing:0.16em;text-transform:uppercase;color:#A23E66">The problem</span><span style="font:400 17px/1.65 var(--font-body)">Doing it alone means stalling, second-guessing and half-finished courses.</span></div><div class="rv" style="display:flex;flex-wrap:wrap;gap:8px 28px;align-items:baseline;padding:20px 0;border-bottom:1px solid #E9B9CA"><span style="flex:0 0 150px;font:500 12px/1.6 var(--font-label);letter-spacing:0.16em;text-transform:uppercase;color:#A23E66">What you want</span><span style="font:400 17px/1.65 var(--font-body)">Your offer, sales page, freebie and emails live, built by you.</span></div><div class="rv" style="display:flex;flex-wrap:wrap;gap:8px 28px;align-items:baseline;padding:20px 0;border-bottom:1px solid #E9B9CA"><span style="flex:0 0 150px;font:500 12px/1.6 var(--font-label);letter-spacing:0.16em;text-transform:uppercase;color:#A23E66">The truth</span><span style="font:400 17px/1.65 var(--font-body)">Your blog is your marketing. The business is the offer and the path behind it, and feedback is what gets it live.</span></div><div class="rv" style="display:flex;flex-wrap:wrap;gap:8px 28px;align-items:baseline;padding:20px 0;border-bottom:1px solid #E9B9CA"><span style="flex:0 0 150px;font:500 12px/1.6 var(--font-label);letter-spacing:0.16em;text-transform:uppercase;color:#A23E66">The answer</span><span style="font:400 17px/1.65 var(--font-body)">The Blogging Business Group Coaching: the 12-week build, monthly calls, workshops, Hot Seats, feedback, community and the full curriculum, backed by the Not-Another-Course Guarantee.</span></div></div>
+<p class="rv" style="margin:0;font:400 clamp(28px,3vw,40px)/1.25 var(--font-display);color:#3A1C2A;text-align:center">$1,497, or 6 payments of $297.</p>
+<div style="align-self:center"><a href="/group-waitlist" class="pill" style="background:#A23E66;color:#FFFFFF">Join The Blogging Business Group Coaching <span aria-hidden="true" style="width:34px;height:34px;border-radius:999px;background:#FFFFFF;display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#A23E66" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></span></a></div></div></section>
+
+</main>
+<footer style="background:#A23E66;color:#FFFFFF;padding:70px 0 0;overflow:hidden">
+  <div style="max-width:1080px;margin:0 auto;padding:0 clamp(16px,4vw,48px);display:flex;flex-wrap:wrap;gap:48px;justify-content:space-between;font:500 15px/2 var(--font-body)">
+    <div style="display:flex;flex-direction:column">
+      <a href="/" style="color:#FFFFFF;text-decoration:none">Home</a>
+      <a href="/start-here" style="color:#FFFFFF;text-decoration:none">Start Here</a>
+      <a href="/about" style="color:#FFFFFF;text-decoration:none">About</a>
+      <a href="/free-trainings" style="color:#FFFFFF;text-decoration:none">Free Trainings</a>
+      <a href="/boss" style="color:#FFFFFF;text-decoration:none">BOSS Business Blueprint</a>
+    </div>
+    <div style="display:flex;flex-direction:column">
+      <a href="/blog-coaching" style="color:#FFFFFF;text-decoration:none">Blog Coaching</a>
+      <a href="/group-coaching" style="color:#FFFFFF;text-decoration:none">Group Coaching</a>
+      <a href="/course" style="color:#FFFFFF;text-decoration:none">The Course</a>
+      <a href="/group-waitlist" style="color:#FFFFFF;text-decoration:none">Group Waitlist</a>
+      <a href="/course-waitlist" style="color:#FFFFFF;text-decoration:none">Course Waitlist</a>
+      <a href="/podcast" style="color:#FFFFFF;text-decoration:none">Podcast</a>
+      <a href="/contact" style="color:#FFFFFF;text-decoration:none">Contact</a>
+    </div>
+    <div style="display:flex;flex-direction:column">
+      <a href="https://www.instagram.com/blogcoach_gen" target="_blank" rel="noopener" style="color:#FFFFFF;text-decoration:none">Instagram</a>
+      <a href="https://www.youtube.com/@GenasysLynn" target="_blank" rel="noopener" style="color:#FFFFFF;text-decoration:none">YouTube</a>
+      <a href="https://www.pinterest.com/BossLadyBloggers/" target="_blank" rel="noopener" style="color:#FFFFFF;text-decoration:none">Pinterest</a>
+    </div>
+  </div>
+  <div class="bl-marquee" style="padding:40px 0 10px;overflow:hidden" aria-hidden="true">
+    <div class="bl-track bl-slow" style="font:400 clamp(120px,15vw,220px)/1 var(--font-display);white-space:nowrap;color:#FBF5EE">
+      <span>BOSS LADY BLOGGERS&#160;&#183;&#160;BOSS LADY BLOGGERS&#160;&#183;&#160;</span><span aria-hidden="true">BOSS LADY BLOGGERS&#160;&#183;&#160;BOSS LADY BLOGGERS&#160;&#183;&#160;</span>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+/* Boss Lady Bloggers · main.js
+   Vanilla JS for every interactive feature (CLAUDE.md §5).
+   Each block checks whether its element exists before running. */
+(function () {
+  'use strict';
+  document.documentElement.classList.remove('no-js');
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- F4: popout menu ---------- */
+  var menuBtn = document.querySelector('[data-menu-open]');
+  var popout = document.getElementById('popout-menu');
+  if (menuBtn && popout) {
+    var closeBtn = popout.querySelector('[data-menu-close]');
+    var lastFocus = null;
+    function openMenu() {
+      lastFocus = document.activeElement;
+      popout.classList.add('open');
+      document.body.classList.add('menu-open');
+      menuBtn.setAttribute('aria-expanded', 'true');
+      (closeBtn || popout).focus();
+    }
+    function closeMenu() {
+      popout.classList.remove('open');
+      document.body.classList.remove('menu-open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+      if (lastFocus) lastFocus.focus();
+    }
+    menuBtn.addEventListener('click', function () {
+      popout.classList.contains('open') ? closeMenu() : openMenu();
+    });
+    if (closeBtn) closeBtn.addEventListener('click', closeMenu);
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && popout.classList.contains('open')) closeMenu();
+    });
+    popout.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', closeMenu);
+    });
+  }
+
+  /* ---------- F19: scroll reveal (once, staggered 80ms) ---------- */
+  var rvEls = document.querySelectorAll('.rv');
+  if (rvEls.length && 'IntersectionObserver' in window && !reduced) {
+    var seen = 0;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        var el = en.target;
+        var delay = (seen % 6) * 80; seen++;
+        setTimeout(function () { el.classList.add('in'); }, delay);
+        io.unobserve(el);
+      });
+    }, { threshold: 0.12 });
+    rvEls.forEach(function (el) { io.observe(el); });
+  } else {
+    rvEls.forEach(function (el) { el.classList.add('in'); });
+  }
+
+  /* ---------- F6: circled word draw-in ---------- */
+  document.querySelectorAll('.circle-draw ellipse').forEach(function (el) {
+    var len = 2 * Math.PI * Math.sqrt((96 * 96 + 34 * 34) / 2); // approx
+    el.style.strokeDasharray = len;
+    el.style.strokeDashoffset = reduced ? 0 : len;
+    if (reduced) return;
+    var io2 = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        el.style.transition = 'stroke-dashoffset 900ms ease';
+        el.style.strokeDashoffset = 0;
+        io2.disconnect();
+      });
+    }, { threshold: 0.6 });
+    io2.observe(el.closest('section') || el);
+  });
+
+  /* ---------- F8: sticky stacking cards scale ---------- */
+  var stack = document.querySelectorAll('[data-stack] > *');
+  if (stack.length && !reduced) {
+    var ticking = false;
+    function stackScale() {
+      stack.forEach(function (card, i) {
+        var r = card.getBoundingClientRect();
+        var top = 120 + i * 24;
+        var cover = Math.min(Math.max((top + 80 - r.top) / 400, 0), 1);
+        if (r.top <= top + 81) card.style.transform = 'scale(' + (1 - cover * 0.05) + ')';
+        else card.style.transform = '';
+      });
+      ticking = false;
+    }
+    window.addEventListener('scroll', function () {
+      if (!ticking) { requestAnimationFrame(stackScale); ticking = true; }
+    }, { passive: true });
+  }
+
+  /* ---------- F9/F10: tabs (offers "Fabulous Things", About glossary) ---------- */
+  document.querySelectorAll('[data-tabs]').forEach(function (group) {
+    var tabs = Array.prototype.slice.call(group.querySelectorAll('[role="tab"]'));
+    var panels = Array.prototype.slice.call(document.querySelectorAll('[data-tabpanel="' + group.getAttribute('data-tabs') + '"]'));
+    function select(i) {
+      tabs.forEach(function (t, j) {
+        var on = i === j;
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+        t.setAttribute('tabindex', on ? '0' : '-1');
+        t.classList.toggle('tab-active', on);
+      });
+      panels.forEach(function (p, j) { p.hidden = i !== j; });
+    }
+    tabs.forEach(function (t, i) {
+      t.addEventListener('click', function () { select(i); });
+      t.addEventListener('keydown', function (e) {
+        var dir = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+        if (!dir) return;
+        e.preventDefault();
+        var n = (i + dir + tabs.length) % tabs.length;
+        select(n); tabs[n].focus();
+      });
+    });
+    select(0);
+  });
+
+  /* ---------- F11: Boss Blend slider fill ---------- */
+  var blends = document.querySelectorAll('[data-blend]');
+  if (blends.length && 'IntersectionObserver' in window) {
+    var io3 = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        var bar = en.target;
+        var v = bar.getAttribute('data-blend');
+        var fill = bar.querySelector('.blend-fill');
+        if (fill) {
+          if (reduced) { fill.style.width = v + '%'; }
+          else {
+            fill.style.transition = 'width 900ms ease';
+            requestAnimationFrame(function () { fill.style.width = v + '%'; });
+          }
+        }
+        io3.unobserve(bar);
+      });
+    }, { threshold: 0.5 });
+    blends.forEach(function (b) { io3.observe(b); });
+  }
+
+  /* ---------- F12: FAQ smooth height ---------- */
+  document.querySelectorAll('.faq details').forEach(function (d) {
+    var a = d.querySelector('.faq-a');
+    if (!a || reduced) return;
+    d.addEventListener('toggle', function () {
+      if (d.open) {
+        var h = a.scrollHeight;
+        a.style.maxHeight = '0';
+        a.style.transition = 'max-height .3s ease';
+        requestAnimationFrame(function () { a.style.maxHeight = h + 40 + 'px'; });
+      } else {
+        a.style.maxHeight = '';
+      }
+    });
+  });
+
+  /* ---------- F17: waitlist forms ---------- */
+  document.querySelectorAll('[data-waitlist]').forEach(function (form) {
+    var showSuccess = function () {
+      var success = form.parentElement.querySelector('.form-success');
+      if (success) { form.hidden = true; success.hidden = false; }
+    };
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      // Forms without data-list just show the success state (no backend yet).
+      showSuccess();
+    });
+  });
+
+  /* ---------- Instagram feed (homepage strip) ---------- */
+  var feed = document.querySelector('[data-instagram-feed]');
+  if (feed) {
+    var FEED_URL = 'https://feeds.behold.so/3p9InkPKcoMGdzJUSdtH';
+    if (FEED_URL) {
+      var cached = null;
+      try {
+        var raw = localStorage.getItem('blb_ig');
+        if (raw) { cached = JSON.parse(raw); if (Date.now() - cached.t > 3600000) cached = null; }
+      } catch (err) { cached = null; }
+      var render = function (posts) {
+        var tiles = feed.querySelectorAll('.ig-tile');
+        posts.slice(0, tiles.length).forEach(function (p, i) {
+          var a = tiles[i];
+          a.href = p.permalink;
+          a.innerHTML = '';
+          var img = document.createElement('img');
+          img.src = (p.sizes && p.sizes.medium && p.sizes.medium.mediaUrl) || p.mediaUrl || p.thumbnailUrl;
+          img.alt = (p.caption || 'Instagram post').slice(0, 120);
+          img.loading = 'lazy';
+          img.style.cssText = 'width:100%;height:100%;object-fit:cover;border-radius:18px';
+          a.appendChild(img);
+        });
+      };
+      if (cached) render(cached.p);
+      else fetch(FEED_URL).then(function (r) { return r.json(); }).then(function (data) {
+        var posts = data.posts || data;
+        try { localStorage.setItem('blb_ig', JSON.stringify({ t: Date.now(), p: posts })); } catch (err) {}
+        render(posts);
+      }).catch(function () {/* keep branded placeholders */});
+    }
+  }
+  /* Showit safety: reveal anything still hidden after 2.5s */
+  setTimeout(function () {
+    document.querySelectorAll('.rv:not(.in)').forEach(function (el) { el.classList.add('in'); });
+  }, 2500);
+})();
+
+</script>

@@ -1,0 +1,82 @@
+BOSS LADY BLOGGERS - NEW WEBSITE ON SHOWIT - PASTE GUIDE
+=========================================================
+
+15 files, one per page. Same workflow as before: one full-page embed
+canvas per Showit page, paste the whole file, publish.
+
+THE FILES AND WHERE EACH ONE GOES
+---------------------------------
+File                      Showit page (URL slug)
+Home.html                 Home page ( / )
+StartHere.html            /start-here
+About.html                /about
+Boss.html                 /boss
+BlogCoaching.html         /blog-coaching   (your existing page)
+GroupCoaching.html        /group-coaching
+Course.html               /course
+GroupWaitlist.html        /group-waitlist
+CourseWaitlist.html       /course-waitlist
+FreeTrainings.html        /free-trainings
+Podcast.html              /podcast
+BlogLanding.html          /blog  (OPTIONAL - your blog already works;
+                          only use if you want the new blog landing look)
+Contact.html              /contact
+ThankYou.html             /thank-you
+NotFound404.html          /404  (OPTIONAL)
+
+HOW TO PASTE (each page)
+------------------------
+1. In Showit, open or create the page with the slug above.
+2. Delete everything on the page canvas.
+3. Add ONE Embed Code canvas, stretch it full width and full height.
+4. Paste the entire contents of the matching file.
+5. Set the canvas height roughly to the page length (you can adjust
+   after previewing; the embed sizes itself).
+6. Publish.
+
+IMPORTANT: if any of your Showit pages use a different slug than the
+list above, tell Claude the real slug and you'll get updated files
+(the menus on every page link to these exact slugs).
+
+WHAT WORKS, EXACTLY AS DESIGNED
+--------------------------------
+- All 20 interactive features: spinning badge, fullscreen berry menu,
+  scroll reveals, circled words, fanned cards, sticky stacking cards,
+  tabs, Boss Blend sliders, FAQs, floating podcast phone, marquees,
+  animated gradients.
+- Live Instagram feed on Home (pulls your latest 6 posts automatically).
+- All 10 training links to Flodesk, Calendly booking buttons, the
+  3 YouTube video cards, Spotify episode links, episode artwork.
+- Coaching price $897 / 3x$333 on /blog-coaching only.
+
+CONTACT FORM
+------------
+Works out of the box. It sends through FormSubmit to
+hello@bossladybloggers.com (same service as your old site) and then
+shows your Thank You page. THE FIRST TIME someone submits (make it
+yourself!), FormSubmit emails you a confirmation link - click it once
+and the form is permanently active.
+
+WAITLIST FORMS (group + course)
+-------------------------------
+Right now they show the pretty "You're on the list!" message but do not
+save the email (Showit pages cannot talk to Flodesk directly).
+To make them real: in Flodesk create an INLINE form for each waitlist
+(Forms > New form > Inline), copy each form's embed code, and send both
+codes to Claude - you'll get updated GroupWaitlist/CourseWaitlist files
+with the real Flodesk forms styled into the design.
+
+IMAGES
+------
+All photos, logos and artwork load from a free image host that is
+already set up and verified working. Nothing for you to upload or
+manage. (Technical note: it's the Netlify project - leave it alone,
+it now quietly serves your site's images. Deleting it breaks every
+image on the site.)
+
+PREVIEW QUIRK
+-------------
+In the Showit EDITOR the animations may look frozen or sections may sit
+there unanimated - that's just the editor. There is also a built-in
+safety so nothing can ever stay invisible. Always judge by the
+published page, not the editor canvas.
