@@ -47,8 +47,8 @@ No fitting shot in the current library (56 photos reviewed):
 
 ## Filled already (FYI)
 
-- Cutouts: gen-hero (home hero arch), gen-portrait (home split, about arch, blog split, coaching bio), gen-laugh (about hero, start-here scrapbook, boss + course + podcast bios, 404 arch), gen-champagne (group bio, 404 full-body), gen-bio (home bio circle, blog-post author, coaching hero frame).
-- Photos: flat lay (menu), desk/typing shots (home final CTA, contact, coaching hero + analytics + notebook), mic shots (start-here offer cards), pink desk (coaching hero).
+- All Genasys slots use real photos cropped into the brand shapes (no transparent cutouts, per her request): balloons and hat shots in the heroes, chair/letterboard/champagne shots in the bio splits, mic and desk shots on the podcast and offer pages.
+- Photos also placed: flat lay (menu), desk/typing shots (home final CTA, contact, coaching hero + analytics + notebook), mic shots (start-here offer cards), pink desk (coaching hero).
 
 ## Dev notes
 
