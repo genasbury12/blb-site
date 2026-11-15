@@ -165,12 +165,75 @@ PIECE_RELATED = """<section style="background:#F6E1E8;padding:70px clamp(16px,4v
 })();
 </script>"""
 
+PIECE_NAV = """<div style="background:#FBF5EE;padding:16px clamp(16px,4vw,40px);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 24px">
+<a href="/" style="display:flex;align-items:center;gap:12px;text-decoration:none">
+<img src="{host}/brand/arch-monogram.svg" alt="" width="31" height="40" style="display:block">
+<span style="font:400 26px/1 var(--font-display);color:#3A1C2A">Boss Lady <em style="color:#A23E66">Bloggers</em></span>
+</a>
+<nav aria-label="Main" style="display:flex;flex-wrap:wrap;align-items:center;gap:6px 20px;font:500 14px/1 var(--font-body)">
+<a href="/start-here" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Start Here</a>
+<a href="/about" style="color:#3A1C2A;text-decoration:none;padding:8px 0">About</a>
+<a href="/free-trainings" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Free Trainings</a>
+<a href="/blog-coaching" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Coaching</a>
+<a href="/podcast" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Podcast</a>
+<a href="/blog" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Blog</a>
+<a href="/contact" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Contact</a>
+<a href="/boss" class="pill" style="background:#3A1C2A;color:#FFFFFF;padding:11px 18px">Explore BOSS</a>
+</nav>
+</div>"""
+
+PIECE_POSTHERO = """<div style="position:relative;overflow:hidden;border-radius:24px;height:clamp(260px,38vw,420px);background:#E9B9CA">
+<img data-hero-img alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none">
+<span data-hero-cat style="position:absolute;left:20px;top:20px;background:#FFFFFF;border-radius:999px;padding:9px 14px;font:500 11px/1 var(--font-label);letter-spacing:0.12em;color:#A23E66;text-transform:uppercase">THE BLOG</span>
+</div>
+<script>
+(function () {
+  'use strict';
+  var seg = location.pathname.split('/').filter(function (x) { return x; }).pop();
+  if (!seg) return;
+  fetch('https://bossladybloggers.com/wp-json/wp/v2/posts?slug=' + encodeURIComponent(seg) + '&_embed')
+    .then(function (r) { return r.json(); })
+    .then(function (posts) {
+      var p = posts && posts[0];
+      if (!p) return;
+      var m = p._embedded && p._embedded['wp:featuredmedia'] && p._embedded['wp:featuredmedia'][0];
+      var src = m && ((m.media_details && m.media_details.sizes && m.media_details.sizes.large && m.media_details.sizes.large.source_url) || m.source_url);
+      var img = document.querySelector('[data-hero-img]');
+      if (img && src) { img.src = src; img.style.display = 'block'; }
+      try {
+        var terms = [].concat.apply([], p._embedded['wp:term'] || []);
+        var c = terms.filter(function (t) { return t.taxonomy === 'category'; })[0];
+        var chip = document.querySelector('[data-hero-cat]');
+        if (c && chip) chip.textContent = c.name.toUpperCase();
+      } catch (e) {}
+    })
+    .catch(function () {/* rose band stays */});
+})();
+</script>"""
+
 PIECES = {
+    "PostNavBar.html":      ("site navigation bar",  PIECE_NAV),
+    "PostHero.html":        ("featured image hero",  PIECE_POSTHERO),
     "PostAuthorCard.html":  ("author sidebar card",  PIECE_AUTHOR),
     "PostDownloadCard.html":("free download card",   PIECE_DOWNLOAD),
     "PostNextStepBand.html":("next-step CTA band",   PIECE_NEXTSTEP),
     "PostRelatedBand.html": ("keep-reading band",    PIECE_RELATED),
 }
+
+
+def build_footer_piece(css: str, js: str) -> None:
+    """PostFooter.html: the full site footer (bio, Get around, Instagram
+    feed, berry footer with marquee) as one embed for the post template."""
+    body = (ROOT / "partials/footer.html").read_text()
+    for a, b in LINKMAP:
+        body = body.replace(a, b)
+    body = re.sub(r'(src|href)="/(images|brand|favicon)', r'\1="%s/\2' % ASSET_HOST, body)
+    out = (FONTS + "\n<style>\n" + css + "\n</style>\n" + body
+           + "\n<script>\n" + js + "\n</script>\n")
+    if "—" in out or "–" in out:
+        raise SystemExit("em/en dash in PostFooter.html")
+    (OUT / "PostFooter.html").write_text(out)
+    print("built PostFooter.html  ->  blog post template piece (full site footer)")
 
 
 def build_pieces() -> None:
@@ -187,6 +250,7 @@ def main() -> None:
     build_pieces()
     css = (ROOT / "css/tokens.css").read_text() + "\n" + (ROOT / "css/styles.css").read_text()
     js = embed_js()
+    build_footer_piece(css, js)
     for src, (name, slug) in PAGES.items():
         html = (ROOT / src).read_text()
         body = html.split("<body>", 1)[1].rsplit("</body>", 1)[0]

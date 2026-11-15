@@ -69,22 +69,32 @@ post page gets rebuilt:
    have (SHOWIT-BLOG-TEMPLATE-STYLE-SPEC.txt). That makes the title,
    featured image and article body match the new brand.
 
-2. PLACE THESE 4 SMALL EMBEDS on the same template page:
+2. PLACE THESE 7 EMBEDS on the same template page, top to bottom:
 
-   File                   What it is              Where to put it
+   File                   What it is              Where / canvas size
+   PostNavBar.html        Site navigation bar      Very top, full width,
+                          (logo + links + BOSS)    ~110px tall (taller on
+                                                   mobile so links wrap)
+   PostHero.html          Featured image band.     Under the nav, above
+                          Pulls each post's own    the post title, full
+                          image + category chip    content width, ~420px
+                          from WordPress
+   (then Showit's own post title, meta and content widgets)
    PostAuthorCard.html    "Meet Genasys" card      Sidebar, next to the
-                          with your photo          post content
+                          with your photo          post content, ~340x320
    PostDownloadCard.html  Foundations Builder      Sidebar, under the
-                          free download card       author card
+                          free download card       author card, ~340x220
    PostNextStepBand.html  Dark plum CTA band       Under the post
-                                                   content
-   PostRelatedBand.html   "Keep reading" band      Very bottom, full
-                          with 3 recent posts      width
+                                                   content, ~140px tall
+   PostRelatedBand.html   "Keep reading" band      Near the bottom, full
+                          with 3 recent posts      width, ~560px tall
+   PostFooter.html        The FULL site footer:    Very bottom, full
+                          your bio, Get around     width, ~1000px tall
+                          links, live Instagram    desktop / ~1700px
+                          feed, berry marquee      mobile
 
-   Each one: add an Embed Code canvas the size shown, paste the file.
-   Sidebar cards: canvas about 340px wide, ~320px tall (author) and
-   ~220px tall (download). Next-step band: full content width, ~140px.
-   Keep-reading band: full page width, ~560px tall.
+   The nav bar and footer make every blog post feel like the rest of
+   the site, so readers can get anywhere from a post.
 
 3. THE KEEP-READING BAND IS AUTOMATIC. It pulls your 3 newest posts
    (picture + title + link) straight from your WordPress blog every
