@@ -3,12 +3,13 @@
 <!-- CATEGORY BAR -->
 <nav aria-label="Blog categories" style="position:sticky;top:77px;z-index:30;background:#3A1C2A;padding:14px clamp(16px,4vw,48px);display:flex;flex-wrap:wrap;gap:8px 26px;justify-content:center;font:500 12px/1 var(--font-label);letter-spacing:0.12em;text-transform:uppercase">
 <a href="/blog/" style="color:#E9B9CA;text-decoration:none;padding:8px 0">Blog Home</a>
-<a href="#" style="color:#FBF5EE;text-decoration:none;padding:8px 0">Starting a Blog</a>
-<a href="#" style="color:#FBF5EE;text-decoration:none;padding:8px 0">Making Money Blogging</a>
-<a href="#" style="color:#FBF5EE;text-decoration:none;padding:8px 0">Digital Products and Offers</a>
-<a href="#" style="color:#FBF5EE;text-decoration:none;padding:8px 0">Blogging and SEO</a>
-<a href="#" style="color:#FBF5EE;text-decoration:none;padding:8px 0">Email Marketing and Sales</a>
-<a href="#" style="color:#FBF5EE;text-decoration:none;padding:8px 0">AI and Business Productivity</a>
+<a href="/blog/category/?cat=blogging" style="color:#FBF5EE;text-decoration:none;padding:8px 0">Blogging</a>
+<a href="/blog/category/?cat=blogging-productivity" style="color:#FBF5EE;text-decoration:none;padding:8px 0">Blogging Productivity</a>
+<a href="/blog/category/?cat=podcast" style="color:#FBF5EE;text-decoration:none;padding:8px 0">Podcast</a>
+<a href="/blog/category/?cat=make-money-blogging" style="color:#FBF5EE;text-decoration:none;padding:8px 0">Make Money Blogging</a>
+<a href="/blog/category/?cat=create-blog-content" style="color:#FBF5EE;text-decoration:none;padding:8px 0">Create Blog Content</a>
+<a href="/blog/category/?cat=how-to" style="color:#FBF5EE;text-decoration:none;padding:8px 0">How To</a>
+<a href="/blog/category/" style="color:#FBF5EE;text-decoration:none;padding:8px 0">All Topics</a>
 </nav>
 
 <!-- FEATURED POST -->
@@ -75,7 +76,7 @@
 <div style="padding:22px;display:flex;flex-direction:column;gap:10px"><span style="font:500 11px/1 var(--font-label);letter-spacing:0.12em;color:#A23E66">CONTENT AND PINTEREST</span><span style="font:400 24px/1.15 var(--font-display);color:#3A1C2A">90 Day Content Plan for a Blog That Sells (13 Weeks, One Offer per Post)</span><span style="font:600 14px/1 var(--font-body);color:#3A1C2A">Read more &#8599;&#65038;</span></div>
 </a>
 </div>
-<a href="#" class="pill pill-plain" style="align-self:center;background:#3A1C2A;color:#FFFFFF">Load more posts</a>
+<a href="/blog/category/" data-load-more class="pill pill-plain" style="align-self:center;background:#3A1C2A;color:#FFFFFF">Load more posts</a>
 </div>
 </section>
 
@@ -153,6 +154,58 @@
       });
     })
     .catch(function () { /* keep the baked-in posts */ });
+
+  /* Load more posts: pull the next page from WordPress and append cards */
+  var moreBtn = document.querySelector('[data-load-more]');
+  if (moreBtn) {
+    var page = 2;
+    moreBtn.addEventListener('click', function (e) {
+      e.preventDefault();
+      moreBtn.style.opacity = '0.6';
+      fetch('https://bossladybloggers.com/wp-json/wp/v2/posts?per_page=6&page=' + page + '&_embed')
+        .then(function (r) { if (!r.ok) throw new Error('done'); return r.json(); })
+        .then(function (posts) {
+          var grid = document.querySelector('.ev3b');
+          var tints = ['#E9B9CA', '#3A1C2A', '#A23E66', '#FBF5EE'];
+          posts.forEach(function (p, i) {
+            var img = '';
+            try { img = p._embedded['wp:featuredmedia'][0].source_url; } catch (err) {}
+            var cat = '';
+            try {
+              var terms = [].concat.apply([], p._embedded['wp:term'] || []);
+              var c = terms.filter(function (t) { return t.taxonomy === 'category'; })[0];
+              if (c) cat = c.name.toUpperCase();
+            } catch (err) {}
+            var tmp = document.createElement('textarea'); tmp.innerHTML = p.title.rendered;
+            var a = document.createElement('a');
+            a.href = p.link;
+            a.className = 'card-hover';
+            a.style.cssText = 'background:#FFFFFF;border-radius:22px;overflow:hidden;text-decoration:none;display:flex;flex-direction:column';
+            var box = document.createElement('div');
+            box.style.cssText = 'position:relative;aspect-ratio:4/3;background:' + tints[i % 4];
+            if (img) {
+              var im = document.createElement('img');
+              im.src = img; im.alt = ''; im.loading = 'lazy';
+              im.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top';
+              box.appendChild(im);
+            }
+            var body = document.createElement('div');
+            body.style.cssText = 'padding:22px;display:flex;flex-direction:column;gap:10px';
+            body.innerHTML = '<span style="font:500 11px/1 var(--font-label);letter-spacing:0.12em;color:#A23E66"></span>'
+              + '<span style="font:400 24px/1.15 var(--font-display);color:#3A1C2A"></span>'
+              + '<span style="font:600 14px/1 var(--font-body);color:#3A1C2A">Read more \u2197\uFE0E</span>';
+            body.children[0].textContent = cat;
+            body.children[1].textContent = tmp.value;
+            a.appendChild(box); a.appendChild(body);
+            grid.appendChild(a);
+          });
+          page += 1;
+          moreBtn.style.opacity = '';
+          if (posts.length < 6) moreBtn.style.display = 'none';
+        })
+        .catch(function () { moreBtn.style.display = 'none'; });
+    });
+  }
 })();
 </script>
 </main>
