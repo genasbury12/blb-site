@@ -106,7 +106,7 @@ PIECE_AUTHOR = """<div style="background:#FBF5EE;border-radius:22px;padding:28px
 PIECE_DOWNLOAD = """<a href="https://bossladybloggers.myflodesk.com/build" target="_blank" rel="noopener" class="card-hover" style="text-decoration:none;background:#3A1C2A;border-radius:22px;padding:26px;display:flex;flex-direction:column;gap:10px;max-width:340px;margin:0 auto">
 <span style="align-self:flex-start;background:#A23E66;border-radius:999px;padding:6px 12px;font:600 11px/1 var(--font-body);color:#FFFFFF">Free download</span>
 <span style="font:400 24px/1.1 var(--font-display);color:#FBF5EE">The Foundations Builder</span>
-<span style="font:600 13px/1 var(--font-body);color:#E9B9CA">Get it free &#8599;</span>
+<span style="font:600 13px/1 var(--font-body);color:#E9B9CA">Get it free &#8599;&#65038;</span>
 </a>"""
 
 PIECE_NEXTSTEP = """<div style="background:#3A1C2A;border-radius:22px;padding:30px;display:flex;flex-wrap:wrap;gap:18px;align-items:center;justify-content:space-between">
