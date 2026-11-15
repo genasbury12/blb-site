@@ -96,6 +96,7 @@ HEAD = """<!doctype html>
 <link rel="stylesheet" href="{fonts}">
 <link rel="stylesheet" href="/css/tokens.css">
 <link rel="stylesheet" href="/css/styles.css">
+<script>document.documentElement.classList.remove('no-js');</script>
 <script src="/js/main.js" defer></script>
 </head>
 <body>

@@ -665,8 +665,16 @@ div[id^="fd-form"] form { padding-top: 0 !important; padding-bottom: 0 !importan
         setTimeout(function () { el.classList.add('in'); }, delay);
         io.unobserve(el);
       });
-    }, { threshold: 0.12 });
+    }, { threshold: 0, rootMargin: '0px 0px -40px 0px' });
     rvEls.forEach(function (el) { io.observe(el); });
+    // Catch-up: anything on screen that still has not revealed after 3s
+    // (slow devices, odd scroll positions) becomes visible.
+    setTimeout(function () {
+      document.querySelectorAll('.rv:not(.in)').forEach(function (el) {
+        var r = el.getBoundingClientRect();
+        if (r.bottom > 0 && r.top < window.innerHeight) el.classList.add('in');
+      });
+    }, 3000);
   } else {
     rvEls.forEach(function (el) { el.classList.add('in'); });
   }
