@@ -1,7 +1,7 @@
 BOSS LADY BLOGGERS - NEW WEBSITE ON SHOWIT - PASTE GUIDE
 =========================================================
 
-15 full pages plus 4 small blog-post pieces. Same workflow as before: one full-page embed
+16 full pages plus 4 small blog-post pieces. Same workflow as before: one full-page embed
 canvas per Showit page, paste the whole file, publish.
 
 THE FILES AND WHERE EACH ONE GOES
@@ -20,6 +20,9 @@ FreeTrainings.html        /free-trainings
 Podcast.html              /podcast
 BlogLanding.html          /blog  (OPTIONAL - your blog already works;
                           only use if you want the new blog landing look)
+BlogCategory.html         /blog-category  (one page, serves EVERY topic:
+                          links pass ?cat=topic-name and the page pulls
+                          that topic's posts from WordPress by itself)
 Contact.html              /contact
 ThankYou.html             /thank-you
 NotFound404.html          /404  (OPTIONAL)
