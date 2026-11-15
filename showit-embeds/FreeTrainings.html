@@ -230,11 +230,7 @@ html.no-js .rv{opacity:1;transform:none}
 <p class="rv" style="margin:0;max-width:580px;font:400 18px/1.6 var(--font-body)">You&rsquo;ve watched the tutorials. Saved the Instagram posts. Downloaded the checklists. And spent more hours than you&rsquo;d like to admit trying to figure out how to make money from your blog.</p>
 <div class="rv"><a href="#trainings" class="pill" style="background:#A23E66;color:#FFFFFF">Pick your free training <span aria-hidden="true" style="width:34px;height:34px;border-radius:999px;background:#FFFFFF;display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#A23E66" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></span></a></div>
 </div>
-<div class="rv" style="flex:1 1 400px;min-width:0;position:relative;height:500px">
-<div style="overflow:hidden;position:absolute;left:0;top:20px;width:62%;height:400px;border-radius:28px;background:#3A1C2A;transform:rotate(-4deg);display:flex;align-items:flex-end;padding:20px"><img src="https://charming-caramel-d2453c.netlify.app/images/mockups/tools-suite.jpg" alt="The free Boss Lady Bloggers tools shown across five devices" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center"></div>
-<div style="overflow:hidden;position:absolute;right:0;top:140px;width:46%;height:300px;border-radius:28px;background:#E9B9CA;transform:rotate(5deg);display:flex;align-items:flex-end;padding:20px"><img src="https://charming-caramel-d2453c.netlify.app/images/mockups/08-email-writer.jpg" alt="The Email Writer free tool shown on a phone" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:70% center"></div>
-<span style="position:absolute;left:20%;bottom:0;background:#FFFFFF;border-radius:999px;padding:12px 20px;box-shadow:0 10px 30px rgba(58,28,42,0.14);font:600 14px/1 var(--font-body);color:#3A1C2A">10 trainings &#183; 10 tools &#183; $0</span>
-</div>
+<div class="rv" style="flex:1 1 400px;min-width:0;position:relative"><img src="https://charming-caramel-d2453c.netlify.app/images/mockups/tools-suite.jpg" alt="The ten free Boss Lady Bloggers tools shown across five devices" loading="eager" style="width:100%;height:auto;display:block;border-radius:28px;box-shadow:0 30px 60px rgba(58,28,42,.18)"><span style="position:absolute;left:50%;bottom:-8px;transform:translateX(-50%);background:#FFFFFF;border-radius:999px;padding:12px 20px;font:600 14px/1 var(--font-body);color:#3A1C2A;box-shadow:0 10px 24px rgba(58,28,42,.15);white-space:nowrap">10 trainings &#183; 10 tools &#183; $0</span></div>
 </div>
 <div style="position:absolute;left:50%;bottom:-66px;transform:translateX(-50%);width:132px;height:132px;z-index:5">
 <img src="https://charming-caramel-d2453c.netlify.app/brand/badge.svg" alt="" width="132" height="132" class="bl-spin" style="display:block;border-radius:999px;box-shadow:0 10px 30px rgba(58,28,42,.25)">
@@ -605,6 +601,9 @@ html.no-js .rv{opacity:1;transform:none}
   document.querySelectorAll('[data-tabs]').forEach(function (group) {
     var tabs = Array.prototype.slice.call(group.querySelectorAll('[role="tab"]'));
     var panels = Array.prototype.slice.call(document.querySelectorAll('[data-tabpanel="' + group.getAttribute('data-tabs') + '"]'));
+    // Inline display styles beat the hidden attribute, so remember each
+    // panel's own display value and toggle display directly.
+    panels.forEach(function (p) { p.setAttribute('data-disp', p.style.display || ''); });
     function select(i) {
       tabs.forEach(function (t, j) {
         var on = i === j;
@@ -612,7 +611,11 @@ html.no-js .rv{opacity:1;transform:none}
         t.setAttribute('tabindex', on ? '0' : '-1');
         t.classList.toggle('tab-active', on);
       });
-      panels.forEach(function (p, j) { p.hidden = i !== j; });
+      panels.forEach(function (p, j) {
+        var on = i === j;
+        p.hidden = !on;
+        p.style.display = on ? p.getAttribute('data-disp') : 'none';
+      });
     }
     tabs.forEach(function (t, i) {
       t.addEventListener('click', function () { select(i); });
@@ -678,9 +681,8 @@ html.no-js .rv{opacity:1;transform:none}
     });
   });
 
-  /* ---------- Instagram feed (homepage strip) ---------- */
-  var feed = document.querySelector('[data-instagram-feed]');
-  if (feed) {
+  /* ---------- Instagram feed (any page with a strip) ---------- */
+  document.querySelectorAll('[data-instagram-feed]').forEach(function (feed) {
     var FEED_URL = 'https://feeds.behold.so/3p9InkPKcoMGdzJUSdtH';
     if (FEED_URL) {
       var cached = null;
@@ -709,7 +711,7 @@ html.no-js .rv{opacity:1;transform:none}
         render(posts);
       }).catch(function () {/* keep branded placeholders */});
     }
-  }
+  });
   /* Showit safety: reveal anything still hidden after 2.5s */
   setTimeout(function () {
     document.querySelectorAll('.rv:not(.in)').forEach(function (el) { el.classList.add('in'); });
