@@ -141,3 +141,10 @@ html.no-js .rv{opacity:1;transform:none}
   .card-hover,.card-hover:hover{transition:none;transform:none}
   .fan-card{transition:none}
 }
+
+/* Guarantee badge: on phones, shrink and lift it above the card so it
+   never covers the headline. */
+@media (max-width: 700px) {
+  .gbadge { width: 92px !important; height: 92px !important; top: -64px !important; right: 16px !important; }
+  .gbadge svg { width: 100%; height: 100%; }
+}
