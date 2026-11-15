@@ -95,6 +95,9 @@
   document.querySelectorAll('[data-tabs]').forEach(function (group) {
     var tabs = Array.prototype.slice.call(group.querySelectorAll('[role="tab"]'));
     var panels = Array.prototype.slice.call(document.querySelectorAll('[data-tabpanel="' + group.getAttribute('data-tabs') + '"]'));
+    // Inline display styles beat the hidden attribute, so remember each
+    // panel's own display value and toggle display directly.
+    panels.forEach(function (p) { p.setAttribute('data-disp', p.style.display || ''); });
     function select(i) {
       tabs.forEach(function (t, j) {
         var on = i === j;
@@ -102,7 +105,11 @@
         t.setAttribute('tabindex', on ? '0' : '-1');
         t.classList.toggle('tab-active', on);
       });
-      panels.forEach(function (p, j) { p.hidden = i !== j; });
+      panels.forEach(function (p, j) {
+        var on = i === j;
+        p.hidden = !on;
+        p.style.display = on ? p.getAttribute('data-disp') : 'none';
+      });
     }
     tabs.forEach(function (t, i) {
       t.addEventListener('click', function () { select(i); });
