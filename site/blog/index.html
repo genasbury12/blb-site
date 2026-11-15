@@ -177,6 +177,47 @@
 <div style="position:relative;flex:1 1 420px;min-width:0;min-height:480px;background:#E9B9CA;display:flex;align-items:flex-end;justify-content:center;overflow:hidden"><img src="/images/photos/portrait-hat.jpg" alt="Genasys smiling in a hat" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%"></div>
 </section>
 
+
+<script>
+(function () {
+  fetch('https://bossladybloggers.com/wp-json/wp/v2/posts?per_page=6&_embed')
+    .then(function (r) { return r.json(); })
+    .then(function (posts) {
+      if (!posts || !posts.length) return;
+      var info = posts.map(function (p) {
+        var img = '';
+        try { img = p._embedded['wp:featuredmedia'][0].source_url; } catch (e) {}
+        var cat = '';
+        try {
+          var terms = [].concat.apply([], p._embedded['wp:term'] || []);
+          var c = terms.filter(function (t) { return t.taxonomy === 'category'; })[0];
+          if (c) cat = c.name.toUpperCase();
+        } catch (e) {}
+        var tmp = document.createElement('textarea'); tmp.innerHTML = p.title.rendered;
+        return { t: tmp.value, l: p.link, img: img, cat: cat };
+      });
+      /* featured hero = newest post */
+      var hero = document.querySelector('main h1');
+      if (hero) hero.textContent = info[0].t;
+      var heroImg = document.querySelector('main section img[loading="eager"]');
+      if (heroImg && info[0].img) heroImg.src = info[0].img;
+      var heroBtn = hero && hero.parentElement.querySelector('a.pill');
+      if (heroBtn) heroBtn.href = info[0].l;
+      /* latest grid */
+      var cards = document.querySelectorAll('.ev3b > a');
+      cards.forEach(function (card, i) {
+        var p = info[i]; if (!p) return;
+        card.href = p.l;
+        var img = card.querySelector('div[style*="aspect-ratio"] img');
+        if (img && p.img) img.src = p.img;
+        var spans = card.querySelectorAll('div:last-child > span');
+        if (spans[0] && p.cat) spans[0].textContent = p.cat;
+        if (spans[1]) spans[1].textContent = p.t;
+      });
+    })
+    .catch(function () { /* keep the baked-in posts */ });
+})();
+</script>
 </main>
 <footer style="background:#A23E66;color:#FFFFFF;padding:70px 0 0;overflow:hidden">
   <div style="max-width:1080px;margin:0 auto;padding:0 clamp(16px,4vw,48px);display:flex;flex-wrap:wrap;gap:48px;justify-content:space-between;font:500 15px/2 var(--font-body)">
