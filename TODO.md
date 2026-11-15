@@ -4,11 +4,12 @@ Everything the new static site still needs. Nothing here blocks deploying the si
 
 ## Needs Genasys (links + accounts)
 
-- **Flodesk form hookups** (forms currently show a friendly success message without saving the email):
-  - Free trainings signup form (on /start-here/ and the berry signup band)
-  - /group-waitlist/ form
-  - /course-waitlist/ form
-  - Replace each `<form data-waitlist action="#">` action with the real Flodesk form endpoint, or embed the Flodesk form code.
+- **Waitlist forms are WIRED through a Netlify function** (netlify/functions/waitlist.mjs). They save to Flodesk as soon as Genasys does these 3 steps:
+  1. Flodesk > Audience > Segments: create "Waitlist - Group Coaching" and "Waitlist - Course"; copy each segment ID from its URL.
+  2. Flodesk > Integrations > API keys: create a key named "Website waitlist".
+  3. Netlify > Site settings > Environment variables: set FLODESK_API_KEY, FLODESK_SEGMENT_GROUP, FLODESK_SEGMENT_COURSE. Then test one signup per page and delete the test subscriber.
+  - If Flodesk rejects segment_ids on create, the fallback is a second call: POST /v1/subscribers/{email}/segments with {"segment_ids":[segment]}.
+  - Still TODO separately: the free-trainings signup band on /start-here/ (shows success, does not save yet; can reuse the same function with a third segment when ready).
 - ~~Coaching price~~ CONFIRMED: $897 or 3 payments of $333, live on /coaching/.
 - ~~Coaching apply link~~ CONFIRMED: the apply pill goes to calendly.com/bossladybloggers/15min.
 - ~~BOSS booking link~~ CONFIRMED: all 4 /boss/ call CTAs go to calendly.com/bossladybloggers/15min.

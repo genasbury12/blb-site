@@ -155,15 +155,41 @@
     });
   });
 
-  /* ---------- F17: waitlist forms (Flodesk TODO) ---------- */
+  /* ---------- F17: waitlist forms ---------- */
   document.querySelectorAll('[data-waitlist]').forEach(function (form) {
+    var showSuccess = function () {
+      var success = form.parentElement.querySelector('.form-success');
+      if (success) { form.hidden = true; success.hidden = false; }
+    };
     form.addEventListener('submit', function (e) {
-      // TODO: replace with the real Flodesk form action (see TODO.md).
-      if (!form.getAttribute('action') || form.getAttribute('action') === '#') {
-        e.preventDefault();
-        var success = form.parentElement.querySelector('.form-success');
-        if (success) { form.hidden = true; success.hidden = false; }
+      e.preventDefault();
+      // Forms with data-list save through the Netlify function into Flodesk.
+      if (form.dataset.list) {
+        var btn = form.querySelector('button[type=submit], button');
+        var err = form.querySelector('.waitlist-error');
+        if (btn) btn.disabled = true;
+        if (err) err.style.display = 'none';
+        var data = {};
+        new FormData(form).forEach(function (v, k) { data[k] = v; });
+        data.list = form.dataset.list;
+        fetch('/.netlify/functions/waitlist', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        }).then(function (r) { return r.json(); }).then(function (out) {
+          if (!out.ok) throw new Error(out.error);
+          showSuccess();
+        }).catch(function (x) {
+          if (err) {
+            err.textContent = (x && x.message) || 'Something went wrong. Please try again.';
+            err.style.display = 'block';
+          }
+          if (btn) btn.disabled = false;
+        });
+        return;
       }
+      // Forms without data-list just show the success state (no backend yet).
+      showSuccess();
     });
   });
 
