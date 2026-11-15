@@ -170,8 +170,7 @@
   /* ---------- Instagram feed (homepage strip) ---------- */
   var feed = document.querySelector('[data-instagram-feed]');
   if (feed) {
-    // TODO: set the Behold.so JSON feed URL once Genasys connects her account.
-    var FEED_URL = '';
+    var FEED_URL = 'https://feeds.behold.so/3p9InkPKcoMGdzJUSdtH';
     if (FEED_URL) {
       var cached = null;
       try {
@@ -185,7 +184,7 @@
           a.href = p.permalink;
           a.innerHTML = '';
           var img = document.createElement('img');
-          img.src = p.mediaUrl || p.thumbnailUrl;
+          img.src = (p.sizes && p.sizes.medium && p.sizes.medium.mediaUrl) || p.mediaUrl || p.thumbnailUrl;
           img.alt = (p.caption || 'Instagram post').slice(0, 120);
           img.loading = 'lazy';
           img.style.cssText = 'width:100%;height:100%;object-fit:cover;border-radius:18px';

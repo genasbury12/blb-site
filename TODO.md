@@ -10,13 +10,13 @@ Everything the new static site still needs. Nothing here blocks deploying the si
   - /course-waitlist/ form
   - Replace each `<form data-waitlist action="#">` action with the real Flodesk form endpoint, or embed the Flodesk form code.
 - ~~Coaching price~~ CONFIRMED: $897 or 3 payments of $333, live on /coaching/.
-- **Coaching apply link**: "Apply for private blog coaching" pill is `href="#"`. Other CTAs use the on-page #apply anchor.
-- **BOSS booking link**: 4 CTAs on /boss/ ("Yes! Let's build my business", "I want results like these. Book my free call", "Book my free Fast Track call", final P.A.R.I.S. CTA) are `href="#"` until the Fast Track call booking URL exists.
+- ~~Coaching apply link~~ CONFIRMED: the apply pill goes to calendly.com/bossladybloggers/15min.
+- ~~BOSS booking link~~ CONFIRMED: all 4 /boss/ call CTAs go to calendly.com/bossladybloggers/15min.
 - **Checkout links**: /group-coaching/ and /course/ buy CTAs route to the waitlist pages per the design; `[GEN: CHECKOUT LINK]` notes kept in place for when Stripe checkout links exist.
 - **Terms links**: guarantee sections on /boss/, /group-coaching/ and /course/ link "terms and conditions" to `#`. Needs a real terms page (design note says lawyer check for the group offer).
 - **YouTube**: 3 video embeds each on /start-here/ and /free-trainings/ are `[VIDEO 01-03]` placeholders; need video URLs.
 - **Apple Podcasts**: /podcast/ "Listen on Apple Podcasts" is `href="#"` (Spotify links are live).
-- **Instagram feed**: homepage strip shows branded tiles. Create a feed at behold.so for @blogcoach_gen, paste the JSON URL into `FEED_URL` in site/js/main.js.
+- ~~Instagram feed~~ LIVE: Behold JSON feed wired into site/js/main.js; homepage strip shows the six latest @blogcoach_gen posts.
 - **Blog categories**: 6 category links on /blog/ and /free-trainings/ are `href="#"` until category pages exist; "Load more posts" button too.
 - **Netlify forms**: after first deploy, open Netlify > Forms and turn on email notifications for the "contact" form.
 - **Domain**: point bossladybloggers.com at the Netlify site when ready to switch.
