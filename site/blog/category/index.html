@@ -88,14 +88,6 @@
 <a href="/blog/category/?cat=make-money-blogging" style="background:#FFFFFF;border-radius:999px;padding:10px 16px;font:600 13px/1 var(--font-body);color:#3A1C2A;text-decoration:none">Make Money Blogging</a>
 <a href="/blog/category/?cat=create-blog-content" style="background:#FFFFFF;border-radius:999px;padding:10px 16px;font:600 13px/1 var(--font-body);color:#3A1C2A;text-decoration:none">Create Blog Content</a>
 <a href="/blog/category/?cat=how-to" style="background:#FFFFFF;border-radius:999px;padding:10px 16px;font:600 13px/1 var(--font-body);color:#3A1C2A;text-decoration:none">How To</a>
-<a href="/blog/category/?cat=offers-and-pricing" style="background:#FFFFFF;border-radius:999px;padding:10px 16px;font:600 13px/1 var(--font-body);color:#3A1C2A;text-decoration:none">Offers and Pricing</a>
-<a href="/blog/category/?cat=start-blogging" style="background:#FFFFFF;border-radius:999px;padding:10px 16px;font:600 13px/1 var(--font-body);color:#3A1C2A;text-decoration:none">Start Blogging</a>
-<a href="/blog/category/?cat=blog-design-branding" style="background:#FFFFFF;border-radius:999px;padding:10px 16px;font:600 13px/1 var(--font-body);color:#3A1C2A;text-decoration:none">Blog Design &amp; Branding</a>
-<a href="/blog/category/?cat=content-and-pinterest" style="background:#FFFFFF;border-radius:999px;padding:10px 16px;font:600 13px/1 var(--font-body);color:#3A1C2A;text-decoration:none">Content and Pinterest</a>
-<a href="/blog/category/?cat=sales-pages-and-copy" style="background:#FFFFFF;border-radius:999px;padding:10px 16px;font:600 13px/1 var(--font-body);color:#3A1C2A;text-decoration:none">Sales Pages and Copy</a>
-<a href="/blog/category/?cat=quick-5-minute-reads" style="background:#FFFFFF;border-radius:999px;padding:10px 16px;font:600 13px/1 var(--font-body);color:#3A1C2A;text-decoration:none">Quick 5 Minute Reads</a>
-<a href="/blog/category/?cat=blog-growth-strategies" style="background:#FFFFFF;border-radius:999px;padding:10px 16px;font:600 13px/1 var(--font-body);color:#3A1C2A;text-decoration:none">Blog Growth Strategies</a>
-<a href="/blog/category/?cat=showit-website" style="background:#FFFFFF;border-radius:999px;padding:10px 16px;font:600 13px/1 var(--font-body);color:#3A1C2A;text-decoration:none">Showit Website</a>
 </div>
 </div>
 </section>
@@ -190,16 +182,19 @@
     .then(function (r) { return r.json(); })
     .then(function (cats) {
       cats = cats.filter(function (c) { return c.count > 0; });
-      // rebuild the pill cloud from the live list, biggest first
+      // the main topics shown as pills; smaller categories still work by link
+      var MAIN = ['blogging', 'blogging-productivity', 'podcast', 'make-money-blogging', 'create-blog-content', 'how-to'];
       var cloud = document.querySelector('[data-cat-cloud]');
       if (cloud) {
         cloud.innerHTML = '';
-        cats.slice().sort(function (a, b) { return b.count - a.count; }).forEach(function (c) {
+        MAIN.forEach(function (ms) {
+          var c = cats.filter(function (x) { return x.slug === ms; })[0];
+          if (!c) return;
           var a = document.createElement('a');
           a.href = '/blog/category/?cat=' + c.slug;
           var on = c.slug === slug;
           a.style.cssText = 'border-radius:999px;padding:10px 16px;font:600 13px/1 var(--font-body);text-decoration:none;background:' + (on ? '#3A1C2A' : '#FFFFFF') + ';color:' + (on ? '#FBF5EE' : '#3A1C2A');
-          a.textContent = decode(c.name) + ' (' + c.count + ')';
+          a.textContent = decode(c.name);
           cloud.appendChild(a);
         });
       }
