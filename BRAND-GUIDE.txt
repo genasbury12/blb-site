@@ -1,0 +1,232 @@
+=====================================================================
+BOSS LADY BLOGGERS - BRAND DESIGN GUIDELINES
+Version 2.0 - November 13, 2026 (The BOSS Business System era)
+=====================================================================
+HOW TO USE THIS FILE: paste it into any Claude project (or hand it
+to any designer) and they have everything: logos, colors, fonts,
+voice, components, rules, and asset URLs. This file is the single
+source of truth. If something here conflicts with older docs, this
+file wins.
+
+=====================================================================
+1. THE BRAND IN ONE BREATH
+=====================================================================
+Boss Lady Bloggers (BLB) is Gen's blog coaching + business education
+brand for women. Founded 2017. Positioning line:
+  "Blog coaching for women who want to make money, not just publish
+   content."
+Tagline (script, keep lowercase): beautiful blogs, built to sell
+Footer line: "Blog coaching, business strategy, digital products,
+and smarter systems for women who want to build businesses that sell."
+Core idea said everywhere: "Your blog is not your business. It's how
+people find your business." / "Build the business. Let your blog
+market it."
+Flagship offer: The BOSS Business System (three tiers: Blueprint,
+Accelerator, Elite). Supporting offers: The Productive Blogger
+Method, The Project Club, The Blogging Ladies membership, 1:1 blog
+coaching by the call.
+
+=====================================================================
+2. LOGO FILES (JPG, ready to use)
+=====================================================================
+Repo folder /brand, served from:
+https://raw.githubusercontent.com/genasbury12/blb-site/claude/redesign-boss-lady-bloggers-r0kbhz/brand/<file>
+
+  blb-logo-primary-cream.jpg   horizontal wordmark on cream (2400x800)
+  blb-logo-primary-ink.jpg     horizontal wordmark on ink
+  blb-logo-stacked-cream.jpg   stacked wordmark + script tagline (1800x1400)
+  blb-logo-stacked-ink.jpg     same on ink
+  blb-logo-submark-cream.jpg   round "blb" script badge, est. 2017 (1200x1200)
+  blb-logo-submark-ink.jpg     same on ink
+
+LOGO RULES
+  - The wordmark is typographic: Fraunces 500 at high optical size,
+    the word "Lady" ALWAYS italic and ALWAYS Boss Pink (cream
+    background) or Rose (ink background). Never all one color.
+  - Clear space: at least the height of the letter B on all sides.
+  - Never stretch, outline, shadow, or recolor outside the palette.
+  - On photos: use the ink version over light areas inside a cream
+    rounded card, never raw over a busy photo.
+  - JPGs have baked backgrounds (cream #FBF6EE or ink #2E1F27). Match
+    the canvas you place them on, or ask for PNG/SVG versions.
+
+=====================================================================
+3. COLOR SYSTEM (exact tokens)
+=====================================================================
+  Paper cream    #FBF6EE  default page background
+  Warm tint      #F4EBDE  alternate section background
+  Ink plum       #2E1F27  dark sections, body headlines, footer
+  Boss pink      #A93F63  brand accent: italic words, links, text accents
+  Deep plum      #7C2B48  hover states, small caps labels on light
+  HOT PINK GRADIENT (buttons/CTAs ONLY):
+      linear-gradient(120deg, #D8427D, #B42E60)
+      shadow: 0 18px 38px -12px rgba(216,66,125,.55)
+  Gold           #BC8A47  script accents, sparkles, stickers, dashed rules
+  Blush          #F0DCE2  soft cards, highlight-marker underlines
+  Rose           #E8A9C0  pink accents ON DARK backgrounds
+  Muted mauve    #6E5C63  body text on light
+  Cream text     #D8CBC3  body text on dark
+
+RULES
+  - Buttons are ALWAYS the hot pink gradient (bright pink). The deep
+    #A93F63 is for text accents, never buttons (client decision,
+    Oct 27 2026 audit).
+  - One pink button per zone. If everything is pink, nothing is.
+  - Text on cream/tint/blush = Ink. Text on ink = Cream text, with
+    bold words in white and accents in Rose.
+  - Gold is for accents and script only, never body text.
+
+=====================================================================
+4. TYPOGRAPHY
+=====================================================================
+Google Fonts embed:
+https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Karla:wght@400;500;600;700&family=Caveat:wght@500;600;700&display=swap
+
+  DISPLAY: Fraunces, weight 500, line-height 1.12, letter-spacing
+    -.01em. Headlines mix roman + italic; italic words take Boss
+    Pink (light bg) or Rose (dark bg).
+    H1 clamp(2.3rem, 5.4vw, 4rem). Section H2 clamp(2.1rem,4.6vw,3.4rem).
+  BODY: Karla 400, 1.03rem, line-height 1.7. Bold = Karla 700.
+    Key sentences are BOLDED for skimmers; on dark bg bold = white.
+  SCRIPT: Caveat (600), replacing Ephesis as of Nov 14 2026 - the
+  client wants the site to match the handwritten marker font on her
+  IG/Pinterest cards. Gold or pink (rose on dark), 22-46px. For
+    asides and taglines only. Max one script line per section. Never
+    body text.
+  LABELS (eyebrows): Karla 700, .72rem, letterspacing .26em,
+    uppercase, deep plum (rose on dark), with a gold sparkle (2726)
+    before. NO numbered "01/02" circles (client removed them).
+
+=====================================================================
+5. SIGNATURE DESIGN ELEMENTS (what makes a page look like BLB)
+=====================================================================
+  - Alternating section canvases: paper / tint / ink / blush, so no
+    two neighboring sections match.
+  - Giant italic outline watermark words behind sections (1.5px
+    stroke, pink at ~13% on light, cream at ~10% on dark).
+  - Scrolling marquee bands (ink, gold, blush) with heart separators.
+  - Spinning circular-text badges around a gradient heart/arrow.
+  - Sticky-note/polaroid photo cards with slight rotations and
+    script captions; gold "sticker" pills rotated a few degrees.
+  - Receipt-style proof cards with perforated edges.
+  - Hand-drawn feel: gold underline SVG squiggles, sparkles (2726),
+    dashed gold borders for "free" things.
+  - Arch-top (230px radius) photo frames for portraits.
+  - Checklists with gradient check circles; crossed-out old-way vs
+    bold new-way comparison rows.
+  - Script numerals (Caveat) for CONTENT lists only.
+  - .hl HIGHLIGHT PILL: rounded pink highlighter behind 1-3 key
+    words in a headline (gradient #F3BFD3 -> rose, radius .35em,
+    box-decoration-break:clone). Signature IG-card device - use on
+    ONE phrase per page hero, sparingly elsewhere.
+  - .hand HANDWRITTEN NOTE: Caveat 600, pink (rose on dark), small
+    rotated aside ("start here, babe", "steal these!"). 1-4 per
+    page, always lowercase, always warm.
+  - Ephesis stays ONLY in the rendered logo JPGs (do not re-render);
+    all live text script is Caveat now.
+MOTION (all guarded by prefers-reduced-motion):
+  - Scroll-in reveals (fade/rise, stagger), split-word hero
+    headlines, count-up stats, tilt cards, magnetic buttons, scroll
+    progress bar, confetti on thank-you pages.
+  - Reveal system rule: never leave clip-path:inset(0) on resting
+    elements; overflow:hidden text wrappers need descender padding.
+
+=====================================================================
+6. VOICE + COPY RULES (current era)
+=====================================================================
+  - Best-friend-who-did-it voice. Short sentences. Plain words.
+    Truth even when it stings, then what to do about it.
+  - Current site copy is warmer-professional: "Babe"/"girl" RARELY
+    now (the BOSS-era copy uses none). Match the copy doc given.
+  - No em dashes. No "not X, it's Y" constructions. No lists of
+    three for rhythm. Max one censored swear per page (h*ll, d*mn)
+    and only if the source copy has it.
+  - Bold the sentences a skimmer must not miss.
+  - Compliance lines stay verbatim: "Business results vary. No
+    earnings are guaranteed." / "My results are my own..."
+
+=====================================================================
+7. CTA + PRICING RULES (client decision, Nov 13 2026)
+=====================================================================
+  - THE primary CTA sitewide is "Book a Free Call" -> /book-a-call
+    (the free Blog Monetization Fast Track call, Calendly embedded).
+  - NO offer prices anywhere on the public site. Pricing is
+    discussed on the free call. Tier/package cards list contents,
+    never amounts. "Payment plans available - pricing on your free
+    call" is the approved phrasing.
+  - Secondary CTAs allowed: "See The BOSS Business System"
+    (/boss-business-system), free training signup
+    (/free-blogging-masterclass, Flodesk form).
+  - Exception: income PROOF receipts (screenshots) stay. They are
+    evidence, not price lists.
+  - PALETTE RULE (client, Nov 14 2026): the site stays WITHIN the
+    blush / mauve / pink / cream / white / near-black family. NO
+    orange, no yellow, no lilac/purple-blue - she rejected orange
+    explicitly ("NOT ORANGE"). Extra accent tokens --sun/--sunl/
+    --lav/--lavl/--lavd/--tang/--tangl exist in v5.py but are
+    ALIASED to family tones (rose, white, dusty mauve #C98DA6,
+    light mauve #EAD5DD, deep mauve #8A3B5C, raspberry). Never
+    point them back at orange/yellow/violet.
+
+  - Exception (client, Nov 13 2026): /blog-coaching (The Blog
+    Profit Intensive) is the ONE page that shows its price:
+    $897 pay in full or 3 x $333, in the enrollment card. Its
+    CTAs still go to /book-a-call.
+
+=====================================================================
+8. PROOF RULES (binding, from the Proof Bank)
+=====================================================================
+  - Never invent testimonials, numbers, or results. Empty beats fake.
+  - Income receipts are SAMPLES, never totals/monthly/yearly claims.
+    $34,481 may only be framed "paid through my invoices".
+  - Blurred proof files only (repo /proof). Never originals.
+  - Client email quotes may run verbatim but WITHOUT names until the
+    client approves hers. Zoom-call lines are paraphrase: tell as
+    stories only, never quotation marks.
+  - Approved proof assets (repo /proof via raw.githubusercontent,
+    same branch): proof-first-stripe-payouts-2020-2021.jpg ($18.52
+    first payout), proof-4000-dec-2023.jpg, proof-2499-sep/oct-2023,
+    proof-1500-apr-2023.jpg, proof-333-monthly-payments.jpg,
+    proof-monthly-client-payments-2024.jpg, proof-81-invoices-paid.jpg
+    and others listed in the Proof Bank doc.
+
+=====================================================================
+9. PHOTO LIBRARY
+=====================================================================
+56 brand photos, served from:
+https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_0NN.jpeg  (NN = 00..55)
+Known keys: 030 + 047 Gen portraits (hero/coach), 021 off-the-clock,
+013 Gen + son, 006 Kings Island, 019 podcast art, 022 course
+library, 026 client site build, 002/009/014 behind-the-scenes,
+033-041 blog graphics. Use in arch frames or polaroid cards with
+script captions.
+
+=====================================================================
+10. SITE MAP + TECH (for any Claude touching the website)
+=====================================================================
+Nav: Home / Start Here / BOSS Business System / Blog Coaching /
+Resources (/freebies) / About + [Book a Free Call] button.
+Key slugs: /boss-business-system, /blog-coaching, /blogging-ladies,
+/freebies, /free-blogging-masterclass, /training-thank-you,
+/book-a-call, /about, /podcast, /blog, /portfolio, /contact, /404.
+Retired: /blog-to-paid and /blog-accelerator now redirect to
+/boss-business-system.
+Tech: Showit site; every page is ONE self-contained HTML file pasted
+into a full-page Embed Code block (desktop AND mobile canvases).
+Blog runs on WordPress via Showit; THE TWO BLOG TEMPLATES ALLOW NO
+JAVASCRIPT (zero-JS embeds + Custom CSS only). Forms: Flodesk
+(form 6a712a913c526be4f8fd1754 = course library) + FormSubmit for
+contact. Booking: calendly.com/bossladybloggers/15min.
+Master build system + full changelog: CLIENT-SITE-PLAYBOOK.txt in
+the repo genasbury12/blb-site (branch
+claude/redesign-boss-lady-bloggers-r0kbhz).
+
+=====================================================================
+11. QUICK DO / DON'T
+=====================================================================
+DO: alternate canvases - bold the money sentences - gold script
+asides - real receipts - arch photos - bright pink gradient buttons -
+"Book a Free Call" as the ask - reduced-motion fallbacks.
+DON'T: list offer prices - fake proof or countdowns - numbered
+section kickers - em dashes - more than one script line per section -
+JavaScript on blog templates - Lady in the wordmark un-italicized.

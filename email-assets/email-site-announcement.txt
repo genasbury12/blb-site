@@ -1,0 +1,99 @@
+==================================================
+THE "NEW SITE IS LIVE" ANNOUNCEMENT EMAIL
+==================================================
+
+SUBJECT LINE (pick one, A is my favorite):
+A) I did a thing. A whole new gorgeous thing.
+B) The glow up is HERE, babe
+C) New site. Who is she??
+
+PREVIEW TEXT (the little line after the subject):
+Come see what a blog built to sell actually looks like.
+
+
+==================================================
+HOW TO BUILD IT IN FLODESK (block by block)
+==================================================
+1. Image block  ->  blb-header-blush.png (the "hey babe" header)
+2. Text block   ->  copy section 1 below
+3. Image block  ->  blb-site-tour.gif (link it to bossladybloggers.com)
+4. Text block   ->  copy section 2 below
+5. Image block  ->  blb-cta-call.png is for calls, so instead use
+                    Flodesk's button block: "TAKE ME TO THE NEW SITE"
+                    in your Boss pink #A93F63, linked to
+                    https://www.bossladybloggers.com
+6. Image block  ->  blb-div-squiggle.png (the gold squiggle)
+7. Text block   ->  copy section 3 (the PS)
+8. Image block  ->  blb-signature.png (xo, Genasys)
+9. Image block  ->  blb-footer-main.png
+
+Set the email background to Paper cream #FBF6EE so the
+images blend right in.
+
+
+==================================================
+COPY SECTION 1 (above the GIF)
+==================================================
+
+Okay so. Remember how I build gorgeous, business-first
+websites for my clients?
+
+I finally did it for ME.
+
+The entire Boss Lady Bloggers site got torn down to the
+studs and rebuilt. New words. New design. New everything.
+It is, and I say this with zero humility, the prettiest
+thing I have ever made.
+
+Here's a little tour:
+
+
+==================================================
+COPY SECTION 2 (under the GIF, above the button)
+==================================================
+
+And it's not just a pretty face. The new site is stacked:
+
+** Six FREE blogging courses. An entire course library,
+zero dollars, one signup. Starting your blog, finding
+what to sell, getting traffic, all of it.
+
+** The Blog Accelerator. My done-with-you program where
+we build your offer, your copy, and your custom site in
+21 days. Only 3 spots at a time, and the new program page
+finally does it justice.
+
+** A new About page you should honestly go play with.
+There's a checklist. It talks back. I'm not explaining
+further.
+
+** The podcast, blog coaching, all of it redesigned to
+match.
+
+But mostly? I want you to see it. Because this site IS
+the pitch. This is exactly the kind of blog I build, and
+now you can click around inside one.
+
+[ BUTTON: TAKE ME TO THE NEW SITE ]
+
+
+==================================================
+COPY SECTION 3 (the PS, after the squiggle)
+==================================================
+
+PS. If you look at it and think "okay but I want MY blog
+to feel like this"... babe, that is literally what I do.
+The Blog Accelerator takes you from idea to a custom
+site built to sell in 21 days, and there are payment
+plans. Go peek at the program page while you're there,
+or just hit reply and tell me what you're building. I
+read everything.
+
+
+==================================================
+VOICE NOTES (so it stays sounding like you if you edit)
+==================================================
+- Short punchy lines. One idea per paragraph.
+- "babe" once or twice, never more.
+- Confidence with a wink, never salesy-slick.
+- The PS is the soft sell. The body is pure excitement.

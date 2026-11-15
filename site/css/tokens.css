@@ -1,0 +1,28 @@
+/* Boss Lady Bloggers brand tokens. Use these variables everywhere. */
+:root{
+  --plum:#3A1C2A;      /* headlines, dark sections, footer */
+  --berry:#A23E66;     /* buttons, accents, the logo arch */
+  --rose:#E9B9CA;      /* highlights on plum, photo frames */
+  --blush:#F6E1E8;     /* section backgrounds, soft cards */
+  --cream:#FBF5EE;     /* main background */
+  --pink-pop:#F6C9D8;  /* italic words on berry heroes (display size only) */
+  --lilac:#EBDDF2;     /* rare accent */
+  --cocoa:#4A2F3B;     /* body text */
+  --mauve:#6E4B5B;     /* captions, muted labels */
+  --white-soft:#FFFCFA;
+  --line:#F0DCE3;
+
+  --font-display:'Instrument Serif',Georgia,serif;
+  --font-body:'Inter',Arial,sans-serif;
+  --font-label:'DM Mono','Courier New',monospace;
+  --font-script:'Caveat','Brush Script MT',cursive;
+
+  --radius-card:24px; --radius-lg:32px; --radius-pill:999px;
+  --max:1180px;
+  --shadow-soft:0 30px 60px rgba(58,28,42,.18);
+}
+/* Google Fonts link (put in <head> of every page):
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=Caveat:wght@600;700&display=swap">
+*/

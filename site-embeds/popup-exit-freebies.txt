@@ -1,0 +1,127 @@
+<!--
+============================================================
+BLB EXIT POPUP - "TAKE THE FREE COURSES WITH YOU"
+============================================================
+WHERE: paste into ONE Embed Code block on any regular Showit
+page (the block can be tiny and tucked anywhere). Works fine
+on the SAME pages as the redesign popup - this one only fires
+when someone is about to LEAVE, and it will never appear on
+top of the redesign popup.
+
+DO NOT put this on the blog templates (they block JavaScript).
+
+HOW IT BEHAVES:
+- desktop: fires when their mouse shoots up toward the close
+  button / address bar
+- phone: fires when they scroll a good way down, then flick
+  quickly back up (the phone version of "I'm leaving")
+- never fires in the first 6 seconds of a visit
+- close it and it stays gone for 7 days
+- click the gold button and it never shows again
+- ESC, the X, or the dark background all close it
+============================================================
+-->
+
+<div id="blbExit" role="dialog" aria-modal="true" aria-label="Free blogging courses offer" style="display:none">
+<style>
+#blbExit{position:fixed;inset:0;z-index:99998;font-family:'Karla',sans-serif;color:#2E1F27;align-items:center;justify-content:center;padding:20px}
+#blbExit *{margin:0;padding:0;box-sizing:border-box}
+#blbExit .ov{position:absolute;inset:0;background:rgba(46,31,39,.62);backdrop-filter:blur(3px);cursor:pointer}
+#blbExit .card{position:relative;background:#2E1F27;color:#FBF6EE;border:1px solid rgba(188,138,71,.5);border-radius:26px;max-width:500px;width:100%;padding:42px 36px 34px;text-align:center;box-shadow:0 40px 90px -30px rgba(0,0,0,.8);animation:blbExIn .45s cubic-bezier(.2,1.2,.3,1);overflow:hidden}
+@keyframes blbExIn{from{opacity:0;transform:translateY(26px) scale(.96)}to{opacity:1;transform:none}}
+#blbExit .card::before{content:'';position:absolute;top:-70px;right:-70px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(169,63,99,.45),transparent 70%)}
+#blbExit .card::after{content:'';position:absolute;bottom:-80px;left:-60px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(188,138,71,.35),transparent 70%)}
+#blbExit .x{position:absolute;top:14px;right:14px;z-index:2;width:38px;height:38px;border:1px solid rgba(251,246,238,.35);border-radius:50%;background:transparent;cursor:pointer;font-size:17px;line-height:1;color:#FBF6EE;transition:all .2s}
+#blbExit .x:hover{background:#FBF6EE;color:#2E1F27}
+
+/* mini course tiles */
+#blbExit .tiles{position:relative;z-index:1;display:flex;justify-content:center;gap:8px;margin-bottom:20px}
+#blbExit .tile{width:64px;border-radius:10px;background:#3D2B34;border:1px solid rgba(251,246,238,.18);padding:9px 7px 8px;transform:rotate(-3deg)}
+#blbExit .tile:nth-child(2){transform:rotate(2deg) translateY(-5px);background:#7C2B48;border-color:rgba(240,220,226,.4)}
+#blbExit .tile:nth-child(3){transform:rotate(-1deg)}
+#blbExit .tile .n{font-family:'Fraunces',Georgia,serif;font-size:19px;color:#BC8A47;line-height:1}
+#blbExit .tile:nth-child(2) .n{color:#F0DCE2}
+#blbExit .tile .l{height:4px;border-radius:3px;background:rgba(251,246,238,.28);margin-top:6px}
+#blbExit .tile .l+.l{width:70%}
+#blbExit .free{position:absolute;z-index:2;top:104px;right:calc(50% - 130px);background:#BC8A47;color:#2E1F27;font-weight:700;font-size:10px;letter-spacing:.16em;text-transform:uppercase;padding:6px 12px;border-radius:40px;transform:rotate(8deg)}
+
+#blbExit .script{position:relative;z-index:1;font-family:'Ephesis',cursive;font-size:clamp(26px,3.6vw,32px);color:#BC8A47;margin-bottom:2px}
+#blbExit h2{position:relative;z-index:1;font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:clamp(24px,4.2vw,32px);line-height:1.14;margin-bottom:12px;color:#FBF6EE}
+#blbExit h2 em{font-style:italic;color:#E8A9C0}
+#blbExit p{position:relative;z-index:1;font-size:15px;line-height:1.65;color:#D8CBC3;max-width:380px;margin:0 auto 22px}
+#blbExit p b{color:#FBF6EE}
+#blbExit .btn{position:relative;z-index:1;display:inline-block;background:#BC8A47;color:#2E1F27;border:1px solid #BC8A47;font-weight:700;font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;padding:18px 38px;border-radius:60px;text-decoration:none;transition:all .2s;box-shadow:0 18px 34px -14px rgba(0,0,0,.6)}
+#blbExit .btn:hover{background:#FBF6EE;border-color:#FBF6EE;transform:translateY(-3px)}
+#blbExit .nah{position:relative;z-index:1;display:block;margin:14px auto 0;background:none;border:none;cursor:pointer;font-family:'Karla',sans-serif;font-size:12px;color:#D8CBC3;text-decoration:underline;text-underline-offset:3px}
+#blbExit .nah:hover{color:#E8A9C0}
+#blbExit .micro{position:relative;z-index:1;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:#BC8A47;margin-top:16px}
+@media (max-width:480px){#blbExit .card{padding:36px 22px 28px}#blbExit .free{right:12px}}
+@media (prefers-reduced-motion:reduce){#blbExit .card{animation:none}}
+</style>
+
+<div class="ov" data-close aria-hidden="true"></div>
+<div class="card">
+  <button class="x" data-close aria-label="Close">&#10005;</button>
+  <div class="tiles" aria-hidden="true">
+    <div class="tile"><div class="n">01</div><div class="l"></div><div class="l"></div></div>
+    <div class="tile"><div class="n">02</div><div class="l"></div><div class="l"></div></div>
+    <div class="tile"><div class="n">03</div><div class="l"></div><div class="l"></div></div>
+  </div>
+  <span class="free">100% free</span>
+  <div class="script">wait, babe!</div>
+  <h2>Don't leave <em>empty-handed.</em></h2>
+  <p>Take the <b>six free blogging courses</b> with you: starting your blog, finding what to sell, getting traffic, making your first sale. One signup, the whole library.</p>
+  <a class="btn" href="/freebies">Grab the free courses &rarr;</a>
+  <button class="nah" data-close>no thanks, I like leaving empty-handed</button>
+  <div class="micro">Six courses &#10022; zero dollars &#10022; unsubscribe whenever</div>
+</div>
+
+<script>
+(function(){
+  var pop=document.getElementById('blbExit');
+  if(!pop)return;
+  var KEY='blbExitSeen';
+  try{
+    var seen=localStorage.getItem(KEY);
+    if(seen==='grabbed')return;
+    if(seen&&Date.now()-parseInt(seen,10)<7*24*60*60*1000)return;
+  }catch(e){}
+  var shown=false,armed=false;
+  setTimeout(function(){armed=true},6000);
+  function redesignOpen(){
+    var rd=document.getElementById('blbPop');
+    return rd&&getComputedStyle(rd).display!=='none';
+  }
+  function show(){
+    if(shown||!armed||redesignOpen())return;
+    shown=true;
+    pop.style.display='flex';
+  }
+  function close(val){
+    pop.style.display='none';
+    try{localStorage.setItem(KEY,val||String(Date.now()))}catch(e){}
+  }
+  /* desktop: mouse bolts for the top of the window */
+  document.addEventListener('mouseout',function(e){
+    if(!e.relatedTarget&&e.clientY<=12)show();
+  });
+  /* phone: scrolled well in, then a fast flick back up */
+  var maxY=0,upRun=0,lastY=window.pageYOffset;
+  document.addEventListener('scroll',function(){
+    var y=window.pageYOffset;
+    if(y>maxY)maxY=y;
+    if(y<lastY)upRun+=lastY-y;else upRun=0;
+    lastY=y;
+    if(maxY>700&&upRun>450)show();
+  },{passive:true});
+  pop.querySelectorAll('[data-close]').forEach(function(el){
+    el.addEventListener('click',function(){close()});
+  });
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'&&pop.style.display==='flex')close();
+  });
+  var btn=pop.querySelector('.btn');
+  if(btn)btn.addEventListener('click',function(){close('grabbed')});
+})();
+</script>
+</div>

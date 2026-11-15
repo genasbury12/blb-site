@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200" role="img" aria-label="Boss Lady Bloggers circle badge">
+  <defs><path id="ring" d="M100,100 m-72,0 a72,72 0 1,1 144,0 a72,72 0 1,1 -144,0"/></defs>
+  <circle cx="100" cy="100" r="100" fill="#3A1C2A"/>
+  <text font-family="'DM Mono','Courier New',monospace" font-size="15" letter-spacing="4.2" fill="#E9B9CA"><textPath href="#ring">BOSS LADY BLOGGERS · BLOGS THAT SELL · </textPath></text>
+  <text x="100" y="112" text-anchor="middle" font-family="'Instrument Serif',Georgia,serif" font-size="40" fill="#FBF5EE">BLB</text>
+</svg>

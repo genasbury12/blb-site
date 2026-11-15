@@ -1,0 +1,1310 @@
+=====================================================================
+THE CLIENT WEBSITE PLAYBOOK
+How the Boss Lady Bloggers site was built, written as a repeatable
+process for coding new client websites on Showit.
+
+THIS IS A LIVING DOCUMENT. It gets updated every time we fix
+something new on this project. Newest changes are logged at the
+bottom in the CHANGELOG.
+=====================================================================
+
+THE BIG IDEA
+Every page is one self-contained HTML file (styles, scripts, and
+content all in a single document) that gets pasted into a full-page
+Embed Code block on a Showit page. Showit handles hosting, domains,
+and the page list. The embed handles 100% of the design. This gives
+you hand-coded, award-style custom design on a platform the client
+already knows how to log into.
+
+THE PHASES
+  0. Collect everything from the client
+  1. Define the brand system
+  2. Set up the workspace (repo + build pipeline)
+  3. Build the core pages
+  4. The interactive layer (what makes it feel expensive)
+  5. Forms and integrations
+  6. Course/membership backends (if any)
+  7. Verify every page like a robot
+  8. Deliver and install in Showit
+  9. The Showit blog (special case, different rules)
+ 10. Bonus assets (email kit, GIFs, launch email)
+ 11. Lessons learned (read this twice)
+
+
+=====================================================================
+PHASE 0 - COLLECT EVERYTHING FROM THE CLIENT
+=====================================================================
+Before writing any code, gather:
+
+[ ] Complete website copy, page by page (a single doc is ideal).
+    Decisions to extract from it: offers, prices, payment plans,
+    guarantees, timelines, capacity limits ("3 clients at a time").
+[ ] Brand photos. REQUIREMENTS to give the client up front:
+      - JPG files only (no HEIC, no PNG photo exports)
+      - each photo file UNDER 30 MB
+      - uploaded to a shared Google Drive folder
+    A folder of 15-40 photos is plenty. Screenshots of past work
+    too (portfolio). From there, move them somewhere with stable
+    direct URLs for the site to serve; we used a GitHub repo
+    branch and raw.githubusercontent.com URLs.
+[ ] Links: booking (Calendly), payment (Stripe payment links),
+    social, podcast platforms, YouTube testimonial videos (IDs),
+    email platform embed code (Flodesk form snippet).
+[ ] The page list. Ours: home, about, program/offer page, coaching,
+    start here, book a call, contact, freebies + thank you, course
+    library + course pages, blog, podcast, legal pages.
+[ ] Voice rules. Ours: warm, punchy, "babe" sparingly, and NO EM
+    DASHES anywhere in site copy.
+[ ] Every business fact you'll need: email address for forms,
+    course passwords, program price and payment plan, call length.
+
+If the client is missing something (real course titles, podcast
+episode links), build with clearly labeled placeholders and keep a
+running "waiting on client" list.
+
+
+=====================================================================
+PHASE 1 - DEFINE THE BRAND SYSTEM
+=====================================================================
+Lock these before page one, and never freelance new values later:
+
+COLORS (BLB's, swap per client):
+  --paper  #FBF6EE   page background, never pure white
+  --tint   #F4EBDE   alternate section background
+  --ink    #2E1F27   dark sections + body text, never pure black
+  --pink   #A93F63   the action color: buttons, links, accents
+  --purple #7C2B48   hover states, small caps labels
+  --gold   #BC8A47   script accents, dividers, flourishes
+  --blush  #F0DCE2   soft highlight backgrounds, pills
+  --muted  #6E5C63   secondary text
+
+FONTS (3 roles):
+  Display serif (Fraunces 500 + italic) for headlines
+  Workhorse sans (Karla 400/700) for body and caps labels
+  Script (Ephesis) for handwritten accent lines
+
+SIGNATURE ELEMENTS (reuse on every site, restyle per brand):
+  - Eyebrow labels: bold caps, letterspaced, small
+  - Script "hand notes" under headings
+  - Pill-shaped buttons (radius 60px), pink with white text
+  - Giant outlined display words behind sections
+    (color transparent + -webkit-text-stroke at low opacity)
+  - Rounded cards (radius 20-26px) with soft dramatic shadows
+  - Arched photo frames (border-radius 46vw 46vw 24px 24px)
+  - Spinning circular text badges (SVG textPath + CSS rotate)
+  - Announcement banner marquee at the very top of every page
+
+
+=====================================================================
+PHASE 2 - SET UP THE WORKSPACE
+=====================================================================
+1. One git repo per client. All page HTML files at the root.
+   Images on a branch or folder served via raw.githubusercontent.
+2. A Python "builder" script that holds the shared skeleton:
+   - BASE_CSS: tokens, nav, footer, buttons, cards, section styles
+   - NAV / FOOTER / LOADER constants (canonical, edited ONCE)
+   - STD_JS: loader dismiss, reveal-on-scroll observer, count-ups,
+     typewriter, mobile menu, back-to-top, year stamp
+   - page(fname, title, desc, content, extra_css, extra_js):
+     wraps content in the full HTML document and writes the file
+   - helpers: vidband(video keys), faq_schema(), faq_html()
+3. Every page is then a small script: content HTML + page-specific
+   CSS/JS, calling page(). Rebuilding a page is rerunning a script.
+4. Deliverables are .txt copies of each .html (clients can open txt
+   and copy-paste; some computers fight .html attachments).
+
+CRITICAL RULE LEARNED THE HARD WAY: if you later patch pages
+directly (adding banners, new marquee styles, new JS), PORT THE
+PATCH BACK INTO THE BUILDER. Freshly generated pages silently miss
+every patch that only lives in the old files. This bit us twice:
+regenerated pages lost the announcement banner, the marquee styles,
+the stats band styles, and the reveal script coverage. Before
+delivering any rebuilt page, diff its class names against a known
+good page and confirm every used class has CSS and every behavior
+has JS.
+
+
+=====================================================================
+PHASE 3 - BUILD THE CORE PAGES
+=====================================================================
+Order that worked: homepage first (it defines the design system in
+practice), then the offer page, then everything else.
+
+EVERY page gets, top to bottom:
+  1. Announcement banner marquee (clickable, dismissible)
+  2. Nav: logo, home icon, links, pill CTA button; fancy mobile
+     menu (spinning badge, numbered links, photo, big pink CTA)
+  3. Hero DIFFERENT from every other page's hero
+  4. Alternating sections, each visually distinct (see rule below)
+  5. Testimonial video band (YouTube embeds, youtube-nocookie.com)
+  6. FAQ accordion + JSON-LD schema on money pages
+  7. Final CTA band (dark, script accent, shimmer headline)
+  8. Reverse-direction outline marquee
+  9. Footer: giant outline wordmark, 4 columns, podcast pills,
+     script sign-off, copyright
+
+THE NO-TWINS RULE (client said "Never do this again" and she was
+right): no two adjacent sections may share the same layout. Rotate
+through: text+image split, card grid, ink (dark) band, stats band,
+photo strip marquee, comparison table, timeline, checklist,
+centered prose with doodles. If two sections in a row are both
+"heading + paragraphs," redesign one. The page must be skimmable
+by someone scrolling fast on a phone.
+
+CONTENT DENSITY: err heavily toward MORE collateral: doodle arrows,
+underline squiggles (SVG), floating stickers, polaroids, chips,
+marquees, big outlined words. Restraint reads as unfinished to
+this kind of client. "Add like 70 interactive elements" was real
+feedback and correct for the brand.
+
+
+=====================================================================
+PHASE 4 - THE INTERACTIVE LAYER
+=====================================================================
+The standard kit (all in STD_JS + BASE_CSS, all guarded by
+prefers-reduced-motion):
+  - Page loader (branded mini illustration) that self-dismisses,
+    PLUS a pure-CSS animation fallback that kills it after ~3s
+    even if every script dies
+  - Reveal-on-scroll: an IntersectionObserver ADDS .rv to
+    off-screen elements then adds .in when they enter. Two rules:
+    (a) the hide rule must be WEAKER than the .in reveal rule,
+    (b) if you hand-write rv classes in markup, the observer must
+    also select .rv, and in-viewport elements need .rv REMOVED.
+  - Sliding marquees (duplicate the content 2x, translateX(-50%))
+  - Typewriter headline words ([data-words] JSON attribute)
+  - Count-up numbers ([data-count])
+  - Sticky nav, back-to-top, magnetic buttons, click ripples,
+    sparkle cursor trail, card tilt
+
+PAGE-SPECIFIC SHOWPIECES (one or two per page, sitewide they add
+up): tappable checklist with live meter and a reaction note,
+scroll-drawn timeline (scaleY a gradient line by scroll progress),
+3D flip cards, old-way/new-way toggle switch, clickable polaroid
+cluster, giant subtle background line-art (podcast microphone),
+progress bars, "coming soon" pages with skip-the-line offer cards.
+
+
+=====================================================================
+PHASE 5 - FORMS AND INTEGRATIONS
+=====================================================================
+CONTACT FORMS: FormSubmit (formsubmit.co/EMAIL). POST with hidden
+fields _subject, _captcha=false, _template=table, and _next set to
+the page URL + "?sent=1" for the success note. WARNING: the first
+ever submission emails the owner an activation link they MUST
+click. mailto: links are NOT a contact form; they open the
+visitor's mail app and feel broken. Never ship mailto as a form.
+
+FLODESK INLINE FORMS: paste their div + loader snippet. The
+universal loader's function call REQUIRES the 6th argument 'fd'
+or you get "window.fd is not a function". Have the client set the
+form's success redirect to the thank-you page.
+  STYLING: Flodesk's default render is tiny. Since the form is
+  injected into YOUR page, override it: wrap the fd-form div in a
+  designed card (brand border, corner ribbon tag, headline +
+  script sub, sheen animation) and restyle the internals with
+  scoped !important rules. Target attribute patterns, not exact
+  class names: [class*="__container"] (zero its padding/margins,
+  this kills the mystery gap), [class*="__fields"] (force
+  display:grid, 1 column, 12px gap for stacked full-width
+  fields), inputs (16px+ font so iOS doesn't zoom, generous
+  padding, brand focus ring), [class*="__button"] and button
+  (full width, big, brand pill). Test with mock Flodesk markup
+  injected into the container if the real script can't load in
+  your test environment.
+
+PAYMENTS: link buttons straight to payment links (Cash App/Stripe).
+Put "how do payments work" in the FAQ + schema. Say "payment plans
+available" everywhere the price appears.
+
+BOOKING: Calendly links on every CTA. Confirm the event's real
+duration matches what the copy promises.
+
+SCHEMA: FAQPage JSON-LD on homepage, offer page, coaching page,
+booking page.
+
+
+=====================================================================
+PHASE 6 - COURSE / MEMBERSHIP BACKENDS
+=====================================================================
+Kajabi-style players as single-file pages:
+  - Password gate: a session key in localStorage after entering
+    the shared password (ours: BLOGBABE). Client-side only; it
+    keeps honest people honest, which is the right level for a
+    free library.
+  - Google Drive videos: iframe src /file/d/FILE_ID/preview
+  - YouTube videos: youtube-nocookie.com/embed/ID?rel=0
+  - Sidebar lesson list + main stage, progress checkboxes saved
+    to localStorage (bll_courseN_done), progress bar per module
+  - Workbooks: Google Doc links ending in /copy (forces the
+    visitor to duplicate the doc)
+  - eBook-style course: chapters in-page with interactive tools
+    (fill-in cards, generators, dashboards) that autosave every
+    [data-save] field to one localStorage key + print stylesheet
+  - Courses not ready yet: coming-soon page with animated progress
+    bar and a flashy "skip the line" offer card for the paid
+    program
+
+
+=====================================================================
+PHASE 7 - VERIFY EVERY PAGE LIKE A ROBOT
+=====================================================================
+Never ship a page you haven't rendered. The rig: Playwright +
+headless Chromium.
+
+PER PAGE CHECKLIST:
+[ ] Desktop full-page screenshot (emulate reduced motion for
+    stable captures) and actually LOOK at it top to bottom at
+    full size. Squinting at a thumbnail missed real breakage.
+[ ] Scroll pass first so lazy images and reveals fire.
+[ ] Mobile 390px: horizontal overflow must be 0px
+    (scrollWidth - clientWidth). Belt and braces: put
+    html,body{overflow-x:hidden} in the base CSS anyway.
+[ ] Zero console/page errors.
+[ ] CLICK the interactive things in the test browser: menu opens,
+    accordions toggle, tabs switch, checklists count, toggles
+    flip. "It renders" is not "it works."
+[ ] Test WITH JavaScript disabled: the full page must still be
+    readable and complete. Loader hidden, content visible.
+    (Playwright context: javaScriptEnabled false.)
+[ ] Classic CSS grid gotcha to watch for: a grid child with
+    margin:auto and no width collapses to 0 width. Give grid
+    media items width:100%. This one bit us three times.
+
+Fix, re-verify, THEN commit, push, and export the .txt copy.
+
+
+=====================================================================
+PHASE 8 - DELIVER AND INSTALL IN SHOWIT
+=====================================================================
+For each page: Showit page -> one full-page Embed Code block ->
+paste the whole HTML document -> publish.
+
+TEACH THE CLIENT THESE FOUR THINGS (saves endless panic):
+1. The embed block is a PICTURE FRAME. The code fills whatever
+   frame you draw. Full width frame on desktop AND separately on
+   the mobile canvas; Showit positions the two canvases
+   independently. A squished or off-canvas block on mobile = the
+   "missing" nav/menu/hero.
+2. The Showit EDITOR canvas never renders embeds or custom code.
+   Gray box in the editor is normal. Judge only the PUBLISHED
+   site (preview links can also lag).
+3. After every change: save, PUBLISH, then hard refresh
+   (Cmd+Shift+R). Old cached pages cause most "it's broken"
+   reports.
+4. Send screenshots WITH the URL bar visible when something looks
+   wrong. Screenshots let you diagnose remotely; browser zoom can
+   make pages look mysteriously tiny, so check for the zoom icon.
+
+Keep a running "waiting on client" list (activation email click,
+real course titles, category links, membership checkout URL) and
+a "when branches merge, repoint all raw.githubusercontent image
+URLs" note if images live on a branch.
+
+
+=====================================================================
+PHASE 9 - THE SHOWIT BLOG (SPECIAL CASE, DIFFERENT RULES)
+=====================================================================
+Showit blogs are WordPress under the hood with Showit-designed
+templates. Embeds and CSS behave DIFFERENTLY there. Rules:
+
+1. The blog index and single post pages are built from Showit
+   BLOG TEMPLATES with placeholder elements (title, content,
+   featured image, post list). You cannot paste one big page
+   embed and call it done.
+2. Brand the placeholders via the CUSTOM CSS box + CSS classes:
+   client assigns class names to placeholders (Advanced -> CSS
+   Classes: blb-title, blb-meta, blb-featured, blb-post,
+   blb-grid, blb-cats, blb-card, blb-cardtitle, blb-cardimg,
+   blb-readmore...) and your stylesheet targets those classes
+   with !important throughout (Showit inlines its own styles).
+3. The Custom CSS box accepts PURE CSS ONLY. No HTML, no <style>
+   tags, and its linter rejects @import. Load fonts with a tiny
+   separate embed block containing <link> tags instead.
+4. Custom CSS shows only on preview/published pages, never in the
+   editor. And nothing changes until classes are assigned. Put
+   both facts in comments at the top of the CSS file.
+5. Ship a PROOF BADGE in the CSS while installing: a body::after
+   fixed pill saying "CSS IS LOADED". It instantly separates
+   "stylesheet not reaching the page" from "classes not assigned."
+   Delete the block after everything works.
+6. The index post cards repeat ONE template card. Classes assigned
+   to the pieces of that one card style every post. CSS can paint
+   the cards (colors, fonts, corners, shadows, hover) but cannot
+   rearrange the template's layout; layout changes happen in the
+   Showit designer.
+7. Categories on the live site are real links, sometimes several
+   per post. Style .blb-cats a as individual pills; keep the
+   container transparent.
+8. SECTION EMBEDS ON BLOG TEMPLATES GET NO JAVASCRIPT. Scripts
+   that work on normal Showit pages silently fail here. Any embed
+   for a blog template must be ZERO-JS: CSS-only marquees
+   (statically duplicated content), CSS-only mobile menu
+   (checkbox hack), no loader, no reveal-on-scroll. We shipped a
+   full coming-soon page this way: banner + nav + hero + offer
+   cards + footer, all pure CSS.
+9. Interim move that buys time: a "blog coming back soon" page on
+   the index template with offers for the freebie, podcast, and
+   paid program, while the real templates get finished.
+
+
+=====================================================================
+PHASE 10 - BONUS ASSETS (THE LAUNCH KIT)
+=====================================================================
+These take an hour with the pipeline and clients love them:
+
+EMAIL GRAPHICS (Flodesk): build one HTML sheet with a block per
+asset, render each block to PNG with Playwright at
+deviceScaleFactor 2 (retina), omitBackground for transparent
+pieces. Download the actual Google Font .woff2 files and load
+them locally so the type is exactly on-brand. Kit: 3 headers
+(clean / dark / script "hey babe"), footer, signature, 2 dividers,
+circular badge, 2 button images, photo polaroid, quote card.
+
+SITE TOUR GIF: localize the homepage (swap image URLs and fonts
+to local files), script a scroll tour in Playwright (hold the
+hero, glide between stops), screenshot each step, assemble with
+PIL (600px wide, ~12fps, quantized to ~160 colors, loop forever).
+Target under 5MB. Make frame 1 the full hero because Outlook
+freezes GIFs on the first frame.
+
+DECK QA: THE DEFECTS THAT ONLY SHOW UP WHEN YOU RENDER. Every one
+of these shipped past a "looks fine" review and had to be caught
+in the rendered images:
+  - Shapes with line width 0 still draw a hairline. Decorative
+    circles all had visible rings. Use an explicit no-line, not
+    width 0.
+  - Text boxes vertically centre by default, so captions in a row
+    with different line counts sit at different heights. Pin
+    valign to top in your text helper.
+  - Anything centred on the first/last item of an evenly spaced
+    track runs off the slide. Inset the track by half a caption
+    width before computing the step.
+  - Caption boxes exactly as wide as the column step touch each
+    other and read as one running paragraph. Subtract a gutter.
+  - A headline ending in a colon must sit ABOVE the list it
+    introduces. Bottom-anchored titles break reading order.
+  - A half-slide colour panel with one small line in it reads as
+    unfinished. Either fill it with a real element (oversized
+    script, framed image slot) or make the panel smaller.
+  - Icon/checkbox rows need the label vertically centred against
+    the box, not top-aligned, or every label sits low.
+
+DECK VARIETY IS ABOUT COMPOSITION, NOT CONTENT BLOCKS. Our first
+100-slide deck had 20 "layouts" and the client said every slide
+looked the same, and she was right: all 20 shared one composition
+(eyebrow top-left, headline same spot, content below, cream bg).
+The top third of 70 slides was identical. Real variety means
+changing the COMPOSITION: move the title (top, bottom, centred,
+vertically-centred left), split the canvas (colour panel left,
+right, or a top band), go full-bleed colour, use circles instead
+of cards, stagger card heights, bleed a giant numeral off the
+edge, set a huge tinted word behind the text, and rotate the
+background across 6 values. Assert it in code: log each slide's
+layout + background and fail if two adjacent slides share a
+layout or three in a row share a background.
+
+COURSE DECK TEMPLATE: build it as a .pptx with pptxgenjs so the
+client can edit in Google Slides (which already has the Google
+Fonts) or PowerPoint. Write ~20 reusable LAYOUT FUNCTIONS (cover,
+module divider, statement, teach, bullets, 2/3 cards, compare,
+steps, stat, quote, checklist, do-dont, prompt, example, recap,
+breather, resources, offer, closing) then call them with real
+content, so the client duplicates a slide instead of designing
+one. Put layout guidance in the SPEAKER NOTES of each layout's
+first use. Two gotchas that cost us a round: (1) in pptxgenjs the
+bullet option must be on EACH item's options, not the parent, or
+only the first line gets a bullet; (2) cards sized by eye leave a
+dead band at the slide bottom, so render and check every slide.
+
+FAVICON: a single letter monogram beats a shrunken logo every
+time. Set the brand initial in the display serif (italic if the
+wordmark uses italic), cream on a solid brand-color circle, with
+TRANSPARENT corners so it adapts to light and dark browser
+themes. Render big (512px) then downsample with LANCZOS, and
+ALWAYS preview it at the real delivered size plus an 8x pixel
+zoom before shipping. Watch for a gotcha: an explicit body
+background in the render page defeats omitBackground and bakes
+gray corners into the PNG. Deliver the size the platform asks
+for (Showit wants 35x35) plus 180 and 512 for app icons.
+
+BRAND COLORS FOR FLODESK: hand the client the 8 hex codes with
+one-line usage rules (background = paper, buttons = action color,
+text = ink, one pink button per email).
+
+LAUNCH EMAIL: subject options, preview text, block-by-block
+assembly using the kit, and copy in the client's voice. The
+strategy: the site IS the pitch; the GIF shows it off; the PS is
+the soft sell for the paid offer.
+
+
+=====================================================================
+PHASE 11 - LESSONS LEARNED (READ TWICE, THEY ALL COST US A ROUND)
+=====================================================================
+ 1. Grid children with margin:auto and no width collapse to zero.
+    Media in grids always gets width:100%.
+ 2. Patches applied to files but not the builder VANISH on the
+    next rebuild. Port every patch back, and diff every rebuilt
+    page's used classes against a working page before sending.
+ 3. If you make a hide-rule stronger (html.js .rv), the show-rule
+    (.rv.in) silently loses. After any specificity change, verify
+    the state you WANT wins.
+ 4. A reveal system that auto-tags elements ignores classes you
+    hand-write. Extend the selector AND handle the in-viewport
+    case before relying on it.
+ 5. Showit editor shows embeds as gray boxes; custom CSS never
+    renders in the editor. Only the published site is truth.
+ 6. Showit's Custom CSS box: pure CSS only, no @import. Fonts go
+    in a separate link-tag embed.
+ 7. Blog template embeds get no JS. Zero-JS versions for anything
+    living there, including the mobile menu (checkbox hack).
+ 8. The embed block is a picture frame sized per canvas; mobile is
+    positioned separately and is where "it disappeared" happens.
+ 9. FormSubmit needs its one-time activation click; mailto is not
+    a form; the Flodesk loader needs the 'fd' argument.
+10. Verify by USING the page in a real browser: click everything,
+    scroll everything, test with JS off, check 390px overflow,
+    view the full-size screenshot. Forcing states in tests can
+    mask real failures (we force-revealed sections once and
+    shipped a bug the test was hiding).
+11. Distinct adjacent sections, always. Clients notice twins
+    instantly and they are right.
+12. Keep every deliverable as .txt files clients can open, sent in
+    small labeled batches with a one-line "where it goes."
+13. Photos of the client, hand-drawn collateral, and motion are
+    what make a page feel expensive. When in doubt, add more.
+14. Announcement banner on every page pointing at the free offer.
+    The freebie is the top of the whole funnel; make it loud.
+15. iOS renders subtle effects differently (an expanding
+    box-shadow pulse looked like a washed-out halo). On mobile
+    prefer solid fills, explicit borders, and z-index layering,
+    and test on a real phone screenshot.
+
+
+=====================================================================
+KICKOFF PROMPT FOR THE NEXT CLIENT PROJECT
+=====================================================================
+Paste something like this to start a new build:
+
+"We're building a client website the Boss Lady Bloggers way:
+single-file HTML pages pasted into Showit embed blocks. Follow the
+CLIENT-SITE-PLAYBOOK.txt in this repo. Here is the client's
+complete copy doc [attach], brand colors [hexes], fonts [3 roles],
+photo folder [location], links [booking/payment/social/videos],
+and page list [list]. Voice rules: [rules]. Build the shared
+builder first (tokens, nav, footer, loader, standard JS), then the
+homepage, then confirm the design direction with screenshots
+before building out the rest. Every page: announcement banner,
+distinct sections, testimonial videos, FAQ schema on money pages,
+mobile-verified at 390px, delivered as .txt files."
+
+=====================================================================
+CHANGELOG (newest first)
+=====================================================================
+2026-11-14  v5.4  V7 HOMEPAGE + LINKS PAGE (client: "take jenna
+                  kutcher and spicy website, combine them... build
+                  me a gorgeous site"). Studied both reference sites
+                  section by section (26 pages screenshotted via
+                  Playwright through the proxy; hosts added to the
+                  BLB env: jennakutcher.com, static.showit.co,
+                  lib.showit.com, spicymargarita.tonicsiteshop.com,
+                  fonts, cdnjs). NEW DEVICES now on the homepage
+                  (build7_home.py, all v6 copy preserved):
+                  promo top banner w/ mockup + hand-drawn squiggle
+                  (SVG data-URI) + "Yes! gimme" btn; ghost-name hero
+                  ("boss lady bloggers" giant Fraunces in pink/gold
+                  w/ arch photo overlapping + floating white pill
+                  buttons w/ circle arrows + spin badge); witty
+                  stats trio (2017 / 6 figures+ / 1 little boy - all
+                  facts from her copy); squiggled colored-word
+                  mission H1; "Three doors" stacked wycards (ink/
+                  blush/gold-border, big italic numerals, circular
+                  photo chips, learn-more rotate arrows); oval photo
+                  tags + "Very into:" card on story photo; tilted
+                  colored client-quote cards; "You're in the right
+                  place, babe." hot gradient script strip; script-
+                  the + giant PODCAST stack w/ monospace platforms
+                  line; chunky "NOT YOUR AVERAGE BLOGGING ADVICE"
+                  + numbered blog category rows w/ rotate arrows;
+                  gold folder-tab Free Training Library card w/
+                  spinning starburst "free + tools" badge + mockup
+                  thumbs; squiggles on dark via gold variant; arrow
+                  doodle after dream pullquote. NEW /links page
+                  (build7_links.py, chrome=False, dark): link-in-bio
+                  with circle photo, script tagline, social pills,
+                  7 circle-thumb link rows w/ arrow chips. Client
+                  must CREATE Showit page slug /links (full-page
+                  embed, desktop+mobile). All pages verify over=0
+                  errs=0. NEXT (approved direction): roll v7 devices
+                  across Start Here, BBS, Coaching, Resources,
+                  About, Contact.
+
+2026-11-15  v6.2  HERO POLISH ROUND (client, four quick calls):
+                  accent words HOT pink (--hot) not rose; "make
+                  money" pill = slim inline-block (line-height 1.02,
+                  hot gradient, ink text) after "box too tall";
+                  SIX balloons now (added deep mauve + raspberry),
+                  strings re-aimed into her closed fist; she's
+                  BIGGER (600px) with feet on the hero's bottom
+                  edge (grid align-items:end, margin-bottom -1px);
+                  and finally BACK TO IVORY background (client:
+                  "go back to the ivory background") - ink
+                  headline, ink strings at .45, white balloon got a
+                  stroke, curve fill #F7EDE0 into blush. The dark
+                  hero era is over; do not re-darken unless she
+                  asks. Verified clean.
+
+2026-11-14  v6.1  HERO = ABOVE-THE-FOLD SPLIT (client: "not even
+                  boss lady bloggers. Do my above the fold still on
+                  the left and pic on the right"). LEFT: gold "hey
+                  babe!", her H1 in Abril Fatface sentence case
+                  ("make money" in rose .hl pill, "publish
+                  content." rose), italic Fraunces sub, gold hand
+                  note, white pill CTAs. RIGHT: her cutout with the
+                  4 balloons tied in her raised hand, floating in
+                  open dark space (title beside, so nothing can
+                  cover). Duplicate mission section REMOVED (its
+                  copy lives in the hero now). Photo stacks above
+                  text under 920px. Verified clean.
+
+2026-11-14  v6.0  SPLIT HERO - THE KEEPER (client: "balloons have
+                  to be in my hand!! boss lady bloggers capitalized
+                  to the right and me with balloons in hand").
+                  Hero is now a 2-column grid on the black-burgundy
+                  field: LEFT = her standing-laugh cutout with the
+                  4-balloon pink cluster tied INTO her raised hand
+                  (original anchor geometry works now because the
+                  title no longer sits above her); RIGHT = BOSS /
+                  LADY / BLOGGERS stacked in Abril Fatface CAPS
+                  (LADY rose + indented), gold "hey babe!", the
+                  build-your-blog/build-your-income line with gold
+                  "that's where I come in", white pill CTAs.
+                  Stacks to one column under 920px. Curve into
+                  blush stats band kept. Verified clean.
+
+2026-11-14  v5.9  BALLOONS FIXED FOR REAL (client: "now you cant
+                  even see the balloons... make it work"). Behind
+                  the letters they were hidden by the giant type;
+                  anchored at her raised hand they always invade
+                  the title zone. FINAL GEOMETRY: cluster sits IN
+                  FRONT of her (z6, like she's holding them) at her
+                  right shoulder, left:50%/top:24%/width:50% of the
+                  photo box, strings curve down-left to her hand at
+                  the bow (SVG anchor 56,256). Fully visible, zero
+                  letter overlap. Do not move the cluster above
+                  photo-top again - her raised hand is at 35% photo
+                  height so any balloons above it hit the title.
+
+2026-11-14  v5.8  HERO FINAL + CRAZY FEATURES PASS (client: "I
+                  love the black actually with the balloons. but it
+                  covers the text and I still hate the fonts",
+                  "every section of jenna/spicy has CRAZY insane
+                  features"). FONT: --fashion is now ABRIL FATFACE
+                  (Bodoni Moda removed; she hated it). HERO: back
+                  on the black-burgundy field; title has NO JS
+                  reveal any more (pure CSS keyframe - in her
+                  Showit preview the IntersectionObserver reveal
+                  never fired so the title was invisible; NEVER put
+                  data-rv on hero-critical text again); balloons
+                  moved BEHIND the letters (z-index 3 under ghname
+                  z4, cutout z5) so nothing covers the name; curved
+                  SVG divider sweeps hero into the blush stats
+                  band. NEW FEATURES: offer cards are STICKY
+                  STACKING deck (position:sticky top:110px);
+                  ticker words alternate solid/outline (-webkit-
+                  text-stroke rose); scrolling PHOTO MARQUEE
+                  (cutouts + BTS photos + mockups, 40s) between
+                  story and proof. Font strip with 4 candidates
+                  sent (Abril live; DM Serif / Playfair 800 /
+                  Cormorant 700 as alternates). All pages verified.
+
+2026-11-14  v5.7  HERO 3.0 - BOLD + FEMININE (client: "I like the
+                  bold font but feminine too", "I dont like the
+                  white bubble font", "play around with different
+                  color backgrounds not all that cream color",
+                  "BIG PLAYFUL"). New fashion display face: BODONI
+                  MODA (--fashion token in v5.py, loaded sitewide,
+                  local TTFs in scratchpad brandfonts for shots).
+                  Hero is now a FULL DEEP-BURGUNDY FIELD: cream
+                  Bodoni "boss lady bloggers" at ~16vw (no outline
+                  letters - she vetoed), "lady" in rose italic,
+                  gold Caveat "hey babe!", her cutout + pink-family
+                  balloon cluster center, split taglines left/right
+                  of her ("You've spent enough time building your
+                  blog... isn't it time it started building your
+                  income?" + hand-note "that's where I come in"),
+                  white pill buttons w/ arrow chips. SECTION COLOR
+                  RHYTHM: stats band blush, mission white (hl pill
+                  pops), five-pieces light mauve, story white, blog
+                  white - less cream everywhere. Verified all
+                  pages over=0 errs=0.
+
+2026-11-14  v5.6  HERO 2.0 + CUTOUTS + BALLOONS + FAMILY PALETTE
+                  (client: transparent photos of her, "put back
+                  balloons in my hand", "boss lady bloggers doesnt
+                  look cool", "NOT ORANGE", "stick to blush, mauve,
+                  pink, white, black... more FUN like jenna
+                  kutcher"). 5 transparent cutout PNGs -> /cutouts
+                  (gen-hat-smile, gen-sitting, gen-laugh-hat,
+                  gen-champagne, gen-standing-laugh, 900px wide,
+                  real alpha). NEW HERO LOCKUP: gold Caveat "hey
+                  babe!" + "boss" (pink) + "lady" (dusty rose,
+                  italic) + OUTLINED "bloggers" (text-stroke ink),
+                  her standing-laugh cutout overlapping the
+                  letters, drop-shadow instead of a photo frame,
+                  and an SVG BALLOON CLUSTER (hot pink / rose /
+                  blush / deep mauve, white highlights, strings
+                  meeting her raised hand, 6s bob animation,
+                  reduced-motion safe). PALETTE: briefly trialed
+                  yellow/tangerine/lilac - client vetoed; the new
+                  v5.py tokens are now ALIASES inside the pink
+                  family (see brand guide palette rule). Stats,
+                  pills, quote cards, strips, PODCAST type, blog
+                  words, folder tab all recolored within family.
+                  All pages verify over=0 errs=0.
+
+2026-11-14  v5.5  FUN FONTS (client: "change my fonts to FUN - same
+                  fonts used in my IG and Pins"). Her IG cards =
+                  bookish serif + handwritten marker accents + pink
+                  highlighter pills. Site serif (Fraunces) already
+                  matches; the script did not. SWAPPED sitewide in
+                  v5.py: Ephesis -> Caveat 500-700 (--script). New
+                  CORE devices: .hl rounded pink highlight pill
+                  (gradient #F3BFD3->rose, clone-break) and .hand
+                  Caveat note (pink, -2deg). Applied on home: "make
+                  money" hl in mission H1, "start here, babe" by
+                  hero pills, "the short version of my story:" over
+                  stats, "no wrong answer!" on ways, "steal these!"
+                  on folder thumbs. Blog canvases updated to Caveat
+                  too (still no JS). ALL pages rebuilt + verified.
+                  Ephesis remains only inside the rendered logo
+                  JPGs. Brand guide type section updated.
+
+2026-11-14  v5.3  BLOG TEMPLATE CANVASES (client: "blog pages code
+                  but only as separate site canvases"): new
+                  /blog-canvases folder via build6_blogcanvases.py,
+                  5 standalone CSS-ONLY embeds for the two Showit
+                  blog templates (NO JS allowed there, asserted in
+                  the builder): 1-Navigation (annbar + nav incl.
+                  Podcast, checkbox-hack mobile burger, no JS),
+                  2-Blog-Hero (list template heading), 3-Post-Styles
+                  (style-only: themes WP post content - Fraunces
+                  headings, pink links, blush blockquotes, rounded
+                  imgs; targets .sw-blog-content/.entry-content/
+                  article), 4-CTA (liked-this-post -> book a call +
+                  BOSS), 5-Footer (links ONLY to the 17 live pages).
+                  Tested stacked at 1440+390: over=0 errs=0, CSS
+                  menu opens. Zip BLB-blog-canvases.zip sent with
+                  placement README. ALSO: client confirmed her site
+                  is now ONLY 17 pages (Home/About/Contact/Start
+                  Here/Podcast/3 legal/Blog Coaching/BBS/PBM/Project
+                  Club/Book a Call/Call Booked/Freebies/Training
+                  Thank You/Masterclass) - sent BLB-showit-pages.zip
+                  with just those, files named after Showit pages.
+                  Blog landing, blogging-ladies, membership, old
+                  thank-yous etc. are OFF the live site (repo files
+                  kept).
+
+2026-11-13  v5.2  PODCAST ADDED TO NAV (client): NAV_LINKS in v5.py
+                  now Home / Start Here / BOSS Business System /
+                  Blog Coaching / Resources / Podcast / About, with
+                  Podcast -> the existing /podcast page (page
+                  content unchanged). ALL pages rebuilt so the new
+                  nav is in every embed - client must re-paste all
+                  page codes in Showit for the nav to update
+                  sitewide. Nav fit checked at 1250/1320/1440/1680:
+                  one line, no wrap, 26px clear of the CTA; burger
+                  below 1240 unchanged. Verified 15 pages over=0
+                  errs=0 at 1440 + 390.
+
+2026-11-13  v5.1  NEW CONTACT PAGE (client's full copy verbatim)
+                  via build6_contact.py -> contact.html (old entry
+                  removed from build5_support.py PAGES). Sections:
+                  hero (File_021, "let's get you to the right
+                  place", skip-to-form ghost btn); routing cards -
+                  BOSS (ink) + Blog Profit Intensive (blush), copy
+                  per client, buttons -> /boss-business-system and
+                  /blog-coaching; contact form card - SAME FormSubmit
+                  endpoint + hidden fields as before (hello@
+                  bossladybloggers.com, _next -> /contact?sent=1,
+                  success banner on ?sent=1) PLUS her new required
+                  dropdown "What are you reaching out about?" with
+                  7 options (BOSS / coaching / customer support /
+                  podcast / brand collab / website design / other),
+                  sent as "topic" in the email; "Before you hit
+                  send" honesty card -> /freebies; stay-connected
+                  socials (Instagram @bossladybloggers, YouTube,
+                  /podcast) + script-font Genasys signoff.
+                  Verified 15 pages over=0 errs=0 at 1440 + 390.
+
+2026-11-13  v5.0  NEW RESOURCES PAGE (client's full copy verbatim)
+                  via build6_resources.py -> freebies.html (the nav
+                  "Resources" slug; old freebies entry removed from
+                  build5_support.py PAGES). Sections: centered hero
+                  ("you don't need another 100 blogging tips" +
+                  tried-pills + still-wondering question cards);
+                  gold mqband; 10 TRAINING+TOOL cards, each with
+                  mockup image, number/category, headline, copy, a
+                  gold-bordered toolbox panel (Your free tool - name
+                  + description + "You'll walk away with"), and a
+                  "Get the free training + <tool>" button; YouTube
+                  section (topics + 3 featured-video cards ->
+                  channel); podcast section (File_019 + 3 episode
+                  rows -> /podcast); 6 blog category cards on ink ->
+                  /blog; BOSS + Blog Profit Intensive program cards;
+                  finale. COMING-SOON RULE APPLIES HERE TOO: only
+                  01 + 05 link to Flodesk; other 8 cards show the
+                  ribbon + "Coming soon - stay tuned" (LIVE set in
+                  build6_resources.py, same rule as Start Here).
+                  Old six-course Flodesk library page is retired
+                  with this. Verified 15 pages over=0 errs=0.
+
+2026-11-13  v4.9  TRAINING AVAILABILITY (client): only 01 Business
+                  Foundations and 05 Sales Diagnostic are finished.
+                  The other 8 training cards on Start Here are now
+                  "coming soon": pink diagonal ribbon over a faded
+                  mockup, no Flodesk link anywhere on the card, CTA
+                  text "Coming soon - stay tuned". Controlled by the
+                  LIVE set in build6_starthere.py - add a number
+                  back to LIVE and rebuild when she says a training
+                  is ready. Do NOT re-link the 8 until she says so.
+
+2026-11-13  v4.8  NEW START HERE PAGE (client's full copy verbatim)
+                  via build6_starthere.py -> start-here.html,
+                  replacing the old v4-era page. Sections: hero
+                  (File_030) + wants pills; gold mqband; "your blog
+                  is not your business" ink bizcard; 10 FREE
+                  TRAININGS grid - each card shows its freebie
+                  mockup image (see below), number badge, category,
+                  H3, copy, Flodesk link (build/offer/presell/fix/
+                  sales/site/convert/email/plan/claude); Two Ways to
+                  Work With Me (BOSS + Blog Profit Intensive cards
+                  on ink); YouTube section (@bossladybloggers, topic
+                  pills + 3 featured video cards); podcast section
+                  (File_019 + 3 featured episodes -> /podcast);
+                  Genasys section (File_047); finale. CTAs follow
+                  the client's copy: BBS primary + coaching ghost.
+                  FREEBIE MOCKUPS: client's 10 laptop+phone mockup
+                  PNGs (regular + transparent each) merged from the
+                  freebie-mockups branch into /freebie-mockups on
+                  this branch; used on the Start Here cards via raw
+                  GitHub URLs; share package (zip + link list txt)
+                  sent to client for her page editor. Verified 15
+                  pages over=0 errs=0 at 1440 + 390.
+
+2026-11-13  v4.7  THE BLOG PROFIT INTENSIVE replaces the by-the-call
+                  coaching page at /blog-coaching (new builder
+                  build6_coaching.py; old COACH_BODY entry removed
+                  from build5_support.py PAGES so support rebuilds
+                  can't clobber it). Client's v2 copy verbatim:
+                  12 weeks, 12 private weekly calls, the 6-part Blog
+                  Profit Method (sticky gradient number circles +
+                  checklists + outcome pull-rules), 12-week grid on
+                  ink, 8-resource Implementation Library + 90-Day
+                  Roadmap bonus card, selling-objection card, Genasys
+                  section (File_047), for/not-for, imagine-knowing
+                  card, enrollment card, 7-FAQ with JSON-LD, finale
+                  with spin badge. PRICING EXCEPTION (client,
+                  2026-11-13): this page ALONE shows prices - $897
+                  pay in full or 3 x $333 - in the enrollment card.
+                  The sitewide no-prices rule still holds everywhere
+                  else. All CTAs still -> /book-a-call ("apply on a
+                  free call"). Verified 14 pages over=0 errs=0 at
+                  1440 + 390.
+
+2026-11-13  v4.6  CTA + PRICING POLICY (client): the ONLY primary
+                  CTA sitewide is "Book a Free Call" -> /book-a-call,
+                  and NO offer prices appear anywhere public.
+                  Applied: nav button sitewide; home/about/BBS
+                  primary buttons -> free call (page links demoted to
+                  ghost); BOSS page stripped of every tier price,
+                  payment-plan number and the $497 hero line (tier
+                  cards keep contents, buttons -> free call, FAQ
+                  payments answer rewritten numberless, approved
+                  phrasing "payment plans available - pricing on
+                  your free call"); blog-coaching $150/$400/$750 +
+                  Stripe buy buttons removed -> free call; Blogging
+                  Ladies $100 removed everywhere incl. marquee;
+                  blog-to-paid + blog-accelerator retired to
+                  noindex redirect stubs -> /boss-business-system;
+                  every remaining Blog to Paid link/label swept to
+                  BOSS; blog-kit promo embeds de-priced. Income
+                  proof receipts KEPT (evidence, not price lists).
+                  Left as-is, flagged: blog-launch-lab-payments.html
+                  (legacy checkout page with amounts).
+                  BRAND KIT: 6 logo JPGs rendered with the real
+                  Fraunces/Ephesis fonts (repo /brand: primary,
+                  stacked+tagline, blb submark; cream + ink each)
+                  and BRAND-GUIDE.txt rewritten as v2.0, the full
+                  handoff doc for other Claude projects (identity,
+                  logo files+rules, tokens incl. hot-pink gradient,
+                  type, signature elements, motion, voice, CTA/no-
+                  price policy, proof rules, photo library, site
+                  map/tech). Fonts for rendering fetched from
+                  google/fonts on GitHub (googleapis is proxy-
+                  blocked; raw.githubusercontent works).
+2026-11-12  v4.5  BOSS SALES PAGE v2 (priced) from the updated copy.
+                  Headline promise: offer/sales page/freebie/welcome
+                  emails live in 12 weeks or coaching continues free.
+                  THREE TIERS, honest beta pricing: Blueprint $497
+                  (reg $697, 6x$97=$582), Accelerator $1,497 featured
+                  (reg $1,997, 6x$297=$1,782, first-Tuesday 1pm ET
+                  calls, Not Another Course Guarantee), Elite $4,997
+                  (reg $5,997, 6x$897=$5,382, 5 clients, application).
+                  Also: two starting paths + 30-question audit, 4
+                  phases/8 modules, 12-week schedule timeline, 5
+                  differentiators, "real beta price not a fake
+                  countdown" block, Fast Track 3-day bonus, guarantee
+                  pact card with Elite/Blueprint terms + no-refund
+                  line, story with the $50-affiliate/$0-planner/$200-
+                  coach arc and the REAL $18.52 receipt image, proof
+                  section with the "BOSS is new, no program specific
+                  student results yet" line kept verbatim, 13-question
+                  FAQ with JSON-LD, tier chooser + Fast Track call
+                  band + compliance footer line.
+                  TIER BUTTONS are mailto enrollment links until
+                  checkout URLs exist (Blueprint/Accelerator need
+                  Stripe payment links incl. 6-pay plans; Elite needs
+                  an application form link).
+2026-11-12  v4.4  FULL BOSS BUSINESS SYSTEM SALES PAGE from the
+                  client's complete copy ("AI can build your entire
+                  blog in a day. So why isn't it making you any
+                  money?"). Replaces the holding page. Sections: AI
+                  hero, done-everything pills, 1,000-visitors outline
+                  number + truth card, two-women split panel, story,
+                  gradient program reveal, 6 what-you'll-build blocks
+                  (script numerals + "So..." pull rules), 8 module
+                  cards, Monday-morning imagine card, ChatGPT
+                  objection (ink), for/not-for fit, PROOF (cleared
+                  receipts + 2 anonymized email quotes + portfolio
+                  case-study band), what-you-receive (confirmed rows
+                  only), cost-of-no-strategy, investment =
+                  "enrollment opens soon" card (free training / free
+                  call / waitlist email) because price+terms aren't
+                  confirmed, 7-question FAQ with JSON-LD, finale with
+                  her P.S. All [INSERT] slots either filled with
+                  verified proof or held honestly - nothing invented.
+                  STILL NEEDED to finish the page: confirmed price,
+                  payment options, support tiers + deliverables,
+                  included resources, access period/start date,
+                  bonuses, refund terms, time commitment, onboarding
+                  flow; plus case-study picks and the first named
+                  testimonial once a client OKs hers.
+2026-11-12  v4.3  FREE 2027 MASTERCLASS FUNNEL, per the client's
+                  landing copy + funnel spec. New pages:
+                  /free-blogging-masterclass (SEO title "How to Make
+                  Money Blogging in 2027 | Free Class", distraction-
+                  free mini-nav, ONE prominent Flodesk form card in
+                  the hero per spec, CTAs all anchor to it,
+                  educational-results disclaimer kept verbatim) and
+                  /training-thank-you ("You're In!", confetti, video
+                  player placeholder, 1,000-visitors question, BOSS
+                  pitch). New popup embed popup-masterclass-2027.txt
+                  (14s or 45% scroll, 7-day suppression, never shows
+                  on the funnel pages; run ONE popup per page).
+                  FORM HEADLINE TEST ("test a few"): the form card
+                  rotates 5 headlines per visitor, sticky via
+                  localStorage (blbMcVar), variant tagged on the
+                  element. True conversion attribution needs one
+                  Flodesk form per variant - swap IDs in when made.
+                  All "free training" buttons sitewide now point to
+                  /free-blogging-masterclass. PENDING (Flodesk side):
+                  dedicated masterclass form ID (page uses the
+                  course-library form as placeholder), success
+                  redirect to /training-thank-you, email subject
+                  "Your 2027 blog business training is inside", and
+                  the actual training video embed on the thank-you.
+2026-11-12  v4.2  REAL PROOF ON THE SITE (from the Proof Bank built
+                  Oct 27-Nov 11). Homepage proof section: 4 blurred
+                  receipts ($4,000 inv #042, $2,499 inv #035-R-001
+                  "one of two payments for a custom website + 12
+                  months of coaching", $1,500 first card payment,
+                  the 9-cell $333/month grid) + 3 VERBATIM client
+                  email quotes shown without names + the kicker
+                  "Nine years of blogging. Six years coaching
+                  bloggers. Real clients. Real invoices." About:
+                  $18.52 first-ever Stripe payout (Apr 2020) and the
+                  81-paid-invoices/$34,481 card ("paid through my
+                  invoices", never all-time income). BBS page:
+                  monthly-invoices strip + one quote. Images live in
+                  repo /proof (blurred versions only), served via
+                  raw.githubusercontent on this branch.
+                  PROOF RULES (binding): receipts are SAMPLES, never
+                  totals or monthly/yearly figures; blurred files
+                  only, never originals (originals show names and
+                  home addresses); email quotes may run verbatim but
+                  WITHOUT names until each client OKs hers; call
+                  lines are Zoom paraphrase - tell as stories only;
+                  client results numbers not cleared; no written
+                  testimonial exists yet - never invent one. Ask-
+                  first list for named testimonials lives in "What
+                  Clients Said" section 7.
+2026-11-12  v4.1  About page rebuilt from the client's new About
+                  copy (BOSS era): "two years learning how to blog /
+                  nobody taught me the business behind it" hero, the
+                  never-ending-list chips, the run-a-blog vs build-a-
+                  business realization, basement/nap-times single-mom
+                  section, the systems+AI second lesson, what-we-look-
+                  at grid, five beliefs, and the NEW three-offer suite
+                  revealed in her copy: The BOSS Business System,
+                  The Productive Blogger Method, The Project Club.
+                  Holding pages created at /productive-blogger-method
+                  and /project-club from her card copy only (full
+                  pages await her copy) so no nav or button 404s.
+2026-11-12  v4.0  THE BOSS BUSINESS SYSTEM ERA. New flagship and
+                  positioning from the client's Nov homepage copy +
+                  sitemap concept: "Blog coaching for women who want
+                  to make money, not just publish content." Homepage
+                  fully rebuilt (pain pills, missing-business reframe,
+                  "Your blog is not your business" manifesto, the five
+                  business pieces, program section, imagine flips,
+                  story, proof band, AI/Claude/ClickUp section, free
+                  training band). New nav per her sitemap with her
+                  requested full name: Home / Start Here / BOSS
+                  Business System / Blog Coaching / Resources
+                  (-> /freebies for now) / About + "Explore BOSS
+                  Business System" CTA. Footer brand line updated to
+                  her new closing line. Annbar: Blog to Paid Nov 27-30
+                  countdown REMOVED (new copy supersedes the offer),
+                  replaced with a BOSS Business System announcement.
+                  Interim /boss-business-system page built strictly
+                  from the homepage's program copy; full sales page
+                  awaits her copy. Blog to Paid pages left intact and
+                  reachable by URL. Testimonial [INSERT] placeholders
+                  omitted per the proof rule. Nav lesson again: longer
+                  item names -> burger breakpoint raised 1120->1240 and
+                  nav tightened; always test 1140-1680 after nav edits.
+2026-10-27  v3.7  Live-site bug round (client screenshots of
+                  bossladybloggers.com). ROOT CAUSE, BIG LESSON:
+                  the reveal system's final state applied
+                  clip-path:inset(0) to EVERY [data-rv] element,
+                  so each revealed element clipped its own border
+                  box forever. Symptoms: the How-It-Works step
+                  circles (negative-margin pop-outs) sliced in
+                  half, and descenders (p/g/y tails) shaved off
+                  tight-leading display headings, i.e. "bottoms of
+                  letters cut off". Fix: the final reveal state
+                  only resets opacity/transform; clip-path belongs
+                  ONLY to the data-rv="clip" variant, and its final
+                  inset must be NEGATIVE (-8% to -18%) so ink can
+                  overhang. Second fix: split-headline word
+                  wrappers (.w, overflow:hidden) get
+                  padding-bottom:.16em / margin-bottom:-.16em so
+                  italic descenders survive; display line-height
+                  raised 1.08 -> 1.12. RULE: never leave a
+                  zero-inset clip-path on resting content, and any
+                  overflow:hidden text wrapper needs descender
+                  padding. NOTE: the live Showit paste has edits
+                  made outside this repo (SHOP nav item, "Express
+                  Build" copy in Get Gorgeous, research line in Get
+                  Clear) - re-pasting repo files over those pages
+                  will drop them unless they're merged here first.
+2026-10-26  v3.6  Client audit round ("find your mistakes"). Fixes:
+                  (1) CTA color: buttons now a bright pink gradient
+                  (--hot #D8427D -> --hot2 #B42E60) on .btn, .nav-cta
+                  and spin-badge centers; deep boss pink stays for
+                  text accents. Lesson: the brand's "action color"
+                  must read BRIGHT at button scale, not plum-dark.
+                  (2) Removed the numbered 01/02 kicker circles
+                  sitewide (client: unprofessional); eyebrows now
+                  carry a gold sparkle (eyebrow::before \2726).
+                  (3) Heading audit: every <section> on every page
+                  now contains an H1 or H2 (added to free-start bar,
+                  gold guide bar, About honest card, Ladies real-talk
+                  + behind-the-scenes, Freebies honest note, Book-a-
+                  Call steps, Contact email column). Automated check:
+                  count sections without h1/h2 per page = 0.
+                  (4) Images: 16 -> 33 placements from the client's
+                  56-photo library (urgency circle, receipts
+                  polaroid, freedom polaroid, investment + coaching
+                  + ladies circle portraits, freebies hero, podcast
+                  studio shot, about who-for frame).
+                  (5) Section differentiation: giant italic outline
+                  watermark words (.wm) behind key sections; every
+                  section gets overflow:hidden to clip them.
+                  NOTE: the client's live domain is proxy-blocked
+                  from the cloud box; audits run on the repo pages
+                  plus rendered screenshots, never on guesses.
+2026-10-26  v3.5  THE BLOG TO PAID ERA: full-site rebuild from the
+                  Oct 25 "Full Website Copy" doc (28-page PDF).
+                  New offer: Blog to Paid ($500 to start then
+                  $333 x 11, or $3,600 PIF saving $563; 4 founding
+                  spots; enrollment Fri Nov 27 - Mon Nov 30
+                  11:59pm ET). "Fast Track call" is now the FREE
+                  CALL name; primary button sitewide is "Book my
+                  free Fast Track call". The Blogging Ladies
+                  membership returns at $100/month. Blog coaching
+                  is by-the-call (Power Hour $150 / Momentum Pack
+                  $400 / Deep Dive $750, same Stripe links). New
+                  nav: Home/About/Blog to Paid/Coaching/Free
+                  Courses/Blog/Podcast + Book a free call. Footer
+                  tagline "Beautiful blogs, built to sell." AI
+                  stance is now OPEN (we use AI for drafts).
+                  NEW v5 MOTION SYSTEM (2026): shared core with
+                  scroll reveals (IntersectionObserver + data-rv
+                  variants incl. clip-path), split-word hero
+                  headlines, marquee strips, count-up stats,
+                  tilt + magnetic buttons, floating blobs +
+                  grain, scroll progress bar, live countdown to
+                  Nov 30 (annbar chip, [data-cd]), sticky
+                  stacking month cards, receipt cards with
+                  perforated edges, phone video mock, FAQ
+                  accordions with JSON-LD pairs. All of it
+                  guarded by prefers-reduced-motion and a .js
+                  class so content shows without JS.
+                  Pages rebuilt: index, blog-to-paid (NEW, also
+                  mirrored into blog-accelerator.html until the
+                  Showit page is renamed), about, blog-coaching,
+                  blogging-ladies (NEW, mirrored to membership),
+                  freebies, podcast, blog, book-a-call (no main
+                  nav, Calendly embedded), contact, freebies-
+                  thank-you, call-booked (NEW), blog-to-paid-
+                  welcome (NEW), 404 (NEW). Every other page +
+                  blog-kit embeds swept for old labels/offers.
+                  LESSONS: (1) data-rv="l/r" horizontal reveal
+                  offsets create page overflow on mobile before
+                  they fire - switch them to translateY under
+                  760px and add html,body overflow-x:clip.
+                  (2) Full-page screenshots of scroll-reveal
+                  sites capture blank sections - force .inview
+                  on everything before screenshotting.
+2026-10-22  v3.4  Full-site copy release from the client's
+                  "Blog to Booked" copy doc (25-page PDF): home,
+                  about, both sales pages, start here, free
+                  courses, listen & watch (podcast + YouTube),
+                  blog header, portfolio, book a call, contact,
+                  nav (About / Blog to Booked / Fast Track /
+                  Portfolio / Listen & Watch / Blog / Free
+                  Courses), footer brand + bottom lines,
+                  announcement bar, SEO titles/metas, and the
+                  in-post CTA embed. Process: read the doc in
+                  full, generators for the big pages, surgical
+                  asserted swaps for the rest, banned-phrase
+                  sweep (while you sleep / autopilot / dream
+                  clients), then overflow-check every page.
+                  Lesson: scope component rules to direct
+                  children (.x > div), a bare descendant div
+                  selector grabs grandchildren and shreds grids.
+2026-10-22  v3.3  Sales page design v2, skimmable-first: both
+                  offer pages rebuilt with an sx- component
+                  system where no two sections share a layout.
+                  Numbered editorial kickers (01 / sound
+                  familiar), sticky-note cards with tape, old
+                  way struck-through vs new way pink flow pills,
+                  ink dream sections with glowing checklists,
+                  stat tiles with arrows, a giant
+                  outline/pink/italic manifesto stack, zigzag
+                  month cards with script numerals, crossed-out
+                  "other ways" cards vs the winning offer, a
+                  contract-style Launch Promise with signature
+                  and seal, and check vs strikethrough fit
+                  lists. Tier identity: Club = paper hero, Fast
+                  Track = dark ink hero + gold luxe cards +
+                  $7,000 -> $333 anchor. Rule: body copy on sales
+                  pages lives in chips, tiles, and one-line
+                  checks; paragraphs max 2-3 lines.
+2026-10-19  v3.2  Offer replacement: the Blog Accelerator and
+                  coaching packages are retired. /blog-accelerator
+                  now sells the Blog Build Club ($99/mo, 6-month
+                  membership, weekly group coaching, 3-month
+                  launch) and /blog-coaching sells the Fast Track
+                  Private Build Club ($333/mo, private weekly
+                  calls, done-for-you piece monthly, 8-week
+                  launch). Pages built from the client's PAS
+                  long-form copy: problem hero, agitate, dream,
+                  story, solution + deliverable cards, month/week
+                  plan steps, stats, price anchoring, stack +
+                  join card (terms checkbox gates the Join
+                  button), existing video testimonials + built
+                  sites reused as proof, launch promise,
+                  credibility, fit check, FAQ (schema+visible),
+                  recap CTA. Fast Track adds the tier comparison
+                  table. Bracketed placeholders (testimonials,
+                  scarcity, call/payment policies) were omitted,
+                  not invented. Nav renamed sitewide: Build Club
+                  + Fast Track; every Accelerator/package mention
+                  updated. Join buttons point to /book-a-call
+                  until the two Stripe subscription links exist.
+2026-10-19  v3.1  Program restructure: the Accelerator is now
+                  "Blog Coaching + Web Design", done with you
+                  AND for you, 12 weeks, one 1-hour 1:1 call
+                  every week (replaces the 21-day sprint
+                  everywhere: hero, marquees, stats, timeline
+                  now phased W1-2/W3-4/W5-7/W8-12, FAQ, final
+                  CTA, plus every cross-sell mention on other
+                  pages and embeds). Added two sections to the
+                  offer page: an ink-band objection section
+                  ("Why would I start a blog when AI answers
+                  everything?") and a named framework, The
+                  Unreplicable Blog Method (offer first,
+                  only-you content, selling ecosystem, owned
+                  audience), plus two AI-objection FAQs in
+                  schema+visible pairs. Terms still describe the
+                  21-day program and need her updated legal copy.
+2026-10-19  v3.0  Removed every claim that the business uses
+                  AI: the "You use AI" FAQ pairs (schema +
+                  visible) on the homepage and offer page, and
+                  the robot/automated QA language on the
+                  portfolio and case study. AI now appears on
+                  the site only as the problem the coaching
+                  solves, never as part of the process.
+2026-10-19  v2.9  Copy rule locked in: the H1 sells the DESIRED
+                  OUTCOME ("a gorgeous blog that sells your
+                  digital products while you sleep"); the
+                  objection handling (AI killed blogging etc.)
+                  lives in the sub-headline and the first FAQ,
+                  never as the headline itself.
+2026-10-19  v2.8  Message repositioning for the AI era: lead
+                  with the objection ("AI didn't kill blogging,
+                  it killed blogging for pageviews") and own one
+                  lane (blog coaching for selling digital
+                  products + services via a gorgeous site and a
+                  selling ecosystem). Changes land as a LAYER:
+                  heroes + subs on the money pages, an
+                  objection-handling FAQ added FIRST in both the
+                  visible FAQ and the JSON-LD schema (always in
+                  pairs, re-validate the JSON parses), SEO
+                  titles/descriptions, the sitewide footer
+                  positioning line, and one tie-in line each on
+                  start-here/about. Design untouched; copy only.
+2026-10-19  v2.7  Nav capacity lesson: adding ONE menu item
+                  (Portfolio) overflowed the desktop nav on
+                  laptops - links wrapped into two-line stacks.
+                  Fix on every page and both blog nav embeds:
+                  white-space:nowrap on links/logo/CTA, tighter
+                  gap (16px) and letter-spacing (.12em), font a
+                  step smaller, and the burger breakpoint raised
+                  from 920px to 1120px so the menu collapses
+                  before it can crowd. RULE: after adding any
+                  nav item, re-test the nav at 1140-1680px wide
+                  and confirm every link renders on one line.
+2026-10-19  v2.6  Pricing strategy switch: program investment is
+                  now HIDDEN sitewide ("shared on your free call")
+                  across the offer page, homepage, coming-soon,
+                  payments page, course upsells, both FAQ copies
+                  (visible + JSON-LD schema must be edited in
+                  PAIRS), and the blog-kit promo embeds. Payments
+                  moved from Cash App to Stripe: coaching buttons
+                  go straight to Stripe checkout links, program
+                  checkout buttons route to the free call, and
+                  the privacy policy's processor references were
+                  updated to match. Sweep command: grep for the
+                  dollar amounts AND the old processor name over
+                  html+txt before calling it done.
+2026-08-12  v2.5  In-post course library CTA, two formats:
+                  (a) PNG banners (wide 1500x750 + square 1080)
+                  rendered from HTML with local brand fonts,
+                  transparent corners, inserted as a linked
+                  image in WordPress; (b) a zero-JS HTML card
+                  (Custom HTML block) with scoped .blbcta
+                  styles, whole card is one link to the page
+                  hosting the Flodesk form. Both mobile-checked
+                  in a mock post column.
+2026-08-10  v2.4  Portfolio: /portfolio page with one featured
+                  case study card (scrolling homepage shot in a
+                  panel, palette dots, scope tags, two CTAs) and
+                  dashed "your site here" slots. Case studies
+                  live at /case-study-<slug>, built in the
+                  client's session and linked from the portfolio.
+                  Portfolio link injected into every page's nav,
+                  staggered mobile menus renumbered, footer
+                  Explore lists, and the blog-kit nav/footer
+                  embeds; chrome-light funnel pages carry it in
+                  their slim footer only. Delivery upgrade: all
+                  codes now ship as one zip (build_zip.py),
+                  rebuilt and re-sent after every change.
+2026-08-10  v2.3  Exit popup: second popup with a DIFFERENT
+                  offer (the freebie) and a different look
+                  (dark card vs cream card). Desktop trigger is
+                  mouseout at the window top; phone trigger is
+                  700px scrolled then a 450px upward flick.
+                  Arms only after 6s, and it checks the other
+                  popup's element display so the two never
+                  stack - scroll popup always wins the moment.
+2026-08-10  v2.2  Redesign funnel: popup quick form (name,
+                  email, website; FormSubmit POST) -> confetti
+                  welcome page with the full onboarding form ->
+                  confetti confirmation page pushing the core
+                  program + a free call. Confetti is a ~40-line
+                  canvas script, brand colors, fades by 5s,
+                  skipped under reduced motion. FormSubmit needs
+                  its one-time activation email clicked before
+                  submissions flow. Funnel pages are noindex.
+2026-08-10  v2.1  Lead popup embed: self-contained offer popup
+                  ("see your homepage redesigned") pasted into
+                  one embed block per page. Shows after 9s or
+                  33% scroll, 7-day snooze on close, permanent
+                  hide after CTA click, ESC/overlay close, CSS
+                  before/after browser art. GOTCHA: an inline
+                  display:none beats any class toggle - show and
+                  hide with element.style, not classList. Never
+                  on blog templates (no JS there).
+2026-08-10  v2.0  Legal pages: client supplies official legal
+                  copy (Disclaimer, Privacy Policy, Terms) as
+                  markdown; a converter injects it into the
+                  legal page shells, replacing the bracketed
+                  template text and its warning notice. The
+                  plain-English intro paragraph becomes a blush
+                  "human version first" callout, tables get a
+                  dark header + horizontal scroll wrapper for
+                  phones, and every page is re-verified at 390px.
+2026-08-09  v1.9  Phase 6 rescue rules, learned from the live
+                  site: (a) Showit publishes text boxes at drawn
+                  size and clips longer real titles, so card
+                  title rules force wrap + auto height; (b) a
+                  category class landing on the content area or
+                  title makes everything uppercase pill-styled,
+                  so body/title rules explicitly reset
+                  text-transform, letter-spacing, link padding
+                  and background; use :not(.blbx) to outrank the
+                  pill selector at equal order; (c) added a
+                  blb-hide utility class to remove stray shapes
+                  the client cannot find on the Showit canvas.
+2026-08-09  v1.8  Phase 6: the single post template gets its
+                  OWN Custom CSS file (post kit), separate from
+                  the index kit CSS. Covers header, featured
+                  image, body type, headings with pink underline,
+                  lists, quote cards, images, buttons, tables,
+                  prev/next links, comments, and a mobile block.
+                  Opt-in WordPress block classes: blb-lead,
+                  blb-dropcap, blb-note, blb-btn (added per post
+                  via block Advanced -> Additional CSS class).
+2026-08-09  v1.7  Phase 6: blog Custom CSS now ends with a
+                  mobile block: under 700px force the post grid
+                  and every card to display:block width:100%
+                  !important (Showit/WP keeps cards two-across on
+                  phones otherwise and titles wrap one word per
+                  line). Also bump card titles to 19px and shrink
+                  pagination pills on mobile. Always test the
+                  card grid at 390px, not just the embeds.
+2026-08-07  v1.6  Phase 10: added the deck QA defect list (zero-
+                  width lines still draw, default valign centres,
+                  end-of-track captions overflow, zero-gutter
+                  columns merge, colon headlines must lead).
+2026-08-07  v1.5  Phase 10 + lesson: slide variety comes from
+                  composition, not from renaming content blocks.
+                  Also: pptxgenjs shape is ShapeType.rect, not
+                  .rectangle; never use a vertical edge stripe.
+2026-08-07  v1.4  Phase 10: course deck template recipe (layout
+                  functions + speaker notes; pptxgenjs bullets go
+                  on each item, not the parent).
+2026-08-07  v1.3  Phase 10: favicon recipe added (monogram in
+                  display serif, transparent corners, render big
+                  and downsample, test at real size; watch the
+                  omitBackground gotcha).
+2026-08-06  v1.2  Phase 0: photo intake requirements locked in.
+                  JPG only, each file under 30 MB, delivered via
+                  a shared Google Drive folder.
+2026-08-06  v1.1  Phase 5: added the Flodesk form glow-up recipe
+                  (card wrapper + scoped !important overrides via
+                  [class*=] selectors; zero the container margins
+                  to kill the dead gap; 16px+ inputs for iOS).
+2026-08-06  v1.0  Initial playbook written covering the full BLB
+                  build: phases 0-11, all 15 lessons, kickoff
+                  prompt. Everything from the copy-driven redesign
+                  through the blog kit, course players, email
+                  asset pipeline, and launch email.
+
+=====================================================================
+END OF PLAYBOOK
+=====================================================================

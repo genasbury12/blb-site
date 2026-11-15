@@ -1,0 +1,44 @@
+<!--
+============================================================
+IN-POST / SIDEBAR CTA - BLOG TO PAID (HTML version)
+============================================================
+WHERE: inside a blog post (WordPress CUSTOM HTML block) or in
+the blog sidebar. Paste this whole file where you want it.
+
+The entire card is one big link to your free Fast Track call.
+
+Zero JavaScript, so it works perfectly on the blog templates.
+============================================================
+-->
+
+<div class="blbcta2">
+<style>
+.blbcta2{margin:34px 0}
+.blbcta2 a.blbcta2-card{position:relative;display:block;overflow:hidden;background:#2E1F27 !important;border:2px solid #2E1F27 !important;border-radius:24px !important;padding:34px 30px 30px !important;text-decoration:none !important;font-family:'Karla',sans-serif;transition:box-shadow .25s ease,transform .25s ease}
+.blbcta2 a.blbcta2-card:hover{transform:translateY(-4px);box-shadow:0 30px 55px -24px rgba(46,31,39,.6)}
+.blbcta2 .blbcta2-glow{position:absolute;top:-90px;right:-70px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(169,63,99,.55),transparent 70%);pointer-events:none}
+.blbcta2 .blbcta2-tag{position:absolute;top:18px;right:-38px;background:#BC8A47;color:#fff !important;font-weight:700;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;padding:8px 44px;transform:rotate(38deg)}
+.blbcta2 .blbcta2-script{font-family:'Ephesis',cursive;font-size:26px;line-height:1.2;color:#E8A9C0 !important;margin:0 0 2px}
+.blbcta2 .blbcta2-h{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:clamp(24px,4vw,32px);line-height:1.15;color:#FBF6EE !important;margin:0 0 10px}
+.blbcta2 .blbcta2-h em{font-style:italic;color:#E8A9C0 !important}
+.blbcta2 .blbcta2-p{font-size:15.5px;line-height:1.6;color:#D8CBC3 !important;max-width:520px;margin:0 0 20px}
+.blbcta2 .blbcta2-p b{color:#FBF6EE !important}
+.blbcta2 .blbcta2-btn{display:inline-block;background:#A93F63;color:#fff !important;font-weight:700;font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;padding:16px 32px;border-radius:60px;box-shadow:0 16px 30px -12px rgba(124,43,72,.55)}
+.blbcta2 a.blbcta2-card:hover .blbcta2-btn{background:#FBF6EE;color:#2E1F27 !important}
+.blbcta2 .blbcta2-m{font-weight:700;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#E8A9C0 !important;margin:14px 0 0}
+@media (max-width:600px){
+  .blbcta2 a.blbcta2-card{padding:28px 20px 26px !important}
+  .blbcta2 .blbcta2-btn{display:block;text-align:center}
+}
+</style>
+
+<a class="blbcta2-card" href="https://bossladybloggers.com/book-a-call">
+  <span class="blbcta2-glow"></span>
+  <span class="blbcta2-tag">4 spots</span>
+  <p class="blbcta2-script">want this done with you, not at you?</p>
+  <p class="blbcta2-h">Blog to Paid is 1:1 blog coaching for a year <em>plus a custom Showit website I build for you.</em></p>
+  <p class="blbcta2-p"><b>Book the free call</b> and we'll map your first 90 days. You leave with a plan either way.</p>
+  <span class="blbcta2-btn">Book my free Fast Track call &rarr;</span>
+  <p class="blbcta2-m">Free 30 minutes &#10022; no pitch deck, promise</p>
+</a>
+</div>

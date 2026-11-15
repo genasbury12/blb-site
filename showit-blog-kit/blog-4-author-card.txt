@@ -1,0 +1,34 @@
+<!--
+============================================================
+PART 4 of 5 — AUTHOR CARD (one embed block)
+============================================================
+WHERE IT GOES: an Embed Code block under the opt-in card on
+the single post template. Roughly 260px tall, max width
+~760px, centered.
+============================================================
+-->
+
+<div id="blbAuth">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;1,9..144,500&family=Karla:wght@400;700&family=Ephesis&display=swap');
+#blbAuth{font-family:'Karla',sans-serif;color:#2E1F27;padding:10px}
+#blbAuth *{margin:0;padding:0;box-sizing:border-box}
+#blbAuth .card{max-width:720px;margin:0 auto;display:grid;grid-template-columns:120px 1fr;gap:26px;align-items:center;background:#fff;border:1px solid rgba(46,31,39,.16);border-radius:26px;padding:30px 34px;box-shadow:0 26px 50px -26px rgba(46,31,39,.38)}
+#blbAuth .ph{width:120px;height:140px;border-radius:60px 60px 16px 16px;overflow:hidden;border:1px solid rgba(46,31,39,.3)}
+#blbAuth .ph img{width:100%;height:100%;object-fit:cover;display:block}
+#blbAuth .script{font-family:'Ephesis',cursive;font-size:24px;color:#A93F63;margin-bottom:2px}
+#blbAuth h3{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:22px;margin-bottom:8px}
+#blbAuth p{font-size:15px;color:#6E5C63;line-height:1.6;margin-bottom:10px}
+#blbAuth a{font-weight:700;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#A93F63;text-decoration:none}
+@media (max-width:600px){#blbAuth .card{grid-template-columns:1fr;text-align:center}#blbAuth .ph{margin:0 auto}}
+</style>
+<div class="card">
+  <div class="ph"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/blb-site-images-folder-5nm2vd/blb%20site%20images/File_030.jpeg" alt="Genasys, Boss Lady Bloggers"></div>
+  <div>
+    <div class="script">hi, i'm your blog coach</div>
+    <h3>Genasys &middot; Boss Lady Bloggers</h3>
+    <p>Blog coach and website designer building gorgeous, business-first blogs for women who want an actual business. Since 2017, 300+ clients and students.</p>
+    <a href="/about">More about me &rarr;</a>
+  </div>
+</div>
+</div>

@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 130" width="100" height="130" role="img" aria-label="Boss Lady Bloggers monogram">
+  <path d="M0 50 A50 50 0 0 1 100 50 V122 Q100 130 92 130 H8 Q0 130 0 122 Z" fill="#A23E66"/>
+  <circle cx="50" cy="26" r="6" fill="#FBF5EE"/>
+  <text x="50" y="112" text-anchor="middle" font-family="'DM Mono','Courier New',monospace" font-weight="500" font-size="28" letter-spacing="2" fill="#FBF5EE">BLB</text>
+</svg>
