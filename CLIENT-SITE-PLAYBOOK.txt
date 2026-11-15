@@ -539,6 +539,21 @@ CHANGELOG (newest first)
                   across Start Here, BBS, Coaching, Resources,
                   About, Contact.
 
+2026-11-15  v6.2  HERO POLISH ROUND (client, four quick calls):
+                  accent words HOT pink (--hot) not rose; "make
+                  money" pill = slim inline-block (line-height 1.02,
+                  hot gradient, ink text) after "box too tall";
+                  SIX balloons now (added deep mauve + raspberry),
+                  strings re-aimed into her closed fist; she's
+                  BIGGER (600px) with feet on the hero's bottom
+                  edge (grid align-items:end, margin-bottom -1px);
+                  and finally BACK TO IVORY background (client:
+                  "go back to the ivory background") - ink
+                  headline, ink strings at .45, white balloon got a
+                  stroke, curve fill #F7EDE0 into blush. The dark
+                  hero era is over; do not re-darken unless she
+                  asks. Verified clean.
+
 2026-11-14  v6.1  HERO = ABOVE-THE-FOLD SPLIT (client: "not even
                   boss lady bloggers. Do my above the fold still on
                   the left and pic on the right"). LEFT: gold "hey
