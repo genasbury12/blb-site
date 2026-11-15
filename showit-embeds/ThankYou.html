@@ -182,6 +182,13 @@ html.no-js .rv{opacity:1;transform:none}
   .gbadge svg { width: 100%; height: 100%; }
 }
 
+/* Flodesk inline embeds: the form ships with empty title and subtitle
+   blocks and its own padding; the card already has a heading, so drop
+   the dead space. */
+div[id^="fd-form"] [class*="__title"],
+div[id^="fd-form"] [class*="__subtitle"] { display: none !important; }
+div[id^="fd-form"] form { padding-top: 0 !important; padding-bottom: 0 !important; }
+
 </style>
 
 <a class="skip-link" href="#main">Skip to content</a>
