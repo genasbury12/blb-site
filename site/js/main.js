@@ -200,9 +200,8 @@
     });
   });
 
-  /* ---------- Instagram feed (homepage strip) ---------- */
-  var feed = document.querySelector('[data-instagram-feed]');
-  if (feed) {
+  /* ---------- Instagram feed (any page with a strip) ---------- */
+  document.querySelectorAll('[data-instagram-feed]').forEach(function (feed) {
     var FEED_URL = 'https://feeds.behold.so/3p9InkPKcoMGdzJUSdtH';
     if (FEED_URL) {
       var cached = null;
@@ -231,5 +230,5 @@
         render(posts);
       }).catch(function () {/* keep branded placeholders */});
     }
-  }
+  });
 })();
