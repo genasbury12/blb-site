@@ -24,7 +24,7 @@ Everything the new static site still needs. Nothing here blocks deploying the si
 ## Needs Genasys (decisions + copy)
 
 - `[GEN: ...]` notes kept verbatim from the approved design: bonus you'll deliver (group + course), group member cap, course price increase date, pin template count (BOSS Bonus #3), stack bonuses line, group size FAQ answer, course tools FAQ answer.
-- **Trainings 02-10**: /free-trainings/ and /start-here/ list all 10 trainings with their Flodesk links per the design. Only Blogging Foundations (/build) and Sales Diagnostic (/sales) are finished today. Say the word and the other 8 get "coming soon" treatment.
+- ~~Trainings 02-10~~ CONFIRMED: Genasys supplied all 10 Flodesk training links (build, offer, presell, fix, sales, site, convert, email, plan, claude); all live on /free-trainings/ and /start-here/ with their freebie mockups.
 - **Blog content**: featured post, trending pills and 6 latest cards are placeholder titles; /blog/post-template.html is the intentional template. Needs first real posts.
 - **404 copyright line**: the design's 404 had "(c) BOSS LADY BLOGGERS LLC 2026". Dropped to avoid a double footer; add to the shared footer partial if you want it sitewide.
 
@@ -42,7 +42,7 @@ No fitting shot in the current library (56 photos reviewed):
 - Group Zoom call (Start Here, group-coaching hero figure)
 - Genasys holding a coffee (/coaching/ bio split)
 - Scrapbook props on /about/: chocolate lava cake, the old 2010 MacBook, flowers/candles/chocolate
-- Mockups: Foundations Builder (laptop + card), BOSS app (Start Here + course), ebook/workbook bonus card, trainings-on-laptop + tool-on-phone (/free-trainings/), blog featured photo + phone mockup (/blog/), post template featured band
+- Mockups: BOSS app (Start Here + course), ebook/workbook bonus card, blog featured photo + phone mockup (/blog/), post template featured band (the 10 freebie mockups are now placed on /free-trainings/ and the featured slots)
 - Real podcast cover art (a designed SVG version is in place and looks final)
 
 ## Filled already (FYI)
