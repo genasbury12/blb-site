@@ -47,7 +47,7 @@ PAGES = {
                         "A thank-you offer for masterclass sign-ups: The Blogging Ladies Membership at 50% off for one hour."),
     "black-friday":    ("black-friday/index.html", "",
                         "Black Friday: 50% Off The Blogging Ladies | Boss Lady Bloggers",
-                        "Black Friday through Cyber Monday only: The Blogging Ladies Membership is 50% off, plus a free 1:1 blog coaching call with Gen and a custom roadmap."),
+                        "November 25 through Cyber Monday only: The Blogging Ladies Membership is 50% off, $23.50 a month locked in forever, plus a free 1:1 blog coaching call with Gen and a custom roadmap."),
     "podcast":         ("podcast/index.html", "podcast",
                         "Podcast | Boss Lady Bloggers",
                         "The Boss Lady Bloggers podcast: blogging and business talk for women building money making blogs."),
