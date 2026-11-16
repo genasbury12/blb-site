@@ -293,6 +293,9 @@ def build_footer_piece(css: str, js: str) -> None:
     # canvas width and clip anything that would overflow a narrow canvas.
     body = body.replace("clamp(120px,15vw,220px)", "clamp(48px,15vw,220px)")
     body = '<div style="overflow-x:clip;max-width:100%">\n' + body + '\n</div>'
+    # Container-proof the Instagram grid: tile count adapts to whatever
+    # width Showit gives the widget, so tiles never blow up.
+    body += '\n<style>.ig-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))!important}</style>'
     out = (FONTS + "\n<style>\n" + css + "\n</style>\n" + body
            + "\n<script>\n" + js + "\n</script>\n")
     if "—" in out or "–" in out:
