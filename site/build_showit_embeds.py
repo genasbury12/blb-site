@@ -292,7 +292,7 @@ def build_footer_piece(css: str, js: str) -> None:
     # Embed safety: the giant marquee cannot wrap, so scale it with the
     # canvas width and clip anything that would overflow a narrow canvas.
     body = body.replace("clamp(120px,15vw,220px)", "clamp(48px,15vw,220px)")
-    body = '<div style="overflow-x:clip;max-width:100%">\n' + body + '\n</div>'
+    body = '<div style="width:100vw;max-width:100vw;overflow-x:clip">\n' + body + '\n</div>'
     # Container-proof the Instagram grid: tile count adapts to whatever
     # width Showit gives the widget, so tiles never blow up.
     body += '\n<style>.ig-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))!important}</style>'
@@ -313,7 +313,8 @@ def build_footer_piece(css: str, js: str) -> None:
 
 def build_pieces() -> None:
     for name, (label, html) in PIECES.items():
-        out = FONTS + "\n" + MINI_CSS + "\n" + html.replace("{host}", ASSET_HOST) + "\n"
+        body = '<div style="width:100vw;max-width:100vw;overflow-x:clip">\n' + html.replace("{host}", ASSET_HOST) + '\n</div>'
+        out = FONTS + "\n" + MINI_CSS + "\n" + body + "\n"
         if "—" in out or "–" in out:
             raise SystemExit(f"em/en dash in {name}")
         (OUT / name).write_text(out)
