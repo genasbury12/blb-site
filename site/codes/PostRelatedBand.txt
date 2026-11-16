@@ -1,0 +1,57 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=Caveat:wght@600;700&display=swap">
+<style>
+:root{--font-display:'Instrument Serif',serif;--font-body:'Inter',system-ui,sans-serif;--font-label:'DM Mono',monospace}
+*{box-sizing:border-box}body{margin:0;background:transparent}
+.pill{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:13px 22px;font:600 14px/1 var(--font-body);text-decoration:none;transition:background .2s ease,color .2s ease,transform .2s ease}
+.pill:hover{transform:translateY(-2px)}
+.card-hover{transition:transform .25s ease,box-shadow .25s ease}
+.card-hover:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(58,28,42,.14)}
+</style>
+<div style="width:100vw;max-width:100vw;overflow-x:clip">
+<section style="background:#F6E1E8;padding:70px clamp(16px,4vw,48px);border-radius:0">
+<div style="max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:28px">
+<h2 style="margin:0;font:400 clamp(36px,4vw,54px)/1 var(--font-display);color:#3A1C2A">Keep reading</h2>
+<div data-related style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px">
+<a href="/blog" class="card-hover" style="background:#FFFFFF;border-radius:20px;overflow:hidden;text-decoration:none"><div data-img style="aspect-ratio:4/3;background:#E9B9CA"></div><div data-title style="padding:20px;font:400 22px/1.15 var(--font-display);color:#3A1C2A">More from the blog</div></a>
+<a href="/blog" class="card-hover" style="background:#FFFFFF;border-radius:20px;overflow:hidden;text-decoration:none"><div data-img style="aspect-ratio:4/3;background:#3A1C2A"></div><div data-title style="padding:20px;font:400 22px/1.15 var(--font-display);color:#3A1C2A">More from the blog</div></a>
+<a href="/blog" class="card-hover" style="background:#FFFFFF;border-radius:20px;overflow:hidden;text-decoration:none"><div data-img style="aspect-ratio:4/3;background:#A23E66"></div><div data-title style="padding:20px;font:400 22px/1.15 var(--font-display);color:#3A1C2A">More from the blog</div></a>
+</div>
+</div>
+</section>
+<script>
+(function () {
+  'use strict';
+  var cards = document.querySelectorAll('[data-related] > a');
+  if (!cards.length) return;
+  fetch('https://bossladybloggers.com/wp-json/wp/v2/posts?per_page=6&_embed')
+    .then(function (r) { return r.json(); })
+    .then(function (posts) {
+      var here = location.href.replace(/[?#].*$/, '').replace(/\/$/, '');
+      var picks = posts.filter(function (p) {
+        return p.link.replace(/\/$/, '') !== here;
+      }).slice(0, cards.length);
+      picks.forEach(function (p, i) {
+        var a = cards[i];
+        a.href = p.link;
+        var t = a.querySelector('[data-title]');
+        if (t) t.innerHTML = p.title.rendered;
+        var media = p._embedded && p._embedded['wp:featuredmedia'] && p._embedded['wp:featuredmedia'][0];
+        var src = media && ((media.media_details && media.media_details.sizes && media.media_details.sizes.medium_large && media.media_details.sizes.medium_large.source_url) || media.source_url);
+        var box = a.querySelector('[data-img]');
+        if (box && src) {
+          box.innerHTML = '';
+          var img = document.createElement('img');
+          img.src = src;
+          img.alt = '';
+          img.loading = 'lazy';
+          img.style.cssText = 'width:100%;height:100%;object-fit:cover;display:block';
+          box.appendChild(img);
+        }
+      });
+    })
+    .catch(function () {/* keep the plain cards linking to the blog */});
+})();
+</script>
+</div>
