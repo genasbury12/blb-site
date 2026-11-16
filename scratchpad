@@ -1,0 +1,155 @@
+BOSS LADY BLOGGERS - NEW WEBSITE ON SHOWIT - PASTE GUIDE
+=========================================================
+
+17 full pages plus 4 small blog-post pieces. Same workflow as before: one full-page embed
+canvas per Showit page, paste the whole file, publish.
+
+THE FILES AND WHERE EACH ONE GOES
+---------------------------------
+File                      Showit page (URL slug)
+Home.html                 Home page ( / )
+StartHere.html            /start-here
+About.html                /about
+Boss.html                 /boss
+BlogCoaching.html         /blog-coaching   (your existing page)
+GroupCoaching.html        /group-coaching
+Course.html               /course
+GroupWaitlist.html        /group-waitlist
+CourseWaitlist.html       /course-waitlist
+FreeTrainings.html        /free-trainings
+Podcast.html              /podcast
+BlogLanding.html          /blog  (OPTIONAL - your blog already works;
+                          only use if you want the new blog landing look)
+BlogCategory.html         /blog-category  (one page, serves EVERY topic:
+                          links pass ?cat=topic-name and the page pulls
+                          that topic's posts from WordPress by itself)
+Contact.html              /contact
+ThankYou.html             /thank-you
+NotFound404.html          /404  (OPTIONAL)
+Links.html                /links  (link-in-bio page: put
+                          bossladybloggers.com/links in your
+                          Instagram bio)
+
+HOW TO PASTE (each page)
+------------------------
+1. In Showit, open or create the page with the slug above.
+2. Delete everything on the page canvas.
+3. Add ONE Embed Code canvas, stretch it full width and full height.
+4. Paste the entire contents of the matching file.
+5. Set the canvas height roughly to the page length (you can adjust
+   after previewing; the embed sizes itself).
+6. Publish.
+
+IMPORTANT: if any of your Showit pages use a different slug than the
+list above, tell Claude the real slug and you'll get updated files
+(the menus on every page link to these exact slugs).
+
+WHAT WORKS, EXACTLY AS DESIGNED
+--------------------------------
+- All 20 interactive features: spinning badge, fullscreen berry menu,
+  scroll reveals, circled words, fanned cards, sticky stacking cards,
+  tabs, Boss Blend sliders, FAQs, floating podcast phone, marquees,
+  animated gradients.
+- Live Instagram feed on Home (pulls your latest 6 posts automatically).
+- All 10 training links to Flodesk, Calendly booking buttons, the
+  3 YouTube video cards, Spotify episode links, episode artwork.
+- Coaching price $897 / 3x$333 on /blog-coaching only.
+
+BLOG POST TEMPLATE (the page every blog post uses)
+--------------------------------------------------
+Your blog posts live in WordPress, so the post page itself is a Showit
+BLOG TEMPLATE, not a regular page. On that template, Showit's own blog
+widgets (post title, featured image, post content) pull in each article
+automatically - you cannot replace those with an embed. But you CAN
+place embed canvases around them. That is exactly how the designed
+post page gets rebuilt:
+
+1. STYLE THE WIDGETS (15 min, once). Open Blog > your post template in
+   Showit and set the fonts/colors from the style spec file you already
+   have (SHOWIT-BLOG-TEMPLATE-STYLE-SPEC.txt). That makes the title,
+   featured image and article body match the new brand.
+
+2. PLACE THESE 7 EMBEDS on the same template page, top to bottom:
+
+   File                   What it is              Where / canvas size
+   PostNavBar.html        Site navigation bar      Very top, full width,
+                          (logo + links + BOSS)    ~110px, DESKTOP ONLY:
+                                                   hide this canvas on
+                                                   mobile in Showit
+   PostNavMobile.html     Mobile navigation:       Very top, full width,
+                          logo + berry hamburger   ~80px, MOBILE ONLY:
+                          button that opens the    hide it on desktop
+                          fullscreen menu page
+   MenuPage.html          The fullscreen berry     Its own Showit page,
+                          menu itself. The         slug /menu, one full
+                          hamburger links here;    page embed canvas
+                          the X goes back
+   PostHero.html          Featured image band.     Under the nav, above
+                          Pulls each post's own    the post title, full
+                          image + category chip    content width, ~420px
+                          from WordPress
+   (then Showit's own post title, meta and content widgets)
+   PostAuthorCard.html    "Meet Genasys" card      Sidebar, next to the
+                          with your photo          post content, ~340x320
+   PostDownloadCard.html  Foundations Builder      Sidebar, under the
+                          free download card       author card, ~340x220
+   PostNextStepBand.html  Dark plum CTA band       Under the post
+                                                   content, ~140px tall
+   PostRelatedBand.html   "Keep reading" band      Near the bottom, full
+                          with 3 recent posts      width, ~560px tall
+   PostFooter.html        The FULL site footer     Very bottom, full
+                          with the Instagram       width, ~1000px tall,
+                          feed                     DESKTOP ONLY
+   PostFooterMobile.html  Same footer without      Very bottom, full
+                          the Instagram feed       width, ~1300px tall,
+                                                   MOBILE ONLY
+
+   The nav bar and footer make every blog post feel like the rest of
+   the site, so readers can get anywhere from a post.
+
+3. THE KEEP-READING BAND IS AUTOMATIC. It pulls your 3 newest posts
+   (picture + title + link) straight from your WordPress blog every
+   time the page loads, and skips the post the reader is already on.
+   Nothing to update, ever.
+
+4. ONE LINE TO EDIT PER POST (optional). The next-step band has a
+   placeholder line: "[Next step: the free training or offer this post
+   points to]". Showit uses ONE template for all posts, so either
+   replace that line once with something evergreen that fits every
+   post, or skip that band entirely. The button already links to your
+   free trainings page.
+
+Because it is a template, you do all of this ONCE and every blog post
+(old and new) instantly wears the new design.
+
+CONTACT FORM
+------------
+Works out of the box. It sends through FormSubmit to
+hello@bossladybloggers.com (same service as your old site) and then
+shows your Thank You page. THE FIRST TIME someone submits (make it
+yourself!), FormSubmit emails you a confirmation link - click it once
+and the form is permanently active.
+
+WAITLIST FORMS (group + course)
+-------------------------------
+Right now they show the pretty "You're on the list!" message but do not
+save the email (Showit pages cannot talk to Flodesk directly).
+To make them real: in Flodesk create an INLINE form for each waitlist
+(Forms > New form > Inline), copy each form's embed code, and send both
+codes to Claude - you'll get updated GroupWaitlist/CourseWaitlist files
+with the real Flodesk forms styled into the design.
+
+IMAGES
+------
+All photos, logos and artwork load from a free image host that is
+already set up and verified working. Nothing for you to upload or
+manage. (Technical note: it's the Netlify project - leave it alone,
+it now quietly serves your site's images. Deleting it breaks every
+image on the site.)
+
+PREVIEW QUIRK
+-------------
+In the Showit EDITOR the animations may look frozen or sections may sit
+there unanimated - that's just the editor. There is also a built-in
+safety so nothing can ever stay invisible. Always judge by the
+published page, not the editor canvas.

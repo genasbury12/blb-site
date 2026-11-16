@@ -1,0 +1,777 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=Caveat:wght@600;700&display=swap">
+<style>
+/* Boss Lady Bloggers brand tokens. Use these variables everywhere. */
+:root{
+  --plum:#3A1C2A;      /* headlines, dark sections, footer */
+  --berry:#A23E66;     /* buttons, accents, the logo arch */
+  --rose:#E9B9CA;      /* highlights on plum, photo frames */
+  --blush:#F6E1E8;     /* section backgrounds, soft cards */
+  --cream:#FBF5EE;     /* main background */
+  --pink-pop:#F6C9D8;  /* italic words on berry heroes (display size only) */
+  --lilac:#EBDDF2;     /* rare accent */
+  --cocoa:#4A2F3B;     /* body text */
+  --mauve:#6E4B5B;     /* captions, muted labels */
+  --white-soft:#FFFCFA;
+  --line:#F0DCE3;
+
+  --font-display:'Instrument Serif',Georgia,serif;
+  --font-body:'Inter',Arial,sans-serif;
+  --font-label:'DM Mono','Courier New',monospace;
+  --font-script:'Caveat','Brush Script MT',cursive;
+
+  --radius-card:24px; --radius-lg:32px; --radius-pill:999px;
+  --max:1180px;
+  --shadow-soft:0 30px 60px rgba(58,28,42,.18);
+}
+/* Google Fonts link (put in <head> of every page):
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=Caveat:wght@600;700&display=swap">
+*/
+
+/* ============================================================
+   Boss Lady Bloggers · shared styles
+   Built from the design helmet CSS + CLAUDE.md rules.
+   ============================================================ */
+
+/* ---------- base ---------- */
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--cream);font-family:var(--font-body);color:var(--cocoa);overflow-x:clip}
+img{max-width:100%;display:block}
+a{color:var(--berry)}
+a:hover{color:var(--plum)}
+main{display:block}
+
+/* skip link + focus */
+.skip-link{position:absolute;left:-9999px;top:0;background:var(--plum);color:#fff;padding:12px 20px;border-radius:0 0 12px 0;z-index:200;font:600 14px/1 var(--font-body)}
+.skip-link:focus{left:0}
+:focus-visible{outline:2px solid var(--berry);outline-offset:2px}
+
+/* ---------- design-system classes (from the helmet) ---------- */
+.hl{background:#E9B9CA;padding:0 .14em;border-radius:6px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.hl-dark{background:#A23E66;color:#FFFFFF;padding:0 .14em;border-radius:6px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+
+@keyframes blspin{to{transform:rotate(360deg)}}
+.bl-spin{animation:blspin 26s linear infinite}
+
+@keyframes blmarq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.bl-track{display:flex;width:max-content;animation:blmarq 38s linear infinite}
+.bl-slow{animation-duration:70s}
+.bl-rev{animation-direction:reverse}
+.bl-marquee:hover .bl-track{animation-play-state:paused}
+
+@keyframes blgrad{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.bl-grad{background:linear-gradient(300deg,#F6E1E8,#FBF5EE,#EBDDF2,#F3C9D7);background-size:300% 300%;animation:blgrad 12s ease infinite}
+.bl-grad404{background:linear-gradient(300deg,#3A1C2A,#59253D,#A23E66,#3A1C2A);background-size:300% 300%;animation:blgrad 12s ease infinite}
+
+@keyframes blfloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.bl-float{animation:blfloat 4s ease-in-out infinite}
+
+.pill{display:inline-flex;align-items:center;gap:14px;min-height:48px;padding:6px 8px 6px 24px;border-radius:999px;font:600 15px/1 var(--font-body);text-decoration:none;box-sizing:border-box;border:0;cursor:pointer}
+.pill-plain{padding:6px 26px}
+.navl{color:var(--plum);text-decoration:none}
+.navl:hover,.navl[aria-current="page"]{color:var(--berry)}
+.card-hover{transition:transform .25s ease}
+.card-hover:hover{transform:translateY(-6px);box-shadow:0 24px 50px rgba(58,28,42,.16)}
+
+/* F7: fanned cards straighten on hover */
+.fan-card{transition:transform .3s ease}
+.fan-card:hover{transform:rotate(0deg) translateY(-6px)!important}
+
+/* hero split row: no upward pull once it stacks on small screens */
+@media (max-width:980px){
+  .hero-split{margin-top:16px!important}
+  .hero-split p{text-align:center!important;margin-bottom:0!important}
+}
+
+/* About: Boss Blend rows compress on phones */
+@media (max-width:680px){
+  .blend-row{grid-template-columns:84px minmax(0,1fr) 84px!important;gap:10px!important}
+  .blend-row>span{font-size:12px!important}
+}
+
+/* Podcast: fixed-size hero scene scales down on phones */
+@media (max-width:480px){
+  .pod-scene{transform:scale(.7);transform-origin:top center;height:380px!important}
+}
+
+/* Instagram strip responsive */
+@media (max-width:980px){.ig-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
+@media (max-width:680px){.ig-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+
+/* even grids (keep exactly, per CLAUDE.md §7) */
+.ev2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+.ev3,.ev3b{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+.ev4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+@media (max-width:1100px){.ev4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:980px){.ev3{grid-template-columns:minmax(0,1fr)}.ev3b{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:680px){.ev2,.ev3b,.ev4{grid-template-columns:minmax(0,1fr)}}
+
+/* ---------- header (F5 sticky) ---------- */
+.site-header{position:sticky;top:0;z-index:50;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;padding:14px clamp(16px,4vw,48px);background:rgba(251,245,238,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.site-logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--plum)}
+.site-logo img{width:31px;height:40px}
+.site-logo .wordmark{font:400 26px/1 var(--font-display)}
+.site-logo .wordmark em{font-style:italic;color:var(--berry)}
+.site-nav{display:flex;flex-wrap:wrap;align-items:center;gap:22px;font:500 14px/1 var(--font-body)}
+.menu-btn{width:48px;height:48px;border-radius:999px;border:0;background:var(--berry);cursor:pointer;display:flex;align-items:center;justify-content:center}
+@media (max-width:980px){.site-nav .navl,.site-nav .nav-boss{display:none}}
+
+/* ---------- popout menu (F4) ---------- */
+.popout{position:fixed;inset:0;z-index:100;background:var(--berry);padding:28px clamp(16px,4vw,48px);overflow-y:auto;display:flex;flex-direction:column;gap:40px;opacity:0;transform:translateY(-12px);pointer-events:none;transition:opacity .25s ease,transform .25s ease;visibility:hidden}
+.popout.open{opacity:1;transform:none;pointer-events:auto;visibility:visible}
+.popout-top{display:flex;justify-content:space-between;align-items:center}
+.popout-close{width:48px;height:48px;border-radius:999px;border:2px solid var(--cream);background:transparent;color:var(--cream);font:400 26px/1 var(--font-body);cursor:pointer}
+.popout-grid{display:flex;flex-wrap:wrap;gap:48px;align-items:flex-start}
+.popout-nav{flex:1 1 380px;min-width:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 32px;font:400 32px/1.1 var(--font-display)}
+.popout-nav a{color:#fff;text-decoration:none}
+.popout-nav a:hover{color:var(--pink-pop)}
+.popout-photo{height:260px;border-radius:24px;background:var(--rose);overflow:hidden;display:flex;align-items:flex-end;padding:20px}
+.popout-photo img{width:100%;height:100%;object-fit:cover}
+.popout-photo:has(img){padding:0}
+body.menu-open{overflow:hidden}
+@media (max-width:680px){.popout-nav{font-size:24px}}
+
+/* ---------- FAQ (F12) ---------- */
+.faq details{border-bottom:1.5px solid var(--line)}
+.faq summary{display:flex;justify-content:space-between;align-items:center;gap:18px;cursor:pointer;list-style:none;padding:22px 4px;font:400 clamp(19px,2.2vw,24px)/1.3 var(--font-display);color:var(--plum)}
+.faq summary::-webkit-details-marker{display:none}
+.faq-plus{flex:0 0 auto;width:34px;height:34px;border-radius:999px;border:1.5px solid var(--berry);color:var(--berry);display:flex;align-items:center;justify-content:center;font:400 20px/1 var(--font-body);transition:transform .25s ease}
+.faq details[open] .faq-plus{transform:rotate(45deg)}
+.faq .faq-a{overflow:hidden;font:400 16px/1.65 var(--font-body);color:var(--cocoa);padding:0 4px}
+.faq details[open] .faq-a{padding-bottom:22px}
+
+/* ---------- tabs (F9/F10) ---------- */
+[role="tab"]{cursor:pointer}
+[role="tabpanel"][hidden]{display:none}
+
+/* ---------- scroll reveal (F19) ---------- */
+.rv{opacity:0;transform:translateY(12px);transition:opacity .5s ease,transform .5s ease}
+.rv.in{opacity:1;transform:none}
+html.no-js .rv{opacity:1;transform:none}
+
+/* ---------- sticky side tab (F15) ---------- */
+.side-tab{position:fixed;left:0;top:50%;transform:rotate(180deg) translateY(50%);writing-mode:vertical-rl;z-index:40;background:var(--berry);color:#fff;text-decoration:none;font:600 13px/1 var(--font-body);letter-spacing:.08em;padding:18px 12px;border-radius:0 12px 12px 0}
+@media (max-width:980px){.side-tab{display:none}}
+
+/* ---------- forms ---------- */
+.form-input{width:100%;min-height:52px;padding:12px 18px;border:1.5px solid var(--rose);border-radius:14px;font:400 16px/1.4 var(--font-body);color:var(--plum);background:#fff}
+.form-input:focus{border-color:var(--berry);outline:none}
+.form-label{font:500 12px/1 var(--font-label);letter-spacing:.12em;text-transform:uppercase;color:var(--mauve)}
+.form-success[hidden]{display:none}
+
+/* ---------- misc ---------- */
+.wrapc{max-width:var(--max);margin:0 auto}
+.label{font:500 13px/1 var(--font-label);letter-spacing:.2em;text-transform:uppercase;color:var(--berry)}
+.script-line{font:700 32px/1.1 var(--font-script);color:var(--berry)}
+
+/* reduced motion: stop loops and auto-movement */
+@media (prefers-reduced-motion: reduce){
+  .bl-spin,.bl-track,.bl-grad,.bl-grad404,.bl-float{animation:none}
+  .rv{opacity:1;transform:none;transition:none}
+  .card-hover,.card-hover:hover{transition:none;transform:none}
+  .fan-card{transition:none}
+}
+
+/* Guarantee badge: on phones, shrink and lift it above the card so it
+   never covers the headline. */
+@media (max-width: 700px) {
+  .gbadge { width: 92px !important; height: 92px !important; top: -64px !important; right: 16px !important; }
+  .gbadge svg { width: 100%; height: 100%; }
+}
+
+/* Flodesk inline embeds: the form ships with empty title and subtitle
+   blocks and its own padding; the card already has a heading, so drop
+   the dead space. */
+div[id^="fd-form"] [class*="__title"],
+div[id^="fd-form"] [class*="__subtitle"] { display: none !important; }
+div[id^="fd-form"] form { padding-top: 0 !important; padding-bottom: 0 !important; }
+
+</style>
+
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <a href="/" class="site-logo">
+    <img src="https://charming-caramel-d2453c.netlify.app/brand/arch-monogram.svg" alt="" width="31" height="40">
+    <span class="wordmark">Boss Lady <em>Bloggers</em></span>
+  </a>
+  <nav aria-label="Main" class="site-nav">
+    <a href="/start-here" class="navl" data-nav="start-here">Start Here</a>
+    <a href="/about" class="navl" data-nav="about">About</a>
+    <a href="/free-trainings" class="navl" data-nav="free-trainings" aria-current="page">Free Trainings</a>
+    <a href="/blog-coaching" class="navl" data-nav="coaching">Coaching</a>
+    <a href="/podcast" class="navl" data-nav="podcast">Podcast</a>
+    <a href="/blog" class="navl" data-nav="blog">Blog</a>
+    <a href="/contact" class="navl" data-nav="contact">Contact</a>
+    <a href="/boss" class="pill pill-plain nav-boss" style="background:#3A1C2A;color:#FFFFFF" data-nav="boss">Explore BOSS</a>
+    <button type="button" class="menu-btn" data-menu-open aria-expanded="false" aria-controls="popout-menu" aria-label="Open full menu">
+      <svg aria-hidden="true" width="18" height="14" viewBox="0 0 18 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M1 1h16M1 7h16M1 13h16"></path></svg>
+    </button>
+  </nav>
+</header>
+
+<div id="popout-menu" class="popout" role="dialog" aria-modal="true" aria-label="Full menu" tabindex="-1">
+  <div class="popout-top">
+    <span style="font:400 26px/1 var(--font-display);color:#FBF5EE">Boss Lady Bloggers</span>
+    <button type="button" class="popout-close" data-menu-close aria-label="Close menu">&times;</button>
+  </div>
+  <div class="popout-grid">
+    <div style="flex:1 1 380px;min-width:0;display:flex;flex-direction:column;gap:18px">
+      <p style="margin:0;font:400 clamp(44px,5vw,72px)/1 var(--font-display);color:#FBF5EE">Helping women build blogs that <em>sell.</em></p>
+      <p style="margin:0;font:400 16px/1.6 var(--font-body);color:#F6E1E8">If you&rsquo;re new here, welcome. Start with the page made for you.</p>
+      <div><a href="/start-here" class="pill pill-plain" style="background:#FBF5EE;color:#3A1C2A">Start here</a></div>
+    </div>
+    <nav aria-label="Full menu" class="popout-nav">
+      <a href="/">Home</a><a href="/about">About</a><a href="/start-here">Start Here</a><a href="/boss">BOSS Business Blueprint</a><a href="/blog-coaching">Blog Coaching</a><a href="/group-coaching">Group Coaching</a><a href="/course">The Course</a><a href="/free-trainings">Free Trainings</a><a href="/podcast">Podcast</a><a href="/blog">Blog</a><a href="/contact">Contact</a><a href="https://www.instagram.com/blogcoach_gen" target="_blank" rel="noopener">Instagram</a>
+    </nav>
+  </div>
+  <div class="popout-photo"><img src="https://charming-caramel-d2453c.netlify.app/images/photos/flatlay-notebook.jpg" alt="Notebook, pen and a Boss mug on a desk" loading="lazy"></div>
+</div>
+<style>
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+@media (max-width:980px){.grid3{grid-template-columns:minmax(0,1fr)}}
+</style>
+<main id="main">
+
+<!-- HERO -->
+<section style="position:relative;padding:clamp(56px,7vw,100px) clamp(16px,4vw,48px) 130px">
+<div style="max-width:1240px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;gap:48px">
+<div style="flex:1 1 560px;min-width:0;display:flex;flex-direction:column;gap:22px">
+<p style="margin:0;font:700 34px/1 var(--font-script);color:#A23E66">free resources</p>
+<h1 style="margin:0;font:400 clamp(48px,6vw,88px)/0.98 var(--font-display);color:#3A1C2A;letter-spacing:-0.02em">You don&rsquo;t need another 100 blogging tips. You need to know <span class="hl">what to do next.</span></h1>
+<p class="rv" style="margin:0;max-width:580px;font:400 18px/1.6 var(--font-body)">You&rsquo;ve watched the tutorials. Saved the Instagram posts. Downloaded the checklists. And spent more hours than you&rsquo;d like to admit trying to figure out how to make money from your blog.</p>
+<div class="rv"><a href="#trainings" class="pill" style="background:#A23E66;color:#FFFFFF">Pick your free training <span aria-hidden="true" style="width:34px;height:34px;border-radius:999px;background:#FFFFFF;display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#A23E66" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></span></a></div>
+</div>
+<div class="rv" style="flex:1 1 400px;min-width:0;position:relative"><img src="https://charming-caramel-d2453c.netlify.app/images/mockups/tools-suite-cream.jpg" alt="The ten free Boss Lady Bloggers tools shown across five devices" loading="eager" style="width:100%;height:auto;display:block;border-radius:28px;box-shadow:0 30px 60px rgba(58,28,42,.18)"><span style="position:absolute;left:50%;bottom:-8px;transform:translateX(-50%);background:#FFFFFF;border-radius:999px;padding:12px 20px;font:600 14px/1 var(--font-body);color:#3A1C2A;box-shadow:0 10px 24px rgba(58,28,42,.15);white-space:nowrap">10 trainings &#183; 10 tools &#183; $0</span></div>
+</div>
+<div style="position:absolute;left:50%;bottom:-66px;transform:translateX(-50%);width:132px;height:132px;z-index:5">
+<img src="https://charming-caramel-d2453c.netlify.app/brand/badge.svg" alt="" width="132" height="132" class="bl-spin" style="display:block;border-radius:999px;box-shadow:0 10px 30px rgba(58,28,42,.25)">
+</div>
+</section>
+
+<!-- QUESTIONS -->
+<section style="background:#3A1C2A;padding:140px clamp(16px,4vw,48px) 110px">
+<div style="max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:44px;align-items:center;text-align:center">
+<h2 class="rv" style="margin:0;font:400 clamp(38px,4.4vw,62px)/1.06 var(--font-display);color:#FBF5EE">But you&rsquo;re still wondering&#8230;</h2>
+<div style="display:flex;flex-wrap:wrap;gap:22px;justify-content:center">
+<div class="rv" style="background:#E9B9CA;border-radius:16px;padding:24px 28px;transform:rotate(-3deg);font:400 26px/1.15 var(--font-display);color:#3A1C2A">What should I sell?</div>
+<div class="rv" style="background:#F6E1E8;border-radius:16px;padding:24px 28px;transform:rotate(2deg);font:400 26px/1.15 var(--font-display);color:#3A1C2A">Why isn&rsquo;t anyone buying?</div>
+<div class="rv" style="background:#FBF5EE;border-radius:16px;padding:24px 28px;transform:rotate(-1.5deg);font:400 26px/1.15 var(--font-display);color:#3A1C2A">Is my website the problem?</div>
+<div class="rv" style="background:#E9B9CA;border-radius:16px;padding:24px 28px;transform:rotate(3deg);font:400 26px/1.15 var(--font-display);color:#3A1C2A">Traffic, email, or a product?</div>
+</div>
+<p class="rv" style="margin:0;font:400 clamp(30px,3.4vw,46px)/1.1 var(--font-display);color:#FBF5EE">Let&rsquo;s stop collecting advice and start <span class="hl-dark">figuring things out.</span></p>
+</div>
+</section>
+
+<!-- HOW IT WORKS 3 STEPS -->
+<section style="padding:90px clamp(16px,4vw,48px)">
+<div class="ev3" style="max-width:1100px;margin:0 auto;gap:20px">
+<div class="rv" style="background:#FFFFFF;border-radius:24px;padding:32px;display:flex;flex-direction:column;gap:10px"><span style="font:400 64px/0.9 var(--font-display);color:#A23E66">01</span><span style="font:400 30px/1.1 var(--font-display);color:#3A1C2A">Watch the training.</span></div>
+<div class="rv" style="background:#FFFFFF;border-radius:24px;padding:32px;display:flex;flex-direction:column;gap:10px"><span style="font:400 64px/0.9 var(--font-display);color:#A23E66">02</span><span style="font:400 30px/1.1 var(--font-display);color:#3A1C2A">Use the tool.</span></div>
+<div class="rv" style="background:#A23E66;border-radius:24px;padding:32px;display:flex;flex-direction:column;gap:10px"><span style="font:400 64px/0.9 var(--font-display);color:#F6E1E8">03</span><span style="font:400 30px/1.1 var(--font-display);color:#FFFFFF">Walk away with something you can actually implement.</span></div>
+</div>
+</section>
+
+<!-- TRAININGS -->
+<section id="trainings" style="padding:100px clamp(16px,4vw,48px);background:#F6E1E8">
+<div style="max-width:1180px;margin:0 auto;display:flex;flex-direction:column;gap:44px">
+<div style="text-align:center;display:flex;flex-direction:column;gap:14px;align-items:center">
+<p class="rv" style="margin:0;font:500 13px/1 var(--font-label);letter-spacing:0.2em;text-transform:uppercase;color:#A23E66">10 free trainings and 10 free business tools</p>
+<h2 class="rv" style="margin:0;font:400 clamp(40px,5vw,70px)/1.02 var(--font-display);color:#3A1C2A">Start with the problem you&rsquo;re trying to solve <span class="hl" style="background:#FFFFFF">right now.</span></h2>
+<p class="rv" style="margin:0;font:400 18px/1.6 var(--font-body)">You don&rsquo;t need to go through all 10.</p>
+</div>
+
+<div style="display:flex;flex-wrap:wrap;border-radius:32px;overflow:hidden;background:#3A1C2A">
+<div style="flex:1 1 520px;min-width:0;padding:clamp(32px,5vw,60px);display:flex;flex-direction:column;gap:18px">
+<p style="margin:0;font:700 30px/1 var(--font-script);color:#E9B9CA">start here</p>
+<p style="margin:0;font:500 12px/1 var(--font-label);letter-spacing:0.18em;text-transform:uppercase;color:#F0DCE3">01 &#183; Business Foundations</p>
+<h3 style="margin:0;font:400 clamp(32px,3.4vw,48px)/1.04 var(--font-display);color:#FBF5EE">Why your blog isn&rsquo;t making money (even though you&rsquo;re doing everything they told you)</h3>
+<p style="margin:0;font:400 16px/1.6 var(--font-body);color:#F0DCE3">You&rsquo;ve followed the advice. Written the posts. Worked on traffic. But where are the sales? Learn why building a blog and building a business aren&rsquo;t the same thing.</p>
+<div style="background:rgba(251,245,238,0.08);border:1px solid rgba(246,225,232,0.3);border-radius:18px;padding:20px;display:flex;flex-direction:column;gap:8px">
+<p style="margin:0;font:500 11px/1 var(--font-label);letter-spacing:0.16em;color:#E9B9CA">YOUR FREE TOOL: THE FOUNDATIONS BUILDER</p>
+<p style="margin:0;font:400 15px/1.55 var(--font-body);color:#FBF5EE">A guided business planning tool to define your audience, the problem you solve, what you could sell, and how the business fits together.</p>
+<p style="margin:0;font:600 14px/1.5 var(--font-body);color:#E9B9CA">You&rsquo;ll walk away with: a clearer foundation for the business you&rsquo;re trying to build.</p>
+</div>
+<div><a href="https://bossladybloggers.myflodesk.com/build" target="_blank" rel="noopener" class="pill" style="background:#FBF5EE;color:#3A1C2A">Get the free training and Foundations Builder <span aria-hidden="true" style="width:34px;height:34px;border-radius:999px;background:#A23E66;display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></span></a></div>
+</div>
+<div style="overflow:hidden;flex:1 1 340px;min-width:0;min-height:360px;position:relative;background:#E9B9CA;display:flex;align-items:flex-end;padding:24px"><img src="https://charming-caramel-d2453c.netlify.app/images/mockups/foundations-scene.jpg" alt="The Foundations Builder free tool on a tablet and phone" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top"><span style="position:absolute;right:24px;top:24px;background:#FFFFFF;border-radius:999px;padding:10px 16px;font:600 13px/1 var(--font-body);color:#A23E66">Most popular</span></div>
+</div>
+
+<div class="grid3">
+<article class="card-hover rv" style="background:#FFFFFF;border-radius:24px;padding:28px;display:flex;flex-direction:column;gap:14px">
+<div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><span style="font:400 52px/1 var(--font-display);color:#A23E66">02</span><span style="background:#F6E1E8;color:#3A1C2A;border-radius:999px;padding:8px 14px;font:500 11px/1 var(--font-label);letter-spacing:0.12em;text-transform:uppercase">Offer Discovery</span></div>
+<h3 style="margin:0;font:400 clamp(30px,3vw,40px)/1.06 var(--font-display);color:#3A1C2A;-webkit-text-stroke:0.6px #3A1C2A">What should you actually sell on your blog? How to find an offer people want to buy</h3>
+<p style="margin:0;font:500 17px/1.6 var(--font-body);color:#3A1C2A">An ebook? A course? A membership? A service? If you&rsquo;ve got a hundred ideas but no idea which one is worth pursuing, start here.</p>
+<div style="background:#FBF5EE;border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:6px;flex-grow:1"><img src="https://charming-caramel-d2453c.netlify.app/images/mockups/02-offer-finder.jpg" alt="The Offer Finder free tool on a laptop and phone" loading="lazy" style="width:100%;border-radius:10px;display:block">
+<p style="margin:0;font:500 11px/1.3 var(--font-label);letter-spacing:0.14em;color:#A23E66;text-transform:uppercase">Your free tool: The Offer Finder</p>
+<p style="margin:0;font:500 16px/1.55 var(--font-body);color:#3A1C2A">A guided offer discovery tool that helps you evaluate your skills, audience, and potential business opportunities.</p>
+<p style="margin:0;font:600 14px/1.5 var(--font-body);color:#3A1C2A">You&rsquo;ll walk away with: promising offer ideas to research and test.</p>
+</div>
+<a href="https://bossladybloggers.myflodesk.com/offer" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;min-height:48px;border-radius:999px;background:#A23E66;color:#FFFFFF;font:600 14px/1.2 var(--font-body);text-decoration:none;padding:8px 18px;text-align:center">Get the free training and Offer Finder</a>
+</article>
+<article class="card-hover rv" style="background:#FFFFFF;border-radius:24px;padding:28px;display:flex;flex-direction:column;gap:14px">
+<div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><span style="font:400 52px/1 var(--font-display);color:#A23E66">03</span><span style="background:#F6E1E8;color:#3A1C2A;border-radius:999px;padding:8px 14px;font:500 11px/1 var(--font-label);letter-spacing:0.12em;text-transform:uppercase">Offer Validation</span></div>
+<h3 style="margin:0;font:400 clamp(30px,3vw,40px)/1.06 var(--font-display);color:#3A1C2A;-webkit-text-stroke:0.6px #3A1C2A">Before you spend months creating that product, find out if anyone will actually buy it.</h3>
+<p style="margin:0;font:500 17px/1.6 var(--font-body);color:#3A1C2A">Imagine spending three months building a product only to launch it and hear absolutely nothing. Let&rsquo;s try to avoid that.</p>
+<div style="background:#FBF5EE;border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:6px;flex-grow:1"><img src="https://charming-caramel-d2453c.netlify.app/images/mockups/03-presale-planner.jpg" alt="The Presale Planner free tool on a laptop and phone" loading="lazy" style="width:100%;border-radius:10px;display:block">
+<p style="margin:0;font:500 11px/1.3 var(--font-label);letter-spacing:0.14em;color:#A23E66;text-transform:uppercase">Your free tool: The Pre-Sale Planner</p>
+<p style="margin:0;font:500 16px/1.55 var(--font-body);color:#3A1C2A">A guided planning resource to organize your offer test, decide what to communicate, and track how potential buyers respond.</p>
+<p style="margin:0;font:600 14px/1.5 var(--font-body);color:#3A1C2A">You&rsquo;ll walk away with: a practical plan for testing demand before building the complete product.</p>
+</div>
+<a href="https://bossladybloggers.myflodesk.com/presell" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;min-height:48px;border-radius:999px;background:#A23E66;color:#FFFFFF;font:600 14px/1.2 var(--font-body);text-decoration:none;padding:8px 18px;text-align:center">Get the free training and Pre-Sale Planner</a>
+</article>
+<article class="card-hover rv" style="background:#FFFFFF;border-radius:24px;padding:28px;display:flex;flex-direction:column;gap:14px">
+<div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><span style="font:400 52px/1 var(--font-display);color:#A23E66">04</span><span style="background:#F6E1E8;color:#3A1C2A;border-radius:999px;padding:8px 14px;font:500 11px/1 var(--font-label);letter-spacing:0.12em;text-transform:uppercase">Offer Diagnostic</span></div>
+<h3 style="margin:0;font:400 clamp(30px,3vw,40px)/1.06 var(--font-display);color:#3A1C2A;-webkit-text-stroke:0.6px #3A1C2A">You created an offer nobody&rsquo;s buying. Here&rsquo;s how to find out what&rsquo;s wrong.</h3>
+<p style="margin:0;font:500 17px/1.6 var(--font-body);color:#3A1C2A">You created the product, published the sales page, told your audience, and nobody&rsquo;s buying. Before you change everything, figure out what actually needs attention.</p>
+<div style="background:#FBF5EE;border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:6px;flex-grow:1"><img src="https://charming-caramel-d2453c.netlify.app/images/mockups/04-offer-leak-score.jpg" alt="The Offer Leak Score free tool on a laptop and phone" loading="lazy" style="width:100%;border-radius:10px;display:block">
+<p style="margin:0;font:500 11px/1.3 var(--font-label);letter-spacing:0.14em;color:#A23E66;text-transform:uppercase">Your free tool: The Offer Leak Score</p>
+<p style="margin:0;font:500 16px/1.55 var(--font-body);color:#3A1C2A">A guided offer audit to evaluate your promise, positioning, audience fit, and buying objections.</p>
+<p style="margin:0;font:600 14px/1.5 var(--font-body);color:#3A1C2A">You&rsquo;ll walk away with: potential weaknesses in your offer and which ones to investigate first.</p>
+</div>
+<a href="https://bossladybloggers.myflodesk.com/fix" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;min-height:48px;border-radius:999px;background:#A23E66;color:#FFFFFF;font:600 14px/1.2 var(--font-body);text-decoration:none;padding:8px 18px;text-align:center">Get the free training and Offer Leak Score</a>
+</article>
+<article class="card-hover rv" style="background:#FFFFFF;border-radius:24px;padding:28px;display:flex;flex-direction:column;gap:14px">
+<div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><span style="font:400 52px/1 var(--font-display);color:#A23E66">05</span><span style="background:#F6E1E8;color:#3A1C2A;border-radius:999px;padding:8px 14px;font:500 11px/1 var(--font-label);letter-spacing:0.12em;text-transform:uppercase">Sales Diagnostic</span></div>
+<h3 style="margin:0;font:400 clamp(30px,3vw,40px)/1.06 var(--font-display);color:#3A1C2A;-webkit-text-stroke:0.6px #3A1C2A">People are reading your content but nobody&rsquo;s buying. Here&rsquo;s where you could be losing sales.</h3>
+<p style="margin:0;font:500 17px/1.6 var(--font-body);color:#3A1C2A">You&rsquo;re getting visitors, clicks, or email signups, but those people aren&rsquo;t becoming customers. What&rsquo;s happening?</p>
+<div style="background:#FBF5EE;border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:6px;flex-grow:1"><img src="https://charming-caramel-d2453c.netlify.app/images/mockups/05-sales-leak-finder.jpg" alt="The Sales Leak Finder free tool on a laptop and phone" loading="lazy" style="width:100%;border-radius:10px;display:block">
+<p style="margin:0;font:500 11px/1.3 var(--font-label);letter-spacing:0.14em;color:#A23E66;text-transform:uppercase">Your free tool: The Sales Leak Finder</p>
+<p style="margin:0;font:500 16px/1.55 var(--font-body);color:#3A1C2A">A guided diagnostic to examine your sales process, from discovery to the purchase decision.</p>
+<p style="margin:0;font:600 14px/1.5 var(--font-body);color:#3A1C2A">You&rsquo;ll walk away with: a prioritized list of potential sales process problems.</p>
+</div>
+<a href="https://bossladybloggers.myflodesk.com/sales" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;min-height:48px;border-radius:999px;background:#A23E66;color:#FFFFFF;font:600 14px/1.2 var(--font-body);text-decoration:none;padding:8px 18px;text-align:center">Get the free training and Sales Leak Finder</a>
+</article>
+<article class="card-hover rv" style="background:#FFFFFF;border-radius:24px;padding:28px;display:flex;flex-direction:column;gap:14px">
+<div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><span style="font:400 52px/1 var(--font-display);color:#A23E66">06</span><span style="background:#F6E1E8;color:#3A1C2A;border-radius:999px;padding:8px 14px;font:500 11px/1 var(--font-label);letter-spacing:0.12em;text-transform:uppercase">Website</span></div>
+<h3 style="margin:0;font:400 clamp(30px,3vw,40px)/1.06 var(--font-display);color:#3A1C2A;-webkit-text-stroke:0.6px #3A1C2A">Your website looks beautiful. But is it actually helping you make money?</h3>
+<p style="margin:0;font:500 17px/1.6 var(--font-body);color:#3A1C2A">You&rsquo;ve spent hours on fonts, colors, images, and layouts. But can someone land on your homepage and understand what you sell?</p>
+<div style="background:#FBF5EE;border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:6px;flex-grow:1"><img src="https://charming-caramel-d2453c.netlify.app/images/mockups/06-homepage-builder.jpg" alt="The Homepage Builder free tool on a laptop and phone" loading="lazy" style="width:100%;border-radius:10px;display:block">
+<p style="margin:0;font:500 11px/1.3 var(--font-label);letter-spacing:0.14em;color:#A23E66;text-transform:uppercase">Your free tool: The Homepage Builder</p>
+<p style="margin:0;font:500 16px/1.55 var(--font-body);color:#3A1C2A">A guided messaging tool that helps you plan the essential sections of a homepage built around your offers.</p>
+<p style="margin:0;font:600 14px/1.5 var(--font-body);color:#3A1C2A">You&rsquo;ll walk away with: a homepage outline and messaging draft.</p>
+</div>
+<a href="https://bossladybloggers.myflodesk.com/site" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;min-height:48px;border-radius:999px;background:#A23E66;color:#FFFFFF;font:600 14px/1.2 var(--font-body);text-decoration:none;padding:8px 18px;text-align:center">Get the free training and Homepage Builder</a>
+</article>
+<article class="card-hover rv" style="background:#FFFFFF;border-radius:24px;padding:28px;display:flex;flex-direction:column;gap:14px">
+<div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><span style="font:400 52px/1 var(--font-display);color:#A23E66">07</span><span style="background:#F6E1E8;color:#3A1C2A;border-radius:999px;padding:8px 14px;font:500 11px/1 var(--font-label);letter-spacing:0.12em;text-transform:uppercase">Conversion</span></div>
+<h3 style="margin:0;font:400 clamp(30px,3vw,40px)/1.06 var(--font-display);color:#3A1C2A;-webkit-text-stroke:0.6px #3A1C2A">The missing steps between someone finding your blog and actually buying from you</h3>
+<p style="margin:0;font:500 17px/1.6 var(--font-body);color:#3A1C2A">Someone finds your blog, reads your content, loves it, and disappears. What went wrong?</p>
+<div style="background:#FBF5EE;border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:6px;flex-grow:1"><img src="https://charming-caramel-d2453c.netlify.app/images/mockups/07-conversion-checker.jpg" alt="The Conversion Checker free tool on a laptop and phone" loading="lazy" style="width:100%;border-radius:10px;display:block">
+<p style="margin:0;font:500 11px/1.3 var(--font-label);letter-spacing:0.14em;color:#A23E66;text-transform:uppercase">Your free tool: The Conversion Checker</p>
+<p style="margin:0;font:500 16px/1.55 var(--font-body);color:#3A1C2A">A guided review of your content and website to identify opportunities to improve the path toward an offer.</p>
+<p style="margin:0;font:600 14px/1.5 var(--font-body);color:#3A1C2A">You&rsquo;ll walk away with: a focused list of conversion improvements to test.</p>
+</div>
+<a href="https://bossladybloggers.myflodesk.com/convert" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;min-height:48px;border-radius:999px;background:#A23E66;color:#FFFFFF;font:600 14px/1.2 var(--font-body);text-decoration:none;padding:8px 18px;text-align:center">Get the free training and Conversion Checker</a>
+</article>
+<article class="card-hover rv" style="background:#FFFFFF;border-radius:24px;padding:28px;display:flex;flex-direction:column;gap:14px">
+<div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><span style="font:400 52px/1 var(--font-display);color:#A23E66">08</span><span style="background:#F6E1E8;color:#3A1C2A;border-radius:999px;padding:8px 14px;font:500 11px/1 var(--font-label);letter-spacing:0.12em;text-transform:uppercase">Email + Sales</span></div>
+<h3 style="margin:0;font:400 clamp(30px,3vw,40px)/1.06 var(--font-display);color:#3A1C2A;-webkit-text-stroke:0.6px #3A1C2A">You have an email list. Now what? How to turn subscribers into paying customers</h3>
+<p style="margin:0;font:500 17px/1.6 var(--font-body);color:#3A1C2A">You&rsquo;ve worked hard to grow your email list, but now you&rsquo;re wondering what to send besides blog posts.</p>
+<div style="background:#FBF5EE;border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:6px;flex-grow:1"><img src="https://charming-caramel-d2453c.netlify.app/images/mockups/08-email-writer.jpg" alt="The Email Writer free tool on a laptop and phone" loading="lazy" style="width:100%;border-radius:10px;display:block">
+<p style="margin:0;font:500 11px/1.3 var(--font-label);letter-spacing:0.14em;color:#A23E66;text-transform:uppercase">Your free tool: The Email Writer</p>
+<p style="margin:0;font:500 16px/1.55 var(--font-body);color:#3A1C2A">A guided resource to develop emails around your audience&rsquo;s problems and your paid offers.</p>
+<p style="margin:0;font:600 14px/1.5 var(--font-body);color:#3A1C2A">You&rsquo;ll walk away with: draft emails you can personalize and use.</p>
+</div>
+<a href="https://bossladybloggers.myflodesk.com/email" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;min-height:48px;border-radius:999px;background:#A23E66;color:#FFFFFF;font:600 14px/1.2 var(--font-body);text-decoration:none;padding:8px 18px;text-align:center">Get the free training and Email Writer</a>
+</article>
+<article class="card-hover rv" style="background:#FFFFFF;border-radius:24px;padding:28px;display:flex;flex-direction:column;gap:14px">
+<div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><span style="font:400 52px/1 var(--font-display);color:#A23E66">09</span><span style="background:#F6E1E8;color:#3A1C2A;border-radius:999px;padding:8px 14px;font:500 11px/1 var(--font-label);letter-spacing:0.12em;text-transform:uppercase">Business Planning</span></div>
+<h3 style="margin:0;font:400 clamp(30px,3vw,40px)/1.06 var(--font-display);color:#3A1C2A;-webkit-text-stroke:0.6px #3A1C2A">Stop doing 100 things for your blog. Here&rsquo;s how to figure out what will actually make you money.</h3>
+<p style="margin:0;font:500 17px/1.6 var(--font-body);color:#3A1C2A">Your to do list is endless. Blog posts, pins, Instagram, products, website updates, emails. Which deserves your attention?</p>
+<div style="background:#FBF5EE;border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:6px;flex-grow:1"><img src="https://charming-caramel-d2453c.netlify.app/images/mockups/09-plan-builder.jpg" alt="The Plan Builder free tool on a laptop and phone" loading="lazy" style="width:100%;border-radius:10px;display:block">
+<p style="margin:0;font:500 11px/1.3 var(--font-label);letter-spacing:0.14em;color:#A23E66;text-transform:uppercase">Your free tool: The 90-Day Plan Builder</p>
+<p style="margin:0;font:500 16px/1.55 var(--font-body);color:#3A1C2A">A guided business planning tool to assess your stage, choose projects, and organize your next steps.</p>
+<p style="margin:0;font:600 14px/1.5 var(--font-body);color:#3A1C2A">You&rsquo;ll walk away with: a personalized 90 day action plan based on the information you provide.</p>
+</div>
+<a href="https://bossladybloggers.myflodesk.com/plan" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;min-height:48px;border-radius:999px;background:#A23E66;color:#FFFFFF;font:600 14px/1.2 var(--font-body);text-decoration:none;padding:8px 18px;text-align:center">Get the free training and 90-Day Plan Builder</a>
+</article>
+<article class="card-hover rv" style="background:#FFFFFF;border-radius:24px;padding:28px;display:flex;flex-direction:column;gap:14px">
+<div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><span style="font:400 52px/1 var(--font-display);color:#A23E66">10</span><span style="background:#F6E1E8;color:#3A1C2A;border-radius:999px;padding:8px 14px;font:500 11px/1 var(--font-label);letter-spacing:0.12em;text-transform:uppercase">How I Use Claude</span></div>
+<h3 style="margin:0;font:400 clamp(30px,3vw,40px)/1.06 var(--font-display);color:#3A1C2A;-webkit-text-stroke:0.6px #3A1C2A">How I use Claude to run my blogging business without spending my entire day doing everything myself</h3>
+<p style="margin:0;font:500 17px/1.6 var(--font-body);color:#3A1C2A">What if you could spend less time organizing, planning, drafting, and figuring out what to do next?</p>
+<div style="background:#FBF5EE;border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:6px;flex-grow:1"><img src="https://charming-caramel-d2453c.netlify.app/images/mockups/10-claude-starter-kit.jpg" alt="The Claude Starter Kit free tool on a laptop and phone" loading="lazy" style="width:100%;border-radius:10px;display:block">
+<p style="margin:0;font:500 11px/1.3 var(--font-label);letter-spacing:0.14em;color:#A23E66;text-transform:uppercase">Your free tool: The Claude Starter Kit</p>
+<p style="margin:0;font:500 16px/1.55 var(--font-body);color:#3A1C2A">A collection of practical instructions and prompts to start using Claude for real business tasks.</p>
+<p style="margin:0;font:600 14px/1.5 var(--font-body);color:#3A1C2A">You&rsquo;ll walk away with: a starting point for using Claude to support your own business.</p>
+</div>
+<a href="https://bossladybloggers.myflodesk.com/claude" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;min-height:48px;border-radius:999px;background:#A23E66;color:#FFFFFF;font:600 14px/1.2 var(--font-body);text-decoration:none;padding:8px 18px;text-align:center">Get the free training and Claude Starter Kit</a>
+</article>
+</div>
+</div>
+</section>
+
+<!-- YOUTUBE -->
+<section class="bl-grad" style="padding:110px clamp(16px,4vw,48px)">
+<div style="max-width:1180px;margin:0 auto;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-wrap:wrap;gap:32px;align-items:flex-end;justify-content:space-between">
+<div style="flex:1 1 520px;min-width:0;display:flex;flex-direction:column;gap:14px">
+<p class="rv" style="margin:0;font:700 32px/1 var(--font-script);color:#A23E66">prefer watching?</p>
+<h2 class="rv" style="margin:0;font:400 clamp(40px,4.8vw,66px)/1.02 var(--font-display);color:#3A1C2A">Come hang out on YouTube.</h2>
+<p class="rv" style="margin:0;font:400 17px/1.6 var(--font-body)">See how I build, market, and manage my own online business. Money making blogs, offers, websites, email marketing, launch strategy, Claude, and productivity.</p>
+</div>
+<a href="https://www.youtube.com/@GenasysLynn" target="_blank" rel="noopener" class="pill pill-plain rv" style="background:#3A1C2A;color:#FFFFFF">Watch on YouTube</a>
+</div>
+<div class="ev3" style="gap:20px">
+<a class="rv card-hover" href="https://www.youtube.com/watch?v=YMbXVmb0LXY" target="_blank" rel="noopener" aria-label="Watch video 1 on YouTube" style="aspect-ratio:16/9;border-radius:20px;overflow:hidden;position:relative;display:block;background:#3A1C2A"><img src="https://charming-caramel-d2453c.netlify.app/images/videos/video-1.jpg" alt="" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"><span aria-hidden="true" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center"><span style="width:64px;height:64px;border-radius:999px;background:rgba(251,245,238,.92);box-shadow:0 10px 24px rgba(58,28,42,.35);display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 22 22"><path d="M7 4l12 7-12 7z" fill="#A23E66"></path></svg></span></span></a>
+<a class="rv card-hover" href="https://www.youtube.com/watch?v=nGh0bNGXLRI" target="_blank" rel="noopener" aria-label="Watch video 2 on YouTube" style="aspect-ratio:16/9;border-radius:20px;overflow:hidden;position:relative;display:block;background:#3A1C2A"><img src="https://charming-caramel-d2453c.netlify.app/images/videos/video-2.jpg" alt="" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"><span aria-hidden="true" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center"><span style="width:64px;height:64px;border-radius:999px;background:rgba(251,245,238,.92);box-shadow:0 10px 24px rgba(58,28,42,.35);display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 22 22"><path d="M7 4l12 7-12 7z" fill="#A23E66"></path></svg></span></span></a>
+<a class="rv card-hover" href="https://www.youtube.com/watch?v=IG8QxfSpVkw" target="_blank" rel="noopener" aria-label="Watch video 3 on YouTube" style="aspect-ratio:16/9;border-radius:20px;overflow:hidden;position:relative;display:block;background:#3A1C2A"><img src="https://charming-caramel-d2453c.netlify.app/images/videos/video-3.jpg" alt="" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"><span aria-hidden="true" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center"><span style="width:64px;height:64px;border-radius:999px;background:rgba(251,245,238,.92);box-shadow:0 10px 24px rgba(58,28,42,.35);display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 22 22"><path d="M7 4l12 7-12 7z" fill="#A23E66"></path></svg></span></span></a>
+</div>
+</div>
+</section>
+
+<!-- PODCAST BAND -->
+<section style="background:#3A1C2A;padding:100px clamp(16px,4vw,48px)">
+<div style="max-width:1180px;margin:0 auto;display:flex;flex-wrap:wrap;gap:48px;align-items:center">
+<div style="flex:1 1 460px;min-width:0;display:flex;flex-direction:column;gap:18px">
+<h2 class="rv" style="margin:0;font:400 clamp(44px,5vw,76px)/0.98 var(--font-display);color:#FBF5EE">Listen to the Boss Lady Bloggers <em style="color:#E9B9CA">Podcast</em></h2>
+<p class="rv" style="margin:0;font:400 17px/1.6 var(--font-body);color:#F0DCE3">Blogging, business, and the conversations you actually need to hear. Listen while driving, cleaning, walking, or fitting business learning into a busy day.</p>
+<div class="rv"><a href="/podcast" class="pill pill-plain" style="background:#FBF5EE;color:#3A1C2A">Listen to the podcast</a></div>
+</div>
+<div style="flex:1 1 460px;min-width:0;display:flex;flex-direction:column">
+<div class="rv" style="display:flex;align-items:center;gap:18px;padding:20px 0;border-bottom:1px solid rgba(246,225,232,0.25)"><span style="font:500 12px/1 var(--font-label);color:#E9B9CA">01</span><span style="flex-grow:1;font:400 24px/1.15 var(--font-display);color:#FBF5EE"><a href="https://open.spotify.com/episode/6iEravIODHZt9DDeCsP1TO" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">Why Is My Blog Not Getting Traffic? (You Don&rsquo;t Need More)</a></span></div>
+<div class="rv" style="display:flex;align-items:center;gap:18px;padding:20px 0;border-bottom:1px solid rgba(246,225,232,0.25)"><span style="font:500 12px/1 var(--font-label);color:#E9B9CA">02</span><span style="flex-grow:1;font:400 24px/1.15 var(--font-display);color:#FBF5EE"><a href="https://open.spotify.com/episode/6dDxGyHRNU3LyHZqhhRnKp" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">100 Blog Posts. Zero Sales. What&rsquo;s Actually Going Wrong?</a></span></div>
+<div class="rv" style="display:flex;align-items:center;gap:18px;padding:20px 0;border-bottom:1px solid rgba(246,225,232,0.25)"><span style="font:500 12px/1 var(--font-label);color:#E9B9CA">03</span><span style="flex-grow:1;font:400 24px/1.15 var(--font-display);color:#FBF5EE"><a href="https://open.spotify.com/episode/1GjHLHBhdaRHXwJuxPTk4z" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">Blog Not Making Money? Start a Money Making Blog</a></span></div>
+</div>
+</div>
+</section>
+
+<!-- BLOG CATEGORIES -->
+<section style="padding:110px clamp(16px,4vw,48px)">
+<div style="max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:36px;align-items:center">
+<h2 class="rv" style="margin:0;text-align:center;font:400 clamp(40px,4.6vw,64px)/1.02 var(--font-display);color:#3A1C2A">Want to keep learning? <span class="hl">Explore the blog.</span></h2>
+<div class="ev3b" style="width:100%;gap:16px">
+<a href="#" class="card-hover rv" style="display:flex;align-items:center;justify-content:space-between;min-height:90px;padding:0 28px;border-radius:22px;background:#FFFFFF;text-decoration:none;font:400 26px/1.1 var(--font-display);color:#3A1C2A">Starting a Blog <span aria-hidden="true" style="color:#A23E66">&#8599;&#65038;</span></a>
+<a href="#" class="card-hover rv" style="display:flex;align-items:center;justify-content:space-between;min-height:90px;padding:0 28px;border-radius:22px;background:#E9B9CA;text-decoration:none;font:400 26px/1.1 var(--font-display);color:#3A1C2A">Making Money Blogging <span aria-hidden="true">&#8599;&#65038;</span></a>
+<a href="#" class="card-hover rv" style="display:flex;align-items:center;justify-content:space-between;min-height:90px;padding:0 28px;border-radius:22px;background:#FFFFFF;text-decoration:none;font:400 26px/1.1 var(--font-display);color:#3A1C2A">Digital Products and Offers <span aria-hidden="true" style="color:#A23E66">&#8599;&#65038;</span></a>
+<a href="#" class="card-hover rv" style="display:flex;align-items:center;justify-content:space-between;min-height:90px;padding:0 28px;border-radius:22px;background:#3A1C2A;text-decoration:none;font:400 26px/1.1 var(--font-display);color:#FBF5EE">Blogging and SEO <span aria-hidden="true" style="color:#E9B9CA">&#8599;&#65038;</span></a>
+<a href="#" class="card-hover rv" style="display:flex;align-items:center;justify-content:space-between;min-height:90px;padding:0 28px;border-radius:22px;background:#FFFFFF;text-decoration:none;font:400 26px/1.1 var(--font-display);color:#3A1C2A">Email Marketing and Sales <span aria-hidden="true" style="color:#A23E66">&#8599;&#65038;</span></a>
+<a href="#" class="card-hover rv" style="display:flex;align-items:center;justify-content:space-between;min-height:90px;padding:0 28px;border-radius:22px;background:#F6E1E8;text-decoration:none;font:400 26px/1.1 var(--font-display);color:#3A1C2A">AI and Business Productivity <span aria-hidden="true" style="color:#A23E66">&#8599;&#65038;</span></a>
+</div>
+<a href="/blog" class="pill pill-plain" style="background:transparent;color:#3A1C2A;border:2px solid #3A1C2A">Browse all blog posts</a>
+</div>
+</section>
+
+<!-- TWO OFFERS -->
+<section style="padding:0 clamp(16px,4vw,48px) 110px">
+<div class="ev2" style="max-width:1180px;margin:0 auto;gap:20px">
+<article class="rv" style="min-width:0;background:#E9B9CA;border-radius:30px;padding:clamp(28px,4vw,52px);display:flex;flex-direction:column;gap:16px">
+<p style="margin:0;font:700 28px/1 var(--font-script);color:#A23E66">ready to stop piecing it together?</p>
+<h3 style="margin:0;font:400 clamp(34px,3.4vw,48px)/1.04 var(--font-display);color:#3A1C2A">Meet The BOSS Business System</h3>
+<p style="margin:0;font:400 16px/1.65 var(--font-body);color:#3A1C2A">Free trainings help you solve individual problems, but eventually you need to put the pieces together: offer, brand, website, content, email marketing, sales, and systems.</p>
+<div style="margin-top:auto"><a href="/boss" class="pill pill-plain" style="background:#3A1C2A;color:#FFFFFF">Explore the BOSS Business System</a></div>
+</article>
+<article class="rv" style="min-width:0;background:#3A1C2A;border-radius:30px;padding:clamp(28px,4vw,52px);display:flex;flex-direction:column;gap:16px">
+<p style="margin:0;font:700 28px/1 var(--font-script);color:#E9B9CA">want me in your corner?</p>
+<h3 style="margin:0;font:400 clamp(34px,3.4vw,48px)/1.04 var(--font-display);color:#FBF5EE">Want me to help you with your actual blog?</h3>
+<p style="margin:0;font:400 16px/1.65 var(--font-body);color:#F0DCE3">Inside The Blog Profit Intensive, we&rsquo;ll work together privately for 12 weeks. We&rsquo;ll identify what&rsquo;s preventing sales, develop or improve your offer, build front end and back end sales strategies, and prepare and execute a sales campaign.</p>
+<div style="margin-top:auto"><a href="/blog-coaching" class="pill pill-plain" style="background:#FBF5EE;color:#3A1C2A">Explore private blog coaching</a></div>
+</article>
+</div>
+</section>
+
+<!-- FINAL CTA -->
+<section style="padding:120px clamp(16px,4vw,48px);background:#E9B9CA;text-align:center">
+<div style="max-width:900px;margin:0 auto;display:flex;flex-direction:column;gap:22px;align-items:center">
+<h2 class="rv" style="margin:0;font:400 clamp(44px,5.6vw,84px)/1 var(--font-display);color:#3A1C2A">You don&rsquo;t need to figure everything out today.</h2>
+<p class="rv" style="margin:0;max-width:620px;font:400 18px/1.6 var(--font-body);color:#3A1C2A">Choose the free training that matches your biggest problem. Use the resource that comes with it. Put something into action. Your goal was never just to have a blog. You wanted to build something that could make money.</p>
+<div class="rv" style="display:flex;flex-wrap:wrap;gap:14px;justify-content:center">
+<a href="#trainings" class="pill pill-plain" style="background:#3A1C2A;color:#FFFFFF">Explore the free trainings</a>
+<a href="/boss" class="pill pill-plain" style="background:#FBF5EE;color:#3A1C2A">Discover the BOSS Business System</a>
+</div>
+</div>
+</section>
+
+</main>
+<section style="background:#FBF5EE;padding:90px clamp(16px,4vw,48px) 40px">
+<div style="max-width:1180px;margin:0 auto;display:flex;flex-wrap:wrap;gap:48px;justify-content:space-between;align-items:flex-start">
+<div style="flex:1 1 520px;min-width:0;display:flex;flex-direction:column;gap:22px">
+<p class="rv" style="margin:0;font:700 clamp(64px,7vw,96px)/0.9 var(--font-script);color:#A23E66">Genasys</p>
+<div style="display:flex;flex-wrap:wrap;gap:24px;align-items:center">
+<div style="position:relative;width:120px;height:120px;border-radius:999px;background:#E9B9CA;flex:0 0 auto;overflow:hidden;display:flex;align-items:flex-end;justify-content:center"><img src="https://charming-caramel-d2453c.netlify.app/images/photos/portrait-hat.jpg" alt="Genasys smiling in a hat" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 35%"></div>
+<div style="flex:1 1 280px;display:flex;flex-direction:column;gap:14px">
+<p style="margin:0;font:400 16px/1.6 var(--font-body)">Blog coach, Showit designer, and founder of Boss Lady Bloggers. Helping women build blogs that make money since 2017.</p>
+<div style="display:flex;flex-wrap:wrap;gap:8px">
+<a href="https://www.instagram.com/blogcoach_gen" target="_blank" rel="noopener" style="border:1px solid #E9B9CA;border-radius:8px;padding:8px 12px;font:500 11px/1 var(--font-label);letter-spacing:0.08em;color:#3A1C2A;text-decoration:none">FOLLOW ON INSTAGRAM</a>
+<a href="/podcast" style="border:1px solid #E9B9CA;border-radius:8px;padding:8px 12px;font:500 11px/1 var(--font-label);letter-spacing:0.08em;color:#3A1C2A;text-decoration:none">LISTEN TO THE PODCAST</a>
+<a href="https://www.youtube.com/@GenasysLynn" target="_blank" rel="noopener" style="border:1px solid #E9B9CA;border-radius:8px;padding:8px 12px;font:500 11px/1 var(--font-label);letter-spacing:0.08em;color:#3A1C2A;text-decoration:none">WATCH ON YOUTUBE</a>
+</div>
+</div>
+</div>
+</div>
+<div style="flex:0 1 300px;display:flex;flex-direction:column;gap:14px">
+<p style="margin:0;font:700 34px/1 var(--font-body);letter-spacing:0.02em;color:#A23E66;text-transform:uppercase;border-bottom:2px solid #A23E66;padding-bottom:8px">Get around</p>
+<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 24px;font:400 15px/1.8 var(--font-body)">
+<a href="/" style="color:#3A1C2A;text-decoration:none">Home</a><a href="/boss" style="color:#3A1C2A;text-decoration:none">BOSS</a>
+<a href="/about" style="color:#3A1C2A;text-decoration:none">About</a><a href="/blog-coaching" style="color:#3A1C2A;text-decoration:none">Coaching</a>
+<a href="/start-here" style="color:#3A1C2A;text-decoration:none">Start Here</a><a href="/free-trainings" style="color:#3A1C2A;text-decoration:none">Freebies</a>
+<a href="/blog" style="color:#3A1C2A;text-decoration:none">Blog</a><a href="/podcast" style="color:#3A1C2A;text-decoration:none">Podcast</a>
+<a href="/contact" style="color:#3A1C2A;text-decoration:none">Contact</a><a href="/group-coaching" style="color:#3A1C2A;text-decoration:none">Group Coaching</a>
+<a href="/course" style="color:#3A1C2A;text-decoration:none">The Course</a>
+</div>
+</div>
+</div>
+<div data-instagram-feed="blogcoach_gen" style="margin-top:56px;display:flex;flex-direction:column;gap:18px">
+<div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px">
+<a href="https://www.instagram.com/blogcoach_gen" target="_blank" rel="noopener" style="background:#E9B9CA;border-radius:999px;padding:10px 18px;font:500 13px/1 var(--font-label);letter-spacing:0.14em;color:#3A1C2A;text-decoration:none">@BLOGCOACH_GEN</a>
+<a href="https://www.instagram.com/blogcoach_gen" target="_blank" rel="noopener" style="font:600 14px/1 var(--font-body);color:#A23E66">Follow along on Instagram &#8599;&#65038;</a>
+</div>
+<div style="display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px" class="ig-grid"><a href="https://www.instagram.com/blogcoach_gen" target="_blank" rel="noopener" aria-label="Instagram post 1" class="card-hover ig-tile" style="aspect-ratio:1/1;border-radius:18px;background:#E9B9CA;display:flex;align-items:flex-end;padding:12px;text-decoration:none;overflow:hidden"><span style="font:500 10px/1 var(--font-label);letter-spacing:0.12em;color:#3A1C2A">LIVE POST 1</span></a><a href="https://www.instagram.com/blogcoach_gen" target="_blank" rel="noopener" aria-label="Instagram post 2" class="card-hover ig-tile" style="aspect-ratio:1/1;border-radius:18px;background:#3A1C2A;display:flex;align-items:flex-end;padding:12px;text-decoration:none;overflow:hidden"><span style="font:500 10px/1 var(--font-label);letter-spacing:0.12em;color:#E9B9CA">LIVE POST 2</span></a><a href="https://www.instagram.com/blogcoach_gen" target="_blank" rel="noopener" aria-label="Instagram post 3" class="card-hover ig-tile" style="aspect-ratio:1/1;border-radius:18px;background:#F6E1E8;display:flex;align-items:flex-end;padding:12px;text-decoration:none;overflow:hidden"><span style="font:500 10px/1 var(--font-label);letter-spacing:0.12em;color:#3A1C2A">LIVE POST 3</span></a><a href="https://www.instagram.com/blogcoach_gen" target="_blank" rel="noopener" aria-label="Instagram post 4" class="card-hover ig-tile" style="aspect-ratio:1/1;border-radius:18px;background:#A23E66;display:flex;align-items:flex-end;padding:12px;text-decoration:none;overflow:hidden"><span style="font:500 10px/1 var(--font-label);letter-spacing:0.12em;color:#FBF5EE">LIVE POST 4</span></a><a href="https://www.instagram.com/blogcoach_gen" target="_blank" rel="noopener" aria-label="Instagram post 5" class="card-hover ig-tile" style="aspect-ratio:1/1;border-radius:18px;background:#E9B9CA;display:flex;align-items:flex-end;padding:12px;text-decoration:none;overflow:hidden"><span style="font:500 10px/1 var(--font-label);letter-spacing:0.12em;color:#3A1C2A">LIVE POST 5</span></a><a href="https://www.instagram.com/blogcoach_gen" target="_blank" rel="noopener" aria-label="Instagram post 6" class="card-hover ig-tile" style="aspect-ratio:1/1;border-radius:18px;background:#3A1C2A;display:flex;align-items:flex-end;padding:12px;text-decoration:none;overflow:hidden"><span style="font:500 10px/1 var(--font-label);letter-spacing:0.12em;color:#E9B9CA">LIVE POST 6</span></a></div>
+</div>
+</section>
+<footer style="background:#A23E66;color:#FFFFFF;padding:70px 0 0;overflow:hidden">
+  <div style="max-width:1080px;margin:0 auto;padding:0 clamp(16px,4vw,48px);display:flex;flex-wrap:wrap;gap:48px;justify-content:space-between;font:500 15px/2 var(--font-body)">
+    <div style="display:flex;flex-direction:column">
+      <a href="/" style="color:#FFFFFF;text-decoration:none">Home</a>
+      <a href="/start-here" style="color:#FFFFFF;text-decoration:none">Start Here</a>
+      <a href="/about" style="color:#FFFFFF;text-decoration:none">About</a>
+      <a href="/free-trainings" style="color:#FFFFFF;text-decoration:none">Free Trainings</a>
+      <a href="/boss" style="color:#FFFFFF;text-decoration:none">BOSS Business Blueprint</a>
+    </div>
+    <div style="display:flex;flex-direction:column">
+      <a href="/blog-coaching" style="color:#FFFFFF;text-decoration:none">Blog Coaching</a>
+      <a href="/group-coaching" style="color:#FFFFFF;text-decoration:none">Group Coaching</a>
+      <a href="/course" style="color:#FFFFFF;text-decoration:none">The Course</a>
+      <a href="/podcast" style="color:#FFFFFF;text-decoration:none">Podcast</a>
+      <a href="/contact" style="color:#FFFFFF;text-decoration:none">Contact</a>
+    </div>
+    <div style="display:flex;flex-direction:column">
+      <a href="https://www.instagram.com/blogcoach_gen" target="_blank" rel="noopener" style="color:#FFFFFF;text-decoration:none">Instagram</a>
+      <a href="https://www.youtube.com/@GenasysLynn" target="_blank" rel="noopener" style="color:#FFFFFF;text-decoration:none">YouTube</a>
+      <a href="https://www.pinterest.com/BossLadyBloggers/" target="_blank" rel="noopener" style="color:#FFFFFF;text-decoration:none">Pinterest</a>
+    </div>
+  </div>
+  <div class="bl-marquee" style="padding:40px 0 10px;overflow:hidden" aria-hidden="true">
+    <div class="bl-track bl-slow" style="font:400 clamp(120px,15vw,220px)/1 var(--font-display);white-space:nowrap;color:#FBF5EE">
+      <span>BOSS LADY BLOGGERS&#160;&#183;&#160;BOSS LADY BLOGGERS&#160;&#183;&#160;</span><span aria-hidden="true">BOSS LADY BLOGGERS&#160;&#183;&#160;BOSS LADY BLOGGERS&#160;&#183;&#160;</span>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+/* Boss Lady Bloggers · main.js
+   Vanilla JS for every interactive feature (CLAUDE.md §5).
+   Each block checks whether its element exists before running. */
+(function () {
+  'use strict';
+  document.documentElement.classList.remove('no-js');
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- F4: popout menu ---------- */
+  var menuBtn = document.querySelector('[data-menu-open]');
+  var popout = document.getElementById('popout-menu');
+  if (menuBtn && popout) {
+    var closeBtn = popout.querySelector('[data-menu-close]');
+    var lastFocus = null;
+    function openMenu() {
+      lastFocus = document.activeElement;
+      popout.classList.add('open');
+      document.body.classList.add('menu-open');
+      menuBtn.setAttribute('aria-expanded', 'true');
+      (closeBtn || popout).focus();
+    }
+    function closeMenu() {
+      popout.classList.remove('open');
+      document.body.classList.remove('menu-open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+      if (lastFocus) lastFocus.focus();
+    }
+    menuBtn.addEventListener('click', function () {
+      popout.classList.contains('open') ? closeMenu() : openMenu();
+    });
+    if (closeBtn) closeBtn.addEventListener('click', closeMenu);
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && popout.classList.contains('open')) closeMenu();
+    });
+    popout.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', closeMenu);
+    });
+  }
+
+  /* ---------- F19: scroll reveal (once, staggered 80ms) ---------- */
+  var rvEls = document.querySelectorAll('.rv');
+  if (rvEls.length && 'IntersectionObserver' in window && !reduced) {
+    var seen = 0;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        var el = en.target;
+        var delay = (seen % 6) * 80; seen++;
+        setTimeout(function () { el.classList.add('in'); }, delay);
+        io.unobserve(el);
+      });
+    }, { threshold: 0, rootMargin: '0px 0px -40px 0px' });
+    rvEls.forEach(function (el) { io.observe(el); });
+    // Catch-up: anything on screen that still has not revealed after 3s
+    // (slow devices, odd scroll positions) becomes visible.
+    setTimeout(function () {
+      document.querySelectorAll('.rv:not(.in)').forEach(function (el) {
+        var r = el.getBoundingClientRect();
+        if (r.bottom > 0 && r.top < window.innerHeight) el.classList.add('in');
+      });
+    }, 3000);
+  } else {
+    rvEls.forEach(function (el) { el.classList.add('in'); });
+  }
+
+  /* ---------- F6: circled word draw-in ---------- */
+  document.querySelectorAll('.circle-draw ellipse').forEach(function (el) {
+    var len = 2 * Math.PI * Math.sqrt((96 * 96 + 34 * 34) / 2); // approx
+    el.style.strokeDasharray = len;
+    el.style.strokeDashoffset = reduced ? 0 : len;
+    if (reduced) return;
+    var io2 = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        el.style.transition = 'stroke-dashoffset 900ms ease';
+        el.style.strokeDashoffset = 0;
+        io2.disconnect();
+      });
+    }, { threshold: 0.6 });
+    io2.observe(el.closest('section') || el);
+  });
+
+  /* ---------- F8: sticky stacking cards scale ---------- */
+  var stack = document.querySelectorAll('[data-stack] > *');
+  if (stack.length && !reduced) {
+    var ticking = false;
+    function stackScale() {
+      stack.forEach(function (card, i) {
+        var r = card.getBoundingClientRect();
+        var top = 120 + i * 24;
+        var cover = Math.min(Math.max((top + 80 - r.top) / 400, 0), 1);
+        if (r.top <= top + 81) card.style.transform = 'scale(' + (1 - cover * 0.05) + ')';
+        else card.style.transform = '';
+      });
+      ticking = false;
+    }
+    window.addEventListener('scroll', function () {
+      if (!ticking) { requestAnimationFrame(stackScale); ticking = true; }
+    }, { passive: true });
+  }
+
+  /* ---------- F9/F10: tabs (offers "Fabulous Things", About glossary) ---------- */
+  document.querySelectorAll('[data-tabs]').forEach(function (group) {
+    var tabs = Array.prototype.slice.call(group.querySelectorAll('[role="tab"]'));
+    var panels = Array.prototype.slice.call(document.querySelectorAll('[data-tabpanel="' + group.getAttribute('data-tabs') + '"]'));
+    // Inline display styles beat the hidden attribute, so remember each
+    // panel's own display value and toggle display directly.
+    panels.forEach(function (p) { p.setAttribute('data-disp', p.style.display || ''); });
+    function select(i) {
+      tabs.forEach(function (t, j) {
+        var on = i === j;
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+        t.setAttribute('tabindex', on ? '0' : '-1');
+        t.classList.toggle('tab-active', on);
+      });
+      panels.forEach(function (p, j) {
+        var on = i === j;
+        p.hidden = !on;
+        p.style.display = on ? p.getAttribute('data-disp') : 'none';
+      });
+    }
+    tabs.forEach(function (t, i) {
+      t.addEventListener('click', function () { select(i); });
+      t.addEventListener('keydown', function (e) {
+        var dir = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+        if (!dir) return;
+        e.preventDefault();
+        var n = (i + dir + tabs.length) % tabs.length;
+        select(n); tabs[n].focus();
+      });
+    });
+    select(0);
+  });
+
+  /* ---------- F11: Boss Blend slider fill ---------- */
+  var blends = document.querySelectorAll('[data-blend]');
+  if (blends.length && 'IntersectionObserver' in window) {
+    var io3 = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        var bar = en.target;
+        var v = bar.getAttribute('data-blend');
+        var fill = bar.querySelector('.blend-fill');
+        if (fill) {
+          if (reduced) { fill.style.width = v + '%'; }
+          else {
+            fill.style.transition = 'width 900ms ease';
+            requestAnimationFrame(function () { fill.style.width = v + '%'; });
+          }
+        }
+        io3.unobserve(bar);
+      });
+    }, { threshold: 0.5 });
+    blends.forEach(function (b) { io3.observe(b); });
+  }
+
+  /* ---------- F12: FAQ smooth height ---------- */
+  document.querySelectorAll('.faq details').forEach(function (d) {
+    var a = d.querySelector('.faq-a');
+    if (!a || reduced) return;
+    d.addEventListener('toggle', function () {
+      if (d.open) {
+        var h = a.scrollHeight;
+        a.style.maxHeight = '0';
+        a.style.transition = 'max-height .3s ease';
+        requestAnimationFrame(function () { a.style.maxHeight = h + 40 + 'px'; });
+      } else {
+        a.style.maxHeight = '';
+      }
+    });
+  });
+
+  /* ---------- F17: waitlist forms ---------- */
+  document.querySelectorAll('[data-waitlist]').forEach(function (form) {
+    var showSuccess = function () {
+      var success = form.parentElement.querySelector('.form-success');
+      if (success) { form.hidden = true; success.hidden = false; }
+    };
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      // Forms without data-list just show the success state (no backend yet).
+      showSuccess();
+    });
+  });
+
+  /* ---------- Instagram feed (any page with a strip) ---------- */
+  document.querySelectorAll('[data-instagram-feed]').forEach(function (feed) {
+    var FEED_URL = 'https://feeds.behold.so/3p9InkPKcoMGdzJUSdtH';
+    if (FEED_URL) {
+      var cached = null;
+      try {
+        var raw = localStorage.getItem('blb_ig');
+        if (raw) { cached = JSON.parse(raw); if (Date.now() - cached.t > 3600000) cached = null; }
+      } catch (err) { cached = null; }
+      var render = function (posts) {
+        var tiles = feed.querySelectorAll('.ig-tile');
+        posts.slice(0, tiles.length).forEach(function (p, i) {
+          var a = tiles[i];
+          a.href = p.permalink;
+          a.innerHTML = '';
+          var img = document.createElement('img');
+          img.src = (p.sizes && p.sizes.medium && p.sizes.medium.mediaUrl) || p.mediaUrl || p.thumbnailUrl;
+          img.alt = (p.caption || 'Instagram post').slice(0, 120);
+          img.loading = 'lazy';
+          img.style.cssText = 'width:100%;height:100%;object-fit:cover;border-radius:18px';
+          a.appendChild(img);
+        });
+      };
+      if (cached) render(cached.p);
+      else fetch(FEED_URL).then(function (r) { return r.json(); }).then(function (data) {
+        var posts = data.posts || data;
+        try { localStorage.setItem('blb_ig', JSON.stringify({ t: Date.now(), p: posts })); } catch (err) {}
+        render(posts);
+      }).catch(function () {/* keep branded placeholders */});
+    }
+  });
+  /* Showit safety: reveal anything still hidden after 2.5s */
+  setTimeout(function () {
+    document.querySelectorAll('.rv:not(.in)').forEach(function (el) { el.classList.add('in'); });
+  }, 2500);
+})();
+
+</script>

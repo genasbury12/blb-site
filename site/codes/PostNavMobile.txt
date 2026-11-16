@@ -1,0 +1,22 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=Caveat:wght@600;700&display=swap">
+<style>
+:root{--font-display:'Instrument Serif',serif;--font-body:'Inter',system-ui,sans-serif;--font-label:'DM Mono',monospace}
+*{box-sizing:border-box}body{margin:0;background:transparent}
+.pill{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:13px 22px;font:600 14px/1 var(--font-body);text-decoration:none;transition:background .2s ease,color .2s ease,transform .2s ease}
+.pill:hover{transform:translateY(-2px)}
+.card-hover{transition:transform .25s ease,box-shadow .25s ease}
+.card-hover:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(58,28,42,.14)}
+</style>
+<div style="width:100vw;max-width:100vw;overflow-x:clip">
+<div style="background:#FBF5EE;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px">
+<a href="/" style="display:flex;align-items:center;gap:10px;text-decoration:none">
+<img src="https://charming-caramel-d2453c.netlify.app/brand/arch-monogram.svg" alt="" width="26" height="34" style="display:block">
+<span style="font:400 23px/1 var(--font-display);color:#3A1C2A">Boss Lady <em style="color:#A23E66">Bloggers</em></span>
+</a>
+<a href="/menu" aria-label="Open full menu" style="flex:0 0 auto;width:48px;height:48px;border-radius:999px;background:#A23E66;display:flex;align-items:center;justify-content:center;text-decoration:none">
+<svg aria-hidden="true" width="18" height="14" viewBox="0 0 18 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M1 1h16M1 7h16M1 13h16"></path></svg>
+</a>
+</div>
+</div>

@@ -1,0 +1,58 @@
+SHOWIT BLOG TEMPLATE - NEW BRAND STYLE SPEC
+============================================
+One-time setup in Showit: Blog > (your post template). Set these once
+and every post matches the new website automatically.
+
+FONTS (add in Showit's font settings if not there)
+--------------------------------------------------
+Headlines:  Instrument Serif (Google font) - regular 400 only, never bold
+Body:       Inter (Google font) - 400 regular, 600 for bold text
+Labels:     DM Mono (Google font) - 500, letterspacing 2-3
+Accents:    Caveat (Google font) - 700 (use sparingly, one line per section)
+
+COLORS (hex)
+------------
+Plum (headlines, dark bg):   #3A1C2A
+Berry (links, buttons):      #A23E66
+Rose (highlights, frames):   #E9B9CA
+Blush (soft backgrounds):    #F6E1E8
+Cream (page background):     #FBF5EE
+Cocoa (body text):           #4A2F3B
+Mauve (captions, meta):      #6E4B5B
+
+POST TEMPLATE SETTINGS
+----------------------
+Page background:        #FBF5EE (cream)
+Post title:             Instrument Serif 400, ~44-54px desktop / 32px
+                        mobile, color #3A1C2A, line height 1.05
+Meta (date, category):  DM Mono 500, 12px, letterspacing 2,
+                        ALL CAPS, color #A23E66
+Featured image:         rounded corners 24px if the option exists
+Body text:              Inter 400, 17px, line height 1.65, color #4A2F3B
+Headings in post (H2):  Instrument Serif 400, 30-34px, #3A1C2A
+Headings in post (H3):  Instrument Serif 400, 24px, #3A1C2A
+Links in post:          #A23E66, underlined; hover #3A1C2A
+Bold text:              Inter 600, #3A1C2A
+Blockquote:             Instrument Serif 400 italic, 22-24px, #3A1C2A,
+                        left border 3px #A23E66, padding-left 20px
+                        (or background #F6E1E8, rounded 16px, padding 24px)
+Button style:           pill shape (fully rounded), background #A23E66,
+                        text white Inter 600 15px; hover #3A1C2A
+Captions:               Inter 400, 13px, #6E4B5B
+
+POST LIST / SIDEBAR (if your template has them)
+-----------------------------------------------
+Card background:        #FFFFFF, corner radius 22px
+Card category label:    DM Mono 500 11px caps #A23E66
+Card title:             Instrument Serif 400, 22-24px, #3A1C2A
+Sidebar headings:       Instrument Serif 400 24px #3A1C2A
+
+HEADER / FOOTER ON BLOG PAGES
+-----------------------------
+Keep whatever Showit header/footer you use sitewide, but set:
+- header background #FBF5EE, nav links Inter 500 14px #3A1C2A
+- footer background #A23E66, links white Inter 500 15px
+This makes the WordPress-powered pages feel continuous with the new
+embed pages.
+
+That's it - about 15 minutes of clicking in the template editor, once.
