@@ -42,6 +42,9 @@ PAGES = {
     "masterclass":     ("free-masterclass/index.html", "free-masterclass",
                         "Free Masterclass | Boss Lady Bloggers",
                         "Still blogging but not making money? Watch the free masterclass and discover the 7-step blog-to-business system that turns your blog content into cash."),
+    "membership-offer":("membership-offer/index.html", "",
+                        "Membership Offer | Boss Lady Bloggers",
+                        "A thank-you offer for masterclass sign-ups: The Blogging Ladies Membership at 50% off for one hour."),
     "podcast":         ("podcast/index.html", "podcast",
                         "Podcast | Boss Lady Bloggers",
                         "The Boss Lady Bloggers podcast: blogging and business talk for women building money making blogs."),
@@ -110,6 +113,9 @@ def canonical_for(out: str) -> str:
     return DOMAIN + "/" + out
 
 
+BARE = {"membership-offer"}  # distraction-free pages: no menu or footer
+
+
 def main() -> int:
     header = (PARTIALS / "header.html").read_text()
     footer = (PARTIALS / "footer.html").read_text()
@@ -125,7 +131,7 @@ def main() -> int:
                           f'class="navl" data-nav="{nav}" aria-current="page"')
         page = (HEAD.format(title=title, desc=desc, fonts=FONTS,
                             canonical=canonical_for(out), domain=DOMAIN)
-                + h + body + footer + FOOT)
+                + ("" if key in BARE else h) + body + ("" if key in BARE else footer) + FOOT)
         if ".dc.html" in page:
             print(f"ERROR {key}: unconverted .dc.html link", file=sys.stderr)
             return 1
@@ -141,7 +147,7 @@ def main() -> int:
 
     # sitemap.xml (every page except 404 and the blog post template)
     urls = [canonical_for(out) for key, (out, *_rest) in PAGES.items()
-            if key not in ("404", "blog-post") and (PAGES_DIR / f"{key}.html").exists()]
+            if key not in ("404", "blog-post", "membership-offer") and (PAGES_DIR / f"{key}.html").exists()]
     sm = ['<?xml version="1.0" encoding="UTF-8"?>',
           '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
     sm += [f"  <url><loc>{u}</loc></url>" for u in urls]
