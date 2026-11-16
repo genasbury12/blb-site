@@ -33,3 +33,8 @@
   from = "/group-waitlist/*"
   to = "/membership/"
   status = 301
+
+[[redirects]]
+  from = "/free-trainings/*"
+  to = "/"
+  status = 301

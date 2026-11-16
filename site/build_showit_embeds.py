@@ -22,7 +22,6 @@ PAGES = {
     "boss/index.html":           ("Boss.html", "/boss"),
     "coaching/index.html":       ("BlogCoaching.html", "/blog-coaching"),
     "membership/index.html":     ("Membership.html", "/membership"),
-    "free-trainings/index.html": ("FreeTrainings.html", "/free-trainings"),
     "podcast/index.html":        ("Podcast.html", "/podcast"),
     "blog/index.html":           ("BlogLanding.html", "/blog"),
     "links/index.html":          ("Links.html", "/links"),
@@ -39,7 +38,7 @@ LINKMAP = [
     ('href="/boss/"', 'href="/boss"'),
     ('href="/coaching/"', 'href="/blog-coaching"'),
     ('href="/membership/"', 'href="/membership"'),
-    ('href="/free-trainings/"', 'href="/free-trainings"'),
+    ('href="/free-masterclass/"', 'href="/opt-in-page"'),
     ('href="/podcast/"', 'href="/podcast"'),
     ('href="/blog/post-template.html"', 'href="/blog"'),
     ('href="/links/"', 'href="/links"'),
@@ -103,15 +102,15 @@ PIECE_AUTHOR = """<div style="background:#FBF5EE;border-radius:22px;padding:28px
 <a href="/about" class="pill" style="background:#A23E66;color:#FFFFFF">Learn more</a>
 </div>"""
 
-PIECE_DOWNLOAD = """<a href="https://bossladybloggers.myflodesk.com/build" target="_blank" rel="noopener" class="card-hover" style="text-decoration:none;background:#3A1C2A;border-radius:22px;padding:26px;display:flex;flex-direction:column;gap:10px;max-width:340px;margin:0 auto">
-<span style="align-self:flex-start;background:#A23E66;border-radius:999px;padding:6px 12px;font:600 11px/1 var(--font-body);color:#FFFFFF">Free download</span>
-<span style="font:400 24px/1.1 var(--font-display);color:#FBF5EE">The Foundations Builder</span>
-<span style="font:600 13px/1 var(--font-body);color:#E9B9CA">Get it free &#8599;&#65038;</span>
+PIECE_DOWNLOAD = """<a href="/opt-in-page" class="card-hover" style="text-decoration:none;background:#3A1C2A;border-radius:22px;padding:26px;display:flex;flex-direction:column;gap:10px;max-width:340px;margin:0 auto">
+<span style="align-self:flex-start;background:#A23E66;border-radius:999px;padding:6px 12px;font:600 11px/1 var(--font-body);color:#FFFFFF">Free masterclass</span>
+<span style="font:400 24px/1.1 var(--font-display);color:#FBF5EE">Still Blogging&hellip; But Not Making Money?</span>
+<span style="font:600 13px/1 var(--font-body);color:#E9B9CA">Watch free &#8599;&#65038;</span>
 </a>"""
 
 PIECE_NEXTSTEP = """<div style="background:#3A1C2A;border-radius:22px;padding:30px;display:flex;flex-wrap:wrap;gap:18px;align-items:center;justify-content:space-between">
-<span style="flex:1 1 280px;font:400 26px/1.15 var(--font-display);color:#FBF5EE">[Next step: the free training or offer this post points to]</span>
-<a href="/free-trainings" class="pill" style="background:#FBF5EE;color:#3A1C2A">Get the free training</a>
+<span style="flex:1 1 280px;font:400 26px/1.15 var(--font-display);color:#FBF5EE">[Next step: the free masterclass or offer this post points to]</span>
+<a href="/opt-in-page" class="pill" style="background:#FBF5EE;color:#3A1C2A">Watch the free masterclass</a>
 </div>"""
 
 PIECE_RELATED = """<section style="background:#F6E1E8;padding:70px clamp(16px,4vw,48px);border-radius:0">
@@ -167,7 +166,7 @@ PIECE_NAV = """<div style="background:#FBF5EE;padding:16px clamp(16px,4vw,40px);
 <nav aria-label="Main" style="display:flex;flex-wrap:wrap;align-items:center;gap:6px 20px;font:500 14px/1 var(--font-body)">
 <a href="/start-here" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Start Here</a>
 <a href="/about" style="color:#3A1C2A;text-decoration:none;padding:8px 0">About</a>
-<a href="/free-trainings" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Free Trainings</a>
+<a href="/opt-in-page" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Free Masterclass</a>
 <a href="/blog-coaching" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Coaching</a>
 <a href="/membership" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Membership</a>
 <a href="/podcast" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Podcast</a>
@@ -242,7 +241,7 @@ PIECE_MENUPAGE = """<div style="min-height:100vh;background:#A23E66;padding:22px
 <a href="/boss" style="color:#FBF5EE;text-decoration:none">BOSS Business Blueprint</a>
 <a href="/blog-coaching" style="color:#FBF5EE;text-decoration:none">Blog Coaching</a>
 <a href="/membership" style="color:#FBF5EE;text-decoration:none">The Blogging Ladies Membership</a>
-<a href="/free-trainings" style="color:#FBF5EE;text-decoration:none">Free Trainings</a>
+<a href="/opt-in-page" style="color:#FBF5EE;text-decoration:none">Free Masterclass</a>
 <a href="/podcast" style="color:#FBF5EE;text-decoration:none">Podcast</a>
 <a href="/blog" style="color:#FBF5EE;text-decoration:none">Blog</a>
 <a href="/contact" style="color:#FBF5EE;text-decoration:none">Contact</a>
