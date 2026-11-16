@@ -18,9 +18,9 @@ FreeMasterclass.html      /free-masterclass  (your free masterclass opt-in page.
 MembershipOffer.html      /membership-offer  (the 1-hour 50% off upsell people see
                           right after signing up for the masterclass. No menu
                           or footer on purpose. Hide it from your Showit nav)
-BlackFriday.html          /black-friday  (Black Friday through Cyber Monday sale:
-                          50% off + free 1:1 call and roadmap. The timer runs
-                          on its own: before Nov 27 it counts down to the sale,
+BlackFriday.html          /black-friday  (Nov 25 early access through Cyber Monday:
+                          50% off locked in forever + free 1:1 call and roadmap.
+                          The timer runs on its own: before Nov 25 it counts down,
                           after Nov 30 11:59 PM ET it shows "sale ended")
 Membership.html           /membership  (The Blogging Ladies Membership,
                           $47 a month sales page. Paste your checkout
