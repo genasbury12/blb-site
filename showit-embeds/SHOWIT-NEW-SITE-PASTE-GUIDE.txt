@@ -73,8 +73,12 @@ post page gets rebuilt:
 
    File                   What it is              Where / canvas size
    PostNavBar.html        Site navigation bar      Very top, full width,
-                          (logo + links + BOSS)    ~110px tall (taller on
-                                                   mobile so links wrap)
+                          (logo + links + BOSS)    ~110px, DESKTOP ONLY:
+                                                   hide this canvas on
+                                                   mobile in Showit
+   PostNavMobile.html     Mobile navigation:       Very top, full width,
+                          centered logo + a        ~150px, MOBILE ONLY:
+                          swipeable pill row       hide it on desktop
    PostHero.html          Featured image band.     Under the nav, above
                           Pulls each post's own    the post title, full
                           image + category chip    content width, ~420px
