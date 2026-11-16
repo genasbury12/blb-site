@@ -302,6 +302,13 @@ def build_footer_piece(css: str, js: str) -> None:
         raise SystemExit("em/en dash in PostFooter.html")
     (OUT / "PostFooter.html").write_text(out)
     print("built PostFooter.html  ->  blog post template piece (full site footer)")
+    # Mobile variant: same footer without the Instagram feed block.
+    mbody = re.sub(r'<div data-instagram-feed=[\s\S]*?</div>\n</div>\n</section>', '</div>\n</section>', body, count=1)
+    assert 'data-instagram-feed' not in mbody, "IG strip failed"
+    mout = (FONTS + "\n<style>\n" + css + "\n</style>\n" + mbody
+            + "\n<script>\n" + js + "\n</script>\n")
+    (OUT / "PostFooterMobile.html").write_text(mout)
+    print("built PostFooterMobile.html  ->  blog post template piece (mobile footer, no Instagram)")
 
 
 def build_pieces() -> None:
