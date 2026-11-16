@@ -30,6 +30,20 @@ Links.html                /links  (link-in-bio page: put
                           bossladybloggers.com/links in your
                           Instagram bio)
 
+SITE-WIDE MASTERCLASS POPUP (paste ONCE, shows on every page)
+-------------------------------------------------------------
+File: SitewidePopup.html  (your Flodesk "Still Blogging... But Not Making
+Money?" masterclass popup; on signup it sends people to
+/masterclass-delivery)
+1. Showit > Site Settings (gear) > Advanced > Custom Head HTML.
+2. Paste the whole file there. Save, publish.
+3. Delete every OLD popup and exit-intent box on the site so it does not
+   double up: any Showit popup canvases with a form, and any older Flodesk
+   popup code in Custom Head HTML or in embed boxes.
+Do NOT also paste it into a page or canvas, or it will show twice.
+If Showit ever strips it from the head, put it in one Embed Code box on a
+canvas that is shared on every page (your nav canvas) instead.
+
 HOW TO PASTE (each page)
 ------------------------
 1. In Showit, open or create the page with the slug above.
