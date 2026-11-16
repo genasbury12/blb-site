@@ -23,6 +23,7 @@ PAGES = {
     "coaching/index.html":       ("BlogCoaching.html", "/blog-coaching"),
     "membership/index.html":     ("Membership.html", "/membership"),
     "free-masterclass/index.html": ("FreeMasterclass.html", "/free-masterclass"),
+    "membership-offer/index.html": ("MembershipOffer.html", "/membership-offer"),
     "podcast/index.html":        ("Podcast.html", "/podcast"),
     "blog/index.html":           ("BlogLanding.html", "/blog"),
     "links/index.html":          ("Links.html", "/links"),

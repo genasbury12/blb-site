@@ -154,7 +154,7 @@
 <h2 style="margin:0 0 6px;font:400 clamp(30px,3vw,38px)/1.05 var(--font-display);color:#3A1C2A">Get the free masterclass</h2>
 <p style="margin:0 0 18px;font:400 15px/1.6 var(--font-body);color:#4A2F3B">Pop in your name and email and I&rsquo;ll take you straight to the video.</p>
 <div id="mc-form" class="mc-root" data-ff-el="root" data-ff-version="3" data-ff-type="inline" data-ff-name="masterclassPage" data-ff-stage="default">
-<div data-ff-el="config" data-ff-config="eyJ0cmlnZ2VyIjp7Im1vZGUiOiJpbW1lZGlhdGVseSIsInZhbHVlIjowfSwib25TdWNjZXNzIjp7Im1vZGUiOiJyZWRpcmVjdCIsIm1lc3NhZ2UiOiIiLCJyZWRpcmVjdFVybCI6Imh0dHBzOi8vYm9zc2xhZHlibG9nZ2Vycy5jb20vbWFzdGVyY2xhc3MtZGVsaXZlcnkifSwiY29pIjpmYWxzZSwic2hvd0ZvclJldHVyblZpc2l0b3JzIjp0cnVlLCJub3RpZmljYXRpb24iOnRydWUsImdkcHIiOnsiYWNjZXB0c01hcmtldGluZyI6ZmFsc2UsInByaXZhY3lQb2xpY3kiOnsiZW5hYmxlZCI6ZmFsc2UsIm1hbmRhdG9yeSI6ZmFsc2V9fSwidHJhY2tpbmdDb25maWciOnsibWV0YVBpeGVsSWQiOiIiLCJjb29raWVCYW5uZXJFbmFibGVkIjpmYWxzZSwiZ29vZ2xlQW5hbHl0aWNzSWQiOiIifX0=" style="display:none"></div>
+<div data-ff-el="config" data-ff-config="eyJ0cmlnZ2VyIjp7Im1vZGUiOiJpbW1lZGlhdGVseSIsInZhbHVlIjowfSwib25TdWNjZXNzIjp7Im1vZGUiOiJyZWRpcmVjdCIsIm1lc3NhZ2UiOiIiLCJyZWRpcmVjdFVybCI6Imh0dHBzOi8vYm9zc2xhZHlibG9nZ2Vycy5jb20vbWVtYmVyc2hpcC1vZmZlciJ9LCJjb2kiOmZhbHNlLCJzaG93Rm9yUmV0dXJuVmlzaXRvcnMiOnRydWUsIm5vdGlmaWNhdGlvbiI6dHJ1ZSwiZ2RwciI6eyJhY2NlcHRzTWFya2V0aW5nIjpmYWxzZSwicHJpdmFjeVBvbGljeSI6eyJlbmFibGVkIjpmYWxzZSwibWFuZGF0b3J5IjpmYWxzZX19LCJ0cmFja2luZ0NvbmZpZyI6eyJtZXRhUGl4ZWxJZCI6IiIsImNvb2tpZUJhbm5lckVuYWJsZWQiOmZhbHNlLCJnb29nbGVBbmFseXRpY3NJZCI6IiJ9fQ==" style="display:none"></div>
 <form action="https://form.flodesk.com/forms/681c011c9c17d4e9af084ed3/submit" method="post" data-ff-el="form">
 <div class="fd-form-content" data-ff-el="content">
 <div data-ff-el="fields">
@@ -171,6 +171,8 @@
 <script>
 (function(w,d,t,h,s,n){if(w.fd)return;w.FlodeskObject=n;var fn=function(){(w[n].q=w[n].q||[]).push(arguments);};w[n]=w[n]||fn;var f=d.getElementsByTagName(t)[0];var v='?v='+Math.floor(new Date().getTime()/(120*1000))*60;var sm=d.createElement(t);sm.async=true;sm.type='module';sm.src=h+s+'.mjs'+v;f.parentNode.insertBefore(sm,f);var sn=d.createElement(t);sn.async=true;sn.noModule=true;sn.src=h+s+'.js'+v;f.parentNode.insertBefore(sn,f);})(window,document,'script','https://assets.flodesk.com','/universal','fd');
 window.fd('form:handle',{formId:'681c011c9c17d4e9af084ed3',rootEl:'#mc-form'});
+(function(){var r=document.getElementById('mc-form');if(!r||!window.MutationObserver)return;var gone=false;
+new MutationObserver(function(){if(!gone&&r.getAttribute('data-ff-stage')==='success'){gone=true;setTimeout(function(){window.location.href='/membership-offer';},600);}}).observe(r,{attributes:true,attributeFilter:['data-ff-stage']});})();
 </script>
 <p style="margin:14px 0 0;font:400 13px/1.5 var(--font-body);color:#6E4B5B;text-align:center">Free. You&rsquo;ll also get my emails, and you can unsubscribe anytime.</p>
 </div>
