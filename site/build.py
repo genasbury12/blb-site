@@ -48,6 +48,9 @@ PAGES = {
     "black-friday":    ("black-friday/index.html", "",
                         "Black Friday: 50% Off The Blogging Ladies | Boss Lady Bloggers",
                         "November 25 through Cyber Monday only: The Blogging Ladies Membership is 50% off, $23.50 a month locked in forever, plus a free 1:1 blog coaching call with Gen and a custom roadmap."),
+    "masterclass-delivery": ("masterclass-delivery/index.html", "",
+                        "Your Free Masterclass | Boss Lady Bloggers",
+                        "Watch your free masterclass: the 7-step blog-to-business system that turns your blog content into cash."),
     "podcast":         ("podcast/index.html", "podcast",
                         "Podcast | Boss Lady Bloggers",
                         "The Boss Lady Bloggers podcast: blogging and business talk for women building money making blogs."),
@@ -150,7 +153,7 @@ def main() -> int:
 
     # sitemap.xml (every page except 404 and the blog post template)
     urls = [canonical_for(out) for key, (out, *_rest) in PAGES.items()
-            if key not in ("404", "blog-post", "membership-offer", "black-friday") and (PAGES_DIR / f"{key}.html").exists()]
+            if key not in ("404", "blog-post", "membership-offer", "black-friday", "masterclass-delivery") and (PAGES_DIR / f"{key}.html").exists()]
     sm = ['<?xml version="1.0" encoding="UTF-8"?>',
           '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
     sm += [f"  <url><loc>{u}</loc></url>" for u in urls]
