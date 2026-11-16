@@ -182,12 +182,13 @@ PIECE_NAV = """<div style="background:#FBF5EE;padding:16px clamp(16px,4vw,40px);
 </nav>
 </div>"""
 
-PIECE_POSTHERO = """<div style="position:relative;overflow:hidden;border-radius:26px;height:clamp(280px,40vw,460px);background:#E9B9CA;box-shadow:0 24px 50px rgba(58,28,42,0.16)">
+PIECE_POSTHERO = """<div style="max-width:820px;margin:0 auto"><div style="position:relative;overflow:hidden;border-radius:26px;aspect-ratio:3/2;background:#E9B9CA;box-shadow:0 24px 50px rgba(58,28,42,0.16)">
 <img data-hero-img alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none">
-<span aria-hidden="true" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(58,28,42,0.45) 0%,rgba(58,28,42,0) 45%)"></span>
-<span data-hero-cat style="position:absolute;left:20px;bottom:20px;background:#FFFFFF;border-radius:999px;padding:10px 16px;font:500 11px/1 var(--font-label);letter-spacing:0.12em;color:#A23E66;text-transform:uppercase">THE BLOG</span>
-<span data-hero-date style="position:absolute;right:20px;bottom:20px;background:rgba(251,245,238,0.92);border-radius:999px;padding:10px 16px;font:500 11px/1 var(--font-label);letter-spacing:0.12em;color:#3A1C2A"></span>
 </div>
+<div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;margin-top:14px">
+<span data-hero-cat style="background:#F6E1E8;border-radius:999px;padding:10px 16px;font:500 11px/1 var(--font-label);letter-spacing:0.12em;color:#A23E66;text-transform:uppercase">THE BLOG</span>
+<span data-hero-date style="font:500 11px/1 var(--font-label);letter-spacing:0.12em;color:#6E4B5B"></span>
+</div></div>
 <script>
 (function () {
   'use strict';
