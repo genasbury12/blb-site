@@ -13,3 +13,23 @@
   for = "/images/*"
   [headers.values]
     Cache-Control = "public, max-age=604800"
+
+[[redirects]]
+  from = "/course/*"
+  to = "/membership/"
+  status = 301
+
+[[redirects]]
+  from = "/course-waitlist/*"
+  to = "/membership/"
+  status = 301
+
+[[redirects]]
+  from = "/group-coaching/*"
+  to = "/membership/"
+  status = 301
+
+[[redirects]]
+  from = "/group-waitlist/*"
+  to = "/membership/"
+  status = 301

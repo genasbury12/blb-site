@@ -1,7 +1,7 @@
 BOSS LADY BLOGGERS - NEW WEBSITE ON SHOWIT - PASTE GUIDE
 =========================================================
 
-17 full pages plus 4 small blog-post pieces. Same workflow as before: one full-page embed
+14 full pages plus 4 small blog-post pieces. Same workflow as before: one full-page embed
 canvas per Showit page, paste the whole file, publish.
 
 THE FILES AND WHERE EACH ONE GOES
@@ -12,10 +12,9 @@ StartHere.html            /start-here
 About.html                /about
 Boss.html                 /boss
 BlogCoaching.html         /blog-coaching   (your existing page)
-GroupCoaching.html        /group-coaching
-Course.html               /course
-GroupWaitlist.html        /group-waitlist
-CourseWaitlist.html       /course-waitlist
+Membership.html           /membership  (The Blogging Ladies Membership,
+                          $47 a month sales page. Paste your checkout
+                          link into every join button before publishing)
 FreeTrainings.html        /free-trainings
 Podcast.html              /podcast
 BlogLanding.html          /blog  (OPTIONAL - your blog already works;
@@ -29,6 +28,18 @@ NotFound404.html          /404  (OPTIONAL)
 Links.html                /links  (link-in-bio page: put
                           bossladybloggers.com/links in your
                           Instagram bio)
+
+PAGES TAKEN DOWN (do this once)
+-------------------------------
+The Course, Course Waitlist, Group Coaching and Group Waitlist pages are
+retired. In Showit: delete those 4 pages, then add 301 redirects so old
+links land on the membership:
+  /course            ->  /membership
+  /course-waitlist   ->  /membership
+  /group-coaching    ->  /membership
+  /group-waitlist    ->  /membership
+Also re-paste your nav, footer and menu embeds (they now link to
+Membership instead of Group Coaching and The Course).
 
 SITE-WIDE MASTERCLASS POPUP (paste ONCE, shows on every page)
 -------------------------------------------------------------
@@ -143,15 +154,6 @@ hello@bossladybloggers.com (same service as your old site) and then
 shows your Thank You page. THE FIRST TIME someone submits (make it
 yourself!), FormSubmit emails you a confirmation link - click it once
 and the form is permanently active.
-
-WAITLIST FORMS (group + course)
--------------------------------
-Right now they show the pretty "You're on the list!" message but do not
-save the email (Showit pages cannot talk to Flodesk directly).
-To make them real: in Flodesk create an INLINE form for each waitlist
-(Forms > New form > Inline), copy each form's embed code, and send both
-codes to Claude - you'll get updated GroupWaitlist/CourseWaitlist files
-with the real Flodesk forms styled into the design.
 
 IMAGES
 ------

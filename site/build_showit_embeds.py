@@ -21,10 +21,7 @@ PAGES = {
     "about/index.html":          ("About.html", "/about"),
     "boss/index.html":           ("Boss.html", "/boss"),
     "coaching/index.html":       ("BlogCoaching.html", "/blog-coaching"),
-    "group-coaching/index.html": ("GroupCoaching.html", "/group-coaching"),
-    "course/index.html":         ("Course.html", "/course"),
-    "group-waitlist/index.html": ("GroupWaitlist.html", "/group-waitlist"),
-    "course-waitlist/index.html":("CourseWaitlist.html", "/course-waitlist"),
+    "membership/index.html":     ("Membership.html", "/membership"),
     "free-trainings/index.html": ("FreeTrainings.html", "/free-trainings"),
     "podcast/index.html":        ("Podcast.html", "/podcast"),
     "blog/index.html":           ("BlogLanding.html", "/blog"),
@@ -41,10 +38,7 @@ LINKMAP = [
     ('href="/about/"', 'href="/about"'),
     ('href="/boss/"', 'href="/boss"'),
     ('href="/coaching/"', 'href="/blog-coaching"'),
-    ('href="/group-coaching/"', 'href="/group-coaching"'),
-    ('href="/course/"', 'href="/course"'),
-    ('href="/group-waitlist/"', 'href="/group-waitlist"'),
-    ('href="/course-waitlist/"', 'href="/course-waitlist"'),
+    ('href="/membership/"', 'href="/membership"'),
     ('href="/free-trainings/"', 'href="/free-trainings"'),
     ('href="/podcast/"', 'href="/podcast"'),
     ('href="/blog/post-template.html"', 'href="/blog"'),
@@ -175,6 +169,7 @@ PIECE_NAV = """<div style="background:#FBF5EE;padding:16px clamp(16px,4vw,40px);
 <a href="/about" style="color:#3A1C2A;text-decoration:none;padding:8px 0">About</a>
 <a href="/free-trainings" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Free Trainings</a>
 <a href="/blog-coaching" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Coaching</a>
+<a href="/membership" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Membership</a>
 <a href="/podcast" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Podcast</a>
 <a href="/blog" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Blog</a>
 <a href="/contact" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Contact</a>
@@ -246,8 +241,7 @@ PIECE_MENUPAGE = """<div style="min-height:100vh;background:#A23E66;padding:22px
 <a href="/start-here" style="color:#FBF5EE;text-decoration:none">Start Here</a>
 <a href="/boss" style="color:#FBF5EE;text-decoration:none">BOSS Business Blueprint</a>
 <a href="/blog-coaching" style="color:#FBF5EE;text-decoration:none">Blog Coaching</a>
-<a href="/group-coaching" style="color:#FBF5EE;text-decoration:none">Group Coaching</a>
-<a href="/course" style="color:#FBF5EE;text-decoration:none">The Course</a>
+<a href="/membership" style="color:#FBF5EE;text-decoration:none">The Blogging Ladies Membership</a>
 <a href="/free-trainings" style="color:#FBF5EE;text-decoration:none">Free Trainings</a>
 <a href="/podcast" style="color:#FBF5EE;text-decoration:none">Podcast</a>
 <a href="/blog" style="color:#FBF5EE;text-decoration:none">Blog</a>

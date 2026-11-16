@@ -202,6 +202,7 @@ div[id^="fd-form"] form { padding-top: 0 !important; padding-bottom: 0 !importan
     <a href="/about" class="navl" data-nav="about">About</a>
     <a href="/free-trainings" class="navl" data-nav="free-trainings">Free Trainings</a>
     <a href="/blog-coaching" class="navl" data-nav="coaching">Coaching</a>
+    <a href="/membership" class="navl" data-nav="membership">Membership</a>
     <a href="/podcast" class="navl" data-nav="podcast">Podcast</a>
     <a href="/blog" class="navl" data-nav="blog">Blog</a>
     <a href="/contact" class="navl" data-nav="contact">Contact</a>
@@ -224,7 +225,7 @@ div[id^="fd-form"] form { padding-top: 0 !important; padding-bottom: 0 !importan
       <div><a href="/start-here" class="pill pill-plain" style="background:#FBF5EE;color:#3A1C2A">Start here</a></div>
     </div>
     <nav aria-label="Full menu" class="popout-nav">
-      <a href="/">Home</a><a href="/about">About</a><a href="/start-here">Start Here</a><a href="/boss">BOSS Business Blueprint</a><a href="/blog-coaching">Blog Coaching</a><a href="/group-coaching">Group Coaching</a><a href="/course">The Course</a><a href="/free-trainings">Free Trainings</a><a href="/podcast">Podcast</a><a href="/blog">Blog</a><a href="/contact">Contact</a><a href="https://www.instagram.com/blogcoach_gen" target="_blank" rel="noopener">Instagram</a>
+      <a href="/">Home</a><a href="/about">About</a><a href="/start-here">Start Here</a><a href="/boss">BOSS Business Blueprint</a><a href="/blog-coaching">Blog Coaching</a><a href="/membership">The Blogging Ladies Membership</a><a href="/free-trainings">Free Trainings</a><a href="/podcast">Podcast</a><a href="/blog">Blog</a><a href="/contact">Contact</a><a href="https://www.instagram.com/blogcoach_gen" target="_blank" rel="noopener">Instagram</a>
     </nav>
   </div>
   <div class="popout-photo"><img src="https://charming-caramel-d2453c.netlify.app/images/photos/flatlay-notebook.jpg" alt="Notebook, pen and a Boss mug on a desk" loading="lazy"></div>
@@ -244,7 +245,7 @@ div[id^="fd-form"] form { padding-top: 0 !important; padding-bottom: 0 !importan
 <a href="/start-here" class="card-hover" style="display:block;background:#FFFFFF;color:#3A1C2A;border-radius:999px;padding:18px 24px;font:600 16px/1.3 var(--font-body);text-decoration:none">New here? Start here</a>
 <a href="https://calendly.com/bossladybloggers/15min" target="_blank" rel="noopener" class="card-hover" style="display:block;background:#3A1C2A;color:#FBF5EE;border-radius:999px;padding:18px 24px;font:600 16px/1.3 var(--font-body);text-decoration:none">Book a free 15 minute call</a>
 <a href="/blog-coaching" class="card-hover" style="display:block;background:#FFFFFF;color:#3A1C2A;border-radius:999px;padding:18px 24px;font:600 16px/1.3 var(--font-body);text-decoration:none">Private blog coaching</a>
-<a href="/course" class="card-hover" style="display:block;background:#FFFFFF;color:#3A1C2A;border-radius:999px;padding:18px 24px;font:600 16px/1.3 var(--font-body);text-decoration:none">The Blogging Business Course</a>
+<a href="/membership" class="card-hover" style="display:block;background:#E9B9CA;color:#3A1C2A;border-radius:999px;padding:18px 24px;font:600 16px/1.3 var(--font-body);text-decoration:none">Join The Blogging Ladies Membership</a>
 <a href="/podcast" class="card-hover" style="display:block;background:#FFFFFF;color:#3A1C2A;border-radius:999px;padding:18px 24px;font:600 16px/1.3 var(--font-body);text-decoration:none">Listen to the podcast</a>
 <a href="/blog" class="card-hover" style="display:block;background:#FFFFFF;color:#3A1C2A;border-radius:999px;padding:18px 24px;font:600 16px/1.3 var(--font-body);text-decoration:none">Read the blog</a>
 </div>
@@ -281,8 +282,7 @@ div[id^="fd-form"] form { padding-top: 0 !important; padding-bottom: 0 !importan
 <a href="/about" style="color:#3A1C2A;text-decoration:none">About</a><a href="/blog-coaching" style="color:#3A1C2A;text-decoration:none">Coaching</a>
 <a href="/start-here" style="color:#3A1C2A;text-decoration:none">Start Here</a><a href="/free-trainings" style="color:#3A1C2A;text-decoration:none">Freebies</a>
 <a href="/blog" style="color:#3A1C2A;text-decoration:none">Blog</a><a href="/podcast" style="color:#3A1C2A;text-decoration:none">Podcast</a>
-<a href="/contact" style="color:#3A1C2A;text-decoration:none">Contact</a><a href="/group-coaching" style="color:#3A1C2A;text-decoration:none">Group Coaching</a>
-<a href="/course" style="color:#3A1C2A;text-decoration:none">The Course</a>
+<a href="/contact" style="color:#3A1C2A;text-decoration:none">Contact</a><a href="/membership" style="color:#3A1C2A;text-decoration:none">Membership</a>
 </div>
 </div>
 </div>
@@ -305,8 +305,7 @@ div[id^="fd-form"] form { padding-top: 0 !important; padding-bottom: 0 !importan
     </div>
     <div style="display:flex;flex-direction:column">
       <a href="/blog-coaching" style="color:#FFFFFF;text-decoration:none">Blog Coaching</a>
-      <a href="/group-coaching" style="color:#FFFFFF;text-decoration:none">Group Coaching</a>
-      <a href="/course" style="color:#FFFFFF;text-decoration:none">The Course</a>
+      <a href="/membership" style="color:#FFFFFF;text-decoration:none">The Blogging Ladies Membership</a>
       <a href="/podcast" style="color:#FFFFFF;text-decoration:none">Podcast</a>
       <a href="/contact" style="color:#FFFFFF;text-decoration:none">Contact</a>
     </div>
