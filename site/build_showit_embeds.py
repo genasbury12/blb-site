@@ -211,8 +211,26 @@ PIECE_POSTHERO = """<div style="position:relative;overflow:hidden;border-radius:
 })();
 </script>"""
 
+PIECE_NAV_MOBILE = """<div style="background:#FBF5EE;padding:14px 0 16px">
+<a href="/" style="display:flex;align-items:center;justify-content:center;gap:10px;text-decoration:none;padding:0 16px">
+<img src="{host}/brand/arch-monogram.svg" alt="" width="26" height="34" style="display:block">
+<span style="font:400 24px/1 var(--font-display);color:#3A1C2A">Boss Lady <em style="color:#A23E66">Bloggers</em></span>
+</a>
+<nav aria-label="Main" style="display:flex;gap:8px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding:14px 16px 4px;scrollbar-width:none">
+<a href="/start-here" style="flex:0 0 auto;background:#FFFFFF;border-radius:999px;padding:11px 16px;font:600 13px/1 var(--font-body);color:#3A1C2A;text-decoration:none;white-space:nowrap">Start Here</a>
+<a href="/free-trainings" style="flex:0 0 auto;background:#FFFFFF;border-radius:999px;padding:11px 16px;font:600 13px/1 var(--font-body);color:#3A1C2A;text-decoration:none;white-space:nowrap">Free Trainings</a>
+<a href="/boss" style="flex:0 0 auto;background:#A23E66;border-radius:999px;padding:11px 16px;font:600 13px/1 var(--font-body);color:#FFFFFF;text-decoration:none;white-space:nowrap">Explore BOSS</a>
+<a href="/blog-coaching" style="flex:0 0 auto;background:#FFFFFF;border-radius:999px;padding:11px 16px;font:600 13px/1 var(--font-body);color:#3A1C2A;text-decoration:none;white-space:nowrap">Coaching</a>
+<a href="/blog" style="flex:0 0 auto;background:#FFFFFF;border-radius:999px;padding:11px 16px;font:600 13px/1 var(--font-body);color:#3A1C2A;text-decoration:none;white-space:nowrap">Blog</a>
+<a href="/podcast" style="flex:0 0 auto;background:#FFFFFF;border-radius:999px;padding:11px 16px;font:600 13px/1 var(--font-body);color:#3A1C2A;text-decoration:none;white-space:nowrap">Podcast</a>
+<a href="/about" style="flex:0 0 auto;background:#FFFFFF;border-radius:999px;padding:11px 16px;font:600 13px/1 var(--font-body);color:#3A1C2A;text-decoration:none;white-space:nowrap">About</a>
+<a href="/contact" style="flex:0 0 auto;background:#FFFFFF;border-radius:999px;padding:11px 16px;font:600 13px/1 var(--font-body);color:#3A1C2A;text-decoration:none;white-space:nowrap">Contact</a>
+</nav>
+</div>"""
+
 PIECES = {
     "PostNavBar.html":      ("site navigation bar",  PIECE_NAV),
+    "PostNavMobile.html":   ("mobile navigation bar", PIECE_NAV_MOBILE),
     "PostHero.html":        ("featured image hero",  PIECE_POSTHERO),
     "PostAuthorCard.html":  ("author sidebar card",  PIECE_AUTHOR),
     "PostDownloadCard.html":("free download card",   PIECE_DOWNLOAD),
