@@ -231,16 +231,6 @@ div[id^="fd-form"] form { padding-top: 0 !important; padding-bottom: 0 !importan
 </div>
 <main id="main">
 
-<!-- CATEGORY BAR -->
-<nav aria-label="Blog categories" style="position:sticky;top:77px;z-index:30;background:#3A1C2A;padding:14px clamp(16px,4vw,48px);display:flex;flex-wrap:wrap;gap:8px 26px;justify-content:center;font:500 12px/1 var(--font-label);letter-spacing:0.12em;text-transform:uppercase">
-<a href="/blog" style="color:#E9B9CA;text-decoration:none;padding:8px 0">Blog Home</a>
-<a href="/blog-category?cat=blogging" data-cat="blogging" style="color:#FBF5EE;text-decoration:none;padding:8px 0">Blogging</a>
-<a href="/blog-category?cat=blogging-productivity" data-cat="blogging-productivity" style="color:#FBF5EE;text-decoration:none;padding:8px 0">Blogging Productivity</a>
-<a href="/blog-category?cat=podcast" data-cat="podcast" style="color:#FBF5EE;text-decoration:none;padding:8px 0">Podcast</a>
-<a href="/blog-category?cat=make-money-blogging" data-cat="make-money-blogging" style="color:#FBF5EE;text-decoration:none;padding:8px 0">Make Money Blogging</a>
-<a href="/blog-category?cat=create-blog-content" data-cat="create-blog-content" style="color:#FBF5EE;text-decoration:none;padding:8px 0">Create Blog Content</a>
-<a href="/blog-category?cat=how-to" data-cat="how-to" style="color:#FBF5EE;text-decoration:none;padding:8px 0">How To</a>
-</nav>
 
 <!-- CATEGORY HERO -->
 <section style="background:#F6E1E8;padding:90px clamp(16px,4vw,48px) 70px">
@@ -248,14 +238,15 @@ div[id^="fd-form"] form { padding-top: 0 !important; padding-bottom: 0 !importan
 <p style="margin:0;font:700 32px/1 var(--font-script);color:#A23E66">browse by topic</p>
 <h1 data-cat-title style="margin:0;font:400 clamp(48px,6vw,88px)/0.98 var(--font-display);color:#3A1C2A">The Blog</h1>
 <p data-cat-count style="margin:0;font:500 12px/1 var(--font-label);letter-spacing:0.14em;color:#6E4B5B">PICK A TOPIC BELOW</p>
-<div data-cat-cloud style="display:flex;flex-wrap:wrap;gap:10px;margin-top:10px">
+<div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:10px;align-items:flex-start"><a href="/blog" style="background:#3A1C2A;border-radius:999px;padding:10px 16px;font:600 13px/1 var(--font-body);color:#FBF5EE;text-decoration:none">Blog Home</a>
+<div data-cat-cloud style="display:contents">
 <a href="/blog-category?cat=blogging" style="background:#FFFFFF;border-radius:999px;padding:10px 16px;font:600 13px/1 var(--font-body);color:#3A1C2A;text-decoration:none">Blogging</a>
 <a href="/blog-category?cat=blogging-productivity" style="background:#FFFFFF;border-radius:999px;padding:10px 16px;font:600 13px/1 var(--font-body);color:#3A1C2A;text-decoration:none">Blogging Productivity</a>
 <a href="/blog-category?cat=podcast" style="background:#FFFFFF;border-radius:999px;padding:10px 16px;font:600 13px/1 var(--font-body);color:#3A1C2A;text-decoration:none">Podcast</a>
 <a href="/blog-category?cat=make-money-blogging" style="background:#FFFFFF;border-radius:999px;padding:10px 16px;font:600 13px/1 var(--font-body);color:#3A1C2A;text-decoration:none">Make Money Blogging</a>
 <a href="/blog-category?cat=create-blog-content" style="background:#FFFFFF;border-radius:999px;padding:10px 16px;font:600 13px/1 var(--font-body);color:#3A1C2A;text-decoration:none">Create Blog Content</a>
 <a href="/blog-category?cat=how-to" style="background:#FFFFFF;border-radius:999px;padding:10px 16px;font:600 13px/1 var(--font-body);color:#3A1C2A;text-decoration:none">How To</a>
-</div>
+</div></div>
 </div>
 </section>
 
