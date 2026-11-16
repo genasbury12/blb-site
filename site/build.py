@@ -37,7 +37,7 @@ PAGES = {
                         "1:1 Blog Coaching | Boss Lady Bloggers",
                         "Private 1:1 blog coaching with Genasys for women who want their blogs to sell."),
     "membership":      ("membership/index.html", "membership",
-                        "The Blogging Ladies Membership | Boss Lady Bloggers",
+                        "The Blogging Ladies Membership | Blogging Membership for Women",
                         "The Blogging Ladies Membership is the cozy, fun blogging community for women who still love to blog. Weekly coaching, a new lesson every week and a community that gets it. $47 a month."),
     "free-trainings":  ("free-trainings/index.html", "free-trainings",
                         "Free Trainings | Boss Lady Bloggers",
