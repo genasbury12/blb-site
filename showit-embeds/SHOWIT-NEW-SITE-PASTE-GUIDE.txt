@@ -97,10 +97,12 @@ post page gets rebuilt:
                                                    content, ~140px tall
    PostRelatedBand.html   "Keep reading" band      Near the bottom, full
                           with 3 recent posts      width, ~560px tall
-   PostFooter.html        The FULL site footer:    Very bottom, full
-                          your bio, Get around     width, ~1000px tall
-                          links, live Instagram    desktop / ~1700px
-                          feed, berry marquee      mobile
+   PostFooter.html        The FULL site footer     Very bottom, full
+                          with the Instagram       width, ~1000px tall,
+                          feed                     DESKTOP ONLY
+   PostFooterMobile.html  Same footer without      Very bottom, full
+                          the Instagram feed       width, ~1300px tall,
+                                                   MOBILE ONLY
 
    The nav bar and footer make every blog post feel like the rest of
    the site, so readers can get anywhere from a post.
