@@ -1,0 +1,453 @@
+<style>
+.bl8-mono{margin:0;font:500 12px/1.4 var(--font-label);letter-spacing:0.18em;text-transform:uppercase}
+.bl8-check{background-color:#FBF5EE;background-image:conic-gradient(#F6E1E8 25%,transparent 0 50%,#F6E1E8 0 75%,transparent 0);background-size:64px 64px}
+.bl8-h2{margin:0;font:400 clamp(42px,5.2vw,76px)/1.0 var(--font-display);letter-spacing:-0.02em}
+.bl8-p{margin:0;font:400 18px/1.7 var(--font-body)}
+.bl8-note{background:#FFFFFF;border-radius:16px;padding:14px 20px 20px;box-shadow:0 16px 36px rgba(58,28,42,0.16);max-width:380px}
+.bl8-note-top{margin:0 0 10px;display:flex;justify-content:space-between;font:600 13px/1 var(--font-body);color:#A23E66}
+.bl8-note-txt{margin:0;font:400 clamp(22px,2.2vw,28px)/1.2 var(--font-display);color:#3A1C2A}
+.bl8-gen{margin:0;border:1.5px dashed #A23E66;border-radius:12px;padding:10px 14px;background:#FFFCFA;font:500 12px/1.5 var(--font-label);letter-spacing:0.06em;color:#A23E66}
+.bl8-tape{position:absolute;top:-14px;left:50%;width:110px;height:28px;transform:translateX(-50%) rotate(-4deg);background:rgba(233,185,202,0.85);border-radius:3px}
+.bl8-polaroid{position:relative;margin:0;background:#FFFFFF;padding:14px 14px 18px;border-radius:6px;box-shadow:0 24px 50px rgba(58,28,42,0.18)}
+.bl8-polaroid figcaption{margin-top:12px;font:700 24px/1.1 var(--font-script);color:#3A1C2A;text-align:center}
+.bl8-win{background:#FFFFFF;border:2px solid #3A1C2A;border-radius:14px;overflow:hidden;box-shadow:8px 8px 0 #3A1C2A}
+.bl8-winbar{display:flex;align-items:center;gap:8px;background:#F6E1E8;border-bottom:2px solid #3A1C2A;padding:10px 14px;font:500 12px/1 var(--font-label);letter-spacing:0.06em;color:#3A1C2A}
+.bl8-dot{width:12px;height:12px;border-radius:999px;border:1.5px solid #3A1C2A;background:#FBF5EE;flex:none}
+.bl8-tab{display:flex;align-items:flex-start;gap:14px;padding:16px 18px;border-bottom:1px solid #F0DCE3;font:400 17px/1.5 var(--font-body);color:#3A1C2A}
+.bl8-tab:last-child{border-bottom:0}
+.bl8-x{flex:none;width:22px;height:22px;border-radius:6px;background:#F6E1E8;color:#A23E66;display:flex;align-items:center;justify-content:center;font:600 14px/1 var(--font-body)}
+.bl8-phone{width:290px;max-width:100%;border-radius:44px;background:#3A1C2A;padding:12px;box-shadow:0 30px 60px rgba(58,28,42,0.25)}
+.bl8-screen{border-radius:34px;padding:22px 14px 26px;background:linear-gradient(160deg,#E9B9CA,#F6E1E8 45%,#EBDDF2);min-height:420px;display:flex;flex-direction:column;gap:10px}
+.bl8-notif{background:rgba(255,252,250,0.92);border-radius:18px;padding:12px 14px;display:flex;flex-direction:column;gap:4px}
+.bl8-notif b{font:600 12px/1.2 var(--font-body);color:#A23E66;letter-spacing:0.02em}
+.bl8-notif span{font:400 14px/1.35 var(--font-body);color:#3A1C2A}
+.bl8-chip{display:inline-flex;align-items:center;gap:10px;background:#FFFFFF;border-radius:999px;padding:12px 20px;font:500 16px/1.3 var(--font-body);color:#3A1C2A;box-shadow:0 10px 24px rgba(58,28,42,0.08)}
+.bl8-myth{flex:1 1 240px;background:#FBF5EE;border-radius:22px;padding:24px;display:flex;flex-direction:column;gap:12px}
+.bl8-myth s{font:400 22px/1.2 var(--font-display);color:#A23E66;text-decoration-thickness:1.5px}
+.bl8-myth p{margin:0;font:400 16px/1.6 var(--font-body);color:#4A2F3B}
+.bl8-top{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+@media (max-width:760px){.bl8-top{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.bl8-top>div{background:#FFFFFF;border:2px solid #3A1C2A;border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:10px}
+.bl8-top b{font:500 11px/1 var(--font-label);letter-spacing:0.16em;color:#A23E66}
+.bl8-top span{font:400 20px/1.2 var(--font-display);color:#3A1C2A}
+.bl8-cd{position:relative;width:min(300px,72vw);aspect-ratio:1/1;border-radius:999px;background:conic-gradient(from 30deg,#F6E1E8,#EBDDF2,#FBF5EE,#E9B9CA,#F6C9D8,#EBDDF2,#F6E1E8);box-shadow:0 20px 50px rgba(0,0,0,0.25);display:flex;align-items:center;justify-content:center}
+.bl8-cd::after{content:"";position:absolute;width:22%;height:22%;border-radius:999px;background:#3A1C2A;border:10px solid rgba(255,252,250,0.7)}
+.bl8-cd p{position:absolute;top:16%;left:0;right:0;text-align:center;margin:0;font:700 clamp(24px,3vw,32px)/1 var(--font-script);color:#A23E66;transform:rotate(-8deg)}
+.bl8-cd small{position:absolute;bottom:17%;left:0;right:0;text-align:center;font:700 22px/1 var(--font-script);color:#3A1C2A;transform:rotate(-8deg)}
+.bl8-track{display:flex;gap:16px;align-items:flex-start;padding:14px 0;border-bottom:1px dashed rgba(246,225,232,0.35)}
+.bl8-track:last-child{border-bottom:0}
+.bl8-track .n{flex:none;font:500 13px/1.6 var(--font-label);letter-spacing:0.1em;color:#E9B9CA}
+.bl8-track .t{font:400 17px/1.5 var(--font-body);color:#F6E1E8}
+.bl8-track .t strong{font:400 22px/1.2 var(--font-display);color:#FBF5EE;display:block}
+.bl8-track details summary{cursor:pointer;list-style:none;font:600 13px/1.4 var(--font-body);color:#E9B9CA;margin-top:8px}
+.bl8-track details summary::-webkit-details-marker{display:none}
+.bl8-track ol{margin:10px 0 0;padding-left:20px;font:400 15px/1.7 var(--font-body);color:#F6E1E8}
+.bl8-obj{display:inline-flex;align-self:flex-start;gap:8px;align-items:center;border-radius:999px;padding:8px 14px;font:500 12px/1.3 var(--font-label);letter-spacing:0.06em}
+.bl8-thing{border-radius:30px;padding:clamp(26px,4vw,48px);display:flex;flex-wrap:wrap;gap:36px;align-items:center}
+.bl8-num{font:400 clamp(70px,8vw,110px)/0.8 var(--font-display);font-style:italic}
+.bl8-step{flex:1 1 240px;background:#FFFFFF;border-radius:24px;padding:26px;display:flex;flex-direction:column;gap:10px;box-shadow:0 14px 30px rgba(58,28,42,0.07)}
+.bl8-gift{flex:1 1 280px;max-width:360px;position:relative;background:#FFFFFF;border-radius:22px;padding:30px 24px 24px;display:flex;flex-direction:column;gap:10px;border:2px solid #E9B9CA}
+.bl8-gift .tag{position:absolute;top:-16px;left:20px;background:#A23E66;color:#FFFFFF;border-radius:999px;padding:8px 14px;font:500 11px/1 var(--font-label);letter-spacing:0.16em}
+.bl8-comment{display:flex;gap:16px;padding:22px 0;border-bottom:1px solid #F0DCE3}
+.bl8-comment:last-child{border-bottom:0}
+.bl8-ava{flex:none;width:48px;height:48px;border-radius:999px;background:#E9B9CA;display:flex;align-items:center;justify-content:center;font:400 24px/1 var(--font-display);color:#3A1C2A}
+.bl8-said{margin:0 0 8px;font:500 12px/1 var(--font-label);letter-spacing:0.12em;color:#A23E66;text-transform:uppercase}
+.bl8-ch{flex:1 1 240px;border:1.5px solid rgba(246,225,232,0.35);border-radius:22px;padding:24px;display:flex;flex-direction:column;gap:10px}
+.bl8-ch b{font:500 12px/1 var(--font-label);letter-spacing:0.18em;color:#E9B9CA}
+.bl8-ch h3{margin:0;font:400 28px/1.1 var(--font-display);color:#FBF5EE}
+.bl8-ch p{margin:0;font:400 16px/1.6 var(--font-body);color:#F6E1E8}
+.bl8-receipt{background:#FFFCFA;width:min(380px,100%);padding:28px 26px 34px;font:400 14px/1.8 var(--font-label);color:#3A1C2A;box-shadow:0 24px 50px rgba(0,0,0,0.25);transform:rotate(2deg);-webkit-mask:radial-gradient(circle 8px at 50% 100%,transparent 98%,#000) 50% 100%/22px 100% repeat-x;mask:radial-gradient(circle 8px at 50% 100%,transparent 98%,#000) 50% 100%/22px 100% repeat-x}
+.bl8-receipt .row{display:flex;justify-content:space-between;gap:12px}
+.bl8-paper{background:#FFFFFF;background-image:repeating-linear-gradient(#FFFFFF 0 35px,#F0DCE3 35px 36px);border-left:3px solid #E9B9CA;border-radius:6px;padding:40px clamp(22px,4vw,48px) 36px;box-shadow:0 24px 50px rgba(58,28,42,0.14);transform:rotate(-1deg)}
+.bl8-paper p{margin:0;font:600 clamp(23px,2.4vw,28px)/36px var(--font-script);color:#3A1C2A}
+.bl8-profile{background:#FFFFFF;border:2px solid #3A1C2A;border-radius:18px;overflow:hidden}
+.bl8-profile dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:8px 14px;font:400 15px/1.45 var(--font-body);color:#3A1C2A}
+.bl8-profile dt{font:500 12px/1.6 var(--font-label);letter-spacing:0.1em;color:#A23E66;text-transform:uppercase}
+.bl8-profile dd{margin:0}
+.bl8-quiz label{display:flex;gap:14px;align-items:flex-start;background:#FFFFFF;border-radius:18px;padding:18px 20px;cursor:pointer;font:400 17px/1.5 var(--font-body);color:#3A1C2A;box-shadow:0 10px 24px rgba(58,28,42,0.06)}
+.bl8-quiz input{flex:none;appearance:none;-webkit-appearance:none;width:26px;height:26px;margin:0;border:2px solid #A23E66;border-radius:8px;background:#FFFFFF;display:grid;place-content:center;cursor:pointer}
+.bl8-quiz input:checked{background:#A23E66}
+.bl8-quiz input:checked::after{content:"";width:10px;height:6px;border:solid #FFFFFF;border-width:0 0 2.5px 2.5px;transform:rotate(-45deg) translateY(-1px)}
+.bl8-quiz label strong{color:#A23E66;font-weight:600}
+.bl8-chat{background:#FFFFFF;border:2px solid #3A1C2A;border-radius:18px;overflow:hidden;box-shadow:8px 8px 0 #A23E66}
+.bl8-msgs{padding:clamp(18px,3vw,30px);display:flex;flex-direction:column;gap:14px;max-height:none}
+.bl8-q,.bl8-a{max-width:640px;border-radius:20px;padding:14px 18px;display:flex;flex-direction:column;gap:6px}
+.bl8-q{align-self:flex-end;background:#A23E66;border-bottom-right-radius:6px}
+.bl8-q b,.bl8-a b{font:500 11px/1 var(--font-label);letter-spacing:0.14em;text-transform:uppercase}
+.bl8-q b{color:#F6E1E8}.bl8-q span{font:600 17px/1.4 var(--font-body);color:#FFFFFF}
+.bl8-a{align-self:flex-start;background:#F6E1E8;border-bottom-left-radius:6px}
+.bl8-a b{color:#A23E66}.bl8-a span{font:400 16px/1.6 var(--font-body);color:#3A1C2A}
+.bl8-paris{display:flex;gap:18px;align-items:flex-start;padding:18px 0;border-bottom:1px solid rgba(246,225,232,0.25)}
+.bl8-paris:last-child{border-bottom:0}
+.bl8-paris b{flex:none;width:52px;height:52px;border-radius:999px;background:#E9B9CA;color:#3A1C2A;display:flex;align-items:center;justify-content:center;font:400 30px/1 var(--font-display);font-style:italic}
+.bl8-paris p{margin:0;font:400 18px/1.6 var(--font-body);color:#F6E1E8;padding-top:10px}
+.bl8-mark{background:linear-gradient(transparent 62%,#E9B9CA 62%,#E9B9CA 92%,transparent 92%);-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.bl8-hero-h1{margin:0;font:400 clamp(46px,6.2vw,96px)/0.96 var(--font-display);color:#3A1C2A;letter-spacing:-0.025em}
+@media (max-width:640px){.bl8-collage{min-height:460px!important}.bl8-btn{white-space:normal;text-align:left}}
+</style>
+
+<main id="main">
+
+<div class="bl-marquee" style="background:#A23E66;padding:14px 0;overflow:hidden" aria-label="Blogging is so back. The Blogging Ladies Membership, $47 a month.">
+<div class="bl-track" style="font:500 13px/1 var(--font-label);letter-spacing:0.18em;color:#FBF5EE;white-space:nowrap" aria-hidden="true"><span style="padding:0 22px">BLOGGING IS SO BACK</span><span aria-hidden="true">&#10022;</span><span style="padding:0 22px">XOXO, THE BLOGGING LADIES</span><span aria-hidden="true">&#10022;</span><span style="padding:0 22px">A NEW LESSON EVERY WEEK</span><span aria-hidden="true">&#10022;</span><span style="padding:0 22px">WEEKLY GROUP BLOG COACHING</span><span aria-hidden="true">&#10022;</span><span style="padding:0 22px">$47 A MONTH</span><span aria-hidden="true">&#10022;</span><span style="padding:0 22px">THERE&rsquo;S A SEAT SAVED FOR YOU</span><span aria-hidden="true">&#10022;</span><span style="padding:0 22px">BLOGGING IS SO BACK</span><span aria-hidden="true">&#10022;</span><span style="padding:0 22px">XOXO, THE BLOGGING LADIES</span><span aria-hidden="true">&#10022;</span><span style="padding:0 22px">A NEW LESSON EVERY WEEK</span><span aria-hidden="true">&#10022;</span><span style="padding:0 22px">WEEKLY GROUP BLOG COACHING</span><span aria-hidden="true">&#10022;</span><span style="padding:0 22px">$47 A MONTH</span><span aria-hidden="true">&#10022;</span><span style="padding:0 22px">THERE&rsquo;S A SEAT SAVED FOR YOU</span><span aria-hidden="true">&#10022;</span><span style="padding:0 22px">BLOGGING IS SO BACK</span><span aria-hidden="true">&#10022;</span><span style="padding:0 22px">XOXO, THE BLOGGING LADIES</span><span aria-hidden="true">&#10022;</span><span style="padding:0 22px">A NEW LESSON EVERY WEEK</span><span aria-hidden="true">&#10022;</span><span style="padding:0 22px">WEEKLY GROUP BLOG COACHING</span><span aria-hidden="true">&#10022;</span><span style="padding:0 22px">$47 A MONTH</span><span aria-hidden="true">&#10022;</span><span style="padding:0 22px">THERE&rsquo;S A SEAT SAVED FOR YOU</span><span aria-hidden="true">&#10022;</span></div>
+</div>
+
+<section class="bl8-check" style="padding:clamp(56px,7vw,100px) clamp(16px,4vw,48px) clamp(70px,8vw,120px);overflow:hidden">
+<div style="max-width:1180px;margin:0 auto;display:flex;flex-wrap:wrap;gap:56px;align-items:center">
+<div style="flex:1 1 520px;min-width:0;display:flex;flex-direction:column;gap:22px">
+<div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center">
+<span style="background:#3A1C2A;color:#FBF5EE;border-radius:999px;padding:10px 16px;font:500 12px/1 var(--font-label);letter-spacing:0.18em">THE BLOGGING LADIES MEMBERSHIP</span>
+<span style="font:italic 400 22px/1 var(--font-display);color:#A23E66">Diary of a Blogging Lady</span>
+</div>
+<h1 class="bl8-hero-h1">The world wants you to believe blogging is dead. <em style="color:#A23E66">But blogging is coming back,</em> and there&rsquo;s a <span class="bl8-mark">seat saved for you.</span></h1>
+<p class="bl8-p" style="color:#4A2F3B;max-width:600px">The cozy, fun blogging membership for women who still love to write. A new lesson every week, weekly group blog coaching, and a community of blogging ladies who get it. All for $47 a month.</p>
+<div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center"><a href="#join" class="pill bl8-btn" style="background:#3A1C2A;color:#FFFFFF">Count me in! Join the Blogging Ladies <span aria-hidden="true" style="width:34px;height:34px;border-radius:999px;background:#A23E66;display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></span></a><span style="font:700 26px/1 var(--font-script);color:#A23E66">only $47 a month &#10022;</span></div>
+</div>
+<div class="bl8-collage" style="flex:1 1 420px;min-width:0;position:relative;min-height:540px">
+<figure class="bl8-polaroid" style="position:absolute;top:0;right:6%;width:min(310px,74%);transform:rotate(3deg)"><span class="bl8-tape" aria-hidden="true"></span><div style="aspect-ratio:4/5;overflow:hidden;border-radius:3px;background:#E9B9CA"><img src="/images/photos/desk-typing.jpg" alt="Genasys typing on her laptop" style="width:100%;height:100%;object-fit:cover;object-position:40% 25%"></div><figcaption>me, hitting publish again</figcaption></figure>
+<div style="position:absolute;left:0;bottom:-10px;z-index:3"><div class="bl8-note rv" style="transform:rotate(-4deg);"><p class="bl8-note-top"><span>&#8249; Notes</span><span aria-hidden="true">&#8943;</span></p><p class="bl8-note-txt">I couldn&rsquo;t help but wonder&hellip; <span class="hl">is blogging actually back?</span></p></div></div>
+<div aria-hidden="true" style="position:absolute;right:0;bottom:0;z-index:3;background:#3A1C2A;color:#FBF5EE;border-radius:999px;padding:12px 18px;font:500 12px/1.3 var(--font-label);letter-spacing:0.12em;transform:rotate(6deg)">MOOD: READY TO BLOG AGAIN</div>
+<span aria-hidden="true" class="bl-float" style="position:absolute;left:12%;top:4%;font:400 44px/1 var(--font-display);color:#A23E66">&#10022;</span>
+<span aria-hidden="true" class="bl-float" style="position:absolute;right:0;top:46%;font:400 30px/1 var(--font-display);color:#A23E66;animation-delay:1.2s">&#10022;</span>
+</div>
+</div>
+</section>
+
+<section style="background:#3A1C2A;padding:110px clamp(16px,4vw,48px)">
+<div style="max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:44px">
+<div style="text-align:center;display:flex;flex-direction:column;gap:14px;align-items:center">
+<p class="bl8-mono" style="color:#E9B9CA">Previously on</p>
+<h2 class="bl8-h2" style="color:#FBF5EE"><em>The Blogging Ladies</em></h2>
+<p style="margin:0;font:500 12px/1 var(--font-label);letter-spacing:0.18em;color:#F6E1E8;border:1.5px solid rgba(246,225,232,0.4);border-radius:999px;padding:10px 16px">SEASON 1, EPISODE 1: THE FIRST TIME YOU HIT PUBLISH</p>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:48px;align-items:center">
+<div style="flex:1 1 460px;min-width:0;display:flex;flex-direction:column;gap:18px">
+<p class="rv" style="margin:0;font:400 clamp(30px,3.4vw,44px)/1.1 var(--font-display);color:#FBF5EE">Remember the first time you hit publish?</p>
+<p class="bl8-p rv" style="color:#F6E1E8">Maybe it was a recipe. Maybe it was your birth story, or your DIY dresser makeover, or the day you finally said the thing out loud. You picked a blog name you loved. You spent way too long choosing fonts. You refreshed the page just to see if anyone had commented.</p>
+<p class="bl8-p rv" style="color:#F6E1E8">For a lot of us, blogging was more than a hobby. One woman told me it was like therapy. Another called it a journal to your life.</p>
+<p class="rv" style="margin:0;font:400 clamp(26px,2.8vw,36px)/1.2 var(--font-display);color:#E9B9CA"><em>And somewhere along the way, it stopped feeling like that.</em></p>
+</div>
+<div style="flex:1 1 340px;min-width:0;display:flex;flex-direction:column;gap:22px;align-items:center">
+<figure class="bl8-note rv" style="margin:0;transform:rotate(-3deg);"><p class="bl8-note-top"><span>&#8249; From the survey</span><span aria-hidden="true">&#8943;</span></p><blockquote class="bl8-note-txt" style="margin:0">&ldquo;To me blogging is like therapy.&rdquo;</blockquote><figcaption class="bl8-mono" style="color:#6E4B5B;margin-top:10px">A Blogging Lady, anonymous</figcaption></figure>
+<figure class="bl8-note rv" style="margin:0;transform:rotate(2deg);align-self:flex-end"><p class="bl8-note-top"><span>&#8249; From the survey</span><span aria-hidden="true">&#8943;</span></p><blockquote class="bl8-note-txt" style="margin:0">&ldquo;A journal to your life.&rdquo;</blockquote><figcaption class="bl8-mono" style="color:#6E4B5B;margin-top:10px">A Blogging Lady, anonymous</figcaption></figure>
+</div>
+</div>
+</div>
+</section>
+
+<section style="padding:110px clamp(16px,4vw,48px)">
+<div style="max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:44px">
+<h2 class="bl8-h2 rv" style="color:#3A1C2A;text-align:center">Somewhere between the algorithm and AI, <em style="color:#A23E66">you lost the joy.</em></h2>
+<div style="display:flex;flex-wrap:wrap;gap:48px;align-items:flex-start">
+<div style="flex:1 1 440px;min-width:0;display:flex;flex-direction:column;gap:20px">
+<p class="bl8-p rv" style="color:#4A2F3B">Everyone started telling you blogging was dead. Post Reels instead. Go viral on TikTok. Let AI write it for you. Chase traffic, add affiliate links, wait for the money.</p>
+<p class="bl8-p rv" style="color:#4A2F3B">So maybe you stopped. One blogger put it so simply:</p>
+<figure class="bl8-note rv" style="margin:0;transform:rotate(-1.5deg);"><p class="bl8-note-top"><span>&#8249; From the survey</span><span aria-hidden="true">&#8943;</span></p><blockquote class="bl8-note-txt" style="margin:0">&ldquo;I stopped posting recently so need to rediscover some enthusiasm.&rdquo;</blockquote><figcaption class="bl8-mono" style="color:#6E4B5B;margin-top:10px">A Blogging Lady, anonymous</figcaption></figure>
+<p class="bl8-p rv" style="color:#4A2F3B">Or maybe you&rsquo;re stuck in the loop so many of us know:</p>
+<figure class="bl8-note rv" style="margin:0;transform:rotate(1.5deg);max-width:460px"><p class="bl8-note-top"><span>&#8249; From the survey</span><span aria-hidden="true">&#8943;</span></p><blockquote class="bl8-note-txt" style="margin:0">&ldquo;I will work on it for a few months and then get discouraged and then other life demands pop up and then I go back to it.&rdquo;</blockquote><figcaption class="bl8-mono" style="color:#6E4B5B;margin-top:10px">A Blogging Lady, anonymous</figcaption></figure>
+</div>
+<div style="flex:1 1 420px;min-width:0;display:flex;flex-direction:column;gap:18px">
+<p class="bl8-p rv" style="color:#3A1C2A;font-weight:600">And if you&rsquo;re honest, here&rsquo;s what it&rsquo;s been feeling like:</p>
+<div class="bl8-win rv"><div class="bl8-winbar"><span class="bl8-dot"></span><span class="bl8-dot"></span><span class="bl8-dot"></span><span style="margin-left:8px">my_blog_drafts_FINAL_v7.doc</span></div><div class="bl8-tab rv"><span class="bl8-x" aria-hidden="true">&times;</span><span>Too many tabs open in your head, and no idea which one to close first</span></div><div class="bl8-tab rv"><span class="bl8-x" aria-hidden="true">&times;</span><span>Rewriting the same post again and again because it doesn&rsquo;t feel &ldquo;good enough&rdquo;</span></div><div class="bl8-tab rv"><span class="bl8-x" aria-hidden="true">&times;</span><span>Researching instead of doing, and losing whole weekends to the tech</span></div><div class="bl8-tab rv"><span class="bl8-x" aria-hidden="true">&times;</span><span>Blogging alone, with no one to tell you you&rsquo;re on the right track</span></div><div class="bl8-tab rv"><span class="bl8-x" aria-hidden="true">&times;</span><span>Loving to write, but missing the part where you get paid for it</span></div></div>
+</div>
+</div>
+<p class="rv" style="margin:0;text-align:center;font:400 clamp(28px,3.2vw,44px)/1.2 var(--font-display);color:#3A1C2A">You haven&rsquo;t lost your message. <span class="hl">You&rsquo;ve just been blogging alone for too long.</span></p>
+</div>
+</section>
+
+<section class="bl-grad" style="padding:110px clamp(16px,4vw,48px)">
+<div style="max-width:1140px;margin:0 auto;display:flex;flex-direction:column;gap:48px">
+<h2 class="bl8-h2 rv" style="color:#3A1C2A;text-align:center">Say goodbye to blogging alone, <em style="color:#A23E66">and hello to blogging again.</em></h2>
+<div style="display:flex;flex-wrap:wrap;gap:56px;align-items:center">
+<div style="flex:1 1 460px;min-width:0;display:flex;flex-direction:column;gap:18px">
+<p class="rv" style="margin:0;font:700 34px/1 var(--font-script);color:#A23E66">Picture this.</p>
+<p class="bl8-p rv" style="color:#3A1C2A">The kids are down for a nap. Your coffee is still warm (for once). You open your laptop, and you actually know what to write today. You hit publish, and it feels like it used to.</p>
+<p class="bl8-p rv" style="color:#3A1C2A">Later, your phone buzzes. Someone bought the thing you made. Not an affiliate commission. Your printable. Your ebook. Your course. Your coaching.</p>
+<p class="rv" style="margin:0;font:400 clamp(28px,3vw,38px)/1.15 var(--font-display);color:#3A1C2A">That&rsquo;s the dream, isn&rsquo;t it?</p>
+</div>
+<div style="flex:0 1 320px;min-width:0;display:flex;justify-content:center">
+<div class="bl8-phone rv" role="img" aria-label="A phone lock screen with notifications for a new sale, a new blog comment and a coaching call reminder">
+<div class="bl8-screen">
+<p style="margin:6px 0 2px;text-align:center;font:400 64px/1 var(--font-display);color:#3A1C2A">2:14</p>
+<p style="margin:0 0 14px;text-align:center;font:500 11px/1 var(--font-label);letter-spacing:0.14em;color:#6E4B5B">NAP TIME, WARM COFFEE</p>
+<div class="bl8-notif"><b>NEW ORDER &#10022;</b><span>Someone just bought your printable!</span></div>
+<div class="bl8-notif"><b>YOUR BLOG</b><span>New comment on the post you published this morning</span></div>
+<div class="bl8-notif"><b>THE BLOGGING LADIES</b><span>Group coaching starts soon. Bring your questions!</span></div>
+</div></div>
+</div>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center"><span class="bl8-chip rv"><span aria-hidden="true" style="color:#A23E66">&#10022;</span>A message to share with the world, and readers who need it</span><span class="bl8-chip rv"><span aria-hidden="true" style="color:#A23E66">&#10022;</span>A purpose bigger than a paycheck</span><span class="bl8-chip rv"><span aria-hidden="true" style="color:#A23E66">&#10022;</span>Being home with your kids while you build something that&rsquo;s yours</span><span class="bl8-chip rv"><span aria-hidden="true" style="color:#A23E66">&#10022;</span>An income from your words, not from a job you dread</span><span class="bl8-chip rv"><span aria-hidden="true" style="color:#A23E66">&#10022;</span>Blogging friends who cheer you on</span></div>
+<div style="display:flex;flex-wrap:wrap;gap:28px;justify-content:center;align-items:flex-start">
+<figure class="bl8-note rv" style="margin:0;transform:rotate(-2deg);max-width:440px"><p class="bl8-note-top"><span>&#8249; From the survey</span><span aria-hidden="true">&#8943;</span></p><blockquote class="bl8-note-txt" style="margin:0">&ldquo;An income that comes from my creative outlet, create the opportunity to be home with my family and create my own schedule.&rdquo;</blockquote><figcaption class="bl8-mono" style="color:#6E4B5B;margin-top:10px">A Blogging Lady, anonymous</figcaption></figure>
+<figure class="bl8-note rv" style="margin:0;transform:rotate(2.5deg);"><p class="bl8-note-top"><span>&#8249; From the survey</span><span aria-hidden="true">&#8943;</span></p><blockquote class="bl8-note-txt" style="margin:0">&ldquo;Make $1 to prove to myself I CAN do it!&rdquo;</blockquote><figcaption class="bl8-mono" style="color:#6E4B5B;margin-top:10px">A Blogging Lady, anonymous</figcaption></figure>
+</div>
+<p class="rv" style="margin:0;text-align:center;font:700 40px/1 var(--font-script);color:#A23E66">Both are welcome here.</p>
+</div>
+</section>
+
+<section style="background:#3A1C2A;padding:110px clamp(16px,4vw,48px)">
+<div style="max-width:1140px;margin:0 auto;display:flex;flex-direction:column;gap:44px">
+<div style="text-align:center;display:flex;flex-direction:column;gap:18px;align-items:center">
+<p class="bl8-mono" style="color:#E9B9CA">&#10022; Breaking news &#10022;</p>
+<h2 class="bl8-h2" style="color:#FBF5EE">Here&rsquo;s the truth: blogging isn&rsquo;t dead. <em style="color:#E9B9CA">It&rsquo;s coming back.</em></h2>
+<p class="bl8-p" style="color:#F6E1E8;max-width:760px">People are tired of 15-second videos and AI-written answers that all sound the same. They want real people again. Real stories. Real experience. Someone who has actually done the thing.</p>
+<p style="margin:0;font:700 44px/1 var(--font-script);color:#E9B9CA">That&rsquo;s you.</p>
+<p class="bl8-p" style="color:#F6E1E8;max-width:760px">A blog is still the one place online you own. No algorithm can take it away. And when you pair it with your own email list and something to sell, it becomes a business.</p>
+</div>
+<p class="rv" style="margin:0;text-align:center;font:400 clamp(28px,3vw,40px)/1.15 var(--font-display);color:#FBF5EE">Here&rsquo;s what most blogging advice got backwards:</p>
+<div style="display:flex;flex-wrap:wrap;gap:16px"><article class="bl8-myth rv"><s>&ldquo;I need more traffic before I can make money.&rdquo;</s><p>You need something to sell first. Then every reader has somewhere to go.</p></article><article class="bl8-myth rv"><s>&ldquo;Blogs make money from ads and affiliates.&rdquo;</s><p>They pay pennies until you&rsquo;re huge. Your own offer can pay you now, even with a small audience.</p></article><article class="bl8-myth rv"><s>&ldquo;AI can write my blog for me.&rdquo;</s><p>AI can&rsquo;t tell your story, so your voice stays yours. But AI should absolutely do the heavy lifting on the tech and the busywork, and I&rsquo;ll show you exactly how.</p></article><article class="bl8-myth rv"><s>&ldquo;I need to figure it all out alone.&rdquo;</s><p>Nope. That&rsquo;s exactly what the Blogging Ladies are for.</p></article></div>
+<div style="background:#F6E1E8;border-radius:30px;padding:clamp(28px,5vw,56px);display:flex;flex-wrap:wrap;gap:44px;align-items:center">
+<div style="flex:1 1 420px;min-width:0;display:flex;flex-direction:column;gap:16px">
+<p class="bl8-mono" style="color:#A23E66">Dear diary, a true story</p>
+<p class="bl8-p rv" style="color:#3A1C2A">I learned this the hard way. I started my lifestyle blog in 2017, in my aunt&rsquo;s basement, on a 2010 MacBook. Two years in, I&rsquo;d made about $50 in affiliate money and never got paid, because the cash-out minimum was $100.</p>
+<p class="bl8-p rv" style="color:#3A1C2A">When I built my own offer first, my first Stripe payout was <span class="hl">$18.52.</span> Within 3 to 4 months, I&rsquo;d made about <span class="hl">$4,000.</span></p>
+<p class="rv" style="margin:0;font:400 clamp(24px,2.4vw,32px)/1.2 var(--font-display);color:#3A1C2A">Same girl. Same laptop. Same love of blogging. <em style="color:#A23E66">I just finally had the right order, and people in my corner.</em></p>
+</div>
+<div style="flex:1 1 380px;min-width:0;display:flex;flex-wrap:wrap;gap:22px;justify-content:center">
+<figure class="bl8-polaroid rv" style="width:min(250px,100%);transform:rotate(-3deg)"><span class="bl8-tape" aria-hidden="true"></span><div style="height:170px;overflow:hidden;border-radius:3px;background:#E9B9CA"><img src="/images/proof/proof-first-stripe-payouts-2020-2021.jpg" alt="Blurred sample of early Stripe payouts" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center top"></div><figcaption>my first Stripe payouts</figcaption></figure>
+<figure class="bl8-polaroid rv" style="width:min(250px,100%);transform:rotate(2.5deg)"><span class="bl8-tape" aria-hidden="true"></span><div style="height:170px;overflow:hidden;border-radius:3px;background:#E9B9CA"><img src="/images/proof/proof-81-invoices-paid.jpg" alt="Invoice app showing 81 paid invoices totaling $34,481" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center bottom"></div><figcaption>81 invoices paid: $34,481</figcaption></figure>
+<figure class="bl8-polaroid rv" style="width:min(250px,100%);transform:rotate(-1.5deg)"><span class="bl8-tape" aria-hidden="true"></span><div style="height:170px;overflow:hidden;border-radius:3px;background:#E9B9CA"><img src="/images/proof/proof-monthly-client-payments-2024.jpg" alt="Blurred sample of monthly client payments" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center bottom"></div><figcaption>real client payments, 2024</figcaption></figure>
+</div>
+</div>
+</div>
+</section>
+
+<section class="bl8-check" style="padding:110px clamp(16px,4vw,48px)">
+<div style="max-width:1140px;margin:0 auto;display:flex;flex-direction:column;gap:48px">
+<div style="background:#A23E66;border-radius:34px;padding:clamp(32px,5vw,64px);display:flex;flex-wrap:wrap;gap:44px;align-items:center;box-shadow:0 30px 60px rgba(58,28,42,0.18)">
+<div style="flex:1 1 440px;min-width:0;display:flex;flex-direction:column;gap:18px">
+<p class="bl8-mono" style="color:#F6E1E8">Now starring: you</p>
+<h2 class="bl8-h2" style="color:#FBF5EE">Welcome to <em style="color:#F6C9D8">The Blogging Ladies</em> Membership.</h2>
+<p class="bl8-p" style="color:#F6E1E8">The cozy, fun blogging membership where you&rsquo;ll learn how to turn your blog into a business, one bite-sized lesson a week, with weekly group coaching and a community of women blogging right alongside you.</p>
+<p style="margin:0;font:400 clamp(24px,2.4vw,30px)/1.2 var(--font-display);color:#FBF5EE">It&rsquo;s for the woman who still loves to blog, <em style="color:#F6C9D8">and is ready to finally get paid for it.</em></p>
+</div>
+<div style="flex:1 1 340px;min-width:0;position:relative;min-height:380px">
+<figure class="bl8-polaroid" style="position:absolute;top:0;left:0;width:62%;transform:rotate(-4deg)"><span class="bl8-tape" aria-hidden="true"></span><div style="aspect-ratio:1/1;overflow:hidden;border-radius:3px"><img src="/images/photos/flatlay-notebook.jpg" alt="Notebook, pen and a Boss mug on a desk" loading="lazy" style="width:100%;height:100%;object-fit:cover"></div><figcaption>lesson of the week</figcaption></figure>
+<figure class="bl8-polaroid" style="position:absolute;bottom:0;right:0;width:62%;transform:rotate(4deg)"><span class="bl8-tape" aria-hidden="true"></span><div style="aspect-ratio:1/1;overflow:hidden;border-radius:3px"><img src="/images/photos/desk-mic-smile.jpg" alt="Genasys smiling at her desk with a microphone" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center 25%"></div><figcaption>see you on the call!</figcaption></figure>
+</div>
+</div>
+<div style="background:#FFFCFA;border:2px solid #3A1C2A;border-radius:24px;overflow:hidden">
+<div style="background:#3A1C2A;padding:14px 22px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap"><span style="font:500 12px/1.4 var(--font-label);letter-spacing:0.16em;color:#FBF5EE">YOUR NEW TOP 6</span><span style="font:500 12px/1.4 var(--font-label);letter-spacing:0.16em;color:#E9B9CA">WHAT YOU&rsquo;LL WALK AWAY WITH</span></div>
+<div class="bl8-top" style="padding:clamp(16px,3vw,26px)"><div class="rv"><b>#1</b><span>Your love of blogging back, and a reason to hit publish every week</span></div><div class="rv"><b>#2</b><span>A clear message, and readers who can&rsquo;t wait for your next post</span></div><div class="rv"><b>#3</b><span>Something of your own to sell, like a digital product, course, coaching or membership</span></div><div class="rv"><b>#4</b><span>A freebie and emails that turn readers into buyers</span></div><div class="rv"><b>#5</b><span>Blogging friends who cheer you on every single week</span></div><div class="rv"><b>#6</b><span>A blog that fits around your kids, your job and your real life, with AI making the tech way easier</span></div></div>
+</div>
+</div>
+</section>
+
+<section style="padding:110px clamp(16px,4vw,48px)">
+<div style="max-width:1140px;margin:0 auto;display:flex;flex-direction:column;gap:30px">
+<div style="text-align:center;display:flex;flex-direction:column;gap:16px;align-items:center;margin-bottom:10px">
+<p class="bl8-mono" style="color:#A23E66">&#10022; Unwrap it &#10022;</p>
+<h2 class="bl8-h2" style="color:#3A1C2A">When you unwrap The Blogging Ladies Membership, <em style="color:#A23E66">here&rsquo;s what you get.</em></h2>
+</div>
+
+<article class="bl8-thing" style="background:#3A1C2A">
+<div style="flex:1 1 300px;min-width:0;display:flex;flex-direction:column;gap:18px;align-items:center;text-align:center">
+<span class="bl8-num" style="color:#E9B9CA">#1</span>
+<h3 style="margin:0;font:400 clamp(32px,3.4vw,46px)/1.05 var(--font-display);color:#FBF5EE">A new module every week</h3>
+<div class="bl8-cd" role="img" aria-label="A burned CD labeled Blogging Ladies Mix Vol. 1"><p>Blogging Ladies Mix</p><small>vol. 1 &#10022;</small></div>
+<p class="bl8-p" style="color:#F6E1E8;font-size:16px">No overwhelm. No 40-hour course you&rsquo;ll never finish. Just one module each week, made of short 5 to 15 minute lessons, with templates, assignments and checklists so you actually do it.</p>
+<span class="bl8-obj" style="background:#E9B9CA;color:#3A1C2A">OBJECTION BUSTED: &ldquo;I START COURSES AND NEVER FINISH THEM.&rdquo;</span>
+</div>
+<div style="flex:1 1 440px;min-width:0"><p class="bl8-mono" style="color:#E9B9CA;margin-bottom:8px">The tracklist</p><div class="bl8-track"><span class="n">TRACK 01</span><div class="t"><strong>Week 1: Business Foundation</strong>Figure out what your blog should sell, and who it&rsquo;s for.<details><summary>See the 9 lessons inside Week 1 &#9662;</summary><ol><li>Your Blog Is Marketing, Not Your Business</li><li>Choose Your Profitable Business Direction</li><li>Define the Woman You&rsquo;re Actually Selling To</li><li>Find the Problem Worth Paying to Solve</li><li>Create Your Digital Product Direction</li><li>Position Your Business So Buyers Understand It</li><li>Write Messaging That Makes People Feel Understood</li><li>Connect Your Blog to Your Future Sales</li><li>Finalize Your Business Foundation Blueprint</li></ol></details></div></div><div class="bl8-track"><span class="n">TRACK 02</span><div class="t"><strong>Week 2: Brand and Website</strong>A professional website, and a path that leads your readers to your offer.</div></div><div class="bl8-track"><span class="n">TRACK 03</span><div class="t"><strong>Week 3: Content Production Engine</strong>A blogging routine you can repeat, where every post supports your sales.</div></div><div class="bl8-track"><span class="n">TRACK 04</span><div class="t"><strong>Week 4: Marketing and Distribution</strong>Promote your posts in a way you can actually keep up with.</div></div><div class="bl8-track"><span class="n">TRACK 05</span><div class="t"><strong>Week 5: Digital Product Development</strong>Create a digital product you can sell, and a simple way to deliver it.</div></div><div class="bl8-track"><span class="n">TRACK 06</span><div class="t"><strong>Week 6: Email and Sales Systems</strong>A working email funnel, checkout and delivery, so readers can buy from you.</div></div><div class="bl8-track"><span class="n">TRACK 07</span><div class="t"><strong>Week 7: AI and Automation Hub</strong>Use AI to set up the tech, speed up the busywork and get unstuck in minutes instead of whole weekends, without losing your voice.</div></div><div class="bl8-track"><span class="n">TRACK 08</span><div class="t"><strong>Week 8: CEO Productivity System</strong>Simple planning, follow-through and tracking that fits around your real life.</div></div></div>
+</article>
+
+<article class="bl8-thing" style="background:#A23E66">
+<div style="flex:1 1 440px;min-width:0;display:flex;flex-direction:column;gap:16px">
+<span class="bl8-num" style="color:#F6C9D8">#2</span>
+<h3 style="margin:0;font:400 clamp(32px,3.4vw,46px)/1.05 var(--font-display);color:#FBF5EE">Weekly group blog coaching calls</h3>
+<p class="bl8-p" style="color:#F6E1E8">Every week, hop on a live call with me. Bring your blog, your questions and your &ldquo;am I doing this right?&rdquo; moments, and get real answers. Can&rsquo;t make it live? Catch the replay.</p>
+<span class="bl8-obj" style="background:#FBF5EE;color:#A23E66">OBJECTION BUSTED: &ldquo;I NEED SOMEONE TO TELL ME IF I&rsquo;M ON THE RIGHT TRACK.&rdquo;</span>
+</div>
+<div style="flex:1 1 320px;min-width:0;background:#FBF5EE;border-radius:20px;overflow:hidden;box-shadow:8px 8px 0 #3A1C2A">
+<div style="background:#3A1C2A;padding:12px 18px;display:flex;justify-content:space-between;align-items:center"><span style="font:500 12px/1 var(--font-label);letter-spacing:0.16em;color:#FBF5EE">TONIGHT&rsquo;S LINEUP</span><span style="background:#A23E66;color:#FFFFFF;border-radius:999px;padding:6px 10px;font:500 11px/1 var(--font-label);letter-spacing:0.14em">&#9679; LIVE</span></div>
+<div style="padding:22px;display:flex;flex-direction:column;gap:12px">
+<p style="margin:0;font:400 30px/1.1 var(--font-display);color:#3A1C2A">The Blogging Ladies: <em style="color:#A23E66">Live Coaching</em></p>
+<p style="margin:0;font:400 15px/1.6 var(--font-body);color:#4A2F3B">Bring your blog. Leave with answers. New episode every week, replays always available.</p>
+<p class="bl8-gen">[GEN: DAY AND TIME OF THE WEEKLY CALL]</p>
+</div></div>
+</article>
+
+<div style="display:flex;flex-wrap:wrap;gap:22px">
+<article class="bl8-thing" style="flex:1 1 480px;background:#F6E1E8;align-items:flex-start">
+<div style="flex:1 1 280px;min-width:0;display:flex;flex-direction:column;gap:14px">
+<span class="bl8-num" style="color:#A23E66">#3</span>
+<h3 style="margin:0;font:400 clamp(30px,3vw,40px)/1.05 var(--font-display);color:#3A1C2A">The Blogging Ladies community</h3>
+<p class="bl8-p" style="color:#4A2F3B;font-size:16px">A cozy corner of the internet full of women who love blogging as much as you do. Share your wins, swap ideas, and finally have people who get it.</p>
+<figure class="bl8-note rv" style="margin:0;transform:rotate(-2deg);"><p class="bl8-note-top"><span>&#8249; From the survey</span><span aria-hidden="true">&#8943;</span></p><blockquote class="bl8-note-txt" style="margin:0">&ldquo;I need a community. I get in my head a lot.&rdquo;</blockquote><figcaption class="bl8-mono" style="color:#6E4B5B;margin-top:10px">A Blogging Lady, anonymous</figcaption></figure>
+<p style="margin:0;font:700 28px/1 var(--font-script);color:#A23E66">You&rsquo;ll find yours here.</p>
+<p class="bl8-gen">[GEN: WHERE THE COMMUNITY LIVES]</p>
+<span class="bl8-obj" style="background:#3A1C2A;color:#FBF5EE">OBJECTION BUSTED: &ldquo;I FEEL LIKE I&rsquo;M DOING THIS ALL ALONE.&rdquo;</span>
+</div>
+</article>
+<article class="bl8-thing" style="flex:1 1 380px;background:#FFFFFF;border:2px solid #E9B9CA;align-items:flex-start">
+<div style="flex:1 1 260px;min-width:0;display:flex;flex-direction:column;gap:14px">
+<span class="bl8-num" style="color:#A23E66">#4</span>
+<h3 style="margin:0;font:400 clamp(30px,3vw,40px)/1.05 var(--font-display);color:#3A1C2A">The course library</h3>
+<p class="bl8-p" style="color:#4A2F3B;font-size:16px">Your new modules stay with you, plus all my previous courses included.</p>
+<div aria-hidden="true" style="display:flex;gap:8px;align-items:flex-end;height:150px;padding:0 6px;border-bottom:6px solid #3A1C2A">
+<span style="width:38px;height:140px;background:#A23E66;border-radius:4px 4px 0 0;writing-mode:vertical-rl;transform:rotate(180deg);font:500 11px/38px var(--font-label);letter-spacing:0.14em;color:#FFFFFF;text-align:center">BLOGGING LADIES</span>
+<span style="width:32px;height:118px;background:#E9B9CA;border-radius:4px 4px 0 0;writing-mode:vertical-rl;transform:rotate(180deg);font:500 11px/32px var(--font-label);letter-spacing:0.14em;color:#3A1C2A;text-align:center">VOL. 2</span>
+<span style="width:42px;height:132px;background:#3A1C2A;border-radius:4px 4px 0 0;writing-mode:vertical-rl;transform:rotate(180deg);font:500 11px/42px var(--font-label);letter-spacing:0.14em;color:#FBF5EE;text-align:center">VOL. 3</span>
+<span style="width:30px;height:104px;background:#EBDDF2;border-radius:4px 4px 0 0;writing-mode:vertical-rl;transform:rotate(180deg);font:500 11px/30px var(--font-label);letter-spacing:0.14em;color:#3A1C2A;text-align:center">XOXO</span>
+<span style="width:36px;height:124px;background:#F6C9D8;border-radius:4px 4px 0 0;transform:rotate(6deg);transform-origin:bottom left"></span>
+</div>
+<p class="bl8-gen">[GEN: WHICH PAST COURSES GO IN THE LIBRARY]</p>
+<span class="bl8-obj" style="background:#F6E1E8;color:#A23E66">OBJECTION BUSTED: &ldquo;I NEED THE WHOLE PICTURE, NOT JUST ONE TIP.&rdquo;</span>
+</div>
+</article>
+</div>
+</div>
+</section>
+
+<section style="background:#F6E1E8;padding:110px clamp(16px,4vw,48px)">
+<div style="max-width:1140px;margin:0 auto;display:flex;flex-direction:column;gap:44px">
+<h2 class="bl8-h2 rv" style="color:#3A1C2A;text-align:center">How does it work?</h2>
+<div style="display:flex;flex-wrap:wrap;gap:18px"><div class="bl8-step rv"><p class="bl8-mono" style="color:#A23E66">Step 1</p><p style="margin:0;font:400 32px/1.05 var(--font-display);color:#3A1C2A"><em>Join</em></p><p style="margin:0;font:400 16px/1.6 var(--font-body);color:#4A2F3B">Say hi in the community and get your first module the same week.</p></div><div class="bl8-step rv"><p class="bl8-mono" style="color:#A23E66">Step 2</p><p style="margin:0;font:400 32px/1.05 var(--font-display);color:#3A1C2A"><em>Learn and blog</em></p><p style="margin:0;font:400 16px/1.6 var(--font-body);color:#4A2F3B">One bite-sized lesson a week, plus live coaching to keep you moving.</p></div><div class="bl8-step rv"><p class="bl8-mono" style="color:#A23E66">Step 3</p><p style="margin:0;font:400 32px/1.05 var(--font-display);color:#3A1C2A"><em>Share and sell</em></p><p style="margin:0;font:400 16px/1.6 var(--font-body);color:#4A2F3B">Your message out in the world, and something of your own to sell.</p></div></div>
+<div style="text-align:center;display:flex;flex-direction:column;gap:14px;align-items:center;margin-top:30px">
+<p class="bl8-mono" style="color:#A23E66">&#10022; Bonus tracks &#10022;</p>
+<h2 class="bl8-h2" style="color:#3A1C2A">And did someone say <em style="color:#A23E66">bonuses?</em></h2>
+</div>
+<p class="bl8-gen">[GEN: KEEP ONLY THE BONUSES YOU&rsquo;LL ACTUALLY DELIVER. DELETE THE REST BEFORE YOU PUBLISH.]</p>
+<div style="display:flex;flex-wrap:wrap;gap:30px 18px;justify-content:center"><article class="bl8-gift rv"><span class="tag">BONUS #1</span><h3 style="margin:0;font:400 26px/1.1 var(--font-display);color:#3A1C2A">Launch Emails That Sell Your Own Offer</h3><p style="margin:0;font:400 15px/1.6 var(--font-body);color:#4A2F3B">Copy-and-customize launch emails, so you can sell your product without feeling pushy or salesy.</p></article><article class="bl8-gift rv"><span class="tag">BONUS #2</span><h3 style="margin:0;font:400 26px/1.1 var(--font-display);color:#3A1C2A">The Hit Publish Checklist Library</h3><p style="margin:0;font:400 15px/1.6 var(--font-body);color:#4A2F3B">A checklist for every module. (Every woman on my survey said &ldquo;Heck yes!&rdquo; to checklists.)</p></article><article class="bl8-gift rv"><span class="tag">BONUS #3</span><h3 style="margin:0;font:400 26px/1.1 var(--font-display);color:#3A1C2A">Freebie Templates</h3><p style="margin:0;font:400 15px/1.6 var(--font-body);color:#4A2F3B">Done-for-you templates for checklists, planners and guides, so you can start growing your list this week.</p></article><article class="bl8-gift rv"><span class="tag">BONUS #4</span><h3 style="margin:0;font:400 26px/1.1 var(--font-display);color:#3A1C2A">The 90-Day Blog Content Calendar</h3><p style="margin:0;font:400 15px/1.6 var(--font-body);color:#4A2F3B">Know exactly what to write, every week, so you never stare at a blank page again.</p></article><article class="bl8-gift rv"><span class="tag">BONUS #5</span><h3 style="margin:0;font:400 26px/1.1 var(--font-display);color:#3A1C2A">Monthly Blogging Challenges</h3><p style="margin:0;font:400 15px/1.6 var(--font-body);color:#4A2F3B">Fun challenges with the other Blogging Ladies to help you publish, grow your list and make your first sale.</p></article></div>
+<div style="text-align:center"><a href="#join" class="pill bl8-btn" style="background:#3A1C2A;color:#FFFFFF">Count me in! Join the Blogging Ladies <span aria-hidden="true" style="width:34px;height:34px;border-radius:999px;background:#A23E66;display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></span></a></div>
+</div>
+</section>
+
+<section style="padding:90px clamp(16px,4vw,48px)">
+<div style="max-width:860px;margin:0 auto;display:flex;flex-direction:column;gap:20px">
+<div style="background:#FFFFFF;border-radius:24px;padding:clamp(22px,4vw,40px);box-shadow:0 20px 44px rgba(58,28,42,0.08)"><p style="margin:0 0 6px;font:500 12px/1 var(--font-label);letter-spacing:0.16em;color:#6E4B5B">1 COMMENT</p><div class="bl8-comment rv"><span class="bl8-ava" aria-hidden="true">M</span><div><p class="bl8-said">Morgan said&hellip;</p><blockquote style="margin:0;font:400 clamp(21px,2.1vw,26px)/1.3 var(--font-display);color:#3A1C2A">&ldquo;I really liked your authenticity and you break things down in a way that feels understandable and relatable.&rdquo;</blockquote></div></div></div>
+</div>
+</section>
+
+<section style="background:#3A1C2A;padding:110px clamp(16px,4vw,48px)">
+<div style="max-width:1140px;margin:0 auto;display:flex;flex-direction:column;gap:44px">
+<h2 class="bl8-h2 rv" style="color:#FBF5EE;text-align:center">Sure, you could keep <em style="color:#E9B9CA">figuring it out on your own.</em></h2>
+<div style="display:flex;flex-wrap:wrap;gap:16px">
+<article class="bl8-ch rv"><b>CHANNEL 1</b><h3>Free YouTube and Pinterest</h3><p>You&rsquo;ll learn a lot. But it&rsquo;s random, it never connects, and you&rsquo;re still blogging alone.</p></article>
+<article class="bl8-ch rv"><b>CHANNEL 2</b><h3>Another big course</h3><p>Most cost hundreds, teach traffic instead of business, and end up half finished on your laptop.</p></article>
+<article class="bl8-ch rv"><b>CHANNEL 3</b><h3>Hire a 1:1 coach</h3><p>It works, but it&rsquo;s a big investment. My own 1:1 programs cost thousands.</p></article>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:48px;align-items:center;justify-content:center">
+<div style="flex:1 1 380px;min-width:0;display:flex;flex-direction:column;gap:16px">
+<p style="margin:0;font:400 clamp(30px,3.4vw,46px)/1.1 var(--font-display);color:#FBF5EE">So what&rsquo;s the cost of this?</p>
+<p class="bl8-p" style="color:#F6E1E8">$47 a month. That&rsquo;s about $11 a week, less than a takeout night, for a new lesson every week, live coaching every week and a community that has your back.</p>
+</div>
+<div class="bl8-receipt rv" role="img" aria-label="Receipt: weekly lesson, weekly live coaching and the community, total $47 a month, about $11 a week">
+<p style="margin:0 0 4px;text-align:center;font:400 28px/1.1 var(--font-display);color:#3A1C2A">The Blogging Ladies</p>
+<p style="margin:0 0 16px;text-align:center;font-size:11px;letter-spacing:0.16em">THANK YOU FOR BLOGGING WITH US</p>
+<div class="row"><span>1 new lesson / week</span><span>&#10003;</span></div>
+<div class="row"><span>Live coaching / week</span><span>&#10003;</span></div>
+<div class="row"><span>Replays</span><span>&#10003;</span></div>
+<div class="row"><span>The community</span><span>&#10003;</span></div>
+<div class="row"><span>Course library</span><span>&#10003;</span></div>
+<p style="margin:12px 0;border-top:1.5px dashed #3A1C2A"></p>
+<div class="row" style="font-weight:500;font-size:16px"><span>TOTAL / MONTH</span><span>$47</span></div>
+<div class="row" style="color:#A23E66"><span>about / week</span><span>$11</span></div>
+<p style="margin:16px 0 0;text-align:center;font:700 24px/1 var(--font-script);color:#A23E66">xoxo, Gen</p>
+</div>
+</div>
+</div>
+</section>
+
+<section id="join" class="bl8-check" style="padding:110px clamp(16px,4vw,48px);scroll-margin-top:90px">
+<div style="max-width:760px;margin:0 auto;position:relative">
+<span aria-hidden="true" class="bl-float" style="position:absolute;left:-10px;top:-30px;font:400 48px/1 var(--font-display);color:#A23E66">&#10022;</span>
+<div style="background:#FFFCFA;border:2px solid #3A1C2A;border-radius:32px;overflow:hidden;box-shadow:12px 12px 0 #A23E66">
+<div style="background:#A23E66;padding:18px 26px;text-align:center"><p style="margin:0;font:500 12px/1.4 var(--font-label);letter-spacing:0.18em;color:#FFFFFF">EVERYTHING INSIDE THE BLOGGING LADIES MEMBERSHIP</p></div>
+<div style="padding:clamp(26px,5vw,52px);display:flex;flex-direction:column;gap:20px">
+<ul style="margin:0;padding:0;list-style:none"><li class="rv" style="display:flex;gap:14px;align-items:flex-start;padding:14px 0;border-bottom:1px solid #F0DCE3;font:400 18px/1.5 var(--font-body);color:#3A1C2A"><span aria-hidden="true" style="color:#A23E66;font-size:20px;line-height:1.3">&#10022;</span>A new bite-sized module every week, all 8 BOSS modules</li><li class="rv" style="display:flex;gap:14px;align-items:flex-start;padding:14px 0;border-bottom:1px solid #F0DCE3;font:400 18px/1.5 var(--font-body);color:#3A1C2A"><span aria-hidden="true" style="color:#A23E66;font-size:20px;line-height:1.3">&#10022;</span>Checklists and workbooks for every lesson</li><li class="rv" style="display:flex;gap:14px;align-items:flex-start;padding:14px 0;border-bottom:1px solid #F0DCE3;font:400 18px/1.5 var(--font-body);color:#3A1C2A"><span aria-hidden="true" style="color:#A23E66;font-size:20px;line-height:1.3">&#10022;</span>Weekly group blog coaching calls, with replays</li><li class="rv" style="display:flex;gap:14px;align-items:flex-start;padding:14px 0;border-bottom:1px solid #F0DCE3;font:400 18px/1.5 var(--font-body);color:#3A1C2A"><span aria-hidden="true" style="color:#A23E66;font-size:20px;line-height:1.3">&#10022;</span>The Blogging Ladies community</li><li class="rv" style="display:flex;gap:14px;align-items:flex-start;padding:14px 0;border-bottom:1px solid #F0DCE3;font:400 18px/1.5 var(--font-body);color:#3A1C2A"><span aria-hidden="true" style="color:#A23E66;font-size:20px;line-height:1.3">&#10022;</span>The course library</li><li style="display:flex;gap:14px;align-items:flex-start;padding:14px 0;font:400 18px/1.5 var(--font-body);color:#3A1C2A"><span aria-hidden="true" style="color:#A23E66;font-size:20px;line-height:1.3">&#10022;</span>Bonuses to help you sell your own offer</li></ul>
+<div style="text-align:center;display:flex;flex-direction:column;gap:6px;align-items:center">
+<p style="margin:0;font:400 clamp(70px,9vw,120px)/0.9 var(--font-display);color:#3A1C2A">$47<span style="font-size:0.32em;color:#A23E66"> a month</span></p>
+</div>
+<p class="bl8-gen">[GEN: CANCEL ANYTIME? CONFIRM BEFORE PUBLISHING. AND PASTE YOUR CHECKOUT LINK INTO EVERY JOIN BUTTON.]</p>
+<div style="text-align:center"><a href="#join" class="pill bl8-btn" style="background:#3A1C2A;color:#FFFFFF">Yes! I&rsquo;m ready to blog again <span aria-hidden="true" style="width:34px;height:34px;border-radius:999px;background:#A23E66;display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></span></a></div>
+<p style="margin:0;text-align:center;font:400 15px/1.6 var(--font-body);color:#4A2F3B">You&rsquo;ll get access right away. Your first module and your first coaching call are waiting for you this week.</p>
+</div></div></div>
+</section>
+
+<section style="padding:110px clamp(16px,4vw,48px)">
+<div style="max-width:900px;margin:0 auto;display:flex;flex-direction:column;gap:30px">
+<h2 class="bl8-h2 rv" style="color:#3A1C2A;text-align:center">Read the <em style="color:#A23E66">comments.</em></h2>
+<div style="background:#FFFFFF;border-radius:24px;padding:clamp(22px,4vw,40px);box-shadow:0 20px 44px rgba(58,28,42,0.08)"><p style="margin:0 0 6px;font:500 12px/1 var(--font-label);letter-spacing:0.16em;color:#6E4B5B">3 COMMENTS</p><div class="bl8-comment rv"><span class="bl8-ava" aria-hidden="true">S</span><div><p class="bl8-said">Sadie said&hellip;</p><blockquote style="margin:0;font:400 clamp(21px,2.1vw,26px)/1.3 var(--font-display);color:#3A1C2A">&ldquo;Honestly, our chat was so lovely yesterday! :) I felt encouraged and supported but with no pressure to work with you.&rdquo;</blockquote></div></div><div class="bl8-comment rv"><span class="bl8-ava" aria-hidden="true">T</span><div><p class="bl8-said">Tesha said&hellip;</p><blockquote style="margin:0;font:400 clamp(21px,2.1vw,26px)/1.3 var(--font-display);color:#3A1C2A">&ldquo;She gave me a clear vision how to move my business forward and make money doing what I love.&rdquo;</blockquote></div></div><div class="bl8-comment rv"><span class="bl8-ava" aria-hidden="true">C</span><div><p class="bl8-said">Clare said&hellip;</p><blockquote style="margin:0;font:400 clamp(21px,2.1vw,26px)/1.3 var(--font-display);color:#3A1C2A">&ldquo;Gen comes across as super friendly and understanding and as I am completely new to blogging, I feel that Gen will give me the right encouragement and support along my journey.&rdquo;</blockquote></div></div></div>
+<div style="text-align:center"><a href="#join" class="pill bl8-btn" style="background:#3A1C2A;color:#FFFFFF">Save me a seat <span aria-hidden="true" style="width:34px;height:34px;border-radius:999px;background:#A23E66;display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></span></a></div>
+</div>
+</section>
+
+<section style="background:#F6E1E8;padding:110px clamp(16px,4vw,48px)">
+<div style="max-width:820px;margin:0 auto;display:flex;flex-direction:column;gap:30px;align-items:center">
+<p class="bl8-mono" style="color:#A23E66">&#10022; Pinky promise &#10022;</p>
+<h2 class="bl8-h2 rv" style="color:#3A1C2A;text-align:center">The Blog Again <em style="color:#A23E66">Promise</em></h2>
+<div class="bl8-paper rv" style="width:100%">
+<p>I want you to blog again, and I&rsquo;m confident you will. So here&rsquo;s my promise.</p>
+<p>Show up live to your first 4 weekly coaching calls and do the work we talk about. If your blog still isn&rsquo;t moving forward, just tell me within 30 days of your 4th call, and I&rsquo;ll refund your first month&rsquo;s $47. No hard feelings.</p>
+<p style="text-align:right;color:#A23E66">xoxo, Gen</p>
+</div>
+<p class="bl8-gen">[GEN: CONFIRM THIS PROMISE, AND ADD A TERMS AND CONDITIONS PAGE FOR THE MEMBERSHIP (THEN LINK IT HERE)]</p>
+</div>
+</section>
+
+<section style="padding:110px clamp(16px,4vw,48px)">
+<div style="max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;gap:48px;align-items:center">
+<div style="flex:1 1 420px;min-width:0;display:flex;flex-direction:column;gap:18px">
+<p class="bl8-mono" style="color:#A23E66">&#10022; About me &#10022;</p>
+<h2 class="bl8-h2 rv" style="color:#3A1C2A">And just <em style="color:#A23E66">who am I?</em></h2>
+<p class="bl8-p rv" style="color:#4A2F3B">I&rsquo;m Genasys, and I&rsquo;m a blogger first. I started my lifestyle blog in 2017 on a 2010 MacBook in my aunt&rsquo;s basement, and I&rsquo;ve been coaching bloggers since 2020.</p>
+<p class="bl8-p rv" style="color:#4A2F3B">I know the joy of hitting publish, and I know the heartbreak of a blog that doesn&rsquo;t pay you. I brought the Blogging Ladies back because blogging is coming back, and I want you in it.</p>
+</div>
+<div class="bl8-profile rv" style="flex:1 1 380px;min-width:0">
+<div class="bl8-winbar" style="justify-content:space-between"><span>GENASYS&rsquo;S PROFILE</span><span style="color:#A23E66">&#9679; ONLINE NOW</span></div>
+<div style="padding:22px;display:flex;flex-wrap:wrap;gap:20px;align-items:flex-start">
+<div style="flex:0 0 150px;aspect-ratio:4/5;border-radius:12px;overflow:hidden;background:#E9B9CA"><img src="/images/photos/portrait-hat.jpg" alt="Genasys smiling in a hat" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center 30%"></div>
+<dl style="flex:1 1 200px">
+<dt>Mood</dt><dd>ready for you to blog again</dd>
+<dt>Blogging since</dt><dd>2017</dd>
+<dt>First laptop</dt><dd>a 2010 MacBook</dd>
+<dt>First office</dt><dd>my aunt&rsquo;s basement</dd>
+<dt>Coaching since</dt><dd>2020</dd>
+<dt>Clients paid</dt><dd>81 invoices and counting</dd>
+</dl>
+</div></div>
+</div>
+</section>
+
+<section class="bl-grad" style="padding:110px clamp(16px,4vw,48px)">
+<div style="max-width:780px;margin:0 auto;display:flex;flex-direction:column;gap:26px">
+<div style="text-align:center;display:flex;flex-direction:column;gap:14px;align-items:center">
+<span style="background:#A23E66;color:#FFFFFF;border-radius:999px;padding:10px 16px;font:500 12px/1 var(--font-label);letter-spacing:0.18em">QUIZ TIME!</span>
+<h2 class="bl8-h2" style="color:#3A1C2A">Are you a <em style="color:#A23E66">Blogging Lady?</em></h2>
+<p class="bl8-p" style="color:#4A2F3B">Check every one that sounds like you.</p>
+</div>
+<div class="bl8-quiz" style="display:flex;flex-direction:column;gap:12px"><label class="rv"><input type="checkbox" data-quiz><span><strong>You still love to write.</strong> Even when it&rsquo;s hard, you keep coming back to your blog.</span></label><label class="rv"><input type="checkbox" data-quiz><span><strong>You have a message.</strong> Something you&rsquo;ve lived through, learned or love, and you want to share it with the world.</span></label><label class="rv"><input type="checkbox" data-quiz><span><strong>You want to make money from home.</strong> So you can be there for your kids and build something that&rsquo;s yours.</span></label><label class="rv"><input type="checkbox" data-quiz><span><strong>You want blogging friends.</strong> People who get it, cheer you on and keep you going.</span></label></div>
+<p data-quiz-result aria-live="polite" style="margin:0;text-align:center;font:700 34px/1.1 var(--font-script);color:#A23E66;min-height:40px"></p>
+<p class="bl8-p" style="color:#4A2F3B;text-align:center;font-size:16px">This isn&rsquo;t for you if you think blogging is dead, you want overnight income without the work, or you want it all built for you. (If that&rsquo;s you, look at <a href="/boss/" style="color:#A23E66;font-weight:600">the BOSS Business Blueprint</a>.)</p>
+</div>
+</section>
+<script>
+(function(){var boxes=document.querySelectorAll('[data-quiz]');var out=document.querySelector('[data-quiz-result]');if(!boxes.length||!out)return;
+var msgs=['','Ooh, one! Keep reading, babe.','Two for two. You&rsquo;re getting warmer!','Three?! You&rsquo;re basically one of us.','All four! You&rsquo;re a Blogging Lady. Come on in.'];
+boxes.forEach(function(b){b.addEventListener('change',function(){var n=0;boxes.forEach(function(x){if(x.checked)n++;});out.innerHTML=msgs[n];});});})();
+</script>
+
+<section style="padding:110px clamp(16px,4vw,48px)">
+<div style="max-width:880px;margin:0 auto;display:flex;flex-direction:column;gap:30px">
+<h2 class="bl8-h2 rv" style="color:#3A1C2A;text-align:center">You&rsquo;ve got questions. <em style="color:#A23E66">I&rsquo;m online.</em></h2>
+<div class="bl8-chat">
+<div class="bl8-winbar"><span class="bl8-dot"></span><span class="bl8-dot"></span><span class="bl8-dot"></span><span style="margin-left:8px">Instant Message with BlogCoachGen</span></div>
+<div class="bl8-msgs"><div class="bl8-q rv"><b>You</b><span>Isn&rsquo;t blogging dead?</span></div><div class="bl8-a rv"><b>BlogCoachGen</b><span>Nope. People are tired of algorithms and AI-written everything. They want real people with real stories, and a blog is the one place online you own.</span></div><div class="bl8-q rv"><b>You</b><span>Do I need a blog already?</span></div><div class="bl8-a rv"><b>BlogCoachGen</b><span>No. Whether you&rsquo;re brand new, starting over, or have been blogging for years, you&rsquo;ll start right where you are.</span></div><div class="bl8-q rv"><b>You</b><span>How much time does it take?</span></div><div class="bl8-a rv"><b>BlogCoachGen</b><span>The lessons are bite-sized, 5 to 15 minutes each. <span style="display:block;margin-top:8px" class="bl8-gen">[GEN: ABOUT HOW MANY HOURS A WEEK]</span></span></div><div class="bl8-q rv"><b>You</b><span>What if I join late? Do I miss modules?</span></div><div class="bl8-a rv"><b>BlogCoachGen</b><span><span style="display:block" class="bl8-gen">[GEN: DO MODULES DRIP FROM EACH MEMBER&rsquo;S JOIN DATE, OR FOR EVERYONE AT ONCE?]</span></span></div><div class="bl8-q rv"><b>You</b><span>I&rsquo;m not techy. Can I still do this?</span></div><div class="bl8-a rv"><b>BlogCoachGen</b><span>Yes. Most bloggers struggle with the tech. Every lesson is step by step, I&rsquo;ll show you how to use AI to figure out the tech fast, and you can bring anything you&rsquo;re stuck on to the weekly call.</span></div><div class="bl8-q rv"><b>You</b><span>Do I have to show my face?</span></div><div class="bl8-a rv"><b>BlogCoachGen</b><span><span style="display:block" class="bl8-gen">[GEN: CONFIRM A NO-FACE PATH, SINCE SEVERAL WOMEN ON YOUR FORMS ASKED]</span></span></div><div class="bl8-q rv"><b>You</b><span>Will I make money?</span></div><div class="bl8-a rv"><b>BlogCoachGen</b><span>I can&rsquo;t promise income, and no honest coach can. I can promise you&rsquo;ll know what to sell, how to sell it, and have people cheering you on while you do.</span></div><div class="bl8-q rv"><b>You</b><span>Can I cancel?</span></div><div class="bl8-a rv"><b>BlogCoachGen</b><span><span style="display:block" class="bl8-gen">[GEN: YOUR CANCELLATION POLICY]</span></span></div><div class="bl8-q rv"><b>You</b><span>What&rsquo;s the difference between this and your other offers?</span></div><div class="bl8-a rv"><b>BlogCoachGen</b><span>The membership is learning and coaching in a group. <a href="/coaching/" style="color:#A23E66;font-weight:600">1:1 blog coaching</a> is private coaching with me. <a href="/boss/" style="color:#A23E66;font-weight:600">The BOSS Business Blueprint</a> is where I build it all for you.</span></div><p style="margin:6px 0 0;font:500 11px/1 var(--font-label);letter-spacing:0.14em;color:#6E4B5B">BlogCoachGen is typing&hellip;</p></div>
+</div>
+<div style="text-align:center"><a href="#join" class="pill bl8-btn" style="background:#3A1C2A;color:#FFFFFF">Join the Blogging Ladies <span aria-hidden="true" style="width:34px;height:34px;border-radius:999px;background:#A23E66;display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></span></a></div>
+</div>
+</section>
+
+<section style="background:#3A1C2A;padding:110px clamp(16px,4vw,48px)">
+<div style="max-width:880px;margin:0 auto;display:flex;flex-direction:column;gap:30px">
+<div style="text-align:center;display:flex;flex-direction:column;gap:14px;align-items:center">
+<p class="bl8-mono" style="color:#E9B9CA">Next time on The Blogging Ladies</p>
+<h2 class="bl8-h2" style="color:#FBF5EE">Your blog is <em style="color:#E9B9CA">waiting for you.</em></h2>
+</div>
+<div><div class="bl8-paris rv"><b aria-hidden="true">P</b><p>You still love to blog, but somewhere along the way it stopped feeling like it used to.</p></div><div class="bl8-paris rv"><b aria-hidden="true">A</b><p>Blogging alone, chasing traffic and rewriting the same post won&rsquo;t bring it back.</p></div><div class="bl8-paris rv"><b aria-hidden="true">R</b><p>A message to share, a purpose, and an income from home.</p></div><div class="bl8-paris rv"><b aria-hidden="true">I</b><p>Blogging isn&rsquo;t dead. It&rsquo;s coming back, and real voices like yours are what people want.</p></div><div class="bl8-paris rv"><b aria-hidden="true">S</b><p>The Blogging Ladies Membership: a new lesson every week, weekly group coaching, a community that gets it and bonuses to help you sell your own offer. $47 a month.</p></div></div>
+<div style="text-align:center;display:flex;flex-direction:column;gap:18px;align-items:center"><a href="#join" class="pill bl8-btn" style="background:#FBF5EE;color:#3A1C2A">Yes! I&rsquo;m ready to blog again <span aria-hidden="true" style="width:34px;height:34px;border-radius:999px;background:#A23E66;display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></span></a><p style="margin:0;font:700 34px/1 var(--font-script);color:#E9B9CA">see you inside, xoxo Gen &#10022;</p></div>
+</div>
+</section>
+
+</main>
