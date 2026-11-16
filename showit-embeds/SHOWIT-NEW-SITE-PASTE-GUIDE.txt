@@ -1,7 +1,7 @@
 BOSS LADY BLOGGERS - NEW WEBSITE ON SHOWIT - PASTE GUIDE
 =========================================================
 
-14 full pages plus 4 small blog-post pieces. Same workflow as before: one full-page embed
+13 full pages plus 4 small blog-post pieces. Same workflow as before: one full-page embed
 canvas per Showit page, paste the whole file, publish.
 
 THE FILES AND WHERE EACH ONE GOES
@@ -15,7 +15,6 @@ BlogCoaching.html         /blog-coaching   (your existing page)
 Membership.html           /membership  (The Blogging Ladies Membership,
                           $47 a month sales page. Paste your checkout
                           link into every join button before publishing)
-FreeTrainings.html        /free-trainings
 Podcast.html              /podcast
 BlogLanding.html          /blog  (OPTIONAL - your blog already works;
                           only use if you want the new blog landing look)
@@ -31,13 +30,16 @@ Links.html                /links  (link-in-bio page: put
 
 PAGES TAKEN DOWN (do this once)
 -------------------------------
-The Course, Course Waitlist, Group Coaching and Group Waitlist pages are
-retired. In Showit: delete those 4 pages, then add 301 redirects so old
+The Free Trainings, Course, Course Waitlist, Group Coaching and Group
+Waitlist pages are retired. Every "free training" button now goes to
+your free masterclass opt-in page at /opt-in-page.
+In Showit: delete those 5 pages, then add 301 redirects so old
 links land on the membership:
   /course            ->  /membership
   /course-waitlist   ->  /membership
   /group-coaching    ->  /membership
   /group-waitlist    ->  /membership
+  /free-trainings    ->  /opt-in-page
 Also re-paste your nav, footer and menu embeds (they now link to
 Membership instead of Group Coaching and The Course).
 
@@ -116,8 +118,8 @@ post page gets rebuilt:
    (then Showit's own post title, meta and content widgets)
    PostAuthorCard.html    "Meet Genasys" card      Sidebar, next to the
                           with your photo          post content, ~340x320
-   PostDownloadCard.html  Foundations Builder      Sidebar, under the
-                          free download card       author card, ~340x220
+   PostDownloadCard.html  Free masterclass         Sidebar, under the
+                          card                     author card, ~340x220
    PostNextStepBand.html  Dark plum CTA band       Under the post
                                                    content, ~140px tall
    PostRelatedBand.html   "Keep reading" band      Near the bottom, full
@@ -138,11 +140,11 @@ post page gets rebuilt:
    Nothing to update, ever.
 
 4. ONE LINE TO EDIT PER POST (optional). The next-step band has a
-   placeholder line: "[Next step: the free training or offer this post
+   placeholder line: "[Next step: the free masterclass or offer this post
    points to]". Showit uses ONE template for all posts, so either
    replace that line once with something evergreen that fits every
    post, or skip that band entirely. The button already links to your
-   free trainings page.
+   free masterclass page (/opt-in-page).
 
 Because it is a template, you do all of this ONCE and every blog post
 (old and new) instantly wears the new design.
