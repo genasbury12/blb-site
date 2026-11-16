@@ -211,26 +211,61 @@ PIECE_POSTHERO = """<div style="position:relative;overflow:hidden;border-radius:
 })();
 </script>"""
 
-PIECE_NAV_MOBILE = """<div style="background:#FBF5EE;padding:14px 0 16px">
-<a href="/" style="display:flex;align-items:center;justify-content:center;gap:10px;text-decoration:none;padding:0 16px">
+PIECE_NAV_MOBILE = """<div style="background:#FBF5EE;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px">
+<a href="/" style="display:flex;align-items:center;gap:10px;text-decoration:none">
 <img src="{host}/brand/arch-monogram.svg" alt="" width="26" height="34" style="display:block">
-<span style="font:400 24px/1 var(--font-display);color:#3A1C2A">Boss Lady <em style="color:#A23E66">Bloggers</em></span>
+<span style="font:400 23px/1 var(--font-display);color:#3A1C2A">Boss Lady <em style="color:#A23E66">Bloggers</em></span>
 </a>
-<nav aria-label="Main" style="display:flex;gap:8px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding:14px 16px 4px;scrollbar-width:none">
-<a href="/start-here" style="flex:0 0 auto;background:#FFFFFF;border-radius:999px;padding:11px 16px;font:600 13px/1 var(--font-body);color:#3A1C2A;text-decoration:none;white-space:nowrap">Start Here</a>
-<a href="/free-trainings" style="flex:0 0 auto;background:#FFFFFF;border-radius:999px;padding:11px 16px;font:600 13px/1 var(--font-body);color:#3A1C2A;text-decoration:none;white-space:nowrap">Free Trainings</a>
-<a href="/boss" style="flex:0 0 auto;background:#A23E66;border-radius:999px;padding:11px 16px;font:600 13px/1 var(--font-body);color:#FFFFFF;text-decoration:none;white-space:nowrap">Explore BOSS</a>
-<a href="/blog-coaching" style="flex:0 0 auto;background:#FFFFFF;border-radius:999px;padding:11px 16px;font:600 13px/1 var(--font-body);color:#3A1C2A;text-decoration:none;white-space:nowrap">Coaching</a>
-<a href="/blog" style="flex:0 0 auto;background:#FFFFFF;border-radius:999px;padding:11px 16px;font:600 13px/1 var(--font-body);color:#3A1C2A;text-decoration:none;white-space:nowrap">Blog</a>
-<a href="/podcast" style="flex:0 0 auto;background:#FFFFFF;border-radius:999px;padding:11px 16px;font:600 13px/1 var(--font-body);color:#3A1C2A;text-decoration:none;white-space:nowrap">Podcast</a>
-<a href="/about" style="flex:0 0 auto;background:#FFFFFF;border-radius:999px;padding:11px 16px;font:600 13px/1 var(--font-body);color:#3A1C2A;text-decoration:none;white-space:nowrap">About</a>
-<a href="/contact" style="flex:0 0 auto;background:#FFFFFF;border-radius:999px;padding:11px 16px;font:600 13px/1 var(--font-body);color:#3A1C2A;text-decoration:none;white-space:nowrap">Contact</a>
-</nav>
+<a href="/menu" aria-label="Open full menu" style="flex:0 0 auto;width:48px;height:48px;border-radius:999px;background:#A23E66;display:flex;align-items:center;justify-content:center;text-decoration:none">
+<svg aria-hidden="true" width="18" height="14" viewBox="0 0 18 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M1 1h16M1 7h16M1 13h16"></path></svg>
+</a>
 </div>"""
+
+PIECE_MENUPAGE = """<div style="min-height:100vh;background:#A23E66;padding:22px clamp(16px,4vw,48px) 60px;display:flex;flex-direction:column;gap:34px">
+<div style="display:flex;align-items:center;justify-content:space-between">
+<span style="font:400 26px/1 var(--font-display);color:#FBF5EE">Boss Lady Bloggers</span>
+<a href="/" data-menu-back aria-label="Close menu" style="width:48px;height:48px;border-radius:999px;background:#FBF5EE;color:#3A1C2A;display:flex;align-items:center;justify-content:center;text-decoration:none;font:400 26px/1 var(--font-body)">&times;</a>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:40px;align-items:flex-start">
+<div style="flex:1 1 320px;min-width:0;display:flex;flex-direction:column;gap:18px">
+<p style="margin:0;font:400 clamp(40px,5vw,72px)/1 var(--font-display);color:#FBF5EE">Helping women build blogs that <em>sell.</em></p>
+<p style="margin:0;font:400 16px/1.6 var(--font-body);color:#F6E1E8">If you&rsquo;re new here, welcome. Start with the page made for you.</p>
+<div><a href="/start-here" class="pill" style="background:#FBF5EE;color:#3A1C2A">Start here</a></div>
+</div>
+<nav aria-label="Full menu" style="flex:1 1 300px;min-width:0;display:flex;flex-direction:column;font:400 clamp(26px,3vw,36px)/1.9 var(--font-display)">
+<a href="/" style="color:#FBF5EE;text-decoration:none">Home</a>
+<a href="/about" style="color:#FBF5EE;text-decoration:none">About</a>
+<a href="/start-here" style="color:#FBF5EE;text-decoration:none">Start Here</a>
+<a href="/boss" style="color:#FBF5EE;text-decoration:none">BOSS Business Blueprint</a>
+<a href="/blog-coaching" style="color:#FBF5EE;text-decoration:none">Blog Coaching</a>
+<a href="/group-coaching" style="color:#FBF5EE;text-decoration:none">Group Coaching</a>
+<a href="/course" style="color:#FBF5EE;text-decoration:none">The Course</a>
+<a href="/free-trainings" style="color:#FBF5EE;text-decoration:none">Free Trainings</a>
+<a href="/podcast" style="color:#FBF5EE;text-decoration:none">Podcast</a>
+<a href="/blog" style="color:#FBF5EE;text-decoration:none">Blog</a>
+<a href="/contact" style="color:#FBF5EE;text-decoration:none">Contact</a>
+</nav>
+</div>
+<div style="display:flex;gap:20px">
+<a href="https://www.instagram.com/blogcoach_gen" target="_blank" rel="noopener" style="font:500 12px/1 var(--font-label);letter-spacing:0.14em;color:#F6E1E8;text-decoration:none">INSTAGRAM</a>
+<a href="https://www.youtube.com/@GenasysLynn" target="_blank" rel="noopener" style="font:500 12px/1 var(--font-label);letter-spacing:0.14em;color:#F6E1E8;text-decoration:none">YOUTUBE</a>
+<a href="https://www.pinterest.com/BossLadyBloggers/" target="_blank" rel="noopener" style="font:500 12px/1 var(--font-label);letter-spacing:0.14em;color:#F6E1E8;text-decoration:none">PINTEREST</a>
+</div>
+</div>
+<script>
+(function () {
+  'use strict';
+  var back = document.querySelector('[data-menu-back]');
+  if (back) back.addEventListener('click', function (e) {
+    if (window.history.length > 1) { e.preventDefault(); window.history.back(); }
+  });
+})();
+</script>"""
 
 PIECES = {
     "PostNavBar.html":      ("site navigation bar",  PIECE_NAV),
     "PostNavMobile.html":   ("mobile navigation bar", PIECE_NAV_MOBILE),
+    "MenuPage.html":        ("fullscreen menu page (/menu)", PIECE_MENUPAGE),
     "PostHero.html":        ("featured image hero",  PIECE_POSTHERO),
     "PostAuthorCard.html":  ("author sidebar card",  PIECE_AUTHOR),
     "PostDownloadCard.html":("free download card",   PIECE_DOWNLOAD),

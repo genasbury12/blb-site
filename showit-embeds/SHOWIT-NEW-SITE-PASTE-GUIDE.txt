@@ -77,8 +77,13 @@ post page gets rebuilt:
                                                    hide this canvas on
                                                    mobile in Showit
    PostNavMobile.html     Mobile navigation:       Very top, full width,
-                          centered logo + a        ~150px, MOBILE ONLY:
-                          swipeable pill row       hide it on desktop
+                          logo + berry hamburger   ~80px, MOBILE ONLY:
+                          button that opens the    hide it on desktop
+                          fullscreen menu page
+   MenuPage.html          The fullscreen berry     Its own Showit page,
+                          menu itself. The         slug /menu, one full
+                          hamburger links here;    page embed canvas
+                          the X goes back
    PostHero.html          Featured image band.     Under the nav, above
                           Pulls each post's own    the post title, full
                           image + category chip    content width, ~420px

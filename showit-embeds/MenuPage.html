@@ -1,0 +1,51 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=Caveat:wght@600;700&display=swap">
+<style>
+:root{--font-display:'Instrument Serif',serif;--font-body:'Inter',system-ui,sans-serif;--font-label:'DM Mono',monospace}
+*{box-sizing:border-box}body{margin:0;background:transparent}
+.pill{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:13px 22px;font:600 14px/1 var(--font-body);text-decoration:none;transition:background .2s ease,color .2s ease,transform .2s ease}
+.pill:hover{transform:translateY(-2px)}
+.card-hover{transition:transform .25s ease,box-shadow .25s ease}
+.card-hover:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(58,28,42,.14)}
+</style>
+<div style="min-height:100vh;background:#A23E66;padding:22px clamp(16px,4vw,48px) 60px;display:flex;flex-direction:column;gap:34px">
+<div style="display:flex;align-items:center;justify-content:space-between">
+<span style="font:400 26px/1 var(--font-display);color:#FBF5EE">Boss Lady Bloggers</span>
+<a href="/" data-menu-back aria-label="Close menu" style="width:48px;height:48px;border-radius:999px;background:#FBF5EE;color:#3A1C2A;display:flex;align-items:center;justify-content:center;text-decoration:none;font:400 26px/1 var(--font-body)">&times;</a>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:40px;align-items:flex-start">
+<div style="flex:1 1 320px;min-width:0;display:flex;flex-direction:column;gap:18px">
+<p style="margin:0;font:400 clamp(40px,5vw,72px)/1 var(--font-display);color:#FBF5EE">Helping women build blogs that <em>sell.</em></p>
+<p style="margin:0;font:400 16px/1.6 var(--font-body);color:#F6E1E8">If you&rsquo;re new here, welcome. Start with the page made for you.</p>
+<div><a href="/start-here" class="pill" style="background:#FBF5EE;color:#3A1C2A">Start here</a></div>
+</div>
+<nav aria-label="Full menu" style="flex:1 1 300px;min-width:0;display:flex;flex-direction:column;font:400 clamp(26px,3vw,36px)/1.9 var(--font-display)">
+<a href="/" style="color:#FBF5EE;text-decoration:none">Home</a>
+<a href="/about" style="color:#FBF5EE;text-decoration:none">About</a>
+<a href="/start-here" style="color:#FBF5EE;text-decoration:none">Start Here</a>
+<a href="/boss" style="color:#FBF5EE;text-decoration:none">BOSS Business Blueprint</a>
+<a href="/blog-coaching" style="color:#FBF5EE;text-decoration:none">Blog Coaching</a>
+<a href="/group-coaching" style="color:#FBF5EE;text-decoration:none">Group Coaching</a>
+<a href="/course" style="color:#FBF5EE;text-decoration:none">The Course</a>
+<a href="/free-trainings" style="color:#FBF5EE;text-decoration:none">Free Trainings</a>
+<a href="/podcast" style="color:#FBF5EE;text-decoration:none">Podcast</a>
+<a href="/blog" style="color:#FBF5EE;text-decoration:none">Blog</a>
+<a href="/contact" style="color:#FBF5EE;text-decoration:none">Contact</a>
+</nav>
+</div>
+<div style="display:flex;gap:20px">
+<a href="https://www.instagram.com/blogcoach_gen" target="_blank" rel="noopener" style="font:500 12px/1 var(--font-label);letter-spacing:0.14em;color:#F6E1E8;text-decoration:none">INSTAGRAM</a>
+<a href="https://www.youtube.com/@GenasysLynn" target="_blank" rel="noopener" style="font:500 12px/1 var(--font-label);letter-spacing:0.14em;color:#F6E1E8;text-decoration:none">YOUTUBE</a>
+<a href="https://www.pinterest.com/BossLadyBloggers/" target="_blank" rel="noopener" style="font:500 12px/1 var(--font-label);letter-spacing:0.14em;color:#F6E1E8;text-decoration:none">PINTEREST</a>
+</div>
+</div>
+<script>
+(function () {
+  'use strict';
+  var back = document.querySelector('[data-menu-back]');
+  if (back) back.addEventListener('click', function (e) {
+    if (window.history.length > 1) { e.preventDefault(); window.history.back(); }
+  });
+})();
+</script>
