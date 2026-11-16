@@ -289,6 +289,10 @@ def build_footer_piece(css: str, js: str) -> None:
     for a, b in LINKMAP:
         body = body.replace(a, b)
     body = re.sub(r'(src|href)="/(images|brand|favicon)', r'\1="%s/\2' % ASSET_HOST, body)
+    # Embed safety: the giant marquee cannot wrap, so scale it with the
+    # canvas width and clip anything that would overflow a narrow canvas.
+    body = body.replace("clamp(120px,15vw,220px)", "clamp(48px,15vw,220px)")
+    body = '<div style="overflow-x:clip;max-width:100%">\n' + body + '\n</div>'
     out = (FONTS + "\n<style>\n" + css + "\n</style>\n" + body
            + "\n<script>\n" + js + "\n</script>\n")
     if "—" in out or "–" in out:
