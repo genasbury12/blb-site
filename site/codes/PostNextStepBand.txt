@@ -12,6 +12,6 @@
 <div style="width:100vw;max-width:100vw;overflow-x:clip">
 <div style="background:#3A1C2A;border-radius:22px;padding:30px;display:flex;flex-wrap:wrap;gap:18px;align-items:center;justify-content:space-between">
 <span style="flex:1 1 280px;font:400 26px/1.15 var(--font-display);color:#FBF5EE">[Next step: the free masterclass or offer this post points to]</span>
-<a href="/opt-in-page" class="pill" style="background:#FBF5EE;color:#3A1C2A">Watch the free masterclass</a>
+<a href="/free-masterclass" class="pill" style="background:#FBF5EE;color:#3A1C2A">Watch the free masterclass</a>
 </div>
 </div>

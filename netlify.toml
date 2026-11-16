@@ -36,5 +36,5 @@
 
 [[redirects]]
   from = "/free-trainings/*"
-  to = "/"
+  to = "/free-masterclass/"
   status = 301

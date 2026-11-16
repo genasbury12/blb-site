@@ -18,7 +18,7 @@
 <nav aria-label="Main" style="display:flex;flex-wrap:wrap;align-items:center;gap:6px 20px;font:500 14px/1 var(--font-body)">
 <a href="/start-here" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Start Here</a>
 <a href="/about" style="color:#3A1C2A;text-decoration:none;padding:8px 0">About</a>
-<a href="/opt-in-page" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Free Masterclass</a>
+<a href="/free-masterclass" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Free Masterclass</a>
 <a href="/blog-coaching" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Coaching</a>
 <a href="/membership" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Membership</a>
 <a href="/podcast" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Podcast</a>
