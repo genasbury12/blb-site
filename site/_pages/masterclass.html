@@ -1,0 +1,255 @@
+<style>
+.bl8-mono{margin:0;font:500 12px/1.4 var(--font-label);letter-spacing:0.18em;text-transform:uppercase}
+.bl8-check{background-color:#FBF5EE;background-image:linear-gradient(rgba(233,185,202,0.32) 50%,transparent 50%),linear-gradient(90deg,rgba(233,185,202,0.32) 50%,transparent 50%);background-size:44px 44px}
+.bl8-soft{background-color:#FBF5EE;background-image:linear-gradient(90deg,#FBF5EE 0%,rgba(251,245,238,0.92) 45%,rgba(251,245,238,0.55) 100%),linear-gradient(rgba(233,185,202,0.22) 50%,transparent 50%),linear-gradient(90deg,rgba(233,185,202,0.22) 50%,transparent 50%);background-size:100% 100%,44px 44px,44px 44px}
+@media (max-width:760px){.bl8-soft{background-image:linear-gradient(rgba(251,245,238,0.85),rgba(251,245,238,0.85)),linear-gradient(rgba(233,185,202,0.22) 50%,transparent 50%),linear-gradient(90deg,rgba(233,185,202,0.22) 50%,transparent 50%)}}
+.bl8-lace{height:22px;background:radial-gradient(circle at 11px 0,#FFFCFA 10px,transparent 10.5px) 0 0/22px 22px repeat-x,radial-gradient(circle at 11px 0,transparent 4px,transparent 4px);position:relative;z-index:2;margin-bottom:-22px}
+.bl8-torn{position:relative;background:#F6E1E8;padding:26px 30px 30px;clip-path:polygon(0 3%,4% 0,9% 2%,15% 0,22% 3%,30% 1%,37% 3%,45% 0,52% 2%,60% 0,68% 3%,75% 1%,83% 3%,90% 0,96% 2%,100% 0,99% 20%,100% 40%,98% 60%,100% 80%,99% 100%,92% 98%,85% 100%,77% 97%,70% 100%,62% 98%,54% 100%,46% 97%,38% 100%,30% 98%,22% 100%,14% 97%,7% 100%,0 98%,1% 78%,0 58%,2% 38%,0 18%);box-shadow:0 10px 24px rgba(58,28,42,0.12)}
+.bl8-torn p{margin:0;font:600 clamp(28px,3vw,36px)/1.1 var(--font-script);color:#6E4B5B}
+.bl8-strip{display:flex;gap:18px;justify-content:center;flex-wrap:wrap}
+.bl8-strip figure{flex:0 1 200px}
+
+.bl8-h2{margin:0;font:400 clamp(42px,5.2vw,76px)/1.0 var(--font-display);letter-spacing:-0.02em}
+.bl8-p{margin:0;font:400 18px/1.7 var(--font-body)}
+.bl8-note{background:#FFFFFF;border-radius:16px;padding:14px 20px 20px;box-shadow:0 16px 36px rgba(58,28,42,0.16);max-width:380px}
+.bl8-note-top{margin:0 0 10px;display:flex;justify-content:space-between;font:600 13px/1 var(--font-body);color:#A23E66}
+.bl8-note-txt{margin:0;font:400 clamp(22px,2.2vw,28px)/1.2 var(--font-display);color:#3A1C2A}
+.bl8-gen{margin:0;border:1.5px dashed #A23E66;border-radius:12px;padding:10px 14px;background:#FFFCFA;font:500 12px/1.5 var(--font-label);letter-spacing:0.06em;color:#A23E66}
+.bl8-tape{position:absolute;top:-14px;left:50%;width:110px;height:28px;transform:translateX(-50%) rotate(-4deg);background:rgba(233,185,202,0.85);border-radius:2px;z-index:2}
+.bl8-tape.dots{background:radial-gradient(circle,#FFFCFA 1.6px,transparent 2px) 0 0/9px 9px,rgba(233,185,202,0.9)}
+.bl8-tape.stripe{background:repeating-linear-gradient(135deg,rgba(233,185,202,0.9) 0 6px,rgba(255,252,250,0.85) 6px 11px)}
+.bl8-tape.ging{background:linear-gradient(rgba(162,62,102,0.22) 50%,transparent 50%) 0 0/10px 10px,linear-gradient(90deg,rgba(162,62,102,0.22) 50%,transparent 50%) 0 0/10px 10px,rgba(246,225,232,0.95)}
+.bl8-polaroid{position:relative;margin:0;background:#FFFCFA;padding:14px 14px 22px;border-radius:6px;box-shadow:0 24px 50px rgba(58,28,42,0.18)}
+.bl8-polaroid figcaption{margin-top:12px;font:700 24px/1.1 var(--font-script);color:#3A1C2A;text-align:center}
+.bl8-win{background:#FFFFFF;border:2px solid #3A1C2A;border-radius:14px;overflow:hidden;box-shadow:8px 8px 0 #3A1C2A}
+.bl8-winbar{display:flex;align-items:center;gap:8px;background:#F6E1E8;border-bottom:2px solid #3A1C2A;padding:10px 14px;font:500 12px/1 var(--font-label);letter-spacing:0.06em;color:#3A1C2A}
+.bl8-dot{width:12px;height:12px;border-radius:999px;border:1.5px solid #3A1C2A;background:#FBF5EE;flex:none}
+.bl8-tab{display:flex;align-items:flex-start;gap:14px;padding:16px 18px;border-bottom:1px solid #F0DCE3;font:400 17px/1.5 var(--font-body);color:#3A1C2A}
+.bl8-tab:last-child{border-bottom:0}
+.bl8-x{flex:none;width:22px;height:22px;border-radius:6px;background:#F6E1E8;color:#A23E66;display:flex;align-items:center;justify-content:center;font:600 14px/1 var(--font-body)}
+.bl8-phone{width:290px;max-width:100%;border-radius:44px;background:#3A1C2A;padding:12px;box-shadow:0 30px 60px rgba(58,28,42,0.25)}
+.bl8-screen{border-radius:34px;padding:22px 14px 26px;background:linear-gradient(160deg,#E9B9CA,#F6E1E8 45%,#EBDDF2);min-height:420px;display:flex;flex-direction:column;gap:10px}
+.bl8-notif{background:rgba(255,252,250,0.92);border-radius:18px;padding:12px 14px;display:flex;flex-direction:column;gap:4px}
+.bl8-notif b{font:600 12px/1.2 var(--font-body);color:#A23E66;letter-spacing:0.02em}
+.bl8-notif span{font:400 14px/1.35 var(--font-body);color:#3A1C2A}
+.bl8-chip{display:inline-flex;align-items:center;gap:10px;background:#FFFFFF;border-radius:999px;padding:12px 20px;font:500 16px/1.3 var(--font-body);color:#3A1C2A;box-shadow:0 10px 24px rgba(58,28,42,0.08)}
+.bl8-myth{flex:1 1 240px;background:#FBF5EE;border-radius:22px;padding:24px;display:flex;flex-direction:column;gap:12px}
+.bl8-myth s{font:400 22px/1.2 var(--font-display);color:#A23E66;text-decoration-thickness:1.5px}
+.bl8-myth p{margin:0;font:400 16px/1.6 var(--font-body);color:#4A2F3B}
+.bl8-top{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+@media (max-width:760px){.bl8-top{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.bl8-top>div{background:#FFFFFF;border:2px solid #3A1C2A;border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:10px}
+.bl8-top b{font:500 11px/1 var(--font-label);letter-spacing:0.16em;color:#A23E66}
+.bl8-top span{font:400 20px/1.2 var(--font-display);color:#3A1C2A}
+.bl8-cd{position:relative;width:min(300px,72vw);aspect-ratio:1/1;border-radius:999px;background:conic-gradient(from 30deg,#F6E1E8,#EBDDF2,#FBF5EE,#E9B9CA,#F6C9D8,#EBDDF2,#F6E1E8);box-shadow:0 20px 50px rgba(0,0,0,0.25);display:flex;align-items:center;justify-content:center}
+.bl8-cd::after{content:"";position:absolute;width:22%;height:22%;border-radius:999px;background:#3A1C2A;border:10px solid rgba(255,252,250,0.7)}
+.bl8-cd p{position:absolute;top:16%;left:0;right:0;text-align:center;margin:0;font:700 clamp(24px,3vw,32px)/1 var(--font-script);color:#A23E66;transform:rotate(-8deg)}
+.bl8-cd small{position:absolute;bottom:17%;left:0;right:0;text-align:center;font:700 22px/1 var(--font-script);color:#3A1C2A;transform:rotate(-8deg)}
+.bl8-track{display:flex;gap:16px;align-items:flex-start;padding:14px 0;border-bottom:1px dashed rgba(246,225,232,0.35)}
+.bl8-track:last-child{border-bottom:0}
+.bl8-track .n{flex:none;font:500 13px/1.6 var(--font-label);letter-spacing:0.1em;color:#E9B9CA}
+.bl8-track .t{font:400 17px/1.5 var(--font-body);color:#F6E1E8}
+.bl8-track .t strong{font:400 22px/1.2 var(--font-display);color:#FBF5EE;display:block}
+.bl8-track details summary{cursor:pointer;list-style:none;font:600 13px/1.4 var(--font-body);color:#E9B9CA;margin-top:8px}
+.bl8-track details summary::-webkit-details-marker{display:none}
+.bl8-track ol{margin:10px 0 0;padding-left:20px;font:400 15px/1.7 var(--font-body);color:#F6E1E8}
+.bl8-obj{display:inline-flex;align-self:flex-start;gap:8px;align-items:center;border-radius:999px;padding:8px 14px;font:500 12px/1.3 var(--font-label);letter-spacing:0.06em}
+.bl8-thing{border-radius:30px;padding:clamp(26px,4vw,48px);display:flex;flex-wrap:wrap;gap:36px;align-items:center}
+.bl8-num{font:400 clamp(70px,8vw,110px)/0.8 var(--font-display);font-style:italic}
+.bl8-step{flex:1 1 240px;background:#FFFFFF;border-radius:24px;padding:26px;display:flex;flex-direction:column;gap:10px;box-shadow:0 14px 30px rgba(58,28,42,0.07)}
+.bl8-gift{flex:1 1 280px;max-width:360px;position:relative;background:#FFFFFF;border-radius:22px;padding:30px 24px 24px;display:flex;flex-direction:column;gap:10px;border:2px solid #E9B9CA}
+.bl8-gift .tag{position:absolute;top:-16px;left:20px;background:#A23E66;color:#FFFFFF;border-radius:999px;padding:8px 14px;font:500 11px/1 var(--font-label);letter-spacing:0.16em}
+.bl8-comment{display:flex;gap:16px;padding:22px 0;border-bottom:1px solid #F0DCE3}
+.bl8-comment:last-child{border-bottom:0}
+.bl8-ava{flex:none;width:48px;height:48px;border-radius:999px;background:#E9B9CA;display:flex;align-items:center;justify-content:center;font:400 24px/1 var(--font-display);color:#3A1C2A}
+.bl8-said{margin:0 0 8px;font:500 12px/1 var(--font-label);letter-spacing:0.12em;color:#A23E66;text-transform:uppercase}
+.bl8-ch{flex:1 1 240px;border:1.5px solid rgba(246,225,232,0.35);border-radius:22px;padding:24px;display:flex;flex-direction:column;gap:10px}
+.bl8-ch b{font:500 12px/1 var(--font-label);letter-spacing:0.18em;color:#E9B9CA}
+.bl8-ch h3{margin:0;font:400 28px/1.1 var(--font-display);color:#FBF5EE}
+.bl8-ch p{margin:0;font:400 16px/1.6 var(--font-body);color:#F6E1E8}
+.bl8-receipt{background:#FFFCFA;width:min(380px,100%);padding:28px 26px 34px;font:400 14px/1.8 var(--font-label);color:#3A1C2A;box-shadow:0 24px 50px rgba(0,0,0,0.25);transform:rotate(2deg);-webkit-mask:radial-gradient(circle 8px at 50% 100%,transparent 98%,#000) 50% 100%/22px 100% repeat-x;mask:radial-gradient(circle 8px at 50% 100%,transparent 98%,#000) 50% 100%/22px 100% repeat-x}
+.bl8-receipt .row{display:flex;justify-content:space-between;gap:12px}
+.bl8-paper{background:#FFFFFF;background-image:repeating-linear-gradient(#FFFFFF 0 35px,#F0DCE3 35px 36px);border-left:3px solid #E9B9CA;border-radius:6px;padding:40px clamp(22px,4vw,48px) 36px;box-shadow:0 24px 50px rgba(58,28,42,0.14);transform:rotate(-1deg)}
+.bl8-paper p{margin:0;font:600 clamp(23px,2.4vw,28px)/36px var(--font-script);color:#3A1C2A}
+.bl8-profile{background:#FFFFFF;border:2px solid #3A1C2A;border-radius:18px;overflow:hidden}
+.bl8-profile dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:8px 14px;font:400 15px/1.45 var(--font-body);color:#3A1C2A}
+.bl8-profile dt{font:500 12px/1.6 var(--font-label);letter-spacing:0.1em;color:#A23E66;text-transform:uppercase}
+.bl8-profile dd{margin:0}
+.bl8-quiz label{display:flex;gap:14px;align-items:flex-start;background:#FFFFFF;border-radius:18px;padding:18px 20px;cursor:pointer;font:400 17px/1.5 var(--font-body);color:#3A1C2A;box-shadow:0 10px 24px rgba(58,28,42,0.06)}
+.bl8-quiz input{flex:none;appearance:none;-webkit-appearance:none;width:26px;height:26px;margin:0;border:2px solid #A23E66;border-radius:8px;background:#FFFFFF;display:grid;place-content:center;cursor:pointer}
+.bl8-quiz input:checked{background:#A23E66}
+.bl8-quiz input:checked::after{content:"";width:10px;height:6px;border:solid #FFFFFF;border-width:0 0 2.5px 2.5px;transform:rotate(-45deg) translateY(-1px)}
+.bl8-quiz label strong{color:#A23E66;font-weight:600}
+.bl8-chat{background:#FFFFFF;border:2px solid #3A1C2A;border-radius:18px;overflow:hidden;box-shadow:8px 8px 0 #A23E66}
+.bl8-msgs{padding:clamp(18px,3vw,30px);display:flex;flex-direction:column;gap:14px;max-height:none}
+.bl8-q,.bl8-a{max-width:640px;border-radius:20px;padding:14px 18px;display:flex;flex-direction:column;gap:6px}
+.bl8-q{align-self:flex-end;background:#A23E66;border-bottom-right-radius:6px}
+.bl8-q b,.bl8-a b{font:500 11px/1 var(--font-label);letter-spacing:0.14em;text-transform:uppercase}
+.bl8-q b{color:#F6E1E8}.bl8-q span{font:600 17px/1.4 var(--font-body);color:#FFFFFF}
+.bl8-a{align-self:flex-start;background:#F6E1E8;border-bottom-left-radius:6px}
+.bl8-a b{color:#A23E66}.bl8-a span{font:400 16px/1.6 var(--font-body);color:#3A1C2A}
+.bl8-paris{display:flex;gap:18px;align-items:flex-start;padding:18px 0;border-bottom:1px solid rgba(246,225,232,0.25)}
+.bl8-paris:last-child{border-bottom:0}
+.bl8-paris b{flex:none;width:52px;height:52px;border-radius:999px;background:#E9B9CA;color:#3A1C2A;display:flex;align-items:center;justify-content:center;font:400 30px/1 var(--font-display);font-style:italic}
+.bl8-paris p{margin:0;font:400 18px/1.6 var(--font-body);color:#F6E1E8;padding-top:10px}
+.bl8-mark{background:linear-gradient(transparent 62%,#E9B9CA 62%,#E9B9CA 92%,transparent 92%);-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.bl8-hero-h1{margin:0;font:400 clamp(46px,6.2vw,96px)/0.96 var(--font-display);color:#3A1C2A;letter-spacing:-0.025em}
+@media (max-width:640px){.bl8-collage{min-height:460px!important}.bl8-mood{display:none}.bl8-strip{gap:14px}.bl8-strip figure{flex:0 1 calc(50% - 7px);padding:8px 8px 14px}.bl8-strip figcaption{font-size:20px!important}.bl8-btn{white-space:normal;text-align:left}}
+</style>
+
+<style>
+/* the site-wide Flodesk popup is the same masterclass, so hide it on this page */
+[data-ff-type="popup"].ff-681c011c9c17d4e9af084ed3{display:none!important}
+.mc-card{background:#FFFCFA;border-radius:26px;padding:clamp(22px,3vw,32px);box-shadow:0 30px 60px rgba(58,28,42,0.18);position:relative}
+.mc-root form{margin:0;display:flex;flex-direction:column;gap:12px}
+.mc-root [data-ff-el="fields"]{display:flex;flex-direction:column;gap:12px}
+.mc-root .fd-form-group{margin:0;position:relative}
+.mc-root .fd-form-label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.mc-root .fd-form-control{width:100%;box-sizing:border-box;min-height:54px;border:1.5px solid #E9B9CA;border-radius:14px;background:#FFFFFF;padding:14px 18px;font:400 16px/1.3 var(--font-body);color:#3A1C2A;outline:none}
+.mc-root .fd-form-control::placeholder{color:#6E4B5B;opacity:1}
+.mc-root .fd-form-control:focus{border-color:#A23E66;box-shadow:0 0 0 3px rgba(162,62,102,0.15)}
+.mc-root .fd-has-error .fd-form-control{border-color:#A23E66;background:#FFF5F8}
+.mc-root .fd-form-feedback{display:block;margin-top:6px;font:500 13px/1.4 var(--font-body);color:#A23E66}
+.mc-root .fd-btn{width:100%;min-height:56px;border:0;border-radius:999px;background:#A23E66;color:#FFFFFF;font:600 16px/1.2 var(--font-body);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;padding:10px 20px}
+.mc-root .fd-btn:hover{background:#3A1C2A}
+.mc-root .fd-btn:focus-visible{outline:3px solid #E9B9CA;outline-offset:2px}
+.mc-root .fd-btn:disabled{opacity:0.75}
+.mc-root .fd-form-success{display:none}
+.mc-root[data-ff-stage="success"] .fd-form-success{display:block}
+.mc-root[data-ff-stage="success"] .fd-form-content{display:none}
+.mc-root .fd-form-error{display:none;font:500 14px/1.4 var(--font-body);color:#A23E66}
+.mc-root .fd-has-error .fd-form-error,.mc-root .fd-form-error:not(:empty){display:block}
+.mc-screen{position:relative;border-radius:18px;overflow:hidden;background:#3A1C2A;aspect-ratio:16/9;max-width:100%}
+.mc-screen img{width:100%;height:100%;object-fit:cover;display:block;opacity:0.9}
+.mc-play{position:absolute;inset:0;margin:auto;width:76px;height:76px;border-radius:999px;background:rgba(251,245,238,0.94);display:flex;align-items:center;justify-content:center;box-shadow:0 12px 30px rgba(0,0,0,0.3)}
+.mc-step{display:flex;align-items:center;gap:16px;padding:16px 4px;border-bottom:1px dashed rgba(246,225,232,0.35)}
+.mc-step:last-child{border-bottom:0}
+.mc-step .n{flex:none;font:500 13px/1 var(--font-label);letter-spacing:0.12em;color:#E9B9CA;width:64px}
+.mc-step .bar{flex:1;height:14px;border-radius:999px;background:linear-gradient(90deg,rgba(246,225,232,0.28),rgba(246,225,232,0.08))}
+.mc-step .lock{flex:none;font:600 12px/1 var(--font-label);letter-spacing:0.12em;color:#F6C9D8}
+@media (max-width:640px){.mc-step .n{width:52px}.mc-torn{display:none}}
+</style>
+
+<main id="main">
+
+<section id="mc-signup" class="bl8-soft" style="padding:clamp(48px,6vw,90px) clamp(16px,4vw,48px) clamp(64px,7vw,110px);overflow:hidden;scroll-margin-top:80px">
+<div style="max-width:1180px;margin:0 auto;display:flex;flex-wrap:wrap;gap:clamp(36px,5vw,64px);align-items:center">
+<div style="flex:1 1 500px;min-width:0;display:flex;flex-direction:column;gap:20px">
+<div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center">
+<span style="background:#3A1C2A;color:#FBF5EE;border-radius:999px;padding:10px 16px;font:500 12px/1 var(--font-label);letter-spacing:0.18em">FREE MASTERCLASS</span>
+<span style="font:700 26px/1 var(--font-script);color:#A23E66">wait&hellip; &#10022;</span>
+</div>
+<h1 class="bl8-hero-h1">Still blogging&hellip; <em style="color:#A23E66">but not</em> <span class="bl8-mark">making money?</span></h1>
+<p class="bl8-p" style="color:#4A2F3B;max-width:580px;font-size:19px">Watch this free masterclass and discover the 7-step blog-to-business system that turns your blog content into cash.</p>
+<div class="mc-screen" role="img" aria-label="Preview of the free masterclass video" style="max-width:560px;box-shadow:0 24px 50px rgba(58,28,42,0.18)">
+<img src="https://img.youtube.com/vi/yWbtuY3PysY/hqdefault.jpg" alt="" loading="eager">
+<span class="mc-play" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="#A23E66"></path></svg></span>
+<span aria-hidden="true" style="position:absolute;left:14px;top:14px;background:#A23E66;color:#FFFFFF;border-radius:999px;padding:7px 12px;font:500 11px/1 var(--font-label);letter-spacing:0.14em">FREE &middot; WATCH NOW</span>
+</div>
+</div>
+<div style="flex:1 1 380px;min-width:0;max-width:460px;margin:0 auto;position:relative">
+<span class="bl8-tape dots" aria-hidden="true" style="z-index:3"></span>
+<div class="mc-card">
+<p class="bl8-mono" style="color:#A23E66;margin-bottom:10px">&#10022; Save my seat &#10022;</p>
+<h2 style="margin:0 0 6px;font:400 clamp(30px,3vw,38px)/1.05 var(--font-display);color:#3A1C2A">Get the free masterclass</h2>
+<p style="margin:0 0 18px;font:400 15px/1.6 var(--font-body);color:#4A2F3B">Pop in your name and email and I&rsquo;ll take you straight to the video.</p>
+<div id="mc-form" class="mc-root" data-ff-el="root" data-ff-version="3" data-ff-type="inline" data-ff-name="masterclassPage" data-ff-stage="default">
+<div data-ff-el="config" data-ff-config="eyJ0cmlnZ2VyIjp7Im1vZGUiOiJpbW1lZGlhdGVseSIsInZhbHVlIjowfSwib25TdWNjZXNzIjp7Im1vZGUiOiJyZWRpcmVjdCIsIm1lc3NhZ2UiOiIiLCJyZWRpcmVjdFVybCI6Imh0dHBzOi8vYm9zc2xhZHlibG9nZ2Vycy5jb20vbWFzdGVyY2xhc3MtZGVsaXZlcnkifSwiY29pIjpmYWxzZSwic2hvd0ZvclJldHVyblZpc2l0b3JzIjp0cnVlLCJub3RpZmljYXRpb24iOnRydWUsImdkcHIiOnsiYWNjZXB0c01hcmtldGluZyI6ZmFsc2UsInByaXZhY3lQb2xpY3kiOnsiZW5hYmxlZCI6ZmFsc2UsIm1hbmRhdG9yeSI6ZmFsc2V9fSwidHJhY2tpbmdDb25maWciOnsibWV0YVBpeGVsSWQiOiIiLCJjb29raWVCYW5uZXJFbmFibGVkIjpmYWxzZSwiZ29vZ2xlQW5hbHl0aWNzSWQiOiIifX0=" style="display:none"></div>
+<form action="https://form.flodesk.com/forms/681c011c9c17d4e9af084ed3/submit" method="post" data-ff-el="form">
+<div class="fd-form-content" data-ff-el="content">
+<div data-ff-el="fields">
+<div class="fd-form-group"><input id="mc-first" class="fd-form-control" type="text" maxlength="255" name="firstName" placeholder="First name" autocomplete="given-name" data-ff-tab="firstName::email" required><label for="mc-first" class="fd-form-label">First name</label></div>
+<div class="fd-form-group"><input id="mc-email" class="fd-form-control" type="text" maxlength="255" name="email" placeholder="Email address" autocomplete="email" inputmode="email" data-ff-tab="email:firstName:submit" required><label for="mc-email" class="fd-form-label">Email address</label></div>
+<input type="text" maxlength="255" name="confirm_email_address" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
+</div>
+<div data-ff-el="footer"><button type="submit" class="fd-btn" data-ff-el="submit" data-ff-tab="submit">HECK YES! Give me access! <span aria-hidden="true">&#8599;&#65038;</span></button></div>
+</div>
+<div class="fd-form-success" data-ff-el="success"><p style="margin:0;font:400 24px/1.25 var(--font-display);color:#3A1C2A">You&rsquo;re in! Taking you to the masterclass now&hellip;</p></div>
+<div class="fd-form-error" data-ff-el="error"></div>
+</form>
+</div>
+<script>
+(function(w,d,t,h,s,n){if(w.fd)return;w.FlodeskObject=n;var fn=function(){(w[n].q=w[n].q||[]).push(arguments);};w[n]=w[n]||fn;var f=d.getElementsByTagName(t)[0];var v='?v='+Math.floor(new Date().getTime()/(120*1000))*60;var sm=d.createElement(t);sm.async=true;sm.type='module';sm.src=h+s+'.mjs'+v;f.parentNode.insertBefore(sm,f);var sn=d.createElement(t);sn.async=true;sn.noModule=true;sn.src=h+s+'.js'+v;f.parentNode.insertBefore(sn,f);})(window,document,'script','https://assets.flodesk.com','/universal','fd');
+window.fd('form:handle',{formId:'681c011c9c17d4e9af084ed3',rootEl:'#mc-form'});
+</script>
+<p style="margin:14px 0 0;font:400 13px/1.5 var(--font-body);color:#6E4B5B;text-align:center">Free. You&rsquo;ll also get my emails, and you can unsubscribe anytime.</p>
+</div>
+<div class="bl8-torn mc-torn" aria-hidden="true" style="position:absolute;right:-18px;top:-58px;width:150px;padding:16px 18px 18px;transform:rotate(6deg);z-index:4"><p style="font-size:24px">grab a coffee &amp; press play &#9825;</p></div>
+</div>
+</div>
+</section>
+
+<section style="padding:110px clamp(16px,4vw,48px)">
+<div style="max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;gap:48px;align-items:center">
+<div style="flex:1 1 420px;min-width:0;display:flex;flex-direction:column;gap:18px">
+<p class="rv" style="margin:0;font:700 32px/1 var(--font-script);color:#A23E66">sound familiar?</p>
+<h2 class="bl8-h2 rv" style="color:#3A1C2A">You&rsquo;re doing the work. <em style="color:#A23E66">The money isn&rsquo;t showing up.</em></h2>
+<p class="bl8-p rv" style="color:#4A2F3B">Everyone told you the same thing. Chase traffic, add affiliate links, wait for the money. So you kept publishing. And waiting.</p>
+<figure class="bl8-note rv" style="margin:0;transform:rotate(-1.5deg);"><p class="bl8-note-top"><span>&#8249; From the survey</span><span aria-hidden="true">&#8943;</span></p><blockquote class="bl8-note-txt" style="margin:0">&ldquo;I stopped posting recently so need to rediscover some enthusiasm.&rdquo;</blockquote><figcaption class="bl8-mono" style="color:#6E4B5B;margin-top:10px">A Blogging Lady, anonymous</figcaption></figure>
+</div>
+<div style="flex:1 1 420px;min-width:0">
+<div class="bl8-win rv"><div class="bl8-winbar"><span class="bl8-dot"></span><span class="bl8-dot"></span><span class="bl8-dot"></span><span style="margin-left:8px">why_isnt_my_blog_paying_me.doc</span></div><div class="bl8-tab rv"><span class="bl8-x" aria-hidden="true">&times;</span><span>Blogging for years and still making pennies from ads and affiliates</span></div><div class="bl8-tab rv"><span class="bl8-x" aria-hidden="true">&times;</span><span>Being told you need more traffic before you can make money</span></div><div class="bl8-tab rv"><span class="bl8-x" aria-hidden="true">&times;</span><span>Rewriting the same post again and again because it doesn&rsquo;t feel &ldquo;good enough&rdquo;</span></div><div class="bl8-tab rv"><span class="bl8-x" aria-hidden="true">&times;</span><span>Researching instead of doing, and losing whole weekends to the tech</span></div><div class="bl8-tab rv"><span class="bl8-x" aria-hidden="true">&times;</span><span>Loving to write, but missing the part where you get paid for it</span></div></div>
+</div>
+</div>
+</section>
+
+<section style="background:#3A1C2A;padding:110px clamp(16px,4vw,48px)">
+<div style="max-width:1140px;margin:0 auto;display:flex;flex-direction:column;gap:48px">
+<div style="display:flex;flex-wrap:wrap;gap:48px;align-items:center">
+<div style="flex:1 1 420px;min-width:0;display:flex;flex-direction:column;gap:18px">
+<p class="bl8-mono" style="color:#E9B9CA">&#10022; Inside the free masterclass &#10022;</p>
+<h2 class="bl8-h2" style="color:#FBF5EE">The 7-step <em style="color:#E9B9CA">blog-to-business system</em> that turns your blog content into cash.</h2>
+<p class="bl8-p" style="color:#F6E1E8">Every step, in the right order, from a blogger who learned it the hard way. Press play and you&rsquo;ll see exactly where your blog fits.</p>
+<div><a href="#mc-signup" class="pill bl8-btn" style="background:#FBF5EE;color:#3A1C2A">Show me the 7 steps <span aria-hidden="true" style="width:34px;height:34px;border-radius:999px;background:#A23E66;display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></span></a></div>
+</div>
+<div style="flex:1 1 400px;min-width:0;background:rgba(251,245,238,0.05);border:1.5px solid rgba(246,225,232,0.25);border-radius:24px;padding:16px 24px" aria-label="Seven steps, revealed inside the masterclass"><div class="mc-step rv"><span class="n">STEP 1</span><span class="bar" aria-hidden="true"></span><span class="lock"><svg aria-hidden="true" width="12" height="13" viewBox="0 0 12 13" fill="none" stroke="#F6C9D8" stroke-width="1.6"><rect x="1.5" y="6" width="9" height="6" rx="1.5"></rect><path d="M3.5 6V4a2.5 2.5 0 015 0v2"></path></svg> INSIDE</span></div><div class="mc-step rv"><span class="n">STEP 2</span><span class="bar" aria-hidden="true"></span><span class="lock"><svg aria-hidden="true" width="12" height="13" viewBox="0 0 12 13" fill="none" stroke="#F6C9D8" stroke-width="1.6"><rect x="1.5" y="6" width="9" height="6" rx="1.5"></rect><path d="M3.5 6V4a2.5 2.5 0 015 0v2"></path></svg> INSIDE</span></div><div class="mc-step rv"><span class="n">STEP 3</span><span class="bar" aria-hidden="true"></span><span class="lock"><svg aria-hidden="true" width="12" height="13" viewBox="0 0 12 13" fill="none" stroke="#F6C9D8" stroke-width="1.6"><rect x="1.5" y="6" width="9" height="6" rx="1.5"></rect><path d="M3.5 6V4a2.5 2.5 0 015 0v2"></path></svg> INSIDE</span></div><div class="mc-step rv"><span class="n">STEP 4</span><span class="bar" aria-hidden="true"></span><span class="lock"><svg aria-hidden="true" width="12" height="13" viewBox="0 0 12 13" fill="none" stroke="#F6C9D8" stroke-width="1.6"><rect x="1.5" y="6" width="9" height="6" rx="1.5"></rect><path d="M3.5 6V4a2.5 2.5 0 015 0v2"></path></svg> INSIDE</span></div><div class="mc-step rv"><span class="n">STEP 5</span><span class="bar" aria-hidden="true"></span><span class="lock"><svg aria-hidden="true" width="12" height="13" viewBox="0 0 12 13" fill="none" stroke="#F6C9D8" stroke-width="1.6"><rect x="1.5" y="6" width="9" height="6" rx="1.5"></rect><path d="M3.5 6V4a2.5 2.5 0 015 0v2"></path></svg> INSIDE</span></div><div class="mc-step rv"><span class="n">STEP 6</span><span class="bar" aria-hidden="true"></span><span class="lock"><svg aria-hidden="true" width="12" height="13" viewBox="0 0 12 13" fill="none" stroke="#F6C9D8" stroke-width="1.6"><rect x="1.5" y="6" width="9" height="6" rx="1.5"></rect><path d="M3.5 6V4a2.5 2.5 0 015 0v2"></path></svg> INSIDE</span></div><div class="mc-step rv"><span class="n">STEP 7</span><span class="bar" aria-hidden="true"></span><span class="lock"><svg aria-hidden="true" width="12" height="13" viewBox="0 0 12 13" fill="none" stroke="#F6C9D8" stroke-width="1.6"><rect x="1.5" y="6" width="9" height="6" rx="1.5"></rect><path d="M3.5 6V4a2.5 2.5 0 015 0v2"></path></svg> INSIDE</span></div></div>
+</div>
+<p class="rv" style="margin:0;text-align:center;font:400 clamp(28px,3vw,40px)/1.15 var(--font-display);color:#FBF5EE">Plus, what most blogging advice <em style="color:#E9B9CA">got backwards:</em></p>
+<div style="display:flex;flex-wrap:wrap;gap:16px"><article class="bl8-myth rv"><s>&ldquo;I need more traffic before I can make money.&rdquo;</s><p>You need something to sell first. Then every reader has somewhere to go.</p></article><article class="bl8-myth rv"><s>&ldquo;Blogs make money from ads and affiliates.&rdquo;</s><p>They pay pennies until you&rsquo;re huge. Your own offer can pay you now, even with a small audience.</p></article><article class="bl8-myth rv"><s>&ldquo;AI can write my blog for me.&rdquo;</s><p>AI can&rsquo;t tell your story, so your voice stays yours. But it can do the heavy lifting on the tech and the busywork.</p></article><article class="bl8-myth rv"><s>&ldquo;I need to figure it all out alone.&rdquo;</s><p>Nope. That&rsquo;s exactly why I made this for you.</p></article></div>
+</div>
+</section>
+
+<section class="bl8-check" style="padding:110px clamp(16px,4vw,48px)">
+<div style="max-width:1140px;margin:0 auto;background:#FFFCFA;border-radius:32px;padding:clamp(28px,5vw,56px);display:flex;flex-wrap:wrap;gap:44px;align-items:center;box-shadow:0 30px 60px rgba(58,28,42,0.12)">
+<div style="flex:1 1 420px;min-width:0;display:flex;flex-direction:column;gap:16px">
+<p class="bl8-mono" style="color:#A23E66">Dear diary, a true story</p>
+<h2 class="bl8-h2 rv" style="color:#3A1C2A">Hi, I&rsquo;m Gen. <em style="color:#A23E66">I&rsquo;ve been where you are.</em></h2>
+<p class="bl8-p rv" style="color:#3A1C2A">I started my lifestyle blog in 2017, in my aunt&rsquo;s basement, on a 2010 MacBook. Two years in, I&rsquo;d made about $50 in affiliate money and never got paid, because the cash-out minimum was $100.</p>
+<p class="bl8-p rv" style="color:#3A1C2A">When I built my own offer first, my first Stripe payout was <span class="hl">$18.52.</span> Within 3 to 4 months, I&rsquo;d made about <span class="hl">$4,000.</span> I&rsquo;ve been coaching bloggers since 2020.</p>
+<p class="rv" style="margin:0;font:400 clamp(24px,2.4vw,32px)/1.2 var(--font-display);color:#3A1C2A">Same girl. Same laptop. <em style="color:#A23E66">I just finally had the right order.</em></p>
+<div><a href="#mc-signup" class="pill bl8-btn" style="background:#3A1C2A;color:#FFFFFF">Watch the free masterclass <span aria-hidden="true" style="width:34px;height:34px;border-radius:999px;background:#A23E66;display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></span></a></div>
+</div>
+<div style="flex:1 1 380px;min-width:0;display:flex;flex-wrap:wrap;gap:22px;justify-content:center">
+<figure class="bl8-polaroid rv" style="width:min(250px,100%);transform:rotate(-3deg)"><span class="bl8-tape stripe" aria-hidden="true"></span><div style="height:170px;overflow:hidden;border-radius:3px;background:#E9B9CA"><img src="/images/proof/proof-first-stripe-payouts-2020-2021.jpg" alt="Blurred sample of early Stripe payouts" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center top"></div><figcaption>my first Stripe payouts</figcaption></figure>
+<figure class="bl8-polaroid rv" style="width:min(250px,100%);transform:rotate(2.5deg)"><span class="bl8-tape ging" aria-hidden="true"></span><div style="height:170px;overflow:hidden;border-radius:3px;background:#E9B9CA"><img src="/images/proof/proof-81-invoices-paid.jpg" alt="Invoice app showing 81 paid invoices totaling $34,481" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center bottom"></div><figcaption>81 invoices paid: $34,481</figcaption></figure>
+<figure class="bl8-polaroid rv" style="width:min(250px,100%);transform:rotate(-1.5deg)"><span class="bl8-tape dots" aria-hidden="true"></span><div style="height:170px;overflow:hidden;border-radius:3px;background:#E9B9CA"><img src="/images/proof/proof-monthly-client-payments-2024.jpg" alt="Blurred sample of monthly client payments" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center bottom"></div><figcaption>real client payments, 2024</figcaption></figure>
+<figure class="bl8-polaroid rv" style="width:min(250px,100%);transform:rotate(2deg)"><span class="bl8-tape stripe" aria-hidden="true"></span><div style="height:170px;overflow:hidden;border-radius:3px;background:#E9B9CA"><img src="/images/photos/portrait-hat.jpg" alt="Genasys smiling in a hat" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center 30%"></div><figcaption>xo, Gen</figcaption></figure>
+</div>
+</div>
+</section>
+
+<section style="padding:110px clamp(16px,4vw,48px)">
+<div style="max-width:900px;margin:0 auto;display:flex;flex-direction:column;gap:30px">
+<h2 class="bl8-h2 rv" style="color:#3A1C2A;text-align:center">Read the <em style="color:#A23E66">comments.</em></h2>
+<div style="background:#FFFFFF;border-radius:24px;padding:clamp(22px,4vw,40px);box-shadow:0 20px 44px rgba(58,28,42,0.08)"><p style="margin:0 0 6px;font:500 12px/1 var(--font-label);letter-spacing:0.16em;color:#6E4B5B">3 COMMENTS</p><div class="bl8-comment rv"><span class="bl8-ava" aria-hidden="true">M</span><div><p class="bl8-said">Morgan said&hellip;</p><blockquote style="margin:0;font:400 clamp(21px,2.1vw,26px)/1.3 var(--font-display);color:#3A1C2A">&ldquo;I really liked your authenticity and you break things down in a way that feels understandable and relatable.&rdquo;</blockquote></div></div><div class="bl8-comment rv"><span class="bl8-ava" aria-hidden="true">T</span><div><p class="bl8-said">Tesha said&hellip;</p><blockquote style="margin:0;font:400 clamp(21px,2.1vw,26px)/1.3 var(--font-display);color:#3A1C2A">&ldquo;She gave me a clear vision how to move my business forward and make money doing what I love.&rdquo;</blockquote></div></div><div class="bl8-comment rv"><span class="bl8-ava" aria-hidden="true">C</span><div><p class="bl8-said">Clare said&hellip;</p><blockquote style="margin:0;font:400 clamp(21px,2.1vw,26px)/1.3 var(--font-display);color:#3A1C2A">&ldquo;Gen comes across as super friendly and understanding and as I am completely new to blogging, I feel that Gen will give me the right encouragement and support along my journey.&rdquo;</blockquote></div></div></div>
+</div>
+</section>
+
+<section class="bl-grad" style="padding:110px clamp(16px,4vw,48px)">
+<div style="max-width:780px;margin:0 auto;display:flex;flex-direction:column;gap:26px">
+<h2 class="bl8-h2" style="color:#3A1C2A;text-align:center">This masterclass is <em style="color:#A23E66">for you if&hellip;</em></h2>
+<ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:12px"><li class="rv" style="display:flex;gap:14px;align-items:flex-start;background:#FFFFFF;border-radius:18px;padding:18px 20px;font:400 17px/1.5 var(--font-body);color:#3A1C2A;box-shadow:0 10px 24px rgba(58,28,42,0.06)"><span aria-hidden="true" style="flex:none;width:26px;height:26px;border-radius:8px;background:#A23E66;color:#FFFFFF;display:flex;align-items:center;justify-content:center;font:600 14px/1 var(--font-body)">&#10003;</span>You still love to blog, but it isn&rsquo;t paying you yet</li><li class="rv" style="display:flex;gap:14px;align-items:flex-start;background:#FFFFFF;border-radius:18px;padding:18px 20px;font:400 17px/1.5 var(--font-body);color:#3A1C2A;box-shadow:0 10px 24px rgba(58,28,42,0.06)"><span aria-hidden="true" style="flex:none;width:26px;height:26px;border-radius:8px;background:#A23E66;color:#FFFFFF;display:flex;align-items:center;justify-content:center;font:600 14px/1 var(--font-body)">&#10003;</span>You&rsquo;ve tried ads, affiliates or chasing traffic and the money never showed up</li><li class="rv" style="display:flex;gap:14px;align-items:flex-start;background:#FFFFFF;border-radius:18px;padding:18px 20px;font:400 17px/1.5 var(--font-body);color:#3A1C2A;box-shadow:0 10px 24px rgba(58,28,42,0.06)"><span aria-hidden="true" style="flex:none;width:26px;height:26px;border-radius:8px;background:#A23E66;color:#FFFFFF;display:flex;align-items:center;justify-content:center;font:600 14px/1 var(--font-body)">&#10003;</span>You want to make money from home, around your kids and your real life</li><li class="rv" style="display:flex;gap:14px;align-items:flex-start;background:#FFFFFF;border-radius:18px;padding:18px 20px;font:400 17px/1.5 var(--font-body);color:#3A1C2A;box-shadow:0 10px 24px rgba(58,28,42,0.06)"><span aria-hidden="true" style="flex:none;width:26px;height:26px;border-radius:8px;background:#A23E66;color:#FFFFFF;display:flex;align-items:center;justify-content:center;font:600 14px/1 var(--font-body)">&#10003;</span>You&rsquo;re brand new, starting over, or have been blogging for years</li></ul>
+</div>
+</section>
+
+<section style="background:#3A1C2A;padding:110px clamp(16px,4vw,48px)">
+<div style="max-width:860px;margin:0 auto;display:flex;flex-direction:column;gap:22px;align-items:center;text-align:center">
+<p style="margin:0;font:700 34px/1 var(--font-script);color:#E9B9CA">your blog is waiting &#10022;</p>
+<h2 class="bl8-h2" style="color:#FBF5EE">Still blogging&hellip; <em style="color:#E9B9CA">but not making money?</em></h2>
+<p class="bl8-p" style="color:#F6E1E8;max-width:640px">Watch this free masterclass and discover the 7-step blog-to-business system that turns your blog content into cash.</p>
+<a href="#mc-signup" class="pill bl8-btn" style="background:#FBF5EE;color:#3A1C2A">HECK YES! Give me access! <span aria-hidden="true" style="width:34px;height:34px;border-radius:999px;background:#A23E66;display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></span></a>
+<p style="margin:0;font:700 30px/1 var(--font-script);color:#E9B9CA">xoxo, Gen</p>
+</div>
+</section>
+
+</main>

@@ -1,7 +1,7 @@
 BOSS LADY BLOGGERS - NEW WEBSITE ON SHOWIT - PASTE GUIDE
 =========================================================
 
-13 full pages plus 4 small blog-post pieces. Same workflow as before: one full-page embed
+14 full pages plus 4 small blog-post pieces. Same workflow as before: one full-page embed
 canvas per Showit page, paste the whole file, publish.
 
 THE FILES AND WHERE EACH ONE GOES
@@ -12,6 +12,9 @@ StartHere.html            /start-here
 About.html                /about
 Boss.html                 /boss
 BlogCoaching.html         /blog-coaching   (your existing page)
+FreeMasterclass.html      /free-masterclass  (your free masterclass opt-in page.
+                          The form is your real Flodesk masterclass form:
+                          signups go to /masterclass-delivery)
 Membership.html           /membership  (The Blogging Ladies Membership,
                           $47 a month sales page. Paste your checkout
                           link into every join button before publishing)
@@ -32,14 +35,14 @@ PAGES TAKEN DOWN (do this once)
 -------------------------------
 The Free Trainings, Course, Course Waitlist, Group Coaching and Group
 Waitlist pages are retired. Every "free training" button now goes to
-your free masterclass opt-in page at /opt-in-page.
+your new free masterclass page at /free-masterclass.
 In Showit: delete those 5 pages, then add 301 redirects so old
 links land on the membership:
   /course            ->  /membership
   /course-waitlist   ->  /membership
   /group-coaching    ->  /membership
   /group-waitlist    ->  /membership
-  /free-trainings    ->  /opt-in-page
+  /free-trainings    ->  /free-masterclass
 Also re-paste your nav, footer and menu embeds (they now link to
 Membership instead of Group Coaching and The Course).
 
@@ -144,7 +147,7 @@ post page gets rebuilt:
    points to]". Showit uses ONE template for all posts, so either
    replace that line once with something evergreen that fits every
    post, or skip that band entirely. The button already links to your
-   free masterclass page (/opt-in-page).
+   free masterclass page (/free-masterclass).
 
 Because it is a template, you do all of this ONCE and every blog post
 (old and new) instantly wears the new design.
