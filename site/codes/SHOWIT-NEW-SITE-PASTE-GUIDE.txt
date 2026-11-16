@@ -1,7 +1,7 @@
 BOSS LADY BLOGGERS - NEW WEBSITE ON SHOWIT - PASTE GUIDE
 =========================================================
 
-15 full pages plus 4 small blog-post pieces. Same workflow as before: one full-page embed
+16 full pages plus 4 small blog-post pieces. Same workflow as before: one full-page embed
 canvas per Showit page, paste the whole file, publish.
 
 THE FILES AND WHERE EACH ONE GOES
@@ -18,6 +18,10 @@ FreeMasterclass.html      /free-masterclass  (your free masterclass opt-in page.
 MembershipOffer.html      /membership-offer  (the 1-hour 50% off upsell people see
                           right after signing up for the masterclass. No menu
                           or footer on purpose. Hide it from your Showit nav)
+BlackFriday.html          /black-friday  (Black Friday through Cyber Monday sale:
+                          50% off + free 1:1 call and roadmap. The timer runs
+                          on its own: before Nov 27 it counts down to the sale,
+                          after Nov 30 11:59 PM ET it shows "sale ended")
 Membership.html           /membership  (The Blogging Ladies Membership,
                           $47 a month sales page. Paste your checkout
                           link into every join button before publishing)

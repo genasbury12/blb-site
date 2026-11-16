@@ -24,6 +24,7 @@ PAGES = {
     "membership/index.html":     ("Membership.html", "/membership"),
     "free-masterclass/index.html": ("FreeMasterclass.html", "/free-masterclass"),
     "membership-offer/index.html": ("MembershipOffer.html", "/membership-offer"),
+    "black-friday/index.html":   ("BlackFriday.html", "/black-friday"),
     "podcast/index.html":        ("Podcast.html", "/podcast"),
     "blog/index.html":           ("BlogLanding.html", "/blog"),
     "links/index.html":          ("Links.html", "/links"),
