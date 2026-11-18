@@ -11,7 +11,7 @@ E = ROOT / "showit-embeds"
 
 GROUPS = [
     ("Full pages", "One Embed Code box per Showit page, stretched full width. Paste, publish.", [
-        ("MasterclassDelivery", "/masterclass-delivery", "NEW: Where masterclass sign-ups watch the video, with your workbook link and the 1-hour 50% off timer. Paste this one first. Leave it out of your menu."),
+        ("MasterclassDelivery", "/masterclass-delivery", "NEW: Where masterclass sign-ups watch the video. Countdown above it, the 50% off join box and what they get right under it, your workbook link and the floating timer. Paste this one first. Leave it out of your menu."),
         ("FreeMasterclass", "/free-masterclass", "NEW: Your free masterclass opt-in page. The form is your real Flodesk masterclass form."),
         ("MembershipOffer", "/membership-offer", "NEW: The 1-hour 50% off upsell people see right after signing up. Leave it out of your menu."),
         ("BlackFriday", "/black-friday", "NEW: Early access Nov 25 through Cyber Monday: 50% off, $23.50 a month locked in forever, plus the free 1:1 call and roadmap."),
