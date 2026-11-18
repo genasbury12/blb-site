@@ -362,6 +362,31 @@ div[id^="fd-form"] form { padding-top: 0 !important; padding-bottom: 0 !importan
 .md-deal .of-clock{box-shadow:4px 4px 0 #3A1C2A}
 @media (min-width:761px){.of-bar{display:flex;left:auto;right:max(18px,env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));border-radius:999px;padding:10px 10px 10px 22px;gap:14px;box-shadow:0 20px 44px rgba(58,28,42,0.35)}}
 .md-wb{display:flex;flex-wrap:wrap;gap:16px 22px;align-items:center;background:#FFFCFA;border:2px solid #3A1C2A;border-radius:22px;padding:20px 24px;box-shadow:6px 6px 0 #E9B9CA;text-align:left}
+.md-topbar{width:100%;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px 16px;background:#3A1C2A;color:#F6E1E8;border-radius:999px;padding:10px 10px 10px 20px;font:500 13px/1.3 var(--font-label);letter-spacing:0.08em;text-transform:uppercase}
+.md-topbar b{font:500 18px/1 var(--font-label);color:#FBF5EE;font-variant-numeric:tabular-nums;letter-spacing:0.06em}
+.md-topbar a{background:#A23E66;color:#FFFFFF;border-radius:999px;padding:10px 16px;font:600 13px/1 var(--font-body);letter-spacing:0;text-transform:none;text-decoration:none;white-space:nowrap}
+.md-topbar .dot{width:9px;height:9px;border-radius:999px;background:#F6C9D8;animation:mdpulse 1.4s ease-in-out infinite}
+@keyframes mdpulse{50%{opacity:0.25}}
+@media (prefers-reduced-motion:reduce){.md-topbar .dot{animation:none}}
+@media (max-width:640px){.md-topbar{border-radius:18px;padding:12px 14px}}
+.md-offer{width:100%;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:0;background:#A23E66;border-radius:24px;overflow:hidden;box-shadow:0 24px 50px rgba(162,62,102,0.3);text-align:left}
+.md-offer-l{padding:clamp(22px,3vw,32px);display:flex;flex-direction:column;gap:12px}
+.md-offer-h{margin:0;font:400 clamp(26px,2.8vw,38px)/1.1 var(--font-display);color:#FFFFFF}
+.md-offer-h em{color:#F6C9D8}
+.md-offer-s{margin:0;font:400 15px/1.5 var(--font-body);color:#F6E1E8}
+.md-offer-s s{color:#F6C9D8;margin-right:6px}
+.md-offer-cta{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:4px}
+.md-offer-cta .of-clock{box-shadow:4px 4px 0 #3A1C2A;padding:10px 16px}
+.md-offer-cta .of-digits{font-size:clamp(32px,4vw,44px)}
+.md-offer-r{background:#FBF5EE;padding:clamp(22px,3vw,32px)}
+.md-offer-r ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px}
+.md-offer-r li{display:flex;gap:10px;align-items:flex-start;font:400 15px/1.45 var(--font-body);color:#3A1C2A}
+.md-offer-r li span{flex:none;width:22px;height:22px;border-radius:7px;background:#A23E66;color:#FFFFFF;display:flex;align-items:center;justify-content:center;font:600 12px/1 var(--font-body);margin-top:1px}
+.md-who{grid-column:1/-1;background:#3A1C2A;padding:18px clamp(22px,3vw,32px) 22px}
+.md-who-g{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px 18px}
+.md-who-g div{font:400 14px/1.45 var(--font-body);color:#F6E1E8}
+.md-who-g b{color:#FFFFFF;font-weight:600}
+@media (max-width:760px){.md-offer{grid-template-columns:minmax(0,1fr)}.md-who-g{grid-template-columns:minmax(0,1fr)}}
 .md-step b{width:40px;height:40px;border-radius:999px;background:#A23E66;color:#FFFFFF;display:flex;align-items:center;justify-content:center;font:400 22px/1 var(--font-display);font-style:italic}
 </style>
 
@@ -372,6 +397,7 @@ div[id^="fd-form"] form { padding-top: 0 !important; padding-bottom: 0 !importan
 <span style="background:#3A1C2A;color:#FBF5EE;border-radius:999px;padding:10px 16px;font:500 12px/1 var(--font-label);letter-spacing:0.18em">&#10003; YOU&rsquo;RE IN!</span>
 <h1 class="bl8-hero-h1" style="font-size:clamp(44px,6vw,90px)">Grab your coffee <em style="color:#A23E66">&amp; press play.</em></h1>
 <p class="bl8-p" style="color:#4A2F3B;max-width:640px">Here&rsquo;s your free masterclass: the 7-step blog-to-business system that turns your blog content into cash. Bookmark this page so you can come back to it anytime.</p>
+<div class="md-topbar" data-live><span class="dot" aria-hidden="true"></span><span>Your 50% off membership deal ends in <b data-clock>60:00</b></span><a href="https://bossladybloggers.thrivecart.com/the-blogging-ladies-membership-half-off/">Join at 50% off</a></div>
 <div style="width:100%;position:relative">
 <span class="bl8-tape ging" aria-hidden="true" style="z-index:3"></span>
 <div class="md-frame">
@@ -379,15 +405,20 @@ div[id^="fd-form"] form { padding-top: 0 !important; padding-bottom: 0 !importan
 </div>
 <div class="bl8-torn md-torn" aria-hidden="true" style="position:absolute;right:-18px;top:-50px;width:160px;padding:16px 18px 18px;transform:rotate(5deg);z-index:4"><p style="font-size:24px">take notes, babe &#9825;</p></div>
 </div>
+<div class="md-offer" data-live>
+<div class="md-offer-l">
+<p class="bl8-mono" style="color:#F6E1E8">&#10022; Before your 50% off expires &#10022;</p>
+<p class="md-offer-h">Join The Blogging Ladies for <em>$23.50 a month,</em> locked in forever.</p>
+<p class="md-offer-s"><s>$47</s> Half price, only until the timer runs out.</p>
+<div class="md-offer-cta"><div class="of-clock" role="timer" aria-live="off"><span class="of-digits" data-clock>60:00</span><span class="of-unit">minutes<br>left</span></div><a href="https://bossladybloggers.thrivecart.com/the-blogging-ladies-membership-half-off/" class="of-yes" style="width:auto;background:#FBF5EE;color:#3A1C2A">Yes! Give me 50% off <span aria-hidden="true" style="width:34px;height:34px;border-radius:999px;background:#FFFFFF;display:flex;align-items:center;justify-content:center;flex:none"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#A23E66" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></span></a></div>
+</div>
+<div class="md-offer-r"><p class="bl8-mono" style="color:#3A1C2A;margin-bottom:10px">What you get</p><ul><li><span aria-hidden="true">&#10003;</span>A new 5 to 15 minute lesson every week, all 8 modules</li><li><span aria-hidden="true">&#10003;</span>Weekly live coaching with me, plus replays</li><li><span aria-hidden="true">&#10003;</span>Templates, checklists and the full course library</li><li><span aria-hidden="true">&#10003;</span>The Blogging Ladies community</li><li><span aria-hidden="true">&#10003;</span>5 bonuses, including AI trained on your voice</li></ul></div>
+<div class="md-who"><p class="bl8-mono" style="color:#F6E1E8;margin-bottom:10px">Made for you if you&rsquo;re&hellip;</p><div class="md-who-g"><div><b>Brand new?</b> Start right, step by step.</div><div><b>Starting over?</b> Get your spark back.</div><div><b>Blogging for years?</b> Finally get paid for it.</div><div><b>Busy mom?</b> Short lessons, nap-time friendly.</div><div><b>Not techy?</b> AI and weekly help do the heavy lifting.</div><div><b>Not sure?</b> Cancel anytime. The Blog Again Promise has you.</div></div></div>
+</div>
 <div class="md-wb" style="width:100%">
 <div style="flex:none;width:64px;height:64px;border-radius:16px;background:#F6E1E8;display:flex;align-items:center;justify-content:center" aria-hidden="true"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#A23E66" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h12l4 4v12H4z"></path><path d="M8 10h8M8 14h8M8 18h5"></path></svg></div>
 <div style="flex:1 1 280px;min-width:0"><p class="bl8-mono" style="color:#A23E66;margin-bottom:6px">&#10022; Follow along &#10022;</p><p style="margin:0 0 4px;font:400 clamp(22px,2.4vw,30px)/1.15 var(--font-display);color:#3A1C2A">Open your free masterclass workbook</p><p style="margin:0;font:400 15px/1.55 var(--font-body);color:#4A2F3B">Fill it in as you watch: find your one woman, write your one sentence, map your freebie and get your 7-day plan. It saves as you type.</p></div>
 <a href="https://claude.ai/artifact/GdmcGrvnC3mtw5i2mVkx64" target="_blank" rel="noopener" class="of-yes" style="width:auto;background:#3A1C2A;color:#FFFFFF">Open my workbook <span aria-hidden="true" style="width:34px;height:34px;border-radius:999px;background:#FFFFFF;display:flex;align-items:center;justify-content:center;flex:none"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#A23E66" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></span></a>
-</div>
-<div class="md-deal" data-live style="width:100%">
-<div style="flex:1 1 300px;min-width:0"><p class="bl8-mono" style="color:#F6E1E8;margin-bottom:6px">&#10022; Your thank-you deal &#10022;</p><p style="margin:0;font:400 clamp(22px,2.4vw,30px)/1.15 var(--font-display);color:#FFFFFF">The Blogging Ladies for <em style="color:#F6C9D8">50% off</em>: $23.50 a month, locked in forever.</p></div>
-<div class="of-clock" role="timer" aria-live="off"><span class="of-digits" data-clock>60:00</span><span class="of-unit">minutes<br>left</span></div>
-<a href="https://bossladybloggers.thrivecart.com/the-blogging-ladies-membership-half-off/" class="of-yes" style="width:auto;background:#FBF5EE;color:#3A1C2A">Get 50% off <span aria-hidden="true" style="width:34px;height:34px;border-radius:999px;background:#FFFFFF;display:flex;align-items:center;justify-content:center;flex:none"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#A23E66" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></span></a>
 </div>
 </div>
 </section>
