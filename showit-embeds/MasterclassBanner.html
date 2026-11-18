@@ -1,0 +1,60 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=Caveat:wght@600;700&display=swap">
+<style>
+/* Free masterclass announcement banner. Counts down to Mon Nov 30 2026, 11:59 PM Eastern, then hides itself. */
+.mcb{box-sizing:border-box;width:100%;background-color:#F6E1E8;background-image:linear-gradient(rgba(233,185,202,0.35) 50%,transparent 50%),linear-gradient(90deg,rgba(233,185,202,0.35) 50%,transparent 50%);background-size:36px 36px;padding:26px max(16px,4vw);font-family:Inter,Arial,sans-serif;color:#3A1C2A;overflow:hidden}
+.mcb *{box-sizing:border-box}
+.mcb-in{max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:28px 36px}
+.mcb-tab{flex:none;position:relative;width:190px;transform:rotate(-6deg);background:#3A1C2A;border-radius:16px;padding:9px;box-shadow:0 18px 34px rgba(58,28,42,0.28);text-decoration:none}
+.mcb-tab img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:9px;background:#E9B9CA}
+.mcb-play{position:absolute;inset:0;margin:auto;width:44px;height:44px;border-radius:999px;background:rgba(251,245,238,0.95);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 18px rgba(0,0,0,0.3)}
+.mcb-tape{position:absolute;top:-12px;left:50%;width:74px;height:22px;transform:translateX(-50%) rotate(4deg);background:radial-gradient(circle,#FFFCFA 1.4px,transparent 1.8px) 0 0/8px 8px,rgba(233,185,202,0.95);border-radius:2px}
+.mcb-copy{flex:1 1 auto;min-width:0}
+.mcb-eyebrow{margin:0 0 6px;font:500 11px/1 'DM Mono',monospace;letter-spacing:0.18em;text-transform:uppercase;color:#A23E66}
+.mcb-h{margin:0;font:400 clamp(26px,2.9vw,40px)/1.04 'Instrument Serif',Georgia,serif;color:#3A1C2A;letter-spacing:-0.01em}
+.mcb-h em{color:#A23E66}
+.mcb-h span{background:linear-gradient(transparent 62%,#E9B9CA 62%,#E9B9CA 92%,transparent 92%)}
+.mcb-p{margin:8px 0 0;font:500 15px/1.5 Inter,Arial,sans-serif;color:#4A2F3B;max-width:560px}
+.mcb-p b{color:#3A1C2A}
+.mcb-act{flex:none;display:flex;flex-direction:column;align-items:center;gap:14px}
+.mcb-cd{display:flex;gap:8px}
+.mcb-cd div{min-width:62px;background:#FFFCFA;border-radius:12px;padding:9px 6px 8px;text-align:center;box-shadow:0 8px 18px rgba(58,28,42,0.1)}
+.mcb-cd b{display:block;font:500 26px/1 'DM Mono',monospace;color:#3A1C2A;font-variant-numeric:tabular-nums}
+.mcb-cd span{display:block;margin-top:5px;font:500 9px/1 'DM Mono',monospace;letter-spacing:0.16em;color:#A23E66}
+.mcb-btn{display:inline-flex;align-items:center;gap:10px;background:#A23E66;color:#FFFFFF;border-radius:999px;padding:14px 22px;font:600 15px/1 Inter,Arial,sans-serif;text-decoration:none;white-space:nowrap;box-shadow:0 12px 26px rgba(162,62,102,0.3)}
+.mcb-btn:hover{background:#3A1C2A}
+.mcb-btn:focus-visible{outline:3px solid #3A1C2A;outline-offset:3px}
+@media (max-width:980px){.mcb-in{flex-wrap:wrap;justify-content:center;text-align:center}.mcb-copy{flex:1 1 100%;order:2}.mcb-p{margin-left:auto;margin-right:auto}.mcb-tab{order:1;width:160px}.mcb-act{order:3}}
+@media (max-width:560px){.mcb{padding:22px 16px}.mcb-tab{display:none}.mcb-cd div{min-width:56px}.mcb-cd b{font-size:22px}}
+</style>
+<div class="mcb" id="mcb" role="region" aria-label="Free masterclass">
+<div class="mcb-in">
+<a class="mcb-tab" href="/free-masterclass" aria-label="Watch the free masterclass"><span class="mcb-tape" aria-hidden="true"></span><img src="https://img.youtube.com/vi/2e6-Vj_kksU/hqdefault.jpg" alt="The free masterclass video"><span class="mcb-play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="#A23E66"></path></svg></span></a>
+<div class="mcb-copy">
+<p class="mcb-eyebrow">&#10022; Free masterclass &middot; ends November 30 &#10022;</p>
+<p class="mcb-h">Still blogging&hellip; <em>but not</em> <span>making money?</span></p>
+<p class="mcb-p">Watch the free masterclass and discover the 7-step blog-to-business system that turns your blog content into cash. <b>Free through November 30.</b></p>
+</div>
+<div class="mcb-act">
+<div class="mcb-cd" role="timer" aria-label="Time left to watch free"><div><b data-mcb="d">00</b><span>DAYS</span></div><div><b data-mcb="h">00</b><span>HRS</span></div><div><b data-mcb="m">00</b><span>MINS</span></div><div><b data-mcb="s">00</b><span>SECS</span></div></div>
+<a class="mcb-btn" href="/free-masterclass">Yes! Save my free seat <span aria-hidden="true">&#8594;</span></a>
+</div>
+</div>
+</div>
+<script>
+(function(){
+  var END=Date.UTC(2026,11,1,4,59,59); /* Mon Nov 30 2026, 11:59:59 PM Eastern */
+  var box=document.getElementById('mcb'); if(!box) return;
+  function pad(n){return (n<10?'0':'')+n;}
+  function set(k,v){var e=box.querySelector('[data-mcb="'+k+'"]'); if(e) e.textContent=pad(v);}
+  function tick(){
+    var left=END-Date.now();
+    if(left<=0){box.style.display='none';return;}
+    set('d',Math.floor(left/86400000));set('h',Math.floor(left%86400000/3600000));
+    set('m',Math.floor(left%3600000/60000));set('s',Math.floor(left%60000/1000));
+    setTimeout(tick,1000);
+  }
+  tick();
+})();
+</script>

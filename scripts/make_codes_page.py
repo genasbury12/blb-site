@@ -12,7 +12,7 @@ E = ROOT / "showit-embeds"
 GROUPS = [
     ("Full pages", "One Embed Code box per Showit page, stretched full width. Paste, publish.", [
         ("MasterclassDelivery", "/masterclass-delivery", "NEW: Where masterclass sign-ups watch the video. Countdown above it, the 50% off join box and what they get right under it, your workbook link and the floating timer. Paste this one first. Leave it out of your menu."),
-        ("FreeMasterclass", "/free-masterclass", "NEW: Your free masterclass opt-in page. The form is your real Flodesk masterclass form."),
+        ("FreeMasterclass", "/free-masterclass", "NEW: Your free masterclass opt-in page, now with a countdown to Nov 30 above the form. The form is your real Flodesk masterclass form."),
         ("MembershipOffer", "/membership-offer", "NEW: The 1-hour 50% off upsell people see right after signing up. Leave it out of your menu."),
         ("BlackFriday", "/black-friday", "NEW: Early access Nov 25 through Cyber Monday: 50% off, $23.50 a month locked in forever, plus the free 1:1 call and roadmap."),
         ("Membership", "/membership", "NEW: The Blogging Ladies Membership sales page."),
@@ -24,6 +24,7 @@ GROUPS = [
         ("ThankYou", "/thank-you", ""), ("NotFound404", "/404", "Optional"),
     ]),
     ("Site-wide", "Paste once and it shows on every page.", [
+        ("MasterclassBanner", "Top of every page: one Embed Code box on a canvas shared site-wide, full width, about 180 tall on desktop and 330 on mobile", "NEW: Free masterclass banner with a countdown to Nov 30, 11:59 PM Eastern. It hides itself when time runs out."),
         ("SitewidePopup", "Site Settings > Advanced > Custom Head HTML", "Your Flodesk masterclass popup. Delete old popups so it doesn't double up."),
     ]),
     ("Blog post template", "Paste each into its own Embed Code box on your WordPress single post template in Showit.", [
