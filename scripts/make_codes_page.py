@@ -11,6 +11,8 @@ E = ROOT / "showit-embeds"
 
 GROUPS = [
     ("Full pages", "One Embed Code box per Showit page, stretched full width. Paste, publish.", [
+        ("Roadmap", "/roadmap", "NEW: The Blog Business Roadmap free assessment: sign up, 15 questions, then her personal roadmap, all on one page. Mobile first. It grows its own canvas, so any starting height works. Leave it out of your menu if you like."),
+        ("RoadmapTool", "/roadmap-tool", "NEW: One page for all 7 roadmap tools (each roadmap links to its tool with her own 72 hour deadline). With no deadline it shows full price, no timer. Leave it out of your menu."),
         ("MasterclassDelivery", "/masterclass-delivery", "NEW: Where masterclass sign-ups watch the video. Countdown above it, the 50% off join box and what they get right under it, your workbook link and the floating timer. Paste this one first. Leave it out of your menu."),
         ("FreeMasterclass", "/free-masterclass", "NEW: Your free masterclass opt-in page, now with a countdown to Nov 30 above the form. The form is your real Flodesk masterclass form."),
         ("MembershipOffer", "/membership-offer", "NEW: The 1-hour 50% off upsell people see right after signing up. Leave it out of your menu."),
@@ -44,6 +46,7 @@ STEPS = [
     "Delete the Course, Course Waitlist, Group Coaching and Group Waitlist pages in Showit, and 301 redirect each one to /membership.",
     "Delete the Free Trainings page and 301 redirect /free-trainings to /free-masterclass.",
     "Re-paste every page and your nav, footer and menu pieces: they now link to the membership and the free masterclass.",
+    "Create two new Showit pages, /roadmap and /roadmap-tool, each with one full width Embed Code box. Paste Roadmap and RoadmapTool. Any canvas height works: the code grows the canvas to fit.",
     "In Flodesk, open your masterclass form and change where it sends people after signup to bossladybloggers.com/membership-offer, so popup signups see the 50% off offer too.",
 ]
 

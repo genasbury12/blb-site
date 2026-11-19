@@ -1,0 +1,208 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Karla:wght@400;500;600;700;800&display=swap">
+<style>
+/* Roadmap tool sales page: one Showit page serves all 7 tools with ?tool=<key>&d=<deadline>.
+   The 30% off offer only shows inside her own 72 hour window. No deadline = full price, no timer. */
+#bbt{--plum:#3E1F2B;--berry:#A93F63;--pink:#E2638D;--blush:#F4D6DD;--cream:#FBF6EE;--rose:#E8C8CB;--white:#FFFFFF;--soft:#6B4553;
+--display:'Fraunces',Georgia,serif;--body:'Karla',Arial,sans-serif;
+position:relative;width:100%;background:var(--cream);color:var(--plum);font:400 17px/1.6 var(--body);color-scheme:light;overflow:hidden;-webkit-font-smoothing:antialiased;text-align:left}
+#bbt *,#bbt *::before,#bbt *::after{box-sizing:border-box;min-width:0}
+#bbt [hidden]{display:none!important}
+#bbt h1,#bbt h2,#bbt h3,#bbt p,#bbt ul,#bbt ol{margin:0;padding:0}
+#bbt h1,#bbt h2,#bbt h3{font-family:var(--display);font-weight:500;line-height:1.06;letter-spacing:-0.015em;text-wrap:balance}
+#bbt a{color:inherit}
+#bbt img{display:block;max-width:100%}
+#bbt .in{width:100%;max-width:1140px;margin:0 auto;padding:0 max(16px,4vw)}
+#bbt .sec{padding:clamp(52px,8vw,96px) 0}
+#bbt .eyebrow{display:inline-flex;align-items:center;gap:10px;font:700 12px/1 var(--body);letter-spacing:.16em;text-transform:uppercase;color:var(--berry)}
+#bbt .eyebrow::before{content:"";width:22px;height:2px;border-radius:2px;background:currentColor}
+#bbt .on-dark .eyebrow{color:var(--rose)}
+#bbt .accent{font-style:italic;color:var(--berry)}
+#bbt .btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:58px;padding:16px 30px;border:0;border-radius:999px;background:var(--berry);color:var(--white);font:700 17px/1.25 var(--body);text-decoration:none;text-align:center;cursor:pointer;box-shadow:0 14px 30px -12px rgba(169,63,99,.7);transition:transform .2s ease,background .2s ease}
+#bbt .btn:hover{background:var(--plum);transform:translateY(-2px)}
+#bbt .btn svg{flex:none;transition:transform .2s ease}
+#bbt .btn:hover svg{transform:translateX(4px)}
+#bbt .btn.cream{background:var(--cream);color:var(--plum)}
+#bbt .btn.cream:hover{background:var(--white)}
+#bbt .btn:focus-visible,#bbt .plain:focus-visible{outline:3px solid var(--pink);outline-offset:3px}
+#bbt .plain{font:700 15px/1.3 var(--body);color:var(--berry);text-decoration:underline;text-underline-offset:4px}
+#bbt .slot{border:2px dashed var(--berry);border-radius:14px;padding:12px 16px;font:600 14px/1.45 var(--body);color:var(--berry);background:rgba(169,63,99,.06)}
+
+#bbt .bar{position:sticky;top:0;z-index:5;background:var(--plum);color:var(--cream);padding:10px max(16px,4vw);display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px 18px;font:600 15px/1.3 var(--body);text-align:center}
+#bbt .bar b{font:500 19px/1 var(--display);font-variant-numeric:tabular-nums;color:var(--pink)}
+#bbt .bar a{padding:9px 16px;border-radius:999px;background:var(--pink);color:var(--white);text-decoration:none;font:700 14px/1 var(--body)}
+
+#bbt .hero{position:relative;padding:clamp(40px,6vw,84px) 0 clamp(52px,7vw,96px);isolation:isolate}
+#bbt .hero::before{content:"";position:absolute;right:-10%;top:-30%;width:60vw;height:60vw;max-width:700px;max-height:700px;border-radius:50%;background:radial-gradient(circle,rgba(226,99,141,.22),rgba(226,99,141,0) 65%);z-index:-1}
+#bbt .back{display:inline-flex;align-items:center;gap:8px;margin-bottom:26px;font:700 14px/1 var(--body);color:var(--berry);text-decoration:none}
+#bbt .hero-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(30px,5vw,72px);align-items:center}
+#bbt .hero-copy{display:flex;flex-direction:column;gap:20px;align-items:flex-start}
+#bbt .hero h1{font-size:clamp(40px,6vw,70px);font-weight:450;letter-spacing:-.025em;line-height:1.02}
+#bbt .feel{font:italic 400 clamp(20px,2.2vw,24px)/1.45 var(--display);color:var(--soft);max-width:560px}
+#bbt .deal{width:100%;max-width:520px;background:var(--white);border-radius:24px;padding:22px;box-shadow:0 26px 54px -36px rgba(62,31,43,.6);display:flex;flex-direction:column;gap:12px}
+#bbt .deal .btn{width:100%}
+#bbt .deal-top{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+#bbt .tag{display:inline-flex;align-items:center;padding:8px 14px;border-radius:999px;background:var(--berry);color:var(--white);font:800 14px/1 var(--body);letter-spacing:.04em}
+#bbt .mini{font:600 14px/1.3 var(--body);color:var(--soft)}
+#bbt .mini b{color:var(--berry);font-variant-numeric:tabular-nums}
+#bbt .plus{display:flex;gap:10px;align-items:flex-start;font-size:16px;line-height:1.45}
+#bbt .plus svg{flex:none;margin-top:2px}
+#bbt .full{text-align:center}
+
+#bbt .cover{position:relative;aspect-ratio:4/5;max-width:440px;width:100%;margin:0 auto;transform:rotate(2deg)}
+#bbt .cover img{width:100%;height:100%;object-fit:cover;border-radius:22px;box-shadow:0 40px 80px -40px rgba(62,31,43,.8)}
+#bbt .mock{width:100%;height:100%;border-radius:22px;background:var(--berry);color:var(--white);padding:clamp(26px,4vw,44px);display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 40px 80px -40px rgba(62,31,43,.8);position:relative;overflow:hidden;isolation:isolate}
+#bbt .mock::before{content:"";position:absolute;right:-90px;bottom:-90px;width:300px;height:300px;border-radius:50%;background:rgba(255,255,255,.1);z-index:-1}
+#bbt .mock small{font:700 12px/1.3 var(--body);letter-spacing:.16em;text-transform:uppercase;color:var(--blush)}
+#bbt .mock p{font:500 clamp(30px,3.6vw,44px)/1.05 var(--display);letter-spacing:-.02em}
+#bbt .tape{position:absolute;top:-14px;left:50%;width:120px;height:30px;margin-left:-60px;background:rgba(232,200,203,.92);border-radius:3px;transform:rotate(-4deg);z-index:2}
+
+#bbt .inside{background:var(--white)}
+#bbt .two{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(26px,5vw,64px);align-items:start}
+#bbt .two h2{font-size:clamp(32px,4.4vw,50px);margin-top:14px}
+#bbt .list{list-style:none;display:grid;gap:12px}
+#bbt .list li{display:flex;gap:14px;align-items:flex-start;padding:16px 18px;border-radius:18px;background:var(--cream);font-size:17px;line-height:1.55}
+#bbt .list svg{flex:none;margin-top:3px}
+#bbt .desc{display:grid;gap:14px;font-size:17.5px}
+
+#bbt .bonus{background:var(--blush)}
+#bbt .bonus-card{position:relative;background:var(--white);border-radius:30px;padding:clamp(28px,5vw,56px);display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(20px,4vw,44px);align-items:center;box-shadow:0 30px 60px -40px rgba(62,31,43,.6)}
+#bbt .gift{display:grid;place-items:center;width:clamp(92px,12vw,130px);aspect-ratio:1;border-radius:28px;background:var(--berry);transform:rotate(-6deg)}
+#bbt .bonus-card h2{font-size:clamp(30px,4vw,46px);margin:12px 0}
+#bbt .bonus-card p{color:var(--soft);font-size:17.5px}
+
+#bbt .clocksec{background:var(--plum);color:var(--cream);text-align:center}
+#bbt .clocksec .in{display:flex;flex-direction:column;align-items:center;gap:20px}
+#bbt .clocksec h2{font-size:clamp(32px,5vw,56px);font-weight:450;max-width:760px}
+#bbt .clocksec h2 em{color:var(--pink)}
+#bbt .clock{display:flex;gap:10px}
+#bbt .clock div{min-width:clamp(78px,12vw,110px);background:var(--cream);color:var(--plum);border-radius:18px;padding:16px 8px 12px}
+#bbt .clock b{display:block;font:500 clamp(36px,6vw,58px)/1 var(--display);font-variant-numeric:tabular-nums}
+#bbt .clock span{display:block;margin-top:8px;font:700 11px/1 var(--body);letter-spacing:.16em;color:var(--berry)}
+#bbt .clocksec p{max-width:560px;color:#F1DDE2;font-size:17.5px}
+
+#bbt .note{max-width:640px;margin:0 auto;text-align:center;display:flex;flex-direction:column;align-items:center;gap:16px}
+#bbt .note h2{font-size:clamp(30px,4.4vw,48px)}
+#bbt .note p{color:var(--soft);font-size:18px}
+
+#bbt .shop{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px;margin-top:30px}
+#bbt .shop a{display:flex;flex-direction:column;gap:8px;padding:24px;border-radius:22px;background:var(--white);text-decoration:none;box-shadow:0 20px 40px -32px rgba(62,31,43,.6);transition:transform .2s ease}
+#bbt .shop a:hover{transform:translateY(-3px)}
+#bbt .shop small{font:700 12px/1.3 var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--berry)}
+#bbt .shop b{font:500 23px/1.15 var(--display)}
+
+@media (max-width:860px){
+ #bbt .hero-grid,#bbt .two{grid-template-columns:minmax(0,1fr)}
+ #bbt .cover{max-width:320px;order:-1}
+ #bbt .bonus-card{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:420px){#bbt .clock div{min-width:0;flex:1}#bbt .bar{font-size:14px}}
+@media (prefers-reduced-motion:reduce){#bbt *{transition:none!important}}
+</style>
+
+<div id="bbt"><div data-out></div></div>
+
+<script>
+(function(){
+'use strict';
+var CFG={"membership": "https://bossladybloggers.thrivecart.com/the-blogging-ladies-membership/", "call": "https://calendly.com/bossladybloggers/15min", "builder": "", "toolPage": "/roadmap-tool", "signupFormId": "", "resultForms": {"R1": "", "R2": "", "R3": "", "R4": "", "R5": "", "R6": "", "R7": "", "R8": "", "R9": ""}, "tools": {"launch-planner": {"name": "Digital Product Launch Planner", "bonus": "Freebie Planner + Opt-in Copy Template", "fullPrice": "https://payhip.com/b/ntQVE", "discountLink": "", "bonusDelivery": "", "cover": "", "details": [], "step": "Her and your offer", "feel": "You can feel there's an offer in you. You just don't know where to start, and every blank page makes you second guess the whole idea."}, "starter-kit": {"name": "The Blog to Paid Starter Kit", "bonus": "Freebie Planner + Opt-in Copy Template", "fullPrice": "https://payhip.com/b/byO9v", "discountLink": "", "bonusDelivery": "", "cover": "", "details": [], "step": "Your message, copy and brand", "feel": "You know who you help. Now you want words and a look that make her feel like you built this just for her, instead of rewriting your homepage for the fifth time."}, "welcome-sequence": {"name": "Welcome Sequence Swipe File", "bonus": "Freebie Planner + Opt-in Copy Template", "fullPrice": "https://payhip.com/b/xbiSu", "discountLink": "", "bonusDelivery": "", "cover": "", "details": [], "step": "Your freebie and emails", "feel": "You want every new subscriber to feel welcomed instead of forgotten, and to know exactly what to buy from you when she's ready."}, "content-plan": {"name": "90-Day Long-Form Content Plan", "bonus": "20 Pinterest Pin Templates for Offer-Led Blog Posts", "fullPrice": "https://payhip.com/b/zfi5n", "discountLink": "", "bonusDelivery": "", "cover": "", "details": [], "step": "Posts that feed your offer", "feel": "You're tired of staring at a blank post wondering what to write this week. You want every post to have a job, and to know it's walking her toward your offer."}, "pin-templates": {"name": "20 Pinterest Pin Templates for Offer-Led Blog Posts", "bonus": "90-Day Long-Form Content Plan", "fullPrice": "https://payhip.com/b/vKxpr", "discountLink": "", "bonusDelivery": "", "cover": "", "details": [], "step": "Traffic", "feel": "You want the right women finding your posts and landing on your freebie, without designing every pin from scratch on a week you barely have time to breathe."}, "launch-kit": {"name": "The Launch Kit", "bonus": "7-Email Launch Sequence Swipe File", "fullPrice": "https://payhip.com/b/MNLUT", "discountLink": "", "bonusDelivery": "", "cover": "", "details": [], "step": "Traffic, in the Selling stage", "feel": "You have something real to sell. This time you want to launch it like you mean it, with a plan, instead of posting once and hoping somebody notices."}, "dashboard": {"name": "Blog Business Dashboard (Notion)", "bonus": "Client Welcome Packet + Onboarding Kit", "fullPrice": "https://payhip.com/b/CS2Br", "discountLink": "", "bonusDelivery": "", "cover": "", "details": [], "step": "Systems", "feel": "Your business is working, and right now it lives in your head and too many open tabs. You want one calm place to run it, so you can finally breathe."}}};
+var root=document.getElementById('bbt');if(!root)return;
+var out=root.querySelector('[data-out]');
+var HOUR=3600000,WINDOW=72*HOUR;
+var LS={get:function(k){try{return JSON.parse(localStorage.getItem('bbr-'+k));}catch(e){return null;}},set:function(k,v){try{localStorage.setItem('bbr-'+k,JSON.stringify(v));}catch(e){}}};
+function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+var ARROW='<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+var TICK='<svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#A93F63"/><path d="M7 12.5l3.3 3.3L17 9" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+var GIFT='<svg width="54" height="54" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="9" width="18" height="12" rx="2"/><path d="M3 13h18M12 9v12M12 9c-1.5-3-5-4-6-2s2 2 6 2zM12 9c1.5-3 5-4 6-2s-2 2-6 2z"/></svg>';
+
+function fit(){
+ var r=root.getBoundingClientRect(),el=root.parentElement,n=0;
+ while(el&&el!==document.body&&el!==document.documentElement&&n<10){
+  n++;var b=el.getBoundingClientRect(),need=Math.ceil(r.bottom-b.top);
+  if(el.getAttribute('data-bbr-fit')||b.height<need-1){el.style.height=need+'px';el.setAttribute('data-bbr-fit','1');}
+  el=el.parentElement;
+ }
+}
+if(window.ResizeObserver){new ResizeObserver(function(){fit();}).observe(root);}
+window.addEventListener('load',fit);window.addEventListener('resize',fit);
+
+var p=new URLSearchParams(location.search),key=p.get('tool'),tool=CFG.tools[key];
+
+/* Unknown or missing tool: show all 7 */
+if(!tool){
+ var h='<div class="sec"><div class="in"><span class="eyebrow">Roadmap tools</span><h1 style="font-size:clamp(38px,6vw,64px);margin-top:14px">A tool for every stop on the road.</h1><div class="shop">';
+ Object.keys(CFG.tools).forEach(function(k){var t=CFG.tools[k];h+='<a href="?tool='+k+'"><small>'+esc(t.step)+'</small><b>'+esc(t.name)+'</b></a>';});
+ out.innerHTML=h+'</div></div></div>';fit();return;
+}
+
+/* Her deadline: the earliest honest value we know. A link can never push it later than 72 hours from her roadmap. */
+var now=Date.now(),c=[],d=parseInt(p.get('d'),10),start=LS.get('start'),saved=LS.get('deadline');
+if(d&&d>now-90*24*HOUR&&d<=now+WINDOW+60000)c.push(d);
+if(typeof saved==='number')c.push(saved);
+if(typeof start==='number')c.push(start+WINDOW);
+var deadline=c.length?Math.min.apply(Math,c):null;
+if(deadline)LS.set('deadline',deadline);
+var hasOffer=!!(deadline&&tool.discountLink);
+
+function render(){
+ var live=hasOffer&&Date.now()<deadline,expired=hasOffer&&!live,h='';
+ if(live)h+='<div class="bar" data-live><span>Your 30% off ends in <b data-bar>00h 00m 00s</b></span><a href="'+esc(tool.discountLink)+'">Claim 30% off</a></div>';
+
+ /* hero */
+ h+='<div class="hero"><div class="in"><a class="back" href="/roadmap?step=roadmap"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Back to my roadmap</a>';
+ h+='<div class="hero-grid"><div class="hero-copy"><span class="eyebrow">Your roadmap step: '+esc(tool.step)+'</span><h1>'+esc(tool.name)+'</h1><p class="feel">'+esc(tool.feel)+'</p>';
+ h+='<div class="deal">';
+ if(live){
+  h+='<div class="deal-top"><span class="tag">30% OFF</span><span class="mini">Ends in <b data-mini>72h 00m</b></span></div>';
+  h+='<p class="plus">'+TICK+'<span>Plus <b>'+esc(tool.bonus)+'</b>, free with your order.</span></p>';
+  h+='<a class="btn" href="'+esc(tool.discountLink)+'">Get it for 30% off '+ARROW+'</a>';
+  h+='<p class="full"><a class="plain" href="'+esc(tool.fullPrice)+'">Or see it at full price</a></p>';
+ }else{
+  if(expired)h+='<p class="mini">Your 72 hour window has closed. The tool is still right here, and it will still help.</p>';
+  h+='<a class="btn" href="'+esc(tool.fullPrice)+'">Get the '+esc(tool.name)+' '+ARROW+'</a>';
+ }
+ if(deadline&&!tool.discountLink)h+='<p class="slot">Slot: the 30% off Payhip link for this tool is not set yet, so this page shows full price only.</p>';
+ h+='</div></div>';
+ h+='<div class="cover"><span class="tape" aria-hidden="true"></span>'+(tool.cover?'<img src="'+esc(tool.cover)+'" alt="'+esc(tool.name)+'">':'<div class="mock"><small>Boss Lady Bloggers</small><p>'+esc(tool.name)+'</p><small>'+esc(tool.step)+'</small></div>')+'</div>';
+ h+='</div></div></div>';
+
+ /* what's inside */
+ h+='<div class="inside sec"><div class="in two"><div><span class="eyebrow">What’s inside</span><h2>Everything you need for <span class="accent">this</span> step.</h2></div><div>';
+ if(tool.details&&tool.details.length){
+  h+='<ul class="list">'+tool.details.map(function(x){return '<li>'+TICK+'<span>'+esc(x)+'</span></li>';}).join('')+'</ul>';
+ }else h+='<p class="slot">Slot: product details for '+esc(tool.name)+' go here, copied word for word from its Payhip page.</p>';
+ h+='</div></div></div>';
+
+ /* bonus + clock, only inside her window */
+ if(live){
+  h+='<div class="bonus sec"><div class="in"><div class="bonus-card"><div class="gift">'+GIFT+'</div><div><span class="eyebrow">Your free bonus</span><h2>'+esc(tool.bonus)+'</h2>';
+  h+='<p>Yours free when you get the '+esc(tool.name)+' at 30% off before your timer runs out.</p>';
+  h+=tool.bonusDelivery?'<p style="margin-top:10px">'+esc(tool.bonusDelivery)+'</p>':'<p class="slot" style="margin-top:14px">Slot: how the bonus is delivered.</p>';
+  h+='</div></div></div></div>';
+  h+='<div class="clocksec sec"><div class="in"><span class="eyebrow" style="color:var(--rose)">Your window</span><h2>This price is <em>yours</em> until the clock runs out.</h2>';
+  h+='<div class="clock" role="timer" aria-label="Time left at 30% off"><div><b data-c="h">72</b><span>HOURS</span></div><div><b data-c="m">00</b><span>MINS</span></div><div><b data-c="s">00</b><span>SECS</span></div></div>';
+  h+='<p>Your 72 hours started the moment your roadmap opened. Refreshing won’t restart it and it never secretly extends. When it ends, the 30% off goes away.</p>';
+  h+='<a class="btn cream" href="'+esc(tool.discountLink)+'">Get it for 30% off '+ARROW+'</a></div></div>';
+ }else{
+  h+='<div class="sec"><div class="in note"><h2>Ready when <span class="accent">you</span> are.</h2><p>No pressure and no countdown. Just the tool for the step you’re on.</p><a class="btn" href="'+esc(tool.fullPrice)+'">Get the '+esc(tool.name)+' '+ARROW+'</a></div></div>';
+ }
+ out.innerHTML=h;fit();
+}
+render();
+
+if(hasOffer&&Date.now()<deadline){
+ var timer;
+ var tick=function(){
+  var ms=deadline-Date.now();
+  if(ms<=0){clearInterval(timer);render();return;}
+  function pad(n){return (n<10?'0':'')+n;}
+  var H=Math.floor(ms/HOUR),M=Math.floor(ms%HOUR/60000),S=Math.floor(ms%60000/1000);
+  var set=function(sel,v){var e=root.querySelector(sel);if(e)e.textContent=v;};
+  set('[data-c="h"]',pad(H));set('[data-c="m"]',pad(M));set('[data-c="s"]',pad(S));
+  set('[data-bar]',pad(H)+'h '+pad(M)+'m '+pad(S)+'s');set('[data-mini]',H+'h '+pad(M)+'m');
+ };
+ tick();timer=setInterval(tick,1000);
+}
+})();
+</script>
