@@ -1,0 +1,797 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Karla:wght@400;500;600;700;800&display=swap">
+<style>
+/* Blog Business Roadmap: free assessment. One embed, three screens (sign up, questions, roadmap).
+   Routing uses ?step=quiz&q=N and ?step=roadmap. Everything is scoped to #bbr so Showit styles never leak in or out. */
+#bbr{--plum:#3E1F2B;--berry:#A93F63;--pink:#E2638D;--blush:#F4D6DD;--cream:#FBF6EE;--rose:#E8C8CB;--white:#FFFFFF;--soft:#6B4553;
+--display:'Fraunces',Georgia,serif;--body:'Karla',Arial,sans-serif;
+position:relative;width:100%;background:var(--cream);color:var(--plum);font:400 17px/1.6 var(--body);color-scheme:light;overflow:hidden;-webkit-font-smoothing:antialiased;text-align:left}
+#bbr *,#bbr *::before,#bbr *::after{box-sizing:border-box;min-width:0}
+#bbr [hidden]{display:none!important}
+#bbr h1,#bbr h2,#bbr h3,#bbr p,#bbr ol,#bbr ul,#bbr figure,#bbr blockquote{margin:0;padding:0}
+#bbr h1,#bbr h2,#bbr h3{font-family:var(--display);font-weight:500;line-height:1.06;letter-spacing:-0.015em;text-wrap:balance;color:inherit}
+#bbr em{font-style:italic}
+#bbr a{color:inherit}
+#bbr img{display:block;max-width:100%}
+#bbr button{font:inherit;color:inherit}
+#bbr .in{width:100%;max-width:1140px;margin:0 auto;padding:0 max(16px,4vw)}
+#bbr .narrow{max-width:760px}
+#bbr .eyebrow{display:inline-flex;align-items:center;gap:10px;font:700 12px/1 var(--body);letter-spacing:.16em;text-transform:uppercase;color:var(--berry)}
+#bbr .eyebrow::before{content:"";width:22px;height:2px;border-radius:2px;background:currentColor}
+#bbr .on-dark .eyebrow,#bbr .eyebrow.light{color:var(--rose)}
+#bbr .sec{padding:clamp(56px,9vw,104px) 0}
+#bbr .sec-head{display:flex;flex-direction:column;gap:14px;margin-bottom:clamp(28px,4vw,44px)}
+#bbr .sec-head h2{font-size:clamp(32px,5vw,52px)}
+#bbr .sec-head p{max-width:600px;color:var(--soft);font-size:18px}
+#bbr .accent{font-style:italic;color:var(--berry)}
+#bbr .on-dark .accent{color:var(--pink)}
+#bbr .mark{background:linear-gradient(transparent 64%,rgba(226,99,141,.38) 64%,rgba(226,99,141,.38) 90%,transparent 90%);padding:0 .06em}
+
+/* buttons */
+#bbr .btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:58px;padding:16px 30px;border:0;border-radius:999px;background:var(--berry);color:var(--white);font:700 17px/1.2 var(--body);text-decoration:none;text-align:center;cursor:pointer;box-shadow:0 14px 30px -12px rgba(169,63,99,.7);transition:transform .2s ease,background .2s ease,box-shadow .2s ease}
+#bbr .btn:hover{background:var(--plum);transform:translateY(-2px);box-shadow:0 18px 34px -14px rgba(62,31,43,.7)}
+#bbr .btn:active{transform:translateY(0)}
+#bbr .btn svg{flex:none;transition:transform .2s ease}
+#bbr .btn:hover svg{transform:translateX(4px)}
+#bbr .btn.cream{background:var(--cream);color:var(--plum);box-shadow:0 14px 30px -14px rgba(0,0,0,.5)}
+#bbr .btn.cream:hover{background:var(--white)}
+#bbr .btn.ghost{background:transparent;color:var(--plum);border:2px solid var(--rose);box-shadow:none}
+#bbr .btn.ghost:hover{border-color:var(--plum);background:transparent}
+#bbr .btn.wide{width:100%}
+#bbr .btn[disabled]{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none}
+#bbr .btn:focus-visible,#bbr .opt:focus-visible,#bbr input:focus-visible,#bbr textarea:focus-visible,#bbr summary:focus-visible,#bbr .link:focus-visible{outline:3px solid var(--pink);outline-offset:3px}
+#bbr .link{background:none;border:0;padding:6px 0;font:700 15px/1.2 var(--body);color:var(--berry);text-decoration:underline;text-underline-offset:4px;cursor:pointer}
+
+/* fields */
+#bbr .field{display:flex;flex-direction:column;gap:7px}
+#bbr .field label{font:700 14px/1.2 var(--body);color:var(--plum)}
+#bbr input[type=text],#bbr input[type=email],#bbr textarea{width:100%;min-height:56px;padding:14px 18px;border:2px solid var(--rose);border-radius:16px;background:var(--white);color:var(--plum);font:500 17px/1.3 var(--body);transition:border-color .2s ease,box-shadow .2s ease;-webkit-appearance:none;appearance:none}
+#bbr input::placeholder,#bbr textarea::placeholder{color:#a8848f}
+#bbr input:focus,#bbr textarea:focus{outline:none;border-color:var(--berry);box-shadow:0 0 0 4px rgba(169,63,99,.14)}
+#bbr textarea{min-height:140px;resize:vertical;line-height:1.5}
+#bbr .slot{border:2px dashed var(--berry);border-radius:14px;padding:10px 14px;font:600 13px/1.4 var(--body);color:var(--berry);background:rgba(169,63,99,.06)}
+#bbr .ff-err:not(:empty){margin-top:10px;color:var(--berry);font:600 14px/1.4 var(--body)}
+#bbr [data-ff-el="success"]{display:none}
+
+/* ========== SCREEN 1: SIGN UP ========== */
+#bbr .hero{position:relative;background:var(--plum);color:var(--cream);padding:clamp(40px,7vw,96px) 0 clamp(56px,8vw,110px);overflow:hidden;isolation:isolate}
+#bbr .hero::before{content:"";position:absolute;inset:-20% -10% auto auto;width:70vw;height:70vw;max-width:820px;max-height:820px;border-radius:50%;background:radial-gradient(circle,rgba(226,99,141,.34),rgba(226,99,141,0) 65%);z-index:-1}
+#bbr .hero::after{content:"";position:absolute;left:-15%;bottom:-40%;width:60vw;height:60vw;max-width:700px;max-height:700px;border-radius:50%;background:radial-gradient(circle,rgba(169,63,99,.45),rgba(169,63,99,0) 65%);z-index:-1}
+#bbr .hero-road{position:absolute;left:0;right:0;bottom:18px;width:100%;height:120px;opacity:.28;z-index:-1;pointer-events:none}
+#bbr .hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(32px,5vw,72px);align-items:center}
+#bbr .hero-copy{display:flex;flex-direction:column;gap:22px}
+#bbr .pill{align-self:flex-start;display:inline-flex;align-items:center;gap:10px;padding:9px 16px;border-radius:999px;border:1.5px solid rgba(232,200,203,.45);font:700 12px/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--rose)}
+#bbr .pill i{width:8px;height:8px;border-radius:50%;background:var(--pink);box-shadow:0 0 0 4px rgba(226,99,141,.25)}
+#bbr .hero h1{font-size:clamp(40px,6.6vw,74px);font-weight:450;line-height:1.0;letter-spacing:-.025em}
+#bbr .hero h1 em{color:var(--pink)}
+#bbr .lede{font-size:clamp(18px,1.8vw,20px);line-height:1.6;color:#F1DDE2;max-width:560px}
+#bbr .lede b{color:var(--white);font-weight:700}
+#bbr .facts{display:flex;flex-wrap:wrap;gap:10px 22px;list-style:none;font:600 15px/1.3 var(--body);color:var(--rose)}
+#bbr .facts li{display:flex;align-items:center;gap:8px}
+#bbr .facts svg{flex:none}
+#bbr .welcome{display:flex;flex-wrap:wrap;align-items:center;gap:12px 18px;padding:16px 18px;border-radius:18px;background:rgba(251,246,238,.08);border:1.5px solid rgba(232,200,203,.3)}
+#bbr .welcome p{flex:1 1 220px;font-size:16px;color:var(--cream)}
+#bbr .welcome .btn{min-height:48px;padding:12px 22px;font-size:15px}
+
+#bbr .formcard{position:relative;background:var(--cream);color:var(--plum);border-radius:28px;padding:clamp(26px,3.4vw,40px);box-shadow:0 40px 80px -30px rgba(0,0,0,.6);transform:rotate(1.2deg)}
+#bbr .formcard>*{transform:rotate(-1.2deg)}
+#bbr .tape{position:absolute;top:-14px;left:50%;width:120px;height:30px;margin-left:-60px;background:rgba(232,200,203,.9);border-radius:3px;transform:rotate(-3deg)!important;box-shadow:0 2px 6px rgba(0,0,0,.08)}
+#bbr .formcard h2{font-size:clamp(26px,2.6vw,32px);margin-bottom:8px}
+#bbr .formcard .sub{color:var(--soft);font-size:16px;margin-bottom:22px}
+#bbr .form{display:flex;flex-direction:column;gap:14px}
+#bbr .form .btn{margin-top:6px}
+#bbr .fine{display:flex;align-items:flex-start;gap:8px;margin-top:16px;font-size:14px;line-height:1.5;color:var(--soft)}
+#bbr .fine svg{flex:none;margin-top:3px}
+
+#bbr .feel{background:var(--cream)}
+#bbr .notes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+#bbr .note{position:relative;background:var(--white);border-radius:22px;padding:30px 28px 28px;box-shadow:0 22px 44px -30px rgba(62,31,43,.45);font:400 clamp(20px,2vw,23px)/1.4 var(--display);font-style:italic;color:var(--plum)}
+#bbr .note:nth-child(1){transform:rotate(-1deg)}
+#bbr .note:nth-child(2){transform:rotate(.8deg);background:var(--blush)}
+#bbr .note:nth-child(3){transform:rotate(.6deg);background:var(--blush)}
+#bbr .note:nth-child(4){transform:rotate(-.8deg)}
+#bbr .note::before{content:"";position:absolute;top:-9px;left:26px;width:18px;height:18px;border-radius:50%;background:var(--berry);box-shadow:inset -3px -3px 0 rgba(0,0,0,.18)}
+#bbr .turn{margin-top:clamp(40px,6vw,64px);text-align:center;display:flex;flex-direction:column;align-items:center;gap:14px}
+#bbr .turn h2{font-size:clamp(34px,5.4vw,60px);max-width:900px}
+#bbr .turn p{max-width:620px;color:var(--soft);font-size:18px}
+
+#bbr .order{background:var(--white)}
+#bbr .stops{list-style:none;display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:8px;position:relative;margin-top:8px}
+#bbr .stops::before{content:"";position:absolute;left:6%;right:6%;top:27px;border-top:3px dotted var(--rose)}
+#bbr .stops li{position:relative;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;font:700 14px/1.25 var(--body);color:var(--plum)}
+#bbr .stops b{display:grid;place-items:center;width:56px;height:56px;border-radius:50%;background:var(--cream);border:3px solid var(--rose);font:500 22px/1 var(--display);color:var(--berry)}
+#bbr .stops li.here b{background:var(--berry);border-color:var(--berry);color:var(--white);box-shadow:0 0 0 7px rgba(169,63,99,.16)}
+#bbr .stops small{display:block;font:600 12px/1.3 var(--body);color:var(--berry)}
+#bbr .order-note{margin-top:30px;text-align:center;font-size:18px;color:var(--soft)}
+#bbr .order-note b{color:var(--plum)}
+
+#bbr .gets{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+#bbr .get{background:var(--white);border-radius:24px;padding:30px 28px;display:flex;flex-direction:column;gap:12px;box-shadow:0 24px 48px -34px rgba(62,31,43,.5)}
+#bbr .get .n{font:500 46px/1 var(--display);font-style:italic;color:var(--pink)}
+#bbr .get h3{font-size:25px}
+#bbr .get p{color:var(--soft);font-size:16.5px}
+
+#bbr .gen{background:var(--blush)}
+#bbr .gen-grid{display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:center}
+#bbr .gen-photo{position:relative;width:clamp(150px,22vw,230px);aspect-ratio:1;border-radius:50%;overflow:hidden;border:8px solid var(--white);box-shadow:0 24px 50px -24px rgba(62,31,43,.5)}
+#bbr .gen-photo img{width:100%;height:100%;object-fit:cover;object-position:60% 30%}
+#bbr .gen-copy{display:flex;flex-direction:column;gap:14px}
+#bbr .gen-copy h2{font-size:clamp(32px,4.4vw,48px)}
+#bbr .gen-copy p{font-size:18px;max-width:620px}
+
+#bbr .final{background:var(--berry);color:var(--white);text-align:center}
+#bbr .final .in{display:flex;flex-direction:column;align-items:center;gap:20px}
+#bbr .final h2{font-size:clamp(34px,5.6vw,62px);max-width:860px}
+#bbr .final p{max-width:560px;color:#FBE3EA;font-size:18px}
+
+/* ========== SCREEN 2: QUESTIONS ========== */
+#bbr .quiz{min-height:100vh;min-height:100svh;background:var(--cream);padding:clamp(22px,4vw,48px) 0 64px}
+#bbr .quiz-top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px;font:700 13px/1.3 var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--berry)}
+#bbr .quiz-top span:last-child{color:var(--soft);letter-spacing:.06em;text-transform:none;font-weight:600;font-size:14px;text-align:right}
+#bbr .track{position:relative;height:12px;border-radius:12px;background:var(--rose);margin-bottom:clamp(26px,4vw,40px)}
+#bbr .track i{position:absolute;left:0;top:0;bottom:0;border-radius:12px;background:var(--berry);transition:width .45s cubic-bezier(.2,.8,.2,1)}
+#bbr .track b{position:absolute;top:50%;width:26px;height:26px;margin:-13px 0 0 -13px;border-radius:50%;background:var(--pink);border:4px solid var(--white);box-shadow:0 6px 14px -4px rgba(169,63,99,.6);transition:left .45s cubic-bezier(.2,.8,.2,1)}
+#bbr .qcard{background:var(--white);border-radius:30px;padding:clamp(24px,4.4vw,48px);box-shadow:0 34px 70px -44px rgba(62,31,43,.55)}
+#bbr .qcard.enter{animation:bbrIn .38s cubic-bezier(.2,.8,.2,1)}
+@keyframes bbrIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+#bbr .qsec{display:inline-block;margin-bottom:14px;padding:7px 13px;border-radius:999px;background:var(--blush);font:700 13px/1.2 var(--body);color:var(--berry)}
+#bbr .qcard h2{font-size:clamp(26px,3.6vw,38px);line-height:1.15}
+#bbr .qhint{margin-top:10px;color:var(--soft);font-size:16px}
+#bbr .opts{display:grid;gap:12px;margin-top:26px}
+#bbr .opt{display:flex;align-items:center;gap:16px;width:100%;min-height:64px;padding:14px 20px 14px 14px;border:2px solid var(--rose);border-radius:20px;background:var(--white);color:var(--plum);font:600 17.5px/1.35 var(--body);text-align:left;cursor:pointer;transition:border-color .18s ease,background .18s ease,transform .18s ease,box-shadow .18s ease}
+@media (hover:hover){#bbr .opt:hover{border-color:var(--pink);transform:translateY(-1px);box-shadow:0 12px 24px -18px rgba(169,63,99,.7)}}
+#bbr .opt .k{flex:none;display:grid;place-items:center;width:36px;height:36px;border-radius:12px;background:var(--blush);font:700 15px/1 var(--body);color:var(--berry);transition:background .18s ease,color .18s ease}
+#bbr .opt[aria-pressed="true"]{background:var(--berry);border-color:var(--berry);color:var(--white)}
+#bbr .opt[aria-pressed="true"] .k{background:var(--white);color:var(--berry)}
+#bbr .qnav{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:26px}
+#bbr .qnav .btn{min-height:54px}
+#bbr .qnav .btn.ghost{padding:14px 24px}
+#bbr .qcheer{margin-top:22px;text-align:center;font:italic 400 18px/1.4 var(--display);color:var(--soft)}
+
+/* ========== LOADING ========== */
+#bbr .loading{min-height:100vh;min-height:100svh;background:var(--plum);color:var(--cream);display:flex;align-items:center;justify-content:center;padding:60px 16px;text-align:center}
+#bbr .loading .box{display:flex;flex-direction:column;align-items:center;gap:22px;max-width:520px}
+#bbr .loading svg path.draw{stroke-dasharray:6 12;animation:bbrDash 1.2s linear infinite}
+@keyframes bbrDash{to{stroke-dashoffset:-36}}
+#bbr .loading h2{font-size:clamp(30px,5vw,44px)}
+#bbr .loading ul{list-style:none;display:flex;flex-direction:column;gap:10px;font:600 17px/1.3 var(--body);color:var(--rose)}
+#bbr .loading li{display:flex;align-items:center;gap:10px;justify-content:center;opacity:0;animation:bbrFade .4s ease forwards}
+#bbr .loading li:nth-child(2){animation-delay:.55s}
+#bbr .loading li:nth-child(3){animation-delay:1.1s}
+@keyframes bbrFade{to{opacity:1}}
+
+/* ========== SCREEN 3: ROADMAP ========== */
+#bbr .mhero{position:relative;background:var(--plum);color:var(--cream);padding:clamp(44px,7vw,92px) 0 clamp(48px,7vw,84px);overflow:hidden;isolation:isolate}
+#bbr .mhero::before{content:"";position:absolute;right:-12%;top:-30%;width:70vw;height:70vw;max-width:760px;max-height:760px;border-radius:50%;background:radial-gradient(circle,rgba(226,99,141,.32),rgba(226,99,141,0) 65%);z-index:-1}
+#bbr .mhero-grid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);gap:clamp(28px,4vw,56px);align-items:center}
+#bbr .mhero h1{font-size:clamp(40px,6.4vw,76px);font-weight:450;letter-spacing:-.025em;line-height:1;margin:18px 0 22px}
+#bbr .mhero h1 em{color:var(--pink)}
+#bbr .mhero .lede{max-width:620px}
+#bbr .belief{position:relative;background:var(--blush);color:var(--plum);border-radius:24px;padding:34px 28px 28px;transform:rotate(-2deg);box-shadow:0 30px 60px -30px rgba(0,0,0,.6)}
+#bbr .belief .tape{transform:rotate(4deg)!important}
+#bbr .belief small{display:block;font:700 12px/1 var(--body);letter-spacing:.16em;text-transform:uppercase;color:var(--berry);margin-bottom:12px}
+#bbr .belief p{font:italic 500 clamp(24px,2.6vw,30px)/1.2 var(--display)}
+#bbr .road{list-style:none;display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:6px;position:relative;margin-top:clamp(40px,6vw,64px)}
+#bbr .road::before{content:"";position:absolute;left:6%;right:6%;top:25px;border-top:3px dashed rgba(232,200,203,.45)}
+#bbr .road li{position:relative;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center}
+#bbr .road .dot{display:grid;place-items:center;width:52px;height:52px;border-radius:50%;border:3px solid var(--rose);background:var(--plum);font:500 20px/1 var(--display);color:var(--rose)}
+#bbr .road .done .dot{background:var(--berry);border-color:var(--berry);color:var(--white)}
+#bbr .road .now .dot{background:var(--pink);border-color:var(--cream);color:var(--white);box-shadow:0 0 0 8px rgba(226,99,141,.28);animation:bbrPulse 2.4s ease-in-out infinite}
+@keyframes bbrPulse{50%{box-shadow:0 0 0 14px rgba(226,99,141,.08)}}
+#bbr .road li>span:last-child{display:flex;flex-direction:column;gap:3px}
+#bbr .road .lbl{font:700 14px/1.25 var(--body);color:var(--cream)}
+#bbr .road .st{font:600 12px/1.2 var(--body);color:var(--rose)}
+#bbr .road .now .st{color:var(--pink)}
+#bbr .road-legend{margin-top:22px;color:var(--rose);font-size:15px}
+
+#bbr .mirror{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px}
+#bbr .mcard{background:var(--white);border-radius:26px;padding:clamp(26px,3.4vw,40px);box-shadow:0 26px 54px -38px rgba(62,31,43,.55);display:flex;flex-direction:column;gap:14px}
+#bbr .mcard .big{font:italic 500 clamp(26px,3vw,34px)/1.2 var(--display);color:var(--berry)}
+#bbr .mcard p{color:var(--soft);font-size:17px}
+#bbr .mcard.quote{background:var(--blush)}
+#bbr .mcard.quote .big{color:var(--plum)}
+#bbr .mcard.full{grid-column:1/-1}
+
+#bbr .start{position:relative;background:var(--berry);color:var(--white);border-radius:32px;padding:clamp(28px,5vw,60px);overflow:hidden;isolation:isolate;box-shadow:0 40px 80px -44px rgba(169,63,99,.9)}
+#bbr .start::after{content:"";position:absolute;right:-120px;top:-120px;width:340px;height:340px;border-radius:50%;background:rgba(255,255,255,.08);z-index:-1}
+#bbr .start .eyebrow{color:var(--blush)}
+#bbr .start h2{font-size:clamp(38px,6vw,68px);margin:14px 0 10px;font-weight:450}
+#bbr .start .why{font-size:19px;color:#FBE3EA;max-width:640px}
+#bbr .moves{list-style:none;counter-reset:m;display:grid;gap:16px;margin:30px 0}
+#bbr .moves li{counter-increment:m;position:relative;padding:20px 22px 20px 74px;border-radius:20px;background:rgba(255,255,255,.1);font-size:18px;line-height:1.55;color:var(--white)}
+#bbr .moves li::before{content:counter(m);position:absolute;left:20px;top:18px;display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:var(--white);color:var(--berry);font:600 19px/1 var(--display)}
+#bbr .doneline{display:flex;gap:14px;align-items:flex-start;padding:20px 22px;border-radius:20px;background:var(--plum);font-size:17.5px;line-height:1.55}
+#bbr .doneline svg{flex:none;margin-top:3px}
+#bbr .doneline b{color:var(--pink)}
+
+#bbr .ticket{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);background:var(--white);border-radius:28px;box-shadow:0 30px 60px -40px rgba(62,31,43,.6);overflow:hidden}
+#bbr .ticket-l{padding:clamp(26px,3.6vw,44px);display:flex;flex-direction:column;gap:14px;align-items:flex-start}
+#bbr .ticket-l h3{font-size:clamp(28px,3.4vw,38px)}
+#bbr .ticket-l p{color:var(--soft);font-size:17px}
+#bbr .ticket-l p b{color:var(--plum)}
+#bbr .ticket-r{position:relative;background:var(--blush);padding:clamp(26px,3.6vw,44px);display:flex;flex-direction:column;justify-content:center;gap:14px;border-left:3px dashed var(--white)}
+#bbr .ticket-r::before,#bbr .ticket-r::after{content:"";position:absolute;left:-17px;width:30px;height:30px;border-radius:50%;background:var(--cream)}
+#bbr .ticket-r::before{top:-15px}#bbr .ticket-r::after{bottom:-15px}
+#bbr .ticket-r small{font:700 12px/1.3 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--berry)}
+#bbr .clock{display:flex;gap:8px}
+#bbr .clock div{flex:1;background:var(--plum);color:var(--cream);border-radius:14px;padding:12px 4px 10px;text-align:center}
+#bbr .clock b{display:block;font:500 clamp(28px,3vw,36px)/1 var(--display);font-variant-numeric:tabular-nums}
+#bbr .clock span{display:block;margin-top:6px;font:700 10px/1 var(--body);letter-spacing:.16em;color:var(--rose)}
+#bbr .ticket-r p{font-size:14.5px;line-height:1.5;color:var(--soft)}
+
+#bbr .weeks{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+#bbr .week{background:var(--white);border-radius:22px;padding:24px 22px;border-top:6px solid var(--berry);display:flex;flex-direction:column;gap:10px;box-shadow:0 20px 40px -32px rgba(62,31,43,.5)}
+#bbr .week:nth-child(2){border-color:var(--pink)}#bbr .week:nth-child(3){border-color:var(--rose)}#bbr .week:nth-child(4){border-color:var(--plum)}
+#bbr .week small{font:700 12px/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--berry)}
+#bbr .week p{font:500 21px/1.25 var(--display)}
+#bbr .week p+p{padding-top:10px;border-top:1.5px dashed var(--rose)}
+#bbr .slow{margin-top:22px;font:italic 400 20px/1.4 var(--display);color:var(--soft);text-align:center}
+
+#bbr .prog{display:flex;align-items:center;gap:16px;margin-bottom:20px}
+#bbr .prog .bar{flex:1;height:10px;border-radius:10px;background:var(--rose);overflow:hidden}
+#bbr .prog .bar i{display:block;height:100%;background:var(--berry);border-radius:10px;transition:width .3s ease}
+#bbr .prog span{font:700 15px/1 var(--body);color:var(--berry);white-space:nowrap}
+#bbr .steps{display:grid;gap:12px}
+#bbr details.step{background:var(--white);border-radius:22px;box-shadow:0 18px 36px -30px rgba(62,31,43,.5);overflow:hidden}
+#bbr details.step[open]{box-shadow:0 26px 50px -34px rgba(62,31,43,.6)}
+#bbr summary{display:flex;align-items:center;gap:14px;padding:18px 20px;cursor:pointer;list-style:none}
+#bbr summary::-webkit-details-marker{display:none}
+#bbr summary .num{flex:none;display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--blush);color:var(--berry);font:600 18px/1 var(--display)}
+#bbr .step.is-done summary .num{background:var(--berry);color:var(--white)}
+#bbr .step.is-now summary .num{background:var(--pink);color:var(--white)}
+#bbr summary .t{flex:1;font:500 22px/1.2 var(--display)}
+#bbr .badge{flex:none;padding:6px 11px;border-radius:999px;background:var(--blush);font:700 12px/1 var(--body);color:var(--berry)}
+#bbr .step.is-now .badge{background:var(--pink);color:var(--white)}
+#bbr .step.is-done .badge{background:var(--plum);color:var(--cream)}
+#bbr summary .chev{flex:none;transition:transform .2s ease}
+#bbr details[open] summary .chev{transform:rotate(180deg)}
+#bbr .step-body{padding:0 20px 20px 74px;display:grid;gap:10px}
+#bbr .chk{display:flex;gap:14px;align-items:flex-start;padding:12px 14px;border-radius:14px;background:var(--cream);cursor:pointer;font-size:16.5px;line-height:1.55}
+#bbr .chk input{flex:none;width:24px;height:24px;margin:2px 0 0;accent-color:var(--berry);cursor:pointer}
+#bbr .chk input:checked+span{color:var(--soft);text-decoration:line-through;text-decoration-color:rgba(169,63,99,.5)}
+
+#bbr .story{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(24px,4vw,56px);align-items:center}
+#bbr .story-photo{position:relative;border-radius:28px;overflow:hidden;aspect-ratio:4/5;box-shadow:0 34px 70px -40px rgba(62,31,43,.7);transform:rotate(-1.5deg)}
+#bbr .story-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 20%}
+#bbr .story-copy{display:flex;flex-direction:column;gap:16px}
+#bbr .story-copy h2{font-size:clamp(32px,4.4vw,48px)}
+#bbr .story-copy p{font-size:18px}
+#bbr .story-copy .disc{font:italic 400 18px/1.5 var(--display);color:var(--berry);padding-left:18px;border-left:3px solid var(--pink)}
+
+#bbr .offer{position:relative;background:var(--plum);color:var(--cream);border-radius:34px;padding:clamp(30px,5.4vw,68px);text-align:center;overflow:hidden;isolation:isolate}
+#bbr .offer::before{content:"";position:absolute;left:50%;top:-50%;width:700px;height:700px;margin-left:-350px;border-radius:50%;background:radial-gradient(circle,rgba(226,99,141,.35),rgba(226,99,141,0) 62%);z-index:-1}
+#bbr .offer .in2{max-width:720px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:18px}
+#bbr .offer h2{font-size:clamp(34px,5vw,58px);font-weight:450}
+#bbr .offer h2 em{color:var(--pink)}
+#bbr .offer p{font-size:19px;color:#F1DDE2}
+#bbr .offer .btn{max-width:640px;line-height:1.35}
+
+#bbr .inbox{background:var(--blush);border-radius:30px;padding:clamp(26px,4.4vw,52px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(22px,4vw,48px);align-items:center}
+#bbr .inbox h2{font-size:clamp(30px,4vw,44px);margin-bottom:10px}
+#bbr .inbox p{color:var(--soft);font-size:17px}
+#bbr .sent{font:italic 500 22px/1.35 var(--display);color:var(--berry)}
+
+#bbr .mfoot{padding:36px 0 56px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px;color:var(--soft);font-size:15px}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width:900px){
+ #bbr .hero-grid,#bbr .mhero-grid,#bbr .story,#bbr .inbox,#bbr .ticket{grid-template-columns:minmax(0,1fr)}
+ #bbr .formcard{transform:none}#bbr .formcard>*{transform:none}
+ #bbr .gets{grid-template-columns:minmax(0,1fr)}
+ #bbr .weeks{grid-template-columns:repeat(2,minmax(0,1fr))}
+ #bbr .belief{max-width:460px}
+ #bbr .ticket-r{border-left:0;border-top:3px dashed var(--white)}
+ #bbr .ticket-r::before,#bbr .ticket-r::after{top:-17px;left:auto;bottom:auto}
+ #bbr .ticket-r::before{left:-15px}#bbr .ticket-r::after{right:-15px}
+ #bbr .story-photo{max-width:420px;aspect-ratio:1}
+}
+@media (max-width:700px){
+ #bbr{font-size:16.5px}
+ #bbr .notes,#bbr .mirror{grid-template-columns:minmax(0,1fr)}
+ #bbr .note{transform:none!important}
+ #bbr .stops,#bbr .road{grid-template-columns:minmax(0,1fr);gap:0}
+ #bbr .stops::before{left:27px;right:auto;top:20px;bottom:20px;border-top:0;border-left:3px dotted var(--rose)}
+ #bbr .stops li{flex-direction:row;text-align:left;gap:16px;padding:6px 0}
+ #bbr .stops b{width:48px;height:48px;font-size:19px;margin-left:3px}
+ #bbr .stops li span{display:flex;flex-direction:column;gap:2px}
+ #bbr .order-note{text-align:left}
+ #bbr .road::before{left:24px;right:auto;top:22px;bottom:22px;border-top:0;border-left:3px dashed rgba(232,200,203,.45)}
+ #bbr .road li{flex-direction:row;text-align:left;gap:16px;padding:7px 0}
+ #bbr .road .dot{width:48px;height:48px;font-size:18px}
+ #bbr .gen-grid{grid-template-columns:minmax(0,1fr);justify-items:start}
+ #bbr .weeks{grid-template-columns:minmax(0,1fr)}
+ #bbr .moves li{padding:64px 18px 18px;font-size:17px}
+ #bbr .moves li::before{left:18px;top:16px}
+ #bbr .step-body{padding:0 14px 16px}
+ #bbr summary{padding:16px}
+ #bbr summary .t{font-size:20px}
+ #bbr .opt{font-size:16.5px;min-height:60px}
+ #bbr .qnav .btn:not(.ghost){flex:1}
+ #bbr .clock b{font-size:30px}
+}
+@media (prefers-reduced-motion:reduce){#bbr *{animation:none!important;transition:none!important}}
+</style>
+
+<div id="bbr">
+
+<!-- ===================== SCREEN 1: SIGN UP ===================== -->
+<section data-screen="signup">
+ <div class="hero on-dark">
+  <svg class="hero-road" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true"><path d="M-20 90 C 180 90 220 20 420 26 S 700 104 880 92 S 1100 20 1240 30" fill="none" stroke="#E8C8CB" stroke-width="4" stroke-dasharray="3 14" stroke-linecap="round"/></svg>
+  <div class="in hero-grid">
+   <div class="hero-copy">
+    <span class="pill"><i></i>The Blog Business Roadmap</span>
+    <h1>You're not behind. You're building in the <em>wrong order</em>.</h1>
+    <p class="lede">If you've poured your heart into your blog and it still feels like an expensive hobby, this is for you. Answer 15 honest questions and I'll show you <b>exactly where your blog business is stuck</b>, and the one step to take first.</p>
+    <ul class="facts">
+     <li><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="#E2638D" stroke-width="2.4"/><path d="M12 7v5l3 2" fill="none" stroke="#E2638D" stroke-width="2.4" stroke-linecap="round"/></svg>About 5 minutes</li>
+     <li><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="#E2638D" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Free</li>
+     <li><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10" fill="none" stroke="#E2638D" stroke-width="2.6" stroke-linecap="round"/></svg>Your roadmap opens instantly</li>
+    </ul>
+    <div class="welcome" data-welcome hidden><p>Welcome back<span data-wname></span>. Your roadmap is saved right where you left it.</p><button type="button" class="btn cream" data-open-map>Open my roadmap</button></div>
+   </div>
+   <div class="formcard" id="bbr-start">
+    <span class="tape" aria-hidden="true"></span>
+    <h2>Where should I send it?</h2>
+    <p class="sub">Your roadmap opens on this page the second you finish. No waiting on an email.</p>
+    <div data-signup-slot></div>
+    <p class="fine"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="2.5" fill="none" stroke="#A93F63" stroke-width="2.2"/><path d="M8 10V7.5a4 4 0 018 0V10" fill="none" stroke="#A93F63" stroke-width="2.2"/></svg><span>Your answers stay on your device. I never sell your email.</span></p>
+   </div>
+  </div>
+ </div>
+
+ <div class="feel sec">
+  <div class="in">
+   <div class="sec-head"><span class="eyebrow">Sound familiar?</span><h2>Maybe you're tired of feeling <span class="accent">like this</span>.</h2></div>
+   <div class="notes">
+    <p class="note">"I've published post after post, and the only person checking my stats is me."</p>
+    <p class="note">"I've bought the courses. I still don't know what I'm supposed to sell."</p>
+    <p class="note">"Some weeks I'm all in. Then life happens, and my blog goes quiet again."</p>
+    <p class="note">"I watch other women make money from their blogs and quietly wonder what they know that I don't."</p>
+   </div>
+   <div class="turn">
+    <h2>It's not a you problem. <span class="accent">It's an order problem.</span></h2>
+    <p>You don't need more hustle, more posts or another course. You need to know which step you're really on, and what to do next. That's what this roadmap hands you.</p>
+   </div>
+  </div>
+ </div>
+
+ <div class="order sec">
+  <div class="in">
+   <div class="sec-head"><span class="eyebrow">The Business Ready Order</span><h2>8 stops. One right order.</h2><p>A blog that pays you is built in this order. Skip a stop and the ones after it never quite work. Your roadmap shows you which stop you're really at.</p></div>
+   <ol class="stops">
+    <li><b>1</b><span>Her</span></li>
+    <li><b>2</b><span>Your offer</span></li>
+    <li><b>3</b><span>Your message</span></li>
+    <li><b>4</b><span>Your copy</span></li>
+    <li><b>5</b><span>Your brand and website</span></li>
+    <li><b>6</b><span>Your freebie and emails</span></li>
+    <li class="here"><b>7</b><span>Posts that feed your offer<small>Where most of us start</small></span></li>
+    <li><b>8</b><span>Traffic</span></li>
+   </ol>
+   <p class="order-note">If you started with posts, you started at stop 7. <b>That's why it's felt so hard.</b></p>
+  </div>
+ </div>
+
+ <div class="sec">
+  <div class="in">
+   <div class="sec-head"><span class="eyebrow">What you'll walk away with</span><h2>Clarity you can <span class="accent">feel</span> in 5 minutes.</h2></div>
+   <div class="gets">
+    <div class="get"><span class="n">01</span><h3>Your stage, in plain words</h3><p>Starting, Stuck, Selling or Scaling. A real name for where you are, so you can stop guessing and stop comparing.</p></div>
+    <div class="get"><span class="n">02</span><h3>The one step to start on</h3><p>Plus the 3 moves to make this week. Not 40 open tabs. Three moves you can actually finish.</p></div>
+    <div class="get"><span class="n">03</span><h3>A plan that fits your real life</h3><p>A checklist for every step after it and a 30 day plan sized to the hours you really have. Even the hard weeks.</p></div>
+   </div>
+  </div>
+ </div>
+
+ <div class="gen sec">
+  <div class="in gen-grid">
+   <div class="gen-photo"><img src="https://charming-caramel-d2453c.netlify.app/images/photos/portrait-hat.jpg" alt="Gen smiling in her pink hat" loading="lazy"></div>
+   <div class="gen-copy">
+    <span class="eyebrow">Hi, I'm Gen</span>
+    <h2>I've been exactly where you are.</h2>
+    <p>I've been blogging since 2017 and coaching bloggers since 2020. For a long time I did everything in the wrong order and blamed myself for it. This roadmap is the order I wish someone had handed me back then.</p>
+   </div>
+  </div>
+ </div>
+
+ <div class="final sec">
+  <div class="in">
+   <h2>You've carried this question long enough. Let's answer it.</h2>
+   <p>15 honest questions. About 5 minutes. A roadmap made for exactly where you are.</p>
+   <a class="btn cream" href="#bbr-start" data-scroll-form>Start my roadmap <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  </div>
+ </div>
+</section>
+
+<!-- ===================== SCREEN 2: QUESTIONS ===================== -->
+<section data-screen="quiz" class="quiz" hidden>
+ <div class="in narrow">
+  <div class="quiz-top"><span data-qcount></span><span data-qsec></span></div>
+  <div class="track" aria-hidden="true"><i data-fill></i><b data-pin></b></div>
+  <div class="qcard" data-qcard></div>
+  <p class="qcheer" data-cheer></p>
+ </div>
+</section>
+
+<!-- ===================== LOADING ===================== -->
+<section data-screen="loading" class="loading" hidden>
+ <div class="box">
+  <svg width="220" height="70" viewBox="0 0 220 70" aria-hidden="true"><path class="draw" d="M10 55 C 50 55 50 15 90 15 S 130 55 170 55 S 200 25 210 20" fill="none" stroke="#E2638D" stroke-width="5" stroke-linecap="round"/><circle cx="10" cy="55" r="7" fill="#A93F63"/><circle cx="210" cy="20" r="9" fill="#E2638D"/></svg>
+  <h2 data-loadname>Building your roadmap</h2>
+  <ul><li>Reading your answers</li><li>Finding your stage</li><li>Choosing your first step</li></ul>
+ </div>
+</section>
+
+<!-- ===================== SCREEN 3: ROADMAP ===================== -->
+<section data-screen="map" hidden></section>
+
+</div>
+
+<script>
+(function(){
+'use strict';
+var CFG={"membership": "https://bossladybloggers.thrivecart.com/the-blogging-ladies-membership/", "call": "https://calendly.com/bossladybloggers/15min", "builder": "", "toolPage": "/roadmap-tool", "signupFormId": "", "resultForms": {"R1": "", "R2": "", "R3": "", "R4": "", "R5": "", "R6": "", "R7": "", "R8": "", "R9": ""}, "tools": {"launch-planner": {"name": "Digital Product Launch Planner", "bonus": "Freebie Planner + Opt-in Copy Template", "fullPrice": "https://payhip.com/b/ntQVE", "discountLink": "", "bonusDelivery": "", "cover": "", "details": [], "step": "Her and your offer", "feel": "You can feel there's an offer in you. You just don't know where to start, and every blank page makes you second guess the whole idea."}, "starter-kit": {"name": "The Blog to Paid Starter Kit", "bonus": "Freebie Planner + Opt-in Copy Template", "fullPrice": "https://payhip.com/b/byO9v", "discountLink": "", "bonusDelivery": "", "cover": "", "details": [], "step": "Your message, copy and brand", "feel": "You know who you help. Now you want words and a look that make her feel like you built this just for her, instead of rewriting your homepage for the fifth time."}, "welcome-sequence": {"name": "Welcome Sequence Swipe File", "bonus": "Freebie Planner + Opt-in Copy Template", "fullPrice": "https://payhip.com/b/xbiSu", "discountLink": "", "bonusDelivery": "", "cover": "", "details": [], "step": "Your freebie and emails", "feel": "You want every new subscriber to feel welcomed instead of forgotten, and to know exactly what to buy from you when she's ready."}, "content-plan": {"name": "90-Day Long-Form Content Plan", "bonus": "20 Pinterest Pin Templates for Offer-Led Blog Posts", "fullPrice": "https://payhip.com/b/zfi5n", "discountLink": "", "bonusDelivery": "", "cover": "", "details": [], "step": "Posts that feed your offer", "feel": "You're tired of staring at a blank post wondering what to write this week. You want every post to have a job, and to know it's walking her toward your offer."}, "pin-templates": {"name": "20 Pinterest Pin Templates for Offer-Led Blog Posts", "bonus": "90-Day Long-Form Content Plan", "fullPrice": "https://payhip.com/b/vKxpr", "discountLink": "", "bonusDelivery": "", "cover": "", "details": [], "step": "Traffic", "feel": "You want the right women finding your posts and landing on your freebie, without designing every pin from scratch on a week you barely have time to breathe."}, "launch-kit": {"name": "The Launch Kit", "bonus": "7-Email Launch Sequence Swipe File", "fullPrice": "https://payhip.com/b/MNLUT", "discountLink": "", "bonusDelivery": "", "cover": "", "details": [], "step": "Traffic, in the Selling stage", "feel": "You have something real to sell. This time you want to launch it like you mean it, with a plan, instead of posting once and hoping somebody notices."}, "dashboard": {"name": "Blog Business Dashboard (Notion)", "bonus": "Client Welcome Packet + Onboarding Kit", "fullPrice": "https://payhip.com/b/CS2Br", "discountLink": "", "bonusDelivery": "", "cover": "", "details": [], "step": "Systems", "feel": "Your business is working, and right now it lives in your head and too many open tabs. You want one calm place to run it, so you can finally breathe."}}};
+var root=document.getElementById('bbr');if(!root)return;
+var HOUR=3600000,WINDOW=72*HOUR;
+var LS={get:function(k){try{return JSON.parse(localStorage.getItem('bbr-'+k));}catch(e){return null;}},
+ set:function(k,v){try{localStorage.setItem('bbr-'+k,JSON.stringify(v));}catch(e){}},
+ del:function(k){try{localStorage.removeItem('bbr-'+k);}catch(e){}}};
+function q(s){return root.querySelector(s);}
+function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+var ARROW='<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+var CHECK='<svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+/* ---------- Roadmap content (the 8 steps, word for word from the preview) ---------- */
+var STEPS=[
+ {title:"Her",q:"I can name one real woman I help, and I have 3 things she said about her problem, in her own words.",
+  moves:["Write down one real woman you could help. Not a made up avatar. Someone who keeps texting you about this.","Send this to 5 women like her: “I'm starting a blog for women who [her problem]. Could I ask you 3 quick questions? No pitch, I promise.” Ask: What's the hardest part about this right now? What have you already tried? If this was totally fixed, what would be different in your week?","Write down their exact words, messy and all. Circle the phrases that repeat."],
+  done:"you can name one real woman and you have at least 3 things she said, in her words."},
+ {title:"Your offer",q:"I can say my offer in one line, and at least one real woman told me she wants it.",
+  moves:["Go back to her answer to “what would be different in your week?” That's the result she'll pay for.","Pick the smallest thing that gets her closer, and how she'd want it: a tool she uses herself, or you walking her through it.","Describe it to your 5 women before you build it: “I'm making [thing] for [problem]. Would that help you?” Listen for “when can I get it?”"],
+  done:"you can say your offer in one line, and one real woman said she wants it."},
+ {title:"Your message",q:"If I read my one sentence to a friend, she can say it back to me in her own words.",
+  moves:["Fill in: I help [her] get [her result, her words] with [your offer].","Write your one belief: the thing most people get wrong about her problem.","Text your sentence to a friend and ask, “What do you think I do?”"],
+  done:"a friend says it back to you in her own words, and you can say your belief in one line."},
+ {title:"Your copy",q:"The top of my homepage has a headline in her words and one button.",
+  moves:["Write your homepage headline: her result, in her words.","Write one or two sentences under it: who it's for and how.","Pick your one button. It goes to your offer or your freebie. Just one."],
+  done:"the top of your homepage is written, and you know your About page order: her problem, your story, what changed, your belief, one next step."},
+ {title:"Your brand and website",q:"I have a name I can spell, 2 or 3 colors, 1 or 2 fonts, and a platform picked.",
+  moves:["Write 3 name ideas. Say each one out loud and ask someone to type it. Cut any they misspell.","Decide how she should feel when she lands. Pick 2 or 3 colors for that, plus one bright color for buttons only.","Pick 1 or 2 fonts and your platform: Showit if you want to design it yourself, a coded site if you're happy asking AI for changes."],
+  done:"you have a name you can say and spell, 2 or 3 colors, 1 or 2 fonts and a platform."},
+ {title:"Your freebie and emails",q:"I have a freebie that's step one of my offer, and welcome emails that invite her to buy.",
+  moves:["Look at your offer and ask, what's the first step of it? That's your freebie. It should give her a small win in about 10 minutes.","Connect it to a sign up form so your emails send on their own.","Write one sentence for each of 5 welcome emails: deliver the freebie, your story, your belief, a quick win, the invite to your offer."],
+  done:"you know your freebie and what each of your 5 welcome emails is about."},
+ {title:"Posts that feed your offer",q:"Every post I publish has a job, and my freebie sits near the top.",
+  moves:["Write a problem post title: her problem, in her words.","Write a belief post title: flip what keeps her stuck, with your story.","Write a how-to post title: teach one piece, and let your offer be the full version."],
+  done:"you have 3 titles, and your freebie sits near the top of each post with one clear next step at the end."},
+ {title:"Traffic",q:"I show up on one channel every week, and it sends women to my freebie.",
+  moves:["Ask your 5 women where they look for help with this. That's your channel.","Write how many times a week you can really show up there on a hard week.","Point every piece at your freebie, or a post with your freebie at the top. Not your homepage."],
+  done:"you've picked one channel and know which of your 3 posts it sends her to first."}
+];
+var SYSTEMS={title:"Systems",moves:["For one week, write down every task you touch and how long it took. Circle the ones only you can do.","Pick the one task you repeat most and write its steps down once, so AI or an automation can take it.","Plan your week around the hours you really have: one block for your offer, one for content, one for your list."],
+ done:"your week has a repeatable plan, and one repeating task no longer needs you."};
+var WHY=["Every step after this one gets easier the moment you know exactly who she is.","Once one real woman says she wants it, you stop building in the dark.","When she can say it back to you, she can tell her friends about you too.","This is where a visitor decides, in seconds, if you're for her.","This is how your blog starts to feel like a real business, to her and to you.","This is where readers turn into a list, and a list turns into sales.","From here on, nothing you write is wasted.","This is where the right women start finding you, on purpose."];
+
+/* ---------- Questions (wording and answer order unchanged: scoring depends on them) ---------- */
+var Q=[
+ {t:"Which one sounds most like you?",o:["I haven't started my blog yet","I have a blog, but it hasn't made money yet","My blog makes a little from ads or affiliate links","I sell something of my own, but sales are on and off","I make steady sales, and I'm stretched too thin"]},
+ {t:"How long have you been blogging?",o:["Not yet","Under 1 year","1 to 3 years","More than 3 years"]},
+ {t:"How many hours a week can you really give your blog business?",h:"Be honest, nobody's grading this.",o:["Under 3","3 to 5","5 to 10","More than 10"]},
+ {t:"How do you want help?",o:["Give me the steps and I'll do it","I want a community and someone to check my work","I want someone to do it with me, privately","I want someone to build it for me"]}
+];
+STEPS.forEach(function(s,i){Q.push({t:s.q,step:i,o:["Not yet","Kind of","Done"]});});
+Q.push({t:"What's the hardest part right now?",h:"Pick the one that stings most.",o:["I have too many ideas","I don't know what to sell","I get readers, but no sales","I can't stay consistent","Tech and my website overwhelm me","I don't feel qualified yet","Social media drains me"]});
+Q.push({t:"What do you want in the next 6 months?",o:["My first dollar from my blog","A small, steady income","A full time income","To quit my job"]});
+Q.push({t:"If this was totally fixed, what would be different in your week?",h:"Optional. Say it the way you'd say it to a friend.",free:true});
+var CHEER={0:"No wrong answers here. Just honest ones.",4:"Now the 8 stops. “Not yet” helps you more than a hopeful “Done”.",8:"Halfway there. You're doing great.",12:"Almost done. These last three are about you.",14:"Last one. Take your time."};
+
+/* ---------- Scoring (unchanged rules from the preview) ---------- */
+function score(a){
+ var order=a.slice(4,12);
+ var stage=["Starting","Stuck","Stuck","Selling","Scaling"][a[0]];
+ if((a[0]===3||a[0]===4)&&order[1]!==2)stage="Stuck";
+ if(order.every(function(x){return x===2;}))stage="Scaling";
+ var start=-1;for(var i=0;i<8;i++){if(order[i]!==2){start=i;break;}}
+ var help=a[3],hrs=a[2],goal=a[13],offer;
+ if(help===3)offer="Blueprint";else if(stage==="Scaling")offer="Blueprint";
+ else if(goal>=2&&hrs===3)offer="Blueprint";else if(hrs===0)offer="Membership";
+ else if(stage==="Starting")offer="Membership";
+ else if((stage==="Stuck"||stage==="Selling")&&help===2)offer="Intensive";
+ else if((stage==="Stuck"||stage==="Selling")&&help<2)offer="Membership";else offer="Call";
+ return {stage:stage,start:start,order:order,offer:offer};
+}
+function toolFor(r){
+ if(r.start<0)return "dashboard";
+ if(r.start<=1)return "launch-planner";
+ if(r.start<=4)return "starter-kit";
+ if(r.start===5)return "welcome-sequence";
+ if(r.start===6)return "content-plan";
+ return r.stage==="Selling"?"launch-kit":"pin-templates";
+}
+var LINES={
+ Starting:["You haven't built anything yet, and honestly? That's the best place to be. You get to do this in the right order from day one, with nothing to undo.","Business first, blog second."],
+ Stuck:["You've shown up. You've done the work. And the money still hasn't come. Hear me on this: that's not a you problem. It's an order problem, and order can be fixed.","Your blog isn't your business. It's your marketing."],
+ Selling:["You've already done the brave part. You made something, and people bought it. Now it needs a clear path that walks her from your post to your checkout, so sales stop feeling like luck.","Traffic needs somewhere to go."],
+ Scaling:["It's working. And it's quietly eating your whole week. You didn't build this to feel this stretched. Now it needs systems, so it runs without you every single minute.","You don't need more hours. You need fewer things that need you."]};
+var DESIRE=["your blog finally makes its first dollar","you can make a small but steady income from your blog","you can work for yourself and build your own schedule","you can work for yourself and build your own schedule"];
+var OFFERS={
+ Membership:{h:"You don't have to do this <em>alone</em> anymore.",p:"Doing the next step by yourself is where the momentum usually dies. Inside The Blogging Ladies Membership you get short lessons, weekly live coaching calls and a room full of women working on the same step you are. Come do it with us.",b:"Join The Blogging Ladies"},
+ Intensive:{h:"Want me in your <em>corner</em>?",p:"You don't need more information. You need someone in your corner, privately, while you build. The Blog Profit Intensive is 12 weeks of 1:1 coaching on your offer and your sales path. Let's see if it's the right fit on a free call first.",call:true},
+ Blueprint:{h:"Ready to stop doing it <em>all yourself</em>?",p:"You don't need another course. You need it built. The BOSS Business Blueprint builds your brand, site, freebies, emails and first launch with you, over 6 months. I only take 5 clients at a time.",call:true},
+ Call:{h:"Let's look at this <em>together</em>.",p:"Bring your roadmap to a free 1:1 call and we'll map out your next 6 months, whether you work with me or not.",call:true}};
+var FORM={"Starting|Membership":"R1","Starting|Blueprint":"R2","Stuck|Membership":"R3","Stuck|Intensive":"R4","Stuck|Blueprint":"R5","Selling|Membership":"R6","Selling|Intensive":"R7","Selling|Blueprint":"R8","Scaling|Blueprint":"R9"};
+
+/* ---------- State ---------- */
+var A=LS.get('answers');if(!A||A.length!==Q.length)A=Q.map(function(){return null;});
+var cur=0;
+function complete(){for(var i=0;i<Q.length;i++){if(!Q[i].free&&A[i]===null)return false;}return true;}
+function firstOpen(){for(var i=0;i<Q.length;i++){if(!Q[i].free&&A[i]===null)return i;}return Q.length-1;}
+
+/* ---------- Showit: grow the canvas around this embed so nothing is cut off ---------- */
+function fit(){
+ var r=root.getBoundingClientRect(),el=root.parentElement,n=0;
+ while(el&&el!==document.body&&el!==document.documentElement&&n<10){
+  n++;var b=el.getBoundingClientRect(),need=Math.ceil(r.bottom-b.top);
+  if(el.getAttribute('data-bbr-fit')||b.height<need-1){el.style.height=need+'px';el.setAttribute('data-bbr-fit','1');}
+  el=el.parentElement;
+ }
+}
+if(window.ResizeObserver){new ResizeObserver(function(){fit();}).observe(root);}
+window.addEventListener('load',fit);window.addEventListener('resize',fit);
+
+/* ---------- Routing with query strings ---------- */
+function setURL(step,qn,push){
+ try{var u=new URL(location.href);
+  if(step)u.searchParams.set('step',step);else u.searchParams.delete('step');
+  if(qn)u.searchParams.set('q',qn);else u.searchParams.delete('q');
+  u.hash='';
+  if(u.href!==location.href)history[push?'pushState':'replaceState']({bbr:1},'',u.href);}catch(e){}
+}
+function show(name){
+ ['signup','quiz','loading','map'].forEach(function(s){q('[data-screen="'+s+'"]').hidden=(s!==name);});
+ var top=root.getBoundingClientRect().top+(window.pageYOffset||0);
+ if(window.pageYOffset>top+2)window.scrollTo(0,Math.max(0,top));
+ fit();
+}
+function route(){
+ var p=new URLSearchParams(location.search),step=p.get('step');
+ if(step==='roadmap'&&complete()&&LS.get('signed')){renderMap();return;}
+ if(step==='quiz'&&LS.get('signed')){var n=parseInt(p.get('q'),10)-1;if(isNaN(n)||n<0)n=0;n=Math.min(n,firstOpen());drawQ(n);show('quiz');return;}
+ showSignup();
+}
+window.addEventListener('popstate',route);
+
+/* ---------- Flodesk ---------- */
+function loadFd(){
+ (function(w,d,t,h,s,n){if(w.fd)return;w.FlodeskObject=n;var fn=function(){(w[n].q=w[n].q||[]).push(arguments);};w[n]=w[n]||fn;var f=d.getElementsByTagName(t)[0];var v='?v='+Math.floor(new Date().getTime()/(120*1000))*60;var sm=d.createElement(t);sm.async=true;sm.type='module';sm.src=h+s+'.mjs'+v;f.parentNode.insertBefore(sm,f);var sn=d.createElement(t);sn.async=true;sn.noModule=true;sn.src=h+s+'.js'+v;f.parentNode.insertBefore(sn,f);})(window,document,'script','https://assets.flodesk.com','/universal','fd');
+}
+function ffConfig(){
+ return btoa(JSON.stringify({trigger:{mode:"immediately",value:0},onSuccess:{mode:"message",message:"",redirectUrl:""},coi:false,showForReturnVisitors:true,notification:true,gdpr:{acceptsMarketing:false,privacyPolicy:{enabled:false,mandatory:false}},trackingConfig:{metaPixelId:"",cookieBannerEnabled:false,googleAnalyticsId:""}}));
+}
+/* Builds a styled form. With a Flodesk form id it is wired to that form; without one it still works on the page and shows a slot label. */
+function formHTML(id,formId,fields,button,slotLabel){
+ var h='<div id="'+id+'"'+(formId?' data-ff-el="root" data-ff-version="3" data-ff-type="inline" data-ff-name="'+id+'" data-ff-stage="default"':'')+'>';
+ if(formId)h+='<div data-ff-el="config" data-ff-config="'+ffConfig()+'" style="display:none"></div>';
+ h+='<form class="form" novalidate'+(formId?' action="https://form.flodesk.com/forms/'+formId+'/submit" method="post" data-ff-el="form"':'')+'>';
+ h+='<div data-ff-el="content"><div class="form" data-ff-el="fields">';
+ fields.forEach(function(f){
+  h+='<div class="field"><label for="'+id+'-'+f.n+'">'+f.l+'</label><input id="'+id+'-'+f.n+'" type="text" name="'+f.n+'" maxlength="255" autocomplete="'+f.ac+'"'+(f.n==='email'?' inputmode="email"':'')+' placeholder="'+f.ph+'" value="'+esc(f.v||'')+'" required></div>';
+ });
+ h+='<input type="text" name="confirm_email_address" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">';
+ h+='</div><div data-ff-el="footer"><button type="submit" class="btn wide" data-ff-el="submit">'+button+' '+ARROW+'</button></div></div>';
+ h+='<div data-ff-el="success"></div><div class="ff-err" data-ff-el="error"></div></form></div>';
+ if(!formId)h+='<p class="slot" style="margin-top:14px">'+slotLabel+'</p>';
+ return h;
+}
+function validEmail(v){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);}
+function wire(id,formId,onDone,check){
+ var wrap=document.getElementById(id);if(!wrap)return;
+ var form=wrap.querySelector('form'),err=wrap.querySelector('.ff-err'),fired=false;
+ function finish(){if(fired)return;fired=true;onDone();}
+ form.addEventListener('submit',function(e){
+  var msg=check(form);
+  if(msg){e.preventDefault();e.stopImmediatePropagation();err.textContent=msg;return;}
+  err.textContent='';
+  if(!formId){e.preventDefault();finish();return;}
+  var b=form.querySelector('button');if(b){b.disabled=true;}
+  setTimeout(function(){if(wrap.getAttribute('data-ff-stage')!=='error')finish();},9000);
+ },true);
+ if(formId){
+  loadFd();window.fd('form:handle',{formId:formId,rootEl:'#'+id});
+  if(window.MutationObserver)new MutationObserver(function(){var s=wrap.getAttribute('data-ff-stage');
+   if(s==='success')finish();if(s==='error'){var b=form.querySelector('button');if(b)b.disabled=false;}
+  }).observe(wrap,{attributes:true,attributeFilter:['data-ff-stage']});
+ }
+}
+
+/* ---------- Screen 1 ---------- */
+var signupBuilt=false;
+function showSignup(){
+ if(!signupBuilt){
+  signupBuilt=true;
+  q('[data-signup-slot]').innerHTML=formHTML('bbr-su',CFG.signupFormId,[
+   {n:'firstName',l:'First name',ph:'What should I call you?',ac:'given-name',v:LS.get('name')||''},
+   {n:'email',l:'Email',ph:'you@example.com',ac:'email',v:LS.get('email')||''}],
+   'Show me where I’m stuck','Slot S0: your Flodesk sign up form (segment Roadmap: Signed up) is not connected yet.');
+  wire('bbr-su',CFG.signupFormId,function(){
+   LS.set('signed',true);
+   drawQ(complete()?0:firstOpen());setURL('quiz',cur+1,true);show('quiz');
+  },function(f){
+   var nm=f.querySelector('[name=firstName]').value.trim(),em=f.querySelector('[name=email]').value.trim();
+   if(!nm)return 'Add your first name so your roadmap can greet you.';
+   if(!validEmail(em))return 'That email doesn’t look quite right yet.';
+   LS.set('name',nm.slice(0,40));LS.set('email',em);return '';
+  });
+ }
+ var nm=LS.get('name');
+ if(complete()&&LS.get('signed')&&LS.get('result')){q('[data-welcome]').hidden=false;q('[data-wname]').textContent=nm?', '+nm:'';}
+ else q('[data-welcome]').hidden=true;
+ show('signup');
+}
+root.addEventListener('click',function(e){
+ var a=e.target.closest('[data-scroll-form]');
+ if(a){e.preventDefault();var f=document.getElementById('bbr-start');window.scrollTo({top:f.getBoundingClientRect().top+window.pageYOffset-24,behavior:'smooth'});var i=f.querySelector('input');if(i)setTimeout(function(){i.focus({preventScroll:true});},500);return;}
+ if(e.target.closest('[data-open-map]')){setURL('roadmap',null,true);renderMap();return;}
+ if(e.target.closest('[data-restart]')){A=Q.map(function(){return null;});LS.set('answers',A);LS.del('result');drawQ(0);setURL('quiz',1,true);show('quiz');return;}
+});
+
+/* ---------- Screen 2 ---------- */
+function drawQ(i){
+ cur=i;var qq=Q[i],pct=Math.round(i/Q.length*100);
+ q('[data-qcount]').textContent='Question '+(i+1)+' of '+Q.length;
+ q('[data-qsec]').textContent=i<4?'About you':i<12?'Stop '+(qq.step+1)+' of 8':'What you want';
+ q('[data-fill]').style.width=pct+'%';q('[data-pin]').style.left=Math.max(2,pct)+'%';
+ var h='';
+ if(qq.step!==undefined)h+='<span class="qsec">The Business Ready Order: '+esc(STEPS[qq.step].title)+'</span>';
+ h+='<h2 id="bbr-qt">'+esc(qq.t)+'</h2>'+(qq.h?'<p class="qhint">'+esc(qq.h)+'</p>':'');
+ if(qq.free){h+='<div class="field" style="margin-top:24px"><label for="bbr-free" class="sr" style="position:absolute;left:-9999px">Your answer</label><textarea id="bbr-free" maxlength="400" placeholder="When this is fixed, my week would feel"></textarea></div>';}
+ else{h+='<div class="opts" role="group" aria-labelledby="bbr-qt">'+qq.o.map(function(o,k){return '<button type="button" class="opt" data-i="'+k+'" aria-pressed="'+(A[i]===k)+'"><span class="k">'+String.fromCharCode(65+k)+'</span><span>'+esc(o)+'</span></button>';}).join('')+'</div>';}
+ h+='<div class="qnav"><button type="button" class="btn ghost" data-back'+(i?'':' style="visibility:hidden"')+'>Back</button>';
+ h+='<button type="button" class="btn" data-next'+(!qq.free&&A[i]===null?' disabled':'')+'>'+(i===Q.length-1?'Show me my roadmap':'Next')+' '+ARROW+'</button></div>';
+ var card=q('[data-qcard]');card.innerHTML=h;card.classList.remove('enter');void card.offsetWidth;card.classList.add('enter');
+ if(qq.free){q('#bbr-free').value=A[i]||'';}
+ var c=CHEER[i];if(c===undefined){for(var j=i;j>=0;j--){if(CHEER[j]!==undefined){c=CHEER[j];break;}}}
+ q('[data-cheer]').textContent=c||'';
+ fit();
+}
+function saveFree(){var ta=q('#bbr-free');if(ta&&Q[cur].free){A[cur]=ta.value.trim().slice(0,400);LS.set('answers',A);}}
+function next(){
+ saveFree();
+ if(!Q[cur].free&&A[cur]===null)return;
+ if(cur>=Q.length-1){finishQuiz();return;}
+ drawQ(cur+1);setURL('quiz',cur+1,true);show('quiz');
+}
+q('[data-screen="quiz"]').addEventListener('click',function(e){
+ var b=e.target.closest('.opt');
+ if(b){A[cur]=+b.getAttribute('data-i');LS.set('answers',A);
+  root.querySelectorAll('.opt').forEach(function(o){o.setAttribute('aria-pressed',o===b?'true':'false');});
+  var nb=q('[data-next]');if(nb)nb.disabled=false;
+  var at=cur;setTimeout(function(){if(cur===at)next();},260);return;}
+ if(e.target.closest('[data-next]')){next();return;}
+ if(e.target.closest('[data-back]')&&cur>0){saveFree();drawQ(cur-1);setURL('quiz',cur+1,false);show('quiz');}
+});
+document.addEventListener('keydown',function(e){
+ if(q('[data-screen="quiz"]').hidden||e.metaKey||e.ctrlKey||e.altKey)return;
+ if(document.activeElement&&document.activeElement.tagName==='TEXTAREA')return;
+ var n=parseInt(e.key,10);var opts=root.querySelectorAll('.opt');
+ if(n>=1&&n<=opts.length){opts[n-1].click();}
+});
+
+/* ---------- Loading, then roadmap ---------- */
+function finishQuiz(){
+ var nm=LS.get('name');q('[data-loadname]').textContent='Building your roadmap'+(nm?', '+nm:'');
+ show('loading');
+ var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+ setTimeout(function(){setURL('roadmap',null,true);renderMap();},reduce?500:2100);
+}
+var tickTimer=null;
+function renderMap(){
+ var r=score(A);LS.set('result',r);
+ var t=LS.get('start');if(!t){t=Date.now();LS.set('start',t);}
+ var deadline=t+WINDOW,old=LS.get('deadline');if(!old||old>deadline)LS.set('deadline',deadline);else deadline=old;
+ var nm=LS.get('name')||'',step=r.start<0?SYSTEMS:STEPS[r.start],o=OFFERS[r.offer],formId=FORM[r.stage+'|'+r.offer];
+ var toolKey=toolFor(r),tool=CFG.tools[toolKey];
+ var h='';
+
+ /* hero */
+ h+='<div class="mhero on-dark"><div class="in"><div class="mhero-grid"><div>';
+ h+='<span class="pill"><i></i>Your Blog Business Roadmap</span>';
+ h+='<h1>'+(nm?esc(nm)+', you’re':'You’re')+' in the <em>'+r.stage+'</em> stage.</h1>';
+ h+='<p class="lede">'+esc(LINES[r.stage][0])+'</p></div>';
+ h+='<div class="belief"><span class="tape" aria-hidden="true"></span><small>The belief to hold onto</small><p>'+esc(LINES[r.stage][1])+'</p></div></div>';
+ h+='<ol class="road" aria-label="Your 8 stop road map">';
+ STEPS.forEach(function(s,i){var done=r.order[i]===2&&i!==r.start,now=i===r.start;
+  h+='<li class="'+(now?'now':done?'done':'')+'"><span class="dot">'+(done?CHECK:(i+1))+'</span><span><span class="lbl">'+esc(s.title)+'</span> <span class="st">'+(now?'Start here':done?'Done':'Up next')+'</span></span></li>';});
+ h+='</ol><p class="road-legend">'+(r.start<0?'All 8 stops are done. Your next step is systems.':'Checked stops are done. The pink one is where you start: '+esc(step.title)+'.')+'</p>';
+ h+='</div></div>';
+
+ /* mirror */
+ var struggle=Q[12].o[A[12]],free=A[14];
+ h+='<div class="sec"><div class="in"><div class="mirror">';
+ h+='<div class="mcard'+(free?'':' full')+'"><span class="eyebrow">What you told me</span><p class="big">“'+esc(struggle)+'.”</p><p>That’s a heavy thing to carry quietly. It doesn’t mean you’re not cut out for this. It means one step got skipped, and your roadmap below shows you exactly which one.</p></div>';
+ if(free)h+='<div class="mcard quote"><span class="eyebrow">And when it’s fixed</span><p class="big" data-free></p><p>Keep that close. That’s what we’re building toward, one step at a time.</p></div>';
+ h+='</div></div></div>';
+
+ /* start here */
+ h+='<div class="in" style="padding-bottom:clamp(56px,9vw,104px)"><div class="start"><span class="eyebrow">Start here</span><h2>'+esc(step.title)+'</h2>';
+ h+='<p class="why">'+esc(r.start<0?'Everything on the road is done. Now you get your time back.':WHY[r.start])+' Here are your next 3 moves.</p>';
+ h+='<ol class="moves">'+step.moves.map(function(m){return '<li>'+esc(m)+'</li>';}).join('')+'</ol>';
+ h+='<p class="doneline"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#E2638D"/><path d="M7 12.5l3.3 3.3L17 9" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>You’re done when</b> '+esc(step.done)+'</span></p></div></div>';
+
+ /* tool ticket */
+ var link=CFG.toolPage+'?tool='+toolKey+'&d='+deadline,live=!!tool.discountLink&&Date.now()<deadline;
+ h+='<div class="in" style="padding-bottom:clamp(56px,9vw,104px)"><div class="ticket" data-ticket>';
+ h+='<div class="ticket-l"><span class="eyebrow">The tool for your step</span><h3>'+esc(tool.name)+'</h3>';
+ if(tool.discountLink){
+  h+='<p data-live'+(live?'':' hidden')+'>Want a shortcut through this step? Get it at <b>30% off</b>, plus <b>'+esc(tool.bonus)+'</b> free, for the next 72 hours.</p>';
+  h+='<p data-dead'+(live?' hidden':'')+'>Your 30% off window has closed. The tool is still here at full price whenever you’re ready.</p>';
+ }else h+='<p>Made for the exact step you’re on right now, so you’re not starting from a blank page.</p>';
+ h+='<a class="btn" href="'+esc(link)+'">See the tool '+ARROW+'</a></div>';
+ if(tool.discountLink){
+  h+='<div class="ticket-r" data-live'+(live?'':' hidden')+'><small>Your 30% off ends in</small><div class="clock" role="timer"><div><b data-c="h">72</b><span>HOURS</span></div><div><b data-c="m">00</b><span>MINS</span></div><div><b data-c="s">00</b><span>SECS</span></div></div><p>Your 72 hours started the moment your roadmap opened. It never resets, and it never secretly extends.</p></div>';
+ }
+ h+='</div></div>';
+
+ /* 30 day plan */
+ var pace=A[2]<=1?1:2,todo=[];
+ for(var i=Math.max(0,r.start);i<8&&todo.length<8;i++)if(r.order[i]!==2||i===r.start)todo.push(STEPS[i].title);
+ if(r.start<0)todo.push('Systems');
+ var weeks=[0,1,2,3].map(function(w){var x=todo.slice(w*pace,w*pace+pace);return x.length?x:['Catch up, and send one more message to your 5 women'];});
+ h+='<div class="sec" style="background:var(--white)"><div class="in"><div class="sec-head"><span class="eyebrow">Your next 30 days</span><h2>A plan sized to your <span class="accent">real</span> week.</h2><p>Built around the hours you told me you actually have. Not the hours you wish you had.</p></div>';
+ h+='<div class="weeks">'+weeks.map(function(w,i){return '<div class="week"><small>Week '+(i+1)+'</small>'+w.map(function(x){return '<p>'+esc(x)+'</p>';}).join('')+'</div>';}).join('')+'</div>';
+ h+='<p class="slow">Slow is fine. Backwards is what costs you.</p></div></div>';
+
+ /* checklist */
+ h+='<div class="sec"><div class="in"><div class="sec-head"><span class="eyebrow">Your full roadmap</span><h2>Every stop, every move.</h2><p>Tick things off as you go. Your progress saves on this device, so you can come back any time.</p></div>';
+ h+='<div class="prog"><div class="bar"><i data-pbar></i></div><span data-ptxt></span></div><div class="steps">';
+ STEPS.forEach(function(s,i){var done=r.order[i]===2&&i!==r.start,now=i===r.start;
+  h+='<details class="step'+(now?' is-now':done?' is-done':'')+'"'+(now?' open':'')+'><summary><span class="num">'+(i+1)+'</span><span class="t">'+esc(s.title)+'</span><span class="badge">'+(now?'Start here':done?'Done':'Up next')+'</span><svg class="chev" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="#A93F63" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></summary><div class="step-body">';
+  s.moves.forEach(function(m,j){var id='c'+i+'-'+j,v=LS.get(id);if(v===null)v=r.order[i]===2;
+   h+='<label class="chk"><input type="checkbox" data-ck="'+id+'"'+(v?' checked':'')+'><span>'+esc(m)+'</span></label>';});
+  h+='</div></details>';});
+ h+='</div>';
+ if(CFG.builder)h+='<div class="mcard" style="margin-top:22px"><span class="eyebrow">Stuck on a step?</span><p class="big" style="color:var(--plum)">The Blog Business Builder writes your first draft with you.</p><a class="btn ghost" style="align-self:flex-start" href="'+esc(CFG.builder)+'">Open the Blog Business Builder</a></div>';
+ h+='</div></div>';
+
+ /* story */
+ h+='<div class="sec" style="background:var(--blush)"><div class="in story"><div class="story-photo"><img src="https://charming-caramel-d2453c.netlify.app/images/photos/desk-writing.jpg" alt="Gen writing in her planner" loading="lazy"></div>';
+ h+='<div class="story-copy"><span class="eyebrow">Why the order matters so much to me</span><h2>I learned this the slow way.</h2>';
+ h+='<p>In 2017 I started a lifestyle blog on an old MacBook in my aunt’s basement. Two years in, my affiliate dashboard said about $50, and I couldn’t even cash it out because the minimum was $100. Then I changed the order. My first Stripe payout was $18.52 on April 16, 2020.</p>';
+ h+='<p class="disc">My results are my own, not a prediction of yours. But the order is the part I want you to steal.</p></div></div></div>';
+
+ /* offer */
+ var btn=o.call?'Book a FREE Blog Business Monetization Fast Track Call so '+DESIRE[A[13]]:o.b,href=o.call?CFG.call:CFG.membership;
+ h+='<div class="sec"><div class="in"><div class="offer"><div class="in2"><span class="eyebrow light">Your next step, with support</span><h2>'+o.h+'</h2><p>'+esc(o.p)+'</p><a class="btn cream" href="'+esc(href)+'" data-offer="'+r.offer+'">'+esc(btn)+' '+ARROW+'</a></div></div></div></div>';
+
+ /* send to inbox */
+ h+='<div class="in" style="padding-bottom:20px"><div class="inbox"><div><span class="eyebrow">Keep this roadmap</span><h2>Send it to your inbox.</h2><p>So it’s waiting for you the next time you sit down to work, plus a few emails written just for the '+r.stage+' stage.</p></div>';
+ h+='<div data-rslot data-form="'+formId+'"></div></div></div>';
+ h+='<div class="mfoot"><button type="button" class="link" data-restart>Retake the questions</button><span>Your answers and ticks stay saved on this device.</span></div>';
+
+ var m=q('[data-screen="map"]');m.innerHTML=h;
+ if(free){m.querySelector('[data-free]').textContent='“'+free+'”';}
+
+ var rid=CFG.resultForms[formId]||'';
+ m.querySelector('[data-rslot]').innerHTML=formHTML('bbr-rf',rid,[{n:'email',l:'Email',ph:'you@example.com',ac:'email',v:LS.get('email')||''}],'Send my roadmap','Slot '+formId+': your Flodesk form for '+r.stage+' and '+r.offer+' fit is not connected yet.');
+ wire('bbr-rf',rid,function(){var s=m.querySelector('[data-rslot]');s.innerHTML='<p class="sent">It’s on its way. Check your inbox in a few minutes, and peek in promotions just in case.</p>';fit();},function(f){var em=f.querySelector('[name=email]').value.trim();if(!validEmail(em))return 'That email doesn’t look quite right yet.';LS.set('email',em);return '';});
+
+ function prog(){var all=m.querySelectorAll('[data-ck]'),n=0;all.forEach(function(c){if(c.checked)n++;});m.querySelector('[data-pbar]').style.width=Math.round(n/all.length*100)+'%';m.querySelector('[data-ptxt]').textContent=n+' of '+all.length+' moves done';}
+ prog();
+ m.addEventListener('change',function(e){var c=e.target.closest('[data-ck]');if(c){LS.set(c.getAttribute('data-ck'),c.checked);prog();}});
+ m.addEventListener('toggle',function(){fit();},true);
+
+ clearInterval(tickTimer);
+ function pad(n){return (n<10?'0':'')+n;}
+ function tick(){var ms=deadline-Date.now();
+  if(ms<=0){m.querySelectorAll('[data-live]').forEach(function(x){x.hidden=true;});m.querySelectorAll('[data-dead]').forEach(function(x){x.hidden=false;});clearInterval(tickTimer);return;}
+  var hh=m.querySelector('[data-c="h"]');if(!hh)return;
+  hh.textContent=pad(Math.floor(ms/HOUR));m.querySelector('[data-c="m"]').textContent=pad(Math.floor(ms%HOUR/60000));m.querySelector('[data-c="s"]').textContent=pad(Math.floor(ms%60000/1000));}
+ if(tool.discountLink){tick();tickTimer=setInterval(tick,1000);}
+ show('map');
+}
+
+route();
+})();
+</script>

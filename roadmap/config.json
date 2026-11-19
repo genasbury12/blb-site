@@ -1,0 +1,98 @@
+{
+  "_read_me": "Every link and Flodesk slot for /roadmap and /roadmap-tool lives here. Fill a slot, then run: python3 scripts/make_roadmap.py",
+  "membership": "https://bossladybloggers.thrivecart.com/the-blogging-ladies-membership/",
+  "call": "https://calendly.com/bossladybloggers/15min",
+  "builder": "",
+  "toolPage": "/roadmap-tool",
+  "signupFormId": "",
+  "resultForms": {
+    "R1": "",
+    "R2": "",
+    "R3": "",
+    "R4": "",
+    "R5": "",
+    "R6": "",
+    "R7": "",
+    "R8": "",
+    "R9": ""
+  },
+  "tools": {
+    "launch-planner": {
+      "name": "Digital Product Launch Planner",
+      "bonus": "Freebie Planner + Opt-in Copy Template",
+      "fullPrice": "https://payhip.com/b/ntQVE",
+      "discountLink": "",
+      "bonusDelivery": "",
+      "cover": "",
+      "details": [],
+      "step": "Her and your offer",
+      "feel": "You can feel there's an offer in you. You just don't know where to start, and every blank page makes you second guess the whole idea."
+    },
+    "starter-kit": {
+      "name": "The Blog to Paid Starter Kit",
+      "bonus": "Freebie Planner + Opt-in Copy Template",
+      "fullPrice": "https://payhip.com/b/byO9v",
+      "discountLink": "",
+      "bonusDelivery": "",
+      "cover": "",
+      "details": [],
+      "step": "Your message, copy and brand",
+      "feel": "You know who you help. Now you want words and a look that make her feel like you built this just for her, instead of rewriting your homepage for the fifth time."
+    },
+    "welcome-sequence": {
+      "name": "Welcome Sequence Swipe File",
+      "bonus": "Freebie Planner + Opt-in Copy Template",
+      "fullPrice": "https://payhip.com/b/xbiSu",
+      "discountLink": "",
+      "bonusDelivery": "",
+      "cover": "",
+      "details": [],
+      "step": "Your freebie and emails",
+      "feel": "You want every new subscriber to feel welcomed instead of forgotten, and to know exactly what to buy from you when she's ready."
+    },
+    "content-plan": {
+      "name": "90-Day Long-Form Content Plan",
+      "bonus": "20 Pinterest Pin Templates for Offer-Led Blog Posts",
+      "fullPrice": "https://payhip.com/b/zfi5n",
+      "discountLink": "",
+      "bonusDelivery": "",
+      "cover": "",
+      "details": [],
+      "step": "Posts that feed your offer",
+      "feel": "You're tired of staring at a blank post wondering what to write this week. You want every post to have a job, and to know it's walking her toward your offer."
+    },
+    "pin-templates": {
+      "name": "20 Pinterest Pin Templates for Offer-Led Blog Posts",
+      "bonus": "90-Day Long-Form Content Plan",
+      "fullPrice": "https://payhip.com/b/vKxpr",
+      "discountLink": "",
+      "bonusDelivery": "",
+      "cover": "",
+      "details": [],
+      "step": "Traffic",
+      "feel": "You want the right women finding your posts and landing on your freebie, without designing every pin from scratch on a week you barely have time to breathe."
+    },
+    "launch-kit": {
+      "name": "The Launch Kit",
+      "bonus": "7-Email Launch Sequence Swipe File",
+      "fullPrice": "https://payhip.com/b/MNLUT",
+      "discountLink": "",
+      "bonusDelivery": "",
+      "cover": "",
+      "details": [],
+      "step": "Traffic, in the Selling stage",
+      "feel": "You have something real to sell. This time you want to launch it like you mean it, with a plan, instead of posting once and hoping somebody notices."
+    },
+    "dashboard": {
+      "name": "Blog Business Dashboard (Notion)",
+      "bonus": "Client Welcome Packet + Onboarding Kit",
+      "fullPrice": "https://payhip.com/b/CS2Br",
+      "discountLink": "",
+      "bonusDelivery": "",
+      "cover": "",
+      "details": [],
+      "step": "Systems",
+      "feel": "Your business is working, and right now it lives in your head and too many open tabs. You want one calm place to run it, so you can finally breathe."
+    }
+  }
+}

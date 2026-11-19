@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Blog Business Roadmap</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Karla:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* VOICE: warm, blunt big sister. Short lines, no hype.
+   IDEA: a hand-drawn road map in a paper planner, 8 stops from "her" to "traffic".
+   PICTURE: the winding road with 8 numbered stops; her stop glows, done stops are checked.
+   COLOUR and TYPE: cream paper, plum ink, berry accent, blush fields. Fraunces titles, Karla body.
+   LAYOUT: one calm column, one question per screen, roadmap scrolls like a planner page. */
+:root{color-scheme:light dark;
+--bg:light-dark(#FBF6EE,#1f1016);--ink:light-dark(#3E1F2B,#F7E9EC);--soft:light-dark(#6d4a57,#d9b9c3);
+--card:light-dark(#ffffff,#2b1720);--blush:light-dark(#F4D6DD,#4a2433);--rose:light-dark(#E8C8CB,#5a2c3d);
+--berry:#A93F63;--pink:#E2638D;--line:light-dark(#ead9d0,#4a2a36)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.55 Karla,system-ui,sans-serif;overflow-x:clip}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;font-weight:700;line-height:1.08;text-wrap:balance;margin:0 0 .4em}
+h1{font-size:clamp(32px,6vw,50px)}h2{font-size:clamp(24px,4vw,32px)}h3{font-size:20px}
+p{margin:0 0 1em}
+.wrap{max-width:680px;margin:0 auto;padding:clamp(24px,5vw,56px) max(5vw,18px)}
+.hero{background:var(--blush)}
+.road{width:100%;height:auto;display:block;margin:8px 0 18px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:12px 26px;border:0;border-radius:999px;background:var(--berry);color:#fff;font:700 17px Karla,sans-serif;cursor:pointer;text-decoration:none;text-align:center}
+.btn:hover{background:var(--pink)}.btn:focus-visible,.opt:focus-visible,input:focus-visible{outline:3px solid var(--pink);outline-offset:3px}
+.btn.ghost{background:transparent;color:var(--ink);border:2px solid var(--line)}
+label{display:block;font-weight:700;margin:14px 0 6px}
+input[type=text],input[type=email],textarea{width:100%;min-height:50px;padding:12px 14px;border:2px solid var(--line);border-radius:14px;background:var(--card);color:var(--ink);font:16px Karla,sans-serif}
+textarea{min-height:110px}
+.small{font-size:14px;color:var(--soft)}
+.ticks{padding:0;list-style:none;margin:0 0 22px}.ticks li{padding-left:28px;position:relative;margin:6px 0}
+.ticks li:before{content:"";position:absolute;left:4px;top:8px;width:12px;height:12px;border-radius:50%;background:var(--berry)}
+.bar{height:8px;border-radius:9px;background:var(--rose);overflow:hidden;margin-bottom:22px}.bar i{display:block;height:100%;background:var(--berry);transition:width .3s}
+.qnum{font-weight:700;color:var(--berry);font-size:15px;margin-bottom:6px}
+.opts{display:grid;gap:10px;margin:18px 0}
+.opt{display:block;width:100%;text-align:left;min-height:54px;padding:14px 18px;border:2px solid var(--line);border-radius:16px;background:var(--card);color:var(--ink);font:600 17px Karla,sans-serif;cursor:pointer}
+.opt:hover{border-color:var(--pink)}.opt.on{border-color:var(--berry);background:var(--blush)}
+.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:10px}
+.card{background:var(--card);border:2px solid var(--line);border-radius:20px;padding:22px;margin:0 0 20px}
+.feature{background:var(--berry);color:#fff;border:0}.feature h2,.feature h3{color:#fff}.feature .small{color:#fbe3ea}
+.moves{counter-reset:m;list-style:none;padding:0;margin:0}.moves li{counter-increment:m;position:relative;padding-left:44px;margin:0 0 14px}
+.moves li:before{content:counter(m);position:absolute;left:0;top:0;width:30px;height:30px;border-radius:50%;background:#fff;color:var(--berry);font:700 16px Karla;display:grid;place-items:center}
+.step{border-top:2px solid var(--line);padding:16px 0}.step:first-of-type{border-top:0}
+.step h3{display:flex;gap:10px;align-items:center}.badge{font:700 13px Karla;padding:3px 10px;border-radius:99px;background:var(--rose);color:var(--ink)}
+.chk{display:flex;gap:12px;align-items:flex-start;margin:8px 0;font-weight:400;cursor:pointer}
+.chk input{width:22px;height:22px;flex:none;margin-top:2px;accent-color:var(--berry)}
+table{width:100%;border-collapse:collapse;font-size:16px}td,th{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}th{font-weight:700}
+.quote{border-left:4px solid var(--pink);padding:6px 0 6px 16px;font-style:italic;margin:0 0 14px}
+.hide{display:none}
+@media (prefers-reduced-motion:reduce){.bar i{transition:none}}
+</style>
+</head>
+<body>
+
+<!-- SCREEN 1: SIGN UP -->
+<section id="s-signup">
+ <div class="hero"><div class="wrap">
+  <h1>Find out exactly where your blog business is stuck, and what to do first.</h1>
+  <p>15 questions. About 5 minutes. You get a roadmap built for where you are right now, not a generic checklist.</p>
+  <svg class="road" viewBox="0 0 640 150" aria-hidden="true"><path d="M20 120 C120 120 120 30 220 30 S320 120 420 120 S520 30 620 30" fill="none" stroke="#A93F63" stroke-width="6" stroke-dasharray="2 14" stroke-linecap="round"/><g fill="#A93F63"><circle cx="20" cy="120" r="12"/><circle cx="220" cy="30" r="12"/><circle cx="420" cy="120" r="12"/><circle cx="620" cy="30" r="16" fill="#E2638D"/></g></svg>
+ </div></div>
+ <div class="wrap">
+  <h3>You'll walk away with:</h3>
+  <ul class="ticks"><li>Your stage, in plain words</li><li>The one step to start on, and the 3 moves to make this week</li><li>A checklist for every step after it, and a 30 day plan sized to your real week</li></ul>
+  <!-- In Showit, replace this form with the Flodesk sign up form (segment Roadmap: Signed up) and send it to #quiz -->
+  <form id="signup">
+   <label for="fname">First name</label><input id="fname" type="text" autocomplete="given-name" required>
+   <label for="email">Email</label><input id="email" type="email" autocomplete="email" required>
+   <div class="row"><button class="btn" type="submit">Start my roadmap</button></div>
+  </form>
+  <p class="small" style="margin-top:16px">I've been blogging since 2017 and coaching bloggers since 2020. This is the order I wish someone had handed me.</p>
+ </div>
+</section>
+
+<!-- SCREEN 2: QUESTIONS -->
+<section id="s-quiz" class="hide"><div class="wrap">
+ <div class="bar"><i id="prog" style="width:0"></i></div>
+ <div id="qbox"></div>
+ <div class="row"><button class="btn ghost" id="back" type="button">Back</button><button class="btn" id="next" type="button">Next</button></div>
+</div></section>
+
+<!-- SCREEN 3: ROADMAP -->
+<section id="s-map" class="hide">
+ <div class="hero"><div class="wrap">
+  <h1 id="r-head"></h1><p id="r-line"></p>
+  <svg class="road" id="r-road" viewBox="0 0 640 170" role="img" aria-label="Your 8 step road map"></svg>
+  <p class="small" id="r-legend"></p>
+ </div></div>
+ <div class="wrap" id="r-body"></div>
+</section>
+
+<script>
+{
+const CONFIG={
+ membership:"https://bossladybloggers.thrivecart.com/the-blogging-ladies-membership/",
+ call:"https://calendly.com/bossladybloggers/15min",
+ builder:"",            // Blog Business Builder link (add when ready)
+ toolPages:{},          // shop tool countdown pages, filled in task 06
+ forms:{}               // Flodesk "send my roadmap" embeds R1 to R9, filled in task 09
+};
+const store={get(k){try{return JSON.parse(localStorage.getItem('bbr-'+k))}catch(e){return null}},set(k,v){try{localStorage.setItem('bbr-'+k,JSON.stringify(v))}catch(e){}}};
+
+const STEPS=[
+ {k:"Her",title:"Her",q:"I can name one real woman I help, and I have 3 things she said about her problem, in her own words.",
+  moves:["Write down one real woman you could help. Not a made up avatar. Someone who keeps texting you about this.","Send this to 5 women like her: “I'm starting a blog for women who [her problem]. Could I ask you 3 quick questions? No pitch, I promise.” Ask: What's the hardest part about this right now? What have you already tried? If this was totally fixed, what would be different in your week?","Write down their exact words, messy and all. Circle the phrases that repeat."],
+  done:"you can name one real woman and you have at least 3 things she said, in her words.",tool:"Digital Product Launch Planner",bonus:"Freebie Planner + Opt-in Copy Template"},
+ {k:"Offer",title:"Your offer",q:"I can say my offer in one line, and at least one real woman told me she wants it.",
+  moves:["Go back to her answer to “what would be different in your week?” That's the result she'll pay for.","Pick the smallest thing that gets her closer, and how she'd want it: a tool she uses herself, or you walking her through it.","Describe it to your 5 women before you build it: “I'm making [thing] for [problem]. Would that help you?” Listen for “when can I get it?”"],
+  done:"you can say your offer in one line, and one real woman said she wants it.",tool:"Digital Product Launch Planner",bonus:"Freebie Planner + Opt-in Copy Template"},
+ {k:"Message",title:"Your message",q:"If I read my one sentence to a friend, she can say it back to me in her own words.",
+  moves:["Fill in: I help [her] get [her result, her words] with [your offer].","Write your one belief: the thing most people get wrong about her problem.","Text your sentence to a friend and ask, “What do you think I do?”"],
+  done:"a friend says it back to you in her own words, and you can say your belief in one line.",tool:"The Blog to Paid Starter Kit",bonus:"Freebie Planner + Opt-in Copy Template"},
+ {k:"Copy",title:"Your copy",q:"The top of my homepage has a headline in her words and one button.",
+  moves:["Write your homepage headline: her result, in her words.","Write one or two sentences under it: who it's for and how.","Pick your one button. It goes to your offer or your freebie. Just one."],
+  done:"the top of your homepage is written, and you know your About page order: her problem, your story, what changed, your belief, one next step.",tool:"The Blog to Paid Starter Kit",bonus:"Freebie Planner + Opt-in Copy Template"},
+ {k:"Brand",title:"Your brand and website",q:"I have a name I can spell, 2 or 3 colors, 1 or 2 fonts, and a platform picked.",
+  moves:["Write 3 name ideas. Say each one out loud and ask someone to type it. Cut any they misspell.","Decide how she should feel when she lands. Pick 2 or 3 colors for that, plus one bright color for buttons only.","Pick 1 or 2 fonts and your platform: Showit if you want to design it yourself, a coded site if you're happy asking AI for changes."],
+  done:"you have a name you can say and spell, 2 or 3 colors, 1 or 2 fonts and a platform.",tool:"The Blog to Paid Starter Kit",bonus:"Freebie Planner + Opt-in Copy Template"},
+ {k:"Freebie",title:"Your freebie and emails",q:"I have a freebie that's step one of my offer, and welcome emails that invite her to buy.",
+  moves:["Look at your offer and ask, what's the first step of it? That's your freebie. It should give her a small win in about 10 minutes.","Connect it to a sign up form so your emails send on their own.","Write one sentence for each of 5 welcome emails: deliver the freebie, your story, your belief, a quick win, the invite to your offer."],
+  done:"you know your freebie and what each of your 5 welcome emails is about.",tool:"Welcome Sequence Swipe File",bonus:"Freebie Planner + Opt-in Copy Template"},
+ {k:"Posts",title:"Posts that feed your offer",q:"Every post I publish has a job, and my freebie sits near the top.",
+  moves:["Write a problem post title: her problem, in her words.","Write a belief post title: flip what keeps her stuck, with your story.","Write a how-to post title: teach one piece, and let your offer be the full version."],
+  done:"you have 3 titles, and your freebie sits near the top of each post with one clear next step at the end.",tool:"90-Day Long-Form Content Plan",bonus:"20 Pinterest Pin Templates for Offer-Led Blog Posts"},
+ {k:"Traffic",title:"Traffic",q:"I show up on one channel every week, and it sends women to my freebie.",
+  moves:["Ask your 5 women where they look for help with this. That's your channel.","Write how many times a week you can really show up there on a hard week.","Point every piece at your freebie, or a post with your freebie at the top. Not your homepage."],
+  done:"you've picked one channel and know which of your 3 posts it sends her to first.",tool:"20 Pinterest Pin Templates for Offer-Led Blog Posts",bonus:"90-Day Long-Form Content Plan"}
+];
+const SYSTEMS={title:"Systems",moves:["For one week, write down every task you touch and how long it took. Circle the ones only you can do.","Pick the one task you repeat most and write its steps down once, so AI or an automation can take it.","Plan your week around the hours you really have: one block for your offer, one for content, one for your list."],
+ done:"your week has a repeatable plan, and one repeating task no longer needs you.",tool:"Blog Business Dashboard (Notion)",bonus:"Client Welcome Packet + Onboarding Kit"};
+
+const Q=[
+ {t:"Which one sounds most like you?",o:["I haven't started my blog yet","I have a blog, but it hasn't made money yet","My blog makes a little from ads or affiliate links","I sell something of my own, but sales are on and off","I make steady sales, and I'm stretched too thin"]},
+ {t:"How long have you been blogging?",o:["Not yet","Under 1 year","1 to 3 years","More than 3 years"]},
+ {t:"How many hours a week can you really give your blog business?",h:"Be honest, nobody's grading this.",o:["Under 3","3 to 5","5 to 10","More than 10"]},
+ {t:"How do you want help?",o:["Give me the steps and I'll do it","I want a community and someone to check my work","I want someone to do it with me, privately","I want someone to build it for me"]},
+ ...STEPS.map((s,i)=>({t:s.q,part:"The Business Ready Order: "+s.title,o:["Not yet","Kind of","Done"]})),
+ {t:"What's the hardest part right now?",h:"Pick the one that stings most.",o:["I have too many ideas","I don't know what to sell","I get readers, but no sales","I can't stay consistent","Tech and my website overwhelm me","I don't feel qualified yet","Social media drains me"]},
+ {t:"What do you want in the next 6 months?",o:["My first dollar from my blog","A small, steady income","A full time income","To quit my job"]},
+ {t:"If this was totally fixed, what would be different in your week?",h:"Optional. Your own words.",free:true}
+];
+
+let A=store.get('answers')||Array(Q.length).fill(null), cur=0, name=store.get('name')||"";
+const $=id=>document.getElementById(id);
+function show(id){["s-signup","s-quiz","s-map"].forEach(s=>$(s).classList.toggle('hide',s!==id));window.scrollTo(0,0)}
+
+function drawQ(){
+ const q=Q[cur];$('prog').style.width=Math.round(cur/Q.length*100)+'%';
+ let h='<div class="qnum">Question '+(cur+1)+' of '+Q.length+(q.part?' · '+q.part:'')+'</div><h2>'+q.t+'</h2>'+(q.h?'<p class="small">'+q.h+'</p>':'');
+ if(q.free){h+='<label for="free" class="hide">Your answer</label><textarea id="free" placeholder="Type it the way you\'d say it to a friend"></textarea>'}
+ else h+='<div class="opts">'+q.o.map((o,i)=>'<button type="button" class="opt'+(A[cur]===i?' on':'')+'" data-i="'+i+'">'+o+'</button>').join('')+'</div>';
+ $('qbox').innerHTML=h;
+ if(q.free){$('free').value=A[cur]||"";}
+ $('back').style.visibility=cur?'visible':'hidden';
+ $('next').textContent=cur===Q.length-1?'See my roadmap':'Next';
+ $('next').disabled=!q.free&&A[cur]===null;$('next').style.opacity=$('next').disabled?.5:1;
+}
+$('qbox').addEventListener('click',e=>{const b=e.target.closest('.opt');if(!b)return;A[cur]=+b.dataset.i;store.set('answers',A);drawQ();setTimeout(()=>go(1),180)});
+function go(d){
+ if(Q[cur].free&&$('free'))A[cur]=$('free').value.trim();
+ if(d>0&&!Q[cur].free&&A[cur]===null)return;
+ store.set('answers',A);
+ if(cur+d>=Q.length){finish();return}
+ cur=Math.max(0,cur+d);drawQ();
+}
+$('next').addEventListener('click',()=>go(1));$('back').addEventListener('click',()=>go(-1));
+
+$('signup').addEventListener('submit',e=>{e.preventDefault();name=$('fname').value.trim();store.set('name',name);cur=0;show('s-quiz');drawQ();location.hash='quiz'});
+
+function score(a){
+ const order=a.slice(4,12);
+ let stage=["Starting","Stuck","Stuck","Selling","Scaling"][a[0]];
+ if((a[0]===3||a[0]===4)&&order[1]!==2)stage="Stuck";
+ if(order.every(x=>x===2))stage="Scaling";
+ let start=order.findIndex(x=>x!==2);
+ const help=a[3],hrs=a[2],goal=a[13];let offer;
+ if(help===3)offer="Blueprint";else if(stage==="Scaling")offer="Blueprint";
+ else if(goal>=2&&hrs===3)offer="Blueprint";else if(hrs===0)offer="Membership";
+ else if(stage==="Starting")offer="Membership";
+ else if((stage==="Stuck"||stage==="Selling")&&help===2)offer="Intensive";
+ else if((stage==="Stuck"||stage==="Selling")&&help<2)offer="Membership";else offer="Call";
+ return{stage,start,order,offer};
+}
+const LINES={Starting:["You haven't built anything yet, and that's the best place to start. You get to do it in the right order from day one.","Business first, blog second."],
+ Stuck:["You've done the work. The money hasn't shown up. That's not a you problem. It's an order problem.","Your blog isn't your business. It's your marketing."],
+ Selling:["You've got something to sell. Now it needs a path that walks her from your post to your checkout.","Traffic needs somewhere to go."],
+ Scaling:["It's working, and it's eating your week. Now it needs systems, so it runs without you every minute.","You don't need more hours. You need fewer things that need you."]};
+const DESIRE=["your blog finally makes its first dollar","you can make a small but steady income from your blog","you can work for yourself and build your own schedule","you can work for yourself and build your own schedule"];
+const OFFERS={
+ Membership:{h:"Do your next step with us",p:"You don't have to do your next step alone. Inside The Blogging Ladies Membership you get short lessons, weekly live coaching calls and a room full of women doing the same step you are.",b:"Join The Blogging Ladies",u:()=>CONFIG.membership},
+ Intensive:{h:"Want me in your corner?",p:"You want me in your corner, privately, while you build. The Blog Profit Intensive is 12 weeks of 1:1 coaching on your offer and your sales path. Let's see if it fits on a free call first.",call:true},
+ Blueprint:{h:"Want it built with you?",p:"You don't need another course. You need it built. The BOSS Business Blueprint builds your brand, site, freebies, emails and first launch with you, over 6 months. I only take 5 clients at a time.",call:true},
+ Call:{h:"Let's look at this together",p:"Let's look at your roadmap together. On a free 1:1 call we map your next 6 months, whether you work with me or not.",call:true}};
+const FORM={"Starting|Membership":"R1","Starting|Blueprint":"R2","Stuck|Membership":"R3","Stuck|Intensive":"R4","Stuck|Blueprint":"R5","Selling|Membership":"R6","Selling|Intensive":"R7","Selling|Blueprint":"R8","Scaling|Blueprint":"R9"};
+
+function road(order,start){
+ const pts=[[40,130],[120,50],[200,120],[280,45],[360,125],[440,50],[520,120],[600,45]];
+ let d="M"+pts.map(p=>p.join(" ")).join(" L");
+ let s='<path d="'+d+'" fill="none" stroke="#A93F63" stroke-width="5" stroke-dasharray="2 12" stroke-linecap="round" stroke-linejoin="round"/>';
+ pts.forEach((p,i)=>{const done=order[i]===2,me=i===start;
+  s+='<circle cx="'+p[0]+'" cy="'+p[1]+'" r="'+(me?24:17)+'" fill="'+(me?'#E2638D':done?'#A93F63':'#FBF6EE')+'" stroke="#A93F63" stroke-width="3"/>';
+  s+=done&&!me?'<path d="M'+(p[0]-7)+' '+p[1]+' l5 5 l9 -10" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>':'<circle cx="'+p[0]+'" cy="'+p[1]+'" r="'+(me?7:4)+'" fill="'+(me?'#fff':'#A93F63')+'"/>';
+ });return s;
+}
+
+function finish(){
+ const r=score(A);
+ let t=store.get('start');if(!t){t=Date.now();store.set('start',t)}
+ store.set('result',r);location.hash='roadmap';
+ const step=r.start<0?SYSTEMS:STEPS[r.start];
+ $('r-head').textContent=(name?name+', you':'You')+"'re in the "+r.stage+" stage.";
+ $('r-line').textContent=LINES[r.stage][0];
+ $('r-road').innerHTML=road(r.order,r.start);
+ $('r-legend').textContent=r.start<0?"All 8 steps are done. Your next step is systems.":"Checked stops are done. The pink one is where you start: "+step.title+".";
+ const struggle=Q[12].o[A[12]],free=A[14];
+ const deadline=t+72*3600*1000,left=Math.max(0,deadline-Date.now());
+ const hrs=A[2],pace=hrs<=1?1:2;
+ const todo=[];for(let i=Math.max(0,r.start);i<8&&todo.length<8;i++)if(r.order[i]!==2||i===r.start)todo.push(STEPS[i].title);
+ if(r.start<0)todo.push("Systems");
+ const weeks=[0,1,2,3].map(w=>todo.slice(w*pace,w*pace+pace).join(" and ")||"Catch up, and send one more message to your 5 women");
+ const o=OFFERS[r.offer],formId=FORM[r.stage+"|"+r.offer];
+ let h='';
+ h+='<p class="small">The belief to hold onto:</p><h2>'+LINES[r.stage][1]+'</h2>';
+ h+='<p>You said the hardest part right now is: <strong>'+struggle.toLowerCase()+'</strong>.</p>';
+ if(free)h+='<p class="quote" id="r-free"></p>';
+ h+='<div class="card feature"><p class="small">Start here</p><h2>'+step.title+'</h2><h3>Your next 3 moves</h3><ol class="moves">'+step.moves.map(m=>'<li>'+m+'</li>').join('')+'</ol><p><strong>You\'re done when</strong> '+step.done+'</p></div>';
+ h+='<div class="card"><p class="small">The tool for your step</p><h3>'+step.tool+'</h3><p>30% off, plus '+step.bonus+', for the next <strong id="cd">72 hours</strong>.</p><a class="btn" href="'+(CONFIG.toolPages[step.tool]||'#roadmap')+'">See the tool</a></div>';
+ h+='<h2>Your 30 day plan</h2><table><tbody>'+weeks.map((w,i)=>'<tr><th>Week '+(i+1)+'</th><td>'+w+'</td></tr>').join('')+'</tbody></table><p class="small">Slow is fine. Backwards is what costs you.</p>';
+ h+='<h2 style="margin-top:28px">Your full checklist</h2>'+STEPS.map((s,i)=>'<div class="step"><h3>'+(i+1)+'. '+s.title+(r.order[i]===2?' <span class="badge">Done</span>':i===r.start?' <span class="badge">Start here</span>':'')+'</h3>'+s.moves.map((m,j)=>{const id='c'+i+'-'+j;return '<label class="chk"><input type="checkbox" id="'+id+'"'+((store.get(id)??r.order[i]===2)?' checked':'')+'><span>'+m+'</span></label>'}).join('')+'</div>').join('');
+ if(CONFIG.builder)h+='<div class="card"><h3>Stuck on a step?</h3><p>The Blog Business Builder writes your first draft with you.</p><a class="btn ghost" href="'+CONFIG.builder+'">Open the Blog Business Builder</a></div>';
+ h+='<div class="card" style="margin-top:20px"><p>In 2017 I started a lifestyle blog on an old MacBook in my aunt\'s basement. Two years in, my affiliate dashboard said about $50, and I couldn\'t even cash it out because the minimum was $100. Then I changed the order. My first Stripe payout was $18.52 on April 16, 2020.</p><p class="small">My results are my own, not a prediction of yours. But the order is the part I want you to steal.</p></div>';
+ h+='<div class="card feature"><h2>'+o.h+'</h2><p>'+o.p+'</p><a class="btn" style="background:#fff;color:#A93F63" href="'+(o.call?CONFIG.call:o.u())+'">'+(o.call?'Book a FREE Blog Business Monetization Fast Track Call so '+DESIRE[A[13]]:o.b)+'</a></div>';
+ h+='<div class="card"><h3>Send my roadmap to my inbox</h3><p class="small">So you can come back to it, plus a few emails written for your stage.</p>'+(CONFIG.forms[formId]||'<form id="sendme"><label for="se">Email</label><input id="se" type="email" autocomplete="email" required><div class="row"><button class="btn" type="submit">Send my roadmap</button></div><p class="small">Preview: on your site this is Flodesk form '+formId+'.</p></form>')+'</div>';
+ $('r-body').innerHTML=h;
+ if(free)$('r-free').textContent='And when it\'s fixed: “'+free+'”';
+ const sm=$('sendme');if(sm)sm.addEventListener('submit',e=>{e.preventDefault();sm.innerHTML='<p><strong>Saved here for now.</strong> On your site this goes to Flodesk.</p>'});
+ const tick=()=>{const ms=Math.max(0,deadline-Date.now()),el=$('cd');if(!el)return;el.textContent=ms?Math.floor(ms/3600000)+'h '+Math.floor(ms%3600000/60000)+'m left':'Ended';};tick();setInterval(tick,30000);
+ show('s-map');
+}
+$('r-body').addEventListener('change',e=>{if(e.target.matches('.chk input'))store.set(e.target.id,e.target.checked)});
+
+function route(){const h=location.hash.slice(1);
+ if(h==='roadmap'&&store.get('result')&&A.every((x,i)=>x!==null||Q[i].free)){finish();return}
+ if(h==='quiz'){show('s-quiz');drawQ();return}
+ show('s-signup');}
+window.addEventListener('hashchange',route);route();
+}
+</script>
+</body>
+</html>

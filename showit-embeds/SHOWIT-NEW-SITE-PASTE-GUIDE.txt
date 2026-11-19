@@ -27,6 +27,13 @@ BlackFriday.html          /black-friday  (Nov 25 early access through Cyber Mond
 Membership.html           /membership  (The Blogging Ladies Membership,
                           $47 a month sales page. Paste your checkout
                           link into every join button before publishing)
+Roadmap.html              /roadmap  (the Blog Business Roadmap free assessment:
+                          sign up, 15 questions and her personal roadmap,
+                          all on one page. It grows its own canvas, so
+                          any starting canvas height works)
+RoadmapTool.html          /roadmap-tool  (one page serves all 7 roadmap tools:
+                          /roadmap-tool?tool=launch-planner and so on.
+                          30% off only shows inside her own 72 hours)
 Podcast.html              /podcast
 BlogLanding.html          /blog  (OPTIONAL - your blog already works;
                           only use if you want the new blog landing look)
