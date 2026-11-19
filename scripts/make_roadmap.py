@@ -14,11 +14,18 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 SRC = ROOT / "roadmap"
 cfg = json.loads((SRC / "config.json").read_text())
 cfg.pop("_read_me", None)
-blob = json.dumps(cfg, ensure_ascii=True).replace("<", "\\u003c")
+def to_blob(c):
+    return json.dumps(c, ensure_ascii=True).replace("<", "\\u003c")
+
+# The roadmap only needs each tool's name and bonus; the tool page gets everything.
+lean = json.loads(json.dumps(cfg))
+for t in lean["tools"].values():
+    for k in ("summary", "details", "feel", "cover", "bonusDelivery", "price"):
+        t.pop(k, None)
 
 BANNED = ["—", "–", "…", "..."]
 
-def build(src, embed, page, title):
+def build(src, embed, page, title, blob):
     code = (SRC / src).read_text().replace("__CONFIG__", blob)
     for b in BANNED:
         if b in code:
@@ -33,5 +40,5 @@ def build(src, embed, page, title):
                    + code + "\n</body></html>\n")
     print(f"wrote showit-embeds/{embed} ({len(code.encode())//1024} KB) and site/{page}/index.html")
 
-build("Roadmap.src.html", "Roadmap.html", "roadmap", "Blog Business Roadmap | Boss Lady Bloggers")
-build("RoadmapTool.src.html", "RoadmapTool.html", "roadmap-tool", "Roadmap Tool | Boss Lady Bloggers")
+build("Roadmap.src.html", "Roadmap.html", "roadmap", "Blog Business Roadmap | Boss Lady Bloggers", to_blob(lean))
+build("RoadmapTool.src.html", "RoadmapTool.html", "roadmap-tool", "Roadmap Tool | Boss Lady Bloggers", to_blob(cfg))

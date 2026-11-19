@@ -725,7 +725,7 @@ function renderMap(){
  h+='<div class="in" style="padding-bottom:clamp(56px,9vw,104px)"><div class="ticket" data-ticket>';
  h+='<div class="ticket-l"><span class="eyebrow">The tool for your step</span><h3>'+esc(tool.name)+'</h3>';
  if(tool.discountLink){
-  h+='<p data-live'+(live?'':' hidden')+'>Want a shortcut through this step? Get it at <b>30% off</b>, plus <b>'+esc(tool.bonus)+'</b> free, for the next 72 hours.</p>';
+  h+='<p data-live'+(live?'':' hidden')+'>Want a shortcut through this step? Get it at <b>30% off</b>'+(tool.bonus?', plus <b>'+esc(tool.bonus)+'</b> free,':'')+' for the next 72 hours.</p>';
   h+='<p data-dead'+(live?' hidden':'')+'>Your 30% off window has closed. The tool is still here at full price whenever you’re ready.</p>';
  }else h+='<p>Made for the exact step you’re on right now, so you’re not starting from a blank page.</p>';
  h+='<a class="btn" href="'+esc(link)+'">See the tool '+ARROW+'</a></div>';
