@@ -64,6 +64,7 @@ position:relative;width:100%;background:var(--cream);color:var(--plum);font:400 
 #bbt .list{list-style:none;display:grid;gap:12px}
 #bbt .list li{display:flex;gap:14px;align-items:flex-start;padding:16px 18px;border-radius:18px;background:var(--cream);font-size:17px;line-height:1.55}
 #bbt .list svg{flex:none;margin-top:3px}
+#bbt .summary{margin-top:18px;font-size:18px;line-height:1.6;color:var(--soft)}
 #bbt .desc{display:grid;gap:14px;font-size:17.5px}
 
 #bbt .bonus{background:var(--blush)}
@@ -94,7 +95,7 @@ position:relative;width:100%;background:var(--cream);color:var(--plum);font:400 
 
 @media (max-width:860px){
  #bbt .hero-grid,#bbt .two{grid-template-columns:minmax(0,1fr)}
- #bbt .cover{max-width:320px;order:-1}
+ #bbt .cover{max-width:250px;transform:rotate(1.5deg)}
  #bbt .bonus-card{grid-template-columns:minmax(0,1fr)}
 }
 @media (max-width:420px){#bbt .clock div{min-width:0;flex:1}#bbt .bar{font-size:14px}}
@@ -155,12 +156,12 @@ function render(){
  h+='<div class="deal">';
  if(live){
   h+='<div class="deal-top"><span class="tag">30% OFF</span><span class="mini">Ends in <b data-mini>72h 00m</b></span></div>';
-  h+='<p class="plus">'+TICK+'<span>Plus <b>'+esc(tool.bonus)+'</b>, free with your order.</span></p>';
+  h+=tool.bonus?'<p class="plus">'+TICK+'<span>Plus <b>'+esc(tool.bonus)+'</b>, free with your order.</span></p>':'<p class="slot">Slot: the bonus for this tool is not chosen yet.</p>';
   h+='<a class="btn" href="'+esc(tool.discountLink)+'">Get it for 30% off '+ARROW+'</a>';
-  h+='<p class="full"><a class="plain" href="'+esc(tool.fullPrice)+'">Or see it at full price</a></p>';
+  h+='<p class="full"><a class="plain" href="'+esc(tool.fullPrice)+'">Or pay full price'+(tool.price?' ('+esc(tool.price)+')':'')+'</a></p>';
  }else{
   if(expired)h+='<p class="mini">Your 72 hour window has closed. The tool is still right here, and it will still help.</p>';
-  h+='<a class="btn" href="'+esc(tool.fullPrice)+'">Get the '+esc(tool.name)+' '+ARROW+'</a>';
+  h+='<a class="btn" href="'+esc(tool.fullPrice)+'">'+(tool.price?'Get it for '+esc(tool.price):'Get the '+esc(tool.name))+' '+ARROW+'</a>';
  }
  if(deadline&&!tool.discountLink)h+='<p class="slot">Slot: the 30% off Payhip link for this tool is not set yet, so this page shows full price only.</p>';
  h+='</div></div>';
@@ -168,7 +169,7 @@ function render(){
  h+='</div></div></div>';
 
  /* what's inside */
- h+='<div class="inside sec"><div class="in two"><div><span class="eyebrow">What’s inside</span><h2>Everything you need for <span class="accent">this</span> step.</h2></div><div>';
+ h+='<div class="inside sec"><div class="in two"><div><span class="eyebrow">What’s inside</span><h2>Everything you need for <span class="accent">this</span> step.</h2>'+(tool.summary?'<p class="summary">'+esc(tool.summary)+'</p>':'')+'</div><div>';
  if(tool.details&&tool.details.length){
   h+='<ul class="list">'+tool.details.map(function(x){return '<li>'+TICK+'<span>'+esc(x)+'</span></li>';}).join('')+'</ul>';
  }else h+='<p class="slot">Slot: product details for '+esc(tool.name)+' go here, copied word for word from its Payhip page.</p>';
@@ -176,7 +177,7 @@ function render(){
 
  /* bonus + clock, only inside her window */
  if(live){
-  h+='<div class="bonus sec"><div class="in"><div class="bonus-card"><div class="gift">'+GIFT+'</div><div><span class="eyebrow">Your free bonus</span><h2>'+esc(tool.bonus)+'</h2>';
+  h+='<div class="bonus sec"><div class="in"><div class="bonus-card"><div class="gift">'+GIFT+'</div><div><span class="eyebrow">Your free bonus</span>'+(tool.bonus?'<h2>'+esc(tool.bonus)+'</h2>':'<p class="slot" style="margin:12px 0">Slot: the bonus for this tool is not chosen yet.</p>');
   h+='<p>Yours free when you get the '+esc(tool.name)+' at 30% off before your timer runs out.</p>';
   h+=tool.bonusDelivery?'<p style="margin-top:10px">'+esc(tool.bonusDelivery)+'</p>':'<p class="slot" style="margin-top:14px">Slot: how the bonus is delivered.</p>';
   h+='</div></div></div></div>';
@@ -185,7 +186,7 @@ function render(){
   h+='<p>Your 72 hours started the moment your roadmap opened. Refreshing won’t restart it and it never secretly extends. When it ends, the 30% off goes away.</p>';
   h+='<a class="btn cream" href="'+esc(tool.discountLink)+'">Get it for 30% off '+ARROW+'</a></div></div>';
  }else{
-  h+='<div class="sec"><div class="in note"><h2>Ready when <span class="accent">you</span> are.</h2><p>No pressure and no countdown. Just the tool for the step you’re on.</p><a class="btn" href="'+esc(tool.fullPrice)+'">Get the '+esc(tool.name)+' '+ARROW+'</a></div></div>';
+  h+='<div class="sec"><div class="in note"><h2>Ready when <span class="accent">you</span> are.</h2><p>No pressure and no countdown. Just the tool for the step you’re on.</p><a class="btn" href="'+esc(tool.fullPrice)+'">'+(tool.price?'Get it for '+esc(tool.price):'Get the '+esc(tool.name))+' '+ARROW+'</a></div></div>';
  }
  out.innerHTML=h;fit();
 }
