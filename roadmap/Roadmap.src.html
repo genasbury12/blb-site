@@ -594,8 +594,15 @@ function wire(id,formId,onDone,check){
   var msg=check(form);
   if(msg){e.preventDefault();e.stopImmediatePropagation();err.textContent=msg;return;}
   err.textContent='';
-  if(!formId){e.preventDefault();finish();return;}
+  e.preventDefault();
+  if(!formId){finish();return;}
   var b=form.querySelector('button');if(b){b.disabled=true;}
+  if(window.fd&&window.fd.q){
+   /* Flodesk's script didn't load (an ad blocker, a slow network): send the sign up ourselves, then move on */
+   var data={};form.querySelectorAll('input[name]').forEach(function(x){data[x.name]=x.value.trim();});
+   try{fetch('https://form.flodesk.com/forms/'+formId+'/submit',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data),keepalive:true}).catch(function(){});}catch(x){}
+   setTimeout(finish,400);return;
+  }
   setTimeout(function(){if(wrap.getAttribute('data-ff-stage')!=='error')finish();},9000);
  },true);
  if(formId){

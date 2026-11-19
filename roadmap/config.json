@@ -2,28 +2,29 @@
   "_read_me": "Every link and Flodesk slot for /roadmap and /roadmap-tool lives here. Fill a slot, then run: python3 scripts/make_roadmap.py",
   "membership": "https://bossladybloggers.thrivecart.com/the-blogging-ladies-membership/",
   "call": "https://calendly.com/bossladybloggers/15min",
-  "builder": "",
+  "builder": "https://claude.ai/artifact/UMt2Yx2Y4eMuH6Aaj83Qm5",
   "toolPage": "/roadmap-tool",
-  "signupFormId": "",
+  "signupFormId": "6aff6a8473f8bdfcb05be936",
   "resultForms": {
-    "R1": "",
-    "R2": "",
-    "R3": "",
-    "R4": "",
-    "R5": "",
-    "R6": "",
-    "R7": "",
-    "R8": "",
-    "R9": ""
+    "R1": "6aff6ad28bbdc2f07c6160db",
+    "R2": "6aff6b011cfbf326f691edec",
+    "R3": "6aff6b30cbf96f57599c2671",
+    "R4": "6aff6b4bf350b3fd816d7f38",
+    "R5": "6aff6b82cbf96f57599c2672",
+    "R6": "6aff6b9d7cef1eab337d3da7",
+    "R7": "6aff6bb78baf931adbc20cfe",
+    "R8": "6aff6be65b20d36e2c701ad5",
+    "R9": "6aff6c011cfbf326f691edf3"
   },
   "tools": {
     "launch-planner": {
       "name": "Digital Product Launch Planner",
       "price": "$27",
+      "dealPrice": "$18.90",
       "bonus": "Freebie Planner + Opt-in Copy Template",
       "fullPrice": "https://payhip.com/b/ntQVE",
-      "discountLink": "",
-      "bonusDelivery": "",
+      "discountLink": "https://payhip.com/order?link=6oKvg&pricing_plan=2VGJl76kzD",
+      "bonusDelivery": "Both downloads arrive together when you check out.",
       "cover": "",
       "summary": "A 6 week launch planner for bloggers, coaches and course creators launching a product to their email list. Enter your launch date and it fills in the due dates, email schedule and sales math. Ready-made tasks, hooks and email slots, plus a full example launch. It doesn't write your emails. Google Sheets, with an XLSX version included.",
       "details": [
@@ -41,9 +42,10 @@
     "starter-kit": {
       "name": "The Blog to Paid Starter Kit",
       "price": "$197",
+      "dealPrice": "$137.90",
       "bonus": "",
       "fullPrice": "https://payhip.com/b/byO9v",
-      "discountLink": "",
+      "discountLink": "https://payhip.com/order?link=r8Aj6&pricing_plan=yZGjQm61BN",
       "bonusDelivery": "",
       "cover": "",
       "summary": "22 templates, swipe files, workbooks and planners for selling your own product from your blog, in the order you use them. Worth $460 bought piece by piece. Tools only, not coaching.",
@@ -56,15 +58,17 @@
         "Start Here PDF with every link, in order"
       ],
       "step": "Your message, copy and brand",
-      "feel": "You know who you help. Now you want words and a look that make her feel like you built this just for her, instead of rewriting your homepage for the fifth time."
+      "feel": "You know who you help. Now you want words and a look that make her feel like you built this just for her, instead of rewriting your homepage for the fifth time.",
+      "_bonus_note": "Planned bonus: first month of The Blogging Ladies Membership free. Add it here only once the ThriveCart coupon exists."
     },
     "welcome-sequence": {
       "name": "Welcome Sequence Swipe File",
       "price": "$17",
+      "dealPrice": "$11.90",
       "bonus": "Freebie Planner + Opt-in Copy Template",
       "fullPrice": "https://payhip.com/b/xbiSu",
-      "discountLink": "",
-      "bonusDelivery": "",
+      "discountLink": "https://payhip.com/order?link=wZiNG&pricing_plan=APzDJw6PGE",
+      "bonusDelivery": "Both downloads arrive together when you check out.",
       "cover": "",
       "summary": "Five welcome emails for someone who just got your freebie, over 7 days: deliver the freebie, build trust, teach one idea, make a plain offer, final nudge. Google Doc.",
       "details": [
@@ -81,10 +85,11 @@
     "content-plan": {
       "name": "90-Day Long-Form Content Plan",
       "price": "$17",
+      "dealPrice": "$11.90",
       "bonus": "20 Pinterest Pin Templates for Offer-Led Blog Posts",
       "fullPrice": "https://payhip.com/b/zfi5n",
-      "discountLink": "",
-      "bonusDelivery": "",
+      "discountLink": "https://payhip.com/order?link=HhUgz&pricing_plan=ZoWVroxrWA",
+      "bonusDelivery": "Both downloads arrive together when you check out.",
       "cover": "",
       "summary": "13 weeks of blog posts, podcast episodes or videos where every piece points to something you sell. Google Sheets.",
       "details": [
@@ -100,10 +105,11 @@
     "pin-templates": {
       "name": "20 Pinterest Pin Templates for Offer-Led Blog Posts",
       "price": "$12",
-      "bonus": "90-Day Long-Form Content Plan",
+      "dealPrice": "$8.40",
+      "bonus": "Freebie Planner + Opt-in Copy Template",
       "fullPrice": "https://payhip.com/b/vKxpr",
-      "discountLink": "",
-      "bonusDelivery": "",
+      "discountLink": "https://payhip.com/order?link=kxGCq&pricing_plan=q3BoNj80zE",
+      "bonusDelivery": "Both downloads arrive together when you check out.",
       "cover": "",
       "summary": "20 editable pins (1000 x 1500) in free Canva for posts that lead to a freebie or product.",
       "details": [
@@ -118,10 +124,11 @@
     "launch-kit": {
       "name": "The Launch Kit",
       "price": "$97",
+      "dealPrice": "$67.90",
       "bonus": "Welcome Sequence Swipe File",
       "fullPrice": "https://payhip.com/b/MNLUT",
-      "discountLink": "",
-      "bonusDelivery": "",
+      "discountLink": "https://payhip.com/order?link=6ceVG&pricing_plan=63WdA3Lkzw",
+      "bonusDelivery": "Both downloads arrive together when you check out.",
       "cover": "",
       "summary": "The page, the proof, the emails and the plan for launching a digital product, course or coaching offer. 4 products for one price.",
       "details": [
@@ -137,10 +144,11 @@
     "dashboard": {
       "name": "Blog Business Dashboard (Notion)",
       "price": "$47",
+      "dealPrice": "$32.90",
       "bonus": "Client Welcome Packet + Onboarding Kit",
       "fullPrice": "https://payhip.com/b/CS2Br",
-      "discountLink": "",
-      "bonusDelivery": "",
+      "discountLink": "https://payhip.com/order?link=TL5wv&pricing_plan=ZwzKR717W9",
+      "bonusDelivery": "Both downloads arrive together when you check out.",
       "cover": "",
       "summary": "One Notion page for your offers, content, emails, launches and money, each linked back to an offer so you can see what's making money. Pre-filled with an example. Free Notion plan. You log payments and email stats by hand in a 20 minute weekly review. It doesn't connect to Stripe, Etsy or email tools.",
       "details": [

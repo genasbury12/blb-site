@@ -14,13 +14,17 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 SRC = ROOT / "roadmap"
 cfg = json.loads((SRC / "config.json").read_text())
 cfg.pop("_read_me", None)
+for t in cfg["tools"].values():
+    t.pop("_bonus_note", None)
+
+
 def to_blob(c):
     return json.dumps(c, ensure_ascii=True).replace("<", "\\u003c")
 
 # The roadmap only needs each tool's name and bonus; the tool page gets everything.
 lean = json.loads(json.dumps(cfg))
 for t in lean["tools"].values():
-    for k in ("summary", "details", "feel", "cover", "bonusDelivery", "price"):
+    for k in ("summary", "details", "feel", "cover", "bonusDelivery", "price", "dealPrice", "_bonus_note"):
         t.pop(k, None)
 
 BANNED = ["—", "–", "…", "..."]
