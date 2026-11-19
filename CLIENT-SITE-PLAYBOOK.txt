@@ -501,6 +501,28 @@ mobile-verified at 390px, delivered as .txt files."
 =====================================================================
 CHANGELOG (newest first)
 =====================================================================
+2026-11-19  v3.8  Second client kickoff: Fearless Business Boss
+                  (clients/fearless-business-boss/, builder +
+                  homepage first, per the kickoff prompt). The
+                  client's live site was proxy-blocked until the
+                  domain was added to the environment's allowed
+                  hosts; after that, copy, offers, testimonials and
+                  photos were pulled straight from the WordPress
+                  pages. LESSONS: (1) a reveal's final state
+                  (transform:none) silently flattens any decorative
+                  rotate/translate on the same element (fanned
+                  polaroids came out straight). Put decorative tilt
+                  on the individual rotate/translate properties, or
+                  on a child, never on transform of a data-rv
+                  element. (2) A long nowrap pill button sets the
+                  min-content width of its grid column and pushes
+                  the column past 390px; on phones let buttons wrap
+                  and give grid children min-width:0. (3) Playfair
+                  Display defaults to old-style numerals; set
+                  font-variant-numeric:lining-nums for prices and
+                  stats. (4) Scope stat styles to direct children
+                  (.st>span); a bare .st span also hit the count-up
+                  number and shrank it to body size.
 2026-11-14  v5.4  V7 HOMEPAGE + LINKS PAGE (client: "take jenna
                   kutcher and spicy website, combine them... build
                   me a gorgeous site"). Studied both reference sites

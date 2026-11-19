@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fearless Business Boss | Business Coach for Women Service Providers</title>
+<meta name="description" content="Tammy Durden helps seasoned women service providers earn more and work less by handing off the right work and building a virtual team. Book a free Hand-Off Plan call.">
+<script>document.documentElement.classList.add('js')</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F7F9FC; --tint:#EBF1FA; --sky:#D9E6FB;
+  --ink:#0E1B3A; --ink2:#16295A; --text:#1B2846; --muted:#56637F; --line:#D5DEEC;
+  --blue:#2456D3; --blue2:#1A3D96; --btn1:#2F6BEA; --btn2:#1E48B8;
+  --teal:#1497B4; --gold:#C2A15A; --gold2:#E7D6A8;
+  --serif:'Playfair Display',Georgia,'Times New Roman',serif;
+  --sans:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;
+  --r:22px; --shadow:0 30px 60px -30px rgba(14,27,58,.35),0 10px 24px -12px rgba(14,27,58,.18);
+}
+*,*:before,*:after{box-sizing:border-box}
+html,body{margin:0;padding:0;overflow-x:hidden;overflow-x:clip}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--paper);color:var(--text);font-family:var(--sans);font-variant-numeric:lining-nums;font-size:18px;line-height:1.65;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:var(--blue)}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:600;color:var(--ink);line-height:1.12;margin:0 0 .5em;letter-spacing:-.01em}
+h1{font-size:clamp(40px,5.6vw,74px)}
+h2{font-size:clamp(32px,4vw,52px)}
+h3{font-size:clamp(22px,2.2vw,28px)}
+p{margin:0 0 1em}
+em.ac,.ac{font-style:italic;color:var(--blue)}
+.wrap{width:min(1200px,92vw);margin:0 auto;position:relative}
+.narrow{width:min(820px,92vw);margin:0 auto;position:relative}
+section{position:relative;overflow:hidden;padding:clamp(72px,9vw,128px) 0}
+.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:absolute;left:-999px;top:8px;z-index:999;background:var(--ink);color:#fff;padding:10px 16px;border-radius:10px}
+.skip:focus{left:8px}
+:focus-visible{outline:3px solid var(--teal);outline-offset:3px;border-radius:6px}
+
+/* eyebrow + hand note */
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font:700 13px/1.45 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--blue2);margin-bottom:18px}
+.eyebrow:before{content:"";width:26px;height:2px;background:var(--gold)}
+.on-ink .eyebrow{color:var(--gold2)}
+.note{font-family:var(--serif);font-style:italic;color:var(--muted);font-size:clamp(19px,1.8vw,23px)}
+.lead{font-size:clamp(19px,1.6vw,21px);color:var(--muted);max-width:640px}
+.on-ink{background:var(--ink);color:#DCE4F3}
+.on-ink h1,.on-ink h2,.on-ink h3{color:#fff}
+.on-ink .ac{color:#9DBBFF}
+.on-ink .lead,.on-ink .note{color:#B9C6E0}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:56px;padding:16px 30px;border-radius:60px;border:0;cursor:pointer;
+  background:linear-gradient(135deg,var(--btn1),var(--btn2));color:#fff;font:700 15px/1.2 var(--sans);letter-spacing:.06em;text-transform:uppercase;text-decoration:none;
+  box-shadow:0 14px 30px -12px rgba(36,86,211,.65);transition:transform .25s,box-shadow .25s,background .25s;position:relative;overflow:hidden;white-space:nowrap}
+.btn:hover{transform:translateY(-2px);box-shadow:0 20px 36px -14px rgba(36,86,211,.75)}
+.btn svg{width:18px;height:18px;flex:none}
+.btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 2px var(--ink)}
+.btn.ghost:hover{background:var(--ink);color:#fff}
+.on-ink .btn.ghost{color:#fff;box-shadow:inset 0 0 0 2px rgba(255,255,255,.7)}
+.on-ink .btn.ghost:hover{background:#fff;color:var(--ink)}
+.btn.gold{background:linear-gradient(135deg,#D9BE7C,#B48E40);color:var(--ink);box-shadow:0 14px 30px -12px rgba(180,142,64,.7)}
+.btn .rip{position:absolute;border-radius:50%;background:rgba(255,255,255,.45);transform:scale(0);animation:rip .6s ease-out forwards;pointer-events:none}
+@keyframes rip{to{transform:scale(4);opacity:0}}
+.btn-row{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+@media(max-width:640px){.btn{white-space:normal;text-align:center;padding:16px 24px}.btn-row .btn{width:100%}}
+[class$="-g"]>*{min-width:0}
+.tlink{font-weight:700;color:var(--ink);text-decoration:none;border-bottom:2px solid var(--gold);padding-bottom:2px}
+.tlink:hover{color:var(--blue)}
+.on-ink .tlink{color:#fff}
+
+/* cards, chips, frames */
+.card{background:#fff;border-radius:var(--r);box-shadow:var(--shadow);padding:clamp(26px,3vw,38px);position:relative}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:40px;background:var(--sky);color:var(--blue2);font:600 14px/1.2 var(--sans)}
+.chip.gold{background:#F4ECD6;color:#7A5C1E}
+.ph{display:inline-block;border:2px dashed var(--gold);color:#7A5C1E;background:#FBF6E8;border-radius:10px;padding:2px 10px;font:600 14px/1.5 var(--sans)}
+.arch{border-radius:46vw 46vw 24px 24px;overflow:hidden;box-shadow:var(--shadow)}
+.arch img{width:100%;height:100%;object-fit:cover}
+.wm{position:absolute;font-family:var(--serif);font-style:italic;font-weight:600;font-size:clamp(120px,19vw,300px);line-height:.8;color:transparent;
+  -webkit-text-stroke:1.5px rgba(36,86,211,.13);white-space:nowrap;pointer-events:none;user-select:none;z-index:0}
+.on-ink .wm{-webkit-text-stroke-color:rgba(157,187,255,.14)}
+section>.wrap,section>.narrow{z-index:1}
+.squig{display:block;width:180px;height:14px;margin:6px 0 22px}
+.center{text-align:center}
+.center .squig{margin-left:auto;margin-right:auto}
+.center .lead{margin-left:auto;margin-right:auto}
+
+/* spinning badge */
+.spin{position:absolute;width:150px;height:150px;border-radius:50%;background:var(--ink);display:grid;place-items:center;box-shadow:var(--shadow);z-index:3}
+.spin svg{position:absolute;inset:0;width:100%;height:100%;animation:spin 18s linear infinite}
+.spin text{font:700 11px var(--sans);letter-spacing:.12em;fill:#fff;text-transform:uppercase}
+.spin b{width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,var(--btn1),var(--btn2));display:grid;place-items:center;color:#fff;font:italic 600 28px var(--serif)}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* marquees */
+.mq{overflow:hidden;white-space:nowrap;position:relative}
+.mq-track{display:inline-flex;animation:mq 38s linear infinite}
+.mq-track>span{display:inline-flex;align-items:center;gap:26px;padding-right:26px}
+.mq.rev .mq-track{animation-direction:reverse}
+@keyframes mq{to{transform:translateX(-50%)}}
+.mq:hover .mq-track{animation-play-state:paused}
+.strip{background:var(--blue);color:#fff;padding:20px 0;font:600 17px var(--sans);letter-spacing:.04em}
+.strip i{font-style:normal;color:var(--gold2)}
+.outline-mq{padding:26px 0;background:var(--paper);border-top:1px solid var(--line)}
+.outline-mq span{font:italic 600 clamp(44px,7vw,92px)/1.1 var(--serif);color:transparent;-webkit-text-stroke:1.4px var(--blue)}
+.outline-mq span i{font-style:normal;-webkit-text-stroke:0;color:var(--gold);font-size:.5em}
+
+/* announcement banner */
+.ann{background:var(--ink);color:#fff;position:relative;z-index:60;font:600 14.5px/1 var(--sans);letter-spacing:.04em}
+.ann a{color:#fff;text-decoration:none;display:block;padding:13px 54px 13px 0}
+.ann .mq-track{animation-duration:30s}
+.ann b{color:var(--gold2);font-weight:700}
+.ann .dot{width:6px;height:6px;border-radius:50%;background:var(--gold);display:inline-block}
+.ann-x{position:absolute;right:0;top:0;bottom:0;width:48px;border:0;background:var(--ink);color:#fff;font-size:22px;cursor:pointer}
+.ann.hide{display:none}
+
+/* nav */
+.navt{position:absolute;opacity:0;pointer-events:none}
+.nav{position:sticky;top:0;z-index:50;background:rgba(247,249,252,.92);backdrop-filter:saturate(1.4) blur(12px);-webkit-backdrop-filter:saturate(1.4) blur(12px);border-bottom:1px solid transparent;transition:border-color .3s,box-shadow .3s}
+.nav.stuck{border-color:var(--line);box-shadow:0 10px 30px -20px rgba(14,27,58,.4)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:18px;min-height:82px}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink);white-space:nowrap}
+.logo .mono{width:46px;height:46px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font:italic 600 25px/1 var(--serif);position:relative;flex:none}
+.logo .mono:after{content:"";position:absolute;inset:3px;border-radius:50%;border:1px solid rgba(231,214,168,.7)}
+.logo .wt{display:flex;flex-direction:column;line-height:1}
+.logo .wt b{font:italic 600 25px/1 var(--serif)}
+.logo .wt small{font:700 10.5px/1 var(--sans);letter-spacing:.32em;text-transform:uppercase;color:var(--blue2);margin-top:6px}
+.nav-r{display:flex;align-items:center;gap:14px}
+.nav-links{display:flex;gap:26px;margin-right:8px}
+.nav-links a{color:var(--ink);text-decoration:none;font:600 14px var(--sans);letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
+.nav-links a:hover{color:var(--blue)}
+.nav .btn{min-height:48px;padding:12px 22px;font-size:13px}
+.burger{display:inline-flex;align-items:center;gap:12px;cursor:pointer;background:var(--ink);color:#fff;border-radius:60px;padding:0 20px 0 18px;height:48px;font:700 13px var(--sans);letter-spacing:.16em;text-transform:uppercase;user-select:none}
+.burger .bars{width:20px;display:grid;gap:5px}
+.burger .bars i{height:2px;background:#fff;border-radius:2px;display:block;transition:transform .3s,opacity .3s}
+.burger .bars i:nth-child(2){width:70%;justify-self:end}
+.burger:hover .bars i:nth-child(2){width:100%}
+@media(max-width:1120px){.nav-links{display:none}}
+@media(max-width:720px){.nav .btn{display:none}.logo .wt b{font-size:21px}.logo .wt small{font-size:9px;letter-spacing:.26em}.logo .mono{width:40px;height:40px;font-size:21px}.burger{padding:0 16px}.nav .wrap{min-height:72px}}
+@media(max-width:380px){.burger .lbl{display:none}}
+
+/* pull-out drawer */
+.scrim{position:fixed;inset:0;background:rgba(9,17,38,.55);opacity:0;pointer-events:none;transition:opacity .35s;z-index:80}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(480px,100vw);background:var(--ink);color:#fff;z-index:90;transform:translateX(102%);transition:transform .5s cubic-bezier(.7,0,.2,1);
+  display:flex;flex-direction:column;overflow-y:auto;overscroll-behavior:contain;visibility:hidden}
+.navt:checked~.drawer{transform:none;visibility:visible}
+.navt:checked~.scrim{opacity:1;pointer-events:auto}
+.dr-top{display:flex;justify-content:space-between;align-items:center;padding:22px 26px;border-bottom:1px solid rgba(255,255,255,.1)}
+.dr-top .eyebrow{margin:0;color:var(--gold2)}
+.dr-x{width:46px;height:46px;border-radius:50%;border:1.5px solid rgba(255,255,255,.4);display:grid;place-items:center;cursor:pointer;color:#fff;font-size:24px;line-height:1;transition:transform .3s,background .3s}
+.dr-x:hover{transform:rotate(90deg);background:rgba(255,255,255,.1)}
+.dr-links{list-style:none;margin:0;padding:12px 26px 8px;counter-reset:m}
+.dr-links li{counter-increment:m;border-bottom:1px solid rgba(255,255,255,.08);opacity:0;transform:translateX(30px);transition:opacity .4s,transform .4s}
+.navt:checked~.drawer .dr-links li{opacity:1;transform:none}
+.dr-links a{display:flex;align-items:baseline;gap:16px;padding:13px 0;text-decoration:none;color:#fff}
+.dr-links a:before{content:counter(m,decimal-leading-zero);font:600 12px var(--sans);color:var(--gold);letter-spacing:.1em;width:22px}
+.dr-links b{font:500 25px/1.15 var(--serif);transition:color .2s,transform .3s}
+.dr-links small{margin-left:auto;font:500 12.5px var(--sans);color:#8FA0C4;text-align:right}
+.dr-links a:hover b{color:#9DBBFF;transform:translateX(6px)}
+.dr-links a[aria-current] b{color:#9DBBFF;font-style:italic}
+.dr-card{margin:18px 26px 26px;border-radius:20px;background:linear-gradient(140deg,#1B3478,#122555);padding:22px;display:grid;grid-template-columns:96px 1fr;gap:18px;align-items:center;position:relative;overflow:hidden}
+.dr-card img{width:96px;height:118px;object-fit:cover;border-radius:60px 60px 14px 14px}
+.dr-card p{margin:0 0 12px;font:italic 500 19px/1.3 var(--serif);color:#fff}
+.dr-card .btn{min-height:46px;padding:11px 18px;font-size:12px;white-space:normal;text-align:center}
+.dr-foot{margin-top:auto;padding:18px 26px 26px;display:flex;flex-wrap:wrap;gap:10px;font-size:14px;color:#8FA0C4}
+.dr-foot a{color:#fff;text-decoration:none;border:1px solid rgba(255,255,255,.25);padding:7px 14px;border-radius:30px;font-weight:600;font-size:13px}
+.dr-foot a:hover{background:#fff;color:var(--ink)}
+@media(max-width:480px){.dr-links small{display:none}.dr-links b{font-size:23px}}
+.navt:checked~.drawer .dr-links li:nth-child(1){transition-delay:.12s}
+.navt:checked~.drawer .dr-links li:nth-child(2){transition-delay:.15s}
+.navt:checked~.drawer .dr-links li:nth-child(3){transition-delay:.18s}
+.navt:checked~.drawer .dr-links li:nth-child(4){transition-delay:.21s}
+.navt:checked~.drawer .dr-links li:nth-child(5){transition-delay:.24s}
+.navt:checked~.drawer .dr-links li:nth-child(6){transition-delay:.27s}
+.navt:checked~.drawer .dr-links li:nth-child(7){transition-delay:.30s}
+.navt:checked~.drawer .dr-links li:nth-child(8){transition-delay:.33s}
+.navt:checked~.drawer .dr-links li:nth-child(9){transition-delay:.36s}
+.navt:checked~.drawer .dr-links li:nth-child(10){transition-delay:.39s}
+.navt:checked~.drawer .dr-links li:nth-child(11){transition-delay:.42s}
+html.lock,html.lock body{overflow:hidden}
+
+/* FAQ (details: works with no JS) */
+.faq details{background:#fff;border-radius:18px;margin-bottom:14px;box-shadow:0 12px 30px -22px rgba(14,27,58,.45);border:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;padding:22px 64px 22px 26px;font:600 clamp(18px,1.6vw,21px)/1.35 var(--serif);color:var(--ink);position:relative}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:after{content:"+";position:absolute;right:22px;top:50%;transform:translateY(-50%);width:32px;height:32px;border-radius:50%;background:var(--sky);color:var(--blue2);display:grid;place-items:center;font:600 22px/1 var(--sans);transition:transform .3s,background .3s}
+.faq details[open] summary:after{transform:translateY(-50%) rotate(45deg);background:var(--blue);color:#fff}
+.faq .a{padding:0 26px 24px;color:var(--muted)}
+
+/* final CTA */
+.final{text-align:center;background:radial-gradient(1200px 500px at 50% 120%,#21419A 0%,var(--ink) 60%)}
+.final h2{font-size:clamp(38px,5.4vw,72px);max-width:960px;margin:0 auto .3em}
+.shimmer{background:linear-gradient(100deg,#fff 20%,#9DBBFF 40%,#fff 60%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shim 6s linear infinite}
+@keyframes shim{to{background-position:-250% 0}}
+.final .btn-row{justify-content:center;margin-top:34px}
+.final .fine{margin-top:22px;font-size:15px;color:#8FA0C4}
+
+/* footer */
+.foot{background:#0A1430;color:#AFBCD8;padding:80px 0 34px;position:relative;overflow:hidden}
+.foot .big{font:italic 600 clamp(64px,13vw,200px)/.9 var(--serif);color:transparent;-webkit-text-stroke:1.2px rgba(157,187,255,.28);white-space:nowrap;text-align:center;margin-bottom:56px}
+.fgrid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:44px}
+.foot h4{font:700 13px var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--gold2);margin-bottom:18px}
+.foot ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.foot a{color:#DCE4F3;text-decoration:none}
+.foot a:hover{color:#fff;text-decoration:underline}
+.foot .pills{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.foot .pills a{border:1px solid rgba(255,255,255,.25);border-radius:30px;padding:8px 16px;font-size:14px;font-weight:600}
+.foot .sign{font:italic 500 28px var(--serif);color:#fff;margin-top:14px}
+.foot .bottom{border-top:1px solid rgba(255,255,255,.1);margin-top:56px;padding-top:24px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-size:14px}
+.foot .btn{margin-top:6px;white-space:normal;text-align:center}
+@media(max-width:900px){.fgrid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.fgrid{grid-template-columns:1fr}}
+
+/* back to top */
+.totop{position:fixed;right:18px;bottom:18px;width:52px;height:52px;border-radius:50%;background:var(--ink);color:#fff;border:0;display:grid;place-items:center;cursor:pointer;z-index:40;opacity:0;transform:translateY(16px);transition:.3s;box-shadow:var(--shadow)}
+.totop.on{opacity:1;transform:none}
+
+/* loader: only exists when JS runs; CSS kills it at 3s regardless */
+.loader{display:none}
+.js .loader{position:fixed;inset:0;z-index:200;background:var(--ink);display:grid;place-items:center;animation:ldkill .01s 3s forwards;transition:opacity .5s,visibility .5s}
+.loader .ld{display:grid;justify-items:center;gap:18px}
+.loader .m{width:84px;height:84px;border-radius:50%;border:1.5px solid var(--gold);display:grid;place-items:center;color:#fff;font:italic 600 44px/1 var(--serif);animation:ldp 1.6s ease-in-out infinite}
+.loader small{font:700 11px var(--sans);letter-spacing:.34em;text-transform:uppercase;color:var(--gold2)}
+.loader.done{opacity:0;visibility:hidden}
+@keyframes ldkill{to{opacity:0;visibility:hidden}}
+@keyframes ldp{50%{transform:scale(1.07);box-shadow:0 0 0 14px rgba(194,161,90,.12)}}
+
+/* reveal on scroll. Hide rule (.js [data-rv]) is WEAKER than show rule
+   (.js [data-rv].in). Final state resets opacity/transform only: no
+   clip-path on resting content (playbook v3.7). */
+.js [data-rv]{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
+.js [data-rv="l"]{transform:translateX(-34px)}
+.js [data-rv="r"]{transform:translateX(34px)}
+.js [data-rv="z"]{transform:scale(.94)}
+.js [data-rv].in{opacity:1;transform:none}
+@media(max-width:760px){.js [data-rv="l"],.js [data-rv="r"]{transform:translateY(26px)}}
+
+@media(prefers-reduced-motion:reduce){
+  *,*:before,*:after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+  .js [data-rv]{opacity:1;transform:none}
+  .mq-track{animation:none!important}
+  .js .loader{display:none}
+}
+
+/* hero */
+.hero{padding:clamp(40px,6vw,84px) 0 clamp(70px,8vw,110px)}
+.hero-g{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(36px,5vw,80px);align-items:center}
+.hero h1{margin-bottom:0;font-size:clamp(40px,5.2vw,68px)}
+.tw{font:500 19px var(--sans);color:var(--ink);margin:0 0 30px}
+.tw-w{color:var(--blue);font-weight:700}
+.caret{display:inline-block;width:2px;height:1.1em;background:var(--blue);vertical-align:-3px;margin-left:3px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.trust{list-style:none;padding:0;margin:38px 0 0;display:flex;flex-wrap:wrap;gap:16px 30px}
+.trust li{display:flex;align-items:center;gap:12px;font-size:15px;color:var(--muted);line-height:1.35}
+.trust b{color:var(--ink);display:block}
+.stars{display:inline-flex;gap:1px;flex:none}
+.tbadge{flex:none;width:46px;height:46px;border-radius:50%;background:var(--sky);color:var(--blue2);display:grid;place-items:center;font:italic 600 19px var(--serif)}
+.hero-v{position:relative;max-width:520px;justify-self:center;width:100%}
+.hero-ph{aspect-ratio:4/5.2;width:100%;border:10px solid #fff;outline:1px solid var(--line)}
+.sticker{position:absolute;background:#fff;border-radius:18px;box-shadow:var(--shadow);padding:14px 18px;display:flex;align-items:center;gap:12px;font-size:15px;line-height:1.3;color:var(--muted);z-index:3}
+.sticker b{color:var(--ink)}
+.sticker svg{width:34px;height:34px;padding:7px;border-radius:50%;background:var(--blue);color:#fff;flex:none}
+.s1{right:-26px;top:60px;animation:bob 6s ease-in-out infinite}
+.s2{right:20px;bottom:-24px;flex-direction:column;align-items:flex-start;gap:0;background:var(--ink);color:#B9C6E0;animation:bob 7s ease-in-out -2s infinite}
+.s2 b{font:italic 600 26px var(--serif);color:#fff}
+@keyframes bob{50%{transform:translateY(-10px)}}
+
+/* checklist */
+.fam-g{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(30px,5vw,70px);align-items:start}
+.meter{background:#fff;border-radius:var(--r);padding:26px;box-shadow:var(--shadow);margin-top:26px}
+.meter-n{font:500 16px var(--sans);color:var(--muted)}
+.meter-n b{font:italic 600 48px/1 var(--serif);color:var(--blue);margin-right:4px}
+.meter-bar{height:10px;border-radius:10px;background:var(--sky);margin:14px 0;overflow:hidden}
+.meter-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--teal),var(--blue));border-radius:10px;transition:width .5s cubic-bezier(.2,.7,.2,1)}
+#mMsg{font:italic 500 21px/1.35 var(--serif);color:var(--ink);min-height:2.7em}
+.meter .btn{width:100%;white-space:normal}
+.js .meter .btn{display:none}
+.js .meter.hot .btn{display:inline-flex}
+.checks{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.ck{width:100%;height:100%;min-height:86px;display:flex;align-items:center;gap:14px;text-align:left;background:#fff;border:2px solid transparent;border-radius:18px;padding:16px 18px;cursor:pointer;font:500 17px/1.35 var(--sans);color:var(--ink);box-shadow:0 12px 30px -22px rgba(14,27,58,.5);transition:border-color .25s,transform .25s,background .25s}
+.ck:hover{transform:translateY(-3px);border-color:var(--sky)}
+.ck .box{flex:none;width:30px;height:30px;border-radius:9px;border:2px solid var(--line);display:grid;place-items:center;color:transparent;transition:.25s}
+.ck .box svg{width:18px;height:18px}
+.ck[aria-pressed=true]{border-color:var(--blue);background:#F2F6FE}
+.ck[aria-pressed=true] .box{background:var(--blue);border-color:var(--blue);color:#fff}
+
+/* call band */
+.call-h{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end;margin-bottom:50px}
+.call-h .lead{margin:0}
+.call-g{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.ccard{background:linear-gradient(160deg,#1A2F66,#13244F);border:1px solid rgba(157,187,255,.18);border-radius:var(--r);padding:34px 30px;transition:transform .3s}
+.ccard .num{font:italic 600 58px/1 var(--serif);color:var(--gold);display:block;margin-bottom:18px}
+.ccard p{color:#B9C6E0;margin:0}
+.call-f{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:30px;margin-top:50px;padding-top:40px;border-top:1px solid rgba(255,255,255,.12)}
+.call-f blockquote{margin:0;max-width:620px}
+.call-f blockquote p{font:italic 500 clamp(20px,2vw,25px)/1.4 var(--serif);color:#fff;margin:0 0 10px}
+.call-f cite{font-style:normal;font-size:15px;color:var(--gold2)}
+.call-cta{display:flex;flex-direction:column;align-items:flex-start;gap:14px}
+
+/* meet */
+.meet-g{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,90px);align-items:center}
+.meet-v{position:relative;padding:0 40px 70px 0}
+.m-main{border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);aspect-ratio:4/3.4}
+.m-main img{width:100%;height:100%;object-fit:cover}
+.pola{position:absolute;right:0;bottom:0;width:44%;background:#fff;padding:10px 10px 0;margin:0;box-shadow:var(--shadow);transform:rotate(5deg);transition:transform .4s;z-index:2}
+.pola:hover{transform:rotate(0) scale(1.04)}
+.pola img{width:100%;aspect-ratio:1;object-fit:cover}
+.pola figcaption{font:italic 500 19px var(--serif);text-align:center;padding:10px 0 12px;color:var(--ink)}
+.m-tag{position:absolute;left:-14px;bottom:24px;background:var(--gold);color:var(--ink);font:600 14px var(--sans);padding:10px 16px;border-radius:40px;transform:rotate(-4deg);box-shadow:var(--shadow);z-index:3}
+.meet-chips{list-style:none;padding:0;margin:8px 0 26px;display:flex;flex-wrap:wrap;gap:10px}
+
+/* stats */
+.stats{background:linear-gradient(120deg,var(--blue2),var(--blue) 55%,#2F6BEA);color:#fff;padding:70px 0}
+.stats-g{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.st{text-align:center;padding:10px 14px;border-left:1px solid rgba(255,255,255,.22)}
+.st:first-child{border-left:0}
+.st b{display:block;font:italic 600 clamp(48px,5.5vw,72px)/1 var(--serif);color:#fff;margin-bottom:10px}
+.st>span{font-size:16px;color:#DCE6FF}
+
+/* offers */
+.off-g{display:grid;grid-template-columns:1fr 1.12fr 1fr;gap:24px;align-items:center;margin-top:46px}
+.off{background:#fff;border-radius:var(--r);padding:34px 30px;box-shadow:var(--shadow);border:1px solid var(--line);display:flex;flex-direction:column;position:relative}
+.off .tag{font:700 12px var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--blue2);margin-bottom:12px}
+.off p{color:var(--muted);font-size:17px}
+.ticks{list-style:none;padding:0;margin:4px 0 24px;display:grid;gap:10px}
+.ticks li{display:flex;gap:10px;align-items:flex-start;font-size:16px;line-height:1.4}
+.ticks svg{width:20px;height:20px;flex:none;color:var(--blue);margin-top:1px}
+.price{margin:auto 0 20px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.price b{font:italic 600 42px/1 var(--serif);color:var(--ink)}
+.price span{font-size:15px;color:var(--muted)}
+.off .btn{width:100%}
+.off.feat{background:var(--ink);color:#DCE4F3;padding:46px 34px;border:0;box-shadow:0 40px 80px -30px rgba(14,27,58,.6)}
+.off.feat h3{color:#fff;font-size:clamp(26px,2.6vw,32px)}
+.off.feat p,.off.feat .price span{color:#B9C6E0}
+.off.feat .tag{color:var(--gold2)}
+.off.feat .ticks svg{color:var(--gold)}
+.off.feat .price b{color:#fff;font-size:34px}
+.ribbon{position:absolute;top:-16px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--ink);font:700 12px var(--sans);letter-spacing:.18em;text-transform:uppercase;padding:9px 18px;border-radius:30px;white-space:nowrap}
+
+/* toggle */
+.sw-wrap{display:inline-flex;align-items:center;gap:16px;margin:16px 0 40px;font:600 17px var(--sans)}
+.sw-l{color:var(--muted);transition:color .3s}
+.sw-l.on{color:var(--ink)}
+.sw{width:76px;height:40px;border-radius:40px;border:0;background:var(--blue);position:relative;cursor:pointer;transition:background .3s}
+.sw i{position:absolute;top:5px;left:5px;width:30px;height:30px;border-radius:50%;background:#fff;transition:transform .35s cubic-bezier(.2,.7,.2,1);box-shadow:0 4px 10px rgba(0,0,0,.2)}
+.sw[aria-checked=true] i{transform:translateX(36px)}
+.sw[aria-checked=false]{background:#8D97AD}
+.ways{display:grid;grid-template-columns:1fr 1fr;gap:22px;text-align:left}
+.way{border-radius:var(--r);padding:32px;background:#fff;box-shadow:var(--shadow)}
+.way ul{list-style:none;padding:0;margin:0;display:grid;gap:12px}
+.way li{padding-left:34px;position:relative;font-size:17px}
+.old li{color:var(--muted);text-decoration:line-through;text-decoration-color:rgba(86,99,127,.5)}
+.old li:before{content:"\00d7";position:absolute;left:4px;top:-3px;font:600 24px var(--sans);color:#A4AEC2}
+.new{background:var(--ink)}
+.new h3{color:#fff}
+.new li{color:#fff}
+.new li:before{content:"";position:absolute;left:2px;top:5px;width:18px;height:18px;border-radius:50%;background:var(--gold) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230E1B3A' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center/12px no-repeat}
+.js .ways{grid-template-columns:1fr;max-width:620px;margin:0 auto}
+.js .ways .way{display:none;animation:wayin .45s ease}
+.js .ways[data-on=new] .new,.js .ways[data-on=old] .old{display:block}
+@keyframes wayin{from{opacity:0;transform:translateY(12px)}}
+.sw-wrap{display:none}
+.js .sw-wrap{display:inline-flex}
+
+/* videos */
+.vid-h{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:40px;flex-wrap:wrap}
+.vid-h h2{margin:0}
+.vid-g{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.vid-g figure{margin:0}
+.vid,.vid-g iframe{display:block;position:relative;aspect-ratio:16/9;border-radius:var(--r);overflow:hidden;width:100%;border:0;box-shadow:0 30px 60px -30px rgba(0,0,0,.7)}
+.vid img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.vid:hover img{transform:scale(1.04)}
+.vid:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(14,27,58,.5))}
+.play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:76px;height:76px;border-radius:50%;background:linear-gradient(135deg,var(--btn1),var(--btn2));display:grid;place-items:center;z-index:2;box-shadow:0 0 0 10px rgba(255,255,255,.15);transition:transform .3s}
+.vid:hover .play{transform:translate(-50%,-50%) scale(1.08)}
+.vid-g figcaption{margin-top:16px}
+.vid-g figcaption b{display:block;font:600 22px var(--serif);color:#fff}
+.vid-g figcaption span{font-size:15px;color:#8FA0C4}
+.press{display:flex;align-items:center;gap:24px;margin-top:60px;padding-top:30px;border-top:1px solid rgba(255,255,255,.12)}
+.press-l{flex:none;font:700 12px var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--gold2)}
+.press-mq{flex:1;min-width:0;font:italic 500 21px var(--serif);color:#DCE4F3;-webkit-mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.press-mq i{font-style:normal;color:var(--gold);font-size:13px}
+
+/* love */
+.love{padding-bottom:70px}
+.love-g{display:grid;grid-template-columns:1.2fr 1fr;gap:clamp(30px,5vw,70px);align-items:center}
+.love-h{font-size:clamp(26px,2.6vw,34px);margin-bottom:22px}
+.love-big blockquote{margin:18px 0 26px}
+.love-big p{font:italic 500 clamp(28px,3.2vw,42px)/1.3 var(--serif);color:var(--ink);margin:0 0 20px}
+.love-big cite{font-style:normal;font-size:16px;color:var(--muted)}
+.love-big cite b{color:var(--ink);margin-right:8px}
+.love-side{position:relative;display:grid;gap:18px;padding-right:110px}
+.lq{margin:0;background:#fff;border-radius:20px;padding:24px 26px;box-shadow:var(--shadow);border-left:4px solid var(--blue)}
+.lq.alt{border-left-color:var(--gold);margin-left:40px}
+.lq p{margin:0 0 10px;font-size:17px;color:var(--ink)}
+.lq figcaption{font-size:14px;color:var(--muted);font-weight:600}
+.love-ph{position:absolute;right:-10px;top:50%;width:150px;height:150px;object-fit:cover;border-radius:50%;border:6px solid #fff;box-shadow:var(--shadow);margin-top:-75px}
+.qmq{margin-top:70px}
+.quotes .mq-track{animation-duration:60s}
+.quotes span{display:inline-flex;flex-direction:column;justify-content:center;align-items:flex-start;text-align:left;white-space:normal;width:360px;min-height:150px;background:var(--tint);border-radius:20px;padding:22px 26px;margin-right:18px;gap:10px!important}
+.quotes q{font:italic 500 19px/1.4 var(--serif);color:var(--ink);quotes:"\201C" "\201D"}
+.quotes b{font-size:14px;color:var(--blue2)}
+
+/* free */
+.fan{display:flex;justify-content:center;align-items:flex-end;margin:50px 0 50px;min-height:330px}
+.fp{display:block;width:250px;background:#fff;padding:12px 12px 0;box-shadow:var(--shadow);text-decoration:none;color:var(--ink);transition:transform .4s;position:relative}
+.fp img{width:100%;height:280px;object-fit:cover;object-position:top}
+.fp span{display:block;font:italic 500 18px var(--serif);padding:12px 0 14px}
+/* individual transform props so the reveal's transform:none cannot flatten the fan */
+.fp{transition:rotate .4s,translate .4s,scale .4s,opacity .8s,transform .8s}
+.f1{rotate:-7deg;translate:0 10px;margin-right:-24px}
+.f2{z-index:2;translate:0 -14px}
+.f3{rotate:7deg;translate:0 10px;margin-left:-24px}
+.fan .fp:hover{rotate:0deg;translate:0 -22px;scale:1.05;z-index:3}
+
+/* learn rows */
+.learn-h{margin-bottom:30px}
+.row{display:grid;grid-template-columns:minmax(160px,300px) 1fr auto;gap:30px;align-items:center;padding:30px 10px;border-top:1px solid var(--line);text-decoration:none;color:var(--text);transition:background .3s,padding .3s}
+.row:last-child{border-bottom:1px solid var(--line)}
+.rw{font:italic 600 clamp(40px,5vw,66px)/1 var(--serif);color:transparent;-webkit-text-stroke:1.4px var(--ink);transition:color .3s}
+.rd{font-size:18px;color:var(--muted)}
+.rposts{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.rposts i{font-style:normal;font-size:14px;font-weight:600;background:var(--sky);color:var(--blue2);padding:6px 12px;border-radius:20px}
+.ra{width:58px;height:58px;border-radius:50%;border:1.5px solid var(--ink);display:grid;place-items:center;transition:.3s}
+.ra svg{width:22px;height:22px}
+.row:hover{background:#fff;padding-left:26px;padding-right:26px}
+.row:hover .rw{color:var(--blue);-webkit-text-stroke-color:var(--blue)}
+.row:hover .ra{background:var(--blue);border-color:var(--blue);color:#fff;transform:rotate(-45deg)}
+
+/* faq */
+.faq-g{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(30px,5vw,70px);align-items:start}
+.faq-l{position:sticky;top:110px}
+.faq-l img{width:100%;max-width:380px;aspect-ratio:1;object-fit:cover;border-radius:50%;border:8px solid #fff;box-shadow:var(--shadow);margin:10px 0 22px}
+
+@media(max-width:980px){
+  .hero-g,.fam-g,.meet-g,.love-g,.faq-g,.call-h{grid-template-columns:1fr}
+  .hero-v{max-width:440px;margin-top:20px}
+  .call-g{grid-template-columns:1fr}
+  .off-g{grid-template-columns:1fr;max-width:560px;margin-left:auto;margin-right:auto}
+  .off-g .feat{order:-1}
+  .stats-g{grid-template-columns:1fr 1fr}
+  .st:nth-child(3){border-left:0}
+  .faq-l{position:static}
+  .vid-g{grid-template-columns:1fr}
+  .meet-v{max-width:560px}
+}
+@media(max-width:640px){
+  body{font-size:17px}
+  .checks{grid-template-columns:1fr}
+  .ck{min-height:66px}
+  .s1{right:-6px;top:24px}
+  .hero-v .spin{left:-6px!important;bottom:40px!important;width:118px;height:118px}
+  .hero-v .spin b{width:48px;height:48px;font-size:22px}
+  .ways,.js .ways{grid-template-columns:1fr}
+  .way{padding:26px 22px}
+  .fan{flex-direction:column;align-items:center;gap:22px;min-height:0}
+  .f1,.f2,.f3{rotate:0deg;translate:none;margin:0}
+  .f1{rotate:-3deg}.f3{rotate:3deg}
+  .fp{width:min(280px,80vw)}
+  .row{grid-template-columns:1fr auto;gap:14px 18px;padding:24px 4px}
+  .rw{grid-column:1/-1}
+  .ra{width:48px;height:48px;grid-row:2;grid-column:2}
+  .love-side{padding-right:0}
+  .love-ph{display:none}
+  .lq.alt{margin-left:0}
+  .quotes span{width:290px}
+  .press{flex-direction:column;align-items:flex-start;gap:14px}
+  .press-mq{width:100%}
+  .sw-wrap{gap:10px;font-size:15px}
+  .meet-v{padding:0 20px 60px 0}
+  .m-tag{left:0}
+  .stats-g{gap:30px 10px}
+  .st{border-left:0}
+}
+</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is the Hand-Off Plan call really free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. It is a free 30-minute Zoom call with Tammy, and there is no sales pitch. You leave with your top three hand-offs, a quick price check on your packages, and one clear next step for the next 30 days."}}, {"@type": "Question", "name": "Who do you coach?", "acceptedAnswer": {"@type": "Answer", "text": "Women online service providers and solopreneurs: virtual assistants, bookkeepers, online business managers, consultants, coaches, course creators and agency owners. Many are seasoned women with years of experience who are booked full and ready to grow. Men are welcome on occasion if it is a good fit for both."}}, {"@type": "Question", "name": "Do I need to have a team already?", "acceptedAnswer": {"@type": "Answer", "text": "No. Some clients have never hired help. Others have a subcontractor or two and want to grow into an agency. Tammy meets you right where you are and shows you how to find, onboard, contract and manage help when you are ready."}}, {"@type": "Question", "name": "I am not very techy. Can I still do this?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Tammy explains everything in plain language, one step at a time, and virtual hand-holding is always included. You never have to figure it out alone."}}, {"@type": "Question", "name": "Is your coaching faith-based?", "acceptedAnswer": {"@type": "Answer", "text": "Tammy is a Christ follower with over 30 years of Christian ministry experience, and her faith shapes how she does business. If you would like Christ-centered coaching, just say so on your call."}}, {"@type": "Question", "name": "What is the difference between the Mastermind and 1:1 coaching?", "acceptedAnswer": {"@type": "Answer", "text": "The Fearless Mastermind is group coaching: two live sessions a month in a small, confidential group, with time for your own questions. Business Freedom 1:1 Coaching is private: two sessions a month just for you, help building your team, and access to Tammy's client portal of contracts, agreements and templates."}}, {"@type": "Question", "name": "Can you guarantee results?", "acceptedAnswer": {"@type": "Answer", "text": "No honest coach can. Your growth depends on the actions you take and the steps you follow. Tammy gives you the steps, and she walks beside you while you take them."}}]}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="loader" id="loader" aria-hidden="true"><div class="ld"><div class="m">F</div><small>Fearless Business Boss</small></div></div>
+<div class="ann" id="ann"><a href="/resources" class="mq"><div class="mq-track"><span><b>FREE:</b> The Build Your Agency Checklist<i class="dot"></i></span><span>Ready to stop doing it all yourself? Grab it free<i class="dot"></i></span><span><b>FREE:</b> Your Hand-Off Plan call with Tammy<i class="dot"></i></span><span>No sales pitch. Just a real plan.<i class="dot"></i></span><span><b>FREE:</b> The Build Your Agency Checklist<i class="dot"></i></span><span>Ready to stop doing it all yourself? Grab it free<i class="dot"></i></span><span><b>FREE:</b> Your Hand-Off Plan call with Tammy<i class="dot"></i></span><span>No sales pitch. Just a real plan.<i class="dot"></i></span></div></a><button class="ann-x" type="button" aria-label="Close announcement">&times;</button></div>
+<input type="checkbox" id="navt" class="navt" aria-hidden="true" tabindex="-1">
+<header class="nav" id="nav"><div class="wrap">
+  <a href="/" class="logo" aria-label="Fearless Business Boss home"><span class="mono">F</span><span class="wt"><b>Fearless</b><small>Business Boss</small></span></a>
+  <div class="nav-r">
+    <nav class="nav-links" aria-label="Quick links"><a href="/start-here">Start Here</a><a href="/coaching">Coaching</a><a href="/mastermind">Mastermind</a></nav>
+    <a class="btn" href="https://scheduler.zoom.us/fearlessboss/1-on-1-mini-coaching-session-" target="_blank" rel="noopener">Free Hand-Off Plan call</a>
+    <label for="navt" class="burger" role="button" tabindex="0" aria-controls="drawer" aria-expanded="false"><span class="bars" aria-hidden="true"><i></i><i></i><i></i></span><span class="lbl">Menu</span></label>
+  </div>
+</div></header>
+<aside class="drawer" id="drawer" aria-label="Site menu">
+  <div class="dr-top"><span class="eyebrow">Menu</span><label for="navt" class="dr-x" role="button" tabindex="0" aria-label="Close menu">&times;</label></div>
+  <ul class="dr-links"><li><a href="/" aria-current=page><b>Home</b><small>Start at the beginning</small></a></li><li><a href="/start-here"><b>Start Here</b><small>New? Read this first</small></a></li><li><a href="/about"><b>About Tammy</b><small>18 years, one big why</small></a></li><li><a href="/coaching"><b>1:1 Coaching</b><small>Business Freedom Coaching</small></a></li><li><a href="/mastermind"><b>The Mastermind</b><small>Monthly membership</small></a></li><li><a href="/pricing-intensive"><b>Pricing Intensive</b><small>One session, new prices</small></a></li><li><a href="/resources"><b>Resources</b><small>Free checklists + tools</small></a></li><li><a href="/blog"><b>Blog</b><small>Weekly articles</small></a></li><li><a href="/podcast"><b>Podcast</b><small>Listen in</small></a></li><li><a href="/youtube"><b>YouTube</b><small>Watch Tammy teach</small></a></li><li><a href="/contact"><b>Contact</b><small>Say hello</small></a></li></ul>
+  <div class="dr-card"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/sharp-rubin-nleft3/clients/fearless-business-boss/images/tammy-window.jpg" alt="Tammy Durden smiling by a window with a coffee mug" loading="lazy">
+    <div><p>Not sure where to start? Let&rsquo;s map it out together.</p><a class="btn" href="https://scheduler.zoom.us/fearlessboss/1-on-1-mini-coaching-session-" target="_blank" rel="noopener">Book my free Hand-Off Plan call</a></div></div>
+  <div class="dr-foot"><a href="https://www.facebook.com/FearlessBusinessBoss/" target="_blank" rel="noopener">Facebook</a><a href="https://www.instagram.com/fearlessbusinessboss" target="_blank" rel="noopener">Instagram</a><a href="https://www.linkedin.com/in/tammydurden/" target="_blank" rel="noopener">LinkedIn</a><a href="mailto:info@fearlessbusinessboss.com">Email Tammy</a></div>
+</aside>
+<label for="navt" class="scrim" aria-hidden="true"></label>
+<main id="main">
+
+<!-- 1 HERO: split, arch portrait -->
+<section class="hero">
+  <div class="wm" style="right:-4vw;top:2vw" aria-hidden="true">Fearless</div>
+  <div class="wrap hero-g">
+    <div class="hero-t">
+      <span class="eyebrow" data-rv>Business coach for women service providers</span>
+      <h1 data-rv>Earn more.<br>Work less.<br><em class="ac">Finally hand it off.</em></h1>
+      <svg class="squig" viewBox="0 0 180 14" aria-hidden="true"><path d="M2 9 C 22 1, 38 1, 58 8 S 98 14, 118 7 S 158 1, 178 8" fill="none" stroke="#C2A15A" stroke-width="2.6" stroke-linecap="round"/></svg>
+      <p class="lead" data-rv>For seasoned women who are booked full, maxed out and ready to grow. Tammy has spent 18 years building VA and digital marketing agencies, and she will walk beside you step by step. Virtual hand-holding is always included.</p>
+      <p class="tw" data-rv>Made for <span class="tw-w" data-words='["virtual assistants","bookkeepers","online business managers","consultants","coaches","agency owners"]'>virtual assistants</span><span class="caret" aria-hidden="true"></span></p>
+      <div class="btn-row" data-rv>
+        <a class="btn" href="https://scheduler.zoom.us/fearlessboss/1-on-1-mini-coaching-session-" target="_blank" rel="noopener">Book my free Hand-Off Plan call <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="tlink" href="/start-here">New here? Start here</a>
+      </div>
+      <ul class="trust" data-rv>
+        <li><span class="stars" aria-label="5 stars"><svg viewBox="0 0 24 24" width="18" height="18" fill="#C2A15A" aria-hidden="true"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7L12 17.3 5.8 20.9l1.6-7L2 9.2l7.1-.6z"/></svg><svg viewBox="0 0 24 24" width="18" height="18" fill="#C2A15A" aria-hidden="true"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7L12 17.3 5.8 20.9l1.6-7L2 9.2l7.1-.6z"/></svg><svg viewBox="0 0 24 24" width="18" height="18" fill="#C2A15A" aria-hidden="true"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7L12 17.3 5.8 20.9l1.6-7L2 9.2l7.1-.6z"/></svg><svg viewBox="0 0 24 24" width="18" height="18" fill="#C2A15A" aria-hidden="true"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7L12 17.3 5.8 20.9l1.6-7L2 9.2l7.1-.6z"/></svg><svg viewBox="0 0 24 24" width="18" height="18" fill="#C2A15A" aria-hidden="true"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7L12 17.3 5.8 20.9l1.6-7L2 9.2l7.1-.6z"/></svg></span><span><b>5.0 on Google</b> client reviews</span></li>
+        <li><span class="tbadge">2x</span><span><b>Best of Virginia</b> for coaching, UpCity</span></li>
+        <li><span class="tbadge">18</span><span><b>Years</b> in online services</span></li>
+      </ul>
+    </div>
+    <div class="hero-v" data-rv="z">
+      <div class="arch hero-ph"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/sharp-rubin-nleft3/clients/fearless-business-boss/images/tammy-desk-portrait.jpg" alt="Tammy Durden, business coach, smiling at her desk with her laptop" width="1100" height="1540"></div>
+      <div class="spin" style="left:-48px;bottom:70px" aria-hidden="true"><svg viewBox="0 0 150 150"><defs><path id="sp" d="M75,75 m-56,0 a56,56 0 1,1 112,0 a56,56 0 1,1 -112,0"/></defs><text><textPath href="#sp" textLength="348" lengthAdjust="spacing">Free hand-off plan call &#10022; no sales pitch &#10022; </textPath></text></svg><b>F</b></div>
+      <div class="sticker s1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Virtual hand-holding<br><b>always included</b></span></div>
+      <div class="sticker s2"><b>Hundreds</b><span>of women coached</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 2 STRIP MARQUEE -->
+<div class="mq strip" aria-hidden="true"><div class="mq-track"><span>Virtual assistants<i>&#10022;</i></span><span>Bookkeepers<i>&#10022;</i></span><span>Online business managers<i>&#10022;</i></span><span>Consultants<i>&#10022;</i></span><span>Course creators<i>&#10022;</i></span><span>Digital marketing agencies<i>&#10022;</i></span><span>Coaches<i>&#10022;</i></span><span>Tech pros<i>&#10022;</i></span><span>Virtual assistants<i>&#10022;</i></span><span>Bookkeepers<i>&#10022;</i></span><span>Online business managers<i>&#10022;</i></span><span>Consultants<i>&#10022;</i></span><span>Course creators<i>&#10022;</i></span><span>Digital marketing agencies<i>&#10022;</i></span><span>Coaches<i>&#10022;</i></span><span>Tech pros<i>&#10022;</i></span></div></div>
+
+<!-- 3 TAPPABLE CHECKLIST -->
+<section class="familiar" style="background:var(--tint)">
+  <div class="wrap fam-g">
+    <div class="fam-l" data-rv="l">
+      <span class="eyebrow">Be honest, friend</span>
+      <h2>Does any of this <em class="ac">sound familiar?</em></h2>
+      <p class="note">Tap everything that feels true right now.</p>
+      <div class="meter" aria-live="polite">
+        <div class="meter-n"><b id="mN">0</b> of 8</div>
+        <div class="meter-bar"><i id="mBar"></i></div>
+        <p id="mMsg">Tap the ones that feel true.</p>
+        <a class="btn" id="mBtn" href="https://scheduler.zoom.us/fearlessboss/1-on-1-mini-coaching-session-" target="_blank" rel="noopener">Let&rsquo;s fix this together</a>
+      </div>
+    </div>
+    <ul class="checks" data-rv="r">
+      <li><button type="button" class="ck" aria-pressed="false"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span>My client list is full, or nearly full</span></button></li><li><button type="button" class="ck" aria-pressed="false"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span>I am turning clients away</span></button></li><li><button type="button" class="ck" aria-pressed="false"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span>My revenue has flatlined</span></button></li><li><button type="button" class="ck" aria-pressed="false"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span>I work too hard for too little pay</span></button></li><li><button type="button" class="ck" aria-pressed="false"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span>My life gets squeezed around my business</span></button></li><li><button type="button" class="ck" aria-pressed="false"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span>I want help, but I do not know who to hire</span></button></li><li><button type="button" class="ck" aria-pressed="false"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span>I am not sure what to charge anymore</span></button></li><li><button type="button" class="ck" aria-pressed="false"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span>All the new tech and AI tools overwhelm me</span></button></li>
+    </ul>
+  </div>
+</section>
+
+<!-- 4 THE CALL: ink band, three cards -->
+<section class="on-ink call">
+  <div class="wm" style="left:-3vw;bottom:-2vw" aria-hidden="true">Hand it off</div>
+  <div class="wrap">
+    <div class="call-h">
+      <div data-rv>
+        <span class="eyebrow">Your free 30-minute call</span>
+        <h2>Not just any call. <em class="ac">The Hand-Off Plan Call.</em></h2>
+      </div>
+      <p class="lead" data-rv>Service businesses are changing fast. Clients want more, new tools show up every week, and you cannot add more hours to your day. So this is not a vague chat. In 30 minutes on Zoom, Tammy helps you see exactly what to hand off first, and how to price so the help pays for itself.</p>
+    </div>
+    <div class="call-g">
+      <div class="ccard" data-rv data-tilt><span class="num">01</span><h3>Your top 3 hand-offs</h3><p>The three tasks eating your week that a subcontractor, a virtual assistant or a simple tool could take off your plate.</p></div>
+      <div class="ccard" data-rv data-tilt style="transition-delay:.1s"><span class="num">02</span><h3>Your price check</h3><p>A quick look at your packages so the help you bring on pays for itself. You are usually worth more than you realize.</p></div>
+      <div class="ccard" data-rv data-tilt style="transition-delay:.2s"><span class="num">03</span><h3>Your next 30 days</h3><p>One clear next step, written down, so you leave with a real plan and not just a pep talk.</p></div>
+    </div>
+    <div class="call-f" data-rv>
+      <blockquote><p>&ldquo;I&rsquo;m leaving our conversation feeling lighter, more encouraged, and more hopeful about my journey.&rdquo;</p><cite>Joyce Adedoja, after her free session with Tammy</cite></blockquote>
+      <div class="call-cta"><span class="chip gold">No sales pitch. Promise.</span><a class="btn gold" href="https://scheduler.zoom.us/fearlessboss/1-on-1-mini-coaching-session-" target="_blank" rel="noopener">Pick my call time <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 MEET TAMMY: photo collage + story -->
+<section class="meet">
+  <div class="wrap meet-g">
+    <div class="meet-v" data-rv="l">
+      <div class="m-main"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/sharp-rubin-nleft3/clients/fearless-business-boss/images/tammy-red-laptop.jpg" alt="Tammy working at her laptop with a coffee mug by a sunny window" loading="lazy"></div>
+      <figure class="pola"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/sharp-rubin-nleft3/clients/fearless-business-boss/images/tammy-still-the-boss.jpg" alt="Tammy holding a sign that says Still the Boss" loading="lazy"><figcaption>Still the boss</figcaption></figure>
+      <div class="m-tag">Co-author of <i>Through Our Lens</i></div>
+    </div>
+    <div class="meet-t" data-rv="r">
+      <span class="eyebrow">Meet your coach</span>
+      <h2>Hi, I&rsquo;m Tammy. <em class="ac">I&rsquo;ve been where you are.</em></h2>
+      <p>In 2008 I started a lead generation business from home. Then came virtual assistant and bookkeeping services, a VA agency, and a boutique digital marketing agency. At the end of 2020 I exited my agency to coach full time, and it fit just right.</p>
+      <p>I also live with multiple sclerosis and lupus. I decided my disABILITY did not mean the end of my story. Through my agencies I hired other disabled professionals and moms of disabled children so they could work from home too.</p>
+      <p class="note">&ldquo;Life isn&rsquo;t fair, but God is faithful.&rdquo;</p>
+      <ul class="meet-chips"><li class="chip">Award-winning coach</li><li class="chip">Christ follower</li><li class="chip">Speaker + instructor</li></ul>
+      <a class="tlink" href="/about">Read my whole story</a>
+    </div>
+  </div>
+</section>
+
+<!-- 6 STATS BAND -->
+<section class="stats">
+  <h2 class="sr">Tammy by the numbers</h2>
+  <div class="wrap stats-g">
+    <div class="st" data-rv><b><span data-count="18">18</span></b><span>years in the online services industry</span></div>
+    <div class="st" data-rv><b><span data-count="30" data-suffix="+">30+</span></b><span>years of Christian ministry experience</span></div>
+    <div class="st" data-rv><b><span data-count="2" data-suffix="x">2x</span></b><span>Best of Virginia for coaching</span></div>
+    <div class="st" data-rv><b>5.0</b><span>star rating on Google reviews</span></div>
+  </div>
+</section>
+
+<!-- 7 WORK WITH TAMMY: three offers, one featured -->
+<section class="offers">
+  <div class="wm" style="right:-6vw;top:40px" aria-hidden="true">Grow</div>
+  <div class="wrap">
+    <div class="center" data-rv>
+      <span class="eyebrow">Ways to work with Tammy</span>
+      <h2>Pick the support <em class="ac">that fits your season.</em></h2>
+      <svg class="squig" viewBox="0 0 180 14" aria-hidden="true"><path d="M2 9 C 22 1, 38 1, 58 8 S 98 14, 118 7 S 158 1, 178 8" fill="none" stroke="#C2A15A" stroke-width="2.6" stroke-linecap="round"/></svg>
+    </div>
+    <div class="off-g">
+      <article class="off" data-rv>
+        <span class="tag">Membership</span>
+        <h3>The Fearless Mastermind</h3>
+        <p>Group coaching for women solopreneurs, capped at 10 to 12 members so everyone gets time with Tammy.</p>
+        <ul class="ticks"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Two live sessions every month</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>15 to 20 minutes for your questions</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Monthly goals and quarterly challenges</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Confidential, never recorded</li></ul>
+        <div class="price"><b>$75</b><span>per month</span></div>
+        <a class="btn ghost" href="/mastermind">See the Mastermind</a>
+      </article>
+      <article class="off feat" data-rv style="transition-delay:.1s">
+        <span class="ribbon">Most support</span>
+        <span class="tag">1:1 coaching</span>
+        <h3>Business Freedom Coaching</h3>
+        <p>Private coaching to grow, price and build your virtual team, with Tammy beside you the whole way.</p>
+        <ul class="ticks"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Two private sessions every month</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Pricing, packages and marketing strategy</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Find, onboard and manage subcontractors</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Client portal: contracts, agreements, templates</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Virtual hand-holding between sessions</li></ul>
+        <div class="price"><b>3 months</b><span>minimum. Investment shared on your free call.</span></div>
+        <a class="btn gold" href="/coaching">Explore 1:1 coaching</a>
+      </article>
+      <article class="off" data-rv style="transition-delay:.2s">
+        <span class="tag">One session</span>
+        <h3>Pricing &amp; Packages Intensive</h3>
+        <p>One focused session to turn your services into clear packages and raise your prices with confidence. Pricing is Tammy&rsquo;s most requested topic.</p>
+        <ul class="ticks"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Your services turned into packages</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>New prices you can say out loud</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>What to tell your current clients</li></ul>
+        <div class="price"><span class="ph">Price: Tammy to set</span></div>
+        <a class="btn ghost" href="/pricing-intensive">See the Intensive</a>
+      </article>
+    </div>
+    <p class="center note" data-rv style="margin-top:34px">Not sure which one? That is exactly what the free call is for.</p>
+  </div>
+</section>
+
+<!-- 8 OLD WAY / NEW WAY TOGGLE -->
+<section class="toggle-s" style="background:var(--tint)">
+  <div class="narrow center">
+    <span class="eyebrow" data-rv>Two ways to run a business</span>
+    <h2 data-rv>Doing it all, or <em class="ac">doing it fearless?</em></h2>
+    <div class="sw-wrap" data-rv>
+      <span class="sw-l" id="swL">Doing it all</span>
+      <button type="button" class="sw" id="sw" role="switch" aria-checked="true" aria-labelledby="swL swR"><i></i></button>
+      <span class="sw-l on" id="swR">The fearless way</span>
+    </div>
+    <div class="ways" id="ways" data-rv>
+      <div class="way old"><h3>Doing it all</h3><ul>
+        <li>Working nights and weekends to keep up</li><li>Saying no to new clients because you are full</li><li>Charging what you charged five years ago</li><li>Figuring out every new tool by yourself</li><li>Your life squeezed around your business</li></ul></div>
+      <div class="way new"><h3>The fearless way</h3><ul>
+        <li>Your top tasks handed to trusted help</li><li>Saying yes to more clients and more revenue</li><li>Packages priced for what you are worth today</li><li>A coach and a circle of women in your corner</li><li>A business built to fit your life</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- 9 VIDEO BAND -->
+<section class="on-ink vids">
+  <div class="wrap">
+    <div class="vid-h" data-rv><div><span class="eyebrow">Watch Tammy teach</span><h2>Pull up a chair <em class="ac">and listen in.</em></h2></div>
+      <a class="tlink" href="/youtube">More videos</a></div>
+    <div class="vid-g">
+      <figure data-rv><a class="vid" href="https://www.youtube.com/watch?v=Hhava8q7TQQ" data-yt="Hhava8q7TQQ" aria-label="Play: Scaling Service Businesses on Beyond Six Figures with Ziv Raviv" target="_blank" rel="noopener">
+        <img src="https://i.ytimg.com/vi/Hhava8q7TQQ/hqdefault.jpg" alt="" loading="lazy"><span class="play"><svg viewBox="0 0 24 24" width="26" height="26" fill="#fff"><path d="M8 5v14l11-7z"/></svg></span></a>
+        <figcaption><b>Scaling Service Businesses</b><span>Beyond Six Figures with Ziv Raviv</span></figcaption></figure>
+      <figure data-rv style="transition-delay:.1s"><a class="vid" href="https://www.youtube.com/watch?v=tMUTC8ww-90" data-yt="tMUTC8ww-90" aria-label="Play: Empowering Disabled Entrepreneurs on Fempreneur International" target="_blank" rel="noopener">
+        <img src="https://i.ytimg.com/vi/tMUTC8ww-90/hqdefault.jpg" alt="" loading="lazy"><span class="play"><svg viewBox="0 0 24 24" width="26" height="26" fill="#fff"><path d="M8 5v14l11-7z"/></svg></span></a>
+        <figcaption><b>Empowering Disabled Entrepreneurs</b><span>Fempreneur International, hosted by Odiva Vasell</span></figcaption></figure>
+    </div>
+    <div class="press" data-rv><span class="press-l">As featured in</span>
+      <div class="mq press-mq" aria-hidden="true"><div class="mq-track"><span>Female Entrepreneur Magazine<i>&#10022;</i></span><span>BOLD Journey Magazine<i>&#10022;</i></span><span>Canvas Rebel Magazine<i>&#10022;</i></span><span>The EliteX Magazine<i>&#10022;</i></span><span>Influencer Digest<i>&#10022;</i></span><span>SCORE<i>&#10022;</i></span><span>Freelance University<i>&#10022;</i></span><span>Coach Foundation<i>&#10022;</i></span><span>Female Entrepreneur Magazine<i>&#10022;</i></span><span>BOLD Journey Magazine<i>&#10022;</i></span><span>Canvas Rebel Magazine<i>&#10022;</i></span><span>The EliteX Magazine<i>&#10022;</i></span><span>Influencer Digest<i>&#10022;</i></span><span>SCORE<i>&#10022;</i></span><span>Freelance University<i>&#10022;</i></span><span>Coach Foundation<i>&#10022;</i></span></div></div></div>
+  </div>
+</section>
+
+<!-- 10 CLIENT LOVE -->
+<section class="love">
+  <div class="wrap love-g">
+    <div class="love-big" data-rv="l">
+      <span class="eyebrow">Client love</span>
+      <h2 class="love-h">What women say <em class="ac">after working with Tammy.</em></h2>
+      <span class="stars" aria-label="5 stars"><svg viewBox="0 0 24 24" width="18" height="18" fill="#C2A15A" aria-hidden="true"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7L12 17.3 5.8 20.9l1.6-7L2 9.2l7.1-.6z"/></svg><svg viewBox="0 0 24 24" width="18" height="18" fill="#C2A15A" aria-hidden="true"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7L12 17.3 5.8 20.9l1.6-7L2 9.2l7.1-.6z"/></svg><svg viewBox="0 0 24 24" width="18" height="18" fill="#C2A15A" aria-hidden="true"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7L12 17.3 5.8 20.9l1.6-7L2 9.2l7.1-.6z"/></svg><svg viewBox="0 0 24 24" width="18" height="18" fill="#C2A15A" aria-hidden="true"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7L12 17.3 5.8 20.9l1.6-7L2 9.2l7.1-.6z"/></svg><svg viewBox="0 0 24 24" width="18" height="18" fill="#C2A15A" aria-hidden="true"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7L12 17.3 5.8 20.9l1.6-7L2 9.2l7.1-.6z"/></svg></span>
+      <blockquote><p>&ldquo;Tammy&rsquo;s vast knowledge, expertise in running her own digital marketing agency, and her heart of gold makes her an amazing business coach.&rdquo;</p>
+      <cite><b>Natashia</b> Tiel Virtual Solutions</cite></blockquote>
+      <a class="tlink" href="https://g.page/r/CWSaD_gmSFZDEAE/review" target="_blank" rel="noopener">Read Tammy&rsquo;s Google reviews</a>
+    </div>
+    <div class="love-side">
+      <figure class="lq" data-rv="r"><p>&ldquo;Tammy has a reassuring, trustworthy presence, and I highly recommend her coaching services!&rdquo;</p><figcaption>Jena Petrescue Kroeker, Writing Coach</figcaption></figure>
+      <figure class="lq alt" data-rv="r" style="transition-delay:.1s"><p>&ldquo;You are steady, compassionate, heartfelt, knowledgeable beyond measure in business processes, and marketing online.&rdquo;</p><figcaption>LM</figcaption></figure>
+      <img class="love-ph" src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/sharp-rubin-nleft3/clients/fearless-business-boss/images/tammy-love-clients.jpg" alt="Tammy holding a heart eyes sign" loading="lazy" data-rv="z">
+    </div>
+  </div>
+  <div class="qmq"><div class="mq quotes" aria-hidden="true"><div class="mq-track"><span><q>I would not be where I am today in business without her support and guidance.</q><b>Lisa, Bloom Content Design</b></span><span><q>Tammy helped me clear through the doubt and confusion.</q><b>Sheryl, Urban Admin</b></span><span><q>I now have a clear direction as to where my business is heading. 10/10 recommend!</q><b>Laura Mae, Pixi Training VA</b></span><span><q>Five minutes with Tammy was an eye opener, so imagine if you have 20!</q><b>DG</b></span><span><q>Tammy is exceptional.</q><b>Kelly Cannings, FreelanceU.com</b></span><span><q>She helped me identify my strengths and weaknesses and provided practical strategies.</q><b>LindaMae, Designs By LindaMae</b></span><span><q>Her extensive experience, depth of knowledge and patience are extraordinary.</q><b>Becky, Virtual Administrative Services</b></span><span><q>I would not be where I am today in business without her support and guidance.</q><b>Lisa, Bloom Content Design</b></span><span><q>Tammy helped me clear through the doubt and confusion.</q><b>Sheryl, Urban Admin</b></span><span><q>I now have a clear direction as to where my business is heading. 10/10 recommend!</q><b>Laura Mae, Pixi Training VA</b></span><span><q>Five minutes with Tammy was an eye opener, so imagine if you have 20!</q><b>DG</b></span><span><q>Tammy is exceptional.</q><b>Kelly Cannings, FreelanceU.com</b></span><span><q>She helped me identify my strengths and weaknesses and provided practical strategies.</q><b>LindaMae, Designs By LindaMae</b></span><span><q>Her extensive experience, depth of knowledge and patience are extraordinary.</q><b>Becky, Virtual Administrative Services</b></span></div></div></div>
+</section>
+
+<!-- 11 FREE RESOURCES: fanned polaroids -->
+<section class="free" style="background:var(--tint)">
+  <div class="wrap center">
+    <span class="eyebrow" data-rv>Free resources</span>
+    <h2 data-rv>Free tools to get you <em class="ac">moving this week.</em></h2>
+    <p class="lead" data-rv>Start small. Download a checklist, work through it with a cup of coffee, and see how much clearer things feel.</p>
+    <div class="fan">
+      <a class="fp f1" href="/resources" data-rv><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/sharp-rubin-nleft3/clients/fearless-business-boss/images/freebie-startup-checklist.jpg" alt="Fearlessly Start Your Business checklist cover" loading="lazy"><span>Startup Checklist</span></a>
+      <a class="fp f2" href="/resources" data-rv style="transition-delay:.1s"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/sharp-rubin-nleft3/clients/fearless-business-boss/images/freebie-agency-checklist.jpg" alt="Build Your Agency Checklist cover" loading="lazy"><span>Build Your Agency Checklist</span></a>
+      <a class="fp f3" href="/resources" data-rv style="transition-delay:.2s"><img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/sharp-rubin-nleft3/clients/fearless-business-boss/images/freebie-storyboard.jpg" alt="Fearless Storyboard worksheet preview" loading="lazy"><span>Ideal Client Storyboard</span></a>
+    </div>
+    <a class="btn" href="/resources" data-rv>Get the free resources <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  </div>
+</section>
+
+<!-- 12 LEARN WITH TAMMY: editorial rows -->
+<section class="learn">
+  <div class="wrap">
+    <div class="learn-h" data-rv><span class="eyebrow">Learn with Tammy</span><h2>Read it, hear it, <em class="ac">or watch it.</em></h2></div>
+    <a class="row" href="/blog" data-rv><span class="rw">Blog</span><span class="rd">Weekly articles on pricing, scaling and building your agency.<span class="rposts"><i>How to Price Your Packages</i><i>Scale By Outsourcing</i><i>5 Mindset Tips for Success</i></span></span><span class="ra"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+    <a class="row" href="/podcast" data-rv><span class="rw">Podcast</span><span class="rd">Tammy&rsquo;s conversations on scaling, outsourcing and building a business with a chronic illness.</span><span class="ra"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+    <a class="row" href="/youtube" data-rv><span class="rw">YouTube</span><span class="rd">Trainings, interviews and step by step walkthroughs you can watch anytime.</span><span class="ra"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+  </div>
+</section>
+
+<!-- 13 FAQ -->
+<section class="faq-s" style="background:var(--tint)">
+  <div class="wrap faq-g">
+    <div class="faq-l" data-rv="l">
+      <span class="eyebrow">Good questions</span>
+      <h2>Before you <em class="ac">book your call.</em></h2>
+      <img src="https://raw.githubusercontent.com/genasbury12/blb-site/claude/sharp-rubin-nleft3/clients/fearless-business-boss/images/tammy-cozy-cup.jpg" alt="Tammy relaxing on a sofa with a cup of coffee" loading="lazy">
+      <p class="note">Still wondering? Email me. I read every one. ~ Tammy</p>
+    </div>
+    <div class="faq" data-rv="r"><details><summary>Is the Hand-Off Plan call really free?</summary><div class="a"><p>Yes. It is a free 30-minute Zoom call with Tammy, and there is no sales pitch. You leave with your top three hand-offs, a quick price check on your packages, and one clear next step for the next 30 days.</p></div></details><details><summary>Who do you coach?</summary><div class="a"><p>Women online service providers and solopreneurs: virtual assistants, bookkeepers, online business managers, consultants, coaches, course creators and agency owners. Many are seasoned women with years of experience who are booked full and ready to grow. Men are welcome on occasion if it is a good fit for both.</p></div></details><details><summary>Do I need to have a team already?</summary><div class="a"><p>No. Some clients have never hired help. Others have a subcontractor or two and want to grow into an agency. Tammy meets you right where you are and shows you how to find, onboard, contract and manage help when you are ready.</p></div></details><details><summary>I am not very techy. Can I still do this?</summary><div class="a"><p>Yes. Tammy explains everything in plain language, one step at a time, and virtual hand-holding is always included. You never have to figure it out alone.</p></div></details><details><summary>Is your coaching faith-based?</summary><div class="a"><p>Tammy is a Christ follower with over 30 years of Christian ministry experience, and her faith shapes how she does business. If you would like Christ-centered coaching, just say so on your call.</p></div></details><details><summary>What is the difference between the Mastermind and 1:1 coaching?</summary><div class="a"><p>The Fearless Mastermind is group coaching: two live sessions a month in a small, confidential group, with time for your own questions. Business Freedom 1:1 Coaching is private: two sessions a month just for you, help building your team, and access to Tammy's client portal of contracts, agreements and templates.</p></div></details><details><summary>Can you guarantee results?</summary><div class="a"><p>No honest coach can. Your growth depends on the actions you take and the steps you follow. Tammy gives you the steps, and she walks beside you while you take them.</p></div></details></div>
+  </div>
+</section>
+
+<!-- 14 FINAL CTA -->
+<section class="on-ink final">
+  <div class="narrow">
+    <span class="eyebrow">Your next step</span>
+    <h2 class="shimmer">You don&rsquo;t have to do it alone, my friend.</h2>
+    <p class="note">Thirty minutes. One plan. No sales pitch.</p>
+    <div class="btn-row"><a class="btn gold" href="https://scheduler.zoom.us/fearlessboss/1-on-1-mini-coaching-session-" target="_blank" rel="noopener">Book my free Hand-Off Plan call <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="btn ghost" href="/resources">Grab a free checklist</a></div>
+    <p class="fine">Free 30-minute Zoom call. Pick the time that suits you.</p>
+  </div>
+</section>
+
+</main>
+<div class="mq outline-mq rev" aria-hidden="true"><div class="mq-track"><span>Earn more<i>&#10022;</i></span><span>Work less<i>&#10022;</i></span><span>Hand it off<i>&#10022;</i></span><span>Grow with a team<i>&#10022;</i></span><span>You are not alone<i>&#10022;</i></span><span>Earn more<i>&#10022;</i></span><span>Work less<i>&#10022;</i></span><span>Hand it off<i>&#10022;</i></span><span>Grow with a team<i>&#10022;</i></span><span>You are not alone<i>&#10022;</i></span></div></div>
+<footer class="foot"><div class="wrap">
+  <div class="big" aria-hidden="true">Fearless</div>
+  <div class="fgrid">
+    <div><a href="/" class="logo" style="color:#fff"><span class="mono" style="background:#16295A">F</span><span class="wt"><b>Fearless</b><small style="color:#9DBBFF">Business Boss</small></span></a>
+      <p style="margin:20px 0 6px">Business coaching for seasoned women service providers who are ready to earn more and work less.</p>
+      <div class="sign">~ Tammy</div></div>
+    <div><h4>Work with Tammy</h4><ul><li><a href="/coaching">1:1 Business Freedom Coaching</a></li><li><a href="/mastermind">The Fearless Mastermind</a></li><li><a href="/pricing-intensive">Pricing &amp; Packages Intensive</a></li><li><a href="https://scheduler.zoom.us/fearlessboss/1-on-1-mini-coaching-session-">Free Hand-Off Plan call</a></li></ul></div>
+    <div><h4>Explore</h4><ul><li><a href="/start-here">Start Here</a></li><li><a href="/about">About Tammy</a></li><li><a href="/resources">Free Resources</a></li><li><a href="/blog">Blog</a></li><li><a href="/podcast">Podcast</a></li><li><a href="/youtube">YouTube</a></li><li><a href="/contact">Contact</a></li></ul></div>
+    <div><h4>Stay close</h4><p style="margin:0 0 10px">Questions? Email <a href="mailto:info@fearlessbusinessboss.com">info@fearlessbusinessboss.com</a></p>
+      <a class="btn" href="https://scheduler.zoom.us/fearlessboss/1-on-1-mini-coaching-session-" target="_blank" rel="noopener">Book my free Hand-Off Plan call</a>
+      <div class="pills"><a href="https://www.facebook.com/FearlessBusinessBoss/" target="_blank" rel="noopener">Facebook</a><a href="https://www.instagram.com/fearlessbusinessboss" target="_blank" rel="noopener">Instagram</a><a href="https://www.linkedin.com/in/tammydurden/" target="_blank" rel="noopener">LinkedIn</a></div></div>
+  </div>
+  <div class="bottom"><span>&copy; <span data-year>2026</span> Fearless Business Boss LLC. Mechanicsville, Virginia.</span>
+    <span><a href="https://www.iubenda.com/privacy-policy/31543086" target="_blank" rel="noopener">Privacy Policy</a> &nbsp;&middot;&nbsp; <a href="https://www.iubenda.com/terms-and-conditions/31543086" target="_blank" rel="noopener">Terms</a></span></div>
+</div></footer>
+<script>
+(function(){
+  var d=document, h=d.documentElement, rm=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function $$(s,c){return Array.prototype.slice.call((c||d).querySelectorAll(s))}
+  // loader
+  function done(){var l=d.getElementById('loader'); if(l) l.classList.add('done')}
+  window.addEventListener('load',function(){setTimeout(done,350)}); setTimeout(done,1600);
+  // announcement
+  var ann=d.getElementById('ann');
+  try{ if(ann && sessionStorage.getItem('fbb_ann')==='x') ann.classList.add('hide') }catch(e){}
+  $$('.ann-x').forEach(function(b){b.addEventListener('click',function(){ann.classList.add('hide');try{sessionStorage.setItem('fbb_ann','x')}catch(e){}})});
+  // drawer menu
+  var t=d.getElementById('navt'), burger=d.querySelector('.burger');
+  function sync(){ h.classList.toggle('lock',t.checked); if(burger) burger.setAttribute('aria-expanded',t.checked?'true':'false');
+    if(t.checked){var f=d.querySelector('.dr-x'); f&&setTimeout(function(){f.focus()},350)} }
+  if(t){ t.addEventListener('change',sync);
+    $$('label[for=navt][role=button]').forEach(function(l){l.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();t.checked=!t.checked;sync(); if(!t.checked&&burger) burger.focus()}})});
+    $$('.drawer a').forEach(function(a){a.addEventListener('click',function(){t.checked=false;sync()})});
+    d.addEventListener('keydown',function(e){if(e.key==='Escape'&&t.checked){t.checked=false;sync();burger&&burger.focus()}});
+  }
+  // sticky nav + back to top
+  var nav=d.getElementById('nav'), top=d.createElement('button');
+  top.className='totop'; top.type='button'; top.setAttribute('aria-label','Back to top'); top.innerHTML='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 19V5M6 11l6-6 6 6"/></svg>';
+  d.body.appendChild(top); top.addEventListener('click',function(){window.scrollTo({top:0,behavior:rm?'auto':'smooth'})});
+  function onS(){var y=window.scrollY; nav&&nav.classList.toggle('stuck',y>20); top.classList.toggle('on',y>900)}
+  window.addEventListener('scroll',onS,{passive:true}); onS();
+  // reveal on scroll
+  var rv=$$('[data-rv]');
+  if('IntersectionObserver' in window && !rm){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px',threshold:.08});
+    rv.forEach(function(el){io.observe(el)});
+  } else rv.forEach(function(el){el.classList.add('in')});
+  // count-ups
+  function count(el){var n=parseFloat(el.getAttribute('data-count')),s=el.getAttribute('data-suffix')||'',t0=null;
+    if(rm){el.textContent=n+s;return}
+    function f(ts){if(!t0)t0=ts;var p=Math.min((ts-t0)/1600,1),v=Math.round(n*(1-Math.pow(1-p,3)));el.textContent=v+s;if(p<1)requestAnimationFrame(f)}
+    requestAnimationFrame(f)}
+  var cs=$$('[data-count]');
+  if('IntersectionObserver' in window){var ci=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){count(e.target);ci.unobserve(e.target)}})},{threshold:.4});cs.forEach(function(c){ci.observe(c)})}
+  // typewriter
+  $$('[data-words]').forEach(function(el){
+    var w; try{w=JSON.parse(el.getAttribute('data-words'))}catch(e){return}
+    if(rm||!w.length) return; var i=0,j=w[0].length,del=true;
+    function tick(){var cur=w[i]; if(del){j--; if(j<=0){del=false;i=(i+1)%w.length}} else {j++; if(j>=w[i].length){del=true; el.textContent=w[i].slice(0,j); return setTimeout(tick,2200)}}
+      el.textContent=w[i].slice(0,Math.max(j,0)); setTimeout(tick,del?45:85)}
+    setTimeout(tick,2600)});
+  // ripples + magnetic buttons
+  $$('.btn').forEach(function(b){
+    b.addEventListener('click',function(e){var r=b.getBoundingClientRect(),s=d.createElement('span'),z=Math.max(r.width,r.height);s.className='rip';s.style.width=s.style.height=z+'px';s.style.left=(e.clientX-r.left-z/2)+'px';s.style.top=(e.clientY-r.top-z/2)+'px';b.appendChild(s);setTimeout(function(){s.remove()},700)});
+    if(rm||!window.matchMedia('(hover:hover)').matches) return;
+    b.addEventListener('mousemove',function(e){var r=b.getBoundingClientRect();b.style.transform='translate('+((e.clientX-r.left-r.width/2)*.12)+'px,'+((e.clientY-r.top-r.height/2)*.2-2)+'px)'});
+    b.addEventListener('mouseleave',function(){b.style.transform=''});
+  });
+  // tilt cards
+  if(!rm && window.matchMedia('(hover:hover)').matches) $$('[data-tilt]').forEach(function(c){
+    c.addEventListener('mousemove',function(e){var r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transform='perspective(900px) rotateY('+(x*6)+'deg) rotateX('+(-y*6)+'deg) translateY(-4px)'});
+    c.addEventListener('mouseleave',function(){c.style.transform=''})});
+  // YouTube facades
+  $$('[data-yt]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();var f=d.createElement('iframe');
+    f.src='https://www.youtube-nocookie.com/embed/'+a.getAttribute('data-yt')+'?rel=0&autoplay=1';f.title=a.getAttribute('aria-label')||'Video';f.allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture';f.allowFullscreen=true;
+    a.parentNode.replaceChild(f,a)})});
+  // year
+  $$('[data-year]').forEach(function(y){y.textContent=new Date().getFullYear()});
+})();
+
+(function(){
+  var d=document;
+  // checklist meter
+  var cks=[].slice.call(d.querySelectorAll('.ck')), n=d.getElementById('mN'), bar=d.getElementById('mBar'), msg=d.getElementById('mMsg'), meter=d.querySelector('.meter');
+  var notes=['Tap the ones that feel true.','You are feeling the squeeze. Better to fix it early.','You are feeling the squeeze. Better to fix it early.','Friend, it is time to hand some of this off.','Friend, it is time to hand some of this off.','Friend, it is time to hand some of this off.','You are carrying too much alone. Let us make a plan.','You are carrying too much alone. Let us make a plan.','You are carrying too much alone. Let us make a plan.'];
+  function upd(){var c=cks.filter(function(b){return b.getAttribute('aria-pressed')==='true'}).length;
+    n.textContent=c; bar.style.width=(c/cks.length*100)+'%'; msg.textContent=notes[c]; meter.classList.toggle('hot',c>=1)}
+  cks.forEach(function(b){b.addEventListener('click',function(){b.setAttribute('aria-pressed',b.getAttribute('aria-pressed')==='true'?'false':'true');upd()})});
+  // old way / new way switch
+  var sw=d.getElementById('sw'), ways=d.getElementById('ways'), L=d.getElementById('swL'), R=d.getElementById('swR');
+  function setW(on){sw.setAttribute('aria-checked',on?'true':'false');ways.setAttribute('data-on',on?'new':'old');R.classList.toggle('on',on);L.classList.toggle('on',!on)}
+  if(sw){setW(false); sw.addEventListener('click',function(){setW(sw.getAttribute('aria-checked')!=='true')});
+    // flip to the fearless way once, the first time it scrolls into view
+    if('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){var o=new IntersectionObserver(function(es){if(es[0].isIntersecting){setTimeout(function(){setW(true)},1300);o.disconnect()}},{threshold:.6});o.observe(ways)} else setW(true)}
+})();
+</script>
+</body>
+</html>
