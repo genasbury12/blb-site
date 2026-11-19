@@ -46,6 +46,9 @@ position:relative;width:100%;background:var(--cream);color:var(--plum);font:400 
 #bbt .tag{display:inline-flex;align-items:center;padding:8px 14px;border-radius:999px;background:var(--berry);color:var(--white);font:800 14px/1 var(--body);letter-spacing:.04em}
 #bbt .mini{font:600 14px/1.3 var(--body);color:var(--soft)}
 #bbt .mini b{color:var(--berry);font-variant-numeric:tabular-nums}
+#bbt .price{display:flex;align-items:baseline;gap:12px}
+#bbt .price b{font:500 44px/1 var(--display);color:var(--plum)}
+#bbt .price s{font:600 20px/1 var(--body);color:var(--soft)}
 #bbt .plus{display:flex;gap:10px;align-items:flex-start;font-size:16px;line-height:1.45}
 #bbt .plus svg{flex:none;margin-top:2px}
 #bbt .full{text-align:center}
@@ -156,8 +159,9 @@ function render(){
  h+='<div class="deal">';
  if(live){
   h+='<div class="deal-top"><span class="tag">30% OFF</span><span class="mini">Ends in <b data-mini>72h 00m</b></span></div>';
-  h+=tool.bonus?'<p class="plus">'+TICK+'<span>Plus <b>'+esc(tool.bonus)+'</b>, free with your order.</span></p>':'<p class="slot">Slot: the bonus for this tool is not chosen yet.</p>';
-  h+='<a class="btn" href="'+esc(tool.discountLink)+'">Get it for 30% off '+ARROW+'</a>';
+  if(tool.dealPrice)h+='<p class="price"><b>'+esc(tool.dealPrice)+'</b>'+(tool.price?' <s>'+esc(tool.price)+'</s>':'')+'</p>';
+  if(tool.bonus)h+='<p class="plus">'+TICK+'<span>Plus <b>'+esc(tool.bonus)+'</b>, free with your order.</span></p>';
+  h+='<a class="btn" href="'+esc(tool.discountLink)+'">Get it for '+(tool.dealPrice?esc(tool.dealPrice):'30% off')+' '+ARROW+'</a>';
   h+='<p class="full"><a class="plain" href="'+esc(tool.fullPrice)+'">Or pay full price'+(tool.price?' ('+esc(tool.price)+')':'')+'</a></p>';
  }else{
   if(expired)h+='<p class="mini">Your 72 hour window has closed. The tool is still right here, and it will still help.</p>';
@@ -176,15 +180,17 @@ function render(){
  h+='</div></div></div>';
 
  /* bonus + clock, only inside her window */
- if(live){
-  h+='<div class="bonus sec"><div class="in"><div class="bonus-card"><div class="gift">'+GIFT+'</div><div><span class="eyebrow">Your free bonus</span>'+(tool.bonus?'<h2>'+esc(tool.bonus)+'</h2>':'<p class="slot" style="margin:12px 0">Slot: the bonus for this tool is not chosen yet.</p>');
+ if(live&&tool.bonus){
+  h+='<div class="bonus sec"><div class="in"><div class="bonus-card"><div class="gift">'+GIFT+'</div><div><span class="eyebrow">Your free bonus</span><h2>'+esc(tool.bonus)+'</h2>';
   h+='<p>Yours free when you get the '+esc(tool.name)+' at 30% off before your timer runs out.</p>';
-  h+=tool.bonusDelivery?'<p style="margin-top:10px">'+esc(tool.bonusDelivery)+'</p>':'<p class="slot" style="margin-top:14px">Slot: how the bonus is delivered.</p>';
+  if(tool.bonusDelivery)h+='<p style="margin-top:10px">'+esc(tool.bonusDelivery)+'</p>';
   h+='</div></div></div></div>';
+ }
+ if(live){
   h+='<div class="clocksec sec"><div class="in"><span class="eyebrow" style="color:var(--rose)">Your window</span><h2>This price is <em>yours</em> until the clock runs out.</h2>';
   h+='<div class="clock" role="timer" aria-label="Time left at 30% off"><div><b data-c="h">72</b><span>HOURS</span></div><div><b data-c="m">00</b><span>MINS</span></div><div><b data-c="s">00</b><span>SECS</span></div></div>';
   h+='<p>Your 72 hours started the moment your roadmap opened. Refreshing won’t restart it and it never secretly extends. When it ends, the 30% off goes away.</p>';
-  h+='<a class="btn cream" href="'+esc(tool.discountLink)+'">Get it for 30% off '+ARROW+'</a></div></div>';
+  h+='<a class="btn cream" href="'+esc(tool.discountLink)+'">Get it for '+(tool.dealPrice?esc(tool.dealPrice):'30% off')+' '+ARROW+'</a></div></div>';
  }else{
   h+='<div class="sec"><div class="in note"><h2>Ready when <span class="accent">you</span> are.</h2><p>No pressure and no countdown. Just the tool for the step you’re on.</p><a class="btn" href="'+esc(tool.fullPrice)+'">'+(tool.price?'Get it for '+esc(tool.price):'Get the '+esc(tool.name))+' '+ARROW+'</a></div></div>';
  }
