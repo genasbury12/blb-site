@@ -11,6 +11,7 @@ E = ROOT / "showit-embeds"
 
 GROUPS = [
     ("Full pages", "One Embed Code box per Showit page, stretched full width. Paste, publish.", [
+        ("AICheckQuiz", "/ai-check, or any page you like", "NEW: The Is AI making you busier? quiz. Quiz screens in your BLB brand, results in the PBM brand, wired to your 4 Flodesk type forms. Paste it into one full width Embed Code box on any page: it grows its own canvas."),
         ("Roadmap", "/roadmap", "NEW: The Blog Business Roadmap free assessment: sign up, 15 questions, then her personal roadmap, all on one page. Mobile first. It grows its own canvas, so any starting height works. Leave it out of your menu if you like."),
         ("RoadmapTool", "/roadmap-tool", "NEW: One page for all 7 roadmap tools (each roadmap links to its tool with her own 72 hour deadline). With no deadline it shows full price, no timer. Leave it out of your menu."),
         ("MasterclassDelivery", "/masterclass-delivery", "NEW: Where masterclass sign-ups watch the video. Countdown above it, the 50% off join box and what they get right under it, your workbook link and the floating timer. Paste this one first. Leave it out of your menu."),
