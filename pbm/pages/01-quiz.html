@@ -6,7 +6,7 @@
 <title>Is AI Making You Busier? A 2-Minute Check for Bloggers</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=Caveat:wght@600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=Caveat:wght@600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap">
 <style>
 /* AI check quiz for The Productive Blogger Method, in the Boss Lady Bloggers brand.
    Plum ink, berry accent, blush and rose folders with tabs, a pink sticky note, cream paper.
@@ -118,6 +118,35 @@ position:relative;width:100%;min-height:100vh;background:var(--cream);color:var(
 #pbmq .others{margin-top:30px;font-size:15px;color:var(--mauve);display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center}
 #pbmq .others button{min-height:44px;background:none;border:0;padding:0;color:var(--berry);font:600 15px/1.2 var(--body);text-decoration:underline;text-underline-offset:4px}
 #pbmq .foot{font:400 12px/1.4 var(--mono);color:var(--mauve);padding:10px 0 34px}
+/* ===== Result screens: The Productive Blogger Method brand (brand.css tokens) ===== */
+#pbmq.is-pbm{--plum:#1F1E24;--berry:#A8328F;--pop:#F6C8EE;--cream:#FBF9FA;--cocoa:#2C2A31;--mauve:#6A6570;--line:#ECE6EA;--white:#fff;
+--f1:#F7DDEF;--f2:#DDEFE7;--f3:#FBE8D3;--f4:#E4E1F7;--f5:#FCE3EC;--f6:#DCEBF7;--note:#FFF4B8;--blush:#F7DDEF;--rose:#F2C9E6;
+--display:'Plus Jakarta Sans',system-ui,sans-serif;--body:'DM Sans',system-ui,sans-serif;--mono:'Plus Jakarta Sans',system-ui,sans-serif;--hand:'Plus Jakarta Sans',system-ui,sans-serif;
+font-family:var(--body)}
+#pbmq.is-pbm .topline{background:var(--pop)}
+#pbmq.is-pbm h1,#pbmq.is-pbm h2{font-weight:800;letter-spacing:-.02em}
+#pbmq.is-pbm em{font-style:normal}
+#pbmq.is-pbm h3{font:700 18px/1.3 var(--display)}
+#pbmq.is-pbm .brand b{font:800 18px/1.1 var(--display)}
+#pbmq.is-pbm .brand b i{font-style:normal}
+#pbmq.is-pbm .brand span{font:700 11px/1 var(--display);letter-spacing:.1em}
+#pbmq.is-pbm .folder{box-shadow:0 1px 0 rgba(31,30,36,.06)}
+#pbmq.is-pbm .folder::before{font:700 13px/1 var(--display);letter-spacing:0;text-transform:none}
+#pbmq.is-pbm .kicker{font:700 13px/1.3 var(--display);letter-spacing:.08em}
+#pbmq.is-pbm .result .type{font-size:clamp(36px,7vw,54px);line-height:1.05}
+#pbmq.is-pbm .one{font:600 clamp(18px,2.6vw,21px)/1.4 var(--body);color:var(--plum)}
+#pbmq.is-pbm .sec h3::before{display:none}
+#pbmq.is-pbm .ticks li{background:rgba(255,255,255,.75)}
+#pbmq.is-pbm .note{border-radius:4px 4px 18px 4px;box-shadow:0 10px 22px -16px rgba(31,30,36,.5)}
+#pbmq.is-pbm .note::before{background:rgba(255,255,255,.65);border-radius:3px}
+#pbmq.is-pbm .note h3{font:800 20px/1.2 var(--display);margin-bottom:8px}
+#pbmq.is-pbm .note p,#pbmq.is-pbm .note h3{color:var(--plum)}
+#pbmq.is-pbm .fix span{background:var(--f1);font:800 13px/1 var(--display)}
+#pbmq.is-pbm .cta h3{font:800 clamp(22px,3.6vw,28px)/1.2 var(--display);color:var(--pop)}
+#pbmq.is-pbm .cta h3 em{color:var(--white)}
+#pbmq.is-pbm .cta p{color:#EDE8EE}
+#pbmq.is-pbm .cta .sig{font:800 18px/1 var(--display);color:var(--pop)}
+#pbmq.is-pbm .foot{font:400 13px/1.4 var(--body)}
 @media (max-width:520px){#pbmq .keys{display:none}#pbmq .note{transform:none}}
 @media (prefers-reduced-motion:reduce){#pbmq *{animation:none!important;transition:none!important}}
 </style>
@@ -226,6 +255,7 @@ if(window.ResizeObserver)new ResizeObserver(fit).observe(root);
 window.addEventListener('load',fit);window.addEventListener('resize',fit);
 
 function show(id,focusEl){
+ root.classList.toggle('is-pbm',id==='s-result');
  root.querySelectorAll('.screen').forEach(function(s){var on=s.id===id;s.hidden=!on;if(on){s.classList.remove('enter');void s.offsetWidth;s.classList.add('enter');}});
  var top=root.getBoundingClientRect().top+window.pageYOffset;if(window.pageYOffset>top)window.scrollTo(0,top);
  if(focusEl)try{focusEl.focus({preventScroll:true});}catch(e){}
