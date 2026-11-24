@@ -29,6 +29,15 @@ STICKER = '<svg class="sticker" viewBox="0 0 120 120" aria-hidden="true"><path d
 STAR = '<svg class="spark" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 0l4.5 15.5L40 20l-15.5 4.5L20 40l-4.5-15.5L0 20l15.5-4.5z"/></svg>'
 BURST = '<svg class="burst" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 0l9 30 25-19-15 27 31 3-30 9 19 25-27-15-3 31-9-30-25 19 15-27-31-3 30-9-19-25 27 15z"/></svg>'
 
+# Real course screens (mockups v2, captured from the live course). Served from jsDelivr pinned to the commit
+# that added them, because the Netlify image host stopped deploying on Nov 15.
+SHOTS = "https://cdn.jsdelivr.net/gh/genasbury12/blb-site@6628ed57c0836524f91d524eee1c79a83d725b48/site/images/icc/"
+MOD_TITLES = ["Set Up Your Capture System", "Do Your Real Work With Claude", "Turn Your Library Into a Course",
+              "Make Your Prompts Work for Students", "Build the Lesson Boards", "Make the Videos", "Update and Launch"]
+def shot(name, alt, cls="shot", eager=False):
+    lz = "" if eager else ' loading="lazy"'
+    return f'<img class="{cls}" src="{SHOTS}{name}.jpg" alt="{e(alt)}" width="1600" height="900"{lz}>'
+
 THEME = r'''<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Outfit:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap">
 <style>
@@ -81,6 +90,10 @@ THEME = r'''<link rel="preconnect" href="https://fonts.googleapis.com"><link rel
 .icc .win .lbl{color:var(--violet)}
 .icc .win .pf-slot{border-color:var(--violet);color:var(--violet);background:rgba(99,72,181,.06)}
 .icc .win .ticks.lt li{background:#fff;color:var(--ink);border-color:var(--ink)}
+.icc img.shot{display:block;width:100%;height:auto;border-radius:16px;border:1.5px solid var(--ink);box-shadow:0 22px 44px -28px rgba(39,36,58,.55)}
+.icc .shotwrap{display:flex;flex-direction:column;gap:10px}
+.icc .shotcap{font:700 11px/1.4 var(--font-label);letter-spacing:.08em;color:var(--violet);text-transform:uppercase}
+.icc .dk .shotcap{color:var(--lilac)}
 .icc .spark{width:26px;height:26px;fill:var(--violet)}
 .icc .rel{position:relative}
 /* graphic vocabulary */
@@ -207,7 +220,7 @@ o.append(f'''<section class="ihero vio dk">
 <div class="stack" style="gap:20px"><p class="lbl" style="color:#E0D5F5">{e(s[0])}</p><h1>{headline(s[1])}</h1>{P(s[2])}{P(s[3])}
 <p class="intro">{e(s[4])}</p><p class="lockup">The Interactive <b>Course Creator.</b></p><p class="mode">CREATE_MODE: ON</p><p class="big">{e(s[6])}</p>
 <div class="row">{cta(s[7][1:-1], "cr")}</div></div>
-<div class="stack hero-vis" style="gap:22px">{STICKER}{dash}{CURSOR}<div class="stats">{"".join(stat(x) for x in stats)}</div></div>
+<div class="stack hero-vis" style="gap:22px">{STICKER}{shot("01-hero-every-device", "The Interactive Course Creator shown on an iMac, MacBook, iPad and iPhone.", eager=True)}{CURSOR}<div class="stats">{"".join(stat(x) for x in stats)}</div></div>
 </div></section>''')
 assert s[4] == "Introducing..." and s[5] == "The Interactive Course Creator"
 
@@ -218,7 +231,7 @@ cut = next(i for i, l in enumerate(rest) if l.startswith("[Embed") or l.startswi
 o.append(f'''<section class="lil"><div class="in stack" style="gap:30px">
 <div class="nar stack ctr-h">{lb}<h2>{headline(h)}</h2></div>
 <div class="twocol"><div class="stack">{flow(rest[:cut])}</div>
-<div class="stack">{win("demo.mov", flow(rest[cut:cut + 2]))}<div class="row">{cta(rest[-1][1:-1], "cr")}</div></div></div></div></section>''')
+<div class="stack">{shot("09-course-home", "The course home with a folder for every module, on a laptop and a phone.")}{win("demo.mov", flow(rest[cut + 1:cut + 2]))}<div class="row">{cta(rest[-1][1:-1], "cr")}</div></div></div></div></section>''')
 
 def split(n, cls="", photo=None):
     lb, h, rest = head2(section(n))
@@ -325,7 +338,9 @@ for k, a in enumerate(starts):
             items.append(f'<div><b>{e(t)}</b>{"".join(f"<p>{e(x)}</p>" for x in d)}</div>')
         inner = flow(body[:mark + 1]) + f'<div class="inside">{"".join(items)}</div>' + flow(body[tail:])
     mbody = f'<div class="mod"><div><span class="num">{e(num)}</span><h3>{e(title)}</h3></div><div class="stack" style="gap:14px">{inner}</div></div>'
-    mods.append('<article class="rv">' + win(num.lower().replace(" ", "_") + ".board", mbody) + '</article>')
+    n = len(mods)
+    pic = shot(f"{n + 2:02d}-module-{n + 1}", f"Module {n + 1}, {MOD_TITLES[n]}, open on a laptop and a phone.")
+    mods.append('<article class="rv stack" style="gap:16px">' + win(num.lower().replace(" ", "_") + ".board", mbody) + pic + '</article>')
 o.append(f'''<section class="grid-bg"><div class="in stack" style="gap:30px">
 <div class="nar stack ctr-h"><p class="lbl">The course creation process</p><h2>{headline(s[0])}</h2></div>
 <div class="mods">{"".join(mods)}</div></div></section>''')
@@ -365,6 +380,7 @@ for c in cats:
     groups.append(win(s[c].lower().replace(" & ", "_").replace(" ", "_") + ".sop", f'<h3 style="font-size:22px;margin-bottom:12px">{e(s[c])}</h3><ul>{"".join(f"<li>{e(x)}</li>" for x in items)}</ul>'))
 o.append(f'''<section style="background:#FFFFFF"><div class="in stack" style="gap:30px">
 <div class="nar stack ctr-h"><p class="lbl">{e(s[0])}</p><h2>{headline(s[1])}</h2>{flow(s[2:cats[0]])}</div>
+{shot("11-passport-and-libraries", "The Course SOP Library on a laptop and the Passport form on a tablet.")}
 <div class="sop">{"".join(groups)}</div>
 <div class="nar stack">{flow(s[j:])}</div></div></section>''')
 
@@ -418,9 +434,13 @@ o.append(f'''<section class="grid-bg"><div class="in stack" style="gap:30px">
 s = section(20)
 o.append(f'''<section style="background:#FFFFFF"><div class="in stack" style="gap:24px">
 <div class="nar stack ctr-h"><h2>{headline(s[0])}</h2></div>
-<div class="pairs">{flow(s[1:])}</div></div></section>''')
+{shot("10-feedback-board", "The feedback board where students say where they got stuck.")}
+<div class="pairs">{flow(s[2:])}</div></div></section>''')
+assert s[1].startswith("[Insert genuine screenshots")
 
 o.append(split(21, "lil"))
+# right before the offer: everything inside
+o.append(f'''<section class="lil" style="padding-top:0"><div class="in shotwrap"><p class="shotcap">Everything inside</p>{shot("00-everything-inside-grid", "All 7 module boards, the course home and the feedback board in one grid.")}</div></section>''')
 
 # 22 EVERYTHING YOU RECEIVE
 s = section(22)
