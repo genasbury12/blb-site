@@ -23,7 +23,7 @@ GROUPS = [
         ("Academy", "/academy (menu title: Courses)", "NEW: The BOSS Academy storefront. The course library filters by category. Dashed boxes mark the course and All Access prices; send me each course's sales page link and the All Access link and I'll wire the buttons."),
         ("Membership", "/membership", "NEW: The Blogging Ladies Membership sales page."),
         ("Home", "/ (home page)", ""), ("StartHere", "/start-here", ""), ("About", "/about", ""),
-        ("BlogCoaching", "/blog-coaching", "NEW: Now your Work With Me page for The BOSS Business Experience. Dashed boxes mark what you still need to fill in: portfolio, testimonial, case studies, starting investment, timeline, payment plans and the two \"if confirmed\" resources."), ("Podcast", "/podcast", ""),
+        ("BlogCoaching", "/blog-coaching", "NEW: rebuilt from your 12 month Blog Coaching & Design copy. Real client mockups and the 5 video testimonials are in. Dashed boxes: starting investment and payment terms, coaching call frequency, a website design testimonial, two case studies, and the end of Section 21 (your copy was cut off)."), ("Podcast", "/podcast", ""),
         ("BlogLanding", "/blog", "Optional: only if you want the new blog landing look"),
         ("BlogCategory", "/blog-category", "One page serves every topic"),
         ("Links", "/links", "Link-in-bio page"), ("Contact", "/contact", ""),
