@@ -300,15 +300,7 @@ div[id^="fd-form"] form { padding-top: 0 !important; padding-bottom: 0 !importan
       <div><h3>Explore</h3><a href="/about">About</a><a href="/futureproof-webinar">Futureproof Your Blog Webinar</a><a href="/blog">The Blog</a><a href="/podcast">The Podcast</a><a href="https://www.youtube.com/@GenasysLynn" target="_blank" rel="noopener">YouTube</a><a href="/contact">Contact</a></div>
     </div>
   </div>
-  <div class="ft-stay">
-    <div><h3>Stay Connected</h3><p>Modern business strategies, buyer psychology, AI and conversations about the future of blogging.</p></div>
-    <form class="ft-form" data-ft-news novalidate>
-      <label for="ft-email">Email Address</label>
-      <input id="ft-email" type="text" name="email" inputmode="email" autocomplete="email" placeholder="Email Address" maxlength="255">
-      <button type="submit">Subscribe</button>
-      <p class="ft-msg" role="status" aria-live="polite"></p>
-    </form>
-  </div>
+  <!-- Stay Connected newsletter form: taken out for now (Nov 24). Restore it once the Flodesk form ID is ready. -->
   <div class="ft-row">
     <nav aria-label="Social"><a href="https://www.instagram.com/blogcoach_gen" target="_blank" rel="noopener">Instagram</a><a href="https://www.pinterest.com/BossLadyBloggers/" target="_blank" rel="noopener">Pinterest</a><a href="https://www.youtube.com/@GenasysLynn" target="_blank" rel="noopener">YouTube</a></nav>
     <nav aria-label="Legal"><a href="/privacy-policy">Privacy Policy</a><a href="/terms-and-conditions">Terms &amp; Conditions</a></nav>
@@ -326,7 +318,6 @@ div[id^="fd-form"] form { padding-top: 0 !important; padding-bottom: 0 !importan
   var NEWS_FORM_ID='';
   var form=document.querySelector('[data-ft-news]');if(!form)return;
   var msg=form.querySelector('.ft-msg'),btn=form.querySelector('button'),inp=form.querySelector('input[name=email]');
-  if(!NEWS_FORM_ID){var s=document.createElement('div');s.className='ft-slot';s.innerHTML='<b>TO FILL IN</b>Newsletter form is not connected to Flodesk yet, so sign ups are not saved.';form.appendChild(s);}
   form.addEventListener('submit',function(e){
     e.preventDefault();
     var em=inp.value.trim();
