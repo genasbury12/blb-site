@@ -1,0 +1,991 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=Caveat:wght@600;700&display=swap">
+<style>
+/* Boss Lady Bloggers brand tokens. Use these variables everywhere. */
+:root{
+  --plum:#3A1C2A;      /* headlines, dark sections, footer */
+  --berry:#A23E66;     /* buttons, accents, the logo arch */
+  --rose:#E9B9CA;      /* highlights on plum, photo frames */
+  --blush:#F6E1E8;     /* section backgrounds, soft cards */
+  --cream:#FBF5EE;     /* main background */
+  --pink-pop:#F6C9D8;  /* italic words on berry heroes (display size only) */
+  --lilac:#EBDDF2;     /* rare accent */
+  --cocoa:#4A2F3B;     /* body text */
+  --mauve:#6E4B5B;     /* captions, muted labels */
+  --white-soft:#FFFCFA;
+  --line:#F0DCE3;
+
+  --font-display:'Instrument Serif',Georgia,serif;
+  --font-body:'Inter',Arial,sans-serif;
+  --font-label:'DM Mono','Courier New',monospace;
+  --font-script:'Caveat','Brush Script MT',cursive;
+
+  --radius-card:24px; --radius-lg:32px; --radius-pill:999px;
+  --max:1180px;
+  --shadow-soft:0 30px 60px rgba(58,28,42,.18);
+}
+/* Google Fonts link (put in <head> of every page):
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=Caveat:wght@600;700&display=swap">
+*/
+
+/* ============================================================
+   Boss Lady Bloggers · shared styles
+   Built from the design helmet CSS + CLAUDE.md rules.
+   ============================================================ */
+
+/* ---------- base ---------- */
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--cream);font-family:var(--font-body);color:var(--cocoa);overflow-x:clip}
+img{max-width:100%;display:block}
+a{color:var(--berry)}
+a:hover{color:var(--plum)}
+main{display:block}
+
+/* skip link + focus */
+.skip-link{position:absolute;left:-9999px;top:0;background:var(--plum);color:#fff;padding:12px 20px;border-radius:0 0 12px 0;z-index:200;font:600 14px/1 var(--font-body)}
+.skip-link:focus{left:0}
+:focus-visible{outline:2px solid var(--berry);outline-offset:2px}
+
+/* ---------- design-system classes (from the helmet) ---------- */
+.hl{background:#E9B9CA;padding:0 .14em;border-radius:6px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.hl-dark{background:#A23E66;color:#FFFFFF;padding:0 .14em;border-radius:6px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+
+@keyframes blspin{to{transform:rotate(360deg)}}
+.bl-spin{animation:blspin 26s linear infinite}
+
+@keyframes blmarq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.bl-track{display:flex;width:max-content;animation:blmarq 38s linear infinite}
+.bl-slow{animation-duration:70s}
+.bl-rev{animation-direction:reverse}
+.bl-marquee:hover .bl-track{animation-play-state:paused}
+
+@keyframes blgrad{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.bl-grad{background:linear-gradient(300deg,#F6E1E8,#FBF5EE,#EBDDF2,#F3C9D7);background-size:300% 300%;animation:blgrad 12s ease infinite}
+.bl-grad404{background:linear-gradient(300deg,#3A1C2A,#59253D,#A23E66,#3A1C2A);background-size:300% 300%;animation:blgrad 12s ease infinite}
+
+@keyframes blfloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.bl-float{animation:blfloat 4s ease-in-out infinite}
+
+.pill{display:inline-flex;align-items:center;gap:14px;min-height:48px;padding:6px 8px 6px 24px;border-radius:999px;font:600 15px/1 var(--font-body);text-decoration:none;box-sizing:border-box;border:0;cursor:pointer}
+.pill-plain{padding:6px 26px}
+.navl{color:var(--plum);text-decoration:none}
+.navl:hover,.navl[aria-current="page"]{color:var(--berry)}
+.card-hover{transition:transform .25s ease}
+.card-hover:hover{transform:translateY(-6px);box-shadow:0 24px 50px rgba(58,28,42,.16)}
+
+/* F7: fanned cards straighten on hover */
+.fan-card{transition:transform .3s ease}
+.fan-card:hover{transform:rotate(0deg) translateY(-6px)!important}
+
+/* hero split row: no upward pull once it stacks on small screens */
+@media (max-width:980px){
+  .hero-split{margin-top:16px!important}
+  .hero-split p{text-align:center!important;margin-bottom:0!important}
+}
+
+/* About: Boss Blend rows compress on phones */
+@media (max-width:680px){
+  .blend-row{grid-template-columns:84px minmax(0,1fr) 84px!important;gap:10px!important}
+  .blend-row>span{font-size:12px!important}
+}
+
+/* Podcast: fixed-size hero scene scales down on phones */
+@media (max-width:480px){
+  .pod-scene{transform:scale(.7);transform-origin:top center;height:380px!important}
+}
+
+/* Instagram strip responsive */
+@media (max-width:980px){.ig-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
+@media (max-width:680px){.ig-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+
+/* even grids (keep exactly, per CLAUDE.md §7) */
+.ev2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+.ev3,.ev3b{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+.ev4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+@media (max-width:1100px){.ev4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:980px){.ev3{grid-template-columns:minmax(0,1fr)}.ev3b{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:680px){.ev2,.ev3b,.ev4{grid-template-columns:minmax(0,1fr)}}
+
+/* ---------- header (F5 sticky) ---------- */
+.site-header{position:sticky;top:0;z-index:50;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;padding:14px clamp(16px,4vw,48px);background:rgba(251,245,238,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.site-logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--plum)}
+.site-logo img{width:31px;height:40px}
+.site-logo .wordmark{font:400 26px/1 var(--font-display)}
+.site-logo .wordmark em{font-style:italic;color:var(--berry)}
+.site-nav{display:flex;flex-wrap:wrap;align-items:center;gap:22px;font:500 14px/1 var(--font-body)}
+.menu-btn{width:48px;height:48px;border-radius:999px;border:0;background:var(--berry);cursor:pointer;display:flex;align-items:center;justify-content:center}
+@media (max-width:1360px){.site-nav{gap:16px;font-size:13.5px}.site-nav .nav-boss{padding:12px 16px}}
+@media (max-width:1260px){.site-nav{gap:12px;font-size:13px}}
+@media (max-width:1160px){.site-nav .navl,.site-nav .nav-boss{display:none}}
+
+/* ---------- popout menu (F4) ---------- */
+.popout{position:fixed;inset:0;z-index:100;background:var(--berry);padding:28px clamp(16px,4vw,48px);overflow-y:auto;display:flex;flex-direction:column;gap:40px;opacity:0;transform:translateY(-12px);pointer-events:none;transition:opacity .25s ease,transform .25s ease;visibility:hidden}
+.popout.open{opacity:1;transform:none;pointer-events:auto;visibility:visible}
+.popout-top{display:flex;justify-content:space-between;align-items:center}
+.popout-close{width:48px;height:48px;border-radius:999px;border:2px solid var(--cream);background:transparent;color:var(--cream);font:400 26px/1 var(--font-body);cursor:pointer}
+.popout-grid{display:flex;flex-wrap:wrap;gap:48px;align-items:flex-start}
+.popout-nav{flex:1 1 380px;min-width:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 32px;font:400 32px/1.1 var(--font-display)}
+.popout-nav a{color:#fff;text-decoration:none}
+.popout-nav a:hover{color:var(--pink-pop)}
+.popout-photo{height:260px;border-radius:24px;background:var(--rose);overflow:hidden;display:flex;align-items:flex-end;padding:20px}
+.popout-photo img{width:100%;height:100%;object-fit:cover}
+.popout-photo:has(img){padding:0}
+body.menu-open{overflow:hidden}
+@media (max-width:680px){.popout-nav{font-size:24px}}
+
+/* ---------- FAQ (F12) ---------- */
+.faq details{border-bottom:1.5px solid var(--line)}
+.faq summary{display:flex;justify-content:space-between;align-items:center;gap:18px;cursor:pointer;list-style:none;padding:22px 4px;font:400 clamp(19px,2.2vw,24px)/1.3 var(--font-display);color:var(--plum)}
+.faq summary::-webkit-details-marker{display:none}
+.faq-plus{flex:0 0 auto;width:34px;height:34px;border-radius:999px;border:1.5px solid var(--berry);color:var(--berry);display:flex;align-items:center;justify-content:center;font:400 20px/1 var(--font-body);transition:transform .25s ease}
+.faq details[open] .faq-plus{transform:rotate(45deg)}
+.faq .faq-a{overflow:hidden;font:400 16px/1.65 var(--font-body);color:var(--cocoa);padding:0 4px}
+.faq details[open] .faq-a{padding-bottom:22px}
+
+/* ---------- tabs (F9/F10) ---------- */
+[role="tab"]{cursor:pointer}
+[role="tabpanel"][hidden]{display:none}
+
+/* ---------- scroll reveal (F19) ---------- */
+.rv{opacity:0;transform:translateY(12px);transition:opacity .5s ease,transform .5s ease}
+.rv.in{opacity:1;transform:none}
+html.no-js .rv{opacity:1;transform:none}
+
+/* ---------- sticky side tab (F15) ---------- */
+.side-tab{position:fixed;left:0;top:50%;transform:rotate(180deg) translateY(50%);writing-mode:vertical-rl;z-index:40;background:var(--berry);color:#fff;text-decoration:none;font:600 13px/1 var(--font-body);letter-spacing:.08em;padding:18px 12px;border-radius:0 12px 12px 0}
+@media (max-width:980px){.side-tab{display:none}}
+
+/* ---------- forms ---------- */
+.form-input{width:100%;min-height:52px;padding:12px 18px;border:1.5px solid var(--rose);border-radius:14px;font:400 16px/1.4 var(--font-body);color:var(--plum);background:#fff}
+.form-input:focus{border-color:var(--berry);outline:none}
+.form-label{font:500 12px/1 var(--font-label);letter-spacing:.12em;text-transform:uppercase;color:var(--mauve)}
+.form-success[hidden]{display:none}
+
+/* ---------- misc ---------- */
+.wrapc{max-width:var(--max);margin:0 auto}
+.label{font:500 13px/1 var(--font-label);letter-spacing:.2em;text-transform:uppercase;color:var(--berry)}
+.script-line{font:700 32px/1.1 var(--font-script);color:var(--berry)}
+
+/* reduced motion: stop loops and auto-movement */
+@media (prefers-reduced-motion: reduce){
+  .bl-spin,.bl-track,.bl-grad,.bl-grad404,.bl-float{animation:none}
+  .rv{opacity:1;transform:none;transition:none}
+  .card-hover,.card-hover:hover{transition:none;transform:none}
+  .fan-card{transition:none}
+}
+
+/* Guarantee badge: on phones, shrink and lift it above the card so it
+   never covers the headline. */
+@media (max-width: 700px) {
+  .gbadge { width: 92px !important; height: 92px !important; top: -64px !important; right: 16px !important; }
+  .gbadge svg { width: 100%; height: 100%; }
+}
+
+/* Flodesk inline embeds: the form ships with empty title and subtitle
+   blocks and its own padding; the card already has a heading, so drop
+   the dead space. */
+div[id^="fd-form"] [class*="__title"],
+div[id^="fd-form"] [class*="__subtitle"] { display: none !important; }
+div[id^="fd-form"] form { padding-top: 0 !important; padding-bottom: 0 !important; }
+
+</style>
+
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <a href="/" class="site-logo">
+    <img src="https://charming-caramel-d2453c.netlify.app/brand/arch-monogram.svg" alt="" width="31" height="40">
+    <span class="wordmark">Boss Lady <em>Bloggers</em></span>
+  </a>
+  <nav aria-label="Main" class="site-nav">
+    <a href="/about" class="navl" data-nav="about">About</a>
+    <a href="/blog-coaching" class="navl" data-nav="coaching" aria-current="page">Blog Coaching &amp; Design</a>
+    <a href="/membership" class="navl" data-nav="membership">Membership</a>
+    <a href="/academy" class="navl" data-nav="academy">Courses</a>
+    <a href="/start-here" class="navl" data-nav="start-here">Resources</a>
+    <a href="/blog-coaching" class="pill pill-plain nav-boss" style="background:#3A1C2A;color:#FFFFFF">Work With Me</a>
+    <button type="button" class="menu-btn" data-menu-open aria-expanded="false" aria-controls="popout-menu" aria-label="Open full menu">
+      <svg aria-hidden="true" width="18" height="14" viewBox="0 0 18 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M1 1h16M1 7h16M1 13h16"></path></svg>
+    </button>
+  </nav>
+</header>
+
+<div id="popout-menu" class="popout" role="dialog" aria-modal="true" aria-label="Full menu" tabindex="-1">
+  <div class="popout-top">
+    <span style="font:400 26px/1 var(--font-display);color:#FBF5EE">Boss Lady Bloggers</span>
+    <button type="button" class="popout-close" data-menu-close aria-label="Close menu">&times;</button>
+  </div>
+  <div class="popout-grid">
+    <div style="flex:1 1 380px;min-width:0;display:flex;flex-direction:column;gap:18px">
+      <p style="margin:0;font:400 clamp(44px,5vw,72px)/1 var(--font-display);color:#FBF5EE">Helping you build the business <em>behind your blog.</em></p>
+      <p style="margin:0;font:400 16px/1.6 var(--font-body);color:#F6E1E8">Professional blog coaching, custom website design and modern business education for ambitious women.</p>
+      <div><a href="/blog-coaching" class="pill pill-plain" style="background:#FBF5EE;color:#3A1C2A">Work With Me</a></div>
+    </div>
+    <nav aria-label="Full menu" class="popout-nav">
+      <a href="/">Home</a><a href="/about">About</a><a href="/blog-coaching">Blog Coaching &amp; Design</a><a href="/membership">The Blogging Ladies Membership</a><a href="/academy">Courses</a><a href="/start-here">Resources</a><a href="/futureproof-webinar">Futureproof Your Blog Webinar</a><a href="/blog">Blog</a><a href="/podcast">Podcast</a><a href="/contact">Contact</a>
+    </nav>
+  </div>
+  <div class="popout-photo"><img src="https://charming-caramel-d2453c.netlify.app/images/photos/flatlay-notebook.jpg" alt="Notebook, pen and a Boss mug on a desk" loading="lazy"></div>
+</div>
+<style>
+/* Shared look for the Portfolio and Client Project pages: cream and plum editorial, real laptop and phone mockups. */
+.pf{--plum:#3A1C2A;--berry:#A23E66;--rose:#E9B9CA;--blush:#F6E1E8;--cream:#FBF5EE;--cocoa:#4A2F3B;--mauve:#6E4B5B;--pop:#F6C9D8}
+.pf section{padding:clamp(76px,9vw,124px) clamp(16px,4vw,48px)}
+.pf .in{max-width:1180px;margin:0 auto}
+.pf .nar{max-width:780px;margin:0 auto}
+.pf .lbl{margin:0;font:500 12px/1.5 var(--font-label);letter-spacing:.2em;text-transform:uppercase;color:var(--berry)}
+.pf .dk .lbl{color:var(--rose)}
+.pf h1,.pf h2,.pf h3{margin:0;font-family:var(--font-display);font-weight:400;letter-spacing:-.015em;text-wrap:balance;color:var(--plum)}
+.pf h1{font-size:clamp(46px,6.4vw,92px);line-height:.98;letter-spacing:-.025em}
+.pf h2{font-size:clamp(38px,5vw,64px);line-height:1.02}
+.pf h1 em,.pf h2 em{color:var(--berry)}
+.pf .dk h1,.pf .dk h2,.pf .dk h3{color:var(--cream)}
+.pf .dk h1 em,.pf .dk h2 em{color:var(--pop)}
+.pf p{margin:0}
+.pf .body{font:400 18px/1.7 var(--font-body);color:var(--cocoa)}
+.pf .dk .body{color:#F1DDE2}
+.pf .big{font:400 clamp(24px,3vw,34px)/1.25 var(--font-display);color:var(--plum)}
+.pf .dk .big{color:var(--cream)}
+.pf .it{font-style:italic;color:var(--berry)}
+.pf .dk .it{color:var(--pop)}
+.pf .stack{display:flex;flex-direction:column;gap:20px}
+.pf .row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.pf .ctr{text-align:center}.pf .ctr .row{justify-content:center}
+.pf .pf-btn{display:inline-flex;align-items:center;gap:12px;min-height:56px;padding:8px 10px 8px 24px;border-radius:999px;background:var(--plum);color:#fff;font:600 15.5px/1.2 var(--font-body);text-decoration:none;transition:transform .2s ease}
+.pf .pf-btn i{flex:none;width:38px;height:38px;border-radius:999px;background:var(--berry);display:grid;place-items:center;transition:transform .2s ease}
+.pf .pf-btn.cr{background:var(--cream);color:var(--plum)}
+.pf .pf-btn.br{background:var(--berry)}.pf .pf-btn.br i{background:var(--plum)}
+.pf .pf-btn.ol{background:transparent;color:var(--plum);border:1.5px solid var(--plum)}
+.pf .pf-btn.olw{background:transparent;color:var(--cream);border:1.5px solid rgba(233,185,202,.6)}
+.pf .pf-btn.olw i{background:var(--pop)}.pf .pf-btn.olw i svg{stroke:#3A1C2A}
+@media (hover:hover){.pf .pf-btn:hover{transform:translateY(-2px)}.pf .pf-btn:hover i{transform:rotate(45deg)}}
+.pf .pf-btn:focus-visible,.pf summary:focus-visible{outline:3px solid var(--berry);outline-offset:3px}
+.pf .pf-slot{border:2px dashed var(--berry);border-radius:18px;padding:16px 20px;background:rgba(162,62,102,.05);font:500 15px/1.5 var(--font-body);color:var(--berry)}
+.pf .pf-slot b{display:block;font:500 11px/1.3 var(--font-label);letter-spacing:.16em;text-transform:uppercase;margin-bottom:6px}
+.pf .pf-slot.sm{padding:12px 16px;font-size:14px}
+.pf .dk .pf-slot{border-color:var(--pop);color:var(--pop);background:rgba(246,201,216,.06)}
+.pf .chips{display:flex;flex-wrap:wrap;gap:8px}
+.pf .chips span{padding:10px 16px;border-radius:999px;background:var(--plum);color:var(--cream);font:400 19px/1.2 var(--font-display)}
+.pf .shot{display:block;border-radius:22px;overflow:hidden;box-shadow:0 34px 70px -44px rgba(58,28,42,.7);background:var(--blush)}
+.pf .shot img{width:100%;height:auto;display:block}
+
+/* hero */
+.pf .hero{background:var(--cream);position:relative;overflow:hidden;isolation:isolate}
+.pf .hero::before{content:"";position:absolute;right:-12%;top:-30%;width:60vw;height:60vw;max-width:760px;max-height:760px;border-radius:50%;background:radial-gradient(circle,rgba(233,185,202,.55),rgba(233,185,202,0) 66%);z-index:-1}
+.pf .hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(36px,5vw,72px);align-items:center}
+.pf .fan{position:relative;aspect-ratio:16/13}
+.pf .fan .shot{position:absolute;width:78%}
+.pf .fan .shot:nth-child(1){left:0;top:4%;transform:rotate(-5deg)}
+.pf .fan .shot:nth-child(2){right:0;top:18%;transform:rotate(4deg)}
+.pf .fan .shot:nth-child(3){left:11%;bottom:0;transform:rotate(-1deg)}
+
+/* philosophy */
+.pf .twocol{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(30px,5vw,72px);align-items:start}
+.pf .understand{display:grid;gap:8px}
+.pf .understand p{padding:14px 18px;border-radius:14px;background:var(--blush);font:400 22px/1.25 var(--font-display);color:var(--plum)}
+.pf .understand p:first-child{background:var(--plum);color:var(--cream)}
+
+/* projects */
+.pf .proj{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:clamp(26px,4vw,56px);align-items:center;padding:clamp(22px,3vw,34px);border-radius:32px;background:#fff}
+.pf .proj:nth-child(even){grid-template-columns:minmax(0,.75fr) minmax(0,1.25fr)}
+.pf .proj:nth-child(even) .proj-img{order:2}
+.pf .proj-img{display:block;border-radius:20px;overflow:hidden;background:var(--blush)}
+.pf .proj-img img{width:100%;height:auto;display:block;transition:transform .5s ease}
+@media (hover:hover){.pf .proj-img:hover img{transform:scale(1.025)}}
+.pf .proj h3{font-size:clamp(32px,3.4vw,44px);line-height:1.02}
+.pf .proj .who{font:500 15px/1.5 var(--font-body);color:var(--mauve)}
+.pf .svc{display:flex;flex-wrap:wrap;gap:6px}
+.pf .svc span{padding:8px 13px;border-radius:999px;border:1.5px solid var(--rose);font:500 13px/1.2 var(--font-body);color:var(--plum)}
+.pf .projs{display:flex;flex-direction:column;gap:22px}
+.pf .tiny{font:500 11.5px/1.4 var(--font-label);letter-spacing:.16em;text-transform:uppercase;color:var(--plum)}
+.pf .link{font:600 15px/1.3 var(--font-body);color:var(--berry);text-decoration:underline;text-underline-offset:4px}
+
+/* strategy */
+.pf .see{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.pf .see > div{border-radius:28px;padding:clamp(22px,3vw,34px);display:flex;flex-direction:column;gap:10px}
+.pf .see .a{background:var(--blush)}
+.pf .see .b{background:var(--plum)}
+.pf .see p.x{font:400 clamp(21px,2.2vw,25px)/1.3 var(--font-display);color:var(--plum)}
+.pf .see .b p.x{color:var(--cream)}
+.pf .should{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.pf .should li{padding:18px 20px;border-radius:18px;background:#fff;font:500 16.5px/1.5 var(--font-body);color:var(--plum);border-left:3px solid var(--berry)}
+.pf .should li b{display:block;font:400 22px/1.2 var(--font-display);color:var(--berry);margin-bottom:4px;font-weight:400}
+
+/* gallery */
+.pf .gal-d{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.pf .gal-m{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:12px}
+.pf .gal-m .shot{border-radius:18px}
+.pf .cap{margin-top:10px;font:500 11.5px/1.4 var(--font-label);letter-spacing:.14em;text-transform:uppercase;color:var(--mauve)}
+
+/* experience */
+.pf .bx{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,4vw,56px);align-items:start}
+.pf .ticks{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.pf .ticks li{position:relative;padding:13px 16px 13px 50px;border-radius:14px;background:rgba(251,245,238,.08);font:500 16px/1.5 var(--font-body);color:var(--cream)}
+.pf .ticks li::before{content:"";position:absolute;left:14px;top:14px;width:22px;height:22px;border-radius:7px;background:var(--berry) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 12.5l4 4L18 8' fill='none' stroke='%23fff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/16px no-repeat}
+
+/* process */
+.pf .steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.pf .step{background:#fff;border-radius:28px;padding:28px;display:flex;flex-direction:column;gap:12px}
+.pf .step .n{font:400 italic 52px/.9 var(--font-display);color:var(--berry)}
+.pf .step h3{font-size:27px;line-height:1.12}
+.pf .step p{font:400 16px/1.6 var(--font-body);color:var(--cocoa)}
+
+/* faq */
+.pf .faq{display:flex;flex-direction:column;gap:12px}
+.pf .faq details{width:100%;box-sizing:border-box;background:#fff;border:2px solid var(--plum);border-radius:18px;padding:4px 20px}
+.pf .faq summary{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:56px;font:600 16.5px/1.35 var(--font-body);color:var(--plum);cursor:pointer;list-style:none}
+.pf .faq summary::-webkit-details-marker{display:none}
+.pf .faq .faq-a p{margin:0 0 10px;font:400 16px/1.65 var(--font-body);color:var(--plum)}
+
+/* webinar mini */
+.pf .mini{background:var(--plum);border-radius:32px;padding:clamp(28px,5vw,56px);display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:28px;align-items:center}
+
+/* client project */
+.pf .cp-hero{background:var(--plum)}
+.pf .meta{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.pf .meta div{padding:16px 18px;border-radius:18px;background:rgba(251,245,238,.07);display:flex;flex-direction:column;gap:6px}
+.pf .meta span{font:500 11px/1.3 var(--font-label);letter-spacing:.16em;text-transform:uppercase;color:var(--pop)}
+.pf .meta b{font:400 22px/1.2 var(--font-display);color:var(--cream);font-weight:400}
+.pf .cp-sec{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(24px,4vw,64px);align-items:start;padding:clamp(34px,4vw,52px) 0;border-top:1px solid rgba(58,28,42,.14)}
+.pf .cp-sec h2{font-size:clamp(32px,3.6vw,46px)}
+.pf .cp-sec .num{display:block;font:500 11.5px/1 var(--font-label);letter-spacing:.18em;color:var(--berry);margin-bottom:14px}
+.pf .more{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.pf .more a{display:flex;flex-direction:column;gap:10px;text-decoration:none;color:var(--plum)}
+.pf .more a span{font:400 22px/1.2 var(--font-display)}
+
+@media (max-width:980px){
+ .pf .hero-grid,.pf .twocol,.pf .proj,.pf .proj:nth-child(even),.pf .bx,.pf .mini,.pf .cp-sec{grid-template-columns:minmax(0,1fr)}
+ .pf .proj:nth-child(even) .proj-img{order:0}
+ .pf .steps,.pf .more{grid-template-columns:minmax(0,1fr)}
+ .pf .gal-m{grid-template-columns:repeat(4,minmax(0,1fr))}
+}
+@media (max-width:700px){
+ .pf .see,.pf .should,.pf .gal-d,.pf .meta{grid-template-columns:minmax(0,1fr)}
+ .pf .gal-m{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .pf .pf-btn{font-size:15px;padding-left:20px}
+}
+@media (prefers-reduced-motion:reduce){.pf *{transition:none!important}}
+
+.vt-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:16px}
+.vt{display:flex;flex-direction:column;gap:12px;background:#FFFFFF;border-radius:22px;padding:12px 12px 16px;box-shadow:0 22px 44px -36px rgba(58,28,42,.6)}
+.vt-frame{position:relative;aspect-ratio:9/12;border-radius:14px;overflow:hidden;background:#3A1C2A}
+.vt-frame img{width:100%;height:100%;object-fit:cover;display:block}
+.vt-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vt-play{position:absolute;inset:0;width:100%;border:0;padding:0;margin:0;background:linear-gradient(180deg,rgba(58,28,42,0) 45%,rgba(58,28,42,.65));cursor:pointer;display:flex;align-items:flex-end;justify-content:flex-start}
+.vt-play span{margin:14px;width:52px;height:52px;border-radius:999px;background:#A23E66;display:grid;place-items:center;transition:transform .2s ease}
+@media (hover:hover){.vt-play:hover span{transform:scale(1.08)}}
+.vt-play:focus-visible{outline:3px solid #A23E66;outline-offset:3px}
+.vt-name{margin:0 4px;font:400 24px/1.1 var(--font-display);color:#3A1C2A}
+.vt-cap{margin:0 4px;font:500 11px/1.4 var(--font-label);letter-spacing:.14em;text-transform:uppercase;color:#A23E66}
+</style>
+<style>
+.pf .beat{font:400 clamp(21px,2.3vw,26px)/1.3 var(--font-display);color:var(--plum)}
+.pf .dk .beat{color:var(--cream)}
+.pf .ctr-h{text-align:left}
+.pf .ctr-h > h2,.pf .ctr-h > .lbl{text-align:center}
+.pf .sticky{position:sticky;top:110px}
+.pf .ticks.lt li{background:#fff;color:var(--plum)}
+.pf .dk .ticks.lt li{background:rgba(251,245,238,.08);color:var(--cream)}
+.pf .ticks.no li::before{background:var(--plum) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M7 7l10 10M17 7L7 17' fill='none' stroke='%23fff' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E") center/14px no-repeat}
+.pf .tagrow{display:flex;flex-wrap:wrap;gap:8px 18px;font:500 11.5px/1.5 var(--font-label);letter-spacing:.16em;text-transform:uppercase;color:var(--pop)}
+.pf .tagrow span+span::before{content:"\2726";margin-right:18px;color:var(--berry)}
+.pf .thoughts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.pf .thoughts p{padding:18px 20px;border-radius:18px;background:#fff;font:400 italic 21px/1.35 var(--font-display);color:var(--plum)}
+.pf .thoughts p::before{content:"\201C";color:var(--berry)}.pf .thoughts p::after{content:"\201D";color:var(--berry)}
+.pf .phase{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(24px,4vw,56px);padding:clamp(26px,4vw,44px);border-radius:32px;background:#fff;align-items:start}
+.pf .phase .pn{font:500 12px/1 var(--font-label);letter-spacing:.2em;color:var(--berry)}
+.pf .phase h3{font:400 italic clamp(48px,6vw,80px)/.95 var(--font-display);color:var(--plum);margin:10px 0 12px}
+.pf .phase .when{display:inline-block;padding:9px 14px;border-radius:999px;background:var(--plum);color:var(--cream);font:500 11px/1 var(--font-label);letter-spacing:.14em}
+.pf .phase .ticks.lt li{background:var(--cream);font-size:15px;padding:11px 14px 11px 46px}
+.pf .phase .ticks.lt li::before{top:12px}
+@media (min-width:1100px){.pf .phase .ticks{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.pf .phase .outc{padding:18px 20px;border-radius:18px;background:var(--berry);color:#fff;font:400 20px/1.35 var(--font-display)}
+.pf .phase .outc b{display:block;font:500 11px/1.3 var(--font-label);letter-spacing:.16em;text-transform:uppercase;color:var(--pop);margin-bottom:6px;font-weight:500}
+.pf .phases{display:flex;flex-direction:column;gap:18px}
+.pf .cycle{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;counter-reset:c}
+.pf .cycle div{padding:22px 18px;border-radius:22px;background:rgba(251,245,238,.08);display:flex;flex-direction:column;gap:8px}
+.pf .cycle b{font:400 italic 34px/1 var(--font-display);color:var(--pop);font-weight:400}
+.pf .cycle p{font:400 15px/1.55 var(--font-body);color:#F1DDE2}
+.pf .pairs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.pf .pair{padding:22px 24px;border-radius:22px;background:#fff;display:flex;flex-direction:column;gap:8px}
+.pf .pair h3{font-size:25px;line-height:1.15}
+.pf .pair p{font:400 16px/1.6 var(--font-body);color:var(--cocoa)}
+.pf .dk .pair{background:rgba(251,245,238,.07)}.pf .dk .pair h3{color:var(--cream)}.pf .dk .pair p{color:#F1DDE2}
+.pf .price{background:var(--plum);border-radius:32px;padding:clamp(28px,4vw,48px);display:flex;flex-direction:column;gap:14px}
+.pf .fornot{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.pf .fornot > div{border-radius:28px;padding:clamp(22px,3vw,32px);display:flex;flex-direction:column;gap:14px}
+.pf .avail{background:var(--berry);border-radius:32px;padding:clamp(30px,5vw,60px);text-align:center;display:flex;flex-direction:column;gap:16px;align-items:center}
+.pf .avail h2{color:#fff}.pf .avail h2 em{color:var(--pop)}.pf .avail .body{color:#FBE3EA}
+
+.pf .steps4{grid-template-columns:repeat(4,minmax(0,1fr))}.pf .gal3{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width:1100px){.pf .steps4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:980px){.pf .gal3{grid-template-columns:minmax(0,1fr)}.pf .phase{grid-template-columns:minmax(0,1fr)}.pf .cycle{grid-template-columns:repeat(2,minmax(0,1fr))}.pf .sticky{position:static}}
+@media (max-width:700px){.pf .steps4,.pf .thoughts,.pf .pairs,.pf .fornot,.pf .cycle{grid-template-columns:minmax(0,1fr)}}
+</style>
+<style>
+.pf .show{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;background:#F6E1E8;border-radius:30px;padding:clamp(14px,2vw,22px)}
+.pf .show article{background:#fff;border-radius:22px;padding:22px;display:flex;flex-direction:column;gap:12px}
+.pf .show h3{font-size:24px}
+.pf .show .ico{width:26px;height:26px;fill:none;stroke:#A23E66;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.pf .show .bar{display:grid;gap:5px}.pf .show .bar span{font:500 13px/1 var(--font-body);color:var(--plum)}
+.pf .show .bar i{display:block;height:8px;border-radius:99px;background:#F3E6EB}.pf .show .bar b{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#A23E66,#C46A8E)}
+.pf .show .eco{display:flex;flex-direction:column;align-items:stretch;gap:4px;text-align:center}
+.pf .show .eco span{padding:9px;border-radius:10px;background:#FBF5EE;font:500 13.5px/1 var(--font-body);color:var(--plum)}
+.pf .show .eco .l2{background:#F6E1E8}.pf .show .eco .l3{background:#E9B9CA}.pf .show .eco .l4{background:#3A1C2A;color:#FBF5EE}
+.pf .show .eco em{font-style:normal;color:#A23E66;font-size:13px;line-height:1}
+.pf .show .wt{display:grid;grid-template-columns:1fr 1fr;gap:12px}.pf .show .wt > div{display:flex;flex-direction:column;gap:8px}
+.pf .show .wt small{font:500 12px/1 var(--font-body);color:var(--mauve)}
+.pf .show .wfa{aspect-ratio:4/5;border:1.5px solid #E9B9CA;border-radius:12px;padding:8px;display:flex;flex-direction:column;gap:6px;background:#FFFCFA}
+.pf .show .wfa i{display:block;border-radius:5px}.pf .show .wfa .t{height:10px;background:#E9D6DD}
+.pf .show .g9{flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:5px}.pf .show .g9 i{background:#F1DDE5}
+.pf .show .hb{flex:1.2;background:#3A1C2A;border-radius:6px;padding:10px;display:flex;flex-direction:column;gap:5px;justify-content:center}
+.pf .show .hb i{height:7px;width:70%;background:#FBF5EE}.pf .show .hb i.s{width:50%;background:#E9B9CA}.pf .show .hb i.s2{width:38%;height:10px;border-radius:99px;background:#A23E66}
+.pf .show .band{height:22px;background:#E9B9CA}.pf .show .g2{flex:.8;display:grid;grid-template-columns:1fr 1fr;gap:5px}.pf .show .g2 i{background:#F6E1E8}
+.pf .show .rd{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.pf .show .rd li{display:flex;align-items:center;gap:12px;font:500 15px/1.3 var(--font-body);color:var(--plum)}
+.pf .show .rd span{flex:none;width:28px;height:28px;border-radius:50%;background:#F6E1E8;display:grid;place-items:center;font:500 12px/1 var(--font-label);color:#A23E66}
+@media (max-width:800px){.pf .show{grid-template-columns:minmax(0,1fr)}}
+.pf .areas{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.pf .area{background:#fff;border-radius:22px;padding:24px;display:flex;flex-direction:column;gap:8px}
+.pf .area .n{font:400 italic 34px/1 var(--font-display);color:var(--berry)}
+.pf .area h3{font-size:25px;line-height:1.15}
+.pf .area p{margin:0;font:400 16px/1.6 var(--font-body);color:var(--cocoa)}
+.pf .area p.q{font:400 italic 19px/1.4 var(--font-display);color:var(--plum)}
+.pf .exgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.pf .ex{background:#fff;border-radius:24px;padding:22px;display:flex;flex-direction:column;gap:12px;box-shadow:0 22px 44px -36px rgba(58,28,42,.6)}
+.pf .ex.wide{grid-column:1 / -1}
+.pf .ex .tagx{align-self:flex-start;font:500 10.5px/1 var(--font-label);letter-spacing:.16em;text-transform:uppercase;padding:7px 11px;border-radius:999px;background:var(--blush);color:var(--plum)}
+.pf .ex h3{font-size:24px}
+.pf .leak{background:var(--plum);border-radius:16px;padding:16px;display:grid;gap:10px;color:var(--cream)}
+.pf .leak b{font:400 22px/1.2 var(--font-display);font-weight:400}
+.pf .leak .vs2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.pf .leak .vs2 div{border-radius:12px;padding:10px 12px;font:400 14px/1.45 var(--font-body)}
+.pf .leak .w{background:rgba(155,44,44,.3)}.pf .leak .r{background:rgba(63,125,90,.35)}
+.pf .leak .vs2 span{display:block;font:500 10px/1 var(--font-label);letter-spacing:.14em;text-transform:uppercase;margin-bottom:6px;opacity:.85}
+.pf .wire{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pf .wf{border:1.5px solid var(--line,#F0DCE3);border-radius:12px;padding:10px;display:grid;gap:6px;background:#FFFCFA}
+.pf .wf i{display:block;border-radius:6px;background:#EADBE1;height:10px}
+.pf .wf i.h{height:20px;width:80%;background:#D9C3CC}.pf .wf i.b{height:26px;width:46%;border-radius:999px;background:var(--berry)}
+.pf .wf i.s{width:60%}.pf .wf .row3{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.pf .wf .row3 i{height:34px}
+.pf .wf.old i.b{background:#cbb}.pf .wf.old .menu{display:flex;flex-wrap:wrap;gap:4px}.pf .wf.old .menu i{width:28px;height:8px}
+.pf .wf small{font:500 10px/1 var(--font-label);letter-spacing:.14em;text-transform:uppercase;color:var(--mauve)}
+.pf .lad{display:grid;gap:8px}
+.pf .lad div{display:grid;grid-template-columns:76px 1fr;gap:12px;align-items:center;padding:12px 14px;border-radius:14px;background:var(--blush);font:400 15px/1.4 var(--font-body);color:var(--plum)}
+.pf .lad div b{font:700 22px/1 var(--font-script);color:var(--berry)}
+.pf .lad div.on{background:var(--plum);color:var(--cream)}.pf .lad div.on b{color:var(--rose)}
+.pf .flow5{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.pf .flow5 span{padding:12px 14px;border-radius:14px;background:var(--blush);font:500 14px/1.2 var(--font-body);color:var(--plum)}
+.pf .flow5 span.k{background:var(--berry);color:#fff}
+.pf .flow5 em{font:700 22px/1 var(--font-script);color:var(--berry);font-style:normal}
+.pf .road{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.pf .road div{border-top:6px solid var(--berry);background:#FFFCFA;border-radius:0 0 14px 14px;padding:12px;display:grid;gap:4px}
+.pf .road div:nth-child(2){border-color:#C46A8E}.pf .road div:nth-child(3){border-color:var(--rose)}.pf .road div:nth-child(4){border-color:var(--plum)}
+.pf .road small{font:500 10px/1 var(--font-label);letter-spacing:.14em;text-transform:uppercase;color:var(--mauve)}
+.pf .road b{font:400 18px/1.2 var(--font-display);font-weight:400;color:var(--plum)}
+.pf .exnote{font:400 13.5px/1.5 var(--font-body);color:var(--mauve)}
+.pf .found{display:flex;flex-wrap:wrap;gap:8px}
+.pf .found span{padding:11px 16px;border-radius:999px;background:var(--plum);color:var(--cream);font:400 18px/1.2 var(--font-display)}
+.pf .willq p{margin:0;padding:16px 0;border-top:1px solid rgba(251,245,238,.2);font:400 italic clamp(20px,2.2vw,26px)/1.35 var(--font-display);color:var(--cream)}
+.pf .steps5{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.pf .steps5 article{background:#fff;border-radius:22px;padding:20px;display:flex;flex-direction:column;gap:8px}
+.pf .steps5 .n{font:400 italic 40px/.9 var(--font-display);color:var(--berry)}
+.pf .steps5 h3{font-size:21px;line-height:1.2}
+.pf .steps5 p{margin:0;font:400 14.5px/1.55 var(--font-body);color:var(--cocoa)}
+.pf .app{background:#fff;border-radius:28px;padding:clamp(22px,4vw,40px);display:flex;flex-direction:column;gap:18px;box-shadow:0 30px 60px -40px rgba(58,28,42,.6)}
+.pf .app .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.pf .app .fld{display:flex;flex-direction:column;gap:6px}
+.pf .app label.q,.pf .app legend{font:600 15px/1.35 var(--font-body);color:var(--plum);padding:0}
+.pf .app input[type=text],.pf .app textarea{border:2px solid var(--rose);border-radius:14px;padding:12px 14px;font:400 16px/1.5 var(--font-body);color:var(--plum);background:var(--cream);-webkit-appearance:none;appearance:none}
+.pf .app input[type=text]{min-height:52px}.pf .app textarea{min-height:100px;resize:vertical}
+.pf .app input:focus,.pf .app textarea:focus{outline:none;border-color:var(--berry);box-shadow:0 0 0 4px rgba(162,62,102,.14)}
+.pf .app fieldset{border:0;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.pf .app .opt{display:flex;gap:10px;align-items:flex-start;padding:11px 14px;border:1.5px solid var(--rose);border-radius:12px;cursor:pointer;font:400 15.5px/1.45 var(--font-body);color:var(--plum)}
+.pf .app .opt input{margin-top:3px;accent-color:#A23E66;width:18px;height:18px;flex:none}
+.pf .app .opt:has(input:checked){border-color:var(--berry);background:var(--blush)}
+.pf .app .opt:focus-within{outline:3px solid var(--berry);outline-offset:2px}
+.pf .app button{align-self:flex-start;min-height:58px;padding:0 28px;border:0;border-radius:999px;background:var(--berry);color:#fff;font:600 16px/1 var(--font-body);cursor:pointer}
+.pf .app button:disabled{opacity:.6}
+.pf .app .msg:not(:empty){font:600 14.5px/1.4 var(--font-body);color:#9B2C2C}
+.pf .app .done{font:400 clamp(26px,3vw,34px)/1.25 var(--font-display);color:var(--plum);margin:0}
+@media (max-width:1100px){.pf .steps5{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:800px){.pf .areas,.pf .exgrid,.pf .steps5,.pf .app .two{grid-template-columns:minmax(0,1fr)}.pf .road{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.pf .leak .vs2,.pf .wire{grid-template-columns:minmax(0,1fr)}}
+</style>
+<main id="main" class="pf">
+<section class="hero dk" style="background:#3A1C2A"><div class="in hero-grid">
+<div class="stack" style="gap:20px"><p class="lbl">A COMPLIMENTARY PRIVATE BUSINESS DIAGNOSTIC &amp; STRATEGY SESSION</p><h1 style="font-size:clamp(42px,5.4vw,78px)">Let me show you what I would do with your business if it were mine.</h1>
+<p class="body">Before we even get on a call, I&rsquo;ll study your business, examine what you&rsquo;ve already built, explore your monetization opportunities and identify what could be standing between you and the revenue you&rsquo;re trying to generate.</p><p class="body">Then we&rsquo;ll meet privately, and I&rsquo;ll walk you through a personalized strategic presentation developed around your business.</p><div class="stack" style="gap:2px"><p class="big">Not someone else&rsquo;s business.</p><p class="big">Not a generic blogging roadmap.</p><p class="big it">Yours.</p></div></div>
+<div class="stack" style="gap:18px;background:#FBF5EE;border-radius:30px;padding:clamp(24px,3vw,36px)">
+<p style="font:700 clamp(30px,3vw,40px)/1 var(--font-script);color:#A23E66;transform:rotate(-2deg);align-self:flex-start">Introducing...</p>
+<h2 style="color:#3A1C2A;font-size:clamp(34px,3.6vw,48px)">The Blog Monetization <em style="color:#A23E66">Fast Track Call</em></h2>
+<p style="font:400 16.5px/1.6 var(--font-body);color:#4A2F3B;margin:0">A complimentary private strategy experience with Genasys, founder of Boss Lady Bloggers, professional blog coach, business strategist and custom website designer.</p>
+<div class="row"><a class="pf-btn br" href="#apply">Apply for My Personalized Fast Track Call <i aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></i></a></div><p style="font:500 12px/1.5 var(--font-label);letter-spacing:.08em;color:#6E4B5B;margin:0">Complimentary for qualified applicants. Application and business questionnaire required.</p></div>
+</div></section>
+<section style="background:#FBF5EE"><div class="in stack" style="gap:24px">
+<div class="nar stack ctr-h" style="gap:12px"><p class="lbl" style="text-align:center">Inside your personalized Fast Track experience</p><h2 style="text-align:center">See your business <em>through my eyes.</em></h2></div>
+<div class="show"><article><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5M8 11h6"/></svg><h3>Revenue Leak Analysis</h3><div class="bar"><span>Offer positioning</span><i><b style="width:34%"></b></i></div><div class="bar"><span>Customer pathways</span><i><b style="width:55%"></b></i></div><div class="bar"><span>Sales conversion</span><i><b style="width:28%"></b></i></div><div class="bar"><span>Messaging</span><i><b style="width:42%"></b></i></div></article><article><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><path d="M10 6.5h4a2.5 2.5 0 012.5 2.5v5"/></svg><h3>Your Offer Ecosystem</h3><div class="eco"><span>Free resource</span><em>&darr;</em><span class="l2">Entry offer</span><em>&darr;</em><span class="l3">Signature offer</span><em>&darr;</em><span class="l4">Premium support</span></div></article>
+<article><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M9 9v11"/></svg><h3>Website Transformation</h3><div class="wt"><div><div class="wfa"><i class="t"></i><div class="g9"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div><small>Before</small></div><div><div class="wfa"><i class="t"></i><div class="hb"><i></i><i class="s"></i><i class="s2"></i></div><i class="band"></i><div class="g2"><i></i><i></i></div></div><small>Proposed direction</small></div></div></article><article><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16M4 12h16M4 19h16"/><circle cx="8" cy="5" r="1.6"/><circle cx="14" cy="12" r="1.6"/><circle cx="10" cy="19" r="1.6"/></svg><h3>Your Strategic Roadmap</h3><ol class="rd"><li><span>1</span>Business clarity</li><li><span>2</span>Brand &amp; messaging</li><li><span>3</span>Website &amp; offers</li><li><span>4</span>Sales systems</li><li><span>5</span>Growth &amp; optimization</li></ol></article></div>
+<p class="exnote" style="text-align:center">Illustrative previews of the kinds of things your personalized presentation can include. Yours is built around your own business.</p>
+</div></section>
+<section style="background:#FBF5EE"><div class="in twocol"><div class="stack sticky"><h2>You&rsquo;ve been working so hard on your blog. <em>But has anyone actually sat down and examined why it isn&rsquo;t making you the money you want?</em></h2></div><div class="stack"><p class="beat">You&rsquo;ve probably questioned your niche.</p>
+<p class="beat">Wondered whether you need a different offer.</p>
+<p class="beat">Considered redesigning your website.</p>
+<p class="beat">Tried creating another freebie.</p>
+<p class="beat">Spent hours researching marketing strategies.</p>
+<p class="beat">Questioned whether you simply need more traffic.</p>
+<p class="body">And every time something doesn&rsquo;t work, you&rsquo;re left trying to figure out what went wrong.</p>
+<p class="beat">Was it the messaging?</p>
+<p class="beat">The offer?</p>
+<p class="beat">The website?</p>
+<p class="beat">The audience?</p>
+<p class="beat">The pricing?</p>
+<p class="beat">The marketing?</p>
+<p class="beat">Or something you haven&rsquo;t even considered yet?</p>
+<p class="body">It&rsquo;s difficult to diagnose a business you&rsquo;re emotionally invested in, especially when you&rsquo;ve been building it piece by piece without anyone examining how those pieces work together.</p>
+<p class="beat">That&rsquo;s exactly what I want to help you do.</p></div></div></section>
+<section style="background:#FFFFFF"><div class="in twocol"><div class="stack sticky"><h2>Most discovery calls begin with someone asking you about your business. <em>Mine begins with me already having studied it.</em></h2></div><div class="stack"><p class="body">Before our call, you&rsquo;ll complete a detailed business questionnaire.</p>
+<p class="body">I&rsquo;ll use your answers, your existing business assets and the information available about your business to prepare a personalized strategic presentation.</p>
+<p class="body">When we meet, we&rsquo;re not going to spend our entire time together discussing things you could have told me beforehand.</p>
+<p class="beat">We&rsquo;re going to examine what I&rsquo;ve uncovered.</p>
+<p class="body">I&rsquo;ll explain where I see potential gaps, why certain strategies may not be producing the results you want and what I would consider changing.</p>
+<p class="body">Depending on your business, I may also show you examples of how your offers, website, sales funnels, messaging or marketing could be restructured.</p>
+<p class="beat">I want you to actually see the possibilities for your business.</p>
+<p class="beat">Not just hear me talk about them.</p></div></div></section>
+<section style="background:#F6E1E8"><div class="in stack" style="gap:28px">
+<div class="nar stack ctr-h"><p class="lbl" style="text-align:center">Your personalized business presentation</p><h2 style="text-align:center">Imagine sitting down with someone who has already looked at your business and prepared a strategic vision for what it could become.</h2><p class="body">Your Fast Track presentation is developed around your individual circumstances.</p>
+<p class="body">Depending on what your business needs, we&rsquo;ll explore areas such as:</p></div>
+<div class="areas"><article class="area rv"><span class="n">01</span><h3>Your current reality versus your desired business</h3><p class="q">Where are you now? Where do you want to be? What is preventing those two realities from coming together?</p><p>We&rsquo;ll examine your goals, current efforts and existing business foundations.</p></article><article class="area rv"><span class="n">02</span><h3>Your hidden revenue leaks</h3><p>I&rsquo;ll look for places where potential customers may be losing interest, becoming confused or reaching a dead end before purchasing.</p><p>Sometimes the problem isn&rsquo;t attracting more people.</p><p>It&rsquo;s what happens after those people discover you.</p></article><article class="area rv"><span class="n">03</span><h3>Your offer ecosystem</h3><p class="q">Are your offers competing against each other?</p><p class="q">Are you giving customers too many choices?</p><p class="q">Is there a clear reason to purchase each offer?</p><p class="q">Are you creating opportunities for existing customers to continue buying from you?</p><p>We&rsquo;ll examine how your products and services could work together more strategically.</p></article><article class="area rv"><span class="n">04</span><h3>Your brand messaging and positioning</h3><p class="q">Does your potential customer immediately understand that your business is for her?</p><p class="q">Does your messaging communicate a problem she recognizes and a solution she values?</p><p>We&rsquo;ll explore where your communication may need greater specificity, clarity and direction.</p></article><article class="area rv"><span class="n">05</span><h3>Your website and customer experience</h3><p>I&rsquo;ll consider how your existing website supports your business goals.</p><p>Where appropriate, I may prepare visual concepts showing how your homepage, customer pathways or website structure could be improved.</p></article><article class="area rv"><span class="n">06</span><h3>Your marketing and sales funnels</h3><p>We&rsquo;ll examine how someone discovers your business, develops trust, explores your offers and eventually becomes a customer.</p><p>I&rsquo;ll show you where those connections could become stronger.</p></article><article class="area rv"><span class="n">07</span><h3>Your AI implementation opportunities</h3><p>We&rsquo;ll explore where artificial intelligence could support your business development, content production, digital product creation or daily operations.</p><p>Not simply to create more content, but to make the work you&rsquo;re already doing more intentional and efficient.</p></article><article class="area rv"><span class="n">08</span><h3>Your business development roadmap</h3><p>I&rsquo;ll help you visualize the sequence of work that could move your business forward.</p><p class="q">What needs to happen first?</p><p class="q">What should wait?</p><p class="q">What needs to be developed, refined or reconsidered?</p><p class="q">And how could those projects support your longer term business goals?</p></article></div></div></section>
+<section style="background:#FBF5EE"><div class="in stack" style="gap:28px">
+<div class="nar stack ctr-h"><h2 style="text-align:center">What if you could actually see what needs to change?</h2><p class="body">There&rsquo;s a difference between someone telling you that your website needs better messaging and someone showing you how your homepage could be structured differently.</p>
+<p class="body">There&rsquo;s a difference between being told to build an email funnel and seeing how your content, free resources, offers and email sequences could connect.</p>
+<p class="body">There&rsquo;s a difference between being told to simplify your business and seeing which of your offers are competing against each other.</p>
+<p class="body">That&rsquo;s why I incorporate visual examples and personalized strategic concepts into my Fast Track presentations when they&rsquo;re appropriate for the business.</p></div>
+<div class="exgrid"><article class="ex"><span class="tagx">Example, anonymized</span><h3>A revenue leak analysis</h3>
+<div class="leak"><b>Every path ends in a free call</b><div class="vs2"><div class="w"><span>What&rsquo;s happening</span>A reader who loves a post can only book a call with a stranger, or leave.</div><div class="r"><span>What works</span>Post, then a matching freebie, then a small paid first step.</div></div></div>
+<div class="leak"><b>A list that reads but isn&rsquo;t asked to buy</b><div class="vs2"><div class="w"><span>What&rsquo;s happening</span>Helpful emails with no single next step.</div><div class="r"><span>What works</span>A short welcome series that ends in one clear offer.</div></div></div></article><article class="ex"><span class="tagx">Example, anonymized</span><h3>A personalized sales funnel</h3>
+<div class="flow5"><span>Posts, pins and videos</span><em>&rarr;</em><span class="k">One freebie</span><em>&rarr;</em><span>Thank you page offer</span><em>&rarr;</em><span>Welcome emails</span><em>&rarr;</em><span class="k">Core offer</span></div>
+<p class="exnote">Every piece of content has one job: lead to the freebie. The emails do the rest.</p></article><article class="ex"><span class="tagx">Example, anonymized</span><h3>A before and after homepage concept</h3>
+<div class="wire"><div class="wf old"><small>Before</small><div class="menu"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><i class="h"></i><i></i><i class="s"></i><div class="row3"><i></i><i></i><i></i></div><i class="b"></i></div>
+<div class="wf"><small>After</small><i class="h"></i><i class="s"></i><i class="b"></i><div class="row3"><i style="background:#F6E1E8"></i><i style="background:#E9B9CA"></i><i style="background:#F6E1E8"></i></div><i class="s"></i></div></div>
+<p class="exnote">One clear promise, one main button and a path for each kind of visitor, instead of a menu of everything.</p></article><article class="ex"><span class="tagx">Example, anonymized</span><h3>An offer ecosystem</h3>
+<div class="lad"><div><b>High</b>Premium private work, offered to existing customers</div><div><b>Mid</b>A group program as the natural next step</div><div class="on"><b>Entry</b>One small paid first yes</div><div><b>Free</b>One freebie that matches the best posts</div></div></article></div>
+<div class="nar stack" style="text-align:center"><p class="body">These are examples of the type of strategic thinking that goes into preparing for a Fast Track Call.</p>
+<p class="body">Your presentation will reflect your own business, challenges and opportunities.</p>
+<div class="row"><a class="pf-btn " href="#apply">I Want to See What&rsquo;s Possible for My Business <i aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></i></a></div></div></div></section>
+<section style="background:#FFFFFF"><div class="in twocol"><div class="stack sticky"><p class="lbl">For bloggers who haven&rsquo;t started yet</p><h2>Let&rsquo;s make sure you&rsquo;re building the right business before you spend months building the wrong one.</h2></div>
+<div class="stack"><p class="body">You don&rsquo;t need an existing website to benefit from a strategic business conversation.</p>
+<p class="body">If you&rsquo;re starting from scratch, we&rsquo;ll focus on the foundations of the business you&rsquo;re considering.</p><div class="found"><span>Your expertise.</span><span>Your potential customers.</span><span>The problems you could help people solve.</span><span>The products or services you could develop.</span><span>Your potential positioning.</span><span>The role your website could play.</span><span>The business model that could make sense for your ambitions.</span></div><p class="body">Rather than immediately choosing a niche, buying a website template and publishing blog posts, let&rsquo;s explore what you&rsquo;re actually building and how it could eventually generate revenue.</p></div></div></section>
+<section style="background:#F6E1E8"><div class="in twocol"><div class="stack sticky"><p class="lbl">For existing bloggers</p><h2>Let&rsquo;s find out why the business you&rsquo;ve already built isn&rsquo;t performing the way you hoped it would.</h2></div>
+<div class="stack"><p class="beat">You&rsquo;ve invested your time.</p>
+<p class="beat">You&rsquo;ve created the content.</p>
+<p class="beat">You&rsquo;ve developed offers.</p>
+<p class="beat">You&rsquo;ve built your website.</p>
+<p class="beat">Maybe you&rsquo;ve even grown an audience and an email list.</p>
+<p class="beat">But something isn&rsquo;t connecting.</p>
+<p class="body">During your Fast Track experience, we&rsquo;ll look beyond the individual strategies you&rsquo;ve tried and examine the business as a whole.</p>
+<p class="body">Because sometimes the answer isn&rsquo;t creating another offer, publishing another blog post or purchasing another marketing tool.</p>
+<p class="beat">Sometimes it&rsquo;s restructuring what already exists.</p></div></div></section>
+<section class="dk" style="background:#3A1C2A"><div class="in twocol"><div class="stack sticky"><p class="lbl">The next 12 months</p><h2>What happens if you continue approaching your business exactly as you are today?</h2></div>
+<div class="stack"><div class="willq"><p>Will you still be spending hours creating content without knowing how it&rsquo;s contributing to your revenue?</p><p>Will you still be relying on free calls to make every sale?</p><p>Will you still be questioning whether your products are what your audience actually wants?</p><p>Will you still be manually doing work that could be supported by better systems?</p><p>Will you still be wondering what needs your attention first?</p></div><p class="body">I want you to consider what another year of uncertainty could cost you in time, energy and missed opportunities.</p>
+<p class="body">Then let&rsquo;s explore what a more intentional approach could look like.</p></div></div></section>
+<section style="background:#FBF5EE"><div class="in stack" style="gap:28px">
+<div class="nar stack ctr-h"><p class="lbl" style="text-align:center">How the Fast Track experience works</p><h2 style="text-align:center">Five steps <em>from application to strategy.</em></h2></div>
+<div class="steps5"><article class="rv"><span class="n">01</span><h3>Tell me about your business.</h3><p>Complete the application so I can understand your current circumstances, goals and interest in private professional support.</p></article><article class="rv"><span class="n">02</span><h3>Complete your detailed business questionnaire.</h3><p>If your application is approved, you&rsquo;ll receive a more comprehensive questionnaire about your business, expertise, offers, audience, marketing and challenges.</p><p>This is where I begin gathering the information needed to prepare your personalized presentation.</p></article><article class="rv"><span class="n">03</span><h3>I&rsquo;ll prepare for our strategic conversation.</h3><p>I&rsquo;ll review your responses and relevant business assets, explore potential opportunities and develop a presentation around the areas I believe deserve our attention.</p></article><article class="rv"><span class="n">04</span><h3>We&rsquo;ll meet privately on Zoom.</h3><p>I&rsquo;ll walk you through my findings, explain the strategic opportunities I&rsquo;ve identified and discuss what I would prioritize moving forward.</p><p>You&rsquo;ll have the opportunity to ask questions and share your perspective.</p></article><article class="rv"><span class="n">05</span><h3>Explore what working together could look like.</h3><p>If we&rsquo;re a good fit, I&rsquo;ll present how The BOSS Business Experience could help you develop and implement the strategy we&rsquo;ve discussed.</p><p>You&rsquo;ll understand what professional support could look like within your individual business, rather than simply receiving a generic coaching program description.</p></article></div><div class="row" style="justify-content:center"><a class="pf-btn br" href="#apply">Apply for My Fast Track Call <i aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></i></a></div></div></section>
+<section style="background:#FFFFFF"><div class="in twocol"><div class="stack sticky"><h2>I want you to see how I think about your business before deciding whether to hire me.</h2></div><div class="stack"><p class="beat">Hiring a business coach is a meaningful decision.</p>
+<p class="beat">So is hiring a website designer.</p>
+<p class="body">And when you&rsquo;re investing in someone to help develop multiple areas of your business, you deserve to understand how that person thinks, approaches problems and makes strategic decisions.</p>
+<p class="body">That&rsquo;s why I don&rsquo;t want our first conversation to consist entirely of me telling you how wonderful my coaching services are.</p>
+<p class="body">I want to demonstrate my expertise through the way I examine your business.</p>
+<p class="beat">I want you to see the connections I make.</p>
+<p class="beat">Understand the opportunities I identify.</p>
+<p class="body">Experience how I think about your offers, customers, messaging, website and sales.</p>
+<p class="body">And then decide whether that is the kind of strategic support you want beside you.</p></div></div></section>
+<section style="background:#F6E1E8"><div class="in twocol">
+<div class="stack sticky"><span class="shot" style="border-radius:999px 999px 26px 26px;border:10px solid #fff;max-width:420px"><img src="https://charming-caramel-d2453c.netlify.app/images/photos/desk-mic-smile.jpg" alt="Genasys smiling at her desk" loading="lazy" style="aspect-ratio:3/4;object-fit:cover"></span></div>
+<div class="stack"><p class="lbl">Meet your strategist</p><h2>I&rsquo;m not just a blogging coach. <em>I&rsquo;m a blogging business coach.</em></h2><p class="beat">Hi, I&rsquo;m Genasys.</p>
+<p class="body">Founder of Boss Lady Bloggers, business strategist, professional blogging coach and custom Showit website designer.</p>
+<p class="body">I built a money making brand from my aunt&rsquo;s basement as a single mom, working during my son&rsquo;s nap times.</p>
+<p class="body">And I learned that creating a profitable blogging business requires considerably more than understanding how to publish content and grow traffic.</p>
+<p class="beat">It requires understanding how business works.</p>
+<p class="beat">How customers make decisions.</p>
+<p class="beat">How offers create value.</p>
+<p class="beat">How messaging influences sales.</p>
+<p class="beat">How websites support the customer experience.</p>
+<p class="body">How marketing connects people with the products and services they need.</p>
+<p class="beat">And how all of those individual pieces work together.</p>
+<p class="beat">Your blog is one part of that equation.</p>
+<p class="beat">During your Fast Track Call, I&rsquo;m looking at the entire business.</p></div></div></section>
+<section style="background:#FFFFFF"><div class="in stack" style="gap:26px">
+<div class="nar stack ctr-h"><p class="lbl" style="text-align:center">Who should apply?</p><h2 style="text-align:center">I&rsquo;m looking for women who are serious about building something meaningful.</h2><p class="body">The Fast Track experience is designed for women who:</p></div>
+<div class="nar"><ul class="ticks"><li>Want to build or restructure a commercially valuable online business.</li><li>Are tired of guessing what needs to happen next.</li><li>Value personalized expertise and professional guidance.</li><li>Want help developing their offers, brand, website, marketing and sales systems.</li><li>Are willing to reconsider strategies that haven&rsquo;t produced the results they wanted.</li><li>Are interested in working with a professional business strategist and website designer.</li><li>Are financially prepared to explore a premium private coaching and implementation partnership.</li></ul></div>
+<div class="nar stack"><p class="beat">You don&rsquo;t need to be making money already.</p>
+<p class="beat">You don&rsquo;t need a large audience.</p>
+<p class="beat">You don&rsquo;t need to have all the answers.</p>
+<p class="body">You do need to be ready to actively participate in developing your business.</p></div></div></section>
+<section class="dk" style="background:#3A1C2A"><div class="in twocol"><div class="stack sticky"><p class="lbl">An important note about investment</p><h2>Your Fast Track Call is complimentary. <em>Private business development is an investment.</em></h2></div>
+<div class="stack"><p class="body">I dedicate time before these sessions to reviewing your business and preparing personalized strategic recommendations.</p>
+<p class="body">Because of that, I reserve Fast Track Calls for women who are genuinely considering working with me privately.</p>
+<p class="body">My signature BOSS Business Experience combines private business mentorship, strategy development, custom website design, agreed professional implementation and ongoing business development.</p>
+<p class="beat">Private partnerships begin at [confirmed minimum investment].</p>
+<p class="beat">There is no obligation to purchase anything during your call.</p>
+<p class="body">However, you should apply because you are interested in exploring private professional support and are financially positioned to consider that investment if we&rsquo;re a good fit.</p>
+<p class="body">If you&rsquo;re currently looking for lower priced educational resources, I invite you to explore the Blogging Ladies Membership or The BOSS Academy instead.</p>
+<div class="row"><a class="pf-btn cr" href="/academy">Explore My Educational Offers <i aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></i></a></div></div></div></section>
+<section id="apply" style="background:#F6E1E8;scroll-margin-top:80px"><div class="in stack" style="gap:26px;max-width:860px">
+<div class="stack ctr-h"><p class="lbl" style="text-align:center">Application</p><h2 style="text-align:center">Let&rsquo;s see what your business could become.</h2><p class="body">Tell me a little about yourself, what you&rsquo;ve already built, what you want to accomplish and the type of support you&rsquo;re looking for.</p><p class="body">If your application is approved, you&rsquo;ll receive instructions for completing the detailed Fast Track business questionnaire.</p></div><form class="app" data-app novalidate>
+<div class="two"><div class="fld"><label class="q" for="fa-n">First name</label><input id="fa-n" type="text" name="First name" autocomplete="given-name" maxlength="120"></div>
+<div class="fld"><label class="q" for="fa-e">Email address</label><input id="fa-e" type="text" name="Email" inputmode="email" autocomplete="email" maxlength="200"></div></div>
+<div class="fld"><label class="q" for="fa-w">Your website, if you have one</label><input id="fa-w" type="text" name="Website" inputmode="url" maxlength="300"></div>
+<fieldset><legend>Where are you in your business right now?</legend><label class="opt"><input type="radio" name="Stage" value="I&rsquo;m thinking about starting a blog."><span>I&rsquo;m thinking about starting a blog.</span></label><label class="opt"><input type="radio" name="Stage" value="I&rsquo;ve started my blog but haven&rsquo;t made money."><span>I&rsquo;ve started my blog but haven&rsquo;t made money.</span></label><label class="opt"><input type="radio" name="Stage" value="I&rsquo;m making some money but want more consistent revenue."><span>I&rsquo;m making some money but want more consistent revenue.</span></label><label class="opt"><input type="radio" name="Stage" value="I have an established business and want to adapt it for the future."><span>I have an established business and want to adapt it for the future.</span></label></fieldset>
+<div class="fld"><label class="q" for="fa-b">Tell me a little about yourself and what you&rsquo;ve already built.</label><textarea id="fa-b" name="About and what she has built" maxlength="3000"></textarea></div>
+<div class="fld"><label class="q" for="fa-g">What do you want to accomplish?</label><textarea id="fa-g" name="What she wants to accomplish" maxlength="3000"></textarea></div>
+<div class="fld"><label class="q" for="fa-s">What type of support are you looking for?</label><textarea id="fa-s" name="Support she is looking for" maxlength="3000"></textarea></div>
+<fieldset><legend>Are you financially prepared to explore a premium private coaching and implementation partnership if we&rsquo;re a good fit?</legend><label class="opt"><input type="radio" name="Investment ready" value="Yes"><span>Yes</span></label><label class="opt"><input type="radio" name="Investment ready" value="Not yet"><span>Not yet</span></label></fieldset>
+<button type="submit">Submit My Application</button><p class="msg" role="alert"></p>
+<p style="margin:0;font:400 14px/1.5 var(--font-body);color:#6E4B5B">Applications are reviewed individually. Submitting an application does not automatically guarantee a private session.</p></form></div></section>
+<section style="background:#FFFFFF"><div class="nar stack" style="gap:26px">
+<div class="stack" style="text-align:center;gap:14px"><p class="lbl">Frequently asked questions</p><h2>Before you <em>apply.</em></h2></div>
+<div class="faq"><details class="rv"><summary>Is this really complimentary?<span class="faq-plus" aria-hidden="true" style="flex:none;font:400 24px/1 var(--font-body);color:#A23E66">+</span></summary><div class="faq-a" style="padding:2px 0 12px"><p>Yes. Approved applicants receive a complimentary Fast Track strategy session.</p></div></details><details class="rv"><summary>Is this just a discovery call?<span class="faq-plus" aria-hidden="true" style="flex:none;font:400 24px/1 var(--font-body);color:#A23E66">+</span></summary><div class="faq-a" style="padding:2px 0 12px"><p>No. I review your business information beforehand and prepare a personalized strategic presentation to guide our discussion.</p><p>We will also explore the possibility of working together privately.</p></div></details><details class="rv"><summary>Do you prepare something specifically for my business?<span class="faq-plus" aria-hidden="true" style="flex:none;font:400 24px/1 var(--font-body);color:#A23E66">+</span></summary><div class="faq-a" style="padding:2px 0 12px"><p>Yes. The strategic presentation is developed around your questionnaire responses, business circumstances and relevant business assets.</p><p>The specific recommendations and visual examples will depend on what I identify during my preparation.</p></div></details><details class="rv"><summary>Will you redesign my website during the call?<span class="faq-plus" aria-hidden="true" style="flex:none;font:400 24px/1 var(--font-body);color:#A23E66">+</span></summary><div class="faq-a" style="padding:2px 0 12px"><p>The session is a strategic consultation, not a complete website design service.</p><p>Where appropriate, I may present preliminary visual examples of how your website could be restructured.</p><p>A finished custom website is part of my paid professional services.</p></div></details><details class="rv"><summary>Will I receive a complete business plan?<span class="faq-plus" aria-hidden="true" style="flex:none;font:400 24px/1 var(--font-body);color:#A23E66">+</span></summary><div class="faq-a" style="padding:2px 0 12px"><p>We&rsquo;ll discuss personalized recommendations and potential strategic priorities. The call does not replace a complete private business development engagement.</p></div></details><details class="rv"><summary>Do I need an existing blog?<span class="faq-plus" aria-hidden="true" style="flex:none;font:400 24px/1 var(--font-body);color:#A23E66">+</span></summary><div class="faq-a" style="padding:2px 0 12px"><p>No. The presentation can focus on developing a new business or identifying opportunities within an existing one.</p></div></details><details class="rv"><summary>Will we discuss artificial intelligence?<span class="faq-plus" aria-hidden="true" style="flex:none;font:400 24px/1 var(--font-body);color:#A23E66">+</span></summary><div class="faq-a" style="padding:2px 0 12px"><p>Where relevant, yes. We&rsquo;ll explore how AI could support your business operations, marketing, content creation or product development.</p></div></details><details class="rv"><summary>Is this a sales call?<span class="faq-plus" aria-hidden="true" style="flex:none;font:400 24px/1 var(--font-body);color:#A23E66">+</span></summary><div class="faq-a" style="padding:2px 0 12px"><p>Part of our conversation includes exploring whether The BOSS Business Experience is an appropriate next step.</p><p>I believe in being transparent about that from the beginning.</p><p>There is no obligation to purchase.</p></div></details><details class="rv"><summary>How long is the session?<span class="faq-plus" aria-hidden="true" style="flex:none;font:400 24px/1 var(--font-body);color:#A23E66">+</span></summary><div class="faq-a" style="padding:2px 0 12px"><p><span style="display:inline-block;border:2px dashed #A23E66;border-radius:10px;padding:2px 10px;color:#A23E66;font-weight:600">To fill in: Confirmed session duration.</span></p></div></details><details class="rv"><summary>Where will we meet?<span class="faq-plus" aria-hidden="true" style="flex:none;font:400 24px/1 var(--font-body);color:#A23E66">+</span></summary><div class="faq-a" style="padding:2px 0 12px"><p>Privately on Zoom.</p></div></details><details class="rv"><summary>How do I prepare?<span class="faq-plus" aria-hidden="true" style="flex:none;font:400 24px/1 var(--font-body);color:#A23E66">+</span></summary><div class="faq-a" style="padding:2px 0 12px"><p>Once approved, you&rsquo;ll receive instructions for completing your detailed business questionnaire and scheduling your session.</p></div></details></div></div></section>
+<section style="background:#FBF5EE"><div class="nar stack ctr-h">
+<h2 style="text-align:center">Before you spend another year trying to figure out why your business isn&rsquo;t working, let me show you what I see.</h2><p class="beat">Maybe your business needs a different offer.</p>
+<p class="beat">Maybe it needs stronger messaging.</p>
+<p class="beat">Maybe it needs a better sales process.</p>
+<p class="body">Maybe you&rsquo;re sitting on valuable opportunities that haven&rsquo;t been developed yet.</p>
+<p class="body">Or maybe you simply need someone who understands how all the pieces fit together to help you see what you&rsquo;ve been missing.</p>
+<p class="beat">Let&rsquo;s examine your business.</p>
+<p class="beat">Let&rsquo;s explore its potential.</p>
+<p class="body">And let&rsquo;s talk about what it could become with the right strategy and support.</p><div class="row" style="justify-content:center"><a class="pf-btn br" href="#apply">Apply for My Complimentary Fast Track Call <i aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></i></a></div>
+<div style="text-align:center"><span style="font:700 clamp(46px,5vw,64px)/1 var(--font-script);color:#A23E66">Genasys</span><p class="lbl" style="margin-top:6px">Founder of Boss Lady Bloggers</p></div></div></section>
+<script>
+(function(){
+  var TO="https://formsubmit.co/ajax/hello@bossladybloggers.com";
+  var f=document.querySelector('[data-app]');if(!f)return;var msg=f.querySelector('.msg');
+  f.addEventListener('submit',function(ev){ev.preventDefault();
+    var v=function(n){var el=f.querySelector('[name="'+n+'"]');return el?el.value.trim():'';};
+    var r=function(n){var el=f.querySelector('input[name="'+n+'"]:checked');return el?el.value:'';};
+    if(!v('First name')){msg.textContent='Add your first name.';return;}
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v('Email'))){msg.textContent='That email doesn’t look quite right yet.';return;}
+    if(!r('Stage')){msg.textContent='Tell me where you are in your business right now.';return;}
+    if(!v('What she wants to accomplish')){msg.textContent='Tell me what you want to accomplish.';return;}
+    if(!r('Investment ready')){msg.textContent='Answer the investment question so I can review your application.';return;}
+    msg.textContent='';var b=f.querySelector('button');b.disabled=true;
+    var data={_subject:'Fast Track Call application: '+v('First name'),_template:'table',_captcha:'false',_replyto:v('Email')};
+    ['First name','Email','Website','About and what she has built','What she wants to accomplish','Support she is looking for'].forEach(function(n){data[n]=v(n);});
+    data['Stage']=r('Stage');data['Investment ready']=r('Investment ready');
+    fetch(TO,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(data)})
+      .then(function(x){if(!x.ok)throw 0;f.innerHTML='<p class="done">Thank you. Your application is in. I review every one personally, and you’ll hear from me by email.</p>';})
+      .catch(function(){b.disabled=false;msg.textContent='That didn’t send. Please try again in a moment.';});
+  });
+})();
+</script>
+</main><footer class="ft" style="background:#A23E66;color:#FFFFFF;padding:80px 0 0;overflow:hidden">
+<style>
+.ft a{color:#FFFFFF;text-decoration:none}
+.ft .ft-in{max-width:1180px;margin:0 auto;padding:0 clamp(16px,4vw,48px)}
+.ft .ft-top{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(36px,5vw,72px);align-items:start}
+.ft .ft-brand{font:400 clamp(40px,5vw,64px)/.95 var(--font-display);letter-spacing:-.01em;color:#FBF5EE;margin:0}
+.ft .ft-tag{margin:0;font:400 16px/1.65 var(--font-body);color:#F6E1E8;max-width:440px}
+.ft .ft-tag2{margin:0;font:400 italic 24px/1.3 var(--font-display);color:#FBF5EE}
+.ft .ft-cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}
+.ft .ft-cols h3{margin:0 0 12px;font:500 11.5px/1.4 var(--font-label);letter-spacing:.18em;text-transform:uppercase;color:#F6C9D8}
+.ft .ft-cols a{display:block;padding:6px 0;font:500 15px/1.45 var(--font-body)}
+@media (hover:hover){.ft .ft-cols a:hover,.ft .ft-row a:hover{text-decoration:underline;text-underline-offset:4px}}
+.ft .ft-stay{margin-top:56px;background:#3A1C2A;border-radius:30px;padding:clamp(24px,4vw,40px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px 48px;align-items:center}
+.ft .ft-stay h3{margin:0 0 8px;font:400 clamp(30px,3.4vw,42px)/1.05 var(--font-display);color:#FBF5EE}
+.ft .ft-stay p{margin:0;font:400 16px/1.6 var(--font-body);color:#F1DDE2}
+.ft .ft-form{display:flex;flex-wrap:wrap;gap:10px}
+.ft .ft-form label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.ft .ft-form input[type=text]{flex:1 1 220px;min-width:0;min-height:54px;border-radius:999px;border:0;padding:0 22px;font:500 16px/1 var(--font-body);color:#3A1C2A;background:#FBF5EE;-webkit-appearance:none;appearance:none}
+.ft .ft-form button{min-height:54px;padding:0 26px;border-radius:999px;border:0;background:#A23E66;color:#FFFFFF;font:600 15.5px/1 var(--font-body);cursor:pointer}
+.ft .ft-form input:focus-visible,.ft .ft-form button:focus-visible,.ft a:focus-visible{outline:3px solid #F6C9D8;outline-offset:3px}
+.ft .ft-msg{flex:1 1 100%;margin:0;font:500 14px/1.5 var(--font-body);color:#F6C9D8}
+.ft .ft-msg:empty{display:none}
+.ft .ft-slot{flex:1 1 100%;border:2px dashed #F6C9D8;border-radius:16px;padding:12px 16px;font:500 14px/1.5 var(--font-body);color:#F6C9D8}
+.ft .ft-slot b{display:block;font:500 11px/1.3 var(--font-label);letter-spacing:.16em;margin-bottom:4px}
+.ft .ft-row{margin-top:40px;padding:22px 0;border-top:1px solid rgba(251,245,238,.28);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:14px 28px;font:500 12px/1.5 var(--font-label);letter-spacing:.14em;text-transform:uppercase}
+.ft .ft-row nav{display:flex;flex-wrap:wrap;gap:8px 22px}
+.ft .ft-row p{margin:0;color:#F6E1E8}
+@media (max-width:900px){.ft .ft-top,.ft .ft-stay{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:560px){.ft .ft-cols{grid-template-columns:repeat(2,minmax(0,1fr))}.ft .ft-cols > div:last-child{grid-column:1 / -1}}
+</style>
+<div class="ft-in">
+  <div class="ft-top">
+    <div style="display:flex;flex-direction:column;gap:18px">
+      <p class="ft-brand">BOSS LADY BLOGGERS</p>
+      <p class="ft-tag">Professional blog coaching, custom website design and modern business education for ambitious women.</p>
+      <p class="ft-tag2">Helping you build the business behind your blog.</p>
+    </div>
+    <div class="ft-cols">
+      <div><h3>Work With Me</h3><a href="/blog-coaching">The BOSS Business Experience</a><a href="/blog-coaching">Private Blog Coaching &amp; Design</a><a href="/portfolio">Website Design Portfolio</a></div>
+      <div><h3>Learn From Me</h3><a href="/membership">The Blogging Ladies Membership</a><a href="/academy">The BOSS Academy</a><a href="/all-access">Academy All Access</a></div>
+      <div><h3>Explore</h3><a href="/about">About</a><a href="/futureproof-webinar">Futureproof Your Blog Webinar</a><a href="/blog">The Blog</a><a href="/podcast">The Podcast</a><a href="https://www.youtube.com/@GenasysLynn" target="_blank" rel="noopener">YouTube</a><a href="/contact">Contact</a></div>
+    </div>
+  </div>
+  <div class="ft-stay">
+    <div><h3>Stay Connected</h3><p>Modern business strategies, buyer psychology, AI and conversations about the future of blogging.</p></div>
+    <form class="ft-form" data-ft-news novalidate>
+      <label for="ft-email">Email Address</label>
+      <input id="ft-email" type="text" name="email" inputmode="email" autocomplete="email" placeholder="Email Address" maxlength="255">
+      <button type="submit">Subscribe</button>
+      <p class="ft-msg" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+  <div class="ft-row">
+    <nav aria-label="Social"><a href="https://www.instagram.com/blogcoach_gen" target="_blank" rel="noopener">Instagram</a><a href="https://www.pinterest.com/BossLadyBloggers/" target="_blank" rel="noopener">Pinterest</a><a href="https://www.youtube.com/@GenasysLynn" target="_blank" rel="noopener">YouTube</a></nav>
+    <nav aria-label="Legal"><a href="/privacy-policy">Privacy Policy</a><a href="/terms-and-conditions">Terms &amp; Conditions</a></nav>
+    <p>&copy; Boss Lady Bloggers. All rights reserved.</p>
+  </div>
+</div>
+<div class="bl-marquee" style="padding:10px 0 10px;overflow:hidden" aria-hidden="true">
+  <div class="bl-track bl-slow" style="font:400 clamp(120px,15vw,220px)/1 var(--font-display);white-space:nowrap;color:#FBF5EE">
+    <span>BOSS LADY BLOGGERS&#160;&#183;&#160;BOSS LADY BLOGGERS&#160;&#183;&#160;</span><span aria-hidden="true">BOSS LADY BLOGGERS&#160;&#183;&#160;BOSS LADY BLOGGERS&#160;&#183;&#160;</span>
+  </div>
+</div>
+<script>
+(function(){
+  /* Footer newsletter: paste the Flodesk form ID for your newsletter here */
+  var NEWS_FORM_ID='';
+  var form=document.querySelector('[data-ft-news]');if(!form)return;
+  var msg=form.querySelector('.ft-msg'),btn=form.querySelector('button'),inp=form.querySelector('input[name=email]');
+  if(!NEWS_FORM_ID){var s=document.createElement('div');s.className='ft-slot';s.innerHTML='<b>TO FILL IN</b>Newsletter form is not connected to Flodesk yet, so sign ups are not saved.';form.appendChild(s);}
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var em=inp.value.trim();
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){msg.textContent='That email doesn’t look quite right yet.';inp.focus();return;}
+    if(!NEWS_FORM_ID){msg.textContent='This form is not connected yet.';return;}
+    btn.disabled=true;msg.textContent='';
+    fetch('https://form.flodesk.com/forms/'+NEWS_FORM_ID+'/submit',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:em,confirm_email_address:''}),keepalive:true}).catch(function(){}).then(function(){
+      form.innerHTML='<p class="ft-msg" style="font-size:16px;color:#FBF5EE">You’re in. Watch your inbox.</p>';
+    });
+  });
+})();
+</script>
+</footer>
+
+
+<script>
+/* Boss Lady Bloggers · main.js
+   Vanilla JS for every interactive feature (CLAUDE.md §5).
+   Each block checks whether its element exists before running. */
+(function () {
+  'use strict';
+  document.documentElement.classList.remove('no-js');
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- F4: popout menu ---------- */
+  var menuBtn = document.querySelector('[data-menu-open]');
+  var popout = document.getElementById('popout-menu');
+  if (menuBtn && popout) {
+    var closeBtn = popout.querySelector('[data-menu-close]');
+    var lastFocus = null;
+    function openMenu() {
+      lastFocus = document.activeElement;
+      popout.classList.add('open');
+      document.body.classList.add('menu-open');
+      menuBtn.setAttribute('aria-expanded', 'true');
+      (closeBtn || popout).focus();
+    }
+    function closeMenu() {
+      popout.classList.remove('open');
+      document.body.classList.remove('menu-open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+      if (lastFocus) lastFocus.focus();
+    }
+    menuBtn.addEventListener('click', function () {
+      popout.classList.contains('open') ? closeMenu() : openMenu();
+    });
+    if (closeBtn) closeBtn.addEventListener('click', closeMenu);
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && popout.classList.contains('open')) closeMenu();
+    });
+    popout.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', closeMenu);
+    });
+  }
+
+  /* ---------- F19: scroll reveal (once, staggered 80ms) ---------- */
+  var rvEls = document.querySelectorAll('.rv');
+  if (rvEls.length && 'IntersectionObserver' in window && !reduced) {
+    var seen = 0;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        var el = en.target;
+        var delay = (seen % 6) * 80; seen++;
+        setTimeout(function () { el.classList.add('in'); }, delay);
+        io.unobserve(el);
+      });
+    }, { threshold: 0, rootMargin: '0px 0px -40px 0px' });
+    rvEls.forEach(function (el) { io.observe(el); });
+    // Catch-up: anything on screen that still has not revealed after 3s
+    // (slow devices, odd scroll positions) becomes visible.
+    setTimeout(function () {
+      document.querySelectorAll('.rv:not(.in)').forEach(function (el) {
+        var r = el.getBoundingClientRect();
+        if (r.bottom > 0 && r.top < window.innerHeight) el.classList.add('in');
+      });
+    }, 3000);
+  } else {
+    rvEls.forEach(function (el) { el.classList.add('in'); });
+  }
+
+  /* ---------- F6: circled word draw-in ---------- */
+  document.querySelectorAll('.circle-draw ellipse').forEach(function (el) {
+    var len = 2 * Math.PI * Math.sqrt((96 * 96 + 34 * 34) / 2); // approx
+    el.style.strokeDasharray = len;
+    el.style.strokeDashoffset = reduced ? 0 : len;
+    if (reduced) return;
+    var io2 = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        el.style.transition = 'stroke-dashoffset 900ms ease';
+        el.style.strokeDashoffset = 0;
+        io2.disconnect();
+      });
+    }, { threshold: 0.6 });
+    io2.observe(el.closest('section') || el);
+  });
+
+  /* ---------- F8: sticky stacking cards scale ---------- */
+  var stack = document.querySelectorAll('[data-stack] > *');
+  if (stack.length && !reduced) {
+    var ticking = false;
+    function stackScale() {
+      stack.forEach(function (card, i) {
+        var r = card.getBoundingClientRect();
+        var top = 120 + i * 24;
+        var cover = Math.min(Math.max((top + 80 - r.top) / 400, 0), 1);
+        if (r.top <= top + 81) card.style.transform = 'scale(' + (1 - cover * 0.05) + ')';
+        else card.style.transform = '';
+      });
+      ticking = false;
+    }
+    window.addEventListener('scroll', function () {
+      if (!ticking) { requestAnimationFrame(stackScale); ticking = true; }
+    }, { passive: true });
+  }
+
+  /* ---------- F9/F10: tabs (offers "Fabulous Things", About glossary) ---------- */
+  document.querySelectorAll('[data-tabs]').forEach(function (group) {
+    var tabs = Array.prototype.slice.call(group.querySelectorAll('[role="tab"]'));
+    var panels = Array.prototype.slice.call(document.querySelectorAll('[data-tabpanel="' + group.getAttribute('data-tabs') + '"]'));
+    // Inline display styles beat the hidden attribute, so remember each
+    // panel's own display value and toggle display directly.
+    panels.forEach(function (p) { p.setAttribute('data-disp', p.style.display || ''); });
+    function select(i) {
+      tabs.forEach(function (t, j) {
+        var on = i === j;
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+        t.setAttribute('tabindex', on ? '0' : '-1');
+        t.classList.toggle('tab-active', on);
+      });
+      panels.forEach(function (p, j) {
+        var on = i === j;
+        p.hidden = !on;
+        p.style.display = on ? p.getAttribute('data-disp') : 'none';
+      });
+    }
+    tabs.forEach(function (t, i) {
+      t.addEventListener('click', function () { select(i); });
+      t.addEventListener('keydown', function (e) {
+        var dir = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+        if (!dir) return;
+        e.preventDefault();
+        var n = (i + dir + tabs.length) % tabs.length;
+        select(n); tabs[n].focus();
+      });
+    });
+    select(0);
+  });
+
+  /* ---------- F11: Boss Blend slider fill ---------- */
+  var blends = document.querySelectorAll('[data-blend]');
+  if (blends.length && 'IntersectionObserver' in window) {
+    var io3 = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        var bar = en.target;
+        var v = bar.getAttribute('data-blend');
+        var fill = bar.querySelector('.blend-fill');
+        if (fill) {
+          if (reduced) { fill.style.width = v + '%'; }
+          else {
+            fill.style.transition = 'width 900ms ease';
+            requestAnimationFrame(function () { fill.style.width = v + '%'; });
+          }
+        }
+        io3.unobserve(bar);
+      });
+    }, { threshold: 0.5 });
+    blends.forEach(function (b) { io3.observe(b); });
+  }
+
+  /* ---------- F12: FAQ smooth height ---------- */
+  document.querySelectorAll('.faq details').forEach(function (d) {
+    var a = d.querySelector('.faq-a');
+    if (!a || reduced) return;
+    d.addEventListener('toggle', function () {
+      if (d.open) {
+        var h = a.scrollHeight;
+        a.style.maxHeight = '0';
+        a.style.transition = 'max-height .3s ease';
+        requestAnimationFrame(function () { a.style.maxHeight = h + 40 + 'px'; });
+      } else {
+        a.style.maxHeight = '';
+      }
+    });
+  });
+
+  /* ---------- F17: waitlist forms ---------- */
+  document.querySelectorAll('[data-waitlist]').forEach(function (form) {
+    var showSuccess = function () {
+      var success = form.parentElement.querySelector('.form-success');
+      if (success) { form.hidden = true; success.hidden = false; }
+    };
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      // Forms without data-list just show the success state (no backend yet).
+      showSuccess();
+    });
+  });
+
+  /* ---------- Instagram feed (any page with a strip) ---------- */
+  document.querySelectorAll('[data-instagram-feed]').forEach(function (feed) {
+    var FEED_URL = 'https://feeds.behold.so/3p9InkPKcoMGdzJUSdtH';
+    if (FEED_URL) {
+      var cached = null;
+      try {
+        var raw = localStorage.getItem('blb_ig');
+        if (raw) { cached = JSON.parse(raw); if (Date.now() - cached.t > 3600000) cached = null; }
+      } catch (err) { cached = null; }
+      var render = function (posts) {
+        var tiles = feed.querySelectorAll('.ig-tile');
+        posts.slice(0, tiles.length).forEach(function (p, i) {
+          var a = tiles[i];
+          a.href = p.permalink;
+          a.innerHTML = '';
+          var img = document.createElement('img');
+          img.src = (p.sizes && p.sizes.medium && p.sizes.medium.mediaUrl) || p.mediaUrl || p.thumbnailUrl;
+          img.alt = (p.caption || 'Instagram post').slice(0, 120);
+          img.loading = 'lazy';
+          img.style.cssText = 'width:100%;height:100%;object-fit:cover;border-radius:18px';
+          a.appendChild(img);
+        });
+      };
+      if (cached) render(cached.p);
+      else fetch(FEED_URL).then(function (r) { return r.json(); }).then(function (data) {
+        var posts = data.posts || data;
+        try { localStorage.setItem('blb_ig', JSON.stringify({ t: Date.now(), p: posts })); } catch (err) {}
+        render(posts);
+      }).catch(function () {/* keep branded placeholders */});
+    }
+  });
+  /* Showit safety: reveal anything still hidden after 2.5s */
+  setTimeout(function () {
+    document.querySelectorAll('.rv:not(.in)').forEach(function (el) { el.classList.add('in'); });
+  }, 2500);
+})();
+
+</script>

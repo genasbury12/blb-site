@@ -5,6 +5,7 @@ from folio_data import VIDEO_CSS
 
 ROOT = Path(__file__).resolve().parent.parent / "site/_pages"
 CAL = "https://calendly.com/bossladybloggers/15min"
+APPLY_PAGE = "/apply/"   # Fast Track Call application page; every "Apply" button goes here
 COACH = "/coaching/"
 def e(t): return html.escape(t, quote=False).replace("'", "&rsquo;")
 ARR = '<i aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></i>'

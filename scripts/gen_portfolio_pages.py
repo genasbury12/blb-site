@@ -142,7 +142,7 @@ o.append(f'''<section style="background:#F6E1E8"><div class="nar stack ctr" styl
 {P("Whatever your starting point, you don't have to figure out every individual piece independently.")}
 {P("As your professional blog coach, business strategist and website designer, I'll help you bring the pieces together.")}
 <p class="big">Let&rsquo;s build something that feels like you, communicates your value and gives your business <span class="it">a professional foundation to grow from.</span></p>
-<div class="row">{btn("Explore The BOSS Business Experience", COACH, "br")}{btn("Apply for a Fast Track Call", CAL, "ol", True)}</div>
+<div class="row">{btn("Explore The BOSS Business Experience", COACH, "br")}{btn("Apply for a Fast Track Call", APPLY_PAGE, "ol")}</div>
 </div></section>''')
 
 o.append(f'''<section style="background:#FBF5EE"><div class="in"><div class="mini dk">
