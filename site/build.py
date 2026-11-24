@@ -22,8 +22,8 @@ FONTS = ("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1"
 # key -> (output path, nav key, title, meta description)
 PAGES = {
     "index":           ("index.html", "home",
-                        "Boss Lady Bloggers | Blog Coaching for Women",
-                        "Blog coaching that helps women turn their blogs into money making businesses. Start with a free call with Genasys."),
+                        "Boss Lady Bloggers | Blog Coaching, Business Strategy & Showit Website Design",
+                        "Your blog coach, business strategist and website designer. Private blog coaching, custom Showit website design and modern business education for ambitious women."),
     "start-here":      ("start-here/index.html", "start-here",
                         "Start Here | Boss Lady Bloggers",
                         "New here? This page walks you through exactly where to start with Boss Lady Bloggers."),
@@ -33,6 +33,12 @@ PAGES = {
     "coaching":        ("coaching/index.html", "coaching",
                         "Work With Me: The BOSS Business Experience | Boss Lady Bloggers",
                         "The BOSS Business Experience: private 1:1 blog business mentorship, custom Showit website design and done for you business development for women building an online business designed to make money."),
+    "portfolio":       ("portfolio/index.html", "coaching",
+                        "Client Portfolio | Custom Showit Websites for Bloggers | Boss Lady Bloggers",
+                        "Explore custom Showit websites and blogging businesses Genasys has helped ambitious women build through private blog coaching, business strategy and professional website design."),
+    "client-project":  ("client-project/index.html", "coaching",
+                        "Client Project | Boss Lady Bloggers",
+                        "A Boss Lady Bloggers client project: the business strategy, brand direction and custom Showit website behind one woman's blogging business."),
     "academy":         ("academy/index.html", "academy",
                         "Courses | The BOSS Academy | Boss Lady Bloggers",
                         "The BOSS Academy: modern business education for bloggers. Shop specialized courses in business, branding, marketing, sales, AI and the future of blogging, or unlock All Access."),

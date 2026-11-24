@@ -16,16 +16,12 @@
 <span style="font:400 26px/1 var(--font-display);color:#3A1C2A">Boss Lady <em style="color:#A23E66">Bloggers</em></span>
 </a>
 <nav aria-label="Main" style="display:flex;flex-wrap:wrap;align-items:center;gap:6px 20px;font:500 14px/1 var(--font-body)">
-<a href="/start-here" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Start Here</a>
 <a href="/about" style="color:#3A1C2A;text-decoration:none;padding:8px 0">About</a>
-<a href="/free-masterclass" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Free Masterclass</a>
-<a href="/blog-coaching" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Work With Me</a>
+<a href="/blog-coaching" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Blog Coaching &amp; Design</a>
 <a href="/membership" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Membership</a>
 <a href="/academy" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Courses</a>
-<a href="/podcast" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Podcast</a>
-<a href="/blog" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Blog</a>
-<a href="/contact" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Contact</a>
-<a href="https://calendly.com/bossladybloggers/15min" class="pill" style="background:#3A1C2A;color:#FFFFFF;padding:11px 18px">Book a call</a>
+<a href="/start-here" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Resources</a>
+<a href="/blog-coaching" class="pill" style="background:#3A1C2A;color:#FFFFFF;padding:11px 18px">Work With Me</a>
 </nav>
 </div>
 </div>

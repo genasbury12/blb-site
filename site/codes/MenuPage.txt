@@ -17,20 +17,20 @@
 </div>
 <div style="display:flex;flex-wrap:wrap;gap:40px;align-items:flex-start">
 <div style="flex:1 1 320px;min-width:0;display:flex;flex-direction:column;gap:18px">
-<p style="margin:0;font:400 clamp(40px,5vw,72px)/1 var(--font-display);color:#FBF5EE">Helping women build blogs that <em>sell.</em></p>
-<p style="margin:0;font:400 16px/1.6 var(--font-body);color:#F6E1E8">If you&rsquo;re new here, welcome. Start with the page made for you.</p>
-<div><a href="/start-here" class="pill" style="background:#FBF5EE;color:#3A1C2A">Start here</a></div>
+<p style="margin:0;font:400 clamp(40px,5vw,72px)/1 var(--font-display);color:#FBF5EE">Helping you build the business <em>behind your blog.</em></p>
+<p style="margin:0;font:400 16px/1.6 var(--font-body);color:#F6E1E8">Professional blog coaching, custom website design and modern business education for ambitious women.</p>
+<div><a href="/blog-coaching" class="pill" style="background:#FBF5EE;color:#3A1C2A">Work With Me</a></div>
 </div>
 <nav aria-label="Full menu" style="flex:1 1 300px;min-width:0;display:flex;flex-direction:column;font:400 clamp(26px,3vw,36px)/1.9 var(--font-display)">
 <a href="/" style="color:#FBF5EE;text-decoration:none">Home</a>
 <a href="/about" style="color:#FBF5EE;text-decoration:none">About</a>
-<a href="/start-here" style="color:#FBF5EE;text-decoration:none">Start Here</a>
-<a href="/blog-coaching" style="color:#FBF5EE;text-decoration:none">Work With Me</a>
+<a href="/blog-coaching" style="color:#FBF5EE;text-decoration:none">Blog Coaching &amp; Design</a>
 <a href="/membership" style="color:#FBF5EE;text-decoration:none">The Blogging Ladies Membership</a>
 <a href="/academy" style="color:#FBF5EE;text-decoration:none">Courses</a>
-<a href="/free-masterclass" style="color:#FBF5EE;text-decoration:none">Free Masterclass</a>
-<a href="/podcast" style="color:#FBF5EE;text-decoration:none">Podcast</a>
+<a href="/start-here" style="color:#FBF5EE;text-decoration:none">Resources</a>
+<a href="/#webinar" style="color:#FBF5EE;text-decoration:none">Futureproof Your Blog Webinar</a>
 <a href="/blog" style="color:#FBF5EE;text-decoration:none">Blog</a>
+<a href="/podcast" style="color:#FBF5EE;text-decoration:none">Podcast</a>
 <a href="/contact" style="color:#FBF5EE;text-decoration:none">Contact</a>
 </nav>
 </div>
