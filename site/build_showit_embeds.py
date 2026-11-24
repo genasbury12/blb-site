@@ -23,6 +23,8 @@ PAGES = {
     "academy/index.html":        ("Academy.html", "/academy"),
     "interactive-course-creator/index.html": ("InteractiveCourseCreator.html", "/interactive-course-creator"),
     "futureproof-blogger/index.html": ("FutureproofBlogger.html", "/futureproof-blogger"),
+    "futureproof-webinar/index.html": ("FutureproofWebinar.html", "/futureproof-webinar"),
+    "futureproof-replay/index.html": ("FutureproofReplay.html", "/futureproof-replay"),
     "all-access/index.html":     ("AllAccess.html", "/all-access"),
     "portfolio/index.html":      ("Portfolio.html", "/portfolio"),
     "client-project/index.html": ("ClientProject.html", "/client-project"),
@@ -42,6 +44,8 @@ PAGES = {
 
 # internal link rewrites (folder URLs -> Showit slugs)
 LINKMAP = [
+    ('href="/futureproof-webinar/#', 'href="/futureproof-webinar#'),
+    ('href="/futureproof-webinar/"', 'href="/futureproof-webinar"'),
     ('href="/futureproof-blogger/"', 'href="/futureproof-blogger"'),
     ('href="/interactive-course-creator/"', 'href="/interactive-course-creator"'),
     ('href="/all-access/#', 'href="/all-access#'),
@@ -264,7 +268,7 @@ PIECE_MENUPAGE = """<div style="min-height:100vh;background:#A23E66;padding:22px
 <a href="/membership" style="color:#FBF5EE;text-decoration:none">The Blogging Ladies Membership</a>
 <a href="/academy" style="color:#FBF5EE;text-decoration:none">Courses</a>
 <a href="/start-here" style="color:#FBF5EE;text-decoration:none">Resources</a>
-<a href="/#webinar" style="color:#FBF5EE;text-decoration:none">Futureproof Your Blog Webinar</a>
+<a href="/futureproof-webinar" style="color:#FBF5EE;text-decoration:none">Futureproof Your Blog Webinar</a>
 <a href="/blog" style="color:#FBF5EE;text-decoration:none">Blog</a>
 <a href="/podcast" style="color:#FBF5EE;text-decoration:none">Podcast</a>
 <a href="/contact" style="color:#FBF5EE;text-decoration:none">Contact</a>

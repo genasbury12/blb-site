@@ -2,6 +2,7 @@ import html, sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent))
 from folio_data import PROJECTS, VIDEO_CSS, VIDEO_JS, video_cards, IMG
+from pf_parts import WEBINAR_FORM_ID
 P=str(Path(__file__).resolve().parent.parent/'site/_pages/index.html')
 def e(t): return html.escape(t,quote=False).replace("'","&rsquo;")
 ARR='<i aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></i>'
@@ -456,7 +457,7 @@ o.append(r'''<script>
   }
 
   /* Webinar sign up: paste the Flodesk form ID for "Futureproof Your Blog" here */
-  var WEBINAR_FORM_ID='';
+  var WEBINAR_FORM_ID='''+repr(WEBINAR_FORM_ID)+r''';
   var host=document.querySelector('[data-webinar-form]');if(!host)return;
   var id='hp-web';
   var cfg=btoa(JSON.stringify({trigger:{mode:"immediately",value:0},onSuccess:{mode:"message",message:"",redirectUrl:""},coi:false,showForReturnVisitors:true,notification:true,gdpr:{acceptsMarketing:false,privacyPolicy:{enabled:false,mandatory:false}},trackingConfig:{metaPixelId:"",cookieBannerEnabled:false,googleAnalyticsId:""}}));

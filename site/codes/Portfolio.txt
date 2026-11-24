@@ -224,7 +224,7 @@ div[id^="fd-form"] form { padding-top: 0 !important; padding-bottom: 0 !importan
       <div><a href="/blog-coaching" class="pill pill-plain" style="background:#FBF5EE;color:#3A1C2A">Work With Me</a></div>
     </div>
     <nav aria-label="Full menu" class="popout-nav">
-      <a href="/">Home</a><a href="/about">About</a><a href="/blog-coaching">Blog Coaching &amp; Design</a><a href="/membership">The Blogging Ladies Membership</a><a href="/academy">Courses</a><a href="/start-here">Resources</a><a href="/#webinar">Futureproof Your Blog Webinar</a><a href="/blog">Blog</a><a href="/podcast">Podcast</a><a href="/contact">Contact</a>
+      <a href="/">Home</a><a href="/about">About</a><a href="/blog-coaching">Blog Coaching &amp; Design</a><a href="/membership">The Blogging Ladies Membership</a><a href="/academy">Courses</a><a href="/start-here">Resources</a><a href="/futureproof-webinar">Futureproof Your Blog Webinar</a><a href="/blog">Blog</a><a href="/podcast">Podcast</a><a href="/contact">Contact</a>
     </nav>
   </div>
   <div class="popout-photo"><img src="https://charming-caramel-d2453c.netlify.app/images/photos/flatlay-notebook.jpg" alt="Notebook, pen and a Boss mug on a desk" loading="lazy"></div>
@@ -541,7 +541,7 @@ div[id^="fd-form"] form { padding-top: 0 !important; padding-bottom: 0 !importan
 <div class="stack"><p class="lbl">Not quite ready for private coaching &amp; design?</p><h2>Futureproof <em>Your Blog</em></h2>
 <p class="body">Discover how to build a blogging business that can adapt to AI, changing consumer behavior and the evolving future of the internet.</p>
 <p class="body">Understand what your business needs before investing your time and money into building it.</p></div>
-<div class="stack" style="align-items:flex-start"><span class="chips"><span style="background:#A23E66">Free webinar</span></span><a class="pf-btn cr" href="/#webinar">Save My Free Seat <i aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></i></a></div>
+<div class="stack" style="align-items:flex-start"><span class="chips"><span style="background:#A23E66">Free webinar</span></span><a class="pf-btn cr" href="/futureproof-webinar">Save My Free Seat <i aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></i></a></div>
 </div></div></section>
 <script>
 (function(){
@@ -596,7 +596,7 @@ div[id^="fd-form"] form { padding-top: 0 !important; padding-bottom: 0 !importan
     <div class="ft-cols">
       <div><h3>Work With Me</h3><a href="/blog-coaching">The BOSS Business Experience</a><a href="/blog-coaching">Private Blog Coaching &amp; Design</a><a href="/portfolio">Website Design Portfolio</a></div>
       <div><h3>Learn From Me</h3><a href="/membership">The Blogging Ladies Membership</a><a href="/academy">The BOSS Academy</a><a href="/all-access">Academy All Access</a></div>
-      <div><h3>Explore</h3><a href="/about">About</a><a href="/#webinar">Futureproof Your Blog Webinar</a><a href="/blog">The Blog</a><a href="/podcast">The Podcast</a><a href="https://www.youtube.com/@GenasysLynn" target="_blank" rel="noopener">YouTube</a><a href="/contact">Contact</a></div>
+      <div><h3>Explore</h3><a href="/about">About</a><a href="/futureproof-webinar">Futureproof Your Blog Webinar</a><a href="/blog">The Blog</a><a href="/podcast">The Podcast</a><a href="https://www.youtube.com/@GenasysLynn" target="_blank" rel="noopener">YouTube</a><a href="/contact">Contact</a></div>
     </div>
   </div>
   <div class="ft-stay">
