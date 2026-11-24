@@ -96,7 +96,7 @@ for k, a in enumerate(starts):
     course_html.append(f'''<article class="course rv" id="course-{key}"><div class="stack" style="gap:16px">{cover(name, cat, bg, fg)}
 <div class="pricebar"><span>Individual course price {inline_slot("price")}</span><span class="inc">Included with All Access</span></div></div>
 <div class="stack" style="gap:14px"><span class="num">{e(num)} &middot; {e(cat)}</span><h3>{e(name)}</h3><p class="hook">{e(hook)}</p>{flow(body)}
-{btn("See the full course", "/interactive-course-creator/", "ol") if key == "interactive" else ""}
+{btn("See the full course", {"interactive": "/interactive-course-creator/", "futureproof": "/futureproof-blogger/"}[key], "ol") if key in ("interactive", "futureproof") else ""}
 <div class="outc" style="padding:18px 20px;border-radius:18px;background:#A23E66;color:#fff;font:400 20px/1.35 var(--font-display)"><b style="display:block;font:500 11px/1.3 var(--font-label);letter-spacing:.16em;text-transform:uppercase;color:#F6C9D8;margin-bottom:6px;font-weight:500">The transformation</b>{e(trans)}</div></div></article>''')
 
 # 01 HERO
