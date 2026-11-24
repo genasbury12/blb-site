@@ -244,7 +244,7 @@ o.append(f'''<section class="dk" style="background:#3A1C2A"><div class="in stack
 <div class="nar stack" style="text-align:center;align-items:center">{"".join(f'<p class="big">{e(x)}</p>' for x in after[3:5])}
 <p class="body">{e(after[5])}</p><div class="row">{cta(after[6][1:-1], "olw")}</div></div></div></section>''')
 
-o.append("</main>")
+o.append(LEGAL + "</main>")
 out = "\n".join(o)
 for bad in ["—", "–", "…"]: assert bad not in out, bad
 assert "six figure" not in out.lower()
