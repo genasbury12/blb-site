@@ -29,6 +29,12 @@ def std(n, bg, layout="center", dark=False, cta_cls=""):
 
 
 
+# BOSS Business System and website template library mockups (pinned so Showit always loads them)
+BOSS = "https://cdn.jsdelivr.net/gh/genasbury12/blb-site@463c6b98943973b83288beeb28b52195d0290a10/site/images/boss/"
+def mock(f, alt, cap=""):
+    c = f'<p class="cap" style="text-align:center">{e(cap)}</p>' if cap else ""
+    return f'<figure style="margin:0"><span class="shot" style="background:#F6E1E8"><img src="{BOSS}{f}" alt="{e(alt)}" loading="lazy"></span>{c}</figure>'
+
 o = [CSS, EXTRA, '<main id="main" class="pf">']
 
 # 01 HERO
@@ -110,7 +116,9 @@ fol = "".join(f'<a class="proj-img" href="/client-project/?project={k}"><img src
 o.append(f'''<section style="background:#FFFFFF"><div class="in stack" style="gap:30px">
 <div class="in twocol" style="width:100%"><div class="stack sticky"><p class="lbl">{e(s[0])}</p><h2>{headline(s[1])}</h2></div><div class="stack">{flow(s[2:cut])}</div></div>
 <div class="gal-d gal3">{fol}</div>
-{slot("Insert genuine website design testimonial.")}
+<div class="nar stack ctr-h" style="margin-top:20px"><p class="lbl">More of my website design</p><h2 style="font-size:clamp(32px,4vw,52px)">Twenty full websites, <em>designed and built by me.</em></h2></div>
+{mock("07-template-library-all-devices.jpg", "Boss Lady Bloggers website designs shown on a desktop, laptop, tablet and phone")}
+{mock("08-all-20-website-templates.jpg", "Twenty website designs by Genasys, each shown on a laptop")}
 <div class="row" style="justify-content:center">{cta("Explore My Client Portfolio", "ol")}</div></div></section>''')
 
 # 10 DFY: pairs
@@ -122,7 +130,11 @@ o.append(f'''<section style="background:#FBF5EE"><div class="in stack" style="ga
 {pairs(s[pi + 1:pe])}
 <div class="nar stack">{flow(s[pe:])}</div></div></section>''')
 
-o.append(std(11, "#F6E1E8", "split"))
+o.append(std(11, "#F6E1E8", "split").replace("</div></div></section>", "</div></div>" + f'''<div class="in stack" style="gap:18px;margin-top:clamp(40px,5vw,64px)">
+<div class="nar stack ctr-h"><p class="lbl">Built in my business</p><h2 style="font-size:clamp(32px,4vw,52px)">What this looks like <em>in practice.</em></h2></div>
+{mock("01-boss-suite-all-devices.jpg", "The BOSS Business System course on a desktop, laptop, tablet and phone", "The BOSS Business System: an interactive course with lessons, tools and progress tracking")}
+<div class="gal-d">{mock("00-all-9-modules.jpg", "All nine BOSS Business System modules", "Nine modules, each with its own lessons and tools")}{mock("05-sop-and-prompt-libraries.jpg", "SOP and prompt libraries organized in ClickUp", "My SOP and prompt libraries in ClickUp")}</div>
+</div></section>''', 1))
 
 # 12 PRIVATE CLIENT EXPERIENCE: pairs
 s = section(12)
@@ -139,7 +151,6 @@ cut = next(i for i, l in enumerate(s) if l.startswith("[Insert"))
 o.append(f'''<section style="background:#FFFFFF"><div class="in stack" style="gap:30px">
 <div class="nar stack ctr-h"><p class="lbl">{e(s[0])}</p><h2>{headline(s[1])}</h2>{flow(s[2:cut])}</div>
 {video_cards()}
-<div class="row" style="align-items:stretch">{slot("Featured client case study: her original challenges, actual deliverables and verified outcomes, with her completed website design.", "sm")}{slot("Second featured client case study: original business goals, strategic decisions and completed implementation work.", "sm")}</div>
 <div class="row" style="justify-content:center">{cta("Explore More Client Projects", "ol")}</div></div></section>''')
 
 # 14 MEET
@@ -167,7 +178,6 @@ o.append(f'''<section style="background:#FFFFFF"><div class="in stack" style="ga
 <div class="price dk"><p class="lbl">{e(s[pi])}</p><h3 style="font-size:clamp(34px,4vw,52px);color:#FBF5EE">{e(s[pi - 1])}</h3>
 {pairs(s[pi + 1:pe])}</div>
 <div class="nar stack" style="text-align:center;align-items:center"><p class="lbl">{e(s[pe])}</p>
-<p class="big">Starting at</p>{slot("Confirmed starting investment.")}{slot("Initial business development payment and ongoing monthly partnership terms.")}
 {flow(inv[2:])}</div></div></section>''')
 assert inv[0].startswith("Starting at [") and inv[1].startswith("[Insert")
 
@@ -211,9 +221,8 @@ for l in s:
 def ans(lines):
     out = []
     for l in lines:
-        if l.startswith("[Insert"): out.append(f'<span style="display:block;border:2px dashed #A23E66;border-radius:12px;padding:10px 14px;color:#A23E66;font-weight:600">TO FILL IN: {e(l[8:-1])}</span>')
-        elif "[Confirmed Starting Investment]" in l: out.append(e(l.split("[")[0]) + '<span style="display:inline-block;border:2px dashed #A23E66;border-radius:10px;padding:2px 10px;color:#A23E66;font-weight:600">TO FILL IN: confirmed starting investment</span>.')
-        else: out.append(e(l))
+        if l.startswith("[Insert") or "[Confirmed Starting Investment]" in l: continue  # left out until confirmed
+        out.append(e(l))
     return out
 o.append(f'''<section style="background:#FBF5EE"><div class="nar stack" style="gap:26px">
 <div class="stack" style="text-align:center;gap:14px"><p class="lbl">Frequently asked questions</p><h2>Your questions, <em>answered.</em></h2></div>
@@ -222,8 +231,7 @@ o.append(f'''<section style="background:#FBF5EE"><div class="nar stack" style="g
 # 21 FINAL (copy was cut off: rest is a slot)
 s = section(21)
 o.append(f'''<section style="background:#F6E1E8"><div class="nar stack ctr-h">
-<h2>{headline(s[0])}</h2>{flow(s[1:])}
-{slot("The rest of this section, from “I can't promise that every marketing campaign” to your final call to action. Send it and I'll finish this section.")}
+<h2>{headline(s[0])}</h2>{flow([l for l in s[1:] if not l.startswith("I can't promise")])}
 <div class="row" style="justify-content:center">{cta("Apply for Your Complimentary Fast Track Call", "br")}</div></div></section>''')
 
 o.append(VIDEO_JS + "\n</main>")
