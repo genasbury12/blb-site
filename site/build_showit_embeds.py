@@ -67,6 +67,9 @@ LINKMAP = [
     ('href="/terms-and-conditions/"', 'href="/terms-and-conditions"'),
 ]
 
+# Netlify stopped deploying on Nov 15: new portfolio images come from jsDelivr instead.
+PORTFOLIO_CDN = "https://cdn.jsdelivr.net/gh/genasbury12/blb-site@35ad1b3d75a873b83a9402666c714d3bbcbf0564/site/images/portfolio/"
+
 FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">\n'
          '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
          '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1'
@@ -294,6 +297,7 @@ def build_footer_piece(css: str, js: str) -> None:
     body = (ROOT / "partials/footer.html").read_text()
     for a, b in LINKMAP:
         body = body.replace(a, b)
+    body = body.replace('src="/images/portfolio/', 'src="' + PORTFOLIO_CDN)
     body = re.sub(r'(src|href)="/(images|brand|favicon)', r'\1="%s/\2' % ASSET_HOST, body)
     # Embed safety: the giant marquee cannot wrap, so scale it with the
     # canvas width and clip anything that would overflow a narrow canvas.
@@ -342,6 +346,7 @@ def main() -> None:
         for a, b in LINKMAP:
             body = body.replace(a, b)
         # assets served from the Netlify project (acting as the image host)
+        body = body.replace('src="/images/portfolio/', 'src="' + PORTFOLIO_CDN)
         body = re.sub(r'(src|href)="/(images|brand|favicon)', r'\1="%s/\2' % ASSET_HOST, body)
         out = (FONTS + "\n<style>\n" + css + "\n</style>\n" + body
                + "\n<script>\n" + js + "\n</script>\n")
