@@ -21,6 +21,8 @@ PAGES = {
     "about/index.html":          ("About.html", "/about"),
     "coaching/index.html":       ("BlogCoaching.html", "/blog-coaching"),
     "academy/index.html":        ("Academy.html", "/academy"),
+    "portfolio/index.html":      ("Portfolio.html", "/portfolio"),
+    "client-project/index.html": ("ClientProject.html", "/client-project"),
     "membership/index.html":     ("Membership.html", "/membership"),
     "free-masterclass/index.html": ("FreeMasterclass.html", "/free-masterclass"),
     "membership-offer/index.html": ("MembershipOffer.html", "/membership-offer"),
@@ -37,6 +39,13 @@ PAGES = {
 
 # internal link rewrites (folder URLs -> Showit slugs)
 LINKMAP = [
+    ('href="/client-project/?project=', 'href="/client-project?project='),
+    ('href="/portfolio/#', 'href="/portfolio#'),
+    ('href="/portfolio/"', 'href="/portfolio"'),
+    ('href="/coaching/#', 'href="/blog-coaching#'),
+    ('href="/academy/#', 'href="/academy#'),
+    ('href="/start-here/#', 'href="/start-here#'),
+    ('href="/black-friday/"', 'href="/black-friday"'),
     ('href="/start-here/"', 'href="/start-here"'),
     ('href="/about/"', 'href="/about"'),
     ('href="/boss/"', 'href="/boss"'),
@@ -54,6 +63,8 @@ LINKMAP = [
     ('href="/contact/"', 'href="/contact"'),
     ('href="/thank-you/"', 'href="/thank-you"'),
     ('href="/404.html"', 'href="/404"'),
+    ('href="/privacy-policy/"', 'href="/privacy-policy"'),
+    ('href="/terms-and-conditions/"', 'href="/terms-and-conditions"'),
 ]
 
 FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">\n'
@@ -169,16 +180,12 @@ PIECE_NAV = """<div style="background:#FBF5EE;padding:16px clamp(16px,4vw,40px);
 <span style="font:400 26px/1 var(--font-display);color:#3A1C2A">Boss Lady <em style="color:#A23E66">Bloggers</em></span>
 </a>
 <nav aria-label="Main" style="display:flex;flex-wrap:wrap;align-items:center;gap:6px 20px;font:500 14px/1 var(--font-body)">
-<a href="/start-here" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Start Here</a>
 <a href="/about" style="color:#3A1C2A;text-decoration:none;padding:8px 0">About</a>
-<a href="/free-masterclass" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Free Masterclass</a>
-<a href="/blog-coaching" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Work With Me</a>
+<a href="/blog-coaching" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Blog Coaching &amp; Design</a>
 <a href="/membership" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Membership</a>
 <a href="/academy" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Courses</a>
-<a href="/podcast" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Podcast</a>
-<a href="/blog" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Blog</a>
-<a href="/contact" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Contact</a>
-<a href="https://calendly.com/bossladybloggers/15min" class="pill" style="background:#3A1C2A;color:#FFFFFF;padding:11px 18px">Book a call</a>
+<a href="/start-here" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Resources</a>
+<a href="/blog-coaching" class="pill" style="background:#3A1C2A;color:#FFFFFF;padding:11px 18px">Work With Me</a>
 </nav>
 </div>"""
 
@@ -236,20 +243,20 @@ PIECE_MENUPAGE = """<div style="min-height:100vh;background:#A23E66;padding:22px
 </div>
 <div style="display:flex;flex-wrap:wrap;gap:40px;align-items:flex-start">
 <div style="flex:1 1 320px;min-width:0;display:flex;flex-direction:column;gap:18px">
-<p style="margin:0;font:400 clamp(40px,5vw,72px)/1 var(--font-display);color:#FBF5EE">Helping women build blogs that <em>sell.</em></p>
-<p style="margin:0;font:400 16px/1.6 var(--font-body);color:#F6E1E8">If you&rsquo;re new here, welcome. Start with the page made for you.</p>
-<div><a href="/start-here" class="pill" style="background:#FBF5EE;color:#3A1C2A">Start here</a></div>
+<p style="margin:0;font:400 clamp(40px,5vw,72px)/1 var(--font-display);color:#FBF5EE">Helping you build the business <em>behind your blog.</em></p>
+<p style="margin:0;font:400 16px/1.6 var(--font-body);color:#F6E1E8">Professional blog coaching, custom website design and modern business education for ambitious women.</p>
+<div><a href="/blog-coaching" class="pill" style="background:#FBF5EE;color:#3A1C2A">Work With Me</a></div>
 </div>
 <nav aria-label="Full menu" style="flex:1 1 300px;min-width:0;display:flex;flex-direction:column;font:400 clamp(26px,3vw,36px)/1.9 var(--font-display)">
 <a href="/" style="color:#FBF5EE;text-decoration:none">Home</a>
 <a href="/about" style="color:#FBF5EE;text-decoration:none">About</a>
-<a href="/start-here" style="color:#FBF5EE;text-decoration:none">Start Here</a>
-<a href="/blog-coaching" style="color:#FBF5EE;text-decoration:none">Work With Me</a>
+<a href="/blog-coaching" style="color:#FBF5EE;text-decoration:none">Blog Coaching &amp; Design</a>
 <a href="/membership" style="color:#FBF5EE;text-decoration:none">The Blogging Ladies Membership</a>
 <a href="/academy" style="color:#FBF5EE;text-decoration:none">Courses</a>
-<a href="/free-masterclass" style="color:#FBF5EE;text-decoration:none">Free Masterclass</a>
-<a href="/podcast" style="color:#FBF5EE;text-decoration:none">Podcast</a>
+<a href="/start-here" style="color:#FBF5EE;text-decoration:none">Resources</a>
+<a href="/#webinar" style="color:#FBF5EE;text-decoration:none">Futureproof Your Blog Webinar</a>
 <a href="/blog" style="color:#FBF5EE;text-decoration:none">Blog</a>
+<a href="/podcast" style="color:#FBF5EE;text-decoration:none">Podcast</a>
 <a href="/contact" style="color:#FBF5EE;text-decoration:none">Contact</a>
 </nav>
 </div>
@@ -292,22 +299,15 @@ def build_footer_piece(css: str, js: str) -> None:
     # canvas width and clip anything that would overflow a narrow canvas.
     body = body.replace("clamp(120px,15vw,220px)", "clamp(48px,15vw,220px)")
     body = '<div style="width:100vw;max-width:100vw;overflow-x:clip">\n' + body + '\n</div>'
-    # Container-proof the Instagram grid: tile count adapts to whatever
-    # width Showit gives the widget, so tiles never blow up.
-    body += '\n<style>.ig-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))!important}</style>'
     out = (FONTS + "\n<style>\n" + css + "\n</style>\n" + body
            + "\n<script>\n" + js + "\n</script>\n")
     if "—" in out or "–" in out:
         raise SystemExit("em/en dash in PostFooter.html")
     (OUT / "PostFooter.html").write_text(out)
     print("built PostFooter.html  ->  blog post template piece (full site footer)")
-    # Mobile variant: same footer without the Instagram feed block.
-    mbody = re.sub(r'<div data-instagram-feed=[\s\S]*?</div>\n</div>\n</section>', '</div>\n</section>', body, count=1)
-    assert 'data-instagram-feed' not in mbody, "IG strip failed"
-    mout = (FONTS + "\n<style>\n" + css + "\n</style>\n" + mbody
-            + "\n<script>\n" + js + "\n</script>\n")
-    (OUT / "PostFooterMobile.html").write_text(mout)
-    print("built PostFooterMobile.html  ->  blog post template piece (mobile footer, no Instagram)")
+    # Mobile variant: the footer has no Instagram feed any more, so it is the same footer.
+    (OUT / "PostFooterMobile.html").write_text(out)
+    print("built PostFooterMobile.html  ->  blog post template piece (mobile footer)")
 
 
 def build_pieces() -> None:

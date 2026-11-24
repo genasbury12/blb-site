@@ -1,41 +1,44 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=Caveat:wght@700&display=swap">
-<div style="width:320px;overflow:hidden;font-family:Inter,sans-serif">
+<div style="width:320px;overflow:hidden;font-family:Inter,sans-serif;background:#A23E66;color:#FFFFFF;padding:40px 20px 24px;box-sizing:border-box">
+<p style="margin:0;font:400 36px/.95 'Instrument Serif',serif;color:#FBF5EE">BOSS LADY BLOGGERS</p>
+<p style="margin:14px 0 0;font:400 15px/1.6 Inter;color:#F6E1E8">Professional blog coaching, custom website design and modern business education for ambitious women.</p>
+<p style="margin:10px 0 0;font:400 italic 21px/1.3 'Instrument Serif',serif;color:#FBF5EE">Helping you build the business behind your blog.</p>
 
-<div style="background:#FBF5EE;padding:40px 20px 36px">
-<p style="margin:0;font:700 34px/1 Caveat,cursive;color:#A23E66">Genasys</p>
-<div style="position:relative;width:96px;height:96px;border-radius:999px;background:#E9B9CA;overflow:hidden;margin:16px 0"><img src="https://charming-caramel-d2453c.netlify.app/images/photos/portrait-hat.jpg" alt="Genasys smiling in a hat" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 35%"></div>
-<p style="margin:0;font:400 15px/1.6 Inter;color:#4A2F3B">Blog coach, Showit designer, and founder of Boss Lady Bloggers. Helping women build blogs that make money since 2017.</p>
-<div style="display:flex;flex-direction:column;gap:8px;margin-top:14px">
-<a href="https://www.instagram.com/blogcoach_gen" target="_blank" rel="noopener" style="border:1px solid #E9B9CA;border-radius:8px;padding:10px 12px;font:500 11px/1 'DM Mono',monospace;letter-spacing:1px;color:#3A1C2A;text-decoration:none;text-align:center">FOLLOW ON INSTAGRAM</a>
-<a href="/podcast" style="border:1px solid #E9B9CA;border-radius:8px;padding:10px 12px;font:500 11px/1 'DM Mono',monospace;letter-spacing:1px;color:#3A1C2A;text-decoration:none;text-align:center">LISTEN TO THE PODCAST</a>
-<a href="https://www.youtube.com/@GenasysLynn" target="_blank" rel="noopener" style="border:1px solid #E9B9CA;border-radius:8px;padding:10px 12px;font:500 11px/1 'DM Mono',monospace;letter-spacing:1px;color:#3A1C2A;text-decoration:none;text-align:center">WATCH ON YOUTUBE</a>
+<p style="margin:28px 0 8px;font:500 11px/1.4 'DM Mono',monospace;letter-spacing:1.8px;color:#F6C9D8">WORK WITH ME</p>
+<div style="display:flex;flex-direction:column;font:500 14.5px/2 Inter">
+<a href="/blog-coaching" style="color:#FFFFFF;text-decoration:none">The BOSS Business Experience</a>
+<a href="/blog-coaching" style="color:#FFFFFF;text-decoration:none">Private Blog Coaching &amp; Design</a>
+<a href="/portfolio" style="color:#FFFFFF;text-decoration:none">Website Design Portfolio</a>
 </div>
-<p style="margin:28px 0 0;font:700 24px/1 Inter;letter-spacing:0.02em;color:#A23E66;text-transform:uppercase;border-bottom:2px solid #A23E66;padding-bottom:8px">Get around</p>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:4px 16px;font:400 14px/1.9 Inter;margin-top:10px">
-<a href="/" style="color:#3A1C2A;text-decoration:none">Home</a><a href="/academy" style="color:#3A1C2A;text-decoration:none">Courses</a>
-<a href="/about" style="color:#3A1C2A;text-decoration:none">About</a><a href="/blog-coaching" style="color:#3A1C2A;text-decoration:none">Work With Me</a>
-<a href="/start-here" style="color:#3A1C2A;text-decoration:none">Start Here</a><a href="/free-masterclass" style="color:#3A1C2A;text-decoration:none">Free Masterclass</a>
-<a href="/blog" style="color:#3A1C2A;text-decoration:none">Blog</a><a href="/podcast" style="color:#3A1C2A;text-decoration:none">Podcast</a>
-<a href="/contact" style="color:#3A1C2A;text-decoration:none">Contact</a><a href="/membership" style="color:#3A1C2A;text-decoration:none">Membership</a>
+<p style="margin:22px 0 8px;font:500 11px/1.4 'DM Mono',monospace;letter-spacing:1.8px;color:#F6C9D8">LEARN FROM ME</p>
+<div style="display:flex;flex-direction:column;font:500 14.5px/2 Inter">
+<a href="/membership" style="color:#FFFFFF;text-decoration:none">The Blogging Ladies Membership</a>
+<a href="/academy" style="color:#FFFFFF;text-decoration:none">The BOSS Academy</a>
+<a href="/academy#all-access" style="color:#FFFFFF;text-decoration:none">Academy All Access</a>
 </div>
-</div>
-
-<div style="background:#A23E66;padding:36px 20px 20px">
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:4px 14px;font:500 14px/2 Inter">
-<a href="/" style="color:#FFFFFF;text-decoration:none">Home</a><a href="/blog-coaching" style="color:#FFFFFF;text-decoration:none">Work With Me</a>
-<a href="/start-here" style="color:#FFFFFF;text-decoration:none">Start Here</a><a href="/membership" style="color:#FFFFFF;text-decoration:none">Membership</a>
-<a href="/about" style="color:#FFFFFF;text-decoration:none">About</a>
-<a href="/free-masterclass" style="color:#FFFFFF;text-decoration:none">Free Masterclass</a><a href="/podcast" style="color:#FFFFFF;text-decoration:none">Podcast</a>
-<a href="/academy" style="color:#FFFFFF;text-decoration:none">Courses</a><a href="/contact" style="color:#FFFFFF;text-decoration:none">Contact</a>
-</div>
-<div style="display:flex;gap:16px;margin-top:22px">
-<a href="https://www.instagram.com/blogcoach_gen" target="_blank" rel="noopener" style="font:500 10px/1 'DM Mono',monospace;letter-spacing:1.4px;color:#F6E1E8;text-decoration:none">INSTAGRAM</a>
-<a href="https://www.youtube.com/@GenasysLynn" target="_blank" rel="noopener" style="font:500 10px/1 'DM Mono',monospace;letter-spacing:1.4px;color:#F6E1E8;text-decoration:none">YOUTUBE</a>
-<a href="https://www.pinterest.com/BossLadyBloggers/" target="_blank" rel="noopener" style="font:500 10px/1 'DM Mono',monospace;letter-spacing:1.4px;color:#F6E1E8;text-decoration:none">PINTEREST</a>
-</div>
-<p style="margin:26px 0 0;font:400 30px/1 'Instrument Serif',serif;color:#FBF5EE;white-space:nowrap;overflow:hidden">BOSS LADY BLOGGERS</p>
+<p style="margin:22px 0 8px;font:500 11px/1.4 'DM Mono',monospace;letter-spacing:1.8px;color:#F6C9D8">EXPLORE</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:0 14px;font:500 14.5px/2 Inter">
+<a href="/about" style="color:#FFFFFF;text-decoration:none">About</a><a href="/#webinar" style="color:#FFFFFF;text-decoration:none">Free Webinar</a>
+<a href="/blog" style="color:#FFFFFF;text-decoration:none">The Blog</a><a href="/podcast" style="color:#FFFFFF;text-decoration:none">The Podcast</a>
+<a href="https://www.youtube.com/@GenasysLynn" target="_blank" rel="noopener" style="color:#FFFFFF;text-decoration:none">YouTube</a><a href="/contact" style="color:#FFFFFF;text-decoration:none">Contact</a>
 </div>
 
+<div style="margin-top:28px;background:#3A1C2A;border-radius:22px;padding:22px 18px">
+<p style="margin:0;font:400 28px/1.05 'Instrument Serif',serif;color:#FBF5EE">Stay Connected</p>
+<p style="margin:8px 0 14px;font:400 14px/1.6 Inter;color:#F1DDE2">Modern business strategies, buyer psychology, AI and conversations about the future of blogging.</p>
+<a href="/#webinar" style="display:block;text-align:center;background:#A23E66;color:#FFFFFF;border-radius:999px;padding:15px 18px;font:600 15px/1 Inter;text-decoration:none">Subscribe</a>
+</div>
+
+<div style="display:flex;gap:16px;margin-top:24px">
+<a href="https://www.instagram.com/blogcoach_gen" target="_blank" rel="noopener" style="font:500 10.5px/1 'DM Mono',monospace;letter-spacing:1.4px;color:#FFFFFF;text-decoration:none">INSTAGRAM</a>
+<a href="https://www.pinterest.com/BossLadyBloggers/" target="_blank" rel="noopener" style="font:500 10.5px/1 'DM Mono',monospace;letter-spacing:1.4px;color:#FFFFFF;text-decoration:none">PINTEREST</a>
+<a href="https://www.youtube.com/@GenasysLynn" target="_blank" rel="noopener" style="font:500 10.5px/1 'DM Mono',monospace;letter-spacing:1.4px;color:#FFFFFF;text-decoration:none">YOUTUBE</a>
+</div>
+<div style="display:flex;gap:16px;margin-top:14px">
+<a href="/privacy-policy" style="font:500 10.5px/1 'DM Mono',monospace;letter-spacing:1.4px;color:#F6E1E8;text-decoration:none">PRIVACY POLICY</a>
+<a href="/terms-and-conditions" style="font:500 10.5px/1 'DM Mono',monospace;letter-spacing:1.4px;color:#F6E1E8;text-decoration:none">TERMS &amp; CONDITIONS</a>
+</div>
+<p style="margin:18px 0 0;font:400 12px/1.5 Inter;color:#F6E1E8">&copy; Boss Lady Bloggers. All rights reserved.</p>
 </div>

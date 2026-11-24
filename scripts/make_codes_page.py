@@ -18,6 +18,8 @@ GROUPS = [
         ("FreeMasterclass", "/free-masterclass", "NEW: Your free masterclass opt-in page, now with a countdown to Nov 30 above the form. The form is your real Flodesk masterclass form."),
         ("MembershipOffer", "/membership-offer", "NEW: The 1-hour 50% off upsell people see right after signing up. Leave it out of your menu."),
         ("BlackFriday", "/black-friday", "NEW: Early access Nov 25 through Cyber Monday: 50% off, $23.50 a month locked in forever, plus the free 1:1 call and roadmap."),
+        ("Portfolio", "/portfolio", "NEW: your client portfolio with real laptop and phone mockups of 7 client sites and the 5 client video testimonials. Dashed boxes mark each project's description and services, and your starting investment in the FAQ."),
+        ("ClientProject", "/client-project (leave it out of your menu)", "NEW: one page serves every client project: /client-project?project=oneincome, tammy, abroad, fizzy, focusflow, cajungirl or datenight. Send me each client's story and I'll fill in her page."),
         ("Academy", "/academy (menu title: Courses)", "NEW: The BOSS Academy storefront. The course library filters by category. Dashed boxes mark the course and All Access prices; send me each course's sales page link and the All Access link and I'll wire the buttons."),
         ("Membership", "/membership", "NEW: The Blogging Ladies Membership sales page."),
         ("Home", "/ (home page)", ""), ("StartHere", "/start-here", ""), ("About", "/about", ""),
@@ -46,9 +48,10 @@ GROUPS = [
 
 STEPS = [
     "Delete the Course, Course Waitlist, Group Coaching and Group Waitlist pages in Showit, and 301 redirect each one to /membership.",
-    "Delete the old BOSS page (/boss) in Showit and 301 redirect /boss to /blog-coaching. Your new Work With Me page lives at /blog-coaching, and the menu button now says Book a call.",
+    "Add two new Showit pages: /portfolio and /client-project. Paste Portfolio and ClientProject into them. Keep /client-project out of your menu.",
+    "Delete the old BOSS page (/boss) in Showit and 301 redirect /boss to /blog-coaching. Your new Work With Me page lives at /blog-coaching.",
     "Delete the Free Trainings page and 301 redirect /free-trainings to /free-masterclass.",
-    "Re-paste every page and your nav, footer and menu pieces: they now link to the membership and the free masterclass.",
+    "Re-paste every page and your nav, footer and menu pieces: the new menu is About, Blog Coaching & Design, Membership, Courses, Resources and a Work With Me button, and the new footer links to your Portfolio, webinar, privacy policy and terms.",
     "Create two new Showit pages, /roadmap and /roadmap-tool, each with one full width Embed Code box. Paste Roadmap and RoadmapTool. Any canvas height works: the code grows the canvas to fit.",
     "In Flodesk, open your masterclass form and change where it sends people after signup to bossladybloggers.com/membership-offer, so popup signups see the 50% off offer too.",
 ]

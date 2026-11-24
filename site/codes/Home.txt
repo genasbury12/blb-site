@@ -200,16 +200,12 @@ div[id^="fd-form"] form { padding-top: 0 !important; padding-bottom: 0 !importan
     <span class="wordmark">Boss Lady <em>Bloggers</em></span>
   </a>
   <nav aria-label="Main" class="site-nav">
-    <a href="/start-here" class="navl" data-nav="start-here">Start Here</a>
     <a href="/about" class="navl" data-nav="about">About</a>
-    <a href="/free-masterclass" class="navl" data-nav="free-masterclass">Free Masterclass</a>
-    <a href="/blog-coaching" class="navl" data-nav="coaching">Work With Me</a>
+    <a href="/blog-coaching" class="navl" data-nav="coaching">Blog Coaching &amp; Design</a>
     <a href="/membership" class="navl" data-nav="membership">Membership</a>
     <a href="/academy" class="navl" data-nav="academy">Courses</a>
-    <a href="/podcast" class="navl" data-nav="podcast">Podcast</a>
-    <a href="/blog" class="navl" data-nav="blog">Blog</a>
-    <a href="/contact" class="navl" data-nav="contact">Contact</a>
-    <a href="https://calendly.com/bossladybloggers/15min" class="pill pill-plain nav-boss" style="background:#3A1C2A;color:#FFFFFF">Book a call</a>
+    <a href="/start-here" class="navl" data-nav="start-here">Resources</a>
+    <a href="/blog-coaching" class="pill pill-plain nav-boss" style="background:#3A1C2A;color:#FFFFFF">Work With Me</a>
     <button type="button" class="menu-btn" data-menu-open aria-expanded="false" aria-controls="popout-menu" aria-label="Open full menu">
       <svg aria-hidden="true" width="18" height="14" viewBox="0 0 18 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M1 1h16M1 7h16M1 13h16"></path></svg>
     </button>
@@ -223,213 +219,569 @@ div[id^="fd-form"] form { padding-top: 0 !important; padding-bottom: 0 !importan
   </div>
   <div class="popout-grid">
     <div style="flex:1 1 380px;min-width:0;display:flex;flex-direction:column;gap:18px">
-      <p style="margin:0;font:400 clamp(44px,5vw,72px)/1 var(--font-display);color:#FBF5EE">Helping women build blogs that <em>sell.</em></p>
-      <p style="margin:0;font:400 16px/1.6 var(--font-body);color:#F6E1E8">If you&rsquo;re new here, welcome. Start with the page made for you.</p>
-      <div><a href="/start-here" class="pill pill-plain" style="background:#FBF5EE;color:#3A1C2A">Start here</a></div>
+      <p style="margin:0;font:400 clamp(44px,5vw,72px)/1 var(--font-display);color:#FBF5EE">Helping you build the business <em>behind your blog.</em></p>
+      <p style="margin:0;font:400 16px/1.6 var(--font-body);color:#F6E1E8">Professional blog coaching, custom website design and modern business education for ambitious women.</p>
+      <div><a href="/blog-coaching" class="pill pill-plain" style="background:#FBF5EE;color:#3A1C2A">Work With Me</a></div>
     </div>
     <nav aria-label="Full menu" class="popout-nav">
-      <a href="/">Home</a><a href="/about">About</a><a href="/start-here">Start Here</a><a href="/blog-coaching">Work With Me</a><a href="/membership">The Blogging Ladies Membership</a><a href="/academy">Courses</a><a href="/free-masterclass">Free Masterclass</a><a href="/podcast">Podcast</a><a href="/blog">Blog</a><a href="/contact">Contact</a><a href="https://www.instagram.com/blogcoach_gen" target="_blank" rel="noopener">Instagram</a>
+      <a href="/">Home</a><a href="/about">About</a><a href="/blog-coaching">Blog Coaching &amp; Design</a><a href="/membership">The Blogging Ladies Membership</a><a href="/academy">Courses</a><a href="/start-here">Resources</a><a href="/#webinar">Futureproof Your Blog Webinar</a><a href="/blog">Blog</a><a href="/podcast">Podcast</a><a href="/contact">Contact</a>
     </nav>
   </div>
   <div class="popout-photo"><img src="https://charming-caramel-d2453c.netlify.app/images/photos/flatlay-notebook.jpg" alt="Notebook, pen and a Boss mug on a desk" loading="lazy"></div>
 </div>
-<main id="main">
+<style>
+/* Homepage. Editorial BLB: plum and cream with berry accents, arch photo frames, numbered pillars,
+   the three ways to work together as a ladder, and a webinar sign up. Announcement bar hides after Black Friday. */
+.hp{--plum:#3A1C2A;--berry:#A23E66;--rose:#E9B9CA;--blush:#F6E1E8;--cream:#FBF5EE;--cocoa:#4A2F3B;--mauve:#6E4B5B;--pop:#F6C9D8}
+.hp section{padding:clamp(76px,9vw,128px) clamp(16px,4vw,48px)}
+.hp .in{max-width:1180px;margin:0 auto}
+.hp .nar{max-width:780px;margin:0 auto}
+.hp .lbl{margin:0;font:500 12px/1.5 var(--font-label);letter-spacing:.2em;text-transform:uppercase;color:var(--berry)}
+.hp .dk .lbl{color:var(--rose)}
+.hp h1,.hp h2,.hp h3{margin:0;font-family:var(--font-display);font-weight:400;letter-spacing:-.015em;text-wrap:balance;color:var(--plum)}
+.hp h2{font-size:clamp(38px,5vw,66px);line-height:1.02}
+.hp h2 em,.hp h1 em{color:var(--berry)}
+.hp .dk h1,.hp .dk h2,.hp .dk h3{color:var(--cream)}
+.hp .dk h1 em,.hp .dk h2 em{color:var(--pop)}
+.hp p{margin:0}
+.hp .body{font:400 18px/1.7 var(--font-body);color:var(--cocoa)}
+.hp .dk .body{color:#F1DDE2}
+.hp .big{font:400 clamp(24px,3vw,34px)/1.25 var(--font-display);color:var(--plum)}
+.hp .dk .big{color:var(--cream)}
+.hp .it{font-style:italic;color:var(--berry)}
+.hp .dk .it{color:var(--pop)}
+.hp .stack{display:flex;flex-direction:column;gap:20px}
+.hp .row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.hp .hp-btn{display:inline-flex;align-items:center;gap:12px;min-height:56px;padding:8px 10px 8px 24px;border-radius:999px;background:var(--plum);color:#fff;font:600 15.5px/1.2 var(--font-body);text-decoration:none;border:0;cursor:pointer;transition:transform .2s ease}
+.hp .hp-btn i{flex:none;width:38px;height:38px;border-radius:999px;background:var(--berry);display:grid;place-items:center;transition:transform .2s ease}
+.hp .hp-btn.cr{background:var(--cream);color:var(--plum)}
+.hp .hp-btn.br{background:var(--berry)}.hp .hp-btn.br i{background:var(--plum)}
+.hp .hp-btn.ol{background:transparent;color:var(--plum);border:1.5px solid var(--plum)}
+.hp .hp-btn.olw{background:transparent;color:var(--cream);border:1.5px solid rgba(233,185,202,.6)}
+.hp .hp-btn.olw i{background:var(--pop)}.hp .hp-btn.olw i svg{stroke:#3A1C2A}
+@media (hover:hover){.hp .hp-btn:hover{transform:translateY(-2px)}.hp .hp-btn:hover i{transform:rotate(45deg)}}
+.hp .hp-btn:focus-visible,.hp input:focus-visible,.hp button:focus-visible{outline:3px solid var(--berry);outline-offset:3px}
+.hp .hp-slot{border:2px dashed var(--berry);border-radius:18px;padding:16px 20px;background:rgba(162,62,102,.05);font:500 15px/1.5 var(--font-body);color:var(--berry)}
+.hp .hp-slot b{display:block;font:500 11px/1.3 var(--font-label);letter-spacing:.16em;text-transform:uppercase;margin-bottom:6px}
+.hp .dk .hp-slot{border-color:var(--pop);color:var(--pop)}
+.hp .ticks{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.hp .ticks li{position:relative;padding:13px 16px 13px 50px;border-radius:14px;background:#fff;font:500 16px/1.5 var(--font-body);color:var(--plum)}
+.hp .ticks li::before{content:"";position:absolute;left:14px;top:14px;width:22px;height:22px;border-radius:7px;background:var(--berry) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 12.5l4 4L18 8' fill='none' stroke='%23fff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/16px no-repeat}
+.hp .arch{aspect-ratio:3/4;border-radius:999px 999px 26px 26px;overflow:hidden;border:10px solid #fff;box-shadow:0 40px 80px -40px rgba(58,28,42,.7)}
+.hp .arch img{width:100%;height:100%;object-fit:cover;display:block}
 
-<!-- HERO: headline with photo layered through it -->
-<section style="position:relative;padding:clamp(40px,5vw,72px) clamp(16px,4vw,48px) 130px;background:#F6E1E8;z-index:2">
-<div style="max-width:1280px;margin:0 auto;position:relative;text-align:center">
-<p class="rv" style="margin:0 0 18px;font:500 12px/1 var(--font-label);letter-spacing:0.2em;text-transform:uppercase;color:#A23E66">Blog coach &#183; Showit designer &#183; since 2017</p>
-<h1 style="position:relative;z-index:2;margin:0;font:400 clamp(52px,7.4vw,116px)/0.92 var(--font-display);color:#3A1C2A;letter-spacing:-0.03em">You did not start a blog to work this hard <em style="color:#A23E66">for nothing.</em></h1>
-<div class="hero-split" style="display:flex;flex-wrap:wrap;gap:32px;align-items:flex-end;justify-content:center;margin-top:-40px">
-<p style="flex:1 1 220px;max-width:300px;margin:0 0 40px;text-align:left;font:600 18px/1.45 var(--font-body);color:#3A1C2A;position:relative;z-index:2">You started because you wanted to build something of your <span style="color:#A23E66">own&#8230;</span></p>
-<div style="position:relative;z-index:1;flex:0 0 auto;width:min(340px,80vw);height:400px;border-radius:200px 200px 28px 28px;background:#3A1C2A;overflow:hidden;display:flex;align-items:flex-end;justify-content:center"><img src="https://charming-caramel-d2453c.netlify.app/images/photos/hero-balloons.jpg" alt="Genasys laughing and holding balloon strings" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%"></div>
-<p style="flex:1 1 220px;max-width:300px;margin:0 0 40px;text-align:right;font:600 18px/1.45 var(--font-body);color:#3A1C2A;position:relative;z-index:2"><span style="color:#A23E66">&#8230;something</span> that could make money, give you options, and fit a real life.</p>
-</div>
-<div style="position:relative;z-index:3;display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:40px">
-<a href="/start-here" class="pill" style="background:#A23E66;color:#FFFFFF">Start here <span aria-hidden="true" style="width:34px;height:34px;border-radius:999px;background:#FFFFFF;display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#A23E66" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></span></a>
-<a href="/membership" class="pill pill-plain" style="background:transparent;color:#3A1C2A;border:2px solid #3A1C2A">Explore the BOSS Business System</a>
-</div>
-</div>
-<div style="position:absolute;left:50%;bottom:-66px;transform:translateX(-50%);width:132px;height:132px;z-index:5">
-<img src="https://charming-caramel-d2453c.netlify.app/brand/badge.svg" alt="" width="132" height="132" class="bl-spin" style="display:block;border-radius:999px;box-shadow:0 10px 30px rgba(58,28,42,.25)">
-</div>
-</section>
+/* announcement */
+.hp-ann{display:none;background:var(--berry,#A23E66);color:#fff;padding:11px clamp(16px,4vw,48px);text-align:center;font:500 14px/1.45 var(--font-body)}
+.hp-ann.on{display:block}
+.hp-ann b{font:500 12px/1 var(--font-label);letter-spacing:.14em;margin-right:6px}
+.hp-ann a{display:inline-block;margin-left:10px;padding:6px 14px;border-radius:999px;background:#FBF5EE;color:#3A1C2A;font:600 13px/1.2 var(--font-body);text-decoration:none;white-space:nowrap}
 
-<!-- INTRO -->
-<section style="background:#3A1C2A;padding:140px clamp(16px,4vw,48px) 110px;text-align:center">
-<div style="max-width:960px;margin:0 auto;display:flex;flex-direction:column;gap:26px;align-items:center">
-<p class="rv" style="margin:0;font:400 19px/1.65 var(--font-body);color:#F0DCE3;max-width:720px">But now you&rsquo;ve got blog posts, half finished ideas, a website you keep tweaking, and a list of things every blogging expert says you should be doing. The part where someone actually buys something still feels like a mystery.</p>
-<h2 class="rv" style="margin:0;font:400 clamp(36px,4.4vw,62px)/1.12 var(--font-display);color:#FBF5EE">I help women build blogs around <span class="hl-dark">real offers,</span> clear messaging, and websites designed to turn attention into <em style="color:#E9B9CA">sales.</em></h2>
-</div>
-</section>
+/* hero */
+.hp .hero{background:var(--cream);position:relative;overflow:hidden;isolation:isolate;padding-top:clamp(56px,7vw,96px)}
+.hp .hero::before{content:"";position:absolute;right:-8%;top:-20%;width:56vw;height:56vw;max-width:680px;max-height:680px;border-radius:50%;background:radial-gradient(circle,rgba(233,185,202,.6),rgba(233,185,202,0) 66%);z-index:-1}
+.hp .hero-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:clamp(36px,5vw,72px);align-items:center}
+.hp .hero h1{font-size:clamp(46px,6.6vw,96px);line-height:.96;letter-spacing:-.025em}
+.hp .hero .sub{font:400 italic clamp(22px,2.6vw,30px)/1.3 var(--font-display);color:var(--berry)}
+.hp .hero-ph{position:relative}
+.hp .hero-ph .arch{max-width:420px;margin-left:auto}
+.hp .tag3{position:absolute;left:-18px;bottom:40px;display:flex;flex-direction:column;gap:8px}
+.hp .tag3 span{align-self:flex-start;background:#fff;border-radius:999px;padding:10px 16px;font:500 11.5px/1 var(--font-label);letter-spacing:.12em;text-transform:uppercase;color:var(--plum);box-shadow:0 14px 30px -16px rgba(58,28,42,.6)}
+.hp .tag3 span:nth-child(2){margin-left:22px;background:var(--berry);color:#fff}
+.hp .tag3 span:nth-child(3){margin-left:8px;background:var(--plum);color:var(--cream)}
 
-<!-- STATEMENT with circled word -->
-<section style="padding:120px clamp(16px,4vw,48px)">
-<div style="max-width:1180px;margin:0 auto;display:flex;flex-wrap:wrap;gap:56px;align-items:center">
-<div style="flex:1 1 520px;min-width:0;display:flex;flex-direction:column;gap:20px">
-<h2 style="margin:0;font:400 clamp(52px,6vw,92px)/0.96 var(--font-display);color:#3A1C2A;text-transform:uppercase">Your blog is marketing. What is it <span class="circle-draw" style="position:relative;display:inline-block;padding:0 .08em">selling?<svg aria-hidden="true" viewBox="0 0 200 80" preserveAspectRatio="none" style="position:absolute;left:-10%;top:-8%;width:120%;height:116%;overflow:visible"><ellipse cx="100" cy="40" rx="96" ry="34" fill="none" stroke="#A23E66" stroke-width="3" transform="rotate(-4 100 40)"></ellipse></svg></span></h2>
-<p class="rv" style="margin:0;font:700 38px/1 var(--font-script);color:#A23E66">That question changes everything.</p>
-</div>
-<div class="rv" style="flex:1 1 400px;min-width:0;background:#FFFFFF;border-radius:28px;padding:clamp(28px,4vw,48px);display:flex;flex-direction:column;gap:16px;box-shadow:0 20px 50px rgba(58,28,42,0.08)">
-<p style="margin:0;font:400 17px/1.65 var(--font-body)">If you don&rsquo;t know who you serve, what problem you solve, and what you&rsquo;re selling, another twenty posts will only give you twenty more posts.</p>
-<p style="margin:0;font:400 17px/1.65 var(--font-body)">You don&rsquo;t need to wait for a huge audience before thinking like a business owner. You need a reason for the right reader to care, a useful offer, and <span class="hl">a clear path to buy.</span></p>
-</div>
-</div>
-</section>
+/* credibility */
+.hp .cred{background:var(--plum);padding:34px clamp(16px,4vw,48px)}
+.hp .cred .in{display:flex;flex-direction:column;gap:18px;align-items:center;text-align:center}
+.hp .cred .lead{font:400 clamp(26px,3vw,36px)/1.1 var(--font-display);color:var(--cream)}
+.hp .cred .areas{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 22px;font:500 12px/1.5 var(--font-label);letter-spacing:.16em;text-transform:uppercase;color:var(--rose)}
+.hp .cred .areas span+span::before{content:"\2726";margin-right:22px;color:var(--pop)}
+.hp .cred .hp-slot{max-width:760px;width:100%}
 
-<!-- PICK THE HELP (fanned cards) -->
-<section style="background:#F6E1E8;padding:110px clamp(16px,4vw,48px) 130px">
-<div style="max-width:1240px;margin:0 auto;display:flex;flex-direction:column;gap:56px;align-items:center">
-<div style="text-align:center;display:flex;flex-direction:column;gap:12px">
-<p class="rv" style="margin:0;font:500 13px/1 var(--font-label);letter-spacing:0.2em;text-transform:uppercase;color:#A23E66">Three ways in</p>
-<h2 class="rv" style="margin:0;font:400 clamp(42px,5vw,72px)/1.02 var(--font-display);color:#3A1C2A">Pick the help you need <span class="hl" style="background:#FFFFFF">right now.</span></h2>
-</div>
-<div class="fan" style="display:flex;flex-wrap:wrap;gap:24px;justify-content:center;align-items:flex-start">
-<article class="fan-card" style="flex:1 1 320px;max-width:380px;background:#FFFFFF;border-radius:26px;padding:34px;transform:rotate(-3deg);box-shadow:0 24px 50px rgba(58,28,42,0.12);display:flex;flex-direction:column;gap:14px">
-<span style="font:400 64px/0.9 var(--font-display);color:#A23E66">01</span>
-<h3 style="margin:0;font:400 32px/1.05 var(--font-display);color:#3A1C2A">Build the business behind your blog</h3>
-<p style="margin:0;font:400 15px/1.6 var(--font-body)">The BOSS Business System walks you through turning a blog idea into an offer driven business, with messaging, a sales focused website, and a plan for getting that offer in front of buyers.</p>
-<a href="/membership" class="pill pill-plain" style="align-self:flex-start;background:#A23E66;color:#FFFFFF">Explore BOSS Business System</a>
-</article>
-<article class="fan-card" style="flex:1 1 320px;max-width:380px;margin-top:40px;background:#3A1C2A;border-radius:26px;padding:34px;transform:rotate(2deg);box-shadow:0 24px 50px rgba(58,28,42,0.2);display:flex;flex-direction:column;gap:14px">
-<span style="font:400 64px/0.9 var(--font-display);color:#E9B9CA">02</span>
-<h3 style="margin:0;font:400 32px/1.05 var(--font-display);color:#FBF5EE">Work through your sales process with me</h3>
-<p style="margin:0;font:400 15px/1.6 var(--font-body);color:#F0DCE3">The Blog Profit Intensive is private coaching built around your blog. Together we work through front end sales, back end sales, prelaunch, launch, and the improvements that make the whole process stronger.</p>
-<a href="/blog-coaching" class="pill pill-plain" style="align-self:flex-start;background:#FBF5EE;color:#3A1C2A">Explore blog coaching</a>
-</article>
-<article class="fan-card" style="flex:1 1 320px;max-width:380px;background:#E9B9CA;border-radius:26px;padding:34px;transform:rotate(-1.5deg);box-shadow:0 24px 50px rgba(58,28,42,0.12);display:flex;flex-direction:column;gap:14px">
-<span style="font:400 64px/0.9 var(--font-display);color:#3A1C2A">03</span>
-<h3 style="margin:0;font:400 32px/1.05 var(--font-display);color:#3A1C2A">Start with something free</h3>
-<p style="margin:0;font:400 15px/1.6 var(--font-body);color:#3A1C2A">Watch this free masterclass and discover the 7-step blog-to-business system that turns your blog content into cash.</p>
-<a href="/free-masterclass" class="pill pill-plain" style="align-self:flex-start;background:#3A1C2A;color:#FFFFFF">Watch the free masterclass</a>
-</article>
-</div>
-</div>
-</section>
+/* philosophy */
+.hp .phil{background:#fff}
+.hp .ai{display:grid;gap:10px}
+.hp .ai p{padding:16px 20px;border-radius:16px;background:var(--cream);font:400 clamp(20px,2.2vw,25px)/1.3 var(--font-display);color:var(--plum)}
+.hp .qs{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;counter-reset:q}
+.hp .qs li{counter-increment:q;display:flex;gap:14px;align-items:flex-start;padding:20px;border-radius:20px;background:var(--plum);font:400 clamp(20px,2.2vw,24px)/1.3 var(--font-display);color:var(--cream)}
+.hp .qs li::before{content:"0" counter(q);flex:none;font:500 12px/2 var(--font-label);color:var(--pop)}
+.hp .motto{margin-top:10px;padding:clamp(26px,4vw,44px);border-radius:30px;background:var(--berry);text-align:center;font:400 clamp(28px,3.6vw,46px)/1.15 var(--font-display);color:#fff}
+.hp .motto em{color:var(--pop);font-style:italic}
 
-<!-- FREEBIE BANNER -->
-<section style="background:#A23E66;padding:90px clamp(16px,4vw,48px);overflow:hidden">
-<div style="max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;gap:56px;align-items:center">
-<div class="rv" style="flex:0 1 360px;min-width:0;position:relative;height:340px">
-<div style="position:absolute;left:0;top:30px;width:200px;height:270px;border-radius:12px;background:#F6E1E8;transform:rotate(-10deg)"></div>
-<div style="position:absolute;left:150px;top:20px;width:200px;height:270px;border-radius:12px;background:#3A1C2A;transform:rotate(8deg)"></div>
-<div style="position:absolute;left:70px;top:0;width:220px;height:300px;border-radius:14px;background:#FBF5EE;box-shadow:0 20px 40px rgba(0,0,0,0.25);overflow:hidden;display:flex;flex-direction:column"><img src="https://charming-caramel-d2453c.netlify.app/images/photos/flatlay-notebook.jpg" alt="Notebook, pen and a Boss mug on a desk" loading="lazy" style="width:100%;height:150px;object-fit:cover;object-position:center top"><div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;padding:18px 22px 22px;gap:6px"><span style="font:700 22px/1 var(--font-script);color:#A23E66">free masterclass</span><span style="font:400 30px/1 var(--font-display);color:#3A1C2A">Still Blogging&hellip; But Not Making Money?</span></div></div>
-</div>
-<div style="flex:1 1 440px;min-width:0;display:flex;flex-direction:column;gap:16px">
-<h2 class="rv" style="margin:0;font:400 clamp(40px,4.6vw,64px)/1 var(--font-display);color:#FBF5EE;text-transform:uppercase">Still blogging&hellip; but <span class="hl" style="color:#3A1C2A">not making money?</span></h2>
-<p class="rv" style="margin:0;font:400 17px/1.6 var(--font-body);color:#F6E1E8">Watch this free masterclass and discover the 7-step blog-to-business system that turns your blog content into cash.</p>
-<a href="/free-masterclass" class="pill pill-plain rv" style="align-self:flex-start;background:#FBF5EE;color:#3A1C2A">Watch the free masterclass</a>
-</div>
-</div>
-</section>
+/* experience */
+.hp .exp{background:var(--blush)}
+.hp .perhaps{display:grid;gap:12px}
+.hp .perhaps p{padding:18px 22px;border-left:3px solid var(--berry);background:#fff;border-radius:0 18px 18px 0;font:500 17px/1.55 var(--font-body);color:var(--plum)}
+.hp .six{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.hp .six article{background:#fff;border-radius:24px;padding:26px;display:flex;flex-direction:column;gap:10px}
+.hp .six .n{font:400 46px/.9 var(--font-display);font-style:italic;color:var(--berry)}
+.hp .six h3{font-size:26px;line-height:1.1}
+.hp .six p{font:400 16px/1.6 var(--font-body);color:var(--cocoa)}
+.hp .six article:nth-child(4){background:var(--plum)}
+.hp .six article:nth-child(4) h3{color:var(--cream)}.hp .six article:nth-child(4) p{color:#F1DDE2}.hp .six article:nth-child(4) .n{color:var(--pop)}
+.hp .one3{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
+.hp .one3 span{padding:12px 20px;border-radius:999px;background:var(--plum);color:var(--cream);font:400 20px/1.2 var(--font-display)}
 
-<!-- HI I'M GENASYS -->
-<section style="display:flex;flex-wrap:wrap;background:#FBF5EE">
-<div style="flex:1 1 520px;min-width:0;padding:clamp(40px,6vw,96px);display:flex;flex-direction:column;gap:20px;justify-content:center">
-<p class="rv" style="margin:0;font:700 32px/1 var(--font-script);color:#A23E66">nice to meet you</p>
-<h2 class="rv" style="margin:0;font:400 clamp(48px,5.4vw,80px)/0.98 var(--font-display);color:#3A1C2A">Hi, I&rsquo;m Genasys.</h2>
-<p class="rv" style="margin:0;font:400 17px/1.65 var(--font-body)">I&rsquo;m the founder of Boss Lady Bloggers, a blog coach, and a website designer. I built a money making business while raising my son as a single mom, and I know the difference between staying busy with a blog and building a business that can pay you.</p>
-<p class="rv" style="margin:0;font:400 24px/1.3 var(--font-display);color:#3A1C2A">I believe the <span class="hl">offer comes first.</span> Your brand, website, content, email marketing, and sales process should all support it.</p>
-<div class="rv"><a href="/about" class="pill pill-plain" style="background:#A23E66;color:#FFFFFF">Read my story</a></div>
-</div>
-<div style="flex:1 1 420px;min-width:0;min-height:560px;position:relative;background:#E9B9CA;display:flex;align-items:flex-end;justify-content:center;overflow:hidden"><img src="https://charming-caramel-d2453c.netlify.app/images/photos/chair-plants.jpg" alt="Genasys seated in her studio" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%"><span style="position:absolute;right:24px;top:24px;background:#FFFFFF;border-radius:999px;padding:10px 16px;font:600 13px/1 var(--font-body);color:#3A1C2A">@blogcoach_gen</span></div>
-</section>
+/* portfolio */
+.hp .folio{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.hp .mock{aspect-ratio:4/3;border-radius:20px;background:repeating-linear-gradient(135deg,var(--blush) 0 14px,#fff 14px 28px);border:2px dashed var(--berry);display:grid;place-items:center;padding:16px;text-align:center;font:500 12px/1.5 var(--font-label);letter-spacing:.12em;text-transform:uppercase;color:var(--berry)}
 
-<!-- LEARN WITH ME -->
-<section class="bl-grad" style="padding:110px clamp(16px,4vw,48px)">
-<div style="max-width:1180px;margin:0 auto;display:flex;flex-direction:column;gap:40px;align-items:center">
-<div style="text-align:center;display:flex;flex-direction:column;gap:14px;align-items:center">
-<h2 class="rv" style="margin:0;font:400 clamp(42px,5vw,72px)/1.02 var(--font-display);color:#3A1C2A">Learn with me before you spend a dollar.</h2>
-<p class="rv" style="margin:0;max-width:680px;font:400 18px/1.6 var(--font-body)">Watch practical business and blogging videos on YouTube, listen to the Boss Lady Bloggers Podcast, and watch the free masterclass.</p>
-</div>
-<div class="ev3" style="width:100%;gap:20px">
-<a href="https://www.youtube.com/@GenasysLynn" target="_blank" rel="noopener" class="card-hover rv" style="text-decoration:none;background:#3A1C2A;border-radius:26px;padding:34px;display:flex;flex-direction:column;gap:60px;min-height:260px"><svg aria-hidden="true" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#E9B9CA" stroke-width="1.6"><rect x="2.5" y="5" width="19" height="14" rx="4"></rect><path d="M10 9.5l5 2.5-5 2.5z" fill="#E9B9CA"></path></svg><span style="font:400 34px/1.05 var(--font-display);color:#FBF5EE">Watch on YouTube &#8599;&#65038;</span></a>
-<a href="/podcast" class="card-hover rv" style="text-decoration:none;background:#A23E66;border-radius:26px;padding:34px;display:flex;flex-direction:column;gap:60px;min-height:260px"><svg aria-hidden="true" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#FBF5EE" stroke-width="1.6" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M5.5 11a6.5 6.5 0 0013 0M12 17.5V21"></path></svg><span style="font:400 34px/1.05 var(--font-display);color:#FFFFFF">Listen to the podcast &#8599;&#65038;</span></a>
-<a href="/free-masterclass" class="card-hover rv" style="text-decoration:none;background:#FFFFFF;border-radius:26px;padding:34px;display:flex;flex-direction:column;gap:60px;min-height:260px"><svg aria-hidden="true" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#A23E66" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M4 19h16"></path></svg><span style="font:400 34px/1.05 var(--font-display);color:#3A1C2A">Watch the free masterclass &#8599;&#65038;</span></a>
-</div>
-</div>
-</section>
+.hp .fcard{display:flex;flex-direction:column;gap:8px;text-decoration:none;color:var(--plum)}
+.hp .fimg{display:block;border-radius:20px;overflow:hidden;background:var(--blush);box-shadow:0 30px 60px -44px rgba(58,28,42,.7)}
+.hp .fimg img{width:100%;height:auto;display:block;transition:transform .5s ease}
+@media (hover:hover){.hp .fcard:hover .fimg img{transform:scale(1.03)}}
+.hp .fn{margin-top:6px;font:400 25px/1.15 var(--font-display)}
+.hp .fni{font:500 11.5px/1.4 var(--font-label);letter-spacing:.14em;text-transform:uppercase;color:var(--berry)}
+/* ways */
+.hp .ways{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.hp .way{border-radius:30px;padding:30px 26px;display:flex;flex-direction:column;gap:12px;background:#fff}
+.hp .way:nth-child(1){background:var(--plum)}
+.hp .way:nth-child(2){background:var(--berry)}
+.hp .way .k{font:400 italic clamp(30px,3vw,38px)/1.05 var(--font-display);color:var(--plum)}
+.hp .way:nth-child(1) .k,.hp .way:nth-child(2) .k{color:#fff}
+.hp .way .nm{font:500 12px/1.5 var(--font-label);letter-spacing:.16em;text-transform:uppercase;color:var(--berry)}
+.hp .way:nth-child(1) .nm,.hp .way:nth-child(2) .nm{color:var(--pop)}
+.hp .way .sub{font:400 21px/1.25 var(--font-display);color:var(--plum)}
+.hp .way:nth-child(1) .sub,.hp .way:nth-child(2) .sub{color:var(--cream)}
+.hp .way p.d{font:400 16px/1.6 var(--font-body);color:var(--cocoa)}
+.hp .way:nth-child(1) p.d,.hp .way:nth-child(2) p.d{color:#F6E1E8}
+.hp .way .pr{font:400 38px/1 var(--font-display);color:#fff}
+.hp .way .hp-btn{margin-top:auto;align-self:flex-start}
 
-<!-- FINAL CTA -->
-<section style="background:#3A1C2A;padding:110px clamp(16px,4vw,48px)">
-<div style="max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;gap:48px;align-items:center">
-<div style="flex:1 1 520px;min-width:0;display:flex;flex-direction:column;gap:20px">
-<p class="rv" style="margin:0;font:500 13px/1 var(--font-label);letter-spacing:0.2em;text-transform:uppercase;color:#E9B9CA">Your call</p>
-<h2 class="rv" style="margin:0;font:400 clamp(46px,5.4vw,80px)/0.98 var(--font-display);color:#FBF5EE;text-transform:uppercase">You can keep publishing and hoping. Or you can <span class="hl-dark">build something to sell.</span></h2>
-<p class="rv" style="margin:0;font:700 34px/1 var(--font-script);color:#E9B9CA">Let&rsquo;s give all that work a purpose.</p>
-<div class="rv"><a href="/start-here" class="pill" style="background:#FBF5EE;color:#3A1C2A">Start here <span aria-hidden="true" style="width:34px;height:34px;border-radius:999px;background:#A23E66;display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></span></a></div>
-</div>
-<div class="rv" style="flex:0 1 340px;min-width:0;position:relative;height:380px">
-<div style="position:absolute;right:0;top:0;width:66%;height:240px;border-radius:22px;background:#E9B9CA;transform:rotate(4deg);overflow:hidden"><img src="https://charming-caramel-d2453c.netlify.app/images/photos/desk-laptop-mic.jpg" alt="Genasys at her desk with a laptop and microphone" loading="lazy" style="width:100%;height:100%;object-fit:cover"></div>
-<div style="position:absolute;left:0;bottom:0;width:62%;height:230px;border-radius:22px;background:#A23E66;transform:rotate(-5deg);overflow:hidden"><img src="https://charming-caramel-d2453c.netlify.app/images/photos/desk-typing.jpg" alt="Genasys typing on her laptop" loading="lazy" style="width:100%;height:100%;object-fit:cover"></div>
-</div>
-</div>
-</section>
+/* membership */
+.hp .mem{background:var(--cream)}
+.hp .mem-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(30px,5vw,64px);align-items:center}
+.hp .whyb{display:flex;flex-direction:column;gap:4px}
+.hp .whyb p{font:400 clamp(24px,2.8vw,32px)/1.2 var(--font-display);color:var(--plum)}
+.hp .whyb p:nth-child(2){color:var(--berry);font-style:italic}
+.hp .card{position:relative;background:#fff;border-radius:30px;padding:clamp(26px,4vw,42px);display:flex;flex-direction:column;gap:16px;box-shadow:0 30px 60px -40px rgba(58,28,42,.6)}
+.hp .card .price{font:400 clamp(64px,8vw,92px)/.9 var(--font-display);color:var(--plum)}
+.hp .card .hp-btn,.hp .aa-box .hp-btn{align-self:flex-start}
+.hp .card .price span{font-size:.32em;color:var(--mauve)}
 
-<!-- "GET AROUND" FOOTER BIO -->
+/* academy */
+.hp .acad{background:var(--plum)}
+.hp .books{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.hp .bk{display:flex;flex-direction:column;gap:14px;background:rgba(251,245,238,.06);border:1.5px solid rgba(233,185,202,.22);border-radius:26px;padding:22px}
+.hp .cover{aspect-ratio:3/2;border-radius:8px 16px 16px 8px;padding:18px 20px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:-8px 0 0 rgba(0,0,0,.16) inset}
+.hp .cover small{font:500 10px/1.4 var(--font-label);letter-spacing:.16em;text-transform:uppercase}
+.hp .cover b{font:400 clamp(26px,2.6vw,32px)/1 var(--font-display);font-weight:400}
+.hp .bk .hook{font:400 italic 21px/1.3 var(--font-display);color:var(--pop)}
+.hp .bk p.d{font:400 15.5px/1.6 var(--font-body);color:#F1DDE2}
+.hp .bk .hp-btn{margin-top:auto;align-self:flex-start}
 
-</main>
-<section style="background:#FBF5EE;padding:90px clamp(16px,4vw,48px) 40px">
-<div style="max-width:1180px;margin:0 auto;display:flex;flex-wrap:wrap;gap:48px;justify-content:space-between;align-items:flex-start">
-<div style="flex:1 1 520px;min-width:0;display:flex;flex-direction:column;gap:22px">
-<p class="rv" style="margin:0;font:700 clamp(64px,7vw,96px)/0.9 var(--font-script);color:#A23E66">Genasys</p>
-<div style="display:flex;flex-wrap:wrap;gap:24px;align-items:center">
-<div style="position:relative;width:120px;height:120px;border-radius:999px;background:#E9B9CA;flex:0 0 auto;overflow:hidden;display:flex;align-items:flex-end;justify-content:center"><img src="https://charming-caramel-d2453c.netlify.app/images/photos/portrait-hat.jpg" alt="Genasys smiling in a hat" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 35%"></div>
-<div style="flex:1 1 280px;display:flex;flex-direction:column;gap:14px">
-<p style="margin:0;font:400 16px/1.6 var(--font-body)">Blog coach, Showit designer, and founder of Boss Lady Bloggers. Helping women build blogs that make money since 2017.</p>
-<div style="display:flex;flex-wrap:wrap;gap:8px">
-<a href="https://www.instagram.com/blogcoach_gen" target="_blank" rel="noopener" style="border:1px solid #E9B9CA;border-radius:8px;padding:8px 12px;font:500 11px/1 var(--font-label);letter-spacing:0.08em;color:#3A1C2A;text-decoration:none">FOLLOW ON INSTAGRAM</a>
-<a href="/podcast" style="border:1px solid #E9B9CA;border-radius:8px;padding:8px 12px;font:500 11px/1 var(--font-label);letter-spacing:0.08em;color:#3A1C2A;text-decoration:none">LISTEN TO THE PODCAST</a>
-<a href="https://www.youtube.com/@GenasysLynn" target="_blank" rel="noopener" style="border:1px solid #E9B9CA;border-radius:8px;padding:8px 12px;font:500 11px/1 var(--font-label);letter-spacing:0.08em;color:#3A1C2A;text-decoration:none">WATCH ON YOUTUBE</a>
+/* all access */
+.hp .aa{background:var(--berry);border-radius:34px;padding:clamp(30px,5vw,64px);display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:clamp(26px,4vw,56px);align-items:center}
+.hp .aa h2{color:#fff}.hp .aa h2 em{color:var(--pop)}
+.hp .aa .body{color:#FBE3EA}
+.hp .aa-box{background:var(--cream);border-radius:26px;padding:28px;display:flex;flex-direction:column;gap:14px}
+
+/* about */
+.hp .about-grid{display:grid;grid-template-columns:minmax(0,.75fr) minmax(0,1.25fr);gap:clamp(30px,5vw,72px);align-items:start}
+.hp .about-grid .arch{position:sticky;top:110px;max-width:420px}
+.hp .learned{display:grid;gap:8px}
+.hp .learned p{padding:14px 18px;border-radius:14px;background:var(--blush);font:400 22px/1.25 var(--font-display);color:var(--plum)}
+.hp .studies{display:flex;flex-wrap:wrap;gap:8px}
+.hp .studies span{padding:10px 16px;border-radius:999px;background:var(--plum);color:var(--cream);font:500 14px/1.3 var(--font-body)}
+.hp .pull{padding:clamp(22px,4vw,34px);border-radius:26px;background:var(--plum);font:400 clamp(24px,2.8vw,32px)/1.25 var(--font-display);color:var(--cream)}
+.hp .pull em{color:var(--pop)}
+
+/* webinar */
+.hp .web{background:var(--plum);position:relative;overflow:hidden;isolation:isolate}
+.hp .web::before{content:"";position:absolute;right:-10%;top:-30%;width:60vw;height:60vw;max-width:720px;max-height:720px;border-radius:50%;background:radial-gradient(circle,rgba(162,62,102,.55),rgba(162,62,102,0) 65%);z-index:-1}
+.hp .web-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(30px,5vw,64px);align-items:start}
+.hp .web h2{font-size:clamp(50px,7vw,100px);line-height:.95}
+.hp .ifs{display:grid;gap:10px}
+.hp .ifs p{padding:14px 18px;border-radius:14px;border:1.5px solid rgba(233,185,202,.3);font:400 italic 21px/1.3 var(--font-display);color:var(--cream)}
+.hp .cover4{display:grid;gap:12px;counter-reset:w}
+.hp .cover4 div{counter-increment:w;position:relative;padding:20px 20px 20px 70px;border-radius:20px;background:rgba(251,245,238,.07)}
+.hp .cover4 div::before{content:"0" counter(w);position:absolute;left:20px;top:18px;font:400 30px/1 var(--font-display);font-style:italic;color:var(--pop)}
+.hp .cover4 h3{font-size:24px;color:var(--cream);margin-bottom:6px}
+.hp .cover4 p{font:400 15.5px/1.6 var(--font-body);color:#F1DDE2}
+.hp .wform{position:sticky;top:110px;background:var(--cream);border-radius:30px;padding:clamp(24px,3.6vw,38px);display:flex;flex-direction:column;gap:14px;box-shadow:0 40px 80px -40px rgba(0,0,0,.7)}
+.hp .wform h3{font-size:clamp(30px,3vw,38px);color:var(--plum)}
+.hp .field{display:flex;flex-direction:column;gap:6px}
+.hp .field label{font:600 14px/1.2 var(--font-body);color:var(--plum)}
+.hp .field input{min-height:54px;border-radius:14px;border:2px solid var(--rose);padding:0 16px;font:500 16px/1 var(--font-body);background:#fff;color:var(--plum);-webkit-appearance:none;appearance:none}
+.hp .field input:focus{border-color:var(--berry);outline:none;box-shadow:0 0 0 4px rgba(162,62,102,.14)}
+.hp .wform .hp-btn{width:100%;justify-content:space-between}
+.hp .ff-err:not(:empty){font:600 14px/1.4 var(--font-body);color:var(--berry)}
+.hp [data-ff-el="success"]{display:none}
+.hp .wtags{font:500 11px/1.6 var(--font-label);letter-spacing:.14em;text-transform:uppercase;color:var(--mauve);text-align:center}
+
+/* blog */
+.hp .posts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.hp .post{display:flex;flex-direction:column;background:#fff;border-radius:22px;overflow:hidden;text-decoration:none;color:var(--plum);box-shadow:0 22px 44px -36px rgba(58,28,42,.6);transition:transform .2s ease}
+@media (hover:hover){.hp .post:hover{transform:translateY(-4px)}}
+.hp .post .im{aspect-ratio:4/3;background:var(--rose);overflow:hidden}
+.hp .post .im img{width:100%;height:100%;object-fit:cover;display:block}
+.hp .post .t{padding:20px;font:400 23px/1.2 var(--font-display)}
+.hp .nos{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.hp .nos span{padding:9px 16px;border-radius:999px;background:#fff;font:500 14px/1.3 var(--font-body);color:var(--plum)}
+
+/* podcast + youtube */
+.hp .two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.hp .media{border-radius:30px;padding:clamp(26px,4vw,44px);display:flex;flex-direction:column;gap:14px}
+.hp .media.pod{background:var(--blush)}
+.hp .media.yt{background:var(--plum)}
+.hp .media h3{font-size:clamp(30px,3.2vw,40px);line-height:1.05}
+.hp .media.yt h3{color:var(--cream)}
+.hp .media p{font:400 16.5px/1.65 var(--font-body);color:var(--cocoa)}
+.hp .media.yt p{color:#F1DDE2}
+.hp .media .hp-btn{margin-top:auto;align-self:flex-start}
+.hp .media .ic{width:64px;height:64px;border-radius:18px;display:grid;place-items:center;background:var(--berry)}
+
+/* final */
+.hp .final{background:var(--cream);text-align:center}
+.hp .anoth{display:flex;flex-direction:column;gap:4px;margin:6px 0}
+.hp .anoth p{font:400 clamp(22px,2.6vw,30px)/1.3 var(--font-display);color:var(--mauve);text-decoration:line-through;text-decoration-color:var(--berry)}
+.hp .proud{font:400 italic clamp(30px,4vw,48px)/1.15 var(--font-display);color:var(--berry)}
+
+@media (max-width:980px){
+ .hp .hero-grid,.hp .mem-grid,.hp .about-grid,.hp .web-grid,.hp .aa{grid-template-columns:minmax(0,1fr)}
+ .hp .hero-ph .arch{margin:0 auto;max-width:360px}
+ .hp .six,.hp .ways,.hp .books,.hp .folio,.hp .posts{grid-template-columns:minmax(0,1fr)}
+ .hp .about-grid .arch,.hp .wform{position:static}
+ .hp .about-grid .arch{max-width:360px}
+}
+@media (min-width:600px) and (max-width:980px){.hp .six,.hp .posts{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:700px){
+ .hp .qs,.hp .two{grid-template-columns:minmax(0,1fr)}
+ .hp .tag3{left:0}
+ .hp .hp-btn{font-size:15px;padding-left:20px}
+ .hp-ann a{display:block;width:max-content;margin:8px auto 0}
+}
+@media (prefers-reduced-motion:reduce){.hp *{transition:none!important}}
+
+.vt-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:16px}
+.vt{display:flex;flex-direction:column;gap:12px;background:#FFFFFF;border-radius:22px;padding:12px 12px 16px;box-shadow:0 22px 44px -36px rgba(58,28,42,.6)}
+.vt-frame{position:relative;aspect-ratio:9/12;border-radius:14px;overflow:hidden;background:#3A1C2A}
+.vt-frame img{width:100%;height:100%;object-fit:cover;display:block}
+.vt-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vt-play{position:absolute;inset:0;width:100%;border:0;padding:0;margin:0;background:linear-gradient(180deg,rgba(58,28,42,0) 45%,rgba(58,28,42,.65));cursor:pointer;display:flex;align-items:flex-end;justify-content:flex-start}
+.vt-play span{margin:14px;width:52px;height:52px;border-radius:999px;background:#A23E66;display:grid;place-items:center;transition:transform .2s ease}
+@media (hover:hover){.vt-play:hover span{transform:scale(1.08)}}
+.vt-play:focus-visible{outline:3px solid #A23E66;outline-offset:3px}
+.vt-name{margin:0 4px;font:400 24px/1.1 var(--font-display);color:#3A1C2A}
+.vt-cap{margin:0 4px;font:500 11px/1.4 var(--font-label);letter-spacing:.14em;text-transform:uppercase;color:#A23E66}
+
+</style>
+<div class="hp-ann" data-hp-ann role="region" aria-label="Black Friday offer"><b>BLACK FRIDAY EXCLUSIVE:</b> Join the Blogging Ladies Membership for 50% OFF. <a href="/black-friday">Claim Your Offer</a></div>
+<main id="main" class="hp">
+<section class="hero"><div class="in hero-grid">
+<div class="stack" style="gap:22px">
+<p class="lbl">Professional blog coaching &amp; custom website design</p>
+<h1>Your blog coach, business strategist and website designer. <em>All in one.</em></h1>
+<p class="sub">You have the vision for a blogging business. Let&rsquo;s turn it into something worth investing in.</p>
+<p class="body">From figuring out exactly what to sell to developing your brand, designing your custom website and building the marketing and sales strategy behind it, I&rsquo;ll help you bring your entire business together.</p>
+<p class="body">Personalized blog coaching, professional website design and modern business education for ambitious women who want to build more than just a blog.</p>
+<div class="row"><a class="hp-btn " href="/blog-coaching">Explore Private Blog Coaching &amp; Design <i aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></i></a><a class="hp-btn ol" href="#ways">Discover Other Ways to Work With Me <i aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></i></a></div>
 </div>
+<div class="hero-ph"><div class="arch"><img src="https://charming-caramel-d2453c.netlify.app/images/photos/hat-laugh.jpg" alt="Genasys laughing in her pink hat"></div>
+<div class="tag3" aria-hidden="true"><span>Blog coach</span><span>Business strategist</span><span>Website designer</span></div></div>
+</div></section>
+<section class="cred dk"><div class="in">
+<p class="lead">A money making blogging brand</p>
+<p class="areas"><span>Business strategy</span><span>Private blog coaching</span><span>Custom Showit website design</span><span>Marketing &amp; sales</span></p>
+<div class="hp-slot"><b>To fill in</b>Insert verified client results, testimonials and relevant media features.</div>
+</div></section>
+<section class="phil"><div class="in stack" style="gap:30px">
+<div class="nar" style="text-align:center"><h2>Anyone can start a blog now. <em>But how many people actually know how to turn one into a profitable business?</em></h2></div>
+<div class="nar stack">
+<div class="ai"><p>AI can build your website in a day.</p><p>It can write your blog posts, create your digital products, generate your marketing content and tell you a thousand different ways to make money online.</p></div>
+<p class="big">But it cannot guarantee that what you&rsquo;re building is something people want to buy.</p>
+<p class="big it">And that&rsquo;s where the real work begins.</p></div>
+<ol class="qs"><li>What makes someone choose your business when information is everywhere?</li><li>What will people still pay you for when AI can answer their questions for free?</li><li>How will you generate revenue if Google stops sending you as much traffic?</li><li>What makes your offers valuable enough to purchase?</li></ol>
+<div class="nar stack" style="text-align:center">
+<p class="body">These are the questions modern bloggers need to be asking.</p>
+<p class="body">Because the ability to create a blog is becoming increasingly accessible.</p>
+<p class="big">The ability to build a profitable business behind one is an entirely different skill.</p>
+<p class="body">As your blogging coach, I help you develop that skill.</p>
+<p class="body">We establish the business first. Then we build the brand, website, content, marketing and sales systems that support it.</p>
 </div>
+<p class="motto">Your blog isn&rsquo;t your business. <em>It&rsquo;s how people discover the business you&rsquo;ve built.</em></p>
+</div></section>
+<section class="exp"><div class="in stack" style="gap:34px">
+<div class="nar stack" style="text-align:center;align-items:center">
+<p class="lbl">Private 1:1 blog coaching &amp; done for you business development</p>
+<p class="big">You don&rsquo;t have to become a business strategist, website designer, copywriter and marketing expert just to start the business you want to own.</p>
+<p style="font:700 clamp(30px,3.4vw,40px)/1 var(--font-script);color:#A23E66;transform:rotate(-2deg)">Introducing&hellip;</p>
+<h2 style="font-size:clamp(48px,7vw,96px)">The BOSS Business <em>Experience</em></h2>
+<p class="body">My signature private client experience combines professional blog coaching, custom Showit website design and hands on business development to help you turn your ideas, expertise and ambitions into a professionally built online business.</p>
 </div>
+<div class="nar perhaps"><p>Perhaps you&rsquo;ve been carrying your business idea around for years.</p><p>Perhaps you&rsquo;ve already started blogging but know your website, offers and business strategy aren&rsquo;t reflecting what you&rsquo;re capable of building.</p><p>Or perhaps you&rsquo;re ready to invest in doing things properly from the beginning rather than spending the next twelve months learning how to do everything yourself.</p></div>
+<div class="nar stack" style="text-align:center"><p class="body">You want someone who understands your vision, knows how to turn it into a business and has the professional skills to help bring it to life.</p><p class="big it">That&rsquo;s where I come in.</p><p class="big">Together, we&rsquo;ll build the business behind your blog.</p></div>
+<div class="six"><article><span class="n">01</span><h3>Your Business Strategy</h3><p>Establish what you&rsquo;re building, who you&rsquo;re serving, how you&rsquo;ll monetize your expertise and what makes your business commercially valuable.</p></article><article><span class="n">02</span><h3>Your Offers</h3><p>Develop offers around meaningful customer problems, explore real demand and create a monetization strategy that makes sense for your business.</p></article><article><span class="n">03</span><h3>Your Brand &amp; Messaging</h3><p>Establish a distinctive brand that communicates your expertise, connects with potential buyers and gives people a reason to choose you.</p></article><article><span class="n">04</span><h3>Your Custom Website</h3><p>Receive a professionally designed custom Showit website built around your business strategy, offers, audience and customer experience.</p></article><article><span class="n">05</span><h3>Your Marketing &amp; Sales Strategy</h3><p>Develop a cohesive approach to attracting potential customers, building trust, generating demand and selling your offers.</p></article><article><span class="n">06</span><h3>Your Implementation</h3><p>Receive private 1:1 blog coaching, personalized feedback and agreed done for you business development services throughout the experience.</p></article></div>
+<div class="nar stack" style="text-align:center"><p class="body">You won&rsquo;t be handed a generic roadmap and expected to figure everything out independently.</p><p class="body">We&rsquo;ll develop your business together, with personalized strategy and professional implementation along the way.</p></div>
+<div class="one3"><span>One strategic partner.</span><span>One cohesive business vision.</span><span>One private client experience.</span></div>
+<div style="text-align:center"><a class="hp-btn br" href="/blog-coaching">Explore The BOSS Business Experience <i aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></i></a></div>
+</div></section>
+<section style="background:#FFFFFF"><div class="in stack" style="gap:28px">
+<div class="nar stack" style="text-align:center;gap:16px"><p class="lbl">Strategy meets design</p><h2>A beautiful website is one thing. <em>A beautiful website with an actual business strategy behind it is another.</em></h2></div>
+<div class="nar stack"><p class="body">Your website should reflect the caliber of your business.</p><p class="body">It should communicate your expertise, establish your credibility, showcase your offers and help potential customers understand why they should work with you.</p><p class="big it">But it should also feel like yours.</p><p class="body">That&rsquo;s why my custom blogging website designs begin with understanding the woman behind the business, the audience she&rsquo;s serving and the business she&rsquo;s building.</p><p class="body">As both a professional blog coach and Showit website designer, I bring the strategy and design together rather than treating them as two completely separate projects.</p></div>
+<div class="folio"><a class="fcard" href="/client-project?project=oneincome"><span class="fimg"><img src="https://charming-caramel-d2453c.netlify.app/images/portfolio/oneincome-mockup.jpg" alt="The One Income Plan website on a laptop and phone" loading="lazy" width="1600" height="1100"></span><span class="fn">The One Income Plan</span><span class="fni">Personal finance for one income families</span></a><a class="fcard" href="/client-project?project=tammy"><span class="fimg"><img src="https://charming-caramel-d2453c.netlify.app/images/portfolio/tammy-mockup.jpg" alt="Fearless Business Boss website on a laptop and phone" loading="lazy" width="1600" height="1100"></span><span class="fn">Fearless Business Boss</span><span class="fni">Business coaching for women service providers</span></a><a class="fcard" href="/client-project?project=abroad"><span class="fimg"><img src="https://charming-caramel-d2453c.netlify.app/images/portfolio/abroad-mockup.jpg" alt="Marriage &amp; Retirement Abroad website on a laptop and phone" loading="lazy" width="1600" height="1100"></span><span class="fn">Marriage &amp; Retirement Abroad</span><span class="fni">Retiring in France for couples 45 and better</span></a></div>
+<div style="text-align:center"><a class="hp-btn ol" href="/portfolio">Explore My Website Design Portfolio <i aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></i></a></div>
+</div></section>
+<section style="background:#FBF5EE"><div class="in stack" style="gap:26px">
+<div class="nar stack" style="text-align:center;gap:16px"><h2>The women, businesses and websites <em>behind the work.</em></h2><p class="body">There&rsquo;s something incredibly rewarding about watching a woman&rsquo;s business move from an idea she&rsquo;s been thinking about for years into something she can finally see, share and build upon.</p><p class="body">Meet some of the women I&rsquo;ve had the privilege of working with.</p></div>
+<div class="vt-grid"><article class="vt"><div class="vt-frame"><img src="https://i.ytimg.com/vi/7NzvoD912yM/hqdefault.jpg" alt="" loading="lazy"><button type="button" class="vt-play" data-yt="7NzvoD912yM" aria-label="Play Ashley&rsquo;s video testimonial"><span><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="#FFFFFF"/></svg></span></button></div><p class="vt-name">Ashley</p><p class="vt-cap">Client video testimonial</p></article><article class="vt"><div class="vt-frame"><img src="https://i.ytimg.com/vi/cpOFMndycg0/hqdefault.jpg" alt="" loading="lazy"><button type="button" class="vt-play" data-yt="cpOFMndycg0" aria-label="Play Karen&rsquo;s video testimonial"><span><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="#FFFFFF"/></svg></span></button></div><p class="vt-name">Karen</p><p class="vt-cap">Client video testimonial</p></article><article class="vt"><div class="vt-frame"><img src="https://i.ytimg.com/vi/43cFqoCAnA8/hqdefault.jpg" alt="" loading="lazy"><button type="button" class="vt-play" data-yt="43cFqoCAnA8" aria-label="Play Julie&rsquo;s video testimonial"><span><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="#FFFFFF"/></svg></span></button></div><p class="vt-name">Julie</p><p class="vt-cap">Client video testimonial</p></article><article class="vt"><div class="vt-frame"><img src="https://i.ytimg.com/vi/uVIBdvOUaQg/hqdefault.jpg" alt="" loading="lazy"><button type="button" class="vt-play" data-yt="uVIBdvOUaQg" aria-label="Play Kaylin&rsquo;s video testimonial"><span><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="#FFFFFF"/></svg></span></button></div><p class="vt-name">Kaylin</p><p class="vt-cap">Client video testimonial</p></article><article class="vt"><div class="vt-frame"><img src="https://i.ytimg.com/vi/a6AY-uPLcAw/hqdefault.jpg" alt="" loading="lazy"><button type="button" class="vt-play" data-yt="a6AY-uPLcAw" aria-label="Play Gia&rsquo;s video testimonial"><span><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="#FFFFFF"/></svg></span></button></div><p class="vt-name">Gia</p><p class="vt-cap">Client video testimonial</p></article></div>
+<div style="text-align:center"><a class="hp-btn " href="/blog-coaching">Let&rsquo;s Build Your Business <i aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></i></a></div>
+</div></section>
+<section id="ways" style="background:#F6E1E8;scroll-margin-top:80px"><div class="in stack" style="gap:30px">
+<div class="nar stack" style="text-align:center;gap:16px"><p class="lbl">Find the right level of support</p><h2>How would you like to <em>build your business?</em></h2>
+<p class="body">You might want someone to help you build it.</p><p class="body">You might prefer to follow a strategic system independently.</p><p class="body">Or you might be looking to master a particular business skill.</p><p class="body">I&rsquo;ve created three different ways to help you, depending on where you are and the kind of support you&rsquo;re looking for.</p></div>
+<div class="ways">
+<article class="way"><p class="k">01. Build it with me.</p><p class="nm">The BOSS Business Experience</p><p class="sub">Private Blog Coaching &amp; Custom Website Design</p><p class="d">Work with me privately to develop your business strategy, offers, brand, website and sales foundations.</p><p class="d">Designed for women who value their time, want personalized expertise and are ready to invest in professional implementation.</p><a class="hp-btn cr" href="/blog-coaching">Explore Private Coaching &amp; Design <i aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></i></a></article>
+<article class="way"><p class="k">02. Follow my system.</p><p class="nm">The Blogging Ladies Membership</p><p class="sub">Your Business Building Roadmap</p><p class="d">Learn the complete strategic process behind building a profitable blogging business, with practical projects, roadmaps and action plans to help you implement it independently.</p><p class="pr">$47<span style="font-size:.45em;color:#F6C9D8">/month</span></p><a class="hp-btn cr" href="/membership">Explore the Membership <i aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></i></a></article>
+<article class="way"><p class="k">03. Learn from me.</p><p class="nm">The BOSS Academy</p><p class="sub">Specialized Blogging &amp; Business Courses</p><p class="d">Master modern business strategies, AI, productivity, digital product creation and the skills you need to develop your business as the industry evolves.</p><p class="d">Purchase individual courses or unlock the complete Academy collection.</p><a class="hp-btn " href="/academy">Shop the Courses <i aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></i></a></article>
+</div></div></section>
+<section class="mem"><div class="in mem-grid">
+<div class="stack">
+<p class="lbl">Your business building membership</p>
+<h2>Imagine knowing exactly what to work on <em>every time you open your laptop.</em></h2>
+<p class="body">Instead of questioning whether you should be creating content, developing an offer, redesigning your website or trying to grow your email list, you&rsquo;d understand what your business actually needs next.</p>
+<div class="whyb"><p>You&rsquo;d know what you&rsquo;re building.</p><p>Why you&rsquo;re building it.</p><p>And how it&rsquo;s intended to help your business make money.</p></div>
+<p class="body">That&rsquo;s what the Blogging Ladies Membership was created to give you.</p>
+<p class="body">At the heart of your membership is my signature eight module BOSS Business System, where you&rsquo;ll learn the strategic process behind building and monetizing a blogging business.</p>
+<p class="body">But we&rsquo;re not stopping at education.</p>
+<p class="body">Inside the membership, you&rsquo;ll also have practical direction for turning that knowledge into completed business projects.</p>
 </div>
-<div style="flex:0 1 300px;display:flex;flex-direction:column;gap:14px">
-<p style="margin:0;font:700 34px/1 var(--font-body);letter-spacing:0.02em;color:#A23E66;text-transform:uppercase;border-bottom:2px solid #A23E66;padding-bottom:8px">Get around</p>
-<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 24px;font:400 15px/1.8 var(--font-body)">
-<a href="/" style="color:#3A1C2A;text-decoration:none">Home</a><a href="/academy" style="color:#3A1C2A;text-decoration:none">Courses</a>
-<a href="/about" style="color:#3A1C2A;text-decoration:none">About</a><a href="/blog-coaching" style="color:#3A1C2A;text-decoration:none">Work With Me</a>
-<a href="/start-here" style="color:#3A1C2A;text-decoration:none">Start Here</a><a href="/free-masterclass" style="color:#3A1C2A;text-decoration:none">Free Masterclass</a>
-<a href="/blog" style="color:#3A1C2A;text-decoration:none">Blog</a><a href="/podcast" style="color:#3A1C2A;text-decoration:none">Podcast</a>
-<a href="/contact" style="color:#3A1C2A;text-decoration:none">Contact</a><a href="/membership" style="color:#3A1C2A;text-decoration:none">Membership</a>
+<div class="card">
+<p class="lbl">What&rsquo;s inside?</p>
+<ul class="ticks"><li style="background:#FBF5EE">The complete eight module BOSS Business System.</li><li style="background:#FBF5EE">Strategic business roadmaps.</li><li style="background:#FBF5EE">Business projects and action plans.</li><li style="background:#FBF5EE">Practical implementation resources.</li><li style="background:#FBF5EE">Ongoing business development direction.</li></ul>
+<p style="font:400 16px/1.6 var(--font-body);color:#4A2F3B">Understand how the individual pieces of your business work together, identify your priorities and start building in the right order.</p>
+<p style="font:400 italic 22px/1.3 var(--font-display);color:#A23E66">Because you don&rsquo;t need another hundred things to do. You need to understand which things actually deserve your attention.</p>
+<p class="lbl" style="color:#3A1C2A">The Blogging Ladies Membership</p>
+<p class="price">$47<span>/month</span></p>
+<a class="hp-btn br" href="/membership">Become a Blogging Lady <i aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></i></a>
+</div></div></section>
+<section class="acad dk"><div class="in stack" style="gap:32px">
+<div class="nar stack" style="text-align:center;gap:16px"><p class="lbl">Modern business education for ambitious women</p><h2>The blogging industry is evolving. <em>Your business education should too.</em></h2>
+<p class="body">The strategies that worked for bloggers five years ago aren&rsquo;t necessarily the strategies that will work five years from now.</p>
+<p class="body">Technology is changing. Buyer behavior is changing. The way people discover information, evaluate products and make purchasing decisions is changing.</p>
+<p class="big it">And I want you to understand how to adapt.</p>
+<p class="body">The BOSS Academy is an expanding collection of specialized business courses designed to help you develop valuable skills, discover emerging opportunities and become a more capable online business owner.</p>
+<p class="body">Choose the education your business needs right now, or unlock the complete Academy collection.</p>
+<p class="lbl">Explore the course library.</p></div>
+<div class="books"><article class="bk"><div class="cover" style="background:#A23E66;color:#FFFFFF"><small>The BOSS Academy</small><b>The Futureproof Blogger</b><small>Business strategy &amp; the future of blogging</small></div><p class="hook">Will the business you&rsquo;re building today still make sense tomorrow?</p><p class=d>Discover how AI, changing consumer behavior and the evolution of the internet are reshaping the blogging industry.</p><p class=d>Learn how to rethink traditional blogging strategies, create value beyond information and build a business that can adapt as technology changes.</p><a class="hp-btn cr" href="/academy#course-futureproof">Explore the Course <i aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></i></a></article><article class="bk"><div class="cover" style="background:#FBF5EE;color:#3A1C2A"><small>The BOSS Academy</small><b>The Productive Blogger Method</b><small>AI &amp; business productivity</small></div><p class="hook">Stop spending more time organizing your business than actually building it.</p><p class=d>Learn how to use Claude to transform your business goals, strategies and overwhelming collection of unfinished projects into organized projects, personalized action plans and a practical implementation system.</p><p class=d>Know what to work on, what needs to happen first and how to get it done.</p><a class="hp-btn cr" href="/academy#course-pbm">Explore the Course <i aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></i></a></article><article class="bk"><div class="cover" style="background:#E9B9CA;color:#3A1C2A"><small>The BOSS Academy</small><b>The Interactive Course Creator</b><small>AI &amp; digital product creation</small></div><p class="hook">The future of online courses doesn&rsquo;t have to look like another dashboard filled with prerecorded videos.</p><p class=d>Learn how to use Claude to transform your knowledge into interactive educational experiences that go beyond traditional video lessons, static workbooks and downloadable PDFs.</p><p class=d>Discover a new way to package, deliver and monetize your expertise.</p><a class="hp-btn cr" href="/academy#course-interactive">Explore the Course <i aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></i></a></article></div>
+<div style="text-align:center"><a class="hp-btn olw" href="/academy">Shop The BOSS Academy <i aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></i></a></div>
+</div></section>
+<section style="background:#FBF5EE"><div class="in"><div class="aa">
+<div class="stack"><p class="lbl" style="color:#F6E1E8">The complete educational collection</p><h2>Why stop at <em>just one course?</em></h2>
+<p class="body">You want to understand the future of blogging. Master AI. Create more valuable digital products. Strengthen your business skills. And continue learning as your business evolves.</p>
+<p class="body">Instead of purchasing each course individually, unlock the complete BOSS Academy collection.</p>
+<p class="body">One investment gives you access to the included specialized courses, applicable educational resources and an entire collection of modern business strategies.</p></div>
+<div class="aa-box"><p class="lbl">The BOSS Academy All Access</p><p style="font:400 clamp(26px,2.8vw,32px)/1.2 var(--font-display);color:#3A1C2A">Invest in the knowledge behind the business you want to own.</p><a class="hp-btn " href="/academy#all-access">Explore All Access <i aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></i></a></div>
+</div></div></section>
+<section style="background:#FFFFFF"><div class="in about-grid">
+<div class="arch"><img src="https://charming-caramel-d2453c.netlify.app/images/photos/portrait-hat.jpg" alt="Genasys smiling in her pink hat" loading="lazy" style="object-position:60% 30%"></div>
+<div class="stack">
+<p class="lbl">Meet your blog coach</p>
+<h2>I built a money making business from my aunt&rsquo;s basement <em>during nap time.</em></h2>
+<p class="big">Hi, I&rsquo;m Genasys.</p>
+<p class="body">Founder of Boss Lady Bloggers, professional blogging coach, business strategist and custom Showit website designer.</p>
+<p class="body">I started building my business as a single mom, working during my son&rsquo;s nap times with a vision for the life I wanted to create for us.</p>
+<p class="body">But I didn&rsquo;t build my money making business by publishing endless blog posts, growing an enormous audience or waiting for ad revenue to change my life.</p>
+<div class="learned"><p>I learned how to understand people.</p><p>How to identify problems worth solving.</p><p>How to create offers people wanted to purchase.</p><p>How to communicate value, generate sales and build a business around the knowledge and skills I already had.</p></div>
+<p class="big it">That changed everything for me.</p>
+<p class="body">Today, through my private blog coaching services, custom website design, membership and specialized business courses, I help other women develop those same business skills and build something of their own.</p>
+<p class="body">And I&rsquo;m constantly studying what comes next.</p>
+<div class="studies"><span>Buyer psychology.</span><span>Artificial intelligence.</span><span>Emerging technology.</span><span>New business models.</span><span>Productivity systems.</span><span>The future of online education.</span></div>
+<p class="body">I experiment with it, challenge it, develop strategies around it and bring what I learn back into Boss Lady Bloggers.</p>
+<p class="body">Because I don&rsquo;t want to teach you how to build a business for an internet that no longer exists.</p>
+<p class="body">I want to help you build a business for the world you&rsquo;re operating in today, with the ability to adapt tomorrow.</p>
+<p class="pull">Your blog coach should understand more than blogging. <em>She should understand business.</em></p>
+<div class="row"><a class="hp-btn " href="/about">More About Me <i aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></i></a><a class="hp-btn ol" href="/blog-coaching">Explore My Blog Coaching Services <i aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></i></a></div>
+</div></div></section>
+<section class="web dk" id="webinar" style="scroll-margin-top:80px"><div class="in web-grid">
+<div class="stack">
+<p class="lbl">Free webinar with Genasys, founder of Boss Lady Bloggers</p>
+<h2>Futureproof <em>Your Blog</em></h2>
+<p class="big">How to build a profitable blogging business in the age of AI, without depending on Google traffic, outdated monetization strategies or endless content creation.</p>
+<div class="ifs"><p>If you&rsquo;ve been wondering whether it&rsquo;s still worth starting a blog...</p><p>If you&rsquo;re worried about what AI means for the future of your blogging income...</p><p>If you&rsquo;re questioning whether people will continue buying digital products, reading blogs or paying for information...</p></div>
+<p class="big it">You need to watch this.</p>
+<p class="body">The blogging industry isn&rsquo;t standing still. And continuing to build your business around strategies that were designed for a different internet could leave you investing your time in the wrong things.</p>
+<p class="body">Inside this free webinar, I&rsquo;ll explain what&rsquo;s changing, why traditional blogging strategies are becoming more vulnerable and how I would approach building a profitable blogging business today.</p>
+<p class="lbl" style="margin-top:8px">Here&rsquo;s what we&rsquo;ll cover.</p>
+<div class="cover4"><div><h3>What&rsquo;s actually happening to blogging.</h3><p>Understand how AI, changing search behavior and evolving consumer expectations are affecting traditional blogging business models.</p></div><div><h3>What people will still pay you for.</h3><p>Discover why selling information alone is becoming more challenging and what makes an offer valuable when information is increasingly accessible.</p></div><div><h3>The business model I would build today.</h3><p>Learn why I would prioritize valuable offers, direct audience relationships and a deliberate sales strategy over relying entirely on pageviews.</p></div><div><h3>How to adapt without constantly starting over.</h3><p>Identify the skills, business assets and strategies worth developing as technology continues to evolve.</p></div></div>
+<p class="body">Whether you&rsquo;re just starting your blog or questioning the direction of your existing business, this webinar will help you make more informed decisions about what you&rsquo;re building next.</p>
 </div>
-</div>
-</div>
-<div data-instagram-feed="blogcoach_gen" style="margin-top:56px;display:flex;flex-direction:column;gap:18px">
-<div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px">
-<a href="https://www.instagram.com/blogcoach_gen" target="_blank" rel="noopener" style="background:#E9B9CA;border-radius:999px;padding:10px 18px;font:500 13px/1 var(--font-label);letter-spacing:0.14em;color:#3A1C2A;text-decoration:none">@BLOGCOACH_GEN</a>
-<a href="https://www.instagram.com/blogcoach_gen" target="_blank" rel="noopener" style="font:600 14px/1 var(--font-body);color:#A23E66">Follow along on Instagram &#8599;&#65038;</a>
-</div>
-<div style="display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px" class="ig-grid"><a href="https://www.instagram.com/blogcoach_gen" target="_blank" rel="noopener" aria-label="Instagram post 1" class="card-hover ig-tile" style="aspect-ratio:1/1;border-radius:18px;background:#E9B9CA;display:flex;align-items:flex-end;padding:12px;text-decoration:none;overflow:hidden"><span style="font:500 10px/1 var(--font-label);letter-spacing:0.12em;color:#3A1C2A">LIVE POST 1</span></a><a href="https://www.instagram.com/blogcoach_gen" target="_blank" rel="noopener" aria-label="Instagram post 2" class="card-hover ig-tile" style="aspect-ratio:1/1;border-radius:18px;background:#3A1C2A;display:flex;align-items:flex-end;padding:12px;text-decoration:none;overflow:hidden"><span style="font:500 10px/1 var(--font-label);letter-spacing:0.12em;color:#E9B9CA">LIVE POST 2</span></a><a href="https://www.instagram.com/blogcoach_gen" target="_blank" rel="noopener" aria-label="Instagram post 3" class="card-hover ig-tile" style="aspect-ratio:1/1;border-radius:18px;background:#F6E1E8;display:flex;align-items:flex-end;padding:12px;text-decoration:none;overflow:hidden"><span style="font:500 10px/1 var(--font-label);letter-spacing:0.12em;color:#3A1C2A">LIVE POST 3</span></a><a href="https://www.instagram.com/blogcoach_gen" target="_blank" rel="noopener" aria-label="Instagram post 4" class="card-hover ig-tile" style="aspect-ratio:1/1;border-radius:18px;background:#A23E66;display:flex;align-items:flex-end;padding:12px;text-decoration:none;overflow:hidden"><span style="font:500 10px/1 var(--font-label);letter-spacing:0.12em;color:#FBF5EE">LIVE POST 4</span></a><a href="https://www.instagram.com/blogcoach_gen" target="_blank" rel="noopener" aria-label="Instagram post 5" class="card-hover ig-tile" style="aspect-ratio:1/1;border-radius:18px;background:#E9B9CA;display:flex;align-items:flex-end;padding:12px;text-decoration:none;overflow:hidden"><span style="font:500 10px/1 var(--font-label);letter-spacing:0.12em;color:#3A1C2A">LIVE POST 5</span></a><a href="https://www.instagram.com/blogcoach_gen" target="_blank" rel="noopener" aria-label="Instagram post 6" class="card-hover ig-tile" style="aspect-ratio:1/1;border-radius:18px;background:#3A1C2A;display:flex;align-items:flex-end;padding:12px;text-decoration:none;overflow:hidden"><span style="font:500 10px/1 var(--font-label);letter-spacing:0.12em;color:#E9B9CA">LIVE POST 6</span></a></div>
-</div>
-</section>
-<footer style="background:#A23E66;color:#FFFFFF;padding:70px 0 0;overflow:hidden">
-  <div style="max-width:1080px;margin:0 auto;padding:0 clamp(16px,4vw,48px);display:flex;flex-wrap:wrap;gap:48px;justify-content:space-between;font:500 15px/2 var(--font-body)">
-    <div style="display:flex;flex-direction:column">
-      <a href="/" style="color:#FFFFFF;text-decoration:none">Home</a>
-      <a href="/start-here" style="color:#FFFFFF;text-decoration:none">Start Here</a>
-      <a href="/about" style="color:#FFFFFF;text-decoration:none">About</a>
-      <a href="/free-masterclass" style="color:#FFFFFF;text-decoration:none">Free Masterclass</a>
+<div class="wform"><p class="lbl">Free webinar</p><h3>Save your free seat</h3><div data-webinar-form></div><p class="wtags">Free webinar | Modern business strategy | The future of blogging</p></div>
+</div></section>
+<section style="background:#F6E1E8"><div class="in stack" style="gap:28px">
+<div class="nar stack" style="text-align:center;gap:16px"><p class="lbl">The Boss Lady Bloggers blog</p><h2>Let&rsquo;s talk about what actually makes <em>blogging businesses profitable.</em></h2>
+<p class="body">Explore business strategy, offer development, buyer psychology, marketing, artificial intelligence, productivity and thoughtful conversations about the future of blogging.</p>
+<div class="nos"><span>No recycled blogging advice.</span><span>No obsession with pageviews.</span><span>No pretending that publishing more content is the answer to every business problem.</span></div>
+<p class="big">Just practical business education for women who want to build something meaningful and commercially valuable.</p></div>
+<div class="posts" data-latest><a class="post" href="/blog"><div class="im" data-img></div><div class="t" data-title>From the blog</div></a><a class="post" href="/blog"><div class="im" data-img></div><div class="t" data-title>From the blog</div></a><a class="post" href="/blog"><div class="im" data-img></div><div class="t" data-title>From the blog</div></a></div>
+<div style="text-align:center"><a class="hp-btn " href="/blog">Explore the Blog <i aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></i></a></div>
+</div></section>
+<section style="background:#FFFFFF"><div class="in stack" style="gap:28px">
+<div class="nar stack" style="text-align:center;gap:16px"><p class="lbl">Continue the conversation</p><h2>Business conversations <em>worth making time for.</em></h2></div>
+<div class="two">
+<article class="media pod"><span class="ic"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0014 0M12 18v3"/></svg></span><h3>The Boss Lady Bloggers Podcast</h3><p>Thoughtful conversations about blogging, business strategy, buyer psychology, monetization, entrepreneurship and what it takes to build a business in a changing digital world.</p><p>Listen while you&rsquo;re driving, working, walking or finally getting a quiet moment to yourself.</p><a class="hp-btn " href="/podcast">Listen to the Podcast <i aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></i></a></article>
+<article class="media yt dk"><span class="ic" style="background:#A23E66"><svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 7v10l8-5z" fill="#fff"/></svg></span><h3>Boss Lady Bloggers on YouTube</h3><p>Business strategy breakdowns, AI demonstrations, blogging education, productivity experiments and behind the scenes conversations about building an online business.</p><p>Come see what I&rsquo;m learning, building and experimenting with.</p><a class="hp-btn cr" href="https://www.youtube.com/@GenasysLynn">Watch on YouTube <i aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></i></a></article>
+</div></div></section>
+<section class="final"><div class="nar stack" style="align-items:center">
+<p class="lbl">Your vision deserves more than another unfinished business plan</p>
+<h2>A year from now, <em>what do you want to have built?</em></h2>
+<div class="anoth"><p>Another collection of blog posts?</p><p>Another unfinished digital product?</p><p>Another website that doesn&rsquo;t quite reflect your vision?</p></div>
+<p class="proud">Or a business you&rsquo;re proud to put your name on?</p>
+<p class="body">A business with valuable offers, compelling messaging, a professionally designed website and a clear strategy behind how it&rsquo;s intended to make money.</p>
+<p class="body">You don&rsquo;t have to become an expert in every individual part of building an online business before you&rsquo;re allowed to own one.</p>
+<p class="body">You can bring in someone who understands the strategy, knows how the pieces connect and has the professional skills to help bring it all together.</p>
+<p class="body">As your blog coach, business strategist and website designer, that&rsquo;s exactly what I&rsquo;m here to help you do.</p>
+<p class="big">Let&rsquo;s build the business behind your blog.</p>
+<div class="row" style="justify-content:center"><a class="hp-btn br" href="/blog-coaching">Explore Private Blog Coaching &amp; Design <i aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></i></a><a class="hp-btn ol" href="#ways">Discover Other Ways to Work With Me <i aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></i></a></div>
+</div></section>
+<script>
+(function(){
+  document.querySelectorAll('[data-yt]').forEach(function(b){
+    b.addEventListener('click',function(){
+      var id=b.getAttribute('data-yt'),f=document.createElement('iframe');
+      f.src='https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&rel=0&modestbranding=1&playsinline=1';
+      f.title=b.getAttribute('aria-label')||'Client testimonial';
+      f.allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';f.allowFullscreen=true;
+      b.parentNode.appendChild(f);b.remove();
+    });
+  });
+})();
+</script>
+<script>
+(function(){
+  /* Announcement bar: shows until Black Friday ends (Mon Nov 30 2026, 11:59 PM ET) */
+  var bar=document.querySelector('[data-hp-ann]');
+  if(bar&&Date.now()<Date.UTC(2026,11,1,4,59,59))bar.classList.add('on');
+
+  /* Latest 3 blog posts from WordPress */
+  var cards=document.querySelectorAll('[data-latest] > a');
+  if(cards.length&&window.fetch){
+    fetch('https://bossladybloggers.com/wp-json/wp/v2/posts?per_page=3&_embed').then(function(r){return r.json();}).then(function(posts){
+      (posts||[]).slice(0,cards.length).forEach(function(p,i){var a=cards[i];a.href=p.link;
+        var t=a.querySelector('[data-title]');if(t)t.innerHTML=p.title.rendered;
+        var m=p._embedded&&p._embedded['wp:featuredmedia']&&p._embedded['wp:featuredmedia'][0];
+        var src=m&&((m.media_details&&m.media_details.sizes&&m.media_details.sizes.medium_large&&m.media_details.sizes.medium_large.source_url)||m.source_url);
+        var box=a.querySelector('[data-img]');if(box&&src){var img=document.createElement('img');img.src=src;img.alt='';img.loading='lazy';box.appendChild(img);}
+      });
+    }).catch(function(){});
+  }
+
+  /* Webinar sign up: paste the Flodesk form ID for "Futureproof Your Blog" here */
+  var WEBINAR_FORM_ID='';
+  var host=document.querySelector('[data-webinar-form]');if(!host)return;
+  var id='hp-web';
+  var cfg=btoa(JSON.stringify({trigger:{mode:"immediately",value:0},onSuccess:{mode:"message",message:"",redirectUrl:""},coi:false,showForReturnVisitors:true,notification:true,gdpr:{acceptsMarketing:false,privacyPolicy:{enabled:false,mandatory:false}},trackingConfig:{metaPixelId:"",cookieBannerEnabled:false,googleAnalyticsId:""}}));
+  var f=WEBINAR_FORM_ID;
+  var h='<div id="'+id+'"'+(f?' data-ff-el="root" data-ff-version="3" data-ff-type="inline" data-ff-name="webinar" data-ff-stage="default"':'')+'>'+(f?'<div data-ff-el="config" data-ff-config="'+cfg+'" style="display:none"></div>':'')+
+   '<form novalidate'+(f?' action="https://form.flodesk.com/forms/'+f+'/submit" method="post" data-ff-el="form"':'')+' style="display:flex;flex-direction:column;gap:14px"><div data-ff-el="content" style="display:flex;flex-direction:column;gap:14px"><div data-ff-el="fields" style="display:flex;flex-direction:column;gap:12px">'+
+   '<div class="field"><label for="hp-first">First Name</label><input id="hp-first" type="text" name="firstName" maxlength="255" autocomplete="given-name" required></div>'+
+   '<div class="field"><label for="hp-email">Email Address</label><input id="hp-email" type="text" name="email" maxlength="255" inputmode="email" autocomplete="email" required></div>'+
+   '<input type="text" name="confirm_email_address" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true"></div>'+
+   '<div data-ff-el="footer"><button type="submit" class="hp-btn br" data-ff-el="submit">Save My Free Seat <i aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></i></button></div></div>'+
+   '<div data-ff-el="success"></div><div class="ff-err" data-ff-el="error"></div></form></div>'+
+   (f?'':'<div class="hp-slot" style="margin-top:12px"><b>To fill in</b>Flodesk form for the Futureproof Your Blog webinar is not connected yet, so sign ups are not saved.</div>');
+  host.innerHTML=h;
+  var wrap=document.getElementById(id),form=wrap.querySelector('form'),err=wrap.querySelector('.ff-err'),done=false;
+  function finish(){if(done)return;done=true;wrap.innerHTML='<p style="margin:0;font:400 26px/1.25 var(--font-display);color:#3A1C2A">You&rsquo;re in. Check your inbox for your webinar details.</p>';}
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var nm=form.querySelector('[name=firstName]').value.trim(),em=form.querySelector('[name=email]').value.trim();
+    if(!nm){err.textContent='Add your first name.';return;}
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){err.textContent='That email doesn’t look quite right yet.';return;}
+    err.textContent='';
+    if(!f){err.textContent='This form is not connected to Flodesk yet.';return;}
+    form.querySelector('button').disabled=true;
+    if(window.fd&&window.fd.q){try{fetch('https://form.flodesk.com/forms/'+f+'/submit',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({firstName:nm,email:em,confirm_email_address:''}),keepalive:true}).catch(function(){});}catch(x){}setTimeout(finish,400);return;}
+    setTimeout(function(){if(wrap.getAttribute('data-ff-stage')!=='error')finish();},9000);
+  },true);
+  if(f){
+    (function(w,d,t,h,s,n){if(w.fd)return;w.FlodeskObject=n;var fn=function(){(w[n].q=w[n].q||[]).push(arguments);};w[n]=w[n]||fn;var g=d.getElementsByTagName(t)[0];var v='?v='+Math.floor(new Date().getTime()/(120*1000))*60;var sm=d.createElement(t);sm.async=true;sm.type='module';sm.src=h+s+'.mjs'+v;g.parentNode.insertBefore(sm,g);var sn=d.createElement(t);sn.async=true;sn.noModule=true;sn.src=h+s+'.js'+v;g.parentNode.insertBefore(sn,g);})(window,document,'script','https://assets.flodesk.com','/universal','fd');
+    window.fd('form:handle',{formId:f,rootEl:'#'+id});
+    if(window.MutationObserver)new MutationObserver(function(){var s=wrap.getAttribute('data-ff-stage');if(s==='success')finish();if(s==='error')form.querySelector('button').disabled=false;}).observe(wrap,{attributes:true,attributeFilter:['data-ff-stage']});
+  }
+})();
+</script>
+</main><footer class="ft" style="background:#A23E66;color:#FFFFFF;padding:80px 0 0;overflow:hidden">
+<style>
+.ft a{color:#FFFFFF;text-decoration:none}
+.ft .ft-in{max-width:1180px;margin:0 auto;padding:0 clamp(16px,4vw,48px)}
+.ft .ft-top{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(36px,5vw,72px);align-items:start}
+.ft .ft-brand{font:400 clamp(40px,5vw,64px)/.95 var(--font-display);letter-spacing:-.01em;color:#FBF5EE;margin:0}
+.ft .ft-tag{margin:0;font:400 16px/1.65 var(--font-body);color:#F6E1E8;max-width:440px}
+.ft .ft-tag2{margin:0;font:400 italic 24px/1.3 var(--font-display);color:#FBF5EE}
+.ft .ft-cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}
+.ft .ft-cols h3{margin:0 0 12px;font:500 11.5px/1.4 var(--font-label);letter-spacing:.18em;text-transform:uppercase;color:#F6C9D8}
+.ft .ft-cols a{display:block;padding:6px 0;font:500 15px/1.45 var(--font-body)}
+@media (hover:hover){.ft .ft-cols a:hover,.ft .ft-row a:hover{text-decoration:underline;text-underline-offset:4px}}
+.ft .ft-stay{margin-top:56px;background:#3A1C2A;border-radius:30px;padding:clamp(24px,4vw,40px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px 48px;align-items:center}
+.ft .ft-stay h3{margin:0 0 8px;font:400 clamp(30px,3.4vw,42px)/1.05 var(--font-display);color:#FBF5EE}
+.ft .ft-stay p{margin:0;font:400 16px/1.6 var(--font-body);color:#F1DDE2}
+.ft .ft-form{display:flex;flex-wrap:wrap;gap:10px}
+.ft .ft-form label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.ft .ft-form input[type=text]{flex:1 1 220px;min-width:0;min-height:54px;border-radius:999px;border:0;padding:0 22px;font:500 16px/1 var(--font-body);color:#3A1C2A;background:#FBF5EE;-webkit-appearance:none;appearance:none}
+.ft .ft-form button{min-height:54px;padding:0 26px;border-radius:999px;border:0;background:#A23E66;color:#FFFFFF;font:600 15.5px/1 var(--font-body);cursor:pointer}
+.ft .ft-form input:focus-visible,.ft .ft-form button:focus-visible,.ft a:focus-visible{outline:3px solid #F6C9D8;outline-offset:3px}
+.ft .ft-msg{flex:1 1 100%;margin:0;font:500 14px/1.5 var(--font-body);color:#F6C9D8}
+.ft .ft-msg:empty{display:none}
+.ft .ft-slot{flex:1 1 100%;border:2px dashed #F6C9D8;border-radius:16px;padding:12px 16px;font:500 14px/1.5 var(--font-body);color:#F6C9D8}
+.ft .ft-slot b{display:block;font:500 11px/1.3 var(--font-label);letter-spacing:.16em;margin-bottom:4px}
+.ft .ft-row{margin-top:40px;padding:22px 0;border-top:1px solid rgba(251,245,238,.28);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:14px 28px;font:500 12px/1.5 var(--font-label);letter-spacing:.14em;text-transform:uppercase}
+.ft .ft-row nav{display:flex;flex-wrap:wrap;gap:8px 22px}
+.ft .ft-row p{margin:0;color:#F6E1E8}
+@media (max-width:900px){.ft .ft-top,.ft .ft-stay{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:560px){.ft .ft-cols{grid-template-columns:repeat(2,minmax(0,1fr))}.ft .ft-cols > div:last-child{grid-column:1 / -1}}
+</style>
+<div class="ft-in">
+  <div class="ft-top">
+    <div style="display:flex;flex-direction:column;gap:18px">
+      <p class="ft-brand">BOSS LADY BLOGGERS</p>
+      <p class="ft-tag">Professional blog coaching, custom website design and modern business education for ambitious women.</p>
+      <p class="ft-tag2">Helping you build the business behind your blog.</p>
     </div>
-    <div style="display:flex;flex-direction:column">
-      <a href="/blog-coaching" style="color:#FFFFFF;text-decoration:none">Work With Me</a>
-      <a href="/membership" style="color:#FFFFFF;text-decoration:none">The Blogging Ladies Membership</a>
-      <a href="/academy" style="color:#FFFFFF;text-decoration:none">Courses</a>
-      <a href="/podcast" style="color:#FFFFFF;text-decoration:none">Podcast</a>
-      <a href="/contact" style="color:#FFFFFF;text-decoration:none">Contact</a>
-    </div>
-    <div style="display:flex;flex-direction:column">
-      <a href="https://www.instagram.com/blogcoach_gen" target="_blank" rel="noopener" style="color:#FFFFFF;text-decoration:none">Instagram</a>
-      <a href="https://www.youtube.com/@GenasysLynn" target="_blank" rel="noopener" style="color:#FFFFFF;text-decoration:none">YouTube</a>
-      <a href="https://www.pinterest.com/BossLadyBloggers/" target="_blank" rel="noopener" style="color:#FFFFFF;text-decoration:none">Pinterest</a>
+    <div class="ft-cols">
+      <div><h3>Work With Me</h3><a href="/blog-coaching">The BOSS Business Experience</a><a href="/blog-coaching">Private Blog Coaching &amp; Design</a><a href="/portfolio">Website Design Portfolio</a></div>
+      <div><h3>Learn From Me</h3><a href="/membership">The Blogging Ladies Membership</a><a href="/academy">The BOSS Academy</a><a href="/academy#all-access">Academy All Access</a></div>
+      <div><h3>Explore</h3><a href="/about">About</a><a href="/#webinar">Futureproof Your Blog Webinar</a><a href="/blog">The Blog</a><a href="/podcast">The Podcast</a><a href="https://www.youtube.com/@GenasysLynn" target="_blank" rel="noopener">YouTube</a><a href="/contact">Contact</a></div>
     </div>
   </div>
-  <div class="bl-marquee" style="padding:40px 0 10px;overflow:hidden" aria-hidden="true">
-    <div class="bl-track bl-slow" style="font:400 clamp(120px,15vw,220px)/1 var(--font-display);white-space:nowrap;color:#FBF5EE">
-      <span>BOSS LADY BLOGGERS&#160;&#183;&#160;BOSS LADY BLOGGERS&#160;&#183;&#160;</span><span aria-hidden="true">BOSS LADY BLOGGERS&#160;&#183;&#160;BOSS LADY BLOGGERS&#160;&#183;&#160;</span>
-    </div>
+  <div class="ft-stay">
+    <div><h3>Stay Connected</h3><p>Modern business strategies, buyer psychology, AI and conversations about the future of blogging.</p></div>
+    <form class="ft-form" data-ft-news novalidate>
+      <label for="ft-email">Email Address</label>
+      <input id="ft-email" type="text" name="email" inputmode="email" autocomplete="email" placeholder="Email Address" maxlength="255">
+      <button type="submit">Subscribe</button>
+      <p class="ft-msg" role="status" aria-live="polite"></p>
+    </form>
   </div>
+  <div class="ft-row">
+    <nav aria-label="Social"><a href="https://www.instagram.com/blogcoach_gen" target="_blank" rel="noopener">Instagram</a><a href="https://www.pinterest.com/BossLadyBloggers/" target="_blank" rel="noopener">Pinterest</a><a href="https://www.youtube.com/@GenasysLynn" target="_blank" rel="noopener">YouTube</a></nav>
+    <nav aria-label="Legal"><a href="/privacy-policy">Privacy Policy</a><a href="/terms-and-conditions">Terms &amp; Conditions</a></nav>
+    <p>&copy; Boss Lady Bloggers. All rights reserved.</p>
+  </div>
+</div>
+<div class="bl-marquee" style="padding:10px 0 10px;overflow:hidden" aria-hidden="true">
+  <div class="bl-track bl-slow" style="font:400 clamp(120px,15vw,220px)/1 var(--font-display);white-space:nowrap;color:#FBF5EE">
+    <span>BOSS LADY BLOGGERS&#160;&#183;&#160;BOSS LADY BLOGGERS&#160;&#183;&#160;</span><span aria-hidden="true">BOSS LADY BLOGGERS&#160;&#183;&#160;BOSS LADY BLOGGERS&#160;&#183;&#160;</span>
+  </div>
+</div>
+<script>
+(function(){
+  /* Footer newsletter: paste the Flodesk form ID for your newsletter here */
+  var NEWS_FORM_ID='';
+  var form=document.querySelector('[data-ft-news]');if(!form)return;
+  var msg=form.querySelector('.ft-msg'),btn=form.querySelector('button'),inp=form.querySelector('input[name=email]');
+  if(!NEWS_FORM_ID){var s=document.createElement('div');s.className='ft-slot';s.innerHTML='<b>TO FILL IN</b>Newsletter form is not connected to Flodesk yet, so sign ups are not saved.';form.appendChild(s);}
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var em=inp.value.trim();
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){msg.textContent='That email doesn’t look quite right yet.';inp.focus();return;}
+    if(!NEWS_FORM_ID){msg.textContent='This form is not connected yet.';return;}
+    btn.disabled=true;msg.textContent='';
+    fetch('https://form.flodesk.com/forms/'+NEWS_FORM_ID+'/submit',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:em,confirm_email_address:''}),keepalive:true}).catch(function(){}).then(function(){
+      form.innerHTML='<p class="ft-msg" style="font-size:16px;color:#FBF5EE">You’re in. Watch your inbox.</p>';
+    });
+  });
+})();
+</script>
 </footer>
 
 

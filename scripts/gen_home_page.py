@@ -1,0 +1,496 @@
+import html, sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).parent))
+from folio_data import PROJECTS, VIDEO_CSS, VIDEO_JS, video_cards, IMG
+P=str(Path(__file__).resolve().parent.parent/'site/_pages/index.html')
+def e(t): return html.escape(t,quote=False).replace("'","&rsquo;")
+ARR='<i aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></i>'
+def btn(label,href,cls=''): return f'<a class="hp-btn {cls}" href="{href}">{e(label)} {ARR}</a>'
+def slot(t): return f'<div class="hp-slot"><b>To fill in</b>{e(t)}</div>'
+def P_(t,cls='body'): return f'<p class="{cls}">{e(t)}</p>'
+COACH='/coaching/'
+FOLIO=''.join(f'<a class="fcard" href="/client-project/?project={k}"><span class="fimg"><img src="{IMG}{k}-mockup.jpg" alt="{e(n)} website on a laptop and phone" loading="lazy" width="1600" height="1100"></span><span class="fn">{e(n)}</span><span class="fni">{e(ni)}</span></a>' for k,n,cl,ni,u in PROJECTS[:3])
+o=[]
+o.append(r'''<style>
+/* Homepage. Editorial BLB: plum and cream with berry accents, arch photo frames, numbered pillars,
+   the three ways to work together as a ladder, and a webinar sign up. Announcement bar hides after Black Friday. */
+.hp{--plum:#3A1C2A;--berry:#A23E66;--rose:#E9B9CA;--blush:#F6E1E8;--cream:#FBF5EE;--cocoa:#4A2F3B;--mauve:#6E4B5B;--pop:#F6C9D8}
+.hp section{padding:clamp(76px,9vw,128px) clamp(16px,4vw,48px)}
+.hp .in{max-width:1180px;margin:0 auto}
+.hp .nar{max-width:780px;margin:0 auto}
+.hp .lbl{margin:0;font:500 12px/1.5 var(--font-label);letter-spacing:.2em;text-transform:uppercase;color:var(--berry)}
+.hp .dk .lbl{color:var(--rose)}
+.hp h1,.hp h2,.hp h3{margin:0;font-family:var(--font-display);font-weight:400;letter-spacing:-.015em;text-wrap:balance;color:var(--plum)}
+.hp h2{font-size:clamp(38px,5vw,66px);line-height:1.02}
+.hp h2 em,.hp h1 em{color:var(--berry)}
+.hp .dk h1,.hp .dk h2,.hp .dk h3{color:var(--cream)}
+.hp .dk h1 em,.hp .dk h2 em{color:var(--pop)}
+.hp p{margin:0}
+.hp .body{font:400 18px/1.7 var(--font-body);color:var(--cocoa)}
+.hp .dk .body{color:#F1DDE2}
+.hp .big{font:400 clamp(24px,3vw,34px)/1.25 var(--font-display);color:var(--plum)}
+.hp .dk .big{color:var(--cream)}
+.hp .it{font-style:italic;color:var(--berry)}
+.hp .dk .it{color:var(--pop)}
+.hp .stack{display:flex;flex-direction:column;gap:20px}
+.hp .row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.hp .hp-btn{display:inline-flex;align-items:center;gap:12px;min-height:56px;padding:8px 10px 8px 24px;border-radius:999px;background:var(--plum);color:#fff;font:600 15.5px/1.2 var(--font-body);text-decoration:none;border:0;cursor:pointer;transition:transform .2s ease}
+.hp .hp-btn i{flex:none;width:38px;height:38px;border-radius:999px;background:var(--berry);display:grid;place-items:center;transition:transform .2s ease}
+.hp .hp-btn.cr{background:var(--cream);color:var(--plum)}
+.hp .hp-btn.br{background:var(--berry)}.hp .hp-btn.br i{background:var(--plum)}
+.hp .hp-btn.ol{background:transparent;color:var(--plum);border:1.5px solid var(--plum)}
+.hp .hp-btn.olw{background:transparent;color:var(--cream);border:1.5px solid rgba(233,185,202,.6)}
+.hp .hp-btn.olw i{background:var(--pop)}.hp .hp-btn.olw i svg{stroke:#3A1C2A}
+@media (hover:hover){.hp .hp-btn:hover{transform:translateY(-2px)}.hp .hp-btn:hover i{transform:rotate(45deg)}}
+.hp .hp-btn:focus-visible,.hp input:focus-visible,.hp button:focus-visible{outline:3px solid var(--berry);outline-offset:3px}
+.hp .hp-slot{border:2px dashed var(--berry);border-radius:18px;padding:16px 20px;background:rgba(162,62,102,.05);font:500 15px/1.5 var(--font-body);color:var(--berry)}
+.hp .hp-slot b{display:block;font:500 11px/1.3 var(--font-label);letter-spacing:.16em;text-transform:uppercase;margin-bottom:6px}
+.hp .dk .hp-slot{border-color:var(--pop);color:var(--pop)}
+.hp .ticks{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.hp .ticks li{position:relative;padding:13px 16px 13px 50px;border-radius:14px;background:#fff;font:500 16px/1.5 var(--font-body);color:var(--plum)}
+.hp .ticks li::before{content:"";position:absolute;left:14px;top:14px;width:22px;height:22px;border-radius:7px;background:var(--berry) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 12.5l4 4L18 8' fill='none' stroke='%23fff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/16px no-repeat}
+.hp .arch{aspect-ratio:3/4;border-radius:999px 999px 26px 26px;overflow:hidden;border:10px solid #fff;box-shadow:0 40px 80px -40px rgba(58,28,42,.7)}
+.hp .arch img{width:100%;height:100%;object-fit:cover;display:block}
+
+/* announcement */
+.hp-ann{display:none;background:var(--berry,#A23E66);color:#fff;padding:11px clamp(16px,4vw,48px);text-align:center;font:500 14px/1.45 var(--font-body)}
+.hp-ann.on{display:block}
+.hp-ann b{font:500 12px/1 var(--font-label);letter-spacing:.14em;margin-right:6px}
+.hp-ann a{display:inline-block;margin-left:10px;padding:6px 14px;border-radius:999px;background:#FBF5EE;color:#3A1C2A;font:600 13px/1.2 var(--font-body);text-decoration:none;white-space:nowrap}
+
+/* hero */
+.hp .hero{background:var(--cream);position:relative;overflow:hidden;isolation:isolate;padding-top:clamp(56px,7vw,96px)}
+.hp .hero::before{content:"";position:absolute;right:-8%;top:-20%;width:56vw;height:56vw;max-width:680px;max-height:680px;border-radius:50%;background:radial-gradient(circle,rgba(233,185,202,.6),rgba(233,185,202,0) 66%);z-index:-1}
+.hp .hero-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:clamp(36px,5vw,72px);align-items:center}
+.hp .hero h1{font-size:clamp(46px,6.6vw,96px);line-height:.96;letter-spacing:-.025em}
+.hp .hero .sub{font:400 italic clamp(22px,2.6vw,30px)/1.3 var(--font-display);color:var(--berry)}
+.hp .hero-ph{position:relative}
+.hp .hero-ph .arch{max-width:420px;margin-left:auto}
+.hp .tag3{position:absolute;left:-18px;bottom:40px;display:flex;flex-direction:column;gap:8px}
+.hp .tag3 span{align-self:flex-start;background:#fff;border-radius:999px;padding:10px 16px;font:500 11.5px/1 var(--font-label);letter-spacing:.12em;text-transform:uppercase;color:var(--plum);box-shadow:0 14px 30px -16px rgba(58,28,42,.6)}
+.hp .tag3 span:nth-child(2){margin-left:22px;background:var(--berry);color:#fff}
+.hp .tag3 span:nth-child(3){margin-left:8px;background:var(--plum);color:var(--cream)}
+
+/* credibility */
+.hp .cred{background:var(--plum);padding:34px clamp(16px,4vw,48px)}
+.hp .cred .in{display:flex;flex-direction:column;gap:18px;align-items:center;text-align:center}
+.hp .cred .lead{font:400 clamp(26px,3vw,36px)/1.1 var(--font-display);color:var(--cream)}
+.hp .cred .areas{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 22px;font:500 12px/1.5 var(--font-label);letter-spacing:.16em;text-transform:uppercase;color:var(--rose)}
+.hp .cred .areas span+span::before{content:"\2726";margin-right:22px;color:var(--pop)}
+.hp .cred .hp-slot{max-width:760px;width:100%}
+
+/* philosophy */
+.hp .phil{background:#fff}
+.hp .ai{display:grid;gap:10px}
+.hp .ai p{padding:16px 20px;border-radius:16px;background:var(--cream);font:400 clamp(20px,2.2vw,25px)/1.3 var(--font-display);color:var(--plum)}
+.hp .qs{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;counter-reset:q}
+.hp .qs li{counter-increment:q;display:flex;gap:14px;align-items:flex-start;padding:20px;border-radius:20px;background:var(--plum);font:400 clamp(20px,2.2vw,24px)/1.3 var(--font-display);color:var(--cream)}
+.hp .qs li::before{content:"0" counter(q);flex:none;font:500 12px/2 var(--font-label);color:var(--pop)}
+.hp .motto{margin-top:10px;padding:clamp(26px,4vw,44px);border-radius:30px;background:var(--berry);text-align:center;font:400 clamp(28px,3.6vw,46px)/1.15 var(--font-display);color:#fff}
+.hp .motto em{color:var(--pop);font-style:italic}
+
+/* experience */
+.hp .exp{background:var(--blush)}
+.hp .perhaps{display:grid;gap:12px}
+.hp .perhaps p{padding:18px 22px;border-left:3px solid var(--berry);background:#fff;border-radius:0 18px 18px 0;font:500 17px/1.55 var(--font-body);color:var(--plum)}
+.hp .six{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.hp .six article{background:#fff;border-radius:24px;padding:26px;display:flex;flex-direction:column;gap:10px}
+.hp .six .n{font:400 46px/.9 var(--font-display);font-style:italic;color:var(--berry)}
+.hp .six h3{font-size:26px;line-height:1.1}
+.hp .six p{font:400 16px/1.6 var(--font-body);color:var(--cocoa)}
+.hp .six article:nth-child(4){background:var(--plum)}
+.hp .six article:nth-child(4) h3{color:var(--cream)}.hp .six article:nth-child(4) p{color:#F1DDE2}.hp .six article:nth-child(4) .n{color:var(--pop)}
+.hp .one3{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
+.hp .one3 span{padding:12px 20px;border-radius:999px;background:var(--plum);color:var(--cream);font:400 20px/1.2 var(--font-display)}
+
+/* portfolio */
+.hp .folio{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.hp .mock{aspect-ratio:4/3;border-radius:20px;background:repeating-linear-gradient(135deg,var(--blush) 0 14px,#fff 14px 28px);border:2px dashed var(--berry);display:grid;place-items:center;padding:16px;text-align:center;font:500 12px/1.5 var(--font-label);letter-spacing:.12em;text-transform:uppercase;color:var(--berry)}
+
+.hp .fcard{display:flex;flex-direction:column;gap:8px;text-decoration:none;color:var(--plum)}
+.hp .fimg{display:block;border-radius:20px;overflow:hidden;background:var(--blush);box-shadow:0 30px 60px -44px rgba(58,28,42,.7)}
+.hp .fimg img{width:100%;height:auto;display:block;transition:transform .5s ease}
+@media (hover:hover){.hp .fcard:hover .fimg img{transform:scale(1.03)}}
+.hp .fn{margin-top:6px;font:400 25px/1.15 var(--font-display)}
+.hp .fni{font:500 11.5px/1.4 var(--font-label);letter-spacing:.14em;text-transform:uppercase;color:var(--berry)}
+/* ways */
+.hp .ways{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.hp .way{border-radius:30px;padding:30px 26px;display:flex;flex-direction:column;gap:12px;background:#fff}
+.hp .way:nth-child(1){background:var(--plum)}
+.hp .way:nth-child(2){background:var(--berry)}
+.hp .way .k{font:400 italic clamp(30px,3vw,38px)/1.05 var(--font-display);color:var(--plum)}
+.hp .way:nth-child(1) .k,.hp .way:nth-child(2) .k{color:#fff}
+.hp .way .nm{font:500 12px/1.5 var(--font-label);letter-spacing:.16em;text-transform:uppercase;color:var(--berry)}
+.hp .way:nth-child(1) .nm,.hp .way:nth-child(2) .nm{color:var(--pop)}
+.hp .way .sub{font:400 21px/1.25 var(--font-display);color:var(--plum)}
+.hp .way:nth-child(1) .sub,.hp .way:nth-child(2) .sub{color:var(--cream)}
+.hp .way p.d{font:400 16px/1.6 var(--font-body);color:var(--cocoa)}
+.hp .way:nth-child(1) p.d,.hp .way:nth-child(2) p.d{color:#F6E1E8}
+.hp .way .pr{font:400 38px/1 var(--font-display);color:#fff}
+.hp .way .hp-btn{margin-top:auto;align-self:flex-start}
+
+/* membership */
+.hp .mem{background:var(--cream)}
+.hp .mem-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(30px,5vw,64px);align-items:center}
+.hp .whyb{display:flex;flex-direction:column;gap:4px}
+.hp .whyb p{font:400 clamp(24px,2.8vw,32px)/1.2 var(--font-display);color:var(--plum)}
+.hp .whyb p:nth-child(2){color:var(--berry);font-style:italic}
+.hp .card{position:relative;background:#fff;border-radius:30px;padding:clamp(26px,4vw,42px);display:flex;flex-direction:column;gap:16px;box-shadow:0 30px 60px -40px rgba(58,28,42,.6)}
+.hp .card .price{font:400 clamp(64px,8vw,92px)/.9 var(--font-display);color:var(--plum)}
+.hp .card .hp-btn,.hp .aa-box .hp-btn{align-self:flex-start}
+.hp .card .price span{font-size:.32em;color:var(--mauve)}
+
+/* academy */
+.hp .acad{background:var(--plum)}
+.hp .books{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.hp .bk{display:flex;flex-direction:column;gap:14px;background:rgba(251,245,238,.06);border:1.5px solid rgba(233,185,202,.22);border-radius:26px;padding:22px}
+.hp .cover{aspect-ratio:3/2;border-radius:8px 16px 16px 8px;padding:18px 20px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:-8px 0 0 rgba(0,0,0,.16) inset}
+.hp .cover small{font:500 10px/1.4 var(--font-label);letter-spacing:.16em;text-transform:uppercase}
+.hp .cover b{font:400 clamp(26px,2.6vw,32px)/1 var(--font-display);font-weight:400}
+.hp .bk .hook{font:400 italic 21px/1.3 var(--font-display);color:var(--pop)}
+.hp .bk p.d{font:400 15.5px/1.6 var(--font-body);color:#F1DDE2}
+.hp .bk .hp-btn{margin-top:auto;align-self:flex-start}
+
+/* all access */
+.hp .aa{background:var(--berry);border-radius:34px;padding:clamp(30px,5vw,64px);display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:clamp(26px,4vw,56px);align-items:center}
+.hp .aa h2{color:#fff}.hp .aa h2 em{color:var(--pop)}
+.hp .aa .body{color:#FBE3EA}
+.hp .aa-box{background:var(--cream);border-radius:26px;padding:28px;display:flex;flex-direction:column;gap:14px}
+
+/* about */
+.hp .about-grid{display:grid;grid-template-columns:minmax(0,.75fr) minmax(0,1.25fr);gap:clamp(30px,5vw,72px);align-items:start}
+.hp .about-grid .arch{position:sticky;top:110px;max-width:420px}
+.hp .learned{display:grid;gap:8px}
+.hp .learned p{padding:14px 18px;border-radius:14px;background:var(--blush);font:400 22px/1.25 var(--font-display);color:var(--plum)}
+.hp .studies{display:flex;flex-wrap:wrap;gap:8px}
+.hp .studies span{padding:10px 16px;border-radius:999px;background:var(--plum);color:var(--cream);font:500 14px/1.3 var(--font-body)}
+.hp .pull{padding:clamp(22px,4vw,34px);border-radius:26px;background:var(--plum);font:400 clamp(24px,2.8vw,32px)/1.25 var(--font-display);color:var(--cream)}
+.hp .pull em{color:var(--pop)}
+
+/* webinar */
+.hp .web{background:var(--plum);position:relative;overflow:hidden;isolation:isolate}
+.hp .web::before{content:"";position:absolute;right:-10%;top:-30%;width:60vw;height:60vw;max-width:720px;max-height:720px;border-radius:50%;background:radial-gradient(circle,rgba(162,62,102,.55),rgba(162,62,102,0) 65%);z-index:-1}
+.hp .web-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(30px,5vw,64px);align-items:start}
+.hp .web h2{font-size:clamp(50px,7vw,100px);line-height:.95}
+.hp .ifs{display:grid;gap:10px}
+.hp .ifs p{padding:14px 18px;border-radius:14px;border:1.5px solid rgba(233,185,202,.3);font:400 italic 21px/1.3 var(--font-display);color:var(--cream)}
+.hp .cover4{display:grid;gap:12px;counter-reset:w}
+.hp .cover4 div{counter-increment:w;position:relative;padding:20px 20px 20px 70px;border-radius:20px;background:rgba(251,245,238,.07)}
+.hp .cover4 div::before{content:"0" counter(w);position:absolute;left:20px;top:18px;font:400 30px/1 var(--font-display);font-style:italic;color:var(--pop)}
+.hp .cover4 h3{font-size:24px;color:var(--cream);margin-bottom:6px}
+.hp .cover4 p{font:400 15.5px/1.6 var(--font-body);color:#F1DDE2}
+.hp .wform{position:sticky;top:110px;background:var(--cream);border-radius:30px;padding:clamp(24px,3.6vw,38px);display:flex;flex-direction:column;gap:14px;box-shadow:0 40px 80px -40px rgba(0,0,0,.7)}
+.hp .wform h3{font-size:clamp(30px,3vw,38px);color:var(--plum)}
+.hp .field{display:flex;flex-direction:column;gap:6px}
+.hp .field label{font:600 14px/1.2 var(--font-body);color:var(--plum)}
+.hp .field input{min-height:54px;border-radius:14px;border:2px solid var(--rose);padding:0 16px;font:500 16px/1 var(--font-body);background:#fff;color:var(--plum);-webkit-appearance:none;appearance:none}
+.hp .field input:focus{border-color:var(--berry);outline:none;box-shadow:0 0 0 4px rgba(162,62,102,.14)}
+.hp .wform .hp-btn{width:100%;justify-content:space-between}
+.hp .ff-err:not(:empty){font:600 14px/1.4 var(--font-body);color:var(--berry)}
+.hp [data-ff-el="success"]{display:none}
+.hp .wtags{font:500 11px/1.6 var(--font-label);letter-spacing:.14em;text-transform:uppercase;color:var(--mauve);text-align:center}
+
+/* blog */
+.hp .posts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.hp .post{display:flex;flex-direction:column;background:#fff;border-radius:22px;overflow:hidden;text-decoration:none;color:var(--plum);box-shadow:0 22px 44px -36px rgba(58,28,42,.6);transition:transform .2s ease}
+@media (hover:hover){.hp .post:hover{transform:translateY(-4px)}}
+.hp .post .im{aspect-ratio:4/3;background:var(--rose);overflow:hidden}
+.hp .post .im img{width:100%;height:100%;object-fit:cover;display:block}
+.hp .post .t{padding:20px;font:400 23px/1.2 var(--font-display)}
+.hp .nos{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.hp .nos span{padding:9px 16px;border-radius:999px;background:#fff;font:500 14px/1.3 var(--font-body);color:var(--plum)}
+
+/* podcast + youtube */
+.hp .two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.hp .media{border-radius:30px;padding:clamp(26px,4vw,44px);display:flex;flex-direction:column;gap:14px}
+.hp .media.pod{background:var(--blush)}
+.hp .media.yt{background:var(--plum)}
+.hp .media h3{font-size:clamp(30px,3.2vw,40px);line-height:1.05}
+.hp .media.yt h3{color:var(--cream)}
+.hp .media p{font:400 16.5px/1.65 var(--font-body);color:var(--cocoa)}
+.hp .media.yt p{color:#F1DDE2}
+.hp .media .hp-btn{margin-top:auto;align-self:flex-start}
+.hp .media .ic{width:64px;height:64px;border-radius:18px;display:grid;place-items:center;background:var(--berry)}
+
+/* final */
+.hp .final{background:var(--cream);text-align:center}
+.hp .anoth{display:flex;flex-direction:column;gap:4px;margin:6px 0}
+.hp .anoth p{font:400 clamp(22px,2.6vw,30px)/1.3 var(--font-display);color:var(--mauve);text-decoration:line-through;text-decoration-color:var(--berry)}
+.hp .proud{font:400 italic clamp(30px,4vw,48px)/1.15 var(--font-display);color:var(--berry)}
+
+@media (max-width:980px){
+ .hp .hero-grid,.hp .mem-grid,.hp .about-grid,.hp .web-grid,.hp .aa{grid-template-columns:minmax(0,1fr)}
+ .hp .hero-ph .arch{margin:0 auto;max-width:360px}
+ .hp .six,.hp .ways,.hp .books,.hp .folio,.hp .posts{grid-template-columns:minmax(0,1fr)}
+ .hp .about-grid .arch,.hp .wform{position:static}
+ .hp .about-grid .arch{max-width:360px}
+}
+@media (min-width:600px) and (max-width:980px){.hp .six,.hp .posts{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:700px){
+ .hp .qs,.hp .two{grid-template-columns:minmax(0,1fr)}
+ .hp .tag3{left:0}
+ .hp .hp-btn{font-size:15px;padding-left:20px}
+ .hp-ann a{display:block;width:max-content;margin:8px auto 0}
+}
+@media (prefers-reduced-motion:reduce){.hp *{transition:none!important}}
+'''+VIDEO_CSS+r'''
+</style>
+<div class="hp-ann" data-hp-ann role="region" aria-label="Black Friday offer"><b>BLACK FRIDAY EXCLUSIVE:</b> Join the Blogging Ladies Membership for 50% OFF. <a href="/black-friday/">Claim Your Offer</a></div>
+<main id="main" class="hp">''')
+# HERO
+o.append(f'''<section class="hero"><div class="in hero-grid">
+<div class="stack" style="gap:22px">
+<p class="lbl">Professional blog coaching &amp; custom website design</p>
+<h1>Your blog coach, business strategist and website designer. <em>All in one.</em></h1>
+<p class="sub">You have the vision for a blogging business. Let&rsquo;s turn it into something worth investing in.</p>
+{P_("From figuring out exactly what to sell to developing your brand, designing your custom website and building the marketing and sales strategy behind it, I'll help you bring your entire business together.")}
+{P_("Personalized blog coaching, professional website design and modern business education for ambitious women who want to build more than just a blog.")}
+<div class="row">{btn("Explore Private Blog Coaching & Design",COACH)}{btn("Discover Other Ways to Work With Me","#ways","ol")}</div>
+</div>
+<div class="hero-ph"><div class="arch"><img src="/images/photos/hat-laugh.jpg" alt="Genasys laughing in her pink hat"></div>
+<div class="tag3" aria-hidden="true"><span>Blog coach</span><span>Business strategist</span><span>Website designer</span></div></div>
+</div></section>''')
+# CREDIBILITY
+o.append(f'''<section class="cred dk"><div class="in">
+<p class="lead">A money making blogging brand</p>
+<p class="areas"><span>Business strategy</span><span>Private blog coaching</span><span>Custom Showit website design</span><span>Marketing &amp; sales</span></p>
+{slot("Insert verified client results, testimonials and relevant media features.")}
+</div></section>''')
+# PHILOSOPHY
+ai=["AI can build your website in a day.","It can write your blog posts, create your digital products, generate your marketing content and tell you a thousand different ways to make money online."]
+qs=["What makes someone choose your business when information is everywhere?","What will people still pay you for when AI can answer their questions for free?","How will you generate revenue if Google stops sending you as much traffic?","What makes your offers valuable enough to purchase?"]
+o.append(f'''<section class="phil"><div class="in stack" style="gap:30px">
+<div class="nar" style="text-align:center"><h2>Anyone can start a blog now. <em>But how many people actually know how to turn one into a profitable business?</em></h2></div>
+<div class="nar stack">
+<div class="ai">{''.join(f'<p>{e(a)}</p>' for a in ai)}</div>
+<p class="big">But it cannot guarantee that what you&rsquo;re building is something people want to buy.</p>
+<p class="big it">And that&rsquo;s where the real work begins.</p></div>
+<ol class="qs">{''.join(f'<li>{e(q)}</li>' for q in qs)}</ol>
+<div class="nar stack" style="text-align:center">
+{P_("These are the questions modern bloggers need to be asking.")}
+{P_("Because the ability to create a blog is becoming increasingly accessible.")}
+<p class="big">The ability to build a profitable business behind one is an entirely different skill.</p>
+{P_("As your blogging coach, I help you develop that skill.")}
+{P_("We establish the business first. Then we build the brand, website, content, marketing and sales systems that support it.")}
+</div>
+<p class="motto">Your blog isn&rsquo;t your business. <em>It&rsquo;s how people discover the business you&rsquo;ve built.</em></p>
+</div></section>''')
+# EXPERIENCE
+perh=["Perhaps you've been carrying your business idea around for years.","Perhaps you've already started blogging but know your website, offers and business strategy aren't reflecting what you're capable of building.","Or perhaps you're ready to invest in doing things properly from the beginning rather than spending the next twelve months learning how to do everything yourself."]
+six=[("Your Business Strategy","Establish what you're building, who you're serving, how you'll monetize your expertise and what makes your business commercially valuable."),("Your Offers","Develop offers around meaningful customer problems, explore real demand and create a monetization strategy that makes sense for your business."),("Your Brand & Messaging","Establish a distinctive brand that communicates your expertise, connects with potential buyers and gives people a reason to choose you."),("Your Custom Website","Receive a professionally designed custom Showit website built around your business strategy, offers, audience and customer experience."),("Your Marketing & Sales Strategy","Develop a cohesive approach to attracting potential customers, building trust, generating demand and selling your offers."),("Your Implementation","Receive private 1:1 blog coaching, personalized feedback and agreed done for you business development services throughout the experience.")]
+o.append(f'''<section class="exp"><div class="in stack" style="gap:34px">
+<div class="nar stack" style="text-align:center;align-items:center">
+<p class="lbl">Private 1:1 blog coaching &amp; done for you business development</p>
+<p class="big">You don&rsquo;t have to become a business strategist, website designer, copywriter and marketing expert just to start the business you want to own.</p>
+<p style="font:700 clamp(30px,3.4vw,40px)/1 var(--font-script);color:#A23E66;transform:rotate(-2deg)">Introducing&hellip;</p>
+<h2 style="font-size:clamp(48px,7vw,96px)">The BOSS Business <em>Experience</em></h2>
+{P_("My signature private client experience combines professional blog coaching, custom Showit website design and hands on business development to help you turn your ideas, expertise and ambitions into a professionally built online business.")}
+</div>
+<div class="nar perhaps">{''.join(f'<p>{e(x)}</p>' for x in perh)}</div>
+<div class="nar stack" style="text-align:center">{P_("You want someone who understands your vision, knows how to turn it into a business and has the professional skills to help bring it to life.")}<p class="big it">That&rsquo;s where I come in.</p><p class="big">Together, we&rsquo;ll build the business behind your blog.</p></div>
+<div class="six">{''.join(f'<article><span class="n">{i+1:02d}</span><h3>{e(t)}</h3><p>{e(d)}</p></article>' for i,(t,d) in enumerate(six))}</div>
+<div class="nar stack" style="text-align:center">{P_("You won't be handed a generic roadmap and expected to figure everything out independently.")}{P_("We'll develop your business together, with personalized strategy and professional implementation along the way.")}</div>
+<div class="one3"><span>One strategic partner.</span><span>One cohesive business vision.</span><span>One private client experience.</span></div>
+<div style="text-align:center">{btn("Explore The BOSS Business Experience",COACH,"br")}</div>
+</div></section>''')
+# PORTFOLIO
+o.append(f'''<section style="background:#FFFFFF"><div class="in stack" style="gap:28px">
+<div class="nar stack" style="text-align:center;gap:16px"><p class="lbl">Strategy meets design</p><h2>A beautiful website is one thing. <em>A beautiful website with an actual business strategy behind it is another.</em></h2></div>
+<div class="nar stack">{P_("Your website should reflect the caliber of your business.")}{P_("It should communicate your expertise, establish your credibility, showcase your offers and help potential customers understand why they should work with you.")}<p class="big it">But it should also feel like yours.</p>{P_("That's why my custom blogging website designs begin with understanding the woman behind the business, the audience she's serving and the business she's building.")}{P_("As both a professional blog coach and Showit website designer, I bring the strategy and design together rather than treating them as two completely separate projects.")}</div>
+<div class="folio">{FOLIO}</div>
+<div style="text-align:center">{btn("Explore My Website Design Portfolio","/portfolio/","ol")}</div>
+</div></section>''')
+# RESULTS
+o.append(f'''<section style="background:#FBF5EE"><div class="in stack" style="gap:26px">
+<div class="nar stack" style="text-align:center;gap:16px"><h2>The women, businesses and websites <em>behind the work.</em></h2>{P_("There's something incredibly rewarding about watching a woman's business move from an idea she's been thinking about for years into something she can finally see, share and build upon.")}{P_("Meet some of the women I've had the privilege of working with.")}</div>
+{video_cards()}
+<div style="text-align:center">{btn("Let's Build Your Business",COACH)}</div>
+</div></section>''')
+# WAYS
+o.append(f'''<section id="ways" style="background:#F6E1E8;scroll-margin-top:80px"><div class="in stack" style="gap:30px">
+<div class="nar stack" style="text-align:center;gap:16px"><p class="lbl">Find the right level of support</p><h2>How would you like to <em>build your business?</em></h2>
+{P_("You might want someone to help you build it.")}{P_("You might prefer to follow a strategic system independently.")}{P_("Or you might be looking to master a particular business skill.")}{P_("I've created three different ways to help you, depending on where you are and the kind of support you're looking for.")}</div>
+<div class="ways">
+<article class="way"><p class="k">01. Build it with me.</p><p class="nm">The BOSS Business Experience</p><p class="sub">Private Blog Coaching &amp; Custom Website Design</p><p class="d">Work with me privately to develop your business strategy, offers, brand, website and sales foundations.</p><p class="d">Designed for women who value their time, want personalized expertise and are ready to invest in professional implementation.</p>{btn("Explore Private Coaching & Design",COACH,"cr")}</article>
+<article class="way"><p class="k">02. Follow my system.</p><p class="nm">The Blogging Ladies Membership</p><p class="sub">Your Business Building Roadmap</p><p class="d">Learn the complete strategic process behind building a profitable blogging business, with practical projects, roadmaps and action plans to help you implement it independently.</p><p class="pr">$47<span style="font-size:.45em;color:#F6C9D8">/month</span></p>{btn("Explore the Membership","/membership/","cr")}</article>
+<article class="way"><p class="k">03. Learn from me.</p><p class="nm">The BOSS Academy</p><p class="sub">Specialized Blogging &amp; Business Courses</p><p class="d">Master modern business strategies, AI, productivity, digital product creation and the skills you need to develop your business as the industry evolves.</p><p class="d">Purchase individual courses or unlock the complete Academy collection.</p>{btn("Shop the Courses","/academy/")}</article>
+</div></div></section>''')
+# MEMBERSHIP
+inc=["The complete eight module BOSS Business System.","Strategic business roadmaps.","Business projects and action plans.","Practical implementation resources.","Ongoing business development direction."]
+o.append(f'''<section class="mem"><div class="in mem-grid">
+<div class="stack">
+<p class="lbl">Your business building membership</p>
+<h2>Imagine knowing exactly what to work on <em>every time you open your laptop.</em></h2>
+{P_("Instead of questioning whether you should be creating content, developing an offer, redesigning your website or trying to grow your email list, you'd understand what your business actually needs next.")}
+<div class="whyb"><p>You&rsquo;d know what you&rsquo;re building.</p><p>Why you&rsquo;re building it.</p><p>And how it&rsquo;s intended to help your business make money.</p></div>
+{P_("That's what the Blogging Ladies Membership was created to give you.")}
+{P_("At the heart of your membership is my signature eight module BOSS Business System, where you'll learn the strategic process behind building and monetizing a blogging business.")}
+{P_("But we're not stopping at education.")}
+{P_("Inside the membership, you'll also have practical direction for turning that knowledge into completed business projects.")}
+</div>
+<div class="card">
+<p class="lbl">What&rsquo;s inside?</p>
+<ul class="ticks">{''.join(f'<li style="background:#FBF5EE">{e(i)}</li>' for i in inc)}</ul>
+<p style="font:400 16px/1.6 var(--font-body);color:#4A2F3B">Understand how the individual pieces of your business work together, identify your priorities and start building in the right order.</p>
+<p style="font:400 italic 22px/1.3 var(--font-display);color:#A23E66">Because you don&rsquo;t need another hundred things to do. You need to understand which things actually deserve your attention.</p>
+<p class="lbl" style="color:#3A1C2A">The Blogging Ladies Membership</p>
+<p class="price">$47<span>/month</span></p>
+{btn("Become a Blogging Lady","/membership/","br")}
+</div></div></section>''')
+# ACADEMY
+books=[("The Futureproof Blogger","Business strategy & the future of blogging","#A23E66","#FFFFFF","Will the business you're building today still make sense tomorrow?",["Discover how AI, changing consumer behavior and the evolution of the internet are reshaping the blogging industry.","Learn how to rethink traditional blogging strategies, create value beyond information and build a business that can adapt as technology changes."],"futureproof"),
+("The Productive Blogger Method","AI & business productivity","#FBF5EE","#3A1C2A","Stop spending more time organizing your business than actually building it.",["Learn how to use Claude to transform your business goals, strategies and overwhelming collection of unfinished projects into organized projects, personalized action plans and a practical implementation system.","Know what to work on, what needs to happen first and how to get it done."],"pbm"),
+("The Interactive Course Creator","AI & digital product creation","#E9B9CA","#3A1C2A","The future of online courses doesn't have to look like another dashboard filled with prerecorded videos.",["Learn how to use Claude to transform your knowledge into interactive educational experiences that go beyond traditional video lessons, static workbooks and downloadable PDFs.","Discover a new way to package, deliver and monetize your expertise."],"interactive")]
+bh=''.join(f'<article class="bk"><div class="cover" style="background:{bg};color:{fg}"><small>The BOSS Academy</small><b>{e(n)}</b><small>{e(t)}</small></div><p class="hook">{e(h)}</p>{"".join(f"<p class=d>{e(p)}</p>" for p in ps)}{btn("Explore the Course","/academy/#course-"+sl,"cr")}</article>' for n,t,bg,fg,h,ps,sl in books)
+o.append(f'''<section class="acad dk"><div class="in stack" style="gap:32px">
+<div class="nar stack" style="text-align:center;gap:16px"><p class="lbl">Modern business education for ambitious women</p><h2>The blogging industry is evolving. <em>Your business education should too.</em></h2>
+{P_("The strategies that worked for bloggers five years ago aren't necessarily the strategies that will work five years from now.")}
+{P_("Technology is changing. Buyer behavior is changing. The way people discover information, evaluate products and make purchasing decisions is changing.")}
+<p class="big it">And I want you to understand how to adapt.</p>
+{P_("The BOSS Academy is an expanding collection of specialized business courses designed to help you develop valuable skills, discover emerging opportunities and become a more capable online business owner.")}
+{P_("Choose the education your business needs right now, or unlock the complete Academy collection.")}
+<p class="lbl">Explore the course library.</p></div>
+<div class="books">{bh}</div>
+<div style="text-align:center">{btn("Shop The BOSS Academy","/academy/","olw")}</div>
+</div></section>''')
+# ALL ACCESS
+o.append(f'''<section style="background:#FBF5EE"><div class="in"><div class="aa">
+<div class="stack"><p class="lbl" style="color:#F6E1E8">The complete educational collection</p><h2>Why stop at <em>just one course?</em></h2>
+<p class="body">You want to understand the future of blogging. Master AI. Create more valuable digital products. Strengthen your business skills. And continue learning as your business evolves.</p>
+<p class="body">Instead of purchasing each course individually, unlock the complete BOSS Academy collection.</p>
+<p class="body">One investment gives you access to the included specialized courses, applicable educational resources and an entire collection of modern business strategies.</p></div>
+<div class="aa-box"><p class="lbl">The BOSS Academy All Access</p><p style="font:400 clamp(26px,2.8vw,32px)/1.2 var(--font-display);color:#3A1C2A">Invest in the knowledge behind the business you want to own.</p>{btn("Explore All Access","/academy/#all-access")}</div>
+</div></div></section>''')
+# ABOUT
+learned=["I learned how to understand people.","How to identify problems worth solving.","How to create offers people wanted to purchase.","How to communicate value, generate sales and build a business around the knowledge and skills I already had."]
+stud=["Buyer psychology.","Artificial intelligence.","Emerging technology.","New business models.","Productivity systems.","The future of online education."]
+o.append(f'''<section style="background:#FFFFFF"><div class="in about-grid">
+<div class="arch"><img src="/images/photos/portrait-hat.jpg" alt="Genasys smiling in her pink hat" loading="lazy" style="object-position:60% 30%"></div>
+<div class="stack">
+<p class="lbl">Meet your blog coach</p>
+<h2>I built a money making business from my aunt&rsquo;s basement <em>during nap time.</em></h2>
+<p class="big">Hi, I&rsquo;m Genasys.</p>
+{P_("Founder of Boss Lady Bloggers, professional blogging coach, business strategist and custom Showit website designer.")}
+{P_("I started building my business as a single mom, working during my son's nap times with a vision for the life I wanted to create for us.")}
+{P_("But I didn't build my money making business by publishing endless blog posts, growing an enormous audience or waiting for ad revenue to change my life.")}
+<div class="learned">{''.join(f'<p>{e(l)}</p>' for l in learned)}</div>
+<p class="big it">That changed everything for me.</p>
+{P_("Today, through my private blog coaching services, custom website design, membership and specialized business courses, I help other women develop those same business skills and build something of their own.")}
+{P_("And I'm constantly studying what comes next.")}
+<div class="studies">{''.join(f'<span>{e(s)}</span>' for s in stud)}</div>
+{P_("I experiment with it, challenge it, develop strategies around it and bring what I learn back into Boss Lady Bloggers.")}
+{P_("Because I don't want to teach you how to build a business for an internet that no longer exists.")}
+{P_("I want to help you build a business for the world you're operating in today, with the ability to adapt tomorrow.")}
+<p class="pull">Your blog coach should understand more than blogging. <em>She should understand business.</em></p>
+<div class="row">{btn("More About Me","/about/")}{btn("Explore My Blog Coaching Services",COACH,"ol")}</div>
+</div></div></section>''')
+# WEBINAR
+ifs=["If you've been wondering whether it's still worth starting a blog...","If you're worried about what AI means for the future of your blogging income...","If you're questioning whether people will continue buying digital products, reading blogs or paying for information..."]
+cov=[("What's actually happening to blogging.","Understand how AI, changing search behavior and evolving consumer expectations are affecting traditional blogging business models."),("What people will still pay you for.","Discover why selling information alone is becoming more challenging and what makes an offer valuable when information is increasingly accessible."),("The business model I would build today.","Learn why I would prioritize valuable offers, direct audience relationships and a deliberate sales strategy over relying entirely on pageviews."),("How to adapt without constantly starting over.","Identify the skills, business assets and strategies worth developing as technology continues to evolve.")]
+o.append(f'''<section class="web dk" id="webinar" style="scroll-margin-top:80px"><div class="in web-grid">
+<div class="stack">
+<p class="lbl">Free webinar with Genasys, founder of Boss Lady Bloggers</p>
+<h2>Futureproof <em>Your Blog</em></h2>
+<p class="big">How to build a profitable blogging business in the age of AI, without depending on Google traffic, outdated monetization strategies or endless content creation.</p>
+<div class="ifs">{''.join(f'<p>{e(x)}</p>' for x in ifs)}</div>
+<p class="big it">You need to watch this.</p>
+{P_("The blogging industry isn't standing still. And continuing to build your business around strategies that were designed for a different internet could leave you investing your time in the wrong things.")}
+{P_("Inside this free webinar, I'll explain what's changing, why traditional blogging strategies are becoming more vulnerable and how I would approach building a profitable blogging business today.")}
+<p class="lbl" style="margin-top:8px">Here&rsquo;s what we&rsquo;ll cover.</p>
+<div class="cover4">{''.join(f'<div><h3>{e(t)}</h3><p>{e(d)}</p></div>' for t,d in cov)}</div>
+{P_("Whether you're just starting your blog or questioning the direction of your existing business, this webinar will help you make more informed decisions about what you're building next.")}
+</div>
+<div class="wform"><p class="lbl">Free webinar</p><h3>Save your free seat</h3><div data-webinar-form></div><p class="wtags">Free webinar | Modern business strategy | The future of blogging</p></div>
+</div></section>''')
+# BLOG
+nos=["No recycled blogging advice.","No obsession with pageviews.","No pretending that publishing more content is the answer to every business problem."]
+post='<a class="post" href="/blog/"><div class="im" data-img></div><div class="t" data-title>From the blog</div></a>'
+o.append(f'''<section style="background:#F6E1E8"><div class="in stack" style="gap:28px">
+<div class="nar stack" style="text-align:center;gap:16px"><p class="lbl">The Boss Lady Bloggers blog</p><h2>Let&rsquo;s talk about what actually makes <em>blogging businesses profitable.</em></h2>
+{P_("Explore business strategy, offer development, buyer psychology, marketing, artificial intelligence, productivity and thoughtful conversations about the future of blogging.")}
+<div class="nos">{''.join(f'<span>{e(n)}</span>' for n in nos)}</div>
+<p class="big">Just practical business education for women who want to build something meaningful and commercially valuable.</p></div>
+<div class="posts" data-latest>{post*3}</div>
+<div style="text-align:center">{btn("Explore the Blog","/blog/")}</div>
+</div></section>''')
+# PODCAST/YT
+mic='<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0014 0M12 18v3"/></svg>'
+play='<svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 7v10l8-5z" fill="#fff"/></svg>'
+o.append(f'''<section style="background:#FFFFFF"><div class="in stack" style="gap:28px">
+<div class="nar stack" style="text-align:center;gap:16px"><p class="lbl">Continue the conversation</p><h2>Business conversations <em>worth making time for.</em></h2></div>
+<div class="two">
+<article class="media pod"><span class="ic">{mic}</span><h3>The Boss Lady Bloggers Podcast</h3><p>Thoughtful conversations about blogging, business strategy, buyer psychology, monetization, entrepreneurship and what it takes to build a business in a changing digital world.</p><p>Listen while you&rsquo;re driving, working, walking or finally getting a quiet moment to yourself.</p>{btn("Listen to the Podcast","/podcast/")}</article>
+<article class="media yt dk"><span class="ic" style="background:#A23E66">{play}</span><h3>Boss Lady Bloggers on YouTube</h3><p>Business strategy breakdowns, AI demonstrations, blogging education, productivity experiments and behind the scenes conversations about building an online business.</p><p>Come see what I&rsquo;m learning, building and experimenting with.</p>{btn("Watch on YouTube","https://www.youtube.com/@GenasysLynn","cr")}</article>
+</div></div></section>''')
+# FINAL
+o.append(f'''<section class="final"><div class="nar stack" style="align-items:center">
+<p class="lbl">Your vision deserves more than another unfinished business plan</p>
+<h2>A year from now, <em>what do you want to have built?</em></h2>
+<div class="anoth"><p>Another collection of blog posts?</p><p>Another unfinished digital product?</p><p>Another website that doesn&rsquo;t quite reflect your vision?</p></div>
+<p class="proud">Or a business you&rsquo;re proud to put your name on?</p>
+{P_("A business with valuable offers, compelling messaging, a professionally designed website and a clear strategy behind how it's intended to make money.")}
+{P_("You don't have to become an expert in every individual part of building an online business before you're allowed to own one.")}
+{P_("You can bring in someone who understands the strategy, knows how the pieces connect and has the professional skills to help bring it all together.")}
+{P_("As your blog coach, business strategist and website designer, that's exactly what I'm here to help you do.")}
+<p class="big">Let&rsquo;s build the business behind your blog.</p>
+<div class="row" style="justify-content:center">{btn("Explore Private Blog Coaching & Design",COACH,"br")}{btn("Discover Other Ways to Work With Me","#ways","ol")}</div>
+</div></section>''')
+o.append(VIDEO_JS)
+o.append(r'''<script>
+(function(){
+  /* Announcement bar: shows until Black Friday ends (Mon Nov 30 2026, 11:59 PM ET) */
+  var bar=document.querySelector('[data-hp-ann]');
+  if(bar&&Date.now()<Date.UTC(2026,11,1,4,59,59))bar.classList.add('on');
+
+  /* Latest 3 blog posts from WordPress */
+  var cards=document.querySelectorAll('[data-latest] > a');
+  if(cards.length&&window.fetch){
+    fetch('https://bossladybloggers.com/wp-json/wp/v2/posts?per_page=3&_embed').then(function(r){return r.json();}).then(function(posts){
+      (posts||[]).slice(0,cards.length).forEach(function(p,i){var a=cards[i];a.href=p.link;
+        var t=a.querySelector('[data-title]');if(t)t.innerHTML=p.title.rendered;
+        var m=p._embedded&&p._embedded['wp:featuredmedia']&&p._embedded['wp:featuredmedia'][0];
+        var src=m&&((m.media_details&&m.media_details.sizes&&m.media_details.sizes.medium_large&&m.media_details.sizes.medium_large.source_url)||m.source_url);
+        var box=a.querySelector('[data-img]');if(box&&src){var img=document.createElement('img');img.src=src;img.alt='';img.loading='lazy';box.appendChild(img);}
+      });
+    }).catch(function(){});
+  }
+
+  /* Webinar sign up: paste the Flodesk form ID for "Futureproof Your Blog" here */
+  var WEBINAR_FORM_ID='';
+  var host=document.querySelector('[data-webinar-form]');if(!host)return;
+  var id='hp-web';
+  var cfg=btoa(JSON.stringify({trigger:{mode:"immediately",value:0},onSuccess:{mode:"message",message:"",redirectUrl:""},coi:false,showForReturnVisitors:true,notification:true,gdpr:{acceptsMarketing:false,privacyPolicy:{enabled:false,mandatory:false}},trackingConfig:{metaPixelId:"",cookieBannerEnabled:false,googleAnalyticsId:""}}));
+  var f=WEBINAR_FORM_ID;
+  var h='<div id="'+id+'"'+(f?' data-ff-el="root" data-ff-version="3" data-ff-type="inline" data-ff-name="webinar" data-ff-stage="default"':'')+'>'+(f?'<div data-ff-el="config" data-ff-config="'+cfg+'" style="display:none"></div>':'')+
+   '<form novalidate'+(f?' action="https://form.flodesk.com/forms/'+f+'/submit" method="post" data-ff-el="form"':'')+' style="display:flex;flex-direction:column;gap:14px"><div data-ff-el="content" style="display:flex;flex-direction:column;gap:14px"><div data-ff-el="fields" style="display:flex;flex-direction:column;gap:12px">'+
+   '<div class="field"><label for="hp-first">First Name</label><input id="hp-first" type="text" name="firstName" maxlength="255" autocomplete="given-name" required></div>'+
+   '<div class="field"><label for="hp-email">Email Address</label><input id="hp-email" type="text" name="email" maxlength="255" inputmode="email" autocomplete="email" required></div>'+
+   '<input type="text" name="confirm_email_address" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true"></div>'+
+   '<div data-ff-el="footer"><button type="submit" class="hp-btn br" data-ff-el="submit">Save My Free Seat <i aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></i></button></div></div>'+
+   '<div data-ff-el="success"></div><div class="ff-err" data-ff-el="error"></div></form></div>'+
+   (f?'':'<div class="hp-slot" style="margin-top:12px"><b>To fill in</b>Flodesk form for the Futureproof Your Blog webinar is not connected yet, so sign ups are not saved.</div>');
+  host.innerHTML=h;
+  var wrap=document.getElementById(id),form=wrap.querySelector('form'),err=wrap.querySelector('.ff-err'),done=false;
+  function finish(){if(done)return;done=true;wrap.innerHTML='<p style="margin:0;font:400 26px/1.25 var(--font-display);color:#3A1C2A">You&rsquo;re in. Check your inbox for your webinar details.</p>';}
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var nm=form.querySelector('[name=firstName]').value.trim(),em=form.querySelector('[name=email]').value.trim();
+    if(!nm){err.textContent='Add your first name.';return;}
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){err.textContent='That email doesn’t look quite right yet.';return;}
+    err.textContent='';
+    if(!f){err.textContent='This form is not connected to Flodesk yet.';return;}
+    form.querySelector('button').disabled=true;
+    if(window.fd&&window.fd.q){try{fetch('https://form.flodesk.com/forms/'+f+'/submit',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({firstName:nm,email:em,confirm_email_address:''}),keepalive:true}).catch(function(){});}catch(x){}setTimeout(finish,400);return;}
+    setTimeout(function(){if(wrap.getAttribute('data-ff-stage')!=='error')finish();},9000);
+  },true);
+  if(f){
+    (function(w,d,t,h,s,n){if(w.fd)return;w.FlodeskObject=n;var fn=function(){(w[n].q=w[n].q||[]).push(arguments);};w[n]=w[n]||fn;var g=d.getElementsByTagName(t)[0];var v='?v='+Math.floor(new Date().getTime()/(120*1000))*60;var sm=d.createElement(t);sm.async=true;sm.type='module';sm.src=h+s+'.mjs'+v;g.parentNode.insertBefore(sm,g);var sn=d.createElement(t);sn.async=true;sn.noModule=true;sn.src=h+s+'.js'+v;g.parentNode.insertBefore(sn,g);})(window,document,'script','https://assets.flodesk.com','/universal','fd');
+    window.fd('form:handle',{formId:f,rootEl:'#'+id});
+    if(window.MutationObserver)new MutationObserver(function(){var s=wrap.getAttribute('data-ff-stage');if(s==='success')finish();if(s==='error')form.querySelector('button').disabled=false;}).observe(wrap,{attributes:true,attributeFilter:['data-ff-stage']});
+  }
+})();
+</script>
+</main>''')
+out='\n'.join(o)
+for bad in ['—','–']: assert bad not in out, bad
+open(P,'w').write(out); print('wrote',len(out))

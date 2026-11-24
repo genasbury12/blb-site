@@ -193,65 +193,91 @@ div[id^="fd-form"] form { padding-top: 0 !important; padding-bottom: 0 !importan
 
 </style>
 <div style="width:100vw;max-width:100vw;overflow-x:clip">
-<section style="background:#FBF5EE;padding:90px clamp(16px,4vw,48px) 40px">
-<div style="max-width:1180px;margin:0 auto;display:flex;flex-wrap:wrap;gap:48px;justify-content:space-between;align-items:flex-start">
-<div style="flex:1 1 520px;min-width:0;display:flex;flex-direction:column;gap:22px">
-<p class="rv" style="margin:0;font:700 clamp(64px,7vw,96px)/0.9 var(--font-script);color:#A23E66">Genasys</p>
-<div style="display:flex;flex-wrap:wrap;gap:24px;align-items:center">
-<div style="position:relative;width:120px;height:120px;border-radius:999px;background:#E9B9CA;flex:0 0 auto;overflow:hidden;display:flex;align-items:flex-end;justify-content:center"><img src="https://charming-caramel-d2453c.netlify.app/images/photos/portrait-hat.jpg" alt="Genasys smiling in a hat" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 35%"></div>
-<div style="flex:1 1 280px;display:flex;flex-direction:column;gap:14px">
-<p style="margin:0;font:400 16px/1.6 var(--font-body)">Blog coach, Showit designer, and founder of Boss Lady Bloggers. Helping women build blogs that make money since 2017.</p>
-<div style="display:flex;flex-wrap:wrap;gap:8px">
-<a href="https://www.instagram.com/blogcoach_gen" target="_blank" rel="noopener" style="border:1px solid #E9B9CA;border-radius:8px;padding:8px 12px;font:500 11px/1 var(--font-label);letter-spacing:0.08em;color:#3A1C2A;text-decoration:none">FOLLOW ON INSTAGRAM</a>
-<a href="/podcast" style="border:1px solid #E9B9CA;border-radius:8px;padding:8px 12px;font:500 11px/1 var(--font-label);letter-spacing:0.08em;color:#3A1C2A;text-decoration:none">LISTEN TO THE PODCAST</a>
-<a href="https://www.youtube.com/@GenasysLynn" target="_blank" rel="noopener" style="border:1px solid #E9B9CA;border-radius:8px;padding:8px 12px;font:500 11px/1 var(--font-label);letter-spacing:0.08em;color:#3A1C2A;text-decoration:none">WATCH ON YOUTUBE</a>
-</div>
-</div>
-</div>
-</div>
-<div style="flex:0 1 300px;display:flex;flex-direction:column;gap:14px">
-<p style="margin:0;font:700 34px/1 var(--font-body);letter-spacing:0.02em;color:#A23E66;text-transform:uppercase;border-bottom:2px solid #A23E66;padding-bottom:8px">Get around</p>
-<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 24px;font:400 15px/1.8 var(--font-body)">
-<a href="/" style="color:#3A1C2A;text-decoration:none">Home</a><a href="/academy" style="color:#3A1C2A;text-decoration:none">Courses</a>
-<a href="/about" style="color:#3A1C2A;text-decoration:none">About</a><a href="/blog-coaching" style="color:#3A1C2A;text-decoration:none">Work With Me</a>
-<a href="/start-here" style="color:#3A1C2A;text-decoration:none">Start Here</a><a href="/free-masterclass" style="color:#3A1C2A;text-decoration:none">Free Masterclass</a>
-<a href="/blog" style="color:#3A1C2A;text-decoration:none">Blog</a><a href="/podcast" style="color:#3A1C2A;text-decoration:none">Podcast</a>
-<a href="/contact" style="color:#3A1C2A;text-decoration:none">Contact</a><a href="/membership" style="color:#3A1C2A;text-decoration:none">Membership</a>
-</div>
-</div>
-</div>
-</div>
-</section>
-<footer style="background:#A23E66;color:#FFFFFF;padding:70px 0 0;overflow:hidden">
-  <div style="max-width:1080px;margin:0 auto;padding:0 clamp(16px,4vw,48px);display:flex;flex-wrap:wrap;gap:48px;justify-content:space-between;font:500 15px/2 var(--font-body)">
-    <div style="display:flex;flex-direction:column">
-      <a href="/" style="color:#FFFFFF;text-decoration:none">Home</a>
-      <a href="/start-here" style="color:#FFFFFF;text-decoration:none">Start Here</a>
-      <a href="/about" style="color:#FFFFFF;text-decoration:none">About</a>
-      <a href="/free-masterclass" style="color:#FFFFFF;text-decoration:none">Free Masterclass</a>
+<footer class="ft" style="background:#A23E66;color:#FFFFFF;padding:80px 0 0;overflow:hidden">
+<style>
+.ft a{color:#FFFFFF;text-decoration:none}
+.ft .ft-in{max-width:1180px;margin:0 auto;padding:0 clamp(16px,4vw,48px)}
+.ft .ft-top{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(36px,5vw,72px);align-items:start}
+.ft .ft-brand{font:400 clamp(40px,5vw,64px)/.95 var(--font-display);letter-spacing:-.01em;color:#FBF5EE;margin:0}
+.ft .ft-tag{margin:0;font:400 16px/1.65 var(--font-body);color:#F6E1E8;max-width:440px}
+.ft .ft-tag2{margin:0;font:400 italic 24px/1.3 var(--font-display);color:#FBF5EE}
+.ft .ft-cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}
+.ft .ft-cols h3{margin:0 0 12px;font:500 11.5px/1.4 var(--font-label);letter-spacing:.18em;text-transform:uppercase;color:#F6C9D8}
+.ft .ft-cols a{display:block;padding:6px 0;font:500 15px/1.45 var(--font-body)}
+@media (hover:hover){.ft .ft-cols a:hover,.ft .ft-row a:hover{text-decoration:underline;text-underline-offset:4px}}
+.ft .ft-stay{margin-top:56px;background:#3A1C2A;border-radius:30px;padding:clamp(24px,4vw,40px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px 48px;align-items:center}
+.ft .ft-stay h3{margin:0 0 8px;font:400 clamp(30px,3.4vw,42px)/1.05 var(--font-display);color:#FBF5EE}
+.ft .ft-stay p{margin:0;font:400 16px/1.6 var(--font-body);color:#F1DDE2}
+.ft .ft-form{display:flex;flex-wrap:wrap;gap:10px}
+.ft .ft-form label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.ft .ft-form input[type=text]{flex:1 1 220px;min-width:0;min-height:54px;border-radius:999px;border:0;padding:0 22px;font:500 16px/1 var(--font-body);color:#3A1C2A;background:#FBF5EE;-webkit-appearance:none;appearance:none}
+.ft .ft-form button{min-height:54px;padding:0 26px;border-radius:999px;border:0;background:#A23E66;color:#FFFFFF;font:600 15.5px/1 var(--font-body);cursor:pointer}
+.ft .ft-form input:focus-visible,.ft .ft-form button:focus-visible,.ft a:focus-visible{outline:3px solid #F6C9D8;outline-offset:3px}
+.ft .ft-msg{flex:1 1 100%;margin:0;font:500 14px/1.5 var(--font-body);color:#F6C9D8}
+.ft .ft-msg:empty{display:none}
+.ft .ft-slot{flex:1 1 100%;border:2px dashed #F6C9D8;border-radius:16px;padding:12px 16px;font:500 14px/1.5 var(--font-body);color:#F6C9D8}
+.ft .ft-slot b{display:block;font:500 11px/1.3 var(--font-label);letter-spacing:.16em;margin-bottom:4px}
+.ft .ft-row{margin-top:40px;padding:22px 0;border-top:1px solid rgba(251,245,238,.28);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:14px 28px;font:500 12px/1.5 var(--font-label);letter-spacing:.14em;text-transform:uppercase}
+.ft .ft-row nav{display:flex;flex-wrap:wrap;gap:8px 22px}
+.ft .ft-row p{margin:0;color:#F6E1E8}
+@media (max-width:900px){.ft .ft-top,.ft .ft-stay{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:560px){.ft .ft-cols{grid-template-columns:repeat(2,minmax(0,1fr))}.ft .ft-cols > div:last-child{grid-column:1 / -1}}
+</style>
+<div class="ft-in">
+  <div class="ft-top">
+    <div style="display:flex;flex-direction:column;gap:18px">
+      <p class="ft-brand">BOSS LADY BLOGGERS</p>
+      <p class="ft-tag">Professional blog coaching, custom website design and modern business education for ambitious women.</p>
+      <p class="ft-tag2">Helping you build the business behind your blog.</p>
     </div>
-    <div style="display:flex;flex-direction:column">
-      <a href="/blog-coaching" style="color:#FFFFFF;text-decoration:none">Work With Me</a>
-      <a href="/membership" style="color:#FFFFFF;text-decoration:none">The Blogging Ladies Membership</a>
-      <a href="/academy" style="color:#FFFFFF;text-decoration:none">Courses</a>
-      <a href="/podcast" style="color:#FFFFFF;text-decoration:none">Podcast</a>
-      <a href="/contact" style="color:#FFFFFF;text-decoration:none">Contact</a>
-    </div>
-    <div style="display:flex;flex-direction:column">
-      <a href="https://www.instagram.com/blogcoach_gen" target="_blank" rel="noopener" style="color:#FFFFFF;text-decoration:none">Instagram</a>
-      <a href="https://www.youtube.com/@GenasysLynn" target="_blank" rel="noopener" style="color:#FFFFFF;text-decoration:none">YouTube</a>
-      <a href="https://www.pinterest.com/BossLadyBloggers/" target="_blank" rel="noopener" style="color:#FFFFFF;text-decoration:none">Pinterest</a>
+    <div class="ft-cols">
+      <div><h3>Work With Me</h3><a href="/blog-coaching">The BOSS Business Experience</a><a href="/blog-coaching">Private Blog Coaching &amp; Design</a><a href="/portfolio">Website Design Portfolio</a></div>
+      <div><h3>Learn From Me</h3><a href="/membership">The Blogging Ladies Membership</a><a href="/academy">The BOSS Academy</a><a href="/academy#all-access">Academy All Access</a></div>
+      <div><h3>Explore</h3><a href="/about">About</a><a href="/#webinar">Futureproof Your Blog Webinar</a><a href="/blog">The Blog</a><a href="/podcast">The Podcast</a><a href="https://www.youtube.com/@GenasysLynn" target="_blank" rel="noopener">YouTube</a><a href="/contact">Contact</a></div>
     </div>
   </div>
-  <div class="bl-marquee" style="padding:40px 0 10px;overflow:hidden" aria-hidden="true">
-    <div class="bl-track bl-slow" style="font:400 clamp(48px,15vw,220px)/1 var(--font-display);white-space:nowrap;color:#FBF5EE">
-      <span>BOSS LADY BLOGGERS&#160;&#183;&#160;BOSS LADY BLOGGERS&#160;&#183;&#160;</span><span aria-hidden="true">BOSS LADY BLOGGERS&#160;&#183;&#160;BOSS LADY BLOGGERS&#160;&#183;&#160;</span>
-    </div>
+  <div class="ft-stay">
+    <div><h3>Stay Connected</h3><p>Modern business strategies, buyer psychology, AI and conversations about the future of blogging.</p></div>
+    <form class="ft-form" data-ft-news novalidate>
+      <label for="ft-email">Email Address</label>
+      <input id="ft-email" type="text" name="email" inputmode="email" autocomplete="email" placeholder="Email Address" maxlength="255">
+      <button type="submit">Subscribe</button>
+      <p class="ft-msg" role="status" aria-live="polite"></p>
+    </form>
   </div>
+  <div class="ft-row">
+    <nav aria-label="Social"><a href="https://www.instagram.com/blogcoach_gen" target="_blank" rel="noopener">Instagram</a><a href="https://www.pinterest.com/BossLadyBloggers/" target="_blank" rel="noopener">Pinterest</a><a href="https://www.youtube.com/@GenasysLynn" target="_blank" rel="noopener">YouTube</a></nav>
+    <nav aria-label="Legal"><a href="/privacy-policy">Privacy Policy</a><a href="/terms-and-conditions">Terms &amp; Conditions</a></nav>
+    <p>&copy; Boss Lady Bloggers. All rights reserved.</p>
+  </div>
+</div>
+<div class="bl-marquee" style="padding:10px 0 10px;overflow:hidden" aria-hidden="true">
+  <div class="bl-track bl-slow" style="font:400 clamp(48px,15vw,220px)/1 var(--font-display);white-space:nowrap;color:#FBF5EE">
+    <span>BOSS LADY BLOGGERS&#160;&#183;&#160;BOSS LADY BLOGGERS&#160;&#183;&#160;</span><span aria-hidden="true">BOSS LADY BLOGGERS&#160;&#183;&#160;BOSS LADY BLOGGERS&#160;&#183;&#160;</span>
+  </div>
+</div>
+<script>
+(function(){
+  /* Footer newsletter: paste the Flodesk form ID for your newsletter here */
+  var NEWS_FORM_ID='';
+  var form=document.querySelector('[data-ft-news]');if(!form)return;
+  var msg=form.querySelector('.ft-msg'),btn=form.querySelector('button'),inp=form.querySelector('input[name=email]');
+  if(!NEWS_FORM_ID){var s=document.createElement('div');s.className='ft-slot';s.innerHTML='<b>TO FILL IN</b>Newsletter form is not connected to Flodesk yet, so sign ups are not saved.';form.appendChild(s);}
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var em=inp.value.trim();
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){msg.textContent='That email doesn’t look quite right yet.';inp.focus();return;}
+    if(!NEWS_FORM_ID){msg.textContent='This form is not connected yet.';return;}
+    btn.disabled=true;msg.textContent='';
+    fetch('https://form.flodesk.com/forms/'+NEWS_FORM_ID+'/submit',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:em,confirm_email_address:''}),keepalive:true}).catch(function(){}).then(function(){
+      form.innerHTML='<p class="ft-msg" style="font-size:16px;color:#FBF5EE">You’re in. Watch your inbox.</p>';
+    });
+  });
+})();
+</script>
 </footer>
 
 </div>
-<style>.ig-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))!important}</style>
 <script>
 /* Boss Lady Bloggers · main.js
    Vanilla JS for every interactive feature (CLAUDE.md §5).

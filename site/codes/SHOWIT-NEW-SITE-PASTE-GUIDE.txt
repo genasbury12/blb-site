@@ -1,13 +1,14 @@
 BOSS LADY BLOGGERS - NEW WEBSITE ON SHOWIT - PASTE GUIDE
 =========================================================
 
-17 full pages plus 4 small blog-post pieces. Same workflow as before: one full-page embed
+19 full pages plus the small blog-post pieces. Same workflow as before: one full-page embed
 canvas per Showit page, paste the whole file, publish.
 
 THE FILES AND WHERE EACH ONE GOES
 ---------------------------------
 File                      Showit page (URL slug)
-Home.html                 Home page ( / )
+Home.html                 Home page ( / )  (the new homepage. The Black
+                          Friday bar on top hides itself after Nov 30)
 StartHere.html            /start-here
 About.html                /about
 BlogCoaching.html         /blog-coaching   (your Work With Me page: The BOSS
@@ -22,9 +23,16 @@ MembershipOffer.html      /membership-offer  (the 1-hour 50% off upsell people s
                           right after signing up for the masterclass. No menu
                           or footer on purpose. Hide it from your Showit nav)
 BlackFriday.html          /black-friday  (Nov 25 early access through Cyber Monday:
-                          50% off locked in forever + free 1:1 call and roadmap.
+                          50% off, locked in for as long as you stay a member.
                           The timer runs on its own: before Nov 25 it counts down,
                           after Nov 30 11:59 PM ET it shows "sale ended")
+Portfolio.html            /portfolio  (your client portfolio: 7 client sites
+                          as laptop and phone mockups, plus the 5 client
+                          video testimonials. Linked from the footer)
+ClientProject.html        /client-project  (ONE page serves every client
+                          project: /client-project?project=oneincome, tammy,
+                          abroad, fizzy, focusflow, cajungirl, datenight.
+                          Leave it out of your menu)
 Academy.html              /academy  (The BOSS Academy storefront. Name the page
                           "Courses" in your Showit menu)
 Membership.html           /membership  (The Blogging Ladies Membership,
@@ -62,8 +70,12 @@ links land on the membership:
   /group-coaching    ->  /membership
   /group-waitlist    ->  /membership
   /free-trainings    ->  /free-masterclass
-Also re-paste your nav, footer and menu embeds (they now link to
-Membership instead of Group Coaching and The Course).
+Also re-paste your nav, footer and menu embeds. NEW MENU: About,
+Blog Coaching & Design, Membership, Courses, Resources and a
+Work With Me button. NEW FOOTER: Work With Me, Learn From Me and
+Explore columns, Stay Connected sign up, social and legal links.
+Your footer links to /privacy-policy and /terms-and-conditions:
+if your Showit legal pages use other slugs, tell Claude.
 
 SITE-WIDE MASTERCLASS POPUP (paste ONCE, shows on every page)
 -------------------------------------------------------------
@@ -99,7 +111,7 @@ WHAT WORKS, EXACTLY AS DESIGNED
   scroll reveals, circled words, fanned cards, sticky stacking cards,
   tabs, Boss Blend sliders, FAQs, floating podcast phone, marquees,
   animated gradients.
-- Live Instagram feed on Home (pulls your latest 6 posts automatically).
+- Homepage blog section pulls your 3 newest posts automatically.
 - All 10 training links to Flodesk, Calendly booking buttons, the
   3 YouTube video cards, Spotify episode links, episode artwork.
 - Coaching price $897 / 3x$333 on /blog-coaching only.
@@ -149,8 +161,8 @@ post page gets rebuilt:
    PostFooter.html        The FULL site footer     Very bottom, full
                           with the Instagram       width, ~1000px tall,
                           feed                     DESKTOP ONLY
-   PostFooterMobile.html  Same footer without      Very bottom, full
-                          the Instagram feed       width, ~1300px tall,
+   PostFooterMobile.html  Same footer (kept so    Very bottom, full
+                          your mobile slot works)  width, ~1300px tall,
                                                    MOBILE ONLY
 
    The nav bar and footer make every blog post feel like the rest of
