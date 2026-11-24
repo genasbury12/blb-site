@@ -1,0 +1,722 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Interactive Course Creator | Build Interactive Online Courses With Claude | The BOSS Academy</title>
+<meta name="description" content="Learn how to use Claude to turn your expertise into an interactive, branded and gamified online course with student dashboards, working tools, narrated lessons and a personal Playbook.">
+<link rel="canonical" href="https://www.bossladybloggers.com/interactive-course-creator/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Boss Lady Bloggers">
+<meta property="og:title" content="The Interactive Course Creator | Build Interactive Online Courses With Claude | The BOSS Academy">
+<meta property="og:description" content="Learn how to use Claude to turn your expertise into an interactive, branded and gamified online course with student dashboards, working tools, narrated lessons and a personal Playbook.">
+<meta property="og:url" content="https://www.bossladybloggers.com/interactive-course-creator/">
+<meta property="og:image" content="https://www.bossladybloggers.com/brand/og-default.png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=Caveat:wght@600;700&display=swap">
+<link rel="stylesheet" href="/css/tokens.css">
+<link rel="stylesheet" href="/css/styles.css">
+<script>document.documentElement.classList.remove('no-js');</script>
+<script src="/js/main.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <a href="/" class="site-logo">
+    <img src="/brand/arch-monogram.svg" alt="" width="31" height="40">
+    <span class="wordmark">Boss Lady <em>Bloggers</em></span>
+  </a>
+  <nav aria-label="Main" class="site-nav">
+    <a href="/about/" class="navl" data-nav="about">About</a>
+    <a href="/coaching/" class="navl" data-nav="coaching">Blog Coaching &amp; Design</a>
+    <a href="/membership/" class="navl" data-nav="membership">Membership</a>
+    <a href="/academy/" class="navl" data-nav="academy" aria-current="page">Courses</a>
+    <a href="/start-here/" class="navl" data-nav="start-here">Resources</a>
+    <a href="/coaching/" class="pill pill-plain nav-boss" style="background:#3A1C2A;color:#FFFFFF">Work With Me</a>
+    <button type="button" class="menu-btn" data-menu-open aria-expanded="false" aria-controls="popout-menu" aria-label="Open full menu">
+      <svg aria-hidden="true" width="18" height="14" viewBox="0 0 18 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M1 1h16M1 7h16M1 13h16"></path></svg>
+    </button>
+  </nav>
+</header>
+
+<div id="popout-menu" class="popout" role="dialog" aria-modal="true" aria-label="Full menu" tabindex="-1">
+  <div class="popout-top">
+    <span style="font:400 26px/1 var(--font-display);color:#FBF5EE">Boss Lady Bloggers</span>
+    <button type="button" class="popout-close" data-menu-close aria-label="Close menu">&times;</button>
+  </div>
+  <div class="popout-grid">
+    <div style="flex:1 1 380px;min-width:0;display:flex;flex-direction:column;gap:18px">
+      <p style="margin:0;font:400 clamp(44px,5vw,72px)/1 var(--font-display);color:#FBF5EE">Helping you build the business <em>behind your blog.</em></p>
+      <p style="margin:0;font:400 16px/1.6 var(--font-body);color:#F6E1E8">Professional blog coaching, custom website design and modern business education for ambitious women.</p>
+      <div><a href="/coaching/" class="pill pill-plain" style="background:#FBF5EE;color:#3A1C2A">Work With Me</a></div>
+    </div>
+    <nav aria-label="Full menu" class="popout-nav">
+      <a href="/">Home</a><a href="/about/">About</a><a href="/coaching/">Blog Coaching &amp; Design</a><a href="/membership/">The Blogging Ladies Membership</a><a href="/academy/">Courses</a><a href="/start-here/">Resources</a><a href="/#webinar">Futureproof Your Blog Webinar</a><a href="/blog/">Blog</a><a href="/podcast/">Podcast</a><a href="/contact/">Contact</a>
+    </nav>
+  </div>
+  <div class="popout-photo"><img src="/images/photos/flatlay-notebook.jpg" alt="Notebook, pen and a Boss mug on a desk" loading="lazy"></div>
+</div>
+<style>
+/* Shared look for the Portfolio and Client Project pages: cream and plum editorial, real laptop and phone mockups. */
+.pf{--plum:#3A1C2A;--berry:#A23E66;--rose:#E9B9CA;--blush:#F6E1E8;--cream:#FBF5EE;--cocoa:#4A2F3B;--mauve:#6E4B5B;--pop:#F6C9D8}
+.pf section{padding:clamp(76px,9vw,124px) clamp(16px,4vw,48px)}
+.pf .in{max-width:1180px;margin:0 auto}
+.pf .nar{max-width:780px;margin:0 auto}
+.pf .lbl{margin:0;font:500 12px/1.5 var(--font-label);letter-spacing:.2em;text-transform:uppercase;color:var(--berry)}
+.pf .dk .lbl{color:var(--rose)}
+.pf h1,.pf h2,.pf h3{margin:0;font-family:var(--font-display);font-weight:400;letter-spacing:-.015em;text-wrap:balance;color:var(--plum)}
+.pf h1{font-size:clamp(46px,6.4vw,92px);line-height:.98;letter-spacing:-.025em}
+.pf h2{font-size:clamp(38px,5vw,64px);line-height:1.02}
+.pf h1 em,.pf h2 em{color:var(--berry)}
+.pf .dk h1,.pf .dk h2,.pf .dk h3{color:var(--cream)}
+.pf .dk h1 em,.pf .dk h2 em{color:var(--pop)}
+.pf p{margin:0}
+.pf .body{font:400 18px/1.7 var(--font-body);color:var(--cocoa)}
+.pf .dk .body{color:#F1DDE2}
+.pf .big{font:400 clamp(24px,3vw,34px)/1.25 var(--font-display);color:var(--plum)}
+.pf .dk .big{color:var(--cream)}
+.pf .it{font-style:italic;color:var(--berry)}
+.pf .dk .it{color:var(--pop)}
+.pf .stack{display:flex;flex-direction:column;gap:20px}
+.pf .row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.pf .ctr{text-align:center}.pf .ctr .row{justify-content:center}
+.pf .pf-btn{display:inline-flex;align-items:center;gap:12px;min-height:56px;padding:8px 10px 8px 24px;border-radius:999px;background:var(--plum);color:#fff;font:600 15.5px/1.2 var(--font-body);text-decoration:none;transition:transform .2s ease}
+.pf .pf-btn i{flex:none;width:38px;height:38px;border-radius:999px;background:var(--berry);display:grid;place-items:center;transition:transform .2s ease}
+.pf .pf-btn.cr{background:var(--cream);color:var(--plum)}
+.pf .pf-btn.br{background:var(--berry)}.pf .pf-btn.br i{background:var(--plum)}
+.pf .pf-btn.ol{background:transparent;color:var(--plum);border:1.5px solid var(--plum)}
+.pf .pf-btn.olw{background:transparent;color:var(--cream);border:1.5px solid rgba(233,185,202,.6)}
+.pf .pf-btn.olw i{background:var(--pop)}.pf .pf-btn.olw i svg{stroke:#3A1C2A}
+@media (hover:hover){.pf .pf-btn:hover{transform:translateY(-2px)}.pf .pf-btn:hover i{transform:rotate(45deg)}}
+.pf .pf-btn:focus-visible,.pf summary:focus-visible{outline:3px solid var(--berry);outline-offset:3px}
+.pf .pf-slot{border:2px dashed var(--berry);border-radius:18px;padding:16px 20px;background:rgba(162,62,102,.05);font:500 15px/1.5 var(--font-body);color:var(--berry)}
+.pf .pf-slot b{display:block;font:500 11px/1.3 var(--font-label);letter-spacing:.16em;text-transform:uppercase;margin-bottom:6px}
+.pf .pf-slot.sm{padding:12px 16px;font-size:14px}
+.pf .dk .pf-slot{border-color:var(--pop);color:var(--pop);background:rgba(246,201,216,.06)}
+.pf .chips{display:flex;flex-wrap:wrap;gap:8px}
+.pf .chips span{padding:10px 16px;border-radius:999px;background:var(--plum);color:var(--cream);font:400 19px/1.2 var(--font-display)}
+.pf .shot{display:block;border-radius:22px;overflow:hidden;box-shadow:0 34px 70px -44px rgba(58,28,42,.7);background:var(--blush)}
+.pf .shot img{width:100%;height:auto;display:block}
+
+/* hero */
+.pf .hero{background:var(--cream);position:relative;overflow:hidden;isolation:isolate}
+.pf .hero::before{content:"";position:absolute;right:-12%;top:-30%;width:60vw;height:60vw;max-width:760px;max-height:760px;border-radius:50%;background:radial-gradient(circle,rgba(233,185,202,.55),rgba(233,185,202,0) 66%);z-index:-1}
+.pf .hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(36px,5vw,72px);align-items:center}
+.pf .fan{position:relative;aspect-ratio:16/13}
+.pf .fan .shot{position:absolute;width:78%}
+.pf .fan .shot:nth-child(1){left:0;top:4%;transform:rotate(-5deg)}
+.pf .fan .shot:nth-child(2){right:0;top:18%;transform:rotate(4deg)}
+.pf .fan .shot:nth-child(3){left:11%;bottom:0;transform:rotate(-1deg)}
+
+/* philosophy */
+.pf .twocol{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(30px,5vw,72px);align-items:start}
+.pf .understand{display:grid;gap:8px}
+.pf .understand p{padding:14px 18px;border-radius:14px;background:var(--blush);font:400 22px/1.25 var(--font-display);color:var(--plum)}
+.pf .understand p:first-child{background:var(--plum);color:var(--cream)}
+
+/* projects */
+.pf .proj{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:clamp(26px,4vw,56px);align-items:center;padding:clamp(22px,3vw,34px);border-radius:32px;background:#fff}
+.pf .proj:nth-child(even){grid-template-columns:minmax(0,.75fr) minmax(0,1.25fr)}
+.pf .proj:nth-child(even) .proj-img{order:2}
+.pf .proj-img{display:block;border-radius:20px;overflow:hidden;background:var(--blush)}
+.pf .proj-img img{width:100%;height:auto;display:block;transition:transform .5s ease}
+@media (hover:hover){.pf .proj-img:hover img{transform:scale(1.025)}}
+.pf .proj h3{font-size:clamp(32px,3.4vw,44px);line-height:1.02}
+.pf .proj .who{font:500 15px/1.5 var(--font-body);color:var(--mauve)}
+.pf .svc{display:flex;flex-wrap:wrap;gap:6px}
+.pf .svc span{padding:8px 13px;border-radius:999px;border:1.5px solid var(--rose);font:500 13px/1.2 var(--font-body);color:var(--plum)}
+.pf .projs{display:flex;flex-direction:column;gap:22px}
+.pf .tiny{font:500 11.5px/1.4 var(--font-label);letter-spacing:.16em;text-transform:uppercase;color:var(--plum)}
+.pf .link{font:600 15px/1.3 var(--font-body);color:var(--berry);text-decoration:underline;text-underline-offset:4px}
+
+/* strategy */
+.pf .see{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.pf .see > div{border-radius:28px;padding:clamp(22px,3vw,34px);display:flex;flex-direction:column;gap:10px}
+.pf .see .a{background:var(--blush)}
+.pf .see .b{background:var(--plum)}
+.pf .see p.x{font:400 clamp(21px,2.2vw,25px)/1.3 var(--font-display);color:var(--plum)}
+.pf .see .b p.x{color:var(--cream)}
+.pf .should{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.pf .should li{padding:18px 20px;border-radius:18px;background:#fff;font:500 16.5px/1.5 var(--font-body);color:var(--plum);border-left:3px solid var(--berry)}
+.pf .should li b{display:block;font:400 22px/1.2 var(--font-display);color:var(--berry);margin-bottom:4px;font-weight:400}
+
+/* gallery */
+.pf .gal-d{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.pf .gal-m{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:12px}
+.pf .gal-m .shot{border-radius:18px}
+.pf .cap{margin-top:10px;font:500 11.5px/1.4 var(--font-label);letter-spacing:.14em;text-transform:uppercase;color:var(--mauve)}
+
+/* experience */
+.pf .bx{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,4vw,56px);align-items:start}
+.pf .ticks{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.pf .ticks li{position:relative;padding:13px 16px 13px 50px;border-radius:14px;background:rgba(251,245,238,.08);font:500 16px/1.5 var(--font-body);color:var(--cream)}
+.pf .ticks li::before{content:"";position:absolute;left:14px;top:14px;width:22px;height:22px;border-radius:7px;background:var(--berry) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 12.5l4 4L18 8' fill='none' stroke='%23fff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/16px no-repeat}
+
+/* process */
+.pf .steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.pf .step{background:#fff;border-radius:28px;padding:28px;display:flex;flex-direction:column;gap:12px}
+.pf .step .n{font:400 italic 52px/.9 var(--font-display);color:var(--berry)}
+.pf .step h3{font-size:27px;line-height:1.12}
+.pf .step p{font:400 16px/1.6 var(--font-body);color:var(--cocoa)}
+
+/* faq */
+.pf .faq{display:flex;flex-direction:column;gap:12px}
+.pf .faq details{width:100%;box-sizing:border-box;background:#fff;border:2px solid var(--plum);border-radius:18px;padding:4px 20px}
+.pf .faq summary{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:56px;font:600 16.5px/1.35 var(--font-body);color:var(--plum);cursor:pointer;list-style:none}
+.pf .faq summary::-webkit-details-marker{display:none}
+.pf .faq .faq-a p{margin:0 0 10px;font:400 16px/1.65 var(--font-body);color:var(--plum)}
+
+/* webinar mini */
+.pf .mini{background:var(--plum);border-radius:32px;padding:clamp(28px,5vw,56px);display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:28px;align-items:center}
+
+/* client project */
+.pf .cp-hero{background:var(--plum)}
+.pf .meta{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.pf .meta div{padding:16px 18px;border-radius:18px;background:rgba(251,245,238,.07);display:flex;flex-direction:column;gap:6px}
+.pf .meta span{font:500 11px/1.3 var(--font-label);letter-spacing:.16em;text-transform:uppercase;color:var(--pop)}
+.pf .meta b{font:400 22px/1.2 var(--font-display);color:var(--cream);font-weight:400}
+.pf .cp-sec{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(24px,4vw,64px);align-items:start;padding:clamp(34px,4vw,52px) 0;border-top:1px solid rgba(58,28,42,.14)}
+.pf .cp-sec h2{font-size:clamp(32px,3.6vw,46px)}
+.pf .cp-sec .num{display:block;font:500 11.5px/1 var(--font-label);letter-spacing:.18em;color:var(--berry);margin-bottom:14px}
+.pf .more{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.pf .more a{display:flex;flex-direction:column;gap:10px;text-decoration:none;color:var(--plum)}
+.pf .more a span{font:400 22px/1.2 var(--font-display)}
+
+@media (max-width:980px){
+ .pf .hero-grid,.pf .twocol,.pf .proj,.pf .proj:nth-child(even),.pf .bx,.pf .mini,.pf .cp-sec{grid-template-columns:minmax(0,1fr)}
+ .pf .proj:nth-child(even) .proj-img{order:0}
+ .pf .steps,.pf .more{grid-template-columns:minmax(0,1fr)}
+ .pf .gal-m{grid-template-columns:repeat(4,minmax(0,1fr))}
+}
+@media (max-width:700px){
+ .pf .see,.pf .should,.pf .gal-d,.pf .meta{grid-template-columns:minmax(0,1fr)}
+ .pf .gal-m{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .pf .pf-btn{font-size:15px;padding-left:20px}
+}
+@media (prefers-reduced-motion:reduce){.pf *{transition:none!important}}
+
+.vt-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:16px}
+.vt{display:flex;flex-direction:column;gap:12px;background:#FFFFFF;border-radius:22px;padding:12px 12px 16px;box-shadow:0 22px 44px -36px rgba(58,28,42,.6)}
+.vt-frame{position:relative;aspect-ratio:9/12;border-radius:14px;overflow:hidden;background:#3A1C2A}
+.vt-frame img{width:100%;height:100%;object-fit:cover;display:block}
+.vt-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vt-play{position:absolute;inset:0;width:100%;border:0;padding:0;margin:0;background:linear-gradient(180deg,rgba(58,28,42,0) 45%,rgba(58,28,42,.65));cursor:pointer;display:flex;align-items:flex-end;justify-content:flex-start}
+.vt-play span{margin:14px;width:52px;height:52px;border-radius:999px;background:#A23E66;display:grid;place-items:center;transition:transform .2s ease}
+@media (hover:hover){.vt-play:hover span{transform:scale(1.08)}}
+.vt-play:focus-visible{outline:3px solid #A23E66;outline-offset:3px}
+.vt-name{margin:0 4px;font:400 24px/1.1 var(--font-display);color:#3A1C2A}
+.vt-cap{margin:0 4px;font:500 11px/1.4 var(--font-label);letter-spacing:.14em;text-transform:uppercase;color:#A23E66}
+</style>
+<style>
+.pf .beat{font:400 clamp(21px,2.3vw,26px)/1.3 var(--font-display);color:var(--plum)}
+.pf .dk .beat{color:var(--cream)}
+.pf .ctr-h{text-align:left}
+.pf .ctr-h > h2,.pf .ctr-h > .lbl{text-align:center}
+.pf .sticky{position:sticky;top:110px}
+.pf .ticks.lt li{background:#fff;color:var(--plum)}
+.pf .dk .ticks.lt li{background:rgba(251,245,238,.08);color:var(--cream)}
+.pf .ticks.no li::before{background:var(--plum) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M7 7l10 10M17 7L7 17' fill='none' stroke='%23fff' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E") center/14px no-repeat}
+.pf .tagrow{display:flex;flex-wrap:wrap;gap:8px 18px;font:500 11.5px/1.5 var(--font-label);letter-spacing:.16em;text-transform:uppercase;color:var(--pop)}
+.pf .tagrow span+span::before{content:"\2726";margin-right:18px;color:var(--berry)}
+.pf .thoughts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.pf .thoughts p{padding:18px 20px;border-radius:18px;background:#fff;font:400 italic 21px/1.35 var(--font-display);color:var(--plum)}
+.pf .thoughts p::before{content:"\201C";color:var(--berry)}.pf .thoughts p::after{content:"\201D";color:var(--berry)}
+.pf .phase{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(24px,4vw,56px);padding:clamp(26px,4vw,44px);border-radius:32px;background:#fff;align-items:start}
+.pf .phase .pn{font:500 12px/1 var(--font-label);letter-spacing:.2em;color:var(--berry)}
+.pf .phase h3{font:400 italic clamp(48px,6vw,80px)/.95 var(--font-display);color:var(--plum);margin:10px 0 12px}
+.pf .phase .when{display:inline-block;padding:9px 14px;border-radius:999px;background:var(--plum);color:var(--cream);font:500 11px/1 var(--font-label);letter-spacing:.14em}
+.pf .phase .ticks.lt li{background:var(--cream);font-size:15px;padding:11px 14px 11px 46px}
+.pf .phase .ticks.lt li::before{top:12px}
+@media (min-width:1100px){.pf .phase .ticks{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.pf .phase .outc{padding:18px 20px;border-radius:18px;background:var(--berry);color:#fff;font:400 20px/1.35 var(--font-display)}
+.pf .phase .outc b{display:block;font:500 11px/1.3 var(--font-label);letter-spacing:.16em;text-transform:uppercase;color:var(--pop);margin-bottom:6px;font-weight:500}
+.pf .phases{display:flex;flex-direction:column;gap:18px}
+.pf .cycle{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;counter-reset:c}
+.pf .cycle div{padding:22px 18px;border-radius:22px;background:rgba(251,245,238,.08);display:flex;flex-direction:column;gap:8px}
+.pf .cycle b{font:400 italic 34px/1 var(--font-display);color:var(--pop);font-weight:400}
+.pf .cycle p{font:400 15px/1.55 var(--font-body);color:#F1DDE2}
+.pf .pairs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.pf .pair{padding:22px 24px;border-radius:22px;background:#fff;display:flex;flex-direction:column;gap:8px}
+.pf .pair h3{font-size:25px;line-height:1.15}
+.pf .pair p{font:400 16px/1.6 var(--font-body);color:var(--cocoa)}
+.pf .dk .pair{background:rgba(251,245,238,.07)}.pf .dk .pair h3{color:var(--cream)}.pf .dk .pair p{color:#F1DDE2}
+.pf .price{background:var(--plum);border-radius:32px;padding:clamp(28px,4vw,48px);display:flex;flex-direction:column;gap:14px}
+.pf .fornot{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.pf .fornot > div{border-radius:28px;padding:clamp(22px,3vw,32px);display:flex;flex-direction:column;gap:14px}
+.pf .avail{background:var(--berry);border-radius:32px;padding:clamp(30px,5vw,60px);text-align:center;display:flex;flex-direction:column;gap:16px;align-items:center}
+.pf .avail h2{color:#fff}.pf .avail h2 em{color:var(--pop)}.pf .avail .body{color:#FBE3EA}
+
+.pf .steps4{grid-template-columns:repeat(4,minmax(0,1fr))}.pf .gal3{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width:1100px){.pf .steps4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:980px){.pf .gal3{grid-template-columns:minmax(0,1fr)}.pf .phase{grid-template-columns:minmax(0,1fr)}.pf .cycle{grid-template-columns:repeat(2,minmax(0,1fr))}.pf .sticky{position:static}}
+@media (max-width:700px){.pf .steps4,.pf .thoughts,.pf .pairs,.pf .fornot,.pf .cycle{grid-template-columns:minmax(0,1fr)}}
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Space+Mono:wght@400;700&display=swap">
+<style>
+/* The Interactive Lab: the course's own brand. Experimental, playful, unconventional, inventive. */
+.icc{--violet:#6348B5;--peach:#F1A48E;--lilac:#E0D5F5;--canvas:#EBEBE5;--ink:#27243A;
+ --plum:#27243A;--berry:#6348B5;--rose:#E0D5F5;--blush:#E0D5F5;--cream:#EBEBE5;--cocoa:#3A3650;--mauve:#5B5675;--pop:#F1A48E;
+ --font-display:'Bricolage Grotesque',system-ui,sans-serif;--font-label:'Space Mono',ui-monospace,monospace;background:var(--canvas)}
+.icc h1,.icc h2,.icc h3{font-weight:800;letter-spacing:-.035em;line-height:.98}
+.icc h3{letter-spacing:-.02em}
+.icc h1 em,.icc h2 em{font-style:normal;color:var(--ink);background:var(--peach);padding:0 .14em;border-radius:.16em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.icc .dk h1 em,.icc .dk h2 em{color:var(--ink)}
+.icc .lbl{font-weight:700;letter-spacing:.14em;color:var(--violet)}
+.icc .dk .lbl{color:var(--peach)}
+.icc .beat{font-weight:600;font-size:clamp(20px,2.1vw,24px);letter-spacing:-.01em}
+.icc .big{font-weight:600;letter-spacing:-.02em}
+.icc .it{font-style:normal;color:var(--violet)}
+.icc .dk .it{color:var(--peach)}
+.icc .grid-bg{background-color:var(--canvas);background-image:linear-gradient(rgba(99,72,181,.09) 1.5px,transparent 1.5px),linear-gradient(90deg,rgba(99,72,181,.09) 1.5px,transparent 1.5px);background-size:32px 32px}
+.icc .vio{background:var(--violet)}
+.icc .vio.dk .body,.icc .vio.dk .ticks.lt li{color:#F3EEFF}
+.icc .inkbg{background:var(--ink)}
+.icc .lil{background:var(--lilac)}
+.icc .pf-btn{background:var(--ink);border:2px solid var(--ink);box-shadow:5px 5px 0 var(--peach);font-family:var(--font-label);font-weight:700;font-size:14.5px;letter-spacing:.02em;border-radius:14px}
+.icc .pf-btn i{background:var(--violet);border-radius:10px}
+.icc .pf-btn.cr{background:var(--peach);color:var(--ink);box-shadow:5px 5px 0 var(--ink)}
+.icc .pf-btn.cr i{background:var(--ink)}
+.icc .pf-btn.br{background:var(--violet);box-shadow:5px 5px 0 var(--ink)}.icc .pf-btn.br i{background:var(--ink)}
+.icc .pf-btn.ol{background:#fff;color:var(--ink)}
+.icc .pf-btn.olw{background:transparent;color:#fff;border-color:#fff;box-shadow:5px 5px 0 var(--peach)}
+@media (hover:hover){.icc .pf-btn:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--peach)}.icc .pf-btn.cr:hover,.icc .pf-btn.br:hover{box-shadow:7px 7px 0 var(--ink)}}
+.icc .pf-slot{border-color:var(--violet);color:var(--violet);background:rgba(99,72,181,.06);font-family:var(--font-label);font-size:13.5px}
+.icc .dk .pf-slot{border-color:var(--peach);color:var(--peach);background:rgba(241,164,142,.08)}
+.icc .ticks li::before{background-color:var(--violet);border-radius:6px}
+.icc .ticks.lt li{background:#fff;border:2px solid var(--ink);border-radius:12px}
+.icc .dk .ticks.lt li{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.25)}
+/* retro window */
+.icc .win{border:2.5px solid var(--ink);border-radius:18px;overflow:hidden;background:#fff;box-shadow:9px 9px 0 var(--ink)}
+.icc .dk .win{box-shadow:9px 9px 0 var(--peach)}
+.icc .win .bar{background:var(--violet);display:flex;align-items:center;gap:7px;padding:11px 14px;border-bottom:2.5px solid var(--ink)}
+.icc .win .bar i{width:12px;height:12px;border-radius:50%;background:var(--peach);border:1.5px solid var(--ink)}
+.icc .win .bar i:nth-child(2){background:var(--lilac)}.icc .win .bar i:nth-child(3){background:var(--canvas)}
+.icc .win .bar span{margin-left:auto;font:700 11px/1 var(--font-label);letter-spacing:.06em;color:var(--lilac)}
+.icc .win .wb{padding:clamp(18px,2.6vw,28px);color:var(--ink)}
+.icc .win .big,.icc .win .beat,.icc .win h3{color:var(--ink)}
+.icc .win .body{color:var(--cocoa)}
+.icc .win .lbl{color:var(--violet)}
+.icc .win .pf-slot{border-color:var(--violet);color:var(--violet);background:rgba(99,72,181,.06)}
+.icc .win .ticks.lt li{background:#fff;color:var(--ink);border-color:var(--ink)}
+.icc .spark{width:28px;height:28px;fill:var(--peach)}
+.icc .burst{position:absolute;width:clamp(90px,12vw,150px);fill:var(--peach);z-index:0;opacity:.95}
+.icc .rel{position:relative}
+/* hero */
+.icc .ihero{position:relative;overflow:hidden;isolation:isolate}
+.icc .ihero .burst.b1{left:auto;right:30%;top:-36px;width:110px}.icc .ihero .burst.b2{right:4%;bottom:-40px;width:110px;fill:var(--violet);opacity:.9}
+.icc .ihero h1{font-size:clamp(38px,4.4vw,64px)}
+.icc .intro{font:700 15px/1 var(--font-label);letter-spacing:.16em;text-transform:uppercase;color:var(--violet)}
+.icc .name{font:800 clamp(38px,4.6vw,64px)/.95 var(--font-display);letter-spacing:-.04em;color:var(--ink);background:var(--lilac);border:2.5px solid var(--ink);border-radius:16px;padding:14px 18px;box-shadow:6px 6px 0 var(--violet);align-self:flex-start;transform:rotate(-1.5deg)}
+.icc .stats{display:flex;flex-wrap:wrap;gap:8px}
+.icc .stats span{padding:9px 12px;border-radius:10px;background:var(--ink);color:var(--canvas);font:700 11.5px/1.2 var(--font-label);letter-spacing:.06em}
+.icc .stats span b{color:var(--peach)}
+/* dashboard illustration */
+.icc .dash h4{margin:0;font:800 26px/1 var(--font-display);letter-spacing:-.03em;color:var(--ink)}
+.icc .dash .tag{display:inline-block;padding:6px 10px;border-radius:8px;background:var(--lilac);font:700 11px/1 var(--font-label);color:var(--violet);margin:0 6px 6px 0}
+.icc .xp{height:16px;border-radius:999px;border:2px solid var(--ink);background:var(--canvas);overflow:hidden}
+.icc .xp b{display:block;height:100%;width:72%;background:repeating-linear-gradient(45deg,var(--violet) 0 10px,#7b62cc 10px 20px)}
+.icc .mis{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.icc .mis li{display:flex;gap:10px;align-items:center;padding:10px 12px;border-radius:10px;background:var(--canvas);font:600 14.5px/1.3 var(--font-body);color:var(--ink)}
+.icc .mis li i{flex:none;width:20px;height:20px;border-radius:6px;border:2px solid var(--ink);background:#fff}
+.icc .mis li.on i{background:var(--violet) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 12.5l4 4L18 8' fill='none' stroke='%23fff' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/14px no-repeat}
+.icc .badges{display:flex;gap:8px;flex-wrap:wrap}
+.icc .badges span{width:42px;height:42px;border-radius:12px;border:2px solid var(--ink);display:grid;place-items:center;font:700 12px/1 var(--font-label);background:var(--peach);color:var(--ink)}
+.icc .badges span:nth-child(even){background:var(--lilac)}.icc .badges span.lock{background:#ddd;color:#999;border-style:dashed}
+.icc .checker{height:26px;background:conic-gradient(var(--ink) 90deg,#fff 0 180deg,var(--ink) 0 270deg,#fff 0) 0 0/26px 26px}
+/* compare + cards */
+.icc .ab{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+.icc .ab .win .wb p{margin:0 0 10px;font:400 16.5px/1.6 var(--font-body)}
+.icc .ab .a .bar{background:#9d98ad}
+.icc .feat{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.icc .feat article{background:#fff;border:2.5px solid var(--ink);border-radius:18px;padding:22px;display:flex;flex-direction:column;gap:8px;box-shadow:6px 6px 0 var(--lilac)}
+.icc .feat article:nth-child(3n+2){box-shadow:6px 6px 0 var(--peach)}.icc .feat article:nth-child(3n){box-shadow:6px 6px 0 var(--violet)}
+.icc .feat h3{font-size:24px}.icc .feat p{font:400 16px/1.6 var(--font-body);color:var(--cocoa)}
+.icc .glance{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:12px}
+.icc .glance div{border-radius:16px;padding:18px;background:rgba(255,255,255,.08);border:2px solid rgba(255,255,255,.22);color:#F3EEFF;font:500 15.5px/1.45 var(--font-body)}
+.icc .glance div b{display:block;font:800 46px/.9 var(--font-display);letter-spacing:-.04em;color:var(--peach);margin-bottom:6px}
+.icc .mods{display:flex;flex-direction:column;gap:22px}
+.icc .mod{display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr);gap:clamp(20px,3vw,44px);align-items:start}
+.icc .mod .num{font:700 13px/1 var(--font-label);letter-spacing:.18em;color:var(--violet)}
+.icc .mod h3{font-size:clamp(28px,3vw,40px);margin-top:10px}
+.icc .inside{display:grid;gap:10px}
+.icc .inside div{padding:14px 16px;border-radius:12px;background:var(--canvas);border-left:4px solid var(--violet)}
+.icc .inside b{display:block;font:800 18px/1.2 var(--font-display);letter-spacing:-.01em;margin-bottom:4px}
+.icc .inside p{margin:0;font:400 15px/1.55 var(--font-body);color:var(--cocoa)}
+.icc .pass .field{display:flex;flex-direction:column;gap:5px;margin-bottom:10px}
+.icc .pass .field span{font:700 10.5px/1 var(--font-label);letter-spacing:.12em;text-transform:uppercase;color:var(--violet)}
+.icc .pass .field i{display:block;height:34px;border-radius:9px;border:2px solid var(--ink);background:var(--canvas)}
+.icc .pass .two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.icc .ranks{display:flex;flex-wrap:wrap;gap:10px;counter-reset:r}
+.icc .ranks span{counter-increment:r;padding:10px 14px;border-radius:12px;border:2px solid var(--ink);background:#fff;font:800 17px/1 var(--font-display);color:var(--ink)}
+.icc .ranks span::before{content:counter(r);font:700 11px/1 var(--font-label);color:var(--violet);margin-right:8px}
+.icc .ranks span:last-child{background:var(--peach)}
+.icc .sop{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:18px}
+.icc .sop ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.icc .sop li{font:500 15px/1.45 var(--font-body);padding-left:22px;position:relative}
+.icc .sop li::before{content:">";position:absolute;left:0;font:700 14px/1.45 var(--font-label);color:var(--violet)}
+.icc .res{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:14px}
+.icc .res div{background:#fff;border:2.5px solid var(--ink);border-radius:16px;padding:18px}
+.icc .res h3{font-size:19px;margin-bottom:10px}
+.icc .res p{margin:0;padding:6px 0;border-top:1.5px dashed rgba(39,36,58,.2);font:500 14.5px/1.4 var(--font-body)}
+.icc .vs{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:22px;align-items:start}
+.icc .vs ol{margin:0;padding:0;list-style:none;display:grid;gap:8px;counter-reset:s}
+.icc .vs li{counter-increment:s;display:flex;gap:12px;font:500 15.5px/1.45 var(--font-body)}
+.icc .vs li::before{content:counter(s,decimal-leading-zero);font:700 12px/1.9 var(--font-label);color:var(--violet)}
+.icc .vs .a li{color:#6b6780}
+.icc .ifs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:14px}
+.icc .ifs article{border-radius:18px;padding:22px;background:var(--lilac);border:2.5px solid var(--ink)}
+.icc .ifs h3{font-size:22px;margin-bottom:8px}.icc .ifs p{margin:0;font:400 15.5px/1.55 var(--font-body)}
+.icc .ifs article:nth-child(odd){background:#fff}
+.icc .recv{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.icc .recv div{padding:14px 16px;border-radius:12px;background:var(--canvas)}
+.icc .recv b{display:block;font:800 18px/1.2 var(--font-display);margin-bottom:4px}
+.icc .recv p{margin:0;font:400 14.5px/1.5 var(--font-body);color:var(--cocoa)}
+@media (max-width:980px){.icc .mod,.icc .vs{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:700px){.icc .ab,.icc .feat,.icc .recv{grid-template-columns:minmax(0,1fr)}.icc .win{box-shadow:6px 6px 0 var(--ink)}.icc .dk .win{box-shadow:6px 6px 0 var(--peach)}}
+</style>
+<main id="main" class="pf icc">
+<section class="ihero grid-bg"><svg class="burst b1" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 0l9 30 25-19-15 27 31 3-30 9 19 25-27-15-3 31-9-30-25 19 15-27-31-3 30-9-19-25 27 15z"/></svg><svg class="burst b2" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 0l9 30 25-19-15 27 31 3-30 9 19 25-27-15-3 31-9-30-25 19 15-27-31-3 30-9-19-25 27 15z"/></svg>
+<div class="in hero-grid rel" style="z-index:1">
+<div class="stack" style="gap:20px"><p class="lbl">THE BOSS ACADEMY PRESENTS</p><h1>Build the kind of online course you never thought you could create without hiring a software developer.</h1><p class="body">Learn how to use Claude to turn your expertise into a fully interactive, branded and gamified online course with personalized student dashboards, working educational tools, guided implementation, narrated video lessons and an entire learning experience built around your own methodology.</p><p class="body">Without recording every lesson manually, designing dozens of PDF workbooks or limiting your creativity to the functionality of traditional course platforms.</p>
+<p class="intro">Introducing...</p><p class="name">The Interactive Course Creator</p><p class="big">My complete system for planning, building, producing and launching interactive online courses with Claude.</p>
+<div class="row"><a class="pf-btn br" href="#enroll">Teach Me How to Build This <i aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></i></a></div></div>
+<div class="stack" style="gap:22px"><div class="win "><div class="bar"><i></i><i></i><i></i><span>creator_studio</span></div><div class="wb"><div class="dash stack" style="gap:16px">
+<div><span class="tag">MODULE 05</span><span class="tag">Board Builder</span><h4>Build the Lesson Boards</h4></div>
+<div><div style="display:flex;justify-content:space-between;font:700 11px/1 var(--font-label);margin-bottom:6px"><span>XP</span><span>RANK 5 OF 7</span></div><div class="xp"><b></b></div></div>
+<ul class="mis"><li class="on"><i></i>Build your first module board.</li><li class="on"><i></i>Add quick check quizzes.</li><li><i></i>Add missions, XP, badges and lesson locks.</li></ul>
+<div class="badges"><span>01</span><span>02</span><span>03</span><span>04</span><span class="lock">05</span></div></div></div></div><div class="stats"><span><b>7</b> CORE MODULES</span><span><b>34</b> LESSONS</span><span><b>34</b> CLAUDE PROMPTS</span><span><b>16</b> SOPs</span><span><b>35</b> LESSON TOOLS &amp; RESOURCES</span></div></div>
+</div></section>
+<section class="vio dk"><div class="in stack" style="gap:30px">
+<div class="nar stack ctr-h"><p class="lbl">YOU&rsquo;RE LOOKING AT THE FUTURE OF YOUR OWN DIGITAL PRODUCTS.</p><h2>I built this entire course using the methodology I&rsquo;m about to teach you.</h2></div>
+<div class="twocol"><div class="stack"><p class="beat">The interactive lessons.</p>
+<p class="beat">The personalized student dashboard.</p>
+<p class="beat">The quizzes with instant feedback.</p>
+<p class="beat">The missions and progress tracking.</p>
+<p class="beat">The working educational tools.</p>
+<p class="beat">The badges, achievement ranks and completion certificate.</p>
+<p class="beat">The narrated slide lessons in my own voice.</p>
+<p class="body">The prompts that automatically incorporate your individual business information.</p>
+<p class="body">The personal Playbook that collects the work you complete throughout the course.</p>
+<p class="body">I didn&rsquo;t simply create a course explaining what Claude could potentially do.</p>
+<p class="beat">I used Claude to build the educational experience itself.</p>
+<p class="body">And now I&rsquo;m going to teach you the process behind creating your own.</p></div>
+<div class="stack"><div class="win "><div class="bar"><i></i><i></i><i></i><span>demo.mov</span></div><div class="wb"><div class="pf-slot "><b>To fill in</b>Insert interactive course demonstration.</div>
+<div class="pf-slot "><b>To fill in</b>Insert screen recording of the actual course dashboard.</div></div></div><div class="row"><a class="pf-btn cr" href="#enroll">I Want to Learn How to Create This <i aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></i></a></div></div></div></div></section>
+<section class="grid-bg"><div class="in twocol"><div class="stack sticky"><h2>Creating an online course shouldn&rsquo;t require you to become a video producer, instructional designer, graphic designer and technology expert.</h2><svg class="spark" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 0l4.5 15.5L40 20l-15.5 4.5L20 40l-4.5-15.5L0 20l15.5-4.5z"/></svg></div><div class="stack"><p class="beat">You have something valuable to teach.</p>
+<p class="body">Perhaps you&rsquo;ve developed your own methodology through years of experience.</p>
+<p class="body">Perhaps you&rsquo;ve helped clients solve the same problems repeatedly.</p>
+<p class="body">Perhaps you have a collection of ideas, frameworks, strategies and processes that would make an incredible educational product.</p>
+<p class="beat">But turning all of that knowledge into an actual course?</p>
+<p class="beat">That&rsquo;s an entirely different project.</p>
+<p class="beat">You need to organize your curriculum.</p>
+<p class="beat">Write every lesson.</p>
+<p class="beat">Create the supporting worksheets.</p>
+<p class="beat">Record the videos.</p>
+<p class="beat">Edit the videos.</p>
+<p class="beat">Design the presentation slides.</p>
+<p class="beat">Build the course platform.</p>
+<p class="beat">Upload everything.</p>
+<p class="beat">Organize the student resources.</p>
+<p class="beat">Figure out how to make the experience engaging.</p>
+<p class="body">And somehow find the time to do all of that while continuing to operate your business.</p>
+<p class="body">It&rsquo;s no wonder so many women have course ideas that never make it beyond the planning stage.</p>
+<p class="body">And even when you finally finish creating the course, you&rsquo;re left with another important question.</p>
+<p class="beat">Will your students actually use it?</p></div></div></section>
+<section class="lil"><div class="in twocol"><div class="stack sticky"><h2>Your customers don&rsquo;t want another course they purchase, watch halfway through and never finish.</h2><svg class="spark" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 0l4.5 15.5L40 20l-15.5 4.5L20 40l-4.5-15.5L0 20l15.5-4.5z"/></svg></div><div class="stack"><p class="beat">Think about the courses you&rsquo;ve purchased yourself.</p>
+<p class="beat">You were excited when you bought them.</p>
+<p class="beat">You logged into the dashboard.</p>
+<p class="beat">You started watching the lessons.</p>
+<p class="beat">You downloaded a few workbooks.</p>
+<p class="beat">And then life happened.</p>
+<p class="beat">You became overwhelmed by the amount of information.</p>
+<p class="beat">You weren&rsquo;t sure what to do next.</p>
+<p class="beat">Your answers were scattered across notebooks and documents.</p>
+<p class="body">You understood what the educator was teaching, but implementing it in your own business was another matter entirely.</p>
+<p class="body">Traditional online education often places an enormous amount of responsibility on the student to turn information into action.</p>
+<p class="beat">But what if implementation was built directly into the course?</p>
+<p class="body">What if every lesson included a personalized AI prompt that helped the student complete the work?</p>
+<p class="body">What if her answers, exercises and completed projects collected in one organized Playbook?</p>
+<p class="body">What if she could see exactly what she&rsquo;d accomplished and what needed to happen next?</p>
+<p class="body">What if finishing a lesson meant she had actually created something?</p>
+<p class="body">That&rsquo;s the educational experience I want to teach you how to build.</p></div></div></section>
+<section style="background:#FFFFFF"><div class="in stack" style="gap:30px">
+<div class="nar stack ctr-h"><h2>When AI can give people information for free, your educational products need to offer something more.</h2><p class="body">Your potential customers can ask Claude or ChatGPT to explain almost any subject.</p>
+<p class="body">They can ask for instructions, examples, templates and strategies.</p>
+<p class="body">But receiving information isn&rsquo;t the same thing as having a thoughtfully designed experience that helps them work toward a specific outcome.</p>
+<p class="beat">Imagine the difference between these two products.</p></div>
+<div class="ab"><div class="a"><div class="win "><div class="bar"><i></i><i></i><i></i><span>product_a.pdf</span></div><div class="wb"><p>A traditional course with prerecorded videos, downloadable worksheets and general instructions.</p><p>Your customer watches the lessons and is responsible for adapting the information to her own situation.</p></div></div></div>
+<div class="b"><div class="win "><div class="bar"><i></i><i></i><i></i><span>product_b.app</span></div><div class="wb"><p>An interactive course with personalized prompts, working tools, guided missions, saved progress, implementation checklists, achievement badges and an organized collection of everything your customer creates.</p><p>Your customer actively participates in the process you&rsquo;re teaching.</p><p>She isn&rsquo;t simply consuming your knowledge.</p><p>She&rsquo;s using it.</p></div></div></div></div>
+<div class="nar stack"><p class="beat">That&rsquo;s the opportunity.</p>
+<p class="body">Artificial intelligence doesn&rsquo;t just give us the ability to create courses faster.</p>
+<p class="body">It gives us the ability to rethink what an online course can actually be.</p></div></div></section>
+<section class="grid-bg"><div class="in stack" style="gap:30px">
+<div class="nar stack ctr-h"><h2>Your own branded educational experience, built around the way you teach.</h2><p class="body">Imagine your customer purchasing your course and opening an experience that looks and feels entirely like your business.</p></div>
+<div class="feat"><article><h3>A personalized student dashboard</h3><p>Your students can see their progress, completed lessons, upcoming priorities, recent accomplishments and earned badges.</p><p>They know where they left off and what to work on next.</p></article><article><h3>Interactive lesson boards</h3><p>Every module has its own organized learning experience, with lesson content, implementation steps, quizzes, missions, prompts and supporting resources.</p></article><article><h3>Personalized Claude prompts</h3><p>Instead of giving students generic prompts they have to rewrite, create prompts that incorporate their individual business information and goals.</p></article><article><h3>Working educational tools</h3><p>Turn traditional worksheets into interactive resources that students can complete directly within the learning experience.</p></article><article><h3>Guided missions</h3><p>Give students specific implementation tasks so they understand what completing each lesson actually means.</p></article><article><h3>Gamified progress</h3><p>Create XP, achievement badges, ranks, lesson locks and completion milestones that recognize meaningful progress.</p></article><article><h3>A personal student Playbook</h3><p>Give students an organized place to collect the exercises, worksheets and Claude generated work they produce throughout the course.</p></article><article><h3>Narrated educational videos</h3><p>Create branded motion slides narrated using an authorized clone of your own voice, without manually recording every presentation.</p></article><article><h3>Student feedback boards</h3><p>Give students a dedicated way to tell you where they&rsquo;re struggling so you can identify opportunities to improve the educational experience.</p></article><article><h3>An organized course creation system</h3><p>Build the processes, prompts, resource libraries and documentation behind your courses so that you&rsquo;re not reinventing the entire production process every time you create something new.</p></article></div>
+<div class="nar stack ctr-h"><p class="big" style="text-align:center">These aren&rsquo;t just hypothetical ideas.</p><p class="big" style="text-align:center">They&rsquo;re features and systems incorporated into The Interactive Course Creator itself.</p></div></div></section>
+<section class="inkbg dk"><div class="nar stack ctr-h">
+<p class="lbl">YOUR COMPLETE INTERACTIVE COURSE BUILDING SYSTEM</p><h2 style="font-size:clamp(46px,7vw,92px);text-align:center">The Interactive <em>Course Creator</em></h2>
+<p class="big" style="text-align:center">From the knowledge in your head to a complete educational product your customers can actively experience.</p><p class="body">The Interactive Course Creator teaches you how to use Claude to capture your expertise, organize your knowledge, develop your curriculum, create personalized student prompts, build interactive lesson boards, produce educational videos and prepare your finished course for launch.</p>
+<p class="body">You&rsquo;re not simply learning how to ask Claude to build a course dashboard.</p>
+<p class="body">You&rsquo;re learning how to develop the entire system behind creating and delivering an interactive educational product.</p>
+<p class="beat">Every stage builds upon the work you&rsquo;ve completed before it.</p>
+<p class="body">And throughout the course, you&rsquo;ll be using the same interactive educational features you&rsquo;re learning to create.</p>
+<p class="beat">You learn the methodology by experiencing the methodology.</p>
+<div class="row"><a class="pf-btn cr" href="#enroll">Get Access to The Interactive Course Creator <i aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></i></a></div></div></section>
+<section class="vio dk"><div class="in stack" style="gap:28px">
+<div class="nar stack ctr-h"><p class="lbl">Your course at a glance</p><h2>Everything you need to understand my interactive course creation process.</h2></div>
+<div class="glance"><div><b>7</b>core modules, plus a dedicated Module 0 to get you started.</div><div><b>34</b>interactive lessons.</div><div><b>34</b>student prompts with convenient copy buttons.</div><div><b>16</b>detailed standard operating procedures, each with its corresponding Claude prompt.</div><div><b>35</b>lesson tools and resources, plus module trackers and checklists.</div><div><b>34</b>narrated slide lessons in my own voice.</div><div><b>7</b>module board tour videos.</div><div><b>34</b>lesson achievement badges.</div><div><b>7</b>progressive achievement ranks.</div><div>An interactive student dashboard.</div><div>A personalized Passport system.</div><div>A personal student Playbook.</div><div>Implementation missions, quizzes, progress tracking and a completion certificate.</div></div>
+<p class="big" style="text-align:center">All organized inside an interactive learning experience built using Claude.</p></div></section>
+<section class="grid-bg"><div class="in stack" style="gap:30px">
+<div class="nar stack ctr-h"><p class="lbl">The course creation process</p><h2>We&rsquo;re not building random pieces of a course. <em>We&rsquo;re developing an entire course creation system.</em></h2></div>
+<div class="mods"><article class="rv"><div class="win "><div class="bar"><i></i><i></i><i></i><span>part_01.board</span></div><div class="wb"><div class="mod"><div><span class="num">PART 01</span><h3>Capture your expertise.</h3></div><div class="stack" style="gap:14px"><p class="body">Before Claude can help you create a course, it needs to understand what you&rsquo;re teaching and how you actually do the work.</p>
+<p class="body">Begin by documenting your expertise, identifying the result your course helps students achieve and capturing the processes behind your methodology.</p>
+<p class="body">Instead of asking AI to invent a curriculum from a broad subject, give it meaningful knowledge to work from.</p>
+<p class="body">Build the education around real processes, real expertise and work you&rsquo;ve actually done.</p></div></div></div></div></article><article class="rv"><div class="win "><div class="bar"><i></i><i></i><i></i><span>part_02.board</span></div><div class="wb"><div class="mod"><div><span class="num">PART 02</span><h3>Organize your knowledge and build your resource library.</h3></div><div class="stack" style="gap:14px"><p class="body">Create an organized foundation for your course development process.</p>
+<p class="body">Explore how to set up Claude for your business, connect your course creation workflow to ClickUp and develop a reliable system for storing your documents, prompts, processes and resources.</p>
+<p class="body">Learn how to file new materials, manage versions, connect related resources and maintain an organized library as your course develops.</p>
+<p class="body">Your course becomes more than a collection of disconnected documents and conversations with AI.</p>
+<p class="beat">It becomes a structured educational project.</p></div></div></div></div></article><article class="rv"><div class="win "><div class="bar"><i></i><i></i><i></i><span>part_03.board</span></div><div class="wb"><div class="mod"><div><span class="num">PART 03</span><h3>Develop your curriculum.</h3></div><div class="stack" style="gap:14px"><p class="body">Turn your documented expertise into an intentional learning experience.</p>
+<p class="body">Create your curriculum, develop your lessons, review what Claude produces and establish what students need to accomplish throughout the course.</p>
+<p class="body">Evaluate whether your lessons give students the knowledge, tools and instructions required to complete each stage.</p>
+<p class="body">Identify missing lessons before they become problems for your customers.</p>
+<p class="body">You&rsquo;re building a curriculum around implementation, not simply a list of topics you could teach.</p></div></div></div></div></article><article class="rv"><div class="win "><div class="bar"><i></i><i></i><i></i><span>module_04.board</span></div><div class="wb"><div class="mod"><div><span class="num">MODULE 04</span><h3>Make Your Prompts Work for Students</h3></div><div class="stack" style="gap:14px"><p class="beat">Your business is different from your students&rsquo; businesses.</p>
+<p class="body">So why give every student a prompt written around your individual circumstances?</p>
+<p class="body">Learn how to turn your own Claude prompts into reusable student prompts that incorporate each student&rsquo;s information.</p>
+<p class="beat">Inside this module:</p><div class="inside"><div><b>Write your course rules.</b><p>Establish the rules every student prompt should follow, including your writing preferences and standards for honest information.</p></div><div><b>Turn your prompts into student prompts.</b><p>Replace your individual business information with personalized Passport fields so the prompts can be used by different students.</p></div><div><b>Give students templates, never a blank prompt.</b><p>Turn the resources you&rsquo;ve already developed into customizable templates with Make It Mine prompts that help students rebuild them around their own brands.</p></div></div><p class="body">By the end of this module, you&rsquo;ll have a system for developing student prompts and resources designed to adapt to individual circumstances.</p></div></div></div></div></article><article class="rv"><div class="win "><div class="bar"><i></i><i></i><i></i><span>module_05.board</span></div><div class="wb"><div class="mod"><div><span class="num">MODULE 05</span><h3>Build the Lesson Boards</h3></div><div class="stack" style="gap:14px"><p class="body">This is where your educational content becomes an interactive learning experience.</p>
+<p class="body">Learn how to develop the course environment your students will actually use.</p>
+<p class="beat">Inside this module:</p><div class="inside"><div><b>Build your first module board.</b><p>Create a branded lesson board with organized educational content, implementation steps, prompts and tools.</p></div><div><b>Add quick check quizzes.</b><p>Develop lesson quizzes with instant feedback based on what students have just learned.</p></div><div><b>Add missions, XP, badges and lesson locks.</b><p>Create a gamified implementation experience that recognizes completed actions and guides students through the intended learning order.</p></div><div><b>Save progress and the student Playbook.</b><p>Explore how to preserve student progress and collect the work each student completes throughout the course.</p></div><div><b>Build your course home.</b><p>Create one organized starting point where students can access their individual module boards.</p></div><div><b>Add the private student dashboard.</b><p>Develop progress tracking, upcoming lesson recommendations, weekly priorities and a space to record accomplishments.</p></div><div><b>Add a feedback board.</b><p>Give students a place to communicate where they&rsquo;re getting stuck.</p></div><div><b>Share your course with students.</b><p>Learn how Claude artifact sharing works and test your course from a student&rsquo;s perspective.</p></div></div><p class="body">This module takes you beyond designing an attractive course interface.</p>
+<p class="body">It teaches you how to organize the individual elements of a functioning interactive learning experience.</p></div></div></div></div></article><article class="rv"><div class="win "><div class="bar"><i></i><i></i><i></i><span>module_06.board</span></div><div class="wb"><div class="mod"><div><span class="num">MODULE 06</span><h3>Make the Videos</h3></div><div class="stack" style="gap:14px"><p class="body">What if you could create professionally organized educational lessons without sitting in front of a camera and manually recording every explanation?</p>
+<p class="body">Learn my process for creating three different types of educational video content.</p><div class="inside"><div><b>Narrated motion slides in your own voice.</b><p>Develop your lesson scripts with Claude, create branded motion slides and use an authorized voice clone through Fish Audio or ElevenLabs to narrate your education.</p></div><div><b>Board tour videos.</b><p>Create guided video tours that explain how students should navigate the interactive lesson boards and use the available resources.</p></div><div><b>Watch Claude do it walkthroughs.</b><p>Learn how to demonstrate your prompts and processes using a separate demonstration project, with private information protected.</p></div></div><p class="body">Instead of relying exclusively on one type of educational video, learn how to develop instructional content that explains, demonstrates and supports the work your students need to complete.</p></div></div></div></div></article><article class="rv"><div class="win "><div class="bar"><i></i><i></i><i></i><span>module_07.board</span></div><div class="wb"><div class="mod"><div><span class="num">MODULE 07</span><h3>Update and Launch</h3></div><div class="stack" style="gap:14px"><p class="beat">Creating the course is only part of the process.</p>
+<p class="body">You also need a system for maintaining it, giving students access and improving the experience based on their feedback.</p>
+<p class="beat">Inside this module:</p><div class="inside"><div><b>Push one fix to every board.</b><p>Learn how to update shared course materials consistently across multiple module boards.</p></div><div><b>Generate your Everything Inside list.</b><p>Create an accurate inventory of your completed course directly from the live course files.</p><p>No invented deliverables. No inflated numbers. No features you haven&rsquo;t actually built.</p></div><div><b>Write access and claim emails.</b><p>Develop the welcome and access instructions your students need to begin their educational experience.</p></div><div><b>Run a small beta and fix what sticks.</b><p>Collect student feedback, identify the lessons causing the most confusion and prioritize meaningful improvements.</p></div></div><p class="body">By the end of this stage, you&rsquo;ll understand the processes behind preparing, testing, maintaining and launching your interactive educational product.</p></div></div></div></div></article></div></div></section>
+<section class="lil"><div class="in twocol">
+<div class="stack"><p class="lbl">ONE SETUP. PERSONALIZED EDUCATION.</p><h2>Stop making students explain their business to AI every single time they use one of your prompts.</h2><p class="body">Inside The Interactive Course Creator, you&rsquo;ll experience my Passport system.</p>
+<p class="body">At the beginning of the course, you complete a setup form with information such as:</p><p class="body">That information is used to personalize the student prompts throughout the course.</p>
+<p class="body">Instead of repeatedly replacing generic placeholders or explaining the same information to Claude, your course prompts incorporate the relevant context you&rsquo;ve already established.</p>
+<p class="body">And you&rsquo;ll learn the process behind creating a similar system for your own students.</p>
+<p class="beat">Imagine what this could mean for your educational products.</p>
+<p class="body">A business course that incorporates each student&rsquo;s business information.</p>
+<p class="body">A branding course that incorporates individual brand preferences.</p>
+<p class="body">A productivity course that incorporates personal routines and goals.</p>
+<p class="body">An educational experience designed to work with the person actually using it.</p></div>
+<div class="sticky pass"><div class="win "><div class="bar"><i></i><i></i><i></i><span>passport.form</span></div><div class="wb"><div class="field"><span>Your business</span><i></i></div><div class="field"><span>Your website</span><i></i></div><div class="field"><span>What you teach</span><i></i></div><div class="field"><span>Who your education is for</span><i></i></div><div class="field"><span>The result your course is designed to support</span><i></i></div><div class="field"><span>Your course name</span><i></i></div><div class="field"><span>Your brand voice</span><i></i></div><div class="field"><span>Words you never want AI to use</span><i></i></div><div class="field"><span>Your brand colors</span><i></i></div><div class="field"><span>Your fonts</span><i></i></div><div class="field"><span>Your launch goal</span><i></i></div></div></div></div></div></section>
+<section class="grid-bg"><div class="in twocol"><div class="stack sticky"><h2>What if your students finished your course with an organized collection of everything they&rsquo;d created?</h2><svg class="spark" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 0l4.5 15.5L40 20l-15.5 4.5L20 40l-4.5-15.5L0 20l15.5-4.5z"/></svg></div><div class="stack"><p class="body">Instead of having completed exercises scattered across documents, AI conversations, downloaded PDFs and notebooks, The Interactive Course Creator uses a personal Playbook.</p>
+<p class="body">Your completed worksheets and Claude generated drafts collect within your module&rsquo;s Playbook.</p>
+<p class="body">You can revisit your work, download relevant resources and copy your materials into your Claude Project.</p>
+<p class="beat">The education and the implementation become connected.</p>
+<p class="body">And you&rsquo;ll learn how to incorporate this approach into the educational products you create.</p>
+<p class="body">Because completing a course should mean more than reaching the final video.</p>
+<p class="body">It should mean having something to show for the work you&rsquo;ve done.</p></div></div></section>
+<section class="inkbg dk"><div class="in stack" style="gap:30px">
+<div class="nar stack ctr-h"><p class="lbl">The gamified learning experience</p><h2>Give your students a reason to keep moving forward.</h2><p class="body">The Interactive Course Creator includes a gamified educational experience designed around meaningful implementation.</p></div>
+<div class="pairs"><article class="pair rv"><h3>Quick check quizzes</h3><p>Review what you&rsquo;ve learned and receive instant feedback.</p></article><article class="pair rv"><h3>Implementation missions</h3><p>Complete specific actions connected to the objective of each lesson.</p></article><article class="pair rv"><h3>Experience points</h3><p>Earn XP by completing implementation tasks.</p></article><article class="pair rv"><h3>Lesson badges</h3><p>Receive recognition for completing meaningful stages of your course creation process.</p></article><article class="pair rv"><h3>Lesson locks</h3><p>Explore how to guide students through the intended learning sequence.</p></article><article class="pair rv"><h3>Achievement ranks</h3><p>Progress through seven achievement ranks as you develop your course:</p></article><article class="pair rv"><h3>Course Creator certificate</h3><p>Celebrate completing the educational experience with a course completion certificate.</p></article></div>
+<div class="stack" style="align-items:center;gap:14px"><p class="lbl">The seven achievement ranks</p><div class="ranks"><span>Capture Ready</span><span>Library Builder</span><span>Course Planner</span><span>Prompt Writer</span><span>Board Builder</span><span>Video Maker</span><span>Course Creator</span></div></div>
+<div class="nar stack" style="text-align:center"><p class="big">But you aren&rsquo;t simply experiencing gamification as a student.</p><p class="big">You&rsquo;re learning how to build it into your own education.</p></div></div></section>
+<section style="background:#FFFFFF"><div class="in stack" style="gap:30px">
+<div class="nar stack ctr-h"><p class="lbl">16 DOCUMENTED PROCESSES WITH THEIR CORRESPONDING CLAUDE PROMPTS</p><h2>You don&rsquo;t have to figure out how I built everything by watching me click around a screen.</h2><p class="beat">I&rsquo;ve documented the processes behind the course itself.</p>
+<p class="body">Inside your Course SOP Library, you&rsquo;ll find 16 standard operating procedures written around the work involved in building and managing this kind of educational experience.</p>
+<p class="body">Each SOP includes its corresponding Claude prompt and opens from the lessons where you need it.</p></div>
+<div class="sop"><div class="win "><div class="bar"><i></i><i></i><i></i><span>claude_business_setup.sop</span></div><div class="wb"><h3 style="font-size:22px;margin-bottom:12px">Claude &amp; Business Setup</h3><ul><li>Set up Claude for your business.</li><li>Set up your ClickUp workspace from a questionnaire.</li><li>Connect Claude to ClickUp and establish filing rules.</li></ul></div></div><div class="win "><div class="bar"><i></i><i></i><i></i><span>resource_library_management.sop</span></div><div class="wb"><h3 style="font-size:22px;margin-bottom:12px">Resource Library Management</h3><ul><li>File anything Claude makes.</li><li>Create and manage new versions.</li><li>Archive outdated resources.</li><li>Add an SOP and its prompt.</li><li>Audit Claude&rsquo;s filing in ClickUp.</li></ul></div></div><div class="win "><div class="bar"><i></i><i></i><i></i><span>curriculum_educational_development.sop</span></div><div class="wb"><h3 style="font-size:22px;margin-bottom:12px">Curriculum &amp; Educational Development</h3><ul><li>Build a curriculum builder with notes and approvals.</li><li>Audit your course for missing lessons.</li><li>Develop Make It Mine templates.</li></ul></div></div><div class="win "><div class="bar"><i></i><i></i><i></i><span>interactive_course_production.sop</span></div><div class="wb"><h3 style="font-size:22px;margin-bottom:12px">Interactive Course Production</h3><ul><li>Turn a lesson into a gamified Lesson Board.</li><li>Turn course resources into working tools with a Passport and Playbook.</li><li>Make a three part lesson in your own voice.</li><li>Build your Module 0, navigation, lesson locks and celebrations.</li></ul></div></div><div class="win "><div class="bar"><i></i><i></i><i></i><span>reusable_ai_capabilities.sop</span></div><div class="wb"><h3 style="font-size:22px;margin-bottom:12px">Reusable AI Capabilities</h3><ul><li>Make, file and update a Claude Skill.</li></ul></div></div></div>
+<div class="nar stack"><p class="beat">These aren&rsquo;t simply suggestions about what you could do.</p>
+<p class="body">They&rsquo;re documented processes based on the work behind the course you&rsquo;re experiencing.</p></div></div></section>
+<section class="grid-bg"><div class="in stack" style="gap:30px">
+<div class="nar stack ctr-h"><h2>More than prompts. <em>Actual tools to help you build.</em></h2><p class="body">Inside the course, you&rsquo;ll find 35 lesson tools and resources, alongside module progress trackers and implementation checklists.</p>
+<p class="beat">Explore resources such as:</p></div>
+<div class="res"><div><h3>Strategic Worksheets</h3><p>My Course Result</p><p>My Process Finder</p></div><div><h3>Course Creation Templates</h3><p>Library Field Sets</p><p>My Filing Rules</p><p>Lesson Writer</p><p>Quiz Writer</p><p>My Course Rules Block</p><p>Course Home Planner</p><p>Board Tour Script</p><p>Change Log</p></div><div><h3>Implementation Checklists</h3><p>Capture Test Checklist</p><p>Real SOP Check</p><p>Student Prompt Test</p><p>Test Student Script</p><p>Dashboard Test</p><p>Feedback Board Check</p><p>Voice Setup Checklist</p><p>Blur and Privacy Checklist</p><p>Everything Inside Check</p><p>Access Email Test</p></div><div><h3>Progress &amp; Improvement Trackers</h3><p>Beta Stuck Points Tracker</p><p>Individual module progress trackers</p><p>Module implementation checklists</p></div><div><h3>Course Wide Resources</h3><p>The complete Course Roadmap</p><p>The Course SOP Library</p><p>The Course Prompt Library</p><p>Honest Course Rules</p></div></div><p class="big" style="text-align:center">Everything is organized around the work you need to accomplish throughout the course creation process.</p></div></section>
+<section class="lil"><div class="in stack" style="gap:30px">
+<div class="nar stack ctr-h"><h2>Most AI course creation education teaches you how to generate content. <em>I&rsquo;m teaching you how to build the entire educational experience.</em></h2></div>
+<div class="vs"><div class="a"><div class="win "><div class="bar"><i></i><i></i><i></i><span>typical_ai_course.txt</span></div><div class="wb"><h3 style='font-size:22px;margin-bottom:12px'>A typical AI course creation approach</h3><ol><li>Ask AI for course ideas.</li><li>Generate a curriculum.</li><li>Write the lessons.</li><li>Create presentation slides.</li><li>Generate worksheets.</li><li>Upload everything to a course platform.</li></ol></div></div></div>
+<div class="b"><div class="win "><div class="bar"><i></i><i></i><i></i><span>interactive_course_creator.app</span></div><div class="wb"><h3 style='font-size:22px;margin-bottom:12px'>The Interactive Course Creator approach</h3><ol><li>Capture your real expertise and document your methodology.</li><li>Build an organized course creation system.</li><li>Develop a curriculum with clear implementation objectives.</li><li>Create personalized student prompts.</li><li>Turn educational resources into working tools.</li><li>Build interactive module boards.</li><li>Create a personalized dashboard.</li><li>Add quizzes, missions, badges and progress tracking.</li><li>Produce narrated educational videos.</li><li>Develop a student Playbook.</li><li>Establish your update and feedback systems.</li><li>Prepare your course for launch.</li></ol></div></div></div></div>
+<div class="nar stack" style="text-align:center"><p class="big">One approach focuses primarily on generating educational information.</p><p class="big">The other focuses on developing an educational product.</p><p class="big">That&rsquo;s the difference.</p></div></div></section>
+<section style="background:#FFFFFF"><div class="in stack" style="gap:30px">
+<div class="nar stack ctr-h"><h2>Your expertise doesn&rsquo;t have to be about business or blogging.</h2><p class="body">Imagine applying this methodology to the knowledge you already have.</p></div>
+<div class="ifs"><article><h3>If you teach productivity...</h3><p>Build an interactive course where students develop personalized routines, organize projects and track implementation.</p></article><article><h3>If you teach parenting...</h3><p>Create guided educational experiences with reflection exercises, routine builders and personalized planning resources.</p></article><article><h3>If you teach marketing...</h3><p>Develop interactive strategy builders, campaign planning tools and personalized content implementation prompts.</p></article><article><h3>If you teach branding...</h3><p>Create guided brand discovery experiences, messaging workbooks, creative direction tools and personalized AI prompts.</p></article><article><h3>If you teach organization...</h3><p>Develop interactive assessments, personalized action plans and progress tracking experiences.</p></article><article><h3>If you teach creative skills...</h3><p>Build guided projects, implementation checklists, educational demonstrations and achievement milestones.</p></article><article><h3>If you&rsquo;re a coach...</h3><p>Turn the frameworks and processes you repeatedly teach clients into an interactive educational experience they can work through independently.</p></article></div>
+<div class="nar stack" style="text-align:center"><p class="big">You bring the expertise.</p><p class="big">The Interactive Course Creator teaches you the development process behind turning it into an interactive educational product.</p></div></div></section>
+<section class="grid-bg"><div class="in twocol"><div class="stack sticky"><h2>You aren&rsquo;t just learning how to create one course.</h2><svg class="spark" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 0l4.5 15.5L40 20l-15.5 4.5L20 40l-4.5-15.5L0 20l15.5-4.5z"/></svg></div><div class="stack"><p class="body">You&rsquo;re developing a system you could apply to multiple future products.</p>
+<p class="body">Your first interactive course might teach one specific methodology.</p>
+<p class="beat">Your next might explore a completely different subject.</p>
+<p class="beat">You could develop interactive workshops.</p>
+<p class="beat">Guided educational experiences.</p>
+<p class="beat">Customer implementation tools.</p>
+<p class="beat">Digital workbooks.</p>
+<p class="beat">Specialized assessments.</p>
+<p class="beat">Resources that support your coaching programs.</p>
+<p class="beat">Educational products that complement your existing business.</p>
+<p class="body">Once you understand how to capture your expertise, organize your processes, develop personalized prompts and create interactive learning environments, those skills can extend beyond your first project.</p>
+<p class="beat">You&rsquo;re expanding what you&rsquo;re capable of creating.</p></div></div></section>
+<section class="vio dk"><div class="in twocol">
+<div class="stack sticky"><div class="win "><div class="bar"><i></i><i></i><i></i><span>about_genasys.jpg</span></div><div class="wb"><img src="/images/photos/desk-laptop-mic.jpg" alt="Genasys at her desk with her laptop and microphone" loading="lazy" style="width:100%;aspect-ratio:4/5;object-fit:cover;display:block;border-radius:10px"></div></div></div>
+<div class="stack"><p class="lbl">CREATED BY SOMEONE WHO ACTUALLY BUILT THE THING SHE&rsquo;S TEACHING YOU TO BUILD</p><h2>I couldn&rsquo;t stop thinking about what Claude could make possible for online education.</h2><p class="beat">Hi, I&rsquo;m Genasys.</p>
+<p class="body">Founder of Boss Lady Bloggers, professional blog coach, business strategist, custom website designer and someone who genuinely loves discovering better ways to build things.</p>
+<p class="body">I built a money making business from my aunt&rsquo;s basement as a single mom, working during my son&rsquo;s nap times.</p>
+<p class="body">Over the years, I&rsquo;ve developed courses, business frameworks, coaching programs, websites and implementation resources for women building their own businesses.</p>
+<p class="beat">But I&rsquo;ve always been fascinated by one particular challenge.</p>
+<p class="beat">How do we help people actually implement what we&rsquo;re teaching?</p>
+<p class="beat">Not simply watch the education.</p>
+<p class="beat">Not simply understand the strategy.</p>
+<p class="beat">But do the work.</p>
+<p class="body">When I began exploring what Claude could build through interactive artifacts, I started questioning almost everything about traditional course creation.</p>
+<p class="body">Why couldn&rsquo;t my students have personalized prompts that already understood their businesses?</p>
+<p class="beat">Why couldn&rsquo;t their worksheets be working tools?</p>
+<p class="body">Why couldn&rsquo;t their completed exercises collect in one organized Playbook?</p>
+<p class="body">Why couldn&rsquo;t their lessons, implementation missions, resources and progress exist together?</p>
+<p class="body">Why couldn&rsquo;t I create narrated lessons in my own voice without manually recording every presentation?</p>
+<p class="beat">So I began building.</p>
+<p class="beat">Then refining.</p>
+<p class="beat">Then documenting the processes.</p>
+<p class="body">And eventually, those processes became the educational experience you&rsquo;re looking at today.</p>
+<p class="body">The Interactive Course Creator is my way of sharing that methodology with you.</p>
+<p class="body">I&rsquo;m not asking you to imagine what this technology might someday make possible.</p>
+<p class="beat">I&rsquo;m inviting you to learn from something I&rsquo;ve already built.</p></div></div></section>
+<section class="grid-bg"><div class="in stack" style="gap:30px">
+<div class="nar stack ctr-h"><h2>You have something valuable to teach. <em>Now let&rsquo;s rethink how you deliver it.</em></h2></div>
+<div class="fornot"><div style="background:#FFFFFF;border:2.5px solid #27243A"><p class="lbl">This course is designed for:</p><ul class="ticks lt"><li>Bloggers who want to create more distinctive digital products.</li><li>Coaches who want to turn their methodologies into educational experiences.</li><li>Course creators who want to improve how students implement their education.</li><li>Educators interested in interactive learning.</li><li>Service providers who want to package their expertise into products.</li><li>Business owners who want to explore AI beyond writing content.</li><li>Women who have been carrying around course ideas but feel overwhelmed by the production process.</li></ul></div>
+<div style="background:#E0D5F5;border:2.5px solid #27243A"><p class="lbl">This course probably isn&rsquo;t for you if:</p><ul class="ticks lt no"><li>You want AI to invent expertise you don&rsquo;t actually have.</li><li>You expect to generate a complete, commercially successful course from one prompt.</li><li>You&rsquo;re unwilling to review, test and refine your educational materials.</li><li>You want someone else to personally build your entire product.</li><li>You&rsquo;re looking for guaranteed revenue rather than developing a valuable product creation skill.</li></ul></div></div>
+<div class="nar stack"><p class="beat">You might already have a course you&rsquo;d like to recreate.</p>
+<p class="body">You might have a collection of frameworks and client processes you want to teach.</p>
+<p class="body">Or you might be preparing to create your very first educational product.</p>
+<p class="body">What matters is that you have a meaningful subject to teach and a willingness to learn how to develop it differently.</p><p class="big">The Interactive Course Creator is about using AI to support real expertise and thoughtful educational development.</p></div></div></section>
+<section style="background:#FFFFFF"><div class="in stack" style="gap:24px">
+<div class="nar stack ctr-h"><h2>See the work. <em>Experience the possibilities.</em></h2></div>
+<div class="pairs"><div class="pf-slot "><b>To fill in</b>Insert genuine screenshots of the completed course.</div>
+<div class="pf-slot "><b>To fill in</b>Insert narrated lesson demonstration.</div>
+<div class="pf-slot "><b>To fill in</b>Insert working tool demonstration.</div>
+<div class="pf-slot "><b>To fill in</b>Insert Passport personalization demonstration.</div>
+<div class="pf-slot "><b>To fill in</b>Insert student Playbook demonstration.</div>
+<div class="pf-slot "><b>To fill in</b>Insert genuine student testimonials and completed student projects when available.</div></div></div></section>
+<section class="lil"><div class="in twocol"><div class="stack sticky"><h2>Think about everything that traditionally goes into producing an online course.</h2><svg class="spark" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 0l4.5 15.5L40 20l-15.5 4.5L20 40l-4.5-15.5L0 20l15.5-4.5z"/></svg></div><div class="stack"><p class="beat">Curriculum development.</p>
+<p class="beat">Instructional design.</p>
+<p class="beat">Educational resource creation.</p>
+<p class="beat">Graphic design.</p>
+<p class="beat">Video production.</p>
+<p class="beat">Voice recording.</p>
+<p class="beat">Technology setup.</p>
+<p class="beat">Course organization.</p>
+<p class="beat">Student experience design.</p>
+<p class="beat">Testing and maintenance.</p>
+<p class="body">Each of those responsibilities can become an entire project on its own.</p>
+<p class="body">The Interactive Course Creator teaches you an AI supported methodology for bringing those projects together.</p>
+<p class="body">Rather than trying to discover every individual process independently, learn from the documented system behind an existing interactive course.</p>
+<p class="body">And develop a skill you could continue applying to your educational products as your business grows.</p></div></div></section>
+<section id="enroll" class="inkbg dk" style="scroll-margin-top:80px"><div class="in stack" style="gap:26px;max-width:960px">
+<div class="stack ctr-h"><p class="lbl">THE COMPLETE INTERACTIVE COURSE CREATION EXPERIENCE</p><h2 style="text-align:center">The Interactive <em>Course Creator</em></h2></div>
+<div class="win "><div class="bar"><i></i><i></i><i></i><span>everything_inside.list</span></div><div class="wb"><div class="recv"><div><b>Your complete educational curriculum</b><p>7 core modules, a dedicated Module 0 and 34 lessons covering the interactive course creation process.</p></div><div><b>Your personalized Claude prompts</b><p>34 copy ready student prompts that incorporate your Passport information.</p></div><div><b>Your Course SOP Library</b><p>16 documented standard operating procedures with corresponding Claude prompts.</p></div><div><b>Your lesson tools and resources</b><p>35 tools and resources, plus additional module trackers and checklists.</p></div><div><b>Your narrated slide lessons</b><p>34 educational slide lessons narrated in my own voice.</p></div><div><b>Your module board tours</b><p>7 guided video tours introducing the individual module experiences.</p></div><div><b>Your interactive learning experience</b><p>A course home, personalized dashboard, lesson boards, saved progress, quizzes and guided implementation missions.</p></div><div><b>Your Passport and Playbook</b><p>A personalized course setup experience and an organized collection of the work you complete.</p></div><div><b>Your gamified achievement system</b><p>34 lesson badges, seven achievement ranks, XP, progress tracking and a Course Creator completion certificate.</p></div><div><b>Your course wide resources</b><p>The complete Course Roadmap, Prompt Library, SOP Library and Honest Course Rules.</p></div></div><div class="stack" style="align-items:center;text-align:center;margin-top:22px;gap:14px"><p class="lbl">Your investment</p><div class="pf-slot sm"><b>To fill in</b>Course price.</div><div class="pf-slot sm"><b>To fill in</b>Confirmed course access duration and purchase terms.</div><div class="row"><a class="pf-btn br" href="#enroll">Yes! Teach Me How to Build Interactive Courses <i aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></i></a></div><p class="big">Create educational experiences your customers can do more than simply watch.</p></div></div></div>
+<div class="pf-slot "><b>To fill in</b>Your Interactive Course Creator checkout link. Until you send it, every buy button scrolls to this box.</div>
+</div></section>
+<section class="grid-bg"><div class="nar stack" style="gap:26px">
+<div class="stack" style="text-align:center;gap:14px"><p class="lbl">Frequently asked questions</p><h2>Your questions, <em>answered.</em></h2></div>
+<div class="faq"><details class="rv"><summary>Is this just a course about using Claude to write lessons?<span class="faq-plus" aria-hidden="true" style="flex:none;font:400 24px/1 var(--font-body);color:#A23E66">+</span></summary><div class="faq-a" style="padding:2px 0 12px"><p>No.</p><p>The Interactive Course Creator teaches the wider process of developing an interactive educational product, including capturing your expertise, organizing your resources, developing your curriculum, creating personalized prompts, building lesson boards, producing videos and preparing your course for launch.</p></div></details><details class="rv"><summary>Is the course itself interactive?<span class="faq-plus" aria-hidden="true" style="flex:none;font:400 24px/1 var(--font-body);color:#A23E66">+</span></summary><div class="faq-a" style="padding:2px 0 12px"><p>Yes. The course is built using the methodology it teaches.</p><p>You&rsquo;ll experience interactive lesson boards, personalized prompts, quizzes, implementation missions, a Passport, student Playbook, progress tracking and working resources throughout the education.</p></div></details><details class="rv"><summary>Do I need to record all my own videos?<span class="faq-plus" aria-hidden="true" style="flex:none;font:400 24px/1 var(--font-body);color:#A23E66">+</span></summary><div class="faq-a" style="padding:2px 0 12px"><p>The course teaches you how to create narrated motion slides using an authorized clone of your own voice through Fish Audio or ElevenLabs.</p><p>You&rsquo;ll also learn how to create board tours and demonstration walkthroughs.</p><p>You can choose which production approaches make sense for your own educational products.</p></div></details><details class="rv"><summary>What tools will I need?<span class="faq-plus" aria-hidden="true" style="flex:none;font:400 24px/1 var(--font-body);color:#A23E66">+</span></summary><div class="faq-a" style="padding:2px 0 12px"><p>The methodology uses Claude, Claude artifacts, ClickUp and voice generation tools such as Fish Audio or ElevenLabs.</p><p>Certain workflows also use Claude in Chrome.</p><p><span class="islot" style="display:inline-block;border:2px dashed #6348B5;border-radius:10px;padding:3px 10px;color:#6348B5;font-weight:600">To fill in: confirmed subscription requirements and any applicable additional software costs.</span></p></div></details><details class="rv"><summary>Do I need ClickUp?<span class="faq-plus" aria-hidden="true" style="flex:none;font:400 24px/1 var(--font-body);color:#A23E66">+</span></summary><div class="faq-a" style="padding:2px 0 12px"><p>ClickUp is part of the documented resource management and course creation workflow taught inside the course.</p><p>You&rsquo;ll learn how to organize your course documents, prompts, SOPs and resource versions using that system.</p></div></details><details class="rv"><summary>Do I need coding experience?<span class="faq-plus" aria-hidden="true" style="flex:none;font:400 24px/1 var(--font-body);color:#A23E66">+</span></summary><div class="faq-a" style="padding:2px 0 12px"><p>The methodology uses Claude to support the development of interactive educational experiences.</p><p>You won&rsquo;t be expected to manually write every piece of code yourself, but you will need to give Claude clear instructions, evaluate functionality and test what you create.</p><p>More advanced functionality may require additional technical work.</p></div></details><details class="rv"><summary>Can I recreate a course I already have?<span class="faq-plus" aria-hidden="true" style="flex:none;font:400 24px/1 var(--font-body);color:#A23E66">+</span></summary><div class="faq-a" style="padding:2px 0 12px"><p>Yes. You can use your existing lessons, frameworks, workbooks and documented processes as the starting point for creating an interactive educational experience.</p></div></details><details class="rv"><summary>Can students save their progress?<span class="faq-plus" aria-hidden="true" style="flex:none;font:400 24px/1 var(--font-body);color:#A23E66">+</span></summary><div class="faq-a" style="padding:2px 0 12px"><p>The course demonstrates saved progress through Claude, including lesson missions, quiz answers and tool responses.</p><p>You&rsquo;ll learn how to build and test this functionality within the interactive course workflow.</p></div></details><details class="rv"><summary>Will my students need Claude accounts?<span class="faq-plus" aria-hidden="true" style="flex:none;font:400 24px/1 var(--font-body);color:#A23E66">+</span></summary><div class="faq-a" style="padding:2px 0 12px"><p>The course delivery method taught inside uses shared Claude artifacts. Students sign in to Claude to claim access and use the educational experience.</p><p>Applicable account requirements and functionality may depend on Claude&rsquo;s current features.</p></div></details><details class="rv"><summary>Do I need a traditional course platform?<span class="faq-plus" aria-hidden="true" style="flex:none;font:400 24px/1 var(--font-body);color:#A23E66">+</span></summary><div class="faq-a" style="padding:2px 0 12px"><p>This course teaches an alternative delivery approach built around Claude artifacts, module boards and a central course home.</p><p>Whether you also need a separate platform for payments, customer management, access protection or other functionality depends on your business requirements.</p></div></details><details class="rv"><summary>Can I sell the course I create?<span class="faq-plus" aria-hidden="true" style="flex:none;font:400 24px/1 var(--font-body);color:#A23E66">+</span></summary><div class="faq-a" style="padding:2px 0 12px"><p>You can develop educational products for your business using this methodology, subject to applicable commercial usage terms, intellectual property rights and software requirements.</p><p>You&rsquo;ll also need to establish an appropriate purchase and access process for your customers.</p></div></details><details class="rv"><summary>Will this teach me how to launch my finished course?<span class="faq-plus" aria-hidden="true" style="flex:none;font:400 24px/1 var(--font-body);color:#A23E66">+</span></summary><div class="faq-a" style="padding:2px 0 12px"><p>The final module covers preparing your course for students, writing access emails, creating an accurate course inventory, running a small beta and using student feedback to make improvements.</p><p>For a comprehensive marketing and sales methodology, explore the Blogging Ladies Membership.</p></div></details><details class="rv"><summary>Is private coaching included?<span class="faq-plus" aria-hidden="true" style="flex:none;font:400 24px/1 var(--font-body);color:#A23E66">+</span></summary><div class="faq-a" style="padding:2px 0 12px"><p>No. The Interactive Course Creator is a specialized educational experience inside The BOSS Academy.</p><p>Private coaching and personalized professional implementation are available through The BOSS Business Experience.</p></div></details><details class="rv"><summary>Is this included in BOSS Academy All Access?<span class="faq-plus" aria-hidden="true" style="flex:none;font:400 24px/1 var(--font-body);color:#A23E66">+</span></summary><div class="faq-a" style="padding:2px 0 12px"><p>Yes. You can purchase The Interactive Course Creator individually or access it through the complete included Academy collection.</p></div></details><details class="rv"><summary>How long will I have access?<span class="faq-plus" aria-hidden="true" style="flex:none;font:400 24px/1 var(--font-body);color:#A23E66">+</span></summary><div class="faq-a" style="padding:2px 0 12px"><p><span class="islot" style="display:inline-block;border:2px dashed #6348B5;border-radius:10px;padding:3px 10px;color:#6348B5;font-weight:600">To fill in: confirmed access duration.</span></p></div></details><details class="rv"><summary>Will the course be updated as Claude evolves?<span class="faq-plus" aria-hidden="true" style="flex:none;font:400 24px/1 var(--font-body);color:#A23E66">+</span></summary><div class="faq-a" style="padding:2px 0 12px"><p><span class="islot" style="display:inline-block;border:2px dashed #6348B5;border-radius:10px;padding:3px 10px;color:#6348B5;font-weight:600">To fill in: confirmed course update policy.</span></p></div></details><details class="rv"><summary>What is the refund policy?<span class="faq-plus" aria-hidden="true" style="flex:none;font:400 24px/1 var(--font-body);color:#A23E66">+</span></summary><div class="faq-a" style="padding:2px 0 12px"><p><span class="islot" style="display:inline-block;border:2px dashed #6348B5;border-radius:10px;padding:3px 10px;color:#6348B5;font-weight:600">To fill in: confirmed refund policy.</span></p></div></details></div></div></section>
+<section class="lil"><div class="in stack" style="gap:30px">
+<div class="nar stack ctr-h"><h2>The next course you create doesn&rsquo;t have to look anything like the last one you purchased.</h2><p class="body">You don&rsquo;t have to spend months designing workbooks your customers may never open.</p>
+<p class="body">You don&rsquo;t have to limit your educational products to prerecorded videos.</p>
+<p class="body">You don&rsquo;t have to keep your most ambitious product ideas in a document simply because you don&rsquo;t know how to build them.</p>
+<p class="body">Artificial intelligence has opened up new possibilities for women with valuable knowledge and creative ideas.</p>
+<p class="body">But understanding how to turn those possibilities into something organized, functional and genuinely useful is a skill.</p>
+<p class="beat">That&rsquo;s what I&rsquo;m teaching you here.</p>
+<p class="beat">How to capture your expertise.</p>
+<p class="beat">Document your methodology.</p>
+<p class="beat">Develop your education.</p>
+<p class="beat">Personalize your prompts.</p>
+<p class="beat">Build your interactive experiences.</p>
+<p class="beat">Produce your videos.</p>
+<p class="beat">Organize your student resources.</p>
+<p class="body">And prepare your finished product for the people you want to help.</p>
+<p class="body">You&rsquo;re capable of creating something more substantial than another collection of information.</p>
+<p class="beat">Let me show you the process.</p></div>
+<div style="max-width:620px;margin:0 auto;width:100%"><div class="win "><div class="bar"><i></i><i></i><i></i><span>the_interactive_course_creator.app</span></div><div class="wb"><h3 style="font-size:32px;margin-bottom:14px">The Interactive Course Creator</h3><ul class="ticks lt"><li>7 core modules.</li><li>34 interactive lessons.</li><li>34 personalized Claude prompts.</li><li>16 documented SOPs.</li><li>35 lesson tools and resources.</li><li>34 narrated slide lessons.</li><li>7 module board tours.</li><li>One complete interactive course creation methodology.</li></ul><div class="stack" style="margin-top:16px;gap:12px"><div class="pf-slot sm"><b>To fill in</b>Course price.</div><div class="row"><a class="pf-btn br" href="#enroll">Become an Interactive Course Creator <i aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></i></a></div></div></div></div></div>
+</div></section>
+<section class="vio dk"><div class="in stack" style="gap:28px">
+<div class="nar stack ctr-h"><p class="lbl">WANT TO EXPLORE MORE OF WHAT AI CAN MAKE POSSIBLE FOR YOUR BUSINESS?</p><h2>Unlock the complete BOSS Academy collection.</h2><p class="body">Learn how to rethink your business strategy, use AI to implement your business projects and create innovative educational products.</p></div>
+<div class="pairs"><article class="pair rv"><h3>The Futureproof Blogger</h3><p>Understand the future of blogging and what makes a business valuable in the age of AI.</p></article><article class="pair rv"><h3>The Productive Blogger Method</h3><p>Turn your business strategies, ideas and goals into organized projects and practical implementation plans.</p></article><article class="pair rv"><h3>The Interactive Course Creator</h3><p>Develop interactive educational products using the complete course creation methodology.</p></article></div>
+<div class="row" style="justify-content:center"><a class="pf-btn cr" href="/all-access/">Explore BOSS Academy All Access <i aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></i></a><a class="pf-btn olw" href="#enroll">Purchase The Interactive Course Creator Only <i aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></i></a></div></div></section>
+</main><footer class="ft" style="background:#A23E66;color:#FFFFFF;padding:80px 0 0;overflow:hidden">
+<style>
+.ft a{color:#FFFFFF;text-decoration:none}
+.ft .ft-in{max-width:1180px;margin:0 auto;padding:0 clamp(16px,4vw,48px)}
+.ft .ft-top{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(36px,5vw,72px);align-items:start}
+.ft .ft-brand{font:400 clamp(40px,5vw,64px)/.95 var(--font-display);letter-spacing:-.01em;color:#FBF5EE;margin:0}
+.ft .ft-tag{margin:0;font:400 16px/1.65 var(--font-body);color:#F6E1E8;max-width:440px}
+.ft .ft-tag2{margin:0;font:400 italic 24px/1.3 var(--font-display);color:#FBF5EE}
+.ft .ft-cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}
+.ft .ft-cols h3{margin:0 0 12px;font:500 11.5px/1.4 var(--font-label);letter-spacing:.18em;text-transform:uppercase;color:#F6C9D8}
+.ft .ft-cols a{display:block;padding:6px 0;font:500 15px/1.45 var(--font-body)}
+@media (hover:hover){.ft .ft-cols a:hover,.ft .ft-row a:hover{text-decoration:underline;text-underline-offset:4px}}
+.ft .ft-stay{margin-top:56px;background:#3A1C2A;border-radius:30px;padding:clamp(24px,4vw,40px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px 48px;align-items:center}
+.ft .ft-stay h3{margin:0 0 8px;font:400 clamp(30px,3.4vw,42px)/1.05 var(--font-display);color:#FBF5EE}
+.ft .ft-stay p{margin:0;font:400 16px/1.6 var(--font-body);color:#F1DDE2}
+.ft .ft-form{display:flex;flex-wrap:wrap;gap:10px}
+.ft .ft-form label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.ft .ft-form input[type=text]{flex:1 1 220px;min-width:0;min-height:54px;border-radius:999px;border:0;padding:0 22px;font:500 16px/1 var(--font-body);color:#3A1C2A;background:#FBF5EE;-webkit-appearance:none;appearance:none}
+.ft .ft-form button{min-height:54px;padding:0 26px;border-radius:999px;border:0;background:#A23E66;color:#FFFFFF;font:600 15.5px/1 var(--font-body);cursor:pointer}
+.ft .ft-form input:focus-visible,.ft .ft-form button:focus-visible,.ft a:focus-visible{outline:3px solid #F6C9D8;outline-offset:3px}
+.ft .ft-msg{flex:1 1 100%;margin:0;font:500 14px/1.5 var(--font-body);color:#F6C9D8}
+.ft .ft-msg:empty{display:none}
+.ft .ft-slot{flex:1 1 100%;border:2px dashed #F6C9D8;border-radius:16px;padding:12px 16px;font:500 14px/1.5 var(--font-body);color:#F6C9D8}
+.ft .ft-slot b{display:block;font:500 11px/1.3 var(--font-label);letter-spacing:.16em;margin-bottom:4px}
+.ft .ft-row{margin-top:40px;padding:22px 0;border-top:1px solid rgba(251,245,238,.28);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:14px 28px;font:500 12px/1.5 var(--font-label);letter-spacing:.14em;text-transform:uppercase}
+.ft .ft-row nav{display:flex;flex-wrap:wrap;gap:8px 22px}
+.ft .ft-row p{margin:0;color:#F6E1E8}
+@media (max-width:900px){.ft .ft-top,.ft .ft-stay{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:560px){.ft .ft-cols{grid-template-columns:repeat(2,minmax(0,1fr))}.ft .ft-cols > div:last-child{grid-column:1 / -1}}
+</style>
+<div class="ft-in">
+  <div class="ft-top">
+    <div style="display:flex;flex-direction:column;gap:18px">
+      <p class="ft-brand">BOSS LADY BLOGGERS</p>
+      <p class="ft-tag">Professional blog coaching, custom website design and modern business education for ambitious women.</p>
+      <p class="ft-tag2">Helping you build the business behind your blog.</p>
+    </div>
+    <div class="ft-cols">
+      <div><h3>Work With Me</h3><a href="/coaching/">The BOSS Business Experience</a><a href="/coaching/">Private Blog Coaching &amp; Design</a><a href="/portfolio/">Website Design Portfolio</a></div>
+      <div><h3>Learn From Me</h3><a href="/membership/">The Blogging Ladies Membership</a><a href="/academy/">The BOSS Academy</a><a href="/all-access/">Academy All Access</a></div>
+      <div><h3>Explore</h3><a href="/about/">About</a><a href="/#webinar">Futureproof Your Blog Webinar</a><a href="/blog/">The Blog</a><a href="/podcast/">The Podcast</a><a href="https://www.youtube.com/@GenasysLynn" target="_blank" rel="noopener">YouTube</a><a href="/contact/">Contact</a></div>
+    </div>
+  </div>
+  <div class="ft-stay">
+    <div><h3>Stay Connected</h3><p>Modern business strategies, buyer psychology, AI and conversations about the future of blogging.</p></div>
+    <form class="ft-form" data-ft-news novalidate>
+      <label for="ft-email">Email Address</label>
+      <input id="ft-email" type="text" name="email" inputmode="email" autocomplete="email" placeholder="Email Address" maxlength="255">
+      <button type="submit">Subscribe</button>
+      <p class="ft-msg" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+  <div class="ft-row">
+    <nav aria-label="Social"><a href="https://www.instagram.com/blogcoach_gen" target="_blank" rel="noopener">Instagram</a><a href="https://www.pinterest.com/BossLadyBloggers/" target="_blank" rel="noopener">Pinterest</a><a href="https://www.youtube.com/@GenasysLynn" target="_blank" rel="noopener">YouTube</a></nav>
+    <nav aria-label="Legal"><a href="/privacy-policy/">Privacy Policy</a><a href="/terms-and-conditions/">Terms &amp; Conditions</a></nav>
+    <p>&copy; Boss Lady Bloggers. All rights reserved.</p>
+  </div>
+</div>
+<div class="bl-marquee" style="padding:10px 0 10px;overflow:hidden" aria-hidden="true">
+  <div class="bl-track bl-slow" style="font:400 clamp(120px,15vw,220px)/1 var(--font-display);white-space:nowrap;color:#FBF5EE">
+    <span>BOSS LADY BLOGGERS&#160;&#183;&#160;BOSS LADY BLOGGERS&#160;&#183;&#160;</span><span aria-hidden="true">BOSS LADY BLOGGERS&#160;&#183;&#160;BOSS LADY BLOGGERS&#160;&#183;&#160;</span>
+  </div>
+</div>
+<script>
+(function(){
+  /* Footer newsletter: paste the Flodesk form ID for your newsletter here */
+  var NEWS_FORM_ID='';
+  var form=document.querySelector('[data-ft-news]');if(!form)return;
+  var msg=form.querySelector('.ft-msg'),btn=form.querySelector('button'),inp=form.querySelector('input[name=email]');
+  if(!NEWS_FORM_ID){var s=document.createElement('div');s.className='ft-slot';s.innerHTML='<b>TO FILL IN</b>Newsletter form is not connected to Flodesk yet, so sign ups are not saved.';form.appendChild(s);}
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var em=inp.value.trim();
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){msg.textContent='That email doesn’t look quite right yet.';inp.focus();return;}
+    if(!NEWS_FORM_ID){msg.textContent='This form is not connected yet.';return;}
+    btn.disabled=true;msg.textContent='';
+    fetch('https://form.flodesk.com/forms/'+NEWS_FORM_ID+'/submit',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:em,confirm_email_address:''}),keepalive:true}).catch(function(){}).then(function(){
+      form.innerHTML='<p class="ft-msg" style="font-size:16px;color:#FBF5EE">You’re in. Watch your inbox.</p>';
+    });
+  });
+})();
+</script>
+</footer>
+
+</body>
+</html>

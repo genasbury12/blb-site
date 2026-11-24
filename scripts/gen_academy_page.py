@@ -23,6 +23,8 @@ COURSES=[("futureproof","The Futureproof Blogger","Business strategy & the futur
  "What if your next online course was something your customers could actually interact with instead of just watch?",
  ["Discover how to use Claude to transform your knowledge into interactive educational experiences that go beyond traditional video lessons, static workbooks and downloadable PDFs.","Learn a new approach to course creation that encourages active participation, engagement and implementation.","Explore what's possible when artificial intelligence meets digital education, and rethink how you package and deliver your expertise."],
  "Because the future of online courses doesn't have to look like another dashboard filled with prerecorded videos.")]
+# courses with their own sales page
+COURSE_PAGE={"interactive":"/interactive-course-creator/"}
 o=[]
 o.append('''<style>
 /* The BOSS Academy storefront. A calm editorial shop: plum hero with a stack of course "books", category tiles,
@@ -234,7 +236,7 @@ for slug,name,tag,cats,col,hook,ps,close in COURSES:
     cc+=f'''<article class="course" id="course-{slug}" data-cats="{' '.join(cats)}">
 <div class="cover" style="background:{col};color:{fg}"><small>The BOSS Academy</small><b>{e(name)}</b><small>{e(tag)}</small></div>
 <div class="meta"><p class="lbl">{e(tag)}</p><h3>{e(name)}</h3><p class="hook">{e(hook)}</p>{''.join(f'<p class="body">{e(p)}</p>' for p in ps)}<p class="close">{e(close)}</p>
-<div class="buy">{slot("Course price")}{btn("Explore "+name,"#course-"+slug)}</div></div></article>'''
+<div class="buy">{slot("Course price")}{btn("Explore "+name,COURSE_PAGE.get(slug,"#course-"+slug))}</div></div></article>'''
 o.append(f'''<section class="lib" id="library" style="scroll-margin-top:70px"><div class="in">
 <div class="nar stack" style="text-align:center;gap:14px;margin-bottom:30px"><p class="lbl">Explore the Course Library</p><h2>Specialized business education. Practical strategies. <em>Skills you can put to work.</em></h2><p class="body">Purchase the courses you need, when you need them.</p></div>
 <div class="flt" role="group" aria-label="Filter courses by category">{flt}</div>
@@ -261,7 +263,7 @@ o.append(f'''<section class="aa dk" id="all-access" style="scroll-margin-top:70p
 # finder
 fd=[("I'm worried about where blogging is headed.","You're questioning whether traditional blogging strategies will continue working and want to understand how to build a business that can adapt to AI and the changing internet.","Start with The Futureproof Blogger.","#course-futureproof","Explore Course",""),
 ("I have too many ideas and don't know how to get everything done.","You know there's work that needs to happen in your business, but you're overwhelmed by scattered information, unfinished projects and competing priorities.","Start with The Productive Blogger Method.","#course-pbm","Explore Course",""),
-("I want to create digital products that stand out.","You want to turn your knowledge into something more valuable and engaging than another static ebook, PDF or traditional online course.","Start with The Interactive Course Creator.","#course-interactive","Explore Course",""),
+("I want to create digital products that stand out.","You want to turn your knowledge into something more valuable and engaging than another static ebook, PDF or traditional online course.","Start with The Interactive Course Creator.","/interactive-course-creator/","Explore Course",""),
 ("I want to learn all of it.","You're serious about developing your business skills and want access to the complete specialized course collection.","Explore The BOSS Academy All Access.","#all-access","Explore All Access","all")]
 fh=''.join(f'<article class="fc {c}"><p class="q">{e(q)}</p><p class="d">{e(d)}</p><p class="s">{e(s)}</p>{btn(b,h,"cr" if c else "")}</article>' for q,d,s,h,b,c in fd)
 o.append(f'''<section style="background:#F6E1E8"><div class="in stack" style="gap:30px">

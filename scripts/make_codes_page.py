@@ -20,6 +20,7 @@ GROUPS = [
         ("BlackFriday", "/black-friday", "NEW: Early access Nov 25 through Cyber Monday: 50% off, $23.50 a month locked in forever, plus the free 1:1 call and roadmap."),
         ("Portfolio", "/portfolio", "NEW: your client portfolio with real laptop and phone mockups of 7 client sites and the 5 client video testimonials. Dashed boxes mark each project's description and services, and your starting investment in the FAQ."),
         ("ClientProject", "/client-project (leave it out of your menu)", "NEW: one page serves every client project: /client-project?project=oneincome, tammy, abroad, fizzy, focusflow, cajungirl or datenight. Send me each client's story and I'll fill in her page."),
+        ("InteractiveCourseCreator", "/interactive-course-creator", "NEW: The Interactive Course Creator sales page in its own Interactive Lab brand (violet, peach, lilac). The Academy, homepage and All Access course cards link here. Dashed boxes: price, checkout link, access and update terms, software costs, refund policy, the course demo and screen recording, and student proof."),
         ("AllAccess", "/all-access", "NEW: The BOSS Academy All Access sales page. Every All Access button on the site now goes here. Dashed boxes: course prices, combined price, All Access price, payment options, access and future course terms, refund policy and testimonials. Send me the checkout link and I'll wire every Unlock button."),
         ("Academy", "/academy (menu title: Courses)", "NEW: The BOSS Academy storefront. The course library filters by category. Dashed boxes mark the course and All Access prices; send me each course's sales page link and the All Access link and I'll wire the buttons."),
         ("Membership", "/membership", "NEW: The Blogging Ladies Membership sales page."),
@@ -49,7 +50,7 @@ GROUPS = [
 
 STEPS = [
     "Delete the Course, Course Waitlist, Group Coaching and Group Waitlist pages in Showit, and 301 redirect each one to /membership.",
-    "Add three new Showit pages: /portfolio, /client-project and /all-access. Paste Portfolio, ClientProject and AllAccess into them. Keep /client-project out of your menu.",
+    "Add four new Showit pages: /portfolio, /client-project, /all-access and /interactive-course-creator. Paste Portfolio, ClientProject, AllAccess and InteractiveCourseCreator into them. Keep /client-project out of your menu.",
     "Delete the old BOSS page (/boss) in Showit and 301 redirect /boss to /blog-coaching. Your new Work With Me page lives at /blog-coaching.",
     "Delete the Free Trainings page and 301 redirect /free-trainings to /free-masterclass.",
     "Re-paste every page and your nav, footer and menu pieces: the new menu is About, Blog Coaching & Design, Membership, Courses, Resources and a Work With Me button, and the new footer links to your Portfolio, webinar, privacy policy and terms.",
