@@ -359,7 +359,7 @@ o.append(f'''<section style="background:#FBF5EE"><div class="in"><div class="aa"
 <p class="body">You want to understand the future of blogging. Master AI. Create more valuable digital products. Strengthen your business skills. And continue learning as your business evolves.</p>
 <p class="body">Instead of purchasing each course individually, unlock the complete BOSS Academy collection.</p>
 <p class="body">One investment gives you access to the included specialized courses, applicable educational resources and an entire collection of modern business strategies.</p></div>
-<div class="aa-box"><p class="lbl">The BOSS Academy All Access</p><p style="font:400 clamp(26px,2.8vw,32px)/1.2 var(--font-display);color:#3A1C2A">Invest in the knowledge behind the business you want to own.</p>{btn("Explore All Access","/academy/#all-access")}</div>
+<div class="aa-box"><p class="lbl">The BOSS Academy All Access</p><p style="font:400 clamp(26px,2.8vw,32px)/1.2 var(--font-display);color:#3A1C2A">Invest in the knowledge behind the business you want to own.</p>{btn("Explore All Access","/all-access/")}</div>
 </div></div></section>''')
 # ABOUT
 learned=["I learned how to understand people.","How to identify problems worth solving.","How to create offers people wanted to purchase.","How to communicate value, generate sales and build a business around the knowledge and skills I already had."]

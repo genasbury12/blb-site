@@ -256,7 +256,7 @@ o.append(f'''<section class="aa dk" id="all-access" style="scroll-margin-top:70p
 <p style="font:400 italic 22px/1.35 var(--font-display);color:#A23E66">One investment. An entire collection of specialized business education.</p>
 <ul class="ticks">{''.join(f'<li>{e(i)}</li>' for i in inc)}</ul>
 <p class="body" style="font-size:16px">Whether you&rsquo;re reinventing your business strategy, developing innovative digital products or learning how to operate your business more efficiently, you&rsquo;ll have a collection of specialized education to return to.</p>
-{btn("Explore BOSS Academy All Access","#all-access","br")}
+{btn("Explore BOSS Academy All Access","/all-access/","br")}
 </div></div></section>''')
 # finder
 fd=[("I'm worried about where blogging is headed.","You're questioning whether traditional blogging strategies will continue working and want to understand how to build a business that can adapt to AI and the changing internet.","Start with The Futureproof Blogger.","#course-futureproof","Explore Course",""),
@@ -325,7 +325,7 @@ o.append(f'''<section class="final"><div class="nar stack" style="align-items:ce
 <h2>Build the knowledge behind the business <em>you want to own.</em></h2>
 <div class="mores">{''.join(f'<p>{e(m)}</p>' for m in mores)}</div>
 <p class="body">Whatever your business needs next, there&rsquo;s a place to keep learning inside The BOSS Academy.</p>
-<div class="ctas" style="justify-content:center">{btn("Shop All Courses","#library")}{btn("Unlock BOSS Academy All Access","#all-access","br")}</div>
+<div class="ctas" style="justify-content:center">{btn("Shop All Courses","#library")}{btn("Unlock BOSS Academy All Access","/all-access/","br")}</div>
 <div class="sign"><b>THE BOSS ACADEMY</b><span>An educational division of Boss Lady Bloggers.</span><span>Modern business education for ambitious women.</span></div>
 </div></section>''')
 o.append('''<script>

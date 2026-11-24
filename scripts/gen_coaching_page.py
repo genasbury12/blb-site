@@ -7,52 +7,16 @@ from folio_data import PROJECTS, IMG, VIDEO_JS, video_cards
 from pf_parts import *
 
 SRC = Path(__file__).parent / "copy/blog-coaching.txt"
-L = [l.strip() for l in SRC.read_text().split("\n") if l.strip()]
 # brand rule: never "six figure"
-L = [l.replace("my multi six figure brand", "my money making brand") for l in L]
-
-def section(n):
-    start = next(i for i, l in enumerate(L) if l.startswith(f"SECTION {n:02d}:"))
-    end = next((i for i, l in enumerate(L) if i > start and l.startswith("SECTION ")), len(L))
-    return L[start + 1:end]
+L, section = load_copy(SRC, [("my multi six figure brand", "my money making brand")])
 
 CTA = {"Apply": CAL, "Let's Discuss": CAL, "Explore My Client Portfolio": "/portfolio/", "Explore More Client Projects": "/portfolio/#projects"}
 def cta(label, cls=""):
     href = next((v for k, v in CTA.items() if label.startswith(k)), CAL)
     return btn(label, href, cls, href.startswith("http"))
 
-def is_label(l): return l.isupper() and len(l) > 3
-def headline(l):
-    parts = re.split(r"(?<=[.?])\s+", l, maxsplit=1)
-    if len(parts) == 2: return f"{e(parts[0])} <em>{e(parts[1])}</em>"
-    return e(l)
-
-def flow(lines, cta_cls=""):
-    """Generic renderer: bullets, buttons, slots, short display lines and paragraphs."""
-    out, i = [], 0
-    while i < len(lines):
-        l = lines[i]
-        if l.startswith("* "):
-            items = []
-            while i < len(lines) and lines[i].startswith("* "):
-                items.append(lines[i][2:]); i += 1
-            out.append('<ul class="ticks lt">' + "".join(f"<li>{e(x)}</li>" for x in items) + "</ul>")
-            continue
-        if l.startswith("[") and l.endswith("]"):
-            inner = l[1:-1]
-            if inner.startswith("Insert"): out.append(slot(inner + "."))
-            else: out.append(f'<div class="row">{cta(inner, cta_cls)}</div>')
-        elif is_label(l): out.append(f'<p class="lbl">{e(l)}</p>')
-        elif len(l) <= 64: out.append(f'<p class="beat">{e(l)}</p>')
-        else: out.append(P(l))
-        i += 1
-    return "\n".join(out)
-
-def head(lines):
-    """Pull the optional label and the headline off the front of a section."""
-    lbl = ""
-    if is_label(lines[0]): lbl, lines = lines[0], lines[1:]
-    return lbl, lines[0], lines[1:]
+_flow = flow
+def flow(lines, cta_cls=""): return _flow(lines, cta_cls, cta)
 
 def std(n, bg, layout="center", dark=False, cta_cls=""):
     lbl, h, rest = head(section(n))
@@ -63,54 +27,7 @@ def std(n, bg, layout="center", dark=False, cta_cls=""):
                 f'<div class="stack">{flow(rest, cta_cls)}</div></div></section>')
     return (f'<section{cls} style="background:{bg}"><div class="nar stack ctr-h">{lb}<h2>{headline(h)}</h2>{flow(rest, cta_cls)}</div></section>')
 
-def pairs(lines):
-    """Title line followed by a description line."""
-    return '<div class="pairs">' + "".join(f'<article class="pair rv"><h3>{e(t)}</h3><p>{e(d)}</p></article>' for t, d in zip(lines[::2], lines[1::2])) + '</div>'
 
-EXTRA = r'''<style>
-.pf .beat{font:400 clamp(21px,2.3vw,26px)/1.3 var(--font-display);color:var(--plum)}
-.pf .dk .beat{color:var(--cream)}
-.pf .ctr-h{text-align:left}
-.pf .ctr-h > h2,.pf .ctr-h > .lbl{text-align:center}
-.pf .sticky{position:sticky;top:110px}
-.pf .ticks.lt li{background:#fff;color:var(--plum)}
-.pf .dk .ticks.lt li{background:rgba(251,245,238,.08);color:var(--cream)}
-.pf .ticks.no li::before{background:var(--plum) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M7 7l10 10M17 7L7 17' fill='none' stroke='%23fff' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E") center/14px no-repeat}
-.pf .tagrow{display:flex;flex-wrap:wrap;gap:8px 18px;font:500 11.5px/1.5 var(--font-label);letter-spacing:.16em;text-transform:uppercase;color:var(--pop)}
-.pf .tagrow span+span::before{content:"\2726";margin-right:18px;color:var(--berry)}
-.pf .thoughts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.pf .thoughts p{padding:18px 20px;border-radius:18px;background:#fff;font:400 italic 21px/1.35 var(--font-display);color:var(--plum)}
-.pf .thoughts p::before{content:"\201C";color:var(--berry)}.pf .thoughts p::after{content:"\201D";color:var(--berry)}
-.pf .phase{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(24px,4vw,56px);padding:clamp(26px,4vw,44px);border-radius:32px;background:#fff;align-items:start}
-.pf .phase .pn{font:500 12px/1 var(--font-label);letter-spacing:.2em;color:var(--berry)}
-.pf .phase h3{font:400 italic clamp(48px,6vw,80px)/.95 var(--font-display);color:var(--plum);margin:10px 0 12px}
-.pf .phase .when{display:inline-block;padding:9px 14px;border-radius:999px;background:var(--plum);color:var(--cream);font:500 11px/1 var(--font-label);letter-spacing:.14em}
-.pf .phase .ticks.lt li{background:var(--cream);font-size:15px;padding:11px 14px 11px 46px}
-.pf .phase .ticks.lt li::before{top:12px}
-@media (min-width:1100px){.pf .phase .ticks{grid-template-columns:repeat(2,minmax(0,1fr))}}
-.pf .phase .outc{padding:18px 20px;border-radius:18px;background:var(--berry);color:#fff;font:400 20px/1.35 var(--font-display)}
-.pf .phase .outc b{display:block;font:500 11px/1.3 var(--font-label);letter-spacing:.16em;text-transform:uppercase;color:var(--pop);margin-bottom:6px;font-weight:500}
-.pf .phases{display:flex;flex-direction:column;gap:18px}
-.pf .cycle{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;counter-reset:c}
-.pf .cycle div{padding:22px 18px;border-radius:22px;background:rgba(251,245,238,.08);display:flex;flex-direction:column;gap:8px}
-.pf .cycle b{font:400 italic 34px/1 var(--font-display);color:var(--pop);font-weight:400}
-.pf .cycle p{font:400 15px/1.55 var(--font-body);color:#F1DDE2}
-.pf .pairs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
-.pf .pair{padding:22px 24px;border-radius:22px;background:#fff;display:flex;flex-direction:column;gap:8px}
-.pf .pair h3{font-size:25px;line-height:1.15}
-.pf .pair p{font:400 16px/1.6 var(--font-body);color:var(--cocoa)}
-.pf .dk .pair{background:rgba(251,245,238,.07)}.pf .dk .pair h3{color:var(--cream)}.pf .dk .pair p{color:#F1DDE2}
-.pf .price{background:var(--plum);border-radius:32px;padding:clamp(28px,4vw,48px);display:flex;flex-direction:column;gap:14px}
-.pf .fornot{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
-.pf .fornot > div{border-radius:28px;padding:clamp(22px,3vw,32px);display:flex;flex-direction:column;gap:14px}
-.pf .avail{background:var(--berry);border-radius:32px;padding:clamp(30px,5vw,60px);text-align:center;display:flex;flex-direction:column;gap:16px;align-items:center}
-.pf .avail h2{color:#fff}.pf .avail h2 em{color:var(--pop)}.pf .avail .body{color:#FBE3EA}
-
-.pf .steps4{grid-template-columns:repeat(4,minmax(0,1fr))}.pf .gal3{grid-template-columns:repeat(3,minmax(0,1fr))}
-@media (max-width:1100px){.pf .steps4{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:980px){.pf .gal3{grid-template-columns:minmax(0,1fr)}.pf .phase{grid-template-columns:minmax(0,1fr)}.pf .cycle{grid-template-columns:repeat(2,minmax(0,1fr))}.pf .sticky{position:static}}
-@media (max-width:700px){.pf .steps4,.pf .thoughts,.pf .pairs,.pf .fornot,.pf .cycle{grid-template-columns:minmax(0,1fr)}}
-</style>'''
 
 o = [CSS, EXTRA, '<main id="main" class="pf">']
 

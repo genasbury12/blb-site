@@ -1,7 +1,7 @@
 BOSS LADY BLOGGERS - NEW WEBSITE ON SHOWIT - PASTE GUIDE
 =========================================================
 
-19 full pages plus the small blog-post pieces. Same workflow as before: one full-page embed
+20 full pages plus the small blog-post pieces. Same workflow as before: one full-page embed
 canvas per Showit page, paste the whole file, publish.
 
 THE FILES AND WHERE EACH ONE GOES
@@ -33,6 +33,8 @@ ClientProject.html        /client-project  (ONE page serves every client
                           project: /client-project?project=oneincome, tammy,
                           abroad, fizzy, focusflow, cajungirl, datenight.
                           Leave it out of your menu)
+AllAccess.html            /all-access  (The BOSS Academy All Access sales
+                          page. Every All Access button links here)
 Academy.html              /academy  (The BOSS Academy storefront. Name the page
                           "Courses" in your Showit menu)
 Membership.html           /membership  (The Blogging Ladies Membership,
