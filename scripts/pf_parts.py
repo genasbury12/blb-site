@@ -260,3 +260,7 @@ LEGAL = ('<div class="legal" style="padding:22px clamp(16px,4vw,48px);text-align
          'letter-spacing:.12em;text-transform:uppercase;color:#6E6A80">&copy; Boss Lady Bloggers &middot; '
          '<a href="/privacy-policy/" style="color:inherit">Privacy Policy</a> &middot; '
          '<a href="/terms-and-conditions/" style="color:inherit">Terms &amp; Conditions</a></div>')
+
+# Flodesk form for the "Futureproof Your Blog" webinar. Paste its form ID here once it exists in Flodesk:
+# the homepage webinar section and /futureproof-webinar both use it.
+WEBINAR_FORM_ID = ""

@@ -15,7 +15,7 @@ L, section = load_copy(SRC, [("I built a multi six figure brand", "I built a mon
 
 LINKS = {"Discover How We Can Work Together": "#work", "Explore My Private Blog Coaching Services": COACH,
          "Explore The BOSS Business Experience": COACH, "Explore My Client Portfolio": "/portfolio/",
-         "Explore the Membership": "/membership/", "Shop The BOSS Academy": "/academy/", "Save My Free Seat": "/#webinar",
+         "Explore the Membership": "/membership/", "Shop The BOSS Academy": "/academy/", "Save My Free Seat": "/futureproof-webinar/",
          "Read the Blog": "/blog/", "Listen to the Podcast": "/podcast/", "Watch on YouTube": YT,
          "Find Me on Instagram": IG, "Let's Build Your Business Together": COACH}
 def cta(label, cls=""):

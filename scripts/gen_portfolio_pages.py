@@ -149,7 +149,7 @@ o.append(f'''<section style="background:#FBF5EE"><div class="in"><div class="min
 <div class="stack"><p class="lbl">Not quite ready for private coaching &amp; design?</p><h2>Futureproof <em>Your Blog</em></h2>
 <p class="body">Discover how to build a blogging business that can adapt to AI, changing consumer behavior and the evolving future of the internet.</p>
 <p class="body">Understand what your business needs before investing your time and money into building it.</p></div>
-<div class="stack" style="align-items:flex-start"><span class="chips"><span style="background:#A23E66">Free webinar</span></span>{btn("Save My Free Seat", "/#webinar", "cr")}</div>
+<div class="stack" style="align-items:flex-start"><span class="chips"><span style="background:#A23E66">Free webinar</span></span>{btn("Save My Free Seat", "/futureproof-webinar/", "cr")}</div>
 </div></div></section>''')
 o.append(VIDEO_JS + '\n</main>')
 out = '\n'.join(o)
