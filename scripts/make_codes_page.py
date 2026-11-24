@@ -20,7 +20,7 @@ GROUPS = [
         ("BlackFriday", "/black-friday", "NEW: Early access Nov 25 through Cyber Monday: 50% off, $23.50 a month locked in forever, plus the free 1:1 call and roadmap."),
         ("Membership", "/membership", "NEW: The Blogging Ladies Membership sales page."),
         ("Home", "/ (home page)", ""), ("StartHere", "/start-here", ""), ("About", "/about", ""),
-        ("Boss", "/boss", ""), ("BlogCoaching", "/blog-coaching", ""), ("Podcast", "/podcast", ""),
+        ("BlogCoaching", "/blog-coaching", "NEW: Now your Work With Me page for The BOSS Business Experience. Dashed boxes mark what you still need to fill in: portfolio, testimonial, case studies, starting investment, timeline, payment plans and the two \"if confirmed\" resources."), ("Podcast", "/podcast", ""),
         ("BlogLanding", "/blog", "Optional: only if you want the new blog landing look"),
         ("BlogCategory", "/blog-category", "One page serves every topic"),
         ("Links", "/links", "Link-in-bio page"), ("Contact", "/contact", ""),
@@ -45,6 +45,7 @@ GROUPS = [
 
 STEPS = [
     "Delete the Course, Course Waitlist, Group Coaching and Group Waitlist pages in Showit, and 301 redirect each one to /membership.",
+    "Delete the old BOSS page (/boss) in Showit and 301 redirect /boss to /blog-coaching. Your new Work With Me page lives at /blog-coaching, and the menu button now says Book a call.",
     "Delete the Free Trainings page and 301 redirect /free-trainings to /free-masterclass.",
     "Re-paste every page and your nav, footer and menu pieces: they now link to the membership and the free masterclass.",
     "Create two new Showit pages, /roadmap and /roadmap-tool, each with one full width Embed Code box. Paste Roadmap and RoadmapTool. Any canvas height works: the code grows the canvas to fit.",

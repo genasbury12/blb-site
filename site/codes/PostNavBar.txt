@@ -19,12 +19,12 @@
 <a href="/start-here" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Start Here</a>
 <a href="/about" style="color:#3A1C2A;text-decoration:none;padding:8px 0">About</a>
 <a href="/free-masterclass" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Free Masterclass</a>
-<a href="/blog-coaching" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Coaching</a>
+<a href="/blog-coaching" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Work With Me</a>
 <a href="/membership" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Membership</a>
 <a href="/podcast" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Podcast</a>
 <a href="/blog" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Blog</a>
 <a href="/contact" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Contact</a>
-<a href="/boss" class="pill" style="background:#3A1C2A;color:#FFFFFF;padding:11px 18px">Explore BOSS</a>
+<a href="https://calendly.com/bossladybloggers/15min" class="pill" style="background:#3A1C2A;color:#FFFFFF;padding:11px 18px">Book a call</a>
 </nav>
 </div>
 </div>

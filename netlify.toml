@@ -38,3 +38,15 @@
   from = "/free-trainings/*"
   to = "/free-masterclass/"
   status = 301
+
+[[redirects]]
+  from = "/boss"
+  to = "/coaching/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/boss/*"
+  to = "/coaching/"
+  status = 301
+  force = true

@@ -19,7 +19,6 @@ PAGES = {
     "index.html":                ("Home.html", "/"),
     "start-here/index.html":     ("StartHere.html", "/start-here"),
     "about/index.html":          ("About.html", "/about"),
-    "boss/index.html":           ("Boss.html", "/boss"),
     "coaching/index.html":       ("BlogCoaching.html", "/blog-coaching"),
     "membership/index.html":     ("Membership.html", "/membership"),
     "free-masterclass/index.html": ("FreeMasterclass.html", "/free-masterclass"),
@@ -171,12 +170,12 @@ PIECE_NAV = """<div style="background:#FBF5EE;padding:16px clamp(16px,4vw,40px);
 <a href="/start-here" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Start Here</a>
 <a href="/about" style="color:#3A1C2A;text-decoration:none;padding:8px 0">About</a>
 <a href="/free-masterclass" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Free Masterclass</a>
-<a href="/blog-coaching" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Coaching</a>
+<a href="/blog-coaching" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Work With Me</a>
 <a href="/membership" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Membership</a>
 <a href="/podcast" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Podcast</a>
 <a href="/blog" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Blog</a>
 <a href="/contact" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Contact</a>
-<a href="/boss" class="pill" style="background:#3A1C2A;color:#FFFFFF;padding:11px 18px">Explore BOSS</a>
+<a href="https://calendly.com/bossladybloggers/15min" class="pill" style="background:#3A1C2A;color:#FFFFFF;padding:11px 18px">Book a call</a>
 </nav>
 </div>"""
 
@@ -242,8 +241,7 @@ PIECE_MENUPAGE = """<div style="min-height:100vh;background:#A23E66;padding:22px
 <a href="/" style="color:#FBF5EE;text-decoration:none">Home</a>
 <a href="/about" style="color:#FBF5EE;text-decoration:none">About</a>
 <a href="/start-here" style="color:#FBF5EE;text-decoration:none">Start Here</a>
-<a href="/boss" style="color:#FBF5EE;text-decoration:none">BOSS Business Blueprint</a>
-<a href="/blog-coaching" style="color:#FBF5EE;text-decoration:none">Blog Coaching</a>
+<a href="/blog-coaching" style="color:#FBF5EE;text-decoration:none">Work With Me</a>
 <a href="/membership" style="color:#FBF5EE;text-decoration:none">The Blogging Ladies Membership</a>
 <a href="/free-masterclass" style="color:#FBF5EE;text-decoration:none">Free Masterclass</a>
 <a href="/podcast" style="color:#FBF5EE;text-decoration:none">Podcast</a>
