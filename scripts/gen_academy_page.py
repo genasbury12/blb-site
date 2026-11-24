@@ -3,7 +3,9 @@ P='/home/user/blb-site/site/_pages/academy.html'
 def e(t): return html.escape(t,quote=False).replace("'","&rsquo;")
 ARR='<i aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></i>'
 def btn(label,href,cls=''): return f'<a class="ac-btn {cls}" href="{href}">{e(label)} {ARR}</a>'
-def slot(t,dark=False): return f'<span class="ac-slot{" dk" if dark else ""}">{e(t)}</span>'
+# Unconfirmed details (prices, policies) are left out of the live page. Set SHOW_SLOTS = True to see where they go.
+SHOW_SLOTS=False
+def slot(t,dark=False): return f'<span class="ac-slot{" dk" if dark else ""}">{e(t)}</span>' if SHOW_SLOTS else ''
 CATS=[("business","Business & Monetization","Business","Develop profitable business models, discover valuable offer opportunities and create products people have a genuine reason to purchase."),
 ("branding","Branding & Messaging","Branding","Understand your audience, communicate your value and build a brand people actively seek out."),
 ("marketing","Marketing & Audience Growth","Marketing","Attract potential customers, create demand for your offers and build meaningful relationships with your audience."),
@@ -253,7 +255,7 @@ o.append(f'''<section class="aa dk" id="all-access" style="scroll-margin-top:70p
 <p class="body">And as your business evolves, there will always be something new you want to learn.</p>
 <p class="big">Instead of purchasing every course individually, unlock the complete educational collection with The BOSS Academy All Access.</p>
 </div>
-<div class="aa-box"><span class="ac-slot" style="align-self:flex-start">All Access price</span>
+<div class="aa-box">{slot("All Access price")}
 <h3>The BOSS Academy All Access</h3>
 <p style="font:400 italic 22px/1.35 var(--font-display);color:#A23E66">One investment. An entire collection of specialized business education.</p>
 <ul class="ticks">{''.join(f'<li>{e(i)}</li>' for i in inc)}</ul>
@@ -319,6 +321,7 @@ faq=[("Can I purchase individual courses?",["Absolutely. Every available standal
 ("Can I upgrade to All Access after purchasing an individual course?",None)]
 fq=''
 for q,a in faq:
+    if not a and not SHOW_SLOTS: continue
     ans=''.join(f'<p>{e(x)}</p>' for x in a) if a else f'<p>{slot("To fill in: " + ("confirmed course access policy" if "access" in q else "confirmed Academy upgrade policy"),True)}</p>'
     fq+=f'<details><summary>{e(q)}<span class="faq-plus" aria-hidden="true">+</span></summary><div class="faq-a">{ans}</div></details>'
 o.append(f'''<section class="faqs dk"><div class="in stack" style="gap:30px"><div class="nar" style="text-align:center"><h2>Frequently Asked <em>Questions</em></h2></div><div class="faq">{fq}</div></div></section>''')

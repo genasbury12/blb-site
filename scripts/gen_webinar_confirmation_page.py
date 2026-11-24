@@ -79,6 +79,7 @@ rows = []
 for line in s[3:7]:
     k, v = line.split(": ", 1)
     val = {"Date": W["date"], "Time": W["time"], "Duration": W["duration"]}.get(k, v)
+    if not (val and not val.startswith("[")) and not SHOW_SLOTS: continue  # not set yet: row left out
     shown = e(val) if val and not val.startswith("[") else islot(v[1:-1] if v.startswith("[") else v)
     rows.append(f'<div class="drow"><svg viewBox="0 0 24 24">{ICON[k]}</svg><span>{e(k)}</span><span>{shown}</span></div>')
 o.append(f'''<section id="details" style="background:#F6F3F8"><div class="in" style="max-width:820px"><div class="details">
@@ -104,7 +105,7 @@ video = (f'<iframe src="https://www.youtube-nocookie.com/embed/{WELCOME_YOUTUBE_
          if WELCOME_YOUTUBE_ID else orbit() + slot("Your short personal welcome video. Send me the YouTube link and it plays right here."))
 o.append(f'''<section style="background:#F6F3F8"><div class="in stack" style="gap:26px;max-width:960px">
 <div class="nar stack ctr-h"><p class="lbl" style="text-align:center">{e(s[0])}</p><h2 style="text-align:center">{headline(s[1])}</h2></div>
-<div class="player">{video}</div>
+{f'<div class="player">{video}</div>' if WELCOME_YOUTUBE_ID or SHOW_SLOTS else ""}
 <div class="nar stack" style="gap:6px;width:100%"><div class="nots">{"".join(f"<p>{e(x)}</p>" for x in s[3:6])}</div>{P(s[6])}<p class="big" style="font-style:italic;color:#69577F">{e(s[7])}</p></div>
 </div></section>''')
 assert s[2].startswith("[Embed")
@@ -145,7 +146,7 @@ o.append("<script>\n(function(){\n  var W=" + json.dumps(WEBINAR) + ", REG=" + j
   /* Add to calendar: Google Calendar link + .ics download, once the date is set in scripts/pf_parts.py */
   var cal=document.querySelector('[data-cal]');
   if(cal){
-    if(!W.start){cal.innerHTML='<div class="pf-slot sm"><b>To fill in</b>The webinar date and time. Once it’s set, this becomes your Add to My Calendar button (Google Calendar and Apple or Outlook).</div>';}
+    if(!W.start){cal.innerHTML='';}
     else{
       var st=new Date(W.start),en=new Date(st.getTime()+(W.minutes||60)*60000);
       var z=function(d){return d.toISOString().replace(/[-:]/g,'').replace(/\.\d{3}/,'');};

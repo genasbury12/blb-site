@@ -12,7 +12,10 @@ ARR = '<i aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fil
 def btn(label, href, cls="", ext=False):
     t = ' target="_blank" rel="noopener"' if ext else ''
     return f'<a class="pf-btn {cls}" href="{href}"{t}>{e(label)} {ARR}</a>'
-def slot(t, cls=""): return f'<div class="pf-slot {cls}"><b>To fill in</b>{e(t)}</div>'
+# Placeholders never show on the live site: anything not confirmed yet is simply left out.
+# (Set SHOW_SLOTS = True locally to see where unconfirmed details would go.)
+SHOW_SLOTS = False
+def slot(t, cls=""): return f'<div class="pf-slot {cls}"><b>To fill in</b>{e(t)}</div>' if SHOW_SLOTS else ""
 def P(t, cls="body"): return f'<p class="{cls}">{e(t)}</p>'
 
 CSS = r'''<style>

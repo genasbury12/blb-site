@@ -5,6 +5,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent))
 from folio_data import PROJECTS, IMG, VIDEO_JS, video_cards
 from pf_parts import *
+import proof
 
 YT = "https://www.youtube.com/@GenasysLynn"
 IG = "https://www.instagram.com/blogcoach_gen"
@@ -109,7 +110,7 @@ o.append(f'''<section style="background:#FFFFFF"><div class="in stack" style="ga
 <div class="nar stack ctr-h"><h2>{headline(s[0])}</h2>{flow(s[1:cut])}</div>
 <div class="gal-d gal3">{fol}</div>
 {video_cards()}
-{slot("Documented client transformations and case studies.")}
+{proof.css()}{proof.proof()}{proof.quotes(("Tesha", "Morgan", "Clare"))}
 <div class="row" style="justify-content:center">{cta("Explore My Client Portfolio", "ol")}</div></div></section>''')
 
 # 08 EXPLORING

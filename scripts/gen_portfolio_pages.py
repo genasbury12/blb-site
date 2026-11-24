@@ -6,6 +6,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 from folio_data import PROJECTS, VIDEOS, IMG, CDN, VIDEO_CSS, VIDEO_JS, video_cards
 
 from pf_parts import *
+import proof
 
 # ---------------- PORTFOLIO PAGE ----------------
 o = [CSS, '<main id="main" class="pf">']
@@ -45,7 +46,6 @@ for k, name, client, niche, url in PROJECTS:
 <p class="lbl">{e(niche)}</p>
 <h3>{e(name)}</h3>{who}
 {slot("Short description of her business, what she wanted to accomplish and the direction we developed together.", "sm")}
-<p class="tiny">The project</p>
 {slot("Services actually delivered: for example Private Blog Coaching, Brand Strategy, Custom Showit Website Design, Offer Development.", "sm")}
 <div class="row">{btn("View the Full Project", "/client-project/?project=" + k)}<a class="link" href="{url}" target="_blank" rel="noopener">Visit the website</a></div>
 </div></article>''')
@@ -81,7 +81,7 @@ o.append(f'''<section style="background:#FFFFFF"><div class="in stack" style="ga
 {P("My role is to help you make sense of those ideas, develop a strategy around them and bring the agreed pieces of your business to life.")}
 <p class="big">But rather than tell you what that experience is like, I&rsquo;ll let the women I&rsquo;ve worked with <span class="it">tell you themselves.</span></p></div>
 {video_cards()}
-{slot("Optional: add each woman's business name under her video, and a short written quote from her if you'd like one on the page.", "sm")}
+{proof.css()}{proof.quotes(("Tesha", "Sadie", "Morgan"))}
 <div class="row" style="justify-content:center">{btn("Become My Next Private Client", COACH)}</div>
 </div></section>''')
 
@@ -127,7 +127,7 @@ faqs = [("Do you only design websites for bloggers?", [e("My specialty is workin
         ("Will my website look like the other websites in your portfolio?", [e("No. Your website is designed around your individual business, brand identity, audience and goals."), e("My portfolio demonstrates the quality and range of my work rather than a collection of designs you need to choose from.")]),
         ("What if I already have a website?", [e("We can explore your existing website, business strategy and goals to determine whether a strategic redesign or a more comprehensive business development experience would make sense.")]),
         ("Is blog coaching included with my website design?", [e("Private blog coaching is a core component of the BOSS Business Experience."), e("My approach combines business strategy, personalized mentorship and professional website design because those pieces should work together.")]),
-        ("How much does it cost to work with you?", ["Private client experiences begin at " + INV + ".", e("Your final investment depends on your business needs, website requirements and agreed implementation scope.")]),
+        ("How much does it cost to work with you?", [e("Your final investment depends on your business needs, website requirements and agreed implementation scope.")]),
         ("How do I get started?", [e("Begin by exploring the BOSS Business Experience and completing a private client application."), e("We'll discuss your vision, business goals, investment readiness and the support you need during a complimentary Fast Track Call.")])]
 o.append(f'''<section style="background:#FFFFFF"><div class="nar stack" style="gap:26px">
 <div class="stack ctr" style="gap:14px"><p class="lbl">Frequently asked questions</p><h2>Questions <em>before we begin.</em></h2></div>
@@ -173,9 +173,9 @@ SECS = [
 c = [CSS, '<main id="main" class="pf" data-cp>']
 c.append(f'''<section class="cp-hero dk"><div class="in stack" style="gap:26px">
 <p class="lbl">A Boss Lady Bloggers client project</p>
-<h1 data-cp-name>[Client Business Name]</h1>
+<h1 data-cp-name>Client project</h1>
 <div data-cp-line>{slot("One compelling sentence describing the business and the transformation behind the project.")}</div>
-<div class="meta"><div><span>Client</span><b data-cp-client>To fill in</b></div><div><span>Industry</span><b data-cp-industry>To fill in</b></div><div><span>Services</span><b data-cp-services>To fill in: actual services delivered</b></div></div>
+<div class="meta"><div data-cp-client-cell hidden><span>Client</span><b data-cp-client></b></div><div><span>Industry</span><b data-cp-industry></b></div><div data-cp-services-cell hidden><span>Services</span><b data-cp-services></b></div></div>
 <div class="row" data-cp-visit-row>{btn("Visit the Website", "#", "cr")}</div>
 <div data-cp-mock></div>
 </div></section>''')
@@ -187,6 +187,9 @@ for i, (key, h, hint) in enumerate(SECS):
     secs.append(f'''<div class="cp-sec rv" data-sec="{key}"><div><span class="num">{i+1:02d}</span><h2>{e(h)}</h2></div>
 <div class="stack" data-body>{slot(hint)}{extra}</div></div>''')
 c.append(f'''<section style="background:#FBF5EE"><div class="in">{''.join(secs)}</div></section>''')
+c.append(f'''<section style="background:#FFFFFF"><div class="in stack" style="gap:28px">
+<div class="nar stack ctr" style="gap:16px"><p class="lbl">Client experiences</p><h2>What women say about <em>working with me.</em></h2></div>
+{video_cards()}{proof.css()}{proof.quotes(("Tesha", "Sadie", "Morgan"))}</div></section>''')
 c.append(f'''<section style="background:#F6E1E8"><div class="in stack" style="gap:28px">
 <div class="nar stack ctr" style="gap:16px"><h2>Ready to bring your own <em>business vision to life?</em></h2>
 {P("Through the BOSS Business Experience, I combine private blog coaching, custom Showit website design and done for you business development to help ambitious women build the businesses behind their blogs.")}
@@ -197,7 +200,7 @@ data = {k: {"name": n, "client": cl, "industry": ni, "url": u} for k, n, cl, ni,
 c.append('''<script>
 (function(){
   /* One page serves every client project: /client-project?project=oneincome and so on.
-     To fill in a project, add text to its entry: line, services, and any of
+     To complete a project, add text to its entry: line, services, and any of
      meet, start, goals, strategy, brand, website, details, built, result, words (plain text, blank line = new paragraph). */
   var IMG='''+json.dumps(CDN)+''';
   var P=''' + json.dumps(data) + ''';
@@ -214,17 +217,21 @@ c.append('''<script>
   document.title=p.name+' | Client Project | Boss Lady Bloggers';
   root.querySelector('[data-cp-name]').textContent=p.name;
   if(p.line)root.querySelector('[data-cp-line]').innerHTML='<p class="big">'+esc(p.line)+'</p>';
-  if(p.client)root.querySelector('[data-cp-client]').textContent=p.client;
+  if(p.client){root.querySelector('[data-cp-client]').textContent=p.client;root.querySelector('[data-cp-client-cell]').hidden=false;}
   root.querySelector('[data-cp-industry]').textContent=p.industry;
-  if(p.services)root.querySelector('[data-cp-services]').textContent=p.services;
+  if(p.services){root.querySelector('[data-cp-services]').textContent=p.services;root.querySelector('[data-cp-services-cell]').hidden=false;}
   var v=root.querySelector('[data-cp-visit-row] a');v.href=p.url;v.target='_blank';v.rel='noopener';
   root.querySelector('[data-cp-mock]').innerHTML='<span class="shot" style="margin-top:10px"><img src="'+IMG+key+'-mockup.jpg" alt="'+esc(p.name)+' website on a laptop and phone" width="1600" height="1100"></span>';
   var shots=root.querySelector('[data-cp-shots]');
   if(shots)shots.innerHTML='<span class="shot"><img src="'+IMG+key+'-desktop.jpg" alt="'+esc(p.name)+' homepage, desktop" loading="lazy" width="1440" height="900"></span>'+
     '<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;max-width:520px"><span class="shot"><img src="'+IMG+key+'-mobile.jpg" alt="'+esc(p.name)+' homepage, mobile" loading="lazy" width="390" height="844"></span></div>';
-  root.querySelectorAll('[data-sec]').forEach(function(s){var t=p[s.getAttribute('data-sec')];if(t){var b=s.querySelector('[data-body]');var slot=b.querySelector('.pf-slot');if(slot)slot.outerHTML=paras(t);}});
+  root.querySelectorAll('[data-sec]').forEach(function(s){var k=s.getAttribute('data-sec'),t=p[k],b=s.querySelector('[data-body]');
+    if(t){var slot=b.querySelector('.pf-slot');if(slot)slot.outerHTML=paras(t);else b.insertAdjacentHTML('afterbegin',paras(t));}
+    else if(k!=='website')s.remove();});
+  root.querySelectorAll('[data-sec] .num').forEach(function(n,i){n.textContent=(i<9?'0':'')+(i+1);});
 })();
 </script>
+''' + VIDEO_JS + '''
 </main>''')
 out = '\n'.join(c)
 for bad in ['—', '–', '…']: assert bad not in out, bad

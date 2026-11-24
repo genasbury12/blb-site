@@ -8,6 +8,7 @@ import math, sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent))
 from pf_parts import *
+import proof
 
 # Paste the course checkout link here. Until then every buy button scrolls to the purchase box.
 CHECKOUT = ""
@@ -60,8 +61,8 @@ o.append(f'''<section style="background:#F6F3F8"><div class="in twocol">
 <div class="stack" style="gap:26px"><p class="issue" style="color:#69577F">Inside, you&rsquo;ll explore</p><ol class="index">{"".join(f"<li><span>{e(x)}</span></li>" for x in EXPLORE)}</ol>
 <div class="trans"><b>The transformation</b>{e(TRANS)}</div></div></div></section>''')
 
-# 05 THE FUTURE FILES
-o.append(f'''<section class="orc dk"><div class="in stack" style="gap:26px">
+# 05 THE FUTURE FILES (shown once the verified module list is in)
+if SHOW_SLOTS: o.append(f'''<section class="orc dk"><div class="in stack" style="gap:26px">
 <div class="nar stack ctr-h"><p class="lbl" style="text-align:center">05 / The Future Files</p><h2 style="text-align:center">The curriculum, <em>file by file.</em></h2></div>
 <div class="nar">{slot("Your verified module list for The Futureproof Blogger: each Future File's name and a one line outcome. Send it and I'll set it as an editorial index here.")}</div>
 </div></section>''')
@@ -74,12 +75,12 @@ o.append(f'''<section id="enroll" style="background:#F6F3F8;scroll-margin-top:40
 <p class="big"><em style="color:#69577F">I&rsquo;m not interested in teaching you how to build a business for an internet that no longer exists.</em></p></div>
 <div class="stack" style="gap:18px">
 <div class="card">{WM}<hr class="rule">
-<p class="issue" style="color:#69577F">What&rsquo;s inside</p>{slot("The actual deliverables: lessons, resources and anything else included with the course.", "sm")}
-<p class="issue" style="color:#69577F">Your investment</p>{slot("Course price and payment options.", "sm")}{slot("Confirmed access duration and refund terms.", "sm")}
+{'<p class="issue" style="color:#69577F">What&rsquo;s inside</p>' + slot("The actual deliverables: lessons, resources and anything else included with the course.", "sm") if SHOW_SLOTS else ""}
+{'<p class="issue" style="color:#69577F">Your investment</p>' + slot("Course price and payment options.", "sm") + slot("Confirmed access duration and refund terms.", "sm") if SHOW_SLOTS else ""}
 <div class="row">{buy("Enter the Next Era", "dkb")}</div>
 <a class="issue" href="/all-access/" style="color:#69577F">Or get every course with BOSS Academy All Access &rarr;</a>
 {"" if CHECKOUT else slot("Your Futureproof Blogger checkout link. Until you send it, every Enter the Next Era button scrolls here.", "sm")}</div>
-{slot("Verified student testimonials, when you have them.", "sm")}</div>
+{proof.css(accent="#69577F", ink="#211C2C", card="#FFFFFF", radius="4px")}<p class="issue" style="color:#69577F">What women say about learning with Gen</p>{proof.quotes(("Morgan", "Tesha"))}</div>
 </div></section>''')
 
 # 07 CLOSING

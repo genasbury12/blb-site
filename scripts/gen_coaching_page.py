@@ -5,6 +5,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent))
 from folio_data import PROJECTS, IMG, VIDEO_JS, video_cards
 from pf_parts import *
+import proof
 
 SRC = Path(__file__).parent / "copy/blog-coaching.txt"
 # brand rule: never "six figure"
@@ -151,6 +152,7 @@ cut = next(i for i, l in enumerate(s) if l.startswith("[Insert"))
 o.append(f'''<section style="background:#FFFFFF"><div class="in stack" style="gap:30px">
 <div class="nar stack ctr-h"><p class="lbl">{e(s[0])}</p><h2>{headline(s[1])}</h2>{flow(s[2:cut])}</div>
 {video_cards()}
+{proof.css()}{proof.quotes(("Sadie", "Tesha", "Morgan"))}{proof.proof()}
 <div class="row" style="justify-content:center">{cta("Explore More Client Projects", "ol")}</div></div></section>''')
 
 # 14 MEET

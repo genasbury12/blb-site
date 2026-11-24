@@ -4,9 +4,12 @@ import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent))
 from pf_parts import *
+import proof
+from folio_data import video_cards, VIDEO_JS
 
 # Paste the All Access checkout link here. Until then every buy button scrolls to the price box.
 CHECKOUT = ""
+INC = '<span class="tiny">Included</span>'
 BUY = CHECKOUT or "#unlock"
 SRC = Path(__file__).parent / "copy/all-access.txt"
 L, section = load_copy(SRC, [("I built a multi six figure brand", "I built a money making brand")])
@@ -29,7 +32,7 @@ def std(n, bg, layout="split", dark=False, cta_cls=""):
                 f'<div class="stack">{flow(rest, cta_cls)}</div></div></section>')
     return f'<section{cls} style="background:{bg}"><div class="nar stack ctr-h">{lb}<h2>{headline(h)}</h2>{flow(rest, cta_cls)}</div></section>'
 
-def inline_slot(t): return f'<span class="islot">To fill in: {e(t)}</span>'
+def inline_slot(t): return f'<span class="islot">To fill in: {e(t)}</span>' if SHOW_SLOTS else ""
 
 COURSES = [("futureproof", "#A23E66", "#FFFFFF"), ("pbm", "#FBF5EE", "#3A1C2A"), ("interactive", "#E9B9CA", "#3A1C2A")]
 def cover(name, cat, bg, fg, big=False):
@@ -94,7 +97,7 @@ for k, a in enumerate(starts):
     assert blk[ti + 2].startswith("INDIVIDUAL COURSE PRICE") and blk[ti + 3] == "INCLUDED WITH ALL ACCESS"
     key, bg, fg = COURSES[k]
     course_html.append(f'''<article class="course rv" id="course-{key}"><div class="stack" style="gap:16px">{cover(name, cat, bg, fg)}
-<div class="pricebar"><span>Individual course price {inline_slot("price")}</span><span class="inc">Included with All Access</span></div></div>
+<div class="pricebar">{f'<span>Individual course price {inline_slot("price")}</span>' if SHOW_SLOTS else ""}<span class="inc">Included with All Access</span></div></div>
 <div class="stack" style="gap:14px"><span class="num">{e(num)} &middot; {e(cat)}</span><h3>{e(name)}</h3><p class="hook">{e(hook)}</p>{flow(body)}
 {btn("See the full course", {"interactive": "/interactive-course-creator/", "futureproof": "/futureproof-blogger/"}[key], "ol") if key in ("interactive", "futureproof") else ""}
 <div class="outc" style="padding:18px 20px;border-radius:18px;background:#A23E66;color:#fff;font:400 20px/1.35 var(--font-display)"><b style="display:block;font:500 11px/1.3 var(--font-label);letter-spacing:.16em;text-transform:uppercase;color:#F6C9D8;margin-bottom:6px;font-weight:500">The transformation</b>{e(trans)}</div></div></article>''')
@@ -170,7 +173,9 @@ o.append(f'''<section style="background:#F6E1E8"><div class="in stack" style="ga
 s = section(12)
 o.append(f'''<section style="background:#FFFFFF"><div class="in stack" style="gap:24px">
 <div class="nar stack ctr-h"><h2>{headline(s[0])}</h2></div>
-<div class="pairs">{flow(s[1:])}</div></div></section>''')
+{proof.css()}{proof.quotes(("Morgan", "Tesha", "Clare"))}
+{video_cards()}
+{proof.proof()}</div></section>''')
 
 o.append(std(13, "#FBF5EE"))
 
@@ -181,9 +186,11 @@ i = 2
 while i < len(s) and not s[i].startswith("PURCHASE THE COURSES"):
     t, d = s[i], s[i + 1]
     if i + 2 < len(s) and s[i + 2].startswith("Individual price"):
-        rows.append(f'<div class="vrow"><div><h3>{e(t)}</h3><p>{e(d)}</p></div>{inline_slot("individual price")}</div>'); i += 3
+        rows.append(f'<div class="vrow"><div><h3>{e(t)}</h3><p>{e(d)}</p></div>{inline_slot("individual price") or INC}</div>'); i += 3
     elif d.startswith("["):
-        rows.append(f'<div class="vrow"><div><h3>{e(t)}</h3><p>{inline_slot(d[8:-1] if d.startswith("[Insert") else d[1:-1])}</p></div><span class="tiny">Included</span></div>'); i += 2
+        note = inline_slot(d[8:-1] if d.startswith("[Insert") else d[1:-1])
+        note = f"<p>{note}</p>" if note else ""
+        rows.append(f'<div class="vrow"><div><h3>{e(t)}</h3>{note}</div><span class="tiny">Included</span></div>'); i += 2
     else:
         rows.append(f'<div class="vrow"><div><h3>{e(t)}</h3><p>{e(d)}</p></div><span class="tiny">Included</span></div>'); i += 2
 k = s.index("PURCHASE THE COURSES INDIVIDUALLY")
@@ -191,8 +198,7 @@ tail = s[k + 4:]
 o.append(f'''<section id="unlock" style="background:#F6E1E8;scroll-margin-top:80px"><div class="in stack" style="gap:24px;max-width:900px">
 <div class="stack ctr-h"><p class="lbl">{e(s[0])}</p><h2>{headline(s[1])}</h2></div>
 <div class="stack-v">{"".join(rows)}
-<div class="compare"><div class="a"><p class="tiny">{e(s[k])}</p>{inline_slot("combined individual course price")}</div>
-<div class="b"><p class="tiny" style="color:#F6C9D8">{e(s[k + 2])}</p>{inline_slot("All Access investment")}</div></div>
+{f'<div class="compare"><div class="a"><p class="tiny">{e(s[k])}</p>{inline_slot("combined individual course price")}</div><div class="b"><p class="tiny" style="color:#F6C9D8">{e(s[k + 2])}</p>{inline_slot("All Access investment")}</div></div>' if SHOW_SLOTS else ""}
 <div class="stack" style="margin-top:20px;align-items:center;text-align:center">{flow([l for l in tail])}</div></div>
 {"" if CHECKOUT else slot("Your All Access checkout link. Until you send it, every Unlock button scrolls to this price box.")}
 </div></section>''')
@@ -224,10 +230,10 @@ for l in s[1:]:
     if l.endswith("?") and len(l) < 110: cur = [l, []]; qs.append(cur)
     elif cur: cur[1].append(l)
 def ans(lines):
-    return [f'<span class="islot" style="color:#A23E66">To fill in: {e(l[8:-1])}</span>' if l.startswith("[Insert") else e(l) for l in lines]
+    return [e(l) for l in lines if not l.startswith("[")]
 o.append(f'''<section style="background:#FFFFFF"><div class="nar stack" style="gap:26px">
 <div class="stack" style="text-align:center;gap:14px"><p class="lbl">Frequently asked questions</p><h2>{headline(s[0])}</h2></div>
-<div class="faq">{"".join(faq(q, ans(a)) for q, a in qs)}</div></div></section>''')
+<div class="faq">{"".join(faq(q, ans(a)) for q, a in qs if ans(a))}</div></div></section>''')
 
 # 19 FINAL
 s = section(19)
@@ -244,7 +250,7 @@ o.append(f'''<section class="dk" style="background:#3A1C2A"><div class="in stack
 <div class="nar stack" style="text-align:center;align-items:center">{"".join(f'<p class="big">{e(x)}</p>' for x in after[3:5])}
 <p class="body">{e(after[5])}</p><div class="row">{cta(after[6][1:-1], "olw")}</div></div></div></section>''')
 
-o.append(LEGAL + "</main>")
+o.append(VIDEO_JS + LEGAL + "</main>")
 out = "\n".join(o)
 for bad in ["—", "–", "…"]: assert bad not in out, bad
 assert "six figure" not in out.lower()
