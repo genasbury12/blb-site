@@ -14,7 +14,7 @@
 </div>
 <p style="margin:28px 0 0;font:700 24px/1 Inter;letter-spacing:0.02em;color:#A23E66;text-transform:uppercase;border-bottom:2px solid #A23E66;padding-bottom:8px">Get around</p>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px 16px;font:400 14px/1.9 Inter;margin-top:10px">
-<a href="/" style="color:#3A1C2A;text-decoration:none">Home</a><a href="/membership" style="color:#3A1C2A;text-decoration:none">Membership</a>
+<a href="/" style="color:#3A1C2A;text-decoration:none">Home</a><a href="/academy" style="color:#3A1C2A;text-decoration:none">Courses</a>
 <a href="/about" style="color:#3A1C2A;text-decoration:none">About</a><a href="/blog-coaching" style="color:#3A1C2A;text-decoration:none">Work With Me</a>
 <a href="/start-here" style="color:#3A1C2A;text-decoration:none">Start Here</a><a href="/free-masterclass" style="color:#3A1C2A;text-decoration:none">Free Masterclass</a>
 <a href="/blog" style="color:#3A1C2A;text-decoration:none">Blog</a><a href="/podcast" style="color:#3A1C2A;text-decoration:none">Podcast</a>
@@ -28,7 +28,7 @@
 <a href="/start-here" style="color:#FFFFFF;text-decoration:none">Start Here</a><a href="/membership" style="color:#FFFFFF;text-decoration:none">Membership</a>
 <a href="/about" style="color:#FFFFFF;text-decoration:none">About</a>
 <a href="/free-masterclass" style="color:#FFFFFF;text-decoration:none">Free Masterclass</a><a href="/podcast" style="color:#FFFFFF;text-decoration:none">Podcast</a>
-<a href="/membership" style="color:#FFFFFF;text-decoration:none">Membership</a><a href="/contact" style="color:#FFFFFF;text-decoration:none">Contact</a>
+<a href="/academy" style="color:#FFFFFF;text-decoration:none">Courses</a><a href="/contact" style="color:#FFFFFF;text-decoration:none">Contact</a>
 </div>
 <div style="display:flex;gap:16px;margin-top:22px">
 <a href="https://www.instagram.com/blogcoach_gen" target="_blank" rel="noopener" style="font:500 10px/1 'DM Mono',monospace;letter-spacing:1.4px;color:#F6E1E8;text-decoration:none">INSTAGRAM</a>

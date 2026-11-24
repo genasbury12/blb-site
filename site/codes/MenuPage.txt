@@ -27,6 +27,7 @@
 <a href="/start-here" style="color:#FBF5EE;text-decoration:none">Start Here</a>
 <a href="/blog-coaching" style="color:#FBF5EE;text-decoration:none">Work With Me</a>
 <a href="/membership" style="color:#FBF5EE;text-decoration:none">The Blogging Ladies Membership</a>
+<a href="/academy" style="color:#FBF5EE;text-decoration:none">Courses</a>
 <a href="/free-masterclass" style="color:#FBF5EE;text-decoration:none">Free Masterclass</a>
 <a href="/podcast" style="color:#FBF5EE;text-decoration:none">Podcast</a>
 <a href="/blog" style="color:#FBF5EE;text-decoration:none">Blog</a>

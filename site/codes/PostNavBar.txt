@@ -21,6 +21,7 @@
 <a href="/free-masterclass" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Free Masterclass</a>
 <a href="/blog-coaching" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Work With Me</a>
 <a href="/membership" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Membership</a>
+<a href="/academy" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Courses</a>
 <a href="/podcast" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Podcast</a>
 <a href="/blog" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Blog</a>
 <a href="/contact" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Contact</a>
