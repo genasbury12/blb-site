@@ -10,7 +10,7 @@ SRC = Path(__file__).parent / "copy/blog-coaching.txt"
 # brand rule: never "six figure"
 L, section = load_copy(SRC, [("my multi six figure brand", "my money making brand")])
 
-CTA = {"Apply": CAL, "Let's Discuss": CAL, "Explore My Client Portfolio": "/portfolio/", "Explore More Client Projects": "/portfolio/#projects"}
+CTA = {"Apply": APPLY_PAGE, "Let's Discuss": APPLY_PAGE, "Explore My Client Portfolio": "/portfolio/", "Explore More Client Projects": "/portfolio/#projects"}
 def cta(label, cls=""):
     href = next((v for k, v in CTA.items() if label.startswith(k)), CAL)
     return btn(label, href, cls, href.startswith("http"))
