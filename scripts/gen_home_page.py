@@ -3,6 +3,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent))
 from folio_data import PROJECTS, VIDEO_CSS, VIDEO_JS, video_cards, IMG
 from pf_parts import WEBINAR_FORM_ID
+import proof
 P=str(Path(__file__).resolve().parent.parent/'site/_pages/index.html')
 def e(t): return html.escape(t,quote=False).replace("'","&rsquo;")
 ARR='<i aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></i>'
@@ -11,6 +12,157 @@ def slot(t): return f'<div class="hp-slot"><b>To fill in</b>{e(t)}</div>'
 def P_(t,cls='body'): return f'<p class="{cls}">{e(t)}</p>'
 COACH='/coaching/'
 FOLIO=''.join(f'<a class="fcard" href="/client-project/?project={k}"><span class="fimg"><img src="{IMG}{k}-mockup.jpg" alt="{e(n)} website on a laptop and phone" loading="lazy" width="1600" height="1100"></span><span class="fn">{e(n)}</span><span class="fni">{e(ni)}</span></a>' for k,n,cl,ni,u in PROJECTS[:3])
+BOSS="https://cdn.jsdelivr.net/gh/genasbury12/blb-site@463c6b98943973b83288beeb28b52195d0290a10/site/images/boss/"
+RAIL=''.join(f'<a class="fcard" href="/client-project/?project={k}"><span class="fimg"><img src="{IMG}{k}-mockup.jpg" alt="{e(n)} website on a laptop and phone" loading="lazy" width="1600" height="1100"></span><span class="fn">{e(n)}</span><span class="fni">{e(ni)}</span></a>' for k,n,cl,ni,u in PROJECTS)
+LARR='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>'
+RARR='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>'
+CSS2=r'''<style>
+/* Redesign layer (Nov 24): each section gets its own composition. Loaded after the base styles. */
+.hp .split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,72px);align-items:start}
+.hp .split.mid{align-items:center}
+.hp .left h2{text-align:left}
+.hp .frame{border-radius:28px;overflow:hidden;box-shadow:0 40px 80px -46px rgba(58,28,42,.75);background:var(--blush)}
+.hp .frame img{width:100%;height:100%;object-fit:cover;display:block}
+
+/* the reveal script adds class "in" to .rv elements, which collides with the .in container class */
+.hp .prp figure.in,.hp .prq figure.in{margin:0;max-width:none}
+/* proof band (berry) */
+.hp .cred{background:var(--berry);padding:clamp(64px,7vw,96px) clamp(16px,4vw,48px)}
+.hp .cred .in{display:flex;flex-direction:column;gap:clamp(26px,3vw,38px);align-items:stretch;text-align:left}
+.hp .cred-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px 40px}
+.hp .cred .lead{font:400 clamp(34px,4.4vw,58px)/1 var(--font-display);color:#fff;text-align:left}
+.hp .cred .lead em{color:var(--pop)}
+.hp .cred .areas{justify-content:flex-start;color:#fff;max-width:560px}
+.hp .cred .areas span+span::before{color:var(--pop)}
+.hp .cred .prq figcaption{color:var(--berry)}
+
+/* philosophy: editorial split + numbered rail */
+.hp .phil .split h2{font-size:clamp(36px,4.6vw,62px)}
+.hp .phil .ai p{background:var(--blush)}
+.hp .qs4{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;counter-reset:q;border-top:1.5px solid var(--plum)}
+.hp .qs4 li{counter-increment:q;display:flex;flex-direction:column;gap:14px;padding:26px 22px 8px 0;font:400 clamp(20px,1.9vw,24px)/1.3 var(--font-display);color:var(--plum)}
+.hp .qs4 li+li{padding-left:22px;border-left:1.5px solid var(--rose)}
+.hp .qs4 li::before{content:"0" counter(q);font:400 italic clamp(54px,6vw,80px)/.85 var(--font-display);color:var(--berry)}
+.hp .phil-mid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,64px);align-items:start}
+
+/* experience: photo split + bento */
+.hp .exp .exp-top{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(28px,5vw,72px);align-items:center}
+.hp .exp .exp-top .frame{aspect-ratio:4/5;border-radius:999px 999px 28px 28px;border:10px solid #fff}
+.hp .exp .exp-top h2{font-size:clamp(48px,6.4vw,92px);line-height:.95}
+.hp .perhaps3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.hp .perhaps3 p{position:relative;padding:44px 22px 22px;border-radius:22px;background:#fff;font:400 clamp(19px,1.8vw,22px)/1.35 var(--font-display);color:var(--plum)}
+.hp .perhaps3 p::before{content:"\201C";position:absolute;left:20px;top:6px;font:400 64px/1 var(--font-display);color:var(--berry)}
+.hp .bento{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-auto-rows:minmax(0,auto);gap:14px}
+.hp .bento article{background:#fff;border-radius:24px;padding:24px;display:flex;flex-direction:column;gap:8px}
+.hp .bento .n{font:400 italic 42px/.9 var(--font-display);color:var(--berry)}
+.hp .bento h3{font-size:25px;line-height:1.1}
+.hp .bento p{font:400 15.5px/1.6 var(--font-body);color:var(--cocoa)}
+.hp .bento article:nth-child(4){background:var(--plum)}
+.hp .bento article:nth-child(4) h3{color:var(--cream)}.hp .bento article:nth-child(4) p{color:#F1DDE2}.hp .bento article:nth-child(4) .n{color:var(--pop)}
+.hp .bento .ph{grid-column:3;grid-row:1 / span 3;border-radius:24px;overflow:hidden;min-height:100%;background:var(--rose)}
+.hp .bento .ph img{width:100%;height:100%;object-fit:cover;display:block}
+.hp .bento article:nth-child(1){grid-column:1;grid-row:1}.hp .bento article:nth-child(2){grid-column:2;grid-row:1}
+.hp .bento article:nth-child(3){grid-column:1;grid-row:2}.hp .bento article:nth-child(4){grid-column:2;grid-row:2}
+.hp .bento article:nth-child(5){grid-column:1;grid-row:3}.hp .bento article:nth-child(6){grid-column:2;grid-row:3}
+
+/* portfolio: header split + horizontal rail */
+.hp .pf2{background:var(--cream)}
+.hp .rail-wrap{position:relative}
+.hp .rail{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 2px 22px;scrollbar-width:thin;scrollbar-color:var(--berry) transparent;overscroll-behavior-x:contain}
+.hp .rail .fcard{flex:0 0 min(440px,82%);scroll-snap-align:start}
+.hp .rail-nav{display:flex;gap:10px;justify-content:flex-end}
+.hp .rail-nav button{width:52px;height:52px;border-radius:999px;border:1.5px solid var(--plum);background:transparent;color:var(--plum);cursor:pointer;display:grid;place-items:center}
+@media (hover:hover){.hp .rail-nav button:hover{background:var(--plum);color:#fff}}
+
+/* results: dark band, five across */
+.hp .res{background:var(--plum)}
+.hp .res .vt-grid{grid-template-columns:repeat(5,minmax(0,1fr))}
+
+/* ways: staircase */
+.hp .ways-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,64px);align-items:end}
+.hp .ways.stair{align-items:start}
+.hp .ways.stair .way:nth-child(2){margin-top:48px}
+.hp .ways.stair .way:nth-child(3){margin-top:96px;background:var(--blush)}
+
+/* membership: copy + mockup with overlapping card */
+.hp .mem{background:var(--blush)}
+.hp .mem-grid{align-items:start}
+.hp .mem .shot{border-radius:26px;overflow:hidden;background:#FBF5EE;box-shadow:0 40px 80px -46px rgba(58,28,42,.75)}
+.hp .mem .shot img{width:100%;height:auto;display:block}
+.hp .mem .card{margin:-56px 18px 0;z-index:1}
+
+/* academy: rows */
+.hp .acad-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,64px);align-items:start}
+.hp .books.rows{grid-template-columns:minmax(0,1fr);gap:14px}
+.hp .books.rows .bk{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr) auto;gap:clamp(18px,3vw,40px);align-items:center;padding:clamp(18px,2.4vw,26px)}
+.hp .books.rows .bk .txt{display:flex;flex-direction:column;gap:10px}
+.hp .books.rows .bk .hp-btn{margin-top:0;align-self:center}
+
+/* about: collage */
+.hp .about-grid{grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr)}
+.hp .collage{position:relative;padding-bottom:60px}
+.hp .collage .arch{position:static;max-width:440px}
+.hp .collage .dot{position:absolute;right:0;bottom:0;width:min(52%,240px);aspect-ratio:1;border-radius:50%;overflow:hidden;border:10px solid #fff;box-shadow:0 30px 60px -30px rgba(58,28,42,.7)}
+.hp .collage .dot img{width:100%;height:100%;object-fit:cover;display:block}
+.hp .learned.num{counter-reset:l}
+.hp .learned.num p{counter-increment:l;display:flex;gap:14px;align-items:baseline}
+.hp .learned.num p::before{content:counter(l);font:400 italic 26px/1 var(--font-display);color:var(--berry);flex:none}
+
+/* webinar: header + form, no dead space */
+.hp .web .in{display:flex;flex-direction:column;gap:clamp(30px,4vw,52px)}
+.hp .web-top{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(28px,5vw,64px);align-items:center}
+.hp .wform{position:static}
+.hp .ifs3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.hp .ifs3 p{padding:20px 22px;border-radius:18px;border:1.5px solid rgba(233,185,202,.3);font:400 italic 21px/1.35 var(--font-display);color:var(--cream)}
+.hp .web-mid{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(24px,4vw,64px);align-items:start}
+.hp .web-mid .watch{font:400 italic clamp(38px,4.6vw,60px)/1 var(--font-display);color:var(--pop)}
+.hp .cover4.row4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.hp .cover4.row4 div{padding:64px 20px 22px}
+.hp .cover4.row4 div::before{top:20px;font-size:34px}
+.hp .wcta{display:flex;flex-direction:column;gap:14px}
+.hp .wcta p{font:400 16px/1.6 var(--font-body);color:#4A2F3B}
+
+/* blog: split header */
+.hp .blog-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,64px);align-items:end}
+.hp .blog-head .nos{justify-content:flex-start}
+
+/* podcast + youtube: photo cards */
+.hp .media{padding:0;overflow:hidden}
+.hp .media .mph{aspect-ratio:16/9;overflow:hidden}
+.hp .media .mph img{width:100%;height:100%;object-fit:cover;display:block}
+.hp .media .mbody{padding:clamp(24px,3.4vw,40px);display:flex;flex-direction:column;gap:14px;flex:1}
+.hp .media .ic{margin-top:-64px;border:6px solid var(--blush)}
+.hp .media.yt .ic{border-color:var(--plum)}
+
+/* final */
+.hp .final .fph{width:132px;height:132px;border-radius:50%;overflow:hidden;border:8px solid #fff;box-shadow:0 24px 50px -28px rgba(58,28,42,.7)}
+.hp .final .fph img{width:100%;height:100%;object-fit:cover;display:block}
+
+@media (max-width:1100px){.hp .res .vt-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.hp .cover4.row4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:980px){
+ .hp .split,.hp .phil-mid,.hp .exp .exp-top,.hp .ways-head,.hp .acad-head,.hp .web-top,.hp .web-mid,.hp .blog-head{grid-template-columns:minmax(0,1fr)}
+ .hp .qs4{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .hp .qs4 li:nth-child(3){padding-left:0;border-left:0}
+ .hp .perhaps3,.hp .ifs3{grid-template-columns:minmax(0,1fr)}
+ .hp .bento{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .hp .bento article{grid-column:auto!important;grid-row:auto!important}
+ .hp .bento .ph{grid-column:1 / -1;grid-row:auto;aspect-ratio:16/9;min-height:0}
+ .hp .ways.stair .way{margin-top:0!important}
+ .hp .books.rows .bk{grid-template-columns:minmax(0,1fr)}
+ .hp .books.rows .bk .hp-btn{align-self:flex-start}
+ .hp .exp .exp-top .frame{max-width:340px;margin:0 auto}
+ .hp .collage{max-width:440px;margin:0 auto;width:100%}
+ .hp .res .vt-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .hp .mem .card{margin:-40px 10px 0}
+}
+@media (max-width:600px){
+ .hp .qs4,.hp .bento,.hp .cover4.row4{grid-template-columns:minmax(0,1fr)}
+ .hp .qs4 li{padding-left:0!important;border-left:0!important}
+ .hp .res .vt-grid .vt:last-child{grid-column:1 / -1;max-width:calc(50% - 8px);justify-self:center;width:100%}
+ .hp .mem .card{margin:-28px 0 0}
+}
+</style>
+'''
 o=[]
 o.append(r'''<style>
 /* Homepage. Editorial BLB: plum and cream with berry accents, arch photo frames, numbered pillars,
@@ -238,6 +390,7 @@ o.append(r'''<style>
 </style>
 <div class="hp-ann" data-hp-ann role="region" aria-label="Black Friday offer"><b>BLACK FRIDAY EXCLUSIVE:</b> Join the Blogging Ladies Membership for 50% OFF. <a href="/black-friday/">Claim Your Offer</a></div>
 <main id="main" class="hp">''')
+o.append(CSS2)
 # HERO
 o.append(f'''<section class="hero"><div class="in hero-grid">
 <div class="stack" style="gap:22px">
@@ -251,72 +404,74 @@ o.append(f'''<section class="hero"><div class="in hero-grid">
 <div class="hero-ph"><div class="arch"><img src="/images/photos/hat-laugh.jpg" alt="Genasys laughing in her pink hat"></div>
 <div class="tag3" aria-hidden="true"><span>Blog coach</span><span>Business strategist</span><span>Website designer</span></div></div>
 </div></section>''')
-# CREDIBILITY
-o.append(f'''<section class="cred dk"><div class="in">
-<p class="lead">A money making blogging brand</p>
-<p class="areas"><span>Business strategy</span><span>Private blog coaching</span><span>Custom Showit website design</span><span>Marketing &amp; sales</span></p>
-{slot("Insert verified client results, testimonials and relevant media features.")}
+# CREDIBILITY: berry proof band (real payment screenshots + client words)
+o.append(proof.css(accent="#A23E66", ink="#3A1C2A", card="#FFFFFF"))
+o.append(f'''<section class="cred"><div class="in">
+<div class="cred-top"><p class="lead">A money making blogging brand</p>
+<p class="areas"><span>Business strategy</span><span>Private blog coaching</span><span>Custom Showit website design</span><span>Marketing &amp; sales</span></p></div>
+{proof.proof()}
+{proof.quotes(("Tesha", "Morgan", "Clare"))}
 </div></section>''')
-# PHILOSOPHY
+# PHILOSOPHY: editorial split, numbered question rail, motto band
 ai=["AI can build your website in a day.","It can write your blog posts, create your digital products, generate your marketing content and tell you a thousand different ways to make money online."]
 qs=["What makes someone choose your business when information is everywhere?","What will people still pay you for when AI can answer their questions for free?","How will you generate revenue if Google stops sending you as much traffic?","What makes your offers valuable enough to purchase?"]
-o.append(f'''<section class="phil"><div class="in stack" style="gap:30px">
-<div class="nar" style="text-align:center"><h2>Anyone can start a blog now. <em>But how many people actually know how to turn one into a profitable business?</em></h2></div>
-<div class="nar stack">
-<div class="ai">{''.join(f'<p>{e(a)}</p>' for a in ai)}</div>
+o.append(f'''<section class="phil"><div class="in stack" style="gap:clamp(34px,4vw,56px)">
+<div class="split mid"><h2>Anyone can start a blog now. <em>But how many people actually know how to turn one into a profitable business?</em></h2>
+<div class="stack"><div class="ai">{''.join(f'<p>{e(a)}</p>' for a in ai)}</div>
 <p class="big">But it cannot guarantee that what you&rsquo;re building is something people want to buy.</p>
-<p class="big it">And that&rsquo;s where the real work begins.</p></div>
-<ol class="qs">{''.join(f'<li>{e(q)}</li>' for q in qs)}</ol>
-<div class="nar stack" style="text-align:center">
-{P_("These are the questions modern bloggers need to be asking.")}
-{P_("Because the ability to create a blog is becoming increasingly accessible.")}
-<p class="big">The ability to build a profitable business behind one is an entirely different skill.</p>
-{P_("As your blogging coach, I help you develop that skill.")}
-{P_("We establish the business first. Then we build the brand, website, content, marketing and sales systems that support it.")}
+<p class="big it">And that&rsquo;s where the real work begins.</p></div></div>
+<ol class="qs4">{''.join(f'<li>{e(q)}</li>' for q in qs)}</ol>
+<div class="phil-mid">
+<div class="stack">{P_("These are the questions modern bloggers need to be asking.")}{P_("Because the ability to create a blog is becoming increasingly accessible.")}<p class="big">The ability to build a profitable business behind one is an entirely different skill.</p></div>
+<div class="stack">{P_("As your blogging coach, I help you develop that skill.")}{P_("We establish the business first. Then we build the brand, website, content, marketing and sales systems that support it.")}</div>
 </div>
 <p class="motto">Your blog isn&rsquo;t your business. <em>It&rsquo;s how people discover the business you&rsquo;ve built.</em></p>
 </div></section>''')
-# EXPERIENCE
+# EXPERIENCE: arch photo split, quote cards, bento with photo tile
 perh=["Perhaps you've been carrying your business idea around for years.","Perhaps you've already started blogging but know your website, offers and business strategy aren't reflecting what you're capable of building.","Or perhaps you're ready to invest in doing things properly from the beginning rather than spending the next twelve months learning how to do everything yourself."]
 six=[("Your Business Strategy","Establish what you're building, who you're serving, how you'll monetize your expertise and what makes your business commercially valuable."),("Your Offers","Develop offers around meaningful customer problems, explore real demand and create a monetization strategy that makes sense for your business."),("Your Brand & Messaging","Establish a distinctive brand that communicates your expertise, connects with potential buyers and gives people a reason to choose you."),("Your Custom Website","Receive a professionally designed custom Showit website built around your business strategy, offers, audience and customer experience."),("Your Marketing & Sales Strategy","Develop a cohesive approach to attracting potential customers, building trust, generating demand and selling your offers."),("Your Implementation","Receive private 1:1 blog coaching, personalized feedback and agreed done for you business development services throughout the experience.")]
-o.append(f'''<section class="exp"><div class="in stack" style="gap:34px">
-<div class="nar stack" style="text-align:center;align-items:center">
+o.append(f'''<section class="exp"><div class="in stack" style="gap:clamp(34px,4vw,56px)">
+<div class="exp-top">
+<div class="frame"><img src="/images/photos/desk-writing.jpg" alt="Genasys writing at her desk" loading="lazy"></div>
+<div class="stack">
 <p class="lbl">Private 1:1 blog coaching &amp; done for you business development</p>
 <p class="big">You don&rsquo;t have to become a business strategist, website designer, copywriter and marketing expert just to start the business you want to own.</p>
-<p style="font:700 clamp(30px,3.4vw,40px)/1 var(--font-script);color:#A23E66;transform:rotate(-2deg)">Introducing&hellip;</p>
-<h2 style="font-size:clamp(48px,7vw,96px)">The BOSS Business <em>Experience</em></h2>
+<p style="font:700 clamp(30px,3.4vw,40px)/1 var(--font-script);color:#A23E66;transform:rotate(-2deg);align-self:flex-start">Introducing&hellip;</p>
+<h2>The BOSS Business <em>Experience</em></h2>
 {P_("My signature private client experience combines professional blog coaching, custom Showit website design and hands on business development to help you turn your ideas, expertise and ambitions into a professionally built online business.")}
-</div>
-<div class="nar perhaps">{''.join(f'<p>{e(x)}</p>' for x in perh)}</div>
+</div></div>
+<div class="perhaps3">{''.join(f'<p>{e(x)}</p>' for x in perh)}</div>
 <div class="nar stack" style="text-align:center">{P_("You want someone who understands your vision, knows how to turn it into a business and has the professional skills to help bring it to life.")}<p class="big it">That&rsquo;s where I come in.</p><p class="big">Together, we&rsquo;ll build the business behind your blog.</p></div>
-<div class="six">{''.join(f'<article><span class="n">{i+1:02d}</span><h3>{e(t)}</h3><p>{e(d)}</p></article>' for i,(t,d) in enumerate(six))}</div>
+<div class="bento">{''.join(f'<article><span class="n">{i+1:02d}</span><h3>{e(t)}</h3><p>{e(d)}</p></article>' for i,(t,d) in enumerate(six))}<div class="ph"><img src="/images/photos/desk-typing.jpg" alt="Genasys working on her laptop" loading="lazy"></div></div>
 <div class="nar stack" style="text-align:center">{P_("You won't be handed a generic roadmap and expected to figure everything out independently.")}{P_("We'll develop your business together, with personalized strategy and professional implementation along the way.")}</div>
 <div class="one3"><span>One strategic partner.</span><span>One cohesive business vision.</span><span>One private client experience.</span></div>
 <div style="text-align:center">{btn("Explore The BOSS Business Experience",COACH,"br")}</div>
 </div></section>''')
-# PORTFOLIO
-o.append(f'''<section style="background:#FFFFFF"><div class="in stack" style="gap:28px">
-<div class="nar stack" style="text-align:center;gap:16px"><p class="lbl">Strategy meets design</p><h2>A beautiful website is one thing. <em>A beautiful website with an actual business strategy behind it is another.</em></h2></div>
-<div class="nar stack">{P_("Your website should reflect the caliber of your business.")}{P_("It should communicate your expertise, establish your credibility, showcase your offers and help potential customers understand why they should work with you.")}<p class="big it">But it should also feel like yours.</p>{P_("That's why my custom blogging website designs begin with understanding the woman behind the business, the audience she's serving and the business she's building.")}{P_("As both a professional blog coach and Showit website designer, I bring the strategy and design together rather than treating them as two completely separate projects.")}</div>
-<div class="folio">{FOLIO}</div>
+# PORTFOLIO: split header, horizontal rail of every client site
+o.append(f'''<section class="pf2"><div class="in stack" style="gap:30px">
+<div class="split"><div class="stack" style="gap:16px"><p class="lbl">Strategy meets design</p><h2>A beautiful website is one thing. <em>A beautiful website with an actual business strategy behind it is another.</em></h2></div>
+<div class="stack">{P_("Your website should reflect the caliber of your business.")}{P_("It should communicate your expertise, establish your credibility, showcase your offers and help potential customers understand why they should work with you.")}<p class="big it">But it should also feel like yours.</p>{P_("That's why my custom blogging website designs begin with understanding the woman behind the business, the audience she's serving and the business she's building.")}{P_("As both a professional blog coach and Showit website designer, I bring the strategy and design together rather than treating them as two completely separate projects.")}</div></div>
+<div class="rail-wrap"><div class="rail" data-rail tabindex="0" aria-label="Client websites">{RAIL}</div>
+<div class="rail-nav"><button type="button" data-rail-prev aria-label="Previous websites">{LARR}</button><button type="button" data-rail-next aria-label="Next websites">{RARR}</button></div></div>
 <div style="text-align:center">{btn("Explore My Website Design Portfolio","/portfolio/","ol")}</div>
 </div></section>''')
-# RESULTS
-o.append(f'''<section style="background:#FBF5EE"><div class="in stack" style="gap:26px">
-<div class="nar stack" style="text-align:center;gap:16px"><h2>The women, businesses and websites <em>behind the work.</em></h2>{P_("There's something incredibly rewarding about watching a woman's business move from an idea she's been thinking about for years into something she can finally see, share and build upon.")}{P_("Meet some of the women I've had the privilege of working with.")}</div>
+# RESULTS: dark band, all five video testimonials across
+o.append(f'''<section class="res dk"><div class="in stack" style="gap:30px">
+<div class="split mid"><h2>The women, businesses and websites <em>behind the work.</em></h2>
+<div class="stack">{P_("There's something incredibly rewarding about watching a woman's business move from an idea she's been thinking about for years into something she can finally see, share and build upon.")}{P_("Meet some of the women I've had the privilege of working with.")}</div></div>
 {video_cards()}
-<div style="text-align:center">{btn("Let's Build Your Business",COACH)}</div>
+<div style="text-align:center">{btn("Let's Build Your Business",COACH,"cr")}</div>
 </div></section>''')
-# WAYS
-o.append(f'''<section id="ways" style="background:#F6E1E8;scroll-margin-top:80px"><div class="in stack" style="gap:30px">
-<div class="nar stack" style="text-align:center;gap:16px"><p class="lbl">Find the right level of support</p><h2>How would you like to <em>build your business?</em></h2>
-{P_("You might want someone to help you build it.")}{P_("You might prefer to follow a strategic system independently.")}{P_("Or you might be looking to master a particular business skill.")}{P_("I've created three different ways to help you, depending on where you are and the kind of support you're looking for.")}</div>
-<div class="ways">
+# WAYS: staircase of three
+o.append(f'''<section id="ways" style="background:#FFFFFF;scroll-margin-top:80px"><div class="in stack" style="gap:34px">
+<div class="ways-head"><div class="stack" style="gap:16px"><p class="lbl">Find the right level of support</p><h2>How would you like to <em>build your business?</em></h2></div>
+<div class="stack" style="gap:10px">{P_("You might want someone to help you build it.")}{P_("You might prefer to follow a strategic system independently.")}{P_("Or you might be looking to master a particular business skill.")}{P_("I've created three different ways to help you, depending on where you are and the kind of support you're looking for.")}</div></div>
+<div class="ways stair">
 <article class="way"><p class="k">01. Build it with me.</p><p class="nm">The BOSS Business Experience</p><p class="sub">Private Blog Coaching &amp; Custom Website Design</p><p class="d">Work with me privately to develop your business strategy, offers, brand, website and sales foundations.</p><p class="d">Designed for women who value their time, want personalized expertise and are ready to invest in professional implementation.</p>{btn("Explore Private Coaching & Design",COACH,"cr")}</article>
 <article class="way"><p class="k">02. Follow my system.</p><p class="nm">The Blogging Ladies Membership</p><p class="sub">Your Business Building Roadmap</p><p class="d">Learn the complete strategic process behind building a profitable blogging business, with practical projects, roadmaps and action plans to help you implement it independently.</p><p class="pr">$47<span style="font-size:.45em;color:#F6C9D8">/month</span></p>{btn("Explore the Membership","/membership/","cr")}</article>
 <article class="way"><p class="k">03. Learn from me.</p><p class="nm">The BOSS Academy</p><p class="sub">Specialized Blogging &amp; Business Courses</p><p class="d">Master modern business strategies, AI, productivity, digital product creation and the skills you need to develop your business as the industry evolves.</p><p class="d">Purchase individual courses or unlock the complete Academy collection.</p>{btn("Shop the Courses","/academy/")}</article>
 </div></div></section>''')
-# MEMBERSHIP
+# MEMBERSHIP: copy left, real course mockup right with the price card overlapping
 inc=["The complete eight module BOSS Business System.","Strategic business roadmaps.","Business projects and action plans.","Practical implementation resources.","Ongoing business development direction."]
 o.append(f'''<section class="mem"><div class="in mem-grid">
 <div class="stack">
@@ -329,6 +484,8 @@ o.append(f'''<section class="mem"><div class="in mem-grid">
 {P_("But we're not stopping at education.")}
 {P_("Inside the membership, you'll also have practical direction for turning that knowledge into completed business projects.")}
 </div>
+<div>
+<div class="shot"><img src="{BOSS}01-boss-suite-all-devices.jpg" alt="The BOSS Business System course on a desktop, laptop, tablet and phone" loading="lazy" width="2000" height="1223"></div>
 <div class="card">
 <p class="lbl">What&rsquo;s inside?</p>
 <ul class="ticks">{''.join(f'<li style="background:#FBF5EE">{e(i)}</li>' for i in inc)}</ul>
@@ -337,21 +494,21 @@ o.append(f'''<section class="mem"><div class="in mem-grid">
 <p class="lbl" style="color:#3A1C2A">The Blogging Ladies Membership</p>
 <p class="price">$47<span>/month</span></p>
 {btn("Become a Blogging Lady","/membership/","br")}
-</div></div></section>''')
-# ACADEMY
+</div></div></div></section>''')
+# ACADEMY: split header, one row per course
 books=[("The Futureproof Blogger","Business strategy & the future of blogging","#A23E66","#FFFFFF","Will the business you're building today still make sense tomorrow?",["Discover how AI, changing consumer behavior and the evolution of the internet are reshaping the blogging industry.","Learn how to rethink traditional blogging strategies, create value beyond information and build a business that can adapt as technology changes."],"futureproof"),
 ("The Productive Blogger Method","AI & business productivity","#FBF5EE","#3A1C2A","Stop spending more time organizing your business than actually building it.",["Learn how to use Claude to transform your business goals, strategies and overwhelming collection of unfinished projects into organized projects, personalized action plans and a practical implementation system.","Know what to work on, what needs to happen first and how to get it done."],"pbm"),
 ("The Interactive Course Creator","AI & digital product creation","#E9B9CA","#3A1C2A","The future of online courses doesn't have to look like another dashboard filled with prerecorded videos.",["Learn how to use Claude to transform your knowledge into interactive educational experiences that go beyond traditional video lessons, static workbooks and downloadable PDFs.","Discover a new way to package, deliver and monetize your expertise."],"interactive")]
-bh=''.join(f'<article class="bk"><div class="cover" style="background:{bg};color:{fg}"><small>The BOSS Academy</small><b>{e(n)}</b><small>{e(t)}</small></div><p class="hook">{e(h)}</p>{"".join(f"<p class=d>{e(p)}</p>" for p in ps)}{btn("Explore the Course",{"interactive":"/interactive-course-creator/","futureproof":"/futureproof-blogger/"}.get(sl,"/academy/#course-"+sl),"cr")}</article>' for n,t,bg,fg,h,ps,sl in books)
-o.append(f'''<section class="acad dk"><div class="in stack" style="gap:32px">
-<div class="nar stack" style="text-align:center;gap:16px"><p class="lbl">Modern business education for ambitious women</p><h2>The blogging industry is evolving. <em>Your business education should too.</em></h2>
-{P_("The strategies that worked for bloggers five years ago aren't necessarily the strategies that will work five years from now.")}
-{P_("Technology is changing. Buyer behavior is changing. The way people discover information, evaluate products and make purchasing decisions is changing.")}
+bh=''.join(f'<article class="bk"><div class="cover" style="background:{bg};color:{fg}"><small>The BOSS Academy</small><b>{e(n)}</b><small>{e(t)}</small></div><div class="txt"><p class="hook">{e(h)}</p>{"".join(f"<p class=d>{e(p)}</p>" for p in ps)}</div>{btn("Explore the Course",{"interactive":"/interactive-course-creator/","futureproof":"/futureproof-blogger/"}.get(sl,"/academy/#course-"+sl),"cr")}</article>' for n,t,bg,fg,h,ps,sl in books)
+o.append(f'''<section class="acad dk"><div class="in stack" style="gap:34px">
+<div class="acad-head"><div class="stack" style="gap:16px"><p class="lbl">Modern business education for ambitious women</p><h2>The blogging industry is evolving. <em>Your business education should too.</em></h2>
+{P_("The strategies that worked for bloggers five years ago aren't necessarily the strategies that will work five years from now.")}</div>
+<div class="stack">{P_("Technology is changing. Buyer behavior is changing. The way people discover information, evaluate products and make purchasing decisions is changing.")}
 <p class="big it">And I want you to understand how to adapt.</p>
 {P_("The BOSS Academy is an expanding collection of specialized business courses designed to help you develop valuable skills, discover emerging opportunities and become a more capable online business owner.")}
-{P_("Choose the education your business needs right now, or unlock the complete Academy collection.")}
-<p class="lbl">Explore the course library.</p></div>
-<div class="books">{bh}</div>
+{P_("Choose the education your business needs right now, or unlock the complete Academy collection.")}</div></div>
+<p class="lbl">Explore the course library.</p>
+<div class="books rows">{bh}</div>
 <div style="text-align:center">{btn("Shop The BOSS Academy","/academy/","olw")}</div>
 </div></section>''')
 # ALL ACCESS
@@ -362,11 +519,12 @@ o.append(f'''<section style="background:#FBF5EE"><div class="in"><div class="aa"
 <p class="body">One investment gives you access to the included specialized courses, applicable educational resources and an entire collection of modern business strategies.</p></div>
 <div class="aa-box"><p class="lbl">The BOSS Academy All Access</p><p style="font:400 clamp(26px,2.8vw,32px)/1.2 var(--font-display);color:#3A1C2A">Invest in the knowledge behind the business you want to own.</p>{btn("Explore All Access","/all-access/")}</div>
 </div></div></section>''')
-# ABOUT
+# ABOUT: photo collage + numbered lessons
 learned=["I learned how to understand people.","How to identify problems worth solving.","How to create offers people wanted to purchase.","How to communicate value, generate sales and build a business around the knowledge and skills I already had."]
 stud=["Buyer psychology.","Artificial intelligence.","Emerging technology.","New business models.","Productivity systems.","The future of online education."]
 o.append(f'''<section style="background:#FFFFFF"><div class="in about-grid">
-<div class="arch"><img src="/images/photos/portrait-hat.jpg" alt="Genasys smiling in her pink hat" loading="lazy" style="object-position:60% 30%"></div>
+<div class="collage"><div class="arch"><img src="/images/photos/portrait-hat.jpg" alt="Genasys smiling in her pink hat" loading="lazy" style="object-position:60% 30%"></div>
+<div class="dot"><img src="/images/photos/notebook-writing.jpg" alt="Genasys writing in her notebook" loading="lazy"></div></div>
 <div class="stack">
 <p class="lbl">Meet your blog coach</p>
 <h2>I built a money making business from my aunt&rsquo;s basement <em>during nap time.</em></h2>
@@ -374,7 +532,7 @@ o.append(f'''<section style="background:#FFFFFF"><div class="in about-grid">
 {P_("Founder of Boss Lady Bloggers, professional blogging coach, business strategist and custom Showit website designer.")}
 {P_("I started building my business as a single mom, working during my son's nap times with a vision for the life I wanted to create for us.")}
 {P_("But I didn't build my money making business by publishing endless blog posts, growing an enormous audience or waiting for ad revenue to change my life.")}
-<div class="learned">{''.join(f'<p>{e(l)}</p>' for l in learned)}</div>
+<div class="learned num">{''.join(f'<p>{e(l)}</p>' for l in learned)}</div>
 <p class="big it">That changed everything for me.</p>
 {P_("Today, through my private blog coaching services, custom website design, membership and specialized business courses, I help other women develop those same business skills and build something of their own.")}
 {P_("And I'm constantly studying what comes next.")}
@@ -385,46 +543,50 @@ o.append(f'''<section style="background:#FFFFFF"><div class="in about-grid">
 <p class="pull">Your blog coach should understand more than blogging. <em>She should understand business.</em></p>
 <div class="row">{btn("More About Me","/about/")}{btn("Explore My Blog Coaching Services",COACH,"ol")}</div>
 </div></div></section>''')
-# WEBINAR
+# WEBINAR: headline beside the sign up, then full width rows (no empty column)
 ifs=["If you've been wondering whether it's still worth starting a blog...","If you're worried about what AI means for the future of your blogging income...","If you're questioning whether people will continue buying digital products, reading blogs or paying for information..."]
 cov=[("What's actually happening to blogging.","Understand how AI, changing search behavior and evolving consumer expectations are affecting traditional blogging business models."),("What people will still pay you for.","Discover why selling information alone is becoming more challenging and what makes an offer valuable when information is increasingly accessible."),("The business model I would build today.","Learn why I would prioritize valuable offers, direct audience relationships and a deliberate sales strategy over relying entirely on pageviews."),("How to adapt without constantly starting over.","Identify the skills, business assets and strategies worth developing as technology continues to evolve.")]
-o.append(f'''<section class="web dk" id="webinar" style="scroll-margin-top:80px"><div class="in web-grid">
+o.append(f'''<section class="web dk" id="webinar" style="scroll-margin-top:80px"><div class="in">
+<div class="web-top">
 <div class="stack">
 <p class="lbl">Free webinar with Genasys, founder of Boss Lady Bloggers</p>
 <h2>Futureproof <em>Your Blog</em></h2>
 <p class="big">How to build a profitable blogging business in the age of AI, without depending on Google traffic, outdated monetization strategies or endless content creation.</p>
-<div class="ifs">{''.join(f'<p>{e(x)}</p>' for x in ifs)}</div>
-<p class="big it">You need to watch this.</p>
-{P_("The blogging industry isn't standing still. And continuing to build your business around strategies that were designed for a different internet could leave you investing your time in the wrong things.")}
-{P_("Inside this free webinar, I'll explain what's changing, why traditional blogging strategies are becoming more vulnerable and how I would approach building a profitable blogging business today.")}
-<p class="lbl" style="margin-top:8px">Here&rsquo;s what we&rsquo;ll cover.</p>
-<div class="cover4">{''.join(f'<div><h3>{e(t)}</h3><p>{e(d)}</p></div>' for t,d in cov)}</div>
-{P_("Whether you're just starting your blog or questioning the direction of your existing business, this webinar will help you make more informed decisions about what you're building next.")}
 </div>
-<div class="wform"><p class="lbl">Free webinar</p><h3>Save your free seat</h3><div data-webinar-form></div><p class="wtags">Free webinar | Modern business strategy | The future of blogging</p></div>
+<div class="wform" id="webinar-form"><p class="lbl">Free webinar</p><h3>Save your free seat</h3><div data-webinar-form></div><p class="wtags">Free webinar | Modern business strategy | The future of blogging</p></div>
+</div>
+<div class="ifs3">{''.join(f'<p>{e(x)}</p>' for x in ifs)}</div>
+<div class="web-mid"><p class="watch">You need to watch this.</p>
+<div class="stack">{P_("The blogging industry isn't standing still. And continuing to build your business around strategies that were designed for a different internet could leave you investing your time in the wrong things.")}
+{P_("Inside this free webinar, I'll explain what's changing, why traditional blogging strategies are becoming more vulnerable and how I would approach building a profitable blogging business today.")}</div></div>
+<div class="stack" style="gap:16px"><p class="lbl">Here&rsquo;s what we&rsquo;ll cover.</p>
+<div class="cover4 row4">{''.join(f'<div><h3>{e(t)}</h3><p>{e(d)}</p></div>' for t,d in cov)}</div></div>
+<div class="nar stack" style="text-align:center;align-items:center">{P_("Whether you're just starting your blog or questioning the direction of your existing business, this webinar will help you make more informed decisions about what you're building next.")}
+<a class="hp-btn cr" href="#webinar-form">Save My Free Seat {ARR}</a></div>
 </div></section>''')
-# BLOG
+# BLOG: split header
 nos=["No recycled blogging advice.","No obsession with pageviews.","No pretending that publishing more content is the answer to every business problem."]
 post='<a class="post" href="/blog/"><div class="im" data-img></div><div class="t" data-title>From the blog</div></a>'
-o.append(f'''<section style="background:#F6E1E8"><div class="in stack" style="gap:28px">
-<div class="nar stack" style="text-align:center;gap:16px"><p class="lbl">The Boss Lady Bloggers blog</p><h2>Let&rsquo;s talk about what actually makes <em>blogging businesses profitable.</em></h2>
-{P_("Explore business strategy, offer development, buyer psychology, marketing, artificial intelligence, productivity and thoughtful conversations about the future of blogging.")}
+o.append(f'''<section style="background:#F6E1E8"><div class="in stack" style="gap:30px">
+<div class="blog-head"><div class="stack" style="gap:16px"><p class="lbl">The Boss Lady Bloggers blog</p><h2>Let&rsquo;s talk about what actually makes <em>blogging businesses profitable.</em></h2></div>
+<div class="stack">{P_("Explore business strategy, offer development, buyer psychology, marketing, artificial intelligence, productivity and thoughtful conversations about the future of blogging.")}
 <div class="nos">{''.join(f'<span>{e(n)}</span>' for n in nos)}</div>
-<p class="big">Just practical business education for women who want to build something meaningful and commercially valuable.</p></div>
+<p class="big">Just practical business education for women who want to build something meaningful and commercially valuable.</p></div></div>
 <div class="posts" data-latest>{post*3}</div>
 <div style="text-align:center">{btn("Explore the Blog","/blog/")}</div>
 </div></section>''')
-# PODCAST/YT
+# PODCAST/YT: photo cards
 mic='<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0014 0M12 18v3"/></svg>'
 play='<svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 7v10l8-5z" fill="#fff"/></svg>'
 o.append(f'''<section style="background:#FFFFFF"><div class="in stack" style="gap:28px">
 <div class="nar stack" style="text-align:center;gap:16px"><p class="lbl">Continue the conversation</p><h2>Business conversations <em>worth making time for.</em></h2></div>
 <div class="two">
-<article class="media pod"><span class="ic">{mic}</span><h3>The Boss Lady Bloggers Podcast</h3><p>Thoughtful conversations about blogging, business strategy, buyer psychology, monetization, entrepreneurship and what it takes to build a business in a changing digital world.</p><p>Listen while you&rsquo;re driving, working, walking or finally getting a quiet moment to yourself.</p>{btn("Listen to the Podcast","/podcast/")}</article>
-<article class="media yt dk"><span class="ic" style="background:#A23E66">{play}</span><h3>Boss Lady Bloggers on YouTube</h3><p>Business strategy breakdowns, AI demonstrations, blogging education, productivity experiments and behind the scenes conversations about building an online business.</p><p>Come see what I&rsquo;m learning, building and experimenting with.</p>{btn("Watch on YouTube","https://www.youtube.com/@GenasysLynn","cr")}</article>
+<article class="media pod"><div class="mph"><img src="/images/photos/podcast-mic.jpg" alt="Genasys recording her podcast" loading="lazy" style="object-position:50% 20%"></div><div class="mbody"><span class="ic">{mic}</span><h3>The Boss Lady Bloggers Podcast</h3><p>Thoughtful conversations about blogging, business strategy, buyer psychology, monetization, entrepreneurship and what it takes to build a business in a changing digital world.</p><p>Listen while you&rsquo;re driving, working, walking or finally getting a quiet moment to yourself.</p>{btn("Listen to the Podcast","/podcast/")}</div></article>
+<article class="media yt dk"><div class="mph"><img src="/images/photos/analytics-look.jpg" alt="Genasys working at her desk with her microphone" loading="lazy" style="object-position:50% 28%"></div><div class="mbody"><span class="ic" style="background:#A23E66">{play}</span><h3>Boss Lady Bloggers on YouTube</h3><p>Business strategy breakdowns, AI demonstrations, blogging education, productivity experiments and behind the scenes conversations about building an online business.</p><p>Come see what I&rsquo;m learning, building and experimenting with.</p>{btn("Watch on YouTube","https://www.youtube.com/@GenasysLynn","cr")}</div></article>
 </div></div></section>''')
 # FINAL
 o.append(f'''<section class="final"><div class="nar stack" style="align-items:center">
+<div class="fph"><img src="/images/photos/champagne-pour.jpg" alt="Champagne being poured" loading="lazy"></div>
 <p class="lbl">Your vision deserves more than another unfinished business plan</p>
 <h2>A year from now, <em>what do you want to have built?</em></h2>
 <div class="anoth"><p>Another collection of blog posts?</p><p>Another unfinished digital product?</p><p>Another website that doesn&rsquo;t quite reflect your vision?</p></div>
@@ -457,8 +619,15 @@ o.append(r'''<script>
   }
 
   /* Webinar sign up: paste the Flodesk form ID for "Futureproof Your Blog" here */
+  /* Client website rail arrows */
+  var rail=document.querySelector('[data-rail]');
+  if(rail){var step=function(d){var c=rail.querySelector('.fcard');rail.scrollBy({left:d*((c?c.getBoundingClientRect().width:400)+18),behavior:'smooth'});};
+    var pv=document.querySelector('[data-rail-prev]'),nx=document.querySelector('[data-rail-next]');
+    if(pv)pv.addEventListener('click',function(){step(-1);});if(nx)nx.addEventListener('click',function(){step(1);});}
+
   var WEBINAR_FORM_ID='''+repr(WEBINAR_FORM_ID)+r''';
   var host=document.querySelector('[data-webinar-form]');if(!host)return;
+  if(!WEBINAR_FORM_ID){host.innerHTML='<a class="hp-btn br" href="/futureproof-webinar/" style="width:100%;justify-content:space-between">Save My Free Seat <i aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></i></a>';return;}
   var id='hp-web';
   var cfg=btoa(JSON.stringify({trigger:{mode:"immediately",value:0},onSuccess:{mode:"message",message:"",redirectUrl:""},coi:false,showForReturnVisitors:true,notification:true,gdpr:{acceptsMarketing:false,privacyPolicy:{enabled:false,mandatory:false}},trackingConfig:{metaPixelId:"",cookieBannerEnabled:false,googleAnalyticsId:""}}));
   var f=WEBINAR_FORM_ID;
@@ -469,7 +638,7 @@ o.append(r'''<script>
    '<input type="text" name="confirm_email_address" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true"></div>'+
    '<div data-ff-el="footer"><button type="submit" class="hp-btn br" data-ff-el="submit">Save My Free Seat <i aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></i></button></div></div>'+
    '<div data-ff-el="success"></div><div class="ff-err" data-ff-el="error"></div></form></div>'+
-   (f?'':'<div class="hp-slot" style="margin-top:12px"><b>To fill in</b>Flodesk form for the Futureproof Your Blog webinar is not connected yet, so sign ups are not saved.</div>');
+   '';
   host.innerHTML=h;
   var wrap=document.getElementById(id),form=wrap.querySelector('form'),err=wrap.querySelector('.ff-err'),done=false;
   function finish(){if(done)return;done=true;try{sessionStorage.setItem('fpw_email',form.querySelector('[name=email]').value.trim());}catch(x){}location.href='/webinar-confirmation/';wrap.innerHTML='<p style="margin:0;font:400 26px/1.25 var(--font-display);color:#3A1C2A">You&rsquo;re in. Check your inbox for your webinar details.</p>';}
@@ -479,7 +648,6 @@ o.append(r'''<script>
     if(!nm){err.textContent='Add your first name.';return;}
     if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){err.textContent='That email doesn’t look quite right yet.';return;}
     err.textContent='';
-    if(!f){err.textContent='This form is not connected to Flodesk yet.';return;}
     form.querySelector('button').disabled=true;
     if(window.fd&&window.fd.q){try{fetch('https://form.flodesk.com/forms/'+f+'/submit',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({firstName:nm,email:em,confirm_email_address:''}),keepalive:true}).catch(function(){});}catch(x){}setTimeout(finish,400);return;}
     setTimeout(function(){if(wrap.getAttribute('data-ff-stage')!=='error')finish();},9000);

@@ -36,9 +36,9 @@ def css(accent="#A23E66", ink="#3A1C2A", card="#FFFFFF", radius="22px", label_fo
 
 def quotes(names=("Tesha", "Morgan", "Clare")):
     return '<div class="prq">' + "".join(
-        f'<figure class="rv"><blockquote>{_e(QUOTES[n])}</blockquote><figcaption>{n}</figcaption></figure>' for n in names) + '</div>'
+        f'<figure><blockquote>{_e(QUOTES[n])}</blockquote><figcaption>{n}</figcaption></figure>' for n in names) + '</div>'
 
 def proof(src_prefix="/images/proof/"):
     return '<div class="prp">' + "".join(
-        f'<figure class="rv"><div class="im"><img src="{src_prefix}{f}" alt="{_e(a)}" loading="lazy" style="object-position:{pos}"></div><figcaption>{_e(c)}</figcaption></figure>'
+        f'<figure><div class="im"><img src="{src_prefix}{f}" alt="{_e(a)}" loading="lazy" style="object-position:{pos}"></div><figcaption>{_e(c)}</figcaption></figure>'
         for f, a, c, pos in PROOF) + '</div>'
