@@ -25,6 +25,7 @@ PAGES = {
     "futureproof-blogger/index.html": ("FutureproofBlogger.html", "/futureproof-blogger"),
     "futureproof-webinar/index.html": ("FutureproofWebinar.html", "/futureproof-webinar"),
     "futureproof-replay/index.html": ("FutureproofReplay.html", "/futureproof-replay"),
+    "webinar-confirmation/index.html": ("WebinarConfirmation.html", "/webinar-confirmation"),
     "all-access/index.html":     ("AllAccess.html", "/all-access"),
     "portfolio/index.html":      ("Portfolio.html", "/portfolio"),
     "client-project/index.html": ("ClientProject.html", "/client-project"),
@@ -44,6 +45,7 @@ PAGES = {
 
 # internal link rewrites (folder URLs -> Showit slugs)
 LINKMAP = [
+    ("location.href='/webinar-confirmation/'", "location.href='/webinar-confirmation'"),
     ('href="/futureproof-webinar/#', 'href="/futureproof-webinar#'),
     ('href="/futureproof-webinar/"', 'href="/futureproof-webinar"'),
     ('href="/futureproof-blogger/"', 'href="/futureproof-blogger"'),

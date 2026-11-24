@@ -211,7 +211,7 @@ o.append("<script>\n(function(){\n  var FORM_ID=" + json.dumps(WEBINAR_FORM_ID) 
       '<div class="pf-slot sm"><b>To fill in</b>'+esc(T.consent)+'</div>'+
       (f?'':'<div class="pf-slot sm"><b>To fill in</b>The Flodesk form for this webinar is not connected yet, so sign ups are not saved.</div>');
     var wrap=document.getElementById(id),form=wrap.querySelector('form'),err=wrap.querySelector('.err'),done=false;
-    function finish(){if(done)return;done=true;wrap.innerHTML='<p class="done">You’re in. Your webinar details are on their way to your inbox.</p>';}
+    function finish(){if(done)return;done=true;try{sessionStorage.setItem('fpw_email',form.querySelector('[name=email]').value.trim());}catch(x){}location.href='/webinar-confirmation/';wrap.innerHTML='<p class="done">You’re in. Your webinar details are on their way to your inbox.</p>';}
     form.addEventListener('submit',function(e){
       e.preventDefault();
       var nm=form.querySelector('[name=firstName]').value.trim(),em=form.querySelector('[name=email]').value.trim();
