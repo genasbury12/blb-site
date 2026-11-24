@@ -254,3 +254,9 @@ EXTRA = r'''<style>
 @media (max-width:980px){.pf .gal3{grid-template-columns:minmax(0,1fr)}.pf .phase{grid-template-columns:minmax(0,1fr)}.pf .cycle{grid-template-columns:repeat(2,minmax(0,1fr))}.pf .sticky{position:static}}
 @media (max-width:700px){.pf .steps4,.pf .thoughts,.pf .pairs,.pf .fornot,.pf .cycle{grid-template-columns:minmax(0,1fr)}}
 </style>'''
+
+# Course sales pages have no site menu or footer, only this small legal line.
+LEGAL = ('<div class="legal" style="padding:22px clamp(16px,4vw,48px);text-align:center;font:500 11.5px/1.6 var(--font-label);'
+         'letter-spacing:.12em;text-transform:uppercase;color:#6E6A80">&copy; Boss Lady Bloggers &middot; '
+         '<a href="/privacy-policy/" style="color:inherit">Privacy Policy</a> &middot; '
+         '<a href="/terms-and-conditions/" style="color:inherit">Terms &amp; Conditions</a></div>')

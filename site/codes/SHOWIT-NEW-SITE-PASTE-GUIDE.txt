@@ -35,9 +35,11 @@ ClientProject.html        /client-project  (ONE page serves every client
                           Leave it out of your menu)
 InteractiveCourseCreator.html  /interactive-course-creator  (The Interactive
                           Course Creator sales page, in the course's own
-                          Interactive Lab brand)
+                          Interactive Lab brand. No menu or footer on
+                          purpose: hide your Showit nav and footer here)
 AllAccess.html            /all-access  (The BOSS Academy All Access sales
-                          page. Every All Access button links here)
+                          page. Every All Access button links here.
+                          No menu or footer: hide your Showit nav and footer)
 Academy.html              /academy  (The BOSS Academy storefront. Name the page
                           "Courses" in your Showit menu)
 Membership.html           /membership  (The Blogging Ladies Membership,

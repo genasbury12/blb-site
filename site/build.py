@@ -131,7 +131,7 @@ def canonical_for(out: str) -> str:
     return DOMAIN + "/" + out
 
 
-BARE = {"membership-offer"}  # distraction-free pages: no menu or footer
+BARE = {"membership-offer", "all-access", "interactive-course-creator"}  # distraction-free pages (offers and course sales pages): no menu or footer
 
 
 def main() -> int:

@@ -395,7 +395,7 @@ o.append(f'''<section class="vio dk"><div class="in stack" style="gap:28px">
 {pairs(s[3:9])}
 <div class="row" style="justify-content:center">{cta(s[9][1:-1], "cr")}{cta(s[10][1:-1], "olw")}</div></div></section>''')
 
-o.append("</main>")
+o.append(LEGAL + "</main>")
 out = "\n".join(o)
 for bad in ["—", "–", "…"]: assert bad not in out, bad
 assert "six figure" not in out.lower()
