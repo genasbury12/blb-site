@@ -1,7 +1,7 @@
 BOSS LADY BLOGGERS - NEW WEBSITE ON SHOWIT - PASTE GUIDE
 =========================================================
 
-26 full pages plus the small blog-post pieces. Same workflow as before: one full-page embed
+29 full pages plus the small blog-post pieces. Same workflow as before: one full-page embed
 canvas per Showit page, paste the whole file, publish.
 
 THE FILES AND WHERE EACH ONE GOES
@@ -28,6 +28,12 @@ BlackFriday.html          /black-friday  (Nov 25 early access through Cyber Mond
                           after Nov 30 11:59 PM ET it shows "sale ended")
 Apply.html                /apply  (Fast Track Call application. Every
                           Apply button on the site links here)
+ApplicationConfirmation.html /application-confirmation  (after applying)
+FastTrackPreparation.html /fast-track-preparation  (send to approved
+                          applicants: questionnaire + booking)
+FastTrackConfirmation.html /fast-track-confirmation  (Calendly redirects
+                          here after booking; turn on Pass event details)
+                          All three: out of your menu, nav and footer hidden
 Portfolio.html            /portfolio  (your client portfolio: 7 client sites
                           as laptop and phone mockups, plus the 5 client
                           video testimonials. Linked from the footer)
