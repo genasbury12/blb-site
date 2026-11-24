@@ -3,7 +3,7 @@
 import html, sys, json
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent))
-from folio_data import PROJECTS, VIDEOS, IMG, VIDEO_CSS, VIDEO_JS, video_cards
+from folio_data import PROJECTS, VIDEOS, IMG, CDN, VIDEO_CSS, VIDEO_JS, video_cards
 
 ROOT = Path(__file__).resolve().parent.parent / "site/_pages"
 CAL = "https://calendly.com/bossladybloggers/15min"
@@ -353,7 +353,7 @@ c.append('''<script>
   /* One page serves every client project: /client-project?project=oneincome and so on.
      To fill in a project, add text to its entry: line, services, and any of
      meet, start, goals, strategy, brand, website, details, built, result, words (plain text, blank line = new paragraph). */
-  var IMG='https://charming-caramel-d2453c.netlify.app/images/portfolio/';
+  var IMG='''+json.dumps(CDN)+''';
   var P=''' + json.dumps(data) + ''';
   var key=(new URLSearchParams(location.search).get('project')||'').toLowerCase();
   var root=document.querySelector('[data-cp]');if(!root)return;

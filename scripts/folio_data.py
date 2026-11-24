@@ -3,6 +3,9 @@ Only facts we can see are filled in (business name, what the site is about, live
 mockups). Everything about the project itself stays a TO FILL IN slot until Genasys sends it."""
 
 IMG = "/images/portfolio/"
+# Netlify (the usual image host) stopped deploying on Nov 15, so the portfolio images are served
+# from jsDelivr, pinned to the commit that added them. New portfolio images need a new pin.
+CDN = "https://cdn.jsdelivr.net/gh/genasbury12/blb-site@35ad1b3d75a873b83a9402666c714d3bbcbf0564/site/images/portfolio/"
 
 # key, business name, client name ('' = to fill in), niche (from the live site), url
 PROJECTS = [
