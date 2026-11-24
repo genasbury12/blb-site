@@ -10,8 +10,9 @@ File                      Showit page (URL slug)
 Home.html                 Home page ( / )
 StartHere.html            /start-here
 About.html                /about
-Boss.html                 /boss
-BlogCoaching.html         /blog-coaching   (your existing page)
+BlogCoaching.html         /blog-coaching   (your Work With Me page: The BOSS
+                          Business Experience. Delete the old /boss page
+                          and 301 redirect /boss to /blog-coaching)
 FreeMasterclass.html      /free-masterclass  (your free masterclass opt-in page.
                           The form is your real Flodesk masterclass form:
                           signups go to /masterclass-delivery)

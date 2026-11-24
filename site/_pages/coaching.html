@@ -1,297 +1,715 @@
-<main id="main">
+<style>
+/* Work With Me: The BOSS Business Experience. Editorial and calm: plum and cream, an arch photo frame,
+   numbered build pillars, the business-first build order, and clearly marked slots for anything still to confirm. */
+.wwm{--plum:#3A1C2A;--berry:#A23E66;--rose:#E9B9CA;--blush:#F6E1E8;--cream:#FBF5EE;--cocoa:#4A2F3B;--mauve:#6E4B5B;--pop:#F6C9D8}
+.wwm section{padding:clamp(72px,9vw,124px) clamp(16px,4vw,48px)}
+.wwm .in{max-width:1140px;margin:0 auto}
+.wwm .nar{max-width:760px;margin:0 auto}
+.wwm .lbl{margin:0;font:500 12px/1.4 var(--font-label);letter-spacing:.2em;text-transform:uppercase;color:var(--berry)}
+.wwm .lbl.lt{color:var(--rose)}
+.wwm h1,.wwm h2,.wwm h3{font-family:var(--font-display);font-weight:400;letter-spacing:-.015em;margin:0;text-wrap:balance}
+.wwm h2{font-size:clamp(38px,5vw,66px);line-height:1.02;color:var(--plum)}
+.wwm h2 em,.wwm h1 em{color:var(--berry)}
+.wwm .dk h2,.wwm .dk h3{color:var(--cream)}
+.wwm .dk h2 em,.wwm .dk h1 em{color:var(--pop)}
+.wwm p{margin:0}
+.wwm .body{font:400 18px/1.7 var(--font-body);color:var(--cocoa)}
+.wwm .body+.body{margin-top:18px}
+.wwm .dk .body{color:#F1DDE2}
+.wwm .big{font:400 clamp(26px,3.2vw,36px)/1.25 var(--font-display);color:var(--plum)}
+.wwm .dk .big{color:var(--cream)}
+.wwm .stack{display:flex;flex-direction:column;gap:22px}
+.wwm .apply{display:inline-flex;align-items:center;gap:14px;min-height:58px;padding:10px 12px 10px 28px;border-radius:999px;background:var(--plum);color:#fff;font:600 16px/1.2 var(--font-body);text-decoration:none;box-shadow:0 18px 36px -18px rgba(58,28,42,.7);transition:transform .2s ease,background .2s ease}
+.wwm .apply i{flex:none;width:38px;height:38px;border-radius:999px;background:var(--berry);display:grid;place-items:center;transition:transform .2s ease}
+.wwm .apply.cr{background:var(--cream);color:var(--plum)}
+.wwm .apply.br{background:var(--berry)}.wwm .apply.br i{background:var(--plum)}
+@media (hover:hover){.wwm .apply:hover{transform:translateY(-2px)}.wwm .apply:hover i{transform:rotate(45deg)}}
+.wwm .apply:focus-visible,.wwm summary:focus-visible{outline:3px solid var(--berry);outline-offset:3px}
+.wwm .under{font:400 14px/1.5 var(--font-body);color:var(--mauve)}
+.wwm .dk .under{color:var(--rose)}
+.wwm .slot{border:2px dashed var(--berry);border-radius:18px;padding:18px 20px;background:rgba(162,62,102,.05);font:500 15px/1.55 var(--font-body);color:var(--berry)}
+.wwm .slot b{display:block;font:500 11px/1.3 var(--font-label);letter-spacing:.16em;text-transform:uppercase;margin-bottom:6px}
+.wwm .dk .slot{color:var(--pop);border-color:var(--pop);background:rgba(246,201,216,.06)}
+.wwm .tick{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.wwm .tick li{position:relative;padding:14px 18px 14px 52px;border-radius:16px;background:#fff;font:500 16.5px/1.5 var(--font-body);color:var(--plum)}
+.wwm .tick li::before{content:"";position:absolute;left:16px;top:15px;width:22px;height:22px;border-radius:7px;background:var(--berry) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 12.5l4 4L18 8' fill='none' stroke='%23fff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/16px no-repeat}
+.wwm .tick.x li::before{background:var(--mauve) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M7 7l10 10M17 7L7 17' fill='none' stroke='%23fff' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E") center/14px no-repeat}
+.wwm .tick.tint li{background:var(--cream)}
+.wwm .dots{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.wwm .dots li{position:relative;padding-left:24px;font:400 16.5px/1.55 var(--font-body);color:var(--cocoa)}
+.wwm .dots li::before{content:"";position:absolute;left:2px;top:.62em;width:9px;height:9px;border-radius:50%;background:var(--berry)}
 
-<!-- 1. HEADER -->
-<section style="position:relative;background:#3A1C2A;padding:clamp(56px,7vw,100px) clamp(16px,4vw,48px) 130px">
-<div style="max-width:1240px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;gap:40px">
-<div style="position:relative;overflow:hidden;flex:0 1 260px;min-width:0;height:320px;border-radius:26px;background:#A23E66;transform:rotate(-4deg);display:flex;align-items:flex-end;padding:18px"><img src="/images/photos/pink-desk.jpg" alt="Pink desk setup with a laptop" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></div>
-<div style="flex:1 1 520px;min-width:0;text-align:center;display:flex;flex-direction:column;gap:22px;align-items:center">
-<p style="margin:0;font:700 34px/1 var(--font-script);color:#E9B9CA">isn&rsquo;t it time?</p>
-<h1 style="margin:0;font:400 clamp(46px,5.6vw,84px)/1 var(--font-display);color:#FBF5EE;letter-spacing:-0.015em">What if you could finally <em style="color:#E9B9CA">make money</em> from the blog you&rsquo;ve worked so hard to build?</h1>
-<p style="margin:0;max-width:560px;font:400 18px/1.6 var(--font-body);color:#F0DCE3">You&rsquo;ve written the posts. Researched the keywords. Spent hours on your website. Followed the advice and invested your time, energy, and money.</p>
-<a href="#apply" class="pill" style="background:#A23E66;color:#FFFFFF">Yes, I want my blog to make money <span aria-hidden="true" style="width:34px;height:34px;border-radius:999px;background:#FFFFFF;display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#A23E66" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></span></a>
+/* hero */
+.wwm .hero{background:var(--plum);color:var(--cream);position:relative;overflow:hidden;isolation:isolate;padding-top:clamp(56px,7vw,100px)}
+.wwm .hero::before{content:"";position:absolute;right:-12%;top:-30%;width:68vw;height:68vw;max-width:780px;max-height:780px;border-radius:50%;background:radial-gradient(circle,rgba(162,62,102,.5),rgba(162,62,102,0) 66%);z-index:-1}
+.wwm .hero-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:clamp(36px,5vw,72px);align-items:center}
+.wwm .hero h1{font-size:clamp(46px,6.6vw,96px);line-height:.96;color:var(--cream);letter-spacing:-.025em;margin-top:16px}
+.wwm .services{margin-top:16px;font:500 12px/1.7 var(--font-label);letter-spacing:.14em;text-transform:uppercase;color:var(--rose)}
+.wwm .arch{position:relative;aspect-ratio:3/4;border-radius:999px 999px 26px 26px;overflow:hidden;border:10px solid var(--cream);box-shadow:0 40px 80px -40px rgba(0,0,0,.7)}
+.wwm .arch img{width:100%;height:100%;object-fit:cover;object-position:50% 22%;display:block}
+.wwm .seal{position:absolute;left:-26px;bottom:34px;width:120px;height:120px;border-radius:50%;background:var(--berry);color:#fff;display:grid;place-items:center;text-align:center;font:700 26px/1 var(--font-script);transform:rotate(-10deg);box-shadow:0 14px 30px -12px rgba(0,0,0,.6)}
+.wwm .seal span{display:block;font:500 9.5px/1.4 var(--font-label);letter-spacing:.14em;text-transform:uppercase;margin-top:4px}
+
+/* difference */
+.wwm .diff{background:var(--cream);text-align:center}
+.wwm .diff h2{font-size:clamp(40px,5.6vw,76px);max-width:1000px;margin:0 auto}
+.wwm .diff .scr{display:block;margin-top:22px;font:700 clamp(34px,4vw,48px)/1 var(--font-script);color:var(--berry);transform:rotate(-2deg)}
+
+/* moving pieces */
+.wwm .pieces{display:flex;flex-wrap:wrap;gap:10px;margin:8px 0 4px}
+.wwm .pieces span{padding:10px 16px;border-radius:999px;background:#fff;border:1.5px solid var(--rose);font:500 15px/1.2 var(--font-body);color:var(--plum)}
+.wwm .pieces span:nth-child(3n){background:var(--blush)}
+.wwm .pieces span:nth-child(4n){transform:rotate(-2deg)}
+.wwm .pieces span:nth-child(5n){transform:rotate(2deg)}
+.wwm .ask{margin-top:10px;padding:clamp(24px,4vw,40px);border-radius:28px;background:var(--plum);color:var(--cream);font:400 italic clamp(26px,3.4vw,40px)/1.2 var(--font-display)}
+
+/* imagine */
+.wwm .imagine{background:var(--plum);position:relative;overflow:hidden}
+.wwm .lines{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.wwm .lines li{display:flex;gap:16px;align-items:baseline;padding:18px 0;border-bottom:1px solid rgba(233,185,202,.25);font:400 clamp(21px,2.4vw,27px)/1.3 var(--font-display);color:var(--cream)}
+.wwm .lines li::before{content:"\2726";flex:none;font-size:16px;color:var(--pop)}
+
+/* opposite */
+.wwm .order{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;margin-top:8px}
+.wwm .ocard{border-radius:26px;padding:clamp(24px,3.4vw,36px);display:flex;flex-direction:column;gap:16px}
+.wwm .ocard.most{background:#fff}
+.wwm .ocard.ours{background:var(--berry);color:#fff}
+.wwm .ocard h3{font-size:clamp(26px,2.8vw,32px);line-height:1.1}
+.wwm .ocard.ours h3{color:#fff}
+.wwm .steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;counter-reset:s}
+.wwm .steps li{counter-increment:s;display:flex;align-items:center;gap:14px;padding:12px 14px;border-radius:14px;font:500 16px/1.3 var(--font-body)}
+.wwm .steps li::before{content:counter(s);flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font:500 13px/1 var(--font-label)}
+.wwm .most .steps li{background:var(--cream);color:var(--mauve)}
+.wwm .most .steps li::before{background:var(--rose);color:var(--plum)}
+.wwm .ours .steps li{background:rgba(255,255,255,.14);color:#fff}
+.wwm .ours .steps li::before{background:#fff;color:var(--berry)}
+.wwm .cant{display:grid;gap:12px}
+.wwm .cant p{padding:16px 20px;border-left:3px solid var(--berry);background:#fff;border-radius:0 16px 16px 0;font:500 17px/1.5 var(--font-body);color:var(--plum)}
+.wwm .qs{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;counter-reset:q}
+.wwm .qs li{counter-increment:q;display:flex;gap:14px;align-items:flex-start;padding:18px;border-radius:18px;background:var(--blush);font:400 22px/1.25 var(--font-display);color:var(--plum)}
+.wwm .qs li::before{content:"0" counter(q);flex:none;font:500 12px/1.9 var(--font-label);color:var(--berry)}
+
+/* intro */
+.wwm .intro{background:var(--blush)}
+.wwm .intro-card{position:relative;background:var(--plum);border-radius:36px;padding:clamp(32px,6vw,80px);text-align:center;overflow:hidden;isolation:isolate}
+.wwm .intro-card::before{content:"";position:absolute;left:50%;top:-60%;width:900px;height:900px;margin-left:-450px;border-radius:50%;background:radial-gradient(circle,rgba(162,62,102,.55),rgba(162,62,102,0) 60%);z-index:-1}
+.wwm .intro-card h2{font-size:clamp(46px,7vw,96px);line-height:.96;margin-top:14px}
+.wwm .intro-card .tag{margin:18px auto 0;max-width:640px;font:400 italic clamp(21px,2.4vw,26px)/1.35 var(--font-display);color:var(--pop)}
+.wwm .nots{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:34px 0}
+.wwm .nots p{padding:18px;border-radius:18px;border:1.5px solid rgba(233,185,202,.35);font:500 15.5px/1.45 var(--font-body);color:var(--cream);text-align:left}
+.wwm .nots p::before{content:"\2715";display:block;margin-bottom:8px;color:var(--pop);font-size:14px}
+
+/* why three */
+.wwm .three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.wwm .three div{background:#fff;border-radius:24px;padding:26px;display:flex;flex-direction:column;gap:12px}
+.wwm .three h3{font-size:26px;color:var(--plum)}
+.wwm .three p{font:400 16px/1.6 var(--font-body);color:var(--cocoa)}
+.wwm .three .but{color:var(--berry);font-weight:600}
+.wwm .chain{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px;margin:34px 0 10px}
+.wwm .chain span{padding:12px 20px;border-radius:999px;background:var(--plum);color:var(--cream);font:500 13px/1 var(--font-label);letter-spacing:.12em;text-transform:uppercase}
+.wwm .chain i{font-style:normal;color:var(--berry);font-size:20px}
+
+/* pillars */
+.wwm .pillars{display:grid;gap:22px}
+.wwm .pillar{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(22px,4vw,56px);background:#fff;border-radius:30px;padding:clamp(26px,4.4vw,56px);box-shadow:0 26px 54px -44px rgba(58,28,42,.7)}
+.wwm .pillar:nth-child(even){background:var(--cream)}
+.wwm .pillar .n{font:400 clamp(64px,8vw,104px)/.85 var(--font-display);color:var(--berry)}
+.wwm .pillar h3{margin-top:14px;font-size:clamp(28px,3.2vw,40px);line-height:1.08;color:var(--plum)}
+.wwm .pillar .body{font-size:17px}
+.wwm .pillar .lst{background:var(--blush);border-radius:20px;padding:22px}
+.wwm .pillar:nth-child(even) .lst{background:#fff}
+.wwm .pillar .lst .lbl{margin-bottom:14px}
+.wwm .pillar .close{margin-top:18px;font:400 italic 21px/1.35 var(--font-display);color:var(--berry)}
+.wwm .pillar.hl{background:var(--plum)}
+.wwm .pillar.hl h3,.wwm .pillar.hl .close{color:var(--pop)}
+.wwm .pillar.hl .body{color:#F1DDE2}
+.wwm .pillar.hl .n{color:var(--pop)}
+.wwm .pillar.hl .lst{background:rgba(255,255,255,.08)}
+.wwm .pillar.hl .lst p{font:400 17px/1.6 var(--font-body);color:var(--cream)}
+.wwm .pillar.hl .lst p+p{margin-top:10px}
+
+/* portfolio */
+.wwm .folio{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.wwm .mock{aspect-ratio:4/3;border-radius:20px;background:repeating-linear-gradient(135deg,var(--blush) 0 14px,#fff 14px 28px);border:2px dashed var(--berry);display:grid;place-items:center;padding:16px;text-align:center;font:500 12px/1.5 var(--font-label);letter-spacing:.12em;text-transform:uppercase;color:var(--berry)}
+
+/* phases */
+.wwm .phases{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;counter-reset:p}
+.wwm .phase{position:relative;background:#fff;border-radius:26px;padding:30px 26px;display:flex;flex-direction:column;gap:12px;border-top:6px solid var(--berry)}
+.wwm .phase:nth-child(2){border-color:var(--rose)}.wwm .phase:nth-child(3){border-color:var(--plum)}
+.wwm .phase h3{font-size:34px;color:var(--plum)}
+.wwm .phase p{font:400 16.5px/1.6 var(--font-body);color:var(--cocoa)}
+.wwm .leave{margin-top:26px;text-align:center}
+
+/* diy */
+.wwm .diy{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(22px,4vw,56px);align-items:start}
+.wwm .hires{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.wwm .hires li{display:flex;gap:14px;align-items:center;padding:14px 18px;border-radius:16px;background:#fff;font:500 16px/1.4 var(--font-body);color:var(--plum)}
+.wwm .hires li b{flex:none;font:500 12px/1 var(--font-label);color:var(--berry)}
+.wwm .inv{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.wwm .inv li{padding:16px 20px;border-radius:18px;background:var(--plum);color:var(--cream);font:400 22px/1.25 var(--font-display)}
+.wwm .inv li:last-child{background:var(--berry)}
+
+/* included */
+.wwm .incl{background:var(--rose)}
+.wwm .incl-card{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);border-radius:32px;overflow:hidden;box-shadow:0 34px 70px -40px rgba(58,28,42,.7)}
+.wwm .incl-l{background:#fff;padding:clamp(26px,4.4vw,52px)}
+.wwm .incl-l h3{font-size:clamp(30px,3.4vw,42px);color:var(--plum);margin:8px 0 20px}
+.wwm .incl-l .tick{grid-template-columns:repeat(2,minmax(0,1fr))}
+.wwm .incl-l .tick li{background:var(--cream);font-size:15.5px}
+.wwm .incl-r{background:var(--plum);color:var(--cream);padding:clamp(26px,4.4vw,52px);display:flex;flex-direction:column;gap:18px;justify-content:center}
+.wwm .incl-r h3{font-size:clamp(28px,3vw,36px);color:var(--cream)}
+.wwm .res{margin-top:26px;padding-top:24px;border-top:1.5px dashed var(--rose);display:grid;gap:12px}
+
+/* small */
+.wwm .small{background:var(--plum)}
+.wwm .small .big{font-size:clamp(28px,3.6vw,44px)}
+
+/* case studies */
+.wwm .case{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:10px}
+.wwm .case div{background:#fff;border-radius:20px;padding:22px}
+.wwm .case h3{font-size:24px;color:var(--plum);margin-bottom:10px}
+
+/* clarity */
+.wwm .clar{background:var(--blush)}
+.wwm .clar-card{background:#fff;border-radius:30px;padding:clamp(26px,4.4vw,56px)}
+.wwm .promise{margin-top:26px;padding:22px 24px;border-radius:20px;background:var(--plum);color:var(--cream);font:400 italic clamp(22px,2.6vw,28px)/1.3 var(--font-display)}
+
+/* meet */
+.wwm .meet{display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr);gap:clamp(30px,5vw,72px);align-items:center}
+.wwm .meet .arch{border-color:#fff;max-width:400px}
+
+/* fit */
+.wwm .fit{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px}
+.wwm .fitc{border-radius:28px;padding:clamp(24px,3.6vw,40px);display:flex;flex-direction:column;gap:18px}
+.wwm .fitc.yes{background:var(--blush)}
+.wwm .fitc.no{background:#fff}
+.wwm .fitc h3{font-size:clamp(26px,2.8vw,34px);color:var(--plum)}
+.wwm .fitc.yes .tick li{background:#fff}
+.wwm .fitc.no .tick li{background:var(--cream);color:var(--mauve)}
+
+/* faq */
+.wwm .faqs{background:var(--plum)}
+.wwm .faq{max-width:820px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+.wwm .faq details{border:1.5px solid rgba(246,225,232,.35);border-radius:24px;padding:6px 24px}
+.wwm .faq summary{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:56px;font:600 16.5px/1.35 var(--font-body);color:var(--cream);cursor:pointer;list-style:none}
+.wwm .faq summary::-webkit-details-marker{display:none}
+.wwm .faq .faq-plus{flex:none;font:400 26px/1 var(--font-body);color:var(--rose);transition:transform .2s ease}
+.wwm .faq details[open] .faq-plus{transform:rotate(45deg)}
+.wwm .faq-a{padding:0 0 18px}
+.wwm .faq-a p{font:400 16px/1.65 var(--font-body);color:#F0DCE3}
+.wwm .faq-a p+p{margin-top:10px}
+
+/* final */
+.wwm .final{background:var(--cream);text-align:center}
+.wwm .sum{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:28px auto;max-width:860px}
+.wwm .sum span{padding:12px 18px;border-radius:999px;background:#fff;border:1.5px solid var(--rose);font:500 15px/1.2 var(--font-body);color:var(--plum)}
+.wwm .because{display:grid;gap:6px;margin:10px auto 0;max-width:720px}
+.wwm .because p{font:400 clamp(22px,2.6vw,28px)/1.35 var(--font-display);color:var(--plum)}
+.wwm .because p:nth-child(2){color:var(--berry)}
+.wwm .endcard{margin:44px auto 0;max-width:760px;background:var(--plum);border-radius:34px;padding:clamp(30px,5vw,60px);display:flex;flex-direction:column;align-items:center;gap:16px}
+.wwm .endcard h2{font-size:clamp(40px,5.6vw,70px)}
+
+@media (max-width:900px){
+ .wwm .hero-grid,.wwm .pillar,.wwm .diy,.wwm .incl-card,.wwm .meet{grid-template-columns:minmax(0,1fr)}
+ .wwm .hero .arch{max-width:340px}
+ .wwm .three,.wwm .phases,.wwm .folio,.wwm .case,.wwm .nots{grid-template-columns:minmax(0,1fr)}
+ .wwm .incl-l .tick{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:700px){
+ .wwm .order,.wwm .fit,.wwm .qs{grid-template-columns:minmax(0,1fr)}
+ .wwm .seal{left:auto;right:-8px;width:104px;height:104px;font-size:22px}
+ .wwm .apply{font-size:15px;padding-left:22px}
+}
+@media (prefers-reduced-motion:reduce){.wwm *{transition:none!important}}
+</style>
+<main id="main" class="wwm">
+
+<!-- HERO -->
+<section class="hero dk">
+<div class="in hero-grid">
+<div class="stack">
+<p class="lbl lt">The BOSS Business Experience</p>
+<p class="services" style="margin-top:0">Private blog business mentorship &middot; Custom website design &middot; Done for you business development</p>
+<h1>You have the vision for your business. <em>Let&rsquo;s finally build it.</em></h1>
+<p class="body" style="font-size:19px;max-width:640px">Personalized 1:1 blog coaching, custom website design and hands on business development for ambitious women who want to turn their knowledge, passion and expertise into a professionally built online business designed to make money.</p>
+<p class="body" style="max-width:640px">From figuring out exactly what you&rsquo;re going to sell to building the brand, website and sales strategy behind it, we&rsquo;ll bring your entire business together.</p>
+<p class="big" style="max-width:640px;color:#F6C9D8;font-style:italic">You don&rsquo;t have to figure out how to build every piece yourself.</p>
+<div style="display:flex;flex-direction:column;gap:12px;align-items:flex-start"><a class="apply cr" href="https://calendly.com/bossladybloggers/15min" data-apply>Apply for the BOSS Business Experience <i aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></i></a><p class="under">Private client experience by application.</p></div>
 </div>
-<div style="flex:0 1 260px;min-width:0;position:relative;height:360px">
-<div style="overflow:hidden;position:absolute;right:0;top:0;width:88%;height:270px;border-radius:26px;background:#F6E1E8;transform:rotate(4deg);display:flex;align-items:flex-end;padding:18px"><img src="/images/photos/desk-wide.jpg" alt="Genasys working at her desk with laptop and microphone" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></div>
-<div style="position:absolute;left:0;bottom:0;width:46%;height:150px;border-radius:20px;background:#E9B9CA;border:4px solid #3A1C2A;overflow:hidden;display:flex;align-items:flex-end;justify-content:center"><img src="/images/photos/balloons-face.jpg" alt="Genasys among balloons" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%"></div>
+<div style="position:relative">
+<div class="arch"><img src="/images/photos/desk-writing.jpg" alt="Genasys writing in her planner at her desk"></div>
+<div class="seal" aria-hidden="true">Gen<span>private client</span></div>
 </div>
-</div>
-<div style="position:absolute;left:50%;bottom:-66px;transform:translateX(-50%);width:132px;height:132px;z-index:5">
-<svg class="bl-spin" width="132" height="132" viewBox="0 0 132 132" aria-hidden="true"><defs><path id="blc2" d="M66,66 m-47,0 a47,47 0 1,1 94,0 a47,47 0 1,1 -94,0"></path></defs><circle cx="66" cy="66" r="64" fill="#FBF5EE" stroke="#A23E66" stroke-width="2"></circle><text font-family="DM Mono, monospace" font-size="11" letter-spacing="3.4" fill="#3A1C2A"><textPath href="#blc2">12 WEEKS &#183; PRIVATE COACHING &#183; 12 WEEKS &#183; </textPath></text></svg>
-<span aria-hidden="true" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:700 34px/1 var(--font-script);color:#A23E66">Gen</span>
 </div>
 </section>
 
-<!-- 2. WHERE ARE THE SALES -->
-<section style="padding:140px clamp(16px,4vw,48px) 100px">
-<div style="max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;gap:56px;align-items:center">
-<div class="rv" style="position:relative;overflow:hidden;flex:1 1 360px;min-width:0;height:420px;border-radius:28px;background:#F6E1E8"><img src="/images/photos/desk-mic-wide.jpg" alt="Genasys at her desk with laptop and microphone" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 40%"></div>
-<div style="flex:1 1 480px;min-width:0;display:flex;flex-direction:column;gap:18px">
-<p class="rv" style="margin:0;font:500 13px/1 var(--font-label);letter-spacing:0.2em;text-transform:uppercase;color:#A23E66">Sound familiar?</p>
-<h2 style="margin:0;font:400 clamp(46px,5vw,76px)/1 var(--font-display);color:#3A1C2A">But where are the <span class="hl">sales?</span></h2>
-<p class="rv" style="margin:0;font:400 18px/1.65 var(--font-body)">Maybe your blog gets traffic, but nobody buys. Maybe you have an email list but don&rsquo;t know what to send. Maybe you created a product and heard nothing. Or maybe you&rsquo;re not sure what you should sell.</p>
-<p class="rv" style="margin:0;font:600 18px/1.65 var(--font-body);color:#3A1C2A">You know it&rsquo;s possible to make money blogging. You just can&rsquo;t figure out how to make it happen for your blog.</p>
+<!-- THE DIFFERENCE -->
+<section class="diff">
+<div class="in">
+<h2 class="rv">You want to own a successful blogging business. <em>You don&rsquo;t necessarily want to become an expert in building one.</em></h2>
+<span class="scr">There&rsquo;s a difference.</span>
+</div>
+</section>
+
+<!-- STORY -->
+<section style="background:#FFFFFF">
+<div class="nar stack">
+<p class="body">You have something you genuinely want to share with the world. Knowledge you&rsquo;ve accumulated over the years. Experiences that could help someone else. Ideas for products, services or a business you could see yourself running for years to come.</p>
+<p class="body">You&rsquo;ve thought about what your website could look like. The women you could help. The products you could create. The freedom that having something of your own could eventually give you.</p>
+<p class="big">And you&rsquo;re serious about making it happen.</p>
+<p class="body">But somewhere between deciding to start a blogging business and actually building one, you realized just how many moving pieces there are.</p>
+<div class="pieces" aria-label="The moving pieces">
+<span>Finding the right niche.</span><span>Understanding your audience.</span><span>Creating something worth selling.</span><span>Building a recognizable brand.</span><span>Writing website copy.</span><span>Designing a website.</span><span>Growing an email list.</span><span>Creating content.</span><span>Setting up the technology.</span><span>Figuring out how it all translates into actual revenue.</span>
+</div>
+<p class="big"><em style="color:#A23E66">Every decision seems to create another ten decisions.</em></p>
+<p class="body">And while you&rsquo;re perfectly capable of learning how to do all of it, you have to ask yourself:</p>
+<p class="ask">Is figuring out every single piece of this business really how I want to spend the next year of my life?</p>
+</div>
+</section>
+
+<!-- YET YOU FIND YOURSELF -->
+<section style="background:#F6E1E8">
+<div class="in" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(30px,5vw,64px);align-items:start">
+<div class="stack">
+<h2>You have more important things to do than spend another Saturday afternoon trying to figure out how to edit your website.</h2>
+<p class="body">You&rsquo;re already managing a career, a family, an existing business or a life that requires a considerable amount of your attention.</p>
+<p class="body">Building something of your own was supposed to create more possibilities for your life, not consume every spare moment you have.</p>
+</div>
+<div class="stack">
+<p class="lbl">Yet you find yourself:</p>
+<ul class="tick">
+<li class="rv">Researching different business models without knowing which one makes the most sense for you.</li>
+<li class="rv">Saving ideas for digital products without knowing whether anyone would actually purchase them.</li>
+<li class="rv">Wondering whether your niche is specific enough, profitable enough or even worth pursuing.</li>
+<li class="rv">Looking at beautiful websites and wishing you knew how to create something that looked that professional.</li>
+<li class="rv">Questioning whether your messaging is compelling enough to attract the right people.</li>
+<li class="rv">Learning about email marketing, funnels, SEO and social media without understanding how everything connects.</li>
+<li class="rv">Watching AI transform the online business landscape and wondering whether you&rsquo;re building something that will still be relevant in a few years.</li>
+</ul>
 </div>
 </div>
 </section>
 
-<!-- 3. YOU NEED (tilted sticky cards) -->
-<section style="background:#3A1C2A;padding:110px clamp(16px,4vw,48px) 60px">
-<div style="max-width:900px;margin:0 auto;display:flex;flex-direction:column;gap:20px;align-items:center">
-<h2 style="margin:0;text-align:center;font:400 clamp(42px,5vw,74px)/1.02 var(--font-display);color:#FBF5EE">You don&rsquo;t need another 50 blog posts. You need a way to turn <span class="hl-dark">readers into buyers.</span></h2>
-<p class="rv" style="margin:0 0 40px;max-width:640px;text-align:center;font:400 18px/1.6 var(--font-body);color:#F0DCE3">Let&rsquo;s say you publish an amazing blog post tomorrow. It starts ranking. People find it, read it, and love it. And then what?</p>
-<div data-stack style="display:contents">
-<div style="position:sticky;top:120px;width:min(520px,100%);padding-bottom:70px"><div style="background:#E9B9CA;border-radius:18px;padding:32px;transform:rotate(-3deg);box-shadow:0 18px 40px rgba(0,0,0,0.25)"><p style="margin:0 0 10px;font:700 26px/1 var(--font-script);color:#A23E66">question one</p><p style="margin:0;font:400 32px/1.1 var(--font-display);color:#3A1C2A">Do they know you sell something?</p></div></div>
-<div style="position:sticky;top:150px;width:min(520px,100%);padding-bottom:70px"><div style="background:#F6E1E8;border-radius:18px;padding:32px;transform:rotate(2.5deg);box-shadow:0 18px 40px rgba(0,0,0,0.25)"><p style="margin:0 0 10px;font:700 26px/1 var(--font-script);color:#A23E66">question two</p><p style="margin:0;font:400 32px/1.1 var(--font-display);color:#3A1C2A">Does your website give them a reason to explore your offer?</p></div></div>
-<div style="position:sticky;top:180px;width:min(520px,100%);padding-bottom:90px"><div style="background:#FBF5EE;border-radius:18px;padding:32px;transform:rotate(-1.5deg);box-shadow:0 18px 40px rgba(0,0,0,0.25)"><p style="margin:0 0 10px;font:700 26px/1 var(--font-script);color:#A23E66">question three</p><p style="margin:0;font:400 32px/1.1 var(--font-display);color:#3A1C2A">Can you stay connected if they&rsquo;re not ready to buy?</p></div></div>
-</div>
-<p class="rv" style="margin:0;max-width:640px;text-align:center;font:400 18px/1.6 var(--font-body);color:#F0DCE3">Traffic doesn&rsquo;t automatically create sales. Neither does an email list or a beautiful website. You need something worth buying, a reason people want it, and a clear process connecting your audience to your offer.</p>
+<!-- ADVICE VS BUSINESS -->
+<section style="background:#FBF5EE">
+<div class="nar stack" style="text-align:center;align-items:center">
+<p class="body">Perhaps you&rsquo;ve already invested in courses, templates or business tools.</p>
+<p class="big">You&rsquo;ve learned plenty.</p>
+<p class="body">But there&rsquo;s a difference between having access to business information and having an actual business built around that information.</p>
+<h2 style="font-size:clamp(34px,4.4vw,56px)">You don&rsquo;t need another collection of advice.</h2>
+<p class="body" style="font-size:20px">You need someone who can look at your specific vision, make sense of all the moving pieces and help you bring them together.</p>
 </div>
 </section>
 
-<!-- 4. INTRODUCE THE OFFER (laptop + floating tags) -->
-<section style="padding:110px clamp(16px,4vw,48px) 0;background:linear-gradient(#FBF5EE 0%,#FBF5EE 62%,#F6E1E8 62%)">
-<div style="max-width:1000px;margin:0 auto;display:flex;flex-direction:column;gap:22px;align-items:center;text-align:center">
-<p class="rv" style="margin:0;font:700 34px/1 var(--font-script);color:#A23E66">introducing</p>
-<h2 style="margin:0;font:400 clamp(52px,6.4vw,96px)/0.96 var(--font-display);color:#3A1C2A">The Blog Profit Intensive</h2>
-<p class="rv" style="margin:0;max-width:680px;font:400 19px/1.6 var(--font-body)">12 weeks of private blog coaching to turn your blog into a business that <span class="hl">knows how to sell.</span> Someone who looks at your actual blog, helps determine what you should sell, and guides you in building a strategy.</p>
-<div style="position:relative;width:min(760px,100%);margin-top:36px;padding-bottom:80px">
-<div style="background:#FFFFFF;border-radius:22px 22px 0 0;padding:18px 18px 0;box-shadow:0 30px 60px rgba(58,28,42,0.18)"><div style="position:relative;overflow:hidden;aspect-ratio:16/10;border-radius:12px 12px 0 0;background:#FBF5EE"><img src="/images/mockups/blog-profit-diagnostic.jpg" alt="The Blog Profit Diagnostic showing what to fix first" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></div></div>
-<div style="height:22px;margin:0 max(-40px,-4vw);border-radius:0 0 24px 24px;background:#E8D9DF"></div>
-<span class="bl-float" style="position:absolute;left:max(-30px,-4vw);top:50px;background:#E9B9CA;border-radius:999px;padding:12px 18px;font:600 14px/1 var(--font-body);color:#3A1C2A">12 private calls</span>
-<span class="bl-float" style="position:absolute;right:max(-30px,-4vw);top:140px;background:#3A1C2A;border-radius:999px;padding:12px 18px;font:600 14px/1 var(--font-body);color:#FBF5EE;animation-delay:1s">Weekly action plans</span>
-<span class="bl-float" style="position:absolute;left:10%;bottom:120px;background:#FFFFFF;border-radius:999px;padding:12px 18px;font:600 14px/1 var(--font-body);color:#A23E66;box-shadow:0 10px 24px rgba(58,28,42,0.12);animation-delay:2s">Your 90 day roadmap</span>
+<!-- IMAGINE -->
+<section class="imagine dk">
+<div class="in" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(30px,5vw,64px);align-items:start">
+<div class="stack" style="position:sticky;top:110px">
+<p class="lbl lt">Imagine</p>
+<h2>Imagine having an actual business to show for all those ideas you&rsquo;ve been carrying around.</h2>
 </div>
-<a href="#apply" class="pill" style="background:#A23E66;color:#FFFFFF;margin-bottom:90px">Apply for 12 weeks of private blog coaching <span aria-hidden="true" style="width:34px;height:34px;border-radius:999px;background:#FFFFFF;display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#A23E66" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></span></a>
+<div>
+<ul class="lines">
+<li>A business that feels unmistakably like you.</li>
+<li>A professionally designed website you&rsquo;re genuinely proud to send people to.</li>
+<li>An offer you can confidently talk about because you understand exactly who it&rsquo;s for, what it helps them accomplish and why they would choose to invest in it.</li>
+<li>A brand that communicates your value before someone ever gets on a call with you.</li>
+<li>A content strategy that connects directly to what you sell instead of publishing for the sake of publishing.</li>
+<li>An email marketing strategy that gives your readers a reason to become customers.</li>
+<li>And a clear understanding of what needs to happen next, without spending hours every week trying to figure it out.</li>
+</ul>
+<div class="stack" style="margin-top:34px">
+<p class="body">Imagine opening your laptop and working on growing your business instead of constantly trying to get the foundations in place.</p>
+<p class="body">You could spend your time creating, teaching, connecting with your audience and serving your customers.</p>
+<p class="body">Because the business infrastructure supporting you finally makes sense.</p>
+<p class="big" style="color:#F6C9D8;font-style:italic">That&rsquo;s the kind of business I want to help you build.</p>
 </div>
-</section>
-
-<!-- 5. THE BLOG PROFIT METHOD -->
-<section style="background:#F6E1E8;padding:0 0 110px">
-<div class="bl-marquee" style="overflow:hidden;padding:20px 0 50px" aria-hidden="true">
-<div class="bl-track" style="font:400 clamp(64px,8vw,120px)/1 var(--font-display);color:#3A1C2A;white-space:nowrap">
-<span>/ THE BLOG PROFIT METHOD / THE BLOG PROFIT METHOD&#160;</span><span aria-hidden="true">/ THE BLOG PROFIT METHOD / THE BLOG PROFIT METHOD&#160;</span>
 </div>
-</div>
-<div style="max-width:1100px;margin:0 auto;padding:0 clamp(16px,4vw,48px);display:flex;flex-direction:column;gap:24px">
-<p class="rv" style="margin:0 0 16px;text-align:center;font:500 13px/1 var(--font-label);letter-spacing:0.2em;text-transform:uppercase;color:#A23E66">My six part process for turning a blog into a business that sells</p>
-<article class="rv" style="background:#FFFFFF;border-radius:26px;padding:clamp(24px,3.4vw,44px);display:flex;flex-wrap:wrap;gap:28px;align-items:flex-start">
-<span style="flex:0 0 auto;font:400 88px/0.85 var(--font-display);color:#A23E66">01</span>
-<div style="flex:1 1 420px;min-width:0;display:flex;flex-direction:column;gap:12px">
-<h3 style="margin:0;font:400 clamp(30px,3vw,42px)/1.05 var(--font-display);color:#3A1C2A">Find your money opportunity</h3>
-<p style="margin:0;font:400 16px/1.65 var(--font-body)">First, we figure out what people should pay you for. If you don&rsquo;t have an offer, we&rsquo;ll explore your audience&rsquo;s problems, expertise, and opportunities. If you already have something to sell, we&rsquo;ll examine why it may not be producing the results you want.</p>
-<p style="margin:6px 0 0;align-self:flex-start;background:#F6E1E8;border-radius:999px;padding:10px 16px;font:600 14px/1.4 var(--font-body);color:#3A1C2A">Your outcome: A clear offer strategy and evidence to test.</p>
-</div>
-</article>
-<article class="rv" style="background:#FFFFFF;border-radius:26px;padding:clamp(24px,3.4vw,44px);display:flex;flex-wrap:wrap;gap:28px;align-items:flex-start">
-<span style="flex:0 0 auto;font:400 88px/0.85 var(--font-display);color:#A23E66">02</span>
-<div style="flex:1 1 420px;min-width:0;display:flex;flex-direction:column;gap:12px">
-<h3 style="margin:0;font:400 clamp(30px,3vw,42px)/1.05 var(--font-display);color:#3A1C2A">Build your front end sales process</h3>
-<p style="margin:0;font:400 16px/1.65 var(--font-body)">Now we make sure people who discover your blog can discover what you sell. How visitors find you, how content connects to offers, where calls to action belong, and what your sales page needs to communicate.</p>
-<p style="margin:6px 0 0;align-self:flex-start;background:#F6E1E8;border-radius:999px;padding:10px 16px;font:600 14px/1.4 var(--font-body);color:#3A1C2A">Your outcome: A defined path connecting content, website, and paid offers.</p>
-</div>
-</article>
-<article class="rv" style="background:#FFFFFF;border-radius:26px;padding:clamp(24px,3.4vw,44px);display:flex;flex-wrap:wrap;gap:28px;align-items:flex-start">
-<span style="flex:0 0 auto;font:400 88px/0.85 var(--font-display);color:#A23E66">03</span>
-<div style="flex:1 1 420px;min-width:0;display:flex;flex-direction:column;gap:12px">
-<h3 style="margin:0;font:400 clamp(30px,3vw,42px)/1.05 var(--font-display);color:#3A1C2A">Build your back end sales process</h3>
-<p style="margin:0;font:400 16px/1.65 var(--font-body)">Not everyone buys the first time they visit. We&rsquo;ll map how your free resources, email list, welcome messages, relevant offers, and follow ups continue the conversation.</p>
-<p style="margin:6px 0 0;align-self:flex-start;background:#F6E1E8;border-radius:999px;padding:10px 16px;font:600 14px/1.4 var(--font-body);color:#3A1C2A">Your outcome: An email sales strategy for nurturing interested people and making relevant offers.</p>
-</div>
-</article>
-<article class="rv" style="background:#FFFFFF;border-radius:26px;padding:clamp(24px,3.4vw,44px);display:flex;flex-wrap:wrap;gap:28px;align-items:flex-start">
-<span style="flex:0 0 auto;font:400 88px/0.85 var(--font-display);color:#A23E66">04</span>
-<div style="flex:1 1 420px;min-width:0;display:flex;flex-direction:column;gap:12px">
-<h3 style="margin:0;font:400 clamp(30px,3vw,42px)/1.05 var(--font-display);color:#3A1C2A">Prelaunch your offer</h3>
-<p style="margin:0;font:400 16px/1.65 var(--font-body)">Stop creating products in secret and hoping people buy when you finally announce them. We&rsquo;ll research the market, test interest, plan prelaunch content and emails, and prepare the buying experience.</p>
-<p style="margin:6px 0 0;align-self:flex-start;background:#F6E1E8;border-radius:999px;padding:10px 16px;font:600 14px/1.4 var(--font-body);color:#3A1C2A">Your outcome: A tailored prelaunch campaign plan.</p>
-</div>
-</article>
-<article class="rv" style="background:#FFFFFF;border-radius:26px;padding:clamp(24px,3.4vw,44px);display:flex;flex-wrap:wrap;gap:28px;align-items:flex-start">
-<span style="flex:0 0 auto;font:400 88px/0.85 var(--font-display);color:#A23E66">05</span>
-<div style="flex:1 1 420px;min-width:0;display:flex;flex-direction:column;gap:12px">
-<h3 style="margin:0;font:400 clamp(30px,3vw,42px)/1.05 var(--font-display);color:#3A1C2A">Launch and sell</h3>
-<p style="margin:0;font:400 16px/1.65 var(--font-body)">We&rsquo;ll plan the announcement, launch emails, relevant social content, objection handling, and follow ups. When ready, you&rsquo;ll put the campaign into action and collect real customer feedback.</p>
-<p style="margin:6px 0 0;align-self:flex-start;background:#F6E1E8;border-radius:999px;padding:10px 16px;font:600 14px/1.4 var(--font-body);color:#3A1C2A">Your outcome: A focused campaign or offer test and initial evidence about buyer response.</p>
-</div>
-</article>
-<article class="rv" style="background:#FFFFFF;border-radius:26px;padding:clamp(24px,3.4vw,44px);display:flex;flex-wrap:wrap;gap:28px;align-items:flex-start">
-<span style="flex:0 0 auto;font:400 88px/0.85 var(--font-display);color:#A23E66">06</span>
-<div style="flex:1 1 420px;min-width:0;display:flex;flex-direction:column;gap:12px">
-<h3 style="margin:0;font:400 clamp(30px,3vw,42px)/1.05 var(--font-display);color:#3A1C2A">Improve and repeat</h3>
-<p style="margin:0;font:400 16px/1.65 var(--font-body)">We&rsquo;ll review what happened. What created interest? Where did prospects stop? What sold? What should you adjust?</p>
-<p style="margin:6px 0 0;align-self:flex-start;background:#F6E1E8;border-radius:999px;padding:10px 16px;font:600 14px/1.4 var(--font-body);color:#3A1C2A">Your outcome: A clearer process and a prioritized next 90 day plan.</p>
-</div>
-</article>
 </div>
 </section>
 
-<!-- 6. 12 WEEKS (how it works) -->
-<section style="display:flex;flex-wrap:wrap;background:#A23E66">
-<div style="position:relative;overflow:hidden;flex:1 1 420px;min-width:0;min-height:520px;background:#E9B9CA;display:flex;align-items:flex-end;padding:28px"><img src="/images/photos/sitting-glass.jpg" alt="Genasys seated with a celebratory glass" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 25%"></div>
-<div style="flex:1 1 560px;min-width:0;padding:clamp(40px,5vw,80px);display:flex;flex-direction:column;gap:24px">
-<h2 style="margin:0;font:400 clamp(42px,4.6vw,66px)/1 var(--font-display);color:#FBF5EE">Here&rsquo;s what our 12 weeks <em>together</em> look like</h2>
-<ol class="ev3b" style="margin:0;padding:0;list-style:none;gap:10px 28px">
-<li style="display:flex;gap:14px;align-items:baseline;padding:12px 0;border-bottom:1px solid rgba(251,245,238,0.3)"><span style="font:500 12px/1 var(--font-label);color:#F6E1E8">WK 01</span><span style="font:500 15px/1.4 var(--font-body);color:#FFFFFF">Diagnose why your blog isn&rsquo;t making money</span></li>
-<li style="display:flex;gap:14px;align-items:baseline;padding:12px 0;border-bottom:1px solid rgba(251,245,238,0.3)"><span style="font:500 12px/1 var(--font-label);color:#F6E1E8">WK 02</span><span style="font:500 15px/1.4 var(--font-body);color:#FFFFFF">Find or improve your money making offer</span></li>
-<li style="display:flex;gap:14px;align-items:baseline;padding:12px 0;border-bottom:1px solid rgba(251,245,238,0.3)"><span style="font:500 12px/1 var(--font-label);color:#F6E1E8">WK 03</span><span style="font:500 15px/1.4 var(--font-body);color:#FFFFFF">Create your offer positioning and sales message</span></li>
-<li style="display:flex;gap:14px;align-items:baseline;padding:12px 0;border-bottom:1px solid rgba(251,245,238,0.3)"><span style="font:500 12px/1 var(--font-label);color:#F6E1E8">WK 04</span><span style="font:500 15px/1.4 var(--font-body);color:#FFFFFF">Map your front end sales process</span></li>
-<li style="display:flex;gap:14px;align-items:baseline;padding:12px 0;border-bottom:1px solid rgba(251,245,238,0.3)"><span style="font:500 12px/1 var(--font-label);color:#F6E1E8">WK 05</span><span style="font:500 15px/1.4 var(--font-body);color:#FFFFFF">Improve your website&rsquo;s path to purchase</span></li>
-<li style="display:flex;gap:14px;align-items:baseline;padding:12px 0;border-bottom:1px solid rgba(251,245,238,0.3)"><span style="font:500 12px/1 var(--font-label);color:#F6E1E8">WK 06</span><span style="font:500 15px/1.4 var(--font-body);color:#FFFFFF">Plan content that attracts potential buyers</span></li>
-<li style="display:flex;gap:14px;align-items:baseline;padding:12px 0;border-bottom:1px solid rgba(251,245,238,0.3)"><span style="font:500 12px/1 var(--font-label);color:#F6E1E8">WK 07</span><span style="font:500 15px/1.4 var(--font-body);color:#FFFFFF">Map your back end sales process</span></li>
-<li style="display:flex;gap:14px;align-items:baseline;padding:12px 0;border-bottom:1px solid rgba(251,245,238,0.3)"><span style="font:500 12px/1 var(--font-label);color:#F6E1E8">WK 08</span><span style="font:500 15px/1.4 var(--font-body);color:#FFFFFF">Create your email sales strategy</span></li>
-<li style="display:flex;gap:14px;align-items:baseline;padding:12px 0;border-bottom:1px solid rgba(251,245,238,0.3)"><span style="font:500 12px/1 var(--font-label);color:#F6E1E8">WK 09</span><span style="font:500 15px/1.4 var(--font-body);color:#FFFFFF">Build your prelaunch campaign</span></li>
-<li style="display:flex;gap:14px;align-items:baseline;padding:12px 0;border-bottom:1px solid rgba(251,245,238,0.3)"><span style="font:500 12px/1 var(--font-label);color:#F6E1E8">WK 10</span><span style="font:500 15px/1.4 var(--font-body);color:#FFFFFF">Begin prelaunch and gather feedback</span></li>
-<li style="display:flex;gap:14px;align-items:baseline;padding:12px 0;border-bottom:1px solid rgba(251,245,238,0.3)"><span style="font:500 12px/1 var(--font-label);color:#F6E1E8">WK 11</span><span style="font:500 15px/1.4 var(--font-body);color:#FFFFFF">Launch your offer or run a sales test</span></li>
-<li style="display:flex;gap:14px;align-items:baseline;padding:12px 0;border-bottom:1px solid rgba(251,245,238,0.3)"><span style="font:500 12px/1 var(--font-label);color:#F6E1E8">WK 12</span><span style="font:500 15px/1.4 var(--font-body);color:#FFFFFF">Review results and plan the next 90 days</span></li>
+<!-- THE OPPOSITE -->
+<section style="background:#FBF5EE">
+<div class="in stack" style="gap:34px">
+<div class="nar stack" style="text-align:center">
+<h2>Most bloggers build their websites before they build their businesses. <em>We&rsquo;re going to do the opposite.</em></h2>
+</div>
+<div class="cant nar">
+<p class="rv">A beautiful website cannot compensate for an offer nobody wants.</p>
+<p class="rv">Thousands of monthly readers cannot compensate for messaging that fails to connect with potential buyers.</p>
+<p class="rv">An impressive email list cannot compensate for a business that has no clear sales strategy.</p>
+<p class="rv">And AI cannot compensate for building the wrong thing.</p>
+</div>
+<div class="nar stack">
+<p class="body">This is why so many women spend months, sometimes years, growing a blog without generating meaningful revenue.</p>
+<p class="body">They&rsquo;ve built the marketing platform before establishing what the marketing is supposed to sell.</p>
+</div>
+<div class="order">
+<div class="ocard most"><p class="lbl" style="color:#6E4B5B">The usual way</p><h3>The marketing platform first.</h3><ol class="steps"><li>Website</li><li>Content</li><li>Email list</li><li>Figure out what to sell</li></ol></div>
+<div class="ocard ours"><p class="lbl" style="color:#F6E1E8">Inside my private client experience</p><h3>We establish the business first.</h3><ol class="steps"><li>The business</li><li>The brand</li><li>The website</li><li>The content</li><li>The sales infrastructure</li></ol></div>
+</div>
+<div class="nar stack">
+<p class="body">Inside my private client experience, we approach blogging differently.</p>
+<p class="big">We establish the business first.</p>
+</div>
+<ol class="qs">
+<li>Who are we serving?</li>
+<li>What problem are we solving?</li>
+<li>What are we selling?</li>
+<li>Why would someone choose you?</li>
+<li>How will we reach those people?</li>
+<li>What needs to happen for a reader to become a paying customer?</li>
 </ol>
-<p class="rv" style="margin:0;font:400 15px/1.6 var(--font-body);color:#F6E1E8">The exact pace will depend on your starting point. We won&rsquo;t rush a public launch if the offer, audience, or buying process isn&rsquo;t ready.</p>
-</div>
-</section>
-
-<!-- 7. IMPLEMENTATION LIBRARY + BONUS -->
-<section style="padding:110px clamp(16px,4vw,48px)">
-<div style="max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:56px">
-<div style="text-align:center;display:flex;flex-direction:column;gap:14px;align-items:center">
-<p class="rv" style="margin:0;font:500 13px/1 var(--font-label);letter-spacing:0.2em;text-transform:uppercase;color:#A23E66">Your Blog Profit Implementation Library</p>
-<h2 style="margin:0;font:400 clamp(40px,4.6vw,64px)/1.02 var(--font-display);color:#3A1C2A">Every week you&rsquo;ll have practical resources to support action</h2>
-</div>
-<div class="ev4" style="gap:16px">
-<div class="rv" style="background:#FFFFFF;border:1px solid #F0DCE3;border-radius:20px;padding:24px;display:flex;flex-direction:column;gap:12px"><span aria-hidden="true" style="width:34px;height:34px;border-radius:999px;background:#F6E1E8;display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#A23E66" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7.5l3 3 6-7"></path></svg></span><span style="font:400 24px/1.1 var(--font-display);color:#3A1C2A">The Blog Profit Diagnostic</span></div>
-<div class="rv" style="background:#FFFFFF;border:1px solid #F0DCE3;border-radius:20px;padding:24px;display:flex;flex-direction:column;gap:12px"><span aria-hidden="true" style="width:34px;height:34px;border-radius:999px;background:#F6E1E8;display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#A23E66" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7.5l3 3 6-7"></path></svg></span><span style="font:400 24px/1.1 var(--font-display);color:#3A1C2A">The Money Opportunity Finder</span></div>
-<div class="rv" style="background:#FFFFFF;border:1px solid #F0DCE3;border-radius:20px;padding:24px;display:flex;flex-direction:column;gap:12px"><span aria-hidden="true" style="width:34px;height:34px;border-radius:999px;background:#F6E1E8;display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#A23E66" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7.5l3 3 6-7"></path></svg></span><span style="font:400 24px/1.1 var(--font-display);color:#3A1C2A">The Offer Builder</span></div>
-<div class="rv" style="background:#FFFFFF;border:1px solid #F0DCE3;border-radius:20px;padding:24px;display:flex;flex-direction:column;gap:12px"><span aria-hidden="true" style="width:34px;height:34px;border-radius:999px;background:#F6E1E8;display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#A23E66" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7.5l3 3 6-7"></path></svg></span><span style="font:400 24px/1.1 var(--font-display);color:#3A1C2A">The Front End Sales Kit</span></div>
-<div class="rv" style="background:#FFFFFF;border:1px solid #F0DCE3;border-radius:20px;padding:24px;display:flex;flex-direction:column;gap:12px"><span aria-hidden="true" style="width:34px;height:34px;border-radius:999px;background:#F6E1E8;display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#A23E66" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7.5l3 3 6-7"></path></svg></span><span style="font:400 24px/1.1 var(--font-display);color:#3A1C2A">The Back End Sales Kit</span></div>
-<div class="rv" style="background:#FFFFFF;border:1px solid #F0DCE3;border-radius:20px;padding:24px;display:flex;flex-direction:column;gap:12px"><span aria-hidden="true" style="width:34px;height:34px;border-radius:999px;background:#F6E1E8;display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#A23E66" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7.5l3 3 6-7"></path></svg></span><span style="font:400 24px/1.1 var(--font-display);color:#3A1C2A">The Prelaunch Campaign Planner</span></div>
-<div class="rv" style="background:#FFFFFF;border:1px solid #F0DCE3;border-radius:20px;padding:24px;display:flex;flex-direction:column;gap:12px"><span aria-hidden="true" style="width:34px;height:34px;border-radius:999px;background:#F6E1E8;display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#A23E66" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7.5l3 3 6-7"></path></svg></span><span style="font:400 24px/1.1 var(--font-display);color:#3A1C2A">The Launch Campaign Planner</span></div>
-<div class="rv" style="background:#FFFFFF;border:1px solid #F0DCE3;border-radius:20px;padding:24px;display:flex;flex-direction:column;gap:12px"><span aria-hidden="true" style="width:34px;height:34px;border-radius:999px;background:#F6E1E8;display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#A23E66" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7.5l3 3 6-7"></path></svg></span><span style="font:400 24px/1.1 var(--font-display);color:#3A1C2A">The Blog Sales Scorecard</span></div>
-</div>
-<div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:center">
-<div class="rv" style="flex:1 1 440px;max-width:520px;background:#A23E66;border-radius:28px;padding:clamp(28px,4vw,48px);display:flex;flex-direction:column;gap:16px">
-<p style="margin:0;font:400 clamp(44px,4.6vw,64px)/0.95 var(--font-display);color:#FBF5EE">BONUS ALERT!</p>
-<p style="margin:0;font:600 19px/1.4 var(--font-body);color:#FFFFFF">Your Personalized 90 Day Blog Profit Roadmap</p>
-<p style="margin:0;font:400 16px/1.6 var(--font-body);color:#F6E1E8">Not a giant list of everything you could do. A clear sequence of projects based on your business, audience, and available time.</p>
-<div><a href="#apply" class="pill pill-plain" style="background:#FBF5EE;color:#3A1C2A">Let&rsquo;s do this</a></div>
-</div>
-<div class="rv" style="flex:0 1 260px;height:320px;margin-left:-30px;border-radius:18px;background:#3A1C2A;box-shadow:0 24px 50px rgba(58,28,42,0.3);transform:rotate(4deg);overflow:hidden;display:flex;flex-direction:column">
-<img src="/images/mockups/roadmap-mini.jpg" alt="The 90 day roadmap phases" loading="lazy" style="width:100%;height:150px;object-fit:cover;object-position:left top">
-<div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;padding:22px 26px 26px;gap:6px">
-<span style="font:700 24px/1 var(--font-script);color:#E9B9CA">just for you</span>
-<span style="font:400 30px/1.02 var(--font-display);color:#FBF5EE">90 Day Blog Profit Roadmap</span>
-</div>
-</div>
+<div class="nar stack">
+<p class="body">Then we build the brand, website, content and sales infrastructure around those answers.</p>
+<p class="big">Every piece has a purpose.</p>
+<p class="body">Every major decision connects back to your business strategy.</p>
+<p class="body">And instead of hoping your blog eventually becomes profitable, we&rsquo;re building it with monetization in mind from the beginning.</p>
 </div>
 </div>
 </section>
 
-<!-- 8. OBJECTION -->
-<section class="bl-grad" style="padding:110px clamp(16px,4vw,48px);text-align:center">
-<div style="max-width:900px;margin:0 auto;display:flex;flex-direction:column;gap:22px;align-items:center">
-<p class="rv" style="margin:0;font:700 34px/1 var(--font-script);color:#A23E66">but what if&#8230;</p>
-<h2 style="margin:0;font:400 clamp(44px,5vw,76px)/1.02 var(--font-display);color:#3A1C2A">What if you&rsquo;re not good at <span class="hl">selling?</span></h2>
-<p class="rv" style="margin:0;max-width:680px;font:400 18px/1.65 var(--font-body)">Maybe you love creating content and helping people, but asking someone to buy feels uncomfortable. You don&rsquo;t want to pressure people or turn every post into an advertisement.</p>
-<p class="rv" style="margin:0;max-width:680px;font:600 19px/1.6 var(--font-body);color:#3A1C2A">Selling can mean understanding a problem, explaining how you can help, and giving the right person a clear opportunity to purchase. That&rsquo;s a skill we&rsquo;ll practice.</p>
+<!-- INTRODUCING -->
+<section class="intro">
+<div class="in">
+<div class="intro-card dk">
+<p class="lbl lt">Introducing the signature private client experience</p>
+<h2>The BOSS Business <em>Experience</em></h2>
+<p class="tag">Your private business mentor, strategic partner and custom website designer. All in one experience.</p>
+<div class="stack nar" style="margin-top:30px;text-align:left">
+<p class="body">The BOSS Business Experience combines personalized 1:1 blog business coaching, custom website design and done for you business development to help you build a cohesive online business without having to navigate every decision, technical hurdle and strategic challenge alone.</p>
+<p class="body">Together, we&rsquo;ll develop the strategy behind your business, create a brand that communicates your value, build your professional blogging website and establish the marketing and sales foundations that support your revenue goals.</p>
+</div>
+<div class="nots">
+<p>This isn&rsquo;t a group coaching program.</p>
+<p>This isn&rsquo;t a website template with a few tutorials.</p>
+<p>And this certainly isn&rsquo;t another online course you&rsquo;re expected to work through independently.</p>
+</div>
+<p class="big" style="max-width:720px;margin:0 auto 30px">This is a private, collaborative experience centered entirely around your business.</p>
+<a class="apply cr" href="https://calendly.com/bossladybloggers/15min" data-apply>Apply for the BOSS Business Experience <i aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></i></a>
+</div>
 </div>
 </section>
 
-<!-- 9. REAL RESULTS (sticky headline, cards scroll over) -->
-<section style="position:relative;padding:80px clamp(16px,4vw,48px) 120px">
-<div style="position:sticky;top:90px;text-align:center;padding:60px 0;z-index:0">
-<h2 style="margin:0;font:400 clamp(56px,7.6vw,120px)/1 var(--font-display);color:#3A1C2A">Real bloggers. <em style="color:#A23E66">Real results.</em></h2>
+<!-- WHY ALL THREE -->
+<section style="background:#FBF5EE">
+<div class="in stack" style="gap:30px">
+<div class="nar" style="text-align:center"><h2>Why hire a business coach, website designer and marketing strategist separately <em>when your business needs all three to work together?</em></h2></div>
+<div class="three">
+<div><p class="lbl">A traditional blog coach</p><p>A traditional blog coach might teach you how to create an offer, develop a strategy and market your business.</p><p class="but">But you&rsquo;re often responsible for implementing everything yourself.</p></div>
+<div><p class="lbl">A traditional website designer</p><p>A traditional website designer might create a stunning website.</p><p class="but">But you&rsquo;re often expected to arrive with your business strategy, brand messaging, offers and copy already established.</p></div>
+<div><p class="lbl">A course</p><p>And a course might teach you how to do everything.</p><p class="but">But you&rsquo;re still the person responsible for figuring out how it applies to your particular business.</p></div>
 </div>
-<div style="position:relative;z-index:1;max-width:1000px;margin:0 auto;display:flex;flex-direction:column;gap:80px">
-<div style="align-self:flex-start;width:min(380px,100%);background:#F6E1E8;border-radius:20px;padding:28px;transform:rotate(-3deg);box-shadow:0 18px 40px rgba(58,28,42,0.14)"><p style="margin:0 0 12px;font:500 12px/1 var(--font-label);letter-spacing:0.14em;color:#A23E66">&#9733;&#9733;&#9733;&#9733;&#9733;</p><p style="margin:0 0 14px;font:400 26px/1.15 var(--font-display);color:#3A1C2A">&ldquo;I showed everything to my husband and he was just as impressed as I was. I truly cannot believe all of the value you have packed in here!&rdquo;</p><p style="margin:0;font:600 14px/1 var(--font-body)">Brittany, BOSS client</p></div>
-<div style="align-self:flex-end;width:min(380px,100%);background:#3A1C2A;border-radius:20px;padding:28px;transform:rotate(3deg);box-shadow:0 18px 40px rgba(58,28,42,0.2)"><p style="margin:0 0 12px;font:500 12px/1 var(--font-label);letter-spacing:0.14em;color:#E9B9CA">&#9733;&#9733;&#9733;&#9733;&#9733;</p><p style="margin:0 0 14px;font:400 26px/1.15 var(--font-display);color:#FBF5EE">&ldquo;I decided to hire Gen because she was relatable, genuine, very intentional about the work she does and can do. I really feel like she was saying what most other bloggers do not say and thus she was more transparent.&rdquo;</p><p style="margin:0;font:600 14px/1 var(--font-body);color:#F6E1E8">Ashleigh, BOSS client</p></div>
-<div style="align-self:center;width:min(380px,100%);background:#E9B9CA;border-radius:20px;padding:28px;transform:rotate(-1.5deg);box-shadow:0 18px 40px rgba(58,28,42,0.14)"><p style="margin:0 0 12px;font:500 12px/1 var(--font-label);letter-spacing:0.14em;color:#3A1C2A">&#9733;&#9733;&#9733;&#9733;&#9733;</p><p style="margin:0 0 14px;font:400 26px/1.15 var(--font-display);color:#3A1C2A">&ldquo;Was very open about what she can provide and said she would go slow with me because I&rsquo;m not good with the computer.&rdquo;</p><p style="margin:0;font:600 14px/1 var(--font-body);color:#3A1C2A">Angie, BOSS client</p></div>
+<p class="big" style="text-align:center">The BOSS Business Experience brings these pieces together.</p>
+<div class="nar stack" style="text-align:center">
+<p class="body">Because your business strategy should influence your website.<br>Your website should support your offers.<br>Your offers should influence your messaging.<br>Your messaging should shape your marketing.<br>And your marketing should support your sales.</p>
 </div>
-</section>
-
-<!-- 10. HI I'M GENASYS -->
-<section style="display:flex;flex-wrap:wrap;background:#EBDDF2">
-<div style="flex:1 1 520px;min-width:0;padding:clamp(40px,6vw,96px);display:flex;flex-direction:column;gap:20px;justify-content:center">
-<p class="rv" style="margin:0;font:700 32px/1 var(--font-script);color:#A23E66">I&rsquo;ve been there</p>
-<h2 style="margin:0;font:400 clamp(48px,5.4vw,80px)/0.98 var(--font-display);color:#3A1C2A">Hi, I&rsquo;m Genasys!</h2>
-<p class="rv" style="margin:0;font:600 19px/1.5 var(--font-body);color:#3A1C2A">I built a money making business from my aunt&rsquo;s basement while raising my son as a single mom.</p>
-<p class="rv" style="margin:0;font:400 17px/1.65 var(--font-body)">I believe your blog should help you sell something valuable, rather than depend entirely on traffic and display ads. My coaching combines offer development, website messaging, content strategy, and buyer psychology.</p>
-<p class="rv" style="margin:0;font:400 17px/1.65 var(--font-body)">Inside The Blog Profit Intensive, you&rsquo;ll get personal help applying these pieces to your own business.</p>
+<div class="chain" aria-hidden="true"><span>Strategy</span><i>&rarr;</i><span>Website</span><i>&rarr;</i><span>Offers</span><i>&rarr;</i><span>Messaging</span><i>&rarr;</i><span>Marketing</span><i>&rarr;</i><span>Sales</span></div>
+<div class="nar stack" style="text-align:center">
+<p class="body">These aren&rsquo;t separate projects that happen to belong to the same business.</p>
+<p class="big">They&rsquo;re interconnected pieces of one system.</p>
+<p class="body">When we work together, we&rsquo;re not building them in isolation. We&rsquo;re creating a business where everything works toward the same objective.</p>
 </div>
-<div style="flex:1 1 420px;min-width:0;min-height:560px;position:relative;background:#E9B9CA;display:flex;align-items:flex-end;justify-content:center;overflow:hidden">
-<img src="/images/photos/champagne-stand.jpg" alt="Genasys standing with a glass of champagne" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%">
-<span style="position:absolute;right:24px;top:24px;background:#FFFFFF;border-radius:999px;padding:10px 16px;font:600 13px/1 var(--font-body);color:#3A1C2A">@blogcoach_gen</span>
 </div>
 </section>
 
-<!-- 11. FOR YOU IF -->
-<section style="padding:110px clamp(16px,4vw,48px)">
-<div style="max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;gap:56px;align-items:center">
-<div class="rv" style="position:relative;overflow:hidden;flex:1 1 340px;min-width:0;height:440px;border-radius:28px;background:#3A1C2A"><img src="/images/photos/flatlay-notebook.jpg" alt="Notebook, pen and a Boss mug on a desk" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></div>
-<div style="flex:1 1 520px;min-width:0;display:flex;flex-direction:column;gap:18px">
-<h2 style="margin:0;font:400 clamp(40px,4.4vw,60px)/1.02 var(--font-display);color:#3A1C2A">This is for you if</h2>
-<ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:12px">
-<li class="rv" style="display:flex;gap:14px;align-items:flex-start;font:400 17px/1.5 var(--font-body)"><span aria-hidden="true" style="flex:0 0 26px;height:26px;border-radius:999px;background:#A23E66;display:flex;align-items:center;justify-content:center;margin-top:1px"><svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7.5l3 3 6-7"></path></svg></span>You&rsquo;ve been blogging but aren&rsquo;t making the money you expected.</li>
-<li class="rv" style="display:flex;gap:14px;align-items:flex-start;font:400 17px/1.5 var(--font-body)"><span aria-hidden="true" style="flex:0 0 26px;height:26px;border-radius:999px;background:#A23E66;display:flex;align-items:center;justify-content:center;margin-top:1px"><svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7.5l3 3 6-7"></path></svg></span>You have traffic but few sales.</li>
-<li class="rv" style="display:flex;gap:14px;align-items:flex-start;font:400 17px/1.5 var(--font-body)"><span aria-hidden="true" style="flex:0 0 26px;height:26px;border-radius:999px;background:#A23E66;display:flex;align-items:center;justify-content:center;margin-top:1px"><svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7.5l3 3 6-7"></path></svg></span>Your email list isn&rsquo;t helping generate purchases.</li>
-<li class="rv" style="display:flex;gap:14px;align-items:flex-start;font:400 17px/1.5 var(--font-body)"><span aria-hidden="true" style="flex:0 0 26px;height:26px;border-radius:999px;background:#A23E66;display:flex;align-items:center;justify-content:center;margin-top:1px"><svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7.5l3 3 6-7"></path></svg></span>You want to sell an offer or improve an existing one.</li>
-<li class="rv" style="display:flex;gap:14px;align-items:flex-start;font:400 17px/1.5 var(--font-body)"><span aria-hidden="true" style="flex:0 0 26px;height:26px;border-radius:999px;background:#A23E66;display:flex;align-items:center;justify-content:center;margin-top:1px"><svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7.5l3 3 6-7"></path></svg></span>You&rsquo;re tired of guessing what needs fixing.</li>
-<li class="rv" style="display:flex;gap:14px;align-items:flex-start;font:400 17px/1.5 var(--font-body)"><span aria-hidden="true" style="flex:0 0 26px;height:26px;border-radius:999px;background:#A23E66;display:flex;align-items:center;justify-content:center;margin-top:1px"><svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7.5l3 3 6-7"></path></svg></span>You&rsquo;re ready to implement between coaching calls.</li>
+<!-- WHAT WE BUILD -->
+<section style="background:#F6E1E8">
+<div class="in stack" style="gap:34px">
+<div class="nar" style="text-align:center"><p class="lbl">What we&rsquo;ll build</p><h2 style="margin-top:14px">Let&rsquo;s talk about what we&rsquo;ll actually build together.</h2></div>
+<div class="pillars">
+
+<article class="pillar">
+<div><p class="n">01</p><h3>A business strategy that makes commercial sense.</h3>
+<div class="stack" style="gap:14px;margin-top:18px"><p class="body">Before we touch your website, we need to understand what we&rsquo;re building and why someone would pay for it.</p><p class="body">We&rsquo;ll explore your knowledge, experience, interests and strengths alongside the needs, desires and purchasing behavior of the people you want to serve.</p><p class="body">Together, we&rsquo;ll develop a business direction that gives your ideas somewhere profitable to go.</p></div></div>
+<div><div class="lst"><p class="lbl">Our strategic work can include:</p><ul class="dots"><li>Profitable niche selection and refinement.</li><li>Target audience research and buyer psychology.</li><li>Business model development.</li><li>Competitive positioning and differentiation.</li><li>Revenue goals and monetization planning.</li><li>Your personalized business development roadmap.</li></ul></div>
+<p class="body" style="margin-top:18px">You&rsquo;ll understand what your business is, who it&rsquo;s for, how it&rsquo;s intended to make money and what needs to happen to bring it to life.</p>
+<p class="close">No more building around vague ideas and hoping the pieces eventually come together.</p></div>
+</article>
+
+<article class="pillar">
+<div><p class="n">02</p><h3>Offers your audience has a genuine reason to buy.</h3>
+<div class="stack" style="gap:14px;margin-top:18px"><p class="body">You don&rsquo;t need a hundred thousand monthly readers before you can begin developing revenue opportunities.</p><p class="body">You need something valuable to sell and the right people to sell it to.</p><p class="body">We&rsquo;ll identify the problems your audience is actively looking to solve and develop offers around meaningful outcomes.</p><p class="body">Depending on your business model, that could involve digital products, educational programs, services, memberships, coaching or another monetization strategy that makes sense for your audience.</p></div></div>
+<div><div class="lst"><p class="lbl">Together, we&rsquo;ll work through:</p><ul class="dots"><li>Offer discovery and development.</li><li>Demand and validation strategies.</li><li>Product and service positioning.</li><li>Pricing psychology.</li><li>Your offer&rsquo;s promise and unique value.</li><li>The relationship between your free content and paid offers.</li><li>Your broader offer ecosystem.</li></ul></div>
+<p class="close">Rather than creating products simply because other bloggers are selling them, we&rsquo;ll develop offers that make strategic sense for your particular business.</p></div>
+</article>
+
+<article class="pillar">
+<div><p class="n">03</p><h3>Brand messaging that makes people understand why they should choose you.</h3>
+<div class="stack" style="gap:14px;margin-top:18px"><p class="body">Your audience should understand what you do, who you help and why it matters without having to spend twenty minutes exploring your website.</p><p class="body">We&rsquo;ll develop the messaging that communicates the value of your business in a way that feels distinct, compelling and aligned with the people you want to attract.</p></div></div>
+<div><div class="lst"><p class="lbl">We&rsquo;ll work on your:</p><ul class="dots"><li>Brand positioning.</li><li>Core messaging.</li><li>Unique perspective and methodology.</li><li>Brand personality and voice.</li><li>Audience focused value propositions.</li><li>Offer messaging.</li><li>Customer buying motivations.</li></ul></div>
+<p class="body" style="margin-top:18px">Because having something valuable to offer is only half the equation.</p>
+<p class="close">Knowing how to communicate that value is what helps people recognize it.</p></div>
+</article>
+
+<article class="pillar">
+<div><p class="n">04</p><h3>A custom designed blogging website that finally reflects the caliber of your business.</h3>
+<div class="stack" style="gap:14px;margin-top:18px"><p class="body">This is where your vision starts becoming something you can actually see.</p><p class="body">I&rsquo;ll custom design your Showit website around your business strategy, brand direction, offers and audience.</p><p class="body">Not a generic blog template with your logo and brand colors dropped into it.</p><p class="body">A professional online home that reflects the business you&rsquo;re building and gives your visitors clear reasons to stay, explore, subscribe and purchase.</p></div></div>
+<div><div class="lst"><p class="lbl">Your custom website experience can include:</p><ul class="dots"><li>Strategic website planning and sitemap development.</li><li>Custom Showit website design.</li><li>WordPress blog integration.</li><li>Mobile responsive design.</li><li>Strategic navigation and customer pathways.</li><li>Conversion focused page layouts.</li><li>Integration of your offers and email signup opportunities.</li><li>Website launch preparation.</li></ul></div>
+<p class="body" style="margin-top:18px">We&rsquo;ll establish the exact pages, integrations and design deliverables included in your project before we begin.</p>
+<p class="close">The result is a website built to support the business you&rsquo;re creating, not simply showcase your latest blog posts.</p></div>
+</article>
+
+<article class="pillar">
+<div><p class="n">05</p><h3>A marketing strategy that supports your business rather than consuming your life.</h3>
+<div class="stack" style="gap:14px;margin-top:18px"><p class="body">You shouldn&rsquo;t have to publish everywhere, every day, just to feel like you&rsquo;re doing enough.</p><p class="body">We&rsquo;ll determine which marketing channels make sense for your audience, your business model and the time you realistically have available.</p><p class="body">Instead of creating disconnected content, we&rsquo;ll develop a strategy that brings potential customers into your business and gives them relevant next steps.</p></div></div>
+<div><div class="lst"><p class="lbl">Our marketing work can include:</p><ul class="dots"><li>Strategic content pillars.</li><li>Blog content and SEO direction.</li><li>Audience acquisition strategies.</li><li>Lead magnet development.</li><li>Email list growth.</li><li>Content to offer pathways.</li><li>AI assisted content workflows.</li><li>Sustainable marketing priorities.</li></ul></div>
+<p class="close">You&rsquo;ll understand why you&rsquo;re creating each piece of content, who it&rsquo;s intended to attract and how it supports your wider business.</p></div>
+</article>
+
+<article class="pillar">
+<div><p class="n">06</p><h3>A sales system that helps turn your audience into customers.</h3>
+<div class="stack" style="gap:14px;margin-top:18px"><p class="body">Getting people to discover your blog is one thing.</p><p class="body">Helping those people recognize the value of your offers and make a purchasing decision is another.</p><p class="body">We&rsquo;ll work through the sales process behind your business, identifying what your customers need to understand, experience and believe before they&rsquo;re ready to invest.</p></div></div>
+<div><div class="lst"><p class="lbl">Depending on your business, we&rsquo;ll develop strategies for:</p><ul class="dots"><li>Front end and back end sales.</li><li>Email nurturing and sales sequences.</li><li>Offer specific customer journeys.</li><li>Lead generation and conversion.</li><li>Launch and prelaunch planning.</li><li>Sales messaging.</li><li>Strategic upsells and customer retention.</li></ul></div>
+<p class="body" style="margin-top:18px">Your business needs more than content that people enjoy reading.</p>
+<p class="close">It needs a deliberate process for turning the right attention into revenue opportunities.</p></div>
+</article>
+
+<article class="pillar hl dk">
+<div><p class="n">07</p><h3 style="color:#FBF5EE">Private mentorship and hands on implementation throughout the experience.</h3>
+<div class="stack" style="gap:14px;margin-top:18px"><p class="big" style="color:#F6C9D8;font-style:italic">This is the part that changes everything.</p><p class="body">You&rsquo;re not receiving a generic business roadmap and being sent away to figure it out.</p><p class="body">We&rsquo;re working through your business together.</p><p class="body">You&rsquo;ll have personalized coaching, strategic feedback and professional support as we move through the decisions and projects that matter most.</p></div></div>
+<div><div class="lst"><p>When you have questions about your niche, we work through your niche.</p><p>When you&rsquo;re developing an offer, we examine the offer itself.</p><p>When you&rsquo;re unsure about your messaging, we refine it.</p><p>When your website needs to be built, I take care of the design.</p></div>
+<p class="body" style="margin-top:18px">We&rsquo;ll establish which projects I&rsquo;m completing for you, which ones we&rsquo;re working on together and which responsibilities remain yours.</p>
+<p class="close">You get to learn how your business works without being responsible for building every component yourself.</p></div>
+</article>
+
+</div>
+</div>
+</section>
+
+<!-- PORTFOLIO -->
+<section style="background:#FFFFFF">
+<div class="in stack" style="gap:28px">
+<div class="nar" style="text-align:center"><p class="lbl">Portfolio</p><h2 style="margin-top:14px">A look at what&rsquo;s possible when strategy and design come together.</h2></div>
+<div class="folio"><div class="mock">Client website mockup 1</div><div class="mock">Client website mockup 2</div><div class="mock">Client website mockup 3</div></div>
+<div class="slot"><b>To fill in</b>Insert a curated portfolio of previous client websites. Include desktop and mobile mockups of three to five of your strongest Showit website projects.</div>
+<div class="slot"><b>To fill in</b>Insert a genuine client testimonial describing the experience of receiving both coaching and custom website design.</div>
+<p class="big" style="text-align:center">Every business is different. Your website and strategy should reflect that.</p>
+</div>
+</section>
+
+<!-- PHASES -->
+<section style="background:#FBF5EE">
+<div class="in stack" style="gap:30px">
+<div class="nar" style="text-align:center"><p class="lbl">How we&rsquo;ll work together</p><h2 style="margin-top:14px">From the first idea to a business you can confidently put into the world.</h2><p class="body" style="margin-top:16px">Here&rsquo;s how we&rsquo;ll work together.</p></div>
+<div class="phases">
+<div class="phase"><p class="lbl">Phase one</p><h3>Strategize</h3><p>We begin by understanding your vision, your goals, your audience and your business opportunities.</p><p>We&rsquo;ll establish what we&rsquo;re building, what makes your business valuable and how the individual pieces need to work together.</p><p>You&rsquo;ll have a personalized strategic direction before we begin making major decisions about your brand or website.</p></div>
+<div class="phase"><p class="lbl">Phase two</p><h3>Build</h3><p>We bring the strategy to life.</p><p>We develop your offers, refine your messaging, establish your brand direction and create the custom website and agreed business assets that support your business model.</p><p>You&rsquo;ll receive private mentorship throughout the process while I handle the designated design and implementation work.</p></div>
+<div class="phase"><p class="lbl">Phase three</p><h3>Launch &amp; Grow</h3><p>With your business foundations established, we prepare you to introduce your business to the world and begin executing your marketing and sales strategy.</p><p>We&rsquo;ll identify your priorities moving forward, review the systems supporting your business and establish what you need to focus on next.</p></div>
+</div>
+<div class="leave nar stack"><p class="big">You leave with more than a completed website.</p><p class="body">You leave with a business infrastructure, a strategic direction and a clearer understanding of how to move forward.</p></div>
+</div>
+</section>
+
+<!-- DIY -->
+<section style="background:#F6E1E8">
+<div class="in stack" style="gap:30px">
+<div class="nar" style="text-align:center"><h2>Let&rsquo;s consider what building this business independently would actually involve.</h2></div>
+<div class="diy">
+<div class="stack">
+<ul class="hires">
+<li><b>01</b>You could hire a business coach to help you develop your strategy.</li>
+<li><b>02</b>Then hire a website designer to create your online presence.</li>
+<li><b>03</b>Then work with a copywriter to develop your messaging.</li>
+<li><b>04</b>Then invest in specialized courses to understand offers, email marketing, sales and content strategy.</li>
+<li><b>05</b>Then spend your time coordinating those projects and making sure everyone is working toward the same vision.</li>
 </ul>
-<p class="rv" style="margin:8px 0 0;background:#F6E1E8;border-radius:16px;padding:18px 20px;font:500 15px/1.55 var(--font-body);color:#3A1C2A">Heads up: this isn&rsquo;t done for you website design or a guarantee of revenue. This is strategy coaching and guided implementation.</p>
+<p class="body">Or you could learn how to do all of it yourself.</p>
+<p class="body">Neither option is inherently wrong.</p>
+<p class="body">But both require considerable resources, whether that&rsquo;s money, time or your personal attention.</p>
 </div>
-</div>
-</section>
-
-<!-- 12. EVERYTHING INCLUDED + INVESTMENT -->
-<section id="apply" style="position:relative;padding:110px clamp(16px,4vw,48px);background:#E9B9CA">
-<div style="max-width:1000px;margin:0 auto;display:flex;flex-direction:column;gap:32px;align-items:center">
-<p class="rv" style="margin:0;font:500 13px/1 var(--font-label);letter-spacing:0.2em;text-transform:uppercase;color:#3A1C2A">Everything included</p>
-<div style="display:flex;flex-wrap:wrap;width:100%;border-radius:30px;overflow:hidden;box-shadow:0 30px 60px rgba(58,28,42,0.2)">
-<div style="flex:1 1 440px;min-width:0;background:#FFFFFF;padding:clamp(28px,4vw,52px)">
-<h3 style="margin:0 0 20px;font:400 36px/1.05 var(--font-display);color:#3A1C2A">The Blog Profit Intensive</h3>
-<ul style="margin:0;padding:0;list-style:none">
-<li style="padding:13px 0;border-bottom:1px solid #F0DCE3;font:400 16px/1.4 var(--font-body);color:#4A2F3B">12 weekly private coaching calls</li>
-<li style="padding:13px 0;border-bottom:1px solid #F0DCE3;font:400 16px/1.4 var(--font-body);color:#4A2F3B">Personalized Blog Profit Diagnosis</li>
-<li style="padding:13px 0;border-bottom:1px solid #F0DCE3;font:400 16px/1.4 var(--font-body);color:#4A2F3B">Offer development or improvement strategy</li>
-<li style="padding:13px 0;border-bottom:1px solid #F0DCE3;font:400 16px/1.4 var(--font-body);color:#4A2F3B">Six part Blog Profit Method curriculum</li>
-<li style="padding:13px 0;border-bottom:1px solid #F0DCE3;font:400 16px/1.4 var(--font-body);color:#4A2F3B">Front end and back end sales resources</li>
-<li style="padding:13px 0;border-bottom:1px solid #F0DCE3;font:400 16px/1.4 var(--font-body);color:#4A2F3B">Prelaunch and launch planning</li>
-<li style="padding:13px 0;border-bottom:1px solid #F0DCE3;font:400 16px/1.4 var(--font-body);color:#4A2F3B">Guided campaign or offer test</li>
-<li style="padding:13px 0;border-bottom:1px solid #F0DCE3;font:400 16px/1.4 var(--font-body);color:#4A2F3B">Weekly action plans</li>
-<li style="padding:13px 0;border-bottom:1px solid #F0DCE3;font:400 16px/1.4 var(--font-body);color:#4A2F3B">Personalized 90 day roadmap</li>
+<div class="stack">
+<p class="body">The BOSS Business Experience is designed to give you one cohesive place to develop your business strategy, receive personalized mentorship and have essential parts of your business professionally built.</p>
+<ul class="inv">
+<li>You&rsquo;re investing in expertise.</li>
+<li>You&rsquo;re investing in implementation.</li>
+<li>You&rsquo;re investing in the ability to move forward with fewer disconnected decisions and less time spent trying to figure out how everything works.</li>
+<li>And you&rsquo;re investing in business assets you can continue using long after our time together.</li>
 </ul>
 </div>
-<div style="flex:1 1 340px;min-width:0;background:#3A1C2A;padding:clamp(28px,4vw,52px);display:flex;flex-direction:column;gap:18px;justify-content:center">
-<p style="margin:0;font:700 30px/1 var(--font-script);color:#E9B9CA">your investment</p>
-<p style="margin:0;font:400 64px/1 var(--font-display);color:#FBF5EE">$897</p>
-<p style="margin:0;font:400 20px/1.3 var(--font-display);color:#E9B9CA">or 3 payments of <em style="color:#F6C9D8">$333</em></p>
-<p style="margin:0;font:400 15px/1.6 var(--font-body);color:#F0DCE3">12 weeks of private coaching, the full Blog Profit Method, and your personalized 90 day roadmap.</p>
-<a href="https://calendly.com/bossladybloggers/15min" target="_blank" rel="noopener" class="pill" style="align-self:flex-start;background:#A23E66;color:#FFFFFF">Apply for private blog coaching <span aria-hidden="true" style="width:34px;height:34px;border-radius:999px;background:#FFFFFF;display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#A23E66" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></span></a>
+</div>
+</div>
+</section>
+
+<!-- INCLUDED + INVESTMENT -->
+<section class="incl" id="investment">
+<div class="in stack" style="gap:28px">
+<div class="nar" style="text-align:center"><h2>Your investment includes far more than coaching calls.</h2></div>
+<div class="incl-card">
+<div class="incl-l">
+<p class="lbl">The BOSS Business Experience</p>
+<h3>Your private client experience brings together:</h3>
+<ul class="tick">
+<li>Personalized 1:1 blog business coaching.</li>
+<li>Comprehensive business strategy and development.</li>
+<li>Audience research and profitable positioning.</li>
+<li>Offer development and monetization strategy.</li>
+<li>Brand messaging and strategic direction.</li>
+<li>Custom Showit website design.</li>
+<li>Website conversion strategy.</li>
+<li>Marketing and content planning.</li>
+<li>Email marketing and sales strategy.</li>
+<li>Agreed done for you business development projects.</li>
+<li>Personalized feedback and implementation guidance.</li>
+<li>A business roadmap tailored to your goals.</li>
+</ul>
+<div class="res">
+<p class="lbl">Additional educational resources</p>
+<div class="slot"><b>To confirm</b>If confirmed: Access to the eight module BOSS Business System inside the Blogging Ladies Membership.</div>
+<div class="slot"><b>To confirm</b>If confirmed: Access to the BOSS Academy course collection.</div>
+<p class="body" style="font-size:16px">These resources allow you to continue developing your knowledge independently while reserving our private time together for your specific business decisions.</p>
+</div>
+</div>
+<div class="incl-r dk">
+<p class="lbl lt">Your investment</p>
+<h3>Private client experiences begin at</h3>
+<div class="slot"><b>To fill in</b>Confirmed starting investment.</div>
+<p class="body" style="font-size:16.5px">Your final investment will depend on your business needs, project scope and the level of implementation support required.</p>
+<p class="body" style="font-size:16.5px">We&rsquo;ll discuss your goals, recommended package, timeline and exact deliverables during your complimentary Fast Track Call.</p>
+<a class="apply br" href="https://calendly.com/bossladybloggers/15min" data-apply>Apply for the BOSS Business Experience <i aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></i></a>
+<p class="under">Applications are reviewed to ensure we&rsquo;re the right fit for one another.</p>
 </div>
 </div>
 </div>
 </section>
 
-<!-- 13. FAQ -->
-<section style="background:#3A1C2A;padding:110px clamp(16px,4vw,48px)">
-<div style="max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;gap:56px">
-<div style="flex:1 1 320px;min-width:0">
-<h2 style="margin:0;font:400 clamp(44px,4.8vw,68px)/1 var(--font-display);color:#FBF5EE">You&rsquo;ve got questions.<br><em style="color:#E9B9CA">I&rsquo;ve got answers.</em></h2>
+<!-- SMALL BY DESIGN -->
+<section class="small dk">
+<div class="nar stack">
+<p class="lbl lt">By design</p>
+<h2>I intentionally keep my private client experience <em>small.</em></h2>
+<p class="body">This isn&rsquo;t a program where hundreds of women enroll and receive the same assignments, templates and automated feedback.</p>
+<p class="big">I&rsquo;m personally involved in your strategy, your website and the development of your business.</p>
+<p class="body">That requires dedicated time and attention.</p>
+<p class="body">For that reason, availability depends on my current client commitments and upcoming project schedule.</p>
+<p class="body">If you&rsquo;re considering building or redesigning your blogging business, you can submit an application to discuss your goals and determine the next available opportunity to work together.</p>
+<div><a class="apply cr" href="https://calendly.com/bossladybloggers/15min" data-apply>Explore Private Client Availability <i aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></i></a></div>
 </div>
-<div class="faq" style="flex:1 1 520px;min-width:0;display:flex;flex-direction:column">
-<details style="border-bottom:1px solid rgba(246,225,232,0.25);padding:22px 0"><summary style="display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:44px;font:400 26px/1.2 var(--font-display);color:#FBF5EE;padding:0">What if I haven&rsquo;t made money yet?<span class="faq-plus" aria-hidden="true" style="flex:0 0 auto;width:auto;height:auto;border:0;background:transparent;font:400 30px/1 var(--font-body);color:#E9B9CA">+</span></summary><div class="faq-a"><p style="margin:12px 0 0;font:400 16px/1.6 var(--font-body);color:#F0DCE3">We&rsquo;ll examine potential offers and how to create a path toward initial customers.</p></div></details>
-<details style="border-bottom:1px solid rgba(246,225,232,0.25);padding:22px 0"><summary style="display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:44px;font:400 26px/1.2 var(--font-display);color:#FBF5EE;padding:0">What if I already have a product?<span class="faq-plus" aria-hidden="true" style="flex:0 0 auto;width:auto;height:auto;border:0;background:transparent;font:400 30px/1 var(--font-body);color:#E9B9CA">+</span></summary><div class="faq-a"><p style="margin:12px 0 0;font:400 16px/1.6 var(--font-body);color:#F0DCE3">We&rsquo;ll investigate your existing offer, message, audience, and buying process.</p></div></details>
-<details style="border-bottom:1px solid rgba(246,225,232,0.25);padding:22px 0"><summary style="display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:44px;font:400 26px/1.2 var(--font-display);color:#FBF5EE;padding:0">Do I need a lot of traffic?<span class="faq-plus" aria-hidden="true" style="flex:0 0 auto;width:auto;height:auto;border:0;background:transparent;font:400 30px/1 var(--font-body);color:#E9B9CA">+</span></summary><div class="faq-a"><p style="margin:12px 0 0;font:400 16px/1.6 var(--font-body);color:#F0DCE3">No fixed threshold, but smaller audiences may need more direct research and sales tests before a larger launch.</p></div></details>
-<details style="border-bottom:1px solid rgba(246,225,232,0.25);padding:22px 0"><summary style="display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:44px;font:400 26px/1.2 var(--font-display);color:#FBF5EE;padding:0">Will you build everything for me?<span class="faq-plus" aria-hidden="true" style="flex:0 0 auto;width:auto;height:auto;border:0;background:transparent;font:400 30px/1 var(--font-body);color:#E9B9CA">+</span></summary><div class="faq-a"><p style="margin:12px 0 0;font:400 16px/1.6 var(--font-body);color:#F0DCE3">No. We&rsquo;ll work on strategy, feedback, and structure. You&rsquo;ll implement the assets and campaigns.</p></div></details>
-<details style="border-bottom:1px solid rgba(246,225,232,0.25);padding:22px 0"><summary style="display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:44px;font:400 26px/1.2 var(--font-display);color:#FBF5EE;padding:0">Will I make money in 12 weeks?<span class="faq-plus" aria-hidden="true" style="flex:0 0 auto;width:auto;height:auto;border:0;background:transparent;font:400 30px/1 var(--font-body);color:#E9B9CA">+</span></summary><div class="faq-a"><p style="margin:12px 0 0;font:400 16px/1.6 var(--font-body);color:#F0DCE3">I cannot guarantee sales. Outcomes depend on the offer, audience, execution, and market response.</p></div></details>
+</section>
+
+<!-- CASE STUDIES -->
+<section style="background:#FBF5EE">
+<div class="in stack" style="gap:24px">
+<div class="nar" style="text-align:center"><p class="lbl">Client stories</p><h2 style="margin-top:14px">Real businesses. Real women. <em>Real work.</em></h2></div>
+<div class="slot"><b>To fill in: featured client case study</b>Meet [Client Name], founder of [Business Name].</div>
+<div class="case">
+<div><p class="lbl">Where she started</p><h3>&nbsp;</h3><p class="slot">Describe her actual starting point, business challenges and goals.</p></div>
+<div><p class="lbl">What we built together</p><h3>&nbsp;</h3><p class="slot">Describe the specific strategy, offers, website and implementation projects delivered.</p></div>
+<div><p class="lbl">Where she is now</p><h3>&nbsp;</h3><p class="slot">Include verified outcomes, completed assets, measurable improvements or business milestones.</p></div>
+</div>
+<div class="slot"><b>To fill in</b>Insert her genuine testimonial and website images.</div>
+<div class="slot"><b>To fill in</b>Insert second client case study.</div>
+<div class="slot"><b>To fill in</b>Insert third client case study.</div>
+</div>
+</section>
+
+<!-- CLARITY -->
+<section class="clar">
+<div class="nar">
+<div class="clar-card stack">
+<h2>You deserve to understand exactly what you&rsquo;re investing in.</h2>
+<p class="body">Hiring someone to help build your business is a significant decision.</p>
+<p class="big">I want you to make that decision with clarity, not pressure.</p>
+<p class="body">Before we begin working together, we&rsquo;ll discuss your business goals, the recommended project scope, your responsibilities, my responsibilities, your investment and the anticipated timeline.</p>
+<p class="body">You&rsquo;ll know what is included in your experience and what isn&rsquo;t.</p>
+<p class="body">I&rsquo;ll never promise a specific income figure or tell you that launching a beautiful website automatically guarantees sales.</p>
+<p class="body">Your results will depend on your market, offers, pricing, execution, customer demand and continued business activity.</p>
+<p class="promise">What I can commit to is bringing my expertise, strategic attention and agreed design and implementation work to your business.</p>
+<p class="body">My goal is to help you build something with the foundations to support revenue, growth and long term business development.</p>
 </div>
 </div>
 </section>
 
-<!-- 14. FINAL PUSH -->
-<section style="padding:120px clamp(16px,4vw,48px);text-align:center">
-<div style="max-width:1000px;margin:0 auto;display:flex;flex-direction:column;gap:24px;align-items:center">
-<p class="rv" style="margin:0;font:700 34px/1 var(--font-script);color:#A23E66">so what are you waiting for?</p>
-<h2 style="margin:0;font:400 clamp(52px,7vw,108px)/0.95 var(--font-display);color:#3A1C2A;text-transform:uppercase">Let&rsquo;s build your blog sales process together.</h2>
-<p class="rv" style="margin:0;max-width:640px;font:400 18px/1.6 var(--font-body)">You can keep writing posts and hoping inspiration strikes, or we can examine your business, determine what you&rsquo;re selling, and develop a sales strategy together.</p>
-<a href="#apply" class="pill" style="background:#A23E66;color:#FFFFFF">Yes, I&rsquo;m ready to make my blog a business <span aria-hidden="true" style="width:34px;height:34px;border-radius:999px;background:#FFFFFF;display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#A23E66" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></span></a>
+<!-- MEET GEN -->
+<section style="background:#FFFFFF">
+<div class="in meet">
+<div class="arch"><img src="/images/photos/portrait-hat.jpg" alt="Genasys smiling in her pink hat" loading="lazy" style="object-position:60% 30%"></div>
+<div class="stack">
+<p class="lbl">Meet the woman helping you build it</p>
+<h2>I&rsquo;m <em>Genasys.</em></h2>
+<p class="body">I&rsquo;m Genasys, founder of Boss Lady Bloggers, blog business coach, business strategist and Showit website designer.</p>
+<p class="body">I built my own money making business from my aunt&rsquo;s basement during my son&rsquo;s nap times, and that experience taught me how important it is to build a business around strategy rather than endless content creation.</p>
+<p class="body">I created the BOSS Business Experience because I saw too many talented women spending their time trying to become designers, marketers, copywriters and business strategists before they could even begin doing the work they actually loved.</p>
+<p class="body">Now, I bring those disciplines together to help women build businesses that reflect their vision, communicate their value and have a clear strategy behind how they&rsquo;re intended to make money.</p>
+<p style="font:700 34px/1 var(--font-script);color:#A23E66">Genasys</p>
+</div>
+</div>
+</section>
+
+<!-- FIT -->
+<section style="background:#FBF5EE">
+<div class="in stack" style="gap:30px">
+<div class="nar" style="text-align:center"><h2>I created this experience for the woman who is ready to take her business seriously.</h2><p class="body" style="margin-top:18px">You don&rsquo;t need to have everything figured out.</p><p class="big" style="margin-top:6px">But you do need to be ready to build something.</p></div>
+<div class="fit">
+<div class="fitc yes"><h3>We&rsquo;re likely a great fit if:</h3><ul class="tick">
+<li>You&rsquo;re serious about creating an online business rather than simply starting a blog as a hobby.</li>
+<li>You have knowledge, experience, interests or expertise you&rsquo;d love to turn into something commercially valuable.</li>
+<li>You value professional guidance and would rather not spend years figuring everything out independently.</li>
+<li>You want a custom website that reflects the quality of your business.</li>
+<li>You&rsquo;re willing to explore new ideas, receive strategic feedback and make informed business decisions.</li>
+<li>You&rsquo;re prepared to invest financially in professional business development.</li>
+<li>You understand that a successful business requires continued marketing, execution and growth.</li>
+<li>You want a collaborative experience with someone who is genuinely involved in building your business.</li>
+</ul></div>
+<div class="fitc no"><h3>This probably isn&rsquo;t the right experience for you if:</h3><ul class="tick x">
+<li>You&rsquo;re looking for the cheapest possible way to start a blog.</li>
+<li>You&rsquo;re expecting guaranteed or immediate income without ongoing effort.</li>
+<li>You primarily want to monetize through ads without developing a broader business strategy.</li>
+<li>You aren&rsquo;t financially prepared to invest in professional services.</li>
+<li>You&rsquo;re looking for someone to operate your entire business indefinitely on your behalf.</li>
+<li>You&rsquo;re not currently able to dedicate time to your business decisions, collaboration and continued growth.</li>
+</ul></div>
+</div>
+<div class="nar stack" style="text-align:center"><p class="body">I work with women at different stages of business.</p><p class="body">You might be starting completely from scratch, or you might already have a website, audience and offers that need to be brought together more strategically.</p><p class="big">What matters most is your readiness to build.</p></div>
+</div>
+</section>
+
+<!-- FAQ -->
+<section class="faqs dk">
+<div class="in stack" style="gap:30px">
+<div class="nar" style="text-align:center"><h2>Frequently Asked <em>Questions</em></h2></div>
+<div class="faq">
+<details><summary>Do I need to have an existing blog?<span class="faq-plus" aria-hidden="true">+</span></summary><div class="faq-a"><p>No. The experience can support women starting from scratch as well as existing bloggers who need strategic direction, repositioning or a professionally redesigned website.</p><p>We&rsquo;ll determine what makes the most sense based on where you&rsquo;re starting.</p></div></details>
+<details><summary>What if I don&rsquo;t know what niche to choose yet?<span class="faq-plus" aria-hidden="true">+</span></summary><div class="faq-a"><p>That&rsquo;s something we can work through together.</p><p>We&rsquo;ll examine your experience, interests, knowledge, potential audiences and monetization opportunities to identify a direction that makes strategic sense.</p><p>You don&rsquo;t need to arrive with every business decision already made.</p></div></details>
+<details><summary>What if I already have a blog but it isn&rsquo;t making money?<span class="faq-plus" aria-hidden="true">+</span></summary><div class="faq-a"><p>We&rsquo;ll examine the business behind your blog, including your offers, positioning, audience, messaging, website and sales process.</p><p>Our priority will be identifying what&rsquo;s preventing your existing assets from supporting your business goals and determining what needs to change.</p></div></details>
+<details><summary>Is the custom website design included?<span class="faq-plus" aria-hidden="true">+</span></summary><div class="faq-a"><p>Yes. Custom website design is a core component of the BOSS Business Experience.</p><p>Your specific pages, features, integrations and design scope will be outlined in your individual proposal.</p></div></details>
+<details><summary>Do you write my website copy?<span class="faq-plus" aria-hidden="true">+</span></summary><div class="faq-a"><p>We&rsquo;ll work on the strategic messaging behind your website and offers.</p><p>The extent of full copywriting services will depend on your selected project scope and will be clearly outlined before enrollment.</p></div></details>
+<details><summary>How much of the business will you actually build for me?<span class="faq-plus" aria-hidden="true">+</span></summary><div class="faq-a"><p>This is a combination of private coaching, collaborative business development and done for you services.</p><p>During your Fast Track Call, we&rsquo;ll discuss which projects you need professional help completing and establish your specific implementation package.</p><p>You&rsquo;ll know exactly what I&rsquo;ll be responsible for delivering and what we&rsquo;ll work through together.</p></div></details>
+<details><summary>How long does the experience last?<span class="faq-plus" aria-hidden="true">+</span></summary><div class="faq-a"><p class="slot"><b>To fill in</b>Insert confirmed program duration and website development timeline.</p><p>Your project timeline will be discussed during your Fast Track Call and documented before we begin.</p></div></details>
+<details><summary>Can I do this alongside a full time career or raising a family?<span class="faq-plus" aria-hidden="true">+</span></summary><div class="faq-a"><p>Absolutely. Many women want to build a business without stepping away from their existing responsibilities.</p><p>We&rsquo;ll take your realistic availability into account when planning your business development and implementation.</p><p>However, you&rsquo;ll still need dedicated time for coaching, decisions, feedback and growing your business.</p></div></details>
+<details><summary>Can I use AI instead of hiring a blog coach or website designer?<span class="faq-plus" aria-hidden="true">+</span></summary><div class="faq-a"><p>AI can be an incredibly valuable tool for developing and implementing business ideas.</p><p>But having access to AI doesn&rsquo;t automatically tell you which business model to pursue, whether your offers have demand, how to differentiate your brand or whether your website is strategically supporting your customers&rsquo; purchasing decisions.</p><p>Inside the experience, we can use AI where it makes sense while ensuring your business is built around a considered strategy, professional design and personalized direction.</p></div></details>
+<details><summary>Will I make money immediately after launching?<span class="faq-plus" aria-hidden="true">+</span></summary><div class="faq-a"><p>No ethical business coach can guarantee that.</p><p>We&rsquo;ll build your business with monetization and sales in mind, but revenue depends on factors such as market demand, offer quality, marketing, execution and continued development.</p><p>Our work is designed to give you stronger business foundations and a clear strategy for pursuing profitability.</p></div></details>
+<details><summary>Are there payment plans?<span class="faq-plus" aria-hidden="true">+</span></summary><div class="faq-a"><p class="slot"><b>To fill in</b>Insert confirmed payment plan options.</p></div></details>
+<details><summary>Are there additional expenses?<span class="faq-plus" aria-hidden="true">+</span></summary><div class="faq-a"><p>Depending on your business, you may need subscriptions for website hosting, email marketing, checkout systems and other business software.</p><p>We&rsquo;ll discuss anticipated operating costs and distinguish those expenses from your private client investment before beginning.</p></div></details>
+<details><summary>What happens during the Fast Track Call?<span class="faq-plus" aria-hidden="true">+</span></summary><div class="faq-a"><p>We&rsquo;ll discuss your business vision, current challenges, goals, investment readiness and the type of support you&rsquo;re looking for.</p><p>I&rsquo;ll help identify what your business needs and explain whether the BOSS Business Experience is the appropriate next step.</p><p>If we&rsquo;re a good fit, we&rsquo;ll discuss the recommended scope, timeline and investment.</p></div></details>
+</div>
+</div>
+</section>
+
+<!-- FINAL -->
+<section class="final">
+<div class="in">
+<div class="nar stack" style="text-align:center">
+<h2>A year from now, <em>what do you want to have built?</em></h2>
+<p class="body">You could spend the next twelve months researching blogging strategies, experimenting with website templates, questioning your niche and trying to make all the individual pieces of your business work together.</p>
+<p class="body">Or you could decide that this is the business you want to take seriously and bring in someone who knows how to help you build it.</p>
+</div>
+<div class="because">
+<p>Not because you&rsquo;re incapable of doing it yourself.</p>
+<p>Because your time has value.</p>
+<p>Because you have knowledge worth sharing.</p>
+<p>Because you want to spend more of your energy doing the work you care about and less of it navigating the technical and strategic complexities of building an online business.</p>
+</div>
+<p class="big" style="margin-top:34px">You deserve a business that reflects the quality of what you have to offer.</p>
+<div class="sum"><span>A professional website.</span><span>A clear business model.</span><span>Meaningful offers.</span><span>Compelling messaging.</span><span>A marketing and sales strategy.</span><span>And personalized guidance connecting it all.</span></div>
+<div class="endcard dk">
+<p class="lbl lt">The BOSS Business Experience</p>
+<p class="body" style="text-align:center">Private 1:1 blog business mentorship, custom website design and done for you business development.</p>
+<div class="slot" style="width:100%"><b>To fill in</b>Starting at [confirmed investment].</div>
+<h2>Your vision deserves more than another unfinished business plan. <em>Let&rsquo;s build it.</em></h2>
+<a class="apply cr" href="https://calendly.com/bossladybloggers/15min" data-apply>Apply for the BOSS Business Experience <i aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"></path></svg></i></a>
+<p class="under">Complete your private client application to explore working together.</p>
+</div>
 </div>
 </section>
 
