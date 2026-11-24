@@ -25,11 +25,6 @@
 <a href="https://www.youtube.com/@GenasysLynn" target="_blank" rel="noopener" style="color:#FFFFFF;text-decoration:none">YouTube</a><a href="/contact" style="color:#FFFFFF;text-decoration:none">Contact</a>
 </div>
 
-<div style="margin-top:28px;background:#3A1C2A;border-radius:22px;padding:22px 18px">
-<p style="margin:0;font:400 28px/1.05 'Instrument Serif',serif;color:#FBF5EE">Stay Connected</p>
-<p style="margin:8px 0 14px;font:400 14px/1.6 Inter;color:#F1DDE2">Modern business strategies, buyer psychology, AI and conversations about the future of blogging.</p>
-<a href="/futureproof-webinar" style="display:block;text-align:center;background:#A23E66;color:#FFFFFF;border-radius:999px;padding:15px 18px;font:600 15px/1 Inter;text-decoration:none">Subscribe</a>
-</div>
 
 <div style="display:flex;gap:16px;margin-top:24px">
 <a href="https://www.instagram.com/blogcoach_gen" target="_blank" rel="noopener" style="font:500 10.5px/1 'DM Mono',monospace;letter-spacing:1.4px;color:#FFFFFF;text-decoration:none">INSTAGRAM</a>
