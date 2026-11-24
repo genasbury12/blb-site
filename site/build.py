@@ -29,7 +29,7 @@ PAGES = {
                         "New here? This page walks you through exactly where to start with Boss Lady Bloggers."),
     "about":           ("about/index.html", "about",
                         "About Genasys | Boss Lady Bloggers",
-                        "Meet Genasys, the blog coach behind Boss Lady Bloggers, and the story behind the brand."),
+                        "Meet Genasys: blog coach, business strategist and Showit website designer, and the single mom who built Boss Lady Bloggers from her aunt's basement."),
     "coaching":        ("coaching/index.html", "coaching",
                         "Blog Coaching & Showit Website Design | The BOSS Business Experience | Boss Lady Bloggers",
                         "The BOSS Business Experience: a 12 month private partnership with 1:1 blog coaching, custom Showit website design, done for you business development and ongoing strategic mentorship."),
