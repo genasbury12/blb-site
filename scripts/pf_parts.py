@@ -192,7 +192,7 @@ def flow(lines, cta_cls="", cta=None):
             continue
         if l.startswith("[") and l.endswith("]"):
             inner = l[1:-1]
-            if inner.startswith("Insert"): out.append(slot(inner + "."))
+            if inner.startswith("Insert"): out.append(slot(inner if inner.endswith(".") else inner + "."))
             else: out.append(f'<div class="row">{cta(inner, cta_cls)}</div>')
         elif is_label(l): out.append(f'<p class="lbl">{e(l)}</p>')
         elif len(l) <= 64: out.append(f'<p class="beat">{e(l)}</p>')

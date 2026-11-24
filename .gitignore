@@ -1,1 +1,2 @@
-portal/scripts/staging-six-payment-test/state.json
+__pycache__/
+*.pyc
