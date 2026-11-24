@@ -57,6 +57,12 @@ PAGES = {
     "interactive-course-creator": ("interactive-course-creator/index.html", "academy",
                         "The Interactive Course Creator | Build Interactive Online Courses With Claude | The BOSS Academy",
                         "Learn how to use Claude to turn your expertise into an interactive, branded and gamified online course with student dashboards, working tools, narrated lessons and a personal Playbook."),
+    "application-confirmation": ("application-confirmation/index.html", "",
+                        "Application Received | Fast Track Call | Boss Lady Bloggers", "Your Blog Monetization Fast Track Call application is in. Here's what happens next."),
+    "fast-track-preparation": ("fast-track-preparation/index.html", "",
+                        "Prepare for Your Fast Track Call | Boss Lady Bloggers", "Your Fast Track application is approved. Complete your business questionnaire and schedule your private strategy session."),
+    "fast-track-confirmation": ("fast-track-confirmation/index.html", "",
+                        "Your Fast Track Call Is Booked | Boss Lady Bloggers", "Your private Blog Monetization Fast Track Call with Genasys is scheduled. Here's how to prepare."),
     "apply":           ("apply/index.html", "coaching",
                         "Apply for Your Fast Track Call | Blog Monetization Strategy Session | Boss Lady Bloggers",
                         "The Blog Monetization Fast Track Call: a complimentary private business diagnostic and strategy session where Genasys studies your business first and shows you what she would do with it."),
@@ -146,7 +152,7 @@ def canonical_for(out: str) -> str:
     return DOMAIN + "/" + out
 
 
-BARE = {"membership-offer", "all-access", "interactive-course-creator", "futureproof-blogger", "futureproof-webinar", "futureproof-replay", "webinar-confirmation"}  # distraction-free pages (offers and course sales pages): no menu or footer
+BARE = {"membership-offer", "all-access", "interactive-course-creator", "futureproof-blogger", "futureproof-webinar", "futureproof-replay", "webinar-confirmation", "application-confirmation", "fast-track-preparation", "fast-track-confirmation"}  # distraction-free pages (offers and course sales pages): no menu or footer
 
 
 def main() -> int:

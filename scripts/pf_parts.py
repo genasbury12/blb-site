@@ -269,3 +269,6 @@ WEBINAR_FORM_ID = ""
 # "Futureproof Your Blog" webinar details, used by the confirmation page (and its Add to calendar button).
 # start: ISO date and time with UTC offset, e.g. "2026-12-10T19:00:00-05:00". Leave "" until it's set.
 WEBINAR = {"start": "", "minutes": 60, "date": "", "time": "", "duration": ""}
+
+# Fast Track booking: the Calendly event approved applicants book. Replace with the Fast Track Call event link.
+FAST_TRACK_CAL = CAL

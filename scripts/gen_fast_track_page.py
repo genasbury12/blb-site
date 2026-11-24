@@ -292,7 +292,7 @@ o.append("<script>\n(function(){\n  var TO=" + repr(TO).replace("'", '"') + r"""
     ['First name','Email','Website','About and what she has built','What she wants to accomplish','Support she is looking for'].forEach(function(n){data[n]=v(n);});
     data['Stage']=r('Stage');data['Investment ready']=r('Investment ready');
     fetch(TO,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(data)})
-      .then(function(x){if(!x.ok)throw 0;f.innerHTML='<p class="done">Thank you. Your application is in. I review every one personally, and you’ll hear from me by email.</p>';})
+      .then(function(x){if(!x.ok)throw 0;f.innerHTML='<p class="done">Thank you. Your application is in.</p>';location.href='/application-confirmation/';})
       .catch(function(){b.disabled=false;msg.textContent='That didn’t send. Please try again in a moment.';});
   });
 })();
