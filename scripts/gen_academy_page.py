@@ -24,7 +24,7 @@ COURSES=[("futureproof","The Futureproof Blogger","Business strategy & the futur
  ["Discover how to use Claude to transform your knowledge into interactive educational experiences that go beyond traditional video lessons, static workbooks and downloadable PDFs.","Learn a new approach to course creation that encourages active participation, engagement and implementation.","Explore what's possible when artificial intelligence meets digital education, and rethink how you package and deliver your expertise."],
  "Because the future of online courses doesn't have to look like another dashboard filled with prerecorded videos.")]
 # courses with their own sales page
-COURSE_PAGE={"interactive":"/interactive-course-creator/"}
+COURSE_PAGE={"interactive":"/interactive-course-creator/","futureproof":"/futureproof-blogger/"}
 o=[]
 o.append('''<style>
 /* The BOSS Academy storefront. A calm editorial shop: plum hero with a stack of course "books", category tiles,

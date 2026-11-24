@@ -42,6 +42,9 @@ PAGES = {
     "all-access":      ("all-access/index.html", "academy",
                         "The BOSS Academy All Access | Every Course, One Investment | Boss Lady Bloggers",
                         "Unlock the complete BOSS Academy collection: The Futureproof Blogger, The Productive Blogger Method and The Interactive Course Creator, with one investment."),
+    "futureproof-blogger": ("futureproof-blogger/index.html", "academy",
+                        "The Futureproof Blogger | Build a Business for Where the Internet Is Going | The BOSS Academy",
+                        "The Futureproof Blogger: business strategy for the future of blogging. Understand how AI and changing consumer behavior are reshaping blogging, and build a business that can adapt."),
     "interactive-course-creator": ("interactive-course-creator/index.html", "academy",
                         "The Interactive Course Creator | Build Interactive Online Courses With Claude | The BOSS Academy",
                         "Learn how to use Claude to turn your expertise into an interactive, branded and gamified online course with student dashboards, working tools, narrated lessons and a personal Playbook."),
@@ -131,7 +134,7 @@ def canonical_for(out: str) -> str:
     return DOMAIN + "/" + out
 
 
-BARE = {"membership-offer", "all-access", "interactive-course-creator"}  # distraction-free pages (offers and course sales pages): no menu or footer
+BARE = {"membership-offer", "all-access", "interactive-course-creator", "futureproof-blogger"}  # distraction-free pages (offers and course sales pages): no menu or footer
 
 
 def main() -> int:

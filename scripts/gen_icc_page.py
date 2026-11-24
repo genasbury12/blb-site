@@ -24,132 +24,161 @@ def win(label, body, cls=""):
     return (f'<div class="win {cls}"><div class="bar"><i></i><i></i><i></i><span>{e(label)}</span></div>'
             f'<div class="wb">{body}</div></div>')
 
+CURSOR = '<svg class="cursor" viewBox="0 0 60 72" aria-hidden="true"><path d="M4 3l48 30-21 4 12 25-9 4-12-25-15 14z" fill="#F1A48E" stroke="#27243A" stroke-width="3" stroke-linejoin="round"/></svg>'
+STICKER = '<svg class="sticker" viewBox="0 0 120 120" aria-hidden="true"><path d="M60 4l11 24 25-10-5 26 26 7-21 17 15 22-27 1-2 27-22-15-22 15-2-27-27-1 15-22L3 51l26-7-5-26 25 10z" fill="#6348B5" stroke="#27243A" stroke-width="2.5" stroke-linejoin="round"/><text x="60" y="56" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-weight="700" font-size="17" fill="#E0D5F5">LEVEL</text><text x="60" y="77" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-weight="700" font-size="20" fill="#E0D5F5">UP!</text></svg>'
 STAR = '<svg class="spark" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 0l4.5 15.5L40 20l-15.5 4.5L20 40l-4.5-15.5L0 20l15.5-4.5z"/></svg>'
 BURST = '<svg class="burst" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 0l9 30 25-19-15 27 31 3-30 9 19 25-27-15-3 31-9-30-25 19 15-27-31-3 30-9-19-25 27 15z"/></svg>'
 
 THEME = r'''<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Space+Mono:wght@400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Outfit:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap">
 <style>
-/* The Interactive Lab: the course's own brand. Experimental, playful, unconventional, inventive. */
-.icc{--violet:#6348B5;--peach:#F1A48E;--lilac:#E0D5F5;--canvas:#EBEBE5;--ink:#27243A;
- --plum:#27243A;--berry:#6348B5;--rose:#E0D5F5;--blush:#E0D5F5;--cream:#EBEBE5;--cocoa:#3A3650;--mauve:#5B5675;--pop:#F1A48E;
- --font-display:'Bricolage Grotesque',system-ui,sans-serif;--font-label:'Space Mono',ui-monospace,monospace;background:var(--canvas)}
-.icc h1,.icc h2,.icc h3{font-weight:800;letter-spacing:-.035em;line-height:.98}
+/* The Interactive Lab (brand guide v1): Electric Violet meets Pixel Peach. Violet hero, peach buttons with dark text,
+   canvas reading sections, lilac browser panels, thin Code Ink borders, restrained shadows, technical grids. */
+.icc{--violet:#6348B5;--peach:#F1A48E;--lilac:#E0D5F5;--canvas:#EBEBE5;--ink:#27243A;--white:#FAF9F6;
+ --sys-blue:#B7C8F4;--px-purple:#D1B8ED;--coral:#F5C2C9;--cloud:#D9D5F0;--warm:#F5D5C4;
+ --plum:#27243A;--berry:#6348B5;--rose:#E0D5F5;--blush:#E0D5F5;--cream:#FAF9F6;--cocoa:#3A3650;--mauve:#5B5675;--pop:#F1A48E;
+ --font-display:'Space Grotesk',system-ui,sans-serif;--font-body:'Outfit',system-ui,sans-serif;--font-label:'Space Mono',ui-monospace,monospace;
+ background:var(--canvas);font-family:var(--font-body)}
+.icc h1,.icc h2,.icc h3{font-weight:700;letter-spacing:-.035em;line-height:1}
 .icc h3{letter-spacing:-.02em}
-.icc h1 em,.icc h2 em{font-style:normal;color:var(--ink);background:var(--peach);padding:0 .14em;border-radius:.16em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
-.icc .dk h1 em,.icc .dk h2 em{color:var(--ink)}
+.icc h1 em,.icc h2 em{font-style:normal;color:var(--violet)}
+.icc .dk h1 em,.icc .dk h2 em{color:var(--peach)}
 .icc .lbl{font-weight:700;letter-spacing:.14em;color:var(--violet)}
 .icc .dk .lbl{color:var(--peach)}
-.icc .beat{font-weight:600;font-size:clamp(20px,2.1vw,24px);letter-spacing:-.01em}
-.icc .big{font-weight:600;letter-spacing:-.02em}
+.icc .body{font-family:var(--font-body)}
+.icc .beat{font-weight:600;font-size:clamp(20px,2.1vw,24px);letter-spacing:-.015em}
+.icc .big{font-weight:600;letter-spacing:-.025em}
 .icc .it{font-style:normal;color:var(--violet)}
 .icc .dk .it{color:var(--peach)}
-.icc .grid-bg{background-color:var(--canvas);background-image:linear-gradient(rgba(99,72,181,.09) 1.5px,transparent 1.5px),linear-gradient(90deg,rgba(99,72,181,.09) 1.5px,transparent 1.5px);background-size:32px 32px}
-.icc .vio{background:var(--violet)}
+.icc .grid-bg{background-color:var(--canvas);background-image:linear-gradient(rgba(39,36,58,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(39,36,58,.06) 1px,transparent 1px);background-size:36px 36px}
+.icc .vio{background-color:var(--violet);background-image:linear-gradient(rgba(255,255,255,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.08) 1px,transparent 1px);background-size:44px 44px}
 .icc .vio.dk .body,.icc .vio.dk .ticks.lt li{color:#F3EEFF}
 .icc .inkbg{background:var(--ink)}
 .icc .lil{background:var(--lilac)}
-.icc .pf-btn{background:var(--ink);border:2px solid var(--ink);box-shadow:5px 5px 0 var(--peach);font-family:var(--font-label);font-weight:700;font-size:14.5px;letter-spacing:.02em;border-radius:14px}
-.icc .pf-btn i{background:var(--violet);border-radius:10px}
-.icc .pf-btn.cr{background:var(--peach);color:var(--ink);box-shadow:5px 5px 0 var(--ink)}
-.icc .pf-btn.cr i{background:var(--ink)}
-.icc .pf-btn.br{background:var(--violet);box-shadow:5px 5px 0 var(--ink)}.icc .pf-btn.br i{background:var(--ink)}
-.icc .pf-btn.ol{background:#fff;color:var(--ink)}
-.icc .pf-btn.olw{background:transparent;color:#fff;border-color:#fff;box-shadow:5px 5px 0 var(--peach)}
-@media (hover:hover){.icc .pf-btn:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--peach)}.icc .pf-btn.cr:hover,.icc .pf-btn.br:hover{box-shadow:7px 7px 0 var(--ink)}}
+.icc .wht{background:var(--white)}
+/* buttons: peach with dark text */
+.icc .pf-btn{background:var(--peach);color:var(--ink);border:1.5px solid var(--ink);box-shadow:3px 3px 0 var(--ink);font-family:var(--font-label);font-weight:700;font-size:14px;letter-spacing:.03em;text-transform:uppercase;border-radius:12px}
+.icc .pf-btn i{background:var(--ink);border-radius:9px}
+.icc .pf-btn.cr,.icc .pf-btn.br{background:var(--peach);color:var(--ink)}
+.icc .pf-btn.ol{background:var(--white);color:var(--ink)}.icc .pf-btn.ol i{background:var(--violet)}
+.icc .pf-btn.olw{background:transparent;color:#fff;border-color:rgba(255,255,255,.7);box-shadow:none}.icc .pf-btn.olw i{background:var(--peach)}.icc .pf-btn.olw i svg{stroke:#27243A}
+.icc .dk .pf-btn{box-shadow:3px 3px 0 rgba(0,0,0,.35)}
+@media (hover:hover){.icc .pf-btn:hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 var(--ink)}}
 .icc .pf-slot{border-color:var(--violet);color:var(--violet);background:rgba(99,72,181,.06);font-family:var(--font-label);font-size:13.5px}
 .icc .dk .pf-slot{border-color:var(--peach);color:var(--peach);background:rgba(241,164,142,.08)}
 .icc .ticks li::before{background-color:var(--violet);border-radius:6px}
-.icc .ticks.lt li{background:#fff;border:2px solid var(--ink);border-radius:12px}
+.icc .ticks.lt li{background:var(--white);border:1.5px solid var(--ink);border-radius:12px;font-family:var(--font-body)}
 .icc .dk .ticks.lt li{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.25)}
-/* retro window */
-.icc .win{border:2.5px solid var(--ink);border-radius:18px;overflow:hidden;background:#fff;box-shadow:9px 9px 0 var(--ink)}
-.icc .dk .win{box-shadow:9px 9px 0 var(--peach)}
-.icc .win .bar{background:var(--violet);display:flex;align-items:center;gap:7px;padding:11px 14px;border-bottom:2.5px solid var(--ink)}
-.icc .win .bar i{width:12px;height:12px;border-radius:50%;background:var(--peach);border:1.5px solid var(--ink)}
-.icc .win .bar i:nth-child(2){background:var(--lilac)}.icc .win .bar i:nth-child(3){background:var(--canvas)}
-.icc .win .bar span{margin-left:auto;font:700 11px/1 var(--font-label);letter-spacing:.06em;color:var(--lilac)}
+/* lilac browser windows, thin ink borders, restrained shadows */
+.icc .win{border:1.5px solid var(--ink);border-radius:16px;overflow:hidden;background:var(--white);box-shadow:0 22px 44px -28px rgba(39,36,58,.55)}
+.icc .win .bar{background:var(--lilac);display:flex;align-items:center;gap:7px;padding:11px 14px;border-bottom:1.5px solid var(--ink)}
+.icc .win .bar i{width:11px;height:11px;border-radius:50%;background:var(--peach)}
+.icc .win .bar i:nth-child(2){background:var(--violet)}.icc .win .bar i:nth-child(3){background:var(--ink)}
+.icc .win .bar span{margin-left:10px;font:700 11.5px/1 var(--font-label);color:var(--ink)}
 .icc .win .wb{padding:clamp(18px,2.6vw,28px);color:var(--ink)}
 .icc .win .big,.icc .win .beat,.icc .win h3{color:var(--ink)}
 .icc .win .body{color:var(--cocoa)}
 .icc .win .lbl{color:var(--violet)}
 .icc .win .pf-slot{border-color:var(--violet);color:var(--violet);background:rgba(99,72,181,.06)}
 .icc .win .ticks.lt li{background:#fff;color:var(--ink);border-color:var(--ink)}
-.icc .spark{width:28px;height:28px;fill:var(--peach)}
-.icc .burst{position:absolute;width:clamp(90px,12vw,150px);fill:var(--peach);z-index:0;opacity:.95}
+.icc .spark{width:26px;height:26px;fill:var(--violet)}
 .icc .rel{position:relative}
+/* graphic vocabulary */
+.icc .cursor{position:absolute;width:clamp(64px,8vw,110px);z-index:3;filter:drop-shadow(4px 6px 0 rgba(39,36,58,.25))}
+.icc .sticker{position:absolute;width:clamp(92px,11vw,138px);z-index:3;transform:rotate(-10deg)}
+.icc .segs{display:flex;gap:5px}
+.icc .segs b{flex:1;height:12px;border-radius:999px;background:var(--peach)}
+.icc .segs b.off{background:rgba(39,36,58,.15)}
 /* hero */
 .icc .ihero{position:relative;overflow:hidden;isolation:isolate}
-.icc .ihero .burst.b1{left:auto;right:30%;top:-36px;width:110px}.icc .ihero .burst.b2{right:4%;bottom:-40px;width:110px;fill:var(--violet);opacity:.9}
-.icc .ihero h1{font-size:clamp(38px,4.4vw,64px)}
-.icc .intro{font:700 15px/1 var(--font-label);letter-spacing:.16em;text-transform:uppercase;color:var(--violet)}
-.icc .name{font:800 clamp(38px,4.6vw,64px)/.95 var(--font-display);letter-spacing:-.04em;color:var(--ink);background:var(--lilac);border:2.5px solid var(--ink);border-radius:16px;padding:14px 18px;box-shadow:6px 6px 0 var(--violet);align-self:flex-start;transform:rotate(-1.5deg)}
+.icc .ihero h1{font-size:clamp(38px,4.4vw,62px);color:#fff}
+.icc .ihero .body{color:#F3EEFF}
+.icc .intro{font:700 13px/1 var(--font-label);letter-spacing:.16em;text-transform:uppercase;color:var(--lilac)}
+.icc .lockup{font:700 clamp(40px,4.8vw,66px)/.95 var(--font-display);letter-spacing:-.045em;color:#fff}
+.icc .lockup b{display:block;color:var(--peach);font-weight:700}
+.icc .mode{font:700 12px/1 var(--font-label);letter-spacing:.12em;color:var(--lilac)}
 .icc .stats{display:flex;flex-wrap:wrap;gap:8px}
-.icc .stats span{padding:9px 12px;border-radius:10px;background:var(--ink);color:var(--canvas);font:700 11.5px/1.2 var(--font-label);letter-spacing:.06em}
-.icc .stats span b{color:var(--peach)}
+.icc .stats span{padding:9px 12px;border-radius:10px;background:var(--lilac);color:var(--ink);border:1.5px solid var(--ink);font:700 11.5px/1.2 var(--font-label);letter-spacing:.04em}
+.icc .stats span b{color:var(--violet)}
+.icc .hero-vis{position:relative}
+.icc .hero-vis .cursor{right:-8px;bottom:56px}
+.icc .hero-vis .sticker{left:-34px;top:-40px}
 /* dashboard illustration */
-.icc .dash h4{margin:0;font:800 26px/1 var(--font-display);letter-spacing:-.03em;color:var(--ink)}
+.icc .dash h4{margin:0;font:700 26px/1.05 var(--font-display);letter-spacing:-.03em;color:var(--ink)}
 .icc .dash .tag{display:inline-block;padding:6px 10px;border-radius:8px;background:var(--lilac);font:700 11px/1 var(--font-label);color:var(--violet);margin:0 6px 6px 0}
-.icc .xp{height:16px;border-radius:999px;border:2px solid var(--ink);background:var(--canvas);overflow:hidden}
-.icc .xp b{display:block;height:100%;width:72%;background:repeating-linear-gradient(45deg,var(--violet) 0 10px,#7b62cc 10px 20px)}
 .icc .mis{list-style:none;margin:0;padding:0;display:grid;gap:8px}
-.icc .mis li{display:flex;gap:10px;align-items:center;padding:10px 12px;border-radius:10px;background:var(--canvas);font:600 14.5px/1.3 var(--font-body);color:var(--ink)}
-.icc .mis li i{flex:none;width:20px;height:20px;border-radius:6px;border:2px solid var(--ink);background:#fff}
+.icc .mis li{display:flex;gap:10px;align-items:center;padding:10px 12px;border-radius:10px;background:var(--canvas);font:500 14.5px/1.3 var(--font-body);color:var(--ink)}
+.icc .mis li i{flex:none;width:20px;height:20px;border-radius:6px;border:1.5px solid var(--ink);background:#fff}
 .icc .mis li.on i{background:var(--violet) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 12.5l4 4L18 8' fill='none' stroke='%23fff' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/14px no-repeat}
 .icc .badges{display:flex;gap:8px;flex-wrap:wrap}
-.icc .badges span{width:42px;height:42px;border-radius:12px;border:2px solid var(--ink);display:grid;place-items:center;font:700 12px/1 var(--font-label);background:var(--peach);color:var(--ink)}
-.icc .badges span:nth-child(even){background:var(--lilac)}.icc .badges span.lock{background:#ddd;color:#999;border-style:dashed}
-.icc .checker{height:26px;background:conic-gradient(var(--ink) 90deg,#fff 0 180deg,var(--ink) 0 270deg,#fff 0) 0 0/26px 26px}
+.icc .badges span{width:42px;height:42px;border-radius:12px;border:1.5px solid var(--ink);display:grid;place-items:center;font:700 12px/1 var(--font-label);color:var(--ink)}
+.icc .badges span.lock{background:#e4e2ea;color:#8a869a;border-style:dashed}
 /* compare + cards */
 .icc .ab{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
 .icc .ab .win .wb p{margin:0 0 10px;font:400 16.5px/1.6 var(--font-body)}
-.icc .ab .a .bar{background:#9d98ad}
-.icc .feat{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
-.icc .feat article{background:#fff;border:2.5px solid var(--ink);border-radius:18px;padding:22px;display:flex;flex-direction:column;gap:8px;box-shadow:6px 6px 0 var(--lilac)}
-.icc .feat article:nth-child(3n+2){box-shadow:6px 6px 0 var(--peach)}.icc .feat article:nth-child(3n){box-shadow:6px 6px 0 var(--violet)}
-.icc .feat h3{font-size:24px}.icc .feat p{font:400 16px/1.6 var(--font-body);color:var(--cocoa)}
+.icc .ab .a .bar{background:#dcdad2}
+.icc .feat{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.icc .feat article{background:var(--white);border:1.5px solid var(--ink);border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:8px}
+.icc .feat article:nth-child(4n+2){background:var(--lilac)}.icc .feat article:nth-child(4n+3){background:var(--warm)}
+.icc .feat h3{font-size:23px}.icc .feat p{font:400 16px/1.6 var(--font-body);color:var(--cocoa)}
 .icc .glance{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:12px}
-.icc .glance div{border-radius:16px;padding:18px;background:rgba(255,255,255,.08);border:2px solid rgba(255,255,255,.22);color:#F3EEFF;font:500 15.5px/1.45 var(--font-body)}
-.icc .glance div b{display:block;font:800 46px/.9 var(--font-display);letter-spacing:-.04em;color:var(--peach);margin-bottom:6px}
+.icc .glance div{border-radius:14px;padding:18px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.3);color:#F3EEFF;font:400 15.5px/1.45 var(--font-body)}
+.icc .glance div b{display:block;font:700 46px/.9 var(--font-display);letter-spacing:-.04em;color:var(--peach);margin-bottom:6px}
 .icc .mods{display:flex;flex-direction:column;gap:22px}
 .icc .mod{display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr);gap:clamp(20px,3vw,44px);align-items:start}
 .icc .mod .num{font:700 13px/1 var(--font-label);letter-spacing:.18em;color:var(--violet)}
 .icc .mod h3{font-size:clamp(28px,3vw,40px);margin-top:10px}
 .icc .inside{display:grid;gap:10px}
 .icc .inside div{padding:14px 16px;border-radius:12px;background:var(--canvas);border-left:4px solid var(--violet)}
-.icc .inside b{display:block;font:800 18px/1.2 var(--font-display);letter-spacing:-.01em;margin-bottom:4px}
+.icc .inside b{display:block;font:700 18px/1.2 var(--font-display);letter-spacing:-.01em;margin-bottom:4px}
 .icc .inside p{margin:0;font:400 15px/1.55 var(--font-body);color:var(--cocoa)}
 .icc .pass .field{display:flex;flex-direction:column;gap:5px;margin-bottom:10px}
 .icc .pass .field span{font:700 10.5px/1 var(--font-label);letter-spacing:.12em;text-transform:uppercase;color:var(--violet)}
-.icc .pass .field i{display:block;height:34px;border-radius:9px;border:2px solid var(--ink);background:var(--canvas)}
-.icc .pass .two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.icc .ranks{display:flex;flex-wrap:wrap;gap:10px;counter-reset:r}
-.icc .ranks span{counter-increment:r;padding:10px 14px;border-radius:12px;border:2px solid var(--ink);background:#fff;font:800 17px/1 var(--font-display);color:var(--ink)}
-.icc .ranks span::before{content:counter(r);font:700 11px/1 var(--font-label);color:var(--violet);margin-right:8px}
-.icc .ranks span:last-child{background:var(--peach)}
+.icc .pass .field i{display:block;height:34px;border-radius:9px;border:1.5px solid var(--ink);background:var(--canvas)}
+.icc .labs{display:grid;gap:8px;max-width:820px;margin:0 auto;width:100%}
+.icc .labs div{display:grid;grid-template-columns:56px minmax(0,1fr) minmax(0,1fr);align-items:center;gap:12px;padding:14px 18px;border-radius:12px;color:var(--ink)}
+.icc .labs .n{font:700 20px/1 var(--font-display);color:var(--violet)}
+.icc .labs .l{font:700 21px/1.1 var(--font-display);letter-spacing:-.02em}
+.icc .labs .r{font:700 12.5px/1.2 var(--font-label);letter-spacing:.04em}
 .icc .sop{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:18px}
 .icc .sop ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
-.icc .sop li{font:500 15px/1.45 var(--font-body);padding-left:22px;position:relative}
+.icc .sop li{font:400 15px/1.45 var(--font-body);padding-left:22px;position:relative}
 .icc .sop li::before{content:">";position:absolute;left:0;font:700 14px/1.45 var(--font-label);color:var(--violet)}
 .icc .res{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:14px}
-.icc .res div{background:#fff;border:2.5px solid var(--ink);border-radius:16px;padding:18px}
+.icc .res div{background:var(--white);border:1.5px solid var(--ink);border-radius:14px;padding:18px}
 .icc .res h3{font-size:19px;margin-bottom:10px}
-.icc .res p{margin:0;padding:6px 0;border-top:1.5px dashed rgba(39,36,58,.2);font:500 14.5px/1.4 var(--font-body)}
+.icc .res p{margin:0;padding:6px 0;border-top:1px dashed rgba(39,36,58,.22);font:400 14.5px/1.4 var(--font-body)}
 .icc .vs{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:22px;align-items:start}
 .icc .vs ol{margin:0;padding:0;list-style:none;display:grid;gap:8px;counter-reset:s}
-.icc .vs li{counter-increment:s;display:flex;gap:12px;font:500 15.5px/1.45 var(--font-body)}
+.icc .vs li{counter-increment:s;display:flex;gap:12px;font:400 15.5px/1.45 var(--font-body)}
 .icc .vs li::before{content:counter(s,decimal-leading-zero);font:700 12px/1.9 var(--font-label);color:var(--violet)}
 .icc .vs .a li{color:#6b6780}
 .icc .ifs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:14px}
-.icc .ifs article{border-radius:18px;padding:22px;background:var(--lilac);border:2.5px solid var(--ink)}
+.icc .ifs article{border-radius:16px;padding:22px;background:var(--lilac);border:1.5px solid var(--ink)}
 .icc .ifs h3{font-size:22px;margin-bottom:8px}.icc .ifs p{margin:0;font:400 15.5px/1.55 var(--font-body)}
-.icc .ifs article:nth-child(odd){background:#fff}
+.icc .ifs article:nth-child(odd){background:var(--white)}
 .icc .recv{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 .icc .recv div{padding:14px 16px;border-radius:12px;background:var(--canvas)}
-.icc .recv b{display:block;font:800 18px/1.2 var(--font-display);margin-bottom:4px}
+.icc .recv b{display:block;font:700 18px/1.2 var(--font-display);margin-bottom:4px}
 .icc .recv p{margin:0;font:400 14.5px/1.5 var(--font-body);color:var(--cocoa)}
-@media (max-width:980px){.icc .mod,.icc .vs{grid-template-columns:minmax(0,1fr)}}
-@media (max-width:700px){.icc .ab,.icc .feat,.icc .recv{grid-template-columns:minmax(0,1fr)}.icc .win{box-shadow:6px 6px 0 var(--ink)}.icc .dk .win{box-shadow:6px 6px 0 var(--peach)}}
+/* campaign band */
+.icc .band{position:relative;overflow:hidden}
+.icc .band h2{font-size:clamp(52px,9vw,128px);line-height:.92;letter-spacing:-.05em;color:#fff}
+.icc .band h2 span{color:var(--peach)}
+.icc .band h2 mark{background:var(--lilac);color:var(--ink);padding:0 .12em;border-radius:.12em}
+.icc .band .cursor{right:8%;bottom:16%}
+/* dream course builder */
+.icc .dream .opts{display:flex;flex-wrap:wrap;gap:8px}
+.icc .dream label{cursor:pointer}
+.icc .dream input{position:absolute;opacity:0;pointer-events:none}
+.icc .dream label span{display:inline-block;padding:10px 14px;border-radius:10px;border:1.5px solid var(--ink);background:var(--white);font:600 14.5px/1.2 var(--font-body);color:var(--ink)}
+.icc .dream input:checked+span{background:var(--violet);color:#fff;border-color:var(--violet)}
+.icc .dream input:checked+span::before{content:"\2713  "}
+.icc .dream input:focus-visible+span{outline:3px solid var(--peach);outline-offset:2px}
+.icc .term{background:var(--ink);border-radius:12px;padding:18px;color:#F3EEFF;font:400 14px/1.65 var(--font-label);white-space:pre-wrap;min-height:120px}
+.icc .term b{color:var(--peach);font-weight:700}
+@media (max-width:980px){.icc .mod,.icc .vs{grid-template-columns:minmax(0,1fr)}.icc .hero-vis .sticker{left:auto;right:-6px;top:-50px}}
+@media (max-width:700px){.icc .ab,.icc .feat,.icc .recv{grid-template-columns:minmax(0,1fr)}.icc .labs div{grid-template-columns:40px minmax(0,1fr)}.icc .labs .r{grid-column:2}.icc .cursor{display:none}}
 </style>'''
 
 o = [CSS, EXTRA, THEME, '<main id="main" class="pf icc">']
@@ -164,17 +193,21 @@ stats = s[8].split(" | ")
 def stat(t):
     m = re.match(r"(\d+)\s+(.*)", t)
     return f"<span><b>{m.group(1)}</b> {e(m.group(2))}</span>" if m else f"<span>{e(t)}</span>"
-dash = win("creator_studio", f'''<div class="dash stack" style="gap:16px">
-<div><span class="tag">MODULE 05</span><span class="tag">Board Builder</span><h4>Build the Lesson Boards</h4></div>
-<div><div style="display:flex;justify-content:space-between;font:700 11px/1 var(--font-label);margin-bottom:6px"><span>XP</span><span>RANK 5 OF 7</span></div><div class="xp"><b></b></div></div>
+LABS = [("01", "Capture", "Capture Ready", "#E0D5F5"), ("02", "Organize", "Library Builder", "#B7C8F4"), ("03", "Plan", "Course Planner", "#F5D5C4"),
+        ("04", "Personalize", "Prompt Writer", "#D1B8ED"), ("05", "Build", "Board Builder", "#F1A48E"), ("06", "Produce", "Video Maker", "#F5C2C9"),
+        ("07", "Launch", "Course Creator", "#D9D5F0")]
+segs = "".join('<b></b>' if i < 5 else '<b class="off"></b>' for i in range(7))
+dash = win("creator_workspace / home", f'''<div class="dash stack" style="gap:16px">
+<div><span class="tag">LAB 05</span><span class="tag">Board Builder</span><h4>Build the Lesson Boards</h4></div>
+<div><div style="display:flex;justify-content:space-between;font:700 11px/1 var(--font-label);margin-bottom:8px"><span>BUILD_PROGRESS</span><span>RANK 5 OF 7</span></div><div class="segs">{segs}</div></div>
 <ul class="mis"><li class="on"><i></i>Build your first module board.</li><li class="on"><i></i>Add quick check quizzes.</li><li><i></i>Add missions, XP, badges and lesson locks.</li></ul>
-<div class="badges"><span>01</span><span>02</span><span>03</span><span>04</span><span class="lock">05</span></div></div>''')
-o.append(f'''<section class="ihero grid-bg">{BURST.replace('class="burst"', 'class="burst b1"')}{BURST.replace('class="burst"', 'class="burst b2"')}
+<div class="badges">{"".join(f'<span style="background:{c}">{n}</span>' for n, _, _, c in LABS[:4])}<span class="lock">05</span></div></div>''')
+o.append(f'''<section class="ihero vio dk">
 <div class="in hero-grid rel" style="z-index:1">
-<div class="stack" style="gap:20px"><p class="lbl">{e(s[0])}</p><h1>{headline(s[1])}</h1>{P(s[2])}{P(s[3])}
-<p class="intro">{e(s[4])}</p><p class="name">{e(s[5])}</p><p class="big">{e(s[6])}</p>
-<div class="row">{cta(s[7][1:-1], "br")}</div></div>
-<div class="stack" style="gap:22px">{dash}<div class="stats">{"".join(stat(x) for x in stats)}</div></div>
+<div class="stack" style="gap:20px"><p class="lbl" style="color:#E0D5F5">{e(s[0])}</p><h1>{headline(s[1])}</h1>{P(s[2])}{P(s[3])}
+<p class="intro">{e(s[4])}</p><p class="lockup">The Interactive <b>Course Creator.</b></p><p class="mode">CREATE_MODE: ON</p><p class="big">{e(s[6])}</p>
+<div class="row">{cta(s[7][1:-1], "cr")}</div></div>
+<div class="stack hero-vis" style="gap:22px">{STICKER}{dash}{CURSOR}<div class="stats">{"".join(stat(x) for x in stats)}</div></div>
 </div></section>''')
 assert s[4] == "Introducing..." and s[5] == "The Interactive Course Creator"
 
@@ -182,7 +215,7 @@ assert s[4] == "Introducing..." and s[5] == "The Interactive Course Creator"
 s = section(2)
 lb, h, rest = head2(s)
 cut = next(i for i, l in enumerate(rest) if l.startswith("[Embed") or l.startswith("[Insert"))
-o.append(f'''<section class="vio dk"><div class="in stack" style="gap:30px">
+o.append(f'''<section class="lil"><div class="in stack" style="gap:30px">
 <div class="nar stack ctr-h">{lb}<h2>{headline(h)}</h2></div>
 <div class="twocol"><div class="stack">{flow(rest[:cut])}</div>
 <div class="stack">{win("demo.mov", flow(rest[cut:cut + 2]))}<div class="row">{cta(rest[-1][1:-1], "cr")}</div></div></div></div></section>''')
@@ -219,6 +252,39 @@ o.append(f'''<section class="grid-bg"><div class="in stack" style="gap:30px">
 <div class="nar stack ctr-h"><h2>{headline(s[0])}</h2>{flow(s[1:pi])}</div>
 <div class="feat">{"".join(f'<article><h3>{e(t)}</h3>{"".join(f"<p>{e(x)}</p>" for x in d)}</article>' for t, d in cards)}</div>
 <div class="nar stack ctr-h">{"".join(f'<p class="big" style="text-align:center">{e(x)}</p>' for x in s[pe:])}</div></div></section>''')
+
+# Campaign band (brand guide) + the interactive "dream course" concept builder the guide asks for
+FEATS = ["A personalized student dashboard", "Personalized Claude prompts", "Working educational tools", "Quick check quizzes",
+         "Guided missions", "Narrated video lessons", "A personal student Playbook", "Progress tracking and badges"]
+opts = "".join('<label><input type="checkbox" value="' + e(f) + '"><span>' + e(f) + '</span></label>' for f in FEATS)
+builder = ('<div class="dream stack" style="gap:16px"><div class="opts">' + opts + '</div>'
+           '<div class="term" data-term><b>&gt; dream_course</b>\nPick a feature to start building.</div>'
+           '<div class="row"><button type="button" class="pf-btn" data-copy>Copy my concept ' + ARR + '</button>'
+           '<span class="mode" style="color:#6348B5" data-copied></span></div></div>')
+o.append('<section class="band vio dk"><div class="in stack" style="gap:22px">'
+         '<p class="mode">WELCOME TO CREATOR MODE</p>'
+         '<h2>If you can <span>teach it.</span><br>You can <mark>build it.</mark></h2>'
+         '<p class="body" style="max-width:560px">Your knowledge. Your methodology. Your own interactive educational experience.</p></div>'
+         + CURSOR + '</section>')
+o.append('<section class="grid-bg"><div class="in twocol" style="align-items:center">'
+         '<div class="stack"><p class="lbl">Try it</p><h2>Design your <em>dream course.</em></h2>'
+         '<p class="body">Pick the features you want your students to experience. This is a quick concept builder, not a live course.</p></div>'
+         + win("dream_course.builder", builder) + '</div></section>')
+o.append(r"""<script>
+(function(){
+  var box=document.querySelector('.dream');if(!box)return;
+  var term=box.querySelector('[data-term]'),note=box.querySelector('[data-copied]');
+  function text(){var f=[].map.call(box.querySelectorAll('input:checked'),function(i){return i.value;});
+    return f.length?'My dream interactive course includes:\n'+f.map(function(x){return '- '+x;}).join('\n'):'';}
+  function draw(){var t=text();term.innerHTML='<b>&gt; dream_course</b>\n'+(t?t.replace(/&/g,'&amp;').replace(/</g,'&lt;'):'Pick a feature to start building.');note.textContent='';}
+  box.addEventListener('change',draw);
+  box.querySelector('[data-copy]').addEventListener('click',function(){
+    var t=text();if(!t){note.textContent='PICK A FEATURE FIRST';return;}
+    var fail=function(){note.textContent='SELECT AND COPY THE TEXT ABOVE';};
+    if(navigator.clipboard)navigator.clipboard.writeText(t).then(function(){note.textContent='COPIED';},fail);else fail();
+  });
+})();
+</script>""")
 
 # 07 OFFER
 s = section(7)
@@ -285,7 +351,7 @@ items = list(zip(s[2:ri:2], s[3:ri:2])) + [(s[ri], s[ri + 1]), (s[ci], s[ci + 1]
 o.append(f'''<section class="inkbg dk"><div class="in stack" style="gap:30px">
 <div class="nar stack ctr-h"><p class="lbl">The gamified learning experience</p><h2>{headline(s[0])}</h2>{P(s[1])}</div>
 {pairs([x for p in items for x in p])}
-<div class="stack" style="align-items:center;gap:14px"><p class="lbl">The seven achievement ranks</p><div class="ranks">{"".join(f"<span>{e(r.rstrip('.'))}</span>" for r in ranks)}</div></div>
+<div class="stack" style="align-items:center;gap:14px"><p class="lbl">Seven labs. Seven milestones.</p><div class="labs">{"".join(f'<div style="background:{c}"><span class="n">{n}</span><span class="l">{e(l)}</span><span class="r">{e(r.rstrip("."))}</span></div>' for (n, l, _, c), r in zip(LABS, ranks))}</div></div>
 <div class="nar stack" style="text-align:center">{"".join(f'<p class="big">{e(x)}</p>' for x in s[ci + 2:])}</div></div></section>''')
 assert len(ranks) == 7 and ranks[-1] == "Course Creator."
 
