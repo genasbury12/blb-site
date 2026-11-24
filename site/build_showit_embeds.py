@@ -21,6 +21,7 @@ PAGES = {
     "about/index.html":          ("About.html", "/about"),
     "coaching/index.html":       ("BlogCoaching.html", "/blog-coaching"),
     "academy/index.html":        ("Academy.html", "/academy"),
+    "all-access/index.html":     ("AllAccess.html", "/all-access"),
     "portfolio/index.html":      ("Portfolio.html", "/portfolio"),
     "client-project/index.html": ("ClientProject.html", "/client-project"),
     "membership/index.html":     ("Membership.html", "/membership"),
@@ -39,6 +40,8 @@ PAGES = {
 
 # internal link rewrites (folder URLs -> Showit slugs)
 LINKMAP = [
+    ('href="/all-access/#', 'href="/all-access#'),
+    ('href="/all-access/"', 'href="/all-access"'),
     ('href="/client-project/?project=', 'href="/client-project?project='),
     ('href="/portfolio/#', 'href="/portfolio#'),
     ('href="/portfolio/"', 'href="/portfolio"'),
