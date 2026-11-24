@@ -49,6 +49,9 @@ PAGES = {
 
 # internal link rewrites (folder URLs -> Showit slugs)
 LINKMAP = [
+    ('"/apply/"', '"/apply"'), ('"/coaching/"', '"/blog-coaching"'), ('"/membership/"', '"/membership"'),
+    ('"/futureproof-blogger/"', '"/futureproof-blogger"'), ('"/academy/#course-pbm"', '"/academy#course-pbm"'),
+    ('"/interactive-course-creator/"', '"/interactive-course-creator"'), ('"/futureproof-webinar/"', '"/futureproof-webinar"'), ('"/roadmap/"', '"/roadmap"'),
     ("location.href='/application-confirmation/'", "location.href='/application-confirmation'"),
     ('href="/fast-track-preparation/#', 'href="/fast-track-preparation#'),
     ('href="/apply/"', 'href="/apply"'),
