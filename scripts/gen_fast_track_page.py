@@ -7,6 +7,7 @@ import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent))
 from pf_parts import *
+import proof
 
 APPLY = "#apply"
 TO = "https://formsubmit.co/ajax/hello@bossladybloggers.com"
@@ -265,10 +266,13 @@ for l in s:
     if l.endswith("?") and len(l) < 110: cur = [l, []]; qs.append(cur)
     elif cur: cur[1].append(l)
 def ans(lines):
-    return [f'<span style="display:inline-block;border:2px dashed #A23E66;border-radius:10px;padding:2px 10px;color:#A23E66;font-weight:600">To fill in: {e(l[1:-1])}</span>' if l.startswith("[") else e(l) for l in lines]
+    return [e(l) for l in lines if not l.startswith("[")]
+o.append(f'''<section style="background:#F6E1E8"><div class="in stack" style="gap:26px">
+<div class="nar stack ctr-h"><p class="lbl">In their words</p><h2>What women say after <em>talking with me.</em></h2></div>
+{proof.css()}{proof.quotes(("Sadie", "Tesha", "Clare"))}</div></section>''')
 o.append(f'''<section style="background:#FFFFFF"><div class="nar stack" style="gap:26px">
 <div class="stack" style="text-align:center;gap:14px"><p class="lbl">Frequently asked questions</p><h2>Before you <em>apply.</em></h2></div>
-<div class="faq">{"".join(faq(q, ans(a)) for q, a in qs)}</div></div></section>''')
+<div class="faq">{"".join(faq(q, ans(a)) for q, a in qs if ans(a))}</div></div></section>''')
 
 # 16 FINAL
 s = section(16)

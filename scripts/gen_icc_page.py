@@ -5,6 +5,7 @@ import re, sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent))
 from pf_parts import *
+import proof
 
 # Paste the course checkout link here. Until then every buy button scrolls to the price box.
 CHECKOUT = ""
@@ -435,7 +436,9 @@ s = section(20)
 o.append(f'''<section style="background:#FFFFFF"><div class="in stack" style="gap:24px">
 <div class="nar stack ctr-h"><h2>{headline(s[0])}</h2></div>
 {shot("10-feedback-board", "The feedback board where students say where they got stuck.")}
-<div class="pairs">{flow(s[2:])}</div></div></section>''')
+<div class="pairs">{shot("07-module-6", "Module 6, Your Voice, No Camera: narrated lessons, open on a laptop and a phone.")}{shot("11-passport-and-libraries", "The Course SOP Library on a laptop and the Passport form on a tablet.")}{shot("06-module-5", "Module 5: lesson boards and gamification, open on a laptop and a phone.")}{shot("02-module-1", "Module 1, the capture system, open on a laptop and a phone.")}</div>
+<div class="nar stack ctr-h" style="margin-top:12px"><p class="lbl">What women say about learning with Gen</p></div>
+{proof.css(accent="#6348B5", ink="#27243A", card="#FAF9F6", radius="14px")}{proof.quotes(("Morgan", "Tesha", "Clare"))}</div></section>''')
 assert s[1].startswith("[Insert genuine screenshots")
 
 o.append(split(21, "lil"))
@@ -445,10 +448,11 @@ o.append(f'''<section class="lil" style="padding-top:0"><div class="in shotwrap"
 # 22 EVERYTHING YOU RECEIVE
 s = section(22)
 ii = s.index("Your investment")
+inv_lbl = f'<p class="lbl">{e(s[ii])}</p>' if SHOW_SLOTS else ""
 recv = "".join(f'<div><b>{e(t)}</b><p>{e(d)}</p></div>' for t, d in zip(s[2:ii:2], s[3:ii:2]))
 o.append(f'''<section id="enroll" class="inkbg dk" style="scroll-margin-top:80px"><div class="in stack" style="gap:26px;max-width:960px">
 <div class="stack ctr-h"><p class="lbl">{e(s[0])}</p><h2 style="text-align:center">The Interactive <em>Course Creator</em></h2></div>
-{win("everything_inside.list", f'<div class="recv">{recv}</div><div class="stack" style="align-items:center;text-align:center;margin-top:22px;gap:14px"><p class="lbl">{e(s[ii])}</p>{slot("Course price.", "sm")}{slot("Confirmed course access duration and purchase terms.", "sm")}<div class="row">{cta(s[ii + 3][1:-1], "br")}</div><p class="big">{e(s[ii + 4])}</p></div>')}
+{win("everything_inside.list", f'<div class="recv">{recv}</div><div class="stack" style="align-items:center;text-align:center;margin-top:22px;gap:14px">{inv_lbl}{slot("Course price.", "sm")}{slot("Confirmed course access duration and purchase terms.", "sm")}<div class="row">{cta(s[ii + 3][1:-1], "br")}</div><p class="big">{e(s[ii + 4])}</p></div>')}
 {"" if CHECKOUT else slot("Your Interactive Course Creator checkout link. Until you send it, every buy button scrolls to this box.")}
 </div></section>''')
 assert s[1] == "The Interactive Course Creator"
@@ -460,10 +464,10 @@ for l in s:
     if l.endswith("?") and len(l) < 110: cur = [l, []]; qs.append(cur)
     elif cur: cur[1].append(l)
 def ans(lines):
-    return [f'<span class="islot" style="display:inline-block;border:2px dashed #6348B5;border-radius:10px;padding:3px 10px;color:#6348B5;font-weight:600">To fill in: {e(l[8:-1])}</span>' if l.startswith("[Insert") else e(l) for l in lines]
+    return [e(l) for l in lines if not l.startswith("[")]
 o.append(f'''<section class="grid-bg"><div class="nar stack" style="gap:26px">
 <div class="stack" style="text-align:center;gap:14px"><p class="lbl">Frequently asked questions</p><h2>Your questions, <em>answered.</em></h2></div>
-<div class="faq">{"".join(faq(q, ans(a)) for q, a in qs)}</div></div></section>''')
+<div class="faq">{"".join(faq(q, ans(a)) for q, a in qs if ans(a))}</div></div></section>''')
 
 # 24 FINAL
 s = section(24)

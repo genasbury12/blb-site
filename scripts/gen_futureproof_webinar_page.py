@@ -176,10 +176,10 @@ for l in s:
     if l.endswith("?") and len(l) < 110: cur = [l, []]; qs.append(cur)
     elif cur: cur[1].append(l)
 def ans(lines):
-    return [f'<span style="display:inline-block;border:1px dashed #69577F;padding:3px 10px;color:#69577F;font-weight:600">To fill in: {e(l[8:-1])}</span>' if l.startswith("[Insert") else e(l) for l in lines]
+    return [e(l) for l in lines if not l.startswith("[")]
 o.append(f'''<section style="background:#F6F3F8"><div class="nar stack" style="gap:26px">
 <div class="stack" style="text-align:center;gap:14px"><p class="lbl">Frequently asked questions</p><h2>Before you <em>reserve your seat.</em></h2></div>
-<div class="faq">{"".join(faq(q, ans(a)) for q, a in qs)}</div></div></section>''')
+<div class="faq">{"".join(faq(q, ans(a)) for q, a in qs if ans(a))}</div></div></section>''')
 
 # 13 FINAL REGISTRATION
 s = section(13)
@@ -208,8 +208,7 @@ o.append("<script>\n(function(){\n  var FORM_ID=" + json.dumps(WEBINAR_FORM_ID) 
       '<div data-ff-el="footer"><button type="submit" data-ff-el="submit" style="width:100%">'+esc(T.button)+ARR+'</button></div></div>'+
       '<div data-ff-el="success"></div><p class="err" data-ff-el="error" role="alert"></p></form></div>'+
       '<p class="note">'+esc(T.note)+'</p>'+
-      '<div class="pf-slot sm"><b>To fill in</b>'+esc(T.consent)+'</div>'+
-      (f?'':'<div class="pf-slot sm"><b>To fill in</b>The Flodesk form for this webinar is not connected yet, so sign ups are not saved.</div>');
+      '';
     var wrap=document.getElementById(id),form=wrap.querySelector('form'),err=wrap.querySelector('.err'),done=false;
     function finish(){if(done)return;done=true;try{sessionStorage.setItem('fpw_email',form.querySelector('[name=email]').value.trim());}catch(x){}location.href='/webinar-confirmation/';wrap.innerHTML='<p class="done">You’re in. Your webinar details are on their way to your inbox.</p>';}
     form.addEventListener('submit',function(e){
@@ -218,7 +217,8 @@ o.append("<script>\n(function(){\n  var FORM_ID=" + json.dumps(WEBINAR_FORM_ID) 
       if(!nm){err.textContent='Add your first name.';return;}
       if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){err.textContent='That email doesn’t look quite right yet.';return;}
       err.textContent='';
-      if(!f){err.textContent='This form is not connected to Flodesk yet.';return;}
+      // Until the Flodesk form is connected, registrations are emailed to Gen so nobody is lost.
+      if(!f){form.querySelector('button').disabled=true;try{fetch('https://formsubmit.co/ajax/hello@bossladybloggers.com',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({_subject:'New Futureproof Your Blog registration',_template:'table',name:nm,email:em,page:location.href}),keepalive:true}).catch(function(){});}catch(x){}setTimeout(finish,500);return;}
       form.querySelector('button').disabled=true;
       if(window.fd&&window.fd.q){try{fetch('https://form.flodesk.com/forms/'+f+'/submit',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({firstName:nm,email:em,confirm_email_address:''}),keepalive:true}).catch(function(){});}catch(x){}setTimeout(finish,400);return;}
       setTimeout(function(){if(wrap.getAttribute('data-ff-stage')!=='error')finish();},9000);
