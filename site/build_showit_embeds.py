@@ -20,6 +20,7 @@ PAGES = {
     "start-here/index.html":     ("StartHere.html", "/start-here"),
     "about/index.html":          ("About.html", "/about"),
     "coaching/index.html":       ("BlogCoaching.html", "/blog-coaching"),
+    "academy/index.html":        ("Academy.html", "/academy"),
     "membership/index.html":     ("Membership.html", "/membership"),
     "free-masterclass/index.html": ("FreeMasterclass.html", "/free-masterclass"),
     "membership-offer/index.html": ("MembershipOffer.html", "/membership-offer"),
@@ -41,6 +42,7 @@ LINKMAP = [
     ('href="/boss/"', 'href="/boss"'),
     ('href="/coaching/"', 'href="/blog-coaching"'),
     ('href="/membership/"', 'href="/membership"'),
+    ('href="/academy/"', 'href="/academy"'),
     ('href="/free-masterclass/"', 'href="/free-masterclass"'),
     ('href="/podcast/"', 'href="/podcast"'),
     ('href="/blog/post-template.html"', 'href="/blog"'),
@@ -172,6 +174,7 @@ PIECE_NAV = """<div style="background:#FBF5EE;padding:16px clamp(16px,4vw,40px);
 <a href="/free-masterclass" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Free Masterclass</a>
 <a href="/blog-coaching" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Work With Me</a>
 <a href="/membership" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Membership</a>
+<a href="/academy" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Courses</a>
 <a href="/podcast" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Podcast</a>
 <a href="/blog" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Blog</a>
 <a href="/contact" style="color:#3A1C2A;text-decoration:none;padding:8px 0">Contact</a>
@@ -243,6 +246,7 @@ PIECE_MENUPAGE = """<div style="min-height:100vh;background:#A23E66;padding:22px
 <a href="/start-here" style="color:#FBF5EE;text-decoration:none">Start Here</a>
 <a href="/blog-coaching" style="color:#FBF5EE;text-decoration:none">Work With Me</a>
 <a href="/membership" style="color:#FBF5EE;text-decoration:none">The Blogging Ladies Membership</a>
+<a href="/academy" style="color:#FBF5EE;text-decoration:none">Courses</a>
 <a href="/free-masterclass" style="color:#FBF5EE;text-decoration:none">Free Masterclass</a>
 <a href="/podcast" style="color:#FBF5EE;text-decoration:none">Podcast</a>
 <a href="/blog" style="color:#FBF5EE;text-decoration:none">Blog</a>

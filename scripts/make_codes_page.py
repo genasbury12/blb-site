@@ -18,6 +18,7 @@ GROUPS = [
         ("FreeMasterclass", "/free-masterclass", "NEW: Your free masterclass opt-in page, now with a countdown to Nov 30 above the form. The form is your real Flodesk masterclass form."),
         ("MembershipOffer", "/membership-offer", "NEW: The 1-hour 50% off upsell people see right after signing up. Leave it out of your menu."),
         ("BlackFriday", "/black-friday", "NEW: Early access Nov 25 through Cyber Monday: 50% off, $23.50 a month locked in forever, plus the free 1:1 call and roadmap."),
+        ("Academy", "/academy (menu title: Courses)", "NEW: The BOSS Academy storefront. The course library filters by category. Dashed boxes mark the course and All Access prices; send me each course's sales page link and the All Access link and I'll wire the buttons."),
         ("Membership", "/membership", "NEW: The Blogging Ladies Membership sales page."),
         ("Home", "/ (home page)", ""), ("StartHere", "/start-here", ""), ("About", "/about", ""),
         ("BlogCoaching", "/blog-coaching", "NEW: Now your Work With Me page for The BOSS Business Experience. Dashed boxes mark what you still need to fill in: portfolio, testimonial, case studies, starting investment, timeline, payment plans and the two \"if confirmed\" resources."), ("Podcast", "/podcast", ""),
