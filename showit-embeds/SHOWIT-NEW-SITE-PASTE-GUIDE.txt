@@ -1,7 +1,7 @@
 BOSS LADY BLOGGERS - NEW WEBSITE ON SHOWIT - PASTE GUIDE
 =========================================================
 
-24 full pages plus the small blog-post pieces. Same workflow as before: one full-page embed
+25 full pages plus the small blog-post pieces. Same workflow as before: one full-page embed
 canvas per Showit page, paste the whole file, publish.
 
 THE FILES AND WHERE EACH ONE GOES
@@ -35,6 +35,9 @@ ClientProject.html        /client-project  (ONE page serves every client
                           Leave it out of your menu)
 FutureproofWebinar.html   /futureproof-webinar  (free Futureproof Your Blog
                           masterclass sign up page. No menu or footer:
+                          hide your Showit nav and footer here)
+WebinarConfirmation.html  /webinar-confirmation  (shown right after the
+                          webinar sign up. Leave it out of your menu;
                           hide your Showit nav and footer here)
 FutureproofReplay.html    /futureproof-replay  (the masterclass replay with
                           your next steps. Leave it out of your menu; hide

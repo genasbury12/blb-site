@@ -264,3 +264,7 @@ LEGAL = ('<div class="legal" style="padding:22px clamp(16px,4vw,48px);text-align
 # Flodesk form for the "Futureproof Your Blog" webinar. Paste its form ID here once it exists in Flodesk:
 # the homepage webinar section and /futureproof-webinar both use it.
 WEBINAR_FORM_ID = ""
+
+# "Futureproof Your Blog" webinar details, used by the confirmation page (and its Add to calendar button).
+# start: ISO date and time with UTC offset, e.g. "2026-12-10T19:00:00-05:00". Leave "" until it's set.
+WEBINAR = {"start": "", "minutes": 60, "date": "", "time": "", "duration": ""}

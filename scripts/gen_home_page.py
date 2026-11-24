@@ -472,7 +472,7 @@ o.append(r'''<script>
    (f?'':'<div class="hp-slot" style="margin-top:12px"><b>To fill in</b>Flodesk form for the Futureproof Your Blog webinar is not connected yet, so sign ups are not saved.</div>');
   host.innerHTML=h;
   var wrap=document.getElementById(id),form=wrap.querySelector('form'),err=wrap.querySelector('.ff-err'),done=false;
-  function finish(){if(done)return;done=true;wrap.innerHTML='<p style="margin:0;font:400 26px/1.25 var(--font-display);color:#3A1C2A">You&rsquo;re in. Check your inbox for your webinar details.</p>';}
+  function finish(){if(done)return;done=true;try{sessionStorage.setItem('fpw_email',form.querySelector('[name=email]').value.trim());}catch(x){}location.href='/webinar-confirmation/';wrap.innerHTML='<p style="margin:0;font:400 26px/1.25 var(--font-display);color:#3A1C2A">You&rsquo;re in. Check your inbox for your webinar details.</p>';}
   form.addEventListener('submit',function(e){
     e.preventDefault();
     var nm=form.querySelector('[name=firstName]').value.trim(),em=form.querySelector('[name=email]').value.trim();
