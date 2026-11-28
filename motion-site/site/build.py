@@ -1,6 +1,6 @@
 import re,os,sys,html as H
 D=os.path.dirname(os.path.abspath(__file__))  # was /tmp/site; pages still say /tmp/site/ and are mapped here
-HH='https://raw.githubusercontent.com/genasbury12/blb-site/4d99857666b97bc51579ccfa9ced77e68acdcce5'  # pinned commit that holds every image, incl. freebies and the popup poster
+HH='https://raw.githubusercontent.com/genasbury12/blb-site/e6ea3fd9030075704ef913bd2516638cd05693ea'  # pinned commit that holds every image, incl. freebies and the popup poster
 NM=os.environ.get('BLB_NODE_MODULES',os.path.join(os.path.dirname(D),'node_modules'))+'/'
 CDN=['https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/gsap.min.js','https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/ScrollTrigger.min.js','https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/SplitText.min.js','https://cdn.jsdelivr.net/npm/lenis@1.3.28/dist/lenis.min.js']
 LOC=[NM+'gsap/dist/gsap.min.js',NM+'gsap/dist/ScrollTrigger.min.js',NM+'gsap/dist/SplitText.min.js',NM+'lenis/dist/lenis.min.js']
@@ -62,6 +62,7 @@ def build(name):
     body=body.replace('@FILM@',film).replace('@RIB@',rib).replace('@CHECKS@',checks).replace('@PF@',cards).replace('@VIDS@',vids).replace('@WAVE@',wave).replace('@PROOF@',proof)
     out=open(f'{D}/links.html').read()+tlinks+'<style>'+open(f'{D}/core.css').read()+open(f'{D}/kit.css').read()+pcss+tcss+'</style>\n'+('<div class="m sh" id="m-root">\n' if '<!--sh-->' in body else '<div class="m" id="m-root">\n')+open(f'{D}/nav.html').read()+body+open(f'{D}/footer.html').read()+'</div>\n'+''.join(f'<script src="{u}"></script>\n' for u in CDN)+'<script>'+open(f'{D}/core.js').read()+'</script>\n'
     out=_r.sub(r'https://cdn\.jsdelivr\.net/gh/genasbury12/blb-site@([0-9a-f]+)/',r'https://raw.githubusercontent.com/genasbury12/blb-site/\1/',out.replace('@H@',HH)) # jsdfix
+    out=out.replace('@JSD@','https://cdn.jsdelivr.net/gh/genasbury12/blb-site@'+HH.rsplit('/',1)[1])  # videos: jsDelivr sends video/mp4 (GitHub raw does not), added after the jsdfix so it stays on jsDelivr
     out=out.replace('&#8599;','&#8599;&#xFE0E;').replace('&#8595;','&#8595;&#xFE0E;').replace('&#8593;','&#8593;&#xFE0E;').replace('↗','↗︎')
     os.makedirs(f'{D}/out',exist_ok=True)
     open(f'{D}/out/{name}.html','w').write(out)
