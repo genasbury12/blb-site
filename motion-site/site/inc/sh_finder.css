@@ -1,0 +1,14 @@
+.bm .dk .card:not([style*="background"]) h3,.bm .dk .join h3,.bm .dk .dash h3,.bm .dk .finder h3,.bm .dk .ticket h3{color:var(--p)}
+.bm .dk .card:not([style*="background"]) em,.bm .dk .join em,.bm .dk .dash em,.bm .dk .finder em{color:var(--b)}
+.bm .dk .card:not([style*="background"]) .lbl,.bm .dk .join .lbl,.bm .dk .finder .lbl{color:var(--b)}
+.bm .finder{background:var(--w);border-radius:30px;box-shadow:0 40px 80px rgba(58,28,42,.14);padding:clamp(24px,4vw,48px)}
+.bm .fq{display:none;flex-direction:column;gap:14px}
+.bm .fq.on{display:flex;animation:bfade .5s ease}
+.bm .fq .opts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.bm .fq .opts button{text-align:left;padding:18px 20px;border-radius:16px;border:1.5px solid var(--r);background:#fff;font:400 20px/1.25 var(--font-display);color:var(--p);cursor:pointer;transition:all .25s}
+.bm .fq .opts button:hover{border-color:var(--b);transform:translateY(-2px)}
+.bm .fq .opts button[aria-pressed=true]{background:var(--p);color:var(--c);border-color:var(--p)}
+.bm .fdots{display:flex;gap:8px}
+.bm .fdots i{width:34px;height:6px;border-radius:9px;background:#F0DCE3}
+.bm .fdots i.on{background:var(--b)}
+.bm .fq .opts{grid-template-columns:minmax(0,1fr)}

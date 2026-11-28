@@ -1,0 +1,41 @@
+<!DOCTYPE html><html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:IS;src:url(file:///root/.fonts/InstrumentSerif-Regular.ttf)}
+@font-face{font-family:IS;font-style:italic;src:url(file:///root/.fonts/InstrumentSerif-Italic.ttf)}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1350px;overflow:hidden;background:#2A1421}
+#v{position:relative;width:1080px;height:1350px;overflow:hidden;font-family:Inter,Arial,sans-serif;color:#FBF5EE;
+ background:radial-gradient(ellipse at 50% 30%,#4A2236 0%,#2A1421 70%)}
+.grid{position:absolute;inset:0;background:
+ linear-gradient(rgba(246,201,216,.07) 1px,transparent 1px) 0 0/30px 30px,
+ linear-gradient(90deg,rgba(246,201,216,.07) 1px,transparent 1px) 0 0/30px 30px,
+ linear-gradient(rgba(246,201,216,.16) 1.5px,transparent 1.5px) 0 0/150px 150px,
+ linear-gradient(90deg,rgba(246,201,216,.16) 1.5px,transparent 1.5px) 0 0/150px 150px}
+.scan{position:absolute;left:0;right:0;height:180px;background:linear-gradient(180deg,transparent,rgba(246,201,216,.07),transparent)}
+.lbl{position:absolute;font:700 22px/1 Inter;letter-spacing:.24em;text-transform:uppercase;color:#F6C9D8}
+.corner{position:absolute;font:600 18px/1 Inter;letter-spacing:.2em;color:rgba(246,201,216,.55)}
+.sc{position:absolute;inset:0 0 300px 0}
+.big{position:absolute;left:0;right:0;text-align:center;font-family:IS;font-weight:400;line-height:.95;color:#FBF5EE}
+.big em{color:#F6C9D8;font-style:italic}
+svg{position:absolute;overflow:visible}
+.card{position:absolute;width:250px;height:300px;border:3px solid #F6C9D8;border-radius:18px;background:rgba(42,20,33,.85);padding:26px}
+.card i{display:block;height:12px;border-radius:6px;background:rgba(246,201,216,.35);margin-bottom:16px}
+.card b{display:block;height:20px;width:70%;border-radius:6px;background:#F6C9D8;margin-bottom:24px}
+.cap{position:absolute;left:60px;right:60px;bottom:70px;height:190px;display:flex;align-items:center;justify-content:center;text-align:center;flex-wrap:wrap;gap:0 16px;font:800 60px/1.12 Inter;letter-spacing:-.01em}
+.cap span{color:rgba(251,245,238,.38)}
+.cap span.on{color:#FBF5EE}
+.cap span.hot{color:#F6C9D8}
+.bar{position:absolute;left:0;bottom:0;height:10px;background:#A23E66}
+.pill{position:absolute;border-radius:999px}
+</style></head><body><div id="v">
+<div class="grid"></div><div class="scan" id="scan"></div>
+<div class="corner" style="left:40px;top:40px">BLB / BLUEPRINT</div>
+<div class="corner" style="right:40px;top:40px" id="tc">00:00</div>
+<div class="corner" style="left:40px;top:1020px">FUTUREPROOF YOUR BLOG</div>
+<div class="corner" style="right:40px;top:1020px">FREE MASTERCLASS</div>
+<div id="stage" class="sc"></div>
+<div class="cap" id="cap"></div>
+<div class="bar" id="bar"></div>
+</div>
+<script src="words.js"></script><script src="vsl.js"></script>
+</body></html>

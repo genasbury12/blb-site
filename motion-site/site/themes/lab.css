@@ -1,0 +1,21 @@
+/* INTERACTIVE LAB */
+.m{--plum:#27243A;--berry:#6348B5;--rose:#F1A48E;--pop:#F1A48E;--blush:#EBEBE5;--lilac:#E0D5F5;--cream:#FAF9F6;--soft:#FFFFFF;--cocoa:#27243A;--mauve:#4A4660;--line:#DDD8EA;--bl:linear-gradient(135deg,#FAF9F6,#E0D5F5);--fd:'Space Grotesk',Arial,sans-serif;--fb:'Outfit',Arial,sans-serif;--fm:'Space Mono','Courier New',monospace;--fs:'Space Grotesk',sans-serif}
+.m,.m p,.m li{font-family:var(--fb)}
+.m h1,.m h2,.m h3{font-family:var(--fd);font-weight:700;letter-spacing:-.03em;line-height:.98}
+.m h2 em,.m h1 em{color:var(--berry);font-style:normal}
+.m .on-dark h2 em,.m .on-dark h1 em,.m .on-dark em{color:var(--rose)}
+.m .scr{font-family:var(--fm);font-weight:400;font-size:20px!important;letter-spacing:.06em;color:var(--berry)}
+.m .scr::before{content:"> "}
+.m .on-dark .scr{color:var(--rose)}
+.s-hero{background:#6348B5!important;background-image:linear-gradient(rgba(255,255,255,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.08) 1px,transparent 1px)!important;background-size:44px 44px!important}
+.s-hero .aur{display:none}
+.s-hero h1{color:#FAF9F6!important}.s-hero h1 em{color:#F1A48E!important}.s-hero .sub{color:#E0D5F5!important}.s-hero .eye{color:#F1A48E!important}
+.s-hero .arch{background:#F1A48E!important;border-radius:24px 24px 0 0!important;animation:none!important}
+.s-hero .bgname{-webkit-text-stroke:1.5px rgba(250,249,246,.25)!important}
+.lab-grid{background-image:linear-gradient(rgba(99,72,181,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(99,72,181,.08) 1px,transparent 1px);background-size:40px 40px}
+.lab-win{border:2.5px solid #27243A;border-radius:18px;background:#FAF9F6;overflow:hidden;box-shadow:8px 8px 0 #27243A}
+.lab-win>.bar{display:flex;gap:7px;align-items:center;padding:10px 14px;background:#E0D5F5;border-bottom:2.5px solid #27243A}
+.lab-win>.bar i{width:11px;height:11px;border-radius:50%;background:#6348B5}.lab-win>.bar i:first-child{background:#F1A48E}
+.lab-win>.bar span{margin-left:auto;font:400 11px/1 var(--fm);color:#27243A}
+.m .btn{background:#F1A48E;color:#27243A}.m .btn i{background:#27243A;color:#FAF9F6}
+.m .btn.cream{background:#F1A48E;color:#27243A}

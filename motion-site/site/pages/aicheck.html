@@ -1,0 +1,183 @@
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<div class="zq-pad"><div id="pbmq">
+<div class="topline" aria-hidden="true"></div>
+<div class="wrap">
+  <div class="brand"><b>The Productive Blogger <i>Method</i></b><span>by Boss Lady Bloggers</span></div>
+
+  <section class="screen intro" id="s-intro">
+    <div class="folder" data-tab="2-minute check" style="--fc:var(--f1)">
+      <div class="kicker">For bloggers who use AI, or avoid it</div>
+      <h1>Is AI making you <em>busier?</em></h1>
+      <p class="lead">You were promised AI would save you time. If your week still feels scattered, there's a reason, and it's not that you're doing it wrong. Answer 8 quick questions to find your pattern, what it's costing you, and the one fix to start this week.</p>
+      <div class="chips"><span class="chip">8 questions</span><span class="chip">2 minutes</span><span class="chip">A free fix for your pattern</span></div>
+      <button class="btn berry" type="button" id="start">Start the check <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    </div>
+  </section>
+
+  <section class="screen q" id="s-q" hidden>
+    <div class="prog"><div class="bar" aria-hidden="true"><i id="bar"></i></div><span class="count" id="count">1 of 8</span></div>
+    <div class="folder" data-tab="Question 1" style="--fc:var(--f2)" id="qfolder">
+      <h2 id="qtext"></h2>
+      <div class="opts" id="opts" role="group" aria-labelledby="qtext"></div>
+    </div>
+    <div class="qnav"><button class="back" type="button" id="back">Back</button><span class="keys">Tip: press 1 to 4 to answer</span></div>
+  </section>
+
+  <section class="screen gate" id="s-gate" hidden>
+    <div class="folder" data-tab="Almost there" style="--fc:var(--f4)">
+      <div class="kicker">Your result is ready</div>
+      <h2>Where should I send <em>your result?</em></h2>
+      <p class="sub">You'll see it on the next screen, and get a copy by email with your free fix written out.</p>
+      <div class="slot" id="slot">
+        <p class="slot-label">Flodesk form: name and email</p>
+        <!-- FLODESK FORM: paste embed here -->
+        <input type="hidden" name="type" id="type-field" value="">
+        <div id="formhost"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="screen result" id="s-result" hidden></section>
+
+  <p class="foot">The Productive Blogger Method by Boss Lady Bloggers.</p>
+</div>
+</div>
+
+</div>
+<script>
+(function(){
+'use strict';
+/* Flodesk: Flodesk forms can't take hidden fields, so the type is told to Flodesk by WHICH form she fills in.
+   Make one form per type (each adds her to that type's segment) and paste each form ID here.
+   Until an ID is filled in, the form still works on the page but nothing is sent. */
+var FORMS={"polisher":"6b038abf2d07304ab44cc834","where-do-i-start":"6b038b96cc45cc8b60a89019","shiny-starter":"6b038ba244fffb391aa8c953","squeezed":"6b038ba642bfde313b696e1c"};
+
+var root=document.getElementById('pbmq');
+var T={
+ P:{slug:"polisher",name:"The Polisher",fc:"var(--f3)",one:"AI helps you make things better. It just never lets them be done.",
+   you:["You rewrite, re-plan or redesign something most weeks","Your website, your plan or your offer is always almost ready","AI gives you a great draft, and you spend the afternoon perfecting it","You can name a lot you improved last week, and very little you published"],
+   real:"Polishing feels productive because the work really does get better. But nothing earns, grows or helps anyone until it's out in the world. AI made polishing faster, so now there's even more to tweak.",
+   cost:"Weeks of good work that nobody sees, and the quiet feeling that you're behind even though you're working hard.",
+   free:"Before you start your next task, write one line: \"This is done when...\" Stop when you hit it, even if you could make it better.",
+   fix:[["Done looks like","Every weekly task gets a finish line before you start it, so polishing has an end."],["Three priorities a week","One revenue, one audience, one delivery. Shipping those three is the win."],["Claude drafts, you approve","You review once, then it goes out. No endless rounds."]]},
+ W:{slug:"where-do-i-start",name:"The \"Where Do I Start\" Blogger",fc:"var(--f6)",one:"You have plenty to do. What you don't have is a decision about what matters most.",
+   you:["You sit down and spend the first chunk of time deciding what to do","You ask AI what you should work on and get a different answer every time","Your to-do list is long, and you're never sure it's the right list","You often wonder if anything you're doing actually moves your blog forward"],
+   real:"Deciding is the most tiring part of working alone. When you decide fresh every time you sit down, you spend your best energy before the work even starts. AI can list a hundred ideas, but it can't choose for you.",
+   cost:"Time lost to deciding, and the doubt that follows you into every task.",
+   free:"Pick your three things for this week right now, one that could earn money, one that grows your audience, one that helps your readers. Write them where you'll see them. Don't decide again until Monday.",
+   fix:[["Monday decides the week","One short planning session picks your three priorities, so the rest of the week is just doing."],["Claude knows your business","It suggests priorities based on what you sell and who you serve, not generic advice."],["One command center","Your week lives in one place, so you never wonder what's next."]]},
+ S:{slug:"shiny-starter",name:"The Shiny Starter",fc:"var(--f5)",one:"Starting is easy for you. AI made it even easier. Finishing is where it gets lost.",
+   you:["You have half-built freebies, posts or products sitting in drafts","A new idea mid-week usually wins over the plan","AI helps you start something new in minutes","Finishing feels boring once the exciting part is over"],
+   real:"New ideas give you energy, and that's a strength. But AI removes the friction that used to slow you down, so ideas multiply faster than you can finish them. Without one place to park them, every idea competes with the work already in progress.",
+   cost:"A pile of good starts, and very few things your readers can actually use or buy.",
+   free:"Make a \"later\" list today. The next time a new idea hits, add it there and go back to what you were doing. Then pick one unfinished thing to finish this week.",
+   fix:[["One revenue task a week","Finished before anything new begins."],["An idea parking lot","Ideas get saved, not started, so they stop pulling you off course."],["A done list","You see what you finished every week, which makes finishing feel as good as starting."]]},
+ Q:{slug:"squeezed",name:"The Squeezed Blogger",fc:"var(--f2)",one:"You don't have a lot of time. So every minute that goes to restarting really hurts.",
+   you:["You work in short windows: nap time, lunch breaks, after bedtime","You open a new AI chat and explain your blog all over again","By the time you get going, your window is almost over","You feel behind before the week even starts"],
+   real:"The problem isn't your hours. It's the startup cost. Every session begins with remembering where you were, re-explaining your blog to AI, and deciding what to do. In a 30-minute window, that can be most of the window.",
+   cost:"Your scarce time spent on warming up instead of moving forward.",
+   free:"End every work session by writing the very next step on a sticky note, so the next window starts with doing, not deciding.",
+   fix:[["Claude remembers your business","Set it up once and every chat already knows your blog, your offers and your voice."],["Your week is already planned","Every short window opens with the next task waiting."],["Hand off the repeat work","Claude handles the tasks you do every week, so your time goes to what only you can do."]]}
+};
+var Q=[
+ ["You sit down to work on your blog. What usually happens first?",[["I start fixing something that's already done","P"],["I try to figure out what to work on","W"],["I get excited about a new idea and start on it","S"],["I spend the first chunk remembering where I left off","Q"]]],
+ ["How do you use AI right now?",[["To rewrite and improve things I've already made","P"],["To ask what I should be doing","W"],["To start new things fast","S"],["In quick bursts when I finally get a minute","Q"]]],
+ ["When AI gives you an answer, what do you do with it?",[["Edit it again and again","P"],["Wonder if it's even the right direction","W"],["Use it to start something new","S"],["Run out of time before I can use it","Q"]]],
+ ["What did you finish last week?",[["Lots of improvements, not much published","P"],["Honestly, I'm not sure it was the right stuff","W"],["I started a few things, finished not much","S"],["Less than I wanted. My time got eaten up","Q"]]],
+ ["Your to-do list is...",[["Full of things I'm still perfecting","P"],["Long, and I'm never sure what matters most","W"],["Always getting new ideas added","S"],["Realistic, but I never get through it","Q"]]],
+ ["What eats your blog time most?",[["Tweaking my website, plan or offer","P"],["Deciding what to do","W"],["Switching to new projects","S"],["Life. I only get small windows","Q"]]],
+ ["A new idea hits mid-week. You...",[["Add it to the plan and redo the plan","P"],["Feel even less sure what to focus on","W"],["Start on it right away","S"],["Wish I had the time for it","Q"]]],
+ ["What worries you most about AI and your blog?",[["It'll never sound quite as good as I want","P"],["I'll use it on the wrong things","W"],["It'll make me even more scattered","S"],["I don't have time to learn it properly","Q"]]]
+];
+var ORDER=["P","W","S","Q"],FC=["--f2","--f3","--f4","--f6","--f5","--f1","--f2","--f3"];
+var i=0,ans=[],firstName="",kind=null;
+function $(id){return document.getElementById(id);}
+function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+var ARROW='<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+/* Showit: grow the canvas around this embed so nothing is cut off */
+function fit(){var r=root.getBoundingClientRect(),el=root.parentElement,n=0;
+ while(el&&el!==document.body&&el!==document.documentElement&&n<10){n++;var b=el.getBoundingClientRect(),need=Math.ceil(r.bottom-b.top);
+  if(el.getAttribute('data-pbm-fit')||b.height<need-1){el.style.height=need+'px';el.setAttribute('data-pbm-fit','1');}el=el.parentElement;}}
+if(window.ResizeObserver)new ResizeObserver(fit).observe(root);
+window.addEventListener('load',fit);window.addEventListener('resize',fit);
+
+function show(id,focusEl){
+ root.classList.toggle('is-pbm',id==='s-result');
+ root.querySelectorAll('.screen').forEach(function(s){var on=s.id===id;s.hidden=!on;if(on){s.classList.remove('enter');void s.offsetWidth;s.classList.add('enter');}});
+ var top=root.getBoundingClientRect().top+window.pageYOffset;if(window.pageYOffset>top)window.scrollTo(0,top);
+ if(focusEl)try{focusEl.focus({preventScroll:true});}catch(e){}
+ fit();
+}
+function renderQ(){
+ var q=Q[i];$('qtext').textContent=q[0];$('count').textContent=(i+1)+' of '+Q.length;$('bar').style.width=(i/Q.length*100)+'%';
+ var f=$('qfolder');f.style.setProperty('--fc','var('+FC[i]+')');f.setAttribute('data-tab','Question '+(i+1));
+ $('opts').innerHTML=q[1].map(function(a,k){return '<button type="button" class="opt" data-t="'+a[1]+'" aria-pressed="'+(ans[i]===a[1])+'"><b>'+'ABCD'[k]+'</b><span>'+esc(a[0])+'</span></button>';}).join('');
+ $('back').style.visibility=i?'visible':'hidden';
+}
+$('opts').addEventListener('click',function(e){var b=e.target.closest('.opt');if(!b)return;
+ ans[i]=b.getAttribute('data-t');root.querySelectorAll('.opt').forEach(function(o){o.setAttribute('aria-pressed',o===b?'true':'false');});
+ var at=i;setTimeout(function(){if(at!==i)return;i++;if(i<Q.length){renderQ();show('s-q',root.querySelector('.opt'));}else{$('bar').style.width='100%';toGate();}},220);});
+$('back').addEventListener('click',function(){if(i>0){i--;renderQ();show('s-q',root.querySelector('.opt'));}});
+$('start').addEventListener('click',function(){i=0;ans=[];renderQ();show('s-q',root.querySelector('.opt'));});
+document.addEventListener('keydown',function(e){if($('s-q').hidden||e.metaKey||e.ctrlKey||e.altKey)return;var n=parseInt(e.key,10),o=root.querySelectorAll('.opt');if(n>=1&&n<=o.length)o[n-1].click();});
+
+/* Most answers wins. A tie goes to her answer on question 4, then 2, then 6. */
+function winner(a){var c={P:0,W:0,S:0,Q:0};a.forEach(function(x){c[x]++;});var max=Math.max(c.P,c.W,c.S,c.Q);
+ var tied=ORDER.filter(function(k){return c[k]===max;});if(tied.length===1)return tied[0];
+ var tb=[3,1,5];for(var j=0;j<tb.length;j++){if(tied.indexOf(a[tb[j]])>-1)return a[tb[j]];}return tied[0];}
+
+/* Flodesk */
+function loadFd(){(function(w,d,t,h,s,n){if(w.fd)return;w.FlodeskObject=n;var fn=function(){(w[n].q=w[n].q||[]).push(arguments);};w[n]=w[n]||fn;var f=d.getElementsByTagName(t)[0];var v='?v='+Math.floor(new Date().getTime()/(120*1000))*60;var sm=d.createElement(t);sm.async=true;sm.type='module';sm.src=h+s+'.mjs'+v;f.parentNode.insertBefore(sm,f);var sn=d.createElement(t);sn.async=true;sn.noModule=true;sn.src=h+s+'.js'+v;f.parentNode.insertBefore(sn,f);})(window,document,'script','https://assets.flodesk.com','/universal','fd');}
+function ffConfig(){return btoa(JSON.stringify({trigger:{mode:"immediately",value:0},onSuccess:{mode:"message",message:"",redirectUrl:""},coi:false,showForReturnVisitors:true,notification:true,gdpr:{acceptsMarketing:false,privacyPolicy:{enabled:false,mandatory:false}},trackingConfig:{metaPixelId:"",cookieBannerEnabled:false,googleAnalyticsId:""}}));}
+function toGate(){
+ kind=winner(ans);var slug=T[kind].slug,formId=FORMS[slug]||'';
+ $('type-field').value=slug;
+ var h='<div id="pbmf"'+(formId?' data-ff-el="root" data-ff-version="3" data-ff-type="inline" data-ff-name="pbmQuiz" data-ff-stage="default"':'')+'>';
+ if(formId)h+='<div data-ff-el="config" data-ff-config="'+ffConfig()+'" style="display:none"></div>';
+ h+='<form novalidate'+(formId?' action="https://form.flodesk.com/forms/'+formId+'/submit" method="post" data-ff-el="form"':'')+'><div data-ff-el="content"><div data-ff-el="fields">';
+ h+='<div class="field"><label for="pbm-first">First name</label><input id="pbm-first" type="text" name="firstName" maxlength="255" autocomplete="given-name" required></div>';
+ h+='<div class="field"><label for="pbm-email">Email</label><input id="pbm-email" type="text" name="email" maxlength="255" inputmode="email" autocomplete="email" required></div>';
+ h+='<input type="text" name="confirm_email_address" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">';
+ h+='</div><div data-ff-el="footer"><button type="submit" class="btn berry" data-ff-el="submit">Show my result '+ARROW+'</button></div></div>';
+ h+='<div data-ff-el="success"></div><div class="ff-err" data-ff-el="error"></div></form></div>';
+ h+=formId?'<p class="fine">I\'ll email your result and your free fix. Unsubscribe anytime.</p>':'<p class="fine">Preview: the Flodesk form for '+esc(T[kind].name)+' is not connected yet, so nothing typed here is sent anywhere.</p>';
+ $('formhost').innerHTML=h;
+ var wrap=$('pbmf'),form=wrap.querySelector('form'),err=wrap.querySelector('.ff-err'),done=false;
+ function finish(){if(done)return;done=true;renderResult(kind);}
+ form.addEventListener('submit',function(e){
+  e.preventDefault();
+  var nm=form.querySelector('[name=firstName]').value.trim(),em=form.querySelector('[name=email]').value.trim();
+  if(!nm){err.textContent='Add your first name so I know who I\'m writing to.';return;}
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){err.textContent='That email doesn\'t look quite right yet.';return;}
+  err.textContent='';firstName=nm.slice(0,40);
+  if(!formId){finish();return;}
+  var b=form.querySelector('button');b.disabled=true;
+  if(window.fd&&window.fd.q){try{fetch('https://form.flodesk.com/forms/'+formId+'/submit',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({firstName:nm,email:em,confirm_email_address:''}),keepalive:true}).catch(function(){});}catch(x){}setTimeout(finish,400);return;}
+  setTimeout(function(){if(wrap.getAttribute('data-ff-stage')!=='error')finish();},9000);
+ },true);
+ if(formId){loadFd();window.fd('form:handle',{formId:formId,rootEl:'#pbmf'});
+  if(window.MutationObserver)new MutationObserver(function(){var s=wrap.getAttribute('data-ff-stage');if(s==='success')finish();if(s==='error')form.querySelector('button').disabled=false;}).observe(wrap,{attributes:true,attributeFilter:['data-ff-stage']});}
+ show('s-gate',$('pbm-first'));
+}
+
+function renderResult(k){
+ var t=T[k],hi=firstName?esc(firstName)+', you\'re':'You\'re';
+ var h='<div class="folder" data-tab="Your result" style="--fc:'+t.fc+'">';
+ h+='<div class="kicker">'+hi+'</div><h1 class="type">'+esc(t.name)+'</h1><p class="one">'+esc(t.one)+'</p>';
+ h+='<div class="sec"><h3>This is you if...</h3><ul class="ticks">'+t.you.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul></div>';
+ h+='<div class="sec"><h3>What\'s really going on</h3><p>'+esc(t.real)+'</p><p class="truth">Here\'s the part nobody says: <b>AI without a weekly system multiplies whatever you already do.</b> If your week is scattered, AI helps you be scattered faster.</p></div>';
+ h+='<div class="sec"><h3>What it\'s costing you</h3><p>'+esc(t.cost)+'</p></div></div>';
+ h+='<div class="note"><h3>Your free fix for this week</h3><p>'+esc(t.free)+'</p></div>';
+ h+='<div class="folder" data-tab="How it gets fixed for good" style="--fc:var(--f4)"><p>A one-time fix helps this week. What fixes it for good is a weekly system that runs inside Claude and ClickUp. That\'s what The Productive Blogger Method sets up, step by step. For your pattern, it looks like this:</p>';
+ h+='<div class="fix">'+t.fix.map(function(f,n){return '<div><span>'+(n+1)+'</span><p><b>'+esc(f[0])+'.</b> '+esc(f[1])+'</p></div>';}).join('')+'</div></div>';
+ h+='<div class="cta"><h3>Reply and tell me <em>your type</em></h3><p>Check your inbox for your result. Hit reply, tell me you\'re '+esc(t.name.replace(/"/g,''))+', and I\'ll tell you personally where I\'d start. The full system opens January 4.</p><span class="sig">Genasys</span></div>';
+ h+='<p class="others"><span>Curious about the other types?</span>'+ORDER.filter(function(x){return x!==k;}).map(function(x){return '<button type="button" data-k="'+x+'">'+esc(T[x].name)+'</button>';}).join('')+'</p>';
+ $('s-result').innerHTML=h;show('s-result',$('s-result').querySelector('h1'));
+ $('s-result').querySelector('h1').setAttribute('tabindex','-1');
+}
+$('s-result').addEventListener('click',function(e){var b=e.target.closest('button[data-k]');if(b)renderResult(b.getAttribute('data-k'));});
+window.PBM_WINNER=winner;
+fit();
+})();
+</script>
