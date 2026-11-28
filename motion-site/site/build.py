@@ -1,6 +1,6 @@
 import re,os,sys,html as H
 D=os.path.dirname(os.path.abspath(__file__))  # was /tmp/site; pages still say /tmp/site/ and are mapped here
-HH='https://raw.githubusercontent.com/genasbury12/blb-site/5ef0f08395eb8a7051818a95b94f121bf62e67b8'
+HH='https://raw.githubusercontent.com/genasbury12/blb-site/4d99857666b97bc51579ccfa9ced77e68acdcce5'  # pinned commit that holds every image, incl. freebies and the popup poster
 NM=os.environ.get('BLB_NODE_MODULES',os.path.join(os.path.dirname(D),'node_modules'))+'/'
 CDN=['https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/gsap.min.js','https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/ScrollTrigger.min.js','https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/SplitText.min.js','https://cdn.jsdelivr.net/npm/lenis@1.3.28/dist/lenis.min.js']
 LOC=[NM+'gsap/dist/gsap.min.js',NM+'gsap/dist/ScrollTrigger.min.js',NM+'gsap/dist/SplitText.min.js',NM+'lenis/dist/lenis.min.js']
