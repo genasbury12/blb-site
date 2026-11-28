@@ -1,7 +1,7 @@
 (function(){
 /* ================= SETTINGS: fill these in ================= */
 var CFG={
-  FORM_URL:'',          /* ClickUp form share link (Form view > Share > copy link) */
+  FORM_URL:'',          /* ClickUp form share link (Form view > Share > copy link). Set the form's redirect to /futureproof-your-blog-delivery?unlocked=1 */
   REPLAY_ID:'',         /* YouTube video ID of the 30 minute training */
   CHAPTERS:[0,450,900,1350], /* chapter start times in seconds, adjust after recording */
   BONUS1_URL:'',        /* link to Offers AI Can't Copy */
@@ -46,7 +46,7 @@ function render(){
   var b1=$('[data-b1link]');if(b1){if(CFG.BONUS1_URL){b1.href=CFG.BONUS1_URL;b1.target='_blank';b1.rel='noopener';}}
   /* access clock */
   var accEnd=t0+CFG.ACCESS_HOURS*3600e3;
-  function acc(){var ms=accEnd-Date.now();if(ms<=0&&!demo){location.href='/masterclass-expired';return;}ms=Math.max(0,ms);var h=Math.floor(ms/3600e3),m=Math.floor(ms%3600e3/60e3),s=Math.floor(ms%60e3/1e3);var b=$$('[data-access] b');b[0].textContent=pad(h);b[1].textContent=pad(m);b[2].textContent=pad(s);}
+  function acc(){var ms=accEnd-Date.now();if(ms<=0&&!demo){location.href='/futureproof-your-blog-expired';return;}ms=Math.max(0,ms);var h=Math.floor(ms/3600e3),m=Math.floor(ms%3600e3/60e3),s=Math.floor(ms%60e3/1e3);var b=$$('[data-access] b');b[0].textContent=pad(h);b[1].textContent=pad(m);b[2].textContent=pad(s);}
   acc();timers.push(setInterval(acc,1000));
   /* sale clock */
   var saleEnd=t0+CFG.SALE_MINUTES*60e3;
